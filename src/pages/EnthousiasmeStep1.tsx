@@ -37,11 +37,8 @@ const EnthousiasmeStep1 = () => {
             {/* Title */}
             <div className="text-center mb-12">
               <h1 className="text-3xl font-bold text-blue-900 mb-2">
-                5 - 10 jaar
-              </h1>
-              <p className="text-xl text-gray-600">
                 Jouw kindertijd & eerste schooltijd
-              </p>
+              </h1>
             </div>
 
             {/* Questions */}
