@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Star, Target, FileText, Search, Users } from "lucide-react";
@@ -129,7 +128,7 @@ const LandingPage = () => {
         </div>
       </div>
 
-      {/* Process Overview Section - Exact Match to Image */}
+      {/* Process Overview Section - Updated Flow */}
       <div className="max-w-[1440px] mx-auto px-6 py-16 bg-gray-50">
         <div className="mb-12">
           <div className="text-yellow-400 text-sm font-semibold mb-4">Hoe werkt de loopbaan tool</div>
@@ -140,26 +139,25 @@ const LandingPage = () => {
           </h2>
         </div>
         
-        {/* Process Steps with Exact Layout from Image */}
-        <div className="relative min-h-[600px]">
-          {/* Connecting Lines */}
+        {/* Process Steps with Flowing Line */}
+        <div className="relative min-h-[500px]">
+          {/* Flowing curved line through all steps */}
           <svg className="absolute inset-0 w-full h-full" style={{ zIndex: 1 }}>
             <defs>
-              <marker id="arrowhead" markerWidth="10" markerHeight="7" 
-               refX="10" refY="3.5" orient="auto">
-                <polygon points="0 0, 10 3.5, 0 7" fill="#d1d5db" />
-              </marker>
+              {/* No arrowheads needed for flowing line */}
             </defs>
-            {/* Line from step 1 to step 2 */}
-            <line x1="25%" y1="35%" x2="45%" y2="25%" stroke="#d1d5db" strokeWidth="2" markerEnd="url(#arrowhead)" />
-            {/* Line from step 2 to step 3 */}
-            <line x1="55%" y1="25%" x2="75%" y2="45%" stroke="#d1d5db" strokeWidth="2" markerEnd="url(#arrowhead)" />
-            {/* Line from step 3 to step 4 */}
-            <line x1="75%" y1="65%" x2="55%" y2="85%" stroke="#d1d5db" strokeWidth="2" markerEnd="url(#arrowhead)" />
+            {/* Flowing curved line from left to right through all step centers */}
+            <path 
+              d="M -50 200 Q 200 150, 400 120 Q 600 100, 800 180 Q 1000 250, 1200 150" 
+              stroke="#d1d5db" 
+              strokeWidth="3" 
+              fill="none"
+              strokeLinecap="round"
+            />
           </svg>
           
-          {/* Step 1 - De enthousiasme-scan (bottom left) */}
-          <div className="absolute left-[5%] bottom-[10%] w-72" style={{ zIndex: 2 }}>
+          {/* Step 1 - De enthousiasme-scan (left, middle height) */}
+          <div className="absolute left-[8%] top-[35%] w-72" style={{ zIndex: 2 }}>
             <div className="flex flex-col items-center text-center">
               <div className="w-32 h-32 bg-white rounded-full flex items-center justify-center mb-6 shadow-lg border border-gray-100 relative">
                 <div className="absolute -top-2 -left-2">
@@ -177,8 +175,8 @@ const LandingPage = () => {
             </div>
           </div>
           
-          {/* Step 2 - Jouw wensberoepen (top center) */}
-          <div className="absolute left-1/2 top-[5%] transform -translate-x-1/2 w-72" style={{ zIndex: 2 }}>
+          {/* Step 2 - Wensberoepen (center-left, higher) */}
+          <div className="absolute left-[32%] top-[15%] w-72" style={{ zIndex: 2 }}>
             <div className="flex flex-col items-center text-center">
               <div className="w-32 h-32 bg-white rounded-full flex items-center justify-center mb-6 shadow-lg border border-gray-100">
                 <div className="relative">
@@ -188,7 +186,7 @@ const LandingPage = () => {
                   <div className="absolute -bottom-1 -left-1 w-3 h-3 border-2 border-blue-400 rounded"></div>
                 </div>
               </div>
-              <h4 className="font-bold text-blue-900 mb-3 text-lg">Jouw<br />wensberoepen</h4>
+              <h4 className="font-bold text-blue-900 mb-3 text-lg">Wensberoepen</h4>
               <p className="text-sm text-gray-600 leading-relaxed">
                 Lorem ipsum dolor sit amet,<br />
                 consectetur adipiscing elit,<br />
@@ -197,30 +195,17 @@ const LandingPage = () => {
             </div>
           </div>
           
-          {/* Step 3 - Jouw rapport en aanvullingen (right center) */}
-          <div className="absolute right-[5%] top-[35%] w-72" style={{ zIndex: 2 }}>
+          {/* Step 3 - Prioriteiten stellen (center-right, lower) */}
+          <div className="absolute left-[56%] top-[55%] w-72" style={{ zIndex: 2 }}>
             <div className="flex flex-col items-center text-center">
               <div className="w-32 h-32 bg-white rounded-full flex items-center justify-center mb-6 shadow-lg border border-gray-100">
                 <div className="relative">
-                  <div className="w-12 h-16 bg-blue-600 rounded-sm flex flex-col">
-                    <div className="flex justify-between items-center p-1 bg-blue-700 rounded-t-sm">
-                      <div className="flex gap-1">
-                        <div className="w-1 h-1 bg-white rounded-full"></div>
-                        <div className="w-1 h-1 bg-white rounded-full"></div>
-                        <div className="w-1 h-1 bg-white rounded-full"></div>
-                      </div>
-                    </div>
-                    <div className="flex-1 p-1 space-y-1">
-                      <div className="w-full h-0.5 bg-white rounded"></div>
-                      <div className="w-full h-0.5 bg-white rounded"></div>
-                      <div className="w-3/4 h-0.5 bg-white rounded"></div>
-                      <div className="w-full h-0.5 bg-white rounded"></div>
-                    </div>
-                  </div>
-                  <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-blue-600 rounded-sm transform rotate-12"></div>
+                  <Target className="w-12 h-12 text-green-500" />
+                  <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full"></div>
+                  <div className="absolute -bottom-1 -left-1 w-2 h-2 border-2 border-green-500 rounded"></div>
                 </div>
               </div>
-              <h4 className="font-bold text-blue-900 mb-3 text-lg">Jouw rapport en<br />aanvullingen</h4>
+              <h4 className="font-bold text-blue-900 mb-3 text-lg">Prioriteiten<br />stellen</h4>
               <p className="text-sm text-gray-600 leading-relaxed">
                 Lorem ipsum dolor sit amet,<br />
                 consectetur adipiscing elit,<br />
@@ -229,8 +214,8 @@ const LandingPage = () => {
             </div>
           </div>
           
-          {/* Step 4 - Jouw antwoorden (bottom right) */}
-          <div className="absolute right-[15%] bottom-[10%] w-72" style={{ zIndex: 2 }}>
+          {/* Step 4 - Laatste check (right, higher) */}
+          <div className="absolute right-[8%] top-[20%] w-72" style={{ zIndex: 2 }}>
             <div className="flex flex-col items-center text-center">
               <div className="w-32 h-32 bg-white rounded-full flex items-center justify-center mb-6 shadow-lg border border-gray-100">
                 <div className="relative">
@@ -242,7 +227,7 @@ const LandingPage = () => {
                   </div>
                 </div>
               </div>
-              <h4 className="font-bold text-blue-900 mb-3 text-lg">Jouw<br />antwoorden</h4>
+              <h4 className="font-bold text-blue-900 mb-3 text-lg">Laatste<br />check</h4>
               <p className="text-sm text-gray-600 leading-relaxed">
                 Lorem ipsum dolor sit amet,<br />
                 consectetur adipiscing elit,<br />
