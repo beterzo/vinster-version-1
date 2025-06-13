@@ -22,10 +22,9 @@ const LandingPage = () => {
           {/* Logo */}
           <div className="py-6">
             <img 
-              src="/lovable-uploads/e1b00474-91f6-46ad-a01f-9f3c9bdaf981.png" 
+              src="/lovable-uploads/ceb88009-c9c6-446e-a5b6-cd97e8556e0a.png" 
               alt="Vinster Logo" 
               className="h-8 w-auto"
-              style={{ mixBlendMode: 'multiply' }}
             />
           </div>
           
