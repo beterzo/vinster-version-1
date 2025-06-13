@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Sparkles, Target, FileText, Search, Users } from "lucide-react";
-
 const LandingPage = () => {
   return <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header Section */}
@@ -177,7 +176,7 @@ const LandingPage = () => {
           }}>
               <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg border-2 border-gray-100">
                 <div className="relative">
-                  <Users className="w-10 h-10 text-blue-500" />
+                  <Users className="" />
                   <Sparkles className="absolute -top-1 -right-1 w-3 h-3 text-yellow-400 fill-yellow-400" />
                   <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-green-500 rounded-full"></div>
                   <div className="absolute top-1 -right-1 w-2 h-2 bg-red-500 rounded"></div>
