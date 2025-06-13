@@ -1,7 +1,10 @@
 
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="relative overflow-hidden">
       {/* Background Image */}
@@ -13,9 +16,15 @@ const HeroSection = () => {
       </div>
       
       <div className="relative z-10 max-w-[1440px] mx-auto px-6">
-        {/* Logo */}
-        <div className="py-6">
+        {/* Header with Logo and Login Button */}
+        <div className="py-6 flex items-center justify-between">
           <img src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" alt="Vinster Logo" className="h-8 w-auto" />
+          <Button 
+            onClick={() => navigate('/login')}
+            className="bg-white hover:bg-gray-100 text-blue-900 font-semibold px-6 py-2 rounded-lg border border-gray-200 shadow-sm"
+          >
+            Inloggen
+          </Button>
         </div>
         
         {/* Main Hero Content */}
