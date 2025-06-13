@@ -110,13 +110,14 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Rechter kolom - Afbeelding placeholder */}
+          {/* Rechter kolom - Professionele afbeelding */}
           <div className="lg:col-span-3">
-            <div className="bg-gray-200 rounded-3xl h-80 lg:h-96 flex items-center justify-center">
-              <div className="text-center text-gray-500">
-                <CircleUser className="w-16 h-16 mx-auto mb-2 opacity-50" />
-                <p className="text-sm">Afbeelding placeholder</p>
-              </div>
+            <div className="rounded-3xl h-80 lg:h-96 overflow-hidden">
+              <img 
+                src="/lovable-uploads/2bd3a663-554a-48a8-813b-8cc34df54ba0.png"
+                alt="Professionele vrouw met loopbaanontwikkeling materialen"
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
         </div>
