@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Star, Target, FileText, Search, Users } from "lucide-react";
@@ -246,13 +245,24 @@ const LandingPage = () => {
         </div>
       </div>
 
-      {/* Testimonial Section */}
-      <div className="bg-blue-100 py-16">
-        <div className="max-w-[1440px] mx-auto px-6">
+      {/* Testimonial Section with Background Image */}
+      <div className="relative py-16 overflow-hidden">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: "url('/lovable-uploads/f40f684e-643d-4161-be1c-240737966a76.png')"
+          }}
+        >
+          {/* Overlay for better text readability */}
+          <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+        </div>
+        
+        <div className="relative z-10 max-w-[1440px] mx-auto px-6">
           <div className="grid grid-cols-2 gap-8 items-center">
             {/* Quote */}
             <div className="space-y-6">
-              <blockquote className="text-2xl font-bold text-blue-900 leading-tight">
+              <blockquote className="text-2xl font-bold text-white leading-tight">
                 "Ik zag mezelf niet ineens<br />
                 die switch maken, maar<br />
                 wat ben ik blij dat ik het<br />
@@ -260,14 +270,8 @@ const LandingPage = () => {
               </blockquote>
             </div>
             
-            {/* Image */}
-            <div className="flex justify-center">
-              <img 
-                src="/lovable-uploads/5c9e857b-c318-4c07-8c67-12a698a13be3.png"
-                alt="Tevreden gebruiker met headset"
-                className="w-full max-w-md h-auto object-cover rounded-lg"
-              />
-            </div>
+            {/* Empty space to let background image show */}
+            <div></div>
           </div>
         </div>
       </div>
