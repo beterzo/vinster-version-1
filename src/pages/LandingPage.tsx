@@ -73,12 +73,14 @@ const LandingPage = () => {
           </Card>
           
           {/* Blue Card with Report */}
-          <Card className="bg-blue-400 text-white p-8 rounded-3xl border-0 relative overflow-hidden">
+          <Card className="bg-blue-600 text-white p-8 rounded-3xl border-0 relative overflow-hidden">
             <h3 className="text-xl font-bold mb-4">Voorbeeld<br />rapport</h3>
             <div className="absolute bottom-4 right-4">
-              <div className="w-24 h-32 bg-white rounded transform rotate-12 shadow-lg flex items-center justify-center">
-                <FileText className="w-8 h-8 text-gray-600" />
-              </div>
+              <img 
+                src="/lovable-uploads/96779eba-51f8-40e2-a15f-40ccfdcab4e5.png"
+                alt="Rapport voorbeeld"
+                className="w-32 h-auto transform rotate-12"
+              />
             </div>
           </Card>
           
@@ -87,7 +89,7 @@ const LandingPage = () => {
             <h3 className="text-xl font-bold mb-4">Je persoonlijke dashboard</h3>
             <div className="text-sm mb-4 font-semibold">Over deze tool</div>
             <p className="text-sm leading-relaxed">
-              Lorem ipsum dolor sit consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt ut Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt ut.
             </p>
           </Card>
         </div>
