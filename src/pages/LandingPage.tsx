@@ -63,8 +63,8 @@ const LandingPage = () => {
       {/* Three Cards Section */}
       <div className="max-w-[1440px] mx-auto px-6 py-16">
         <div className="grid grid-cols-3 gap-6">
-          {/* Yellow Card */}
-          <Card className="bg-yellow-400 text-black p-8 rounded-3xl border-0">
+          {/* Yellow Card with White Text */}
+          <Card className="bg-yellow-400 text-white p-8 rounded-3xl border-0">
             <h3 className="text-xl font-bold mb-4 leading-tight">
               Bekijk hier<br />
               hoe ons advies<br />
@@ -72,25 +72,47 @@ const LandingPage = () => {
             </h3>
           </Card>
           
-          {/* Blue Card with Report */}
+          {/* Blue Card with Larger Report Document */}
           <Card className="bg-blue-500 text-white p-8 rounded-3xl border-0 relative overflow-hidden">
             <h3 className="text-xl font-bold mb-4 leading-tight">Voorbeeld<br />rapport</h3>
-            <div className="absolute bottom-4 right-4">
-              <img 
-                src="/lovable-uploads/96779eba-51f8-40e2-a15f-40ccfdcab4e5.png"
-                alt="Rapport voorbeeld"
-                className="w-24 h-auto transform rotate-12"
-              />
+            <div className="absolute bottom-2 right-2">
+              {/* Larger, more realistic document */}
+              <div className="w-40 h-52 bg-white rounded-lg shadow-xl transform rotate-12 relative overflow-hidden">
+                {/* Document header */}
+                <div className="h-8 bg-blue-600 flex items-center px-3">
+                  <div className="flex gap-1">
+                    <div className="w-2 h-2 bg-white rounded-full opacity-80"></div>
+                    <div className="w-2 h-2 bg-white rounded-full opacity-80"></div>
+                    <div className="w-2 h-2 bg-white rounded-full opacity-80"></div>
+                  </div>
+                </div>
+                {/* Document content */}
+                <div className="p-4 space-y-2">
+                  <div className="h-2 bg-gray-300 rounded w-full"></div>
+                  <div className="h-2 bg-gray-300 rounded w-4/5"></div>
+                  <div className="h-2 bg-gray-300 rounded w-full"></div>
+                  <div className="h-2 bg-gray-300 rounded w-3/4"></div>
+                  <div className="h-4 bg-blue-200 rounded w-full mt-4"></div>
+                  <div className="h-2 bg-gray-300 rounded w-full"></div>
+                  <div className="h-2 bg-gray-300 rounded w-5/6"></div>
+                  <div className="h-2 bg-gray-300 rounded w-full"></div>
+                  <div className="h-2 bg-gray-300 rounded w-2/3"></div>
+                </div>
+              </div>
             </div>
           </Card>
           
-          {/* Dark Blue Card */}
-          <Card className="bg-blue-900 text-white p-8 rounded-3xl border-0">
-            <h3 className="text-xl font-bold mb-4 leading-tight">Je persoonlijke dashboard</h3>
-            <div className="text-xs text-white/80 mb-3 uppercase tracking-wider font-medium">Over deze tool</div>
-            <p className="text-sm leading-relaxed text-white/90">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
-            </p>
+          {/* Dark Blue Card with Dashboard Layout */}
+          <Card className="bg-blue-900 text-white p-8 rounded-3xl border-0 relative">
+            <h3 className="text-xl font-bold mb-6 leading-tight text-white">Je persoonlijke dashboard</h3>
+            
+            {/* Over deze tool section overlapping with blue background */}
+            <div className="absolute bottom-4 left-4 right-4 bg-blue-600 p-4 rounded-xl">
+              <div className="text-xs text-white/80 mb-3 uppercase tracking-wider font-medium">Over deze tool</div>
+              <p className="text-sm leading-relaxed text-white/90">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+              </p>
+            </div>
           </Card>
         </div>
       </div>
