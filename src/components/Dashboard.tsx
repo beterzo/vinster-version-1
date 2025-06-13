@@ -40,66 +40,36 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
-      <div className="max-w-[1400px] mx-auto px-6 py-8">
-        {/* 3-zone grid layout */}
-        <div className="grid grid-cols-[1fr_400px_1fr] gap-8 min-h-[800px]">
+      <div className="max-w-[1440px] mx-auto px-6 py-8">
+        {/* 2x3 grid layout */}
+        <div className="grid grid-cols-[1fr_300px_400px] grid-rows-[1fr_auto] gap-8 min-h-[800px]">
           
-          {/* Linkerkolom - Welkom + Belangrijk om te weten */}
-          <div className="flex flex-col gap-6">
-            {/* Welkom blok - bovenste helft */}
-            <Card className="p-8 bg-blue-50 border-0 rounded-3xl flex-1">
-              <div className="space-y-4">
-                <h1 className="text-3xl font-bold text-gray-900 mb-4">Welkom</h1>
-                <p className="text-gray-700 font-medium leading-relaxed mb-4">
-                  Dit is jouw persoonlijke dashboard. Hier zie je jouw voortgang 
-                  en kun je verder gaan waar je gebleven bent.
-                </p>
-                <p className="text-gray-600 text-sm leading-relaxed mb-3">
-                  Welkom bij de start van jouw loopbaantraject! We beginnen met de enthousiasme-scan, de eerste 
-                  stap om te ontdekken waar jouw werkelijke interesses en passies liggen.
-                </p>
-                <p className="text-gray-600 text-sm leading-relaxed mb-3">
-                  In deze scan gaan we op zoek naar de activiteiten en omgevingen waar jij van nature enthousiast 
-                  van wordt. Door vragen te stellen over je jeugd, schooltijd en werk brengen we jouw unieke patroon 
-                  van interesses in kaart.
-                </p>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Jouw enthousiasme is de belangrijkste indicator voor wat je echt leuk vindt. Wanneer je iets doet 
-                  waar je enthousiast van wordt, ontstaat er energie en voldoening.
-                </p>
-              </div>
-            </Card>
+          {/* Welkom blok - spans full left column height, aligned with image */}
+          <Card className="p-8 bg-blue-50 border-0 rounded-3xl row-span-1">
+            <div className="space-y-4 h-full flex flex-col">
+              <h1 className="text-3xl font-bold text-gray-900 mb-4">Welkom</h1>
+              <p className="text-gray-700 font-medium leading-relaxed mb-4">
+                Dit is jouw persoonlijke dashboard. Hier zie je jouw voortgang 
+                en kun je verder gaan waar je gebleven bent.
+              </p>
+              <p className="text-gray-600 text-sm leading-relaxed mb-3">
+                Welkom bij de start van jouw loopbaantraject! We beginnen met de enthousiasme-scan, de eerste 
+                stap om te ontdekken waar jouw werkelijke interesses en passies liggen.
+              </p>
+              <p className="text-gray-600 text-sm leading-relaxed mb-3">
+                In deze scan gaan we op zoek naar de activiteiten en omgevingen waar jij van nature enthousiast 
+                van wordt. Door vragen te stellen over je jeugd, schooltijd en werk brengen we jouw unieke patroon 
+                van interesses in kaart.
+              </p>
+              <p className="text-gray-600 text-sm leading-relaxed flex-1">
+                Jouw enthousiasme is de belangrijkste indicator voor wat je echt leuk vindt. Wanneer je iets doet 
+                waar je enthousiast van wordt, ontstaat er energie en voldoening.
+              </p>
+            </div>
+          </Card>
 
-            {/* Belangrijk om te weten blok - onderste helft */}
-            <Card className="p-6 bg-blue-400 border-0 rounded-3xl text-white flex-1">
-              <h3 className="font-bold text-xl mb-4">Belangrijk om te weten</h3>
-              <ul className="space-y-3 text-sm">
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Er zijn geen goede of foute antwoorden - wees eerlijk over wat jij echt leuk vindt.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Denk aan concrete situaties en ervaringen uit jouw leven.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Je kunt je antwoorden altijd aanpassen tijdens het traject.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Je voortgang wordt automatisch opgeslagen.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Na het invullen van beide interviews wordt automatisch een persoonlijk rapport gegenereerd.</span>
-                </li>
-              </ul>
-            </Card>
-          </div>
-
-          {/* Middenkolom - Voortgangsblokken (compact) */}
-          <div className="flex flex-col justify-center space-y-4">
+          {/* Voortgangsblokken - middle column, aligned with bottom row */}
+          <div className="row-start-2 flex flex-col justify-center space-y-3">
             {progressSteps.map((step, index) => (
               <ProgressStep
                 key={index}
@@ -112,9 +82,8 @@ const Dashboard = () => {
             ))}
           </div>
 
-          {/* Rechterkolom - Afbeelding + Knop */}
-          <div className="flex flex-col gap-6">
-            {/* Grote afbeelding - bovenste deel */}
+          {/* Afbeelding - spans both rows on the right */}
+          <div className="row-span-2 flex flex-col gap-6">
             <div className="rounded-3xl h-[500px] overflow-hidden flex-1">
               <img 
                 src="/lovable-uploads/4d34612b-df14-4f89-abac-7542126c6ac2.png"
@@ -122,17 +91,42 @@ const Dashboard = () => {
                 className="w-full h-full object-cover"
               />
             </div>
-
-            {/* Grote gele knop - onderste deel */}
-            <div className="flex items-end">
-              <Button 
-                className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-8 text-xl rounded-3xl shadow-lg hover:shadow-xl transition-all duration-200"
-                size="lg"
-              >
-                Ga verder waar je gebleven was
-              </Button>
-            </div>
+            
+            {/* Gele knop onderaan rechts */}
+            <Button 
+              className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-8 text-xl rounded-3xl shadow-lg hover:shadow-xl transition-all duration-200"
+              size="lg"
+            >
+              Ga verder waar je gebleven was
+            </Button>
           </div>
+
+          {/* Belangrijk om te weten blok - bottom left */}
+          <Card className="p-6 bg-blue-400 border-0 rounded-3xl text-white row-start-2">
+            <h3 className="font-bold text-xl mb-4">Belangrijk om te weten</h3>
+            <ul className="space-y-3 text-sm">
+              <li className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+                <span>Er zijn geen goede of foute antwoorden - wees eerlijk over wat jij echt leuk vindt.</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+                <span>Denk aan concrete situaties en ervaringen uit jouw leven.</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+                <span>Je kunt je antwoorden altijd aanpassen tijdens het traject.</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+                <span>Je voortgang wordt automatisch opgeslagen.</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+                <span>Na het invullen van beide interviews wordt automatisch een persoonlijk rapport gegenereerd.</span>
+              </li>
+            </ul>
+          </Card>
         </div>
       </div>
     </div>
