@@ -1,20 +1,14 @@
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Star, Target, FileText, Search, Users } from "lucide-react";
-
 const LandingPage = () => {
-  return (
-    <div className="min-h-screen bg-gray-50 font-sans">
+  return <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header Section */}
       <div className="relative overflow-hidden">
         {/* Background Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: "url('/lovable-uploads/b67ce5d1-c717-4a77-b5ad-550d88a42378.png')"
-          }}
-        >
+        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
+        backgroundImage: "url('/lovable-uploads/b67ce5d1-c717-4a77-b5ad-550d88a42378.png')"
+      }}>
           {/* Overlay for better text readability - made lighter */}
           <div className="absolute inset-0 bg-black bg-opacity-20"></div>
         </div>
@@ -22,11 +16,7 @@ const LandingPage = () => {
         <div className="relative z-10 max-w-[1440px] mx-auto px-6">
           {/* Logo */}
           <div className="py-6">
-            <img 
-              src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" 
-              alt="Vinster Logo" 
-              className="h-8 w-auto"
-            />
+            <img src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" alt="Vinster Logo" className="h-8 w-auto" />
           </div>
           
           {/* Main Hero Content */}
@@ -77,13 +67,17 @@ const LandingPage = () => {
             
             {/* Blue Card with Report */}
             <div className="col-span-4">
-              <Card className="text-white p-6 rounded-3xl border-0 relative overflow-hidden h-48" style={{ backgroundColor: '#A9C5E2' }}>
+              <Card className="text-white p-6 rounded-3xl border-0 relative overflow-hidden h-48" style={{
+              backgroundColor: '#A9C5E2'
+            }}>
                 <h3 className="text-xl font-bold mb-4 leading-tight">Voorbeeld<br />rapport</h3>
                 <div className="absolute bottom-0 right-4">
                   {/* Larger, more realistic document with updated color */}
                   <div className="w-36 h-48 bg-white rounded-lg shadow-xl transform rotate-12 relative overflow-hidden">
                     {/* Document header */}
-                    <div className="h-7 flex items-center px-3" style={{ backgroundColor: '#78BFE3' }}>
+                    <div className="h-7 flex items-center px-3" style={{
+                    backgroundColor: '#78BFE3'
+                  }}>
                       <div className="flex gap-1">
                         <div className="w-1.5 h-1.5 bg-white rounded-full opacity-80"></div>
                         <div className="w-1.5 h-1.5 bg-white rounded-full opacity-80"></div>
@@ -96,7 +90,10 @@ const LandingPage = () => {
                       <div className="h-1.5 bg-gray-300 rounded w-4/5"></div>
                       <div className="h-1.5 bg-gray-300 rounded w-full"></div>
                       <div className="h-1.5 bg-gray-300 rounded w-3/4"></div>
-                      <div className="h-3 rounded w-full mt-3" style={{ backgroundColor: '#78BFE3', opacity: 0.7 }}></div>
+                      <div className="h-3 rounded w-full mt-3" style={{
+                      backgroundColor: '#78BFE3',
+                      opacity: 0.7
+                    }}></div>
                       <div className="h-1.5 bg-gray-300 rounded w-full"></div>
                       <div className="h-1.5 bg-gray-300 rounded w-5/6"></div>
                       <div className="h-1.5 bg-gray-300 rounded w-full"></div>
@@ -119,9 +116,7 @@ const LandingPage = () => {
               {/* Text directly on white background */}
               <div className="px-2">
                 <h4 className="text-lg font-bold mb-3 text-blue-900">Over deze tool</h4>
-                <p className="text-sm leading-relaxed text-blue-900">
-                  De denkwijze achter vinster is ontwikkeld door Heidi Jansen
-                </p>
+                <p className="text-sm leading-relaxed text-blue-900">De denkwijze achter vinster is ontwikkeld door Heidi Jansen.</p>
               </div>
             </div>
           </div>
@@ -145,18 +140,19 @@ const LandingPage = () => {
           {/* Container for the process flow */}
           <div className="relative h-32 mb-16">
             {/* Flowing curved line connecting all circles */}
-            <svg className="absolute inset-0 w-full h-full" style={{ zIndex: 1 }}>
-              <path 
-                d="M 150 50 Q 300 30, 400 50 T 700 50 T 1050 50" 
-                stroke="#e5e7eb" 
-                strokeWidth="4" 
-                fill="none"
-                strokeLinecap="round"
-              />
+            <svg className="absolute inset-0 w-full h-full" style={{
+            zIndex: 1
+          }}>
+              <path d="M 150 50 Q 300 30, 400 50 T 700 50 T 1050 50" stroke="#e5e7eb" strokeWidth="4" fill="none" strokeLinecap="round" />
             </svg>
             
             {/* Step 1 - Enthousiasmescan */}
-            <div className="absolute" style={{ left: '150px', top: '50px', transform: 'translate(-50%, -50%)', zIndex: 2 }}>
+            <div className="absolute" style={{
+            left: '150px',
+            top: '50px',
+            transform: 'translate(-50%, -50%)',
+            zIndex: 2
+          }}>
               <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg border-2 border-gray-100">
                 <div className="relative">
                   <Star className="w-8 h-8 text-yellow-400 fill-yellow-400" />
@@ -167,7 +163,12 @@ const LandingPage = () => {
             </div>
             
             {/* Step 2 - Wensberoepen */}
-            <div className="absolute" style={{ left: '400px', top: '50px', transform: 'translate(-50%, -50%)', zIndex: 2 }}>
+            <div className="absolute" style={{
+            left: '400px',
+            top: '50px',
+            transform: 'translate(-50%, -50%)',
+            zIndex: 2
+          }}>
               <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg border-2 border-gray-100">
                 <div className="relative">
                   <Users className="w-10 h-10 text-blue-500" />
@@ -180,7 +181,12 @@ const LandingPage = () => {
             </div>
             
             {/* Step 3 - Prioriteiten stellen */}
-            <div className="absolute" style={{ left: '700px', top: '50px', transform: 'translate(-50%, -50%)', zIndex: 2 }}>
+            <div className="absolute" style={{
+            left: '700px',
+            top: '50px',
+            transform: 'translate(-50%, -50%)',
+            zIndex: 2
+          }}>
               <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg border-2 border-gray-100">
                 <div className="relative">
                   <FileText className="w-8 h-8 text-blue-600" />
@@ -192,7 +198,12 @@ const LandingPage = () => {
             </div>
             
             {/* Step 4 - Laatste check */}
-            <div className="absolute" style={{ left: '1050px', top: '50px', transform: 'translate(-50%, -50%)', zIndex: 2 }}>
+            <div className="absolute" style={{
+            left: '1050px',
+            top: '50px',
+            transform: 'translate(-50%, -50%)',
+            zIndex: 2
+          }}>
               <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg border-2 border-gray-100">
                 <div className="relative">
                   <Search className="w-8 h-8 text-yellow-500" />
@@ -230,15 +241,12 @@ const LandingPage = () => {
 
       {/* Testimonial Section as Block on Page */}
       <div className="max-w-[1440px] mx-auto px-6 py-20 bg-gray-50">
-        <div 
-          className="relative overflow-hidden rounded-3xl shadow-xl min-h-[400px]"
-          style={{
-            backgroundImage: "url('/lovable-uploads/f40f684e-643d-4161-be1c-240737966a76.png')",
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat'
-          }}
-        >
+        <div className="relative overflow-hidden rounded-3xl shadow-xl min-h-[400px]" style={{
+        backgroundImage: "url('/lovable-uploads/f40f684e-643d-4161-be1c-240737966a76.png')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}>
           {/* Light overlay for better text readability */}
           <div className="absolute inset-0 bg-white bg-opacity-20"></div>
           
@@ -260,8 +268,6 @@ const LandingPage = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default LandingPage;
