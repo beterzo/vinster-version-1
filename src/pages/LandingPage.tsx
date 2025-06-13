@@ -75,28 +75,30 @@ const LandingPage = () => {
           {/* Blue Card with Larger Report Document */}
           <Card className="bg-blue-500 text-white p-8 rounded-3xl border-0 relative overflow-hidden">
             <h3 className="text-xl font-bold mb-4 leading-tight">Voorbeeld<br />rapport</h3>
-            <div className="absolute bottom-2 right-2">
+            <div className="absolute bottom-6 right-6">
               {/* Larger, more realistic document */}
-              <div className="w-40 h-52 bg-white rounded-lg shadow-xl transform rotate-12 relative overflow-hidden">
+              <div className="w-36 h-48 bg-white rounded-lg shadow-xl transform rotate-12 relative overflow-hidden">
                 {/* Document header */}
-                <div className="h-8 bg-blue-600 flex items-center px-3">
+                <div className="h-7 bg-blue-600 flex items-center px-3">
                   <div className="flex gap-1">
-                    <div className="w-2 h-2 bg-white rounded-full opacity-80"></div>
-                    <div className="w-2 h-2 bg-white rounded-full opacity-80"></div>
-                    <div className="w-2 h-2 bg-white rounded-full opacity-80"></div>
+                    <div className="w-1.5 h-1.5 bg-white rounded-full opacity-80"></div>
+                    <div className="w-1.5 h-1.5 bg-white rounded-full opacity-80"></div>
+                    <div className="w-1.5 h-1.5 bg-white rounded-full opacity-80"></div>
                   </div>
                 </div>
                 {/* Document content */}
-                <div className="p-4 space-y-2">
-                  <div className="h-2 bg-gray-300 rounded w-full"></div>
-                  <div className="h-2 bg-gray-300 rounded w-4/5"></div>
-                  <div className="h-2 bg-gray-300 rounded w-full"></div>
-                  <div className="h-2 bg-gray-300 rounded w-3/4"></div>
-                  <div className="h-4 bg-blue-200 rounded w-full mt-4"></div>
-                  <div className="h-2 bg-gray-300 rounded w-full"></div>
-                  <div className="h-2 bg-gray-300 rounded w-5/6"></div>
-                  <div className="h-2 bg-gray-300 rounded w-full"></div>
-                  <div className="h-2 bg-gray-300 rounded w-2/3"></div>
+                <div className="p-3 space-y-1.5">
+                  <div className="h-1.5 bg-gray-300 rounded w-full"></div>
+                  <div className="h-1.5 bg-gray-300 rounded w-4/5"></div>
+                  <div className="h-1.5 bg-gray-300 rounded w-full"></div>
+                  <div className="h-1.5 bg-gray-300 rounded w-3/4"></div>
+                  <div className="h-3 bg-blue-200 rounded w-full mt-3"></div>
+                  <div className="h-1.5 bg-gray-300 rounded w-full"></div>
+                  <div className="h-1.5 bg-gray-300 rounded w-5/6"></div>
+                  <div className="h-1.5 bg-gray-300 rounded w-full"></div>
+                  <div className="h-1.5 bg-gray-300 rounded w-2/3"></div>
+                  <div className="h-1.5 bg-gray-300 rounded w-full"></div>
+                  <div className="h-1.5 bg-gray-300 rounded w-4/5"></div>
                 </div>
               </div>
             </div>
