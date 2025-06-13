@@ -22,7 +22,11 @@ const LandingPage = () => {
         <div className="relative z-10 max-w-[1440px] mx-auto px-6">
           {/* Logo */}
           <div className="py-6">
-            <div className="text-xl font-bold text-white">LOGO</div>
+            <img 
+              src="/lovable-uploads/e1b00474-91f6-46ad-a01f-9f3c9bdaf981.png" 
+              alt="Vinster Logo" 
+              className="h-8 w-auto"
+            />
           </div>
           
           {/* Main Hero Content */}
