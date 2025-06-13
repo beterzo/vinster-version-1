@@ -140,7 +140,7 @@ const LandingPage = () => {
         {/* Process Steps with Flowing Line */}
         <div className="relative">
           {/* Container for the process flow */}
-          <div className="relative h-32 mb-8">
+          <div className="relative h-32 mb-0 ">
             {/* Flowing curved line connecting all circles */}
             <svg className="absolute inset-0 w-full h-full" style={{
             zIndex: 1
@@ -149,12 +149,12 @@ const LandingPage = () => {
             </svg>
             
             {/* Step 1 - Enthousiasmescan with Sparkles */}
-            <div className="absolute" style={{
+            <div style={{
             left: '150px',
             top: '50px',
             transform: 'translate(-50%, -50%)',
             zIndex: 2
-          }}>
+          }} className="absolute bg-slate-50">
               <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg border-2 border-gray-100">
                 <div className="relative">
                   {/* Main large sparkle in center-right */}
