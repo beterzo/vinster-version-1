@@ -264,7 +264,7 @@ const LandingPage = () => {
             <div className="grid grid-cols-2 gap-8 items-center">
               {/* Quote */}
               <div className="space-y-6">
-                <blockquote className="text-3xl font-bold text-blue-900 leading-tight">
+                <blockquote className="text-3xl font-normal text-blue-900 leading-tight">
                   "Ik zag mezelf niet ineens<br />
                   die switch maken, maar<br />
                   wat ben ik blij dat ik het<br />
