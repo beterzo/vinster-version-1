@@ -16,8 +16,8 @@ const LoginPage = () => {
             backgroundImage: "url('/lovable-uploads/4bce3129-ec2c-4ee4-a082-bb74962f620e.png')"
           }}
         >
-          {/* Dark overlay for better text readability */}
-          <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+          {/* Lighter overlay for better visibility of the image */}
+          <div className="absolute inset-0 bg-black bg-opacity-10"></div>
         </div>
         
         {/* Quote overlay */}
