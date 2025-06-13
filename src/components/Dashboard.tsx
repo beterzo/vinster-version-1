@@ -1,8 +1,9 @@
 
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import ProgressStep from "./ProgressStep";
-import { CircleUser, Target, Star, CheckCircle, Search, FileText } from "lucide-react";
+import { CircleUser, Target, Star, CheckCircle, Search, FileText, ListTodo, UserCheck } from "lucide-react";
 
 const Dashboard = () => {
   const progressSteps = [
@@ -14,25 +15,32 @@ const Dashboard = () => {
       icon: <Star className="w-5 h-5 text-yellow-500" />
     },
     {
-      title: "Jouw wensberoepen",
+      title: "Wensberoepen",
       description: "Verken beroepen die bij jouw interesses en vaardigheden passen.",
       progress: 45,
       isCompleted: false,
       icon: <Target className="w-5 h-5 text-blue-400" />
     },
     {
-      title: "Jouw rapport en aanbevelingen",
-      description: "Krijg een overzicht van jouw resultaten en persoonlijke aanbevelingen.",
+      title: "Prioriteiten stellen",
+      description: "Bepaal wat voor jou het allerbelangrijkst is in je ideale baan.",
       progress: 0,
       isCompleted: false,
-      icon: <FileText className="w-5 h-5 text-gray-400" />
+      icon: <ListTodo className="w-5 h-5 text-gray-400" />
     },
     {
-      title: "Jouw antwoorden",
-      description: "Bekijk en pas je antwoorden aan waar nodig voor het beste resultaat.",
+      title: "Laatste check",
+      description: "Controleer of alles klopt en verfijn je keuzes waar nodig.",
       progress: 0,
       isCompleted: false,
-      icon: <Search className="w-5 h-5 text-gray-400" />
+      icon: <CheckCircle className="w-5 h-5 text-gray-400" />
+    },
+    {
+      title: "Zoekprofiel",
+      description: "Maak je profiel compleet en start met zoeken naar jouw droombaan.",
+      progress: 0,
+      isCompleted: false,
+      icon: <UserCheck className="w-5 h-5 text-gray-400" />
     }
   ];
 
@@ -135,3 +143,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
