@@ -1,0 +1,54 @@
+
+import { Button } from "@/components/ui/button";
+
+const HeroSection = () => {
+  return (
+    <div className="relative overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
+        backgroundImage: "url('/lovable-uploads/b67ce5d1-c717-4a77-b5ad-550d88a42378.png')"
+      }}>
+        {/* Overlay for better text readability - made lighter */}
+        <div className="absolute inset-0 bg-black bg-opacity-20"></div>
+      </div>
+      
+      <div className="relative z-10 max-w-[1440px] mx-auto px-6">
+        {/* Logo */}
+        <div className="py-6">
+          <img src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" alt="Vinster Logo" className="h-8 w-auto" />
+        </div>
+        
+        {/* Main Hero Content */}
+        <div className="grid grid-cols-2 gap-8 items-center min-h-[400px]">
+          {/* Left Content */}
+          <div className="space-y-6">
+            <div className="text-sm text-white leading-relaxed">
+              Wij brengen met wetenschappelijke methoden<br />
+              waardevolle inzichten over jouw talenten in kaart.<br />
+              Leer meer over jezelf!
+            </div>
+            
+            <h1 className="text-4xl font-bold text-white leading-tight">
+              Doe het <span className="text-yellow-400">werk</span> waar<br />
+              je <span className="text-yellow-400">gelukkig</span> van wordt.
+            </h1>
+            
+            <div className="flex gap-4">
+              <Button className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-8 py-3 rounded-full">
+                Doe de test
+              </Button>
+              <Button className="bg-blue-900 hover:bg-blue-800 text-white font-bold px-8 py-3 rounded-full">
+                Hoe het werkt
+              </Button>
+            </div>
+          </div>
+          
+          {/* Right side - empty space to let background image show */}
+          <div></div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default HeroSection;
