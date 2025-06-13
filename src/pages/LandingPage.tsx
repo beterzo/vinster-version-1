@@ -246,33 +246,35 @@ const LandingPage = () => {
         </div>
       </div>
 
-      {/* Testimonial Section with Background Image */}
-      <div className="relative py-16 overflow-hidden">
-        {/* Background Image */}
+      {/* Testimonial Section as Block on Page */}
+      <div className="max-w-[1440px] mx-auto px-6 py-20 bg-gray-50">
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="relative overflow-hidden rounded-3xl shadow-xl min-h-[400px]"
           style={{
-            backgroundImage: "url('/lovable-uploads/f40f684e-643d-4161-be1c-240737966a76.png')"
+            backgroundImage: "url('/lovable-uploads/f40f684e-643d-4161-be1c-240737966a76.png')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
           }}
         >
-          {/* Overlay for better text readability */}
-          <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-        </div>
-        
-        <div className="relative z-10 max-w-[1440px] mx-auto px-6">
-          <div className="grid grid-cols-2 gap-8 items-center">
-            {/* Quote */}
-            <div className="space-y-6">
-              <blockquote className="text-2xl font-bold text-white leading-tight">
-                "Ik zag mezelf niet ineens<br />
-                die switch maken, maar<br />
-                wat ben ik blij dat ik het<br />
-                gedaan heb!"
-              </blockquote>
+          {/* Light overlay for better text readability */}
+          <div className="absolute inset-0 bg-white bg-opacity-20"></div>
+          
+          <div className="relative z-10 px-12 py-16">
+            <div className="grid grid-cols-2 gap-8 items-center">
+              {/* Quote */}
+              <div className="space-y-6">
+                <blockquote className="text-3xl font-bold text-blue-900 leading-tight">
+                  "Ik zag mezelf niet ineens<br />
+                  die switch maken, maar<br />
+                  wat ben ik blij dat ik het<br />
+                  gedaan heb!"
+                </blockquote>
+              </div>
+              
+              {/* Empty space to let background image show */}
+              <div></div>
             </div>
-            
-            {/* Empty space to let background image show */}
-            <div></div>
           </div>
         </div>
       </div>
