@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Star, Target, FileText, Search, Users } from "lucide-react";
+import { Sparkles, Target, FileText, Search, Users } from "lucide-react";
+
 const LandingPage = () => {
   return <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header Section */}
@@ -148,7 +149,7 @@ const LandingPage = () => {
               <path d="M 150 50 Q 300 30, 400 50 T 700 50 T 1050 50" stroke="#e5e7eb" strokeWidth="4" fill="none" strokeLinecap="round" />
             </svg>
             
-            {/* Step 1 - Enthousiasmescan */}
+            {/* Step 1 - Enthousiasmescan with Sparkles */}
             <div className="absolute" style={{
             left: '150px',
             top: '50px',
@@ -157,9 +158,12 @@ const LandingPage = () => {
           }}>
               <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg border-2 border-gray-100">
                 <div className="relative">
-                  <Star className="w-8 h-8 text-yellow-400 fill-yellow-400" />
-                  <Star className="w-4 h-4 text-yellow-400 fill-yellow-400 absolute -top-1 left-6" />
-                  <Star className="w-3 h-3 text-yellow-400 fill-yellow-400 absolute top-2 -left-1" />
+                  {/* Main large sparkle in center-right */}
+                  <Sparkles className="w-8 h-8 text-yellow-400 fill-yellow-400" />
+                  {/* Medium sparkle top-left */}
+                  <Sparkles className="w-5 h-5 text-yellow-400 fill-yellow-400 absolute -top-2 -left-2" />
+                  {/* Small sparkle bottom-right */}
+                  <Sparkles className="w-3 h-3 text-yellow-400 fill-yellow-400 absolute bottom-0 right-0" />
                 </div>
               </div>
             </div>
@@ -174,7 +178,7 @@ const LandingPage = () => {
               <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg border-2 border-gray-100">
                 <div className="relative">
                   <Users className="w-10 h-10 text-blue-500" />
-                  <Star className="absolute -top-1 -right-1 w-3 h-3 text-yellow-400 fill-yellow-400" />
+                  <Sparkles className="absolute -top-1 -right-1 w-3 h-3 text-yellow-400 fill-yellow-400" />
                   <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-green-500 rounded-full"></div>
                   <div className="absolute top-1 -right-1 w-2 h-2 bg-red-500 rounded"></div>
                   <div className="absolute -bottom-1 right-1 w-2 h-2 bg-blue-400 rounded"></div>
