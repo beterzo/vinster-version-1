@@ -96,6 +96,10 @@ const Dashboard = () => {
                     <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
                     <span>Na het invullen van beide interviews wordt automatisch een persoonlijk rapport gegenereerd.</span>
                   </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+                    <span>Na het invullen van het zoekprofiel ontvang je een persoonlijk zoekprofiel waarmee jij de juiste vacatures kunt vinden.</span>
+                  </li>
                 </ul>
               </Card>
 
