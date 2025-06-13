@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Star, Target, FileText, Search, Users } from "lucide-react";
@@ -127,75 +128,101 @@ const LandingPage = () => {
         </div>
       </div>
 
-      {/* Process Overview Section - Updated Flow */}
-      <div className="max-w-[1440px] mx-auto px-6 py-16 bg-gray-50">
-        <div className="mb-12">
+      {/* Process Overview Section - Rebuilt to match reference image */}
+      <div className="max-w-[1440px] mx-auto px-6 py-20 bg-gray-50">
+        {/* Intro Section */}
+        <div className="mb-16 text-center">
           <div className="text-yellow-400 text-sm font-semibold mb-4">Hoe werkt de loopbaan tool</div>
-          <h2 className="text-3xl font-bold text-blue-900 leading-tight max-w-2xl">
+          <h2 className="text-4xl font-bold text-blue-900 leading-tight max-w-4xl mx-auto">
             Samen vinden we stap voor stap uit<br />
             waar jouw interesses liggen en wat<br />
             je het liefste doet.
           </h2>
         </div>
         
-        {/* Process Steps with Smooth Flowing Line */}
-        <div className="relative min-h-[120px] overflow-hidden">
-          {/* Smooth flowing curved line */}
-          <svg className="absolute inset-0 w-full h-full" style={{ zIndex: 1 }}>
-            <path 
-              d="M -400 60 C -200 45, -100 70, 0 55 C 100 40, 200 75, 300 60 C 400 45, 500 80, 600 55 C 700 30, 800 65, 900 50 C 1000 35, 1100 70, 1200 55 C 1300 40, 1400 65, 1800 55" 
-              stroke="#d1d5db" 
-              strokeWidth="3" 
-              fill="none"
-              strokeLinecap="round"
-            />
-          </svg>
-          
-          {/* Step 1 - De enthousiasme-scan */}
-          <div className="absolute" style={{ left: '200px', top: '60px', zIndex: 2, transform: 'translate(-50%, -50%)' }}>
-            <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-lg border border-gray-100">
-              <div className="relative">
-                <Star className="w-6 h-6 text-yellow-400 fill-yellow-400" />
-                <Star className="w-4 h-4 text-yellow-400 fill-yellow-400 absolute -top-1 left-4" />
-                <Star className="w-3 h-3 text-yellow-400 fill-yellow-400 absolute top-1 -left-1" />
-              </div>
-            </div>
-          </div>
-          
-          {/* Step 2 - Wensberoepen */}
-          <div className="absolute" style={{ left: '450px', top: '60px', zIndex: 2, transform: 'translate(-50%, -50%)' }}>
-            <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-lg border border-gray-100">
-              <div className="relative">
-                <Users className="w-8 h-8 text-blue-400" />
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-blue-400 rounded-full"></div>
-                <Star className="absolute -top-1 right-3 w-3 h-3 text-blue-400" />
-                <div className="absolute -bottom-1 -left-1 w-2 h-2 border-2 border-blue-400 rounded"></div>
-              </div>
-            </div>
-          </div>
-          
-          {/* Step 3 - Prioriteiten stellen */}
-          <div className="absolute" style={{ left: '700px', top: '60px', zIndex: 2, transform: 'translate(-50%, -50%)' }}>
-            <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-lg border border-gray-100">
-              <div className="relative">
-                <Target className="w-8 h-8 text-green-500" />
-                <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full"></div>
-                <div className="absolute -bottom-1 -left-1 w-1.5 h-1.5 border-2 border-green-500 rounded"></div>
-              </div>
-            </div>
-          </div>
-          
-          {/* Step 4 - Laatste check */}
-          <div className="absolute" style={{ left: '950px', top: '60px', zIndex: 2, transform: 'translate(-50%, -50%)' }}>
-            <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-lg border border-gray-100">
-              <div className="relative">
-                <Search className="w-8 h-8 text-yellow-500" />
-                <div className="absolute -top-1 right-1 flex gap-0.5">
-                  <div className="w-0.5 h-0.5 bg-yellow-500 rounded-full"></div>
-                  <div className="w-0.5 h-0.5 bg-yellow-500 rounded-full"></div>
-                  <div className="w-0.5 h-0.5 bg-yellow-500 rounded-full"></div>
+        {/* Process Steps with Flowing Line */}
+        <div className="relative">
+          {/* Container for the process flow */}
+          <div className="relative h-32 mb-16">
+            {/* Flowing curved line connecting all circles */}
+            <svg className="absolute inset-0 w-full h-full" style={{ zIndex: 1 }}>
+              <path 
+                d="M 150 50 Q 300 30, 400 50 T 700 50 T 1050 50" 
+                stroke="#e5e7eb" 
+                strokeWidth="4" 
+                fill="none"
+                strokeLinecap="round"
+              />
+            </svg>
+            
+            {/* Step 1 - Enthousiasmescan */}
+            <div className="absolute" style={{ left: '150px', top: '50px', transform: 'translate(-50%, -50%)', zIndex: 2 }}>
+              <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg border-2 border-gray-100">
+                <div className="relative">
+                  <Star className="w-8 h-8 text-yellow-400 fill-yellow-400" />
+                  <Star className="w-4 h-4 text-yellow-400 fill-yellow-400 absolute -top-1 left-6" />
+                  <Star className="w-3 h-3 text-yellow-400 fill-yellow-400 absolute top-2 -left-1" />
                 </div>
               </div>
+            </div>
+            
+            {/* Step 2 - Wensberoepen */}
+            <div className="absolute" style={{ left: '400px', top: '50px', transform: 'translate(-50%, -50%)', zIndex: 2 }}>
+              <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg border-2 border-gray-100">
+                <div className="relative">
+                  <Users className="w-10 h-10 text-blue-500" />
+                  <Star className="absolute -top-1 -right-1 w-3 h-3 text-yellow-400 fill-yellow-400" />
+                  <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-green-500 rounded-full"></div>
+                  <div className="absolute top-1 -right-1 w-2 h-2 bg-red-500 rounded"></div>
+                  <div className="absolute -bottom-1 right-1 w-2 h-2 bg-blue-400 rounded"></div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Step 3 - Prioriteiten stellen */}
+            <div className="absolute" style={{ left: '700px', top: '50px', transform: 'translate(-50%, -50%)', zIndex: 2 }}>
+              <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg border-2 border-gray-100">
+                <div className="relative">
+                  <FileText className="w-8 h-8 text-blue-600" />
+                  <div className="absolute -top-1 -right-1 w-4 h-4 bg-blue-600 rounded-full flex items-center justify-center">
+                    <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Step 4 - Laatste check */}
+            <div className="absolute" style={{ left: '1050px', top: '50px', transform: 'translate(-50%, -50%)', zIndex: 2 }}>
+              <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg border-2 border-gray-100">
+                <div className="relative">
+                  <Search className="w-8 h-8 text-yellow-500" />
+                  <div className="absolute -top-2 -right-1 flex gap-1">
+                    <div className="w-1 h-1 bg-yellow-400 rounded-full"></div>
+                    <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full"></div>
+                    <div className="w-1 h-1 bg-yellow-400 rounded-full"></div>
+                  </div>
+                  <div className="absolute -bottom-1 -left-2 flex gap-1">
+                    <div className="w-1 h-1 bg-yellow-400 rounded-full"></div>
+                    <div className="w-1 h-1 bg-yellow-400 rounded-full"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Step Titles */}
+          <div className="grid grid-cols-4 gap-8">
+            <div className="text-center">
+              <h3 className="text-lg font-bold text-blue-900">Enthousiasmescan</h3>
+            </div>
+            <div className="text-center">
+              <h3 className="text-lg font-bold text-blue-900">Wensberoepen</h3>
+            </div>
+            <div className="text-center">
+              <h3 className="text-lg font-bold text-blue-900">Prioriteiten stellen</h3>
+            </div>
+            <div className="text-center">
+              <h3 className="text-lg font-bold text-blue-900">Laatste check</h3>
             </div>
           </div>
         </div>
