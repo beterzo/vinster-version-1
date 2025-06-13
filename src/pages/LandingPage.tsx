@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Star, Target, FileText, Search, Users } from "lucide-react";
@@ -77,7 +76,7 @@ const LandingPage = () => {
             
             {/* Blue Card with Report */}
             <div className="col-span-4">
-              <Card className="bg-blue-500 text-white p-6 rounded-3xl border-0 relative overflow-hidden h-48">
+              <Card className="text-white p-6 rounded-3xl border-0 relative overflow-hidden h-48" style={{ backgroundColor: '#A9C5E2' }}>
                 <h3 className="text-xl font-bold mb-4 leading-tight">Voorbeeld<br />rapport</h3>
                 <div className="absolute bottom-0 right-4">
                   {/* Larger, more realistic document with updated color */}
