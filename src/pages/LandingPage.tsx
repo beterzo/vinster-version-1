@@ -1,19 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Sparkles, Target, FileText, Search, Users } from "lucide-react";
-
 const LandingPage = () => {
-  return (
-    <div className="min-h-screen bg-gray-50 font-sans">
+  return <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header Section */}
       <div className="relative overflow-hidden">
         {/* Background Image */}
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: "url('/lovable-uploads/b67ce5d1-c717-4a77-b5ad-550d88a42378.png')"
-          }}
-        >
+        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
+        backgroundImage: "url('/lovable-uploads/b67ce5d1-c717-4a77-b5ad-550d88a42378.png')"
+      }}>
           {/* Overlay for better text readability - made lighter */}
           <div className="absolute inset-0 bg-black bg-opacity-20"></div>
         </div>
@@ -21,11 +16,7 @@ const LandingPage = () => {
         <div className="relative z-10 max-w-[1440px] mx-auto px-6">
           {/* Logo */}
           <div className="py-6">
-            <img
-              src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png"
-              alt="Vinster Logo"
-              className="h-8 w-auto"
-            />
+            <img src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" alt="Vinster Logo" className="h-8 w-auto" />
           </div>
           
           {/* Main Hero Content */}
@@ -76,10 +67,9 @@ const LandingPage = () => {
             
             {/* Blue Card with Report */}
             <div className="col-span-4">
-              <Card
-                className="text-white p-6 rounded-3xl border-0 relative overflow-hidden h-48"
-                style={{ backgroundColor: '#A9C5E2' }}
-              >
+              <Card className="text-white p-6 rounded-3xl border-0 relative overflow-hidden h-48" style={{
+              backgroundColor: '#A9C5E2'
+            }}>
                 <h3 className="text-xl font-bold mb-4 leading-tight">
                   Voorbeeld<br />rapport
                 </h3>
@@ -87,10 +77,9 @@ const LandingPage = () => {
                   {/* Larger, more realistic document with updated color */}
                   <div className="w-36 h-48 bg-white rounded-lg shadow-xl transform rotate-12 relative overflow-hidden">
                     {/* Document header */}
-                    <div
-                      className="h-7 flex items-center px-3"
-                      style={{ backgroundColor: '#78BFE3' }}
-                    >
+                    <div className="h-7 flex items-center px-3" style={{
+                    backgroundColor: '#78BFE3'
+                  }}>
                       <div className="flex gap-1">
                         <div className="w-1.5 h-1.5 bg-white rounded-full opacity-80"></div>
                         <div className="w-1.5 h-1.5 bg-white rounded-full opacity-80"></div>
@@ -103,10 +92,10 @@ const LandingPage = () => {
                       <div className="h-1.5 bg-gray-300 rounded w-4/5"></div>
                       <div className="h-1.5 bg-gray-300 rounded w-full"></div>
                       <div className="h-1.5 bg-gray-300 rounded w-3/4"></div>
-                      <div
-                        className="h-3 rounded w-full mt-3"
-                        style={{ backgroundColor: '#78BFE3', opacity: 0.7 }}
-                      ></div>
+                      <div className="h-3 rounded w-full mt-3" style={{
+                      backgroundColor: '#78BFE3',
+                      opacity: 0.7
+                    }}></div>
                       <div className="h-1.5 bg-gray-300 rounded w-full"></div>
                       <div className="h-1.5 bg-gray-300 rounded w-5/6"></div>
                       <div className="h-1.5 bg-gray-300 rounded w-full"></div>
@@ -177,7 +166,9 @@ const LandingPage = () => {
             {/* Step 2: Wensberoepen - Light Blue */}
             <div className="flex flex-col items-center">
               <div className="relative mb-8">
-                <div className="w-24 h-24 rounded-full shadow-lg flex items-center justify-center" style={{ backgroundColor: '#A9C5E2' }}>
+                <div className="w-24 h-24 rounded-full shadow-lg flex items-center justify-center" style={{
+                backgroundColor: '#A9C5E2'
+              }}>
                   <Users className="w-10 h-10 text-white" />
                 </div>
               </div>
@@ -216,17 +207,7 @@ const LandingPage = () => {
           </div>
 
           {/* Simple connecting lines using existing colors */}
-          <div className="absolute top-12 left-0 w-full flex justify-between px-12">
-            <div className="flex items-center space-x-2">
-              <div className="w-16 h-0.5 bg-yellow-400"></div>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-16 h-0.5" style={{ backgroundColor: '#A9C5E2' }}></div>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-16 h-0.5 bg-blue-900"></div>
-            </div>
-          </div>
+          
         </div>
 
         {/* Call to action */}
@@ -239,15 +220,12 @@ const LandingPage = () => {
 
       {/* Testimonial Section as Block on Page */}
       <div className="max-w-[1440px] mx-auto px-6 py-8 bg-gray-50">
-        <div
-          className="relative overflow-hidden rounded-3xl shadow-xl min-h-[300px]"
-          style={{
-            backgroundImage: "url('/lovable-uploads/f40f684e-643d-4161-be1c-240737966a76.png')",
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat'
-          }}
-        >
+        <div className="relative overflow-hidden rounded-3xl shadow-xl min-h-[300px]" style={{
+        backgroundImage: "url('/lovable-uploads/f40f684e-643d-4161-be1c-240737966a76.png')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}>
           {/* Light overlay for better text readability */}
           <div className="absolute inset-0 bg-white bg-opacity-20"></div>
           
@@ -269,8 +247,6 @@ const LandingPage = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default LandingPage;
