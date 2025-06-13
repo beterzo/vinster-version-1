@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -24,6 +23,7 @@ const EnthousiasmeStep4 = () => {
     console.log("Scan completed!", answers);
     // For now, navigate back to home or show a completion message
     alert("Enthousiasme scan afgerond!");
+    navigate('/home');
   };
 
   return (
