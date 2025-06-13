@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Star, Target, FileText, Search, Users } from "lucide-react";
@@ -142,10 +143,6 @@ const LandingPage = () => {
         <div className="relative min-h-[500px]">
           {/* Flowing curved line through all steps */}
           <svg className="absolute inset-0 w-full h-full" style={{ zIndex: 1 }}>
-            <defs>
-              {/* No arrowheads needed for flowing line */}
-            </defs>
-            {/* Flowing curved line from left to right through all step centers */}
             <path 
               d="M -50 200 Q 200 150, 400 120 Q 600 100, 800 180 Q 1000 250, 1200 150" 
               stroke="#d1d5db" 
@@ -155,14 +152,16 @@ const LandingPage = () => {
             />
           </svg>
           
-          {/* Step 1 - De enthousiasme-scan (left, middle height) */}
-          <div className="absolute left-[8%] top-[35%] w-72" style={{ zIndex: 2 }}>
+          {/* Step 1 - De enthousiasme-scan */}
+          <div className="absolute" style={{ left: '150px', top: '150px', zIndex: 2, transform: 'translate(-50%, -50%)' }}>
             <div className="flex flex-col items-center text-center">
               <div className="w-32 h-32 bg-white rounded-full flex items-center justify-center mb-6 shadow-lg border border-gray-100 relative">
-                <div className="absolute -top-2 -left-2">
-                  <Star className="w-8 h-8 text-yellow-400 fill-yellow-400" />
-                  <Star className="w-6 h-6 text-yellow-400 fill-yellow-400 absolute -top-1 left-6" />
-                  <Star className="w-4 h-4 text-yellow-400 fill-yellow-400 absolute top-2 -left-1" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="relative">
+                    <Star className="w-8 h-8 text-yellow-400 fill-yellow-400" />
+                    <Star className="w-6 h-6 text-yellow-400 fill-yellow-400 absolute -top-1 left-6" />
+                    <Star className="w-4 h-4 text-yellow-400 fill-yellow-400 absolute top-2 -left-1" />
+                  </div>
                 </div>
               </div>
               <h4 className="font-bold text-blue-900 mb-3 text-lg">De enthousiasme-scan</h4>
@@ -174,15 +173,17 @@ const LandingPage = () => {
             </div>
           </div>
           
-          {/* Step 2 - Wensberoepen (center-left, higher) */}
-          <div className="absolute left-[32%] top-[15%] w-72" style={{ zIndex: 2 }}>
+          {/* Step 2 - Wensberoepen */}
+          <div className="absolute" style={{ left: '400px', top: '120px', zIndex: 2, transform: 'translate(-50%, -50%)' }}>
             <div className="flex flex-col items-center text-center">
               <div className="w-32 h-32 bg-white rounded-full flex items-center justify-center mb-6 shadow-lg border border-gray-100">
-                <div className="relative">
-                  <Users className="w-12 h-12 text-blue-400" />
-                  <div className="absolute -top-1 -right-1 w-4 h-4 bg-blue-400 rounded-full"></div>
-                  <Star className="absolute -top-2 right-4 w-4 h-4 text-blue-400" />
-                  <div className="absolute -bottom-1 -left-1 w-3 h-3 border-2 border-blue-400 rounded"></div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="relative">
+                    <Users className="w-12 h-12 text-blue-400" />
+                    <div className="absolute -top-1 -right-1 w-4 h-4 bg-blue-400 rounded-full"></div>
+                    <Star className="absolute -top-2 right-4 w-4 h-4 text-blue-400" />
+                    <div className="absolute -bottom-1 -left-1 w-3 h-3 border-2 border-blue-400 rounded"></div>
+                  </div>
                 </div>
               </div>
               <h4 className="font-bold text-blue-900 mb-3 text-lg">Wensberoepen</h4>
@@ -194,14 +195,16 @@ const LandingPage = () => {
             </div>
           </div>
           
-          {/* Step 3 - Prioriteiten stellen (center-right, lower) */}
-          <div className="absolute left-[56%] top-[55%] w-72" style={{ zIndex: 2 }}>
+          {/* Step 3 - Prioriteiten stellen */}
+          <div className="absolute" style={{ left: '800px', top: '180px', zIndex: 2, transform: 'translate(-50%, -50%)' }}>
             <div className="flex flex-col items-center text-center">
               <div className="w-32 h-32 bg-white rounded-full flex items-center justify-center mb-6 shadow-lg border border-gray-100">
-                <div className="relative">
-                  <Target className="w-12 h-12 text-green-500" />
-                  <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full"></div>
-                  <div className="absolute -bottom-1 -left-1 w-2 h-2 border-2 border-green-500 rounded"></div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="relative">
+                    <Target className="w-12 h-12 text-green-500" />
+                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full"></div>
+                    <div className="absolute -bottom-1 -left-1 w-2 h-2 border-2 border-green-500 rounded"></div>
+                  </div>
                 </div>
               </div>
               <h4 className="font-bold text-blue-900 mb-3 text-lg">Prioriteiten<br />stellen</h4>
@@ -213,16 +216,18 @@ const LandingPage = () => {
             </div>
           </div>
           
-          {/* Step 4 - Laatste check (right, higher) */}
-          <div className="absolute right-[8%] top-[20%] w-72" style={{ zIndex: 2 }}>
+          {/* Step 4 - Laatste check */}
+          <div className="absolute" style={{ left: '1200px', top: '150px', zIndex: 2, transform: 'translate(-50%, -50%)' }}>
             <div className="flex flex-col items-center text-center">
               <div className="w-32 h-32 bg-white rounded-full flex items-center justify-center mb-6 shadow-lg border border-gray-100">
-                <div className="relative">
-                  <Search className="w-12 h-12 text-yellow-500" />
-                  <div className="absolute -top-1 right-2 flex gap-0.5">
-                    <div className="w-1 h-1 bg-yellow-500 rounded-full"></div>
-                    <div className="w-1 h-1 bg-yellow-500 rounded-full"></div>
-                    <div className="w-1 h-1 bg-yellow-500 rounded-full"></div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="relative">
+                    <Search className="w-12 h-12 text-yellow-500" />
+                    <div className="absolute -top-1 right-2 flex gap-0.5">
+                      <div className="w-1 h-1 bg-yellow-500 rounded-full"></div>
+                      <div className="w-1 h-1 bg-yellow-500 rounded-full"></div>
+                      <div className="w-1 h-1 bg-yellow-500 rounded-full"></div>
+                    </div>
                   </div>
                 </div>
               </div>
