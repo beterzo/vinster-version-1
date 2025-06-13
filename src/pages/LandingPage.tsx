@@ -75,11 +75,11 @@ const LandingPage = () => {
           {/* Blue Card with Larger Report Document */}
           <Card className="bg-blue-500 text-white p-8 rounded-3xl border-0 relative overflow-hidden">
             <h3 className="text-xl font-bold mb-4 leading-tight">Voorbeeld<br />rapport</h3>
-            <div className="absolute bottom-6 right-6">
-              {/* Larger, more realistic document */}
+            <div className="absolute bottom-4 right-4">
+              {/* Larger, more realistic document with updated color */}
               <div className="w-36 h-48 bg-white rounded-lg shadow-xl transform rotate-12 relative overflow-hidden">
                 {/* Document header */}
-                <div className="h-7 bg-blue-600 flex items-center px-3">
+                <div className="h-7 flex items-center px-3" style={{ backgroundColor: '#78BFE3' }}>
                   <div className="flex gap-1">
                     <div className="w-1.5 h-1.5 bg-white rounded-full opacity-80"></div>
                     <div className="w-1.5 h-1.5 bg-white rounded-full opacity-80"></div>
@@ -92,7 +92,7 @@ const LandingPage = () => {
                   <div className="h-1.5 bg-gray-300 rounded w-4/5"></div>
                   <div className="h-1.5 bg-gray-300 rounded w-full"></div>
                   <div className="h-1.5 bg-gray-300 rounded w-3/4"></div>
-                  <div className="h-3 bg-blue-200 rounded w-full mt-3"></div>
+                  <div className="h-3 rounded w-full mt-3" style={{ backgroundColor: '#78BFE3', opacity: 0.7 }}></div>
                   <div className="h-1.5 bg-gray-300 rounded w-full"></div>
                   <div className="h-1.5 bg-gray-300 rounded w-5/6"></div>
                   <div className="h-1.5 bg-gray-300 rounded w-full"></div>
