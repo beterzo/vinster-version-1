@@ -20,7 +20,7 @@ const LandingPage = () => {
           </div>
           
           {/* Main Hero Content */}
-          <div className="grid grid-cols-2 gap-8 items-center min-h-[500px]">
+          <div className="grid grid-cols-2 gap-8 items-center min-h-[400px]">
             {/* Left Content */}
             <div className="space-y-6">
               <div className="text-sm text-white leading-relaxed">
@@ -51,8 +51,8 @@ const LandingPage = () => {
       </div>
 
       {/* Three Cards Section - Wrapped in White Container */}
-      <div className="max-w-[1440px] mx-auto px-6 py-20 bg-gray-50">
-        <div className="bg-white rounded-3xl shadow-xl p-8">
+      <div className="max-w-[1440px] mx-auto px-6 py-12 bg-gray-50">
+        <div className="bg-white rounded-3xl shadow-xl p-6">
           <div className="grid grid-cols-12 gap-6">
             {/* Yellow Card */}
             <div className="col-span-4">
@@ -116,7 +116,9 @@ const LandingPage = () => {
               {/* Text directly on white background */}
               <div className="px-2">
                 <h4 className="text-lg font-bold mb-3 text-blue-900">Over deze tool</h4>
-                <p className="text-sm leading-relaxed text-blue-900">De denkwijze achter vinster is ontwikkeld door Heidi Jansen.</p>
+                <p className="text-sm leading-relaxed text-blue-900">
+                  De denkwijze achter vinster is ontwikkeld door Heidi Jansen.
+                </p>
               </div>
             </div>
           </div>
@@ -124,9 +126,9 @@ const LandingPage = () => {
       </div>
 
       {/* Process Overview Section - Rebuilt to match reference image */}
-      <div className="max-w-[1440px] mx-auto px-6 py-20 bg-gray-50">
+      <div className="max-w-[1440px] mx-auto px-6 py-12 bg-gray-50">
         {/* Intro Section */}
-        <div className="mb-16 text-center">
+        <div className="mb-10 text-center">
           <div className="text-yellow-400 text-sm font-semibold mb-4">Hoe werkt de loopbaan tool</div>
           <h2 className="text-4xl font-bold text-blue-900 leading-tight max-w-4xl mx-auto">
             Samen vinden we stap voor stap uit<br />
@@ -138,7 +140,7 @@ const LandingPage = () => {
         {/* Process Steps with Flowing Line */}
         <div className="relative">
           {/* Container for the process flow */}
-          <div className="relative h-32 mb-16">
+          <div className="relative h-32 mb-8">
             {/* Flowing curved line connecting all circles */}
             <svg className="absolute inset-0 w-full h-full" style={{
             zIndex: 1
@@ -240,8 +242,8 @@ const LandingPage = () => {
       </div>
 
       {/* Testimonial Section as Block on Page */}
-      <div className="max-w-[1440px] mx-auto px-6 py-20 bg-gray-50">
-        <div className="relative overflow-hidden rounded-3xl shadow-xl min-h-[400px]" style={{
+      <div className="max-w-[1440px] mx-auto px-6 py-12 bg-gray-50">
+        <div className="relative overflow-hidden rounded-3xl shadow-xl min-h-[300px]" style={{
         backgroundImage: "url('/lovable-uploads/f40f684e-643d-4161-be1c-240737966a76.png')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
