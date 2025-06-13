@@ -2,90 +2,100 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import ProgressStep from "./ProgressStep";
-import { CircleUser, Target, Star, CheckCircle, Search } from "lucide-react";
+import { CircleUser, Target, Star, CheckCircle, Search, FileText } from "lucide-react";
 
 const Dashboard = () => {
   const progressSteps = [
     {
-      title: "Enthousiasme-scan",
+      title: "De enthousiasme-scan",
       description: "Ontdek wat jou écht enthousiast maakt in je werk en waar je energie van krijgt.",
       progress: 100,
       isCompleted: true,
-      icon: <Star className="w-6 h-6 text-yellow-500" />
+      icon: <Star className="w-5 h-5 text-yellow-500" />
     },
     {
-      title: "Wensberoepen",
+      title: "Jouw wensberoepen",
       description: "Verken beroepen die bij jouw interesses en vaardigheden passen.",
-      progress: 75,
+      progress: 45,
       isCompleted: false,
-      icon: <Target className="w-6 h-6 text-blue-500" />
+      icon: <Target className="w-5 h-5 text-blue-400" />
     },
     {
-      title: "Prioriteiten stellen",
-      description: "Bepaal wat voor jou het allerbelangrijkst is in je ideale baan.",
+      title: "Jouw rapport en aanbevelingen",
+      description: "Krijg een overzicht van jouw resultaten en persoonlijke aanbevelingen.",
       progress: 0,
       isCompleted: false,
-      icon: <CircleUser className="w-6 h-6 text-gray-400" />
+      icon: <FileText className="w-5 h-5 text-gray-400" />
     },
     {
-      title: "Laatste check",
-      description: "Controleer of alles klopt en verfijn je keuzes waar nodig.",
+      title: "Jouw antwoorden",
+      description: "Bekijk en pas je antwoorden aan waar nodig voor het beste resultaat.",
       progress: 0,
       isCompleted: false,
-      icon: <CheckCircle className="w-6 h-6 text-gray-400" />
-    },
-    {
-      title: "Zoekprofiel",
-      description: "Maak je profiel compleet en start met zoeken naar jouw droombaan.",
-      progress: 0,
-      isCompleted: false,
-      icon: <Search className="w-6 h-6 text-gray-400" />
+      icon: <Search className="w-5 h-5 text-gray-400" />
     }
   ];
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <div className="max-w-7xl mx-auto px-8 py-12">
         <div className="grid lg:grid-cols-12 gap-8">
           {/* Linker kolom - Welkom sectie */}
           <div className="lg:col-span-4 space-y-6">
-            <div className="space-y-4">
-              <h1 className="text-3xl font-bold text-gray-900">Welkom</h1>
-              <p className="text-gray-600 leading-relaxed">
-                Dit is jouw persoonlijke dashboard. Hier zie je jouw voortgang en kun je verder gaan waar je gebleven bent.
-              </p>
-              <p className="text-gray-600 leading-relaxed">
-                Doorloop de stappen in volgorde om jouw ideale loopbaanpad te ontdekken. Elke stap bouwt voort op de vorige en helpt je dichter bij jouw droombaan te komen.
-              </p>
-            </div>
+            {/* Welkom blok */}
+            <Card className="p-8 bg-blue-50 border-0 rounded-3xl">
+              <div className="space-y-4">
+                <h1 className="text-4xl font-bold text-gray-900 mb-4">Welkom</h1>
+                <p className="text-gray-700 font-medium leading-relaxed mb-4">
+                  Dit is jouw persoonlijke dashboard. Hier zie je jouw voortgang 
+                  en kun je verder gaan waar je gebleven bent.
+                </p>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Welkom bij de start van jouw loopbaantraject! We beginnen met de enthousiasme-scan, de eerste 
+                  stap om te ontdekken waar jouw werkelijke interesses en passies liggen.
+                </p>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  In deze scan gaan we op zoek naar de activiteiten en omgevingen waar jij van nature enthousiast 
+                  van wordt. Door vragen te stellen over je jeugd, schooltijd en werk brengen we jouw unieke patroon 
+                  van interesses in kaart.
+                </p>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Jouw enthousiasme is de belangrijkste indicator voor wat je echt leuk vindt. Wanneer je iets doet 
+                  waar je enthousiast van wordt, ontstaat er energie en voldoening.
+                </p>
+              </div>
+            </Card>
 
             {/* Belangrijk om te weten blok */}
-            <Card className="p-6 bg-vinster-blue border-0 rounded-2xl">
-              <h3 className="font-semibold text-gray-900 mb-4">Belangrijk om te weten</h3>
-              <ul className="space-y-3 text-sm text-gray-700">
+            <Card className="p-8 bg-blue-400 border-0 rounded-3xl text-white">
+              <h3 className="font-bold text-xl mb-6">Belangrijk om te weten</h3>
+              <ul className="space-y-4 text-sm">
                 <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Volg de stappen in volgorde voor het beste resultaat</span>
+                  <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+                  <span>Er zijn geen goede of foute antwoorden - wees eerlijk over wat jij echt leuk vindt.</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Je voortgang wordt automatisch opgeslagen</span>
+                  <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+                  <span>Denk aan concrete situaties en ervaringen uit jouw leven.</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Neem de tijd voor elke stap - kwaliteit boven snelheid</span>
+                  <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+                  <span>Je kunt je antwoorden altijd aanpassen tijdens het traject.</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Je kunt altijd teruggaan om antwoorden aan te passen</span>
+                  <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+                  <span>Je voortgang wordt automatisch opgeslagen.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+                  <span>Na het invullen van beide interviews wordt automatisch een persoonlijk rapport gegenereerd.</span>
                 </li>
               </ul>
             </Card>
           </div>
 
           {/* Midden kolom - Voortgangsblokken */}
-          <div className="lg:col-span-5 space-y-4">
-            <h2 className="text-xl font-semibold text-gray-900 mb-6">Jouw loopbaantraject</h2>
+          <div className="lg:col-span-5 space-y-6">
             <div className="space-y-4">
               {progressSteps.map((step, index) => (
                 <ProgressStep
@@ -102,7 +112,7 @@ const Dashboard = () => {
 
           {/* Rechter kolom - Afbeelding placeholder */}
           <div className="lg:col-span-3">
-            <div className="bg-gray-200 rounded-2xl h-80 lg:h-96 flex items-center justify-center">
+            <div className="bg-gray-200 rounded-3xl h-80 lg:h-96 flex items-center justify-center">
               <div className="text-center text-gray-500">
                 <CircleUser className="w-16 h-16 mx-auto mb-2 opacity-50" />
                 <p className="text-sm">Afbeelding placeholder</p>
@@ -112,9 +122,9 @@ const Dashboard = () => {
         </div>
 
         {/* Grote gele actieknop */}
-        <div className="mt-12 text-center">
+        <div className="mt-12">
           <Button 
-            className="bg-vinster-yellow hover:bg-yellow-400 text-white font-bold px-12 py-4 text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200"
+            className="w-full bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-6 text-lg rounded-3xl shadow-lg hover:shadow-xl transition-all duration-200"
             size="lg"
           >
             Ga verder waar je gebleven was
