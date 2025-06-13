@@ -41,14 +41,14 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
       <div className="max-w-[1440px] mx-auto px-6 py-8">
-        {/* 3-koloms grid layout */}
-        <div className="grid grid-cols-[1fr_300px_400px] gap-x-8 min-h-[800px]">
+        {/* 2-rijen grid layout */}
+        <div className="grid grid-rows-[auto_1fr] gap-y-8 min-h-[800px]">
           
-          {/* Linkerkolom */}
-          <div className="flex flex-col gap-8">
-            {/* Welkom blok - bovenaan links, loopt door tot aan afbeelding */}
-            <Card className="p-8 bg-blue-50 border-0 rounded-3xl flex-1">
-              <div className="space-y-4 h-full flex flex-col">
+          {/* Bovenste rij: Welkomstbericht + Afbeelding */}
+          <div className="grid grid-cols-[1fr_400px] gap-x-8">
+            {/* Welkom blok - breed tot aan afbeelding */}
+            <Card className="p-8 bg-blue-50 border-0 rounded-3xl">
+              <div className="space-y-4">
                 <h1 className="text-3xl font-bold text-gray-900 mb-4">Welkom</h1>
                 <p className="text-gray-700 font-medium leading-relaxed mb-4">
                   Dit is jouw persoonlijke dashboard. Hier zie je jouw voortgang 
@@ -63,15 +63,27 @@ const Dashboard = () => {
                   van wordt. Door vragen te stellen over je jeugd, schooltijd en werk brengen we jouw unieke patroon 
                   van interesses in kaart.
                 </p>
-                <p className="text-gray-600 text-sm leading-relaxed flex-1">
+                <p className="text-gray-600 text-sm leading-relaxed">
                   Jouw enthousiasme is de belangrijkste indicator voor wat je echt leuk vindt. Wanneer je iets doet 
                   waar je enthousiast van wordt, ontstaat er energie en voldoening.
                 </p>
               </div>
             </Card>
 
+            {/* Afbeelding - rechtsboven */}
+            <div className="rounded-3xl h-[500px] overflow-hidden">
+              <img 
+                src="/lovable-uploads/4d34612b-df14-4f89-abac-7542126c6ac2.png"
+                alt="Professionele vrouw met loopbaanontwikkeling materialen"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+
+          {/* Onderste rij: Belangrijk blok + Stappen + Knop */}
+          <div className="grid grid-cols-[auto_1fr_400px] gap-x-8 items-start">
             {/* Belangrijk om te weten blok - linksonder */}
-            <Card className="p-6 bg-blue-400 border-0 rounded-3xl text-white">
+            <Card className="p-6 bg-blue-400 border-0 rounded-3xl text-white w-[350px]">
               <h3 className="font-bold text-xl mb-4">Belangrijk om te weten</h3>
               <ul className="space-y-3 text-sm">
                 <li className="flex items-start gap-3">
@@ -96,35 +108,23 @@ const Dashboard = () => {
                 </li>
               </ul>
             </Card>
-          </div>
 
-          {/* Middenkolom - vijf stappenblokken */}
-          <div className="flex flex-col justify-end">
-            <div className="space-y-4">
-              {progressSteps.map((step, index) => (
-                <ProgressStep
-                  key={index}
-                  title={step.title}
-                  progress={step.progress}
-                  isCompleted={step.isCompleted}
-                  icon={step.icon}
-                  compact={true}
-                />
-              ))}
+            {/* Vijf stappenblokken - midden */}
+            <div className="flex flex-col justify-start">
+              <div className="space-y-4">
+                {progressSteps.map((step, index) => (
+                  <ProgressStep
+                    key={index}
+                    title={step.title}
+                    progress={step.progress}
+                    isCompleted={step.isCompleted}
+                    icon={step.icon}
+                    compact={true}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
 
-          {/* Rechterkolom - afbeelding en knop */}
-          <div className="flex flex-col gap-6">
-            {/* Afbeelding - rechtsboven */}
-            <div className="rounded-3xl h-[500px] overflow-hidden flex-1">
-              <img 
-                src="/lovable-uploads/4d34612b-df14-4f89-abac-7542126c6ac2.png"
-                alt="Professionele vrouw met loopbaanontwikkeling materialen"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            
             {/* Gele knop - rechtsonder */}
             <Button 
               className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-8 text-xl rounded-3xl shadow-lg hover:shadow-xl transition-all duration-200"
