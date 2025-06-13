@@ -1,5 +1,3 @@
-
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Star, Target, FileText, Search, Users } from "lucide-react";
@@ -24,7 +22,7 @@ const LandingPage = () => {
           {/* Logo */}
           <div className="py-6">
             <img 
-              src="/lovable-uploads/b3731930-5d78-4bcb-8d0a-362ad1ef3e97.png" 
+              src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" 
               alt="Vinster Logo" 
               className="h-8 w-auto"
             />
@@ -240,4 +238,3 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
-
