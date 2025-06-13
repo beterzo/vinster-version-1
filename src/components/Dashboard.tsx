@@ -47,7 +47,7 @@ const Dashboard = () => {
           {/* Linker kolom: Content */}
           <div className="grid grid-rows-[auto_1fr] gap-y-8">
             {/* Welkom blok - bovenaan links */}
-            <Card className="p-8 bg-blue-50 border-0 rounded-3xl">
+            <Card className="p-8 border-0 rounded-3xl" style={{ backgroundColor: '#E6F0F6' }}>
               <div className="space-y-4">
                 <h1 className="text-3xl font-bold text-gray-900 mb-4">Welkom</h1>
                 <p className="text-gray-700 font-medium leading-relaxed mb-4">
@@ -73,7 +73,7 @@ const Dashboard = () => {
             {/* Onderste rij: Belangrijk blok + Stappen */}
             <div className="grid grid-cols-[350px_1fr] gap-x-8 items-stretch">
               {/* Belangrijk om te weten blok - linksonder */}
-              <Card className="p-6 bg-blue-400 border-0 rounded-3xl text-white flex flex-col">
+              <Card className="p-6 border-0 rounded-3xl text-white flex flex-col" style={{ backgroundColor: '#78BFE3' }}>
                 <h3 className="font-bold text-xl mb-4">Belangrijk om te weten</h3>
                 <ul className="space-y-4 text-sm flex-1 flex flex-col justify-between">
                   <li className="flex items-start gap-3">
