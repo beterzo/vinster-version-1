@@ -8,6 +8,11 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
+import EnthousiasmeIntro from "./pages/EnthousiasmeIntro";
+import EnthousiasmeStep1 from "./pages/EnthousiasmeStep1";
+import EnthousiasmeStep2 from "./pages/EnthousiasmeStep2";
+import EnthousiasmeStep3 from "./pages/EnthousiasmeStep3";
+import EnthousiasmeStep4 from "./pages/EnthousiasmeStep4";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +26,11 @@ const App = () => (
           <Route path="/landingspagina" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/enthousiasme-intro" element={<EnthousiasmeIntro />} />
+          <Route path="/enthousiasme-stap-1" element={<EnthousiasmeStep1 />} />
+          <Route path="/enthousiasme-stap-2" element={<EnthousiasmeStep2 />} />
+          <Route path="/enthousiasme-stap-3" element={<EnthousiasmeStep3 />} />
+          <Route path="/enthousiasme-stap-4" element={<EnthousiasmeStep4 />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
