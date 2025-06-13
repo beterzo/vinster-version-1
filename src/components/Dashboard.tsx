@@ -80,8 +80,8 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Onderste rij: Belangrijk blok + Stappen + Knop */}
-          <div className="grid grid-cols-[auto_1fr_400px] gap-x-8 items-start">
+          {/* Onderste rij: Belangrijk blok + Stappen + Knop - alle even hoog */}
+          <div className="grid grid-cols-[auto_1fr_400px] gap-x-8 items-stretch">
             {/* Belangrijk om te weten blok - linksonder */}
             <Card className="p-6 bg-blue-400 border-0 rounded-3xl text-white w-[350px]">
               <h3 className="font-bold text-xl mb-4">Belangrijk om te weten</h3>
@@ -109,29 +109,29 @@ const Dashboard = () => {
               </ul>
             </Card>
 
-            {/* Vijf stappenblokken - midden */}
-            <div className="flex flex-col justify-start">
-              <div className="space-y-4">
-                {progressSteps.map((step, index) => (
-                  <ProgressStep
-                    key={index}
-                    title={step.title}
-                    progress={step.progress}
-                    isCompleted={step.isCompleted}
-                    icon={step.icon}
-                    compact={true}
-                  />
-                ))}
-              </div>
+            {/* Vijf stappenblokken - midden, gelijkmatig verdeeld */}
+            <div className="flex flex-col justify-between">
+              {progressSteps.map((step, index) => (
+                <ProgressStep
+                  key={index}
+                  title={step.title}
+                  progress={step.progress}
+                  isCompleted={step.isCompleted}
+                  icon={step.icon}
+                  compact={true}
+                />
+              ))}
             </div>
 
-            {/* Gele knop - rechtsonder */}
-            <Button 
-              className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-8 text-xl rounded-3xl shadow-lg hover:shadow-xl transition-all duration-200"
-              size="lg"
-            >
-              Ga verder waar je gebleven was
-            </Button>
+            {/* Gele knop - rechtsonder, uitgelijnd naar beneden */}
+            <div className="flex flex-col justify-end">
+              <Button 
+                className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-8 text-xl rounded-3xl shadow-lg hover:shadow-xl transition-all duration-200"
+                size="lg"
+              >
+                Ga verder waar je gebleven was
+              </Button>
+            </div>
           </div>
         </div>
       </div>
