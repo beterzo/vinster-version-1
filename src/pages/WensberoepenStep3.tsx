@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -33,6 +32,7 @@ const WensberoepenStep3 = () => {
   const handleComplete = () => {
     console.log("Wensberoepen scan completed!", { jobTitle, answers });
     alert("Wensberoepen scan afgerond!");
+    navigate('/home');
   };
 
   const questions = [
