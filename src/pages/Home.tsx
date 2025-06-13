@@ -1,8 +1,8 @@
 
 import Dashboard from "@/components/Dashboard";
 
-const Index = () => {
+const Home = () => {
   return <Dashboard />;
 };
 
-export default Index;
+export default Home;
