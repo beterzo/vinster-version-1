@@ -65,7 +65,7 @@ const LandingPage = () => {
         <div className="grid grid-cols-3 gap-6">
           {/* Yellow Card */}
           <Card className="bg-yellow-400 text-black p-8 rounded-3xl border-0">
-            <h3 className="text-xl font-bold mb-4">
+            <h3 className="text-xl font-bold mb-4 leading-tight">
               Bekijk hier<br />
               hoe ons advies<br />
               tot stand komt.
@@ -73,23 +73,23 @@ const LandingPage = () => {
           </Card>
           
           {/* Blue Card with Report */}
-          <Card className="bg-blue-600 text-white p-8 rounded-3xl border-0 relative overflow-hidden">
-            <h3 className="text-xl font-bold mb-4">Voorbeeld<br />rapport</h3>
+          <Card className="bg-blue-500 text-white p-8 rounded-3xl border-0 relative overflow-hidden">
+            <h3 className="text-xl font-bold mb-4 leading-tight">Voorbeeld<br />rapport</h3>
             <div className="absolute bottom-4 right-4">
               <img 
                 src="/lovable-uploads/96779eba-51f8-40e2-a15f-40ccfdcab4e5.png"
                 alt="Rapport voorbeeld"
-                className="w-32 h-auto transform rotate-12"
+                className="w-24 h-auto transform rotate-12"
               />
             </div>
           </Card>
           
           {/* Dark Blue Card */}
           <Card className="bg-blue-900 text-white p-8 rounded-3xl border-0">
-            <h3 className="text-xl font-bold mb-4">Je persoonlijke dashboard</h3>
-            <div className="text-sm mb-4 font-semibold">Over deze tool</div>
-            <p className="text-sm leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt ut Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt ut.
+            <h3 className="text-xl font-bold mb-4 leading-tight">Je persoonlijke dashboard</h3>
+            <div className="text-xs text-white/80 mb-3 uppercase tracking-wider font-medium">Over deze tool</div>
+            <p className="text-sm leading-relaxed text-white/90">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
             </p>
           </Card>
         </div>
