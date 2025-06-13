@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Sparkles, Target, FileText, Search, Users } from "lucide-react";
@@ -153,37 +152,20 @@ const LandingPage = () => {
           </h2>
         </div>
 
-        {/* Luxury Process Flow */}
+        {/* Simple Process Flow */}
         <div className="relative">
-          {/* Background gradient line */}
-          <div className="absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-yellow-200 via-blue-200 to-blue-300 rounded-full transform -translate-y-1/2 opacity-30"></div>
+          {/* Background gradient line using existing colors */}
+          <div className="absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 via-blue-300 to-blue-900 rounded-full transform -translate-y-1/2 opacity-30"></div>
           
           {/* Process steps container */}
           <div className="relative grid grid-cols-4 gap-8">
             
-            {/* Step 1: Enthousiasmescan */}
+            {/* Step 1: Enthousiasmescan - Yellow */}
             <div className="flex flex-col items-center">
               <div className="relative mb-8">
-                {/* Luxury circle with gradient and shadow */}
-                <div className="w-32 h-32 bg-gradient-to-br from-yellow-300 to-yellow-500 rounded-full shadow-2xl flex items-center justify-center relative overflow-hidden">
-                  {/* Inner circle with sparkles */}
-                  <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-inner relative">
-                    <div className="relative">
-                      {/* Main sparkle in center */}
-                      <Sparkles className="w-10 h-10 text-yellow-500 fill-yellow-500" />
-                      {/* Top-left sparkle */}
-                      <Sparkles className="w-6 h-6 text-yellow-400 fill-yellow-400 absolute -top-3 -left-3" />
-                      {/* Bottom-right sparkle */}
-                      <Sparkles className="w-4 h-4 text-yellow-600 fill-yellow-600 absolute -bottom-1 -right-2" />
-                    </div>
-                  </div>
-                  {/* Floating particles */}
-                  <div className="absolute top-2 right-4 w-2 h-2 bg-yellow-200 rounded-full animate-pulse"></div>
-                  <div className="absolute bottom-3 left-3 w-1.5 h-1.5 bg-yellow-300 rounded-full animate-pulse delay-75"></div>
-                </div>
-                {/* Step number */}
-                <div className="absolute -top-2 -left-2 w-8 h-8 bg-blue-900 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg">
-                  1
+                {/* Simple yellow circle */}
+                <div className="w-24 h-24 bg-yellow-400 rounded-full shadow-lg flex items-center justify-center">
+                  <Sparkles className="w-10 h-10 text-white fill-white" />
                 </div>
               </div>
               <h3 className="text-xl font-bold text-blue-900 mb-3 text-center">Enthousiasmescan</h3>
@@ -192,24 +174,11 @@ const LandingPage = () => {
               </p>
             </div>
 
-            {/* Step 2: Wensberoepen */}
+            {/* Step 2: Wensberoepen - Light Blue */}
             <div className="flex flex-col items-center">
               <div className="relative mb-8">
-                <div className="w-32 h-32 bg-gradient-to-br from-blue-300 to-blue-500 rounded-full shadow-2xl flex items-center justify-center relative overflow-hidden">
-                  <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-inner relative">
-                    <div className="relative">
-                      <Users className="w-10 h-10 text-blue-600" />
-                      {/* Decorative elements */}
-                      <div className="absolute -top-1 -right-2 w-3 h-3 bg-green-400 rounded-full"></div>
-                      <div className="absolute -bottom-1 -left-2 w-2.5 h-2.5 bg-red-400 rounded-full"></div>
-                      <div className="absolute top-1 right-0 w-2 h-2 bg-yellow-400 rounded"></div>
-                    </div>
-                  </div>
-                  <div className="absolute top-3 right-2 w-2 h-2 bg-blue-200 rounded-full animate-pulse"></div>
-                  <div className="absolute bottom-4 left-2 w-1.5 h-1.5 bg-blue-300 rounded-full animate-pulse delay-100"></div>
-                </div>
-                <div className="absolute -top-2 -left-2 w-8 h-8 bg-blue-900 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg">
-                  2
+                <div className="w-24 h-24 rounded-full shadow-lg flex items-center justify-center" style={{ backgroundColor: '#A9C5E2' }}>
+                  <Users className="w-10 h-10 text-white" />
                 </div>
               </div>
               <h3 className="text-xl font-bold text-blue-900 mb-3 text-center">Wensberoepen</h3>
@@ -218,22 +187,11 @@ const LandingPage = () => {
               </p>
             </div>
 
-            {/* Step 3: Prioriteiten stellen */}
+            {/* Step 3: Prioriteiten stellen - Dark Blue */}
             <div className="flex flex-col items-center">
               <div className="relative mb-8">
-                <div className="w-32 h-32 bg-gradient-to-br from-purple-300 to-purple-500 rounded-full shadow-2xl flex items-center justify-center relative overflow-hidden">
-                  <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-inner relative">
-                    <div className="relative">
-                      <Target className="w-10 h-10 text-purple-600" />
-                      {/* Target rings */}
-                      <div className="absolute inset-0 w-10 h-10 border-2 border-purple-300 rounded-full animate-ping"></div>
-                    </div>
-                  </div>
-                  <div className="absolute top-2 left-3 w-2 h-2 bg-purple-200 rounded-full animate-pulse"></div>
-                  <div className="absolute bottom-3 right-3 w-1.5 h-1.5 bg-purple-300 rounded-full animate-pulse delay-150"></div>
-                </div>
-                <div className="absolute -top-2 -left-2 w-8 h-8 bg-blue-900 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg">
-                  3
+                <div className="w-24 h-24 bg-blue-900 rounded-full shadow-lg flex items-center justify-center">
+                  <Target className="w-10 h-10 text-white" />
                 </div>
               </div>
               <h3 className="text-xl font-bold text-blue-900 mb-3 text-center">Prioriteiten stellen</h3>
@@ -242,26 +200,11 @@ const LandingPage = () => {
               </p>
             </div>
 
-            {/* Step 4: Laatste check */}
+            {/* Step 4: Laatste check - White with blue accent */}
             <div className="flex flex-col items-center">
               <div className="relative mb-8">
-                <div className="w-32 h-32 bg-gradient-to-br from-green-300 to-green-500 rounded-full shadow-2xl flex items-center justify-center relative overflow-hidden">
-                  <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-inner relative">
-                    <div className="relative">
-                      <Search className="w-10 h-10 text-green-600" />
-                      {/* Search sparkles */}
-                      <div className="absolute -top-2 -right-1 flex gap-1">
-                        <div className="w-1 h-1 bg-green-400 rounded-full animate-pulse"></div>
-                        <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse delay-75"></div>
-                        <div className="w-1 h-1 bg-green-400 rounded-full animate-pulse delay-150"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="absolute top-4 right-2 w-2 h-2 bg-green-200 rounded-full animate-pulse"></div>
-                  <div className="absolute bottom-2 left-4 w-1.5 h-1.5 bg-green-300 rounded-full animate-pulse delay-200"></div>
-                </div>
-                <div className="absolute -top-2 -left-2 w-8 h-8 bg-blue-900 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg">
-                  4
+                <div className="w-24 h-24 bg-white border-2 border-blue-900 rounded-full shadow-lg flex items-center justify-center">
+                  <Search className="w-10 h-10 text-blue-900" />
                 </div>
               </div>
               <h3 className="text-xl font-bold text-blue-900 mb-3 text-center">Laatste check</h3>
@@ -272,19 +215,16 @@ const LandingPage = () => {
 
           </div>
 
-          {/* Connecting arrows */}
-          <div className="absolute top-16 left-0 w-full flex justify-between px-16">
-            <div className="flex items-center space-x-2 text-gray-400">
-              <div className="w-8 h-0.5 bg-gradient-to-r from-yellow-300 to-blue-300"></div>
-              <div className="w-2 h-2 border-r-2 border-t-2 border-blue-300 transform rotate-45"></div>
+          {/* Simple connecting lines using existing colors */}
+          <div className="absolute top-12 left-0 w-full flex justify-between px-12">
+            <div className="flex items-center space-x-2">
+              <div className="w-16 h-0.5 bg-yellow-400"></div>
             </div>
-            <div className="flex items-center space-x-2 text-gray-400">
-              <div className="w-8 h-0.5 bg-gradient-to-r from-blue-300 to-purple-300"></div>
-              <div className="w-2 h-2 border-r-2 border-t-2 border-purple-300 transform rotate-45"></div>
+            <div className="flex items-center space-x-2">
+              <div className="w-16 h-0.5" style={{ backgroundColor: '#A9C5E2' }}></div>
             </div>
-            <div className="flex items-center space-x-2 text-gray-400">
-              <div className="w-8 h-0.5 bg-gradient-to-r from-purple-300 to-green-300"></div>
-              <div className="w-2 h-2 border-r-2 border-t-2 border-green-300 transform rotate-45"></div>
+            <div className="flex items-center space-x-2">
+              <div className="w-16 h-0.5 bg-blue-900"></div>
             </div>
           </div>
         </div>
