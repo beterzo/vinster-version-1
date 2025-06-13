@@ -63,11 +63,11 @@ const LandingPage = () => {
 
       {/* Three Cards Section - Wrapped in White Container */}
       <div className="max-w-[1440px] mx-auto px-6 py-20 bg-gray-50">
-        <div className="bg-white rounded-3xl shadow-xl p-12">
+        <div className="bg-white rounded-3xl shadow-xl p-8">
           <div className="grid grid-cols-12 gap-6">
             {/* Yellow Card */}
             <div className="col-span-4">
-              <Card className="bg-yellow-400 text-white p-8 rounded-3xl border-0 h-full">
+              <Card className="bg-yellow-400 text-white p-6 rounded-3xl border-0 h-48">
                 <h3 className="text-xl font-bold mb-4 leading-tight">
                   Bekijk hier<br />
                   hoe ons advies<br />
@@ -78,7 +78,7 @@ const LandingPage = () => {
             
             {/* Blue Card with Report */}
             <div className="col-span-4">
-              <Card className="bg-blue-500 text-white p-8 rounded-3xl border-0 relative overflow-hidden h-full">
+              <Card className="bg-blue-500 text-white p-6 rounded-3xl border-0 relative overflow-hidden h-48">
                 <h3 className="text-xl font-bold mb-4 leading-tight">Voorbeeld<br />rapport</h3>
                 <div className="absolute bottom-4 right-4">
                   {/* Larger, more realistic document with updated color */}
@@ -111,17 +111,17 @@ const LandingPage = () => {
             </div>
             
             {/* Right Column - Dashboard Card + Text */}
-            <div className="col-span-4 flex flex-col space-y-6">
+            <div className="col-span-4 flex flex-col space-y-4">
               {/* Dark Blue Dashboard Card */}
-              <Card className="bg-blue-900 text-white p-8 rounded-3xl border-0">
+              <Card className="bg-blue-900 text-white p-6 rounded-3xl border-0 h-24">
                 <h3 className="text-xl font-bold leading-tight text-white">Je persoonlijke<br />dashboard</h3>
               </Card>
               
               {/* Text directly on white background */}
               <div className="px-2">
-                <h4 className="text-lg font-bold mb-4 text-blue-900">Over deze tool</h4>
+                <h4 className="text-lg font-bold mb-3 text-blue-900">Over deze tool</h4>
                 <p className="text-sm leading-relaxed text-blue-900">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt ut Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt ut.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 </p>
               </div>
             </div>
