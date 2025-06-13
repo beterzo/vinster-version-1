@@ -104,15 +104,18 @@ const LandingPage = () => {
             </div>
           </Card>
           
-          {/* Dark Blue Card with Dashboard Layout */}
-          <Card className="bg-blue-900 text-white p-8 rounded-3xl border-0 relative">
-            <h3 className="text-xl font-bold mb-6 leading-tight text-white">Je persoonlijke dashboard</h3>
+          {/* Dark Blue Card with White Bottom Section */}
+          <Card className="bg-blue-900 text-white rounded-3xl border-0 relative overflow-hidden">
+            {/* Top blue section */}
+            <div className="p-8 pb-4">
+              <h3 className="text-xl font-bold leading-tight text-white">Je persoonlijke<br />dashboard</h3>
+            </div>
             
-            {/* Over deze tool section overlapping with blue background */}
-            <div className="absolute bottom-4 left-4 right-4 bg-blue-600 p-4 rounded-xl">
-              <div className="text-xs text-white/80 mb-3 uppercase tracking-wider font-medium">Over deze tool</div>
-              <p className="text-sm leading-relaxed text-white/90">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+            {/* Bottom white section */}
+            <div className="bg-white text-blue-900 p-6 m-4 mt-0 rounded-2xl">
+              <h4 className="text-lg font-bold mb-4 text-blue-900">Over deze tool</h4>
+              <p className="text-sm leading-relaxed text-blue-900">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt ut Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt ut.
               </p>
             </div>
           </Card>
