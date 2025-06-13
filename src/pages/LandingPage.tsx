@@ -139,11 +139,11 @@ const LandingPage = () => {
         </div>
         
         {/* Process Steps with Flowing Line */}
-        <div className="relative min-h-[120px]">
-          {/* Flowing curved line through all steps */}
+        <div className="relative min-h-[120px] overflow-hidden">
+          {/* Flowing curved line that extends off the page */}
           <svg className="absolute inset-0 w-full h-full" style={{ zIndex: 1 }}>
             <path 
-              d="M 150 60 Q 300 50, 450 60 Q 600 70, 750 60" 
+              d="M -200 60 Q 100 50, 200 60 Q 350 50, 450 60 Q 600 70, 700 60 Q 850 50, 950 60 Q 1100 70, 1600 60" 
               stroke="#d1d5db" 
               strokeWidth="3" 
               fill="none"
@@ -152,7 +152,7 @@ const LandingPage = () => {
           </svg>
           
           {/* Step 1 - De enthousiasme-scan */}
-          <div className="absolute" style={{ left: '150px', top: '60px', zIndex: 2, transform: 'translate(-50%, -50%)' }}>
+          <div className="absolute" style={{ left: '200px', top: '60px', zIndex: 2, transform: 'translate(-50%, -50%)' }}>
             <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-lg border border-gray-100">
               <div className="relative">
                 <Star className="w-6 h-6 text-yellow-400 fill-yellow-400" />
@@ -163,7 +163,7 @@ const LandingPage = () => {
           </div>
           
           {/* Step 2 - Wensberoepen */}
-          <div className="absolute" style={{ left: '350px', top: '60px', zIndex: 2, transform: 'translate(-50%, -50%)' }}>
+          <div className="absolute" style={{ left: '450px', top: '60px', zIndex: 2, transform: 'translate(-50%, -50%)' }}>
             <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-lg border border-gray-100">
               <div className="relative">
                 <Users className="w-8 h-8 text-blue-400" />
@@ -175,7 +175,7 @@ const LandingPage = () => {
           </div>
           
           {/* Step 3 - Prioriteiten stellen */}
-          <div className="absolute" style={{ left: '550px', top: '60px', zIndex: 2, transform: 'translate(-50%, -50%)' }}>
+          <div className="absolute" style={{ left: '700px', top: '60px', zIndex: 2, transform: 'translate(-50%, -50%)' }}>
             <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-lg border border-gray-100">
               <div className="relative">
                 <Target className="w-8 h-8 text-green-500" />
@@ -186,7 +186,7 @@ const LandingPage = () => {
           </div>
           
           {/* Step 4 - Laatste check */}
-          <div className="absolute" style={{ left: '750px', top: '60px', zIndex: 2, transform: 'translate(-50%, -50%)' }}>
+          <div className="absolute" style={{ left: '950px', top: '60px', zIndex: 2, transform: 'translate(-50%, -50%)' }}>
             <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-lg border border-gray-100">
               <div className="relative">
                 <Search className="w-8 h-8 text-yellow-500" />
