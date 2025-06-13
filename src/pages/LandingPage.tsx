@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Star, Target, FileText, Search, Users } from "lucide-react";
@@ -92,81 +93,124 @@ const LandingPage = () => {
         </div>
       </div>
 
-      {/* Process Overview Section - New Design */}
-      <div className="max-w-[1440px] mx-auto px-6 py-16 bg-white">
+      {/* Process Overview Section - Exact Match to Image */}
+      <div className="max-w-[1440px] mx-auto px-6 py-16 bg-gray-50">
         <div className="mb-12">
-          <div className="text-yellow-400 text-sm font-semibold mb-4">Hoe werkt de loopbaan test?</div>
-          <h2 className="text-3xl font-bold text-gray-900 leading-tight max-w-2xl">
-            Samen vinden we stap voor stap uit waar jouw interesses liggen en wat je het liefste doet.
+          <div className="text-yellow-400 text-sm font-semibold mb-4">Hoe werkt de loopbaan tool</div>
+          <h2 className="text-3xl font-bold text-blue-900 leading-tight max-w-2xl">
+            Samen vinden we stap voor stap uit<br />
+            waar jouw interesses liggen en wat<br />
+            je het liefste doet.
           </h2>
         </div>
         
-        {/* Process Steps with New Layout */}
-        <div className="relative min-h-[500px]">
+        {/* Process Steps with Exact Layout from Image */}
+        <div className="relative min-h-[600px]">
           {/* Connecting Lines */}
           <svg className="absolute inset-0 w-full h-full" style={{ zIndex: 1 }}>
             <defs>
               <marker id="arrowhead" markerWidth="10" markerHeight="7" 
                refX="10" refY="3.5" orient="auto">
-                <polygon points="0 0, 10 3.5, 0 7" fill="#e5e7eb" />
+                <polygon points="0 0, 10 3.5, 0 7" fill="#d1d5db" />
               </marker>
             </defs>
             {/* Line from step 1 to step 2 */}
-            <line x1="20%" y1="25%" x2="50%" y2="15%" stroke="#e5e7eb" strokeWidth="2" markerEnd="url(#arrowhead)" />
+            <line x1="25%" y1="35%" x2="45%" y2="25%" stroke="#d1d5db" strokeWidth="2" markerEnd="url(#arrowhead)" />
             {/* Line from step 2 to step 3 */}
-            <line x1="70%" y1="15%" x2="80%" y2="50%" stroke="#e5e7eb" strokeWidth="2" markerEnd="url(#arrowhead)" />
+            <line x1="55%" y1="25%" x2="75%" y2="45%" stroke="#d1d5db" strokeWidth="2" markerEnd="url(#arrowhead)" />
             {/* Line from step 3 to step 4 */}
-            <line x1="80%" y1="70%" x2="50%" y2="85%" stroke="#e5e7eb" strokeWidth="2" markerEnd="url(#arrowhead)" />
+            <line x1="75%" y1="65%" x2="55%" y2="85%" stroke="#d1d5db" strokeWidth="2" markerEnd="url(#arrowhead)" />
           </svg>
           
-          {/* Step 1 - De enthousiasme-scan (left) */}
-          <div className="absolute left-0 top-[20%] w-64" style={{ zIndex: 2 }}>
+          {/* Step 1 - De enthousiasme-scan (bottom left) */}
+          <div className="absolute left-[5%] bottom-[10%] w-72" style={{ zIndex: 2 }}>
             <div className="flex flex-col items-center text-center">
-              <div className="w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center mb-4 shadow-lg">
-                <Star className="w-10 h-10 text-white" />
+              <div className="w-32 h-32 bg-white rounded-full flex items-center justify-center mb-6 shadow-lg border border-gray-100 relative">
+                <div className="absolute -top-2 -left-2">
+                  <Star className="w-8 h-8 text-yellow-400 fill-yellow-400" />
+                  <Star className="w-6 h-6 text-yellow-400 fill-yellow-400 absolute -top-1 left-6" />
+                  <Star className="w-4 h-4 text-yellow-400 fill-yellow-400 absolute top-2 -left-1" />
+                </div>
               </div>
-              <h4 className="font-bold text-gray-900 mb-2">De enthousiasme-scan</h4>
+              <h4 className="font-bold text-blue-900 mb-3 text-lg">De enthousiasme-scan</h4>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+                Lorem ipsum dolor sit amet,<br />
+                consectetur adipiscing elit,<br />
+                sed diam
               </p>
             </div>
           </div>
           
           {/* Step 2 - Jouw wensberoepen (top center) */}
-          <div className="absolute left-1/2 top-0 transform -translate-x-1/2 w-64" style={{ zIndex: 2 }}>
+          <div className="absolute left-1/2 top-[5%] transform -translate-x-1/2 w-72" style={{ zIndex: 2 }}>
             <div className="flex flex-col items-center text-center">
-              <div className="w-20 h-20 bg-blue-400 rounded-full flex items-center justify-center mb-4 shadow-lg">
-                <Target className="w-10 h-10 text-white" />
+              <div className="w-32 h-32 bg-white rounded-full flex items-center justify-center mb-6 shadow-lg border border-gray-100">
+                <div className="relative">
+                  <Users className="w-12 h-12 text-blue-400" />
+                  <div className="absolute -top-1 -right-1 w-4 h-4 bg-blue-400 rounded-full"></div>
+                  <Star className="absolute -top-2 right-4 w-4 h-4 text-blue-400" />
+                  <div className="absolute -bottom-1 -left-1 w-3 h-3 border-2 border-blue-400 rounded"></div>
+                </div>
               </div>
-              <h4 className="font-bold text-gray-900 mb-2">Jouw wensberoepen</h4>
+              <h4 className="font-bold text-blue-900 mb-3 text-lg">Jouw<br />wensberoepen</h4>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+                Lorem ipsum dolor sit amet,<br />
+                consectetur adipiscing elit,<br />
+                sed diam
               </p>
             </div>
           </div>
           
-          {/* Step 3 - Jouw rapport en aanvullingen (right) */}
-          <div className="absolute right-0 top-[40%] w-64" style={{ zIndex: 2 }}>
+          {/* Step 3 - Jouw rapport en aanvullingen (right center) */}
+          <div className="absolute right-[5%] top-[35%] w-72" style={{ zIndex: 2 }}>
             <div className="flex flex-col items-center text-center">
-              <div className="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mb-4 shadow-lg">
-                <FileText className="w-10 h-10 text-white" />
+              <div className="w-32 h-32 bg-white rounded-full flex items-center justify-center mb-6 shadow-lg border border-gray-100">
+                <div className="relative">
+                  <div className="w-12 h-16 bg-blue-600 rounded-sm flex flex-col">
+                    <div className="flex justify-between items-center p-1 bg-blue-700 rounded-t-sm">
+                      <div className="flex gap-1">
+                        <div className="w-1 h-1 bg-white rounded-full"></div>
+                        <div className="w-1 h-1 bg-white rounded-full"></div>
+                        <div className="w-1 h-1 bg-white rounded-full"></div>
+                      </div>
+                    </div>
+                    <div className="flex-1 p-1 space-y-1">
+                      <div className="w-full h-0.5 bg-white rounded"></div>
+                      <div className="w-full h-0.5 bg-white rounded"></div>
+                      <div className="w-3/4 h-0.5 bg-white rounded"></div>
+                      <div className="w-full h-0.5 bg-white rounded"></div>
+                    </div>
+                  </div>
+                  <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-blue-600 rounded-sm transform rotate-12"></div>
+                </div>
               </div>
-              <h4 className="font-bold text-gray-900 mb-2">Jouw rapport en aanvullingen</h4>
+              <h4 className="font-bold text-blue-900 mb-3 text-lg">Jouw rapport en<br />aanvullingen</h4>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+                Lorem ipsum dolor sit amet,<br />
+                consectetur adipiscing elit,<br />
+                sed diam
               </p>
             </div>
           </div>
           
-          {/* Step 4 - Jouw antwoorden (bottom center) */}
-          <div className="absolute left-1/2 bottom-0 transform -translate-x-1/2 w-64" style={{ zIndex: 2 }}>
+          {/* Step 4 - Jouw antwoorden (bottom right) */}
+          <div className="absolute right-[15%] bottom-[10%] w-72" style={{ zIndex: 2 }}>
             <div className="flex flex-col items-center text-center">
-              <div className="w-20 h-20 bg-yellow-500 rounded-full flex items-center justify-center mb-4 shadow-lg">
-                <Search className="w-10 h-10 text-white" />
+              <div className="w-32 h-32 bg-white rounded-full flex items-center justify-center mb-6 shadow-lg border border-gray-100">
+                <div className="relative">
+                  <Search className="w-12 h-12 text-yellow-500" />
+                  <div className="absolute -top-1 right-2 flex gap-0.5">
+                    <div className="w-1 h-1 bg-yellow-500 rounded-full"></div>
+                    <div className="w-1 h-1 bg-yellow-500 rounded-full"></div>
+                    <div className="w-1 h-1 bg-yellow-500 rounded-full"></div>
+                  </div>
+                </div>
               </div>
-              <h4 className="font-bold text-gray-900 mb-2">Jouw antwoorden</h4>
+              <h4 className="font-bold text-blue-900 mb-3 text-lg">Jouw<br />antwoorden</h4>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+                Lorem ipsum dolor sit amet,<br />
+                consectetur adipiscing elit,<br />
+                sed diam
               </p>
             </div>
           </div>
