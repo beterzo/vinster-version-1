@@ -93,64 +93,81 @@ const LandingPage = () => {
         </div>
       </div>
 
-      {/* Process Overview Section */}
-      <div className="max-w-[1440px] mx-auto px-6 py-16">
-        <div className="text-center mb-12">
+      {/* Process Overview Section - New Design */}
+      <div className="max-w-[1440px] mx-auto px-6 py-16 bg-white">
+        <div className="mb-12">
           <div className="text-yellow-400 text-sm font-semibold mb-4">Hoe werkt de loopbaan test?</div>
-          <h2 className="text-3xl font-bold text-gray-900 leading-tight">
-            Samen vinden we stap voor stap uit<br />
-            waar jouw interesses liggen en wat<br />
-            je het liefste doet.
+          <h2 className="text-3xl font-bold text-gray-900 leading-tight max-w-2xl">
+            Samen vinden we stap voor stap uit waar jouw interesses liggen en wat je het liefste doet.
           </h2>
         </div>
         
-        {/* Process Steps */}
-        <div className="relative">
-          {/* Connecting Line */}
-          <div className="absolute top-8 left-0 right-0 h-0.5 bg-gray-300 z-0"></div>
+        {/* Process Steps with New Layout */}
+        <div className="relative min-h-[500px]">
+          {/* Connecting Lines */}
+          <svg className="absolute inset-0 w-full h-full" style={{ zIndex: 1 }}>
+            <defs>
+              <marker id="arrowhead" markerWidth="10" markerHeight="7" 
+               refX="10" refY="3.5" orient="auto">
+                <polygon points="0 0, 10 3.5, 0 7" fill="#e5e7eb" />
+              </marker>
+            </defs>
+            {/* Line from step 1 to step 2 */}
+            <line x1="20%" y1="25%" x2="50%" y2="15%" stroke="#e5e7eb" strokeWidth="2" markerEnd="url(#arrowhead)" />
+            {/* Line from step 2 to step 3 */}
+            <line x1="70%" y1="15%" x2="80%" y2="50%" stroke="#e5e7eb" strokeWidth="2" markerEnd="url(#arrowhead)" />
+            {/* Line from step 3 to step 4 */}
+            <line x1="80%" y1="70%" x2="50%" y2="85%" stroke="#e5e7eb" strokeWidth="2" markerEnd="url(#arrowhead)" />
+          </svg>
           
-          <div className="grid grid-cols-4 gap-8 relative z-10">
-            {/* Step 1 */}
-            <div className="text-center">
-              <div className="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Star className="w-8 h-8 text-white" />
+          {/* Step 1 - De enthousiasme-scan (left) */}
+          <div className="absolute left-0 top-[20%] w-64" style={{ zIndex: 2 }}>
+            <div className="flex flex-col items-center text-center">
+              <div className="w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center mb-4 shadow-lg">
+                <Star className="w-10 h-10 text-white" />
               </div>
               <h4 className="font-bold text-gray-900 mb-2">De enthousiasme-scan</h4>
               <p className="text-sm text-gray-600 leading-relaxed">
-                We onderzoeken waar jij van nature enthousiast van wordt en wat je energie geeft.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
               </p>
             </div>
-            
-            {/* Step 2 */}
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-400 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Target className="w-8 h-8 text-white" />
+          </div>
+          
+          {/* Step 2 - Jouw wensberoepen (top center) */}
+          <div className="absolute left-1/2 top-0 transform -translate-x-1/2 w-64" style={{ zIndex: 2 }}>
+            <div className="flex flex-col items-center text-center">
+              <div className="w-20 h-20 bg-blue-400 rounded-full flex items-center justify-center mb-4 shadow-lg">
+                <Target className="w-10 h-10 text-white" />
               </div>
               <h4 className="font-bold text-gray-900 mb-2">Jouw wensberoepen</h4>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Op basis van jouw profiel laten we zien welke beroepen bij jou passen.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
               </p>
             </div>
-            
-            {/* Step 3 */}
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <FileText className="w-8 h-8 text-white" />
+          </div>
+          
+          {/* Step 3 - Jouw rapport en aanvullingen (right) */}
+          <div className="absolute right-0 top-[40%] w-64" style={{ zIndex: 2 }}>
+            <div className="flex flex-col items-center text-center">
+              <div className="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mb-4 shadow-lg">
+                <FileText className="w-10 h-10 text-white" />
               </div>
               <h4 className="font-bold text-gray-900 mb-2">Jouw rapport en aanvullingen</h4>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Je ontvangt een persoonlijk rapport met concrete vervolgstappen.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
               </p>
             </div>
-            
-            {/* Step 4 */}
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-800 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Search className="w-8 h-8 text-white" />
+          </div>
+          
+          {/* Step 4 - Jouw antwoorden (bottom center) */}
+          <div className="absolute left-1/2 bottom-0 transform -translate-x-1/2 w-64" style={{ zIndex: 2 }}>
+            <div className="flex flex-col items-center text-center">
+              <div className="w-20 h-20 bg-yellow-500 rounded-full flex items-center justify-center mb-4 shadow-lg">
+                <Search className="w-10 h-10 text-white" />
               </div>
               <h4 className="font-bold text-gray-900 mb-2">Jouw antwoorden</h4>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Begin met zoeken naar vacatures die perfect bij jouw profiel passen.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
               </p>
             </div>
           </div>
