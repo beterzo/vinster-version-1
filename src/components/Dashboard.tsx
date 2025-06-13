@@ -32,6 +32,8 @@ const Dashboard = () => {
   const handleStepClick = (stepTitle: string) => {
     if (stepTitle === "Enthousiasmescan") {
       navigate("/enthousiasme-intro");
+    } else if (stepTitle === "Wensberoepen") {
+      navigate("/wensberoepen-intro");
     }
     // Add more navigation logic for other steps later
   };
