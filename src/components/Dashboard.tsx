@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import ProgressStep from "./ProgressStep";
@@ -7,7 +6,7 @@ import { CircleUser, Target, Star, CheckCircle, Search, FileText } from "lucide-
 const Dashboard = () => {
   const progressSteps = [
     {
-      title: "De enthousiasme-scan",
+      title: "Enthousiasmescan",
       description: "Ontdek wat jou écht enthousiast maakt in je werk en waar je energie van krijgt.",
       progress: 100,
       isCompleted: true,
