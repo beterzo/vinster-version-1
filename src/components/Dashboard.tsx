@@ -29,6 +29,13 @@ const Dashboard = () => {
     }
   };
 
+  const handleStepClick = (stepTitle: string) => {
+    if (stepTitle === "Enthousiasmescan") {
+      navigate("/enthousiasme-intro");
+    }
+    // Add more navigation logic for other steps later
+  };
+
   const progressSteps = [
     {
       title: "Enthousiasmescan",
@@ -150,14 +157,15 @@ const Dashboard = () => {
               {/* Vijf stappenblokken - midden, gelijkmatig verdeeld */}
               <div className="flex flex-col justify-between">
                 {progressSteps.map((step, index) => (
-                  <ProgressStep
-                    key={index}
-                    title={step.title}
-                    progress={step.progress}
-                    isCompleted={step.isCompleted}
-                    icon={step.icon}
-                    compact={true}
-                  />
+                  <div key={index} onClick={() => handleStepClick(step.title)} className="cursor-pointer">
+                    <ProgressStep
+                      title={step.title}
+                      progress={step.progress}
+                      isCompleted={step.isCompleted}
+                      icon={step.icon}
+                      compact={true}
+                    />
+                  </div>
                 ))}
               </div>
             </div>
