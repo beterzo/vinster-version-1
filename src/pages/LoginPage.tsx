@@ -1,11 +1,58 @@
 
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Apple } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { useNavigate, Link } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 const LoginPage = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { signIn } = useAuth();
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!email || !password) {
+      toast({
+        title: "Vul alle velden in",
+        description: "E-mailadres en wachtwoord zijn verplicht.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsLoading(true);
+
+    const { error } = await signIn(email, password);
+
+    if (error) {
+      toast({
+        title: "Fout bij inloggen",
+        description: error.message === "Invalid login credentials" 
+          ? "Onjuiste inloggegevens. Probeer het opnieuw."
+          : error.message,
+        variant: "destructive",
+      });
+    } else {
+      toast({
+        title: "Succesvol ingelogd!",
+        description: "Welkom terug.",
+      });
+      navigate("/home");
+    }
+
+    setIsLoading(false);
+  };
+
   return (
     <div className="min-h-screen grid grid-cols-2">
       {/* Left side - Image with quote overlay */}
@@ -49,7 +96,7 @@ const LoginPage = () => {
           </div>
 
           {/* Login Form */}
-          <form className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
             {/* Email field */}
             <div className="space-y-2">
               <Label htmlFor="email" className="text-blue-900 font-medium">
@@ -59,7 +106,10 @@ const LoginPage = () => {
                 id="email"
                 type="email"
                 placeholder="emailadres"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900"
+                required
               />
             </div>
 
@@ -72,7 +122,10 @@ const LoginPage = () => {
                 id="password"
                 type="password"
                 placeholder="wachtwoord"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900"
+                required
               />
             </div>
 
@@ -85,8 +138,12 @@ const LoginPage = () => {
             </div>
 
             {/* Login button */}
-            <Button className="w-full h-12 bg-blue-900 hover:bg-blue-800 text-white font-semibold text-base rounded-lg">
-              Aanmelden
+            <Button 
+              type="submit"
+              className="w-full h-12 bg-blue-900 hover:bg-blue-800 text-white font-semibold text-base rounded-lg"
+              disabled={isLoading}
+            >
+              {isLoading ? "Bezig met inloggen..." : "Aanmelden"}
             </Button>
 
             {/* Divider */}
@@ -104,6 +161,7 @@ const LoginPage = () => {
               <Button
                 variant="outline"
                 className="h-12 border-gray-300 hover:bg-gray-50"
+                type="button"
               >
                 <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
                   <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -116,6 +174,7 @@ const LoginPage = () => {
               <Button
                 variant="outline"
                 className="h-12 border-gray-300 hover:bg-gray-50"
+                type="button"
               >
                 <Apple className="w-5 h-5 mr-2" />
                 Apple
@@ -126,9 +185,9 @@ const LoginPage = () => {
             <div className="text-center">
               <p className="text-sm text-gray-600">
                 Heb je nog geen account?{" "}
-                <a href="#" className="font-semibold text-yellow-500 hover:text-yellow-600">
+                <Link to="/signup" className="font-semibold text-yellow-500 hover:text-yellow-600">
                   Maak hier een aan
-                </a>
+                </Link>
               </p>
             </div>
           </form>
