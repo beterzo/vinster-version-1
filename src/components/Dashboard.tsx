@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import ProgressStep from "./ProgressStep";
@@ -7,13 +6,13 @@ import { CircleUser, Target, Star, CheckCircle, Search, FileText, ListTodo, User
 const Dashboard = () => {
   const progressSteps = [
     {
-      title: "De enthousiasme-scan",
+      title: "Enthousiasmescan",
       progress: 100,
       isCompleted: true,
       icon: <Star className="w-5 h-5 text-yellow-500" />
     },
     {
-      title: "Jouw wensberoepen",
+      title: "Wensberoepen",
       progress: 45,
       isCompleted: false,
       icon: <Target className="w-5 h-5 text-blue-400" />
