@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import ProgressStep from "./ProgressStep";
@@ -114,7 +113,7 @@ const Dashboard = () => {
           <div className="lg:col-span-3">
             <div className="rounded-3xl h-80 lg:h-96 overflow-hidden">
               <img 
-                src="/lovable-uploads/2bd3a663-554a-48a8-813b-8cc34df54ba0.png"
+                src="/lovable-uploads/5c9e857b-c318-4c07-8c67-12a698a13be3.png"
                 alt="Professionele vrouw met loopbaanontwikkeling materialen"
                 className="w-full h-full object-cover"
               />
