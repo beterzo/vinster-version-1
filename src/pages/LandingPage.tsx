@@ -80,7 +80,7 @@ const LandingPage = () => {
             <div className="col-span-4">
               <Card className="bg-blue-500 text-white p-6 rounded-3xl border-0 relative overflow-hidden h-48">
                 <h3 className="text-xl font-bold mb-4 leading-tight">Voorbeeld<br />rapport</h3>
-                <div className="absolute bottom-4 right-4">
+                <div className="absolute bottom-0 right-4">
                   {/* Larger, more realistic document with updated color */}
                   <div className="w-36 h-48 bg-white rounded-lg shadow-xl transform rotate-12 relative overflow-hidden">
                     {/* Document header */}
