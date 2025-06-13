@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Star, Target, FileText, Search, Users } from "lucide-react";
@@ -119,7 +120,7 @@ const LandingPage = () => {
               <div className="px-2">
                 <h4 className="text-lg font-bold mb-3 text-blue-900">Over deze tool</h4>
                 <p className="text-sm leading-relaxed text-blue-900">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  De denkwijze achter vinster is ontwikkeld door Heidi Jansen
                 </p>
               </div>
             </div>
