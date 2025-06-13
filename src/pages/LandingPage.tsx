@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Star, Target, FileText, Search, Users } from "lucide-react";
@@ -15,8 +14,8 @@ const LandingPage = () => {
             backgroundImage: "url('/lovable-uploads/b67ce5d1-c717-4a77-b5ad-550d88a42378.png')"
           }}
         >
-          {/* Overlay for better text readability */}
-          <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+          {/* Overlay for better text readability - made lighter */}
+          <div className="absolute inset-0 bg-black bg-opacity-20"></div>
         </div>
         
         <div className="relative z-10 max-w-[1440px] mx-auto px-6">
