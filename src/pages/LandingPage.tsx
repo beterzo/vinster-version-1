@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Star, Target, FileText, Search, Users } from "lucide-react";
@@ -139,11 +140,11 @@ const LandingPage = () => {
         </div>
         
         {/* Process Steps with Flowing Line */}
-        <div className="relative min-h-[120px] overflow-hidden">
-          {/* Flowing curved line that extends off the page */}
+        <div className="relative min-h-[160px] overflow-hidden">
+          {/* More wavy/flowing curved line that extends off the page */}
           <svg className="absolute inset-0 w-full h-full" style={{ zIndex: 1 }}>
             <path 
-              d="M -200 60 Q 100 50, 200 60 Q 350 50, 450 60 Q 600 70, 700 60 Q 850 50, 950 60 Q 1100 70, 1600 60" 
+              d="M -300 60 Q -100 30, 100 55 Q 250 40, 350 65 Q 500 85, 600 55 Q 750 35, 850 70 Q 1000 90, 1150 50 Q 1300 25, 1700 60" 
               stroke="#d1d5db" 
               strokeWidth="3" 
               fill="none"
@@ -160,6 +161,7 @@ const LandingPage = () => {
                 <Star className="w-3 h-3 text-yellow-400 fill-yellow-400 absolute top-1 -left-1" />
               </div>
             </div>
+            <h4 className="text-center text-blue-900 font-semibold mt-4 text-sm">Enthousiasme-scan</h4>
           </div>
           
           {/* Step 2 - Wensberoepen */}
@@ -172,6 +174,7 @@ const LandingPage = () => {
                 <div className="absolute -bottom-1 -left-1 w-2 h-2 border-2 border-blue-400 rounded"></div>
               </div>
             </div>
+            <h4 className="text-center text-blue-900 font-semibold mt-4 text-sm">Wensberoepen</h4>
           </div>
           
           {/* Step 3 - Prioriteiten stellen */}
@@ -183,6 +186,7 @@ const LandingPage = () => {
                 <div className="absolute -bottom-1 -left-1 w-1.5 h-1.5 border-2 border-green-500 rounded"></div>
               </div>
             </div>
+            <h4 className="text-center text-blue-900 font-semibold mt-4 text-sm">Prioriteiten stellen</h4>
           </div>
           
           {/* Step 4 - Laatste check */}
@@ -197,6 +201,7 @@ const LandingPage = () => {
                 </div>
               </div>
             </div>
+            <h4 className="text-center text-blue-900 font-semibold mt-4 text-sm">Laatste check</h4>
           </div>
         </div>
       </div>
