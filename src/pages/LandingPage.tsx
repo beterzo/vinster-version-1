@@ -64,63 +64,67 @@ const LandingPage = () => {
       {/* Three Cards Section - Wrapped in White Container */}
       <div className="max-w-[1440px] mx-auto px-6 py-20 bg-gray-50">
         <div className="bg-white rounded-3xl shadow-xl p-12">
-          <div className="grid grid-cols-3 gap-6">
-            {/* Yellow Card with White Text */}
-            <Card className="bg-yellow-400 text-white p-8 rounded-3xl border-0">
-              <h3 className="text-xl font-bold mb-4 leading-tight">
-                Bekijk hier<br />
-                hoe ons advies<br />
-                tot stand komt.
-              </h3>
-            </Card>
+          <div className="grid grid-cols-12 gap-6">
+            {/* Yellow Card */}
+            <div className="col-span-4">
+              <Card className="bg-yellow-400 text-white p-8 rounded-3xl border-0 h-full">
+                <h3 className="text-xl font-bold mb-4 leading-tight">
+                  Bekijk hier<br />
+                  hoe ons advies<br />
+                  tot stand komt.
+                </h3>
+              </Card>
+            </div>
             
-            {/* Blue Card with Larger Report Document */}
-            <Card className="bg-blue-500 text-white p-8 rounded-3xl border-0 relative overflow-hidden">
-              <h3 className="text-xl font-bold mb-4 leading-tight">Voorbeeld<br />rapport</h3>
-              <div className="absolute bottom-4 right-4">
-                {/* Larger, more realistic document with updated color */}
-                <div className="w-36 h-48 bg-white rounded-lg shadow-xl transform rotate-12 relative overflow-hidden">
-                  {/* Document header */}
-                  <div className="h-7 flex items-center px-3" style={{ backgroundColor: '#78BFE3' }}>
-                    <div className="flex gap-1">
-                      <div className="w-1.5 h-1.5 bg-white rounded-full opacity-80"></div>
-                      <div className="w-1.5 h-1.5 bg-white rounded-full opacity-80"></div>
-                      <div className="w-1.5 h-1.5 bg-white rounded-full opacity-80"></div>
+            {/* Blue Card with Report */}
+            <div className="col-span-4">
+              <Card className="bg-blue-500 text-white p-8 rounded-3xl border-0 relative overflow-hidden h-full">
+                <h3 className="text-xl font-bold mb-4 leading-tight">Voorbeeld<br />rapport</h3>
+                <div className="absolute bottom-4 right-4">
+                  {/* Larger, more realistic document with updated color */}
+                  <div className="w-36 h-48 bg-white rounded-lg shadow-xl transform rotate-12 relative overflow-hidden">
+                    {/* Document header */}
+                    <div className="h-7 flex items-center px-3" style={{ backgroundColor: '#78BFE3' }}>
+                      <div className="flex gap-1">
+                        <div className="w-1.5 h-1.5 bg-white rounded-full opacity-80"></div>
+                        <div className="w-1.5 h-1.5 bg-white rounded-full opacity-80"></div>
+                        <div className="w-1.5 h-1.5 bg-white rounded-full opacity-80"></div>
+                      </div>
+                    </div>
+                    {/* Document content */}
+                    <div className="p-3 space-y-1.5">
+                      <div className="h-1.5 bg-gray-300 rounded w-full"></div>
+                      <div className="h-1.5 bg-gray-300 rounded w-4/5"></div>
+                      <div className="h-1.5 bg-gray-300 rounded w-full"></div>
+                      <div className="h-1.5 bg-gray-300 rounded w-3/4"></div>
+                      <div className="h-3 rounded w-full mt-3" style={{ backgroundColor: '#78BFE3', opacity: 0.7 }}></div>
+                      <div className="h-1.5 bg-gray-300 rounded w-full"></div>
+                      <div className="h-1.5 bg-gray-300 rounded w-5/6"></div>
+                      <div className="h-1.5 bg-gray-300 rounded w-full"></div>
+                      <div className="h-1.5 bg-gray-300 rounded w-2/3"></div>
+                      <div className="h-1.5 bg-gray-300 rounded w-full"></div>
+                      <div className="h-1.5 bg-gray-300 rounded w-4/5"></div>
                     </div>
                   </div>
-                  {/* Document content */}
-                  <div className="p-3 space-y-1.5">
-                    <div className="h-1.5 bg-gray-300 rounded w-full"></div>
-                    <div className="h-1.5 bg-gray-300 rounded w-4/5"></div>
-                    <div className="h-1.5 bg-gray-300 rounded w-full"></div>
-                    <div className="h-1.5 bg-gray-300 rounded w-3/4"></div>
-                    <div className="h-3 rounded w-full mt-3" style={{ backgroundColor: '#78BFE3', opacity: 0.7 }}></div>
-                    <div className="h-1.5 bg-gray-300 rounded w-full"></div>
-                    <div className="h-1.5 bg-gray-300 rounded w-5/6"></div>
-                    <div className="h-1.5 bg-gray-300 rounded w-full"></div>
-                    <div className="h-1.5 bg-gray-300 rounded w-2/3"></div>
-                    <div className="h-1.5 bg-gray-300 rounded w-full"></div>
-                    <div className="h-1.5 bg-gray-300 rounded w-4/5"></div>
-                  </div>
                 </div>
-              </div>
-            </Card>
+              </Card>
+            </div>
             
-            {/* Dark Blue Card with White Bottom Section */}
-            <Card className="bg-blue-900 text-white rounded-3xl border-0 relative overflow-hidden">
-              {/* Top blue section */}
-              <div className="p-8 pb-4">
+            {/* Right Column - Dashboard Card + Text */}
+            <div className="col-span-4 flex flex-col space-y-6">
+              {/* Dark Blue Dashboard Card */}
+              <Card className="bg-blue-900 text-white p-8 rounded-3xl border-0">
                 <h3 className="text-xl font-bold leading-tight text-white">Je persoonlijke<br />dashboard</h3>
-              </div>
+              </Card>
               
-              {/* Bottom white section */}
-              <div className="bg-white text-blue-900 p-6 m-4 mt-0 rounded-2xl">
+              {/* Text directly on white background */}
+              <div className="px-2">
                 <h4 className="text-lg font-bold mb-4 text-blue-900">Over deze tool</h4>
                 <p className="text-sm leading-relaxed text-blue-900">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt ut Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt ut.
                 </p>
               </div>
-            </Card>
+            </div>
           </div>
         </div>
       </div>
