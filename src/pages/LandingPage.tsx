@@ -7,26 +7,37 @@ const LandingPage = () => {
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header Section */}
-      <div className="relative bg-gradient-to-r from-blue-100 to-blue-200 overflow-hidden">
-        <div className="max-w-[1440px] mx-auto px-6">
+      <div className="relative overflow-hidden">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: "url('/lovable-uploads/b67ce5d1-c717-4a77-b5ad-550d88a42378.png')"
+          }}
+        >
+          {/* Overlay for better text readability */}
+          <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+        </div>
+        
+        <div className="relative z-10 max-w-[1440px] mx-auto px-6">
           {/* Logo */}
           <div className="py-6">
-            <div className="text-xl font-bold text-gray-800">LOGO</div>
+            <div className="text-xl font-bold text-white">LOGO</div>
           </div>
           
           {/* Main Hero Content */}
           <div className="grid grid-cols-2 gap-8 items-center min-h-[500px]">
             {/* Left Content */}
             <div className="space-y-6">
-              <div className="text-sm text-gray-600 leading-relaxed">
+              <div className="text-sm text-white leading-relaxed">
                 Wij brengen met wetenschappelijke methoden<br />
                 waardevolle inzichten over jouw talenten in kaart.<br />
                 Leer meer over jezelf!
               </div>
               
-              <h1 className="text-4xl font-bold text-gray-900 leading-tight">
-                Doe het <span className="text-blue-600">werk</span> waar<br />
-                je <span className="text-blue-600">gelukkig</span> van wordt.
+              <h1 className="text-4xl font-bold text-white leading-tight">
+                Doe het <span className="text-yellow-400">werk</span> waar<br />
+                je <span className="text-yellow-400">gelukkig</span> van wordt.
               </h1>
               
               <div className="flex gap-4">
@@ -39,14 +50,8 @@ const LandingPage = () => {
               </div>
             </div>
             
-            {/* Right Image */}
-            <div className="flex justify-end">
-              <img 
-                src="/lovable-uploads/4d34612b-df14-4f89-abac-7542126c6ac2.png"
-                alt="Professionele vrouw met loopbaanontwikkeling materialen"
-                className="w-full max-w-md h-auto object-cover rounded-lg"
-              />
-            </div>
+            {/* Right side - empty space to let background image show */}
+            <div></div>
           </div>
         </div>
       </div>
