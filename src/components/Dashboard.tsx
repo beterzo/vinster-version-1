@@ -73,9 +73,9 @@ const Dashboard = () => {
             {/* Onderste rij: Belangrijk blok + Stappen */}
             <div className="grid grid-cols-[350px_1fr] gap-x-8 items-stretch">
               {/* Belangrijk om te weten blok - linksonder */}
-              <Card className="p-6 bg-blue-400 border-0 rounded-3xl text-white">
+              <Card className="p-6 bg-blue-400 border-0 rounded-3xl text-white flex flex-col">
                 <h3 className="font-bold text-xl mb-4">Belangrijk om te weten</h3>
-                <ul className="space-y-3 text-sm">
+                <ul className="space-y-4 text-sm flex-1 flex flex-col justify-between">
                   <li className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
                     <span>Er zijn geen goede of foute antwoorden - wees eerlijk over wat jij echt leuk vindt.</span>
