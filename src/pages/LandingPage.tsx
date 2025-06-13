@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Star, Target, FileText, Search, Users } from "lucide-react";
@@ -23,7 +22,7 @@ const LandingPage = () => {
           {/* Logo */}
           <div className="py-6">
             <img 
-              src="/lovable-uploads/ceb88009-c9c6-446e-a5b6-cd97e8556e0a.png" 
+              src="/lovable-uploads/b3731930-5d78-4bcb-8d0a-362ad1ef3e97.png" 
               alt="Vinster Logo" 
               className="h-8 w-auto"
             />
