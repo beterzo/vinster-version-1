@@ -25,6 +25,7 @@ const LandingPage = () => {
               src="/lovable-uploads/e1b00474-91f6-46ad-a01f-9f3c9bdaf981.png" 
               alt="Vinster Logo" 
               className="h-8 w-auto"
+              style={{ mixBlendMode: 'multiply' }}
             />
           </div>
           
