@@ -13,7 +13,7 @@ const LoginPage = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: "url('/lovable-uploads/ac03b8e8-7641-4e74-8262-b23ccae41e05.png')"
+            backgroundImage: "url('/lovable-uploads/4bce3129-ec2c-4ee4-a082-bb74962f620e.png')"
           }}
         >
           {/* Dark overlay for better text readability */}
