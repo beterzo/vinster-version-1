@@ -77,7 +77,7 @@ const PrioriteitenActiviteiten = () => {
         {/* Keywords grid */}
         <Card className="p-6 mb-6">
           <h2 className="text-xl font-bold mb-4">
-            Kernwoorden gebaseerd op jouw antwoorden ({keywords.length})
+            Kernwoorden gebaseerd op jouw antwoorden
           </h2>
           <p className="text-gray-600 mb-6">
             Klik op de kernwoorden die voor jou het allerbelangrijkste zijn. Je kunt er zoveel selecteren als je wilt.
@@ -109,14 +109,6 @@ const PrioriteitenActiviteiten = () => {
               <Star className="w-12 h-12 mx-auto mb-4 text-gray-300" />
               <p>Er zijn nog geen kernwoorden beschikbaar.</p>
               <p className="text-sm">Zorg ervoor dat je eerst de enthousiasme-scan en wensberoepen hebt ingevuld.</p>
-            </div>
-          )}
-
-          {selectedKeywords.length > 0 && (
-            <div className="mt-6 p-4 bg-yellow-50 rounded-lg">
-              <p className="text-sm text-yellow-700">
-                <strong>{selectedKeywords.length}</strong> kernwoorden geselecteerd
-              </p>
             </div>
           )}
         </Card>
