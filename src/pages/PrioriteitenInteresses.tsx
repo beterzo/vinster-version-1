@@ -46,8 +46,8 @@ const PrioriteitenInteresses = () => {
         <div className="mb-8">
           <img src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" alt="Vinster Logo" className="h-8 w-auto mb-6" />
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
-              <Target className="w-5 h-5 text-purple-600" />
+            <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: '#E6F0F6' }}>
+              <Target className="w-5 h-5" style={{ color: '#78BFE3' }} />
             </div>
             <h1 className="text-3xl font-bold text-gray-900">Jouw interesses</h1>
           </div>
@@ -64,11 +64,11 @@ const PrioriteitenInteresses = () => {
               Activiteiten
             </span>
             <span className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#78BFE3' }}></div>
               Werkomgeving
             </span>
             <span className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
+              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#78BFE3' }}></div>
               Interesses
             </span>
           </div>
@@ -77,7 +77,7 @@ const PrioriteitenInteresses = () => {
         {/* Keywords grid */}
         <Card className="p-6 mb-6">
           <h2 className="text-xl font-bold mb-4">
-            Kernwoorden gebaseerd op jouw antwoorden ({keywords.length})
+            Kernwoorden gebaseerd op jouw antwoorden
           </h2>
           <p className="text-gray-600 mb-6">
             Klik op de interesses die voor jou het allerbelangrijkste zijn. Je kunt er zoveel selecteren als je wilt.
@@ -91,14 +91,18 @@ const PrioriteitenInteresses = () => {
                   onClick={() => toggleKeyword(keyword)}
                   className={`p-3 rounded-lg border-2 text-left transition-all duration-200 ${
                     selectedKeywords.includes(keyword)
-                      ? 'border-purple-500 bg-purple-50 text-purple-700'
-                      : 'border-gray-200 bg-white hover:border-purple-300 hover:bg-purple-25'
+                      ? 'text-white'
+                      : 'border-gray-200 bg-white hover:border-gray-300'
                   }`}
+                  style={selectedKeywords.includes(keyword) ? {
+                    borderColor: '#78BFE3',
+                    backgroundColor: '#78BFE3'
+                  } : {}}
                 >
                   <div className="flex items-center justify-between">
                     <span className="font-medium text-sm">{keyword}</span>
                     {selectedKeywords.includes(keyword) && (
-                      <Check className="w-4 h-4 text-purple-600" />
+                      <Check className="w-4 h-4 text-white" />
                     )}
                   </div>
                 </button>
@@ -109,14 +113,6 @@ const PrioriteitenInteresses = () => {
               <Target className="w-12 h-12 mx-auto mb-4 text-gray-300" />
               <p>Er zijn nog geen kernwoorden beschikbaar.</p>
               <p className="text-sm">Zorg ervoor dat je eerst de enthousiasme-scan en wensberoepen hebt ingevuld.</p>
-            </div>
-          )}
-
-          {selectedKeywords.length > 0 && (
-            <div className="mt-6 p-4 bg-purple-50 rounded-lg">
-              <p className="text-sm text-purple-700">
-                <strong>{selectedKeywords.length}</strong> kernwoorden geselecteerd
-              </p>
             </div>
           )}
         </Card>
@@ -137,12 +133,12 @@ const PrioriteitenInteresses = () => {
         </Card>
 
         {/* Success message */}
-        <Card className="p-6 mb-8 bg-green-50 border-green-200">
+        <Card className="p-6 mb-8" style={{ backgroundColor: '#E6F0F6', borderColor: '#78BFE3' }}>
           <div className="flex items-center gap-3 mb-4">
-            <CheckCircle className="w-6 h-6 text-green-600" />
-            <h3 className="text-lg font-bold text-green-800">Bijna klaar!</h3>
+            <CheckCircle className="w-6 h-6" style={{ color: '#78BFE3' }} />
+            <h3 className="text-lg font-bold" style={{ color: '#78BFE3' }}>Bijna klaar!</h3>
           </div>
-          <p className="text-green-700">
+          <p style={{ color: '#78BFE3' }}>
             Dit is de laatste stap van het prioriteiten stellen. Na het opslaan ga je terug naar het dashboard 
             waar je kunt zien dat deze stap is afgerond.
           </p>
@@ -161,7 +157,7 @@ const PrioriteitenInteresses = () => {
           <Button
             onClick={handleSave}
             disabled={loading}
-            className="bg-green-600 hover:bg-green-700 text-white"
+            className="bg-yellow-400 hover:bg-yellow-500 text-black"
             size="lg"
           >
             {loading ? "Opslaan..." : "Prioriteiten opslaan"}
