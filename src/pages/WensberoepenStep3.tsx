@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -7,9 +7,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 import WensberoepenProgress from "@/components/WensberoepenProgress";
+import { useWensberoepenResponses } from "@/hooks/useWensberoepenResponses";
 
 const WensberoepenStep3 = () => {
   const navigate = useNavigate();
+  const { getFieldValue, saveResponse, isLoading } = useWensberoepenResponses();
+  
   const [jobTitle, setJobTitle] = useState("");
   const [answers, setAnswers] = useState({
     question1: "",
@@ -26,12 +29,63 @@ const WensberoepenStep3 = () => {
     question12: ""
   });
 
+  // Load saved data when component mounts
+  useEffect(() => {
+    if (!isLoading) {
+      setJobTitle(getFieldValue("wensberoep_3_titel"));
+      setAnswers({
+        question1: getFieldValue("wensberoep_3_werkweek_activiteiten"),
+        question2: getFieldValue("wensberoep_3_werklocatie_omgeving"),
+        question3: getFieldValue("wensberoep_3_binnen_buiten_verhouding"),
+        question4: getFieldValue("wensberoep_3_samenwerking_contacten"),
+        question5: getFieldValue("wensberoep_3_fluitend_thuiskomen_dag"),
+        question6: getFieldValue("wensberoep_3_werk_doel"),
+        question7: getFieldValue("wensberoep_3_reistijd"),
+        question8: getFieldValue("wensberoep_3_werkuren"),
+        question9: getFieldValue("wensberoep_3_werksfeer"),
+        question10: getFieldValue("wensberoep_3_leukste_onderdelen"),
+        question11: getFieldValue("wensberoep_3_belangrijke_aspecten"),
+        question12: getFieldValue("wensberoep_3_kennis_focus")
+      });
+    }
+  }, [isLoading, getFieldValue]);
+
+  const handleJobTitleChange = (value: string) => {
+    setJobTitle(value);
+  };
+
+  const handleJobTitleBlur = () => {
+    saveResponse("wensberoep_3_titel", jobTitle);
+  };
+
   const handleInputChange = (field: string, value: string) => {
     setAnswers(prev => ({ ...prev, [field]: value }));
   };
 
+  const handleInputBlur = (field: string, value: string) => {
+    const fieldMap: { [key: string]: keyof any } = {
+      question1: "wensberoep_3_werkweek_activiteiten",
+      question2: "wensberoep_3_werklocatie_omgeving",
+      question3: "wensberoep_3_binnen_buiten_verhouding",
+      question4: "wensberoep_3_samenwerking_contacten",
+      question5: "wensberoep_3_fluitend_thuiskomen_dag",
+      question6: "wensberoep_3_werk_doel",
+      question7: "wensberoep_3_reistijd",
+      question8: "wensberoep_3_werkuren",
+      question9: "wensberoep_3_werksfeer",
+      question10: "wensberoep_3_leukste_onderdelen",
+      question11: "wensberoep_3_belangrijke_aspecten",
+      question12: "wensberoep_3_kennis_focus"
+    };
+    
+    const dbField = fieldMap[field];
+    if (dbField) {
+      saveResponse(dbField, value);
+    }
+  };
+
   const handleComplete = () => {
-    console.log("Wensberoepen scan completed!", { jobTitle, answers });
+    console.log("Wensberoepen scan completed!");
     alert("Wensberoepen scan afgerond!");
     navigate('/home');
   };
@@ -54,6 +108,10 @@ const WensberoepenStep3 = () => {
     "Wat is voor jou belangrijk in dit werk?",
     "Waar gaat het vooral over in jouw werk? Waar moet je veel van weten?"
   ];
+
+  if (isLoading) {
+    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Laden...</div>;
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
@@ -94,7 +152,8 @@ const WensberoepenStep3 = () => {
                 id="jobTitle"
                 placeholder="Vul hier de naam van je wensberoep in..."
                 value={jobTitle}
-                onChange={(e) => setJobTitle(e.target.value)}
+                onChange={(e) => handleJobTitleChange(e.target.value)}
+                onBlur={handleJobTitleBlur}
                 className="text-lg border-gray-300 focus:border-blue-900 focus:ring-blue-900"
               />
             </div>
@@ -111,6 +170,7 @@ const WensberoepenStep3 = () => {
                     placeholder="Beschrijf hier je antwoord..."
                     value={answers[`question${index + 1}` as keyof typeof answers]}
                     onChange={(e) => handleInputChange(`question${index + 1}`, e.target.value)}
+                    onBlur={(e) => handleInputBlur(`question${index + 1}`, e.target.value)}
                     className="min-h-[80px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
                   />
                 </div>
