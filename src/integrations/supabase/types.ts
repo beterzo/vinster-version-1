@@ -14,6 +14,7 @@ export type Database = {
           created_at: string
           first_name: string
           gender: string
+          has_paid: boolean
           id: string
           last_name: string
           updated_at: string
@@ -22,6 +23,7 @@ export type Database = {
           created_at?: string
           first_name: string
           gender: string
+          has_paid?: boolean
           id: string
           last_name: string
           updated_at?: string
@@ -30,6 +32,7 @@ export type Database = {
           created_at?: string
           first_name?: string
           gender?: string
+          has_paid?: boolean
           id?: string
           last_name?: string
           updated_at?: string

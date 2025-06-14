@@ -10,7 +10,9 @@ import NotFound from "./pages/NotFound";
 import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
+import PaymentRequired from "./pages/PaymentRequired";
 import ProtectedRoute from "./components/ProtectedRoute";
+import PaymentGuard from "./components/PaymentGuard";
 import EnthousiasmeIntro from "./pages/EnthousiasmeIntro";
 import EnthousiasmeStep1 from "./pages/EnthousiasmeStep1";
 import EnthousiasmeStep2 from "./pages/EnthousiasmeStep2";
@@ -46,8 +48,8 @@ const AuthRedirect = () => {
   }
 
   if (user && session) {
-    console.log('🔄 AuthRedirect: User authenticated, redirecting to home');
-    return <Navigate to="/home" replace />;
+    console.log('🔄 AuthRedirect: User authenticated, redirecting to payment check');
+    return <Navigate to="/payment-required" replace />;
   }
 
   console.log('🔄 AuthRedirect: No auth, redirecting to login');
@@ -66,55 +68,60 @@ const App = () => (
             <Route path="/landingspagina" element={<LandingPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
-            <Route path="/home" element={
+            <Route path="/payment-required" element={
               <ProtectedRoute>
-                <Home />
+                <PaymentRequired />
               </ProtectedRoute>
+            } />
+            <Route path="/home" element={
+              <PaymentGuard>
+                <Home />
+              </PaymentGuard>
             } />
             <Route path="/enthousiasme-intro" element={
-              <ProtectedRoute>
+              <PaymentGuard>
                 <EnthousiasmeIntro />
-              </ProtectedRoute>
+              </PaymentGuard>
             } />
             <Route path="/enthousiasme-stap-1" element={
-              <ProtectedRoute>
+              <PaymentGuard>
                 <EnthousiasmeStep1 />
-              </ProtectedRoute>
+              </PaymentGuard>
             } />
             <Route path="/enthousiasme-stap-2" element={
-              <ProtectedRoute>
+              <PaymentGuard>
                 <EnthousiasmeStep2 />
-              </ProtectedRoute>
+              </PaymentGuard>
             } />
             <Route path="/enthousiasme-stap-3" element={
-              <ProtectedRoute>
+              <PaymentGuard>
                 <EnthousiasmeStep3 />
-              </ProtectedRoute>
+              </PaymentGuard>
             } />
             <Route path="/enthousiasme-stap-4" element={
-              <ProtectedRoute>
+              <PaymentGuard>
                 <EnthousiasmeStep4 />
-              </ProtectedRoute>
+              </PaymentGuard>
             } />
             <Route path="/wensberoepen-intro" element={
-              <ProtectedRoute>
+              <PaymentGuard>
                 <WensberoepenIntro />
-              </ProtectedRoute>
+              </PaymentGuard>
             } />
             <Route path="/wensberoepen-stap-1" element={
-              <ProtectedRoute>
+              <PaymentGuard>
                 <WensberoepenStep1 />
-              </ProtectedRoute>
+              </PaymentGuard>
             } />
             <Route path="/wensberoepen-stap-2" element={
-              <ProtectedRoute>
+              <PaymentGuard>
                 <WensberoepenStep2 />
-              </ProtectedRoute>
+              </PaymentGuard>
             } />
             <Route path="/wensberoepen-stap-3" element={
-              <ProtectedRoute>
+              <PaymentGuard>
                 <WensberoepenStep3 />
-              </ProtectedRoute>
+              </PaymentGuard>
             } />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
