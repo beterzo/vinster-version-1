@@ -28,54 +28,130 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Set up auth state listener
+    console.log('🔐 AuthProvider: Initializing auth state');
+
+    // Set up auth state listener FIRST
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
+        console.log('🔐 Auth state change:', event, session?.user?.email || 'no user');
+        
         setSession(session);
         setUser(session?.user ?? null);
         setLoading(false);
+
+        // Log session details for debugging
+        if (session) {
+          console.log('✅ Session active:', {
+            userId: session.user.id,
+            email: session.user.email,
+            expiresAt: new Date(session.expires_at! * 1000).toLocaleString()
+          });
+        } else {
+          console.log('❌ No active session');
+        }
       }
     );
 
-    // Check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      setLoading(false);
-    });
+    // THEN check for existing session
+    const initializeAuth = async () => {
+      try {
+        console.log('🔐 Checking for existing session...');
+        const { data: { session }, error } = await supabase.auth.getSession();
+        
+        if (error) {
+          console.error('❌ Error getting session:', error);
+          setLoading(false);
+          return;
+        }
 
-    return () => subscription.unsubscribe();
+        console.log('🔐 Initial session check:', session?.user?.email || 'no session');
+        setSession(session);
+        setUser(session?.user ?? null);
+        setLoading(false);
+      } catch (error) {
+        console.error('❌ Auth initialization error:', error);
+        setLoading(false);
+      }
+    };
+
+    initializeAuth();
+
+    return () => {
+      console.log('🔐 Cleaning up auth subscription');
+      subscription.unsubscribe();
+    };
   }, []);
 
   const signUp = async (email: string, password: string, firstName: string, lastName: string, gender: string) => {
+    console.log('🔐 Attempting signup for:', email);
     const redirectUrl = `${window.location.origin}/`;
     
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        emailRedirectTo: redirectUrl,
-        data: {
-          first_name: firstName,
-          last_name: lastName,
-          gender: gender
+    try {
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: redirectUrl,
+          data: {
+            first_name: firstName,
+            last_name: lastName,
+            gender: gender
+          }
         }
+      });
+
+      if (error) {
+        console.error('❌ Signup error:', error);
+      } else {
+        console.log('✅ Signup successful');
       }
-    });
-    return { error };
+
+      return { error };
+    } catch (error) {
+      console.error('❌ Signup exception:', error);
+      return { error };
+    }
   };
 
   const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-    return { error };
+    console.log('🔐 Attempting signin for:', email);
+    
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        console.error('❌ Signin error:', error);
+      } else {
+        console.log('✅ Signin successful');
+      }
+
+      return { error };
+    } catch (error) {
+      console.error('❌ Signin exception:', error);
+      return { error };
+    }
   };
 
   const signOut = async () => {
-    const { error } = await supabase.auth.signOut();
-    return { error };
+    console.log('🔐 Attempting signout');
+    
+    try {
+      const { error } = await supabase.auth.signOut();
+
+      if (error) {
+        console.error('❌ Signout error:', error);
+      } else {
+        console.log('✅ Signout successful');
+      }
+
+      return { error };
+    } catch (error) {
+      console.error('❌ Signout exception:', error);
+      return { error };
+    }
   };
 
   const value = {
@@ -86,6 +162,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     signIn,
     signOut,
   };
+
+  console.log('🔐 AuthProvider render:', { 
+    hasUser: !!user, 
+    hasSession: !!session, 
+    loading,
+    userEmail: user?.email 
+  });
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

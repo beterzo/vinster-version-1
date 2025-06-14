@@ -25,9 +25,16 @@ const queryClient = new QueryClient();
 
 // Component to handle automatic redirects for authenticated users
 const AuthRedirect = () => {
-  const { user, loading } = useAuth();
+  const { user, session, loading } = useAuth();
+
+  console.log('🔄 AuthRedirect check:', { 
+    hasUser: !!user, 
+    hasSession: !!session, 
+    loading 
+  });
 
   if (loading) {
+    console.log('🔄 AuthRedirect: Still loading...');
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -38,10 +45,12 @@ const AuthRedirect = () => {
     );
   }
 
-  if (user) {
+  if (user && session) {
+    console.log('🔄 AuthRedirect: User authenticated, redirecting to home');
     return <Navigate to="/home" replace />;
   }
 
+  console.log('🔄 AuthRedirect: No auth, redirecting to login');
   return <Navigate to="/login" replace />;
 };
 
