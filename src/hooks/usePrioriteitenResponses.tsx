@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "./useAuth";
@@ -34,6 +33,31 @@ export const usePrioriteitenResponses = () => {
       loadAIKeywords();
     }
   }, [user]);
+
+  // Calculate progress based on completed steps
+  const calculateProgress = () => {
+    if (!responses) return 0;
+    
+    let completedSteps = 0;
+    
+    // Check if activiteiten step is completed
+    if (responses.selected_activiteiten_keywords.length > 0 || responses.extra_activiteiten_tekst.trim()) {
+      completedSteps++;
+    }
+    
+    // Check if werkomstandigheden step is completed
+    if (responses.selected_werkomstandigheden_keywords.length > 0 || responses.extra_werkomstandigheden_tekst.trim()) {
+      completedSteps++;
+    }
+    
+    // Check if interesses step is completed
+    if (responses.selected_interesses_keywords.length > 0 || responses.extra_interesses_tekst.trim()) {
+      completedSteps++;
+    }
+    
+    // Return progress as percentage
+    return Math.round((completedSteps / 3) * 100);
+  };
 
   const loadResponses = async () => {
     if (!user) return;
@@ -188,6 +212,8 @@ export const usePrioriteitenResponses = () => {
     responses,
     aiKeywords,
     loading,
+    progress: calculateProgress(),
+    isCompleted: calculateProgress() === 100,
     saveResponses,
     refreshData: () => {
       loadResponses();

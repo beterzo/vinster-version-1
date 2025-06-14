@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import ProgressStep from "./ProgressStep";
@@ -6,11 +5,13 @@ import { CircleUser, Target, Star, CheckCircle, Search, FileText, ListTodo, User
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { usePrioriteitenResponses } from "@/hooks/usePrioriteitenResponses";
 
 const Dashboard = () => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { progress: prioriteitenProgress, isCompleted: prioriteitenCompleted } = usePrioriteitenResponses();
 
   const handleLogout = async () => {
     const { error } = await signOut();
@@ -55,21 +56,27 @@ const Dashboard = () => {
     },
     {
       title: "Prioriteiten stellen",
-      progress: 0,
-      isCompleted: false,
-      icon: <ListTodo className="w-5 h-5 text-gray-400" />
+      progress: prioriteitenProgress,
+      isCompleted: prioriteitenCompleted,
+      icon: <ListTodo className={`w-5 h-5 ${
+        prioriteitenCompleted 
+          ? 'text-green-500' 
+          : prioriteitenProgress > 0 
+            ? 'text-yellow-500' 
+            : 'text-yellow-500'
+      }`} />
     },
     {
       title: "Laatste check",
       progress: 0,
       isCompleted: false,
-      icon: <CheckCircle className="w-5 h-5 text-gray-400" />
+      icon: <CheckCircle className="w-5 h-5 text-blue-400" />
     },
     {
       title: "Zoekprofiel",
       progress: 0,
       isCompleted: false,
-      icon: <UserCheck className="w-5 h-5 text-gray-400" />
+      icon: <UserCheck className="w-5 h-5 text-yellow-500" />
     }
   ];
 
