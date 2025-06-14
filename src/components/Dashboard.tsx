@@ -58,13 +58,7 @@ const Dashboard = () => {
       title: "Prioriteiten stellen",
       progress: prioriteitenProgress,
       isCompleted: prioriteitenCompleted,
-      icon: <ListTodo className={`w-5 h-5 ${
-        prioriteitenCompleted 
-          ? 'text-green-500' 
-          : prioriteitenProgress > 0 
-            ? 'text-yellow-500' 
-            : 'text-yellow-500'
-      }`} />
+      icon: <ListTodo className="w-5 h-5 text-yellow-500" />
     },
     {
       title: "Laatste check",
