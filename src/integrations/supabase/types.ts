@@ -66,6 +66,45 @@ export type Database = {
         }
         Relationships: []
       }
+      prioriteiten_responses: {
+        Row: {
+          created_at: string
+          extra_activiteiten_tekst: string | null
+          extra_interesses_tekst: string | null
+          extra_werkomstandigheden_tekst: string | null
+          id: string
+          selected_activiteiten_keywords: string[] | null
+          selected_interesses_keywords: string[] | null
+          selected_werkomstandigheden_keywords: string[] | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          extra_activiteiten_tekst?: string | null
+          extra_interesses_tekst?: string | null
+          extra_werkomstandigheden_tekst?: string | null
+          id?: string
+          selected_activiteiten_keywords?: string[] | null
+          selected_interesses_keywords?: string[] | null
+          selected_werkomstandigheden_keywords?: string[] | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          extra_activiteiten_tekst?: string | null
+          extra_interesses_tekst?: string | null
+          extra_werkomstandigheden_tekst?: string | null
+          id?: string
+          selected_activiteiten_keywords?: string[] | null
+          selected_interesses_keywords?: string[] | null
+          selected_werkomstandigheden_keywords?: string[] | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           ai_interesses: string | null

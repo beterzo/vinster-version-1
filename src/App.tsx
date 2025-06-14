@@ -22,6 +22,10 @@ import WensberoepenIntro from "./pages/WensberoepenIntro";
 import WensberoepenStep1 from "./pages/WensberoepenStep1";
 import WensberoepenStep2 from "./pages/WensberoepenStep2";
 import WensberoepenStep3 from "./pages/WensberoepenStep3";
+import PrioriteitenIntro from "./pages/PrioriteitenIntro";
+import PrioriteitenActiviteiten from "./pages/PrioriteitenActiviteiten";
+import PrioriteitenWerkomstandigheden from "./pages/PrioriteitenWerkomstandigheden";
+import PrioriteitenInteresses from "./pages/PrioriteitenInteresses";
 
 const queryClient = new QueryClient();
 
@@ -121,6 +125,26 @@ const App = () => (
             <Route path="/wensberoepen-stap-3" element={
               <PaymentGuard>
                 <WensberoepenStep3 />
+              </PaymentGuard>
+            } />
+            <Route path="/prioriteiten-intro" element={
+              <PaymentGuard>
+                <PrioriteitenIntro />
+              </PaymentGuard>
+            } />
+            <Route path="/prioriteiten-activiteiten" element={
+              <PaymentGuard>
+                <PrioriteitenActiviteiten />
+              </PaymentGuard>
+            } />
+            <Route path="/prioriteiten-werkomstandigheden" element={
+              <PaymentGuard>
+                <PrioriteitenWerkomstandigheden />
+              </PaymentGuard>
+            } />
+            <Route path="/prioriteiten-interesses" element={
+              <PaymentGuard>
+                <PrioriteitenInteresses />
               </PaymentGuard>
             } />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

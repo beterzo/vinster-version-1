@@ -34,6 +34,8 @@ const Dashboard = () => {
       navigate("/enthousiasme-intro");
     } else if (stepTitle === "Wensberoepen") {
       navigate("/wensberoepen-intro");
+    } else if (stepTitle === "Prioriteiten stellen") {
+      navigate("/prioriteiten-intro");
     }
     // Add more navigation logic for other steps later
   };
@@ -47,8 +49,8 @@ const Dashboard = () => {
     },
     {
       title: "Wensberoepen",
-      progress: 45,
-      isCompleted: false,
+      progress: 100,
+      isCompleted: true,
       icon: <Target className="w-5 h-5 text-blue-400" />
     },
     {
@@ -188,6 +190,7 @@ const Dashboard = () => {
             <Button 
               className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-8 text-xl rounded-3xl shadow-lg hover:shadow-xl transition-all duration-200"
               size="lg"
+              onClick={() => navigate("/prioriteiten-intro")}
             >
               Ga verder waar je gebleven was
             </Button>

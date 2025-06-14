@@ -1,0 +1,117 @@
+
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { useNavigate } from "react-router-dom";
+import { ArrowRight, Target, Star, Briefcase } from "lucide-react";
+import { usePrioriteitenResponses } from "@/hooks/usePrioriteitenResponses";
+
+const PrioriteitenIntro = () => {
+  const navigate = useNavigate();
+  const { aiKeywords } = usePrioriteitenResponses();
+
+  const totalKeywords = aiKeywords ? 
+    aiKeywords.activiteiten.length + 
+    aiKeywords.werkomstandigheden.length + 
+    aiKeywords.interesses.length : 0;
+
+  return (
+    <div className="min-h-screen bg-gray-50 font-sans">
+      <div className="max-w-4xl mx-auto px-6 py-8">
+        {/* Header */}
+        <div className="mb-8">
+          <img src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" alt="Vinster Logo" className="h-8 w-auto mb-6" />
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Prioriteiten stellen</h1>
+          <p className="text-xl text-gray-700">
+            Nu gaan we samen bepalen wat voor jou het allerbelangrijkste is
+          </p>
+        </div>
+
+        {/* Main content */}
+        <Card className="p-8 mb-8">
+          <div className="text-center mb-8">
+            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Target className="w-8 h-8 text-blue-600" />
+            </div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              Op basis van jouw antwoorden hebben we {totalKeywords} kernwoorden geïdentificeerd
+            </h2>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              Deze kernwoorden zijn gebaseerd op jouw enthousiasme-scan en wensberoepen. 
+              Ze geven een goed beeld van wat jou motiveert en waar je energie van krijgt.
+            </p>
+          </div>
+
+          {/* Three categories */}
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
+            <div className="text-center p-6 bg-yellow-50 rounded-lg">
+              <Star className="w-12 h-12 text-yellow-500 mx-auto mb-4" />
+              <h3 className="font-bold text-lg mb-2">Wat je graag doet</h3>
+              <p className="text-gray-600 text-sm mb-3">Activiteiten en taken waar jij energie van krijgt</p>
+              <div className="text-2xl font-bold text-yellow-600">
+                {aiKeywords?.activiteiten.length || 0} kernwoorden
+              </div>
+            </div>
+
+            <div className="text-center p-6 bg-green-50 rounded-lg">
+              <Briefcase className="w-12 h-12 text-green-500 mx-auto mb-4" />
+              <h3 className="font-bold text-lg mb-2">Fijne werkomgeving</h3>
+              <p className="text-gray-600 text-sm mb-3">Omstandigheden waarin jij goed functioneert</p>
+              <div className="text-2xl font-bold text-green-600">
+                {aiKeywords?.werkomstandigheden.length || 0} kernwoorden
+              </div>
+            </div>
+
+            <div className="text-center p-6 bg-purple-50 rounded-lg">
+              <Target className="w-12 h-12 text-purple-500 mx-auto mb-4" />
+              <h3 className="font-bold text-lg mb-2">Jouw interesses</h3>
+              <p className="text-gray-600 text-sm mb-3">Onderwerpen en gebieden die jou boeien</p>
+              <div className="text-2xl font-bold text-purple-600">
+                {aiKeywords?.interesses.length || 0} kernwoorden
+              </div>
+            </div>
+          </div>
+
+          {/* Instructions */}
+          <div className="bg-blue-50 p-6 rounded-lg mb-8">
+            <h3 className="font-bold text-lg mb-4">Wat ga je nu doen?</h3>
+            <ul className="space-y-3 text-gray-700">
+              <li className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                <span>Je gaat de kernwoorden per categorie bekijken en selecteren welke voor jou het allerbelangrijkste zijn</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                <span>Je kunt per categorie aanvullende informatie toevoegen over wat je nog belangrijk vindt</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                <span>Er zijn geen goede of foute antwoorden - ga af op je gevoel en selecteer wat echt bij je past</span>
+              </li>
+            </ul>
+          </div>
+        </Card>
+
+        {/* Navigation */}
+        <div className="flex justify-between items-center">
+          <Button
+            variant="outline"
+            onClick={() => navigate("/home")}
+          >
+            Terug naar dashboard
+          </Button>
+          
+          <Button
+            onClick={() => navigate("/prioriteiten-activiteiten")}
+            className="bg-blue-600 hover:bg-blue-700 text-white"
+            size="lg"
+          >
+            Beginnen met prioriteiten stellen
+            <ArrowRight className="w-5 h-5 ml-2" />
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PrioriteitenIntro;
