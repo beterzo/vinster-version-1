@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -10,6 +11,8 @@ import { useWensberoepenResponses } from "@/hooks/useWensberoepenResponses";
 import { useWebhookData } from "@/hooks/useWebhookData";
 import { sendWebhookData } from "@/services/webhookService";
 import { useToast } from "@/hooks/use-toast";
+import { useFormValidation } from "@/hooks/useFormValidation";
+import { AlertTriangle, CheckCircle } from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
 
 type WensberoepenResponse = Tables<"wensberoepen_responses">;
@@ -19,6 +22,15 @@ const WensberoepenStep3 = () => {
   const { toast } = useToast();
   const { responses, getFieldValue, saveResponse, isLoading } = useWensberoepenResponses();
   const { collectWebhookData } = useWebhookData();
+  const { 
+    isFormComplete, 
+    missingFields, 
+    enthousiasmeComplete, 
+    wensberoepenComplete,
+    missingEnthousiasmeCount,
+    missingWensberoepenCount,
+    isLoading: validationLoading
+  } = useFormValidation();
   
   const [jobTitle, setJobTitle] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -97,6 +109,15 @@ const WensberoepenStep3 = () => {
   };
 
   const handleComplete = async () => {
+    if (!isFormComplete) {
+      toast({
+        title: "Formulier niet compleet",
+        description: "Vul alle velden in voordat je de scan afrondt.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     try {
       setIsSubmitting(true);
       
@@ -190,6 +211,56 @@ const WensberoepenStep3 = () => {
               </p>
             </div>
 
+            {/* Validation Status */}
+            {!validationLoading && (
+              <div className="mb-8 p-4 rounded-lg border">
+                <div className="flex items-center gap-3 mb-3">
+                  {isFormComplete ? (
+                    <CheckCircle className="h-5 w-5 text-green-600" />
+                  ) : (
+                    <AlertTriangle className="h-5 w-5 text-amber-600" />
+                  )}
+                  <h3 className="font-semibold text-lg">
+                    {isFormComplete ? "Alle velden ingevuld!" : "Voortgang van je scans"}
+                  </h3>
+                </div>
+                
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span>Enthousiasme scan</span>
+                    <div className="flex items-center gap-2">
+                      {enthousiasmeComplete ? (
+                        <CheckCircle className="h-4 w-4 text-green-600" />
+                      ) : (
+                        <span className="text-sm text-amber-600">
+                          {missingEnthousiasmeCount} velden ontbreken
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <span>Wensberoepen scan</span>
+                    <div className="flex items-center gap-2">
+                      {wensberoepenComplete ? (
+                        <CheckCircle className="h-4 w-4 text-green-600" />
+                      ) : (
+                        <span className="text-sm text-amber-600">
+                          {missingWensberoepenCount} velden ontbreken
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+                
+                {!isFormComplete && (
+                  <p className="text-sm text-gray-600 mt-3">
+                    Vul alle velden in beide scans in om de "Afronden" knop te activeren.
+                  </p>
+                )}
+              </div>
+            )}
+
             {/* Job Title Input */}
             <div className="mb-8">
               <Label htmlFor="jobTitle" className="text-blue-900 font-medium text-lg mb-3 block">
@@ -236,10 +307,15 @@ const WensberoepenStep3 = () => {
               </Button>
               <Button 
                 onClick={handleComplete}
-                className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold px-8"
-                disabled={isSubmitting}
+                className={`font-semibold px-8 ${
+                  isFormComplete 
+                    ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 
+                    : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                }`}
+                disabled={isSubmitting || !isFormComplete || validationLoading}
               >
-                {isSubmitting ? "Bezig met afronden..." : "Afronden"}
+                {isSubmitting ? "Bezig met afronden..." : 
+                 !isFormComplete ? "Vul alle velden in" : "Afronden"}
               </Button>
             </div>
           </CardContent>
