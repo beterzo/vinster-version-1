@@ -8,6 +8,9 @@ import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 import WensberoepenProgress from "@/components/WensberoepenProgress";
 import { useWensberoepenResponses } from "@/hooks/useWensberoepenResponses";
+import type { Tables } from "@/integrations/supabase/types";
+
+type WensberoepenResponse = Tables<"wensberoepen_responses">;
 
 const WensberoepenStep2 = () => {
   const navigate = useNavigate();
@@ -63,7 +66,7 @@ const WensberoepenStep2 = () => {
   };
 
   const handleInputBlur = (field: string, value: string) => {
-    const fieldMap: { [key: string]: keyof any } = {
+    const fieldMap: Record<string, keyof WensberoepenResponse> = {
       question1: "wensberoep_2_werkweek_activiteiten",
       question2: "wensberoep_2_werklocatie_omgeving",
       question3: "wensberoep_2_binnen_buiten_verhouding",
