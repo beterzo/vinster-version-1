@@ -14,11 +14,11 @@ const EnthousiasmeStep4 = () => {
   const { toast } = useToast();
   const { responses, loading, saving, saveResponse, updateLocalResponse } = useEnthousiasmeResponses();
 
-  const handleInputChange = (field: 'step4_q1' | 'step4_q2' | 'step4_q3', value: string) => {
+  const handleInputChange = (field: 'plezierige_werkperiode_beschrijving' | 'leuk_project_en_rol' | 'fluitend_thuiskomen_dag', value: string) => {
     updateLocalResponse(field, value);
   };
 
-  const handleInputBlur = (field: 'step4_q1' | 'step4_q2' | 'step4_q3', value: string) => {
+  const handleInputBlur = (field: 'plezierige_werkperiode_beschrijving' | 'leuk_project_en_rol' | 'fluitend_thuiskomen_dag', value: string) => {
     saveResponse(field, value);
   };
 
@@ -84,9 +84,9 @@ const EnthousiasmeStep4 = () => {
                 <Textarea
                   id="question1"
                   placeholder="Vertel over de periode waar je met veel plezier aan terugdenkt..."
-                  value={responses.step4_q1 || ''}
-                  onChange={(e) => handleInputChange('step4_q1', e.target.value)}
-                  onBlur={(e) => handleInputBlur('step4_q1', e.target.value)}
+                  value={responses.plezierige_werkperiode_beschrijving || ''}
+                  onChange={(e) => handleInputChange('plezierige_werkperiode_beschrijving', e.target.value)}
+                  onBlur={(e) => handleInputBlur('plezierige_werkperiode_beschrijving', e.target.value)}
                   className="min-h-[120px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
                 />
               </div>
@@ -98,9 +98,9 @@ const EnthousiasmeStep4 = () => {
                 <Textarea
                   id="question2"
                   placeholder="Beschrijf een ander leuk project of periode en jouw rol daarin..."
-                  value={responses.step4_q2 || ''}
-                  onChange={(e) => handleInputChange('step4_q2', e.target.value)}
-                  onBlur={(e) => handleInputBlur('step4_q2', e.target.value)}
+                  value={responses.leuk_project_en_rol || ''}
+                  onChange={(e) => handleInputChange('leuk_project_en_rol', e.target.value)}
+                  onBlur={(e) => handleInputBlur('leuk_project_en_rol', e.target.value)}
                   className="min-h-[120px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
                 />
               </div>
@@ -112,9 +112,9 @@ const EnthousiasmeStep4 = () => {
                 <Textarea
                   id="question3"
                   placeholder="Vertel over een dag waarna je fluitend thuiskwam..."
-                  value={responses.step4_q3 || ''}
-                  onChange={(e) => handleInputChange('step4_q3', e.target.value)}
-                  onBlur={(e) => handleInputBlur('step4_q3', e.target.value)}
+                  value={responses.fluitend_thuiskomen_dag || ''}
+                  onChange={(e) => handleInputChange('fluitend_thuiskomen_dag', e.target.value)}
+                  onBlur={(e) => handleInputBlur('fluitend_thuiskomen_dag', e.target.value)}
                   className="min-h-[120px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
                 />
               </div>

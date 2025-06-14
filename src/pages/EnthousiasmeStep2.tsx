@@ -12,11 +12,11 @@ const EnthousiasmeStep2 = () => {
   const navigate = useNavigate();
   const { responses, loading, saving, saveResponse, updateLocalResponse } = useEnthousiasmeResponses();
 
-  const handleInputChange = (field: 'step2_q1' | 'step2_q2' | 'step2_q3', value: string) => {
+  const handleInputChange = (field: 'school_interessantste_vakken' | 'school_thuiskomst_activiteiten' | 'school_naschoolse_activiteiten', value: string) => {
     updateLocalResponse(field, value);
   };
 
-  const handleInputBlur = (field: 'step2_q1' | 'step2_q2' | 'step2_q3', value: string) => {
+  const handleInputBlur = (field: 'school_interessantste_vakken' | 'school_thuiskomst_activiteiten' | 'school_naschoolse_activiteiten', value: string) => {
     saveResponse(field, value);
   };
 
@@ -74,9 +74,9 @@ const EnthousiasmeStep2 = () => {
                 <Textarea
                   id="question1"
                   placeholder="Vertel over wat je het meest interesseerde op school..."
-                  value={responses.step2_q1 || ''}
-                  onChange={(e) => handleInputChange('step2_q1', e.target.value)}
-                  onBlur={(e) => handleInputBlur('step2_q1', e.target.value)}
+                  value={responses.school_interessantste_vakken || ''}
+                  onChange={(e) => handleInputChange('school_interessantste_vakken', e.target.value)}
+                  onBlur={(e) => handleInputBlur('school_interessantste_vakken', e.target.value)}
                   className="min-h-[120px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
                 />
               </div>
@@ -88,9 +88,9 @@ const EnthousiasmeStep2 = () => {
                 <Textarea
                   id="question2"
                   placeholder="Beschrijf wat je deed als je thuiskwam van school..."
-                  value={responses.step2_q2 || ''}
-                  onChange={(e) => handleInputChange('step2_q2', e.target.value)}
-                  onBlur={(e) => handleInputBlur('step2_q2', e.target.value)}
+                  value={responses.school_thuiskomst_activiteiten || ''}
+                  onChange={(e) => handleInputChange('school_thuiskomst_activiteiten', e.target.value)}
+                  onBlur={(e) => handleInputBlur('school_thuiskomst_activiteiten', e.target.value)}
                   className="min-h-[120px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
                 />
               </div>
@@ -102,9 +102,9 @@ const EnthousiasmeStep2 = () => {
                 <Textarea
                   id="question3"
                   placeholder="Vertel over je activiteiten naast school..."
-                  value={responses.step2_q3 || ''}
-                  onChange={(e) => handleInputChange('step2_q3', e.target.value)}
-                  onBlur={(e) => handleInputBlur('step2_q3', e.target.value)}
+                  value={responses.school_naschoolse_activiteiten || ''}
+                  onChange={(e) => handleInputChange('school_naschoolse_activiteiten', e.target.value)}
+                  onBlur={(e) => handleInputBlur('school_naschoolse_activiteiten', e.target.value)}
                   className="min-h-[120px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
                 />
               </div>

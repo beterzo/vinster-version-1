@@ -12,57 +12,57 @@ export type Database = {
       enthousiasme_responses: {
         Row: {
           created_at: string
+          eerste_werk_leukste_aspecten: string | null
+          fluitend_thuiskomen_dag: string | null
           id: string
-          step1_q1: string | null
-          step1_q2: string | null
-          step1_q3: string | null
-          step2_q1: string | null
-          step2_q2: string | null
-          step2_q3: string | null
-          step3_q1: string | null
-          step3_q2: string | null
-          step3_q3: string | null
-          step4_q1: string | null
-          step4_q2: string | null
-          step4_q3: string | null
+          kindertijd_favoriete_plekken: string | null
+          kindertijd_interesses: string | null
+          kindertijd_liefste_activiteiten: string | null
+          leuk_project_en_rol: string | null
+          plezierige_werkperiode_beschrijving: string | null
+          samenwerking_prettige_aspecten: string | null
+          school_interessantste_vakken: string | null
+          school_naschoolse_activiteiten: string | null
+          school_thuiskomst_activiteiten: string | null
           updated_at: string
           user_id: string
+          werkomgeving_aantrekkelijke_elementen: string | null
         }
         Insert: {
           created_at?: string
+          eerste_werk_leukste_aspecten?: string | null
+          fluitend_thuiskomen_dag?: string | null
           id?: string
-          step1_q1?: string | null
-          step1_q2?: string | null
-          step1_q3?: string | null
-          step2_q1?: string | null
-          step2_q2?: string | null
-          step2_q3?: string | null
-          step3_q1?: string | null
-          step3_q2?: string | null
-          step3_q3?: string | null
-          step4_q1?: string | null
-          step4_q2?: string | null
-          step4_q3?: string | null
+          kindertijd_favoriete_plekken?: string | null
+          kindertijd_interesses?: string | null
+          kindertijd_liefste_activiteiten?: string | null
+          leuk_project_en_rol?: string | null
+          plezierige_werkperiode_beschrijving?: string | null
+          samenwerking_prettige_aspecten?: string | null
+          school_interessantste_vakken?: string | null
+          school_naschoolse_activiteiten?: string | null
+          school_thuiskomst_activiteiten?: string | null
           updated_at?: string
           user_id: string
+          werkomgeving_aantrekkelijke_elementen?: string | null
         }
         Update: {
           created_at?: string
+          eerste_werk_leukste_aspecten?: string | null
+          fluitend_thuiskomen_dag?: string | null
           id?: string
-          step1_q1?: string | null
-          step1_q2?: string | null
-          step1_q3?: string | null
-          step2_q1?: string | null
-          step2_q2?: string | null
-          step2_q3?: string | null
-          step3_q1?: string | null
-          step3_q2?: string | null
-          step3_q3?: string | null
-          step4_q1?: string | null
-          step4_q2?: string | null
-          step4_q3?: string | null
+          kindertijd_favoriete_plekken?: string | null
+          kindertijd_interesses?: string | null
+          kindertijd_liefste_activiteiten?: string | null
+          leuk_project_en_rol?: string | null
+          plezierige_werkperiode_beschrijving?: string | null
+          samenwerking_prettige_aspecten?: string | null
+          school_interessantste_vakken?: string | null
+          school_naschoolse_activiteiten?: string | null
+          school_thuiskomst_activiteiten?: string | null
           updated_at?: string
           user_id?: string
+          werkomgeving_aantrekkelijke_elementen?: string | null
         }
         Relationships: []
       }

@@ -12,11 +12,11 @@ const EnthousiasmeStep3 = () => {
   const navigate = useNavigate();
   const { responses, loading, saving, saveResponse, updateLocalResponse } = useEnthousiasmeResponses();
 
-  const handleInputChange = (field: 'step3_q1' | 'step3_q2' | 'step3_q3', value: string) => {
+  const handleInputChange = (field: 'eerste_werk_leukste_aspecten' | 'werkomgeving_aantrekkelijke_elementen' | 'samenwerking_prettige_aspecten', value: string) => {
     updateLocalResponse(field, value);
   };
 
-  const handleInputBlur = (field: 'step3_q1' | 'step3_q2' | 'step3_q3', value: string) => {
+  const handleInputBlur = (field: 'eerste_werk_leukste_aspecten' | 'werkomgeving_aantrekkelijke_elementen' | 'samenwerking_prettige_aspecten', value: string) => {
     saveResponse(field, value);
   };
 
@@ -74,9 +74,9 @@ const EnthousiasmeStep3 = () => {
                 <Textarea
                   id="question1"
                   placeholder="Beschrijf wat je het leukst vond in je eerste werkervaring..."
-                  value={responses.step3_q1 || ''}
-                  onChange={(e) => handleInputChange('step3_q1', e.target.value)}
-                  onBlur={(e) => handleInputBlur('step3_q1', e.target.value)}
+                  value={responses.eerste_werk_leukste_aspecten || ''}
+                  onChange={(e) => handleInputChange('eerste_werk_leukste_aspecten', e.target.value)}
+                  onBlur={(e) => handleInputBlur('eerste_werk_leukste_aspecten', e.target.value)}
                   className="min-h-[120px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
                 />
               </div>
@@ -88,9 +88,9 @@ const EnthousiasmeStep3 = () => {
                 <Textarea
                   id="question2"
                   placeholder="Vertel wat je aantrekkelijk vond aan de werkomgeving..."
-                  value={responses.step3_q2 || ''}
-                  onChange={(e) => handleInputChange('step3_q2', e.target.value)}
-                  onBlur={(e) => handleInputBlur('step3_q2', e.target.value)}
+                  value={responses.werkomgeving_aantrekkelijke_elementen || ''}
+                  onChange={(e) => handleInputChange('werkomgeving_aantrekkelijke_elementen', e.target.value)}
+                  onBlur={(e) => handleInputBlur('werkomgeving_aantrekkelijke_elementen', e.target.value)}
                   className="min-h-[120px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
                 />
               </div>
@@ -102,9 +102,9 @@ const EnthousiasmeStep3 = () => {
                 <Textarea
                   id="question3"
                   placeholder="Beschrijf wat je fijn vindt aan samenwerken..."
-                  value={responses.step3_q3 || ''}
-                  onChange={(e) => handleInputChange('step3_q3', e.target.value)}
-                  onBlur={(e) => handleInputBlur('step3_q3', e.target.value)}
+                  value={responses.samenwerking_prettige_aspecten || ''}
+                  onChange={(e) => handleInputChange('samenwerking_prettige_aspecten', e.target.value)}
+                  onBlur={(e) => handleInputBlur('samenwerking_prettige_aspecten', e.target.value)}
                   className="min-h-[120px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
                 />
               </div>
