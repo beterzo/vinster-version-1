@@ -2,12 +2,43 @@
 import { useEnthousiasmeResponses } from "./useEnthousiasmeResponses";
 import { useWensberoepenResponses } from "./useWensberoepenResponses";
 import { useAuth } from "./useAuth";
+import { useState, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import type { WebhookData } from "@/services/webhookService";
 
 export const useWebhookData = () => {
   const { user } = useAuth();
   const { responses: enthousiasmeResponses } = useEnthousiasmeResponses();
   const { responses: wensberoepenResponses } = useWensberoepenResponses();
+  const [profileData, setProfileData] = useState<any>(null);
+
+  // Load profile data including the new AI columns
+  useEffect(() => {
+    if (user) {
+      loadProfileData();
+    }
+  }, [user]);
+
+  const loadProfileData = async () => {
+    if (!user) return;
+
+    try {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('first_name, last_name, gender, ai_lievelings_activiteiten, ai_werkomstandigheden, ai_interesses')
+        .eq('id', user.id)
+        .single();
+
+      if (error) {
+        console.error('Error loading profile data:', error);
+        return;
+      }
+
+      setProfileData(data);
+    } catch (error) {
+      console.error('Error loading profile data:', error);
+    }
+  };
 
   const collectWebhookData = (): WebhookData | null => {
     if (!user) {
@@ -17,6 +48,16 @@ export const useWebhookData = () => {
 
     const data: WebhookData = {
       user_id: user.id,
+      
+      // Profile data
+      first_name: profileData?.first_name || "",
+      last_name: profileData?.last_name || "",
+      gender: profileData?.gender || "",
+      
+      // AI-generated fields (will be empty initially, can be filled by N8N)
+      ai_lievelings_activiteiten: profileData?.ai_lievelings_activiteiten || "",
+      ai_werkomstandigheden: profileData?.ai_werkomstandigheden || "",
+      ai_interesses: profileData?.ai_interesses || "",
       
       // Enthousiasme responses mapping
       enthusiasm_childhood_1: enthousiasmeResponses?.kindertijd_liefste_activiteiten || "",
@@ -87,5 +128,6 @@ export const useWebhookData = () => {
 
   return {
     collectWebhookData,
+    refreshProfileData: loadProfileData
   };
 };

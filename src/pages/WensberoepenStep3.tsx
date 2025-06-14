@@ -11,7 +11,6 @@ import { useWebhookData } from "@/hooks/useWebhookData";
 import { sendWebhookData } from "@/services/webhookService";
 import { useToast } from "@/hooks/use-toast";
 import { useFormValidation } from "@/hooks/useFormValidation";
-import { supabase } from "@/integrations/supabase/client";
 import type { Tables } from "@/integrations/supabase/types";
 
 type WensberoepenResponse = Tables<"wensberoepen_responses">;
@@ -28,7 +27,6 @@ const WensberoepenStep3 = () => {
   
   const [jobTitle, setJobTitle] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isGeneratingKeywords, setIsGeneratingKeywords] = useState(false);
   const [answers, setAnswers] = useState({
     question1: "",
     question2: "",
@@ -103,35 +101,6 @@ const WensberoepenStep3 = () => {
     }
   };
 
-  const generateAIKeywords = async (userId: string): Promise<boolean> => {
-    try {
-      setIsGeneratingKeywords(true);
-      console.log('Starting AI keywords generation for user:', userId);
-      
-      const { data, error } = await supabase.functions.invoke('generate-ai-keywords', {
-        body: { user_id: userId }
-      });
-
-      if (error) {
-        console.error('Error calling AI keywords function:', error);
-        return false;
-      }
-
-      if (!data.success) {
-        console.error('AI keywords generation failed:', data.error);
-        return false;
-      }
-
-      console.log('AI keywords generated successfully:', data.keywords);
-      return true;
-    } catch (error) {
-      console.error('Exception during AI keywords generation:', error);
-      return false;
-    } finally {
-      setIsGeneratingKeywords(false);
-    }
-  };
-
   const handleComplete = async () => {
     if (!isFormComplete) {
       toast({
@@ -157,30 +126,7 @@ const WensberoepenStep3 = () => {
         return;
       }
 
-      // First, generate AI keywords
-      toast({
-        title: "AI analyse gestart",
-        description: "Bezig met het genereren van kernwoorden uit je interviews...",
-        variant: "default",
-      });
-
-      const aiSuccess = await generateAIKeywords(webhookData.user_id);
-      
-      if (aiSuccess) {
-        toast({
-          title: "AI analyse voltooid",
-          description: "Kernwoorden zijn succesvol gegenereerd uit je interviews.",
-          variant: "default",
-        });
-      } else {
-        toast({
-          title: "AI analyse gefaald",
-          description: "Kernwoorden konden niet worden gegenereerd, maar je data wordt wel verzonden.",
-          variant: "destructive",
-        });
-      }
-
-      // Send data to webhook regardless of AI success/failure
+      // Send data to webhook
       await sendWebhookData(webhookData);
       
       console.log("Wensberoepen scan completed and data sent to webhook!");
@@ -256,11 +202,10 @@ const WensberoepenStep3 = () => {
               <p className="text-xl text-gray-600">
                 Wat zou jij wel een poosje, of zelfs altijd, willen doen?
               </p>
-              {(isSubmitting || isGeneratingKeywords) && (
+              {isSubmitting && (
                 <div className="mt-4 p-3 bg-blue-50 rounded-lg">
                   <p className="text-sm text-blue-700">
-                    {isGeneratingKeywords ? "🤖 AI analyseert je interviews voor kernwoorden..." : 
-                     isSubmitting ? "📤 Bezig met verzenden van gegevens..." : ""}
+                    📤 Bezig met verzenden van gegevens...
                   </p>
                 </div>
               )}
@@ -306,7 +251,7 @@ const WensberoepenStep3 = () => {
                 onClick={() => navigate('/wensberoepen-stap-2')}
                 variant="outline"
                 className="border-blue-900 text-blue-900 hover:bg-blue-50"
-                disabled={isSubmitting || isGeneratingKeywords}
+                disabled={isSubmitting}
               >
                 Vorige wensberoep
               </Button>
@@ -317,10 +262,9 @@ const WensberoepenStep3 = () => {
                     ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 
                     : "bg-gray-300 text-gray-500 cursor-not-allowed"
                 }`}
-                disabled={isSubmitting || isGeneratingKeywords || !isFormComplete || validationLoading}
+                disabled={isSubmitting || !isFormComplete || validationLoading}
               >
-                {isGeneratingKeywords ? "AI analyseert..." :
-                 isSubmitting ? "Bezig met afronden..." : 
+                {isSubmitting ? "Bezig met afronden..." : 
                  !isFormComplete ? "Vul alle velden in" : "Afronden"}
               </Button>
             </div>
