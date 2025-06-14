@@ -3,9 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CheckCircle, Star, Shield, Zap } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { useToast } from "@/hooks/use-toast";
 
 const PaymentRequired = () => {
   const { user } = useAuth();
+  const { toast } = useToast();
   
   const features = [
     {
@@ -32,7 +34,11 @@ const PaymentRequired = () => {
 
   const handlePayment = async () => {
     if (!user) {
-      alert("Gebruikersgegevens niet beschikbaar");
+      toast({
+        title: "Fout",
+        description: "Gebruikersgegevens niet beschikbaar",
+        variant: "destructive",
+      });
       return;
     }
 
@@ -56,14 +62,38 @@ const PaymentRequired = () => {
 
       if (response.ok) {
         console.log('Webhook successfully sent');
-        // You can add success feedback here if needed
+        
+        // Wacht op de response data
+        const responseData = await response.json();
+        console.log('Webhook response:', responseData);
+        
+        // Controleer of er een checkout_url in de response zit
+        if (responseData.checkout_url) {
+          console.log('Redirecting to:', responseData.checkout_url);
+          // Stuur gebruiker naar de betaal-URL
+          window.location.href = responseData.checkout_url;
+        } else {
+          toast({
+            title: "Fout",
+            description: "Geen betaallink ontvangen. Probeer het opnieuw.",
+            variant: "destructive",
+          });
+        }
       } else {
         console.error('Webhook failed:', response.status, response.statusText);
-        alert("Er is een fout opgetreden bij het verwerken van je aanvraag. Probeer het opnieuw.");
+        toast({
+          title: "Fout",
+          description: "Er is een fout opgetreden bij het verwerken van je aanvraag. Probeer het opnieuw.",
+          variant: "destructive",
+        });
       }
     } catch (error) {
       console.error('Error sending webhook:', error);
-      alert("Er is een fout opgetreden bij het verwerken van je aanvraag. Probeer het opnieuw.");
+      toast({
+        title: "Fout",
+        description: "Er is een fout opgetreden bij het verwerken van je aanvraag. Probeer het opnieuw.",
+        variant: "destructive",
+      });
     }
   };
 
