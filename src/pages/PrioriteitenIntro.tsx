@@ -3,16 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, Target, Star, Briefcase } from "lucide-react";
-import { usePrioriteitenResponses } from "@/hooks/usePrioriteitenResponses";
 
 const PrioriteitenIntro = () => {
   const navigate = useNavigate();
-  const { aiKeywords } = usePrioriteitenResponses();
-
-  const totalKeywords = aiKeywords ? 
-    aiKeywords.activiteiten.length + 
-    aiKeywords.werkomstandigheden.length + 
-    aiKeywords.interesses.length : 0;
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
@@ -33,7 +26,7 @@ const PrioriteitenIntro = () => {
               <Target className="w-8 h-8" style={{ color: '#78BFE3' }} />
             </div>
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              Op basis van jouw antwoorden hebben we {totalKeywords} kernwoorden geïdentificeerd
+              Op basis van jouw antwoorden hebben we kernwoorden geïdentificeerd
             </h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
               Deze kernwoorden zijn gebaseerd op jouw enthousiasme-scan en wensberoepen. 
@@ -46,28 +39,19 @@ const PrioriteitenIntro = () => {
             <div className="text-center p-6 bg-white rounded-lg">
               <Star className="w-12 h-12 mx-auto mb-4" style={{ color: '#78BFE3' }} />
               <h3 className="font-bold text-lg mb-2">Wat je graag doet</h3>
-              <p className="text-gray-600 text-sm mb-3">Activiteiten en taken waar jij energie van krijgt</p>
-              <div className="text-2xl font-bold" style={{ color: '#78BFE3' }}>
-                {aiKeywords?.activiteiten.length || 0} kernwoorden
-              </div>
+              <p className="text-gray-600 text-sm">Activiteiten en taken waar jij energie van krijgt</p>
             </div>
 
             <div className="text-center p-6 bg-white rounded-lg">
               <Briefcase className="w-12 h-12 mx-auto mb-4" style={{ color: '#78BFE3' }} />
               <h3 className="font-bold text-lg mb-2">Fijne werkomgeving</h3>
-              <p className="text-gray-600 text-sm mb-3">Omstandigheden waarin jij goed functioneert</p>
-              <div className="text-2xl font-bold" style={{ color: '#78BFE3' }}>
-                {aiKeywords?.werkomstandigheden.length || 0} kernwoorden
-              </div>
+              <p className="text-gray-600 text-sm">Omstandigheden waarin jij goed functioneert</p>
             </div>
 
             <div className="text-center p-6 bg-white rounded-lg">
               <Target className="w-12 h-12 mx-auto mb-4" style={{ color: '#78BFE3' }} />
               <h3 className="font-bold text-lg mb-2">Jouw interesses</h3>
-              <p className="text-gray-600 text-sm mb-3">Onderwerpen en gebieden die jou boeien</p>
-              <div className="text-2xl font-bold" style={{ color: '#78BFE3' }}>
-                {aiKeywords?.interesses.length || 0} kernwoorden
-              </div>
+              <p className="text-gray-600 text-sm">Onderwerpen en gebieden die jou boeien</p>
             </div>
           </div>
 
