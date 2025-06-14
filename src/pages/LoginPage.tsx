@@ -53,6 +53,10 @@ const LoginPage = () => {
     setIsLoading(false);
   };
 
+  const handleLogoClick = () => {
+    navigate("/home");
+  };
+
   return (
     <div className="min-h-screen grid grid-cols-2">
       {/* Left side - Image with quote overlay */}
@@ -82,7 +86,12 @@ const LoginPage = () => {
         <div className="w-full max-w-md space-y-8">
           {/* Logo */}
           <div className="text-center">
-            <img src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" alt="Vinster Logo" className="h-8 w-auto mx-auto" />
+            <img 
+              src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" 
+              alt="Vinster Logo" 
+              className="h-8 w-auto mx-auto cursor-pointer hover:opacity-80 transition-opacity"
+              onClick={handleLogoClick}
+            />
           </div>
 
           {/* Header */}

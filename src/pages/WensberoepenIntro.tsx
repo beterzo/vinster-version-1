@@ -6,12 +6,21 @@ import { useNavigate } from "react-router-dom";
 const WensberoepenIntro = () => {
   const navigate = useNavigate();
 
+  const handleLogoClick = () => {
+    navigate("/home");
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
-          <img src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" alt="Vinster Logo" className="h-8 w-auto" />
+          <img 
+            src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" 
+            alt="Vinster Logo" 
+            className="h-8 w-auto cursor-pointer hover:opacity-80 transition-opacity"
+            onClick={handleLogoClick}
+          />
         </div>
       </div>
 
