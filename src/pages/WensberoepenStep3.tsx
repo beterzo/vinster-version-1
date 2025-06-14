@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -8,15 +7,21 @@ import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 import WensberoepenProgress from "@/components/WensberoepenProgress";
 import { useWensberoepenResponses } from "@/hooks/useWensberoepenResponses";
+import { useWebhookData } from "@/hooks/useWebhookData";
+import { sendWebhookData } from "@/services/webhookService";
+import { useToast } from "@/hooks/use-toast";
 import type { Tables } from "@/integrations/supabase/types";
 
 type WensberoepenResponse = Tables<"wensberoepen_responses">;
 
 const WensberoepenStep3 = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const { getFieldValue, saveResponse, isLoading } = useWensberoepenResponses();
+  const { collectWebhookData } = useWebhookData();
   
   const [jobTitle, setJobTitle] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [answers, setAnswers] = useState({
     question1: "",
     question2: "",
@@ -87,10 +92,45 @@ const WensberoepenStep3 = () => {
     }
   };
 
-  const handleComplete = () => {
-    console.log("Wensberoepen scan completed!");
-    alert("Wensberoepen scan afgerond!");
-    navigate('/home');
+  const handleComplete = async () => {
+    try {
+      setIsSubmitting(true);
+      
+      // Collect all data for webhook
+      const webhookData = collectWebhookData();
+      
+      if (!webhookData) {
+        toast({
+          title: "Fout",
+          description: "Kan geen gebruikersgegevens vinden voor het verzenden van data.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      // Send data to webhook
+      await sendWebhookData(webhookData);
+      
+      console.log("Wensberoepen scan completed and data sent to webhook!");
+      
+      toast({
+        title: "Gelukt!",
+        description: "Je wensberoepen scan is succesvol afgerond en de gegevens zijn verzonden.",
+        variant: "default",
+      });
+      
+      navigate('/home');
+    } catch (error) {
+      console.error("Error completing wensberoepen scan:", error);
+      
+      toast({
+        title: "Fout bij afronden",
+        description: "Er ging iets mis bij het afronden van je scan. Probeer het opnieuw.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleLogoClick = () => {
@@ -186,14 +226,16 @@ const WensberoepenStep3 = () => {
                 onClick={() => navigate('/wensberoepen-stap-2')}
                 variant="outline"
                 className="border-blue-900 text-blue-900 hover:bg-blue-50"
+                disabled={isSubmitting}
               >
                 Vorige wensberoep
               </Button>
               <Button 
                 onClick={handleComplete}
                 className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold px-8"
+                disabled={isSubmitting}
               >
-                Afronden
+                {isSubmitting ? "Bezig met afronden..." : "Afronden"}
               </Button>
             </div>
           </CardContent>
