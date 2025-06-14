@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -12,7 +11,6 @@ import { useWebhookData } from "@/hooks/useWebhookData";
 import { sendWebhookData } from "@/services/webhookService";
 import { useToast } from "@/hooks/use-toast";
 import { useFormValidation } from "@/hooks/useFormValidation";
-import { AlertTriangle, CheckCircle } from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
 
 type WensberoepenResponse = Tables<"wensberoepen_responses">;
@@ -23,12 +21,7 @@ const WensberoepenStep3 = () => {
   const { responses, getFieldValue, saveResponse, isLoading } = useWensberoepenResponses();
   const { collectWebhookData } = useWebhookData();
   const { 
-    isFormComplete, 
-    missingFields, 
-    enthousiasmeComplete, 
-    wensberoepenComplete,
-    missingEnthousiasmeCount,
-    missingWensberoepenCount,
+    isFormComplete,
     isLoading: validationLoading
   } = useFormValidation();
   
@@ -210,56 +203,6 @@ const WensberoepenStep3 = () => {
                 Wat zou jij wel een poosje, of zelfs altijd, willen doen?
               </p>
             </div>
-
-            {/* Validation Status */}
-            {!validationLoading && (
-              <div className="mb-8 p-4 rounded-lg border">
-                <div className="flex items-center gap-3 mb-3">
-                  {isFormComplete ? (
-                    <CheckCircle className="h-5 w-5 text-green-600" />
-                  ) : (
-                    <AlertTriangle className="h-5 w-5 text-amber-600" />
-                  )}
-                  <h3 className="font-semibold text-lg">
-                    {isFormComplete ? "Alle velden ingevuld!" : "Voortgang van je scans"}
-                  </h3>
-                </div>
-                
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span>Enthousiasme scan</span>
-                    <div className="flex items-center gap-2">
-                      {enthousiasmeComplete ? (
-                        <CheckCircle className="h-4 w-4 text-green-600" />
-                      ) : (
-                        <span className="text-sm text-amber-600">
-                          {missingEnthousiasmeCount} velden ontbreken
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center justify-between">
-                    <span>Wensberoepen scan</span>
-                    <div className="flex items-center gap-2">
-                      {wensberoepenComplete ? (
-                        <CheckCircle className="h-4 w-4 text-green-600" />
-                      ) : (
-                        <span className="text-sm text-amber-600">
-                          {missingWensberoepenCount} velden ontbreken
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </div>
-                
-                {!isFormComplete && (
-                  <p className="text-sm text-gray-600 mt-3">
-                    Vul alle velden in beide scans in om de "Afronden" knop te activeren.
-                  </p>
-                )}
-              </div>
-            )}
 
             {/* Job Title Input */}
             <div className="mb-8">
