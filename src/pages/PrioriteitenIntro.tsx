@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
@@ -78,8 +77,8 @@ const PrioriteitenIntro = () => {
         {/* Navigation */}
         <div className="flex justify-between items-center">
           <Button
-            variant="outline"
             onClick={() => navigate("/home")}
+            className="bg-blue-900 hover:bg-blue-800 text-white font-bold py-4 px-6 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-200"
           >
             Terug naar dashboard
           </Button>
