@@ -14,7 +14,7 @@ type WensberoepenResponse = Tables<"wensberoepen_responses">;
 
 const WensberoepenStep1 = () => {
   const navigate = useNavigate();
-  const { getFieldValue, saveResponse, isLoading } = useWensberoepenResponses();
+  const { responses, getFieldValue, saveResponse, isLoading } = useWensberoepenResponses();
   
   const [jobTitle, setJobTitle] = useState("");
   const [answers, setAnswers] = useState({
@@ -32,40 +32,44 @@ const WensberoepenStep1 = () => {
     question12: ""
   });
 
-  // Load saved data when component mounts
+  // Load saved data when responses change (only when data is loaded)
   useEffect(() => {
-    if (!isLoading) {
-      setJobTitle(getFieldValue("wensberoep_1_titel"));
+    if (!isLoading && responses) {
+      console.log("Loading saved responses into form:", responses);
+      setJobTitle(responses.wensberoep_1_titel || "");
       setAnswers({
-        question1: getFieldValue("wensberoep_1_werkweek_activiteiten"),
-        question2: getFieldValue("wensberoep_1_werklocatie_omgeving"),
-        question3: getFieldValue("wensberoep_1_binnen_buiten_verhouding"),
-        question4: getFieldValue("wensberoep_1_samenwerking_contacten"),
-        question5: getFieldValue("wensberoep_1_fluitend_thuiskomen_dag"),
-        question6: getFieldValue("wensberoep_1_werk_doel"),
-        question7: getFieldValue("wensberoep_1_reistijd"),
-        question8: getFieldValue("wensberoep_1_werkuren"),
-        question9: getFieldValue("wensberoep_1_werksfeer"),
-        question10: getFieldValue("wensberoep_1_leukste_onderdelen"),
-        question11: getFieldValue("wensberoep_1_belangrijke_aspecten"),
-        question12: getFieldValue("wensberoep_1_kennis_focus")
+        question1: responses.wensberoep_1_werkweek_activiteiten || "",
+        question2: responses.wensberoep_1_werklocatie_omgeving || "",
+        question3: responses.wensberoep_1_binnen_buiten_verhouding || "",
+        question4: responses.wensberoep_1_samenwerking_contacten || "",
+        question5: responses.wensberoep_1_fluitend_thuiskomen_dag || "",
+        question6: responses.wensberoep_1_werk_doel || "",
+        question7: responses.wensberoep_1_reistijd || "",
+        question8: responses.wensberoep_1_werkuren || "",
+        question9: responses.wensberoep_1_werksfeer || "",
+        question10: responses.wensberoep_1_leukste_onderdelen || "",
+        question11: responses.wensberoep_1_belangrijke_aspecten || "",
+        question12: responses.wensberoep_1_kennis_focus || ""
       });
     }
-  }, [isLoading, getFieldValue]);
+  }, [isLoading, responses]);
 
   const handleJobTitleChange = (value: string) => {
     setJobTitle(value);
   };
 
   const handleJobTitleBlur = () => {
+    console.log("Saving job title:", jobTitle);
     saveResponse("wensberoep_1_titel", jobTitle);
   };
 
   const handleInputChange = (field: string, value: string) => {
+    console.log(`Updating ${field}:`, value);
     setAnswers(prev => ({ ...prev, [field]: value }));
   };
 
   const handleInputBlur = (field: string, value: string) => {
+    console.log(`Saving ${field}:`, value);
     const fieldMap: Record<string, keyof WensberoepenResponse> = {
       question1: "wensberoep_1_werkweek_activiteiten",
       question2: "wensberoep_1_werklocatie_omgeving",

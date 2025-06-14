@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "./useAuth";
 import { useToast } from "./use-toast";
@@ -14,18 +14,25 @@ export const useWensberoepenResponses = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
 
+  // Stable getFieldValue function using useCallback
+  const getFieldValue = useCallback((field: keyof WensberoepenResponse): string => {
+    return responses?.[field] as string || "";
+  }, [responses]);
+
   // Load existing responses on mount
   useEffect(() => {
     if (user) {
       loadResponses();
     }
-  }, [user]);
+  }, [user?.id]); // Only depend on user.id to prevent unnecessary re-loads
 
   const loadResponses = async () => {
     if (!user) return;
 
     try {
       setIsLoading(true);
+      console.log("Loading wensberoepen responses for user:", user.id);
+      
       const { data, error } = await supabase
         .from("wensberoepen_responses")
         .select("*")
@@ -42,6 +49,7 @@ export const useWensberoepenResponses = () => {
         return;
       }
 
+      console.log("Loaded wensberoepen responses:", data);
       setResponses(data);
     } catch (error) {
       console.error("Error loading wensberoepen responses:", error);
@@ -51,10 +59,14 @@ export const useWensberoepenResponses = () => {
   };
 
   const saveResponse = async (field: keyof WensberoepenResponse, value: string) => {
-    if (!user) return;
+    if (!user) {
+      console.error("No user found for saving response");
+      return;
+    }
 
     try {
       setIsSaving(true);
+      console.log(`Saving ${field}:`, value);
       
       const updateData = {
         [field]: value,
@@ -80,17 +92,18 @@ export const useWensberoepenResponses = () => {
         return;
       }
 
+      console.log(`Successfully saved ${field}:`, data);
       setResponses(data);
-      console.log(`Saved ${field}:`, value);
     } catch (error) {
       console.error("Error saving wensberoepen response:", error);
+      toast({
+        title: "Fout bij opslaan",
+        description: "Er ging iets mis bij het opslaan van je antwoord.",
+        variant: "destructive",
+      });
     } finally {
       setIsSaving(false);
     }
-  };
-
-  const getFieldValue = (field: keyof WensberoepenResponse): string => {
-    return responses?.[field] as string || "";
   };
 
   return {

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -14,7 +13,7 @@ type WensberoepenResponse = Tables<"wensberoepen_responses">;
 
 const WensberoepenStep2 = () => {
   const navigate = useNavigate();
-  const { getFieldValue, saveResponse, isLoading } = useWensberoepenResponses();
+  const { responses, getFieldValue, saveResponse, isLoading } = useWensberoepenResponses();
   
   const [jobTitle, setJobTitle] = useState("");
   const [answers, setAnswers] = useState({
@@ -32,40 +31,44 @@ const WensberoepenStep2 = () => {
     question12: ""
   });
 
-  // Load saved data when component mounts
+  // Load saved data when responses change (only when data is loaded)
   useEffect(() => {
-    if (!isLoading) {
-      setJobTitle(getFieldValue("wensberoep_2_titel"));
+    if (!isLoading && responses) {
+      console.log("Loading saved responses into form:", responses);
+      setJobTitle(responses.wensberoep_2_titel || "");
       setAnswers({
-        question1: getFieldValue("wensberoep_2_werkweek_activiteiten"),
-        question2: getFieldValue("wensberoep_2_werklocatie_omgeving"),
-        question3: getFieldValue("wensberoep_2_binnen_buiten_verhouding"),
-        question4: getFieldValue("wensberoep_2_samenwerking_contacten"),
-        question5: getFieldValue("wensberoep_2_fluitend_thuiskomen_dag"),
-        question6: getFieldValue("wensberoep_2_werk_doel"),
-        question7: getFieldValue("wensberoep_2_reistijd"),
-        question8: getFieldValue("wensberoep_2_werkuren"),
-        question9: getFieldValue("wensberoep_2_werksfeer"),
-        question10: getFieldValue("wensberoep_2_leukste_onderdelen"),
-        question11: getFieldValue("wensberoep_2_belangrijke_aspecten"),
-        question12: getFieldValue("wensberoep_2_kennis_focus")
+        question1: responses.wensberoep_2_werkweek_activiteiten || "",
+        question2: responses.wensberoep_2_werklocatie_omgeving || "",
+        question3: responses.wensberoep_2_binnen_buiten_verhouding || "",
+        question4: responses.wensberoep_2_samenwerking_contacten || "",
+        question5: responses.wensberoep_2_fluitend_thuiskomen_dag || "",
+        question6: responses.wensberoep_2_werk_doel || "",
+        question7: responses.wensberoep_2_reistijd || "",
+        question8: responses.wensberoep_2_werkuren || "",
+        question9: responses.wensberoep_2_werksfeer || "",
+        question10: responses.wensberoep_2_leukste_onderdelen || "",
+        question11: responses.wensberoep_2_belangrijke_aspecten || "",
+        question12: responses.wensberoep_2_kennis_focus || ""
       });
     }
-  }, [isLoading, getFieldValue]);
+  }, [isLoading, responses]);
 
   const handleJobTitleChange = (value: string) => {
     setJobTitle(value);
   };
 
   const handleJobTitleBlur = () => {
+    console.log("Saving job title:", jobTitle);
     saveResponse("wensberoep_2_titel", jobTitle);
   };
 
   const handleInputChange = (field: string, value: string) => {
+    console.log(`Updating ${field}:`, value);
     setAnswers(prev => ({ ...prev, [field]: value }));
   };
 
   const handleInputBlur = (field: string, value: string) => {
+    console.log(`Saving ${field}:`, value);
     const fieldMap: Record<string, keyof WensberoepenResponse> = {
       question1: "wensberoep_2_werkweek_activiteiten",
       question2: "wensberoep_2_werklocatie_omgeving",
@@ -112,7 +115,6 @@ const WensberoepenStep2 = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
-      {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
           <img 
@@ -124,13 +126,11 @@ const WensberoepenStep2 = () => {
         </div>
       </div>
 
-      {/* Main Content */}
       <div className="max-w-[1440px] mx-auto px-6 py-12">
         <WensberoepenProgress currentStep={2} totalSteps={3} />
         
         <Card className="rounded-3xl shadow-xl">
           <CardContent className="p-12">
-            {/* Title */}
             <div className="text-center mb-12">
               <h1 className="text-3xl font-bold text-blue-900 mb-2">
                 Wensberoep 2
@@ -140,7 +140,6 @@ const WensberoepenStep2 = () => {
               </p>
             </div>
 
-            {/* Job Title Input */}
             <div className="mb-8">
               <Label htmlFor="jobTitle" className="text-blue-900 font-medium text-lg mb-3 block">
                 Naam van het beroep
@@ -155,7 +154,6 @@ const WensberoepenStep2 = () => {
               />
             </div>
 
-            {/* Questions */}
             <div className="space-y-6">
               {questions.map((question, index) => (
                 <div key={index}>
@@ -174,7 +172,6 @@ const WensberoepenStep2 = () => {
               ))}
             </div>
 
-            {/* Navigation */}
             <div className="flex justify-between pt-12">
               <Button 
                 onClick={() => navigate('/wensberoepen-stap-1')}
