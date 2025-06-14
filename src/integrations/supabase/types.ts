@@ -66,6 +66,39 @@ export type Database = {
         }
         Relationships: []
       }
+      extra_informatie_responses: {
+        Row: {
+          beroepsopleiding: string | null
+          created_at: string
+          fysieke_beperkingen: string | null
+          id: string
+          opleidingsniveau: string | null
+          sector_voorkeur: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          beroepsopleiding?: string | null
+          created_at?: string
+          fysieke_beperkingen?: string | null
+          id?: string
+          opleidingsniveau?: string | null
+          sector_voorkeur?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          beroepsopleiding?: string | null
+          created_at?: string
+          fysieke_beperkingen?: string | null
+          id?: string
+          opleidingsniveau?: string | null
+          sector_voorkeur?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       prioriteiten_responses: {
         Row: {
           created_at: string

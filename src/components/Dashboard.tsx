@@ -1,17 +1,20 @@
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import ProgressStep from "./ProgressStep";
-import { CircleUser, Target, Star, CheckCircle, Search, FileText, ListTodo, UserCheck, LogOut } from "lucide-react";
+import { CircleUser, Target, Star, CheckCircle, Search, FileText, ListTodo, UserCheck, LogOut, Info } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { usePrioriteitenResponses } from "@/hooks/usePrioriteitenResponses";
+import { useExtraInformatieResponses } from "@/hooks/useExtraInformatieResponses";
 
 const Dashboard = () => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
   const { progress: prioriteitenProgress, isCompleted: prioriteitenCompleted } = usePrioriteitenResponses();
+  const { progress: extraInformatieProgress, isCompleted: extraInformatieCompleted } = useExtraInformatieResponses();
 
   const handleLogout = async () => {
     const { error } = await signOut();
@@ -37,6 +40,8 @@ const Dashboard = () => {
       navigate("/wensberoepen-intro");
     } else if (stepTitle === "Prioriteiten stellen") {
       navigate("/prioriteiten-intro");
+    } else if (stepTitle === "Extra informatie") {
+      navigate("/extra-informatie-intro");
     }
     // Add more navigation logic for other steps later
   };
@@ -61,10 +66,10 @@ const Dashboard = () => {
       icon: <ListTodo className="w-5 h-5 text-yellow-500" />
     },
     {
-      title: "Laatste check",
-      progress: 0,
-      isCompleted: false,
-      icon: <CheckCircle className="w-5 h-5 text-blue-400" />
+      title: "Extra informatie",
+      progress: extraInformatieProgress,
+      isCompleted: extraInformatieCompleted,
+      icon: <Info className="w-5 h-5 text-blue-400" />
     },
     {
       title: "Zoekprofiel",
@@ -74,13 +79,29 @@ const Dashboard = () => {
     }
   ];
 
+  // Determine which step to continue with
+  const getNextStep = () => {
+    if (!prioriteitenCompleted) {
+      return "/prioriteiten-intro";
+    } else if (!extraInformatieCompleted) {
+      return "/extra-informatie-intro";
+    } else {
+      return "/home"; // or wherever the next step should be
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
       <div className="max-w-[1440px] mx-auto px-6 py-8">
         {/* Header with user info and logout */}
         <div className="flex justify-between items-center mb-8">
           <div className="flex items-center space-x-4">
-            <img src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" alt="Vinster Logo" className="h-8 w-auto" />
+            <img 
+              src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" 
+              alt="Vinster Logo" 
+              className="h-8 w-auto cursor-pointer" 
+              onClick={() => navigate("/home")}
+            />
             {user && (
               <div className="text-gray-700">
                 <span className="font-medium">Welkom, {user.user_metadata?.first_name || user.email}</span>
@@ -191,7 +212,7 @@ const Dashboard = () => {
             <Button 
               className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-8 text-xl rounded-3xl shadow-lg hover:shadow-xl transition-all duration-200"
               size="lg"
-              onClick={() => navigate("/prioriteiten-intro")}
+              onClick={() => navigate(getNextStep())}
             >
               Ga verder waar je gebleven was
             </Button>
