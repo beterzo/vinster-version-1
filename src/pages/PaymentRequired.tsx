@@ -117,7 +117,7 @@ const PaymentRequired = () => {
               <div className="text-center mb-6">
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Volledige Toegang</h3>
                 <p className="text-gray-600 mb-4">Eenmalige betaling voor levenslange toegang</p>
-                <div className="text-4xl font-bold text-gray-900 mb-1">€49</div>
+                <div className="text-4xl font-bold text-gray-900 mb-1">€29</div>
                 <p className="text-sm text-gray-500">Eenmalig, geen abonnement</p>
               </div>
 
@@ -149,7 +149,7 @@ const PaymentRequired = () => {
                 className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-4 text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200"
                 size="lg"
               >
-                Start nu voor €49
+                Start nu voor €29
               </Button>
 
               <p className="text-xs text-gray-500 text-center mt-4">
