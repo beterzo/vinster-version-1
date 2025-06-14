@@ -57,7 +57,7 @@ const PrioriteitenIntro = () => {
               color: '#78BFE3'
             }} />
               <h3 className="font-bold text-lg mb-2">Jouw interesses</h3>
-              <p className="text-gray-600 text-sm">Onderwerpen en gebieden die jou boeien</p>
+              <p className="text-gray-600 text-sm">Onderwerpen en gebieden die jou het meeste boeien</p>
             </div>
           </div>
 
