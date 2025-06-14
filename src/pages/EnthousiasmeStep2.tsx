@@ -1,27 +1,36 @@
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 import EnthousiasmeProgress from "@/components/EnthousiasmeProgress";
+import { useEnthousiasmeResponses } from "@/hooks/useEnthousiasmeResponses";
+import { Loader2 } from "lucide-react";
 
 const EnthousiasmeStep2 = () => {
   const navigate = useNavigate();
-  const [answers, setAnswers] = useState({
-    question1: "",
-    question2: "",
-    question3: ""
-  });
+  const { responses, loading, saving, saveResponse, updateLocalResponse } = useEnthousiasmeResponses();
 
-  const handleInputChange = (field: string, value: string) => {
-    setAnswers(prev => ({ ...prev, [field]: value }));
+  const handleInputChange = (field: 'step2_q1' | 'step2_q2' | 'step2_q3', value: string) => {
+    updateLocalResponse(field, value);
+  };
+
+  const handleInputBlur = (field: 'step2_q1' | 'step2_q2' | 'step2_q3', value: string) => {
+    saveResponse(field, value);
   };
 
   const handleLogoClick = () => {
     navigate("/home");
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 font-sans flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
@@ -48,6 +57,12 @@ const EnthousiasmeStep2 = () => {
               <h1 className="text-3xl font-bold text-blue-900 mb-2">
                 Jouw tienertijd & school
               </h1>
+              {saving && (
+                <p className="text-sm text-gray-500 flex items-center justify-center gap-2">
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Bezig met opslaan...
+                </p>
+              )}
             </div>
 
             {/* Questions */}
@@ -59,8 +74,9 @@ const EnthousiasmeStep2 = () => {
                 <Textarea
                   id="question1"
                   placeholder="Vertel over wat je het meest interesseerde op school..."
-                  value={answers.question1}
-                  onChange={(e) => handleInputChange('question1', e.target.value)}
+                  value={responses.step2_q1 || ''}
+                  onChange={(e) => handleInputChange('step2_q1', e.target.value)}
+                  onBlur={(e) => handleInputBlur('step2_q1', e.target.value)}
                   className="min-h-[120px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
                 />
               </div>
@@ -72,8 +88,9 @@ const EnthousiasmeStep2 = () => {
                 <Textarea
                   id="question2"
                   placeholder="Beschrijf wat je deed als je thuiskwam van school..."
-                  value={answers.question2}
-                  onChange={(e) => handleInputChange('question2', e.target.value)}
+                  value={responses.step2_q2 || ''}
+                  onChange={(e) => handleInputChange('step2_q2', e.target.value)}
+                  onBlur={(e) => handleInputBlur('step2_q2', e.target.value)}
                   className="min-h-[120px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
                 />
               </div>
@@ -85,8 +102,9 @@ const EnthousiasmeStep2 = () => {
                 <Textarea
                   id="question3"
                   placeholder="Vertel over je activiteiten naast school..."
-                  value={answers.question3}
-                  onChange={(e) => handleInputChange('question3', e.target.value)}
+                  value={responses.step2_q3 || ''}
+                  onChange={(e) => handleInputChange('step2_q3', e.target.value)}
+                  onBlur={(e) => handleInputBlur('step2_q3', e.target.value)}
                   className="min-h-[120px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
                 />
               </div>

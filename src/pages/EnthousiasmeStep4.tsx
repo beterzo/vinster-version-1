@@ -1,35 +1,46 @@
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 import EnthousiasmeProgress from "@/components/EnthousiasmeProgress";
+import { useEnthousiasmeResponses } from "@/hooks/useEnthousiasmeResponses";
+import { Loader2 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const EnthousiasmeStep4 = () => {
   const navigate = useNavigate();
-  const [answers, setAnswers] = useState({
-    question1: "",
-    question2: "",
-    question3: ""
-  });
+  const { toast } = useToast();
+  const { responses, loading, saving, saveResponse, updateLocalResponse } = useEnthousiasmeResponses();
 
-  const handleInputChange = (field: string, value: string) => {
-    setAnswers(prev => ({ ...prev, [field]: value }));
+  const handleInputChange = (field: 'step4_q1' | 'step4_q2' | 'step4_q3', value: string) => {
+    updateLocalResponse(field, value);
+  };
+
+  const handleInputBlur = (field: 'step4_q1' | 'step4_q2' | 'step4_q3', value: string) => {
+    saveResponse(field, value);
   };
 
   const handleComplete = () => {
-    // Here you would typically save all the answers
-    console.log("Scan completed!", answers);
-    // For now, navigate back to home or show a completion message
-    alert("Enthousiasme scan afgerond!");
+    toast({
+      title: "Enthousiasme scan afgerond!",
+      description: "Je antwoorden zijn opgeslagen. Je kunt ze altijd aanpassen door terug te gaan naar de stappen.",
+    });
     navigate('/home');
   };
 
   const handleLogoClick = () => {
     navigate("/home");
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 font-sans flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
@@ -56,6 +67,12 @@ const EnthousiasmeStep4 = () => {
               <h1 className="text-3xl font-bold text-blue-900 mb-2">
                 Je leukste werkervaring
               </h1>
+              {saving && (
+                <p className="text-sm text-gray-500 flex items-center justify-center gap-2">
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Bezig met opslaan...
+                </p>
+              )}
             </div>
 
             {/* Questions */}
@@ -67,8 +84,9 @@ const EnthousiasmeStep4 = () => {
                 <Textarea
                   id="question1"
                   placeholder="Vertel over de periode waar je met veel plezier aan terugdenkt..."
-                  value={answers.question1}
-                  onChange={(e) => handleInputChange('question1', e.target.value)}
+                  value={responses.step4_q1 || ''}
+                  onChange={(e) => handleInputChange('step4_q1', e.target.value)}
+                  onBlur={(e) => handleInputBlur('step4_q1', e.target.value)}
                   className="min-h-[120px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
                 />
               </div>
@@ -80,8 +98,9 @@ const EnthousiasmeStep4 = () => {
                 <Textarea
                   id="question2"
                   placeholder="Beschrijf een ander leuk project of periode en jouw rol daarin..."
-                  value={answers.question2}
-                  onChange={(e) => handleInputChange('question2', e.target.value)}
+                  value={responses.step4_q2 || ''}
+                  onChange={(e) => handleInputChange('step4_q2', e.target.value)}
+                  onBlur={(e) => handleInputBlur('step4_q2', e.target.value)}
                   className="min-h-[120px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
                 />
               </div>
@@ -93,8 +112,9 @@ const EnthousiasmeStep4 = () => {
                 <Textarea
                   id="question3"
                   placeholder="Vertel over een dag waarna je fluitend thuiskwam..."
-                  value={answers.question3}
-                  onChange={(e) => handleInputChange('question3', e.target.value)}
+                  value={responses.step4_q3 || ''}
+                  onChange={(e) => handleInputChange('step4_q3', e.target.value)}
+                  onBlur={(e) => handleInputBlur('step4_q3', e.target.value)}
                   className="min-h-[120px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
                 />
               </div>

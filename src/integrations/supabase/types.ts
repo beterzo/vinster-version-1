@@ -9,6 +9,63 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      enthousiasme_responses: {
+        Row: {
+          created_at: string
+          id: string
+          step1_q1: string | null
+          step1_q2: string | null
+          step1_q3: string | null
+          step2_q1: string | null
+          step2_q2: string | null
+          step2_q3: string | null
+          step3_q1: string | null
+          step3_q2: string | null
+          step3_q3: string | null
+          step4_q1: string | null
+          step4_q2: string | null
+          step4_q3: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          step1_q1?: string | null
+          step1_q2?: string | null
+          step1_q3?: string | null
+          step2_q1?: string | null
+          step2_q2?: string | null
+          step2_q3?: string | null
+          step3_q1?: string | null
+          step3_q2?: string | null
+          step3_q3?: string | null
+          step4_q1?: string | null
+          step4_q2?: string | null
+          step4_q3?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          step1_q1?: string | null
+          step1_q2?: string | null
+          step1_q3?: string | null
+          step2_q1?: string | null
+          step2_q2?: string | null
+          step2_q3?: string | null
+          step3_q1?: string | null
+          step3_q2?: string | null
+          step3_q3?: string | null
+          step4_q1?: string | null
+          step4_q2?: string | null
+          step4_q3?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
