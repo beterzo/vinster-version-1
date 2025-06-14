@@ -4,10 +4,12 @@ import { Card } from "@/components/ui/card";
 import { CheckCircle, Star, Shield, Zap } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
 
 const PaymentRequired = () => {
   const { user } = useAuth();
   const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
   
   const features = [
     {
@@ -42,6 +44,8 @@ const PaymentRequired = () => {
       return;
     }
 
+    setIsLoading(true);
+    
     try {
       const webhookData = {
         firstName: user.user_metadata?.first_name || '',
@@ -60,19 +64,46 @@ const PaymentRequired = () => {
         body: JSON.stringify(webhookData)
       });
 
+      console.log('Webhook response status:', response.status);
+      console.log('Webhook response headers:', Object.fromEntries(response.headers.entries()));
+
       if (response.ok) {
         console.log('Webhook successfully sent');
         
-        // Wacht op de response data
-        const responseData = await response.json();
-        console.log('Webhook response:', responseData);
+        // Controleer content-type van response
+        const contentType = response.headers.get('content-type');
+        console.log('Response content-type:', contentType);
+        
+        let responseData;
+        try {
+          responseData = await response.json();
+          console.log('Webhook response data:', responseData);
+        } catch (parseError) {
+          console.error('Failed to parse response as JSON:', parseError);
+          const textResponse = await response.text();
+          console.log('Response as text:', textResponse);
+          throw new Error('Invalid JSON response from webhook');
+        }
         
         // Controleer of er een checkout_url in de response zit
-        if (responseData.checkout_url) {
-          console.log('Redirecting to:', responseData.checkout_url);
-          // Stuur gebruiker naar de betaal-URL
-          window.location.href = responseData.checkout_url;
+        if (responseData && responseData.checkout_url) {
+          console.log('Opening checkout URL in new tab:', responseData.checkout_url);
+          
+          // Open Stripe checkout in nieuwe tab
+          const newWindow = window.open(responseData.checkout_url, '_blank');
+          
+          if (newWindow) {
+            toast({
+              title: "Succes",
+              description: "Betaalpagina wordt geopend in een nieuw tabblad.",
+            });
+          } else {
+            // Fallback als popup wordt geblokkeerd
+            console.log('Popup blocked, using direct redirect');
+            window.location.href = responseData.checkout_url;
+          }
         } else {
+          console.error('No checkout_url in response:', responseData);
           toast({
             title: "Fout",
             description: "Geen betaallink ontvangen. Probeer het opnieuw.",
@@ -81,6 +112,8 @@ const PaymentRequired = () => {
         }
       } else {
         console.error('Webhook failed:', response.status, response.statusText);
+        const errorText = await response.text();
+        console.error('Error response body:', errorText);
         toast({
           title: "Fout",
           description: "Er is een fout opgetreden bij het verwerken van je aanvraag. Probeer het opnieuw.",
@@ -94,6 +127,8 @@ const PaymentRequired = () => {
         description: "Er is een fout opgetreden bij het verwerken van je aanvraag. Probeer het opnieuw.",
         variant: "destructive",
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -212,10 +247,11 @@ const PaymentRequired = () => {
 
               <Button 
                 onClick={handlePayment} 
+                disabled={isLoading}
                 className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-4 text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200" 
                 size="lg"
               >
-                Start nu voor €29
+                {isLoading ? "Verwerken..." : "Start nu voor €29"}
               </Button>
 
               <p className="text-xs text-gray-500 text-center mt-4">
