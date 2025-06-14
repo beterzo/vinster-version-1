@@ -68,6 +68,9 @@ export type Database = {
       }
       profiles: {
         Row: {
+          ai_interesses: string | null
+          ai_lievelings_activiteiten: string | null
+          ai_werkomstandigheden: string | null
           created_at: string
           first_name: string
           gender: string
@@ -77,6 +80,9 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          ai_interesses?: string | null
+          ai_lievelings_activiteiten?: string | null
+          ai_werkomstandigheden?: string | null
           created_at?: string
           first_name: string
           gender: string
@@ -86,6 +92,9 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          ai_interesses?: string | null
+          ai_lievelings_activiteiten?: string | null
+          ai_werkomstandigheden?: string | null
           created_at?: string
           first_name?: string
           gender?: string
