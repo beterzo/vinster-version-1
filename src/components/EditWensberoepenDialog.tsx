@@ -1,13 +1,11 @@
 
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useWensberoepenResponses } from "@/hooks/useWensberoepenResponses";
 import { Loader2, Save, X } from "lucide-react";
+import { WensberoepenForm } from "./wensberoepen/WensberoepenForm";
 
 interface EditWensberoepenDialogProps {
   open: boolean;
@@ -315,15 +313,27 @@ const EditWensberoepenDialog = ({ open, onOpenChange, data, onSave }: EditWensbe
           </TabsList>
 
           <TabsContent value="wensberoep-1" className="mt-6">
-            {renderWensberoepFields(1)}
+            <WensberoepenForm
+              prefix="wensberoep_1"
+              formData={formData}
+              onFieldChange={handleInputChange}
+            />
           </TabsContent>
 
           <TabsContent value="wensberoep-2" className="mt-6">
-            {renderWensberoepFields(2)}
+            <WensberoepenForm
+              prefix="wensberoep_2"
+              formData={formData}
+              onFieldChange={handleInputChange}
+            />
           </TabsContent>
 
           <TabsContent value="wensberoep-3" className="mt-6">
-            {renderWensberoepFields(3)}
+            <WensberoepenForm
+              prefix="wensberoep_3"
+              formData={formData}
+              onFieldChange={handleInputChange}
+            />
           </TabsContent>
         </Tabs>
 
