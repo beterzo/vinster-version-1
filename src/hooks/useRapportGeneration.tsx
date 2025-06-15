@@ -3,10 +3,13 @@ import { useState } from 'react';
 import { useAuth } from './useAuth';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from './use-toast';
+import { useMakeWebhookData } from './useMakeWebhookData';
+import { sendMakeWebhook } from '@/services/webhookService';
 
 export const useRapportGeneration = () => {
   const { user } = useAuth();
   const { toast } = useToast();
+  const { collectMakeWebhookData } = useMakeWebhookData();
   const [generating, setGenerating] = useState(false);
   const [userReport, setUserReport] = useState<any>(null);
   const [loading, setLoading] = useState(false);
@@ -59,6 +62,26 @@ export const useRapportGeneration = () => {
       if (error) throw error;
 
       setUserReport(reportData);
+      
+      // Send webhook to Make.com after successful report generation
+      try {
+        const webhookData = collectMakeWebhookData();
+        if (webhookData) {
+          console.log('Sending webhook data to Make.com...');
+          await sendMakeWebhook(webhookData);
+          console.log('Make.com webhook sent successfully');
+        } else {
+          console.warn('No webhook data available to send');
+        }
+      } catch (webhookError) {
+        // Don't fail the entire report generation if webhook fails
+        console.error('Error sending Make.com webhook:', webhookError);
+        toast({
+          title: "Webhook waarschuwing",
+          description: "Het rapport is succesvol gegenereerd, maar er was een probleem met het versturen van de notificatie.",
+          variant: "destructive",
+        });
+      }
       
       toast({
         title: "Rapport gegenereerd",
