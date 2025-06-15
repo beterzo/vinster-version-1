@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CheckCircle, Star, Shield, Zap } from "lucide-react";
@@ -13,22 +12,22 @@ const PaymentRequired = () => {
   
   const features = [
     {
-      title: "Volledige Enthousiasmescan",
+      title: "Volledige enthousiasmescan",
       description: "Ontdek waar jouw echte passies liggen",
       icon: <Star className="w-5 h-5 text-yellow-400" />
     },
     {
-      title: "Wensberoepen Analyse",
+      title: "Wensberoepen analyse",
       description: "Krijg gepersonaliseerde beroepsadviezen",
       icon: <CheckCircle className="w-5 h-5 text-yellow-400" />
     },
     {
-      title: "Persoonlijk Rapport",
+      title: "Persoonlijk rapport",
       description: "Uitgebreide analyse van jouw loopbaanprofiel",
       icon: <Shield className="w-5 h-5 text-yellow-400" />
     },
     {
-      title: "Zoekprofiel Generator",
+      title: "Zoekprofiel generator",
       description: "Automatisch gegenereerd profiel voor vacatures",
       icon: <Zap className="w-5 h-5 text-yellow-400" />
     }
@@ -216,7 +215,7 @@ const PaymentRequired = () => {
             {/* Pricing card */}
             <Card className="p-8 border-0 rounded-3xl bg-white shadow-lg flex-1">
               <div className="text-center mb-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Volledige Toegang</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Volledige toegang</h3>
                 <p className="text-gray-600 mb-4">Eenmalige betaling voor levenslange toegang</p>
                 <div className="text-4xl font-bold text-gray-900 mb-1">€29</div>
                 <p className="text-sm text-gray-500">Eenmalig, geen abonnement</p>
