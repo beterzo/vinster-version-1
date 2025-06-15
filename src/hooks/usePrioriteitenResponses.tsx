@@ -162,10 +162,33 @@ export const usePrioriteitenResponses = () => {
     }
   };
 
+  // Calculate completion status
+  const isCompleted = () => {
+    const hasActiviteiten = responses?.selected_activiteiten_keywords && responses.selected_activiteiten_keywords.length > 0;
+    const hasWerkomstandigheden = responses?.selected_werkomstandigheden_keywords && responses.selected_werkomstandigheden_keywords.length > 0;
+    const hasInteresses = responses?.selected_interesses_keywords && responses.selected_interesses_keywords.length > 0;
+    
+    return !!(hasActiviteiten && hasWerkomstandigheden && hasInteresses);
+  };
+
+  // Calculate progress percentage
+  const getProgress = () => {
+    const steps = [
+      responses?.selected_activiteiten_keywords && responses.selected_activiteiten_keywords.length > 0,
+      responses?.selected_werkomstandigheden_keywords && responses.selected_werkomstandigheden_keywords.length > 0,
+      responses?.selected_interesses_keywords && responses.selected_interesses_keywords.length > 0
+    ];
+    
+    const completedSteps = steps.filter(Boolean).length;
+    return Math.round((completedSteps / steps.length) * 100);
+  };
+
   return {
     responses,
     aiKeywords,
     loading,
-    saveResponses
+    saveResponses,
+    isCompleted: isCompleted(),
+    progress: getProgress()
   };
 };
