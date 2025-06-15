@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Download, CheckCircle, FileText, Home } from "lucide-react";
+import { Download, CheckCircle, FileText, Home } from "lucide-react";
 import { useRapportGeneration } from "@/hooks/useRapportGeneration";
 
 const RapportDownload = () => {
@@ -167,16 +167,7 @@ const RapportDownload = () => {
         </Card>
 
         {/* Navigation */}
-        <div className="flex justify-between items-center">
-          <Button
-            onClick={() => navigate("/rapport-review")}
-            variant="outline"
-            className="rounded-xl"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Terug naar overzicht
-          </Button>
-          
+        <div className="flex justify-center">
           <Button
             onClick={() => navigate("/home")}
             className="bg-blue-900 hover:bg-blue-800 text-white rounded-xl"
