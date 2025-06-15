@@ -44,13 +44,13 @@ export const useRapportGeneration = () => {
     try {
       console.log('Generating report for user:', user.id);
 
-      // Create report record
+      // Create report record with generating status
       const { data: reportData, error } = await supabase
         .from('user_reports')
         .upsert({
           user_id: user.id,
           report_data: rapportData,
-          report_status: 'completed',
+          report_status: 'generating',
           generated_at: new Date().toISOString(),
           updated_at: new Date().toISOString()
         }, {
@@ -63,29 +63,38 @@ export const useRapportGeneration = () => {
 
       setUserReport(reportData);
       
-      // Send webhook to Make.com after successful report generation
+      // Send webhook to Make.com for PDF generation
       try {
         const webhookData = collectMakeWebhookData();
         if (webhookData) {
-          console.log('Sending webhook data to Make.com...');
+          console.log('Sending webhook data to Make.com for PDF generation...');
           await sendMakeWebhook(webhookData);
-          console.log('Make.com webhook sent successfully');
+          console.log('Make.com webhook sent successfully - PDF generation started');
         } else {
           console.warn('No webhook data available to send');
         }
       } catch (webhookError) {
-        // Don't fail the entire report generation if webhook fails
+        // If webhook fails, update status to failed
+        await supabase
+          .from('user_reports')
+          .update({
+            report_status: 'failed',
+            updated_at: new Date().toISOString()
+          })
+          .eq('user_id', user.id);
+          
         console.error('Error sending Make.com webhook:', webhookError);
         toast({
-          title: "Webhook waarschuwing",
-          description: "Het rapport is succesvol gegenereerd, maar er was een probleem met het versturen van de notificatie.",
+          title: "Fout bij genereren",
+          description: "Er is een fout opgetreden bij het starten van de PDF generatie.",
           variant: "destructive",
         });
+        return false;
       }
       
       toast({
-        title: "Rapport gegenereerd",
-        description: "Jouw persoonlijke rapport is succesvol aangemaakt!",
+        title: "PDF generatie gestart",
+        description: "Je rapport wordt gegenereerd. Je wordt automatisch doorgestuurd zodra het klaar is.",
       });
 
       return true;
@@ -102,11 +111,53 @@ export const useRapportGeneration = () => {
     }
   };
 
+  const downloadPdf = async () => {
+    if (!user || !userReport?.pdf_file_path) {
+      toast({
+        title: "Download niet mogelijk",
+        description: "PDF bestand is nog niet beschikbaar.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    try {
+      const { data, error } = await supabase.storage
+        .from('user-reports')
+        .download(userReport.pdf_file_path);
+
+      if (error) throw error;
+
+      // Create download link
+      const url = URL.createObjectURL(data);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `mijn-loopbaan-rapport-${new Date().toISOString().split('T')[0]}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+
+      toast({
+        title: "Download gestart",
+        description: "Je rapport wordt gedownload.",
+      });
+    } catch (error) {
+      console.error('Error downloading PDF:', error);
+      toast({
+        title: "Download fout",
+        description: "Er is een fout opgetreden bij het downloaden van je rapport.",
+        variant: "destructive",
+      });
+    }
+  };
+
   return {
     userReport,
     loading,
     generating,
     loadUserReport,
-    generateReport
+    generateReport,
+    downloadPdf
   };
 };

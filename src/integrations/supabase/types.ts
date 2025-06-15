@@ -182,6 +182,8 @@ export type Database = {
           created_at: string
           generated_at: string | null
           id: string
+          pdf_file_path: string | null
+          pdf_generated_at: string | null
           report_data: Json | null
           report_status: string
           updated_at: string
@@ -191,6 +193,8 @@ export type Database = {
           created_at?: string
           generated_at?: string | null
           id?: string
+          pdf_file_path?: string | null
+          pdf_generated_at?: string | null
           report_data?: Json | null
           report_status?: string
           updated_at?: string
@@ -200,6 +204,8 @@ export type Database = {
           created_at?: string
           generated_at?: string | null
           id?: string
+          pdf_file_path?: string | null
+          pdf_generated_at?: string | null
           report_data?: Json | null
           report_status?: string
           updated_at?: string

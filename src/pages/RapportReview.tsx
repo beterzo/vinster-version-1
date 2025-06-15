@@ -20,10 +20,18 @@ const RapportReview = () => {
   const [editWensberoepenOpen, setEditWensberoepenOpen] = useState(false);
   const [editPrioriteitenOpen, setEditPrioriteitenOpen] = useState(false);
 
-  const handleGenerateReport = async () => {
-    const success = await generateReport(data);
+  const handleGenerateReports = async () => {
+    const success = await generateReport({
+      enthousiasme: data.enthousiasme,
+      wensberoepen: data.wensberoepen,
+      extraInformatie: data.extraInformatie,
+      prioriteiten: data.prioriteiten,
+      timestamp: new Date().toISOString()
+    });
+    
     if (success) {
-      navigate("/rapport-download");
+      // Navigate to download page to show PDF generation progress
+      navigate('/rapport-download');
     }
   };
 
@@ -253,7 +261,7 @@ const RapportReview = () => {
           </Button>
           
           <Button
-            onClick={handleGenerateReport}
+            onClick={handleGenerateReports}
             disabled={generating || !data.enthousiasme || !data.wensberoepen}
             className="bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl"
             size="lg"

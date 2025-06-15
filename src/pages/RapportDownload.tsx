@@ -3,33 +3,96 @@ import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-import { Download, CheckCircle, FileText, Home } from "lucide-react";
+import { Download, CheckCircle, FileText, Home, Clock, AlertTriangle } from "lucide-react";
 import { useRapportGeneration } from "@/hooks/useRapportGeneration";
 
 const RapportDownload = () => {
   const navigate = useNavigate();
-  const { userReport, loadUserReport, loading } = useRapportGeneration();
+  const { userReport, loadUserReport, loading, downloadPdf } = useRapportGeneration();
+  const [pollingInterval, setPollingInterval] = useState<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     loadUserReport();
   }, []);
 
+  // Set up polling for generating status
+  useEffect(() => {
+    if (userReport?.report_status === 'generating') {
+      const interval = setInterval(() => {
+        console.log('Polling for PDF status...');
+        loadUserReport();
+      }, 5000); // Poll every 5 seconds
+
+      setPollingInterval(interval);
+      
+      return () => {
+        clearInterval(interval);
+        setPollingInterval(null);
+      };
+    } else if (pollingInterval) {
+      clearInterval(pollingInterval);
+      setPollingInterval(null);
+    }
+  }, [userReport?.report_status]);
+
   const handleDownload = () => {
-    // TODO: Implement actual PDF download functionality
-    console.log('Download rapport:', userReport);
-    
-    // For now, create a simple text file with the data
-    if (userReport?.report_data) {
-      const dataStr = JSON.stringify(userReport.report_data, null, 2);
-      const dataBlob = new Blob([dataStr], { type: 'application/json' });
-      const url = URL.createObjectURL(dataBlob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = 'mijn-loopbaan-rapport.json';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
+    if (userReport?.pdf_file_path) {
+      downloadPdf();
+    } else {
+      // Fallback to JSON download if PDF not available
+      if (userReport?.report_data) {
+        const dataStr = JSON.stringify(userReport.report_data, null, 2);
+        const dataBlob = new Blob([dataStr], { type: 'application/json' });
+        const url = URL.createObjectURL(dataBlob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'mijn-loopbaan-rapport.json';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      }
+    }
+  };
+
+  const getStatusInfo = () => {
+    switch (userReport?.report_status) {
+      case 'generating':
+        return {
+          icon: Clock,
+          title: 'PDF wordt gegenereerd...',
+          description: 'Je rapport wordt momenteel verwerkt. Dit kan enkele minuten duren.',
+          color: 'text-blue-600',
+          bgColor: 'bg-blue-100',
+          borderColor: 'border-blue-200'
+        };
+      case 'completed':
+        return {
+          icon: CheckCircle,
+          title: 'Jouw rapport is klaar!',
+          description: 'Jouw persoonlijke loopbaanrapport is succesvol gegenereerd en staat klaar voor download.',
+          color: 'text-green-600',
+          bgColor: 'bg-green-100',
+          borderColor: 'border-green-200'
+        };
+      case 'failed':
+        return {
+          icon: AlertTriangle,
+          title: 'Er is een fout opgetreden',
+          description: 'Het genereren van je rapport is mislukt. Probeer het opnieuw of neem contact op.',
+          color: 'text-red-600',
+          bgColor: 'bg-red-100',
+          borderColor: 'border-red-200'
+        };
+      default:
+        return {
+          icon: FileText,
+          title: 'Rapport status onbekend',
+          description: 'De status van je rapport kon niet worden bepaald.',
+          color: 'text-gray-600',
+          bgColor: 'bg-gray-100',
+          borderColor: 'border-gray-200'
+        };
     }
   };
 
@@ -44,6 +107,9 @@ const RapportDownload = () => {
     );
   }
 
+  const statusInfo = getStatusInfo();
+  const StatusIcon = statusInfo.icon;
+
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
       <div className="max-w-4xl mx-auto px-6 py-8">
@@ -55,31 +121,51 @@ const RapportDownload = () => {
             className="h-8 w-auto mb-6" 
           />
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-              <CheckCircle className="w-5 h-5 text-green-600" />
+            <div className={`w-8 h-8 ${statusInfo.bgColor} rounded-full flex items-center justify-center`}>
+              <StatusIcon className={`w-5 h-5 ${statusInfo.color}`} />
             </div>
-            <h1 className="text-3xl font-bold text-gray-900">Jouw rapport is klaar!</h1>
+            <h1 className="text-3xl font-bold text-gray-900">{statusInfo.title}</h1>
           </div>
           <p className="text-lg text-gray-700">
-            Gefeliciteerd! Jouw persoonlijke loopbaanrapport is succesvol gegenereerd en staat klaar voor download.
+            {statusInfo.description}
           </p>
         </div>
 
-        {/* Success Card */}
-        <Card className="p-8 mb-8 bg-gradient-to-r from-green-50 to-blue-50 border-green-200">
+        {/* Status Card */}
+        <Card className={`p-8 mb-8 bg-gradient-to-r from-gray-50 to-blue-50 ${statusInfo.borderColor}`}>
           <div className="text-center">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <FileText className="w-8 h-8 text-green-600" />
+            <div className={`w-16 h-16 ${statusInfo.bgColor} rounded-full flex items-center justify-center mx-auto mb-4`}>
+              <StatusIcon className={`w-8 h-8 ${statusInfo.color}`} />
             </div>
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              Rapport succesvol aangemaakt
+              {userReport?.report_status === 'generating' && 'Rapport wordt verwerkt'}
+              {userReport?.report_status === 'completed' && 'Rapport succesvol aangemaakt'}
+              {userReport?.report_status === 'failed' && 'Generatie mislukt'}
+              {!userReport?.report_status && 'Status onbekend'}
             </h2>
-            <p className="text-gray-600 mb-6">
-              Jouw rapport bevat een complete analyse van je enthousiasme-scan, wensberoepen, 
-              en prioriteiten om je te helpen bij je loopbaankeuzes.
-            </p>
             
-            {userReport && (
+            {userReport?.report_status === 'generating' && (
+              <p className="text-gray-600 mb-6">
+                Je rapport wordt momenteel gegenereerd door onze AI. Dit proces kan enkele minuten duren. 
+                De pagina wordt automatisch bijgewerkt zodra je rapport klaar is.
+              </p>
+            )}
+            
+            {userReport?.report_status === 'completed' && (
+              <p className="text-gray-600 mb-6">
+                Jouw rapport bevat een complete analyse van je enthousiasme-scan, wensberoepen, 
+                en prioriteiten om je te helpen bij je loopbaankeuzes.
+              </p>
+            )}
+
+            {userReport?.report_status === 'failed' && (
+              <p className="text-gray-600 mb-6">
+                Er is een fout opgetreden tijdens het genereren van je rapport. 
+                Ga terug naar het overzicht om het opnieuw te proberen.
+              </p>
+            )}
+            
+            {userReport && userReport.report_status !== 'failed' && (
               <div className="bg-white rounded-lg p-4 mb-6 text-left">
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
@@ -96,75 +182,101 @@ const RapportDownload = () => {
                   </div>
                   <div>
                     <span className="text-gray-500">Status:</span>
-                    <p className="font-medium text-green-600">
-                      {userReport.report_status === 'completed' ? 'Voltooid' : userReport.report_status}
+                    <p className="font-medium">
+                      {userReport.report_status === 'completed' && <span className="text-green-600">Voltooid</span>}
+                      {userReport.report_status === 'generating' && <span className="text-blue-600">Genereren...</span>}
+                      {userReport.report_status === 'failed' && <span className="text-red-600">Mislukt</span>}
                     </p>
                   </div>
                 </div>
+                {userReport.pdf_generated_at && (
+                  <div className="mt-4 pt-4 border-t border-gray-200">
+                    <span className="text-gray-500">PDF gegenereerd:</span>
+                    <p className="font-medium">
+                      {new Date(userReport.pdf_generated_at).toLocaleDateString('nl-NL', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                      })}
+                    </p>
+                  </div>
+                )}
               </div>
             )}
 
-            <Button
-              onClick={handleDownload}
-              className="bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl text-lg px-8 py-3"
-              size="lg"
-              disabled={!userReport}
-            >
-              <Download className="w-5 h-5 mr-2" />
-              Download mijn rapport
-            </Button>
+            {userReport?.report_status === 'completed' && (
+              <Button
+                onClick={handleDownload}
+                className="bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl text-lg px-8 py-3"
+                size="lg"
+              >
+                <Download className="w-5 h-5 mr-2" />
+                {userReport.pdf_file_path ? 'Download PDF rapport' : 'Download rapport (JSON)'}
+              </Button>
+            )}
+
+            {userReport?.report_status === 'generating' && (
+              <div className="flex items-center justify-center gap-2 text-blue-600">
+                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-600"></div>
+                <span>PDF wordt gegenereerd...</span>
+              </div>
+            )}
           </div>
         </Card>
 
-        {/* Info Card */}
-        <Card className="p-6 mb-8">
-          <h3 className="text-lg font-bold text-gray-900 mb-4">Wat zit er in jouw rapport?</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-4">
-              <div className="flex items-start gap-3">
-                <div className="w-6 h-6 bg-yellow-100 rounded-full flex items-center justify-center mt-0.5">
-                  <CheckCircle className="w-4 h-4 text-yellow-600" />
+        {/* Info Card - only show when completed */}
+        {userReport?.report_status === 'completed' && (
+          <Card className="p-6 mb-8">
+            <h3 className="text-lg font-bold text-gray-900 mb-4">Wat zit er in jouw rapport?</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 bg-yellow-100 rounded-full flex items-center justify-center mt-0.5">
+                    <CheckCircle className="w-4 h-4 text-yellow-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-gray-900">Enthousiasme-analyse</h4>
+                    <p className="text-sm text-gray-600">Inzichten in wat jou energie geeft</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-medium text-gray-900">Enthousiasme-analyse</h4>
-                  <p className="text-sm text-gray-600">Inzichten in wat jou energie geeft</p>
+                
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mt-0.5">
+                    <CheckCircle className="w-4 h-4 text-blue-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-gray-900">Beroepen-matching</h4>
+                    <p className="text-sm text-gray-600">Passende beroepen bij jouw profiel</p>
+                  </div>
                 </div>
               </div>
-              
-              <div className="flex items-start gap-3">
-                <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mt-0.5">
-                  <CheckCircle className="w-4 h-4 text-blue-600" />
-                </div>
-                <div>
-                  <h4 className="font-medium text-gray-900">Beroepen-matching</h4>
-                  <p className="text-sm text-gray-600">Passende beroepen bij jouw profiel</p>
-                </div>
-              </div>
-            </div>
 
-            <div className="space-y-4">
-              <div className="flex items-start gap-3">
-                <div className="w-6 h-6 bg-yellow-100 rounded-full flex items-center justify-center mt-0.5">
-                  <CheckCircle className="w-4 h-4 text-yellow-600" />
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 bg-yellow-100 rounded-full flex items-center justify-center mt-0.5">
+                    <CheckCircle className="w-4 h-4 text-yellow-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-gray-900">Prioriteiten overzicht</h4>
+                    <p className="text-sm text-gray-600">Jouw belangrijkste werkfactoren</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-medium text-gray-900">Prioriteiten overzicht</h4>
-                  <p className="text-sm text-gray-600">Jouw belangrijkste werkfactoren</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-3">
-                <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mt-0.5">
-                  <CheckCircle className="w-4 h-4 text-blue-600" />
-                </div>
-                <div>
-                  <h4 className="font-medium text-gray-900">Persoonlijke aanbevelingen</h4>
-                  <p className="text-sm text-gray-600">Concrete stappen voor je loopbaan</p>
+                
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mt-0.5">
+                    <CheckCircle className="w-4 h-4 text-blue-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-gray-900">Persoonlijke aanbevelingen</h4>
+                    <p className="text-sm text-gray-600">Concrete stappen voor je loopbaan</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </Card>
+          </Card>
+        )}
 
         {/* Navigation */}
         <div className="flex justify-center">
