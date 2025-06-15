@@ -339,7 +339,7 @@ const EditWensberoepenDialog = ({ open, onOpenChange, data, onSave }: EditWensbe
           <Button
             onClick={handleSave}
             disabled={isSaving}
-            className="bg-blue-600 hover:bg-blue-700"
+            className="bg-vinster-yellow hover:bg-yellow-600 text-gray-900 font-medium rounded-xl"
           >
             {isSaving ? (
               <Loader2 className="w-4 h-4 mr-2 animate-spin" />
