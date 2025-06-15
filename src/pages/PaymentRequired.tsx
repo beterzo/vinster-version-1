@@ -15,22 +15,22 @@ const PaymentRequired = () => {
     {
       title: "Volledige Enthousiasmescan",
       description: "Ontdek waar jouw echte passies liggen",
-      icon: <Star className="w-5 h-5 text-yellow-500" />
+      icon: <Star className="w-5 h-5 text-yellow-400" />
     },
     {
       title: "Wensberoepen Analyse",
       description: "Krijg gepersonaliseerde beroepsadviezen",
-      icon: <CheckCircle className="w-5 h-5 text-green-500" />
+      icon: <CheckCircle className="w-5 h-5 text-yellow-400" />
     },
     {
       title: "Persoonlijk Rapport",
       description: "Uitgebreide analyse van jouw loopbaanprofiel",
-      icon: <Shield className="w-5 h-5 text-blue-500" />
+      icon: <Shield className="w-5 h-5 text-yellow-400" />
     },
     {
       title: "Zoekprofiel Generator",
       description: "Automatisch gegenereerd profiel voor vacatures",
-      icon: <Zap className="w-5 h-5 text-purple-500" />
+      icon: <Zap className="w-5 h-5 text-yellow-400" />
     }
   ];
 
