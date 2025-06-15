@@ -23,7 +23,7 @@ const DashboardHeader = () => {
         title: "Succesvol uitgelogd",
         description: "Tot ziens!",
       });
-      navigate("/login");
+      navigate("/landingspagina");
     }
   };
 
@@ -44,8 +44,7 @@ const DashboardHeader = () => {
       </div>
       <Button 
         onClick={handleLogout}
-        variant="outline"
-        className="flex items-center space-x-2"
+        className="bg-white hover:bg-gray-100 text-blue-900 font-semibold px-6 py-3 rounded-full border border-gray-200 shadow-sm transition-all duration-200 flex items-center space-x-2"
       >
         <LogOut className="w-4 h-4" />
         <span>Uitloggen</span>

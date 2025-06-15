@@ -21,7 +21,7 @@ const HeroSection = () => {
           <img src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" alt="Vinster Logo" className="h-8 w-auto" />
           <Button 
             onClick={() => navigate('/login')}
-            className="bg-white hover:bg-gray-100 text-blue-900 font-semibold px-6 py-2 rounded-lg border border-gray-200 shadow-sm"
+            className="bg-white hover:bg-gray-100 text-blue-900 font-semibold px-6 py-3 rounded-full border border-gray-200 shadow-sm transition-all duration-200"
           >
             Inloggen
           </Button>
@@ -43,10 +43,13 @@ const HeroSection = () => {
             </h1>
             
             <div className="flex gap-4">
-              <Button className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-8 py-3 rounded-full">
+              <Button 
+                onClick={() => navigate('/signup')}
+                className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
+              >
                 Doe de test
               </Button>
-              <Button className="bg-blue-900 hover:bg-blue-800 text-white font-bold px-8 py-3 rounded-full">
+              <Button className="bg-blue-900 hover:bg-blue-800 text-white font-bold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200">
                 Hoe het werkt
               </Button>
             </div>
