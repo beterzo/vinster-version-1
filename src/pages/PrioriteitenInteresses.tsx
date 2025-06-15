@@ -12,15 +12,17 @@ const PrioriteitenInteresses = () => {
   const navigate = useNavigate();
   const { 
     responses, 
-    saving, 
-    saveAllResponses, 
-    availableInteressesKeywords 
+    loading, 
+    saveResponses, 
+    aiKeywords 
   } = usePrioriteitenResponses();
   
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>(
-    responses.selected_interesses_keywords || []
+    responses?.selected_interesses_keywords || []
   );
-  const [extraText, setExtraText] = useState(responses.extra_interesses_tekst || '');
+  const [extraText, setExtraText] = useState(responses?.extra_interesses_tekst || '');
+
+  const availableInteressesKeywords = aiKeywords?.interesses || [];
 
   const handleKeywordToggle = (keyword: string) => {
     setSelectedKeywords(prev => 
@@ -32,12 +34,11 @@ const PrioriteitenInteresses = () => {
 
   const handleSave = async () => {
     const updatedResponses = {
-      ...responses,
       selected_interesses_keywords: selectedKeywords,
       extra_interesses_tekst: extraText
     };
 
-    const success = await saveAllResponses(updatedResponses);
+    const success = await saveResponses(updatedResponses);
     if (success) {
       navigate("/extra-informatie-intro");
     }
@@ -122,11 +123,11 @@ const PrioriteitenInteresses = () => {
           
           <Button 
             onClick={handleSave}
-            disabled={saving}
+            disabled={loading}
             className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-8 text-xl rounded-3xl shadow-lg hover:shadow-xl transition-all duration-200 disabled:opacity-50" 
             size="lg"
           >
-            {saving ? (
+            {loading ? (
               <>
                 <Save className="w-5 h-5 mr-2 animate-spin" />
                 Opslaan...
