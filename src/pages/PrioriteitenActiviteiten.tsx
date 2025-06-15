@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -135,9 +134,8 @@ const PrioriteitenActiviteiten = () => {
         {/* Navigation */}
         <div className="flex justify-between items-center">
           <Button
-            variant="outline"
             onClick={() => navigate("/extra-informatie-vragen")}
-            className="rounded-xl"
+            className="bg-blue-900 hover:bg-blue-800 text-white rounded-xl"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Terug
