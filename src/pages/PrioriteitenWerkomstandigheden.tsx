@@ -89,15 +89,29 @@ const PrioriteitenWerkomstandigheden = () => {
                 <button
                   key={index}
                   onClick={() => toggleKeyword(keyword)}
-                  className={`p-3 rounded-lg border-2 text-left transition-all duration-200 ${
+                  className={`p-4 rounded-xl border-2 text-left transition-all duration-200 ${
                     selectedKeywords.includes(keyword)
-                      ? 'text-white'
-                      : 'border-gray-200 bg-white hover:border-gray-300'
+                      ? 'text-white shadow-sm'
+                      : 'border-gray-200 bg-white hover:shadow-sm'
                   }`}
                   style={selectedKeywords.includes(keyword) ? {
                     borderColor: '#78BFE3',
                     backgroundColor: '#78BFE3'
-                  } : {}}
+                  } : {
+                    borderColor: selectedKeywords.includes(keyword) ? '#78BFE3' : undefined
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!selectedKeywords.includes(keyword)) {
+                      e.currentTarget.style.borderColor = '#78BFE3';
+                      e.currentTarget.style.backgroundColor = '#E6F0F6';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!selectedKeywords.includes(keyword)) {
+                      e.currentTarget.style.borderColor = '#e5e7eb';
+                      e.currentTarget.style.backgroundColor = 'white';
+                    }
+                  }}
                 >
                   <div className="flex items-center justify-between">
                     <span className="font-medium text-sm">{keyword}</span>
@@ -137,6 +151,7 @@ const PrioriteitenWerkomstandigheden = () => {
           <Button
             variant="outline"
             onClick={() => navigate("/prioriteiten-activiteiten")}
+            className="rounded-xl"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Terug
@@ -145,9 +160,15 @@ const PrioriteitenWerkomstandigheden = () => {
           <Button
             onClick={handleSave}
             disabled={loading}
-            className="text-white"
+            className="text-white rounded-xl"
             style={{ backgroundColor: '#78BFE3' }}
             size="lg"
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#5AADD9';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#78BFE3';
+            }}
           >
             {loading ? "Opslaan..." : "Volgende: Interesses"}
             <ArrowRight className="w-5 h-5 ml-2" />

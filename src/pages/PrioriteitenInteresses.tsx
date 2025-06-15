@@ -53,8 +53,8 @@ const PrioriteitenInteresses = () => {
             className="h-8 w-auto mb-6" 
           />
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-              <Heart className="w-5 h-5 text-green-600" />
+            <div className="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">
+              <Heart className="w-5 h-5 text-yellow-600" />
             </div>
             <h1 className="text-3xl font-bold text-gray-900">Jouw interesses</h1>
           </div>
@@ -79,7 +79,7 @@ const PrioriteitenInteresses = () => {
               Werkomgeving
             </span>
             <span className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+              <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
               Interesses
             </span>
           </div>
@@ -100,16 +100,16 @@ const PrioriteitenInteresses = () => {
                 <button
                   key={index}
                   onClick={() => toggleKeyword(keyword)}
-                  className={`p-3 rounded-lg border-2 text-left transition-all duration-200 ${
+                  className={`p-4 rounded-xl border-2 text-left transition-all duration-200 ${
                     selectedKeywords.includes(keyword)
-                      ? 'border-green-500 bg-green-50 text-green-700'
-                      : 'border-gray-200 bg-white hover:border-green-300 hover:bg-green-25'
+                      ? 'border-yellow-500 bg-yellow-50 text-yellow-700 shadow-sm'
+                      : 'border-gray-200 bg-white hover:border-yellow-300 hover:bg-yellow-25 hover:shadow-sm'
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <span className="font-medium text-sm">{keyword}</span>
                     {selectedKeywords.includes(keyword) && (
-                      <Check className="w-4 h-4 text-green-600" />
+                      <Check className="w-4 h-4 text-yellow-600" />
                     )}
                   </div>
                 </button>
@@ -144,6 +144,7 @@ const PrioriteitenInteresses = () => {
           <Button
             variant="outline"
             onClick={() => navigate("/prioriteiten-werkomstandigheden")}
+            className="rounded-xl"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Terug
@@ -152,7 +153,7 @@ const PrioriteitenInteresses = () => {
           <Button
             onClick={handleSave}
             disabled={loading}
-            className="bg-green-600 hover:bg-green-700 text-white"
+            className="bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl"
             size="lg"
           >
             {loading ? "Opslaan..." : "Profiel voltooien"}

@@ -93,10 +93,10 @@ const PrioriteitenActiviteiten = () => {
                 <button
                   key={index}
                   onClick={() => toggleKeyword(keyword)}
-                  className={`p-3 rounded-lg border-2 text-left transition-all duration-200 ${
+                  className={`p-4 rounded-xl border-2 text-left transition-all duration-200 ${
                     selectedKeywords.includes(keyword)
-                      ? 'border-yellow-500 bg-yellow-50 text-yellow-700'
-                      : 'border-gray-200 bg-white hover:border-yellow-300 hover:bg-yellow-25'
+                      ? 'border-yellow-500 bg-yellow-50 text-yellow-700 shadow-sm'
+                      : 'border-gray-200 bg-white hover:border-yellow-300 hover:bg-yellow-25 hover:shadow-sm'
                   }`}
                 >
                   <div className="flex items-center justify-between">
@@ -137,6 +137,7 @@ const PrioriteitenActiviteiten = () => {
           <Button
             variant="outline"
             onClick={() => navigate("/extra-informatie-vragen")}
+            className="rounded-xl"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Terug
@@ -145,7 +146,7 @@ const PrioriteitenActiviteiten = () => {
           <Button
             onClick={handleSave}
             disabled={loading}
-            className="bg-blue-600 hover:bg-blue-700 text-white"
+            className="bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl"
             size="lg"
           >
             {loading ? "Opslaan..." : "Volgende: werkomgeving"}
