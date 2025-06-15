@@ -2,10 +2,9 @@
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
 import { useNavigate } from "react-router-dom";
-import { ArrowRight, ArrowLeft, Save } from "lucide-react";
+import { ArrowRight, ArrowLeft, Heart, Check } from "lucide-react";
 import { usePrioriteitenResponses } from "@/hooks/usePrioriteitenResponses";
 
 const PrioriteitenInteresses = () => {
@@ -24,7 +23,7 @@ const PrioriteitenInteresses = () => {
 
   const availableInteressesKeywords = aiKeywords?.interesses || [];
 
-  const handleKeywordToggle = (keyword: string) => {
+  const toggleKeyword = (keyword: string) => {
     setSelectedKeywords(prev => 
       prev.includes(keyword)
         ? prev.filter(k => k !== keyword)
@@ -33,12 +32,11 @@ const PrioriteitenInteresses = () => {
   };
 
   const handleSave = async () => {
-    const updatedResponses = {
+    const success = await saveResponses({
       selected_interesses_keywords: selectedKeywords,
       extra_interesses_tekst: extraText
-    };
-
-    const success = await saveResponses(updatedResponses);
+    });
+    
     if (success) {
       navigate("/home");
     }
@@ -52,12 +50,16 @@ const PrioriteitenInteresses = () => {
           <img 
             src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" 
             alt="Vinster Logo" 
-            className="h-8 w-auto mb-6 cursor-pointer" 
-            onClick={() => navigate("/home")}
+            className="h-8 w-auto mb-6" 
           />
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Jouw interesses</h1>
-          <p className="text-xl text-gray-700">
-            Selecteer de onderwerpen en gebieden die jou het meeste boeien
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+              <Heart className="w-5 h-5 text-green-600" />
+            </div>
+            <h1 className="text-3xl font-bold text-gray-900">Jouw interesses</h1>
+          </div>
+          <p className="text-lg text-gray-700">
+            Selecteer de onderwerpen en gebieden die voor jou het allerbelangrijkste zijn
           </p>
         </div>
 
@@ -83,83 +85,78 @@ const PrioriteitenInteresses = () => {
           </div>
         </div>
 
-        {/* Keywords Selection */}
-        <Card className="p-8 mb-8 border-0 rounded-3xl" style={{ backgroundColor: '#E6F0F6' }}>
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
-            Selecteer jouw belangrijkste interesses
+        {/* Keywords grid */}
+        <Card className="p-6 mb-6">
+          <h2 className="text-xl font-bold mb-4">
+            Kernwoorden gebaseerd op jouw antwoorden
           </h2>
+          <p className="text-gray-600 mb-6">
+            Klik op de interesses die voor jou het allerbelangrijkste zijn. Je kunt er zoveel selecteren als je wilt.
+          </p>
           
           {availableInteressesKeywords.length > 0 ? (
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
               {availableInteressesKeywords.map((keyword, index) => (
-                <div key={index} className="flex items-center space-x-2">
-                  <Checkbox
-                    id={`keyword-${index}`}
-                    checked={selectedKeywords.includes(keyword)}
-                    onCheckedChange={() => handleKeywordToggle(keyword)}
-                  />
-                  <label 
-                    htmlFor={`keyword-${index}`}
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
-                  >
-                    {keyword}
-                  </label>
-                </div>
+                <button
+                  key={index}
+                  onClick={() => toggleKeyword(keyword)}
+                  className={`p-3 rounded-lg border-2 text-left transition-all duration-200 ${
+                    selectedKeywords.includes(keyword)
+                      ? 'border-green-500 bg-green-50 text-green-700'
+                      : 'border-gray-200 bg-white hover:border-green-300 hover:bg-green-25'
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="font-medium text-sm">{keyword}</span>
+                    {selectedKeywords.includes(keyword) && (
+                      <Check className="w-4 h-4 text-green-600" />
+                    )}
+                  </div>
+                </button>
               ))}
             </div>
           ) : (
-            <div className="bg-white p-6 rounded-lg mb-8">
-              <p className="text-gray-600">
-                Je hebt nog geen eerdere stappen ingevuld. Ga eerst terug om je enthousiasme-scan en wensberoepen in te vullen.
-              </p>
+            <div className="text-center py-8 text-gray-500">
+              <Heart className="w-12 h-12 mx-auto mb-4 text-gray-300" />
+              <p>Er zijn nog geen kernwoorden beschikbaar.</p>
+              <p className="text-sm">Zorg ervoor dat je eerst de enthousiasme-scan en wensberoepen hebt ingevuld.</p>
             </div>
           )}
+        </Card>
 
-          {/* Extra tekst */}
-          <div>
-            <h3 className="text-xl font-bold text-gray-900 mb-4">
-              Aanvullende interesses (optioneel)
-            </h3>
-            <p className="text-gray-600 mb-4">
-              Zijn er nog andere onderwerpen of gebieden waar je geïnteresseerd in bent? 
-              Vul deze hieronder in.
-            </p>
-            <Textarea
-              placeholder="Bijv. duurzaamheid, internationale ontwikkeling, kunstmatige intelligentie..."
-              value={extraText}
-              onChange={(e) => setExtraText(e.target.value)}
-              className="min-h-[120px]"
-            />
-          </div>
+        {/* Additional text input */}
+        <Card className="p-6 mb-8">
+          <h3 className="text-lg font-bold mb-4">Aanvullende informatie</h3>
+          <p className="text-gray-600 mb-4">
+            Zijn er nog andere onderwerpen of gebieden waar je geïnteresseerd in bent? 
+            Voeg hier je eigen informatie toe.
+          </p>
+          <Textarea
+            value={extraText}
+            onChange={(e) => setExtraText(e.target.value)}
+            placeholder="Beschrijf hier andere interesses, onderwerpen of gebieden die je boeien..."
+            className="min-h-24"
+          />
         </Card>
 
         {/* Navigation */}
         <div className="flex justify-between items-center">
-          <Button 
-            onClick={() => navigate("/prioriteiten-werkomstandigheden")} 
-            className="bg-blue-900 hover:bg-blue-800 text-white font-bold py-4 px-6 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-200"
+          <Button
+            variant="outline"
+            onClick={() => navigate("/prioriteiten-werkomstandigheden")}
           >
-            <ArrowLeft className="w-5 h-5 mr-2" />
-            Vorige stap
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Terug
           </Button>
           
-          <Button 
+          <Button
             onClick={handleSave}
             disabled={loading}
-            className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-8 text-xl rounded-3xl shadow-lg hover:shadow-xl transition-all duration-200 disabled:opacity-50" 
+            className="bg-green-600 hover:bg-green-700 text-white"
             size="lg"
           >
-            {loading ? (
-              <>
-                <Save className="w-5 h-5 mr-2 animate-spin" />
-                Opslaan...
-              </>
-            ) : (
-              <>
-                Profiel voltooien
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </>
-            )}
+            {loading ? "Opslaan..." : "Profiel voltooien"}
+            <ArrowRight className="w-5 h-5 ml-2" />
           </Button>
         </div>
       </div>
