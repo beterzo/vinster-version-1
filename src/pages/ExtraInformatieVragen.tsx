@@ -23,7 +23,7 @@ const ExtraInformatieVragen = () => {
   const handleSave = async () => {
     const success = await saveResponses(formData);
     if (success) {
-      navigate("/home");
+      navigate("/prioriteiten-activiteiten");
     }
   };
 
@@ -42,8 +42,22 @@ const ExtraInformatieVragen = () => {
           />
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Nog iets meer over jou</h1>
           <p className="text-xl text-gray-700">
-            Voor je het eindresultaat ontvangt hebben we nog vier vragen voor je
+            Voor je prioriteiten gaat stellen hebben we nog vier vragen voor je
           </p>
+        </div>
+
+        {/* Progress indicator */}
+        <div className="mb-8">
+          <div className="flex items-center gap-4 text-sm text-gray-500">
+            <span className="flex items-center gap-2">
+              <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+              Extra informatie
+            </span>
+            <span className="flex items-center gap-2">
+              <div className="w-3 h-3 bg-gray-300 rounded-full"></div>
+              Prioriteiten stellen
+            </span>
+          </div>
         </div>
 
         {/* Form */}
@@ -122,7 +136,7 @@ const ExtraInformatieVragen = () => {
         {/* Navigation */}
         <div className="flex justify-between items-center">
           <Button 
-            onClick={() => navigate("/extra-informatie-intro")} 
+            onClick={() => navigate("/profiel-voltooien-intro")} 
             className="bg-blue-900 hover:bg-blue-800 text-white font-bold py-4 px-6 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-200"
           >
             <ArrowLeft className="w-5 h-5 mr-2" />
@@ -142,7 +156,7 @@ const ExtraInformatieVragen = () => {
               </>
             ) : (
               <>
-                Opslaan en afronden
+                Doorgaan naar prioriteiten
                 <ArrowRight className="w-5 h-5 ml-2" />
               </>
             )}

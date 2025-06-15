@@ -18,22 +18,21 @@ const Dashboard = () => {
       navigate("/enthousiasme-intro");
     } else if (stepTitle === "Wensberoepen") {
       navigate("/wensberoepen-intro");
-    } else if (stepTitle === "Prioriteiten stellen") {
-      navigate("/prioriteiten-intro");
-    } else if (stepTitle === "Extra informatie") {
-      navigate("/extra-informatie-intro");
+    } else if (stepTitle === "Profiel voltooien") {
+      navigate("/profiel-voltooien-intro");
+    } else if (stepTitle === "Jouw rapport") {
+      // TODO: Navigate to rapport page when implemented
+      console.log("Rapport page not implemented yet");
     }
     // Add more navigation logic for other steps later
   };
 
   // Determine which step to continue with
   const getNextStep = () => {
-    if (!prioriteitenCompleted) {
-      return "/prioriteiten-intro";
-    } else if (!extraInformatieCompleted) {
-      return "/extra-informatie-intro";
+    if (!extraInformatieCompleted || !prioriteitenCompleted) {
+      return "/profiel-voltooien-intro";
     } else {
-      return "/home"; // or wherever the next step should be
+      return "/home"; // or wherever the rapport page should be
     }
   };
 

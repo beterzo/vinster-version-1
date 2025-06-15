@@ -60,6 +60,10 @@ const PrioriteitenActiviteiten = () => {
         <div className="mb-8">
           <div className="flex items-center gap-4 text-sm text-gray-500">
             <span className="flex items-center gap-2">
+              <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+              Extra informatie
+            </span>
+            <span className="flex items-center gap-2">
               <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
               Activiteiten
             </span>
@@ -132,7 +136,7 @@ const PrioriteitenActiviteiten = () => {
         <div className="flex justify-between items-center">
           <Button
             variant="outline"
-            onClick={() => navigate("/prioriteiten-intro")}
+            onClick={() => navigate("/extra-informatie-vragen")}
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Terug
@@ -144,7 +148,7 @@ const PrioriteitenActiviteiten = () => {
             className="bg-blue-600 hover:bg-blue-700 text-white"
             size="lg"
           >
-            {loading ? "Opslaan..." : "Volgende: Werkomgeving"}
+            {loading ? "Opslaan..." : "Volgende: werkomgeving"}
             <ArrowRight className="w-5 h-5 ml-2" />
           </Button>
         </div>

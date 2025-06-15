@@ -40,7 +40,7 @@ const PrioriteitenInteresses = () => {
 
     const success = await saveResponses(updatedResponses);
     if (success) {
-      navigate("/extra-informatie-intro");
+      navigate("/home");
     }
   };
 
@@ -59,6 +59,28 @@ const PrioriteitenInteresses = () => {
           <p className="text-xl text-gray-700">
             Selecteer de onderwerpen en gebieden die jou het meeste boeien
           </p>
+        </div>
+
+        {/* Progress indicator */}
+        <div className="mb-8">
+          <div className="flex items-center gap-4 text-sm text-gray-500">
+            <span className="flex items-center gap-2">
+              <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+              Extra informatie
+            </span>
+            <span className="flex items-center gap-2">
+              <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+              Activiteiten
+            </span>
+            <span className="flex items-center gap-2">
+              <div className="w-3 h-3 bg-blue-400 rounded-full"></div>
+              Werkomgeving
+            </span>
+            <span className="flex items-center gap-2">
+              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+              Interesses
+            </span>
+          </div>
         </div>
 
         {/* Keywords Selection */}
@@ -134,7 +156,7 @@ const PrioriteitenInteresses = () => {
               </>
             ) : (
               <>
-                Opslaan en doorgaan
+                Profiel voltooien
                 <ArrowRight className="w-5 h-5 ml-2" />
               </>
             )}

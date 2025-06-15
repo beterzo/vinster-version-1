@@ -22,12 +22,11 @@ import WensberoepenIntro from "./pages/WensberoepenIntro";
 import WensberoepenStep1 from "./pages/WensberoepenStep1";
 import WensberoepenStep2 from "./pages/WensberoepenStep2";
 import WensberoepenStep3 from "./pages/WensberoepenStep3";
-import PrioriteitenIntro from "./pages/PrioriteitenIntro";
+import ProfielVoltooienIntro from "./pages/ProfielVoltooienIntro";
+import ExtraInformatieVragen from "./pages/ExtraInformatieVragen";
 import PrioriteitenActiviteiten from "./pages/PrioriteitenActiviteiten";
 import PrioriteitenWerkomstandigheden from "./pages/PrioriteitenWerkomstandigheden";
 import PrioriteitenInteresses from "./pages/PrioriteitenInteresses";
-import ExtraInformatieIntro from "./pages/ExtraInformatieIntro";
-import ExtraInformatieVragen from "./pages/ExtraInformatieVragen";
 
 const queryClient = new QueryClient();
 
@@ -129,9 +128,14 @@ const App = () => (
                 <WensberoepenStep3 />
               </PaymentGuard>
             } />
-            <Route path="/prioriteiten-intro" element={
+            <Route path="/profiel-voltooien-intro" element={
               <PaymentGuard>
-                <PrioriteitenIntro />
+                <ProfielVoltooienIntro />
+              </PaymentGuard>
+            } />
+            <Route path="/extra-informatie-vragen" element={
+              <PaymentGuard>
+                <ExtraInformatieVragen />
               </PaymentGuard>
             } />
             <Route path="/prioriteiten-activiteiten" element={
@@ -147,16 +151,6 @@ const App = () => (
             <Route path="/prioriteiten-interesses" element={
               <PaymentGuard>
                 <PrioriteitenInteresses />
-              </PaymentGuard>
-            } />
-            <Route path="/extra-informatie-intro" element={
-              <PaymentGuard>
-                <ExtraInformatieIntro />
-              </PaymentGuard>
-            } />
-            <Route path="/extra-informatie-vragen" element={
-              <PaymentGuard>
-                <ExtraInformatieVragen />
               </PaymentGuard>
             } />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

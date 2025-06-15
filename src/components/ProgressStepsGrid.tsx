@@ -1,6 +1,6 @@
 
 import ProgressStep from "./ProgressStep";
-import { CircleUser, Target, Star, CheckCircle, Search, FileText, ListTodo, UserCheck, Info } from "lucide-react";
+import { CircleUser, Target, Star, CheckCircle, Search, FileText, ListTodo, UserCheck, Info, ClipboardList } from "lucide-react";
 
 interface ProgressStepsGridProps {
   prioriteitenProgress: number;
@@ -17,6 +17,15 @@ const ProgressStepsGrid = ({
   extraInformatieCompleted,
   onStepClick
 }: ProgressStepsGridProps) => {
+  // Calculate combined progress for "Profiel voltooien"
+  const combinedProgress = () => {
+    if (extraInformatieCompleted && prioriteitenCompleted) return 100;
+    if (!extraInformatieCompleted && !prioriteitenCompleted) return 0;
+    if (extraInformatieCompleted && !prioriteitenCompleted) return 50 + (prioriteitenProgress / 2);
+    if (!extraInformatieCompleted && prioriteitenCompleted) return extraInformatieProgress / 2;
+    return (extraInformatieProgress + prioriteitenProgress) / 2;
+  };
+
   const progressSteps = [
     {
       title: "Enthousiasmescan",
@@ -31,16 +40,16 @@ const ProgressStepsGrid = ({
       icon: <Target className="w-5 h-5 text-blue-400" />
     },
     {
-      title: "Prioriteiten stellen",
-      progress: prioriteitenProgress,
-      isCompleted: prioriteitenCompleted,
-      icon: <ListTodo className="w-5 h-5 text-yellow-500" />
+      title: "Profiel voltooien",
+      progress: combinedProgress(),
+      isCompleted: extraInformatieCompleted && prioriteitenCompleted,
+      icon: <ClipboardList className="w-5 h-5 text-yellow-500" />
     },
     {
-      title: "Extra informatie",
-      progress: extraInformatieProgress,
-      isCompleted: extraInformatieCompleted,
-      icon: <Info className="w-5 h-5 text-blue-400" />
+      title: "Jouw rapport",
+      progress: 0,
+      isCompleted: false,
+      icon: <FileText className="w-5 h-5 text-blue-400" />
     },
     {
       title: "Zoekprofiel",
