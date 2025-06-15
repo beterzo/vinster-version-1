@@ -39,6 +39,8 @@ export const useExtraInformatieResponses = () => {
         .from('extra_informatie_responses')
         .select('*')
         .eq('user_id', user.id)
+        .order('updated_at', { ascending: false })
+        .limit(1)
         .maybeSingle();
 
       if (error) {
