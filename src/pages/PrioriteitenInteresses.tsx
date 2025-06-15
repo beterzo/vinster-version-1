@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -66,7 +67,7 @@ const PrioriteitenInteresses = () => {
         <div className="mb-8">
           <div className="flex items-center gap-4 text-sm text-gray-500">
             <span className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+              <div className="w-3 h-3 bg-blue-400 rounded-full"></div>
               Extra informatie
             </span>
             <span className="flex items-center gap-2">
