@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -20,7 +19,8 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				sans: ['futura-pt', 'Futura', 'sans-serif'],
+				sans: ['"urw-form"', 'sans-serif'],
+				urw: ['"urw-form"', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
