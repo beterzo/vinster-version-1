@@ -8,6 +8,7 @@ import { useRapportData } from "@/hooks/useRapportData";
 import { useRapportGeneration } from "@/hooks/useRapportGeneration";
 import EditEnthousiasmeDialog from "@/components/EditEnthousiasmeDialog";
 import EditExtraInfoDialog from "@/components/EditExtraInfoDialog";
+import EditWensberoepenDialog from "@/components/EditWensberoepenDialog";
 
 const RapportReview = () => {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ const RapportReview = () => {
 
   const [editEnthousiasmeOpen, setEditEnthousiasmeOpen] = useState(false);
   const [editExtraInfoOpen, setEditExtraInfoOpen] = useState(false);
+  const [editWensberoepenOpen, setEditWensberoepenOpen] = useState(false);
 
   const handleGenerateReport = async () => {
     const success = await generateReport(data);
@@ -105,6 +107,7 @@ const RapportReview = () => {
                 <h2 className="text-xl font-bold text-gray-900">Wensberoepen</h2>
               </div>
               <Button
+                onClick={() => setEditWensberoepenOpen(true)}
                 variant="outline"
                 className="gap-2 rounded-xl"
                 disabled={!data.wensberoepen}
@@ -263,6 +266,13 @@ const RapportReview = () => {
           open={editEnthousiasmeOpen}
           onOpenChange={setEditEnthousiasmeOpen}
           data={data.enthousiasme}
+          onSave={refreshData}
+        />
+
+        <EditWensberoepenDialog
+          open={editWensberoepenOpen}
+          onOpenChange={setEditWensberoepenOpen}
+          data={data.wensberoepen}
           onSave={refreshData}
         />
 
