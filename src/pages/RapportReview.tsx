@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -9,6 +8,7 @@ import { useRapportGeneration } from "@/hooks/useRapportGeneration";
 import EditEnthousiasmeDialog from "@/components/EditEnthousiasmeDialog";
 import EditExtraInfoDialog from "@/components/EditExtraInfoDialog";
 import EditWensberoepenDialog from "@/components/EditWensberoepenDialog";
+import EditPrioriteitenDialog from "@/components/EditPrioriteitenDialog";
 
 const RapportReview = () => {
   const navigate = useNavigate();
@@ -18,6 +18,7 @@ const RapportReview = () => {
   const [editEnthousiasmeOpen, setEditEnthousiasmeOpen] = useState(false);
   const [editExtraInfoOpen, setEditExtraInfoOpen] = useState(false);
   const [editWensberoepenOpen, setEditWensberoepenOpen] = useState(false);
+  const [editPrioriteitenOpen, setEditPrioriteitenOpen] = useState(false);
 
   const handleGenerateReport = async () => {
     const success = await generateReport(data);
@@ -184,6 +185,7 @@ const RapportReview = () => {
                 <h2 className="text-xl font-bold text-gray-900">Prioriteiten</h2>
               </div>
               <Button
+                onClick={() => setEditPrioriteitenOpen(true)}
                 variant="outline"
                 className="gap-2 rounded-xl"
                 disabled={!data.prioriteiten}
@@ -280,6 +282,13 @@ const RapportReview = () => {
           open={editExtraInfoOpen}
           onOpenChange={setEditExtraInfoOpen}
           data={data.extraInformatie}
+          onSave={refreshData}
+        />
+
+        <EditPrioriteitenDialog
+          open={editPrioriteitenOpen}
+          onOpenChange={setEditPrioriteitenOpen}
+          data={data.prioriteiten}
           onSave={refreshData}
         />
       </div>
