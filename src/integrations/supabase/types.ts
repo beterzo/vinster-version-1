@@ -177,6 +177,36 @@ export type Database = {
         }
         Relationships: []
       }
+      user_reports: {
+        Row: {
+          created_at: string
+          generated_at: string | null
+          id: string
+          report_data: Json | null
+          report_status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          generated_at?: string | null
+          id?: string
+          report_data?: Json | null
+          report_status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          generated_at?: string | null
+          id?: string
+          report_data?: Json | null
+          report_status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       wensberoepen_responses: {
         Row: {
           created_at: string

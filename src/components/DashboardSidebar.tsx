@@ -4,9 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 interface DashboardSidebarProps {
   getNextStep: () => string;
+  hasUserReport: boolean;
 }
 
-const DashboardSidebar = ({ getNextStep }: DashboardSidebarProps) => {
+const DashboardSidebar = ({ getNextStep, hasUserReport }: DashboardSidebarProps) => {
   const navigate = useNavigate();
 
   return (
@@ -20,14 +21,28 @@ const DashboardSidebar = ({ getNextStep }: DashboardSidebarProps) => {
         />
       </div>
 
-      {/* Gele knop - onderaan rechts */}
-      <Button 
-        className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-8 text-xl rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
-        size="lg"
-        onClick={() => navigate(getNextStep())}
-      >
-        Ga verder waar je gebleven was
-      </Button>
+      {/* Knoppen - onderaan rechts */}
+      <div className="space-y-4">
+        {/* Altijd aanwezige "Ga verder" knop */}
+        <Button 
+          className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-8 text-xl rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
+          size="lg"
+          onClick={() => navigate(getNextStep())}
+        >
+          Ga verder waar je gebleven was
+        </Button>
+
+        {/* Conditionale "Bekijk mijn rapport" knop */}
+        {hasUserReport && (
+          <Button 
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
+            size="lg"
+            onClick={() => navigate("/rapport-download")}
+          >
+            Bekijk mijn rapport
+          </Button>
+        )}
+      </div>
     </div>
   );
 };

@@ -27,6 +27,8 @@ import ExtraInformatieVragen from "./pages/ExtraInformatieVragen";
 import PrioriteitenActiviteiten from "./pages/PrioriteitenActiviteiten";
 import PrioriteitenWerkomstandigheden from "./pages/PrioriteitenWerkomstandigheden";
 import PrioriteitenInteresses from "./pages/PrioriteitenInteresses";
+import RapportReview from "./pages/RapportReview";
+import RapportDownload from "./pages/RapportDownload";
 
 const queryClient = new QueryClient();
 
@@ -151,6 +153,16 @@ const App = () => (
             <Route path="/prioriteiten-interesses" element={
               <PaymentGuard>
                 <PrioriteitenInteresses />
+              </PaymentGuard>
+            } />
+            <Route path="/rapport-review" element={
+              <PaymentGuard>
+                <RapportReview />
+              </PaymentGuard>
+            } />
+            <Route path="/rapport-download" element={
+              <PaymentGuard>
+                <RapportDownload />
               </PaymentGuard>
             } />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

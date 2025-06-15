@@ -7,6 +7,7 @@ interface ProgressStepsGridProps {
   prioriteitenCompleted: boolean;
   extraInformatieProgress: number;
   extraInformatieCompleted: boolean;
+  hasUserReport: boolean;
   onStepClick: (stepTitle: string) => void;
 }
 
@@ -15,6 +16,7 @@ const ProgressStepsGrid = ({
   prioriteitenCompleted,
   extraInformatieProgress,
   extraInformatieCompleted,
+  hasUserReport,
   onStepClick
 }: ProgressStepsGridProps) => {
   // Calculate combined progress for "Profiel voltooien"
@@ -47,8 +49,8 @@ const ProgressStepsGrid = ({
     },
     {
       title: "Jouw rapport",
-      progress: 0,
-      isCompleted: false,
+      progress: hasUserReport ? 100 : 0,
+      isCompleted: hasUserReport,
       icon: <FileText className="w-5 h-5 text-blue-400" />
     },
     {

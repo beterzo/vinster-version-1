@@ -1,7 +1,9 @@
 
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { usePrioriteitenResponses } from "@/hooks/usePrioriteitenResponses";
 import { useExtraInformatieResponses } from "@/hooks/useExtraInformatieResponses";
+import { useRapportGeneration } from "@/hooks/useRapportGeneration";
 import DashboardHeader from "./DashboardHeader";
 import WelcomeCard from "./WelcomeCard";
 import ImportantInfoCard from "./ImportantInfoCard";
@@ -12,6 +14,11 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const { progress: prioriteitenProgress, isCompleted: prioriteitenCompleted } = usePrioriteitenResponses();
   const { progress: extraInformatieProgress, isCompleted: extraInformatieCompleted } = useExtraInformatieResponses();
+  const { userReport, loadUserReport } = useRapportGeneration();
+
+  useEffect(() => {
+    loadUserReport();
+  }, []);
 
   const handleStepClick = (stepTitle: string) => {
     if (stepTitle === "Enthousiasmescan") {
@@ -21,8 +28,11 @@ const Dashboard = () => {
     } else if (stepTitle === "Profiel voltooien") {
       navigate("/profiel-voltooien-intro");
     } else if (stepTitle === "Jouw rapport") {
-      // TODO: Navigate to rapport page when implemented
-      console.log("Rapport page not implemented yet");
+      if (userReport) {
+        navigate("/rapport-download");
+      } else {
+        navigate("/rapport-review");
+      }
     }
     // Add more navigation logic for other steps later
   };
@@ -31,8 +41,10 @@ const Dashboard = () => {
   const getNextStep = () => {
     if (!extraInformatieCompleted || !prioriteitenCompleted) {
       return "/profiel-voltooien-intro";
+    } else if (!userReport) {
+      return "/rapport-review";
     } else {
-      return "/home"; // or wherever the rapport page should be
+      return "/rapport-download";
     }
   };
 
@@ -60,13 +72,17 @@ const Dashboard = () => {
                 prioriteitenCompleted={prioriteitenCompleted}
                 extraInformatieProgress={extraInformatieProgress}
                 extraInformatieCompleted={extraInformatieCompleted}
+                hasUserReport={!!userReport}
                 onStepClick={handleStepClick}
               />
             </div>
           </div>
 
           {/* Rechter kolom: Foto + Knop */}
-          <DashboardSidebar getNextStep={getNextStep} />
+          <DashboardSidebar 
+            getNextStep={getNextStep} 
+            hasUserReport={!!userReport}
+          />
         </div>
       </div>
     </div>
