@@ -39,9 +39,9 @@ export const useExtraInformatieResponses = () => {
         .from('extra_informatie_responses')
         .select('*')
         .eq('user_id', user.id)
-        .single();
+        .maybeSingle();
 
-      if (error && error.code !== 'PGRST116') {
+      if (error) {
         console.error('Error loading extra informatie responses:', error);
         throw error;
       }
@@ -54,9 +54,16 @@ export const useExtraInformatieResponses = () => {
           fysieke_beperkingen: data.fysieke_beperkingen || '',
           sector_voorkeur: data.sector_voorkeur || ''
         });
+      } else {
+        console.log('No extra informatie responses found, using empty defaults');
       }
     } catch (error) {
       console.error('Error loading extra informatie responses:', error);
+      toast({
+        title: "Fout bij laden",
+        description: "Er is een fout opgetreden bij het laden van je gegevens.",
+        variant: "destructive",
+      });
     } finally {
       setLoading(false);
     }
@@ -75,9 +82,14 @@ export const useExtraInformatieResponses = () => {
           user_id: user.id,
           ...data,
           updated_at: new Date().toISOString()
+        }, {
+          onConflict: 'user_id'
         });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Error saving extra informatie responses:', error);
+        throw error;
+      }
 
       setResponses(data);
       
