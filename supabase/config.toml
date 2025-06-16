@@ -59,12 +59,5 @@ enable_signup = false
 enable_confirmations = false
 test_otp = "123456"
 
-[auth.hook.send_email]
-enabled = true
-uri = "https://aqajxxevifmhdjlvqhkz.supabase.co/functions/v1/send-confirmation-email"
-
-[functions.send-confirmation-email]
-verify_jwt = false
-
 [analytics]
 enabled = false
