@@ -8,14 +8,13 @@ const TestimonialSection = () => {
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
       }}>
-        {/* Light overlay for better text readability */}
-        <div className="absolute inset-0 bg-white bg-opacity-20"></div>
+        {/* Light overlay for better background contrast */}
+        <div className="absolute inset-0 bg-white bg-opacity-10"></div>
         
-        <div className="relative z-10 px-12 py-16">
-          {/* Quote positioned on the left where background is lighter */}
-          <div className="absolute left-12 top-1/2 transform -translate-y-1/2 max-w-md">
-            {/* Additional subtle background for text readability */}
-            <div className="bg-black bg-opacity-10 rounded-2xl p-6 backdrop-blur-sm">
+        <div className="relative z-10 px-12 py-16 flex items-center">
+          {/* Blue testimonial box positioned on the left */}
+          <div className="max-w-md">
+            <div className="bg-blue-100 bg-opacity-90 rounded-2xl p-8 shadow-lg">
               <blockquote className="text-3xl font-normal text-blue-900 leading-tight">
                 "Ik zag mezelf niet ineens<br />
                 die switch maken, maar<br />
