@@ -7,12 +7,12 @@ import { useToast } from '@/hooks/use-toast';
 export interface ZoekprofielResponse {
   id: string;
   user_id: string;
-  gewenst_werk: string;
-  branche_richting: string;
-  energie_gevende_aspecten: string;
-  organisatie_type: string;
+  functie_als: string;
+  kerntaken: string;
+  sector: string;
+  organisatie_bij: string;
   gewenste_regio: string;
-  belangrijke_voorwaarden: string;
+  arbeidsvoorwaarden: string;
   created_at: string;
   updated_at: string;
 }
@@ -65,12 +65,12 @@ export const useZoekprofielResponses = () => {
 
   const calculateProgress = (data: ZoekprofielResponse) => {
     const fields = [
-      data.gewenst_werk,
-      data.branche_richting,
-      data.energie_gevende_aspecten,
-      data.organisatie_type,
+      data.functie_als,
+      data.kerntaken,
+      data.sector,
+      data.organisatie_bij,
       data.gewenste_regio,
-      data.belangrijke_voorwaarden
+      data.arbeidsvoorwaarden
     ];
 
     const filledFields = fields.filter(field => field && field.trim() !== '').length;
@@ -144,12 +144,12 @@ export const useZoekprofielResponses = () => {
         },
         body: JSON.stringify({
           user_id: user?.id,
-          gewenst_werk: responses.gewenst_werk,
-          branche_richting: responses.branche_richting,
-          energie_gevende_aspecten: responses.energie_gevende_aspecten,
-          organisatie_type: responses.organisatie_type,
+          functie_als: responses.functie_als,
+          kerntaken: responses.kerntaken,
+          sector: responses.sector,
+          organisatie_bij: responses.organisatie_bij,
           gewenste_regio: responses.gewenste_regio,
-          belangrijke_voorwaarden: responses.belangrijke_voorwaarden,
+          arbeidsvoorwaarden: responses.arbeidsvoorwaarden,
           timestamp: new Date().toISOString()
         }),
       });

@@ -353,38 +353,50 @@ export type Database = {
       }
       zoekprofiel_responses: {
         Row: {
-          belangrijke_voorwaarden: string | null
-          branche_richting: string | null
+          arbeidsvoorwaarden: string | null
           created_at: string
-          energie_gevende_aspecten: string | null
-          gewenst_werk: string | null
+          functie_als: string | null
           gewenste_regio: string | null
           id: string
-          organisatie_type: string | null
+          kerntaken: string | null
+          old_branche_richting: string | null
+          old_energie_gevende_aspecten: string | null
+          old_gewenst_werk: string | null
+          old_organisatie_type: string | null
+          organisatie_bij: string | null
+          sector: string | null
           updated_at: string
           user_id: string
         }
         Insert: {
-          belangrijke_voorwaarden?: string | null
-          branche_richting?: string | null
+          arbeidsvoorwaarden?: string | null
           created_at?: string
-          energie_gevende_aspecten?: string | null
-          gewenst_werk?: string | null
+          functie_als?: string | null
           gewenste_regio?: string | null
           id?: string
-          organisatie_type?: string | null
+          kerntaken?: string | null
+          old_branche_richting?: string | null
+          old_energie_gevende_aspecten?: string | null
+          old_gewenst_werk?: string | null
+          old_organisatie_type?: string | null
+          organisatie_bij?: string | null
+          sector?: string | null
           updated_at?: string
           user_id: string
         }
         Update: {
-          belangrijke_voorwaarden?: string | null
-          branche_richting?: string | null
+          arbeidsvoorwaarden?: string | null
           created_at?: string
-          energie_gevende_aspecten?: string | null
-          gewenst_werk?: string | null
+          functie_als?: string | null
           gewenste_regio?: string | null
           id?: string
-          organisatie_type?: string | null
+          kerntaken?: string | null
+          old_branche_richting?: string | null
+          old_energie_gevende_aspecten?: string | null
+          old_gewenst_werk?: string | null
+          old_organisatie_type?: string | null
+          organisatie_bij?: string | null
+          sector?: string | null
           updated_at?: string
           user_id?: string
         }

@@ -16,24 +16,24 @@ const ZoekprofielVragen = () => {
 
   // Local state for form fields
   const [formData, setFormData] = useState({
-    gewenst_werk: '',
-    branche_richting: '',
-    energie_gevende_aspecten: '',
-    organisatie_type: '',
+    functie_als: '',
+    kerntaken: '',
+    sector: '',
+    organisatie_bij: '',
     gewenste_regio: '',
-    belangrijke_voorwaarden: ''
+    arbeidsvoorwaarden: ''
   });
 
   // Update form data when responses are loaded
   useEffect(() => {
     if (responses) {
       setFormData({
-        gewenst_werk: responses.gewenst_werk || '',
-        branche_richting: responses.branche_richting || '',
-        energie_gevende_aspecten: responses.energie_gevende_aspecten || '',
-        organisatie_type: responses.organisatie_type || '',
+        functie_als: responses.functie_als || '',
+        kerntaken: responses.kerntaken || '',
+        sector: responses.sector || '',
+        organisatie_bij: responses.organisatie_bij || '',
         gewenste_regio: responses.gewenste_regio || '',
-        belangrijke_voorwaarden: responses.belangrijke_voorwaarden || ''
+        arbeidsvoorwaarden: responses.arbeidsvoorwaarden || ''
       });
     }
   }, [responses]);
@@ -71,40 +71,34 @@ const ZoekprofielVragen = () => {
 
   const questions = [
     {
-      field: 'gewenst_werk',
-      title: 'Welk werk wil je graag doen?',
-      description: 'Beschrijf het soort werk, taken en verantwoordelijkheden die je graag zou willen hebben.',
-      placeholder: 'Bijvoorbeeld: projectmanagement, klantcontact, strategische planning...'
+      field: 'functie_als',
+      title: 'Ik ga voor een functie als',
+      examples: 'bijvoorbeeld: coördinator, projectleider, afdelingshoofd, adviseur, docent'
     },
     {
-      field: 'branche_richting',
-      title: 'In welke branche of richting zoek je dat?',
-      description: 'Geef aan in welke sector(en) of type organisaties je graag zou willen werken.',
-      placeholder: 'Bijvoorbeeld: zorg, onderwijs, technologie, finance...'
+      field: 'kerntaken',
+      title: 'Met de volgende kerntaken',
+      examples: 'bijvoorbeeld: adviseren, aansturen, samenstellen, ontwerpen, overdragen, samenwerken, onderzoeken, bedenken'
     },
     {
-      field: 'energie_gevende_aspecten',
-      title: 'Waar krijg je energie van in je werk?',
-      description: 'Wat motiveert je en geeft je voldoening in je dagelijkse werkzaamheden?',
-      placeholder: 'Bijvoorbeeld: mensen helpen, problemen oplossen, creatief bezig zijn...'
+      field: 'sector',
+      title: 'In de sector',
+      examples: 'bijvoorbeeld: overheid, zorg, zakelijke dienstverlening, onderwijs, media, bouw'
     },
     {
-      field: 'organisatie_type',
-      title: 'Bij wat voor type organisatie werk je het liefst?',
-      description: 'Denk aan grootte, cultuur, werksfeer en organisatiestructuur.',
-      placeholder: 'Bijvoorbeeld: startup, groot bedrijf, non-profit, familiebedrijf...'
+      field: 'organisatie_bij',
+      title: 'Bij een',
+      examples: 'bijvoorbeeld: adviesbureau, kenniscentrum, opleidingsinstituut, bank, gemeente'
     },
     {
       field: 'gewenste_regio',
-      title: 'In welke regio zoek je werk?',
-      description: 'Geef aan waar je geografisch gezien graag zou willen werken.',
-      placeholder: 'Bijvoorbeeld: Amsterdam, binnen 30 km van Utrecht, heel Nederland...'
+      title: 'In deze regio',
+      examples: 'deel van Nederland of buitenland'
     },
     {
-      field: 'belangrijke_voorwaarden',
-      title: 'Welke voorwaarden zijn belangrijk voor jou?',
-      description: 'Denk aan salaris, werktijden, thuiswerken, doorgroeimogelijkheden, etc.',
-      placeholder: 'Bijvoorbeeld: flexibele werktijden, thuiswerkmogelijkheid, 32-40 uur...'
+      field: 'arbeidsvoorwaarden',
+      title: 'Met deze arbeidsvoorwaarden',
+      examples: 'noem salaris, uren, pensioen, thuis werken'
     }
   ];
 
@@ -145,38 +139,47 @@ const ZoekprofielVragen = () => {
           {questions.map((question, index) => (
             <Card key={question.field} className="p-8 bg-white border border-gray-100 rounded-3xl shadow-sm">
               <div className="space-y-4">
-                <div>
+                <div className="text-left">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-sm">
                       {index + 1}
                     </div>
                     <h2 className="text-xl font-bold text-gray-900">{question.title}</h2>
                   </div>
-                  <p className="text-gray-600 mb-4">{question.description}</p>
+                  <p className="text-gray-500 text-sm mb-4 italic">({question.examples})</p>
                 </div>
                 
                 <Textarea
                   value={formData[question.field as keyof typeof formData]}
                   onChange={(e) => handleInputChange(question.field, e.target.value)}
-                  placeholder={question.placeholder}
-                  className="min-h-[120px] text-base"
+                  className="min-h-[120px] text-base text-left"
                 />
               </div>
             </Card>
           ))}
+
+          {/* Special section after kerntaken */}
+          <div className="text-left">
+            <p className="text-lg text-gray-700 font-medium">
+              Pak het overzicht van jouw ideale werk er even bij.
+            </p>
+          </div>
         </div>
 
         {/* Submit Section */}
         <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm">
-          <div className="text-center space-y-6">
+          <div className="text-left space-y-6">
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">Klaar om je zoekprofiel af te ronden?</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Je weet wat je wilt!</h3>
+              <p className="text-gray-600 mb-4">
+                Je kunt nu solliciteren óf jouw huidige werk aanpassen met wat je weet over jouw ideale manier van werken.
+              </p>
               <p className="text-gray-600">
                 Je antwoorden worden automatisch opgeslagen. Klik op 'Profiel afronden' om je zoekprofiel te voltooien.
               </p>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4">
               <Button
                 onClick={handleSubmit}
                 disabled={!isCompleted || isSubmitting}
