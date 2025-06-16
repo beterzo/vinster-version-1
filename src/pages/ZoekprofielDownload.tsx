@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-import { Download, CheckCircle, Home, Share2, Target, ArrowRight, Clock } from "lucide-react";
+import { Download, CheckCircle, Home, Share2, Target, ArrowRight, Clock, Linkedin } from "lucide-react";
 import { useZoekprofielPdf } from "@/hooks/useZoekprofielPdf";
 
 const ZoekprofielDownload = () => {
@@ -162,7 +162,7 @@ const ZoekprofielDownload = () => {
               <Button
                 onClick={handleShare}
                 variant="outline"
-                className="rounded-full"
+                className="rounded-full h-10 px-6 min-w-[120px]"
               >
                 <Share2 className="w-4 h-4 mr-2" />
                 Delen
@@ -182,10 +182,10 @@ const ZoekprofielDownload = () => {
               </p>
               <Button
                 variant="outline"
-                className="rounded-full"
+                className="rounded-full h-10 px-6 min-w-[120px]"
                 onClick={() => window.open('https://linkedin.com', '_blank')}
               >
-                <ArrowRight className="w-4 h-4 mr-2" />
+                <Linkedin className="w-4 h-4 mr-2" />
                 Naar LinkedIn
               </Button>
             </div>
