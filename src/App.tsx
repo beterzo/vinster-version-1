@@ -4,7 +4,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider } from "@/hooks/useAuth";
 import ProtectedRoute from "@/components/ProtectedRoute";
-import PaymentGuard from "@/components/PaymentGuard";
 
 // Import pages
 import LandingPage from "@/pages/LandingPage";
@@ -173,9 +172,7 @@ function App() {
                 path="/rapport-review" 
                 element={
                   <ProtectedRoute>
-                    <PaymentGuard>
-                      <RapportReview />
-                    </PaymentGuard>
+                    <RapportReview />
                   </ProtectedRoute>
                 } 
               />
@@ -183,9 +180,7 @@ function App() {
                 path="/rapport-download" 
                 element={
                   <ProtectedRoute>
-                    <PaymentGuard>
-                      <RapportDownload />
-                    </PaymentGuard>
+                    <RapportDownload />
                   </ProtectedRoute>
                 } 
               />
@@ -193,9 +188,7 @@ function App() {
                 path="/onderzoeksplan" 
                 element={
                   <ProtectedRoute>
-                    <PaymentGuard>
-                      <OnderzoeksplanPagina />
-                    </PaymentGuard>
+                    <OnderzoeksplanPagina />
                   </ProtectedRoute>
                 } 
               />
