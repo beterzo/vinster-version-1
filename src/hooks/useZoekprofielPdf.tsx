@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
@@ -19,6 +18,7 @@ export const useZoekprofielPdf = () => {
   const { toast } = useToast();
   const [pdfData, setPdfData] = useState<ZoekprofielPdf | null>(null);
   const [loading, setLoading] = useState(true);
+  const [downloading, setDownloading] = useState(false);
   
   // Refs for cleanup
   const pollingIntervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -152,6 +152,7 @@ export const useZoekprofielPdf = () => {
 
   const downloadPdf = useCallback(async () => {
     if (!pdfData?.pdf_url) {
+      console.warn('⚠️ No PDF URL available for download');
       toast({
         title: "Geen PDF beschikbaar",
         description: "Er is nog geen PDF gegenereerd voor je zoekprofiel.",
@@ -160,30 +161,76 @@ export const useZoekprofielPdf = () => {
       return;
     }
 
-    try {
-      console.log('📄 Downloading zoekprofiel PDF from URL:', pdfData.pdf_url);
+    setDownloading(true);
+    console.log('📄 Starting zoekprofiel PDF download from URL:', pdfData.pdf_url);
 
-      // Create download link using the external PDF URL
+    try {
+      // First attempt: Direct download
+      console.log('🔄 Attempting direct download...');
+      
+      const response = await fetch(pdfData.pdf_url);
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      
+      // Create and trigger download
       const link = document.createElement('a');
-      link.href = pdfData.pdf_url;
+      link.href = url;
       link.download = 'mijn-zoekprofiel.pdf';
-      link.target = '_blank';
+      link.style.display = 'none';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-
+      
+      // Cleanup
+      URL.revokeObjectURL(url);
+      
+      console.log('✅ Direct download successful');
       toast({
         title: "Download gestart",
         description: "Je zoekprofiel PDF wordt gedownload.",
       });
 
-    } catch (error) {
-      console.error('❌ Error downloading PDF:', error);
-      toast({
-        title: "Fout bij downloaden",
-        description: "Kon je zoekprofiel PDF niet downloaden.",
-        variant: "destructive"
-      });
+    } catch (directDownloadError) {
+      console.warn('⚠️ Direct download failed, trying fallback method:', directDownloadError);
+      
+      try {
+        // Fallback: Open in new tab
+        console.log('🔄 Attempting fallback download (new tab)...');
+        
+        const link = document.createElement('a');
+        link.href = pdfData.pdf_url;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.download = 'mijn-zoekprofiel.pdf';
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        console.log('✅ Fallback download triggered');
+        toast({
+          title: "Download geopend",
+          description: "Je zoekprofiel PDF wordt geopend in een nieuw tabblad.",
+        });
+
+      } catch (fallbackError) {
+        console.error('❌ Both download methods failed:', {
+          directError: directDownloadError,
+          fallbackError: fallbackError
+        });
+        
+        toast({
+          title: "Download mislukt",
+          description: "Er is een probleem opgetreden bij het downloaden. Probeer het later opnieuw.",
+          variant: "destructive"
+        });
+      }
+    } finally {
+      setDownloading(false);
     }
   }, [pdfData, toast]);
 
@@ -228,6 +275,7 @@ export const useZoekprofielPdf = () => {
   return {
     pdfData,
     loading,
+    downloading,
     downloadUrl: pdfData?.pdf_url || null,
     isPdfReady,
     isGenerating,

@@ -13,6 +13,7 @@ export const useRapportGeneration = () => {
   const [generating, setGenerating] = useState(false);
   const [userReport, setUserReport] = useState<any>(null);
   const [loading, setLoading] = useState(false);
+  const [downloading, setDownloading] = useState(false);
 
   const loadUserReport = async () => {
     if (!user) return;
@@ -113,6 +114,7 @@ export const useRapportGeneration = () => {
 
   const downloadPdf = async () => {
     if (!user || !userReport?.pdf_file_path) {
+      console.warn('⚠️ No user or PDF file path available for download');
       toast({
         title: "Download niet mogelijk",
         description: "PDF bestand is nog niet beschikbaar.",
@@ -121,34 +123,91 @@ export const useRapportGeneration = () => {
       return;
     }
 
+    setDownloading(true);
+    console.log('📄 Starting rapport PDF download from path:', userReport.pdf_file_path);
+
     try {
+      // First attempt: Direct download from Supabase storage
+      console.log('🔄 Attempting Supabase storage download...');
+      
       const { data, error } = await supabase.storage
         .from('user-reports')
         .download(userReport.pdf_file_path);
 
-      if (error) throw error;
+      if (error) {
+        console.error('❌ Supabase storage download failed:', error);
+        throw error;
+      }
 
       // Create download link
       const url = URL.createObjectURL(data);
       const link = document.createElement('a');
       link.href = url;
       link.download = `mijn-loopbaan-rapport-${new Date().toISOString().split('T')[0]}.pdf`;
+      link.style.display = 'none';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
 
+      console.log('✅ Supabase storage download successful');
       toast({
         title: "Download gestart",
         description: "Je rapport wordt gedownload.",
       });
-    } catch (error) {
-      console.error('Error downloading PDF:', error);
-      toast({
-        title: "Download fout",
-        description: "Er is een fout opgetreden bij het downloaden van je rapport.",
-        variant: "destructive",
-      });
+
+    } catch (storageError) {
+      console.warn('⚠️ Supabase storage download failed, trying alternative methods:', storageError);
+      
+      try {
+        // Fallback: Try to get public URL and download
+        console.log('🔄 Attempting public URL download...');
+        
+        const { data: urlData } = supabase.storage
+          .from('user-reports')
+          .getPublicUrl(userReport.pdf_file_path);
+
+        if (urlData?.publicUrl) {
+          const response = await fetch(urlData.publicUrl);
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+          }
+
+          const blob = await response.blob();
+          const url = URL.createObjectURL(blob);
+          
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = `mijn-loopbaan-rapport-${new Date().toISOString().split('T')[0]}.pdf`;
+          link.style.display = 'none';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          URL.revokeObjectURL(url);
+          
+          console.log('✅ Public URL download successful');
+          toast({
+            title: "Download gestart",
+            description: "Je rapport wordt gedownload.",
+          });
+        } else {
+          throw new Error('No public URL available');
+        }
+
+      } catch (fallbackError) {
+        console.error('❌ All download methods failed:', {
+          storageError: storageError,
+          fallbackError: fallbackError
+        });
+        
+        toast({
+          title: "Download mislukt",
+          description: "Er is een probleem opgetreden bij het downloaden. Probeer het later opnieuw of neem contact op met support.",
+          variant: "destructive",
+        });
+      }
+    } finally {
+      setDownloading(false);
     }
   };
 
@@ -156,6 +215,7 @@ export const useRapportGeneration = () => {
     userReport,
     loading,
     generating,
+    downloading,
     loadUserReport,
     generateReport,
     downloadPdf

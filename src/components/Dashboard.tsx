@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { usePrioriteitenResponses } from "@/hooks/usePrioriteitenResponses";
@@ -19,8 +18,8 @@ const Dashboard = () => {
   const { progress: extraInformatieProgress, isCompleted: extraInformatieCompleted } = useExtraInformatieResponses();
   const { responses: enthousiasmeResponses, loading: enthousiasmeLoading } = useEnthousiasmeResponses();
   const { responses: wensberoepenResponses, isLoading: wensberoepenLoading } = useWensberoepenResponses();
-  const { userReport, loadUserReport, downloadPdf: downloadRapportPdf } = useRapportGeneration();
-  const { isPdfReady: isZoekprofielReady, downloadPdf: downloadZoekprofielPdf } = useZoekprofielPdf();
+  const { userReport, loadUserReport, downloadPdf: downloadRapportPdf, downloading: downloadingRapport } = useRapportGeneration();
+  const { isPdfReady: isZoekprofielReady, downloadPdf: downloadZoekprofielPdf, downloading: downloadingZoekprofiel } = useZoekprofielPdf();
 
   useEffect(() => {
     loadUserReport();
@@ -197,6 +196,8 @@ const Dashboard = () => {
             hasZoekprofielPdf={!!isZoekprofielReady}
             downloadRapportPdf={downloadRapportPdf}
             downloadZoekprofielPdf={downloadZoekprofielPdf}
+            downloadingRapport={downloadingRapport}
+            downloadingZoekprofiel={downloadingZoekprofiel}
           />
         </div>
       </div>
