@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-import { Home, Search } from "lucide-react";
+import { Check, Search } from "lucide-react";
 
 const OnderzoeksplanPagina = () => {
   const navigate = useNavigate();
@@ -132,10 +132,10 @@ const OnderzoeksplanPagina = () => {
         <div className="flex justify-center">
           <Button
             onClick={() => navigate("/home")}
-            className="bg-blue-900 hover:bg-blue-800 text-white rounded-xl"
+            className="bg-yellow-500 hover:bg-yellow-600 text-black rounded-xl"
           >
-            <Home className="w-4 h-4 mr-2" />
-            Naar dashboard
+            <Check className="w-4 h-4 mr-2" />
+            Afronden
           </Button>
         </div>
       </div>
