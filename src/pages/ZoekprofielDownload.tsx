@@ -5,9 +5,11 @@ import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { Download, CheckCircle, Home, Share2, Target, ArrowRight, Clock, Linkedin } from "lucide-react";
 import { useZoekprofielPdf } from "@/hooks/useZoekprofielPdf";
+import { useToast } from "@/hooks/use-toast";
 
 const ZoekprofielDownload = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const { 
     pdfData, 
     loading, 
@@ -22,21 +24,29 @@ const ZoekprofielDownload = () => {
     loadPdfData();
   }, []);
 
-  const handleShare = () => {
-    const shareText = `Ik heb mijn zoekprofiel opgesteld via Vinster! 
-
-🎯 Nu weet ik precies wat ik zoek in mijn volgende baan.
-📄 Mijn persoonlijke zoekprofiel helpt me gericht te solliciteren.
-
-#loopbaan #zoekprofiel #vinster`;
-
-    if (navigator.share) {
-      navigator.share({
-        title: 'Mijn Zoekprofiel',
-        text: shareText,
+  const handleShare = async () => {
+    if (!pdfData?.pdf_url) {
+      toast({
+        title: "Geen PDF beschikbaar",
+        description: "Er is nog geen PDF om te delen.",
+        variant: "destructive"
       });
-    } else {
-      navigator.clipboard.writeText(shareText);
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(pdfData.pdf_url);
+      toast({
+        title: "PDF URL gekopieerd!",
+        description: "De link naar je zoekprofiel is gekopieerd naar het klembord.",
+      });
+    } catch (error) {
+      console.error('Failed to copy PDF URL:', error);
+      toast({
+        title: "Kopiëren mislukt",
+        description: "Kon de PDF URL niet kopiëren naar het klembord.",
+        variant: "destructive"
+      });
     }
   };
 
