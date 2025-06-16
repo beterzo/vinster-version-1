@@ -43,6 +43,13 @@ const WensberoepenStep3 = () => {
     question12: ""
   });
 
+  // Local validation for step 3 only
+  const isStep3Complete = () => {
+    if (!jobTitle.trim()) return false;
+    
+    return Object.values(answers).every(answer => answer.trim() !== "");
+  };
+
   // Load saved data when responses change (only when data is loaded)
   useEffect(() => {
     if (!isLoading && responses) {
@@ -175,6 +182,8 @@ const WensberoepenStep3 = () => {
     return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Laden...</div>;
   }
 
+  const step3Complete = isStep3Complete();
+
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header */}
@@ -259,14 +268,13 @@ const WensberoepenStep3 = () => {
               <Button 
                 onClick={handleComplete}
                 className={`font-semibold px-8 ${
-                  isWensberoepenComplete 
+                  step3Complete && isWensberoepenComplete
                     ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 
                     : "bg-gray-300 text-gray-500 cursor-not-allowed"
                 }`}
-                disabled={isSubmitting || !isWensberoepenComplete || validationLoading}
+                disabled={isSubmitting || !step3Complete || !isWensberoepenComplete || validationLoading}
               >
-                {isSubmitting ? "Bezig met afronden..." : 
-                 !isWensberoepenComplete ? "Vul alle velden in" : "Afronden"}
+                {isSubmitting ? "Bezig met afronden..." : "Afronden"}
               </Button>
             </div>
           </CardContent>
