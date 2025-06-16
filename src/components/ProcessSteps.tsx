@@ -1,10 +1,17 @@
 
 import { Button } from "@/components/ui/button";
 import { Sparkles, Target, Search, Users } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const ProcessSteps = () => {
+  const navigate = useNavigate();
+
+  const handleStartJourney = () => {
+    navigate('/signup');
+  };
+
   return (
-    <div className="max-w-[1440px] mx-auto px-6 py-16 bg-gray-50">
+    <div id="het-proces" className="max-w-[1440px] mx-auto px-6 py-16 bg-gray-50">
       <div className="text-center mb-16">
         <div className="text-yellow-400 text-sm font-semibold mb-4 uppercase tracking-wider">
           Het proces
@@ -83,7 +90,10 @@ const ProcessSteps = () => {
 
       {/* Call to action */}
       <div className="text-center mt-16">
-        <Button className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-12 py-4 rounded-full text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-200">
+        <Button 
+          onClick={handleStartJourney}
+          className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-12 py-4 rounded-full text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-200"
+        >
           Start jouw reis
         </Button>
       </div>

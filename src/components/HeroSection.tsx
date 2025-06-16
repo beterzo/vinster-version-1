@@ -5,6 +5,17 @@ import { useNavigate } from "react-router-dom";
 const HeroSection = () => {
   const navigate = useNavigate();
 
+  const scrollToProcess = () => {
+    const processSection = document.getElementById('het-proces');
+    if (processSection) {
+      processSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleStartJourney = () => {
+    navigate('/signup');
+  };
+
   return (
     <div className="relative overflow-hidden">
       {/* Background Image */}
@@ -42,10 +53,19 @@ const HeroSection = () => {
               je <span className="text-yellow-400">gelukkig</span> van wordt.
             </h1>
             
-            {/* Single centered button with extra padding */}
-            <div className="flex justify-left pt-4 pb-8">
-              <Button className="bg-blue-900 hover:bg-blue-800 text-white font-bold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200">
+            {/* Two buttons side by side */}
+            <div className="flex gap-4 justify-left pt-4 pb-8">
+              <Button 
+                onClick={scrollToProcess}
+                className="bg-blue-900 hover:bg-blue-800 text-white font-bold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
+              >
                 Hoe het werkt
+              </Button>
+              <Button 
+                onClick={handleStartJourney}
+                className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
+              >
+                Start jouw reis
               </Button>
             </div>
           </div>
