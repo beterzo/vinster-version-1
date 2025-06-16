@@ -25,7 +25,7 @@ export interface MakeWebhookData {
 }
 
 export const sendWebhookData = async (data: WebhookData): Promise<void> => {
-  const webhookUrl = "https://beterzotech.app.n8n.cloud/webhook-test/dc567df2-3b19-40dc-a893-fd6fccb55587";
+  const webhookUrl = "https://beterzotech.app.n8n.cloud/webhook/dc567df2-3b19-40dc-a893-fd6fccb55587";
   
   try {
     const response = await fetch(webhookUrl, {
