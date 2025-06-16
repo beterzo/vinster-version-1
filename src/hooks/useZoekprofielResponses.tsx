@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
@@ -25,9 +24,12 @@ export const useZoekprofielResponses = () => {
   const [progress, setProgress] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
   
-  // Debounce state
+  // Keep track of local state for optimistic updates
+  const [localState, setLocalState] = useState<Partial<ZoekprofielResponse>>({});
+  
+  // Debounce state - track active saves to prevent race conditions
   const debounceTimeouts = useRef<{ [key: string]: NodeJS.Timeout }>({});
-  const saveQueue = useRef<{ [key: string]: string }>({});
+  const activeSaves = useRef<Set<string>>(new Set());
 
   const loadResponses = async () => {
     if (!user?.id) {
@@ -52,9 +54,18 @@ export const useZoekprofielResponses = () => {
       console.log('✅ Loaded zoekprofiel responses:', data);
       setResponses(data);
       
-      if (data) {
-        calculateProgress(data);
-      }
+      // Initialize local state with loaded data or empty object
+      const initialState = data || {
+        functie_als: '',
+        kerntaken: '',
+        sector: '',
+        organisatie_bij: '',
+        gewenste_regio: '',
+        arbeidsvoorwaarden: ''
+      };
+      
+      setLocalState(initialState);
+      calculateProgress(initialState);
     } catch (error) {
       console.error('❌ Failed to load zoekprofiel responses:', error);
       toast({
@@ -67,7 +78,7 @@ export const useZoekprofielResponses = () => {
     }
   };
 
-  const calculateProgress = useCallback((data: ZoekprofielResponse) => {
+  const calculateProgress = useCallback((data: Partial<ZoekprofielResponse>) => {
     const fields = [
       data.functie_als,
       data.kerntaken,
@@ -87,77 +98,86 @@ export const useZoekprofielResponses = () => {
   const debouncedSave = useCallback(async (field: string, value: string) => {
     if (!user?.id) return;
 
+    // Prevent multiple saves for the same field
+    if (activeSaves.current.has(field)) {
+      return;
+    }
+
+    activeSaves.current.add(field);
+
     try {
       console.log(`💾 Saving zoekprofiel ${field}:`, value);
 
-      if (responses) {
-        // Update existing record
-        const { error } = await supabase
-          .from('zoekprofiel_responses')
-          .update({ [field]: value })
-          .eq('id', responses.id);
+      // Use upsert logic to handle both insert and update cases
+      const { data, error } = await supabase
+        .from('zoekprofiel_responses')
+        .upsert({
+          user_id: user.id,
+          [field]: value
+        }, {
+          onConflict: 'user_id'
+        })
+        .select()
+        .single();
 
-        if (error) throw error;
-
-        const updatedResponse = { ...responses, [field]: value };
-        setResponses(updatedResponse);
-        calculateProgress(updatedResponse);
-      } else {
-        // Create new record
-        const { data, error } = await supabase
-          .from('zoekprofiel_responses')
-          .insert({
-            user_id: user.id,
-            [field]: value
-          })
-          .select()
-          .single();
-
-        if (error) throw error;
-
-        setResponses(data);
-        calculateProgress(data);
-      }
+      if (error) throw error;
 
       console.log(`✅ Successfully saved zoekprofiel ${field}`);
       
-      // Remove from save queue
-      delete saveQueue.current[field];
+      // Update the responses state with the saved data
+      setResponses(data);
+      
+      // Merge the saved field back into local state to ensure consistency
+      setLocalState(prev => ({
+        ...prev,
+        [field]: value
+      }));
+
     } catch (error) {
       console.error(`❌ Error saving zoekprofiel ${field}:`, error);
+      
+      // Rollback optimistic update on error
+      setLocalState(prev => ({
+        ...prev,
+        [field]: responses?.[field as keyof ZoekprofielResponse] || ''
+      }));
+      
       toast({
         title: "Fout bij opslaan",
         description: `Kon ${field} niet opslaan. Probeer het opnieuw.`,
         variant: "destructive"
       });
+    } finally {
+      activeSaves.current.delete(field);
     }
-  }, [user?.id, responses, calculateProgress, toast]);
+  }, [user?.id, responses, toast]);
 
   const saveResponse = useCallback((field: string, value: string) => {
-    // Optimistically update UI
-    if (responses) {
-      const updatedResponse = { ...responses, [field]: value };
-      setResponses(updatedResponse);
-      calculateProgress(updatedResponse);
-    }
-
-    // Add to save queue
-    saveQueue.current[field] = value;
+    // Immediately update local state for optimistic UI updates
+    setLocalState(prev => {
+      const newState = { ...prev, [field]: value };
+      calculateProgress(newState);
+      return newState;
+    });
 
     // Clear existing timeout for this field
     if (debounceTimeouts.current[field]) {
       clearTimeout(debounceTimeouts.current[field]);
     }
 
-    // Set new timeout
+    // Set new timeout for debounced save
     debounceTimeouts.current[field] = setTimeout(() => {
       debouncedSave(field, value);
       delete debounceTimeouts.current[field];
     }, 1000);
-  }, [responses, calculateProgress, debouncedSave]);
+  }, [calculateProgress, debouncedSave]);
 
   const submitToWebhook = async () => {
-    if (!responses) {
+    // Use local state for submission to ensure we have the latest values
+    const dataToSubmit = { ...responses, ...localState };
+    
+    if (!dataToSubmit.functie_als || !dataToSubmit.kerntaken || !dataToSubmit.sector || 
+        !dataToSubmit.organisatie_bij || !dataToSubmit.gewenste_regio || !dataToSubmit.arbeidsvoorwaarden) {
       toast({
         title: "Geen gegevens",
         description: "Er zijn geen gegevens om te versturen.",
@@ -176,12 +196,12 @@ export const useZoekprofielResponses = () => {
         },
         body: JSON.stringify({
           user_id: user?.id,
-          functie_als: responses.functie_als,
-          kerntaken: responses.kerntaken,
-          sector: responses.sector,
-          organisatie_bij: responses.organisatie_bij,
-          gewenste_regio: responses.gewenste_regio,
-          arbeidsvoorwaarden: responses.arbeidsvoorwaarden,
+          functie_als: dataToSubmit.functie_als,
+          kerntaken: dataToSubmit.kerntaken,
+          sector: dataToSubmit.sector,
+          organisatie_bij: dataToSubmit.organisatie_bij,
+          gewenste_regio: dataToSubmit.gewenste_regio,
+          arbeidsvoorwaarden: dataToSubmit.arbeidsvoorwaarden,
           timestamp: new Date().toISOString()
         }),
       });
@@ -221,8 +241,11 @@ export const useZoekprofielResponses = () => {
     loadResponses();
   }, [user?.id]);
 
+  // Return local state merged with responses for current values
+  const currentData = { ...responses, ...localState };
+
   return {
-    responses,
+    responses: currentData,
     loading,
     progress,
     isCompleted,

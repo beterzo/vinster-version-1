@@ -14,30 +14,6 @@ const ZoekprofielVragen = () => {
   const { responses, loading, saveResponse, submitToWebhook, isCompleted } = useZoekprofielResponses();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Local state for form fields with optimistic updates
-  const [formData, setFormData] = useState({
-    functie_als: '',
-    kerntaken: '',
-    sector: '',
-    organisatie_bij: '',
-    gewenste_regio: '',
-    arbeidsvoorwaarden: ''
-  });
-
-  // Update form data when responses are loaded
-  useEffect(() => {
-    if (responses) {
-      setFormData({
-        functie_als: responses.functie_als || '',
-        kerntaken: responses.kerntaken || '',
-        sector: responses.sector || '',
-        organisatie_bij: responses.organisatie_bij || '',
-        gewenste_regio: responses.gewenste_regio || '',
-        arbeidsvoorwaarden: responses.arbeidsvoorwaarden || ''
-      });
-    }
-  }, [responses]);
-
   // Memoized questions array to prevent unnecessary re-renders
   const questions = useMemo(() => [
     {
@@ -72,12 +48,8 @@ const ZoekprofielVragen = () => {
     }
   ], []);
 
-  // Optimized input change handler with immediate UI updates
+  // Input change handler that directly calls saveResponse
   const handleInputChange = useCallback((field: string, value: string) => {
-    // Immediately update local state for responsive UI
-    setFormData(prev => ({ ...prev, [field]: value }));
-    
-    // Debounced save to database
     saveResponse(field, value);
   }, [saveResponse]);
 
@@ -149,7 +121,7 @@ const ZoekprofielVragen = () => {
                 </div>
                 
                 <Textarea
-                  value={formData[question.field as keyof typeof formData]}
+                  value={responses?.[question.field as keyof typeof responses] || ''}
                   onChange={(e) => handleInputChange(question.field, e.target.value)}
                   className="min-h-[120px] text-base text-left"
                   placeholder={`Vul hier je antwoord in...`}
