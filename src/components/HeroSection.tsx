@@ -42,13 +42,8 @@ const HeroSection = () => {
               je <span className="text-yellow-400">gelukkig</span> van wordt.
             </h1>
             
-            <div className="flex gap-4">
-              <Button 
-                onClick={() => navigate('/signup')}
-                className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
-              >
-                Doe de test
-              </Button>
+            {/* Single centered button with extra padding */}
+            <div className="flex justify-left pt-4 pb-8">
               <Button className="bg-blue-900 hover:bg-blue-800 text-white font-bold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200">
                 Hoe het werkt
               </Button>

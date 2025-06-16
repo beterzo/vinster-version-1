@@ -1,29 +1,24 @@
+
 import { Card } from "@/components/ui/card";
 
 const FeatureCards = () => {
   return (
-    <div className="max-w-[1440px] mx-auto px-6 py-8 bg-gray-50">
-      <div className="bg-white rounded-3xl shadow-xl p-6">
-        <div className="grid grid-cols-12 gap-6">
-          {/* Yellow Card */}
-          <div className="col-span-4">
-            <Card className="bg-yellow-400 text-white p-6 rounded-3xl border-0 h-48">
-              <h3 className="text-xl font-bold mb-4 leading-tight text-left">
-                Bekijk hier<br />
-                hoe ons advies<br />
-                tot stand komt.
-              </h3>
-            </Card>
-          </div>
-          
-          {/* Blue Card with Report */}
-          <div className="col-span-4">
-            <Card className="text-white p-6 rounded-3xl border-0 relative overflow-hidden h-48" style={{
+    <div className="max-w-[1440px] mx-auto px-6 py-12 bg-gray-50">
+      <div className="bg-white rounded-3xl shadow-xl p-8">
+        <div className="flex flex-col items-center space-y-8">
+          {/* Blue Card with Report - Centered */}
+          <div className="max-w-md w-full">
+            <Card className="text-white p-8 rounded-3xl border-0 relative overflow-hidden h-64" style={{
               backgroundColor: '#A9C5E2'
             }}>
-              <h3 className="text-xl font-bold mb-4 leading-tight text-left">
-                Voorbeeld<br />rapport
-              </h3>
+              <div className="space-y-3">
+                <h3 className="text-2xl font-bold leading-tight text-left">
+                  Voorbeeld rapport
+                </h3>
+                <p className="text-lg leading-relaxed text-left opacity-95">
+                  Bekijk hier wat Vinster voor jou kan betekenen
+                </p>
+              </div>
               <div className="absolute bottom-0 right-0">
                 <div className="w-36 h-48 bg-white rounded-lg shadow-xl transform rotate-12 relative overflow-hidden">
                   <div className="h-7 flex items-center px-3" style={{
@@ -56,22 +51,12 @@ const FeatureCards = () => {
             </Card>
           </div>
           
-          {/* Right Column - Dashboard Card + Text */}
-          <div className="col-span-4 flex flex-col space-y-4">
-            {/* Dark Blue Dashboard Card */}
-            <Card className="bg-blue-900 text-white p-6 rounded-3xl border-0 h-24">
-              <h3 className="text-xl font-bold leading-tight text-white text-left">
-                Je persoonlijke<br />dashboard
-              </h3>
-            </Card>
-            
-            {/* Text directly on white background */}
-            <div className="px-2">
-              <h4 className="text-lg font-bold mb-3 text-blue-900 text-left">Over deze tool</h4>
-              <p className="text-sm leading-relaxed text-blue-900 text-left">
-                De denkwijze achter vinster is ontwikkeld door Heidi Jansen.
-              </p>
-            </div>
+          {/* Text section - Centered below the blue card */}
+          <div className="max-w-md w-full px-2">
+            <h4 className="text-lg font-bold mb-3 text-blue-900 text-left">Over deze tool</h4>
+            <p className="text-sm leading-relaxed text-blue-900 text-left">
+              De denkwijze achter vinster is ontwikkeld door Heidi Jansen.
+            </p>
           </div>
         </div>
       </div>
