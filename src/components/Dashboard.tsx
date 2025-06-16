@@ -193,7 +193,7 @@ const Dashboard = () => {
             getNextStep={getNextStep} 
             hasUserReport={!!userReport}
             hasStarted={userHasStarted}
-            hasZoekprofielPdf={isZoekprofielReady}
+            hasZoekprofielPdf={!!isPdfReady}
             downloadRapportPdf={downloadRapportPdf}
             downloadZoekprofielPdf={downloadZoekprofielPdf}
           />
