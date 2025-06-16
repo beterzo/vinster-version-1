@@ -46,34 +46,28 @@ const ZoekprofielIntro = () => {
           </p>
         </div>
 
-        {/* Main Content */}
-        <div className="grid md:grid-cols-2 gap-12 items-start mb-12">
-          <div className="space-y-6">
-            <div className="prose prose-lg text-gray-700">
-              <p>
-                Zo'n profiel helpt om gericht te zoeken, goede gesprekken te voeren én anderen te laten weten waar jij naar op zoek bent.
-              </p>
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            {/* New text block */}
-            <Card className="p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+        {/* Main Content - New Layout */}
+        <div className="grid md:grid-cols-2 gap-12 items-stretch mb-12">
+          {/* Left side - Large text block */}
+          <div className="flex">
+            <Card className="p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow h-full flex items-center">
               <div className="text-left">
                 <p className="text-gray-600 text-sm leading-relaxed">
                   Je geeft aan welk werk je graag wilt doen, in welke branche of richting je dat zoekt, en waar jij energie van krijgt in je werk. Ook vul je in bij wat voor type organisatie je het liefst werkt, in welke regio, en welke voorwaarden jij belangrijk vindt. Dit profiel kun je gebruiken bij het zoeken van vacatures, in gesprekken met mensen uit je netwerk, of als je een open sollicitatie stuurt. Het maakt jouw loopbaankeuze concreet en zichtbaar.
                 </p>
               </div>
             </Card>
+          </div>
 
-            {/* Benefit cards */}
+          {/* Right side - Benefit cards */}
+          <div className="space-y-4 flex flex-col">
             {benefits.map((benefit, index) => (
-              <Card key={index} className="p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
-                <div className="flex items-start gap-4">
+              <Card key={index} className="p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow flex-1">
+                <div className="flex items-start gap-4 h-full">
                   <div className="flex-shrink-0 w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center">
                     {benefit.icon}
                   </div>
-                  <div className="text-left">
+                  <div className="text-left flex-1">
                     <h3 className="font-semibold text-gray-900 mb-2">{benefit.title}</h3>
                     <p className="text-gray-600 text-sm">{benefit.description}</p>
                   </div>

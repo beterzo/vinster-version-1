@@ -1,9 +1,8 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-import { Download, CheckCircle, Home, Search, Share2 } from "lucide-react";
+import { Download, CheckCircle, Home, Clock, AlertTriangle, ArrowRight } from "lucide-react";
 import { useZoekprofielResponses } from "@/hooks/useZoekprofielResponses";
 
 const ZoekprofielDownload = () => {
@@ -21,23 +20,23 @@ const ZoekprofielDownload = () => {
 MIJN ZOEKPROFIEL
 Gegenereerd via Vinster
 
-GEWENST WERK
-${responses.gewenst_werk || 'Niet ingevuld'}
+FUNCTIE ALS
+${responses.functie_als || 'Niet ingevuld'}
 
-BRANCHE/RICHTING
-${responses.branche_richting || 'Niet ingevuld'}
+SECTOR
+${responses.sector || 'Niet ingevuld'}
 
-ENERGIE GEVENDE ASPECTEN
-${responses.energie_gevende_aspecten || 'Niet ingevuld'}
+KERNTAKEN
+${responses.kerntaken || 'Niet ingevuld'}
 
-TYPE ORGANISATIE
-${responses.organisatie_type || 'Niet ingevuld'}
+ORGANISATIE BIJ
+${responses.organisatie_bij || 'Niet ingevuld'}
 
 GEWENSTE REGIO
 ${responses.gewenste_regio || 'Niet ingevuld'}
 
-BELANGRIJKE VOORWAARDEN
-${responses.belangrijke_voorwaarden || 'Niet ingevuld'}
+ARBEIDSVOORWAARDEN
+${responses.arbeidsvoorwaarden || 'Niet ingevuld'}
 
 Aangemaakt op: ${new Date().toLocaleDateString('nl-NL', {
       year: 'numeric',
@@ -62,8 +61,8 @@ Aangemaakt op: ${new Date().toLocaleDateString('nl-NL', {
 
     const shareText = `Ik heb mijn zoekprofiel opgesteld via Vinster! 
 
-🎯 Wat ik zoek: ${responses.gewenst_werk?.substring(0, 100)}...
-🏢 Branche: ${responses.branche_richting?.substring(0, 80)}...
+🎯 Functie als: ${responses.functie_als?.substring(0, 100)}...
+🏢 Sector: ${responses.sector?.substring(0, 80)}...
 📍 Regio: ${responses.gewenste_regio}
 
 #loopbaan #zoekprofiel #vinster`;
@@ -75,7 +74,6 @@ Aangemaakt op: ${new Date().toLocaleDateString('nl-NL', {
       });
     } else {
       navigator.clipboard.writeText(shareText);
-      // Could add a toast here to indicate it was copied
     }
   };
 
@@ -135,23 +133,23 @@ Aangemaakt op: ${new Date().toLocaleDateString('nl-NL', {
             
             <div className="grid gap-4">
               <div className="p-4 bg-gray-50 rounded-xl">
-                <h3 className="font-semibold text-gray-900 mb-2">🎯 Gewenst werk</h3>
-                <p className="text-gray-700 text-sm">{responses.gewenst_werk}</p>
+                <h3 className="font-semibold text-gray-900 mb-2">🎯 Functie als</h3>
+                <p className="text-gray-700 text-sm">{responses.functie_als}</p>
               </div>
               
               <div className="p-4 bg-gray-50 rounded-xl">
-                <h3 className="font-semibold text-gray-900 mb-2">🏢 Branche/Richting</h3>
-                <p className="text-gray-700 text-sm">{responses.branche_richting}</p>
+                <h3 className="font-semibold text-gray-900 mb-2">⚡ Kerntaken</h3>
+                <p className="text-gray-700 text-sm">{responses.kerntaken}</p>
               </div>
               
               <div className="p-4 bg-gray-50 rounded-xl">
-                <h3 className="font-semibold text-gray-900 mb-2">⚡ Energie gevende aspecten</h3>
-                <p className="text-gray-700 text-sm">{responses.energie_gevende_aspecten}</p>
+                <h3 className="font-semibold text-gray-900 mb-2">🏢 Sector</h3>
+                <p className="text-gray-700 text-sm">{responses.sector}</p>
               </div>
               
               <div className="p-4 bg-gray-50 rounded-xl">
-                <h3 className="font-semibold text-gray-900 mb-2">🏛️ Type organisatie</h3>
-                <p className="text-gray-700 text-sm">{responses.organisatie_type}</p>
+                <h3 className="font-semibold text-gray-900 mb-2">🏛️ Organisatie bij</h3>
+                <p className="text-gray-700 text-sm">{responses.organisatie_bij}</p>
               </div>
               
               <div className="p-4 bg-gray-50 rounded-xl">
@@ -160,8 +158,8 @@ Aangemaakt op: ${new Date().toLocaleDateString('nl-NL', {
               </div>
               
               <div className="p-4 bg-gray-50 rounded-xl">
-                <h3 className="font-semibold text-gray-900 mb-2">✅ Belangrijke voorwaarden</h3>
-                <p className="text-gray-700 text-sm">{responses.belangrijke_voorwaarden}</p>
+                <h3 className="font-semibold text-gray-900 mb-2">✅ Arbeidsvoorwaarden</h3>
+                <p className="text-gray-700 text-sm">{responses.arbeidsvoorwaarden}</p>
               </div>
             </div>
           </div>
