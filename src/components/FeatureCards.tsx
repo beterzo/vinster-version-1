@@ -1,4 +1,3 @@
-
 import { Card } from "@/components/ui/card";
 
 const FeatureCards = () => {
@@ -9,7 +8,7 @@ const FeatureCards = () => {
           {/* Yellow Card */}
           <div className="col-span-4">
             <Card className="bg-yellow-400 text-white p-6 rounded-3xl border-0 h-48">
-              <h3 className="text-xl font-bold mb-4 leading-tight">
+              <h3 className="text-xl font-bold mb-4 leading-tight text-left">
                 Bekijk hier<br />
                 hoe ons advies<br />
                 tot stand komt.
@@ -22,13 +21,11 @@ const FeatureCards = () => {
             <Card className="text-white p-6 rounded-3xl border-0 relative overflow-hidden h-48" style={{
               backgroundColor: '#A9C5E2'
             }}>
-              <h3 className="text-xl font-bold mb-4 leading-tight">
+              <h3 className="text-xl font-bold mb-4 leading-tight text-left">
                 Voorbeeld<br />rapport
               </h3>
               <div className="absolute bottom-0 right-4">
-                {/* Larger, more realistic document with updated color */}
                 <div className="w-36 h-48 bg-white rounded-lg shadow-xl transform rotate-12 relative overflow-hidden">
-                  {/* Document header */}
                   <div className="h-7 flex items-center px-3" style={{
                     backgroundColor: '#78BFE3'
                   }}>
@@ -38,7 +35,6 @@ const FeatureCards = () => {
                       <div className="w-1.5 h-1.5 bg-white rounded-full opacity-80"></div>
                     </div>
                   </div>
-                  {/* Document content */}
                   <div className="p-3 space-y-1.5">
                     <div className="h-1.5 bg-gray-300 rounded w-full"></div>
                     <div className="h-1.5 bg-gray-300 rounded w-4/5"></div>
@@ -64,15 +60,15 @@ const FeatureCards = () => {
           <div className="col-span-4 flex flex-col space-y-4">
             {/* Dark Blue Dashboard Card */}
             <Card className="bg-blue-900 text-white p-6 rounded-3xl border-0 h-24">
-              <h3 className="text-xl font-bold leading-tight text-white">
+              <h3 className="text-xl font-bold leading-tight text-white text-left">
                 Je persoonlijke<br />dashboard
               </h3>
             </Card>
             
             {/* Text directly on white background */}
             <div className="px-2">
-              <h4 className="text-lg font-bold mb-3 text-blue-900">Over deze tool</h4>
-              <p className="text-sm leading-relaxed text-blue-900">
+              <h4 className="text-lg font-bold mb-3 text-blue-900 text-left">Over deze tool</h4>
+              <p className="text-sm leading-relaxed text-blue-900 text-left">
                 De denkwijze achter vinster is ontwikkeld door Heidi Jansen.
               </p>
             </div>
