@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -31,6 +30,13 @@ const WensberoepenStep2 = () => {
     question11: "",
     question12: ""
   });
+
+  // Local validation for step 2 only
+  const isStep2Complete = () => {
+    if (!jobTitle.trim()) return false;
+    
+    return Object.values(answers).every(answer => answer.trim() !== "");
+  };
 
   // Load saved data when responses change (only when data is loaded)
   useEffect(() => {
@@ -114,6 +120,8 @@ const WensberoepenStep2 = () => {
     return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Laden...</div>;
   }
 
+  const step2Complete = isStep2Complete();
+
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
       <div className="bg-white shadow-sm">
@@ -183,7 +191,12 @@ const WensberoepenStep2 = () => {
               </Button>
               <Button 
                 onClick={() => navigate('/wensberoepen-stap-3')}
-                className="bg-blue-900 hover:bg-blue-800 text-white"
+                className={`font-semibold px-8 ${
+                  step2Complete
+                    ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 
+                    : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                }`}
+                disabled={!step2Complete}
               >
                 Volgende wensberoep
               </Button>

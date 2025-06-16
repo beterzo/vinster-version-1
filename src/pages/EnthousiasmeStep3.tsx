@@ -12,6 +12,15 @@ const EnthousiasmeStep3 = () => {
   const navigate = useNavigate();
   const { responses, loading, saving, saveResponse, updateLocalResponse } = useEnthousiasmeResponses();
 
+  // Local validation for step 3 only
+  const isStep3Complete = () => {
+    const question1 = responses.eerste_werk_leukste_aspecten?.trim() || '';
+    const question2 = responses.werkomgeving_aantrekkelijke_elementen?.trim() || '';
+    const question3 = responses.samenwerking_prettige_aspecten?.trim() || '';
+    
+    return question1 !== '' && question2 !== '' && question3 !== '';
+  };
+
   const handleInputChange = (field: 'eerste_werk_leukste_aspecten' | 'werkomgeving_aantrekkelijke_elementen' | 'samenwerking_prettige_aspecten', value: string) => {
     updateLocalResponse(field, value);
   };
@@ -31,6 +40,8 @@ const EnthousiasmeStep3 = () => {
       </div>
     );
   }
+
+  const step3Complete = isStep3Complete();
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
@@ -121,7 +132,12 @@ const EnthousiasmeStep3 = () => {
               </Button>
               <Button 
                 onClick={() => navigate('/enthousiasme-stap-4')}
-                className="bg-blue-900 hover:bg-blue-800 text-white"
+                className={`font-semibold px-8 ${
+                  step3Complete
+                    ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 
+                    : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                }`}
+                disabled={!step3Complete}
               >
                 Volgende
               </Button>

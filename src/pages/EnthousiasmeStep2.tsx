@@ -12,6 +12,15 @@ const EnthousiasmeStep2 = () => {
   const navigate = useNavigate();
   const { responses, loading, saving, saveResponse, updateLocalResponse } = useEnthousiasmeResponses();
 
+  // Local validation for step 2 only
+  const isStep2Complete = () => {
+    const question1 = responses.school_interessantste_vakken?.trim() || '';
+    const question2 = responses.school_thuiskomst_activiteiten?.trim() || '';
+    const question3 = responses.school_naschoolse_activiteiten?.trim() || '';
+    
+    return question1 !== '' && question2 !== '' && question3 !== '';
+  };
+
   const handleInputChange = (field: 'school_interessantste_vakken' | 'school_thuiskomst_activiteiten' | 'school_naschoolse_activiteiten', value: string) => {
     updateLocalResponse(field, value);
   };
@@ -31,6 +40,8 @@ const EnthousiasmeStep2 = () => {
       </div>
     );
   }
+
+  const step2Complete = isStep2Complete();
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
@@ -121,7 +132,12 @@ const EnthousiasmeStep2 = () => {
               </Button>
               <Button 
                 onClick={() => navigate('/enthousiasme-stap-3')}
-                className="bg-blue-900 hover:bg-blue-800 text-white"
+                className={`font-semibold px-8 ${
+                  step2Complete
+                    ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 
+                    : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                }`}
+                disabled={!step2Complete}
               >
                 Volgende
               </Button>

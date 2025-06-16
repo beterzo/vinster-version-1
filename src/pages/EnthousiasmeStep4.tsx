@@ -14,6 +14,15 @@ const EnthousiasmeStep4 = () => {
   const { toast } = useToast();
   const { responses, loading, saving, saveResponse, updateLocalResponse } = useEnthousiasmeResponses();
 
+  // Local validation for step 4 only
+  const isStep4Complete = () => {
+    const question1 = responses.plezierige_werkperiode_beschrijving?.trim() || '';
+    const question2 = responses.leuk_project_en_rol?.trim() || '';
+    const question3 = responses.fluitend_thuiskomen_dag?.trim() || '';
+    
+    return question1 !== '' && question2 !== '' && question3 !== '';
+  };
+
   const handleInputChange = (field: 'plezierige_werkperiode_beschrijving' | 'leuk_project_en_rol' | 'fluitend_thuiskomen_dag', value: string) => {
     updateLocalResponse(field, value);
   };
@@ -41,6 +50,8 @@ const EnthousiasmeStep4 = () => {
       </div>
     );
   }
+
+  const step4Complete = isStep4Complete();
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
@@ -131,7 +142,12 @@ const EnthousiasmeStep4 = () => {
               </Button>
               <Button 
                 onClick={handleComplete}
-                className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold px-8"
+                className={`font-semibold px-8 ${
+                  step4Complete
+                    ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 
+                    : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                }`}
+                disabled={!step4Complete}
               >
                 Afronden
               </Button>
