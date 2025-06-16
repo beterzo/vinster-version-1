@@ -24,29 +24,65 @@ const Dashboard = () => {
     loadUserReport();
   }, []);
 
-  // Calculate Enthousiasmescan progress
+  // Calculate Enthousiasmescan progress - more accurate calculation
   const calculateEnthousiasmeProgress = () => {
-    if (enthousiasmeLoading || !enthousiasmeResponses) return 0;
+    if (enthousiasmeLoading) return 0;
+    if (!enthousiasmeResponses) return 0;
     
-    const totalFields = 12; // Total number of enthousiasme questions
-    const filledFields = Object.values(enthousiasmeResponses).filter(value => value && value.trim() !== '').length;
+    // Define the exact fields we expect to be filled
+    const enthousiasmeFields = [
+      'kindertijd_liefste_activiteiten',
+      'kindertijd_favoriete_plekken', 
+      'kindertijd_interesses',
+      'school_interessantste_vakken',
+      'school_thuiskomst_activiteiten',
+      'school_naschoolse_activiteiten',
+      'eerste_werk_leukste_aspecten',
+      'werkomgeving_aantrekkelijke_elementen',
+      'samenwerking_prettige_aspecten',
+      'plezierige_werkperiode_beschrijving',
+      'leuk_project_en_rol',
+      'fluitend_thuiskomen_dag'
+    ];
     
-    return Math.round((filledFields / totalFields) * 100);
-  };
-
-  // Calculate Wensberoepen progress
-  const calculateWensberoepenProgress = () => {
-    if (wensberoepenLoading || !wensberoepenResponses) return 0;
-    
-    // Count all non-null, non-empty string fields except id, user_id, created_at, updated_at
-    const excludeFields = ['id', 'user_id', 'created_at', 'updated_at'];
-    const allFields = Object.keys(wensberoepenResponses).filter(key => !excludeFields.includes(key));
-    const filledFields = allFields.filter(key => {
-      const value = wensberoepenResponses[key as keyof typeof wensberoepenResponses];
-      return value !== null && value !== undefined && String(value).trim() !== '';
+    const filledFields = enthousiasmeFields.filter(field => {
+      const value = enthousiasmeResponses[field as keyof typeof enthousiasmeResponses];
+      return value && String(value).trim() !== '';
     }).length;
     
-    return allFields.length > 0 ? Math.round((filledFields / allFields.length) * 100) : 0;
+    return Math.round((filledFields / enthousiasmeFields.length) * 100);
+  };
+
+  // Calculate Wensberoepen progress - more accurate calculation
+  const calculateWensberoepenProgress = () => {
+    if (wensberoepenLoading) return 0;
+    if (!wensberoepenResponses) return 0;
+    
+    // Define all wensberoepen fields we expect (3 careers × 12 fields each = 36 total)
+    const wensberoepenFieldPrefixes = ['wensberoep_1', 'wensberoep_2', 'wensberoep_3'];
+    const fieldSuffixes = [
+      'titel', 'werkweek_activiteiten', 'leukste_onderdelen', 'werk_doel',
+      'werklocatie_omgeving', 'binnen_buiten_verhouding', 'werksfeer',
+      'samenwerking_contacten', 'werkuren', 'reistijd', 'fluitend_thuiskomen_dag',
+      'belangrijke_aspecten', 'kennis_focus'
+    ];
+    
+    let totalFields = 0;
+    let filledFields = 0;
+    
+    wensberoepenFieldPrefixes.forEach(prefix => {
+      fieldSuffixes.forEach(suffix => {
+        const fieldName = `${prefix}_${suffix}`;
+        totalFields++;
+        
+        const value = wensberoepenResponses[fieldName as keyof typeof wensberoepenResponses];
+        if (value && String(value).trim() !== '') {
+          filledFields++;
+        }
+      });
+    });
+    
+    return totalFields > 0 ? Math.round((filledFields / totalFields) * 100) : 0;
   };
 
   const enthousiasmeProgress = calculateEnthousiasmeProgress();
@@ -54,8 +90,35 @@ const Dashboard = () => {
   const enthousiasmeCompleted = enthousiasmeProgress === 100;
   const wensberoepenCompleted = wensberoepenProgress === 100;
 
-  // Check if user has started (has any progress)
-  const hasStarted = enthousiasmeProgress > 0 || wensberoepenProgress > 0 || prioriteitenProgress > 0 || extraInformatieProgress > 0;
+  // Improved hasStarted logic - check for actual responses, not just progress
+  const hasStarted = () => {
+    // Check if loading
+    if (enthousiasmeLoading || wensberoepenLoading) return false;
+    
+    // Check enthousiasmescan responses
+    if (enthousiasmeResponses) {
+      const hasEnthousiasmeData = Object.values(enthousiasmeResponses).some(value => 
+        value && String(value).trim() !== ''
+      );
+      if (hasEnthousiasmeData) return true;
+    }
+    
+    // Check wensberoepen responses
+    if (wensberoepenResponses) {
+      const excludeFields = ['id', 'user_id', 'created_at', 'updated_at'];
+      const hasWensberoepenData = Object.entries(wensberoepenResponses)
+        .filter(([key]) => !excludeFields.includes(key))
+        .some(([_, value]) => value && String(value).trim() !== '');
+      if (hasWensberoepenData) return true;
+    }
+    
+    // Check other progress indicators
+    if (prioriteitenProgress > 0 || extraInformatieProgress > 0) return true;
+    
+    return false;
+  };
+
+  const userHasStarted = hasStarted();
 
   const handleStepClick = (stepTitle: string) => {
     if (stepTitle === "Enthousiasmescan") {
@@ -128,7 +191,7 @@ const Dashboard = () => {
           <DashboardSidebar 
             getNextStep={getNextStep} 
             hasUserReport={!!userReport}
-            hasStarted={hasStarted}
+            hasStarted={userHasStarted}
           />
         </div>
       </div>
