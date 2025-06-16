@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -171,9 +170,6 @@ const ZoekprofielVragen = () => {
           <div className="text-left space-y-6">
             <div>
               <h3 className="text-2xl font-bold text-gray-900 mb-4">Je weet wat je wilt!</h3>
-              <p className="text-gray-600 mb-4">
-                Je kunt nu solliciteren óf jouw huidige werk aanpassen met wat je weet over jouw ideale manier van werken.
-              </p>
               <p className="text-gray-600">
                 Je antwoorden worden automatisch opgeslagen. Klik op 'Profiel afronden' om je zoekprofiel te voltooien.
               </p>
