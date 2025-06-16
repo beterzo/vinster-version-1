@@ -1,9 +1,10 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { useNavigate } from "react-router-dom";
-import { ArrowRight, ArrowLeft, Star, Check } from "lucide-react";
+import { ArrowRight, ArrowLeft, Star, Check, AlertCircle } from "lucide-react";
 import { usePrioriteitenResponses } from "@/hooks/usePrioriteitenResponses";
 
 const PrioriteitenActiviteiten = () => {
@@ -25,7 +26,13 @@ const PrioriteitenActiviteiten = () => {
     );
   };
 
+  const isValidToProgress = () => {
+    return selectedKeywords.length >= 3;
+  };
+
   const handleSave = async () => {
+    if (!isValidToProgress()) return;
+    
     const success = await saveResponses({
       selected_activiteiten_keywords: selectedKeywords,
       extra_activiteiten_tekst: extraText
@@ -51,7 +58,7 @@ const PrioriteitenActiviteiten = () => {
             <h1 className="text-3xl font-bold text-gray-900">Wat je graag doet</h1>
           </div>
           <p className="text-lg text-gray-700">
-            Selecteer de activiteiten en taken die voor jou het allerbelangrijkste zijn
+            Selecteer de activiteiten en taken die voor jou het allerbelangrijkste zijn (minimaal 3)
           </p>
         </div>
 
@@ -83,7 +90,7 @@ const PrioriteitenActiviteiten = () => {
             Kernwoorden gebaseerd op jouw antwoorden
           </h2>
           <p className="text-gray-600 mb-6">
-            Klik op de kernwoorden die voor jou het allerbelangrijkste zijn. Je kunt er zoveel selecteren als je wilt.
+            Klik op de kernwoorden die voor jou het allerbelangrijkste zijn. Je moet er minimaal 3 selecteren.
           </p>
           
           {keywords.length > 0 ? (
@@ -131,6 +138,16 @@ const PrioriteitenActiviteiten = () => {
           />
         </Card>
 
+        {/* Validation error message */}
+        {!isValidToProgress() && selectedKeywords.length > 0 && (
+          <div className="mb-6 flex items-center gap-2 text-orange-600 bg-orange-50 p-4 rounded-lg">
+            <AlertCircle className="w-5 h-5" />
+            <span className="text-sm">
+              Selecteer nog {3 - selectedKeywords.length} kernwoord{3 - selectedKeywords.length === 1 ? '' : 'en'} om door te gaan naar de volgende stap.
+            </span>
+          </div>
+        )}
+
         {/* Navigation */}
         <div className="flex justify-between items-center">
           <Button
@@ -143,8 +160,12 @@ const PrioriteitenActiviteiten = () => {
           
           <Button
             onClick={handleSave}
-            disabled={loading}
-            className="bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl"
+            disabled={loading || !isValidToProgress()}
+            className={`rounded-xl ${
+              isValidToProgress() 
+                ? 'bg-yellow-500 hover:bg-yellow-600 text-white' 
+                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+            }`}
             size="lg"
           >
             {loading ? "Opslaan..." : "Volgende: werkomgeving"}
