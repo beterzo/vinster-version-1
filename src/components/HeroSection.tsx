@@ -27,10 +27,10 @@ const HeroSection = () => {
           </Button>
         </div>
         
-        {/* Main Hero Content */}
-        <div className="grid grid-cols-2 gap-8 items-center min-h-[400px]">
-          {/* Left Content */}
-          <div className="space-y-6">
+        {/* Main Hero Content - Changed to flex layout for better left alignment */}
+        <div className="flex items-center min-h-[400px]">
+          {/* Left Content - Made wider and fully left-aligned */}
+          <div className="w-full max-w-2xl space-y-6 text-left">
             <div className="text-sm text-white leading-relaxed">
               Wij brengen met wetenschappelijke methoden<br />
               waardevolle inzichten over jouw talenten in kaart.<br />
@@ -54,9 +54,6 @@ const HeroSection = () => {
               </Button>
             </div>
           </div>
-          
-          {/* Right side - empty space to let background image show */}
-          <div></div>
         </div>
       </div>
     </div>
