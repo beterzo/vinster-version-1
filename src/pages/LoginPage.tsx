@@ -97,7 +97,7 @@ const LoginPage = () => {
           {/* Header */}
           <div className="text-center space-y-2">
             <h1 className="text-3xl font-bold text-blue-900">
-              Meld je aan om te beginnen
+              Log in om te beginnen
             </h1>
             <p className="text-gray-600">
               Start je reis naar een betere loopbaan
@@ -108,7 +108,7 @@ const LoginPage = () => {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Email field */}
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-blue-900 font-medium">
+              <Label htmlFor="email" className="text-blue-900 font-medium text-left block">
                 E-mailadres
               </Label>
               <Input
@@ -124,7 +124,7 @@ const LoginPage = () => {
 
             {/* Password field */}
             <div className="space-y-2">
-              <Label htmlFor="password" className="text-blue-900 font-medium">
+              <Label htmlFor="password" className="text-blue-900 font-medium text-left block">
                 Wachtwoord
               </Label>
               <Input

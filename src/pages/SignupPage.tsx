@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -56,7 +57,8 @@ const SignupPage = () => {
     } else {
       toast({
         title: "Account aangemaakt!",
-        description: "Je kunt nu inloggen met je gegevens.",
+        description: "Controleer je e-mail en bevestig je account om in te kunnen loggen. Check ook je spam folder.",
+        duration: 8000,
       });
       navigate("/login");
     }
@@ -114,7 +116,7 @@ const SignupPage = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="firstName" className="text-blue-900 font-medium">
+                <Label htmlFor="firstName" className="text-blue-900 font-medium text-left block">
                   Voornaam
                 </Label>
                 <Input
@@ -128,7 +130,7 @@ const SignupPage = () => {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="lastName" className="text-blue-900 font-medium">
+                <Label htmlFor="lastName" className="text-blue-900 font-medium text-left block">
                   Achternaam
                 </Label>
                 <Input
@@ -144,7 +146,7 @@ const SignupPage = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="gender" className="text-blue-900 font-medium">
+              <Label htmlFor="gender" className="text-blue-900 font-medium text-left block">
                 Geslacht
               </Label>
               <Select value={gender} onValueChange={setGender} required>
@@ -161,7 +163,7 @@ const SignupPage = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-blue-900 font-medium">
+              <Label htmlFor="email" className="text-blue-900 font-medium text-left block">
                 E-mailadres
               </Label>
               <Input
@@ -176,7 +178,7 @@ const SignupPage = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password" className="text-blue-900 font-medium">
+              <Label htmlFor="password" className="text-blue-900 font-medium text-left block">
                 Wachtwoord
               </Label>
               <Input
@@ -191,7 +193,7 @@ const SignupPage = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="confirmPassword" className="text-blue-900 font-medium">
+              <Label htmlFor="confirmPassword" className="text-blue-900 font-medium text-left block">
                 Bevestig wachtwoord
               </Label>
               <Input
