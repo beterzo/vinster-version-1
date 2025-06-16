@@ -8,20 +8,17 @@ const TestimonialSection = () => {
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
       }}>
-        {/* Light overlay for better background contrast */}
-        <div className="absolute inset-0 bg-white bg-opacity-10"></div>
-        
-        <div className="relative z-10 px-12 py-16 flex items-center">
-          {/* Blue testimonial box positioned on the left */}
-          <div className="max-w-md">
-            <div className="bg-blue-100 bg-opacity-90 rounded-2xl p-8 shadow-lg">
-              <blockquote className="text-3xl font-normal text-blue-900 leading-tight">
-                "Ik zag mezelf niet ineens<br />
-                die switch maken, maar<br />
-                wat ben ik blij dat ik het<br />
-                gedaan heb!"
-              </blockquote>
-            </div>
+        <div className="relative z-10 px-12 py-16 flex items-center min-h-[300px]">
+          {/* Text positioned on the left, using more of the image space */}
+          <div className="max-w-lg">
+            <blockquote className="text-3xl font-normal text-white leading-tight text-left" style={{
+              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
+            }}>
+              "Ik zag mezelf niet ineens<br />
+              die switch maken, maar<br />
+              wat ben ik blij dat ik het<br />
+              gedaan heb!"
+            </blockquote>
           </div>
         </div>
       </div>
