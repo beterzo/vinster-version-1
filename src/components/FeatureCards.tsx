@@ -24,7 +24,7 @@ const FeatureCards = () => {
               <h3 className="text-xl font-bold mb-4 leading-tight text-left">
                 Voorbeeld<br />rapport
               </h3>
-              <div className="absolute bottom-0 right-2">
+              <div className="absolute bottom-0 right-0">
                 <div className="w-36 h-48 bg-white rounded-lg shadow-xl transform rotate-12 relative overflow-hidden">
                   <div className="h-7 flex items-center px-3" style={{
                     backgroundColor: '#78BFE3'
