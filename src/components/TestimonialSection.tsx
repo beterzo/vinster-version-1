@@ -11,7 +11,8 @@ const TestimonialSection = () => {
         <div className="relative z-10 px-12 py-16 flex items-center min-h-[300px]">
           {/* Text positioned on the left, using more of the image space */}
           <div className="max-w-lg">
-            <blockquote className="text-3xl font-normal text-white leading-tight text-left" style={{
+            <blockquote className="text-3xl font-normal leading-tight text-left" style={{
+              color: '#1F3A8A',
               textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
             }}>
               "Ik zag mezelf niet ineens<br />
