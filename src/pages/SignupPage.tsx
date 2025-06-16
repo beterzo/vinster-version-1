@@ -56,11 +56,11 @@ const SignupPage = () => {
       });
     } else {
       toast({
-        title: "Account aangemaakt!",
-        description: "Je kunt nu inloggen met je account.",
+        title: "Account succesvol aangemaakt!",
+        description: "Je bent nu automatisch ingelogd en kunt beginnen.",
         duration: 8000,
       });
-      navigate("/login");
+      navigate("/home");
     }
 
     setIsLoading(false);
