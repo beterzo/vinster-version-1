@@ -13,7 +13,7 @@ const DashboardSidebar = ({ getNextStep, hasUserReport }: DashboardSidebarProps)
   return (
     <div className="flex flex-col gap-8">
       {/* Afbeelding - neemt de meeste ruimte in */}
-      <div className="rounded-full flex-1 overflow-hidden">
+      <div className="rounded-2xl flex-1 overflow-hidden">
         <img 
           src="/lovable-uploads/4d34612b-df14-4f89-abac-7542126c6ac2.png"
           alt="Professionele vrouw met loopbaanontwikkeling materialen"
