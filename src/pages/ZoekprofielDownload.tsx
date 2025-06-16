@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-import { Download, CheckCircle, Home, Clock, AlertTriangle, ArrowRight } from "lucide-react";
+import { Download, CheckCircle, Home, Clock, AlertTriangle, ArrowRight, Share2, Search } from "lucide-react";
 import { useZoekprofielResponses } from "@/hooks/useZoekprofielResponses";
 
 const ZoekprofielDownload = () => {
