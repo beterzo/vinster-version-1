@@ -43,8 +43,8 @@ const OnderzoeksplanPagina = () => {
           <div className="bg-white rounded-lg p-6">
             <h4 className="text-lg font-bold text-gray-900 mb-4">Dit is jouw onderzoeksplan:</h4>
             <div className="space-y-4">
-              <div className="flex items-start gap-4">
-                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0 mt-1">
+              <div className="flex items-center gap-4">
+                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0">
                   <span className="text-blue-600 font-bold text-sm">1</span>
                 </div>
                 <p className="text-gray-700 text-left">
@@ -53,8 +53,8 @@ const OnderzoeksplanPagina = () => {
                 </p>
               </div>
 
-              <div className="flex items-start gap-4">
-                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0 mt-1">
+              <div className="flex items-center gap-4">
+                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0">
                   <span className="text-blue-600 font-bold text-sm">2</span>
                 </div>
                 <p className="text-gray-700 text-left">
@@ -62,8 +62,8 @@ const OnderzoeksplanPagina = () => {
                 </p>
               </div>
 
-              <div className="flex items-start gap-4">
-                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0 mt-1">
+              <div className="flex items-center gap-4">
+                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0">
                   <span className="text-blue-600 font-bold text-sm">3</span>
                 </div>
                 <p className="text-gray-700 text-left">
@@ -71,8 +71,8 @@ const OnderzoeksplanPagina = () => {
                 </p>
               </div>
 
-              <div className="flex items-start gap-4">
-                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0 mt-1">
+              <div className="flex items-center gap-4">
+                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0">
                   <span className="text-blue-600 font-bold text-sm">4</span>
                 </div>
                 <p className="text-gray-700 text-left">
@@ -80,8 +80,8 @@ const OnderzoeksplanPagina = () => {
                 </p>
               </div>
 
-              <div className="flex items-start gap-4">
-                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0 mt-1">
+              <div className="flex items-center gap-4">
+                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0">
                   <span className="text-blue-600 font-bold text-sm">5</span>
                 </div>
                 <p className="text-gray-700 text-left">
@@ -90,8 +90,8 @@ const OnderzoeksplanPagina = () => {
                 </p>
               </div>
 
-              <div className="flex items-start gap-4">
-                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0 mt-1">
+              <div className="flex items-center gap-4">
+                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0">
                   <span className="text-blue-600 font-bold text-sm">6</span>
                 </div>
                 <p className="text-gray-700 text-left">
@@ -99,8 +99,8 @@ const OnderzoeksplanPagina = () => {
                 </p>
               </div>
 
-              <div className="flex items-start gap-4">
-                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0 mt-1">
+              <div className="flex items-center gap-4">
+                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0">
                   <span className="text-blue-600 font-bold text-sm">7</span>
                 </div>
                 <p className="text-gray-700 text-left">
@@ -109,8 +109,8 @@ const OnderzoeksplanPagina = () => {
                 </p>
               </div>
 
-              <div className="flex items-start gap-4">
-                <div className="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center shrink-0 mt-1">
+              <div className="flex items-center gap-4">
+                <div className="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center shrink-0">
                   <span className="text-yellow-600 font-bold text-sm">8</span>
                 </div>
                 <p className="text-gray-700 text-left">
