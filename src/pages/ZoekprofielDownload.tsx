@@ -149,45 +149,49 @@ const ZoekprofielDownload = () => {
 
         {/* Action Cards */}
         <div className="grid md:grid-cols-2 gap-6 mb-12">
-          <Card className="p-6 bg-white rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-            <div className="text-center">
+          <Card className="p-6 bg-white rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow flex flex-col justify-between min-h-[280px]">
+            <div className="text-center flex-1 flex flex-col">
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Share2 className="w-8 h-8 text-blue-600" />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Deel met je netwerk</h3>
-              <p className="text-gray-600 mb-4">
+              <p className="text-gray-600 mb-4 flex-1">
                 Laat vrienden, familie en collega's weten wat voor werk je zoekt. 
                 Ze kunnen je helpen met tips en contacten.
               </p>
-              <Button
-                onClick={handleShare}
-                variant="outline"
-                className="rounded-full h-10 px-6 min-w-[120px]"
-              >
-                <Share2 className="w-4 h-4 mr-2" />
-                Delen
-              </Button>
+              <div className="flex justify-center">
+                <Button
+                  onClick={handleShare}
+                  variant="outline"
+                  className="rounded-full h-10 px-6 min-w-[120px]"
+                >
+                  <Share2 className="w-4 h-4 mr-2" />
+                  Delen
+                </Button>
+              </div>
             </div>
           </Card>
 
-          <Card className="p-6 bg-white rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-            <div className="text-center">
+          <Card className="p-6 bg-white rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow flex flex-col justify-between min-h-[280px]">
+            <div className="text-center flex-1 flex flex-col">
               <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Target className="w-8 h-8 text-yellow-600" />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Voeg toe aan LinkedIn</h3>
-              <p className="text-gray-600 mb-4">
+              <p className="text-gray-600 mb-4 flex-1">
                 Update je LinkedIn profiel met je zoekprofiel om 
                 recruiters te laten weten wat je zoekt.
               </p>
-              <Button
-                variant="outline"
-                className="rounded-full h-10 px-6 min-w-[120px]"
-                onClick={() => window.open('https://linkedin.com', '_blank')}
-              >
-                <Linkedin className="w-4 h-4 mr-2" />
-                Naar LinkedIn
-              </Button>
+              <div className="flex justify-center">
+                <Button
+                  variant="outline"
+                  className="rounded-full h-10 px-6 min-w-[120px]"
+                  onClick={() => window.open('https://linkedin.com', '_blank')}
+                >
+                  <Linkedin className="w-4 h-4 mr-2" />
+                  Naar LinkedIn
+                </Button>
+              </div>
             </div>
           </Card>
         </div>
