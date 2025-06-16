@@ -23,7 +23,7 @@ const DashboardHeader = () => {
         title: "Succesvol uitgelogd",
         description: "Tot ziens!",
       });
-      navigate("/landingspagina");
+      navigate("/");
     }
   };
 
