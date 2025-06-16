@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { usePrioriteitenResponses } from "@/hooks/usePrioriteitenResponses";
@@ -6,6 +5,7 @@ import { useExtraInformatieResponses } from "@/hooks/useExtraInformatieResponses
 import { useEnthousiasmeResponses } from "@/hooks/useEnthousiasmeResponses";
 import { useWensberoepenResponses } from "@/hooks/useWensberoepenResponses";
 import { useRapportGeneration } from "@/hooks/useRapportGeneration";
+import { useZoekprofielPdf } from "@/hooks/useZoekprofielPdf";
 import DashboardHeader from "./DashboardHeader";
 import WelcomeCard from "./WelcomeCard";
 import ImportantInfoCard from "./ImportantInfoCard";
@@ -18,7 +18,8 @@ const Dashboard = () => {
   const { progress: extraInformatieProgress, isCompleted: extraInformatieCompleted } = useExtraInformatieResponses();
   const { responses: enthousiasmeResponses, loading: enthousiasmeLoading } = useEnthousiasmeResponses();
   const { responses: wensberoepenResponses, isLoading: wensberoepenLoading } = useWensberoepenResponses();
-  const { userReport, loadUserReport } = useRapportGeneration();
+  const { userReport, loadUserReport, downloadPdf: downloadRapportPdf } = useRapportGeneration();
+  const { isPdfReady: isZoekprofielReady, downloadPdf: downloadZoekprofielPdf } = useZoekprofielPdf();
 
   useEffect(() => {
     loadUserReport();
@@ -192,6 +193,9 @@ const Dashboard = () => {
             getNextStep={getNextStep} 
             hasUserReport={!!userReport}
             hasStarted={userHasStarted}
+            hasZoekprofielPdf={isZoekprofielReady}
+            downloadRapportPdf={downloadRapportPdf}
+            downloadZoekprofielPdf={downloadZoekprofielPdf}
           />
         </div>
       </div>
