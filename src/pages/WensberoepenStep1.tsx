@@ -146,7 +146,7 @@ const WensberoepenStep1 = () => {
 
             {/* Job Title Input */}
             <div className="mb-8">
-              <Label htmlFor="jobTitle" className="text-blue-900 font-medium text-lg mb-3 block">
+              <Label htmlFor="jobTitle" className="text-blue-900 font-medium text-lg mb-3 block text-left">
                 Naam van het beroep
               </Label>
               <Input
@@ -163,7 +163,7 @@ const WensberoepenStep1 = () => {
             <div className="space-y-6">
               {questions.map((question, index) => (
                 <div key={index}>
-                  <Label htmlFor={`question${index + 1}`} className="text-blue-900 font-medium mb-3 block">
+                  <Label htmlFor={`question${index + 1}`} className="text-blue-900 font-medium mb-3 block text-left">
                     {index + 1}. {question}
                   </Label>
                   <Textarea
