@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -14,11 +14,23 @@ const ExtraInformatieVragen = () => {
   const { responses, saving, saveResponses } = useExtraInformatieResponses();
   
   const [formData, setFormData] = useState({
-    opleidingsniveau: responses.opleidingsniveau || '',
-    beroepsopleiding: responses.beroepsopleiding || '',
-    fysieke_beperkingen: responses.fysieke_beperkingen || '',
-    sector_voorkeur: responses.sector_voorkeur || ''
+    opleidingsniveau: '',
+    beroepsopleiding: '',
+    fysieke_beperkingen: '',
+    sector_voorkeur: ''
   });
+
+  // Sync local state with loaded responses
+  useEffect(() => {
+    if (responses) {
+      setFormData({
+        opleidingsniveau: responses.opleidingsniveau || '',
+        beroepsopleiding: responses.beroepsopleiding || '',
+        fysieke_beperkingen: responses.fysieke_beperkingen || '',
+        sector_voorkeur: responses.sector_voorkeur || ''
+      });
+    }
+  }, [responses]);
 
   const handleSave = async () => {
     const success = await saveResponses(formData);

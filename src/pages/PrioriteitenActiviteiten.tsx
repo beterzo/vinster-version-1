@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -11,12 +11,16 @@ const PrioriteitenActiviteiten = () => {
   const navigate = useNavigate();
   const { responses, aiKeywords, saveResponses, loading } = usePrioriteitenResponses();
   
-  const [selectedKeywords, setSelectedKeywords] = useState<string[]>(
-    responses?.selected_activiteiten_keywords || []
-  );
-  const [extraText, setExtraText] = useState(
-    responses?.extra_activiteiten_tekst || ""
-  );
+  const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
+  const [extraText, setExtraText] = useState("");
+
+  // Sync local state with loaded responses
+  useEffect(() => {
+    if (responses) {
+      setSelectedKeywords(responses.selected_activiteiten_keywords || []);
+      setExtraText(responses.extra_activiteiten_tekst || "");
+    }
+  }, [responses]);
 
   const toggleKeyword = (keyword: string) => {
     setSelectedKeywords(prev => 

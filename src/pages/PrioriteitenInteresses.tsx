@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -16,10 +16,16 @@ const PrioriteitenInteresses = () => {
     aiKeywords 
   } = usePrioriteitenResponses();
   
-  const [selectedKeywords, setSelectedKeywords] = useState<string[]>(
-    responses?.selected_interesses_keywords || []
-  );
-  const [extraText, setExtraText] = useState(responses?.extra_interesses_tekst || '');
+  const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
+  const [extraText, setExtraText] = useState('');
+
+  // Sync local state with loaded responses
+  useEffect(() => {
+    if (responses) {
+      setSelectedKeywords(responses.selected_interesses_keywords || []);
+      setExtraText(responses.extra_interesses_tekst || '');
+    }
+  }, [responses]);
 
   const availableInteressesKeywords = aiKeywords?.interesses || [];
 
