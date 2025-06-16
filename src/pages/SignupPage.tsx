@@ -57,7 +57,7 @@ const SignupPage = () => {
     } else {
       toast({
         title: "Account aangemaakt!",
-        description: "Controleer je e-mail en bevestig je account om in te kunnen loggen. Check ook je spam folder.",
+        description: "Je kunt nu inloggen met je account.",
         duration: 8000,
       });
       navigate("/login");
