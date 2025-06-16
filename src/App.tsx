@@ -29,6 +29,7 @@ import PrioriteitenWerkomstandigheden from "./pages/PrioriteitenWerkomstandighed
 import PrioriteitenInteresses from "./pages/PrioriteitenInteresses";
 import RapportReview from "./pages/RapportReview";
 import RapportDownload from "./pages/RapportDownload";
+import OnderzoeksplanPagina from "./pages/OnderzoeksplanPagina";
 
 const queryClient = new QueryClient();
 
@@ -163,6 +164,11 @@ const App = () => (
             <Route path="/rapport-download" element={
               <PaymentGuard>
                 <RapportDownload />
+              </PaymentGuard>
+            } />
+            <Route path="/onderzoeksplan" element={
+              <PaymentGuard>
+                <OnderzoeksplanPagina />
               </PaymentGuard>
             } />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

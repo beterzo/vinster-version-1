@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-import { Download, CheckCircle, FileText, Home, Clock, AlertTriangle, Search } from "lucide-react";
+import { Download, CheckCircle, FileText, Home, Clock, AlertTriangle, ArrowRight } from "lucide-react";
 import { useRapportGeneration } from "@/hooks/useRapportGeneration";
 
 const RapportDownload = () => {
@@ -206,14 +206,27 @@ const RapportDownload = () => {
             )}
 
             {userReport?.report_status === 'completed' && (
-              <Button
-                onClick={handleDownload}
-                className="bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl text-lg px-8 py-3"
-                size="lg"
-              >
-                <Download className="w-5 h-5 mr-2" />
-                {userReport.pdf_file_path ? 'Download PDF rapport' : 'Download rapport (JSON)'}
-              </Button>
+              <div className="space-y-4">
+                <Button
+                  onClick={handleDownload}
+                  className="bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl text-lg px-8 py-3"
+                  size="lg"
+                >
+                  <Download className="w-5 h-5 mr-2" />
+                  {userReport.pdf_file_path ? 'Download PDF rapport' : 'Download rapport (JSON)'}
+                </Button>
+                
+                <div className="pt-4">
+                  <Button
+                    onClick={() => navigate("/onderzoeksplan")}
+                    className="bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xl px-10 py-4"
+                    size="lg"
+                  >
+                    <ArrowRight className="w-6 h-6 mr-3" />
+                    Ga verder met je onderzoeksplan
+                  </Button>
+                </div>
+              </div>
             )}
 
             {userReport?.report_status === 'generating' && (
@@ -272,110 +285,6 @@ const RapportDownload = () => {
                     <p className="text-sm text-gray-600">Concrete stappen voor je loopbaan</p>
                   </div>
                 </div>
-              </div>
-            </div>
-          </Card>
-        )}
-
-        {/* Research Plan - only show when completed */}
-        {userReport?.report_status === 'completed' && (
-          <Card className="p-8 mb-8 bg-gradient-to-r from-blue-50 to-yellow-50 border-blue-200">
-            <div className="text-center mb-6">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Search className="w-8 h-8 text-blue-600" />
-              </div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">En nu?</h2>
-              <h3 className="text-xl font-semibold text-blue-600 mb-4">Onderzoek doen!</h3>
-              <p className="text-gray-700 mb-6">
-                Nu je je rapport hebt, is het tijd om dieper te duiken in de beroepen die bij je passen. 
-                Volg dit onderzoeksplan om de beste keuze te maken:
-              </p>
-            </div>
-
-            <div className="bg-white rounded-lg p-6">
-              <h4 className="text-lg font-bold text-gray-900 mb-4">Dit is jouw onderzoeksplan:</h4>
-              <div className="space-y-4">
-                <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0 mt-1">
-                    <span className="text-blue-600 font-bold text-sm">1</span>
-                  </div>
-                  <p className="text-gray-700">
-                    Vraag AI naar een functie- of beroepsbeschrijving. Vraag ook naar vergelijkbare functies. 
-                    Welk werk lijkt erop? Wat spreekt je aan in de antwoorden die je krijgt?
-                  </p>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0 mt-1">
-                    <span className="text-blue-600 font-bold text-sm">2</span>
-                  </div>
-                  <p className="text-gray-700">
-                    Kijk of je vacatures kunt vinden die een beeld geven van de inhoud van dit beroep.
-                  </p>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0 mt-1">
-                    <span className="text-blue-600 font-bold text-sm">3</span>
-                  </div>
-                  <p className="text-gray-700">
-                    Zoek op LinkedIn naar mensen die dit werk doen. Wat is hun achtergrond?
-                  </p>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0 mt-1">
-                    <span className="text-blue-600 font-bold text-sm">4</span>
-                  </div>
-                  <p className="text-gray-700">
-                    Is er een beroepsvereniging? Wat lees je op de website over ontwikkelingen in de sector en het beroep?
-                  </p>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0 mt-1">
-                    <span className="text-blue-600 font-bold text-sm">5</span>
-                  </div>
-                  <p className="text-gray-700">
-                    Heeft het beroep een vakblad? Zo ja, vraag er één of meerdere op en lees ze. 
-                    Wat valt je op? Word je enthousiast van de onderwerpen?
-                  </p>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0 mt-1">
-                    <span className="text-blue-600 font-bold text-sm">6</span>
-                  </div>
-                  <p className="text-gray-700">
-                    Zoek organisaties waar mensen met dit beroep werken.
-                  </p>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0 mt-1">
-                    <span className="text-blue-600 font-bold text-sm">7</span>
-                  </div>
-                  <p className="text-gray-700">
-                    Welke opleiding heb je eventueel nodig voor dit werk? 
-                    Schrijf alle vragen die bij je opkomen op. Die kun je gaan stellen aan mensen die al werkzaam zijn in deze richting.
-                  </p>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center shrink-0 mt-1">
-                    <span className="text-yellow-600 font-bold text-sm">8</span>
-                  </div>
-                  <p className="text-gray-700">
-                    Maak een lijstje met mensen die je zou willen spreken over dit werk en benader hen.
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-8 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
-                <p className="text-gray-700 font-medium">
-                  Als je genoeg aan de weet bent gekomen kies dan de functie die het allerbest bij je past 
-                  en ga verder met <span className="text-yellow-600 font-bold">de allerlaatste stap: het maken van jouw zoekprofiel!</span>
-                </p>
               </div>
             </div>
           </Card>
