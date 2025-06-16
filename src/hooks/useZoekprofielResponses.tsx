@@ -196,6 +196,7 @@ export const useZoekprofielResponses = () => {
         },
         body: JSON.stringify({
           user_id: user?.id,
+          email: user?.email || "",
           functie_als: dataToSubmit.functie_als,
           kerntaken: dataToSubmit.kerntaken,
           sector: dataToSubmit.sector,
