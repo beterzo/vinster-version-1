@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -10,7 +11,7 @@ import { useWensberoepenResponses } from "@/hooks/useWensberoepenResponses";
 import { useWebhookData } from "@/hooks/useWebhookData";
 import { sendWebhookData } from "@/services/webhookService";
 import { useToast } from "@/hooks/use-toast";
-import { useFormValidation } from "@/hooks/useFormValidation";
+import { useWensberoepenValidation } from "@/hooks/useWensberoepenValidation";
 import type { Tables } from "@/integrations/supabase/types";
 
 type WensberoepenResponse = Tables<"wensberoepen_responses">;
@@ -21,9 +22,9 @@ const WensberoepenStep3 = () => {
   const { responses, getFieldValue, saveResponse, isLoading } = useWensberoepenResponses();
   const { collectWebhookData } = useWebhookData();
   const { 
-    isFormComplete,
+    isWensberoepenComplete,
     isLoading: validationLoading
-  } = useFormValidation();
+  } = useWensberoepenValidation();
   
   const [jobTitle, setJobTitle] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -102,10 +103,10 @@ const WensberoepenStep3 = () => {
   };
 
   const handleComplete = async () => {
-    if (!isFormComplete) {
+    if (!isWensberoepenComplete) {
       toast({
-        title: "Formulier niet compleet",
-        description: "Vul alle velden in voordat je de scan afrondt.",
+        title: "Wensberoepen scan niet compleet",
+        description: "Vul alle wensberoepen velden in voordat je de scan afrondt.",
         variant: "destructive",
       });
       return;
@@ -213,7 +214,7 @@ const WensberoepenStep3 = () => {
 
             {/* Job Title Input */}
             <div className="mb-8">
-              <Label htmlFor="jobTitle" className="text-blue-900 font-medium text-lg mb-3 block">
+              <Label htmlFor="jobTitle" className="text-blue-900 font-medium text-lg mb-3 block text-left">
                 Naam van het beroep
               </Label>
               <Input
@@ -230,7 +231,7 @@ const WensberoepenStep3 = () => {
             <div className="space-y-6">
               {questions.map((question, index) => (
                 <div key={index}>
-                  <Label htmlFor={`question${index + 1}`} className="text-blue-900 font-medium mb-3 block">
+                  <Label htmlFor={`question${index + 1}`} className="text-blue-900 font-medium mb-3 block text-left">
                     {index + 1}. {question}
                   </Label>
                   <Textarea
@@ -258,14 +259,14 @@ const WensberoepenStep3 = () => {
               <Button 
                 onClick={handleComplete}
                 className={`font-semibold px-8 ${
-                  isFormComplete 
+                  isWensberoepenComplete 
                     ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 
                     : "bg-gray-300 text-gray-500 cursor-not-allowed"
                 }`}
-                disabled={isSubmitting || !isFormComplete || validationLoading}
+                disabled={isSubmitting || !isWensberoepenComplete || validationLoading}
               >
                 {isSubmitting ? "Bezig met afronden..." : 
-                 !isFormComplete ? "Vul alle velden in" : "Afronden"}
+                 !isWensberoepenComplete ? "Vul alle velden in" : "Afronden"}
               </Button>
             </div>
           </CardContent>

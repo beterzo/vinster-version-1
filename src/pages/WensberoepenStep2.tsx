@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -141,7 +142,7 @@ const WensberoepenStep2 = () => {
             </div>
 
             <div className="mb-8">
-              <Label htmlFor="jobTitle" className="text-blue-900 font-medium text-lg mb-3 block">
+              <Label htmlFor="jobTitle" className="text-blue-900 font-medium text-lg mb-3 block text-left">
                 Naam van het beroep
               </Label>
               <Input
@@ -157,7 +158,7 @@ const WensberoepenStep2 = () => {
             <div className="space-y-6">
               {questions.map((question, index) => (
                 <div key={index}>
-                  <Label htmlFor={`question${index + 1}`} className="text-blue-900 font-medium mb-3 block">
+                  <Label htmlFor={`question${index + 1}`} className="text-blue-900 font-medium mb-3 block text-left">
                     {index + 1}. {question}
                   </Label>
                   <Textarea

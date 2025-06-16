@@ -40,7 +40,7 @@ export const WensberoepenField = ({
   
   return (
     <div>
-      <Label htmlFor={id}>{label}</Label>
+      <Label htmlFor={id} className="text-left block">{label}</Label>
       <Component
         id={id}
         value={value}

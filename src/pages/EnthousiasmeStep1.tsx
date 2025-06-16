@@ -68,7 +68,7 @@ const EnthousiasmeStep1 = () => {
             {/* Questions */}
             <div className="space-y-8">
               <div>
-                <Label htmlFor="question1" className="text-blue-900 font-medium text-lg mb-3 block">
+                <Label htmlFor="question1" className="text-blue-900 font-medium text-lg mb-3 block text-left">
                   Welke dingen deed je het liefst als kind?
                 </Label>
                 <Textarea
@@ -82,7 +82,7 @@ const EnthousiasmeStep1 = () => {
               </div>
 
               <div>
-                <Label htmlFor="question2" className="text-blue-900 font-medium text-lg mb-3 block">
+                <Label htmlFor="question2" className="text-blue-900 font-medium text-lg mb-3 block text-left">
                   Waar was je graag?
                 </Label>
                 <Textarea
@@ -96,7 +96,7 @@ const EnthousiasmeStep1 = () => {
               </div>
 
               <div>
-                <Label htmlFor="question3" className="text-blue-900 font-medium text-lg mb-3 block">
+                <Label htmlFor="question3" className="text-blue-900 font-medium text-lg mb-3 block text-left">
                   Wat interesseerde jou?
                 </Label>
                 <Textarea
