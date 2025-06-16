@@ -162,7 +162,7 @@ function App() {
                 } 
               />
               <Route 
-                path="/extra-informatie" 
+                path="/extra-informatie-vragen" 
                 element={
                   <ProtectedRoute>
                     <ExtraInformatieVragen />
