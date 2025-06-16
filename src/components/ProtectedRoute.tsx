@@ -14,8 +14,7 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     hasUser: !!user, 
     hasSession: !!session, 
     loading, 
-    currentPath: location.pathname,
-    emailConfirmed: user?.email_confirmed_at
+    currentPath: location.pathname
   });
 
   if (loading) {
@@ -36,13 +35,7 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     return <Navigate to="/login" replace />;
   }
 
-  // Check if email is confirmed
-  if (!user.email_confirmed_at) {
-    console.log('🔒 ProtectedRoute: Email not confirmed, redirecting to email confirmation');
-    return <Navigate to="/email-confirmation" replace />;
-  }
-
-  console.log('✅ ProtectedRoute: Authenticated and confirmed, rendering protected content');
+  console.log('✅ ProtectedRoute: Authenticated, rendering protected content');
   return <>{children}</>;
 };
 
