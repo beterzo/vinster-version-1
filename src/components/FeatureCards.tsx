@@ -11,7 +11,7 @@ const FeatureCards = () => {
   return (
     <div className="max-w-[1440px] mx-auto px-6 py-12 bg-gray-50">
       <div className="bg-white rounded-3xl shadow-xl p-8">
-        <div className="max-w-4xl w-full">
+        <div className="w-full">
           <Card className="text-white p-8 md:p-12 rounded-3xl border-0 relative overflow-hidden min-h-[350px]" style={{
             backgroundColor: '#A9C5E2'
           }}>
