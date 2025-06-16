@@ -22,7 +22,7 @@ const FeatureCards = () => {
                   Daarom doe je dit
                 </h3>
                 
-                <div className="space-y-4 text-lg leading-relaxed opacity-95">
+                <div className="space-y-4 text-lg leading-relaxed opacity-95 text-left">
                   <p>
                     Het doel van Vinster is simpel: jou helpen ontdekken welk werk echt bij je past.
                   </p>
@@ -40,7 +40,7 @@ const FeatureCards = () => {
                   </p>
                 </div>
                 
-                <div className="pt-4">
+                <div className="pt-4 text-left">
                   <Button 
                     onClick={handleViewSampleReport}
                     className="bg-blue-900 hover:bg-blue-800 text-white font-bold px-8 py-4 rounded-full text-lg shadow-lg hover:shadow-xl transition-all duration-200"
