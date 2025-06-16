@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
@@ -24,6 +24,10 @@ export const useZoekprofielResponses = () => {
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
+  
+  // Debounce state
+  const debounceTimeouts = useRef<{ [key: string]: NodeJS.Timeout }>({});
+  const saveQueue = useRef<{ [key: string]: string }>({});
 
   const loadResponses = async () => {
     if (!user?.id) {
@@ -38,7 +42,7 @@ export const useZoekprofielResponses = () => {
         .from('zoekprofiel_responses')
         .select('*')
         .eq('user_id', user.id)
-        .single();
+        .maybeSingle();
 
       if (error && error.code !== 'PGRST116') {
         console.error('❌ Error loading zoekprofiel responses:', error);
@@ -63,7 +67,7 @@ export const useZoekprofielResponses = () => {
     }
   };
 
-  const calculateProgress = (data: ZoekprofielResponse) => {
+  const calculateProgress = useCallback((data: ZoekprofielResponse) => {
     const fields = [
       data.functie_als,
       data.kerntaken,
@@ -78,15 +82,16 @@ export const useZoekprofielResponses = () => {
     
     setProgress(progressPercentage);
     setIsCompleted(progressPercentage === 100);
-  };
+  }, []);
 
-  const saveResponse = async (field: string, value: string) => {
+  const debouncedSave = useCallback(async (field: string, value: string) => {
     if (!user?.id) return;
 
     try {
       console.log(`💾 Saving zoekprofiel ${field}:`, value);
 
       if (responses) {
+        // Update existing record
         const { error } = await supabase
           .from('zoekprofiel_responses')
           .update({ [field]: value })
@@ -98,11 +103,14 @@ export const useZoekprofielResponses = () => {
         setResponses(updatedResponse);
         calculateProgress(updatedResponse);
       } else {
+        // Create new record
         const { data, error } = await supabase
           .from('zoekprofiel_responses')
-          .insert({
+          .upsert({
             user_id: user.id,
             [field]: value
+          }, {
+            onConflict: 'user_id'
           })
           .select()
           .single();
@@ -114,15 +122,41 @@ export const useZoekprofielResponses = () => {
       }
 
       console.log(`✅ Successfully saved zoekprofiel ${field}`);
+      
+      // Remove from save queue
+      delete saveQueue.current[field];
     } catch (error) {
       console.error(`❌ Error saving zoekprofiel ${field}:`, error);
       toast({
         title: "Fout bij opslaan",
-        description: `Kon ${field} niet opslaan.`,
+        description: `Kon ${field} niet opslaan. Probeer het opnieuw.`,
         variant: "destructive"
       });
     }
-  };
+  }, [user?.id, responses, calculateProgress, toast]);
+
+  const saveResponse = useCallback((field: string, value: string) => {
+    // Optimistically update UI
+    if (responses) {
+      const updatedResponse = { ...responses, [field]: value };
+      setResponses(updatedResponse);
+      calculateProgress(updatedResponse);
+    }
+
+    // Add to save queue
+    saveQueue.current[field] = value;
+
+    // Clear existing timeout for this field
+    if (debounceTimeouts.current[field]) {
+      clearTimeout(debounceTimeouts.current[field]);
+    }
+
+    // Set new timeout
+    debounceTimeouts.current[field] = setTimeout(() => {
+      debouncedSave(field, value);
+      delete debounceTimeouts.current[field];
+    }, 1000);
+  }, [responses, calculateProgress, debouncedSave]);
 
   const submitToWebhook = async () => {
     if (!responses) {
@@ -175,6 +209,15 @@ export const useZoekprofielResponses = () => {
       return false;
     }
   };
+
+  // Cleanup timeouts on unmount
+  useEffect(() => {
+    return () => {
+      Object.values(debounceTimeouts.current).forEach(timeout => {
+        clearTimeout(timeout);
+      });
+    };
+  }, []);
 
   useEffect(() => {
     loadResponses();

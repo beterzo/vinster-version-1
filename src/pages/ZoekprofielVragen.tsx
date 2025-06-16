@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -13,7 +14,7 @@ const ZoekprofielVragen = () => {
   const { responses, loading, saveResponse, submitToWebhook, isCompleted } = useZoekprofielResponses();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Local state for form fields
+  // Local state for form fields with optimistic updates
   const [formData, setFormData] = useState({
     functie_als: '',
     kerntaken: '',
@@ -37,38 +38,8 @@ const ZoekprofielVragen = () => {
     }
   }, [responses]);
 
-  const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-    
-    // Auto-save with debounce
-    const timeoutId = setTimeout(() => {
-      saveResponse(field, value);
-    }, 1000);
-
-    return () => clearTimeout(timeoutId);
-  };
-
-  const handleSubmit = async () => {
-    if (!isCompleted) {
-      toast({
-        title: "Profiel niet compleet",
-        description: "Vul alle vragen in voordat je doorgaat.",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    setIsSubmitting(true);
-    const success = await submitToWebhook();
-    
-    if (success) {
-      navigate("/zoekprofiel-download");
-    }
-    
-    setIsSubmitting(false);
-  };
-
-  const questions = [
+  // Memoized questions array to prevent unnecessary re-renders
+  const questions = useMemo(() => [
     {
       field: 'functie_als',
       title: 'Ik ga voor een functie als',
@@ -99,7 +70,36 @@ const ZoekprofielVragen = () => {
       title: 'Met deze arbeidsvoorwaarden',
       examples: 'noem salaris, uren, pensioen, thuis werken'
     }
-  ];
+  ], []);
+
+  // Optimized input change handler with immediate UI updates
+  const handleInputChange = useCallback((field: string, value: string) => {
+    // Immediately update local state for responsive UI
+    setFormData(prev => ({ ...prev, [field]: value }));
+    
+    // Debounced save to database
+    saveResponse(field, value);
+  }, [saveResponse]);
+
+  const handleSubmit = useCallback(async () => {
+    if (!isCompleted) {
+      toast({
+        title: "Profiel niet compleet",
+        description: "Vul alle vragen in voordat je doorgaat.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    const success = await submitToWebhook();
+    
+    if (success) {
+      navigate("/zoekprofiel-download");
+    }
+    
+    setIsSubmitting(false);
+  }, [isCompleted, submitToWebhook, navigate, toast]);
 
   if (loading) {
     return (
@@ -152,6 +152,7 @@ const ZoekprofielVragen = () => {
                   value={formData[question.field as keyof typeof formData]}
                   onChange={(e) => handleInputChange(question.field, e.target.value)}
                   className="min-h-[120px] text-base text-left"
+                  placeholder={`Vul hier je antwoord in...`}
                 />
               </div>
             </Card>
