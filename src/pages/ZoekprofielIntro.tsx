@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-import { Search, ArrowRight, Target, Users, MapPin, CheckCircle } from "lucide-react";
+import { Search, ArrowRight, Target, Users, MapPin } from "lucide-react";
 
 const ZoekprofielIntro = () => {
   const navigate = useNavigate();
@@ -14,12 +14,12 @@ const ZoekprofielIntro = () => {
       description: "Vind passende vacatures sneller"
     },
     {
-      icon: <Users className="w-6 h-6 text-green-500" />,
+      icon: <Users className="w-6 h-6 text-yellow-500" />,
       title: "Betere gesprekken",
       description: "Voer gerichte gesprekken met je netwerk"
     },
     {
-      icon: <MapPin className="w-6 h-6 text-purple-500" />,
+      icon: <MapPin className="w-6 h-6 text-blue-500" />,
       title: "Zichtbaar maken",
       description: "Laat anderen weten waar je naar zoekt"
     }
@@ -47,37 +47,33 @@ const ZoekprofielIntro = () => {
         </div>
 
         {/* Main Content */}
-        <div className="grid md:grid-cols-2 gap-12 items-center mb-12">
+        <div className="grid md:grid-cols-2 gap-12 items-start mb-12">
           <div className="space-y-6">
             <div className="prose prose-lg text-gray-700">
               <p>
                 Zo'n profiel helpt om gericht te zoeken, goede gesprekken te voeren én anderen te laten weten waar jij naar op zoek bent.
               </p>
-              <p>
-                Je geeft aan welk werk je graag wilt doen, in welke branche of richting je dat zoekt, en waar jij energie van krijgt in je werk. Ook vul je in bij wat voor type organisatie je het liefst werkt, in welke regio, en welke voorwaarden jij belangrijk vindt.
-              </p>
-              <p>
-                Dit profiel kun je gebruiken bij het zoeken van vacatures, in gesprekken met mensen uit je netwerk, of als je een open sollicitatie stuurt. Het maakt jouw loopbaankeuze concreet en zichtbaar.
-              </p>
-            </div>
-            
-            <div className="bg-blue-50 p-6 rounded-2xl border border-blue-100">
-              <div className="flex items-center gap-3 mb-3">
-                <CheckCircle className="w-6 h-6 text-blue-600" />
-                <h3 className="font-semibold text-blue-900">Je weet nu wat je wilt</h3>
-              </div>
-              <p className="text-blue-800 font-medium">Tijd om het te gaan vinden.</p>
             </div>
           </div>
 
           <div className="space-y-4">
+            {/* New text block */}
+            <Card className="p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+              <div className="text-left">
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Je geeft aan welk werk je graag wilt doen, in welke branche of richting je dat zoekt, en waar jij energie van krijgt in je werk. Ook vul je in bij wat voor type organisatie je het liefst werkt, in welke regio, en welke voorwaarden jij belangrijk vindt. Dit profiel kun je gebruiken bij het zoeken van vacatures, in gesprekken met mensen uit je netwerk, of als je een open sollicitatie stuurt. Het maakt jouw loopbaankeuze concreet en zichtbaar.
+                </p>
+              </div>
+            </Card>
+
+            {/* Benefit cards */}
             {benefits.map((benefit, index) => (
               <Card key={index} className="p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0 w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center">
                     {benefit.icon}
                   </div>
-                  <div>
+                  <div className="text-left">
                     <h3 className="font-semibold text-gray-900 mb-2">{benefit.title}</h3>
                     <p className="text-gray-600 text-sm">{benefit.description}</p>
                   </div>
