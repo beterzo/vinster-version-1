@@ -22,16 +22,46 @@ serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     )
 
-    const { user_id, pdf_data, filename } = await req.json()
+    const { user_id, pdf_URL, filename } = await req.json()
     
-    if (!user_id || !pdf_data || !filename) {
-      throw new Error('Missing required fields: user_id, pdf_data, or filename')
+    if (!user_id || !pdf_URL || !filename) {
+      throw new Error('Missing required fields: user_id, pdf_URL, or filename')
     }
 
-    console.log(`Processing PDF upload for user: ${user_id}, filename: ${filename}`)
+    console.log(`Processing PDF download for user: ${user_id}, filename: ${filename}, URL: ${pdf_URL}`)
 
-    // Convert base64 to Uint8Array
-    const pdfBuffer = Uint8Array.from(atob(pdf_data), c => c.charCodeAt(0))
+    // Validate URL format
+    let url;
+    try {
+      url = new URL(pdf_URL);
+    } catch (error) {
+      throw new Error('Invalid PDF URL provided');
+    }
+
+    // Download PDF from the provided URL
+    console.log(`Downloading PDF from: ${pdf_URL}`);
+    const pdfResponse = await fetch(pdf_URL, {
+      method: 'GET',
+      headers: {
+        'User-Agent': 'Supabase-Function/1.0'
+      }
+    });
+
+    if (!pdfResponse.ok) {
+      throw new Error(`Failed to download PDF: ${pdfResponse.status} ${pdfResponse.statusText}`);
+    }
+
+    // Check if the response is actually a PDF
+    const contentType = pdfResponse.headers.get('content-type');
+    if (contentType && !contentType.includes('application/pdf') && !contentType.includes('application/octet-stream')) {
+      console.warn(`Warning: Content-Type is ${contentType}, expected application/pdf`);
+    }
+
+    // Convert response to ArrayBuffer and then to Uint8Array
+    const pdfArrayBuffer = await pdfResponse.arrayBuffer();
+    const pdfBuffer = new Uint8Array(pdfArrayBuffer);
+    
+    console.log(`Downloaded PDF size: ${pdfBuffer.length} bytes`);
     
     // Create file path: user_id/filename
     const filePath = `${user_id}/${filename}`
@@ -72,8 +102,9 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({ 
         success: true, 
-        message: 'PDF uploaded and user report updated successfully',
-        file_path: filePath
+        message: 'PDF downloaded and uploaded successfully',
+        file_path: filePath,
+        file_size: pdfBuffer.length
       }),
       { 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
