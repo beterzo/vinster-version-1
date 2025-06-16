@@ -54,7 +54,7 @@ const LoginPage = () => {
   };
 
   const handleLogoClick = () => {
-    navigate("/home");
+    navigate("/");
   };
 
   return (
