@@ -31,11 +31,30 @@ const WensberoepenStep1 = () => {
     question12: ""
   });
 
-  // Local validation for step 1 only
+  // Fixed validation to check actual database responses instead of local state
   const isStep1Complete = () => {
-    if (!jobTitle.trim()) return false;
+    if (!responses) return false;
     
-    return Object.values(answers).every(answer => answer.trim() !== "");
+    // Check job title
+    const jobTitleFilled = responses.wensberoep_1_titel?.trim() !== '' && responses.wensberoep_1_titel !== null;
+    
+    // Check all 12 questions
+    const allQuestionsFilled = [
+      responses.wensberoep_1_werkweek_activiteiten,
+      responses.wensberoep_1_werklocatie_omgeving,
+      responses.wensberoep_1_binnen_buiten_verhouding,
+      responses.wensberoep_1_samenwerking_contacten,
+      responses.wensberoep_1_fluitend_thuiskomen_dag,
+      responses.wensberoep_1_werk_doel,
+      responses.wensberoep_1_reistijd,
+      responses.wensberoep_1_werkuren,
+      responses.wensberoep_1_werksfeer,
+      responses.wensberoep_1_leukste_onderdelen,
+      responses.wensberoep_1_belangrijke_aspecten,
+      responses.wensberoep_1_kennis_focus
+    ].every(field => field?.trim() !== '' && field !== null);
+    
+    return jobTitleFilled && allQuestionsFilled;
   };
 
   // Load saved data when responses change (only when data is loaded)
