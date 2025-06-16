@@ -23,22 +23,22 @@ const DashboardSidebar = ({ getNextStep, hasUserReport }: DashboardSidebarProps)
 
       {/* Knoppen - onderaan rechts */}
       <div className="space-y-4">
-        {/* Altijd aanwezige "Ga verder" knop */}
+        {/* Altijd aanwezige "Ga verder" knop - terug naar geel */}
         <Button 
-          className="w-full text-white font-bold py-8 text-xl rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
-          style={{ backgroundColor: '#21324E' }}
-          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#2a3b5c'}
-          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#21324E'}
+          className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-8 text-xl rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
           size="lg"
           onClick={() => navigate(getNextStep())}
         >
           Ga verder waar je gebleven was
         </Button>
 
-        {/* Conditionale "Bekijk mijn rapport" knop */}
+        {/* Conditionale "Bekijk mijn rapport" knop - naar donkerblauw #21324E */}
         {hasUserReport && (
           <Button 
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
+            className="w-full text-white font-bold py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
+            style={{ backgroundColor: '#21324E' }}
+            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#2a3b5c'}
+            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#21324E'}
             size="lg"
             onClick={() => navigate("/rapport-download")}
           >
