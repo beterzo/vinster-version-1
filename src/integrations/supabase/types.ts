@@ -64,7 +64,15 @@ export type Database = {
           user_id?: string
           werkomgeving_aantrekkelijke_elementen?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "enthousiasme_responses_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       extra_informatie_responses: {
         Row: {
