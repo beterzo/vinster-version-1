@@ -48,7 +48,7 @@ const ProgressStepsGrid = ({
       icon: <ClipboardList className="w-5 h-5 text-yellow-500" />
     },
     {
-      title: "Jouw rapport",
+      title: "Rapport & onderzoeksplan",
       progress: hasUserReport ? 100 : 0,
       isCompleted: hasUserReport,
       icon: <FileText className="w-5 h-5 text-blue-400" />

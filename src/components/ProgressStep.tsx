@@ -24,7 +24,7 @@ const ProgressStep = ({
               {icon}
             </div>}
           <div className="flex-1 space-y-2">
-            <h3 className="font-semibold text-gray-900 text-base">Rapport & onderzoeksplan</h3>
+            <h3 className="font-semibold text-gray-900 text-base">{title}</h3>
             <div className="space-y-1">
               <div className="flex justify-between items-center">
                 <span className="text-xs text-gray-500">
