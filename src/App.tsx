@@ -1,183 +1,235 @@
-
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { AuthProvider, useAuth } from "@/hooks/useAuth";
-import Home from "./pages/Home";
-import NotFound from "./pages/NotFound";
-import LandingPage from "./pages/LandingPage";
-import LoginPage from "./pages/LoginPage";
-import SignupPage from "./pages/SignupPage";
-import PaymentRequired from "./pages/PaymentRequired";
-import ProtectedRoute from "./components/ProtectedRoute";
-import PaymentGuard from "./components/PaymentGuard";
-import EnthousiasmeIntro from "./pages/EnthousiasmeIntro";
-import EnthousiasmeStep1 from "./pages/EnthousiasmeStep1";
-import EnthousiasmeStep2 from "./pages/EnthousiasmeStep2";
-import EnthousiasmeStep3 from "./pages/EnthousiasmeStep3";
-import EnthousiasmeStep4 from "./pages/EnthousiasmeStep4";
-import WensberoepenIntro from "./pages/WensberoepenIntro";
-import WensberoepenStep1 from "./pages/WensberoepenStep1";
-import WensberoepenStep2 from "./pages/WensberoepenStep2";
-import WensberoepenStep3 from "./pages/WensberoepenStep3";
-import ProfielVoltooienIntro from "./pages/ProfielVoltooienIntro";
-import ExtraInformatieVragen from "./pages/ExtraInformatieVragen";
-import PrioriteitenActiviteiten from "./pages/PrioriteitenActiviteiten";
-import PrioriteitenWerkomstandigheden from "./pages/PrioriteitenWerkomstandigheden";
-import PrioriteitenInteresses from "./pages/PrioriteitenInteresses";
-import RapportReview from "./pages/RapportReview";
-import RapportDownload from "./pages/RapportDownload";
-import OnderzoeksplanPagina from "./pages/OnderzoeksplanPagina";
+import { Toaster } from "@/components/ui/toaster";
+import { AuthProvider } from "@/hooks/useAuth";
+import ProtectedRoute from "@/components/ProtectedRoute";
+import PaymentGuard from "@/components/PaymentGuard";
+
+// Import pages
+import LandingPage from "@/pages/LandingPage";
+import SignupPage from "@/pages/SignupPage";
+import LoginPage from "@/pages/LoginPage";
+import Home from "@/pages/Home";
+import EnthousiasmeIntro from "@/pages/EnthousiasmeIntro";
+import EnthousiasmeStep1 from "@/pages/EnthousiasmeStep1";
+import EnthousiasmeStep2 from "@/pages/EnthousiasmeStep2";
+import EnthousiasmeStep3 from "@/pages/EnthousiasmeStep3";
+import EnthousiasmeStep4 from "@/pages/EnthousiasmeStep4";
+import WensberoepenIntro from "@/pages/WensberoepenIntro";
+import WensberoepenStep1 from "@/pages/WensberoepenStep1";
+import WensberoepenStep2 from "@/pages/WensberoepenStep2";
+import WensberoepenStep3 from "@/pages/WensberoepenStep3";
+import ProfielVoltooienIntro from "@/pages/ProfielVoltooienIntro";
+import PrioriteitenActiviteiten from "@/pages/PrioriteitenActiviteiten";
+import PrioriteitenInteresses from "@/pages/PrioriteitenInteresses";
+import PrioriteitenWerkomstandigheden from "@/pages/PrioriteitenWerkomstandigheden";
+import ExtraInformatieVragen from "@/pages/ExtraInformatieVragen";
+import RapportReview from "@/pages/RapportReview";
+import RapportDownload from "@/pages/RapportDownload";
+import OnderzoeksplanPagina from "@/pages/OnderzoeksplanPagina";
+import ZoekprofielIntro from "@/pages/ZoekprofielIntro";
+import ZoekprofielVragen from "@/pages/ZoekprofielVragen";
+import ZoekprofielDownload from "@/pages/ZoekprofielDownload";
+import PaymentRequired from "@/pages/PaymentRequired";
+import NotFound from "@/pages/NotFound";
+
+import "./App.css";
 
 const queryClient = new QueryClient();
 
-// Component to handle automatic redirects for authenticated users
-const AuthRedirect = () => {
-  const { user, session, loading } = useAuth();
-
-  console.log('🔄 AuthRedirect check:', { 
-    hasUser: !!user, 
-    hasSession: !!session, 
-    loading 
-  });
-
-  if (loading) {
-    console.log('🔄 AuthRedirect: Still loading...');
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-900 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Laden...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (user && session) {
-    console.log('🔄 AuthRedirect: User authenticated, redirecting to payment check');
-    return <Navigate to="/payment-required" replace />;
-  }
-
-  console.log('🔄 AuthRedirect: No auth, redirecting to login');
-  return <Navigate to="/login" replace />;
-};
-
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
+function App() {
+  return (
+    <BrowserRouter>
+      <QueryClient client={queryClient}>
         <AuthProvider>
-          <Routes>
-            <Route path="/" element={<AuthRedirect />} />
-            <Route path="/landingspagina" element={<LandingPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<SignupPage />} />
-            <Route path="/payment-required" element={
-              <ProtectedRoute>
-                <PaymentRequired />
-              </ProtectedRoute>
-            } />
-            <Route path="/home" element={
-              <PaymentGuard>
-                <Home />
-              </PaymentGuard>
-            } />
-            <Route path="/enthousiasme-intro" element={
-              <PaymentGuard>
-                <EnthousiasmeIntro />
-              </PaymentGuard>
-            } />
-            <Route path="/enthousiasme-stap-1" element={
-              <PaymentGuard>
-                <EnthousiasmeStep1 />
-              </PaymentGuard>
-            } />
-            <Route path="/enthousiasme-stap-2" element={
-              <PaymentGuard>
-                <EnthousiasmeStep2 />
-              </PaymentGuard>
-            } />
-            <Route path="/enthousiasme-stap-3" element={
-              <PaymentGuard>
-                <EnthousiasmeStep3 />
-              </PaymentGuard>
-            } />
-            <Route path="/enthousiasme-stap-4" element={
-              <PaymentGuard>
-                <EnthousiasmeStep4 />
-              </PaymentGuard>
-            } />
-            <Route path="/wensberoepen-intro" element={
-              <PaymentGuard>
-                <WensberoepenIntro />
-              </PaymentGuard>
-            } />
-            <Route path="/wensberoepen-stap-1" element={
-              <PaymentGuard>
-                <WensberoepenStep1 />
-              </PaymentGuard>
-            } />
-            <Route path="/wensberoepen-stap-2" element={
-              <PaymentGuard>
-                <WensberoepenStep2 />
-              </PaymentGuard>
-            } />
-            <Route path="/wensberoepen-stap-3" element={
-              <PaymentGuard>
-                <WensberoepenStep3 />
-              </PaymentGuard>
-            } />
-            <Route path="/profiel-voltooien-intro" element={
-              <PaymentGuard>
-                <ProfielVoltooienIntro />
-              </PaymentGuard>
-            } />
-            <Route path="/extra-informatie-vragen" element={
-              <PaymentGuard>
-                <ExtraInformatieVragen />
-              </PaymentGuard>
-            } />
-            <Route path="/prioriteiten-activiteiten" element={
-              <PaymentGuard>
-                <PrioriteitenActiviteiten />
-              </PaymentGuard>
-            } />
-            <Route path="/prioriteiten-werkomstandigheden" element={
-              <PaymentGuard>
-                <PrioriteitenWerkomstandigheden />
-              </PaymentGuard>
-            } />
-            <Route path="/prioriteiten-interesses" element={
-              <PaymentGuard>
-                <PrioriteitenInteresses />
-              </PaymentGuard>
-            } />
-            <Route path="/rapport-review" element={
-              <PaymentGuard>
-                <RapportReview />
-              </PaymentGuard>
-            } />
-            <Route path="/rapport-download" element={
-              <PaymentGuard>
-                <RapportDownload />
-              </PaymentGuard>
-            } />
-            <Route path="/onderzoeksplan" element={
-              <PaymentGuard>
-                <OnderzoeksplanPagina />
-              </PaymentGuard>
-            } />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <div className="min-h-screen bg-background font-sans antialiased">
+            <Toaster />
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/signup" element={<SignupPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route 
+                path="/home" 
+                element={
+                  <ProtectedRoute>
+                    <Home />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/enthousiasme-intro" 
+                element={
+                  <ProtectedRoute>
+                    <EnthousiasmeIntro />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/enthousiasme-stap-1" 
+                element={
+                  <ProtectedRoute>
+                    <EnthousiasmeStep1 />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/enthousiasme-stap-2" 
+                element={
+                  <ProtectedRoute>
+                    <EnthousiasmeStep2 />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/enthousiasme-stap-3" 
+                element={
+                  <ProtectedRoute>
+                    <EnthousiasmeStep3 />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/enthousiasme-stap-4" 
+                element={
+                  <ProtectedRoute>
+                    <EnthousiasmeStep4 />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/wensberoepen-intro" 
+                element={
+                  <ProtectedRoute>
+                    <WensberoepenIntro />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/wensberoepen-stap-1" 
+                element={
+                  <ProtectedRoute>
+                    <WensberoepenStep1 />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/wensberoepen-stap-2" 
+                element={
+                  <ProtectedRoute>
+                    <WensberoepenStep2 />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/wensberoepen-stap-3" 
+                element={
+                  <ProtectedRoute>
+                    <WensberoepenStep3 />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/profiel-voltooien-intro" 
+                element={
+                  <ProtectedRoute>
+                    <ProfielVoltooienIntro />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/prioriteiten-activiteiten" 
+                element={
+                  <ProtectedRoute>
+                    <PrioriteitenActiviteiten />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/prioriteiten-interesses" 
+                element={
+                  <ProtectedRoute>
+                    <PrioriteitenInteresses />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/prioriteiten-werkomstandigheden" 
+                element={
+                  <ProtectedRoute>
+                    <PrioriteitenWerkomstandigheden />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/extra-informatie" 
+                element={
+                  <ProtectedRoute>
+                    <ExtraInformatieVragen />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/rapport-review" 
+                element={
+                  <ProtectedRoute>
+                    <PaymentGuard>
+                      <RapportReview />
+                    </PaymentGuard>
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/rapport-download" 
+                element={
+                  <ProtectedRoute>
+                    <PaymentGuard>
+                      <RapportDownload />
+                    </PaymentGuard>
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/onderzoeksplan" 
+                element={
+                  <ProtectedRoute>
+                    <PaymentGuard>
+                      <OnderzoeksplanPagina />
+                    </PaymentGuard>
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/zoekprofiel-intro" 
+                element={
+                  <ProtectedRoute>
+                    <ZoekprofielIntro />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/zoekprofiel-vragen" 
+                element={
+                  <ProtectedRoute>
+                    <ZoekprofielVragen />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/zoekprofiel-download" 
+                element={
+                  <ProtectedRoute>
+                    <ZoekprofielDownload />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route path="/payment-required" element={<PaymentRequired />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
         </AuthProvider>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+      </QueryClient>
+    </BrowserRouter>
+  );
+}
 
 export default App;

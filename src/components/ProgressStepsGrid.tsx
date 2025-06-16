@@ -1,6 +1,7 @@
 
 import ProgressStep from "./ProgressStep";
 import { CircleUser, Target, Star, CheckCircle, Search, FileText, ListTodo, UserCheck, Info, ClipboardList } from "lucide-react";
+import { useZoekprofielResponses } from "@/hooks/useZoekprofielResponses";
 
 interface ProgressStepsGridProps {
   prioriteitenProgress: number;
@@ -19,6 +20,8 @@ const ProgressStepsGrid = ({
   hasUserReport,
   onStepClick
 }: ProgressStepsGridProps) => {
+  const { progress: zoekprofielProgress, isCompleted: zoekprofielCompleted } = useZoekprofielResponses();
+
   // Calculate combined progress for "Profiel voltooien"
   const combinedProgress = () => {
     if (extraInformatieCompleted && prioriteitenCompleted) return 100;
@@ -55,9 +58,9 @@ const ProgressStepsGrid = ({
     },
     {
       title: "Zoekprofiel",
-      progress: 0,
-      isCompleted: false,
-      icon: <UserCheck className="w-5 h-5 text-yellow-500" />
+      progress: zoekprofielProgress,
+      isCompleted: zoekprofielCompleted,
+      icon: <Search className="w-5 h-5 text-yellow-500" />
     }
   ];
 

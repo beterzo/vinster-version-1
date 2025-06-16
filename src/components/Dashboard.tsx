@@ -27,14 +27,15 @@ const Dashboard = () => {
       navigate("/wensberoepen-intro");
     } else if (stepTitle === "Profiel voltooien") {
       navigate("/profiel-voltooien-intro");
-    } else if (stepTitle === "Jouw rapport") {
+    } else if (stepTitle === "Rapport & onderzoeksplan") {
       if (userReport) {
         navigate("/rapport-download");
       } else {
         navigate("/rapport-review");
       }
+    } else if (stepTitle === "Zoekprofiel") {
+      navigate("/zoekprofiel-intro");
     }
-    // Add more navigation logic for other steps later
   };
 
   // Determine which step to continue with
@@ -44,7 +45,7 @@ const Dashboard = () => {
     } else if (!userReport) {
       return "/rapport-review";
     } else {
-      return "/rapport-download";
+      return "/zoekprofiel-intro";
     }
   };
 

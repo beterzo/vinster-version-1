@@ -351,6 +351,45 @@ export type Database = {
         }
         Relationships: []
       }
+      zoekprofiel_responses: {
+        Row: {
+          belangrijke_voorwaarden: string | null
+          branche_richting: string | null
+          created_at: string
+          energie_gevende_aspecten: string | null
+          gewenst_werk: string | null
+          gewenste_regio: string | null
+          id: string
+          organisatie_type: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          belangrijke_voorwaarden?: string | null
+          branche_richting?: string | null
+          created_at?: string
+          energie_gevende_aspecten?: string | null
+          gewenst_werk?: string | null
+          gewenste_regio?: string | null
+          id?: string
+          organisatie_type?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          belangrijke_voorwaarden?: string | null
+          branche_richting?: string | null
+          created_at?: string
+          energie_gevende_aspecten?: string | null
+          gewenst_werk?: string | null
+          gewenste_regio?: string | null
+          id?: string
+          organisatie_type?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
