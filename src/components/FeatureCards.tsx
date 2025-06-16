@@ -24,15 +24,19 @@ const FeatureCards = () => {
                 
                 <div className="space-y-4 text-lg leading-relaxed opacity-95">
                   <p>
-                    Het rapport laat zien welk werk écht bij je past.
+                    Het doel van Vinster is simpel: jou helpen ontdekken welk werk echt bij je past.
                   </p>
                   
                   <p>
-                    Je ontdekt wat jij belangrijk vindt in werk, welke omgeving bij je past en welke functies daarbij horen.
+                    Om dat te bereiken stellen we je slimme vragen over wat je graag doet, waar je energie van krijgt en in welke omgeving je het beste tot je recht komt.
                   </p>
                   
                   <p>
-                    Het is het resultaat van de loopbaantrechter — een helder en bruikbaar document om stappen te zetten richting werk dat bij je past.
+                    Daaruit ontstaat een persoonlijk rapport met concrete functievoorstellen, passend bij jouw voorkeuren, interesses en talenten.
+                  </p>
+                  
+                  <p>
+                    Zo weet je niet alleen wat je zoekt, maar ook waarom.
                   </p>
                 </div>
                 
