@@ -1,3 +1,4 @@
+
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { usePrioriteitenResponses } from "@/hooks/usePrioriteitenResponses";
@@ -193,7 +194,7 @@ const Dashboard = () => {
             getNextStep={getNextStep} 
             hasUserReport={!!userReport}
             hasStarted={userHasStarted}
-            hasZoekprofielPdf={!!isPdfReady}
+            hasZoekprofielPdf={!!isZoekprofielReady}
             downloadRapportPdf={downloadRapportPdf}
             downloadZoekprofielPdf={downloadZoekprofielPdf}
           />
