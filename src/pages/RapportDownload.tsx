@@ -132,7 +132,10 @@ const RapportDownload = () => {
             
             <Button
               onClick={() => navigate("/onderzoeksplan")}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xl py-6 h-auto"
+              className="w-full text-white rounded-xl text-xl py-6 h-auto"
+              style={{ backgroundColor: '#21324E' }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#2a3b5c'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#21324E'}
               size="lg"
             >
               <ArrowRight className="w-6 h-6 mr-3" />
