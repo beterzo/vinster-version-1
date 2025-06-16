@@ -4,9 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useAuth } from "@/hooks/useAuth";
-import { useNavigate, Link } from "react-router-dom";
-import { useToast } from "@/hooks/use-toast";
+import { Link } from "react-router-dom";
 
 const SignupPage = () => {
   const [firstName, setFirstName] = useState("");
@@ -17,57 +15,32 @@ const SignupPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const { signUp } = useAuth();
-  const navigate = useNavigate();
-  const { toast } = useToast();
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (password !== confirmPassword) {
-      toast({
-        title: "Wachtwoorden komen niet overeen",
-        description: "Controleer of beide wachtwoorden hetzelfde zijn.",
-        variant: "destructive",
-      });
+      console.log("Wachtwoorden komen niet overeen");
       return;
     }
 
     if (!firstName || !lastName || !gender || !email || !password) {
-      toast({
-        title: "Vul alle velden in",
-        description: "Alle velden zijn verplicht.",
-        variant: "destructive",
-      });
+      console.log("Alle velden zijn verplicht");
       return;
     }
 
-    setIsLoading(true);
-
-    const { error } = await signUp(email, password, firstName, lastName, gender);
-
-    if (error) {
-      toast({
-        title: "Fout bij registreren",
-        description: error.message === "User already registered" 
-          ? "Dit e-mailadres is al geregistreerd."
-          : error.message,
-        variant: "destructive",
-      });
-    } else {
-      toast({
-        title: "Account succesvol aangemaakt!",
-        description: "Je bent nu automatisch ingelogd en kunt beginnen.",
-        duration: 8000,
-      });
-      navigate("/home");
-    }
-
-    setIsLoading(false);
+    // TODO: Implement registration logic
+    console.log("Signup form submitted:", {
+      firstName,
+      lastName,
+      gender,
+      email,
+      password
+    });
   };
 
   const handleLogoClick = () => {
-    navigate("/");
+    // TODO: Navigate to home
+    console.log("Logo clicked");
   };
 
   return (

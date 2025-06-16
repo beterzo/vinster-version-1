@@ -4,56 +4,22 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useAuth } from "@/hooks/useAuth";
-import { useNavigate, Link } from "react-router-dom";
-import { useToast } from "@/hooks/use-toast";
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const { signIn } = useAuth();
-  const navigate = useNavigate();
-  const { toast } = useToast();
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!email || !password) {
-      toast({
-        title: "Vul alle velden in",
-        description: "E-mailadres en wachtwoord zijn verplicht.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setIsLoading(true);
-
-    const { error } = await signIn(email, password);
-
-    if (error) {
-      toast({
-        title: "Fout bij inloggen",
-        description: error.message === "Invalid login credentials" 
-          ? "Onjuiste inloggegevens. Probeer het opnieuw."
-          : error.message,
-        variant: "destructive",
-      });
-    } else {
-      toast({
-        title: "Succesvol ingelogd!",
-        description: "Welkom terug.",
-      });
-      navigate("/home");
-    }
-
-    setIsLoading(false);
+    // TODO: Implement authentication logic
+    console.log("Login form submitted:", { email, password });
   };
 
   const handleLogoClick = () => {
-    navigate("/");
+    // TODO: Navigate to home
+    console.log("Logo clicked");
   };
 
   return (
