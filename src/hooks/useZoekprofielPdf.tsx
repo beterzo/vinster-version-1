@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
@@ -19,6 +19,10 @@ export const useZoekprofielPdf = () => {
   const { toast } = useToast();
   const [pdfData, setPdfData] = useState<ZoekprofielPdf | null>(null);
   const [loading, setLoading] = useState(true);
+  
+  // Refs for cleanup
+  const pollingIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const realtimeChannelRef = useRef<any>(null);
 
   const loadPdfData = useCallback(async () => {
     if (!user?.id) {
@@ -54,6 +58,97 @@ export const useZoekprofielPdf = () => {
       setLoading(false);
     }
   }, [user?.id, toast]);
+
+  // Setup real-time subscription
+  useEffect(() => {
+    if (!user?.id) return;
+
+    console.log('🔄 Setting up real-time subscription for zoekprofiel updates');
+
+    // Create real-time subscription
+    const channel = supabase
+      .channel('zoekprofiel-updates')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'user_zoekprofielen',
+          filter: `user_id=eq.${user.id}`
+        },
+        (payload) => {
+          console.log('📡 Real-time update received:', payload);
+          
+          if (payload.eventType === 'UPDATE' || payload.eventType === 'INSERT') {
+            const newData = payload.new as ZoekprofielPdf;
+            setPdfData(newData);
+            
+            // Show success message when PDF is completed
+            if (newData.pdf_status === 'completed' && newData.pdf_url) {
+              toast({
+                title: "PDF gereed!",
+                description: "Je zoekprofiel PDF is succesvol gegenereerd en kan nu gedownload worden.",
+              });
+              
+              // Stop polling when completed
+              if (pollingIntervalRef.current) {
+                clearInterval(pollingIntervalRef.current);
+                pollingIntervalRef.current = null;
+              }
+            }
+          }
+        }
+      )
+      .subscribe();
+
+    realtimeChannelRef.current = channel;
+
+    return () => {
+      console.log('🧹 Cleaning up real-time subscription');
+      if (realtimeChannelRef.current) {
+        supabase.removeChannel(realtimeChannelRef.current);
+      }
+    };
+  }, [user?.id, toast]);
+
+  // Setup polling for generating status
+  useEffect(() => {
+    if (!pdfData || pdfData.pdf_status !== 'generating') {
+      // Clear any existing polling
+      if (pollingIntervalRef.current) {
+        clearInterval(pollingIntervalRef.current);
+        pollingIntervalRef.current = null;
+      }
+      return;
+    }
+
+    console.log('⏰ Starting polling for PDF generation status');
+
+    // Poll every 3 seconds while generating
+    pollingIntervalRef.current = setInterval(() => {
+      console.log('🔄 Polling PDF status...');
+      loadPdfData();
+    }, 3000);
+
+    return () => {
+      if (pollingIntervalRef.current) {
+        clearInterval(pollingIntervalRef.current);
+        pollingIntervalRef.current = null;
+      }
+    };
+  }, [pdfData?.pdf_status, loadPdfData]);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (pollingIntervalRef.current) {
+        clearInterval(pollingIntervalRef.current);
+      }
+      if (realtimeChannelRef.current) {
+        supabase.removeChannel(realtimeChannelRef.current);
+      }
+    };
+  }, []);
 
   const downloadPdf = useCallback(async () => {
     if (!pdfData?.pdf_url) {
@@ -122,6 +217,7 @@ export const useZoekprofielPdf = () => {
     }
   }, [user?.id, toast, loadPdfData]);
 
+  // Initial load
   useEffect(() => {
     loadPdfData();
   }, [loadPdfData]);
