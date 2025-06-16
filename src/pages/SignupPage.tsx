@@ -4,7 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Link } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
+import { useNavigate, Link } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 const SignupPage = () => {
   const [firstName, setFirstName] = useState("");
@@ -15,38 +17,71 @@ const SignupPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  const { signUp } = useAuth();
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (password !== confirmPassword) {
-      console.log("Wachtwoorden komen niet overeen");
+      toast({
+        title: "Wachtwoorden komen niet overeen",
+        description: "Controleer of beide wachtwoorden hetzelfde zijn.",
+        variant: "destructive",
+      });
       return;
     }
 
     if (!firstName || !lastName || !gender || !email || !password) {
-      console.log("Alle velden zijn verplicht");
+      toast({
+        title: "Vul alle velden in",
+        description: "Alle velden zijn verplicht.",
+        variant: "destructive",
+      });
       return;
     }
 
-    // TODO: Implement registration logic
-    console.log("Signup form submitted:", {
-      firstName,
-      lastName,
-      gender,
-      email,
-      password
-    });
+    setIsLoading(true);
+
+    const { error } = await signUp(email, password, firstName, lastName, gender);
+
+    if (error) {
+      let errorMessage = "Er is een onbekende fout opgetreden.";
+      
+      if (error.message === "User already registered") {
+        errorMessage = "Dit e-mailadres is al geregistreerd. Probeer in te loggen.";
+      } else if (error.message.includes("Password")) {
+        errorMessage = "Het wachtwoord voldoet niet aan de vereisten. Gebruik minimaal 6 karakters.";
+      } else {
+        errorMessage = error.message;
+      }
+
+      toast({
+        title: "Fout bij registreren",
+        description: errorMessage,
+        variant: "destructive",
+      });
+    } else {
+      toast({
+        title: "Account succesvol aangemaakt!",
+        description: "We hebben een bevestigingsmail naar je e-mailadres gestuurd. Klik op de link in de email om je account te activeren.",
+        duration: 8000,
+      });
+      navigate("/email-confirmation");
+    }
+
+    setIsLoading(false);
   };
 
   const handleLogoClick = () => {
-    // TODO: Navigate to home
-    console.log("Logo clicked");
+    navigate("/");
   };
 
   return (
-    <div className="min-h-screen grid grid-cols-2">
+    <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2">
       {/* Left side - Image with quote overlay */}
-      <div className="relative">
+      <div className="relative hidden lg:block">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
@@ -66,7 +101,7 @@ const SignupPage = () => {
       </div>
 
       {/* Right side - Signup form */}
-      <div className="bg-white flex items-center justify-center p-12">
+      <div className="bg-white flex items-center justify-center p-6 lg:p-12">
         <div className="w-full max-w-md space-y-8">
           <div className="text-center">
             <img 

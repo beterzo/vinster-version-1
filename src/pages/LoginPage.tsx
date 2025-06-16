@@ -4,39 +4,81 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Link } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
+import { useNavigate, Link } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  const { signIn } = useAuth();
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement authentication logic
-    console.log("Login form submitted:", { email, password });
+    
+    if (!email || !password) {
+      toast({
+        title: "Vul alle velden in",
+        description: "E-mailadres en wachtwoord zijn verplicht.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsLoading(true);
+
+    const { error } = await signIn(email, password);
+
+    if (error) {
+      let errorMessage = "Er is een onbekende fout opgetreden.";
+      
+      if (error.message === "Invalid login credentials") {
+        errorMessage = "Onjuiste inloggegevens. Controleer je e-mailadres en wachtwoord.";
+      } else if (error.message === "Email not confirmed") {
+        errorMessage = "Je e-mailadres is nog niet bevestigd. Check je inbox voor de bevestigingsmail.";
+      } else if (error.message.includes("Email not confirmed")) {
+        errorMessage = "Je e-mailadres is nog niet bevestigd. Check je inbox voor de bevestigingsmail.";
+      } else {
+        errorMessage = error.message;
+      }
+
+      toast({
+        title: "Fout bij inloggen",
+        description: errorMessage,
+        variant: "destructive",
+      });
+    } else {
+      toast({
+        title: "Succesvol ingelogd!",
+        description: "Welkom terug.",
+      });
+      navigate("/home");
+    }
+
+    setIsLoading(false);
   };
 
   const handleLogoClick = () => {
-    // TODO: Navigate to home
-    console.log("Logo clicked");
+    navigate("/");
   };
 
   return (
-    <div className="min-h-screen grid grid-cols-2">
+    <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2">
       {/* Left side - Image with quote overlay */}
-      <div className="relative">
+      <div className="relative hidden lg:block">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage: "url('/lovable-uploads/4bce3129-ec2c-4ee4-a082-bb74962f620e.png')"
           }}
         >
-          {/* Lighter overlay for better visibility of the image */}
           <div className="absolute inset-0 bg-black bg-opacity-10"></div>
         </div>
         
-        {/* Quote overlay */}
         <div className="relative z-10 h-full flex items-end p-12">
           <div className="bg-white bg-opacity-90 rounded-2xl p-8 max-w-md">
             <blockquote className="text-xl font-medium text-blue-900 leading-relaxed">
@@ -47,9 +89,8 @@ const LoginPage = () => {
       </div>
 
       {/* Right side - Login form */}
-      <div className="bg-white flex items-center justify-center p-12">
+      <div className="bg-white flex items-center justify-center p-6 lg:p-12">
         <div className="w-full max-w-md space-y-8">
-          {/* Logo */}
           <div className="text-center">
             <img 
               src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" 
@@ -59,7 +100,6 @@ const LoginPage = () => {
             />
           </div>
 
-          {/* Header */}
           <div className="text-center space-y-2">
             <h1 className="text-3xl font-bold text-blue-900">
               Log in om te beginnen
@@ -69,9 +109,7 @@ const LoginPage = () => {
             </p>
           </div>
 
-          {/* Login Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Email field */}
             <div className="space-y-2">
               <Label htmlFor="email" className="text-blue-900 font-medium text-left block">
                 E-mailadres
@@ -87,7 +125,6 @@ const LoginPage = () => {
               />
             </div>
 
-            {/* Password field */}
             <div className="space-y-2">
               <Label htmlFor="password" className="text-blue-900 font-medium text-left block">
                 Wachtwoord
@@ -103,7 +140,6 @@ const LoginPage = () => {
               />
             </div>
 
-            {/* Remember me checkbox */}
             <div className="flex items-center space-x-2">
               <Checkbox id="remember" />
               <Label htmlFor="remember" className="text-sm text-gray-600">
@@ -111,7 +147,6 @@ const LoginPage = () => {
               </Label>
             </div>
 
-            {/* Login button */}
             <Button 
               type="submit"
               className="w-full h-12 bg-blue-900 hover:bg-blue-800 text-white font-semibold text-base rounded-lg"
@@ -120,7 +155,6 @@ const LoginPage = () => {
               {isLoading ? "Bezig met inloggen..." : "Aanmelden"}
             </Button>
 
-            {/* Sign up link */}
             <div className="text-center">
               <p className="text-sm text-gray-600">
                 Heb je nog geen account?{" "}

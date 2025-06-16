@@ -10,6 +10,7 @@ import PaymentGuard from "@/components/PaymentGuard";
 import LandingPage from "@/pages/LandingPage";
 import SignupPage from "@/pages/SignupPage";
 import LoginPage from "@/pages/LoginPage";
+import EmailConfirmationPage from "@/pages/EmailConfirmationPage";
 import Home from "@/pages/Home";
 import EnthousiasmeIntro from "@/pages/EnthousiasmeIntro";
 import EnthousiasmeStep1 from "@/pages/EnthousiasmeStep1";
@@ -49,6 +50,7 @@ function App() {
               <Route path="/" element={<LandingPage />} />
               <Route path="/signup" element={<SignupPage />} />
               <Route path="/login" element={<LoginPage />} />
+              <Route path="/email-confirmation" element={<EmailConfirmationPage />} />
               <Route 
                 path="/home" 
                 element={

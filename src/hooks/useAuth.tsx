@@ -10,6 +10,7 @@ interface AuthContextType {
   signUp: (email: string, password: string, firstName: string, lastName: string, gender: string) => Promise<{ error: any }>;
   signIn: (email: string, password: string) => Promise<{ error: any }>;
   signOut: () => Promise<{ error: any }>;
+  resendConfirmation: (email: string) => Promise<{ error: any }>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -44,6 +45,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           console.log('✅ Session active:', {
             userId: session.user.id,
             email: session.user.email,
+            emailConfirmed: session.user.email_confirmed_at,
             expiresAt: new Date(session.expires_at! * 1000).toLocaleString()
           });
         } else {
@@ -84,7 +86,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const signUp = async (email: string, password: string, firstName: string, lastName: string, gender: string) => {
     console.log('🔐 Attempting signup for:', email);
-    const redirectUrl = `${window.location.origin}/`;
+    const redirectUrl = `${window.location.origin}/home`;
     
     try {
       const { error } = await supabase.auth.signUp({
@@ -103,7 +105,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       if (error) {
         console.error('❌ Signup error:', error);
       } else {
-        console.log('✅ Signup successful');
+        console.log('✅ Signup successful - confirmation email sent');
       }
 
       return { error };
@@ -154,6 +156,31 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const resendConfirmation = async (email: string) => {
+    console.log('🔐 Resending confirmation email for:', email);
+    
+    try {
+      const { error } = await supabase.auth.resend({
+        type: 'signup',
+        email: email,
+        options: {
+          emailRedirectTo: `${window.location.origin}/home`
+        }
+      });
+
+      if (error) {
+        console.error('❌ Resend confirmation error:', error);
+      } else {
+        console.log('✅ Confirmation email resent');
+      }
+
+      return { error };
+    } catch (error) {
+      console.error('❌ Resend confirmation exception:', error);
+      return { error };
+    }
+  };
+
   const value = {
     user,
     session,
@@ -161,13 +188,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     signUp,
     signIn,
     signOut,
+    resendConfirmation,
   };
 
   console.log('🔐 AuthProvider render:', { 
     hasUser: !!user, 
     hasSession: !!session, 
     loading,
-    userEmail: user?.email 
+    userEmail: user?.email,
+    emailConfirmed: user?.email_confirmed_at
   });
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
