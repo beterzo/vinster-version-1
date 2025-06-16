@@ -5,9 +5,10 @@ import { useNavigate } from "react-router-dom";
 interface DashboardSidebarProps {
   getNextStep: () => string;
   hasUserReport: boolean;
+  hasStarted: boolean;
 }
 
-const DashboardSidebar = ({ getNextStep, hasUserReport }: DashboardSidebarProps) => {
+const DashboardSidebar = ({ getNextStep, hasUserReport, hasStarted }: DashboardSidebarProps) => {
   const navigate = useNavigate();
 
   return (
@@ -23,13 +24,13 @@ const DashboardSidebar = ({ getNextStep, hasUserReport }: DashboardSidebarProps)
 
       {/* Knoppen - onderaan rechts */}
       <div className="space-y-4">
-        {/* Altijd aanwezige "Ga verder" knop - terug naar geel */}
+        {/* Dynamische knop tekst op basis van of gebruiker is begonnen */}
         <Button 
           className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-8 text-xl rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
           size="lg"
           onClick={() => navigate(getNextStep())}
         >
-          Ga verder waar je gebleven was
+          {hasStarted ? "Ga verder waar je gebleven was" : "Begin hier"}
         </Button>
 
         {/* Conditionale "Bekijk mijn rapport" knop - naar donkerblauw #21324E */}

@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { usePrioriteitenResponses } from "@/hooks/usePrioriteitenResponses";
 import { useExtraInformatieResponses } from "@/hooks/useExtraInformatieResponses";
+import { useEnthousiasmeResponses } from "@/hooks/useEnthousiasmeResponses";
+import { useWensberoepenResponses } from "@/hooks/useWensberoepenResponses";
 import { useRapportGeneration } from "@/hooks/useRapportGeneration";
 import DashboardHeader from "./DashboardHeader";
 import WelcomeCard from "./WelcomeCard";
@@ -14,11 +16,46 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const { progress: prioriteitenProgress, isCompleted: prioriteitenCompleted } = usePrioriteitenResponses();
   const { progress: extraInformatieProgress, isCompleted: extraInformatieCompleted } = useExtraInformatieResponses();
+  const { responses: enthousiasmeResponses, loading: enthousiasmeLoading } = useEnthousiasmeResponses();
+  const { responses: wensberoepenResponses, isLoading: wensberoepenLoading } = useWensberoepenResponses();
   const { userReport, loadUserReport } = useRapportGeneration();
 
   useEffect(() => {
     loadUserReport();
   }, []);
+
+  // Calculate Enthousiasmescan progress
+  const calculateEnthousiasmeProgress = () => {
+    if (enthousiasmeLoading || !enthousiasmeResponses) return 0;
+    
+    const totalFields = 12; // Total number of enthousiasme questions
+    const filledFields = Object.values(enthousiasmeResponses).filter(value => value && value.trim() !== '').length;
+    
+    return Math.round((filledFields / totalFields) * 100);
+  };
+
+  // Calculate Wensberoepen progress
+  const calculateWensberoepenProgress = () => {
+    if (wensberoepenLoading || !wensberoepenResponses) return 0;
+    
+    // Count all non-null, non-empty string fields except id, user_id, created_at, updated_at
+    const excludeFields = ['id', 'user_id', 'created_at', 'updated_at'];
+    const allFields = Object.keys(wensberoepenResponses).filter(key => !excludeFields.includes(key));
+    const filledFields = allFields.filter(key => {
+      const value = wensberoepenResponses[key as keyof typeof wensberoepenResponses];
+      return value !== null && value !== undefined && String(value).trim() !== '';
+    }).length;
+    
+    return allFields.length > 0 ? Math.round((filledFields / allFields.length) * 100) : 0;
+  };
+
+  const enthousiasmeProgress = calculateEnthousiasmeProgress();
+  const wensberoepenProgress = calculateWensberoepenProgress();
+  const enthousiasmeCompleted = enthousiasmeProgress === 100;
+  const wensberoepenCompleted = wensberoepenProgress === 100;
+
+  // Check if user has started (has any progress)
+  const hasStarted = enthousiasmeProgress > 0 || wensberoepenProgress > 0 || prioriteitenProgress > 0 || extraInformatieProgress > 0;
 
   const handleStepClick = (stepTitle: string) => {
     if (stepTitle === "Enthousiasmescan") {
@@ -40,7 +77,11 @@ const Dashboard = () => {
 
   // Determine which step to continue with
   const getNextStep = () => {
-    if (!extraInformatieCompleted || !prioriteitenCompleted) {
+    if (enthousiasmeProgress < 100) {
+      return "/enthousiasme-intro";
+    } else if (wensberoepenProgress < 100) {
+      return "/wensberoepen-intro";
+    } else if (!extraInformatieCompleted || !prioriteitenCompleted) {
       return "/profiel-voltooien-intro";
     } else if (!userReport) {
       return "/rapport-review";
@@ -69,6 +110,10 @@ const Dashboard = () => {
 
               {/* Vijf stappenblokken - midden, gelijkmatig verdeeld */}
               <ProgressStepsGrid
+                enthousiasmeProgress={enthousiasmeProgress}
+                enthousiasmeCompleted={enthousiasmeCompleted}
+                wensberoepenProgress={wensberoepenProgress}
+                wensberoepenCompleted={wensberoepenCompleted}
                 prioriteitenProgress={prioriteitenProgress}
                 prioriteitenCompleted={prioriteitenCompleted}
                 extraInformatieProgress={extraInformatieProgress}
@@ -83,6 +128,7 @@ const Dashboard = () => {
           <DashboardSidebar 
             getNextStep={getNextStep} 
             hasUserReport={!!userReport}
+            hasStarted={hasStarted}
           />
         </div>
       </div>

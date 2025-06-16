@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 
 const ImportantInfoCard = () => {
   return (
-    <Card className="p-6 border-0 rounded-3xl text-white flex flex-col" style={{ backgroundColor: '#78BFE3' }}>
+    <Card className="p-6 border-0 rounded-3xl text-white flex flex-col text-left" style={{ backgroundColor: '#78BFE3' }}>
       <h3 className="font-bold text-xl mb-4">Belangrijk om te weten</h3>
       <ul className="space-y-4 text-sm flex-1 flex flex-col justify-between">
         <li className="flex items-start gap-3">

@@ -4,6 +4,10 @@ import { CircleUser, Target, Star, CheckCircle, Search, FileText, ListTodo, User
 import { useZoekprofielResponses } from "@/hooks/useZoekprofielResponses";
 
 interface ProgressStepsGridProps {
+  enthousiasmeProgress: number;
+  enthousiasmeCompleted: boolean;
+  wensberoepenProgress: number;
+  wensberoepenCompleted: boolean;
   prioriteitenProgress: number;
   prioriteitenCompleted: boolean;
   extraInformatieProgress: number;
@@ -13,6 +17,10 @@ interface ProgressStepsGridProps {
 }
 
 const ProgressStepsGrid = ({
+  enthousiasmeProgress,
+  enthousiasmeCompleted,
+  wensberoepenProgress,
+  wensberoepenCompleted,
   prioriteitenProgress,
   prioriteitenCompleted,
   extraInformatieProgress,
@@ -34,14 +42,14 @@ const ProgressStepsGrid = ({
   const progressSteps = [
     {
       title: "Enthousiasmescan",
-      progress: 100,
-      isCompleted: true,
+      progress: enthousiasmeProgress,
+      isCompleted: enthousiasmeCompleted,
       icon: <Star className="w-5 h-5 text-yellow-500" />
     },
     {
       title: "Wensberoepen",
-      progress: 100,
-      isCompleted: true,
+      progress: wensberoepenProgress,
+      isCompleted: wensberoepenCompleted,
       icon: <Target className="w-5 h-5 text-blue-400" />
     },
     {
