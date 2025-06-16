@@ -359,10 +359,6 @@ export type Database = {
           gewenste_regio: string | null
           id: string
           kerntaken: string | null
-          old_branche_richting: string | null
-          old_energie_gevende_aspecten: string | null
-          old_gewenst_werk: string | null
-          old_organisatie_type: string | null
           organisatie_bij: string | null
           sector: string | null
           updated_at: string
@@ -375,10 +371,6 @@ export type Database = {
           gewenste_regio?: string | null
           id?: string
           kerntaken?: string | null
-          old_branche_richting?: string | null
-          old_energie_gevende_aspecten?: string | null
-          old_gewenst_werk?: string | null
-          old_organisatie_type?: string | null
           organisatie_bij?: string | null
           sector?: string | null
           updated_at?: string
@@ -391,10 +383,6 @@ export type Database = {
           gewenste_regio?: string | null
           id?: string
           kerntaken?: string | null
-          old_branche_richting?: string | null
-          old_energie_gevende_aspecten?: string | null
-          old_gewenst_werk?: string | null
-          old_organisatie_type?: string | null
           organisatie_bij?: string | null
           sector?: string | null
           updated_at?: string
