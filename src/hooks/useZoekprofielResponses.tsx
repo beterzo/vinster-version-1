@@ -106,11 +106,9 @@ export const useZoekprofielResponses = () => {
         // Create new record
         const { data, error } = await supabase
           .from('zoekprofiel_responses')
-          .upsert({
+          .insert({
             user_id: user.id,
             [field]: value
-          }, {
-            onConflict: 'user_id'
           })
           .select()
           .single();
