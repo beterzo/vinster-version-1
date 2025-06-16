@@ -18,11 +18,11 @@ serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     )
 
-    const { user_id, pdf_data, filename, metadata } = await req.json()
+    const { user_id, pdf_url } = await req.json()
 
-    if (!user_id || !pdf_data) {
+    if (!user_id || !pdf_url) {
       return new Response(
-        JSON.stringify({ error: 'Missing required fields: user_id, pdf_data' }),
+        JSON.stringify({ error: 'Missing required fields: user_id, pdf_url' }),
         { 
           status: 400, 
           headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
@@ -30,36 +30,28 @@ serve(async (req) => {
       )
     }
 
-    console.log('📄 Storing zoekprofiel PDF for user:', user_id)
-
-    // Decode base64 PDF data
-    const pdfBuffer = Uint8Array.from(atob(pdf_data), c => c.charCodeAt(0))
-    
-    // Generate file path
-    const fileExtension = filename?.split('.').pop() || 'pdf'
-    const filePath = `${user_id}/zoekprofiel.${fileExtension}`
-
-    // Upload PDF to storage
-    const { data: uploadData, error: uploadError } = await supabaseClient.storage
-      .from('zoekprofiel-pdfs')
-      .upload(filePath, pdfBuffer, {
-        contentType: 'application/pdf',
-        upsert: true
-      })
-
-    if (uploadError) {
-      console.error('❌ Error uploading PDF:', uploadError)
-      throw uploadError
+    // Basic URL validation
+    try {
+      new URL(pdf_url)
+    } catch {
+      return new Response(
+        JSON.stringify({ error: 'Invalid PDF URL format' }),
+        { 
+          status: 400, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+        }
+      )
     }
 
-    console.log('✅ PDF uploaded successfully:', uploadData)
+    console.log('📄 Storing zoekprofiel PDF URL for user:', user_id)
+    console.log('🔗 PDF URL:', pdf_url)
 
-    // Update user_zoekprofielen table
+    // Update user_zoekprofielen table with PDF URL
     const { data: updateData, error: updateError } = await supabaseClient
       .from('user_zoekprofielen')
       .upsert({
         user_id,
-        pdf_file_path: filePath,
+        pdf_url: pdf_url,
         pdf_generated_at: new Date().toISOString(),
         pdf_status: 'completed'
       }, {
@@ -71,13 +63,13 @@ serve(async (req) => {
       throw updateError
     }
 
-    console.log('✅ User zoekprofiel updated successfully')
+    console.log('✅ User zoekprofiel updated successfully with PDF URL')
 
     return new Response(
       JSON.stringify({ 
         success: true, 
-        message: 'Zoekprofiel PDF stored successfully',
-        file_path: filePath
+        message: 'Zoekprofiel PDF URL stored successfully',
+        pdf_url: pdf_url
       }),
       { 
         status: 200, 

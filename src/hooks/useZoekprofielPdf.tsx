@@ -7,7 +7,7 @@ import { useToast } from '@/hooks/use-toast';
 export interface ZoekprofielPdf {
   id: string;
   user_id: string;
-  pdf_file_path: string | null;
+  pdf_url: string | null;
   pdf_generated_at: string | null;
   pdf_status: string;
   created_at: string;
@@ -19,7 +19,6 @@ export const useZoekprofielPdf = () => {
   const { toast } = useToast();
   const [pdfData, setPdfData] = useState<ZoekprofielPdf | null>(null);
   const [loading, setLoading] = useState(true);
-  const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
 
   const loadPdfData = useCallback(async () => {
     if (!user?.id) {
@@ -44,17 +43,6 @@ export const useZoekprofielPdf = () => {
       console.log('✅ Loaded zoekprofiel PDF data:', data);
       setPdfData(data);
 
-      // Generate download URL if PDF exists
-      if (data?.pdf_file_path && data.pdf_status === 'completed') {
-        const { data: urlData } = await supabase.storage
-          .from('zoekprofiel-pdfs')
-          .createSignedUrl(data.pdf_file_path, 3600); // 1 hour expiry
-
-        if (urlData?.signedUrl) {
-          setDownloadUrl(urlData.signedUrl);
-        }
-      }
-
     } catch (error) {
       console.error('❌ Failed to load zoekprofiel PDF data:', error);
       toast({
@@ -68,7 +56,7 @@ export const useZoekprofielPdf = () => {
   }, [user?.id, toast]);
 
   const downloadPdf = useCallback(async () => {
-    if (!pdfData?.pdf_file_path) {
+    if (!pdfData?.pdf_url) {
       toast({
         title: "Geen PDF beschikbaar",
         description: "Er is nog geen PDF gegenereerd voor je zoekprofiel.",
@@ -78,24 +66,21 @@ export const useZoekprofielPdf = () => {
     }
 
     try {
-      console.log('📄 Downloading zoekprofiel PDF...');
+      console.log('📄 Downloading zoekprofiel PDF from URL:', pdfData.pdf_url);
 
-      if (downloadUrl) {
-        // Use existing signed URL
-        const link = document.createElement('a');
-        link.href = downloadUrl;
-        link.download = 'mijn-zoekprofiel.pdf';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+      // Create download link using the external PDF URL
+      const link = document.createElement('a');
+      link.href = pdfData.pdf_url;
+      link.download = 'mijn-zoekprofiel.pdf';
+      link.target = '_blank';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
 
-        toast({
-          title: "Download gestart",
-          description: "Je zoekprofiel PDF wordt gedownload.",
-        });
-      } else {
-        throw new Error('Geen download URL beschikbaar');
-      }
+      toast({
+        title: "Download gestart",
+        description: "Je zoekprofiel PDF wordt gedownload.",
+      });
 
     } catch (error) {
       console.error('❌ Error downloading PDF:', error);
@@ -105,7 +90,7 @@ export const useZoekprofielPdf = () => {
         variant: "destructive"
       });
     }
-  }, [pdfData, downloadUrl, toast]);
+  }, [pdfData, toast]);
 
   const initializePdfGeneration = useCallback(async () => {
     if (!user?.id) return;
@@ -141,13 +126,13 @@ export const useZoekprofielPdf = () => {
     loadPdfData();
   }, [loadPdfData]);
 
-  const isPdfReady = pdfData?.pdf_status === 'completed' && pdfData?.pdf_file_path;
+  const isPdfReady = pdfData?.pdf_status === 'completed' && pdfData?.pdf_url;
   const isGenerating = pdfData?.pdf_status === 'generating';
 
   return {
     pdfData,
     loading,
-    downloadUrl,
+    downloadUrl: pdfData?.pdf_url || null,
     isPdfReady,
     isGenerating,
     downloadPdf,
