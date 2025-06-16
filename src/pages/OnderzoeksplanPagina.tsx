@@ -47,7 +47,7 @@ const OnderzoeksplanPagina = () => {
                 <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0 mt-1">
                   <span className="text-blue-600 font-bold text-sm">1</span>
                 </div>
-                <p className="text-gray-700">
+                <p className="text-gray-700 text-left">
                   Vraag AI naar een functie- of beroepsbeschrijving. Vraag ook naar vergelijkbare functies. 
                   Welk werk lijkt erop? Wat spreekt je aan in de antwoorden die je krijgt?
                 </p>
@@ -57,7 +57,7 @@ const OnderzoeksplanPagina = () => {
                 <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0 mt-1">
                   <span className="text-blue-600 font-bold text-sm">2</span>
                 </div>
-                <p className="text-gray-700">
+                <p className="text-gray-700 text-left">
                   Kijk of je vacatures kunt vinden die een beeld geven van de inhoud van dit beroep.
                 </p>
               </div>
@@ -66,7 +66,7 @@ const OnderzoeksplanPagina = () => {
                 <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0 mt-1">
                   <span className="text-blue-600 font-bold text-sm">3</span>
                 </div>
-                <p className="text-gray-700">
+                <p className="text-gray-700 text-left">
                   Zoek op LinkedIn naar mensen die dit werk doen. Wat is hun achtergrond?
                 </p>
               </div>
@@ -75,7 +75,7 @@ const OnderzoeksplanPagina = () => {
                 <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0 mt-1">
                   <span className="text-blue-600 font-bold text-sm">4</span>
                 </div>
-                <p className="text-gray-700">
+                <p className="text-gray-700 text-left">
                   Is er een beroepsvereniging? Wat lees je op de website over ontwikkelingen in de sector en het beroep?
                 </p>
               </div>
@@ -84,7 +84,7 @@ const OnderzoeksplanPagina = () => {
                 <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0 mt-1">
                   <span className="text-blue-600 font-bold text-sm">5</span>
                 </div>
-                <p className="text-gray-700">
+                <p className="text-gray-700 text-left">
                   Heeft het beroep een vakblad? Zo ja, vraag er één of meerdere op en lees ze. 
                   Wat valt je op? Word je enthousiast van de onderwerpen?
                 </p>
@@ -94,7 +94,7 @@ const OnderzoeksplanPagina = () => {
                 <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0 mt-1">
                   <span className="text-blue-600 font-bold text-sm">6</span>
                 </div>
-                <p className="text-gray-700">
+                <p className="text-gray-700 text-left">
                   Zoek organisaties waar mensen met dit beroep werken.
                 </p>
               </div>
@@ -103,7 +103,7 @@ const OnderzoeksplanPagina = () => {
                 <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0 mt-1">
                   <span className="text-blue-600 font-bold text-sm">7</span>
                 </div>
-                <p className="text-gray-700">
+                <p className="text-gray-700 text-left">
                   Welke opleiding heb je eventueel nodig voor dit werk? 
                   Schrijf alle vragen die bij je opkomen op. Die kun je gaan stellen aan mensen die al werkzaam zijn in deze richting.
                 </p>
@@ -113,14 +113,14 @@ const OnderzoeksplanPagina = () => {
                 <div className="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center shrink-0 mt-1">
                   <span className="text-yellow-600 font-bold text-sm">8</span>
                 </div>
-                <p className="text-gray-700">
+                <p className="text-gray-700 text-left">
                   Maak een lijstje met mensen die je zou willen spreken over dit werk en benader hen.
                 </p>
               </div>
             </div>
 
             <div className="mt-8 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
-              <p className="text-gray-700 font-medium">
+              <p className="text-gray-700 font-medium text-left">
                 Als je genoeg aan de weet bent gekomen kies dan de functie die het allerbest bij je past 
                 en ga verder met <span className="text-yellow-600 font-bold">de allerlaatste stap: het maken van jouw zoekprofiel!</span>
               </p>
