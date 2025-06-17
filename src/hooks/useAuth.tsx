@@ -1,4 +1,3 @@
-
 import { createContext, useContext, useEffect, useState } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
@@ -7,7 +6,7 @@ interface AuthContextType {
   user: User | null;
   session: Session | null;
   loading: boolean;
-  signUp: (email: string, password: string, firstName: string, lastName: string, gender: string) => Promise<{ error: any }>;
+  signUp: (email: string, password: string, firstName: string, lastName: string) => Promise<{ error: any }>;
   signIn: (email: string, password: string) => Promise<{ error: any }>;
   signOut: () => Promise<{ error: any }>;
   resendConfirmation: (email: string) => Promise<{ error: any }>;
@@ -91,7 +90,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
   }, []);
 
-  const signUp = async (email: string, password: string, firstName: string, lastName: string, gender: string) => {
+  const signUp = async (email: string, password: string, firstName: string, lastName: string) => {
     console.log('🔐 Attempting signup for:', email);
     const redirectUrl = getRedirectUrl();
     console.log('🔐 Using redirect URL:', redirectUrl);
@@ -104,8 +103,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           emailRedirectTo: redirectUrl,
           data: {
             first_name: firstName,
-            last_name: lastName,
-            gender: gender
+            last_name: lastName
           }
         }
       });
