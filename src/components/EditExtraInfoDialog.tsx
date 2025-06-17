@@ -101,6 +101,7 @@ const EditExtraInfoDialog = ({ open, onOpenChange, data, onSave }: EditExtraInfo
                 <SelectItem value="mbo">MBO</SelectItem>
                 <SelectItem value="hbo">HBO</SelectItem>
                 <SelectItem value="wo">WO (Universiteit)</SelectItem>
+                <SelectItem value="niet_van_toepassing">Niet van toepassing</SelectItem>
                 <SelectItem value="anders">Anders</SelectItem>
               </SelectContent>
             </Select>

@@ -39,7 +39,8 @@ const ExtraInformatieVragen = () => {
     }
   };
 
-  const isFormValid = formData.opleidingsniveau !== '' && formData.beroepsopleiding.trim() !== '';
+  // Updated validation - only opleidingsniveau is required
+  const isFormValid = formData.opleidingsniveau !== '';
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
@@ -75,7 +76,7 @@ const ExtraInformatieVragen = () => {
         {/* Form */}
         <Card className="p-8 mb-8 border-0 rounded-3xl" style={{ backgroundColor: '#E6F0F6' }}>
           <div className="space-y-8">
-            {/* Question 1: Opleidingsniveau */}
+            {/* Question 1: Opleidingsniveau - Updated with "Niet van toepassing" option */}
             <div>
               <h3 className="text-xl font-bold text-gray-900 mb-4">
                 1. Wat is jouw opleidingsniveau?
@@ -97,14 +98,21 @@ const ExtraInformatieVragen = () => {
                   <RadioGroupItem value="wo" id="wo" />
                   <Label htmlFor="wo" className="text-lg">Wo</Label>
                 </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="niet_van_toepassing" id="niet_van_toepassing" />
+                  <Label htmlFor="niet_van_toepassing" className="text-lg">Niet van toepassing</Label>
+                </div>
               </RadioGroup>
             </div>
 
-            {/* Question 2: Beroepsopleiding */}
+            {/* Question 2: Beroepsopleiding - Now optional */}
             <div>
               <h3 className="text-xl font-bold text-gray-900 mb-4">
                 2. Welke beroepsopleiding heb je afgerond?
               </h3>
+              <p className="text-gray-600 mb-3 text-sm">
+                (Optioneel)
+              </p>
               <Textarea
                 placeholder="Bijv. Marketing & Communicatie, Verpleegkunde, Werktuigbouwkunde..."
                 value={formData.beroepsopleiding}
@@ -177,7 +185,7 @@ const ExtraInformatieVragen = () => {
 
         {!isFormValid && (
           <p className="text-red-600 text-center mt-4">
-            Vul minimaal je opleidingsniveau en beroepsopleiding in om door te gaan.
+            Vul je opleidingsniveau in om door te gaan.
           </p>
         )}
       </div>
