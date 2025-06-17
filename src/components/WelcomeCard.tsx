@@ -1,11 +1,28 @@
 
 import { Card } from "@/components/ui/card";
+import { useAuth } from "@/hooks/useAuth";
 
 const WelcomeCard = () => {
+  const { user } = useAuth();
+  
+  const getUserName = () => {
+    if (user?.user_metadata?.first_name) {
+      return user.user_metadata.first_name;
+    }
+    if (user?.email) {
+      return user.email.split('@')[0];
+    }
+    return '';
+  };
+
+  const userName = getUserName();
+
   return (
     <Card className="p-8 border-0 rounded-3xl" style={{ backgroundColor: '#E6F0F6' }}>
       <div className="space-y-4 text-left">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">Welkom</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-4">
+          Welkom{userName && ` ${userName}`}
+        </h1>
         <p className="text-gray-700 font-medium leading-relaxed mb-4">
           Dit is jouw persoonlijke dashboard. Hier zie je jouw voortgang 
           en kun je verder gaan waar je gebleven bent.

@@ -6,7 +6,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 
 const DashboardHeader = () => {
-  const { user, signOut } = useAuth();
+  const { signOut } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -29,18 +29,13 @@ const DashboardHeader = () => {
 
   return (
     <div className="flex justify-between items-center mb-8">
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-4 cursor-pointer" onClick={() => navigate("/home")}>
         <img 
           src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" 
           alt="Vinster Logo" 
-          className="h-8 w-auto cursor-pointer" 
-          onClick={() => navigate("/home")}
+          className="h-12 w-auto filter brightness-110 contrast-110" 
         />
-        {user && (
-          <div className="text-gray-700">
-            <span className="font-medium">Welkom, {user.user_metadata?.first_name || user.email}</span>
-          </div>
-        )}
+        <span className="text-2xl font-bold text-gray-800 tracking-wide">Vinster</span>
       </div>
       <Button 
         onClick={handleLogout}
