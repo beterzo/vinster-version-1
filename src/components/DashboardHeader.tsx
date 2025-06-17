@@ -33,9 +33,9 @@ const DashboardHeader = () => {
         <img 
           src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" 
           alt="Vinster Logo" 
-          className="h-12 w-auto filter brightness-110 contrast-110" 
+          className="h-16 w-auto filter brightness-110 contrast-110" 
         />
-        <span className="text-2xl font-bold text-gray-800 tracking-wide">Vinster</span>
+        <span className="text-2xl font-bold tracking-wide" style={{ color: '#253857' }}>Vinster</span>
       </div>
       <Button 
         onClick={handleLogout}

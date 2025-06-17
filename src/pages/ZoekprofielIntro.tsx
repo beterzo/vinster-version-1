@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
@@ -36,7 +35,7 @@ const ZoekprofielIntro = () => {
               alt="Vinster Logo" 
               className="h-12 w-auto filter brightness-110 contrast-110" 
             />
-            <span className="text-2xl font-bold text-gray-800 tracking-wide">Vinster</span>
+            <span className="text-2xl font-bold tracking-wide" style={{ color: '#253857' }}>Vinster</span>
           </div>
           
           <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">

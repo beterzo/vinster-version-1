@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -108,7 +107,7 @@ const SignupPage = () => {
                 alt="Vinster Logo" 
                 className="h-12 w-auto filter brightness-110 contrast-110" 
               />
-              <span className="text-2xl font-bold text-gray-800 tracking-wide">Vinster</span>
+              <span className="text-2xl font-bold tracking-wide" style={{ color: '#253857' }}>Vinster</span>
             </div>
           </div>
 

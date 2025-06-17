@@ -29,7 +29,10 @@ const HeroSection = () => {
       <div className="relative z-10 max-w-[1440px] mx-auto px-6">
         {/* Header with Logo and Login Button */}
         <div className="py-6 flex items-center justify-between">
-          <img src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" alt="Vinster Logo" className="h-8 w-auto" />
+          <div className="flex items-center space-x-4">
+            <img src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" alt="Vinster Logo" className="h-12 w-auto" />
+            <span className="text-xl font-bold tracking-wide" style={{ color: '#253857' }}>Vinster</span>
+          </div>
           <Button 
             onClick={() => navigate('/login')}
             className="bg-white hover:bg-gray-100 text-blue-900 font-semibold px-6 py-3 rounded-full border border-gray-200 shadow-sm transition-all duration-200"
