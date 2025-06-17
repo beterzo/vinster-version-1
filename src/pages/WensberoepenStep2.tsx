@@ -31,6 +31,10 @@ const WensberoepenStep2 = () => {
     question12: ""
   });
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   // Fixed validation to check actual database responses instead of local state
   const isStep2Complete = () => {
     if (!responses) return false;
@@ -120,6 +124,16 @@ const WensberoepenStep2 = () => {
     navigate("/home");
   };
 
+  const handlePrevious = () => {
+    scrollToTop();
+    navigate('/wensberoepen-stap-1');
+  };
+
+  const handleNext = () => {
+    scrollToTop();
+    navigate('/wensberoepen-stap-3');
+  };
+
   const questions = [
     "Wat doe je in een werkweek? Antwoord in werkwoorden en activiteiten.",
     "Waar doe je je werk? Beschrijf de omgeving, het gebouw, de ruimte ....",
@@ -202,14 +216,14 @@ const WensberoepenStep2 = () => {
 
             <div className="flex justify-between pt-12">
               <Button 
-                onClick={() => navigate('/wensberoepen-stap-1')}
+                onClick={handlePrevious}
                 variant="outline"
                 className="border-blue-900 text-blue-900 hover:bg-blue-50"
               >
                 Vorige wensberoep
               </Button>
               <Button 
-                onClick={() => navigate('/wensberoepen-stap-3')}
+                onClick={handleNext}
                 className={`font-semibold px-8 ${
                   step2Complete
                     ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 

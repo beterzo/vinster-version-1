@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -42,6 +41,10 @@ const WensberoepenStep3 = () => {
     question11: "",
     question12: ""
   });
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   // Local validation for step 3 only
   const isStep3Complete = () => {
@@ -107,6 +110,11 @@ const WensberoepenStep3 = () => {
     if (dbField) {
       saveResponse(dbField, value);
     }
+  };
+
+  const handlePrevious = () => {
+    scrollToTop();
+    navigate('/wensberoepen-stap-2');
   };
 
   const handleComplete = async () => {
@@ -258,7 +266,7 @@ const WensberoepenStep3 = () => {
             {/* Navigation */}
             <div className="flex justify-between pt-12">
               <Button 
-                onClick={() => navigate('/wensberoepen-stap-2')}
+                onClick={handlePrevious}
                 variant="outline"
                 className="border-blue-900 text-blue-900 hover:bg-blue-50"
                 disabled={isSubmitting}

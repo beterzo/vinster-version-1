@@ -31,6 +31,10 @@ const WensberoepenStep1 = () => {
     question12: ""
   });
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   // Fixed validation to check actual database responses instead of local state
   const isStep1Complete = () => {
     if (!responses) return false;
@@ -118,6 +122,16 @@ const WensberoepenStep1 = () => {
 
   const handleLogoClick = () => {
     navigate("/home");
+  };
+
+  const handleBackToIntro = () => {
+    scrollToTop();
+    navigate('/wensberoepen-intro');
+  };
+
+  const handleNext = () => {
+    scrollToTop();
+    navigate('/wensberoepen-stap-2');
   };
 
   const questions = [
@@ -208,14 +222,14 @@ const WensberoepenStep1 = () => {
             {/* Navigation */}
             <div className="flex justify-between pt-12">
               <Button 
-                onClick={() => navigate('/wensberoepen-intro')}
+                onClick={handleBackToIntro}
                 variant="outline"
                 className="border-blue-900 text-blue-900 hover:bg-blue-50"
               >
                 Terug naar intro
               </Button>
               <Button 
-                onClick={() => navigate('/wensberoepen-stap-2')}
+                onClick={handleNext}
                 className={`font-semibold px-8 ${
                   step1Complete
                     ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 
