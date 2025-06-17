@@ -156,23 +156,23 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
-      <div className="max-w-[1440px] mx-auto px-6 py-8">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 py-8">
         <DashboardHeader />
 
-        {/* Grid layout met 2 kolommen: links voor content, rechts voor foto */}
-        <div className="grid grid-cols-[1fr_400px] gap-x-8 min-h-[800px]">
+        {/* Mobile-first responsive layout */}
+        <div className="flex flex-col lg:grid lg:grid-cols-[1fr_400px] gap-x-8 min-h-[800px]">
           
-          {/* Linker kolom: Content */}
-          <div className="grid grid-rows-[auto_1fr] gap-y-8">
-            {/* Welkom blok - bovenaan links */}
+          {/* Main content - full width on mobile, left column on desktop */}
+          <div className="flex flex-col gap-y-6 lg:gap-y-8">
+            {/* Welcome card - full width */}
             <WelcomeCard />
 
-            {/* Onderste rij: Belangrijk blok + Stappen */}
-            <div className="grid grid-cols-[350px_1fr] gap-x-8 items-stretch">
-              {/* Belangrijk om te weten blok - linksonder */}
+            {/* Content area - stacked on mobile, side-by-side on desktop */}
+            <div className="flex flex-col lg:grid lg:grid-cols-[350px_1fr] gap-6 lg:gap-x-8 items-stretch">
+              {/* Important info card */}
               <ImportantInfoCard />
 
-              {/* Vijf stappenblokken - midden, gelijkmatig verdeeld */}
+              {/* Progress steps grid */}
               <ProgressStepsGrid
                 enthousiasmeProgress={enthousiasmeProgress}
                 enthousiasmeCompleted={enthousiasmeCompleted}
@@ -188,17 +188,19 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Rechter kolom: Foto + Knop */}
-          <DashboardSidebar 
-            getNextStep={getNextStep} 
-            hasUserReport={!!userReport}
-            hasStarted={userHasStarted}
-            hasZoekprofielPdf={!!isZoekprofielReady}
-            downloadRapportPdf={downloadRapportPdf}
-            downloadZoekprofielPdf={downloadZoekprofielPdf}
-            downloadingRapport={downloadingRapport}
-            downloadingZoekprofiel={downloadingZoekprofiel}
-          />
+          {/* Sidebar - full width on mobile, right column on desktop */}
+          <div className="mt-6 lg:mt-0">
+            <DashboardSidebar 
+              getNextStep={getNextStep} 
+              hasUserReport={!!userReport}
+              hasStarted={userHasStarted}
+              hasZoekprofielPdf={!!isZoekprofielReady}
+              downloadRapportPdf={downloadRapportPdf}
+              downloadZoekprofielPdf={downloadZoekprofielPdf}
+              downloadingRapport={downloadingRapport}
+              downloadingZoekprofiel={downloadingZoekprofiel}
+            />
+          </div>
         </div>
       </div>
     </div>

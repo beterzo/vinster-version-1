@@ -133,7 +133,7 @@ const PaymentRequired = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
-      <div className="max-w-[1200px] mx-auto px-6 py-8">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-8">
         {/* Header */}
         <div className="text-center mb-8">
           <img 
@@ -141,22 +141,22 @@ const PaymentRequired = () => {
             alt="Vinster Logo" 
             className="h-8 w-auto mx-auto mb-6" 
           />
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
             Welkom bij Vinster, {user?.user_metadata?.first_name || 'daar'}!
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
             Je bent nog maar één stap verwijderd van het ontdekken van jouw ideale loopbaan!
           </p>
         </div>
 
-        {/* Main content grid */}
-        <div className="grid grid-cols-[1fr_400px] gap-8 min-h-[600px]">
+        {/* Main content - responsive layout */}
+        <div className="flex flex-col lg:grid lg:grid-cols-[1fr_400px] gap-6 lg:gap-8 min-h-[600px]">
           
           {/* Left column: Content */}
-          <div className="space-y-8">
+          <div className="space-y-6 lg:space-y-8">
             {/* Welcome card */}
-            <Card className="p-8 border-0 rounded-3xl" style={{ backgroundColor: '#E6F0F6' }}>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Start jouw loopbaanontwikkeling</h2>
+            <Card className="p-6 lg:p-8 border-0 rounded-3xl" style={{ backgroundColor: '#E6F0F6' }}>
+              <h2 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4">Start jouw loopbaanontwikkeling</h2>
               <p className="text-gray-700 leading-relaxed mb-4">
                 Met Vinster krijg je toegang tot wetenschappelijk onderbouwde tools die je helpen 
                 jouw ideale loopbaan te vinden. Onze methode is gebaseerd op jarenlang onderzoek 
@@ -169,10 +169,10 @@ const PaymentRequired = () => {
               </p>
             </Card>
 
-            {/* Features grid */}
-            <div className="grid grid-cols-2 gap-6">
+            {/* Features grid - responsive */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
               {features.map((feature, index) => (
-                <Card key={index} className="p-6 border-0 rounded-3xl bg-white shadow-sm">
+                <Card key={index} className="p-4 lg:p-6 border-0 rounded-3xl bg-white shadow-sm">
                   <div className="flex items-start space-x-4">
                     <div className="flex-shrink-0">
                       {feature.icon}
@@ -187,8 +187,8 @@ const PaymentRequired = () => {
             </div>
 
             {/* Value proposition */}
-            <Card className="p-6 border-0 rounded-3xl text-white" style={{ backgroundColor: '#78BFE3' }}>
-              <h3 className="font-bold text-xl mb-4">Waarom kiezen voor Vinster?</h3>
+            <Card className="p-4 lg:p-6 border-0 rounded-3xl text-white" style={{ backgroundColor: '#78BFE3' }}>
+              <h3 className="font-bold text-lg lg:text-xl mb-4">Waarom kiezen voor Vinster?</h3>
               <ul className="space-y-3 text-sm">
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
@@ -210,14 +210,14 @@ const PaymentRequired = () => {
             </Card>
           </div>
 
-          {/* Right column: Pricing */}
-          <div className="flex flex-col gap-8">
+          {/* Right column: Pricing - full width on mobile */}
+          <div className="flex flex-col gap-6 lg:gap-8">
             {/* Pricing card */}
-            <Card className="p-8 border-0 rounded-3xl bg-white shadow-lg flex-1">
+            <Card className="p-6 lg:p-8 border-0 rounded-3xl bg-white shadow-lg flex-1">
               <div className="text-center mb-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Volledige toegang</h3>
+                <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-2">Volledige toegang</h3>
                 <p className="text-gray-600 mb-4">Eenmalige betaling voor levenslange toegang</p>
-                <div className="text-4xl font-bold text-gray-900 mb-1">€29</div>
+                <div className="text-3xl lg:text-4xl font-bold text-gray-900 mb-1">€29</div>
                 <p className="text-sm text-gray-500">Eenmalig, geen abonnement</p>
               </div>
 
@@ -247,7 +247,7 @@ const PaymentRequired = () => {
               <Button 
                 onClick={handlePayment} 
                 disabled={isLoading}
-                className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-4 text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200" 
+                className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-3 lg:py-4 text-base lg:text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200" 
                 size="lg"
               >
                 {isLoading ? "Verwerken..." : "Start nu voor €29"}
@@ -259,7 +259,7 @@ const PaymentRequired = () => {
             </Card>
 
             {/* Guarantee */}
-            <Card className="p-6 border-0 rounded-3xl bg-green-50 border-green-200">
+            <Card className="p-4 lg:p-6 border-0 rounded-3xl bg-green-50 border-green-200">
               <div className="text-center">
                 <Shield className="w-8 h-8 text-green-600 mx-auto mb-3" />
                 <h4 className="font-semibold text-green-800 mb-2">30 dagen geld-terug garantie</h4>

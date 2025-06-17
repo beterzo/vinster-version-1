@@ -100,8 +100,8 @@ const SignupPage = () => {
       </div>
 
       {/* Right side - Signup form */}
-      <div className="bg-white flex items-center justify-center p-6 lg:p-12">
-        <div className="w-full max-w-md space-y-8">
+      <div className="bg-white flex items-center justify-center p-4 sm:p-6 lg:p-12">
+        <div className="w-full max-w-md space-y-6 lg:space-y-8">
           <div className="text-center">
             <img 
               src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" 
@@ -112,7 +112,7 @@ const SignupPage = () => {
           </div>
 
           <div className="text-center space-y-2">
-            <h1 className="text-3xl font-bold text-blue-900">
+            <h1 className="text-2xl sm:text-3xl font-bold text-blue-900">
               Maak je account aan
             </h1>
             <p className="text-gray-600">
@@ -121,7 +121,7 @@ const SignupPage = () => {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="firstName" className="text-blue-900 font-medium text-left block">
                   Voornaam
