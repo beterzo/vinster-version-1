@@ -23,6 +23,13 @@ export const useAuth = () => {
   return context;
 };
 
+// Helper function to get the correct redirect URL
+const getRedirectUrl = () => {
+  // Check if we're in development and use the current origin
+  // This will work both with localhost and Lovable preview URLs
+  return `${window.location.origin}/login`;
+};
+
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
@@ -86,7 +93,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const signUp = async (email: string, password: string, firstName: string, lastName: string, gender: string) => {
     console.log('🔐 Attempting signup for:', email);
-    const redirectUrl = `${window.location.origin}/login`;
+    const redirectUrl = getRedirectUrl();
+    console.log('🔐 Using redirect URL:', redirectUrl);
     
     try {
       const { error } = await supabase.auth.signUp({
@@ -158,13 +166,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const resendConfirmation = async (email: string) => {
     console.log('🔐 Resending confirmation email for:', email);
+    const redirectUrl = getRedirectUrl();
+    console.log('🔐 Using redirect URL for resend:', redirectUrl);
     
     try {
       const { error } = await supabase.auth.resend({
         type: 'signup',
         email: email,
         options: {
-          emailRedirectTo: `${window.location.origin}/login`
+          emailRedirectTo: redirectUrl
         }
       });
 
