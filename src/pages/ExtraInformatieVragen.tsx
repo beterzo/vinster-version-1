@@ -110,11 +110,8 @@ const ExtraInformatieVragen = () => {
               <h3 className="text-xl font-bold text-gray-900 mb-4">
                 2. Welke beroepsopleiding heb je afgerond?
               </h3>
-              <p className="text-gray-600 mb-3 text-sm">
-                (Optioneel)
-              </p>
               <Textarea
-                placeholder="Bijv. Marketing & Communicatie, Verpleegkunde, Werktuigbouwkunde..."
+                placeholder="Bijv. Marketing & Communicatie, Verpleegkunde, Werktuigbouwkunde... (optioneel)"
                 value={formData.beroepsopleiding}
                 onChange={(e) => setFormData({...formData, beroepsopleiding: e.target.value})}
                 className="min-h-[100px] text-lg"
