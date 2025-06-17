@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
@@ -14,12 +15,14 @@ const EnthousiasmeIntro = () => {
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
-          <img 
-            src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" 
-            alt="Vinster Logo" 
-            className="h-8 w-auto cursor-pointer hover:opacity-80 transition-opacity"
-            onClick={handleLogoClick}
-          />
+          <div className="flex items-center space-x-4 cursor-pointer" onClick={handleLogoClick}>
+            <img 
+              src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" 
+              alt="Vinster Logo" 
+              className="h-12 w-auto filter brightness-110 contrast-110" 
+            />
+            <span className="text-2xl font-bold text-gray-800 tracking-wide">Vinster</span>
+          </div>
         </div>
       </div>
 

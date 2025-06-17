@@ -30,11 +30,14 @@ const ZoekprofielIntro = () => {
       <div className="max-w-4xl mx-auto px-6 py-16">
         {/* Header */}
         <div className="text-center mb-12">
-          <img 
-            src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" 
-            alt="Vinster Logo" 
-            className="h-8 w-auto mx-auto mb-8" 
-          />
+          <div className="flex items-center space-x-4 cursor-pointer justify-center mb-8" onClick={() => navigate("/home")}>
+            <img 
+              src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" 
+              alt="Vinster Logo" 
+              className="h-12 w-auto filter brightness-110 contrast-110" 
+            />
+            <span className="text-2xl font-bold text-gray-800 tracking-wide">Vinster</span>
+          </div>
           
           <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
             <Search className="w-8 h-8 text-blue-600" />

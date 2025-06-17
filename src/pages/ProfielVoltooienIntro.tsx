@@ -12,12 +12,14 @@ const ProfielVoltooienIntro = () => {
       <div className="max-w-4xl mx-auto px-6 py-8">
         {/* Header */}
         <div className="mb-8">
-          <img 
-            src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" 
-            alt="Vinster Logo" 
-            className="h-8 w-auto mb-6 cursor-pointer" 
-            onClick={() => navigate("/home")}
-          />
+          <div className="flex items-center space-x-4 cursor-pointer mb-6" onClick={() => navigate("/home")}>
+            <img 
+              src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" 
+              alt="Vinster Logo" 
+              className="h-12 w-auto filter brightness-110 contrast-110" 
+            />
+            <span className="text-2xl font-bold text-gray-800 tracking-wide">Vinster</span>
+          </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Profiel voltooien</h1>
           <p className="text-xl text-gray-700">
             We gaan je profiel compleet maken in twee stappen
