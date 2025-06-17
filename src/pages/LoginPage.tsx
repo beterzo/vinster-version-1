@@ -101,6 +101,7 @@ const LoginPage = () => {
             </div>
           </div>
 
+          {/* Login form title */}
           <div className="text-center space-y-2">
             <h1 className="text-2xl sm:text-3xl font-bold text-blue-900">
               Log in om te beginnen

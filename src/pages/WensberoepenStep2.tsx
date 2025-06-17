@@ -159,12 +159,14 @@ const WensberoepenStep2 = () => {
     <div className="min-h-screen bg-gray-50 font-sans">
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
-          <img 
-            src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" 
-            alt="Vinster Logo" 
-            className="h-8 w-auto cursor-pointer hover:opacity-80 transition-opacity"
-            onClick={handleLogoClick}
-          />
+          <div className="flex items-center space-x-4 cursor-pointer hover:opacity-80 transition-opacity" onClick={handleLogoClick}>
+            <img 
+              src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" 
+              alt="Vinster Logo" 
+              className="h-8 w-auto"
+            />
+            <span className="text-xl font-bold tracking-wide" style={{ color: '#253857' }}>Vinster</span>
+          </div>
         </div>
       </div>
 

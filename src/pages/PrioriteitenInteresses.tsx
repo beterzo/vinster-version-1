@@ -59,11 +59,14 @@ const PrioriteitenInteresses = () => {
       <div className="max-w-4xl mx-auto px-6 py-8">
         {/* Header */}
         <div className="mb-8">
-          <img 
-            src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" 
-            alt="Vinster Logo" 
-            className="h-8 w-auto mb-6" 
-          />
+          <div className="flex items-center space-x-4 mb-6" onClick={() => navigate("/home")}>
+            <img 
+              src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" 
+              alt="Vinster Logo" 
+              className="h-8 w-auto" 
+            />
+            <span className="text-xl font-bold tracking-wide" style={{ color: '#253857' }}>Vinster</span>
+          </div>
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">
               <Heart className="w-5 h-5 text-yellow-600" />
