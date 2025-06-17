@@ -19,6 +19,7 @@ import WensberoepenIntro from "@/pages/WensberoepenIntro";
 import WensberoepenStep1 from "@/pages/WensberoepenStep1";
 import WensberoepenStep2 from "@/pages/WensberoepenStep2";
 import WensberoepenStep3 from "@/pages/WensberoepenStep3";
+import WensberoepenVoltooiPagina from "@/pages/WensberoepenVoltooiPagina";
 import ProfielVoltooienIntro from "@/pages/ProfielVoltooienIntro";
 import PrioriteitenActiviteiten from "@/pages/PrioriteitenActiviteiten";
 import PrioriteitenInteresses from "@/pages/PrioriteitenInteresses";
@@ -125,6 +126,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <WensberoepenStep3 />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/wensberoepen-voltooid" 
+                element={
+                  <ProtectedRoute>
+                    <WensberoepenVoltooiPagina />
                   </ProtectedRoute>
                 } 
               />

@@ -153,7 +153,7 @@ const WensberoepenStep3 = () => {
         variant: "default",
       });
       
-      navigate('/home');
+      navigate('/wensberoepen-voltooid');
     } catch (error) {
       console.error("Error completing wensberoepen scan:", error);
       
