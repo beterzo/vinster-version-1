@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useAuth } from './useAuth';
 import { supabase } from '@/integrations/supabase/client';
@@ -114,15 +113,14 @@ export const useExtraInformatieResponses = () => {
     }
   };
 
+  // Page-based completion: only check required fields (opleidingsniveau is required)
   const isCompleted = () => {
-    return responses.opleidingsniveau !== '' && 
-           responses.beroepsopleiding.trim() !== '';
+    return responses.opleidingsniveau !== '';
   };
 
+  // Page-based progress: either 0% (not started) or 100% (completed with required fields)
   const getProgress = () => {
-    const fields = [responses.opleidingsniveau, responses.beroepsopleiding, responses.fysieke_beperkingen, responses.sector_voorkeur];
-    const completedFields = fields.filter(field => field && field.trim() !== '').length;
-    return Math.round((completedFields / fields.length) * 100);
+    return isCompleted() ? 100 : 0;
   };
 
   return {

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useAuth } from './useAuth';
 import { supabase } from '@/integrations/supabase/client';
@@ -162,25 +161,29 @@ export const usePrioriteitenResponses = () => {
     }
   };
 
-  // Calculate completion status
-  const isCompleted = () => {
-    const hasActiviteiten = responses?.selected_activiteiten_keywords && responses.selected_activiteiten_keywords.length > 0;
-    const hasWerkomstandigheden = responses?.selected_werkomstandigheden_keywords && responses.selected_werkomstandigheden_keywords.length > 0;
-    const hasInteresses = responses?.selected_interesses_keywords && responses.selected_interesses_keywords.length > 0;
-    
-    return !!(hasActiviteiten && hasWerkomstandigheden && hasInteresses);
+  // Calculate completion status - each page needs at least 1 selected keyword to be considered complete
+  const isPageComplete = (keywords?: string[]) => {
+    return keywords && keywords.length > 0;
   };
 
-  // Calculate progress percentage
+  const isCompleted = () => {
+    const activiteitenComplete = isPageComplete(responses?.selected_activiteiten_keywords);
+    const werkomstandighedenComplete = isPageComplete(responses?.selected_werkomstandigheden_keywords);
+    const interessesComplete = isPageComplete(responses?.selected_interesses_keywords);
+    
+    return !!(activiteitenComplete && werkomstandighedenComplete && interessesComplete);
+  };
+
+  // Calculate progress percentage based on completed pages (each page = 33.33%)
   const getProgress = () => {
-    const steps = [
-      responses?.selected_activiteiten_keywords && responses.selected_activiteiten_keywords.length > 0,
-      responses?.selected_werkomstandigheden_keywords && responses.selected_werkomstandigheden_keywords.length > 0,
-      responses?.selected_interesses_keywords && responses.selected_interesses_keywords.length > 0
+    const pages = [
+      isPageComplete(responses?.selected_activiteiten_keywords),
+      isPageComplete(responses?.selected_werkomstandigheden_keywords),
+      isPageComplete(responses?.selected_interesses_keywords)
     ];
     
-    const completedSteps = steps.filter(Boolean).length;
-    return Math.round((completedSteps / steps.length) * 100);
+    const completedPages = pages.filter(Boolean).length;
+    return Math.round((completedPages / pages.length) * 100);
   };
 
   return {

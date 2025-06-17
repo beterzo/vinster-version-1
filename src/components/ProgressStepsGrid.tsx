@@ -30,13 +30,16 @@ const ProgressStepsGrid = ({
 }: ProgressStepsGridProps) => {
   const { progress: zoekprofielProgress, isCompleted: zoekprofielCompleted } = useZoekprofielResponses();
 
-  // Calculate combined progress for "Profiel voltooien"
+  // Calculate page-based progress for "Profiel voltooien"
+  // Extra informatie = 25%, Prioriteiten (3 pages) = 75% (25% each)
   const combinedProgress = () => {
-    if (extraInformatieCompleted && prioriteitenCompleted) return 100;
-    if (!extraInformatieCompleted && !prioriteitenCompleted) return 0;
-    if (extraInformatieCompleted && !prioriteitenCompleted) return 50 + (prioriteitenProgress / 2);
-    if (!extraInformatieCompleted && prioriteitenCompleted) return extraInformatieProgress / 2;
-    return (extraInformatieProgress + prioriteitenProgress) / 2;
+    const extraInformatieWeight = 25; // 25% for extra informatie page
+    const prioriteitenWeight = 75; // 75% for prioriteiten (3 pages combined)
+    
+    const extraInformatieContribution = extraInformatieCompleted ? extraInformatieWeight : 0;
+    const prioriteitenContribution = (prioriteitenProgress / 100) * prioriteitenWeight;
+    
+    return Math.round(extraInformatieContribution + prioriteitenContribution);
   };
 
   const progressSteps = [
