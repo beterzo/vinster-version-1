@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
@@ -20,9 +21,10 @@ export const useZoekprofielPdf = () => {
   const [loading, setLoading] = useState(true);
   const [downloading, setDownloading] = useState(false);
   
-  // Refs for cleanup
+  // Refs for cleanup and tracking
   const pollingIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const realtimeChannelRef = useRef<any>(null);
+  const fallbackPollingRef = useRef<NodeJS.Timeout | null>(null);
 
   const loadPdfData = useCallback(async () => {
     if (!user?.id) {
@@ -59,7 +61,7 @@ export const useZoekprofielPdf = () => {
     }
   }, [user?.id, toast]);
 
-  // Setup real-time subscription
+  // Setup real-time subscription with improved error handling
   useEffect(() => {
     if (!user?.id) return;
 
@@ -83,6 +85,12 @@ export const useZoekprofielPdf = () => {
             const newData = payload.new as ZoekprofielPdf;
             setPdfData(newData);
             
+            // Clear fallback polling when we get real-time updates
+            if (fallbackPollingRef.current) {
+              clearInterval(fallbackPollingRef.current);
+              fallbackPollingRef.current = null;
+            }
+            
             // Show success message when PDF is completed
             if (newData.pdf_status === 'completed' && newData.pdf_url) {
               toast({
@@ -90,7 +98,7 @@ export const useZoekprofielPdf = () => {
                 description: "Je zoekprofiel PDF is succesvol gegenereerd en kan nu gedownload worden.",
               });
               
-              // Stop polling when completed
+              // Stop active polling when completed
               if (pollingIntervalRef.current) {
                 clearInterval(pollingIntervalRef.current);
                 pollingIntervalRef.current = null;
@@ -99,7 +107,15 @@ export const useZoekprofielPdf = () => {
           }
         }
       )
-      .subscribe();
+      .subscribe((status) => {
+        console.log('📡 Real-time subscription status:', status);
+        
+        // If real-time connection fails, start fallback polling
+        if (status === 'CLOSED' || status === 'CHANNEL_ERROR') {
+          console.log('⚠️ Real-time connection failed, starting fallback polling');
+          startFallbackPolling();
+        }
+      });
 
     realtimeChannelRef.current = channel;
 
@@ -111,7 +127,19 @@ export const useZoekprofielPdf = () => {
     };
   }, [user?.id, toast]);
 
-  // Setup polling for generating status
+  // Fallback polling mechanism
+  const startFallbackPolling = useCallback(() => {
+    if (fallbackPollingRef.current) return; // Already polling
+
+    console.log('🔄 Starting fallback polling mechanism');
+    
+    fallbackPollingRef.current = setInterval(() => {
+      console.log('🔄 Fallback polling for PDF updates...');
+      loadPdfData();
+    }, 5000); // Poll every 5 seconds as fallback
+  }, [loadPdfData]);
+
+  // Setup polling for generating status (existing functionality)
   useEffect(() => {
     if (!pdfData || pdfData.pdf_status !== 'generating') {
       // Clear any existing polling
@@ -119,6 +147,13 @@ export const useZoekprofielPdf = () => {
         clearInterval(pollingIntervalRef.current);
         pollingIntervalRef.current = null;
       }
+      
+      // Also clear fallback polling if PDF is completed
+      if (pdfData?.pdf_status === 'completed' && fallbackPollingRef.current) {
+        clearInterval(fallbackPollingRef.current);
+        fallbackPollingRef.current = null;
+      }
+      
       return;
     }
 
@@ -143,6 +178,9 @@ export const useZoekprofielPdf = () => {
     return () => {
       if (pollingIntervalRef.current) {
         clearInterval(pollingIntervalRef.current);
+      }
+      if (fallbackPollingRef.current) {
+        clearInterval(fallbackPollingRef.current);
       }
       if (realtimeChannelRef.current) {
         supabase.removeChannel(realtimeChannelRef.current);
@@ -251,8 +289,9 @@ export const useZoekprofielPdf = () => {
 
       if (error) throw error;
 
-      // Reload data after initialization
+      // Reload data after initialization and start fallback polling
       await loadPdfData();
+      startFallbackPolling();
 
     } catch (error) {
       console.error('❌ Error initializing PDF generation:', error);
@@ -262,7 +301,7 @@ export const useZoekprofielPdf = () => {
         variant: "destructive"
       });
     }
-  }, [user?.id, toast, loadPdfData]);
+  }, [user?.id, toast, loadPdfData, startFallbackPolling]);
 
   // Initial load
   useEffect(() => {

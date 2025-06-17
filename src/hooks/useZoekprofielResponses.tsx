@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
@@ -212,6 +213,29 @@ export const useZoekprofielResponses = () => {
       }
 
       console.log('✅ Successfully submitted to webhook');
+      
+      // Initialize PDF generation status immediately after webhook submission
+      try {
+        console.log('🚀 Initializing PDF generation status after webhook submission...');
+        
+        const { error: initError } = await supabase
+          .from('user_zoekprofielen')
+          .upsert({
+            user_id: user?.id,
+            pdf_status: 'generating'
+          }, {
+            onConflict: 'user_id'
+          });
+
+        if (initError) {
+          console.error('❌ Error initializing PDF generation:', initError);
+        } else {
+          console.log('✅ PDF generation status initialized');
+        }
+      } catch (initError) {
+        console.error('❌ Failed to initialize PDF generation:', initError);
+      }
+
       toast({
         title: "Zoekprofiel verzonden",
         description: "Je zoekprofiel is succesvol verwerkt!",
