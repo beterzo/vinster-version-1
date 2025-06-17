@@ -159,8 +159,8 @@ const Dashboard = () => {
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 py-8">
         <DashboardHeader />
 
-        {/* Mobile-first responsive layout */}
-        <div className="flex flex-col lg:grid lg:grid-cols-[1fr_400px] gap-x-8 min-h-[800px]">
+        {/* Mobile-first responsive layout with stretch alignment on desktop */}
+        <div className="flex flex-col lg:grid lg:grid-cols-[1fr_400px] lg:items-stretch gap-x-8 min-h-[800px]">
           
           {/* Main content - full width on mobile, left column on desktop */}
           <div className="flex flex-col gap-y-6 lg:gap-y-8">
@@ -168,7 +168,7 @@ const Dashboard = () => {
             <WelcomeCard />
 
             {/* Content area - stacked on mobile, side-by-side on desktop */}
-            <div className="flex flex-col lg:grid lg:grid-cols-[350px_1fr] gap-6 lg:gap-x-8 items-stretch">
+            <div className="flex flex-col lg:grid lg:grid-cols-[350px_1fr] gap-6 lg:gap-x-8 lg:items-stretch lg:flex-1">
               {/* Important info card */}
               <ImportantInfoCard />
 
@@ -189,7 +189,7 @@ const Dashboard = () => {
           </div>
 
           {/* Sidebar - full width on mobile, right column on desktop */}
-          <div className="mt-6 lg:mt-0">
+          <div className="mt-6 lg:mt-0 lg:h-full">
             <DashboardSidebar 
               getNextStep={getNextStep} 
               hasUserReport={!!userReport}

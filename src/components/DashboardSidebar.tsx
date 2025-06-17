@@ -48,8 +48,8 @@ const DashboardSidebar = ({
   };
 
   return (
-    <div className="flex flex-col gap-8">
-      {/* Afbeelding - neemt de meeste ruimte in */}
+    <div className="h-full flex flex-col gap-8 lg:justify-between">
+      {/* Afbeelding - neemt alle beschikbare ruimte op desktop */}
       <div className="rounded-2xl flex-1 overflow-hidden">
         <img 
           src="/lovable-uploads/4d34612b-df14-4f89-abac-7542126c6ac2.png"
@@ -58,8 +58,8 @@ const DashboardSidebar = ({
         />
       </div>
 
-      {/* Knoppen - onderaan rechts */}
-      <div className="space-y-4">
+      {/* Knoppen - onderaan, flexibel op mobiel, gefixeerd op desktop */}
+      <div className="space-y-4 lg:flex-shrink-0">
         {bothDocumentsReady ? (
           // Beide documenten zijn klaar - toon download knoppen
           <>
