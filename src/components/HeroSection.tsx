@@ -1,7 +1,10 @@
+
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+
 const HeroSection = () => {
   const navigate = useNavigate();
+
   const scrollToProcess = () => {
     const processSection = document.getElementById('het-proces');
     if (processSection) {
@@ -10,14 +13,17 @@ const HeroSection = () => {
       });
     }
   };
+
   const handleStartJourney = () => {
     navigate('/signup');
   };
-  return <div className="relative overflow-hidden">
+
+  return (
+    <div className="relative overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
-      backgroundImage: "url('/lovable-uploads/b67ce5d1-c717-4a77-b5ad-550d88a42378.png')"
-    }}>
+        backgroundImage: "url('/lovable-uploads/b67ce5d1-c717-4a77-b5ad-550d88a42378.png')"
+      }}>
         {/* Overlay for better text readability - made lighter */}
         <div className="absolute inset-0 bg-black bg-opacity-20"></div>
       </div>
@@ -46,10 +52,13 @@ const HeroSection = () => {
             </div>
             
             <h1 className="text-4xl font-bold text-white leading-tight">
-              Welkom bij <span style={{ color: '#FFCD3E' }}>Vinster</span><br />
-              Voor iedereen die denkt: "Wat wil ik eigenlijk écht met mijn werk?"<br />
-              Of je nu net begint, vastloopt, iets nieuws zoekt of gewoon even wilt heroriënteren – Vinster geeft overzicht, houvast en richting.
+              Welkom bij <span style={{ color: '#FFCD3E' }}>Vinster</span>
             </h1>
+            
+            <p className="text-xl text-white leading-relaxed">
+              Voor iedereen die denkt: "Wat wil ik eigenlijk écht met mijn werk?"<br />
+              Of je nu net begint, vastloopt, iets nieuws zoekt of gewoon even wilt heroriënteren – <span style={{ color: '#FFCD3E' }}>Vinster</span> geeft overzicht, houvast en richting.
+            </p>
             
             {/* Two buttons side by side */}
             <div className="flex gap-4 justify-left pt-4 pb-8">
@@ -63,6 +72,8 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default HeroSection;
