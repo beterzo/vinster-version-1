@@ -24,21 +24,21 @@ const WelcomeCard = () => {
           Welkom{userName && ` ${userName}`}
         </h1>
         <p className="text-gray-700 font-medium leading-relaxed mb-4">
-          Dit is jouw persoonlijke dashboard. Hier zie je jouw voortgang 
-          en kun je verder gaan waar je gebleven bent.
+          Dit is jouw persoonlijke dashboard. Hier zie je de voortgang van jouw loopbaanonderzoek en kun je 
+          verder gaan waar je gebleven bent.
         </p>
         <p className="text-gray-600 text-sm leading-relaxed mb-3">
-          Welkom bij de start van jouw loopbaantraject! We beginnen met de enthousiasme-scan, de eerste 
-          stap om te ontdekken waar jouw werkelijke interesses en passies liggen.
+          Hier start jouw loopbaantraject! We beginnen met de enthousiasmescan, de eerste stap om te 
+          ontdekken wat jij graag doet en hoe jij graag werkt. In deze scan gaan we op zoek naar momenten 
+          waarop jij in je element bent.
         </p>
         <p className="text-gray-600 text-sm leading-relaxed mb-3">
-          In deze scan gaan we op zoek naar de activiteiten en omgevingen waar jij van nature enthousiast 
-          van wordt. Door vragen te stellen over je jeugd, schooltijd en werk brengen we jouw unieke patroon 
-          van interesses in kaart.
+          Door vragen te stellen over je jeugd, schooltijd en werkervaringen bregen we jouw unieke patroon 
+          van voorkeuren en interesses in kaart.
         </p>
         <p className="text-gray-600 text-sm leading-relaxed">
-          Jouw enthousiasme is de belangrijkste indicator voor wat je echt leuk vindt. Wanneer je iets doet 
-          waar je enthousiast van wordt, ontstaat er energie en voldoening.
+          Jouw enthousiasme is een belangijke indicator voor wat je echt leuk vind. Wanneer je iets doet 
+          waar je enthousiast van wordt, ontstaat er energie en voldoening. Dáár gaan we naar op zoek.
         </p>
       </div>
     </Card>
