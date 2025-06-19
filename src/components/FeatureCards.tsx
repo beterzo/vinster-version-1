@@ -1,11 +1,21 @@
 
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { CheckCircle } from "lucide-react";
 
 const FeatureCards = () => {
   const handleViewSampleReport = () => {
     // Open sample report in new tab - you can replace this with actual report URL
     window.open('/sample-report.pdf', '_blank');
+  };
+
+  const scrollToProcess = () => {
+    const processSection = document.getElementById('het-proces');
+    if (processSection) {
+      processSection.scrollIntoView({
+        behavior: 'smooth'
+      });
+    }
   };
 
   return (
@@ -15,70 +25,72 @@ const FeatureCards = () => {
           <Card className="text-white p-8 md:p-12 rounded-3xl border-0 relative overflow-hidden min-h-[350px]" style={{
             backgroundColor: '#A9C5E2'
           }}>
-            <div className="grid md:grid-cols-3 gap-8 items-start">
-              {/* Main content - takes up 2/3 of the space, fully left-aligned */}
-              <div className="md:col-span-2 space-y-6">
-                <h3 className="text-3xl md:text-4xl font-bold leading-tight text-left">
-                  Daarom doe je dit
-                </h3>
-                
-                <div className="space-y-4 text-lg leading-relaxed opacity-95 text-left">
-                  <p>
-                    Het doel van Vinster is simpel: jou helpen ontdekken welk werk echt bij je past.
-                  </p>
-                  
-                  <p>
-                    Om dat te bereiken stellen we je slimme vragen over wat je graag doet, waar je energie van krijgt en in welke omgeving je het beste tot je recht komt.
-                  </p>
-                  
-                  <p>
-                    Daaruit ontstaat een persoonlijk rapport met concrete functievoorstellen, passend bij jouw voorkeuren, interesses en talenten.
-                  </p>
-                  
-                  <p>
-                    Zo weet je niet alleen wat je zoekt, maar ook waarom.
-                  </p>
+            <div className="space-y-8">
+              {/* Main heading */}
+              <h2 className="text-3xl md:text-4xl font-bold leading-tight text-left">
+                Wat is <span style={{ color: '#FFCD3E' }}>Vinster</span>?
+              </h2>
+              
+              {/* Introduction */}
+              <p className="text-lg leading-relaxed opacity-95">
+                <span style={{ color: '#FFCD3E' }}>Vinster</span> is een slimme online tool die je helpt ontdekken welke functies bij jou passen.
+              </p>
+              
+              <p className="text-lg leading-relaxed opacity-95">
+                Op basis van wat jij vertelt — over wat je graag doet, wat je belangrijk vindt en hoe je het liefst werkt — krijg je een persoonlijk loopbaanadvies met:
+              </p>
+              
+              {/* Checkmark list */}
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-6 h-6 text-yellow-400 flex-shrink-0" />
+                  <span className="text-lg">twee passende functies</span>
                 </div>
-                
-                <div className="pt-4 text-left">
-                  <Button 
-                    onClick={handleViewSampleReport}
-                    className="bg-blue-900 hover:bg-blue-800 text-white font-bold px-8 py-4 rounded-full text-lg shadow-lg hover:shadow-xl transition-all duration-200"
-                  >
-                    Bekijk voorbeeldrapport
-                  </Button>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-6 h-6 text-yellow-400 flex-shrink-0" />
+                  <span className="text-lg">één verrassende suggestie</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="w-6 h-6 text-yellow-400 flex-shrink-0" />
+                  <span className="text-lg">een helder stappenplan om jouw keuze mee te realiseren</span>
                 </div>
               </div>
               
-              {/* Report illustration - smaller and more subtle */}
-              <div className="md:col-span-1 flex justify-center md:justify-end items-center">
-                <div className="w-32 h-44 bg-white rounded-lg shadow-xl transform rotate-6 relative overflow-hidden">
-                  <div className="h-6 flex items-center px-3" style={{
-                    backgroundColor: '#78BFE3'
-                  }}>
-                    <div className="flex gap-1">
-                      <div className="w-1.5 h-1.5 bg-white rounded-full opacity-80"></div>
-                      <div className="w-1.5 h-1.5 bg-white rounded-full opacity-80"></div>
-                      <div className="w-1.5 h-1.5 bg-white rounded-full opacity-80"></div>
-                    </div>
-                  </div>
-                  <div className="p-3 space-y-1.5">
-                    <div className="h-1.5 bg-gray-300 rounded w-full"></div>
-                    <div className="h-1.5 bg-gray-300 rounded w-4/5"></div>
-                    <div className="h-1.5 bg-gray-300 rounded w-full"></div>
-                    <div className="h-1.5 bg-gray-300 rounded w-3/4"></div>
-                    <div className="h-3 rounded w-full mt-3" style={{
-                      backgroundColor: '#78BFE3',
-                      opacity: 0.7
-                    }}></div>
-                    <div className="h-1.5 bg-gray-300 rounded w-full"></div>
-                    <div className="h-1.5 bg-gray-300 rounded w-5/6"></div>
-                    <div className="h-1.5 bg-gray-300 rounded w-full"></div>
-                    <div className="h-1.5 bg-gray-300 rounded w-2/3"></div>
-                    <div className="h-1.5 bg-gray-300 rounded w-full"></div>
-                    <div className="h-1.5 bg-gray-300 rounded w-4/5"></div>
-                  </div>
-                </div>
+              <p className="text-lg leading-relaxed opacity-95">
+                Je hoeft geen testen in te vullen of moeilijke keuzes te maken. Jij vertelt. De AI-tool luistert. En geeft richting.
+              </p>
+              
+              {/* What you get section */}
+              <div className="space-y-4">
+                <h3 className="text-2xl font-bold">Wat krijg je?</h3>
+                <p className="text-lg opacity-95">Een loopbaanrapport met</p>
+                
+                <ul className="space-y-2 text-lg opacity-95 pl-4">
+                  <li>• Inzicht in jouw interesses en werkvoorkeuren</li>
+                  <li>• Suggesties voor werk dat écht bij je past: twee passende functies en één verrassende</li>
+                  <li>• Een concreet en nuchter plan om verder te komen</li>
+                  <li>• Nieuw perspectief, zonder dat je meteen iets moet</li>
+                </ul>
+              </div>
+              
+              <p className="text-2xl font-bold text-center" style={{ color: '#FFCD3E' }}>
+                Doe werk waar je blij van wordt.
+              </p>
+              
+              {/* Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+                <Button 
+                  onClick={handleViewSampleReport}
+                  className="bg-white hover:bg-gray-100 text-blue-900 font-bold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
+                >
+                  Bekijk voorbeeldrapport
+                </Button>
+                <Button 
+                  onClick={scrollToProcess}
+                  className="bg-blue-900 hover:bg-blue-800 text-white font-bold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
+                >
+                  Hoe het werkt
+                </Button>
               </div>
             </div>
           </Card>
