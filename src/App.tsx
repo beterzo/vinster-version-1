@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -11,6 +10,7 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import NotFound from "./pages/NotFound";
 import PaymentRequired from "./pages/PaymentRequired";
+import DeMensAchterVinster from "./pages/DeMensAchterVinster";
 import EnthousiasmeIntro from "./pages/EnthousiasmeIntro";
 import EnthousiasmeStep1 from "./pages/EnthousiasmeStep1";
 import EnthousiasmeStep2 from "./pages/EnthousiasmeStep2";
@@ -45,6 +45,7 @@ const App = () => (
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/payment-required" element={<PaymentRequired />} />
+          <Route path="/de-mens-achter-vinster" element={<DeMensAchterVinster />} />
           
           {/* Protected routes */}
           <Route

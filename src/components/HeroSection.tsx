@@ -16,7 +16,7 @@ const HeroSection = () => {
       </div>
       
       <div className="relative z-10 max-w-[1440px] mx-auto px-6">
-        {/* Header with Logo and Login Button */}
+        {/* Header with Logo and Buttons */}
         <div className="py-6 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <img src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" alt="Vinster Logo" className="h-12 w-auto" />
@@ -24,9 +24,18 @@ const HeroSection = () => {
             color: '#253857'
           }}>Vinster | jouw venster op de toekomst</span>
           </div>
-          <Button onClick={() => navigate('/login')} className="bg-white hover:bg-gray-100 text-blue-900 font-semibold px-6 py-3 rounded-full border border-gray-200 shadow-sm transition-all duration-200">
-            Inloggen
-          </Button>
+          <div className="flex items-center space-x-4">
+            <Button 
+              onClick={() => navigate('/de-mens-achter-vinster')} 
+              variant="outline"
+              className="bg-transparent hover:bg-white hover:bg-opacity-10 text-white font-semibold px-6 py-3 rounded-full border-2 border-white transition-all duration-200"
+            >
+              De mens achter Vinster
+            </Button>
+            <Button onClick={() => navigate('/login')} className="bg-white hover:bg-gray-100 text-blue-900 font-semibold px-6 py-3 rounded-full border border-gray-200 shadow-sm transition-all duration-200">
+              Inloggen
+            </Button>
+          </div>
         </div>
         
         {/* Main Hero Content - Changed to flex layout for better left alignment */}
