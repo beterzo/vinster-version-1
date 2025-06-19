@@ -51,7 +51,7 @@ const WensberoepenVoltooiPagina = () => {
               Gefeliciteerd! 🎉
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-              Je wensberoepen scan is succesvol afgerond
+              Je hebt de vragen over de wensberoepen succesvol afgerond
             </p>
 
             {/* What happened explanation */}
@@ -59,20 +59,9 @@ const WensberoepenVoltooiPagina = () => {
               <h2 className="text-2xl font-semibold text-blue-900 mb-4">
                 Wat er nu is gebeurd:
               </h2>
-              <div className="space-y-3 text-gray-700">
-                <div className="flex items-start space-x-3">
-                  <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                  <p>Je antwoorden over je drie wensberoepen zijn veilig opgeslagen</p>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                  <p>De gegevens zijn verzonden voor analyse en verwerking</p>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                  <p>Je persoonlijke loopbaanprofiel wordt voorbereid</p>
-                </div>
-              </div>
+              <p className="text-gray-700">
+                Er worden nu kernwoorden samengesteld om te bepalen wat jij belangrijk vind in jouw werk
+              </p>
             </div>
 
             {/* Next steps */}
