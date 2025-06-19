@@ -45,7 +45,7 @@ const FunctieprofielIntro = () => {
           
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Je bent er bijna!</h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Dit is de laatste stap in Vinster. Je gaat nu je functieprofiel opstellen: een duidelijk overzicht van wat jij zoekt in je volgende baan.
+            Dit is de laatste stap in Vinster. Je hebt onderzoek gedaan en je gaat nu je functieprofiel opstellen. Een functieprofiel is een duidelijk overzicht van de baan die jij zoekt.
           </p>
         </div>
 
