@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -63,7 +64,7 @@ const RapportReview = () => {
             <h1 className="text-3xl font-bold text-gray-900">Controleer je antwoorden</h1>
           </div>
           <p className="text-lg text-gray-700">
-            Bekijk hier al je antwoorden nog een keer. Je kunt ze aanpassen voordat je rapport wordt gegenereerd.
+            Bekijk hier al je antwoorden nog een keer. Je kunt ze aanpassen voordat je loopbaanrapport wordt gegenereerd.
           </p>
         </div>
 
@@ -266,7 +267,7 @@ const RapportReview = () => {
             className="bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl"
             size="lg"
           >
-            {generating ? "Rapport genereren..." : "Genereer mijn rapport"}
+            {generating ? "Loopbaanrapport genereren..." : "Genereer mijn loopbaanrapport"}
             <ArrowRight className="w-5 h-5 ml-2" />
           </Button>
         </div>

@@ -15,6 +15,7 @@ export const useRapportGeneration = () => {
   const [loading, setLoading] = useState(false);
   const [downloading, setDownloading] = useState(false);
 
+  const loa
   const loadUserReport = async () => {
     if (!user) return;
 
@@ -43,7 +44,7 @@ export const useRapportGeneration = () => {
 
     setGenerating(true);
     try {
-      console.log('Generating report for user:', user.id);
+      console.log('Generating loopbaanrapport for user:', user.id);
 
       // Create report record with generating status
       const { data: reportData, error } = await supabase
@@ -95,15 +96,15 @@ export const useRapportGeneration = () => {
       
       toast({
         title: "PDF generatie gestart",
-        description: "Je rapport wordt gegenereerd. Je wordt automatisch doorgestuurd zodra het klaar is.",
+        description: "Je loopbaanrapport wordt gegenereerd. Je wordt automatisch doorgestuurd zodra het klaar is.",
       });
 
       return true;
     } catch (error) {
-      console.error('Error generating report:', error);
+      console.error('Error generating loopbaanrapport:', error);
       toast({
         title: "Fout bij genereren",
-        description: "Er is een fout opgetreden bij het genereren van je rapport.",
+        description: "Er is een fout opgetreden bij het genereren van je loopbaanrapport.",
         variant: "destructive",
       });
       return false;
@@ -124,7 +125,7 @@ export const useRapportGeneration = () => {
     }
 
     setDownloading(true);
-    console.log('📄 Starting rapport PDF download from path:', userReport.pdf_file_path);
+    console.log('📄 Starting loopbaanrapport PDF download from path:', userReport.pdf_file_path);
 
     try {
       // First attempt: Direct download from Supabase storage
@@ -143,7 +144,7 @@ export const useRapportGeneration = () => {
       const url = URL.createObjectURL(data);
       const link = document.createElement('a');
       link.href = url;
-      link.download = `mijn-loopbaan-rapport-${new Date().toISOString().split('T')[0]}.pdf`;
+      link.download = `mijn-loopbaanrapport-${new Date().toISOString().split('T')[0]}.pdf`;
       link.style.display = 'none';
       document.body.appendChild(link);
       link.click();
@@ -153,7 +154,7 @@ export const useRapportGeneration = () => {
       console.log('✅ Supabase storage download successful');
       toast({
         title: "Download gestart",
-        description: "Je rapport wordt gedownload.",
+        description: "Je loopbaanrapport wordt gedownload.",
       });
 
     } catch (storageError) {
@@ -178,7 +179,7 @@ export const useRapportGeneration = () => {
           
           const link = document.createElement('a');
           link.href = url;
-          link.download = `mijn-loopbaan-rapport-${new Date().toISOString().split('T')[0]}.pdf`;
+          link.download = `mijn-loopbaanrapport-${new Date().toISOString().split('T')[0]}.pdf`;
           link.style.display = 'none';
           document.body.appendChild(link);
           link.click();
@@ -188,7 +189,7 @@ export const useRapportGeneration = () => {
           console.log('✅ Public URL download successful');
           toast({
             title: "Download gestart",
-            description: "Je rapport wordt gedownload.",
+            description: "Je loopbaanrapport wordt gedownload.",
           });
         } else {
           throw new Error('No public URL available');

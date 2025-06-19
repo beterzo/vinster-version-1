@@ -30,11 +30,11 @@ const DashboardSidebar = ({
   const bothDocumentsReady = hasUserReport && hasZoekprofielPdf;
 
   const handleRapportDownload = async () => {
-    console.log('🎯 Rapport download button clicked');
+    console.log('🎯 Loopbaanrapport download button clicked');
     try {
       await downloadRapportPdf();
     } catch (error) {
-      console.error('❌ Error in rapport download handler:', error);
+      console.error('❌ Error in loopbaanrapport download handler:', error);
     }
   };
 
@@ -99,7 +99,7 @@ const DashboardSidebar = ({
               ) : (
                 <>
                   <Download className="w-5 h-5" />
-                  Bekijk mijn rapport
+                  Bekijk mijn loopbaanrapport
                 </>
               )}
             </Button>
@@ -115,7 +115,7 @@ const DashboardSidebar = ({
               {hasStarted ? "Ga verder waar je gebleven was" : "Begin hier"}
             </Button>
 
-            {/* Conditionale "Bekijk mijn rapport" knop - naar donkerblauw #21324E */}
+            {/* Conditionale "Bekijk mijn loopbaanrapport" knop - naar donkerblauw #21324E */}
             {hasUserReport && (
               <Button 
                 className="w-full text-white font-bold py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50"
@@ -134,7 +134,7 @@ const DashboardSidebar = ({
                 ) : (
                   <>
                     <Download className="w-5 h-5" />
-                    Bekijk mijn rapport
+                    Bekijk mijn loopbaanrapport
                   </>
                 )}
               </Button>

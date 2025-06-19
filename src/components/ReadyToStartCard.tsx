@@ -31,11 +31,11 @@ const ReadyToStartCard = () => {
             className="bg-white hover:bg-gray-100 font-bold px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 w-full"
             style={{ color: '#21324E' }}
           >
-            Bekijk voorbeeldrapport
+            Bekijk voorbeeldloopbaanrapport
           </Button>
           <Button 
             onClick={scrollToProcess}
-            className="hover:opacity-90 text-white font-bold px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 w-full"
+            className="hover:opacity-90 font-bold px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 w-full"
             style={{ backgroundColor: '#FFCD3E', color: '#21324E' }}
           >
             Hoe het werkt

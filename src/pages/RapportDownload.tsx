@@ -46,7 +46,7 @@ const RapportDownload = () => {
         const url = URL.createObjectURL(dataBlob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = 'mijn-loopbaan-rapport.json';
+        link.download = 'mijn-loopbaanrapport.json';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -60,7 +60,7 @@ const RapportDownload = () => {
       <div className="min-h-screen bg-gray-50 font-sans flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-900 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Rapport laden...</p>
+          <p className="mt-4 text-gray-600">Loopbaanrapport laden...</p>
         </div>
       </div>
     );
@@ -87,7 +87,7 @@ const RapportDownload = () => {
                 Je hebt een belangrijke stap gezet in je loopbaan
               </p>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Bedankt dat je de tijd hebt genomen om je rapport op te stellen. 
+                Bedankt dat je de tijd hebt genomen om je loopbaanrapport op te stellen. 
                 Je weet nu precies welke richting je op wilt!
               </p>
             </>
@@ -98,9 +98,9 @@ const RapportDownload = () => {
               <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-8">
                 <Clock className="w-10 h-10 text-blue-600" />
               </div>
-              <h1 className="text-5xl font-bold text-gray-900 mb-6">Rapport wordt gemaakt!</h1>
+              <h1 className="text-5xl font-bold text-gray-900 mb-6">Loopbaanrapport wordt gemaakt!</h1>
               <p className="text-2xl text-gray-700 mb-4">
-                Je rapport wordt momenteel gegenereerd
+                Je loopbaanrapport wordt momenteel gegenereerd
               </p>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 We zijn bezig met het creëren van je persoonlijke loopbaanrapport. 
@@ -116,7 +116,7 @@ const RapportDownload = () => {
               </div>
               <h1 className="text-5xl font-bold text-gray-900 mb-6">Er ging iets mis</h1>
               <p className="text-2xl text-gray-700 mb-4">
-                Het genereren van je rapport is mislukt
+                Het genereren van je loopbaanrapport is mislukt
               </p>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 Ga terug naar het dashboard en probeer het opnieuw.
@@ -131,9 +131,9 @@ const RapportDownload = () => {
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div className="text-white">
                 <h2 className="text-3xl font-bold mb-4">
-                  {userReport?.report_status === 'completed' && 'Je rapport is klaar!'}
-                  {userReport?.report_status === 'generating' && 'Je rapport wordt gegenereerd!'}
-                  {userReport?.report_status === 'failed' && 'Rapport generatie mislukt'}
+                  {userReport?.report_status === 'completed' && 'Je loopbaanrapport is klaar!'}
+                  {userReport?.report_status === 'generating' && 'Je loopbaanrapport wordt gegenereerd!'}
+                  {userReport?.report_status === 'failed' && 'Loopbaanrapport generatie mislukt'}
                 </h2>
                 <p className="text-lg mb-6 opacity-95">
                   {userReport?.report_status === 'completed' && 
@@ -154,7 +154,7 @@ const RapportDownload = () => {
                     size="lg"
                   >
                     <Download className="w-6 h-6 mr-3" />
-                    Download je rapport
+                    Download je loopbaanrapport
                   </Button>
                 ) : userReport?.report_status === 'generating' ? (
                   <div className="flex items-center space-x-3">
@@ -227,7 +227,7 @@ const RapportDownload = () => {
           <Card className="p-6 bg-white rounded-3xl shadow-sm border border-gray-100 mb-12">
             <div className="text-center text-sm text-gray-500 space-y-2">
               <p>
-                Rapport aangemaakt: {new Date(userReport.generated_at).toLocaleDateString('nl-NL', {
+                Loopbaanrapport aangemaakt: {new Date(userReport.generated_at).toLocaleDateString('nl-NL', {
                   year: 'numeric',
                   month: 'long',
                   day: 'numeric',
