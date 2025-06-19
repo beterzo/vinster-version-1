@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
@@ -56,7 +57,7 @@ const ProfielVoltooienIntro = () => {
                 </div>
                 <div className="flex items-start gap-3">
                   <Info className="w-5 h-5 mt-0.5" style={{ color: '#78BFE3' }} />
-                  <span>Eventuele fysieke beperkingen</span>
+                  <span>Eventuele (fysieke) beperkingen</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <Info className="w-5 h-5 mt-0.5" style={{ color: '#78BFE3' }} />
@@ -127,7 +128,7 @@ const ProfielVoltooienIntro = () => {
             className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-8 text-xl rounded-3xl shadow-lg hover:shadow-xl transition-all duration-200" 
             size="lg"
           >
-            Beginnen met loopbaanrapport maken
+            Loopbaanrapport aanmaken
             <ArrowRight className="w-5 h-5 ml-2" />
           </Button>
         </div>
