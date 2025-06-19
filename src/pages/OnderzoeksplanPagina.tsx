@@ -155,7 +155,7 @@ const OnderzoeksplanPagina = () => {
             className="bg-yellow-500 hover:bg-yellow-600 text-black rounded-xl"
           >
             <Check className="w-4 h-4 mr-2" />
-            Afronden
+            Naar dashboard
           </Button>
         </div>
       </div>
