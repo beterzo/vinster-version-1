@@ -14,11 +14,11 @@ const ProcessSteps = () => {
     <div id="het-proces" className="max-w-[1440px] mx-auto px-4 sm:px-6 py-16 bg-gray-50">
       <div className="text-center mb-16">
         <div className="text-yellow-400 text-sm font-semibold mb-4 uppercase tracking-wider">
-          Het proces
+          Hoe werkt het?
         </div>
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-900 leading-tight max-w-4xl mx-auto">
-          Samen vinden we stap voor stap uit<br className="hidden sm:block" />
-          waar jouw interesses liggen
+          Samen ontdekken we stap voor stap<br className="hidden sm:block" />
+          wat jou boeit en hoe jij graag werkt
         </h2>
       </div>
 
@@ -40,7 +40,7 @@ const ProcessSteps = () => {
             </div>
             <h3 className="text-lg lg:text-xl font-bold text-blue-900 mb-3 text-center">Enthousiasmescan</h3>
             <p className="text-gray-600 text-sm text-center leading-relaxed max-w-48">
-              Ontdek waar jij energie van krijgt en wat jou echt enthousiast maakt
+              Ontdek wanneer jij in je element bent
             </p>
           </div>
 
@@ -55,7 +55,7 @@ const ProcessSteps = () => {
             </div>
             <h3 className="text-lg lg:text-xl font-bold text-blue-900 mb-3 text-center">Wensberoepen</h3>
             <p className="text-gray-600 text-sm text-center leading-relaxed max-w-48">
-              Verken verschillende carrièremogelijkheden die bij jou passen
+              Verken verschillende mogelijkheden die bij jou passen
             </p>
           </div>
 
@@ -68,7 +68,7 @@ const ProcessSteps = () => {
             </div>
             <h3 className="text-lg lg:text-xl font-bold text-blue-900 mb-3 text-center">Prioriteiten stellen</h3>
             <p className="text-gray-600 text-sm text-center leading-relaxed max-w-48">
-              Bepaal wat voor jou het belangrijkst is in je carrière
+              Bepaal wat voor jou het belangrijkst is in je werk
             </p>
           </div>
 
@@ -81,7 +81,7 @@ const ProcessSteps = () => {
             </div>
             <h3 className="text-lg lg:text-xl font-bold text-blue-900 mb-3 text-center">Laatste check</h3>
             <p className="text-gray-600 text-sm text-center leading-relaxed max-w-48">
-              Verfijn je keuzes en krijg je persoonlijke carrière-advies
+              Verfijn je keuzes en krijg een persoonlijk loopbaanrapport
             </p>
           </div>
 

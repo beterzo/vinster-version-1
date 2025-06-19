@@ -17,10 +17,9 @@ const TestimonialSection = () => {
               color: '#FFFFFF',
               textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
             }}>
-              "Ik zag mezelf niet ineens<br />
-              die switch maken, maar<br />
-              wat ben ik blij dat ik het<br />
-              gedaan heb!"
+              "Het lijkt wel magie: dat een<br />
+              paar vragen zulke passende<br />
+              functies op kunnen leveren!"
             </blockquote>
           </div>
         </div>
