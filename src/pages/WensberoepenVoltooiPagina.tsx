@@ -67,7 +67,7 @@ const WensberoepenVoltooiPagina = () => {
             {/* Next steps */}
             <div className="bg-yellow-50 rounded-2xl p-8 mb-12 text-left">
               <h2 className="text-2xl font-semibold text-blue-900 mb-6">
-                Volgende stap: Profiel voltooien
+                Volgende stap: Loopbaanrapport maken
               </h2>
               <p className="text-gray-700 mb-6">
                 Om je persoonlijke loopbaanrapport te kunnen genereren, hebben we nog wat extra informatie van je nodig:
@@ -106,7 +106,7 @@ const WensberoepenVoltooiPagina = () => {
                 onClick={handleProfielVoltooien}
                 className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold px-8 py-3 text-lg"
               >
-                Profiel voltooien
+                Loopbaanrapport maken
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button 
@@ -120,7 +120,7 @@ const WensberoepenVoltooiPagina = () => {
 
             {/* Additional info */}
             <div className="mt-8 text-sm text-gray-500">
-              <p>💡 Je kunt altijd later je profiel voltooien via het dashboard</p>
+              <p>💡 Je kunt altijd later je loopbaanrapport maken via het dashboard</p>
             </div>
           </CardContent>
         </Card>

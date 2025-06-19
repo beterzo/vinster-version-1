@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
@@ -20,9 +19,9 @@ const ProfielVoltooienIntro = () => {
             />
             <span className="text-2xl font-bold text-gray-800 tracking-wide">Vinster</span>
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Profiel voltooien</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Loopbaanrapport maken</h1>
           <p className="text-xl text-gray-700">
-            We gaan je profiel compleet maken in twee stappen
+            We gaan je loopbaanrapport maken in twee stappen
           </p>
         </div>
 
@@ -33,7 +32,7 @@ const ProfielVoltooienIntro = () => {
               <ClipboardList className="w-8 h-8" style={{ color: '#78BFE3' }} />
             </div>
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              Twee laatste stappen om je profiel compleet te maken
+              Twee laatste stappen om jouw loopbaanrapport te genereren
             </h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
               Je gaat eerst wat aanvullende informatie invullen over jezelf. 
@@ -128,7 +127,7 @@ const ProfielVoltooienIntro = () => {
             className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-8 text-xl rounded-3xl shadow-lg hover:shadow-xl transition-all duration-200" 
             size="lg"
           >
-            Beginnen met profiel voltooien
+            Beginnen met loopbaanrapport maken
             <ArrowRight className="w-5 h-5 ml-2" />
           </Button>
         </div>

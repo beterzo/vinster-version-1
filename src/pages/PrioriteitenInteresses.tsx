@@ -184,7 +184,7 @@ const PrioriteitenInteresses = () => {
             }`}
             size="lg"
           >
-            {loading ? "Opslaan..." : "Profiel voltooien"}
+            {loading ? "Opslaan..." : "Loopbaanrapport voltooien"}
             <ArrowRight className="w-5 h-5 ml-2" />
           </Button>
         </div>

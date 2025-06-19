@@ -1,4 +1,3 @@
-
 import ProgressStep from "./ProgressStep";
 import { CircleUser, Target, Star, CheckCircle, Search, FileText, ListTodo, UserCheck, Info, ClipboardList } from "lucide-react";
 import { useZoekprofielResponses } from "@/hooks/useZoekprofielResponses";
@@ -56,7 +55,7 @@ const ProgressStepsGrid = ({
       icon: <Target className="w-5 h-5 text-blue-400" />
     },
     {
-      title: "Profiel voltooien",
+      title: "Loopbaanrapport maken",
       progress: combinedProgress(),
       isCompleted: extraInformatieCompleted && prioriteitenCompleted,
       icon: <ClipboardList className="w-5 h-5 text-yellow-500" />

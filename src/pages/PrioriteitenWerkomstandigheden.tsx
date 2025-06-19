@@ -59,7 +59,7 @@ const PrioriteitenWerkomstandigheden = () => {
             <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: '#E6F0F6' }}>
               <Briefcase className="w-5 h-5" style={{ color: '#78BFE3' }} />
             </div>
-            <h1 className="text-3xl font-bold text-gray-900">Fijne werkomgeving</h1>
+            <h1 className="text-3xl font-bold text-gray-900">Fijne werkomstandigheden</h1>
           </div>
           <p className="text-lg text-gray-700">
             Selecteer de werkomstandigheden die voor jou het allerbelangrijkste zijn (minimaal 3)

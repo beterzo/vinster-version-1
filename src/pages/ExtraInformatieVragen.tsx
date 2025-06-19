@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -120,7 +119,7 @@ const ExtraInformatieVragen = () => {
               />
             </div>
 
-            {/* Question 3: Fysieke beperkingen */}
+            {/* Question 3: Fysieke beperkingen - Updated with (fysieke) in parentheses */}
             <div>
               <h3 className="text-xl font-bold text-gray-900 mb-4">
                 3. Zijn er (fysieke) beperkingen waar we rekening mee moeten houden?
@@ -133,10 +132,10 @@ const ExtraInformatieVragen = () => {
               />
             </div>
 
-            {/* Question 4: Sector voorkeur */}
+            {/* Question 4: Sector voorkeur - Updated question text */}
             <div>
               <h3 className="text-xl font-bold text-gray-900 mb-4">
-                4. Wil je dat ik binnen een bepaalde sector zoek?
+                4. Wil je binnen een bepaalde sector zoeken?
               </h3>
               <p className="text-gray-600 mb-4">
                 Je kunt dan bijvoorbeeld denken aan de bouw, defensie of de zorg. Als je dat aangeeft, 

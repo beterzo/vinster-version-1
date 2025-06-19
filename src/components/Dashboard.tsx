@@ -128,7 +128,7 @@ const Dashboard = () => {
       navigate("/enthousiasme-intro");
     } else if (stepTitle === "Wensberoepen") {
       navigate("/wensberoepen-intro");
-    } else if (stepTitle === "Profiel voltooien") {
+    } else if (stepTitle === "Loopbaanrapport maken") {
       navigate("/profiel-voltooien-intro");
     } else if (stepTitle === "Rapport & onderzoeksplan") {
       if (userReport) {
