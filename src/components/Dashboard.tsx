@@ -22,13 +22,13 @@ const Dashboard = () => {
 
   // User data loading states
   const { responses: enthousiasmeResponses, loading: enthousiasmeLoading } = useEnthousiasmeResponses();
-  const { responses: wensberoepenResponses, loading: wensberoepenLoading } = useWensberoepenResponses();
+  const { responses: wensberoepenResponses, isLoading: wensberoepenLoading } = useWensberoepenResponses();
   const { responses: extraInformatieResponses, loading: extraInformatieLoading } = useExtraInformatieResponses();
   const { responses: prioriteitenResponses, loading: prioriteitenLoading } = usePrioriteitenResponses();
   const { progress: functieprofielProgress, isCompleted: functieprofielCompleted, loading: functieprofielLoading } = useFunctieprofielResponses();
 
   // Report and PDF states
-  const { data: userReport, loading: rapportLoading, downloadPdf: downloadRapportPdf } = useRapportData();
+  const { data: userReport, loading: rapportLoading } = useRapportData();
   const { isPdfReady: isFunctieprofielPdfReady, downloadPdf: downloadFunctieprofielPdf } = useFunctieprofielPdf();
 
   // Loading states for downloads
@@ -138,13 +138,14 @@ const Dashboard = () => {
     if (route) navigate(route);
   }, [navigate, hasUserReport, functieprofielCompleted]);
 
-  // Enhanced download handlers with loading states and error handling
+  // Mock rapport download for now since useRapportData doesn't provide downloadPdf
   const handleRapportDownload = useCallback(async () => {
     if (!userReport || downloadingRapport) return;
     
     setDownloadingRapport(true);
     try {
-      await downloadRapportPdf();
+      // For now, just navigate to rapport download page
+      navigate('/rapport-download');
     } catch (error) {
       console.error('❌ Error downloading rapport:', error);
       toast({
@@ -155,7 +156,7 @@ const Dashboard = () => {
     } finally {
       setDownloadingRapport(false);
     }
-  }, [userReport, downloadRapportPdf, downloadingRapport, toast]);
+  }, [userReport, downloadingRapport, toast, navigate]);
 
   const handleFunctieprofielDownload = useCallback(async () => {
     if (!isFunctieprofielPdfReady || downloadingFunctieprofiel) return;
@@ -195,10 +196,7 @@ const Dashboard = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 h-full">
           {/* Left: Welcome Card */}
           <div className="lg:col-span-1">
-            <WelcomeCard 
-              userName={user?.user_metadata?.first_name || 'daar'} 
-              hasStarted={hasStarted}
-            />
+            <WelcomeCard />
           </div>
 
           {/* Middle: Progress Overview */}
