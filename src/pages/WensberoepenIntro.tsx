@@ -32,7 +32,7 @@ const WensberoepenIntro = () => {
           <CardContent className="p-12">
             {/* Main Title */}
             <h1 className="text-4xl font-bold text-blue-900 mb-8 text-center">
-              Nu een heel ander interview. Hier heb je je fantasie voor nodig. Ik ben benieuwd!
+              Nu een heel ander onderwerp. Hier heb je je fantasie voor nodig.
             </h1>
 
             {/* Instructions Section */}
@@ -42,13 +42,13 @@ const WensberoepenIntro = () => {
                   Instructie wensberoepen
                 </h2>
                 <p className="text-lg text-gray-700 leading-relaxed mb-4">
-                  Zet je fantasie aan het werk en bedenk vier beroepen die je wel (een poosje) zou willen doen. Denk zo vrij mogelijk. Hieronder vul je één voor één jouw 'wensberoepen' in en je beantwoord er een aantal vragen over. Maak je antwoord specifiek.
+                  Zet je fantasie aan het werk en bedenk drie beroepen die je wel (een poosje) zou willen doen. Denk zo vrij mogelijk. Er zijn nu even geen beperkingen. Hieronder vul je dadelijk één voor één je wensberoepen in. Beantwoord de vragen alsof je dat beroep al uitoefent. Je hoeft niet na te denken over hoe het precies gaat in dat werk, beschrijf alleen wat jou erin aanspreekt.
                 </p>
                 <p className="text-lg text-gray-700 leading-relaxed mb-4">
-                  Doe alsof je dit werk al jaren doet. Je hoeft niet na te denken hoe het precies gaat in dat beroep, beschrijf alleen wat jou erin aanspreekt. Probeer elke vraag met 10 tot 50 woorden te beantwoorden. Sommige vragen lijken op elkaar. Beantwoord ze toch allemaal zo precies mogelijk.
+                  Probeer met tenminste 10 tot 20 woorden te antwoorden, meer mag ook. Sommige vragen lijken op elkaar. Beantwoord ze toch allemaal zo precies mogelijk.
                 </p>
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  Je krijgt in totaal twaalf vragen per wensberoep.
+                  Je krijgt in totaal acht vragen per beroep.
                 </p>
               </div>
 

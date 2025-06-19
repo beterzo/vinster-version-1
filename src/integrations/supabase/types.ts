@@ -243,43 +243,31 @@ export type Database = {
           updated_at: string
           user_id: string
           wensberoep_1_belangrijke_aspecten: string | null
-          wensberoep_1_binnen_buiten_verhouding: string | null
           wensberoep_1_fluitend_thuiskomen_dag: string | null
           wensberoep_1_kennis_focus: string | null
           wensberoep_1_leukste_onderdelen: string | null
-          wensberoep_1_reistijd: string | null
           wensberoep_1_samenwerking_contacten: string | null
           wensberoep_1_titel: string | null
           wensberoep_1_werk_doel: string | null
           wensberoep_1_werklocatie_omgeving: string | null
-          wensberoep_1_werksfeer: string | null
-          wensberoep_1_werkuren: string | null
           wensberoep_1_werkweek_activiteiten: string | null
           wensberoep_2_belangrijke_aspecten: string | null
-          wensberoep_2_binnen_buiten_verhouding: string | null
           wensberoep_2_fluitend_thuiskomen_dag: string | null
           wensberoep_2_kennis_focus: string | null
           wensberoep_2_leukste_onderdelen: string | null
-          wensberoep_2_reistijd: string | null
           wensberoep_2_samenwerking_contacten: string | null
           wensberoep_2_titel: string | null
           wensberoep_2_werk_doel: string | null
           wensberoep_2_werklocatie_omgeving: string | null
-          wensberoep_2_werksfeer: string | null
-          wensberoep_2_werkuren: string | null
           wensberoep_2_werkweek_activiteiten: string | null
           wensberoep_3_belangrijke_aspecten: string | null
-          wensberoep_3_binnen_buiten_verhouding: string | null
           wensberoep_3_fluitend_thuiskomen_dag: string | null
           wensberoep_3_kennis_focus: string | null
           wensberoep_3_leukste_onderdelen: string | null
-          wensberoep_3_reistijd: string | null
           wensberoep_3_samenwerking_contacten: string | null
           wensberoep_3_titel: string | null
           wensberoep_3_werk_doel: string | null
           wensberoep_3_werklocatie_omgeving: string | null
-          wensberoep_3_werksfeer: string | null
-          wensberoep_3_werkuren: string | null
           wensberoep_3_werkweek_activiteiten: string | null
         }
         Insert: {
@@ -288,43 +276,31 @@ export type Database = {
           updated_at?: string
           user_id: string
           wensberoep_1_belangrijke_aspecten?: string | null
-          wensberoep_1_binnen_buiten_verhouding?: string | null
           wensberoep_1_fluitend_thuiskomen_dag?: string | null
           wensberoep_1_kennis_focus?: string | null
           wensberoep_1_leukste_onderdelen?: string | null
-          wensberoep_1_reistijd?: string | null
           wensberoep_1_samenwerking_contacten?: string | null
           wensberoep_1_titel?: string | null
           wensberoep_1_werk_doel?: string | null
           wensberoep_1_werklocatie_omgeving?: string | null
-          wensberoep_1_werksfeer?: string | null
-          wensberoep_1_werkuren?: string | null
           wensberoep_1_werkweek_activiteiten?: string | null
           wensberoep_2_belangrijke_aspecten?: string | null
-          wensberoep_2_binnen_buiten_verhouding?: string | null
           wensberoep_2_fluitend_thuiskomen_dag?: string | null
           wensberoep_2_kennis_focus?: string | null
           wensberoep_2_leukste_onderdelen?: string | null
-          wensberoep_2_reistijd?: string | null
           wensberoep_2_samenwerking_contacten?: string | null
           wensberoep_2_titel?: string | null
           wensberoep_2_werk_doel?: string | null
           wensberoep_2_werklocatie_omgeving?: string | null
-          wensberoep_2_werksfeer?: string | null
-          wensberoep_2_werkuren?: string | null
           wensberoep_2_werkweek_activiteiten?: string | null
           wensberoep_3_belangrijke_aspecten?: string | null
-          wensberoep_3_binnen_buiten_verhouding?: string | null
           wensberoep_3_fluitend_thuiskomen_dag?: string | null
           wensberoep_3_kennis_focus?: string | null
           wensberoep_3_leukste_onderdelen?: string | null
-          wensberoep_3_reistijd?: string | null
           wensberoep_3_samenwerking_contacten?: string | null
           wensberoep_3_titel?: string | null
           wensberoep_3_werk_doel?: string | null
           wensberoep_3_werklocatie_omgeving?: string | null
-          wensberoep_3_werksfeer?: string | null
-          wensberoep_3_werkuren?: string | null
           wensberoep_3_werkweek_activiteiten?: string | null
         }
         Update: {
@@ -333,43 +309,31 @@ export type Database = {
           updated_at?: string
           user_id?: string
           wensberoep_1_belangrijke_aspecten?: string | null
-          wensberoep_1_binnen_buiten_verhouding?: string | null
           wensberoep_1_fluitend_thuiskomen_dag?: string | null
           wensberoep_1_kennis_focus?: string | null
           wensberoep_1_leukste_onderdelen?: string | null
-          wensberoep_1_reistijd?: string | null
           wensberoep_1_samenwerking_contacten?: string | null
           wensberoep_1_titel?: string | null
           wensberoep_1_werk_doel?: string | null
           wensberoep_1_werklocatie_omgeving?: string | null
-          wensberoep_1_werksfeer?: string | null
-          wensberoep_1_werkuren?: string | null
           wensberoep_1_werkweek_activiteiten?: string | null
           wensberoep_2_belangrijke_aspecten?: string | null
-          wensberoep_2_binnen_buiten_verhouding?: string | null
           wensberoep_2_fluitend_thuiskomen_dag?: string | null
           wensberoep_2_kennis_focus?: string | null
           wensberoep_2_leukste_onderdelen?: string | null
-          wensberoep_2_reistijd?: string | null
           wensberoep_2_samenwerking_contacten?: string | null
           wensberoep_2_titel?: string | null
           wensberoep_2_werk_doel?: string | null
           wensberoep_2_werklocatie_omgeving?: string | null
-          wensberoep_2_werksfeer?: string | null
-          wensberoep_2_werkuren?: string | null
           wensberoep_2_werkweek_activiteiten?: string | null
           wensberoep_3_belangrijke_aspecten?: string | null
-          wensberoep_3_binnen_buiten_verhouding?: string | null
           wensberoep_3_fluitend_thuiskomen_dag?: string | null
           wensberoep_3_kennis_focus?: string | null
           wensberoep_3_leukste_onderdelen?: string | null
-          wensberoep_3_reistijd?: string | null
           wensberoep_3_samenwerking_contacten?: string | null
           wensberoep_3_titel?: string | null
           wensberoep_3_werk_doel?: string | null
           wensberoep_3_werklocatie_omgeving?: string | null
-          wensberoep_3_werksfeer?: string | null
-          wensberoep_3_werkuren?: string | null
           wensberoep_3_werkweek_activiteiten?: string | null
         }
         Relationships: []

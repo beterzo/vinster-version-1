@@ -78,51 +78,39 @@ export const useWebhookData = () => {
       enthusiasm_recentwork_2: enthousiasmeResponses?.leuk_project_en_rol || "",
       enthusiasm_recentwork_3: enthousiasmeResponses?.fluitend_thuiskomen_dag || "",
 
-      // Wensberoepen responses mapping
-      // Wensberoep 1
+      // Wensberoepen responses mapping - updated to only include 8 questions per wensberoep
+      // Wensberoep 1 (9 fields: 1 title + 8 questions)
       wensberoep_1_titel: wensberoepenResponses?.wensberoep_1_titel || "",
       wensberoep_1_vraag_1: wensberoepenResponses?.wensberoep_1_werkweek_activiteiten || "",
       wensberoep_1_vraag_2: wensberoepenResponses?.wensberoep_1_werklocatie_omgeving || "",
-      wensberoep_1_vraag_3: wensberoepenResponses?.wensberoep_1_binnen_buiten_verhouding || "",
-      wensberoep_1_vraag_4: wensberoepenResponses?.wensberoep_1_samenwerking_contacten || "",
-      wensberoep_1_vraag_5: wensberoepenResponses?.wensberoep_1_fluitend_thuiskomen_dag || "",
-      wensberoep_1_vraag_6: wensberoepenResponses?.wensberoep_1_werk_doel || "",
-      wensberoep_1_vraag_7: wensberoepenResponses?.wensberoep_1_reistijd || "",
-      wensberoep_1_vraag_8: wensberoepenResponses?.wensberoep_1_werkuren || "",
-      wensberoep_1_vraag_9: wensberoepenResponses?.wensberoep_1_werksfeer || "",
-      wensberoep_1_vraag_10: wensberoepenResponses?.wensberoep_1_leukste_onderdelen || "",
-      wensberoep_1_vraag_11: wensberoepenResponses?.wensberoep_1_belangrijke_aspecten || "",
-      wensberoep_1_vraag_12: wensberoepenResponses?.wensberoep_1_kennis_focus || "",
+      wensberoep_1_vraag_3: wensberoepenResponses?.wensberoep_1_samenwerking_contacten || "",
+      wensberoep_1_vraag_4: wensberoepenResponses?.wensberoep_1_fluitend_thuiskomen_dag || "",
+      wensberoep_1_vraag_5: wensberoepenResponses?.wensberoep_1_werk_doel || "",
+      wensberoep_1_vraag_6: wensberoepenResponses?.wensberoep_1_leukste_onderdelen || "",
+      wensberoep_1_vraag_7: wensberoepenResponses?.wensberoep_1_belangrijke_aspecten || "",
+      wensberoep_1_vraag_8: wensberoepenResponses?.wensberoep_1_kennis_focus || "",
 
-      // Wensberoep 2
+      // Wensberoep 2 (9 fields: 1 title + 8 questions)
       wensberoep_2_titel: wensberoepenResponses?.wensberoep_2_titel || "",
       wensberoep_2_vraag_1: wensberoepenResponses?.wensberoep_2_werkweek_activiteiten || "",
       wensberoep_2_vraag_2: wensberoepenResponses?.wensberoep_2_werklocatie_omgeving || "",
-      wensberoep_2_vraag_3: wensberoepenResponses?.wensberoep_2_binnen_buiten_verhouding || "",
-      wensberoep_2_vraag_4: wensberoepenResponses?.wensberoep_2_samenwerking_contacten || "",
-      wensberoep_2_vraag_5: wensberoepenResponses?.wensberoep_2_fluitend_thuiskomen_dag || "",
-      wensberoep_2_vraag_6: wensberoepenResponses?.wensberoep_2_werk_doel || "",
-      wensberoep_2_vraag_7: wensberoepenResponses?.wensberoep_2_reistijd || "",
-      wensberoep_2_vraag_8: wensberoepenResponses?.wensberoep_2_werkuren || "",
-      wensberoep_2_vraag_9: wensberoepenResponses?.wensberoep_2_werksfeer || "",
-      wensberoep_2_vraag_10: wensberoepenResponses?.wensberoep_2_leukste_onderdelen || "",
-      wensberoep_2_vraag_11: wensberoepenResponses?.wensberoep_2_belangrijke_aspecten || "",
-      wensberoep_2_vraag_12: wensberoepenResponses?.wensberoep_2_kennis_focus || "",
+      wensberoep_2_vraag_3: wensberoepenResponses?.wensberoep_2_samenwerking_contacten || "",
+      wensberoep_2_vraag_4: wensberoepenResponses?.wensberoep_2_fluitend_thuiskomen_dag || "",
+      wensberoep_2_vraag_5: wensberoepenResponses?.wensberoep_2_werk_doel || "",
+      wensberoep_2_vraag_6: wensberoepenResponses?.wensberoep_2_leukste_onderdelen || "",
+      wensberoep_2_vraag_7: wensberoepenResponses?.wensberoep_2_belangrijke_aspecten || "",
+      wensberoep_2_vraag_8: wensberoepenResponses?.wensberoep_2_kennis_focus || "",
 
-      // Wensberoep 3
+      // Wensberoep 3 (9 fields: 1 title + 8 questions)
       wensberoep_3_titel: wensberoepenResponses?.wensberoep_3_titel || "",
       wensberoep_3_vraag_1: wensberoepenResponses?.wensberoep_3_werkweek_activiteiten || "",
       wensberoep_3_vraag_2: wensberoepenResponses?.wensberoep_3_werklocatie_omgeving || "",
-      wensberoep_3_vraag_3: wensberoepenResponses?.wensberoep_3_binnen_buiten_verhouding || "",
-      wensberoep_3_vraag_4: wensberoepenResponses?.wensberoep_3_samenwerking_contacten || "",
-      wensberoep_3_vraag_5: wensberoepenResponses?.wensberoep_3_fluitend_thuiskomen_dag || "",
-      wensberoep_3_vraag_6: wensberoepenResponses?.wensberoep_3_werk_doel || "",
-      wensberoep_3_vraag_7: wensberoepenResponses?.wensberoep_3_reistijd || "",
-      wensberoep_3_vraag_8: wensberoepenResponses?.wensberoep_3_werkuren || "",
-      wensberoep_3_vraag_9: wensberoepenResponses?.wensberoep_3_werksfeer || "",
-      wensberoep_3_vraag_10: wensberoepenResponses?.wensberoep_3_leukste_onderdelen || "",
-      wensberoep_3_vraag_11: wensberoepenResponses?.wensberoep_3_belangrijke_aspecten || "",
-      wensberoep_3_vraag_12: wensberoepenResponses?.wensberoep_3_kennis_focus || "",
+      wensberoep_3_vraag_3: wensberoepenResponses?.wensberoep_3_samenwerking_contacten || "",
+      wensberoep_3_vraag_4: wensberoepenResponses?.wensberoep_3_fluitend_thuiskomen_dag || "",
+      wensberoep_3_vraag_5: wensberoepenResponses?.wensberoep_3_werk_doel || "",
+      wensberoep_3_vraag_6: wensberoepenResponses?.wensberoep_3_leukste_onderdelen || "",
+      wensberoep_3_vraag_7: wensberoepenResponses?.wensberoep_3_belangrijke_aspecten || "",
+      wensberoep_3_vraag_8: wensberoepenResponses?.wensberoep_3_kennis_focus || "",
     };
 
     return data;

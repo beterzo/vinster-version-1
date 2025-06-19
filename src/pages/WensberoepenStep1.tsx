@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -24,11 +25,7 @@ const WensberoepenStep1 = () => {
     question5: "",
     question6: "",
     question7: "",
-    question8: "",
-    question9: "",
-    question10: "",
-    question11: "",
-    question12: ""
+    question8: ""
   });
 
   const scrollToTop = () => {
@@ -42,17 +39,13 @@ const WensberoepenStep1 = () => {
     // Check job title
     const jobTitleFilled = responses.wensberoep_1_titel?.trim() !== '' && responses.wensberoep_1_titel !== null;
     
-    // Check all 12 questions
+    // Check all 8 questions
     const allQuestionsFilled = [
       responses.wensberoep_1_werkweek_activiteiten,
       responses.wensberoep_1_werklocatie_omgeving,
-      responses.wensberoep_1_binnen_buiten_verhouding,
       responses.wensberoep_1_samenwerking_contacten,
       responses.wensberoep_1_fluitend_thuiskomen_dag,
       responses.wensberoep_1_werk_doel,
-      responses.wensberoep_1_reistijd,
-      responses.wensberoep_1_werkuren,
-      responses.wensberoep_1_werksfeer,
       responses.wensberoep_1_leukste_onderdelen,
       responses.wensberoep_1_belangrijke_aspecten,
       responses.wensberoep_1_kennis_focus
@@ -69,16 +62,12 @@ const WensberoepenStep1 = () => {
       setAnswers({
         question1: responses.wensberoep_1_werkweek_activiteiten || "",
         question2: responses.wensberoep_1_werklocatie_omgeving || "",
-        question3: responses.wensberoep_1_binnen_buiten_verhouding || "",
-        question4: responses.wensberoep_1_samenwerking_contacten || "",
-        question5: responses.wensberoep_1_fluitend_thuiskomen_dag || "",
-        question6: responses.wensberoep_1_werk_doel || "",
-        question7: responses.wensberoep_1_reistijd || "",
-        question8: responses.wensberoep_1_werkuren || "",
-        question9: responses.wensberoep_1_werksfeer || "",
-        question10: responses.wensberoep_1_leukste_onderdelen || "",
-        question11: responses.wensberoep_1_belangrijke_aspecten || "",
-        question12: responses.wensberoep_1_kennis_focus || ""
+        question3: responses.wensberoep_1_samenwerking_contacten || "",
+        question4: responses.wensberoep_1_fluitend_thuiskomen_dag || "",
+        question5: responses.wensberoep_1_werk_doel || "",
+        question6: responses.wensberoep_1_leukste_onderdelen || "",
+        question7: responses.wensberoep_1_belangrijke_aspecten || "",
+        question8: responses.wensberoep_1_kennis_focus || ""
       });
     }
   }, [isLoading, responses]);
@@ -102,16 +91,12 @@ const WensberoepenStep1 = () => {
     const fieldMap: Record<string, keyof WensberoepenResponse> = {
       question1: "wensberoep_1_werkweek_activiteiten",
       question2: "wensberoep_1_werklocatie_omgeving",
-      question3: "wensberoep_1_binnen_buiten_verhouding",
-      question4: "wensberoep_1_samenwerking_contacten",
-      question5: "wensberoep_1_fluitend_thuiskomen_dag",
-      question6: "wensberoep_1_werk_doel",
-      question7: "wensberoep_1_reistijd",
-      question8: "wensberoep_1_werkuren",
-      question9: "wensberoep_1_werksfeer",
-      question10: "wensberoep_1_leukste_onderdelen",
-      question11: "wensberoep_1_belangrijke_aspecten",
-      question12: "wensberoep_1_kennis_focus"
+      question3: "wensberoep_1_samenwerking_contacten",
+      question4: "wensberoep_1_fluitend_thuiskomen_dag",
+      question5: "wensberoep_1_werk_doel",
+      question6: "wensberoep_1_leukste_onderdelen",
+      question7: "wensberoep_1_belangrijke_aspecten",
+      question8: "wensberoep_1_kennis_focus"
     };
     
     const dbField = fieldMap[field];
@@ -137,13 +122,9 @@ const WensberoepenStep1 = () => {
   const questions = [
     "Wat doe je in een werkweek? Antwoord in werkwoorden en activiteiten.",
     "Waar doe je je werk? Beschrijf de omgeving, het gebouw, de ruimte ....",
-    "Hoe is de verhouding binnen-buiten (op pad zijn)?",
     "Werk je meer samen of meer alleen? Met wat voor mensen heb je contact?",
     "Wat heb je gedaan op een dag dat je fluitend thuiskomt?",
     "Wat is je doel met dit werk?",
-    "Hoeveel reistijd heb je?",
-    "Hoeveel uren werk je?",
-    "Hoe is de sfeer op je werk?",
     "Welke onderdelen uit je werk zijn het leukst?",
     "Wat is voor jou belangrijk in dit werk?",
     "Waar gaat het vooral over in jouw werk? Waar moet je veel van weten?"

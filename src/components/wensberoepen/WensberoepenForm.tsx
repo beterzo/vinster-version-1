@@ -28,7 +28,7 @@ export const WensberoepenForm = ({ prefix, formData, onFieldChange }: Wensberoep
       <WensberoepenFormSection title="Werkinhoud">
         <WensberoepenField
           id={`${prefix}_werkweek_activiteiten`}
-          label="Werkweek activiteiten"
+          label="1. Wat doe je in een werkweek? Antwoord in werkwoorden en activiteiten."
           value={getFieldValue('werkweek_activiteiten')}
           onChange={(value) => handleFieldChange('werkweek_activiteiten', value)}
           placeholder="Beschrijf de dagelijkse activiteiten..."
@@ -37,29 +37,8 @@ export const WensberoepenForm = ({ prefix, formData, onFieldChange }: Wensberoep
         />
 
         <WensberoepenField
-          id={`${prefix}_leukste_onderdelen`}
-          label="Leukste onderdelen"
-          value={getFieldValue('leukste_onderdelen')}
-          onChange={(value) => handleFieldChange('leukste_onderdelen', value)}
-          placeholder="Wat vind je het leukst aan dit werk..."
-          type="textarea"
-        />
-
-        <WensberoepenField
-          id={`${prefix}_werk_doel`}
-          label="Werk doel"
-          value={getFieldValue('werk_doel')}
-          onChange={(value) => handleFieldChange('werk_doel', value)}
-          placeholder="Wat wil je bereiken in dit werk..."
-          type="textarea"
-        />
-      </WensberoepenFormSection>
-
-      {/* Werkomgeving */}
-      <WensberoepenFormSection title="Werkomgeving">
-        <WensberoepenField
           id={`${prefix}_werklocatie_omgeving`}
-          label="Werklocatie en omgeving"
+          label="2. Waar doe je je werk? Beschrijf de omgeving, het gebouw, de ruimte ...."
           value={getFieldValue('werklocatie_omgeving')}
           onChange={(value) => handleFieldChange('werklocatie_omgeving', value)}
           placeholder="Beschrijf de werklocatie..."
@@ -67,61 +46,17 @@ export const WensberoepenForm = ({ prefix, formData, onFieldChange }: Wensberoep
         />
 
         <WensberoepenField
-          id={`${prefix}_binnen_buiten_verhouding`}
-          label="Binnen/buiten verhouding"
-          value={getFieldValue('binnen_buiten_verhouding')}
-          onChange={(value) => handleFieldChange('binnen_buiten_verhouding', value)}
-          placeholder="Bijv. 80% binnen, 20% buiten"
-        />
-
-        <WensberoepenField
-          id={`${prefix}_werksfeer`}
-          label="Werksfeer"
-          value={getFieldValue('werksfeer')}
-          onChange={(value) => handleFieldChange('werksfeer', value)}
-          placeholder="Beschrijf de gewenste werksfeer..."
-          type="textarea"
-        />
-      </WensberoepenFormSection>
-
-      {/* Samenwerking */}
-      <WensberoepenFormSection title="Samenwerking">
-        <WensberoepenField
           id={`${prefix}_samenwerking_contacten`}
-          label="Samenwerking en contacten"
+          label="3. Werk je meer samen of meer alleen? Met wat voor mensen heb je contact?"
           value={getFieldValue('samenwerking_contacten')}
           onChange={(value) => handleFieldChange('samenwerking_contacten', value)}
           placeholder="Met wie werk je samen..."
           type="textarea"
         />
-      </WensberoepenFormSection>
 
-      {/* Praktische zaken */}
-      <WensberoepenFormSection title="Praktische zaken">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <WensberoepenField
-            id={`${prefix}_werkuren`}
-            label="Werkuren"
-            value={getFieldValue('werkuren')}
-            onChange={(value) => handleFieldChange('werkuren', value)}
-            placeholder="Bijv. 40 uur per week"
-          />
-
-          <WensberoepenField
-            id={`${prefix}_reistijd`}
-            label="Reistijd"
-            value={getFieldValue('reistijd')}
-            onChange={(value) => handleFieldChange('reistijd', value)}
-            placeholder="Bijv. 30 minuten enkele reis"
-          />
-        </div>
-      </WensberoepenFormSection>
-
-      {/* Motivatie & Focus */}
-      <WensberoepenFormSection title="Motivatie & Focus">
         <WensberoepenField
           id={`${prefix}_fluitend_thuiskomen_dag`}
-          label="Fluitend thuiskomen dag"
+          label="4. Wat heb je gedaan op een dag dat je fluitend thuiskomt?"
           value={getFieldValue('fluitend_thuiskomen_dag')}
           onChange={(value) => handleFieldChange('fluitend_thuiskomen_dag', value)}
           placeholder="Beschrijf een perfecte werkdag..."
@@ -130,8 +65,26 @@ export const WensberoepenForm = ({ prefix, formData, onFieldChange }: Wensberoep
         />
 
         <WensberoepenField
+          id={`${prefix}_werk_doel`}
+          label="5. Wat is je doel met dit werk?"
+          value={getFieldValue('werk_doel')}
+          onChange={(value) => handleFieldChange('werk_doel', value)}
+          placeholder="Wat wil je bereiken in dit werk..."
+          type="textarea"
+        />
+
+        <WensberoepenField
+          id={`${prefix}_leukste_onderdelen`}
+          label="6. Welke onderdelen uit je werk zijn het leukst?"
+          value={getFieldValue('leukste_onderdelen')}
+          onChange={(value) => handleFieldChange('leukste_onderdelen', value)}
+          placeholder="Wat vind je het leukst aan dit werk..."
+          type="textarea"
+        />
+
+        <WensberoepenField
           id={`${prefix}_belangrijke_aspecten`}
-          label="Belangrijke aspecten"
+          label="7. Wat is voor jou belangrijk in dit werk?"
           value={getFieldValue('belangrijke_aspecten')}
           onChange={(value) => handleFieldChange('belangrijke_aspecten', value)}
           placeholder="Wat vind je belangrijk in dit werk..."
@@ -140,7 +93,7 @@ export const WensberoepenForm = ({ prefix, formData, onFieldChange }: Wensberoep
 
         <WensberoepenField
           id={`${prefix}_kennis_focus`}
-          label="Kennis focus"
+          label="8. Waar gaat het vooral over in jouw werk? Waar moet je veel van weten?"
           value={getFieldValue('kennis_focus')}
           onChange={(value) => handleFieldChange('kennis_focus', value)}
           placeholder="Op welke kennis wil je je focussen..."
