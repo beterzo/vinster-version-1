@@ -14,18 +14,18 @@ const EnthousiasmeStep3 = () => {
 
   // Local validation for step 3 only
   const isStep3Complete = () => {
-    const question1 = responses.eerste_werk_leukste_aspecten?.trim() || '';
-    const question2 = responses.werkomgeving_aantrekkelijke_elementen?.trim() || '';
-    const question3 = responses.samenwerking_prettige_aspecten?.trim() || '';
+    const question1 = responses.plezierige_werkperiode_beschrijving?.trim() || '';
+    const question2 = responses.leuk_project_en_rol?.trim() || '';
+    const question3 = responses.fluitend_thuiskomen_dag?.trim() || '';
     
     return question1 !== '' && question2 !== '' && question3 !== '';
   };
 
-  const handleInputChange = (field: 'eerste_werk_leukste_aspecten' | 'werkomgeving_aantrekkelijke_elementen' | 'samenwerking_prettige_aspecten', value: string) => {
+  const handleInputChange = (field: 'plezierige_werkperiode_beschrijving' | 'leuk_project_en_rol' | 'fluitend_thuiskomen_dag', value: string) => {
     updateLocalResponse(field, value);
   };
 
-  const handleInputBlur = (field: 'eerste_werk_leukste_aspecten' | 'werkomgeving_aantrekkelijke_elementen' | 'samenwerking_prettige_aspecten', value: string) => {
+  const handleInputBlur = (field: 'plezierige_werkperiode_beschrijving' | 'leuk_project_en_rol' | 'fluitend_thuiskomen_dag', value: string) => {
     saveResponse(field, value);
   };
 
@@ -61,14 +61,14 @@ const EnthousiasmeStep3 = () => {
 
       {/* Main Content */}
       <div className="max-w-[1440px] mx-auto px-6 py-12">
-        <EnthousiasmeProgress currentStep={3} totalSteps={4} />
+        <EnthousiasmeProgress currentStep={3} totalSteps={3} />
         
         <Card className="rounded-3xl shadow-xl">
           <CardContent className="p-12">
             {/* Title */}
             <div className="text-center mb-12">
               <h1 className="text-3xl font-bold text-blue-900 mb-2">
-                Je eerste werkervaring
+                Je beste werkervaring
               </h1>
               {saving && (
                 <p className="text-sm text-gray-500 flex items-center justify-center gap-2">
@@ -82,42 +82,42 @@ const EnthousiasmeStep3 = () => {
             <div className="space-y-8">
               <div>
                 <Label htmlFor="question1" className="text-blue-900 font-medium text-lg mb-3 block text-left">
-                  Wat vond je het leukst in je werk? (dat kan ook in een bijbaantje zijn)
+                  Aan welke periode denk je met heel veel plezier terug?
                 </Label>
                 <Textarea
                   id="question1"
-                  placeholder="Beschrijf wat je het leukst vond in je eerste werkervaring..."
-                  value={responses.eerste_werk_leukste_aspecten || ''}
-                  onChange={(e) => handleInputChange('eerste_werk_leukste_aspecten', e.target.value)}
-                  onBlur={(e) => handleInputBlur('eerste_werk_leukste_aspecten', e.target.value)}
+                  placeholder="Beschrijf een werkperiode waar je met heel veel plezier aan terugdenkt..."
+                  value={responses.plezierige_werkperiode_beschrijving || ''}
+                  onChange={(e) => handleInputChange('plezierige_werkperiode_beschrijving', e.target.value)}
+                  onBlur={(e) => handleInputBlur('plezierige_werkperiode_beschrijving', e.target.value)}
                   className="min-h-[120px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
                 />
               </div>
 
               <div>
                 <Label htmlFor="question2" className="text-blue-900 font-medium text-lg mb-3 block text-left">
-                  Wat sprak/spreekt je aan in de werkomgeving?
+                  Kun je nog een leuke periode of project noemen?
                 </Label>
                 <Textarea
                   id="question2"
-                  placeholder="Vertel wat je aantrekkelijk vond aan de werkomgeving..."
-                  value={responses.werkomgeving_aantrekkelijke_elementen || ''}
-                  onChange={(e) => handleInputChange('werkomgeving_aantrekkelijke_elementen', e.target.value)}
-                  onBlur={(e) => handleInputBlur('werkomgeving_aantrekkelijke_elementen', e.target.value)}
+                  placeholder="Vertel over een ander leuk project of periode en je rol daarin..."
+                  value={responses.leuk_project_en_rol || ''}
+                  onChange={(e) => handleInputChange('leuk_project_en_rol', e.target.value)}
+                  onBlur={(e) => handleInputBlur('leuk_project_en_rol', e.target.value)}
                   className="min-h-[120px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
                 />
               </div>
 
               <div>
                 <Label htmlFor="question3" className="text-blue-900 font-medium text-lg mb-3 block text-left">
-                  Wat vond/vind je fijn in samenwerken?
+                  Wanneer kom jij fluitend thuis?
                 </Label>
                 <Textarea
                   id="question3"
-                  placeholder="Beschrijf wat je fijn vindt aan samenwerken..."
-                  value={responses.samenwerking_prettige_aspecten || ''}
-                  onChange={(e) => handleInputChange('samenwerking_prettige_aspecten', e.target.value)}
-                  onBlur={(e) => handleInputBlur('samenwerking_prettige_aspecten', e.target.value)}
+                  placeholder="Beschrijf een dag waarvan je fluitend thuiskwam van je werk..."
+                  value={responses.fluitend_thuiskomen_dag || ''}
+                  onChange={(e) => handleInputChange('fluitend_thuiskomen_dag', e.target.value)}
+                  onBlur={(e) => handleInputBlur('fluitend_thuiskomen_dag', e.target.value)}
                   className="min-h-[120px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
                 />
               </div>
@@ -133,7 +133,7 @@ const EnthousiasmeStep3 = () => {
                 Vorige
               </Button>
               <Button 
-                onClick={() => navigate('/enthousiasme-stap-4')}
+                onClick={() => navigate('/wensberoepen-intro')}
                 className={`font-semibold px-8 ${
                   step3Complete
                     ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 
@@ -141,7 +141,7 @@ const EnthousiasmeStep3 = () => {
                 }`}
                 disabled={!step3Complete}
               >
-                Volgende
+                Afronden
               </Button>
             </div>
           </CardContent>

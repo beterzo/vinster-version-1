@@ -5,15 +5,12 @@ import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
 
 export interface EnthousiasmeResponses {
-  kindertijd_liefste_activiteiten?: string;
-  kindertijd_favoriete_plekken?: string;
-  kindertijd_interesses?: string;
-  school_interessantste_vakken?: string;
-  school_thuiskomst_activiteiten?: string;
-  school_naschoolse_activiteiten?: string;
-  eerste_werk_leukste_aspecten?: string;
-  werkomgeving_aantrekkelijke_elementen?: string;
-  samenwerking_prettige_aspecten?: string;
+  kindertijd_activiteiten?: string;
+  kindertijd_plekken?: string;
+  kindertijd_interesses_nieuw?: string;
+  eerste_werk_leukste_taken?: string;
+  eerste_werk_werkomstandigheden?: string;
+  eerste_werk_onderwerpen?: string;
   plezierige_werkperiode_beschrijving?: string;
   leuk_project_en_rol?: string;
   fluitend_thuiskomen_dag?: string;
@@ -50,15 +47,12 @@ export const useEnthousiasmeResponses = () => {
 
       if (data) {
         setResponses({
-          kindertijd_liefste_activiteiten: data.kindertijd_liefste_activiteiten || '',
-          kindertijd_favoriete_plekken: data.kindertijd_favoriete_plekken || '',
-          kindertijd_interesses: data.kindertijd_interesses || '',
-          school_interessantste_vakken: data.school_interessantste_vakken || '',
-          school_thuiskomst_activiteiten: data.school_thuiskomst_activiteiten || '',
-          school_naschoolse_activiteiten: data.school_naschoolse_activiteiten || '',
-          eerste_werk_leukste_aspecten: data.eerste_werk_leukste_aspecten || '',
-          werkomgeving_aantrekkelijke_elementen: data.werkomgeving_aantrekkelijke_elementen || '',
-          samenwerking_prettige_aspecten: data.samenwerking_prettige_aspecten || '',
+          kindertijd_activiteiten: data.kindertijd_activiteiten || '',
+          kindertijd_plekken: data.kindertijd_plekken || '',
+          kindertijd_interesses_nieuw: data.kindertijd_interesses_nieuw || '',
+          eerste_werk_leukste_taken: data.eerste_werk_leukste_taken || '',
+          eerste_werk_werkomstandigheden: data.eerste_werk_werkomstandigheden || '',
+          eerste_werk_onderwerpen: data.eerste_werk_onderwerpen || '',
           plezierige_werkperiode_beschrijving: data.plezierige_werkperiode_beschrijving || '',
           leuk_project_en_rol: data.leuk_project_en_rol || '',
           fluitend_thuiskomen_dag: data.fluitend_thuiskomen_dag || '',

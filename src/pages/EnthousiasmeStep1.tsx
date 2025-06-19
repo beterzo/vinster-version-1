@@ -14,18 +14,18 @@ const EnthousiasmeStep1 = () => {
 
   // Local validation for step 1 only
   const isStep1Complete = () => {
-    const question1 = responses.kindertijd_liefste_activiteiten?.trim() || '';
-    const question2 = responses.kindertijd_favoriete_plekken?.trim() || '';
-    const question3 = responses.kindertijd_interesses?.trim() || '';
+    const question1 = responses.kindertijd_activiteiten?.trim() || '';
+    const question2 = responses.kindertijd_plekken?.trim() || '';
+    const question3 = responses.kindertijd_interesses_nieuw?.trim() || '';
     
     return question1 !== '' && question2 !== '' && question3 !== '';
   };
 
-  const handleInputChange = (field: 'kindertijd_liefste_activiteiten' | 'kindertijd_favoriete_plekken' | 'kindertijd_interesses', value: string) => {
+  const handleInputChange = (field: 'kindertijd_activiteiten' | 'kindertijd_plekken' | 'kindertijd_interesses_nieuw', value: string) => {
     updateLocalResponse(field, value);
   };
 
-  const handleInputBlur = (field: 'kindertijd_liefste_activiteiten' | 'kindertijd_favoriete_plekken' | 'kindertijd_interesses', value: string) => {
+  const handleInputBlur = (field: 'kindertijd_activiteiten' | 'kindertijd_plekken' | 'kindertijd_interesses_nieuw', value: string) => {
     saveResponse(field, value);
   };
 
@@ -61,14 +61,14 @@ const EnthousiasmeStep1 = () => {
 
       {/* Main Content */}
       <div className="max-w-[1440px] mx-auto px-6 py-12">
-        <EnthousiasmeProgress currentStep={1} totalSteps={4} />
+        <EnthousiasmeProgress currentStep={1} totalSteps={3} />
         
         <Card className="rounded-3xl shadow-xl">
           <CardContent className="p-12">
             {/* Title */}
             <div className="text-center mb-12">
               <h1 className="text-3xl font-bold text-blue-900 mb-2">
-                Jouw kindertijd & eerste schooltijd
+                Jouw kindertijd & tienertijd
               </h1>
               {saving && (
                 <p className="text-sm text-gray-500 flex items-center justify-center gap-2">
@@ -82,42 +82,42 @@ const EnthousiasmeStep1 = () => {
             <div className="space-y-8">
               <div>
                 <Label htmlFor="question1" className="text-blue-900 font-medium text-lg mb-3 block text-left">
-                  Welke dingen deed je het liefst als kind?
+                  Wat deed je graag? (op school en buiten school)
                 </Label>
                 <Textarea
                   id="question1"
-                  placeholder="Beschrijf wat je het liefst deed als kind..."
-                  value={responses.kindertijd_liefste_activiteiten || ''}
-                  onChange={(e) => handleInputChange('kindertijd_liefste_activiteiten', e.target.value)}
-                  onBlur={(e) => handleInputBlur('kindertijd_liefste_activiteiten', e.target.value)}
+                  placeholder="Bijvoorbeeld: voetballen, tekenen, computerspelletjes, muziek maken..."
+                  value={responses.kindertijd_activiteiten || ''}
+                  onChange={(e) => handleInputChange('kindertijd_activiteiten', e.target.value)}
+                  onBlur={(e) => handleInputBlur('kindertijd_activiteiten', e.target.value)}
                   className="min-h-[120px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
                 />
               </div>
 
               <div>
                 <Label htmlFor="question2" className="text-blue-900 font-medium text-lg mb-3 block text-left">
-                  Waar was je graag?
+                  Waar was je veel te vinden? (als je uit school kwam of in het weekend)
                 </Label>
                 <Textarea
                   id="question2"
-                  placeholder="Vertel over de plekken waar je graag was..."
-                  value={responses.kindertijd_favoriete_plekken || ''}
-                  onChange={(e) => handleInputChange('kindertijd_favoriete_plekken', e.target.value)}
-                  onBlur={(e) => handleInputBlur('kindertijd_favoriete_plekken', e.target.value)}
+                  placeholder="Bijvoorbeeld: bij vrienden thuis, op het sportveld, in mijn kamer, buiten in de natuur..."
+                  value={responses.kindertijd_plekken || ''}
+                  onChange={(e) => handleInputChange('kindertijd_plekken', e.target.value)}
+                  onBlur={(e) => handleInputBlur('kindertijd_plekken', e.target.value)}
                   className="min-h-[120px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
                 />
               </div>
 
               <div>
                 <Label htmlFor="question3" className="text-blue-900 font-medium text-lg mb-3 block text-left">
-                  Wat interesseerde jou?
+                  Wat interesseerde jou? (denk aan schoolvakken, hobby's, onderwerpen op tv of in boeken)
                 </Label>
                 <Textarea
                   id="question3"
-                  placeholder="Beschrijf wat je interesseerde als kind..."
-                  value={responses.kindertijd_interesses || ''}
-                  onChange={(e) => handleInputChange('kindertijd_interesses', e.target.value)}
-                  onBlur={(e) => handleInputBlur('kindertijd_interesses', e.target.value)}
+                  placeholder="Bijvoorbeeld: geschiedenis, dieren, techniek, kunst, sport..."
+                  value={responses.kindertijd_interesses_nieuw || ''}
+                  onChange={(e) => handleInputChange('kindertijd_interesses_nieuw', e.target.value)}
+                  onBlur={(e) => handleInputBlur('kindertijd_interesses_nieuw', e.target.value)}
                   className="min-h-[120px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
                 />
               </div>

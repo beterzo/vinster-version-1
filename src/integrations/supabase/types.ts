@@ -12,57 +12,48 @@ export type Database = {
       enthousiasme_responses: {
         Row: {
           created_at: string
-          eerste_werk_leukste_aspecten: string | null
+          eerste_werk_leukste_taken: string | null
+          eerste_werk_onderwerpen: string | null
+          eerste_werk_werkomstandigheden: string | null
           fluitend_thuiskomen_dag: string | null
           id: string
-          kindertijd_favoriete_plekken: string | null
-          kindertijd_interesses: string | null
-          kindertijd_liefste_activiteiten: string | null
+          kindertijd_activiteiten: string | null
+          kindertijd_interesses_nieuw: string | null
+          kindertijd_plekken: string | null
           leuk_project_en_rol: string | null
           plezierige_werkperiode_beschrijving: string | null
-          samenwerking_prettige_aspecten: string | null
-          school_interessantste_vakken: string | null
-          school_naschoolse_activiteiten: string | null
-          school_thuiskomst_activiteiten: string | null
           updated_at: string
           user_id: string
-          werkomgeving_aantrekkelijke_elementen: string | null
         }
         Insert: {
           created_at?: string
-          eerste_werk_leukste_aspecten?: string | null
+          eerste_werk_leukste_taken?: string | null
+          eerste_werk_onderwerpen?: string | null
+          eerste_werk_werkomstandigheden?: string | null
           fluitend_thuiskomen_dag?: string | null
           id?: string
-          kindertijd_favoriete_plekken?: string | null
-          kindertijd_interesses?: string | null
-          kindertijd_liefste_activiteiten?: string | null
+          kindertijd_activiteiten?: string | null
+          kindertijd_interesses_nieuw?: string | null
+          kindertijd_plekken?: string | null
           leuk_project_en_rol?: string | null
           plezierige_werkperiode_beschrijving?: string | null
-          samenwerking_prettige_aspecten?: string | null
-          school_interessantste_vakken?: string | null
-          school_naschoolse_activiteiten?: string | null
-          school_thuiskomst_activiteiten?: string | null
           updated_at?: string
           user_id: string
-          werkomgeving_aantrekkelijke_elementen?: string | null
         }
         Update: {
           created_at?: string
-          eerste_werk_leukste_aspecten?: string | null
+          eerste_werk_leukste_taken?: string | null
+          eerste_werk_onderwerpen?: string | null
+          eerste_werk_werkomstandigheden?: string | null
           fluitend_thuiskomen_dag?: string | null
           id?: string
-          kindertijd_favoriete_plekken?: string | null
-          kindertijd_interesses?: string | null
-          kindertijd_liefste_activiteiten?: string | null
+          kindertijd_activiteiten?: string | null
+          kindertijd_interesses_nieuw?: string | null
+          kindertijd_plekken?: string | null
           leuk_project_en_rol?: string | null
           plezierige_werkperiode_beschrijving?: string | null
-          samenwerking_prettige_aspecten?: string | null
-          school_interessantste_vakken?: string | null
-          school_naschoolse_activiteiten?: string | null
-          school_thuiskomst_activiteiten?: string | null
           updated_at?: string
           user_id?: string
-          werkomgeving_aantrekkelijke_elementen?: string | null
         }
         Relationships: [
           {

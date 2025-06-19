@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { useAuth } from '@/hooks/useAuth';
+import { use Auth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
@@ -20,15 +20,12 @@ const EditEnthousiasmeDialog = ({ open, onOpenChange, data, onSave }: EditEnthou
   const { toast } = useToast();
   const [saving, setSaving] = useState(false);
   const [formData, setFormData] = useState({
-    kindertijd_liefste_activiteiten: '',
-    kindertijd_favoriete_plekken: '',
-    kindertijd_interesses: '',
-    school_interessantste_vakken: '',
-    school_thuiskomst_activiteiten: '',
-    school_naschoolse_activiteiten: '',
-    eerste_werk_leukste_aspecten: '',
-    werkomgeving_aantrekkelijke_elementen: '',
-    samenwerking_prettige_aspecten: '',
+    kindertijd_activiteiten: '',
+    kindertijd_plekken: '',
+    kindertijd_interesses_nieuw: '',
+    eerste_werk_leukste_taken: '',
+    eerste_werk_werkomstandigheden: '',
+    eerste_werk_onderwerpen: '',
     plezierige_werkperiode_beschrijving: '',
     leuk_project_en_rol: '',
     fluitend_thuiskomen_dag: ''
@@ -37,15 +34,12 @@ const EditEnthousiasmeDialog = ({ open, onOpenChange, data, onSave }: EditEnthou
   useEffect(() => {
     if (data) {
       setFormData({
-        kindertijd_liefste_activiteiten: data.kindertijd_liefste_activiteiten || '',
-        kindertijd_favoriete_plekken: data.kindertijd_favoriete_plekken || '',
-        kindertijd_interesses: data.kindertijd_interesses || '',
-        school_interessantste_vakken: data.school_interessantste_vakken || '',
-        school_thuiskomst_activiteiten: data.school_thuiskomst_activiteiten || '',
-        school_naschoolse_activiteiten: data.school_naschoolse_activiteiten || '',
-        eerste_werk_leukste_aspecten: data.eerste_werk_leukste_aspecten || '',
-        werkomgeving_aantrekkelijke_elementen: data.werkomgeving_aantrekkelijke_elementen || '',
-        samenwerking_prettige_aspecten: data.samenwerking_prettige_aspecten || '',
+        kindertijd_activiteiten: data.kindertijd_activiteiten || '',
+        kindertijd_plekken: data.kindertijd_plekken || '',
+        kindertijd_interesses_nieuw: data.kindertijd_interesses_nieuw || '',
+        eerste_werk_leukste_taken: data.eerste_werk_leukste_taken || '',
+        eerste_werk_werkomstandigheden: data.eerste_werk_werkomstandigheden || '',
+        eerste_werk_onderwerpen: data.eerste_werk_onderwerpen || '',
         plezierige_werkperiode_beschrijving: data.plezierige_werkperiode_beschrijving || '',
         leuk_project_en_rol: data.leuk_project_en_rol || '',
         fluitend_thuiskomen_dag: data.fluitend_thuiskomen_dag || ''
@@ -101,11 +95,11 @@ const EditEnthousiasmeDialog = ({ open, onOpenChange, data, onSave }: EditEnthou
             <div className="space-y-4">
               <div>
                 <Label className="text-sm font-medium text-gray-700">
-                  Welke dingen deed je het liefst als kind?
+                  Wat deed je graag? (kindertijd & tienertijd)
                 </Label>
                 <Textarea
-                  value={formData.kindertijd_liefste_activiteiten}
-                  onChange={(e) => setFormData(prev => ({ ...prev, kindertijd_liefste_activiteiten: e.target.value }))}
+                  value={formData.kindertijd_activiteiten}
+                  onChange={(e) => setFormData(prev => ({ ...prev, kindertijd_activiteiten: e.target.value }))}
                   className="mt-1"
                   rows={3}
                 />
@@ -113,11 +107,11 @@ const EditEnthousiasmeDialog = ({ open, onOpenChange, data, onSave }: EditEnthou
 
               <div>
                 <Label className="text-sm font-medium text-gray-700">
-                  Waar was je graag?
+                  Waar was je veel te vinden?
                 </Label>
                 <Textarea
-                  value={formData.kindertijd_favoriete_plekken}
-                  onChange={(e) => setFormData(prev => ({ ...prev, kindertijd_favoriete_plekken: e.target.value }))}
+                  value={formData.kindertijd_plekken}
+                  onChange={(e) => setFormData(prev => ({ ...prev, kindertijd_plekken: e.target.value }))}
                   className="mt-1"
                   rows={3}
                 />
@@ -128,8 +122,8 @@ const EditEnthousiasmeDialog = ({ open, onOpenChange, data, onSave }: EditEnthou
                   Wat interesseerde jou?
                 </Label>
                 <Textarea
-                  value={formData.kindertijd_interesses}
-                  onChange={(e) => setFormData(prev => ({ ...prev, kindertijd_interesses: e.target.value }))}
+                  value={formData.kindertijd_interesses_nieuw}
+                  onChange={(e) => setFormData(prev => ({ ...prev, kindertijd_interesses_nieuw: e.target.value }))}
                   className="mt-1"
                   rows={3}
                 />
@@ -137,11 +131,11 @@ const EditEnthousiasmeDialog = ({ open, onOpenChange, data, onSave }: EditEnthou
 
               <div>
                 <Label className="text-sm font-medium text-gray-700">
-                  Wat interesseerde jou het meest op school?
+                  Wat vond/vind je het leukst om te doen? (eerste werk)
                 </Label>
                 <Textarea
-                  value={formData.school_interessantste_vakken}
-                  onChange={(e) => setFormData(prev => ({ ...prev, school_interessantste_vakken: e.target.value }))}
+                  value={formData.eerste_werk_leukste_taken}
+                  onChange={(e) => setFormData(prev => ({ ...prev, eerste_werk_leukste_taken: e.target.value }))}
                   className="mt-1"
                   rows={3}
                 />
@@ -149,23 +143,11 @@ const EditEnthousiasmeDialog = ({ open, onOpenChange, data, onSave }: EditEnthou
 
               <div>
                 <Label className="text-sm font-medium text-gray-700">
-                  Wat deed je zodra je thuis kwam?
+                  Wat sprak/spreekt je aan in de werkomstandigheden?
                 </Label>
                 <Textarea
-                  value={formData.school_thuiskomst_activiteiten}
-                  onChange={(e) => setFormData(prev => ({ ...prev, school_thuiskomst_activiteiten: e.target.value }))}
-                  className="mt-1"
-                  rows={3}
-                />
-              </div>
-
-              <div>
-                <Label className="text-sm font-medium text-gray-700">
-                  Wat deed je naast school?
-                </Label>
-                <Textarea
-                  value={formData.school_naschoolse_activiteiten}
-                  onChange={(e) => setFormData(prev => ({ ...prev, school_naschoolse_activiteiten: e.target.value }))}
+                  value={formData.eerste_werk_werkomstandigheden}
+                  onChange={(e) => setFormData(prev => ({ ...prev, eerste_werk_werkomstandigheden: e.target.value }))}
                   className="mt-1"
                   rows={3}
                 />
@@ -175,35 +157,11 @@ const EditEnthousiasmeDialog = ({ open, onOpenChange, data, onSave }: EditEnthou
             <div className="space-y-4">
               <div>
                 <Label className="text-sm font-medium text-gray-700">
-                  Wat vond je het leukst in je werk?
+                  Onderwerpen waar je je met plezier mee bezig hield/houdt
                 </Label>
                 <Textarea
-                  value={formData.eerste_werk_leukste_aspecten}
-                  onChange={(e) => setFormData(prev => ({ ...prev, eerste_werk_leukste_aspecten: e.target.value }))}
-                  className="mt-1"
-                  rows={3}
-                />
-              </div>
-
-              <div>
-                <Label className="text-sm font-medium text-gray-700">
-                  Wat sprak/spreekt je aan in de werkomgeving?
-                </Label>
-                <Textarea
-                  value={formData.werkomgeving_aantrekkelijke_elementen}
-                  onChange={(e) => setFormData(prev => ({ ...prev, werkomgeving_aantrekkelijke_elementen: e.target.value }))}
-                  className="mt-1"
-                  rows={3}
-                />
-              </div>
-
-              <div>
-                <Label className="text-sm font-medium text-gray-700">
-                  Wat vond/vind je fijn in samenwerken?
-                </Label>
-                <Textarea
-                  value={formData.samenwerking_prettige_aspecten}
-                  onChange={(e) => setFormData(prev => ({ ...prev, samenwerking_prettige_aspecten: e.target.value }))}
+                  value={formData.eerste_werk_onderwerpen}
+                  onChange={(e) => setFormData(prev => ({ ...prev, eerste_werk_onderwerpen: e.target.value }))}
                   className="mt-1"
                   rows={3}
                 />

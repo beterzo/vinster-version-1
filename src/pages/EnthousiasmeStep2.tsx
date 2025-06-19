@@ -14,18 +14,18 @@ const EnthousiasmeStep2 = () => {
 
   // Local validation for step 2 only
   const isStep2Complete = () => {
-    const question1 = responses.school_interessantste_vakken?.trim() || '';
-    const question2 = responses.school_thuiskomst_activiteiten?.trim() || '';
-    const question3 = responses.school_naschoolse_activiteiten?.trim() || '';
+    const question1 = responses.eerste_werk_leukste_taken?.trim() || '';
+    const question2 = responses.eerste_werk_werkomstandigheden?.trim() || '';
+    const question3 = responses.eerste_werk_onderwerpen?.trim() || '';
     
     return question1 !== '' && question2 !== '' && question3 !== '';
   };
 
-  const handleInputChange = (field: 'school_interessantste_vakken' | 'school_thuiskomst_activiteiten' | 'school_naschoolse_activiteiten', value: string) => {
+  const handleInputChange = (field: 'eerste_werk_leukste_taken' | 'eerste_werk_werkomstandigheden' | 'eerste_werk_onderwerpen', value: string) => {
     updateLocalResponse(field, value);
   };
 
-  const handleInputBlur = (field: 'school_interessantste_vakken' | 'school_thuiskomst_activiteiten' | 'school_naschoolse_activiteiten', value: string) => {
+  const handleInputBlur = (field: 'eerste_werk_leukste_taken' | 'eerste_werk_werkomstandigheden' | 'eerste_werk_onderwerpen', value: string) => {
     saveResponse(field, value);
   };
 
@@ -61,14 +61,14 @@ const EnthousiasmeStep2 = () => {
 
       {/* Main Content */}
       <div className="max-w-[1440px] mx-auto px-6 py-12">
-        <EnthousiasmeProgress currentStep={2} totalSteps={4} />
+        <EnthousiasmeProgress currentStep={2} totalSteps={3} />
         
         <Card className="rounded-3xl shadow-xl">
           <CardContent className="p-12">
             {/* Title */}
             <div className="text-center mb-12">
               <h1 className="text-3xl font-bold text-blue-900 mb-2">
-                Jouw tienertijd & school
+                Je eerste werkervaring
               </h1>
               {saving && (
                 <p className="text-sm text-gray-500 flex items-center justify-center gap-2">
@@ -82,42 +82,42 @@ const EnthousiasmeStep2 = () => {
             <div className="space-y-8">
               <div>
                 <Label htmlFor="question1" className="text-blue-900 font-medium text-lg mb-3 block text-left">
-                  Wat interesseerde jou het meest op school?
+                  Wat vond/vind je het leukst om te doen?
                 </Label>
                 <Textarea
                   id="question1"
-                  placeholder="Vertel over wat je het meest interesseerde op school..."
-                  value={responses.school_interessantste_vakken || ''}
-                  onChange={(e) => handleInputChange('school_interessantste_vakken', e.target.value)}
-                  onBlur={(e) => handleInputBlur('school_interessantste_vakken', e.target.value)}
+                  placeholder="Bijvoorbeeld: klanten helpen, problemen oplossen, creatief bezig zijn..."
+                  value={responses.eerste_werk_leukste_taken || ''}
+                  onChange={(e) => handleInputChange('eerste_werk_leukste_taken', e.target.value)}
+                  onBlur={(e) => handleInputBlur('eerste_werk_leukste_taken', e.target.value)}
                   className="min-h-[120px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
                 />
               </div>
 
               <div>
                 <Label htmlFor="question2" className="text-blue-900 font-medium text-lg mb-3 block text-left">
-                  Wat deed je zodra je thuis kwam?
+                  Wat sprak/spreekt je aan in de werkomstandigheden?
                 </Label>
                 <Textarea
                   id="question2"
-                  placeholder="Beschrijf wat je deed als je thuiskwam van school..."
-                  value={responses.school_thuiskomst_activiteiten || ''}
-                  onChange={(e) => handleInputChange('school_thuiskomst_activiteiten', e.target.value)}
-                  onBlur={(e) => handleInputBlur('school_thuiskomst_activiteiten', e.target.value)}
+                  placeholder="Bijvoorbeeld: gezellige collega's, rustige omgeving, veel vrijheid..."
+                  value={responses.eerste_werk_werkomstandigheden || ''}
+                  onChange={(e) => handleInputChange('eerste_werk_werkomstandigheden', e.target.value)}
+                  onBlur={(e) => handleInputBlur('eerste_werk_werkomstandigheden', e.target.value)}
                   className="min-h-[120px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
                 />
               </div>
 
               <div>
                 <Label htmlFor="question3" className="text-blue-900 font-medium text-lg mb-3 block text-left">
-                  Wat deed je naast school?
+                  Wat zijn onderwerpen waar je je met plezier mee bezig hield/houdt?
                 </Label>
                 <Textarea
                   id="question3"
-                  placeholder="Vertel over je activiteiten naast school..."
-                  value={responses.school_naschoolse_activiteiten || ''}
-                  onChange={(e) => handleInputChange('school_naschoolse_activiteiten', e.target.value)}
-                  onBlur={(e) => handleInputBlur('school_naschoolse_activiteiten', e.target.value)}
+                  placeholder="Bijvoorbeeld: klantenservice, technologie, verkoop, administratie..."
+                  value={responses.eerste_werk_onderwerpen || ''}
+                  onChange={(e) => handleInputChange('eerste_werk_onderwerpen', e.target.value)}
+                  onBlur={(e) => handleInputBlur('eerste_werk_onderwerpen', e.target.value)}
                   className="min-h-[120px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
                 />
               </div>

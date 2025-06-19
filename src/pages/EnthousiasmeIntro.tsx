@@ -32,7 +32,7 @@ const EnthousiasmeIntro = () => {
           <CardContent className="p-12">
             {/* Main Title */}
             <h1 className="text-4xl font-bold text-blue-900 mb-8 text-center">
-              We gaan van start! Ik heb zin om met je mee te gaan denken.
+              We gaan van start!
             </h1>
 
             {/* Instructions Section */}
@@ -42,13 +42,10 @@ const EnthousiasmeIntro = () => {
                   Instructie enthousiasmescan
                 </h2>
                 <p className="text-lg text-gray-700 leading-relaxed mb-4">
-                  Denk aan fijne periodes in je leven, van je jeugd tot aan nu. We hebben de tijd ingedeeld in vier tijdvakken. Als je niets kunt bedenken bij een bepaalde periode, sla die dan gerust over.
-                </p>
-                <p className="text-lg text-gray-700 leading-relaxed mb-4">
-                  Je kunt later terug als je alsnog iets bedenkt. Je krijgt hier in totaal twaalf vragen.
+                  We gaan ontdekken wanneer jij in je element bent en stellen je daarvoor vragen over drie verschillende periodes in je leven. Je kunt later terug als je nog iets bedenkt. Je krijgt drie vragen per periode.
                 </p>
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  Probeer elke vraag met 10 tot 50 woorden te beantwoorden, meer mag ook. Sommige vragen lijken op elkaar. Beantwoord ze toch allemaal zo precies mogelijk. Je mag in steekwoorden en in zinnen antwoorden. Wat jij prettig vindt.
+                  Beantwoord elke vraag met zeker 10 tot 20 woorden, meer mag ook. Beantwoord de vragen zo precies mogelijk. Je mag in steekwoorden of in zinnen antwoorden. Wat jij prettig vindt.
                 </p>
               </div>
 
@@ -58,7 +55,7 @@ const EnthousiasmeIntro = () => {
                   Voor je start
                 </h3>
                 <p className="text-gray-700 leading-relaxed">
-                  Denk terug aan vroeger en leef je in door even na te denken over de volgende vragen: Wat deed jij graag als kind? Was jij een kind dat veel buiten was? Speelde je alleen of liever met anderen? Welke spelletjes vond je leuk? Sportte je graag? Had je hobby's? Wat deed je als het mooi weer was en wat deed je als het regende? Was je een knutselkind? Wat deed je graag na school? Wat was je eerste (bij)baan? Op welke (werk)periode in je latere leven kijk je met veel plezier terug?
+                  Denk terug aan vroeger en leef je even in in de periode die genoemd wordt. Wat deed jij toen graag? Waar was je veel mee bezig? Wat boeide jou? Waar heb je de beste herinneringen aan? Wat was speciaal in die periode? Waar was je graag?
                 </p>
               </div>
 
