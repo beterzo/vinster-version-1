@@ -14,7 +14,6 @@ import EnthousiasmeIntro from "@/pages/EnthousiasmeIntro";
 import EnthousiasmeStep1 from "@/pages/EnthousiasmeStep1";
 import EnthousiasmeStep2 from "@/pages/EnthousiasmeStep2";
 import EnthousiasmeStep3 from "@/pages/EnthousiasmeStep3";
-import EnthousiasmeStep4 from "@/pages/EnthousiasmeStep4";
 import WensberoepenIntro from "@/pages/WensberoepenIntro";
 import WensberoepenStep1 from "@/pages/WensberoepenStep1";
 import WensberoepenStep2 from "@/pages/WensberoepenStep2";
@@ -86,14 +85,6 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <EnthousiasmeStep3 />
-                  </ProtectedRoute>
-                } 
-              />
-              <Route 
-                path="/enthousiasme-stap-4" 
-                element={
-                  <ProtectedRoute>
-                    <EnthousiasmeStep4 />
                   </ProtectedRoute>
                 } 
               />

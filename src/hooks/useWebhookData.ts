@@ -1,3 +1,4 @@
+
 import { useEnthousiasmeResponses } from "./useEnthousiasmeResponses";
 import { useWensberoepenResponses } from "./useWensberoepenResponses";
 import { useAuth } from "./useAuth";
@@ -58,18 +59,20 @@ export const useWebhookData = () => {
       ai_werkomstandigheden: profileData?.ai_werkomstandigheden || "",
       ai_interesses: profileData?.ai_interesses || "",
       
-      // Enthousiasme responses mapping
-      enthusiasm_childhood_1: enthousiasmeResponses?.kindertijd_liefste_activiteiten || "",
-      enthusiasm_childhood_2: enthousiasmeResponses?.kindertijd_favoriete_plekken || "",
-      enthusiasm_childhood_3: enthousiasmeResponses?.kindertijd_interesses || "",
+      // Enthousiasme responses mapping - updated to use new column names
+      enthusiasm_childhood_1: enthousiasmeResponses?.kindertijd_activiteiten || "",
+      enthusiasm_childhood_2: enthousiasmeResponses?.kindertijd_plekken || "",
+      enthusiasm_childhood_3: enthousiasmeResponses?.kindertijd_interesses_nieuw || "",
       
-      enthusiasm_teen_1: enthousiasmeResponses?.school_interessantste_vakken || "",
-      enthusiasm_teen_2: enthousiasmeResponses?.school_thuiskomst_activiteiten || "",
-      enthusiasm_teen_3: enthousiasmeResponses?.school_naschoolse_activiteiten || "",
+      // Since teen period is now combined with childhood, we'll use empty strings for the old teen fields
+      enthusiasm_teen_1: "",
+      enthusiasm_teen_2: "",
+      enthusiasm_teen_3: "",
       
-      enthusiasm_earlywork_1: enthousiasmeResponses?.eerste_werk_leukste_aspecten || "",
-      enthusiasm_earlywork_2: enthousiasmeResponses?.werkomgeving_aantrekkelijke_elementen || "",
-      enthusiasm_earlywork_3: enthousiasmeResponses?.samenwerking_prettige_aspecten || "",
+      // Early work responses - updated to use new column names
+      enthusiasm_earlywork_1: enthousiasmeResponses?.eerste_werk_leukste_taken || "",
+      enthusiasm_earlywork_2: enthousiasmeResponses?.eerste_werk_werkomstandigheden || "",
+      enthusiasm_earlywork_3: enthousiasmeResponses?.eerste_werk_onderwerpen || "",
       
       enthusiasm_recentwork_1: enthousiasmeResponses?.plezierige_werkperiode_beschrijving || "",
       enthusiasm_recentwork_2: enthousiasmeResponses?.leuk_project_en_rol || "",
