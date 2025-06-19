@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 const HeroSection = () => {
@@ -47,8 +46,9 @@ const HeroSection = () => {
             </div>
             
             <h1 className="text-4xl font-bold text-white leading-tight">
-              Doe het <span className="text-yellow-400">werk</span> waar<br />
-              je <span className="text-yellow-400">gelukkig</span> van wordt.
+              Welkom bij Vinster<br />
+              Voor iedereen die denkt: "Wat wil ik eigenlijk écht met mijn werk?"<br />
+              Of je nu net begint, vastloopt, iets nieuws zoekt of gewoon even wilt heroriënteren – Vinster geeft overzicht, houvast en richting.
             </h1>
             
             {/* Two buttons side by side */}
