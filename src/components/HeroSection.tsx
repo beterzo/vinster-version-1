@@ -46,7 +46,7 @@ const HeroSection = () => {
             </div>
             
             <h1 className="text-4xl font-bold text-white leading-tight">
-              Welkom bij Vinster<br />
+              Welkom bij <span style={{ color: '#FFCD3E' }}>Vinster</span><br />
               Voor iedereen die denkt: "Wat wil ik eigenlijk écht met mijn werk?"<br />
               Of je nu net begint, vastloopt, iets nieuws zoekt of gewoon even wilt heroriënteren – Vinster geeft overzicht, houvast en richting.
             </h1>
