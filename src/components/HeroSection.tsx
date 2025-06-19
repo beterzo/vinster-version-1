@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 const HeroSection = () => {
@@ -41,9 +42,8 @@ const HeroSection = () => {
           {/* Left Content - Made wider and fully left-aligned */}
           <div className="w-full max-w-2xl space-y-6 text-left">
             <div className="text-sm text-white leading-relaxed">
-              Wij brengen met wetenschappelijke methoden<br />
-              waardevolle inzichten over jouw talenten in kaart.<br />
-              Leer meer over jezelf!
+              Vind werk dat bij je past, met AI.<br />
+              Slim, persoonlijk en verrassend.
             </div>
             
             <h1 className="text-4xl font-bold text-white leading-tight">
