@@ -1,10 +1,9 @@
-
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
 
-export interface ZoekprofielResponse {
+export interface FunctieprofielResponse {
   id: string;
   user_id: string;
   functie_als: string;
@@ -17,16 +16,16 @@ export interface ZoekprofielResponse {
   updated_at: string;
 }
 
-export const useZoekprofielResponses = () => {
+export const useFunctieprofielResponses = () => {
   const { user } = useAuth();
   const { toast } = useToast();
-  const [responses, setResponses] = useState<ZoekprofielResponse | null>(null);
+  const [responses, setResponses] = useState<FunctieprofielResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
   
   // Keep track of local state for optimistic updates
-  const [localState, setLocalState] = useState<Partial<ZoekprofielResponse>>({});
+  const [localState, setLocalState] = useState<Partial<FunctieprofielResponse>>({});
   
   // Debounce state - track active saves to prevent race conditions
   const debounceTimeouts = useRef<{ [key: string]: NodeJS.Timeout }>({});
@@ -39,7 +38,7 @@ export const useZoekprofielResponses = () => {
     }
 
     try {
-      console.log('🔍 Loading zoekprofiel responses for user:', user.id);
+      console.log('🔍 Loading functieprofiel responses for user:', user.id);
       
       const { data, error } = await supabase
         .from('zoekprofiel_responses')
@@ -48,11 +47,11 @@ export const useZoekprofielResponses = () => {
         .maybeSingle();
 
       if (error && error.code !== 'PGRST116') {
-        console.error('❌ Error loading zoekprofiel responses:', error);
+        console.error('❌ Error loading functieprofiel responses:', error);
         throw error;
       }
 
-      console.log('✅ Loaded zoekprofiel responses:', data);
+      console.log('✅ Loaded functieprofiel responses:', data);
       setResponses(data);
       
       // Initialize local state with loaded data or empty object
@@ -68,10 +67,10 @@ export const useZoekprofielResponses = () => {
       setLocalState(initialState);
       calculateProgress(initialState);
     } catch (error) {
-      console.error('❌ Failed to load zoekprofiel responses:', error);
+      console.error('❌ Failed to load functieprofiel responses:', error);
       toast({
         title: "Fout bij laden",
-        description: "Kon je zoekprofiel gegevens niet laden.",
+        description: "Kon je functieprofiel gegevens niet laden.",
         variant: "destructive"
       });
     } finally {
@@ -79,7 +78,7 @@ export const useZoekprofielResponses = () => {
     }
   };
 
-  const calculateProgress = useCallback((data: Partial<ZoekprofielResponse>) => {
+  const calculateProgress = useCallback((data: Partial<FunctieprofielResponse>) => {
     const fields = [
       data.functie_als,
       data.kerntaken,
@@ -107,7 +106,7 @@ export const useZoekprofielResponses = () => {
     activeSaves.current.add(field);
 
     try {
-      console.log(`💾 Saving zoekprofiel ${field}:`, value);
+      console.log(`💾 Saving functieprofiel ${field}:`, value);
 
       // Use upsert logic to handle both insert and update cases
       const { data, error } = await supabase
@@ -123,7 +122,7 @@ export const useZoekprofielResponses = () => {
 
       if (error) throw error;
 
-      console.log(`✅ Successfully saved zoekprofiel ${field}`);
+      console.log(`✅ Successfully saved functieprofiel ${field}`);
       
       // Update the responses state with the saved data
       setResponses(data);
@@ -135,12 +134,12 @@ export const useZoekprofielResponses = () => {
       }));
 
     } catch (error) {
-      console.error(`❌ Error saving zoekprofiel ${field}:`, error);
+      console.error(`❌ Error saving functieprofiel ${field}:`, error);
       
       // Rollback optimistic update on error
       setLocalState(prev => ({
         ...prev,
-        [field]: responses?.[field as keyof ZoekprofielResponse] || ''
+        [field]: responses?.[field as keyof FunctieprofielResponse] || ''
       }));
       
       toast({
@@ -188,7 +187,7 @@ export const useZoekprofielResponses = () => {
     }
 
     try {
-      console.log('🚀 Submitting zoekprofiel to webhook...');
+      console.log('🚀 Submitting functieprofiel to webhook...');
       
       const response = await fetch('https://hook.eu2.make.com/y47oalww255yswggp44jy2ty8518j2ok', {
         method: 'POST',
@@ -237,8 +236,8 @@ export const useZoekprofielResponses = () => {
       }
 
       toast({
-        title: "Zoekprofiel verzonden",
-        description: "Je zoekprofiel is succesvol verwerkt!",
+        title: "Functieprofiel verzonden",
+        description: "Je functieprofiel is succesvol verwerkt!",
       });
       
       return true;
@@ -246,7 +245,7 @@ export const useZoekprofielResponses = () => {
       console.error('❌ Error submitting to webhook:', error);
       toast({
         title: "Fout bij verzenden",
-        description: "Er ging iets mis bij het verwerken van je zoekprofiel.",
+        description: "Er ging iets mis bij het verwerken van je functieprofiel.",
         variant: "destructive"
       });
       return false;

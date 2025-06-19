@@ -141,6 +141,13 @@ const OnderzoeksplanPagina = () => {
           </div>
         </Card>
 
+        {/* Extra sentence */}
+        <div className="mb-8 text-center">
+          <p className="text-lg text-gray-700">
+            Als je weet welke functie het wordt kun je het functieprofiel op deze website invullen.
+          </p>
+        </div>
+
         {/* Navigation */}
         <div className="flex justify-center">
           <Button

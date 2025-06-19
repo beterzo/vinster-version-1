@@ -4,7 +4,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
 
-export interface ZoekprofielPdf {
+export interface FunctieprofielPdf {
   id: string;
   user_id: string;
   pdf_url: string | null;
@@ -14,10 +14,10 @@ export interface ZoekprofielPdf {
   updated_at: string;
 }
 
-export const useZoekprofielPdf = () => {
+export const useFunctieprofielPdf = () => {
   const { user } = useAuth();
   const { toast } = useToast();
-  const [pdfData, setPdfData] = useState<ZoekprofielPdf | null>(null);
+  const [pdfData, setPdfData] = useState<FunctieprofielPdf | null>(null);
   const [loading, setLoading] = useState(true);
   const [downloading, setDownloading] = useState(false);
   
@@ -33,7 +33,7 @@ export const useZoekprofielPdf = () => {
     }
 
     try {
-      console.log('🔍 Loading zoekprofiel PDF data for user:', user.id);
+      console.log('🔍 Loading functieprofiel PDF data for user:', user.id);
       
       const { data, error } = await supabase
         .from('user_zoekprofielen')
@@ -42,18 +42,18 @@ export const useZoekprofielPdf = () => {
         .maybeSingle();
 
       if (error && error.code !== 'PGRST116') {
-        console.error('❌ Error loading zoekprofiel PDF data:', error);
+        console.error('❌ Error loading functieprofiel PDF data:', error);
         throw error;
       }
 
-      console.log('✅ Loaded zoekprofiel PDF data:', data);
+      console.log('✅ Loaded functieprofiel PDF data:', data);
       setPdfData(data);
 
     } catch (error) {
-      console.error('❌ Failed to load zoekprofiel PDF data:', error);
+      console.error('❌ Failed to load functieprofiel PDF data:', error);
       toast({
         title: "Fout bij laden",
-        description: "Kon je zoekprofiel PDF gegevens niet laden.",
+        description: "Kon je functieprofiel PDF gegevens niet laden.",
         variant: "destructive"
       });
     } finally {
@@ -65,11 +65,11 @@ export const useZoekprofielPdf = () => {
   useEffect(() => {
     if (!user?.id) return;
 
-    console.log('🔄 Setting up real-time subscription for zoekprofiel updates');
+    console.log('🔄 Setting up real-time subscription for functieprofiel updates');
 
     // Create real-time subscription
     const channel = supabase
-      .channel('zoekprofiel-updates')
+      .channel('functieprofiel-updates')
       .on(
         'postgres_changes',
         {
@@ -82,7 +82,7 @@ export const useZoekprofielPdf = () => {
           console.log('📡 Real-time update received:', payload);
           
           if (payload.eventType === 'UPDATE' || payload.eventType === 'INSERT') {
-            const newData = payload.new as ZoekprofielPdf;
+            const newData = payload.new as FunctieprofielPdf;
             setPdfData(newData);
             
             // Clear fallback polling when we get real-time updates
@@ -95,7 +95,7 @@ export const useZoekprofielPdf = () => {
             if (newData.pdf_status === 'completed' && newData.pdf_url) {
               toast({
                 title: "PDF gereed!",
-                description: "Je zoekprofiel PDF is succesvol gegenereerd en kan nu gedownload worden.",
+                description: "Je functieprofiel PDF is succesvol gegenereerd en kan nu gedownload worden.",
               });
               
               // Stop active polling when completed
@@ -193,14 +193,14 @@ export const useZoekprofielPdf = () => {
       console.warn('⚠️ No PDF URL available for download');
       toast({
         title: "Geen PDF beschikbaar",
-        description: "Er is nog geen PDF gegenereerd voor je zoekprofiel.",
+        description: "Er is nog geen PDF gegenereerd voor je functieprofiel.",
         variant: "destructive"
       });
       return;
     }
 
     setDownloading(true);
-    console.log('📄 Starting zoekprofiel PDF download from URL:', pdfData.pdf_url);
+    console.log('📄 Starting functieprofiel PDF download from URL:', pdfData.pdf_url);
 
     try {
       // First attempt: Direct download
@@ -217,7 +217,7 @@ export const useZoekprofielPdf = () => {
       // Create and trigger download
       const link = document.createElement('a');
       link.href = url;
-      link.download = 'mijn-zoekprofiel.pdf';
+      link.download = 'mijn-functieprofiel.pdf';
       link.style.display = 'none';
       document.body.appendChild(link);
       link.click();
@@ -229,7 +229,7 @@ export const useZoekprofielPdf = () => {
       console.log('✅ Direct download successful');
       toast({
         title: "Download gestart",
-        description: "Je zoekprofiel PDF wordt gedownload.",
+        description: "Je functieprofiel PDF wordt gedownload.",
       });
 
     } catch (directDownloadError) {
@@ -243,7 +243,7 @@ export const useZoekprofielPdf = () => {
         link.href = pdfData.pdf_url;
         link.target = '_blank';
         link.rel = 'noopener noreferrer';
-        link.download = 'mijn-zoekprofiel.pdf';
+        link.download = 'mijn-functieprofiel.pdf';
         link.style.display = 'none';
         document.body.appendChild(link);
         link.click();
@@ -252,7 +252,7 @@ export const useZoekprofielPdf = () => {
         console.log('✅ Fallback download triggered');
         toast({
           title: "Download geopend",
-          description: "Je zoekprofiel PDF wordt geopend in een nieuw tabblad.",
+          description: "Je functieprofiel PDF wordt geopend in een nieuw tabblad.",
         });
 
       } catch (fallbackError) {
@@ -276,7 +276,7 @@ export const useZoekprofielPdf = () => {
     if (!user?.id) return;
 
     try {
-      console.log('🚀 Initializing zoekprofiel PDF generation...');
+      console.log('🚀 Initializing functieprofiel PDF generation...');
       
       const { error } = await supabase
         .from('user_zoekprofielen')
