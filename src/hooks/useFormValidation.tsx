@@ -18,17 +18,14 @@ export const useFormValidation = () => {
       };
     }
 
-    // Check enthousiasme fields (12 required fields)
+    // Check enthousiasme fields (9 required fields - updated with correct field names)
     const enthousiasmeFields = [
-      'kindertijd_liefste_activiteiten',
-      'kindertijd_favoriete_plekken', 
-      'kindertijd_interesses',
-      'school_interessantste_vakken',
-      'school_thuiskomst_activiteiten',
-      'school_naschoolse_activiteiten',
-      'eerste_werk_leukste_aspecten',
-      'werkomgeving_aantrekkelijke_elementen',
-      'samenwerking_prettige_aspecten',
+      'kindertijd_activiteiten',
+      'kindertijd_plekken', 
+      'kindertijd_interesses_nieuw',
+      'eerste_werk_leukste_taken',
+      'eerste_werk_werkomstandigheden',
+      'eerste_werk_onderwerpen',
       'plezierige_werkperiode_beschrijving',
       'leuk_project_en_rol',
       'fluitend_thuiskomen_dag'
@@ -39,49 +36,37 @@ export const useFormValidation = () => {
       enthousiasmeResponses[field as keyof typeof enthousiasmeResponses]?.trim() === ''
     );
 
-    // Check wensberoepen fields (39 required fields: 3 titles + 36 questions)
+    // Check wensberoepen fields (27 required fields: 3 titles + 24 questions - updated to remove deleted fields)
     const wensberoepenFields = [
-      // Wensberoep 1 (13 fields: 1 title + 12 questions)
+      // Wensberoep 1 (9 fields: 1 title + 8 questions)
       'wensberoep_1_titel',
       'wensberoep_1_werkweek_activiteiten',
       'wensberoep_1_werklocatie_omgeving',
-      'wensberoep_1_binnen_buiten_verhouding',
       'wensberoep_1_samenwerking_contacten',
       'wensberoep_1_fluitend_thuiskomen_dag',
       'wensberoep_1_werk_doel',
-      'wensberoep_1_reistijd',
-      'wensberoep_1_werkuren',
-      'wensberoep_1_werksfeer',
       'wensberoep_1_leukste_onderdelen',
       'wensberoep_1_belangrijke_aspecten',
       'wensberoep_1_kennis_focus',
       
-      // Wensberoep 2 (13 fields: 1 title + 12 questions)
+      // Wensberoep 2 (9 fields: 1 title + 8 questions)
       'wensberoep_2_titel',
       'wensberoep_2_werkweek_activiteiten',
       'wensberoep_2_werklocatie_omgeving',
-      'wensberoep_2_binnen_buiten_verhouding',
       'wensberoep_2_samenwerking_contacten',
       'wensberoep_2_fluitend_thuiskomen_dag',
       'wensberoep_2_werk_doel',
-      'wensberoep_2_reistijd',
-      'wensberoep_2_werkuren',
-      'wensberoep_2_werksfeer',
       'wensberoep_2_leukste_onderdelen',
       'wensberoep_2_belangrijke_aspecten',
       'wensberoep_2_kennis_focus',
       
-      // Wensberoep 3 (13 fields: 1 title + 12 questions)
+      // Wensberoep 3 (9 fields: 1 title + 8 questions)
       'wensberoep_3_titel',
       'wensberoep_3_werkweek_activiteiten',
       'wensberoep_3_werklocatie_omgeving',
-      'wensberoep_3_binnen_buiten_verhouding',
       'wensberoep_3_samenwerking_contacten',
       'wensberoep_3_fluitend_thuiskomen_dag',
       'wensberoep_3_werk_doel',
-      'wensberoep_3_reistijd',
-      'wensberoep_3_werkuren',
-      'wensberoep_3_werksfeer',
       'wensberoep_3_leukste_onderdelen',
       'wensberoep_3_belangrijke_aspecten',
       'wensberoep_3_kennis_focus'

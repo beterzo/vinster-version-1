@@ -25,22 +25,19 @@ const Dashboard = () => {
     loadUserReport();
   }, []);
 
-  // Calculate Enthousiasmescan progress - more accurate calculation
+  // Calculate Enthousiasmescan progress - updated with correct field names (9 total fields)
   const calculateEnthousiasmeProgress = () => {
     if (enthousiasmeLoading) return 0;
     if (!enthousiasmeResponses) return 0;
     
-    // Define the exact fields we expect to be filled
+    // Define the exact fields we expect to be filled (9 fields total)
     const enthousiasmeFields = [
-      'kindertijd_liefste_activiteiten',
-      'kindertijd_favoriete_plekken', 
-      'kindertijd_interesses',
-      'school_interessantste_vakken',
-      'school_thuiskomst_activiteiten',
-      'school_naschoolse_activiteiten',
-      'eerste_werk_leukste_aspecten',
-      'werkomgeving_aantrekkelijke_elementen',
-      'samenwerking_prettige_aspecten',
+      'kindertijd_activiteiten',
+      'kindertijd_plekken', 
+      'kindertijd_interesses_nieuw',
+      'eerste_werk_leukste_taken',
+      'eerste_werk_werkomstandigheden',
+      'eerste_werk_onderwerpen',
       'plezierige_werkperiode_beschrijving',
       'leuk_project_en_rol',
       'fluitend_thuiskomen_dag'
@@ -54,18 +51,23 @@ const Dashboard = () => {
     return Math.round((filledFields / enthousiasmeFields.length) * 100);
   };
 
-  // Calculate Wensberoepen progress - more accurate calculation
+  // Calculate Wensberoepen progress - updated with correct field count (27 total: 3 careers × 9 fields each)
   const calculateWensberoepenProgress = () => {
     if (wensberoepenLoading) return 0;
     if (!wensberoepenResponses) return 0;
     
-    // Define all wensberoepen fields we expect (3 careers × 12 fields each = 36 total)
+    // Define all wensberoepen fields we expect (3 careers × 9 fields each = 27 total)
     const wensberoepenFieldPrefixes = ['wensberoep_1', 'wensberoep_2', 'wensberoep_3'];
     const fieldSuffixes = [
-      'titel', 'werkweek_activiteiten', 'leukste_onderdelen', 'werk_doel',
-      'werklocatie_omgeving', 'binnen_buiten_verhouding', 'werksfeer',
-      'samenwerking_contacten', 'werkuren', 'reistijd', 'fluitend_thuiskomen_dag',
-      'belangrijke_aspecten', 'kennis_focus'
+      'titel',
+      'werkweek_activiteiten',
+      'werklocatie_omgeving',
+      'samenwerking_contacten',
+      'fluitend_thuiskomen_dag',
+      'werk_doel',
+      'leukste_onderdelen',
+      'belangrijke_aspecten',
+      'kennis_focus'
     ];
     
     let totalFields = 0;

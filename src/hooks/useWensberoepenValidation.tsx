@@ -15,7 +15,7 @@ export const useWensberoepenValidation = () => {
       };
     }
 
-    // Check wensberoepen fields (27 required fields: 3 titles + 24 questions)
+    // Check wensberoepen fields (27 required fields: 3 titles + 24 questions - updated to match current structure)
     const wensberoepenFields = [
       // Wensberoep 1 (9 fields: 1 title + 8 questions)
       'wensberoep_1_titel',
