@@ -1,3 +1,4 @@
+
 import { useAuth } from '@/hooks/useAuth';
 import { useEnthousiasmeResponses } from '@/hooks/useEnthousiasmeResponses';
 import { useWensberoepenResponses } from '@/hooks/useWensberoepenResponses';
@@ -224,7 +225,7 @@ const Dashboard = () => {
                 getNextStep={getNextStep}
                 hasUserReport={hasUserReport}
                 hasStarted={hasStarted}
-                hasFunctieprofielPdf={isPdfReady}
+                hasFunctieprofielPdf={Boolean(isPdfReady)}
                 downloadRapportPdf={handleRapportDownload}
                 downloadFunctieprofielPdf={handleFunctieprofielDownload}
                 downloadingRapport={downloadingRapport}
