@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useAuth } from './useAuth';
 import { supabase } from '@/integrations/supabase/client';
@@ -15,7 +14,6 @@ export const useRapportGeneration = () => {
   const [loading, setLoading] = useState(false);
   const [downloading, setDownloading] = useState(false);
 
-  const loa
   const loadUserReport = async () => {
     if (!user) return;
 
