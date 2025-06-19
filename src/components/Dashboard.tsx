@@ -13,6 +13,7 @@ import DashboardSidebar from './DashboardSidebar';
 import ProgressStepsGrid from './ProgressStepsGrid';
 import WelcomeCard from './WelcomeCard';
 import { useToast } from '@/hooks/use-toast';
+import { TooltipProvider } from '@/components/ui/tooltip';
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -112,7 +113,6 @@ const Dashboard = () => {
   // Overall completion tracking
   const hasStarted = enthousiasmeProgress > 0 || wensberoepenProgress > 0 || extraInformatieProgress > 0 || prioriteitenProgress > 0 || functieprofielProgress > 0;
   const hasUserReport = !!userReport;
-  const hasFunctieprofielPdf = isFunctieprofielPdfReady;
 
   // Navigation logic
   const getNextStep = useCallback(() => {
@@ -188,51 +188,53 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <DashboardHeader />
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 h-full">
-          {/* Left: Welcome Card */}
-          <div className="lg:col-span-1">
-            <WelcomeCard />
-          </div>
+    <TooltipProvider>
+      <div className="min-h-screen bg-gray-50">
+        <DashboardHeader />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 h-full">
+            {/* Left: Welcome Card */}
+            <div className="lg:col-span-1">
+              <WelcomeCard />
+            </div>
 
-          {/* Middle: Progress Overview */}
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 h-full">
-              <h3 className="text-xl font-bold text-gray-900 mb-6">Jouw voortgang</h3>
-              <ProgressStepsGrid
-                enthousiasmeProgress={enthousiasmeProgress}
-                enthousiasmeCompleted={enthousiasmeCompleted}
-                wensberoepenProgress={wensberoepenProgress}
-                wensberoepenCompleted={wensberoepenCompleted}
-                prioriteitenProgress={prioriteitenProgress}
-                prioriteitenCompleted={prioriteitenCompleted}
-                extraInformatieProgress={extraInformatieProgress}
-                extraInformatieCompleted={extraInformatieCompleted}
+            {/* Middle: Progress Overview */}
+            <div className="lg:col-span-1">
+              <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 h-full">
+                <h3 className="text-xl font-bold text-gray-900 mb-6">Jouw voortgang</h3>
+                <ProgressStepsGrid
+                  enthousiasmeProgress={enthousiasmeProgress}
+                  enthousiasmeCompleted={enthousiasmeCompleted}
+                  wensberoepenProgress={wensberoepenProgress}
+                  wensberoepenCompleted={wensberoepenCompleted}
+                  prioriteitenProgress={prioriteitenProgress}
+                  prioriteitenCompleted={prioriteitenCompleted}
+                  extraInformatieProgress={extraInformatieProgress}
+                  extraInformatieCompleted={extraInformatieCompleted}
+                  hasUserReport={hasUserReport}
+                  onStepClick={handleStepClick}
+                />
+              </div>
+            </div>
+
+            {/* Right: Action Sidebar */}
+            <div className="lg:col-span-1">
+              <DashboardSidebar
+                getNextStep={getNextStep}
                 hasUserReport={hasUserReport}
-                onStepClick={handleStepClick}
+                hasStarted={hasStarted}
+                hasFunctieprofielPdf={isFunctieprofielPdfReady}
+                downloadRapportPdf={handleRapportDownload}
+                downloadFunctieprofielPdf={handleFunctieprofielDownload}
+                downloadingRapport={downloadingRapport}
+                downloadingFunctieprofiel={downloadingFunctieprofiel}
               />
             </div>
           </div>
-
-          {/* Right: Action Sidebar */}
-          <div className="lg:col-span-1">
-            <DashboardSidebar
-              getNextStep={getNextStep}
-              hasUserReport={hasUserReport}
-              hasStarted={hasStarted}
-              hasFunctieprofielPdf={isFunctieprofielPdfReady}
-              downloadRapportPdf={handleRapportDownload}
-              downloadFunctieprofielPdf={handleFunctieprofielDownload}
-              downloadingRapport={downloadingRapport}
-              downloadingFunctieprofiel={downloadingFunctieprofiel}
-            />
-          </div>
         </div>
       </div>
-    </div>
+    </TooltipProvider>
   );
 };
 
