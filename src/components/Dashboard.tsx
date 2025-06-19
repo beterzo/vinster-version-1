@@ -29,7 +29,7 @@ const Dashboard = () => {
 
   // Report and PDF states
   const { data: userReport, loading: rapportLoading } = useRapportData();
-  const { isPdfReady: isFunctieprofielPdfReady, downloadPdf: downloadFunctieprofielPdf } = useFunctieprofielPdf();
+  const { isPdfReady, downloadPdf: downloadFunctieprofielPdf } = useFunctieprofielPdf();
 
   // Loading states for downloads
   const [downloadingRapport, setDownloadingRapport] = useState(false);
@@ -158,7 +158,7 @@ const Dashboard = () => {
   }, [userReport, downloadingRapport, toast, navigate]);
 
   const handleFunctieprofielDownload = useCallback(async () => {
-    if (!isFunctieprofielPdfReady || downloadingFunctieprofiel) return;
+    if (!isPdfReady || downloadingFunctieprofiel) return;
     
     setDownloadingFunctieprofiel(true);
     try {
@@ -173,7 +173,7 @@ const Dashboard = () => {
     } finally {
       setDownloadingFunctieprofiel(false);
     }
-  }, [isFunctieprofielPdfReady, downloadFunctieprofielPdf, downloadingFunctieprofiel, toast]);
+  }, [isPdfReady, downloadFunctieprofielPdf, downloadingFunctieprofiel, toast]);
 
   // Early loading state
   if (enthousiasmeLoading || wensberoepenLoading || extraInformatieLoading || prioriteitenLoading || functieprofielLoading || rapportLoading) {
@@ -224,7 +224,7 @@ const Dashboard = () => {
                 getNextStep={getNextStep}
                 hasUserReport={hasUserReport}
                 hasStarted={hasStarted}
-                hasFunctieprofielPdf={isFunctieprofielPdfReady}
+                hasFunctieprofielPdf={isPdfReady}
                 downloadRapportPdf={handleRapportDownload}
                 downloadFunctieprofielPdf={handleFunctieprofielDownload}
                 downloadingRapport={downloadingRapport}
