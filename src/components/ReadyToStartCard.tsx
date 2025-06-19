@@ -36,7 +36,7 @@ const ReadyToStartCard = () => {
           <Button 
             onClick={scrollToProcess}
             className="hover:opacity-90 text-white font-bold px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 w-full"
-            style={{ backgroundColor: '#0476B9' }}
+            style={{ backgroundColor: '#FFCD3E', color: '#21324E' }}
           >
             Hoe het werkt
           </Button>

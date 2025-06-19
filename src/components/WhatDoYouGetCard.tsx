@@ -16,21 +16,21 @@ const WhatDoYouGetCard = () => {
         </p>
         
         <ul className="space-y-3 text-base md:text-lg opacity-95">
-          <li className="flex items-center gap-3">
-            <span className="font-bold flex-shrink-0" style={{ color: '#FFCD3E' }}>•</span>
-            <span>Inzicht in jouw interesses en werkvoorkeuren</span>
+          <li className="flex items-start gap-3">
+            <span className="font-bold flex-shrink-0 mt-1" style={{ color: '#FFCD3E' }}>•</span>
+            <span className="text-left">Inzicht in jouw interesses en werkvoorkeuren</span>
           </li>
-          <li className="flex items-center gap-3">
-            <span className="font-bold flex-shrink-0" style={{ color: '#FFCD3E' }}>•</span>
-            <span>Suggesties voor werk dat écht bij je past: twee passende functies en één verrassende</span>
+          <li className="flex items-start gap-3">
+            <span className="font-bold flex-shrink-0 mt-1" style={{ color: '#FFCD3E' }}>•</span>
+            <span className="text-left">Suggesties voor werk dat écht bij je past: twee passende functies en één verrassende</span>
           </li>
-          <li className="flex items-center gap-3">
-            <span className="font-bold flex-shrink-0" style={{ color: '#FFCD3E' }}>•</span>
-            <span>Een concreet en nuchter plan om verder te komen</span>
+          <li className="flex items-start gap-3">
+            <span className="font-bold flex-shrink-0 mt-1" style={{ color: '#FFCD3E' }}>•</span>
+            <span className="text-left">Een concreet en nuchter plan om verder te komen</span>
           </li>
-          <li className="flex items-center gap-3">
-            <span className="font-bold flex-shrink-0" style={{ color: '#FFCD3E' }}>•</span>
-            <span>Nieuw perspectief, zonder dat je meteen iets moet</span>
+          <li className="flex items-start gap-3">
+            <span className="font-bold flex-shrink-0 mt-1" style={{ color: '#FFCD3E' }}>•</span>
+            <span className="text-left">Nieuw perspectief, zonder dat je meteen iets moet</span>
           </li>
         </ul>
       </div>
