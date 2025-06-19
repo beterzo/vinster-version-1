@@ -1,3 +1,4 @@
+
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { usePrioriteitenResponses } from "@/hooks/usePrioriteitenResponses";
@@ -25,39 +26,48 @@ const Dashboard = () => {
     loadUserReport();
   }, []);
 
-  // Calculate Enthousiasmescan progress - updated with correct field names (9 total fields)
+  // Calculate Enthousiasmescan progress - page-based (0%, 33%, 67%, 100%)
   const calculateEnthousiasmeProgress = () => {
     if (enthousiasmeLoading) return 0;
     if (!enthousiasmeResponses) return 0;
     
-    // Define the exact fields we expect to be filled (9 fields total)
-    const enthousiasmeFields = [
-      'kindertijd_activiteiten',
-      'kindertijd_plekken', 
-      'kindertijd_interesses_nieuw',
-      'eerste_werk_leukste_taken',
-      'eerste_werk_werkomstandigheden',
-      'eerste_werk_onderwerpen',
-      'plezierige_werkperiode_beschrijving',
-      'leuk_project_en_rol',
-      'fluitend_thuiskomen_dag'
-    ];
+    // Define pages and their required fields
+    const page1Fields = ['kindertijd_activiteiten', 'kindertijd_plekken', 'kindertijd_interesses_nieuw'];
+    const page2Fields = ['eerste_werk_leukste_taken', 'eerste_werk_werkomstandigheden', 'eerste_werk_onderwerpen'];
+    const page3Fields = ['plezierige_werkperiode_beschrijving', 'leuk_project_en_rol', 'fluitend_thuiskomen_dag'];
     
-    const filledFields = enthousiasmeFields.filter(field => {
+    // Check if each page is complete (all fields filled)
+    const isPage1Complete = page1Fields.every(field => {
       const value = enthousiasmeResponses[field as keyof typeof enthousiasmeResponses];
       return value && String(value).trim() !== '';
-    }).length;
+    });
     
-    return Math.round((filledFields / enthousiasmeFields.length) * 100);
+    const isPage2Complete = page2Fields.every(field => {
+      const value = enthousiasmeResponses[field as keyof typeof enthousiasmeResponses];
+      return value && String(value).trim() !== '';
+    });
+    
+    const isPage3Complete = page3Fields.every(field => {
+      const value = enthousiasmeResponses[field as keyof typeof enthousiasmeResponses];
+      return value && String(value).trim() !== '';
+    });
+    
+    // Calculate progress based on completed pages
+    let completedPages = 0;
+    if (isPage1Complete) completedPages++;
+    if (isPage2Complete) completedPages++;
+    if (isPage3Complete) completedPages++;
+    
+    // Return progress: 0%, 33%, 67%, or 100%
+    return Math.round((completedPages / 3) * 100);
   };
 
-  // Calculate Wensberoepen progress - updated with correct field count (27 total: 3 careers × 9 fields each)
+  // Calculate Wensberoepen progress - wensberoep-based (0%, 33%, 67%, 100%)
   const calculateWensberoepenProgress = () => {
     if (wensberoepenLoading) return 0;
     if (!wensberoepenResponses) return 0;
     
-    // Define all wensberoepen fields we expect (3 careers × 9 fields each = 27 total)
-    const wensberoepenFieldPrefixes = ['wensberoep_1', 'wensberoep_2', 'wensberoep_3'];
+    // Define fields for each wensberoep
     const fieldSuffixes = [
       'titel',
       'werkweek_activiteiten',
@@ -70,22 +80,33 @@ const Dashboard = () => {
       'kennis_focus'
     ];
     
-    let totalFields = 0;
-    let filledFields = 0;
-    
-    wensberoepenFieldPrefixes.forEach(prefix => {
-      fieldSuffixes.forEach(suffix => {
-        const fieldName = `${prefix}_${suffix}`;
-        totalFields++;
-        
-        const value = wensberoepenResponses[fieldName as keyof typeof wensberoepenResponses];
-        if (value && String(value).trim() !== '') {
-          filledFields++;
-        }
-      });
+    // Check if each wensberoep is complete
+    const isWensberoep1Complete = fieldSuffixes.every(suffix => {
+      const fieldName = `wensberoep_1_${suffix}`;
+      const value = wensberoepenResponses[fieldName as keyof typeof wensberoepenResponses];
+      return value && String(value).trim() !== '';
     });
     
-    return totalFields > 0 ? Math.round((filledFields / totalFields) * 100) : 0;
+    const isWensberoep2Complete = fieldSuffixes.every(suffix => {
+      const fieldName = `wensberoep_2_${suffix}`;
+      const value = wensberoepenResponses[fieldName as keyof typeof wensberoepenResponses];
+      return value && String(value).trim() !== '';
+    });
+    
+    const isWensberoep3Complete = fieldSuffixes.every(suffix => {
+      const fieldName = `wensberoep_3_${suffix}`;
+      const value = wensberoepenResponses[fieldName as keyof typeof wensberoepenResponses];
+      return value && String(value).trim() !== '';
+    });
+    
+    // Calculate progress based on completed wensberoepen
+    let completedWensberoepen = 0;
+    if (isWensberoep1Complete) completedWensberoepen++;
+    if (isWensberoep2Complete) completedWensberoepen++;
+    if (isWensberoep3Complete) completedWensberoepen++;
+    
+    // Return progress: 0%, 33%, 67%, or 100%
+    return Math.round((completedWensberoepen / 3) * 100);
   };
 
   const enthousiasmeProgress = calculateEnthousiasmeProgress();

@@ -18,67 +18,55 @@ export const useFormValidation = () => {
       };
     }
 
-    // Check enthousiasme fields (9 required fields - updated with correct field names)
-    const enthousiasmeFields = [
-      'kindertijd_activiteiten',
-      'kindertijd_plekken', 
-      'kindertijd_interesses_nieuw',
-      'eerste_werk_leukste_taken',
-      'eerste_werk_werkomstandigheden',
-      'eerste_werk_onderwerpen',
-      'plezierige_werkperiode_beschrijving',
-      'leuk_project_en_rol',
-      'fluitend_thuiskomen_dag'
-    ];
-
-    const missingEnthousiasme = enthousiasmeFields.filter(field => 
-      !enthousiasmeResponses?.[field as keyof typeof enthousiasmeResponses] || 
-      enthousiasmeResponses[field as keyof typeof enthousiasmeResponses]?.trim() === ''
-    );
-
-    // Check wensberoepen fields (27 required fields: 3 titles + 24 questions - updated to remove deleted fields)
-    const wensberoepenFields = [
-      // Wensberoep 1 (9 fields: 1 title + 8 questions)
-      'wensberoep_1_titel',
-      'wensberoep_1_werkweek_activiteiten',
-      'wensberoep_1_werklocatie_omgeving',
-      'wensberoep_1_samenwerking_contacten',
-      'wensberoep_1_fluitend_thuiskomen_dag',
-      'wensberoep_1_werk_doel',
-      'wensberoep_1_leukste_onderdelen',
-      'wensberoep_1_belangrijke_aspecten',
-      'wensberoep_1_kennis_focus',
+    // Check enthousiasme completion - page-based approach
+    const enthousiasmeComplete = (() => {
+      if (!enthousiasmeResponses) return false;
       
-      // Wensberoep 2 (9 fields: 1 title + 8 questions)
-      'wensberoep_2_titel',
-      'wensberoep_2_werkweek_activiteiten',
-      'wensberoep_2_werklocatie_omgeving',
-      'wensberoep_2_samenwerking_contacten',
-      'wensberoep_2_fluitend_thuiskomen_dag',
-      'wensberoep_2_werk_doel',
-      'wensberoep_2_leukste_onderdelen',
-      'wensberoep_2_belangrijke_aspecten',
-      'wensberoep_2_kennis_focus',
+      // Define pages and their required fields
+      const page1Fields = ['kindertijd_activiteiten', 'kindertijd_plekken', 'kindertijd_interesses_nieuw'];
+      const page2Fields = ['eerste_werk_leukste_taken', 'eerste_werk_werkomstandigheden', 'eerste_werk_onderwerpen'];
+      const page3Fields = ['plezierige_werkperiode_beschrijving', 'leuk_project_en_rol', 'fluitend_thuiskomen_dag'];
       
-      // Wensberoep 3 (9 fields: 1 title + 8 questions)
-      'wensberoep_3_titel',
-      'wensberoep_3_werkweek_activiteiten',
-      'wensberoep_3_werklocatie_omgeving',
-      'wensberoep_3_samenwerking_contacten',
-      'wensberoep_3_fluitend_thuiskomen_dag',
-      'wensberoep_3_werk_doel',
-      'wensberoep_3_leukste_onderdelen',
-      'wensberoep_3_belangrijke_aspecten',
-      'wensberoep_3_kennis_focus'
-    ];
+      const allPages = [page1Fields, page2Fields, page3Fields];
+      
+      // Check if all pages are complete
+      return allPages.every(pageFields => 
+        pageFields.every(field => {
+          const value = enthousiasmeResponses[field as keyof typeof enthousiasmeResponses];
+          return value && String(value).trim() !== '';
+        })
+      );
+    })();
 
-    const missingWensberoepen = wensberoepenFields.filter(field => 
-      !wensberoepenResponses?.[field as keyof typeof wensberoepenResponses] || 
-      wensberoepenResponses[field as keyof typeof wensberoepenResponses]?.trim() === ''
-    );
+    // Check wensberoepen completion - wensberoep-based approach
+    const wensberoepenComplete = (() => {
+      if (!wensberoepenResponses) return false;
+      
+      // Define fields for each wensberoep
+      const fieldSuffixes = [
+        'titel',
+        'werkweek_activiteiten',
+        'werklocatie_omgeving',
+        'samenwerking_contacten',
+        'fluitend_thuiskomen_dag',
+        'werk_doel',
+        'leukste_onderdelen',
+        'belangrijke_aspecten',
+        'kennis_focus'
+      ];
+      
+      const wensberoepPrefixes = ['wensberoep_1', 'wensberoep_2', 'wensberoep_3'];
+      
+      // Check if all wensberoepen are complete
+      return wensberoepPrefixes.every(prefix =>
+        fieldSuffixes.every(suffix => {
+          const fieldName = `${prefix}_${suffix}`;
+          const value = wensberoepenResponses[fieldName as keyof typeof wensberoepenResponses];
+          return value && String(value).trim() !== '';
+        })
+      );
+    })();
 
-    const enthousiasmeComplete = missingEnthousiasme.length === 0;
-    const wensberoepenComplete = missingWensberoepen.length === 0;
     const isFormComplete = enthousiasmeComplete && wensberoepenComplete;
 
     const missingFields = [];
@@ -95,8 +83,8 @@ export const useFormValidation = () => {
       missingFields,
       enthousiasmeComplete,
       wensberoepenComplete,
-      missingEnthousiasmeCount: missingEnthousiasme.length,
-      missingWensberoepenCount: missingWensberoepen.length
+      missingEnthousiasmeCount: enthousiasmeComplete ? 0 : 1,
+      missingWensberoepenCount: wensberoepenComplete ? 0 : 1
     };
   }, [enthousiasmeResponses, wensberoepenResponses, enthousiasmeLoading, wensberoepenLoading]);
 
