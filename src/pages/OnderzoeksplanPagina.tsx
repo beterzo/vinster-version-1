@@ -21,10 +21,10 @@ const OnderzoeksplanPagina = () => {
             <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
               <Search className="w-5 h-5 text-blue-600" />
             </div>
-            <h1 className="text-3xl font-bold text-gray-900">En nu?</h1>
+            <h1 className="text-3xl font-bold text-gray-900">En nu? <span className="text-lg font-normal text-gray-600">(instructie bij de pagina over het onderzoeksplan)</span></h1>
           </div>
           <p className="text-lg text-gray-700">
-            Nu je je rapport hebt, is het tijd om dieper te duiken in de beroepen die bij je passen.
+            Jouw loopbaanrapport is klaar! Nu kun je op onderzoek uit, want je wilt eerst nog wat meer weten voor je een definitieve keuze kunt maken.
           </p>
         </div>
 
@@ -34,36 +34,37 @@ const OnderzoeksplanPagina = () => {
             <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <Search className="w-8 h-8 text-blue-600" />
             </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">Onderzoek doen!</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">Onderzoek doen!</h2>
             <p className="text-gray-700 mb-6">
-              Volg dit onderzoeksplan om de beste keuze te maken voor je loopbaan:
+              Eerst doe je onderzoek achter je bureau en daarna in de praktijk. Dit is jouw stappenplan:
             </p>
           </div>
 
           <div className="bg-white rounded-lg p-6">
-            <h4 className="text-lg font-bold text-gray-900 mb-4">Dit is jouw onderzoeksplan:</h4>
             <div className="space-y-4">
-              <div className="flex items-center gap-4">
-                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0">
+              <div className="flex items-start gap-4">
+                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0 mt-1">
                   <span className="text-blue-600 font-bold text-sm">1</span>
                 </div>
                 <p className="text-gray-700 text-left">
-                  Vraag AI naar een functie- of beroepsbeschrijving. Vraag ook naar vergelijkbare functies. 
-                  Welk werk lijkt erop? Wat spreekt je aan in de antwoorden die je krijgt?
+                  Vraag AI (of Google) naar een uitgebreide functiebeschrijving van de functies uit je 
+                  loopbaanrapport. Vraag AI ook naar vergelijkbare functies. Welk werk lijkt erop? Wat spreekt 
+                  je aan in de antwoorden die je krijgt?
                 </p>
               </div>
 
-              <div className="flex items-center gap-4">
-                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0">
+              <div className="flex items-start gap-4">
+                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0 mt-1">
                   <span className="text-blue-600 font-bold text-sm">2</span>
                 </div>
                 <p className="text-gray-700 text-left">
-                  Kijk of je vacatures kunt vinden die een beeld geven van de inhoud van dit beroep.
+                  Kijk of je vacatures kunt vinden die een beeld geven van de inhoud van deze functie en van 
+                  de organisaties die deze functies hebben.
                 </p>
               </div>
 
-              <div className="flex items-center gap-4">
-                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0">
+              <div className="flex items-start gap-4">
+                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0 mt-1">
                   <span className="text-blue-600 font-bold text-sm">3</span>
                 </div>
                 <p className="text-gray-700 text-left">
@@ -71,8 +72,8 @@ const OnderzoeksplanPagina = () => {
                 </p>
               </div>
 
-              <div className="flex items-center gap-4">
-                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0">
+              <div className="flex items-start gap-4">
+                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0 mt-1">
                   <span className="text-blue-600 font-bold text-sm">4</span>
                 </div>
                 <p className="text-gray-700 text-left">
@@ -80,18 +81,18 @@ const OnderzoeksplanPagina = () => {
                 </p>
               </div>
 
-              <div className="flex items-center gap-4">
-                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0">
+              <div className="flex items-start gap-4">
+                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0 mt-1">
                   <span className="text-blue-600 font-bold text-sm">5</span>
                 </div>
                 <p className="text-gray-700 text-left">
-                  Heeft het beroep een vakblad? Zo ja, vraag er één of meerdere op en lees ze. 
-                  Wat valt je op? Word je enthousiast van de onderwerpen?
+                  Heeft het beroep een vakblad? Zo ja, vraag er één of meerdere aan en lees ze. Wat valt je 
+                  op? Word je enthousiast van de onderwerpen?
                 </p>
               </div>
 
-              <div className="flex items-center gap-4">
-                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0">
+              <div className="flex items-start gap-4">
+                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0 mt-1">
                   <span className="text-blue-600 font-bold text-sm">6</span>
                 </div>
                 <p className="text-gray-700 text-left">
@@ -99,31 +100,43 @@ const OnderzoeksplanPagina = () => {
                 </p>
               </div>
 
-              <div className="flex items-center gap-4">
-                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0">
+              <div className="flex items-start gap-4">
+                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0 mt-1">
                   <span className="text-blue-600 font-bold text-sm">7</span>
                 </div>
                 <p className="text-gray-700 text-left">
-                  Welke opleiding heb je eventueel nodig voor dit werk? 
-                  Schrijf alle vragen die bij je opkomen op. Die kun je gaan stellen aan mensen die al werkzaam zijn in deze richting.
+                  Welke opleiding heb je eventueel nodig voor dit werk? Vraag het AI of Google.
                 </p>
               </div>
 
-              <div className="flex items-center gap-4">
-                <div className="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center shrink-0">
-                  <span className="text-yellow-600 font-bold text-sm">8</span>
+              <div className="flex items-start gap-4">
+                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center shrink-0 mt-1">
+                  <span className="text-blue-600 font-bold text-sm">8</span>
                 </div>
                 <p className="text-gray-700 text-left">
-                  Maak een lijstje met mensen die je zou willen spreken over dit werk en benader hen.
+                  Schrijf alle vragen op die bij je opkomen tijdens het onderzoek. Die kun je gaan stellen aan 
+                  mensen die al werkzaam zijn in deze richting.
                 </p>
               </div>
-            </div>
 
-            <div className="mt-8 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
-              <p className="text-gray-700 font-medium text-left">
-                Als je genoeg aan de weet bent gekomen kies dan de functie die het allerbest bij je past 
-                en ga verder met <span className="text-yellow-600 font-bold">de allerlaatste stap: het maken van jouw zoekprofiel!</span>
-              </p>
+              <div className="flex items-start gap-4">
+                <div className="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center shrink-0 mt-1">
+                  <span className="text-yellow-600 font-bold text-sm">9</span>
+                </div>
+                <p className="text-gray-700 text-left">
+                  Maak een lijstje met mensen die je zou willen spreken over dit werk en benader hen. Je vindt 
+                  die mensen via LinkedIn en/of via je persoonlijke netwerk.
+                </p>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center shrink-0 mt-1">
+                  <span className="text-yellow-600 font-bold text-sm">10</span>
+                </div>
+                <p className="text-gray-700 text-left">
+                  Verzamel genoeg informatie om een keuze te maken. Neem de tijd en praat er met anderen over.
+                </p>
+              </div>
             </div>
           </div>
         </Card>
