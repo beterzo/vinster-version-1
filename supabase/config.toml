@@ -61,3 +61,6 @@ test_otp = "123456"
 
 [analytics]
 enabled = false
+
+[functions.auth-webhook]
+verify_jwt = false
