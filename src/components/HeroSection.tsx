@@ -1,9 +1,11 @@
 
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const HeroSection = () => {
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
 
   return (
     <div className="relative overflow-hidden">
@@ -22,7 +24,9 @@ const HeroSection = () => {
             <img src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" alt="Vinster Logo" className="h-12 w-auto" />
             <span className="text-xl font-bold tracking-wide" style={{
             color: '#253857'
-          }}>Vinster | jouw venster op de toekomst</span>
+          }}>
+              {isMobile ? 'Vinster' : 'Vinster | jouw venster op de toekomst'}
+            </span>
           </div>
           <div className="flex items-center space-x-4">
             <Button 
