@@ -11,56 +11,48 @@ max_rows = 1000
 [db]
 port = 54322
 
-[db.pooler]
-enabled = false
-port = 54329
-pool_mode = "transaction"
-default_pool_size = 20
-max_client_conn = 100
-
-[realtime]
-enabled = true
-ip_version = "ipv6"
-port = 54323
-
 [studio]
 enabled = true
-port = 54324
-api_url = "http://127.0.0.1:54321"
-openai_api_key = "env(OPENAI_API_KEY)"
+port = 54323
 
 [inbucket]
 enabled = true
-port = 54325
-smtp_port = 54326
-pop3_port = 54327
+port = 54324
+smtp_port = 54325
+pop3_port = 54326
 
 [storage]
 enabled = true
-port = 54326
+port = 54327
 file_size_limit = "50MiB"
 
 [auth]
 enabled = true
-port = 54327
-site_url = "https://vinster-version-1.lovable.app"
-additional_redirect_urls = ["https://vinster-version-1.lovable.app/home", "http://127.0.0.1:3000", "https://localhost:3000"]
+port = 54328
+site_url = "http://localhost:3000"
+additional_redirect_urls = ["https://vinster-version-1.lovable.app"]
 jwt_expiry = 3600
 refresh_token_rotation_enabled = true
 security_update_password_require_reauthentication = true
 
-[auth.email]
-enable_signup = true
-double_confirm_changes = true
-enable_confirmations = true
-
-[auth.sms]
-enable_signup = false
-enable_confirmations = false
-test_otp = "123456"
-
-[analytics]
-enabled = false
+[edge_functions]
+enabled = true
+port = 54329
 
 [functions.auth-webhook]
 verify_jwt = false
+
+[functions.send-email]
+verify_jwt = false
+
+[functions.send-confirmation-email]
+verify_jwt = false
+
+[functions.generate-ai-keywords]
+verify_jwt = true
+
+[functions.store-zoekprofiel-pdf]
+verify_jwt = true
+
+[functions.upload-user-pdf]
+verify_jwt = true
