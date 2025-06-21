@@ -30,7 +30,7 @@ export const ConfirmationEmail = ({
       <Container style={container}>
         <Section style={logoSection}>
           <img
-            src="https://aqajxxevifmhdjlvqhkz.supabase.co/storage/v1/object/public/images/vinster-logo.png"
+            src="https://vinster-version-1.lovable.app/lovable-uploads/vinster-new-logo.png"
             width="40"
             height="40"
             alt="Vinster Logo"

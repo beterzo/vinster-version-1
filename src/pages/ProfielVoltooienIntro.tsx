@@ -14,7 +14,7 @@ const ProfielVoltooienIntro = () => {
         <div className="mb-8">
           <div className="flex items-center space-x-4 cursor-pointer mb-6" onClick={() => navigate("/home")}>
             <img 
-              src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" 
+              src="/lovable-uploads/vinster-new-logo.png" 
               alt="Vinster Logo" 
               className="h-12 w-auto filter brightness-110 contrast-110" 
             />

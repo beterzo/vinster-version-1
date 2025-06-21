@@ -31,7 +31,7 @@ const DashboardHeader = () => {
     <div className="flex justify-between items-center mb-8">
       <div className="flex items-center space-x-4 cursor-pointer" onClick={() => navigate("/home")}>
         <img 
-          src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" 
+          src="/lovable-uploads/vinster-new-logo.png" 
           alt="Vinster Logo" 
           className="h-16 w-auto filter brightness-110 contrast-110" 
         />

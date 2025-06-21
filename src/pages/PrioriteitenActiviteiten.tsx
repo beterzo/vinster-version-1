@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -54,7 +53,7 @@ const PrioriteitenActiviteiten = () => {
       <div className="max-w-4xl mx-auto px-6 py-8">
         {/* Header */}
         <div className="mb-8">
-          <img src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" alt="Vinster Logo" className="h-8 w-auto mb-6" />
+          <img src="/lovable-uploads/vinster-new-logo.png" alt="Vinster Logo" className="h-8 w-auto mb-6" />
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">
               <Star className="w-5 h-5 text-yellow-600" />

@@ -50,7 +50,7 @@ const EnthousiasmeStep3 = () => {
         <div className="max-w-[1440px] mx-auto px-6 py-4">
           <div className="flex items-center space-x-4 cursor-pointer" onClick={handleLogoClick}>
             <img 
-              src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" 
+              src="/lovable-uploads/vinster-new-logo.png" 
               alt="Vinster Logo" 
               className="h-12 w-auto filter brightness-110 contrast-110" 
             />

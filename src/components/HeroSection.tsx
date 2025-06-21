@@ -21,7 +21,7 @@ const HeroSection = () => {
         {/* Header with Logo and Buttons */}
         <div className="py-6 flex items-center justify-between">
           <div className="flex items-center space-x-4">
-            <img src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" alt="Vinster Logo" className="h-12 w-auto" />
+            <img src="/lovable-uploads/vinster-new-logo.png" alt="Vinster Logo" className="h-12 w-auto" />
             <span className="text-xl font-bold tracking-wide" style={{
             color: '#253857'
           }}>
