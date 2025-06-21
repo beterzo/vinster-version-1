@@ -65,9 +65,9 @@ const handler = async (req: Request): Promise<Response> => {
           })
         )
 
-        // Send via Resend
+        // Send via Resend - UPDATED TO USE VERIFIED DOMAIN
         const emailResponse = await resend.emails.send({
-          from: "Vinster <hello@vinster.nl>",
+          from: "Vinster <noreply@vinster.ai>",
           to: [user.email],
           subject: 'Bevestig je emailadres voor Vinster',
           html,
