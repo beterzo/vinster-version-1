@@ -1,11 +1,9 @@
 
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { getStorageUrl } from "@/hooks/useStorageUrl";
 
 const DeMensAchterVinster = () => {
   const navigate = useNavigate();
-  const logoUrl = getStorageUrl('assets', 'vinster-logo.png');
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -14,11 +12,7 @@ const DeMensAchterVinster = () => {
         <div className="max-w-4xl mx-auto px-6 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <img 
-                src={logoUrl}
-                alt="Vinster Logo" 
-                className="h-12 w-auto" 
-              />
+              <h1 className="text-xl font-bold text-blue-900">Vinster</h1>
             </div>
           </div>
         </div>

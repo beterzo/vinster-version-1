@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,7 +7,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate, Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
-import { getStorageUrl } from "@/hooks/useStorageUrl";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -16,7 +16,6 @@ const LoginPage = () => {
   const { signIn } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
-  const logoUrl = getStorageUrl('assets', 'vinster-logo.png');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,10 +62,6 @@ const LoginPage = () => {
     setIsLoading(false);
   };
 
-  const handleLogoClick = () => {
-    navigate("/");
-  };
-
   return (
     <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2">
       {/* Left side - Image with quote overlay */}
@@ -93,13 +88,7 @@ const LoginPage = () => {
       <div className="bg-white flex items-center justify-center p-4 sm:p-6 lg:p-12">
         <div className="w-full max-w-md space-y-6 lg:space-y-8">
           <div className="text-center">
-            <div className="flex items-center cursor-pointer justify-center" onClick={handleLogoClick}>
-              <img 
-                src={logoUrl}
-                alt="Vinster Logo" 
-                className="h-12 w-auto filter brightness-110 contrast-110" 
-              />
-            </div>
+            <h1 className="text-2xl font-bold text-blue-900 mb-6">Vinster</h1>
           </div>
 
           {/* Login form title */}

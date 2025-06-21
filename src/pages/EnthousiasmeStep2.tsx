@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -6,12 +7,10 @@ import { useNavigate } from "react-router-dom";
 import EnthousiasmeProgress from "@/components/EnthousiasmeProgress";
 import { useEnthousiasmeResponses } from "@/hooks/useEnthousiasmeResponses";
 import { Loader2 } from "lucide-react";
-import { getStorageUrl } from "@/hooks/useStorageUrl";
 
 const EnthousiasmeStep2 = () => {
   const navigate = useNavigate();
   const { responses, loading, saving, saveResponse, updateLocalResponse } = useEnthousiasmeResponses();
-  const logoUrl = getStorageUrl('assets', 'vinster-logo.png');
 
   // Local validation for step 2 only
   const isStep2Complete = () => {
@@ -30,10 +29,6 @@ const EnthousiasmeStep2 = () => {
     saveResponse(field, value);
   };
 
-  const handleLogoClick = () => {
-    navigate("/home");
-  };
-
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 font-sans flex items-center justify-center">
@@ -49,12 +44,8 @@ const EnthousiasmeStep2 = () => {
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
-          <div className="flex items-center cursor-pointer" onClick={handleLogoClick}>
-            <img 
-              src={logoUrl}
-              alt="Vinster Logo" 
-              className="h-12 w-auto filter brightness-110 contrast-110" 
-            />
+          <div className="flex items-center">
+            <h1 className="text-xl font-bold text-blue-900">Vinster</h1>
           </div>
         </div>
       </div>

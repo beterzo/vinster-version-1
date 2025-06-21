@@ -2,12 +2,10 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { getStorageUrl } from "@/hooks/useStorageUrl";
 
 const HeroSection = () => {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
-  const logoUrl = getStorageUrl('assets', 'vinster-logo.png');
 
   return (
     <div className="relative overflow-hidden">
@@ -23,11 +21,7 @@ const HeroSection = () => {
         {/* Header with Logo and Buttons */}
         <div className="py-6 flex items-center justify-between">
           <div className="flex items-center">
-            <img 
-              src={logoUrl}
-              alt="Vinster Logo" 
-              className="h-12 w-auto" 
-            />
+            <h1 className="text-2xl font-bold text-white">Vinster</h1>
           </div>
           <div className="flex items-center space-x-4">
             <Button 

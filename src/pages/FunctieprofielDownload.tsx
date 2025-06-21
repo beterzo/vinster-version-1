@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { Download, CheckCircle, Home, Share2, Target, ArrowRight, Clock, Linkedin } from "lucide-react";
 import { useFunctieprofielPdf } from "@/hooks/useFunctieprofielPdf";
 import { useToast } from "@/hooks/use-toast";
-import { getStorageUrl } from "@/hooks/useStorageUrl";
 
 const FunctieprofielDownload = () => {
   const navigate = useNavigate();
@@ -19,7 +18,6 @@ const FunctieprofielDownload = () => {
     loadPdfData,
     initializePdfGeneration
   } = useFunctieprofielPdf();
-  const logoUrl = getStorageUrl('assets', 'vinster-logo.png');
 
   useEffect(() => {
     loadPdfData();
@@ -66,11 +64,7 @@ const FunctieprofielDownload = () => {
       <div className="max-w-4xl mx-auto px-6 py-16">
         {/* Header */}
         <div className="text-center mb-16">
-          <img 
-            src={logoUrl}
-            alt="Vinster Logo" 
-            className="h-8 w-auto mx-auto mb-8" 
-          />
+          <h1 className="text-2xl font-bold text-blue-900 mb-8">Vinster</h1>
           
           <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-8">
             <CheckCircle className="w-10 h-10 text-green-600" />

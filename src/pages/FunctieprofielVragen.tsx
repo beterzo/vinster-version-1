@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -6,14 +7,12 @@ import { useNavigate } from "react-router-dom";
 import { useFunctieprofielResponses } from "@/hooks/useFunctieprofielResponses";
 import { Search, ArrowRight, Home, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { getStorageUrl } from "@/hooks/useStorageUrl";
 
 const FunctieprofielVragen = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { responses, loading, saveResponse, submitToWebhook, isCompleted } = useFunctieprofielResponses();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const logoUrl = getStorageUrl('assets', 'vinster-logo.png');
 
   // Memoized questions array to prevent unnecessary re-renders
   const questions = useMemo(() => [
@@ -90,11 +89,7 @@ const FunctieprofielVragen = () => {
       <div className="max-w-4xl mx-auto px-6 py-16">
         {/* Header */}
         <div className="text-center mb-12">
-          <img 
-            src={logoUrl}
-            alt="Vinster Logo" 
-            className="h-8 w-auto mx-auto mb-8" 
-          />
+          <h1 className="text-2xl font-bold text-blue-900 mb-8">Vinster</h1>
           
           <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
             <Search className="w-8 h-8 text-blue-600" />

@@ -1,12 +1,11 @@
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { Search, ArrowRight, Target, Users, MapPin } from "lucide-react";
-import { getStorageUrl } from "@/hooks/useStorageUrl";
 
 const FunctieprofielIntro = () => {
   const navigate = useNavigate();
-  const logoUrl = getStorageUrl('assets', 'vinster-logo.png');
 
   const benefits = [
     {
@@ -32,11 +31,7 @@ const FunctieprofielIntro = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <div className="flex items-center cursor-pointer justify-center mb-8" onClick={() => navigate("/home")}>
-            <img 
-              src={logoUrl}
-              alt="Vinster Logo" 
-              className="h-12 w-auto filter brightness-110 contrast-110" 
-            />
+            <h1 className="text-2xl font-bold text-blue-900">Vinster</h1>
           </div>
           
           <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">

@@ -7,12 +7,10 @@ import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, ArrowLeft, Save } from "lucide-react";
 import { useExtraInformatieResponses } from "@/hooks/useExtraInformatieResponses";
-import { getStorageUrl } from "@/hooks/useStorageUrl";
 
 const ExtraInformatieVragen = () => {
   const navigate = useNavigate();
   const { responses, saving, saveResponses } = useExtraInformatieResponses();
-  const logoUrl = getStorageUrl('assets', 'vinster-logo.png');
   
   const [formData, setFormData] = useState({
     opleidingsniveau: '',
@@ -48,12 +46,8 @@ const ExtraInformatieVragen = () => {
       <div className="max-w-4xl mx-auto px-6 py-8">
         {/* Header */}
         <div className="mb-8">
-          <div className="flex items-center cursor-pointer mb-6" onClick={() => navigate("/home")}>
-            <img 
-              src={logoUrl}
-              alt="Vinster Logo" 
-              className="h-8 w-auto filter brightness-110 contrast-110" 
-            />
+          <div className="flex items-center mb-6">
+            <h1 className="text-xl font-bold text-blue-900">Vinster</h1>
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Nog iets meer over jou</h1>
           <p className="text-xl text-gray-700">

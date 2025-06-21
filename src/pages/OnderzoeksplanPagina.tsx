@@ -2,22 +2,16 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { Check, Search } from "lucide-react";
-import { getStorageUrl } from "@/hooks/useStorageUrl";
 
 const OnderzoeksplanPagina = () => {
   const navigate = useNavigate();
-  const logoUrl = getStorageUrl('assets', 'vinster-logo.png');
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
       <div className="max-w-4xl mx-auto px-6 py-8">
         {/* Header */}
         <div className="mb-8">
-          <img 
-            src={logoUrl}
-            alt="Vinster Logo" 
-            className="h-8 w-auto mb-6" 
-          />
+          <h1 className="text-xl font-bold text-blue-900 mb-6">Vinster</h1>
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
               <Search className="w-5 h-5 text-blue-600" />
