@@ -79,7 +79,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send the email via Resend
     const emailResponse = await resend.emails.send({
-      from: "Vinster <hello@vinster.nl>",
+      from: "Vinster <noreply@vinster.ai>",
       to: [to],
       subject,
       html,
