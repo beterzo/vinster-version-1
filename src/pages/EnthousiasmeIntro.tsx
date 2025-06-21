@@ -17,7 +17,7 @@ const EnthousiasmeIntro = () => {
         <div className="max-w-[1440px] mx-auto px-6 py-4">
           <div className="flex items-center cursor-pointer" onClick={handleLogoClick}>
             <img 
-              src="/lovable-uploads/9f446431-090f-44ce-9726-57f4cd0bd197.png" 
+              src="/lovable-uploads/37a78841-c439-4437-b2de-5adbc7743c68.png" 
               alt="Vinster Logo" 
               className="h-12 w-auto filter brightness-110 contrast-110" 
             />
