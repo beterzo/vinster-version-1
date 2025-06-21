@@ -72,10 +72,6 @@ const SignupPage = () => {
     setIsLoading(false);
   };
 
-  const handleLogoClick = () => {
-    navigate("/");
-  };
-
   return (
     <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2">
       {/* Left side - Image with quote overlay */}
@@ -101,16 +97,6 @@ const SignupPage = () => {
       {/* Right side - Signup form */}
       <div className="bg-white flex items-center justify-center p-4 sm:p-6 lg:p-12">
         <div className="w-full max-w-md space-y-6 lg:space-y-8">
-          <div className="text-center">
-            <div className="flex items-center cursor-pointer justify-center" onClick={handleLogoClick}>
-              <img 
-                src="/lovable-uploads/37a78841-c439-4437-b2de-5adbc7743c68.png" 
-                alt="Vinster Logo" 
-                className="h-12 w-auto filter brightness-110 contrast-110" 
-              />
-            </div>
-          </div>
-
           {/* Signup form title */}
           <div className="text-center space-y-2">
             <h1 className="text-2xl sm:text-3xl font-bold text-blue-900">

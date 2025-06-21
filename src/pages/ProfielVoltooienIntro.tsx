@@ -12,12 +12,8 @@ const ProfielVoltooienIntro = () => {
       <div className="max-w-4xl mx-auto px-6 py-8">
         {/* Header */}
         <div className="mb-8">
-          <div className="flex items-center cursor-pointer mb-6" onClick={() => navigate("/home")}>
-            <img 
-              src="/lovable-uploads/37a78841-c439-4437-b2de-5adbc7743c68.png" 
-              alt="Vinster Logo" 
-              className="h-12 w-auto filter brightness-110 contrast-110" 
-            />
+          <div className="mb-6">
+            <h1 className="text-xl font-bold text-blue-900">Vinster</h1>
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Loopbaanrapport maken</h1>
           <p className="text-xl text-gray-700">

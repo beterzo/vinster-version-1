@@ -105,10 +105,6 @@ const WensberoepenStep1 = () => {
     }
   };
 
-  const handleLogoClick = () => {
-    navigate("/home");
-  };
-
   const handleBackToIntro = () => {
     scrollToTop();
     navigate('/wensberoepen-intro');
@@ -141,12 +137,7 @@ const WensberoepenStep1 = () => {
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
-          <img 
-            src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" 
-            alt="Vinster Logo" 
-            className="h-8 w-auto cursor-pointer hover:opacity-80 transition-opacity"
-            onClick={handleLogoClick}
-          />
+          <h1 className="text-xl font-bold text-blue-900">Vinster</h1>
         </div>
       </div>
 

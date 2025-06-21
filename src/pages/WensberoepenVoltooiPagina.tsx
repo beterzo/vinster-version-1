@@ -7,10 +7,6 @@ import { CheckCircle, ArrowRight, User, Target, Heart } from "lucide-react";
 const WensberoepenVoltooiPagina = () => {
   const navigate = useNavigate();
 
-  const handleLogoClick = () => {
-    navigate("/home");
-  };
-
   const handleProfielVoltooien = () => {
     navigate("/profiel-voltooien-intro");
   };
@@ -24,13 +20,7 @@ const WensberoepenVoltooiPagina = () => {
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
-          <div className="flex items-center cursor-pointer" onClick={handleLogoClick}>
-            <img 
-              src="/lovable-uploads/37a78841-c439-4437-b2de-5adbc7743c68.png" 
-              alt="Vinster Logo" 
-              className="h-12 w-auto filter brightness-110 contrast-110" 
-            />
-          </div>
+          <h1 className="text-xl font-bold text-blue-900">Vinster</h1>
         </div>
       </div>
 

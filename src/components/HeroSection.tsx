@@ -18,15 +18,8 @@ const HeroSection = () => {
       </div>
       
       <div className="relative z-10 max-w-[1440px] mx-auto px-6">
-        {/* Header with Logo and Buttons */}
-        <div className="py-6 flex items-center justify-between">
-          <div className="flex items-center">
-            <img 
-              src="/lovable-uploads/25a84375-22d5-4bed-af22-298cb602ebfa.png" 
-              alt="Vinster Logo" 
-              className="h-12 w-auto" 
-            />
-          </div>
+        {/* Header with Buttons */}
+        <div className="py-6 flex items-center justify-end">
           <div className="flex items-center space-x-4">
             <Button 
               onClick={() => navigate('/de-mens-achter-vinster')} 
