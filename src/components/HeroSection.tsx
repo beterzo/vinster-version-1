@@ -18,8 +18,21 @@ const HeroSection = () => {
       </div>
       
       <div className="relative z-10 max-w-[1440px] mx-auto px-6">
-        {/* Header with Buttons */}
-        <div className="py-6 flex items-center justify-end">
+        {/* Header with Logo and Buttons */}
+        <div className="py-6 flex items-center justify-between">
+          {/* Logo - Left side */}
+          <div 
+            onClick={() => navigate('/')} 
+            className="cursor-pointer hover:opacity-80 transition-opacity duration-200"
+          >
+            <img 
+              src="/lovable-uploads/76911e06-36ae-46f7-a150-2be7ceefee7d.png" 
+              alt="Vinster Logo" 
+              className={`${isMobile ? 'h-8 w-auto' : 'h-12 w-auto'} drop-shadow-sm`}
+            />
+          </div>
+          
+          {/* Navigation Buttons - Right side */}
           <div className="flex items-center space-x-4">
             <Button 
               onClick={() => navigate('/de-mens-achter-vinster')} 
