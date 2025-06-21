@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -89,7 +90,7 @@ const FunctieprofielVragen = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <img 
-            src="/lovable-uploads/vinster-new-logo.png" 
+            src="/lovable-uploads/9f446431-090f-44ce-9726-57f4cd0bd197.png" 
             alt="Vinster Logo" 
             className="h-8 w-auto mx-auto mb-8" 
           />

@@ -13,7 +13,7 @@ const OnderzoeksplanPagina = () => {
         {/* Header */}
         <div className="mb-8">
           <img 
-            src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" 
+            src="/lovable-uploads/9f446431-090f-44ce-9726-57f4cd0bd197.png" 
             alt="Vinster Logo" 
             className="h-8 w-auto mb-6" 
           />

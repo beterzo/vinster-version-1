@@ -12,13 +12,12 @@ const ProfielVoltooienIntro = () => {
       <div className="max-w-4xl mx-auto px-6 py-8">
         {/* Header */}
         <div className="mb-8">
-          <div className="flex items-center space-x-4 cursor-pointer mb-6" onClick={() => navigate("/home")}>
+          <div className="flex items-center cursor-pointer mb-6" onClick={() => navigate("/home")}>
             <img 
-              src="/lovable-uploads/vinster-new-logo.png" 
+              src="/lovable-uploads/9f446431-090f-44ce-9726-57f4cd0bd197.png" 
               alt="Vinster Logo" 
               className="h-12 w-auto filter brightness-110 contrast-110" 
             />
-            <span className="text-2xl font-bold text-gray-800 tracking-wide">Vinster</span>
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Loopbaanrapport maken</h1>
           <p className="text-xl text-gray-700">
@@ -41,7 +40,7 @@ const ProfielVoltooienIntro = () => {
             </p>
           </div>
 
-          {/* Two steps overview */}
+          {/*  Two steps overview */}
           <div className="grid md:grid-cols-2 gap-8 mb-8">
             <div className="bg-white rounded-lg p-6">
               <div className="flex items-center gap-4 mb-4">

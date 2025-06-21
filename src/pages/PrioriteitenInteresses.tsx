@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -58,13 +59,12 @@ const PrioriteitenInteresses = () => {
       <div className="max-w-4xl mx-auto px-6 py-8">
         {/* Header */}
         <div className="mb-8">
-          <div className="flex items-center space-x-4 mb-6" onClick={() => navigate("/home")}>
+          <div className="flex items-center mb-6" onClick={() => navigate("/home")}>
             <img 
-              src="/lovable-uploads/vinster-new-logo.png" 
+              src="/lovable-uploads/9f446431-090f-44ce-9726-57f4cd0bd197.png" 
               alt="Vinster Logo" 
               className="h-8 w-auto" 
             />
-            <span className="text-xl font-bold tracking-wide" style={{ color: '#253857' }}>Vinster</span>
           </div>
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">

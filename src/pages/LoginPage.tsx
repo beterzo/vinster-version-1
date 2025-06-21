@@ -92,13 +92,12 @@ const LoginPage = () => {
       <div className="bg-white flex items-center justify-center p-4 sm:p-6 lg:p-12">
         <div className="w-full max-w-md space-y-6 lg:space-y-8">
           <div className="text-center">
-            <div className="flex items-center space-x-4 cursor-pointer justify-center" onClick={handleLogoClick}>
+            <div className="flex items-center cursor-pointer justify-center" onClick={handleLogoClick}>
               <img 
-                src="/lovable-uploads/vinster-new-logo.png" 
+                src="/lovable-uploads/9f446431-090f-44ce-9726-57f4cd0bd197.png" 
                 alt="Vinster Logo" 
                 className="h-12 w-auto filter brightness-110 contrast-110" 
               />
-              <span className="text-2xl font-bold tracking-wide" style={{ color: '#253857' }}>Vinster</span>
             </div>
           </div>
 

@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -101,27 +102,27 @@ const SignupPage = () => {
       <div className="bg-white flex items-center justify-center p-4 sm:p-6 lg:p-12">
         <div className="w-full max-w-md space-y-6 lg:space-y-8">
           <div className="text-center">
-            <div className="flex items-center space-x-4 cursor-pointer justify-center" onClick={handleLogoClick}>
+            <div className="flex items-center cursor-pointer justify-center" onClick={handleLogoClick}>
               <img 
-                src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" 
+                src="/lovable-uploads/9f446431-090f-44ce-9726-57f4cd0bd197.png" 
                 alt="Vinster Logo" 
                 className="h-12 w-auto filter brightness-110 contrast-110" 
               />
-              <span className="text-2xl font-bold tracking-wide" style={{ color: '#253857' }}>Vinster</span>
             </div>
           </div>
 
+          {/* Signup form title */}
           <div className="text-center space-y-2">
             <h1 className="text-2xl sm:text-3xl font-bold text-blue-900">
               Maak je account aan
             </h1>
             <p className="text-gray-600">
-              Start je reis naar een betere loopbaan
+              Begin je reis naar een betere loopbaan
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="firstName" className="text-blue-900 font-medium text-left block">
                   Voornaam
@@ -136,6 +137,7 @@ const SignupPage = () => {
                   required
                 />
               </div>
+
               <div className="space-y-2">
                 <Label htmlFor="lastName" className="text-blue-900 font-medium text-left block">
                   Achternaam

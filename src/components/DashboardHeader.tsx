@@ -29,13 +29,12 @@ const DashboardHeader = () => {
 
   return (
     <div className="flex justify-between items-center mb-8">
-      <div className="flex items-center space-x-4 cursor-pointer" onClick={() => navigate("/home")}>
+      <div className="flex items-center cursor-pointer" onClick={() => navigate("/home")}>
         <img 
-          src="/lovable-uploads/vinster-new-logo.png" 
+          src="/lovable-uploads/9f446431-090f-44ce-9726-57f4cd0bd197.png" 
           alt="Vinster Logo" 
           className="h-16 w-auto filter brightness-110 contrast-110" 
         />
-        <span className="text-2xl font-bold tracking-wide" style={{ color: '#253857' }}>Vinster</span>
       </div>
       <Button 
         onClick={handleLogout}

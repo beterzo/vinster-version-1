@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
@@ -29,13 +30,12 @@ const FunctieprofielIntro = () => {
       <div className="max-w-4xl mx-auto px-6 py-16">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="flex items-center space-x-4 cursor-pointer justify-center mb-8" onClick={() => navigate("/home")}>
+          <div className="flex items-center cursor-pointer justify-center mb-8" onClick={() => navigate("/home")}>
             <img 
-              src="/lovable-uploads/vinster-new-logo.png" 
+              src="/lovable-uploads/9f446431-090f-44ce-9726-57f4cd0bd197.png" 
               alt="Vinster Logo" 
               className="h-12 w-auto filter brightness-110 contrast-110" 
             />
-            <span className="text-2xl font-bold tracking-wide" style={{ color: '#253857' }}>Vinster</span>
           </div>
           
           <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">

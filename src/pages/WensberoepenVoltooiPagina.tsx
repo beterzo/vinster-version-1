@@ -24,13 +24,12 @@ const WensberoepenVoltooiPagina = () => {
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
-          <div className="flex items-center space-x-4 cursor-pointer" onClick={handleLogoClick}>
+          <div className="flex items-center cursor-pointer" onClick={handleLogoClick}>
             <img 
-              src="/lovable-uploads/vinster-new-logo.png" 
+              src="/lovable-uploads/9f446431-090f-44ce-9726-57f4cd0bd197.png" 
               alt="Vinster Logo" 
               className="h-12 w-auto filter brightness-110 contrast-110" 
             />
-            <span className="text-2xl font-bold tracking-wide" style={{ color: '#253857' }}>Vinster</span>
           </div>
         </div>
       </div>
