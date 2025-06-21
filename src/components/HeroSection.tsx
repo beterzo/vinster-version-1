@@ -26,9 +26,13 @@ const HeroSection = () => {
             className="cursor-pointer hover:opacity-80 transition-opacity duration-200"
           >
             <img 
-              src="/lovable-uploads/76911e06-36ae-46f7-a150-2be7ceefee7d.png" 
+              src="/lovable-uploads/47b4682a-5bf7-40d3-9098-b43fc177af6e.png" 
               alt="Vinster Logo" 
               className={`${isMobile ? 'h-8 w-auto' : 'h-12 w-auto'} drop-shadow-sm`}
+              onError={(e) => {
+                console.log('Logo failed to load:', e);
+                e.currentTarget.style.display = 'none';
+              }}
             />
           </div>
           
