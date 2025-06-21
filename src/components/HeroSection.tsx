@@ -18,24 +18,8 @@ const HeroSection = () => {
       </div>
       
       <div className="relative z-10 max-w-[1440px] mx-auto px-6">
-        {/* Header with Logo and Buttons */}
-        <div className="py-6 flex items-center justify-between">
-          {/* Logo - Left side */}
-          <div 
-            onClick={() => navigate('/')} 
-            className="cursor-pointer hover:opacity-80 transition-opacity duration-200"
-          >
-            <img 
-              src="/lovable-uploads/d5066014-20b2-4384-a449-99e428b39aea.png" 
-              alt="Vinster Logo" 
-              className={`${isMobile ? 'h-12 w-auto' : 'h-16 w-auto'} drop-shadow-sm`}
-              onError={(e) => {
-                console.log('Logo failed to load:', e);
-                e.currentTarget.style.display = 'none';
-              }}
-            />
-          </div>
-          
+        {/* Header with Navigation Buttons Only */}
+        <div className="py-6 flex items-center justify-end">
           {/* Navigation Buttons - Right side */}
           <div className="flex items-center space-x-4">
             <Button 
