@@ -2,9 +2,11 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
+import { getStorageUrl } from "@/hooks/useStorageUrl";
 
 const WensberoepenIntro = () => {
   const navigate = useNavigate();
+  const logoUrl = getStorageUrl('assets', 'vinster-logo.png');
 
   const handleLogoClick = () => {
     navigate("/home");
@@ -17,7 +19,7 @@ const WensberoepenIntro = () => {
         <div className="max-w-[1440px] mx-auto px-6 py-4">
           <div className="flex items-center cursor-pointer" onClick={handleLogoClick}>
             <img 
-              src="/lovable-uploads/37a78841-c439-4437-b2de-5adbc7743c68.png" 
+              src={logoUrl}
               alt="Vinster Logo" 
               className="h-12 w-auto filter brightness-110 contrast-110" 
             />

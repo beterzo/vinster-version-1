@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,6 +6,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate, Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { getStorageUrl } from "@/hooks/useStorageUrl";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -16,6 +16,7 @@ const LoginPage = () => {
   const { signIn } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const logoUrl = getStorageUrl('assets', 'vinster-logo.png');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -94,7 +95,7 @@ const LoginPage = () => {
           <div className="text-center">
             <div className="flex items-center cursor-pointer justify-center" onClick={handleLogoClick}>
               <img 
-                src="/lovable-uploads/9f446431-090f-44ce-9726-57f4cd0bd197.png" 
+                src={logoUrl}
                 alt="Vinster Logo" 
                 className="h-12 w-auto filter brightness-110 contrast-110" 
               />

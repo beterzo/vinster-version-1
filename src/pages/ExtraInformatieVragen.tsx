@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -8,10 +7,12 @@ import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, ArrowLeft, Save } from "lucide-react";
 import { useExtraInformatieResponses } from "@/hooks/useExtraInformatieResponses";
+import { getStorageUrl } from "@/hooks/useStorageUrl";
 
 const ExtraInformatieVragen = () => {
   const navigate = useNavigate();
   const { responses, saving, saveResponses } = useExtraInformatieResponses();
+  const logoUrl = getStorageUrl('assets', 'vinster-logo.png');
   
   const [formData, setFormData] = useState({
     opleidingsniveau: '',
@@ -49,7 +50,7 @@ const ExtraInformatieVragen = () => {
         <div className="mb-8">
           <div className="flex items-center cursor-pointer mb-6" onClick={() => navigate("/home")}>
             <img 
-              src="/lovable-uploads/9f446431-090f-44ce-9726-57f4cd0bd197.png" 
+              src={logoUrl}
               alt="Vinster Logo" 
               className="h-8 w-auto filter brightness-110 contrast-110" 
             />

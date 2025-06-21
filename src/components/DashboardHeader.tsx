@@ -4,6 +4,7 @@ import { LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
+import { getStorageUrl } from "@/hooks/useStorageUrl";
 
 const DashboardHeader = () => {
   const { signOut } = useAuth();
@@ -27,11 +28,13 @@ const DashboardHeader = () => {
     }
   };
 
+  const logoUrl = getStorageUrl('assets', 'vinster-logo.png');
+
   return (
     <div className="flex justify-between items-center mb-8">
       <div className="flex items-center cursor-pointer" onClick={() => navigate("/home")}>
         <img 
-          src="/lovable-uploads/37a78841-c439-4437-b2de-5adbc7743c68.png" 
+          src={logoUrl}
           alt="Vinster Logo" 
           className="h-16 w-auto filter brightness-110 contrast-110" 
         />

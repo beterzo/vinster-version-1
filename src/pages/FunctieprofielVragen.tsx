@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -7,12 +6,14 @@ import { useNavigate } from "react-router-dom";
 import { useFunctieprofielResponses } from "@/hooks/useFunctieprofielResponses";
 import { Search, ArrowRight, Home, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { getStorageUrl } from "@/hooks/useStorageUrl";
 
 const FunctieprofielVragen = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { responses, loading, saveResponse, submitToWebhook, isCompleted } = useFunctieprofielResponses();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const logoUrl = getStorageUrl('assets', 'vinster-logo.png');
 
   // Memoized questions array to prevent unnecessary re-renders
   const questions = useMemo(() => [
@@ -90,7 +91,7 @@ const FunctieprofielVragen = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <img 
-            src="/lovable-uploads/9f446431-090f-44ce-9726-57f4cd0bd197.png" 
+            src={logoUrl}
             alt="Vinster Logo" 
             className="h-8 w-auto mx-auto mb-8" 
           />

@@ -1,11 +1,12 @@
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { Check, Search } from "lucide-react";
+import { getStorageUrl } from "@/hooks/useStorageUrl";
 
 const OnderzoeksplanPagina = () => {
   const navigate = useNavigate();
+  const logoUrl = getStorageUrl('assets', 'vinster-logo.png');
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
@@ -13,7 +14,7 @@ const OnderzoeksplanPagina = () => {
         {/* Header */}
         <div className="mb-8">
           <img 
-            src="/lovable-uploads/9f446431-090f-44ce-9726-57f4cd0bd197.png" 
+            src={logoUrl}
             alt="Vinster Logo" 
             className="h-8 w-auto mb-6" 
           />

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -6,10 +5,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, ArrowLeft, Star, Check, AlertCircle } from "lucide-react";
 import { usePrioriteitenResponses } from "@/hooks/usePrioriteitenResponses";
+import { getStorageUrl } from "@/hooks/useStorageUrl";
 
 const PrioriteitenActiviteiten = () => {
   const navigate = useNavigate();
   const { responses, aiKeywords, saveResponses, loading } = usePrioriteitenResponses();
+  const logoUrl = getStorageUrl('assets', 'vinster-logo.png');
   
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
   const [extraText, setExtraText] = useState("");
@@ -54,7 +55,7 @@ const PrioriteitenActiviteiten = () => {
       <div className="max-w-4xl mx-auto px-6 py-8">
         {/* Header */}
         <div className="mb-8">
-          <img src="/lovable-uploads/9f446431-090f-44ce-9726-57f4cd0bd197.png" alt="Vinster Logo" className="h-8 w-auto mb-6" />
+          <img src={logoUrl} alt="Vinster Logo" className="h-8 w-auto mb-6" />
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">
               <Star className="w-5 h-5 text-yellow-600" />

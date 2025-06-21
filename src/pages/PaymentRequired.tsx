@@ -4,11 +4,13 @@ import { CheckCircle, Star, Shield, Zap } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
+import { getStorageUrl } from "@/hooks/useStorageUrl";
 
 const PaymentRequired = () => {
   const { user } = useAuth();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
+  const logoUrl = getStorageUrl('assets', 'vinster-logo.png');
   
   const features = [
     {
@@ -137,7 +139,7 @@ const PaymentRequired = () => {
         {/* Header */}
         <div className="text-center mb-8">
           <img 
-            src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" 
+            src={logoUrl}
             alt="Vinster Logo" 
             className="h-8 w-auto mx-auto mb-6" 
           />

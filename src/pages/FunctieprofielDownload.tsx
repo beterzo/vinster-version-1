@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -6,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Download, CheckCircle, Home, Share2, Target, ArrowRight, Clock, Linkedin } from "lucide-react";
 import { useFunctieprofielPdf } from "@/hooks/useFunctieprofielPdf";
 import { useToast } from "@/hooks/use-toast";
+import { getStorageUrl } from "@/hooks/useStorageUrl";
 
 const FunctieprofielDownload = () => {
   const navigate = useNavigate();
@@ -19,6 +19,7 @@ const FunctieprofielDownload = () => {
     loadPdfData,
     initializePdfGeneration
   } = useFunctieprofielPdf();
+  const logoUrl = getStorageUrl('assets', 'vinster-logo.png');
 
   useEffect(() => {
     loadPdfData();
@@ -66,7 +67,7 @@ const FunctieprofielDownload = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <img 
-            src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" 
+            src={logoUrl}
             alt="Vinster Logo" 
             className="h-8 w-auto mx-auto mb-8" 
           />

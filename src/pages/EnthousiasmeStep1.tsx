@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -7,10 +6,12 @@ import { useNavigate } from "react-router-dom";
 import EnthousiasmeProgress from "@/components/EnthousiasmeProgress";
 import { useEnthousiasmeResponses } from "@/hooks/useEnthousiasmeResponses";
 import { Loader2 } from "lucide-react";
+import { getStorageUrl } from "@/hooks/useStorageUrl";
 
 const EnthousiasmeStep1 = () => {
   const navigate = useNavigate();
   const { responses, loading, saving, saveResponse, updateLocalResponse } = useEnthousiasmeResponses();
+  const logoUrl = getStorageUrl('assets', 'vinster-logo.png');
 
   // Local validation for step 1 only
   const isStep1Complete = () => {
@@ -50,7 +51,7 @@ const EnthousiasmeStep1 = () => {
         <div className="max-w-[1440px] mx-auto px-6 py-4">
           <div className="flex items-center cursor-pointer" onClick={handleLogoClick}>
             <img 
-              src="/lovable-uploads/9f446431-090f-44ce-9726-57f4cd0bd197.png" 
+              src={logoUrl}
               alt="Vinster Logo" 
               className="h-12 w-auto filter brightness-110 contrast-110" 
             />
