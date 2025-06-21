@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -63,10 +62,10 @@ const SignupPage = () => {
     } else {
       toast({
         title: "Account succesvol aangemaakt!",
-        description: "We hebben een bevestigingsmail naar je e-mailadres gestuurd. Klik op de link in de email om je account te activeren.",
-        duration: 8000,
+        description: "Je bent nu ingelogd en kunt direct beginnen.",
+        duration: 5000,
       });
-      navigate("/login");
+      navigate("/home");
     }
 
     setIsLoading(false);
