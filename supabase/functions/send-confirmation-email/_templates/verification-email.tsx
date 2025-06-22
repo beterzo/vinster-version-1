@@ -68,16 +68,11 @@ export const VerificationEmail = ({
           <Text style={brandNameStyle}>
             Vinster
           </Text>
-          <Text style={subtitleStyle}>
-            Account Verificatie
-          </Text>
           <Heading style={headingStyle}>
-            Bevestig je Vinster account
+            Bevestig je email adres
           </Heading>
           <Text style={descriptionStyle}>
-            Welkom bij Vinster, {firstName} {lastName}! We zijn blij dat je je hebt aangemeld. 
-            Om je account te activeren en te beginnen met het ontdekken van je loopbaanmogelijkheden, 
-            klik je op onderstaande knop om je e-mailadres te bevestigen.
+            Bedankt voor je aanmelding op Vinster.ai. om je account te verifieren kun je op de onderstaande knop drukken!
           </Text>
           <Button style={buttonStyle} href={verificationUrl}>
             Activeer mijn account
@@ -92,7 +87,7 @@ export const VerificationEmail = ({
         
         <Text style={footerStyle}>
           Met vriendelijke groet,<br />
-          Het Vinster Team
+          Team Vinster
         </Text>
       </Container>
     </Body>
@@ -140,16 +135,6 @@ const brandNameStyle = {
   textAlign: 'center' as const,
 };
 
-const subtitleStyle = {
-  fontSize: '18px',
-  lineHeight: '28px',
-  marginTop: '16px',
-  marginBottom: '16px',
-  fontWeight: '600',
-  color: '#6B7280',
-  margin: '0',
-};
-
 const headingStyle = {
   margin: '0px',
   marginTop: '24px',
@@ -166,7 +151,7 @@ const descriptionStyle = {
   color: '#6B7280',
   marginTop: '16px',
   marginBottom: '32px',
-  textAlign: 'left' as const,
+  textAlign: 'center' as const,
 };
 
 const buttonStyle = {
