@@ -1,4 +1,5 @@
 
+
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "npm:resend@2.0.0";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.50.0";
@@ -58,16 +59,13 @@ const handler = async (req: Request): Promise<Response> => {
       lastName: user.user_metadata?.last_name
     });
 
-    // Use the redirect_to from the payload, but ensure it points to the right domain
-    let redirectUrl = payload.email_data.redirect_to;
-    
-    // Replace localhost with the Lovable preview URL if present
-    if (redirectUrl.includes('localhost:3000')) {
-      redirectUrl = redirectUrl.replace('localhost:3000', '228ae9dd-6d6a-406b-9dbd-95adecbe51b0.lovableproject.com');
-    }
+    // Use the correct Lovable preview URL - should now be consistent with frontend
+    const correctRedirectUrl = 'https://228ae9dd-6d6a-406b-9dbd-95adecbe51b0.lovableproject.com/auth/callback';
+    console.log("🔗 Using correct redirect URL:", correctRedirectUrl);
+    console.log("📋 Original redirect from payload:", payload.email_data.redirect_to);
 
-    // Create verification URL using the corrected redirect URL
-    const verificationUrl = `${Deno.env.get("SUPABASE_URL")}/auth/v1/verify?token=${payload.email_data.token_hash}&type=${payload.email_data.email_action_type}&redirect_to=${redirectUrl}`;
+    // Create verification URL using the correct redirect URL
+    const verificationUrl = `${Deno.env.get("SUPABASE_URL")}/auth/v1/verify?token=${payload.email_data.token_hash}&type=${payload.email_data.email_action_type}&redirect_to=${correctRedirectUrl}`;
 
     console.log("✅ Verification URL created:", verificationUrl);
     console.log("🔗 Token details:", {
@@ -103,7 +101,8 @@ const handler = async (req: Request): Promise<Response> => {
     return new Response(JSON.stringify({ 
       success: true, 
       message: "Verification email sent",
-      emailId: emailResponse.data?.id 
+      emailId: emailResponse.data?.id,
+      redirectUrl: correctRedirectUrl
     }), {
       status: 200,
       headers: { "Content-Type": "application/json", ...corsHeaders },

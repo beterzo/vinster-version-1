@@ -1,3 +1,4 @@
+
 import { createContext, useContext, useEffect, useState } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
@@ -96,6 +97,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     console.log('🔐 Attempting signup for:', email);
     
     try {
+      // Use the correct Lovable preview URL instead of window.location.origin
+      const redirectUrl = 'https://228ae9dd-6d6a-406b-9dbd-95adecbe51b0.lovableproject.com/auth/callback';
+      console.log('🔗 Using redirect URL:', redirectUrl);
+      
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
@@ -104,7 +109,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             first_name: firstName,
             last_name: lastName
           },
-          emailRedirectTo: `${window.location.origin}/auth/callback`
+          emailRedirectTo: redirectUrl
         }
       });
 
@@ -115,7 +120,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         console.log('📊 Signup result:', {
           user: data.user?.email,
           emailConfirmed: data.user?.email_confirmed_at,
-          needsConfirmation: !data.user?.email_confirmed_at
+          needsConfirmation: !data.user?.email_confirmed_at,
+          redirectUrl: redirectUrl
         });
       }
 
@@ -171,11 +177,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     console.log('🔐 Resending confirmation email for:', email);
     
     try {
+      // Use the same correct redirect URL for resend
+      const redirectUrl = 'https://228ae9dd-6d6a-406b-9dbd-95adecbe51b0.lovableproject.com/auth/callback';
+      console.log('🔗 Using redirect URL for resend:', redirectUrl);
+      
       const { error } = await supabase.auth.resend({
         type: 'signup',
         email: email,
         options: {
-          emailRedirectTo: `${window.location.origin}/auth/callback`
+          emailRedirectTo: redirectUrl
         }
       });
 
