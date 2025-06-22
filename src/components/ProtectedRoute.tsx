@@ -1,12 +1,14 @@
 
 import { useAuth } from "@/hooks/useAuth";
 import { Navigate, useLocation } from "react-router-dom";
+import PaymentGate from "./PaymentGate";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
+  requirePayment?: boolean;
 }
 
-const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
+const ProtectedRoute = ({ children, requirePayment = true }: ProtectedRouteProps) => {
   const { user, session, loading } = useAuth();
   const location = useLocation();
 
@@ -14,6 +16,7 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     hasUser: !!user, 
     hasSession: !!session, 
     loading, 
+    requirePayment,
     currentPath: location.pathname
   });
 
@@ -35,6 +38,17 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     return <Navigate to="/login" replace />;
   }
 
+  // If payment is required, wrap in PaymentGate
+  if (requirePayment) {
+    console.log('💰 ProtectedRoute: Payment required, checking payment status');
+    return (
+      <PaymentGate>
+        {children}
+      </PaymentGate>
+    );
+  }
+
+  // No payment required, just show content
   console.log('✅ ProtectedRoute: Authenticated, rendering protected content');
   return <>{children}</>;
 };

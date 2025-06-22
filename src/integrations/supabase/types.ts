@@ -144,6 +144,7 @@ export type Database = {
           ai_werkomstandigheden: string | null
           created_at: string
           first_name: string
+          has_paid: boolean
           id: string
           last_name: string
           updated_at: string
@@ -154,6 +155,7 @@ export type Database = {
           ai_werkomstandigheden?: string | null
           created_at?: string
           first_name: string
+          has_paid?: boolean
           id: string
           last_name: string
           updated_at?: string
@@ -164,6 +166,7 @@ export type Database = {
           ai_werkomstandigheden?: string | null
           created_at?: string
           first_name?: string
+          has_paid?: boolean
           id?: string
           last_name?: string
           updated_at?: string

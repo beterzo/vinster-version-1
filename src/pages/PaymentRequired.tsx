@@ -4,13 +4,25 @@ import { Card } from "@/components/ui/card";
 import { CheckCircle, Star, Shield, Zap, Clock } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
-import { useState } from "react";
+import { usePaymentStatus } from "@/hooks/usePaymentStatus";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const PaymentRequired = () => {
   const { user } = useAuth();
   const { toast } = useToast();
+  const { hasPaid, refreshPaymentStatus } = usePaymentStatus();
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   
+  // Redirect if user has already paid
+  useEffect(() => {
+    if (hasPaid) {
+      console.log('✅ User has paid, redirecting to home');
+      navigate('/home');
+    }
+  }, [hasPaid, navigate]);
+
   const features = [
     {
       title: "Volledige enthousiasmescan",
@@ -65,12 +77,10 @@ const PaymentRequired = () => {
       });
 
       console.log('Webhook response status:', response.status);
-      console.log('Webhook response headers:', Object.fromEntries(response.headers.entries()));
 
       if (response.ok) {
         console.log('Webhook successfully sent');
         
-        // Controleer content-type van response
         const contentType = response.headers.get('content-type');
         console.log('Response content-type:', contentType);
         
@@ -85,20 +95,28 @@ const PaymentRequired = () => {
           throw new Error('Invalid JSON response from webhook');
         }
         
-        // Controleer of er een checkout_url in de response zit
         if (responseData && responseData.checkout_url) {
           console.log('Opening checkout URL in new tab:', responseData.checkout_url);
           
-          // Open Stripe checkout in nieuwe tab
           const newWindow = window.open(responseData.checkout_url, '_blank');
           
           if (newWindow) {
             toast({
               title: "Succes",
-              description: "Betaalpagina wordt geopend in een nieuw tabblad.",
+              description: "Betaalpagina wordt geopend in een nieuw tabblad. Na betaling word je automatisch doorgeleid.",
             });
+            
+            // Start checking payment status periodically after opening checkout
+            const checkInterval = setInterval(async () => {
+              await refreshPaymentStatus();
+            }, 5000); // Check every 5 seconds
+            
+            // Clean up interval after 10 minutes
+            setTimeout(() => {
+              clearInterval(checkInterval);
+            }, 600000);
+            
           } else {
-            // Fallback als popup wordt geblokkeerd
             console.log('Popup blocked, using direct redirect');
             window.location.href = responseData.checkout_url;
           }
@@ -200,7 +218,6 @@ const PaymentRequired = () => {
               </div>
             </Card>
 
-            {/* Flexible Journey Card */}
             <Card className="p-6 lg:p-8 border-0 rounded-3xl" style={{ backgroundColor: '#FEF3C7' }}>
               <div className="flex items-start space-x-4">
                 <div className="flex-shrink-0">
@@ -217,7 +234,6 @@ const PaymentRequired = () => {
               </div>
             </Card>
 
-            {/* Value proposition */}
             <Card className="p-4 lg:p-6 border-0 rounded-3xl text-white" style={{ backgroundColor: '#78BFE3' }}>
               <h3 className="font-bold text-lg lg:text-xl mb-4">Waarom kiezen voor Vinster?</h3>
               <ul className="space-y-3 text-sm">
@@ -241,9 +257,8 @@ const PaymentRequired = () => {
             </Card>
           </div>
 
-          {/* Right column: Pricing - full width on mobile */}
+          {/* Right column: Pricing */}
           <div className="flex flex-col gap-6 lg:gap-8">
-            {/* Pricing card */}
             <Card className="p-6 lg:p-8 border-0 rounded-3xl bg-white shadow-lg flex-1">
               <div className="text-center mb-6">
                 <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-2">Volledige toegang</h3>
@@ -289,7 +304,6 @@ const PaymentRequired = () => {
               </p>
             </Card>
 
-            {/* Guarantee */}
             <Card className="p-4 lg:p-6 border-0 rounded-3xl bg-green-50 border-green-200">
               <div className="text-center">
                 <Shield className="w-8 h-8 text-green-600 mx-auto mb-3" />

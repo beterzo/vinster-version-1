@@ -50,10 +50,17 @@ const App = () => (
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/email-verification" element={<EmailVerificationPage />} />
             <Route path="/auth/callback" element={<AuthCallbackPage />} />
-            <Route path="/payment-required" element={<PaymentRequired />} />
+            <Route 
+              path="/payment-required" 
+              element={
+                <ProtectedRoute requirePayment={false}>
+                  <PaymentRequired />
+                </ProtectedRoute>
+              } 
+            />
             <Route path="/de-mens-achter-vinster" element={<DeMensAchterVinster />} />
             
-            {/* Protected routes */}
+            {/* Protected routes that require payment */}
             <Route
               path="/home"
               element={
