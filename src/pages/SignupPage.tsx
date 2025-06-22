@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -61,11 +62,13 @@ const SignupPage = () => {
       });
     } else {
       toast({
-        title: "Account succesvol aangemaakt!",
-        description: "Je bent nu ingelogd en kunt direct beginnen.",
-        duration: 5000,
+        title: "Account aangemaakt!",
+        description: "We hebben een verificatie email naar je gestuurd. Controleer je inbox.",
+        duration: 6000,
       });
-      navigate("/home");
+      
+      // Navigate to email verification page
+      navigate("/email-verification");
     }
 
     setIsLoading(false);
