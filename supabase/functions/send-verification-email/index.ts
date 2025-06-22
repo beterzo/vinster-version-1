@@ -80,7 +80,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send verification email
     const emailResponse = await resend.emails.send({
-      from: "Vinster <noreply@vinster.nl>",
+      from: "Vinster <noreply@vinster.ai>",
       to: [user.email],
       subject: "Bevestig je account bij Vinster",
       html: emailHtml,
