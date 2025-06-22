@@ -11,6 +11,7 @@ import {
   Button,
   Section,
   Hr,
+  Img,
 } from 'npm:@react-email/components@0.0.22';
 import * as React from 'npm:react@18.3.1';
 
@@ -27,42 +28,75 @@ export const VerificationEmail = ({
   verificationUrl,
   email,
 }: VerificationEmailProps) => (
-  <Html>
-    <Head />
+  <Html dir="ltr" lang="nl">
+    <Head>
+      <style>
+        {`
+          @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            mso-font-alt: 'Helvetica';
+            src: url(https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hiA.woff2) format('woff2');
+          }
+          
+          @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 600;
+            mso-font-alt: 'Helvetica';
+            src: url(https://fonts.gstatic.com/s/inter/v18/UcC73FwrK3iLTeHuS_fjbvMwCp50PDca1ZL7.woff2) format('woff2');
+          }
+          
+          @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 700;
+            mso-font-alt: 'Helvetica';
+            src: url(https://fonts.gstatic.com/s/inter/v18/UcC73FwrK3iLTeHuS_fjbvMwCp50BTca1ZL7.woff2) format('woff2');
+          }
+          
+          * {
+            font-family: 'Inter', Helvetica;
+          }
+        `}
+      </style>
+    </Head>
     <Preview>Bevestig je Vinster account om te beginnen</Preview>
-    <Body style={main}>
-      <Container style={container}>
-        <Heading style={h1}>Welkom bij Vinster!</Heading>
-        
-        <Text style={text}>
-          Hallo {firstName} {lastName},
-        </Text>
-        
-        <Text style={text}>
-          Bedankt voor het aanmaken van je account bij Vinster. Om je account te activeren en te beginnen met het ontdekken van je loopbaanmogelijkheden, klik je op onderstaande knop:
-        </Text>
-
-        <Section style={buttonContainer}>
-          <Button style={button} href={verificationUrl}>
-            Activeer mijn account
-          </Button>
+    <Body style={bodyStyle}>
+      <Container style={containerStyle}>
+        <Section style={imageSection}>
+          <Img
+            alt="Vinster Logo"
+            height="120"
+            src="https://vinster-version-1.lovable.app/lovable-uploads/vinster-new-logo.png"
+            style={logoStyle}
+          />
+          <Section style={contentSection}>
+            <Text style={subtitleStyle}>
+              Account Verificatie
+            </Text>
+            <Heading style={headingStyle}>
+              Bevestig je Vinster account
+            </Heading>
+            <Text style={descriptionStyle}>
+              Welkom bij Vinster, {firstName} {lastName}! We zijn blij dat je je hebt aangemeld. 
+              Om je account te activeren en te beginnen met het ontdekken van je loopbaanmogelijkheden, 
+              klik je op onderstaande knop om je e-mailadres te bevestigen.
+            </Text>
+            <Button style={buttonStyle} href={verificationUrl}>
+              Activeer mijn account
+            </Button>
+          </Section>
         </Section>
-
-        <Text style={text}>
-          Of kopieer en plak deze link in je browser:
-        </Text>
         
-        <Text style={link}>
-          {verificationUrl}
-        </Text>
-
-        <Hr style={hr} />
-
-        <Text style={footer}>
+        <Hr style={hrStyle} />
+        
+        <Text style={footerStyle}>
           Als je dit account niet hebt aangemaakt, kun je deze email negeren.
         </Text>
-
-        <Text style={footer}>
+        
+        <Text style={footerStyle}>
           Met vriendelijke groet,<br />
           Het Vinster Team
         </Text>
@@ -73,66 +107,98 @@ export const VerificationEmail = ({
 
 export default VerificationEmail;
 
-const main = {
-  backgroundColor: '#f6f9fc',
-  fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif',
+const bodyStyle = {
+  margin: '0',
+  marginLeft: '12px',
+  marginRight: '12px',
+  fontFamily: "'Inter', Helvetica",
 };
 
-const container = {
-  backgroundColor: '#ffffff',
-  margin: '0 auto',
-  padding: '20px 0 48px',
-  marginBottom: '64px',
+const containerStyle = {
+  maxWidth: '37.5em',
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  boxSizing: 'border-box' as const,
+  paddingTop: '1rem',
+  paddingBottom: '1rem',
+  height: '100vh',
 };
 
-const h1 = {
-  color: '#1e3a8a',
-  fontSize: '32px',
-  fontWeight: 'bold',
-  margin: '40px 0',
-  padding: '0',
-  textAlign: 'center' as const,
+const imageSection = {
+  marginTop: '16px',
+  marginBottom: '16px',
 };
 
-const text = {
-  color: '#374151',
-  fontSize: '16px',
-  lineHeight: '26px',
-  margin: '16px 0',
-};
-
-const buttonContainer = {
-  textAlign: 'center' as const,
-  margin: '32px 0',
-};
-
-const button = {
-  backgroundColor: '#1e3a8a',
-  borderRadius: '8px',
-  color: '#ffffff',
-  fontSize: '16px',
-  fontWeight: 'bold',
+const logoStyle = {
+  display: 'block',
+  outline: 'none',
+  border: 'none',
   textDecoration: 'none',
+  width: '120px',
+  height: '120px',
+  borderRadius: '12px',
+  objectFit: 'contain' as const,
+  margin: '0 auto',
+};
+
+const contentSection = {
+  marginTop: '32px',
   textAlign: 'center' as const,
+};
+
+const subtitleStyle = {
+  fontSize: '18px',
+  lineHeight: '28px',
+  marginTop: '16px',
+  marginBottom: '16px',
+  fontWeight: '600',
+  color: '#FFCD3E',
+  margin: '0',
+};
+
+const headingStyle = {
+  margin: '0px',
+  marginTop: '8px',
+  fontSize: '36px',
+  lineHeight: '36px',
+  fontWeight: '600',
+  color: '#111827',
+};
+
+const descriptionStyle = {
+  fontSize: '16px',
+  lineHeight: '24px',
+  color: '#6B7280',
+  marginTop: '16px',
+  marginBottom: '16px',
+};
+
+const buttonStyle = {
+  lineHeight: '100%',
+  textDecoration: 'none',
   display: 'inline-block',
-  padding: '12px 32px',
+  maxWidth: '100%',
+  marginTop: '16px',
+  borderRadius: '8px',
+  backgroundColor: '#FFCD3E',
+  paddingLeft: '40px',
+  paddingRight: '40px',
+  paddingTop: '12px',
+  paddingBottom: '12px',
+  fontWeight: '600',
+  color: '#1F2937',
+  border: 'none',
 };
 
-const link = {
-  color: '#2563eb',
-  fontSize: '14px',
-  textDecoration: 'underline',
-  wordBreak: 'break-all' as const,
-};
-
-const hr = {
-  borderColor: '#e5e7eb',
+const hrStyle = {
+  borderColor: '#E5E7EB',
   margin: '32px 0',
 };
 
-const footer = {
-  color: '#6b7280',
+const footerStyle = {
+  color: '#6B7280',
   fontSize: '14px',
   lineHeight: '22px',
   margin: '16px 0',
+  textAlign: 'center' as const,
 };
