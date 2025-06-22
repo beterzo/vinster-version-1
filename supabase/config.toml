@@ -39,7 +39,7 @@ security_update_password_require_reauthentication = true
 enabled = true
 port = 54329
 
-[functions.send-verification-email]
+[functions.send-confirmation-email]
 verify_jwt = false
 
 [functions.generate-ai-keywords]
