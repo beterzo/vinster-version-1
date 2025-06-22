@@ -12,11 +12,21 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-interface WebhookPayload {
-  type: string;
-  table: string;
-  record: any;
-  schema: string;
+interface AuthEventPayload {
+  user: {
+    id: string;
+    email: string;
+    user_metadata: {
+      first_name?: string;
+      last_name?: string;
+    };
+  };
+  email_data: {
+    token: string;
+    token_hash: string;
+    redirect_to: string;
+    email_action_type: string;
+  };
 }
 
 const handler = async (req: Request): Promise<Response> => {
@@ -27,53 +37,36 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const payload: WebhookPayload = await req.json();
-    console.log("📧 Webhook payload:", payload);
+    const payload: AuthEventPayload = await req.json();
+    console.log("📧 Auth Event payload received:", JSON.stringify(payload, null, 2));
 
-    // Only handle user signup events
-    if (payload.type !== "INSERT" || payload.table !== "users") {
-      console.log("❌ Not a user signup event, ignoring");
+    // Check if it's a signup event
+    if (payload.email_data?.email_action_type !== "signup") {
+      console.log("❌ Not a signup event, ignoring");
       return new Response(JSON.stringify({ success: false, message: "Not a signup event" }), {
         status: 200,
         headers: { "Content-Type": "application/json", ...corsHeaders },
       });
     }
 
-    const user = payload.record;
+    const user = payload.user;
     console.log("👤 New user signup:", user.email);
 
-    // Create Supabase client for generating verification link
-    const supabase = createClient(
-      Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
-    );
+    // Create verification URL using the token and redirect info from email_data
+    const verificationUrl = `${Deno.env.get("SUPABASE_URL")}/auth/v1/verify?token=${payload.email_data.token_hash}&type=${payload.email_data.email_action_type}&redirect_to=${payload.email_data.redirect_to}`;
 
-    // Generate email verification token
-    const { data, error } = await supabase.auth.admin.generateLink({
-      type: 'signup',
-      email: user.email,
-      options: {
-        redirectTo: `${Deno.env.get("SUPABASE_URL")?.replace('supabase.co', 'supabase.app') || 'http://localhost:3000'}/auth/callback`
-      }
-    });
-
-    if (error) {
-      console.error("❌ Error generating verification link:", error);
-      throw error;
-    }
-
-    console.log("✅ Verification link generated");
+    console.log("✅ Verification URL created:", verificationUrl);
 
     // Get user metadata
-    const firstName = user.raw_user_meta_data?.first_name || 'daar';
-    const lastName = user.raw_user_meta_data?.last_name || '';
+    const firstName = user.user_metadata?.first_name || 'daar';
+    const lastName = user.user_metadata?.last_name || '';
 
     // Render email template
     const emailHtml = await renderAsync(
       VerificationEmail({
         firstName,
         lastName,
-        verificationUrl: data.properties?.action_link || '',
+        verificationUrl,
         email: user.email
       })
     );
