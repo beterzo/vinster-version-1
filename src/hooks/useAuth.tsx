@@ -1,4 +1,3 @@
-
 import { createContext, useContext, useEffect, useState } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
@@ -35,6 +34,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
         console.log('🔐 Auth state change:', event, session?.user?.email || 'no user');
+        console.log('📧 Email verification status:', {
+          emailConfirmed: session?.user?.email_confirmed_at,
+          userCreated: session?.user?.created_at,
+          lastSignIn: session?.user?.last_sign_in_at
+        });
         
         setSession(session);
         setUser(session?.user ?? null);
@@ -66,7 +70,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           return;
         }
 
-        console.log('🔐 Initial session check:', session?.user?.email || 'no session');
+        console.log('🔐 Initial session check:', {
+          hasSession: !!session,
+          email: session?.user?.email,
+          emailConfirmed: session?.user?.email_confirmed_at
+        });
         setSession(session);
         setUser(session?.user ?? null);
         setLoading(false);
@@ -88,7 +96,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     console.log('🔐 Attempting signup for:', email);
     
     try {
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -104,6 +112,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         console.error('❌ Signup error:', error);
       } else {
         console.log('✅ Signup successful - verification email will be sent');
+        console.log('📊 Signup result:', {
+          user: data.user?.email,
+          emailConfirmed: data.user?.email_confirmed_at,
+          needsConfirmation: !data.user?.email_confirmed_at
+        });
       }
 
       return { error };

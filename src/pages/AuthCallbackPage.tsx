@@ -14,20 +14,52 @@ const AuthCallbackPage = () => {
     const handleAuthCallback = async () => {
       try {
         console.log('🔐 Processing auth callback...');
+        console.log('📝 Search params:', Object.fromEntries(searchParams.entries()));
+        
+        // Log current session state before verification
+        const { data: initialSession } = await supabase.auth.getSession();
+        console.log('📊 Initial session state:', {
+          hasSession: !!initialSession.session,
+          user: initialSession.session?.user?.email,
+          emailConfirmed: initialSession.session?.user?.email_confirmed_at
+        });
         
         const { data, error } = await supabase.auth.getSession();
         
         if (error) {
           console.error('❌ Auth callback error:', error);
+          
+          // Check if it's a token already used error
+          if (error.message.includes('Email link is invalid or has expired')) {
+            setStatus('error');
+            setMessage('Deze verificatie link is al gebruikt of verlopen. Probeer een nieuwe verificatie email aan te vragen.');
+            return;
+          }
+          
           setStatus('error');
           setMessage('Er is een fout opgetreden bij het verifiëren van je account.');
           return;
         }
 
         if (data.session) {
-          console.log('✅ Email verification successful:', data.session.user.email);
-          setStatus('success');
-          setMessage('Je account is succesvol geverifieerd! Je kunt nu inloggen.');
+          console.log('✅ Email verification successful:', {
+            email: data.session.user.email,
+            emailConfirmed: data.session.user.email_confirmed_at,
+            userCreated: data.session.user.created_at,
+            lastSignIn: data.session.user.last_sign_in_at
+          });
+          
+          // Check if user was just verified or was already verified
+          const wasJustVerified = data.session.user.email_confirmed_at && 
+            new Date(data.session.user.email_confirmed_at).getTime() > (Date.now() - 30000); // within last 30 seconds
+          
+          if (wasJustVerified) {
+            setStatus('success');
+            setMessage('Je account is succesvol geverifieerd! Je kunt nu inloggen.');
+          } else {
+            setStatus('success');
+            setMessage('Je account was al geverifieerd. Je kunt nu inloggen.');
+          }
           
           // Redirect to login page after short delay
           setTimeout(() => {
@@ -36,7 +68,7 @@ const AuthCallbackPage = () => {
         } else {
           console.log('❌ No session found after callback');
           setStatus('error');
-          setMessage('Verificatie link is verlopen of ongeldig.');
+          setMessage('Verificatie link is verlopen, al gebruikt, of ongeldig. Vraag een nieuwe verificatie email aan.');
         }
       } catch (error) {
         console.error('❌ Auth callback exception:', error);
@@ -46,7 +78,7 @@ const AuthCallbackPage = () => {
     };
 
     handleAuthCallback();
-  }, [navigate]);
+  }, [navigate, searchParams]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">

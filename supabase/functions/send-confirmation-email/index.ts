@@ -51,6 +51,12 @@ const handler = async (req: Request): Promise<Response> => {
 
     const user = payload.user;
     console.log("👤 New user signup:", user.email);
+    console.log("🔍 User details:", {
+      id: user.id,
+      email: user.email,
+      firstName: user.user_metadata?.first_name,
+      lastName: user.user_metadata?.last_name
+    });
 
     // Use the redirect_to from the payload, but ensure it points to the right domain
     let redirectUrl = payload.email_data.redirect_to;
@@ -64,6 +70,11 @@ const handler = async (req: Request): Promise<Response> => {
     const verificationUrl = `${Deno.env.get("SUPABASE_URL")}/auth/v1/verify?token=${payload.email_data.token_hash}&type=${payload.email_data.email_action_type}&redirect_to=${redirectUrl}`;
 
     console.log("✅ Verification URL created:", verificationUrl);
+    console.log("🔗 Token details:", {
+      token: payload.email_data.token,
+      tokenHash: payload.email_data.token_hash,
+      actionType: payload.email_data.email_action_type
+    });
 
     // Get user metadata
     const firstName = user.user_metadata?.first_name || 'daar';
