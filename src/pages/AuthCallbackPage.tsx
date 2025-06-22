@@ -27,11 +27,11 @@ const AuthCallbackPage = () => {
         if (data.session) {
           console.log('✅ Email verification successful:', data.session.user.email);
           setStatus('success');
-          setMessage('Je account is succesvol geverifieerd!');
+          setMessage('Je account is succesvol geverifieerd! Je kunt nu inloggen.');
           
-          // Redirect to home after short delay
+          // Redirect to login page after short delay
           setTimeout(() => {
-            navigate('/home');
+            navigate('/login');
           }, 2000);
         } else {
           console.log('❌ No session found after callback');
@@ -78,7 +78,7 @@ const AuthCallbackPage = () => {
                 {message}
               </p>
               <p className="text-sm text-gray-500">
-                Je wordt automatisch doorgestuurd...
+                Je wordt automatisch doorgestuurd naar de inlogpagina...
               </p>
             </>
           )}
