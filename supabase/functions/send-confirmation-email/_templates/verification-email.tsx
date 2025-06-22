@@ -61,7 +61,7 @@ export const VerificationEmail = ({
         `}
       </style>
     </Head>
-    <Preview>Bevestig je Vinster account om te beginnen</Preview>
+    <Preview>Activeer je account en log direct in</Preview>
     <Body style={bodyStyle}>
       <Container style={containerStyle}>
         <Section style={contentSection}>
@@ -72,7 +72,7 @@ export const VerificationEmail = ({
             Bevestig je email adres
           </Heading>
           <Text style={descriptionStyle}>
-            Bedankt voor je aanmelding op Vinster.ai. om je account te verifieren kun je op de onderstaande knop drukken!
+            Bedankt voor je aanmelding! Klik op de knop hieronder om je account te activeren en direct in te loggen.
           </Text>
           <Button style={buttonStyle} href={verificationUrl}>
             Activeer mijn account
