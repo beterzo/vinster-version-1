@@ -1,23 +1,14 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-
 const EnthousiasmeIntro = () => {
   const navigate = useNavigate();
-
-  return (
-    <div className="min-h-screen bg-gray-50 font-sans">
+  return <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
           <div className="flex items-center">
-            <img 
-              alt="Vinster Logo" 
-              className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
-              onClick={() => navigate('/')} 
-              src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
-            />
+            <img alt="Vinster Logo" className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" onClick={() => navigate('/')} src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" />
           </div>
         </div>
       </div>
@@ -40,9 +31,7 @@ const EnthousiasmeIntro = () => {
                 <p className="text-lg text-gray-700 leading-relaxed mb-4">
                   We gaan ontdekken wanneer jij in je element bent en stellen je daarvoor vragen over drie verschillende periodes in je leven. Je kunt later terug als je nog iets bedenkt. Je krijgt drie vragen per periode.
                 </p>
-                <p className="text-lg text-gray-700 leading-relaxed">
-                  Beantwoord elke vraag met zeker 10 tot 20 woorden, meer mag ook. Beantwoord de vragen zo precies mogelijk. Je mag in steekwoorden of in zinnen antwoorden. Wat jij prettig vindt.
-                </p>
+                <p className="text-lg text-gray-700 leading-relaxed">Beantwoord elke vraag met 10 tot 20 woorden, meer mag ook. Beantwoord de vragen zo precies mogelijk. Je mag in steekwoorden of in zinnen antwoorden. Wat jij prettig vindt.</p>
               </div>
 
               {/* Before You Start Section */}
@@ -57,10 +46,7 @@ const EnthousiasmeIntro = () => {
 
               {/* Start Button */}
               <div className="text-center pt-8">
-                <Button 
-                  onClick={() => navigate('/enthousiasme-step-1')}
-                  className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold text-lg px-12 py-4 rounded-lg"
-                >
+                <Button onClick={() => navigate('/enthousiasme-step-1')} className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold text-lg px-12 py-4 rounded-lg">
                   Start de scan
                 </Button>
               </div>
@@ -68,8 +54,6 @@ const EnthousiasmeIntro = () => {
           </CardContent>
         </Card>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default EnthousiasmeIntro;
