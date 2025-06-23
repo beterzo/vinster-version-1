@@ -35,9 +35,9 @@ const MobileMenu = () => {
         <Button
           variant="ghost"
           size="icon"
-          className="text-white hover:bg-white hover:bg-opacity-10 transition-all duration-200"
+          className="text-white hover:bg-white hover:bg-opacity-10 transition-all duration-200 h-12 w-12"
         >
-          <Menu className="h-6 w-6" />
+          <Menu className="h-8 w-8" />
         </Button>
       </DrawerTrigger>
       <DrawerContent className="bg-white">

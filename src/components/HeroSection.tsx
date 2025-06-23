@@ -19,22 +19,24 @@ const HeroSection = () => {
       </div>
       
       <div className="relative z-10 max-w-[1440px] mx-auto px-6">
-        {/* Header with Menu, Logo and Buttons */}
+        {/* Header with Logo (left) and Menu + Button (right) */}
         <div className="py-6 flex items-center justify-between">
-          {/* Left side with Mobile Menu and Logo */}
-          <div className="flex items-center space-x-4">
-            <MobileMenu />
+          {/* Left side - Logo only, larger */}
+          <div className="flex items-center">
             <img 
               alt="Vinster Logo" 
-              className="h-10 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              className="h-14 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
               onClick={() => navigate('/')} 
               src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
             />
           </div>
           
-          {/* Right side button */}
-          <div className="flex items-center">
-            <Button onClick={() => navigate('/login')} className="bg-white hover:bg-gray-100 text-blue-900 font-semibold px-6 py-3 rounded-full border border-gray-200 shadow-sm transition-all duration-200">
+          {/* Right side - Mobile Menu and Login Button aligned */}
+          <div className="flex items-center space-x-4">
+            <div className="flex items-center">
+              <MobileMenu />
+            </div>
+            <Button onClick={() => navigate('/login')} className="bg-white hover:bg-gray-100 text-blue-900 font-semibold px-6 py-3 rounded-full border border-gray-200 shadow-sm transition-all duration-200 h-12">
               Inloggen
             </Button>
           </div>
