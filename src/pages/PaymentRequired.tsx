@@ -6,6 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import { usePaymentStatus } from "@/hooks/usePaymentStatus";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
 const PaymentRequired = () => {
   const {
     user
@@ -139,7 +140,7 @@ const PaymentRequired = () => {
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-8">
         {/* Header with new logo */}
         <div className="text-center mb-8">
-          <img alt="Vinster Logo" className="h-12 w-auto mx-auto cursor-pointer hover:opacity-80 transition-opacity duration-200 mb-6" onClick={() => navigate('/')} src="/lovable-uploads/7efcf9fd-6a17-4d51-9fb7-9c0c2efc6116.png" />
+          <img alt="Vinster Logo" className="h-12 w-auto mx-auto cursor-pointer hover:opacity-80 transition-opacity duration-200 mb-6" onClick={() => navigate('/')} src="/lovable-uploads/vinster-new-logo.png" />
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-vinster-blue mb-4">
             Welkom bij Vinster, {user?.user_metadata?.first_name || 'daar'}!
           </h1>
@@ -258,36 +259,10 @@ const PaymentRequired = () => {
                 </p>
               </div>
             </Card>
-
-            {/* FAQ Card */}
-            <Card className="p-6 border-0 rounded-3xl bg-yellow-50 border-yellow-200">
-              <div className="space-y-4">
-                <div className="flex items-center space-x-3">
-                  <HelpCircle className="w-6 h-6 text-yellow-600" />
-                  <h4 className="font-semibold text-vinster-blue">Veelgestelde vragen</h4>
-                </div>
-                
-                <div className="space-y-3">
-                  <div>
-                    <p className="text-sm font-medium text-gray-800 mb-1">Hoe lang duurt het programma?</p>
-                    <p className="text-xs text-gray-600">Ongeveer 45 minuten, maar je kunt pauzeren wanneer je wilt.</p>
-                  </div>
-                  
-                  <div>
-                    <p className="text-sm font-medium text-gray-800 mb-1">Krijg ik direct toegang?</p>
-                    <p className="text-xs text-gray-600">Ja, direct na betaling kun je beginnen met de scans.</p>
-                  </div>
-                  
-                  <div>
-                    <p className="text-sm font-medium text-gray-800 mb-1">Kan ik later nog wijzigen?</p>
-                    <p className="text-xs text-gray-600">Je doorloopt de scans één keer, maar krijgt levenslange toegang tot je resultaten.</p>
-                  </div>
-                </div>
-              </div>
-            </Card>
           </div>
         </div>
       </div>
     </div>;
 };
+
 export default PaymentRequired;
