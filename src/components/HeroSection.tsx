@@ -25,16 +25,19 @@ const HeroSection = () => {
             <img 
               alt="Vinster Logo" 
               onClick={() => navigate('/')} 
-              className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              className="h-16 md:h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
               src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
             />
           </div>
           
           {/* Navigation Buttons - Right side */}
           <div className="flex items-center space-x-4">
-            <Button onClick={() => navigate('/de-mens-achter-vinster')} variant="outline" className="bg-transparent hover:bg-white hover:bg-opacity-10 text-white font-semibold px-6 py-3 rounded-full border-2 border-white transition-all duration-200">
-              De mens achter Vinster
-            </Button>
+            {/* Hide "De mens achter Vinster" button on mobile */}
+            {!isMobile && (
+              <Button onClick={() => navigate('/de-mens-achter-vinster')} variant="outline" className="bg-transparent hover:bg-white hover:bg-opacity-10 text-white font-semibold px-6 py-3 rounded-full border-2 border-white transition-all duration-200">
+                De mens achter Vinster
+              </Button>
+            )}
             <Button onClick={() => navigate('/login')} className="bg-white hover:bg-gray-100 text-blue-900 font-semibold px-6 py-3 rounded-full border border-gray-200 shadow-sm transition-all duration-200">
               Inloggen
             </Button>
