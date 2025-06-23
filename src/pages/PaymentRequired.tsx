@@ -1,7 +1,6 @@
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { CheckCircle, Star, Shield, Zap, Clock, Users, Award, HelpCircle } from "lucide-react";
+import { CheckCircle, Star, Shield, Zap, Clock, HelpCircle } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { usePaymentStatus } from "@/hooks/usePaymentStatus";
@@ -303,66 +302,6 @@ const PaymentRequired = () => {
               <p className="text-xs text-gray-500 text-center mt-4">
                 Veilig betalen met iDEAL, creditcard of PayPal
               </p>
-            </Card>
-
-            {/* Testimonial Card */}
-            <Card className="p-6 border-0 rounded-3xl bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200">
-              <div className="text-center">
-                <div className="flex justify-center mb-4">
-                  <div className="flex space-x-1">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <Star key={star} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                    ))}
-                  </div>
-                </div>
-                <blockquote className="text-sm text-gray-700 italic mb-4">
-                  "Het lijkt wel magie: dat een paar vragen zulke passende functies op kunnen leveren!"
-                </blockquote>
-                <div className="flex items-center justify-center space-x-2">
-                  <Users className="w-4 h-4 text-blue-600" />
-                  <p className="text-xs text-blue-600 font-medium">10.000+ tevreden gebruikers</p>
-                </div>
-              </div>
-            </Card>
-
-            {/* Privacy & Security Card */}
-            <Card className="p-6 border-0 rounded-3xl bg-green-50 border-green-200">
-              <div className="space-y-4">
-                <div className="flex items-center space-x-3">
-                  <Shield className="w-6 h-6 text-green-600" />
-                  <h4 className="font-semibold text-vinster-blue">Privacy & Veiligheid</h4>
-                </div>
-                
-                <div className="space-y-3 text-sm text-gray-700">
-                  <div className="flex items-start space-x-2">
-                    <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                    <span>100% GDPR-compliant</span>
-                  </div>
-                  <div className="flex items-start space-x-2">
-                    <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                    <span>SSL-versleuteling van alle data</span>
-                  </div>
-                  <div className="flex items-start space-x-2">
-                    <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                    <span>Geen data doorverkoop</span>
-                  </div>
-                  <div className="flex items-start space-x-2">
-                    <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                    <span>Jij behoudt eigendom van je data</span>
-                  </div>
-                </div>
-
-                <div className="pt-3 border-t border-green-200">
-                  <p className="text-xs text-green-700">
-                    <button 
-                      onClick={() => navigate('/privacy-verklaring')}
-                      className="underline hover:no-underline"
-                    >
-                      Lees onze volledige privacyverklaring →
-                    </button>
-                  </p>
-                </div>
-              </div>
             </Card>
 
             {/* Money-back guarantee */}
