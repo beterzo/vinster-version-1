@@ -86,7 +86,7 @@ const Dashboard = () => {
           backgroundColor: '#78BFE3'
         }}>
             <div>
-              <h3 className="font-bold text-lg mb-3">
+              <h3 className="font-bold text-xl mb-3">
                 Belangrijk om te weten
               </h3>
               <ul className="text-sm leading-relaxed space-y-4">

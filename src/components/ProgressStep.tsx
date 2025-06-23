@@ -19,7 +19,7 @@ interface ProgressStepProps {
 
 const getStepIcon = (iconName: string, isCompleted: boolean) => {
   const iconProps = {
-    className: `w-5 h-5 ${isCompleted ? 'text-gray-600' : 'text-gray-500'}`,
+    className: `w-5 h-5 text-gray-500`,
   };
 
   switch (iconName) {
@@ -34,29 +34,23 @@ const getStepIcon = (iconName: string, isCompleted: boolean) => {
     case 'search':
       return <Search {...iconProps} />;
     default:
-      return <span className="text-sm font-medium text-gray-600">{iconName}</span>;
+      return <span className="text-sm font-medium text-gray-500">{iconName}</span>;
   }
 };
 
 const ProgressStep = ({ step, isCompleted, isCurrent, progress = 0, onClick }: ProgressStepProps) => {
   return (
     <div 
-      className="p-4 cursor-pointer bg-gray-50 hover:bg-gray-100 transition-all duration-200 rounded-xl border border-gray-200 shadow-sm hover:shadow-md mb-3"
+      className="p-4 cursor-pointer bg-white hover:bg-gray-50 transition-all duration-200 rounded-xl border border-gray-200 shadow-sm hover:shadow-md mb-3"
       onClick={onClick}
     >
       <div className="flex items-center gap-4">
         {/* Icon */}
-        <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-          isCompleted 
-            ? 'bg-green-100' 
-            : isCurrent 
-              ? 'bg-blue-100' 
-              : 'bg-gray-100'
-        }`}>
+        <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-gray-100">
           {step.icon ? (
             getStepIcon(step.icon, isCompleted)
           ) : (
-            <span className="text-sm font-medium text-gray-600">
+            <span className="text-sm font-medium text-gray-500">
               {step.step}
             </span>
           )}
