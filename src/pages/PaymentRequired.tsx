@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CheckCircle, Star, Shield, Zap, Clock, HelpCircle } from "lucide-react";
@@ -7,14 +6,20 @@ import { useToast } from "@/hooks/use-toast";
 import { usePaymentStatus } from "@/hooks/usePaymentStatus";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
 const PaymentRequired = () => {
-  const { user } = useAuth();
-  const { toast } = useToast();
-  const { hasPaid, refreshPaymentStatus } = usePaymentStatus();
+  const {
+    user
+  } = useAuth();
+  const {
+    toast
+  } = useToast();
+  const {
+    hasPaid,
+    refreshPaymentStatus
+  } = usePaymentStatus();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  
+
   // Redirect if user has already paid
   useEffect(() => {
     if (hasPaid) {
@@ -22,42 +27,33 @@ const PaymentRequired = () => {
       navigate('/home');
     }
   }, [hasPaid, navigate]);
-
-  const features = [
-    {
-      title: "Volledige enthousiasmescan",
-      description: "Ontdek waar jouw echte passies liggen",
-      icon: <Star className="w-5 h-5 text-yellow-400" />
-    },
-    {
-      title: "Wensberoepen analyse",
-      description: "Krijg gepersonaliseerde beroepsadviezen",
-      icon: <CheckCircle className="w-5 h-5 text-yellow-400" />
-    },
-    {
-      title: "Persoonlijk rapport",
-      description: "Uitgebreide analyse van jouw loopbaanprofiel",
-      icon: <Shield className="w-5 h-5 text-yellow-400" />
-    },
-    {
-      title: "Zoekprofiel generator",
-      description: "Automatisch gegenereerd profiel voor vacatures",
-      icon: <Zap className="w-5 h-5 text-yellow-400" />
-    }
-  ];
-
+  const features = [{
+    title: "Volledige enthousiasmescan",
+    description: "Ontdek waar jouw echte passies liggen",
+    icon: <Star className="w-5 h-5 text-yellow-400" />
+  }, {
+    title: "Wensberoepen analyse",
+    description: "Krijg gepersonaliseerde beroepsadviezen",
+    icon: <CheckCircle className="w-5 h-5 text-yellow-400" />
+  }, {
+    title: "Persoonlijk rapport",
+    description: "Uitgebreide analyse van jouw loopbaanprofiel",
+    icon: <Shield className="w-5 h-5 text-yellow-400" />
+  }, {
+    title: "Zoekprofiel generator",
+    description: "Automatisch gegenereerd profiel voor vacatures",
+    icon: <Zap className="w-5 h-5 text-yellow-400" />
+  }];
   const handlePayment = async () => {
     if (!user) {
       toast({
         title: "Fout",
         description: "Gebruikersgegevens niet beschikbaar",
-        variant: "destructive",
+        variant: "destructive"
       });
       return;
     }
-
     setIsLoading(true);
-    
     try {
       const webhookData = {
         firstName: user.user_metadata?.first_name || '',
@@ -65,25 +61,19 @@ const PaymentRequired = () => {
         email: user.email || '',
         userId: user.id
       };
-
       console.log('Sending webhook data:', webhookData);
-
       const response = await fetch('https://hook.eu2.make.com/byf77ioiyyzqrsri73hmsri7hjhjyoup', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify(webhookData)
       });
-
       console.log('Webhook response status:', response.status);
-
       if (response.ok) {
         console.log('Webhook successfully sent');
-        
         const contentType = response.headers.get('content-type');
         console.log('Response content-type:', contentType);
-        
         let responseData;
         try {
           responseData = await response.json();
@@ -94,28 +84,24 @@ const PaymentRequired = () => {
           console.log('Response as text:', textResponse);
           throw new Error('Invalid JSON response from webhook');
         }
-        
         if (responseData && responseData.checkout_url) {
           console.log('Opening checkout URL in new tab:', responseData.checkout_url);
-          
           const newWindow = window.open(responseData.checkout_url, '_blank');
-          
           if (newWindow) {
             toast({
               title: "Succes",
-              description: "Betaalpagina wordt geopend in een nieuw tabblad. Na betaling word je automatisch doorgeleid.",
+              description: "Betaalpagina wordt geopend in een nieuw tabblad. Na betaling word je automatisch doorgeleid."
             });
-            
+
             // Start checking payment status periodically after opening checkout
             const checkInterval = setInterval(async () => {
               await refreshPaymentStatus();
             }, 5000); // Check every 5 seconds
-            
+
             // Clean up interval after 10 minutes
             setTimeout(() => {
               clearInterval(checkInterval);
             }, 600000);
-            
           } else {
             console.log('Popup blocked, using direct redirect');
             window.location.href = responseData.checkout_url;
@@ -125,7 +111,7 @@ const PaymentRequired = () => {
           toast({
             title: "Fout",
             description: "Geen betaallink ontvangen. Probeer het opnieuw.",
-            variant: "destructive",
+            variant: "destructive"
           });
         }
       } else {
@@ -135,7 +121,7 @@ const PaymentRequired = () => {
         toast({
           title: "Fout",
           description: "Er is een fout opgetreden bij het verwerken van je aanvraag. Probeer het opnieuw.",
-          variant: "destructive",
+          variant: "destructive"
         });
       }
     } catch (error) {
@@ -143,24 +129,17 @@ const PaymentRequired = () => {
       toast({
         title: "Fout",
         description: "Er is een fout opgetreden bij het verwerken van je aanvraag. Probeer het opnieuw.",
-        variant: "destructive",
+        variant: "destructive"
       });
     } finally {
       setIsLoading(false);
     }
   };
-
-  return (
-    <div className="min-h-screen bg-gray-50 font-sans">
+  return <div className="min-h-screen bg-gray-50 font-sans">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-8">
         {/* Header with new logo */}
         <div className="text-center mb-8">
-          <img 
-            alt="Vinster Logo" 
-            className="h-12 w-auto mx-auto cursor-pointer hover:opacity-80 transition-opacity duration-200 mb-6" 
-            onClick={() => navigate('/')} 
-            src="/lovable-uploads/vinster-new-logo.png" 
-          />
+          <img alt="Vinster Logo" className="h-12 w-auto mx-auto cursor-pointer hover:opacity-80 transition-opacity duration-200 mb-6" onClick={() => navigate('/')} src="/lovable-uploads/7efcf9fd-6a17-4d51-9fb7-9c0c2efc6116.png" />
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-vinster-blue mb-4">
             Welkom bij Vinster, {user?.user_metadata?.first_name || 'daar'}!
           </h1>
@@ -175,7 +154,9 @@ const PaymentRequired = () => {
           {/* Left column: Content */}
           <div className="space-y-6 lg:space-y-8 flex flex-col">
             {/* Welcome card */}
-            <Card className="p-6 lg:p-8 border-0 rounded-3xl" style={{ backgroundColor: '#E6F0F6' }}>
+            <Card className="p-6 lg:p-8 border-0 rounded-3xl" style={{
+            backgroundColor: '#E6F0F6'
+          }}>
               <h2 className="text-xl lg:text-2xl font-bold text-vinster-blue mb-4">Start jouw loopbaanontwikkeling</h2>
               <p className="text-gray-700 leading-relaxed mb-4">
                 Met Vinster krijg je toegang tot wetenschappelijk onderbouwde tools die je helpen 
@@ -191,8 +172,7 @@ const PaymentRequired = () => {
 
             {/* Features grid - responsive */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 flex-grow">
-              {features.map((feature, index) => (
-                <Card key={index} className="p-4 lg:p-6 border-0 rounded-3xl bg-white shadow-sm">
+              {features.map((feature, index) => <Card key={index} className="p-4 lg:p-6 border-0 rounded-3xl bg-white shadow-sm">
                   <div className="flex items-start space-x-4">
                     <div className="flex-shrink-0">
                       {feature.icon}
@@ -202,12 +182,13 @@ const PaymentRequired = () => {
                       <p className="text-sm text-gray-600">{feature.description}</p>
                     </div>
                   </div>
-                </Card>
-              ))}
+                </Card>)}
             </div>
 
             {/* Data Safety Card */}
-            <Card className="p-6 lg:p-8 border-0 rounded-3xl" style={{ backgroundColor: '#E6F0F6' }}>
+            <Card className="p-6 lg:p-8 border-0 rounded-3xl" style={{
+            backgroundColor: '#E6F0F6'
+          }}>
               <div className="flex items-start space-x-4">
                 <div className="flex-shrink-0">
                   <Shield className="w-6 h-6 text-blue-600" />
@@ -258,12 +239,7 @@ const PaymentRequired = () => {
                 </div>
               </div>
 
-              <Button 
-                onClick={handlePayment} 
-                disabled={isLoading}
-                className="w-full bg-yellow-400 hover:bg-yellow-500 text-vinster-blue font-bold py-3 lg:py-4 text-base lg:text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200" 
-                size="lg"
-              >
+              <Button onClick={handlePayment} disabled={isLoading} className="w-full bg-yellow-400 hover:bg-yellow-500 text-vinster-blue font-bold py-3 lg:py-4 text-base lg:text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200" size="lg">
                 {isLoading ? "Verwerken..." : "Start nu voor €29"}
               </Button>
 
@@ -312,8 +288,6 @@ const PaymentRequired = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default PaymentRequired;
