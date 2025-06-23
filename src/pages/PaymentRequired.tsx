@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CheckCircle, Star, Shield, Zap, Clock, HelpCircle } from "lucide-react";
@@ -152,9 +153,14 @@ const PaymentRequired = () => {
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-8">
-        {/* Header */}
+        {/* Header with new logo */}
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-vinster-blue mb-6">Vinster</h1>
+          <img 
+            alt="Vinster Logo" 
+            className="h-12 w-auto mx-auto cursor-pointer hover:opacity-80 transition-opacity duration-200 mb-6" 
+            onClick={() => navigate('/')} 
+            src="/lovable-uploads/vinster-new-logo.png" 
+          />
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-vinster-blue mb-4">
             Welkom bij Vinster, {user?.user_metadata?.first_name || 'daar'}!
           </h1>
