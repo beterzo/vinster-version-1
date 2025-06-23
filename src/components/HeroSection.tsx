@@ -22,7 +22,7 @@ const HeroSection = () => {
         {/* Header with Logo (left) and Menu + Button (right) */}
         <div className="py-6 flex items-center justify-between">
           {/* Left side - Logo only, larger */}
-          <div className="flex items-center">
+          <div className="flex items-center pt-1">
             <img 
               alt="Vinster Logo" 
               className="h-14 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
