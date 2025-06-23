@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { useAuth } from './useAuth';
 import { supabase } from '@/integrations/supabase/client';
@@ -118,6 +119,31 @@ export const usePrioriteitenResponses = () => {
   const saveResponses = async (data: Partial<PrioriteitenData>) => {
     if (!user) return false;
 
+    // Extra validation: ensure we have at least 3 keywords for any category being saved
+    const validationErrors: string[] = [];
+    
+    if (data.selected_activiteiten_keywords !== undefined && data.selected_activiteiten_keywords.length < 3) {
+      validationErrors.push('activiteiten (minimaal 3 vereist)');
+    }
+    
+    if (data.selected_werkomstandigheden_keywords !== undefined && data.selected_werkomstandigheden_keywords.length < 3) {
+      validationErrors.push('werkomstandigheden (minimaal 3 vereist)');
+    }
+    
+    if (data.selected_interesses_keywords !== undefined && data.selected_interesses_keywords.length < 3) {
+      validationErrors.push('interesses (minimaal 3 vereist)');
+    }
+
+    if (validationErrors.length > 0) {
+      console.error('Validation failed for:', validationErrors);
+      toast({
+        title: "Onvoldoende keywords geselecteerd",
+        description: `Selecteer minimaal 3 keywords voor: ${validationErrors.join(', ')}`,
+        variant: "destructive",
+      });
+      return false;
+    }
+
     setLoading(true);
     try {
       console.log('Saving prioriteiten responses:', data);
@@ -161,15 +187,24 @@ export const usePrioriteitenResponses = () => {
     }
   };
 
-  // Calculate completion status - each page needs at least 1 selected keyword to be considered complete
+  // Updated: require at least 3 keywords for a page to be considered complete
   const isPageComplete = (keywords?: string[]) => {
-    return keywords && keywords.length > 0;
+    return keywords && keywords.length >= 3;
   };
 
   const isCompleted = () => {
     const activiteitenComplete = isPageComplete(responses?.selected_activiteiten_keywords);
     const werkomstandighedenComplete = isPageComplete(responses?.selected_werkomstandigheden_keywords);
     const interessesComplete = isPageComplete(responses?.selected_interesses_keywords);
+    
+    console.log('Prioriteiten completion check:', {
+      activiteitenComplete,
+      werkomstandighedenComplete,
+      interessesComplete,
+      activiteitenCount: responses?.selected_activiteiten_keywords?.length || 0,
+      werkomstandighedenCount: responses?.selected_werkomstandigheden_keywords?.length || 0,
+      interessesCount: responses?.selected_interesses_keywords?.length || 0
+    });
     
     return !!(activiteitenComplete && werkomstandighedenComplete && interessesComplete);
   };

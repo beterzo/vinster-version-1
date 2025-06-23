@@ -42,7 +42,12 @@ const PrioriteitenInteresses = () => {
   };
 
   const handleSave = async () => {
-    if (!isValidToProgress()) return;
+    if (!isValidToProgress()) {
+      console.log('Cannot save: insufficient keywords selected', selectedKeywords.length);
+      return;
+    }
+    
+    console.log('Saving interesses with keywords:', selectedKeywords);
     
     const success = await saveResponses({
       selected_interesses_keywords: selectedKeywords,
@@ -160,6 +165,15 @@ const PrioriteitenInteresses = () => {
             <AlertCircle className="w-5 h-5" />
             <span className="text-sm">
               Selecteer nog {3 - selectedKeywords.length} kernwoord{3 - selectedKeywords.length === 1 ? '' : 'en'} om door te gaan naar de volgende stap.
+            </span>
+          </div>
+        )}
+
+        {!isValidToProgress() && selectedKeywords.length === 0 && (
+          <div className="mb-6 flex items-center gap-2 text-red-600 bg-red-50 p-4 rounded-lg">
+            <AlertCircle className="w-5 h-5" />
+            <span className="text-sm">
+              Je moet minimaal 3 kernwoorden selecteren voordat je kunt doorgaan.
             </span>
           </div>
         )}

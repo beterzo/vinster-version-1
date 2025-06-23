@@ -8,10 +8,18 @@ import { useExtraInformatieResponses } from './useExtraInformatieResponses';
 
 export const useDashboard = () => {
   const { user } = useAuth();
-  const { isCompleted: enthousiasmeCompleted } = useEnthousiasmeResponses();
-  const { isCompleted: wensberoepenCompleted } = useWensberoepenResponses();
+  const enthousiasmeData = useEnthousiasmeResponses();
+  const wensberoepenData = useWensberoepenResponses();
   const { isCompleted: prioriteitenCompleted } = usePrioriteitenResponses();
   const { isCompleted: extraInformatieCompleted } = useExtraInformatieResponses();
+
+  // Check if enthousiasme is completed by checking if responses exist and have content
+  const enthousiasmeCompleted = enthousiasmeData.responses && 
+    Object.values(enthousiasmeData.responses).some(value => value && value.trim() !== '');
+
+  // Check if wensberoepen is completed by checking if responses exist and have content
+  const wensberoepenCompleted = wensberoepenData.responses && 
+    Object.values(wensberoepenData.responses).some(value => value && value.trim() !== '');
 
   const progress = {
     enthousiasme: enthousiasmeCompleted ? 'completed' : 'not_started',
