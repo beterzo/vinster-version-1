@@ -163,11 +163,11 @@ const PaymentRequired = () => {
           </p>
         </div>
 
-        {/* Main content - responsive layout */}
-        <div className="flex flex-col lg:grid lg:grid-cols-[1fr_400px] gap-6 lg:gap-8 min-h-[600px]">
+        {/* Main content - responsive layout with aligned columns */}
+        <div className="flex flex-col lg:grid lg:grid-cols-[1fr_400px] gap-6 lg:gap-8">
           
           {/* Left column: Content */}
-          <div className="space-y-6 lg:space-y-8">
+          <div className="space-y-6 lg:space-y-8 flex flex-col">
             {/* Welcome card */}
             <Card className="p-6 lg:p-8 border-0 rounded-3xl" style={{ backgroundColor: '#E6F0F6' }}>
               <h2 className="text-xl lg:text-2xl font-bold text-vinster-blue mb-4">Start jouw loopbaanontwikkeling</h2>
@@ -184,7 +184,7 @@ const PaymentRequired = () => {
             </Card>
 
             {/* Features grid - responsive */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 flex-grow">
               {features.map((feature, index) => (
                 <Card key={index} className="p-4 lg:p-6 border-0 rounded-3xl bg-white shadow-sm">
                   <div className="flex items-start space-x-4">
@@ -215,44 +215,6 @@ const PaymentRequired = () => {
                   </p>
                 </div>
               </div>
-            </Card>
-
-            <Card className="p-6 lg:p-8 border-0 rounded-3xl" style={{ backgroundColor: '#FEF3C7' }}>
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0">
-                  <Clock className="w-6 h-6 text-yellow-600" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-lg text-vinster-blue mb-3">Eén keer door, alle tijd die je nodig hebt</h3>
-                  <p className="text-gray-700 leading-relaxed text-sm">
-                    Je doorloopt het programma één keer, maar je kunt zo lang je wilt nadenken tussen de stappen. 
-                    Neem alle tijd die je nodig hebt om over de vragen na te denken - jouw data blijft altijd toegankelijk 
-                    wanneer je terugkomt. Geen tijdsdruk, geen vervaldatum.
-                  </p>
-                </div>
-              </div>
-            </Card>
-
-            <Card className="p-4 lg:p-6 border-0 rounded-3xl text-white" style={{ backgroundColor: '#78BFE3' }}>
-              <h3 className="font-bold text-lg lg:text-xl mb-4">Waarom kiezen voor Vinster?</h3>
-              <ul className="space-y-3 text-sm">
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Wetenschappelijk onderbouwde methode gebruikt door meer dan 10.000 professionals</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Persoonlijk rapport met concrete vervolgstappen</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Direct toegang tot alle tools en analyses</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Levenslang toegang tot jouw persoonlijke dashboard</span>
-                </li>
-              </ul>
             </Card>
           </div>
 
