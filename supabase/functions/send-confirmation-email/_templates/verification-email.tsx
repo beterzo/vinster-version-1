@@ -1,3 +1,4 @@
+
 import {
   Body,
   Container,
@@ -10,7 +11,6 @@ import {
   Button,
   Section,
   Hr,
-  Img,
 } from 'npm:@react-email/components@0.0.22';
 import * as React from 'npm:react@18.3.1';
 
@@ -65,11 +65,12 @@ export const VerificationEmail = ({
     <Body style={bodyStyle}>
       <Container style={containerStyle}>
         <Section style={contentSection}>
-          <Img
-            src="https://vinster.ai/vinster-logo.png"
-            alt="Vinster Logo"
-            style={logoStyle}
-          />
+          <Heading style={vinsterTitleStyle}>
+            Vinster
+          </Heading>
+          <Text style={taglineStyle}>
+            Jouw venster op de toekomst
+          </Text>
           <Heading style={headingStyle}>
             Bevestig je email adres
           </Heading>
@@ -127,14 +128,23 @@ const contentSection = {
   paddingRight: '24px',
 };
 
-const logoStyle = {
-  height: '40px',
-  width: 'auto',
-  marginTop: '0',
+const vinsterTitleStyle = {
+  margin: '0px',
+  marginBottom: '8px',
+  fontSize: '32px',
+  lineHeight: '36px',
+  fontWeight: '700',
+  color: '#E4C05B',
+  textAlign: 'center' as const,
+};
+
+const taglineStyle = {
+  margin: '0px',
   marginBottom: '24px',
-  marginLeft: 'auto',
-  marginRight: 'auto',
-  display: 'block',
+  fontSize: '14px',
+  lineHeight: '18px',
+  color: '#232D4B',
+  textAlign: 'center' as const,
 };
 
 const headingStyle = {
