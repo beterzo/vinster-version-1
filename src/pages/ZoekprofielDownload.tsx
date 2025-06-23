@@ -1,4 +1,5 @@
 
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -75,21 +76,15 @@ const ZoekprofielDownload = () => {
       <div className="max-w-4xl mx-auto px-6 py-16">
         {/* Header */}
         <div className="text-center mb-16">
-          <img src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" alt="Vinster Logo" className="h-8 w-auto mx-auto mb-8 cursor-pointer hover:opacity-80 transition-opacity duration-200" onClick={() => navigate('/')} />
+          <img src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" alt="Vinster Logo" className="h-16 w-auto mx-auto mb-8 cursor-pointer hover:opacity-80 transition-opacity duration-200" onClick={() => navigate('/')} />
           
           {isPdfReady && <>
-              <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-8">
-                <CheckCircle className="w-10 h-10 text-green-600" />
-              </div>
               <h1 className="text-5xl font-bold text-gray-900 mb-6">Hoera!</h1>
               <p className="text-2xl text-gray-700 mb-4">Je hebt je keuze gemaakt.</p>
               
             </>}
 
           {isGenerating && <>
-              <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-8">
-                <Clock className="w-10 h-10 text-blue-600" />
-              </div>
               <h1 className="text-5xl font-bold text-gray-900 mb-6">Zoekprofiel wordt gemaakt!</h1>
               <p className="text-2xl text-gray-700 mb-4">
                 Je zoekprofiel wordt momenteel gegenereerd
@@ -101,9 +96,6 @@ const ZoekprofielDownload = () => {
             </>}
 
           {pdfData?.pdf_status === 'failed' && <>
-              <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-8">
-                <AlertTriangle className="w-10 h-10 text-red-600" />
-              </div>
               <h1 className="text-5xl font-bold text-gray-900 mb-6">Er ging iets mis</h1>
               <p className="text-2xl text-gray-700 mb-4">
                 Het genereren van je zoekprofiel is mislukt
@@ -114,9 +106,6 @@ const ZoekprofielDownload = () => {
             </>}
 
           {!pdfData && !loading && <>
-              <div className="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                <FileText className="w-8 h-8 text-blue-600 animate-pulse" />
-              </div>
               <h1 className="text-xl font-semibold text-vinster-blue mb-2">
                 Zoekprofiel wordt geïnitialiseerd...
               </h1>
@@ -232,3 +221,4 @@ const ZoekprofielDownload = () => {
     </div>;
 };
 export default ZoekprofielDownload;
+

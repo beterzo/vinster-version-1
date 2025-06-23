@@ -80,15 +80,12 @@ const RapportDownload = () => {
           <img 
             src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
             alt="Vinster Logo" 
-            className="h-8 w-auto mx-auto mb-8 cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+            className="h-16 w-auto mx-auto mb-8 cursor-pointer hover:opacity-80 transition-opacity duration-200" 
             onClick={() => navigate('/')}
           />
           
           {userReport?.report_status === 'completed' && (
             <>
-              <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-8">
-                <CheckCircle className="w-10 h-10 text-green-600" />
-              </div>
               <h1 className="text-5xl font-bold text-gray-900 mb-6">Gefeliciteerd!</h1>
               <p className="text-2xl text-gray-700 mb-4">Je hebt een belangrijke stap gezet in je loopbaan</p>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">Je krijgt nu zicht op de functies die bij jou passen!</p>
@@ -97,9 +94,6 @@ const RapportDownload = () => {
 
           {userReport?.report_status === 'generating' && (
             <>
-              <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-8">
-                <Clock className="w-10 h-10 text-blue-600" />
-              </div>
               <h1 className="text-5xl font-bold text-gray-900 mb-6">Loopbaanrapport wordt gemaakt!</h1>
               <p className="text-2xl text-gray-700 mb-4">
                 Je loopbaanrapport wordt momenteel gegenereerd
@@ -113,9 +107,6 @@ const RapportDownload = () => {
 
           {userReport?.report_status === 'failed' && (
             <>
-              <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-8">
-                <AlertTriangle className="w-10 h-10 text-red-600" />
-              </div>
               <h1 className="text-5xl font-bold text-gray-900 mb-6">Er ging iets mis</h1>
               <p className="text-2xl text-gray-700 mb-4">
                 Het genereren van je loopbaanrapport is mislukt
@@ -128,9 +119,6 @@ const RapportDownload = () => {
 
           {!userReport && (
             <>
-              <div className="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                <FileText className="w-8 h-8 text-blue-600 animate-pulse" />
-              </div>
               <h1 className="text-xl font-semibold text-vinster-blue mb-2">
                 Geen rapport gevonden
               </h1>
