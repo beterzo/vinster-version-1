@@ -3,7 +3,7 @@ const TestimonialSection = () => {
   return (
     <div className="max-w-[1440px] mx-auto px-6 py-8 bg-gray-50">
       <div className="relative overflow-hidden rounded-3xl shadow-xl min-h-[300px]" style={{
-        backgroundImage: "url('/lovable-uploads/f40f684e-643d-4161-be1c-240737966a76.png')",
+        backgroundImage: "url('/lovable-uploads/3e3e3d08-b7d5-4902-aa28-370ce017308e.png')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
