@@ -89,13 +89,14 @@ const Dashboard = () => {
               <h3 className="font-bold text-xl mb-3">
                 Belangrijk om te weten
               </h3>
-              <ul className="text-sm leading-relaxed space-y-4">
+              <ul className="text-sm leading-relaxed space-y-5">
                 <li>• Er zijn geen goede of foute antwoorden - wees eerlijk over wat jij echt leuk vindt</li>
                 <li>• Denk aan concrete situaties en ervaringen uit jouw leven</li>
                 <li>• Je kunt zoveel tijd nemen als je wilt - er zit geen tijdsdruk op dit traject</li>
                 <li>• Het is juist goed om de antwoorden een dag te laten bezinken voordat je verdergaat</li>
                 <li>• Je kunt je antwoorden altijd aanpassen tijdens het traject</li>
                 <li>• Je voortgang wordt automatisch opgeslagen</li>
+                <li>• Alle informatie wordt vertrouwelijk behandeld</li>
               </ul>
             </div>
           </Card>
