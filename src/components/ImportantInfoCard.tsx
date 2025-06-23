@@ -5,7 +5,7 @@ const ImportantInfoCard = () => {
   return (
     <Card className="p-6 border-0 rounded-3xl text-white flex flex-col text-left h-full w-full" style={{ backgroundColor: '#78BFE3' }}>
       <h3 className="font-bold text-2xl mb-4">Belangrijk om te weten</h3>
-      <ul className="space-y-2 text-sm flex-1">
+      <ul className="space-y-4 text-sm flex-1">
         <li className="flex items-start gap-3">
           <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
           <span>Er zijn geen goede of foute antwoorden - wees eerlijk over wat jij echt leuk vindt</span>
