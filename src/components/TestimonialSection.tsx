@@ -4,8 +4,8 @@ const TestimonialSection = () => {
     <div className="max-w-[1440px] mx-auto px-6 py-8 bg-gray-50">
       <div className="relative overflow-hidden rounded-3xl shadow-xl min-h-[300px]" style={{
         backgroundImage: "url('/lovable-uploads/3e3e3d08-b7d5-4902-aa28-370ce017308e.png')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        backgroundSize: '150%',
+        backgroundPosition: 'right center',
         backgroundRepeat: 'no-repeat'
       }}>
         {/* Slightly darker overlay for better text readability */}
