@@ -46,36 +46,31 @@ const ProgressStepsGrid = ({
       title: "Enthousiasmescan",
       progress: enthousiasmeProgress,
       isCompleted: enthousiasmeCompleted,
-      icon: <Star className="w-5 h-5 text-yellow-500" />,
-      tooltipContent: "Ontdek wat je echt leuk vindt door terug te kijken naar je kindertijd en werkverleden"
+      icon: <Star className="w-5 h-5 text-yellow-500" />
     },
     {
       title: "Wensberoepen",
       progress: wensberoepenProgress,
       isCompleted: wensberoepenCompleted,
-      icon: <Target className="w-5 h-5 text-blue-400" />,
-      tooltipContent: "Stel drie ideale banen samen die passen bij jouw interesses en wensen"
+      icon: <Target className="w-5 h-5 text-blue-400" />
     },
     {
       title: "Loopbaanrapport maken",
       progress: combinedProgress(),
       isCompleted: extraInformatieCompleted && prioriteitenCompleted,
-      icon: <ClipboardList className="w-5 h-5 text-yellow-500" />,
-      tooltipContent: "Vul je profiel aan met persoonlijke informatie en prioriteiten"
+      icon: <ClipboardList className="w-5 h-5 text-yellow-500" />
     },
     {
       title: "Loopbaanrapport & onderzoeksplan",
       progress: hasUserReport ? 100 : 0,
       isCompleted: hasUserReport,
-      icon: <FileText className="w-5 h-5 text-blue-400" />,
-      tooltipContent: "Ontvang je persoonlijke loopbaanadvies en concrete actieplan"
+      icon: <FileText className="w-5 h-5 text-blue-400" />
     },
     {
       title: "Zoekprofiel",
       progress: zoekprofielProgress,
       isCompleted: zoekprofielCompleted,
-      icon: <Search className="w-5 h-5 text-yellow-500" />,
-      tooltipContent: "Creëer een professioneel document voor je sollicitaties"
+      icon: <Search className="w-5 h-5 text-yellow-500" />
     }
   ];
 
@@ -89,7 +84,6 @@ const ProgressStepsGrid = ({
             isCompleted={step.isCompleted}
             icon={step.icon}
             compact={true}
-            tooltipContent={step.tooltipContent}
           />
         </div>
       ))}

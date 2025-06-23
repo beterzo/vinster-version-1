@@ -1,7 +1,6 @@
 
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface ProgressStepProps {
   title: string;
@@ -10,7 +9,6 @@ interface ProgressStepProps {
   isCompleted?: boolean;
   icon?: React.ReactNode;
   compact?: boolean;
-  tooltipContent?: string;
 }
 
 const ProgressStep = ({
@@ -19,10 +17,9 @@ const ProgressStep = ({
   progress,
   isCompleted = false,
   icon,
-  compact = false,
-  tooltipContent
+  compact = false
 }: ProgressStepProps) => {
-  const cardContent = (
+  return (
     <Card className="p-4 bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow cursor-pointer">
       {compact ? (
         <div className="flex items-center gap-3">
@@ -69,21 +66,6 @@ const ProgressStep = ({
       )}
     </Card>
   );
-
-  if (tooltipContent) {
-    return (
-      <Tooltip>
-        <TooltipTrigger asChild>
-          {cardContent}
-        </TooltipTrigger>
-        <TooltipContent side="right" className="max-w-xs p-3 bg-slate-900 text-white text-sm rounded-lg shadow-lg">
-          <p>{tooltipContent}</p>
-        </TooltipContent>
-      </Tooltip>
-    );
-  }
-
-  return cardContent;
 };
 
 export default ProgressStep;
