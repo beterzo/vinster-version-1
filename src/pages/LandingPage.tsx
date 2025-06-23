@@ -1,6 +1,5 @@
 
 import HeroSection from "@/components/HeroSection";
-import PricingSection from "@/components/PricingSection";
 import FeatureCards from "@/components/FeatureCards";
 import ProcessSteps from "@/components/ProcessSteps";
 import DataSafetySection from "@/components/DataSafetySection";
@@ -12,10 +11,7 @@ const LandingPage = () => {
       {/* Header Section */}
       <HeroSection />
 
-      {/* Pricing Section */}
-      <PricingSection />
-
-      {/* Three Cards Section - Wrapped in White Container */}
+      {/* Two Cards Section - Wrapped in White Container */}
       <FeatureCards />
 
       {/* Luxury Process Steps Section */}
