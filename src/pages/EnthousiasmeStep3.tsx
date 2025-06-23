@@ -45,7 +45,12 @@ const EnthousiasmeStep3 = () => {
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
           <div className="flex items-center">
-            <h1 className="text-xl font-bold text-blue-900">Vinster</h1>
+            <img 
+              alt="Vinster Logo" 
+              className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              onClick={() => navigate('/')} 
+              src="/lovable-uploads/846d1ec8-bb91-46f6-a16d-1b1c39ebe829.png" 
+            />
           </div>
         </div>
       </div>
