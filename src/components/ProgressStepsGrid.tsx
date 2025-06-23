@@ -4,29 +4,29 @@ import { CircleUser, Target, Star, CheckCircle, Search, FileText, ListTodo, User
 import { useZoekprofielResponses } from "@/hooks/useZoekprofielResponses";
 
 interface ProgressStepsGridProps {
-  enthousiasmeProgress: number;
-  enthousiasmeCompleted: boolean;
-  wensberoepenProgress: number;
-  wensberoepenCompleted: boolean;
-  prioriteitenProgress: number;
-  prioriteitenCompleted: boolean;
-  extraInformatieProgress: number;
-  extraInformatieCompleted: boolean;
-  hasUserReport: boolean;
-  onStepClick: (stepTitle: string) => void;
+  enthousiasmeProgress?: number;
+  enthousiasmeCompleted?: boolean;
+  wensberoepenProgress?: number;
+  wensberoepenCompleted?: boolean;
+  prioriteitenProgress?: number;
+  prioriteitenCompleted?: boolean;
+  extraInformatieProgress?: number;
+  extraInformatieCompleted?: boolean;
+  hasUserReport?: boolean;
+  onStepClick?: (stepTitle: string) => void;
 }
 
 const ProgressStepsGrid = ({
-  enthousiasmeProgress,
-  enthousiasmeCompleted,
-  wensberoepenProgress,
-  wensberoepenCompleted,
-  prioriteitenProgress,
-  prioriteitenCompleted,
-  extraInformatieProgress,
-  extraInformatieCompleted,
-  hasUserReport,
-  onStepClick
+  enthousiasmeProgress = 0,
+  enthousiasmeCompleted = false,
+  wensberoepenProgress = 0,
+  wensberoepenCompleted = false,
+  prioriteitenProgress = 0,
+  prioriteitenCompleted = false,
+  extraInformatieProgress = 0,
+  extraInformatieCompleted = false,
+  hasUserReport = false,
+  onStepClick = () => {}
 }: ProgressStepsGridProps) => {
   const { progress: zoekprofielProgress, isCompleted: zoekprofielCompleted } = useZoekprofielResponses();
 
@@ -43,50 +43,62 @@ const ProgressStepsGrid = ({
 
   const progressSteps = [
     {
+      step: 1,
       title: "Enthousiasmescan",
-      progress: enthousiasmeProgress,
-      isCompleted: enthousiasmeCompleted,
-      icon: <Star className="w-5 h-5 text-yellow-500" />
+      description: "Ontdek wat je echt drijft en motiveert",
+      actionButton: "Start scan"
     },
     {
+      step: 2,
       title: "Wensberoepen",
-      progress: wensberoepenProgress,
-      isCompleted: wensberoepenCompleted,
-      icon: <Target className="w-5 h-5 text-blue-400" />
+      description: "Verken verschillende carrièremogelijkheden",
+      actionButton: "Bekijk beroepen"
     },
     {
+      step: 3,
       title: "Persoonsprofiel",
-      progress: combinedProgress(),
-      isCompleted: extraInformatieCompleted && prioriteitenCompleted,
-      icon: <ClipboardList className="w-5 h-5 text-yellow-500" />
+      description: "Bouw je persoonlijke profiel op",
+      actionButton: "Voltooien"
     },
     {
+      step: 4,
       title: "Loopbaanrapport & onderzoeksplan",
-      progress: hasUserReport ? 100 : 0,
-      isCompleted: hasUserReport,
-      icon: <FileText className="w-5 h-5 text-blue-400" />
+      description: "Ontvang je persoonlijke aanbevelingen",
+      actionButton: "Bekijk rapport"
     },
     {
+      step: 5,
       title: "Zoekprofiel",
-      progress: zoekprofielProgress,
-      isCompleted: zoekprofielCompleted,
-      icon: <Search className="w-5 h-5 text-yellow-500" />
+      description: "Download je zoekprofiel",
+      actionButton: "Download"
     }
+  ];
+
+  const stepProgress = [
+    { progress: enthousiasmeProgress, isCompleted: enthousiasmeCompleted },
+    { progress: wensberoepenProgress, isCompleted: wensberoepenCompleted },
+    { progress: combinedProgress(), isCompleted: extraInformatieCompleted && prioriteitenCompleted },
+    { progress: hasUserReport ? 100 : 0, isCompleted: hasUserReport },
+    { progress: zoekprofielProgress, isCompleted: zoekprofielCompleted }
   ];
 
   return (
     <div className="flex flex-col justify-between space-y-4">
-      {progressSteps.map((step, index) => (
-        <div key={index} onClick={() => onStepClick(step.title)}>
-          <ProgressStep
-            title={step.title}
-            progress={step.progress}
-            isCompleted={step.isCompleted}
-            icon={step.icon}
-            compact={true}
-          />
-        </div>
-      ))}
+      {progressSteps.map((step, index) => {
+        const { progress, isCompleted } = stepProgress[index];
+        const isCurrent = !isCompleted && (index === 0 || stepProgress[index - 1]?.isCompleted);
+        
+        return (
+          <div key={index} onClick={() => onStepClick(step.title)}>
+            <ProgressStep
+              step={step}
+              isCompleted={isCompleted}
+              isCurrent={isCurrent}
+              onClick={() => onStepClick(step.title)}
+            />
+          </div>
+        );
+      })}
     </div>
   );
 };

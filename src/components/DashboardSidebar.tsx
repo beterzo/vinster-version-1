@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import {
   Sheet,
@@ -16,8 +17,13 @@ import { useDashboard } from "@/hooks/useDashboard";
 const DashboardSidebar = () => {
   const navigate = useNavigate();
   const { canStartEnthousiasme, canStartWensberoepen } = useDashboard();
-  const { signOut } = useAuth();
+  const { user } = useAuth();
   const [open, setOpen] = useState(false);
+
+  const handleSignOut = async () => {
+    // Handle sign out logic here
+    navigate('/login');
+  };
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -72,7 +78,7 @@ const DashboardSidebar = () => {
           <Button
             variant="ghost"
             className="w-full justify-start font-normal"
-            onClick={() => signOut()}
+            onClick={handleSignOut}
           >
             Uitloggen
           </Button>

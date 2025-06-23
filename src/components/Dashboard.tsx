@@ -1,34 +1,32 @@
+
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
-import { DashboardHeader } from "./DashboardHeader";
-import { ProgressStepsGrid } from "./ProgressStepsGrid";
-import { WelcomeCard } from "./WelcomeCard";
-import { WhatIsVinsterCard } from "./WhatIsVinsterCard";
-import { ProgressSection } from "./ProgressSection";
-import { WhatDoYouGetCard } from "./WhatDoYouGetCard";
-import { DataSafetySection } from "./DataSafetySection";
-import { ImportantInfoCard } from "./ImportantInfoCard";
+import DashboardHeader from "./DashboardHeader";
+import ProgressStepsGrid from "./ProgressStepsGrid";
+import WelcomeCard from "./WelcomeCard";
+import WhatIsVinsterCard from "./WhatIsVinsterCard";
+import ProgressSection from "./ProgressSection";
+import WhatDoYouGetCard from "./WhatDoYouGetCard";
+import DataSafetySection from "./DataSafetySection";
+import ImportantInfoCard from "./ImportantInfoCard";
 import { Button } from "@/components/ui/button";
 import { useDashboard } from "@/hooks/useDashboard";
 
 const Dashboard = () => {
-  const { user, isLoading } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
-  const { progress } = useDashboard();
+  const { progress, canStartEnthousiasme, canStartWensberoepen } = useDashboard();
 
   useEffect(() => {
-    if (!isLoading && !user) {
+    if (!user) {
       navigate('/login');
     }
-  }, [user, isLoading, navigate]);
+  }, [user, navigate]);
 
-  if (isLoading) {
+  if (!user) {
     return <div>Loading...</div>;
   }
-
-  const canStartEnthousiasme = progress.enthousiasme === 'not_started' || progress.enthousiasme === 'expired';
-  const canStartWensberoepen = progress.wensberoepen === 'not_started' || progress.wensberoepen === 'expired';
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
