@@ -1,6 +1,7 @@
+
 import React from 'react';
 import { Check } from 'lucide-react';
-import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 
 interface ProgressStepProps {
   step: {
@@ -11,76 +12,50 @@ interface ProgressStepProps {
   };
   isCompleted: boolean;
   isCurrent: boolean;
+  progress?: number;
   onClick: () => void;
 }
 
-const ProgressStep = ({ step, isCompleted, isCurrent, onClick }: ProgressStepProps) => {
+const ProgressStep = ({ step, isCompleted, isCurrent, progress = 0, onClick }: ProgressStepProps) => {
   return (
     <div 
-      className={`p-6 rounded-2xl border-2 transition-all duration-200 cursor-pointer ${
-        isCurrent 
-          ? 'border-yellow-400 bg-yellow-50 shadow-md transform scale-105' 
-          : isCompleted 
-            ? 'border-green-400 bg-green-50 hover:shadow-md' 
-            : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm'
-      }`}
+      className="py-3 cursor-pointer hover:bg-gray-50 transition-colors duration-200"
       onClick={onClick}
     >
-      <div className="flex items-center gap-4 mb-4">
-        <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
+      <div className="flex items-center gap-3">
+        {/* Icon */}
+        <div className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 ${
           isCompleted 
-            ? 'bg-green-500' 
-            : isCurrent 
-              ? 'bg-yellow-400' 
-              : 'bg-gray-200'
+            ? 'bg-gray-100' 
+            : 'bg-gray-100'
         }`}>
           {isCompleted ? (
-            <Check className="w-6 h-6 text-white" />
+            <Check className="w-4 h-4 text-gray-600" />
           ) : (
-            <span className={`font-bold ${
-              isCurrent ? 'text-vinster-blue' : 'text-gray-600'
-            }`}>
+            <span className="text-xs font-medium text-gray-600">
               {step.step}
             </span>
           )}
         </div>
-        <h3 className={`text-lg font-bold ${
-          isCurrent ? 'text-vinster-blue' : isCompleted ? 'text-vinster-blue' : 'text-gray-600'
-        }`}>
-          {step.title}
-        </h3>
-      </div>
-      
-      <p className="text-gray-600 text-sm leading-relaxed mb-4">
-        {step.description}
-      </p>
-      
-      <div className="flex items-center justify-between">
-        <span className={`text-xs px-3 py-1 rounded-full ${
-          isCompleted 
-            ? 'bg-green-100 text-green-700' 
-            : isCurrent 
-              ? 'bg-yellow-100 text-yellow-700' 
-              : 'bg-gray-100 text-gray-600'
-        }`}>
-          {isCompleted ? 'Voltooid' : isCurrent ? 'Actief' : 'Te doen'}
-        </span>
         
-        {step.actionButton && (
-          <Button
-            size="sm"
-            className={`${
-              isCurrent 
-                ? 'bg-yellow-400 hover:bg-yellow-500 text-vinster-blue' 
-                : isCompleted 
-                  ? 'bg-green-500 hover:bg-green-600 text-white' 
-                  : 'bg-gray-300 text-gray-600 cursor-not-allowed'
-            }`}
-            disabled={!isCurrent && !isCompleted}
-          >
-            {step.actionButton}
-          </Button>
-        )}
+        {/* Content */}
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center justify-between">
+            <h3 className="text-sm font-medium text-gray-900 truncate">
+              {step.title}
+            </h3>
+            <span className="text-xs text-gray-500 ml-2 flex-shrink-0">
+              {isCompleted ? '✓ Klaar' : `${progress}%`}
+            </span>
+          </div>
+          
+          {/* Progress bar - only show for incomplete items with progress */}
+          {!isCompleted && progress > 0 && (
+            <div className="mt-2">
+              <Progress value={progress} className="h-1" />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

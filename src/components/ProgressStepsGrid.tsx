@@ -1,6 +1,5 @@
 
 import ProgressStep from "./ProgressStep";
-import { CircleUser, Target, Star, CheckCircle, Search, FileText, ListTodo, UserCheck, Info, ClipboardList } from "lucide-react";
 import { useZoekprofielResponses } from "@/hooks/useZoekprofielResponses";
 
 interface ProgressStepsGridProps {
@@ -62,7 +61,7 @@ const ProgressStepsGrid = ({
     },
     {
       step: 4,
-      title: "Loopbaanrapport & onderzoeksplan",
+      title: "Loopbaanrapport",
       description: "Ontvang je persoonlijke aanbevelingen",
       actionButton: "Bekijk rapport"
     },
@@ -75,15 +74,15 @@ const ProgressStepsGrid = ({
   ];
 
   const stepProgress = [
-    { progress: enthousiasmeProgress, isCompleted: enthousiasmeCompleted },
-    { progress: wensberoepenProgress, isCompleted: wensberoepenCompleted },
-    { progress: combinedProgress(), isCompleted: extraInformatieCompleted && prioriteitenCompleted },
+    { progress: enthousiasmeCompleted ? 100 : enthousiasmeProgress, isCompleted: enthousiasmeCompleted },
+    { progress: wensberoepenCompleted ? 100 : wensberoepenProgress, isCompleted: wensberoepenCompleted },
+    { progress: (extraInformatieCompleted && prioriteitenCompleted) ? 100 : combinedProgress(), isCompleted: extraInformatieCompleted && prioriteitenCompleted },
     { progress: hasUserReport ? 100 : 0, isCompleted: hasUserReport },
-    { progress: zoekprofielProgress, isCompleted: zoekprofielCompleted }
+    { progress: zoekprofielCompleted ? 100 : zoekprofielProgress, isCompleted: zoekprofielCompleted }
   ];
 
   return (
-    <div className="flex flex-col justify-between space-y-4">
+    <div className="space-y-1">
       {progressSteps.map((step, index) => {
         const { progress, isCompleted } = stepProgress[index];
         const isCurrent = !isCompleted && (index === 0 || stepProgress[index - 1]?.isCompleted);
@@ -94,6 +93,7 @@ const ProgressStepsGrid = ({
               step={step}
               isCompleted={isCompleted}
               isCurrent={isCurrent}
+              progress={progress}
               onClick={() => onStepClick(step.title)}
             />
           </div>
