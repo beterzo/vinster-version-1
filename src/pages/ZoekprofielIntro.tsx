@@ -43,7 +43,7 @@ const ZoekprofielIntro = () => {
             <Search className="w-8 h-8 text-blue-600" />
           </div>
           
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Je bent er bijna!</h1>
+          <h1 className="text-4xl font-bold text-vinster-blue mb-4">Je bent er bijna!</h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Dit is de laatste stap in Vinster. Je hebt onderzoek gedaan en je gaat nu je zoekprofiel opstellen. Een zoekprofiel is een duidelijk overzicht van de baan die jij zoekt.
           </p>
@@ -71,7 +71,7 @@ const ZoekprofielIntro = () => {
                     {benefit.icon}
                   </div>
                   <div className="text-left flex-1">
-                    <h3 className="font-semibold text-gray-900 mb-2">{benefit.title}</h3>
+                    <h3 className="font-semibold text-vinster-blue mb-2">{benefit.title}</h3>
                     <p className="text-gray-600 text-sm">{benefit.description}</p>
                   </div>
                 </div>

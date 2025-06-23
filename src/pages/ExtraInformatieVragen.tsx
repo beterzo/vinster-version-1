@@ -55,7 +55,7 @@ const ExtraInformatieVragen = () => {
               src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
             />
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Nog iets meer over jou</h1>
+          <h1 className="text-4xl font-bold text-vinster-blue mb-4">Nog iets meer over jou</h1>
           <p className="text-xl text-gray-700">
             Voor je prioriteiten gaat stellen hebben we nog vier vragen voor je
           </p>
@@ -80,7 +80,7 @@ const ExtraInformatieVragen = () => {
           <div className="space-y-8">
             {/* Question 1: Opleidingsniveau - Updated with "Niet van toepassing" option */}
             <div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">
+              <h3 className="text-xl font-bold text-vinster-blue mb-4">
                 1. Wat is jouw opleidingsniveau?
               </h3>
               <RadioGroup 
@@ -109,7 +109,7 @@ const ExtraInformatieVragen = () => {
 
             {/* Question 2: Beroepsopleiding - Now optional */}
             <div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">
+              <h3 className="text-xl font-bold text-vinster-blue mb-4">
                 2. Welke beroepsopleiding heb je afgerond?
               </h3>
               <Textarea
@@ -122,7 +122,7 @@ const ExtraInformatieVragen = () => {
 
             {/* Question 3: Fysieke beperkingen - Updated with (fysieke) in parentheses */}
             <div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">
+              <h3 className="text-xl font-bold text-vinster-blue mb-4">
                 3. Zijn er (fysieke) beperkingen waar we rekening mee moeten houden?
               </h3>
               <Textarea
@@ -135,7 +135,7 @@ const ExtraInformatieVragen = () => {
 
             {/* Question 4: Sector voorkeur - Updated question text */}
             <div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">
+              <h3 className="text-xl font-bold text-vinster-blue mb-4">
                 4. Wil je binnen een bepaalde sector zoeken?
               </h3>
               <p className="text-gray-600 mb-4">
@@ -165,7 +165,7 @@ const ExtraInformatieVragen = () => {
           <Button 
             onClick={handleSave}
             disabled={!isFormValid || saving}
-            className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-8 text-xl rounded-3xl shadow-lg hover:shadow-xl transition-all duration-200 disabled:opacity-50" 
+            className="bg-yellow-400 hover:bg-yellow-500 text-vinster-blue font-bold py-8 text-xl rounded-3xl shadow-lg hover:shadow-xl transition-all duration-200 disabled:opacity-50" 
             size="lg"
           >
             {saving ? (

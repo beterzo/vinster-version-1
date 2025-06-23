@@ -11,7 +11,7 @@ interface WensberoepenFormSectionProps {
 export const WensberoepenFormSection = ({ title, children }: WensberoepenFormSectionProps) => {
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">{title}</h3>
+      <h3 className="text-lg font-semibold text-vinster-blue border-b pb-2">{title}</h3>
       {children}
     </div>
   );

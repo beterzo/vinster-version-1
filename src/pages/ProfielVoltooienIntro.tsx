@@ -20,7 +20,7 @@ const ProfielVoltooienIntro = () => {
               src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
             />
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Loopbaanrapport maken</h1>
+          <h1 className="text-4xl font-bold text-vinster-blue mb-4">Loopbaanrapport maken</h1>
           <p className="text-xl text-gray-700">
             We gaan je loopbaanrapport maken in twee stappen
           </p>
@@ -32,7 +32,7 @@ const ProfielVoltooienIntro = () => {
             <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4">
               <ClipboardList className="w-8 h-8" style={{ color: '#78BFE3' }} />
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            <h2 className="text-2xl font-bold text-vinster-blue mb-4">
               Twee laatste stappen om jouw loopbaanrapport te genereren
             </h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
@@ -48,7 +48,7 @@ const ProfielVoltooienIntro = () => {
                 <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
                   <span className="text-blue-600 font-bold">1</span>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900">Extra informatie</h3>
+                <h3 className="text-xl font-bold text-vinster-blue">Extra informatie</h3>
               </div>
               <div className="space-y-3 text-gray-700">
                 <div className="flex items-start gap-3">
@@ -71,7 +71,7 @@ const ProfielVoltooienIntro = () => {
                 <div className="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">
                   <span className="text-yellow-600 font-bold">2</span>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900">Prioriteiten stellen</h3>
+                <h3 className="text-xl font-bold text-vinster-blue">Prioriteiten stellen</h3>
               </div>
               <div className="space-y-3 text-gray-700">
                 <div className="flex items-start gap-3">
@@ -125,7 +125,7 @@ const ProfielVoltooienIntro = () => {
           
           <Button 
             onClick={() => navigate("/extra-informatie-vragen")} 
-            className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-8 text-xl rounded-3xl shadow-lg hover:shadow-xl transition-all duration-200" 
+            className="bg-yellow-400 hover:bg-yellow-500 text-vinster-blue font-bold py-8 text-xl rounded-3xl shadow-lg hover:shadow-xl transition-all duration-200" 
             size="lg"
           >
             Loopbaanrapport aanmaken

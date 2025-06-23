@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -71,6 +72,9 @@ export default {
 					blue: '#E8F4FD',
 					gray: '#F8F9FA'
 				}
+			},
+			textColor: {
+				'vinster-blue': '#232D4B'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

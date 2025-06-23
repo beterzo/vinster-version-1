@@ -14,7 +14,7 @@ const DataSafetySection = () => {
                 <Shield className="w-6 h-6 text-blue-600" />
               </div>
               <div>
-                <h3 className="font-bold text-lg text-gray-900 mb-3">100% Veilig & GDPR-compliant</h3>
+                <h3 className="font-bold text-lg text-vinster-blue mb-3">100% Veilig & GDPR-compliant</h3>
                 <p className="text-gray-700 leading-relaxed text-sm">
                   Jouw gegevens zijn volledig veilig en GDPR-compliant. We gebruiken AI-modellen om je persoonlijke 
                   inzichten te genereren, maar jouw gegevens worden nooit opgeslagen door deze modellen. 
@@ -31,7 +31,7 @@ const DataSafetySection = () => {
                 <Clock className="w-6 h-6 text-yellow-600" />
               </div>
               <div>
-                <h3 className="font-bold text-lg text-gray-900 mb-3">Eén keer door, alle tijd die je nodig hebt</h3>
+                <h3 className="font-bold text-lg text-vinster-blue mb-3">Eén keer door, alle tijd die je nodig hebt</h3>
                 <p className="text-gray-700 leading-relaxed text-sm">
                   Je doorloopt het programma één keer, maar je kunt zo lang je wilt nadenken tussen de stappen. 
                   Neem alle tijd die je nodig hebt om over de vragen na te denken - jouw data blijft altijd toegankelijk 
