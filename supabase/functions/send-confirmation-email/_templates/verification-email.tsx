@@ -11,6 +11,7 @@ import {
   Button,
   Section,
   Hr,
+  Img,
 } from 'npm:@react-email/components@0.0.22';
 import * as React from 'npm:react@18.3.1';
 
@@ -65,9 +66,11 @@ export const VerificationEmail = ({
     <Body style={bodyStyle}>
       <Container style={containerStyle}>
         <Section style={contentSection}>
-          <Text style={brandNameStyle}>
-            Vinster
-          </Text>
+          <Img
+            src="https://228ae9dd-6d6a-406b-9dbd-95adecbe51b0.lovableproject.com/lovable-uploads/f3a12c87-d122-420f-829e-f68f2d2dfe46.png"
+            alt="Vinster Logo"
+            style={logoStyle}
+          />
           <Heading style={headingStyle}>
             Bevestig je email adres
           </Heading>
@@ -125,14 +128,14 @@ const contentSection = {
   paddingRight: '24px',
 };
 
-const brandNameStyle = {
-  fontSize: '32px',
-  lineHeight: '40px',
+const logoStyle = {
+  height: '40px',
+  width: 'auto',
   marginTop: '0',
-  marginBottom: '8px',
-  fontWeight: '700',
-  color: '#FFCD3E',
-  textAlign: 'center' as const,
+  marginBottom: '24px',
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  display: 'block',
 };
 
 const headingStyle = {
