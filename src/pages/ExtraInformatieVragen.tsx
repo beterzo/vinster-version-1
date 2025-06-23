@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -8,11 +7,13 @@ import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, ArrowLeft, Save } from "lucide-react";
 import { useExtraInformatieResponses } from "@/hooks/useExtraInformatieResponses";
-
 const ExtraInformatieVragen = () => {
   const navigate = useNavigate();
-  const { responses, saving, saveResponses } = useExtraInformatieResponses();
-  
+  const {
+    responses,
+    saving,
+    saveResponses
+  } = useExtraInformatieResponses();
   const [formData, setFormData] = useState({
     opleidingsniveau: '',
     beroepsopleiding: '',
@@ -31,7 +32,6 @@ const ExtraInformatieVragen = () => {
       });
     }
   }, [responses]);
-
   const handleSave = async () => {
     const success = await saveResponses(formData);
     if (success) {
@@ -41,24 +41,15 @@ const ExtraInformatieVragen = () => {
 
   // Updated validation - only opleidingsniveau is required
   const isFormValid = formData.opleidingsniveau !== '';
-
-  return (
-    <div className="min-h-screen bg-gray-50 font-sans">
+  return <div className="min-h-screen bg-gray-50 font-sans">
       <div className="max-w-4xl mx-auto px-6 py-8">
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center mb-6">
-            <img 
-              alt="Vinster Logo" 
-              className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
-              onClick={() => navigate('/')} 
-              src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
-            />
+            <img alt="Vinster Logo" className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" onClick={() => navigate('/')} src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" />
           </div>
-          <h1 className="text-4xl font-bold text-vinster-blue mb-4">Nog iets meer over jou</h1>
-          <p className="text-xl text-gray-700">
-            Voor je prioriteiten gaat stellen hebben we nog vier vragen voor je
-          </p>
+          
+          
         </div>
 
         {/* Progress indicator */}
@@ -76,18 +67,19 @@ const ExtraInformatieVragen = () => {
         </div>
 
         {/* Form */}
-        <Card className="p-8 mb-8 border-0 rounded-3xl" style={{ backgroundColor: '#E6F0F6' }}>
+        <Card className="p-8 mb-8 border-0 rounded-3xl" style={{
+        backgroundColor: '#E6F0F6'
+      }}>
           <div className="space-y-8">
             {/* Question 1: Opleidingsniveau - Updated with "Niet van toepassing" option */}
             <div>
               <h3 className="text-xl font-bold text-vinster-blue mb-4">
                 1. Wat is jouw opleidingsniveau?
               </h3>
-              <RadioGroup 
-                value={formData.opleidingsniveau} 
-                onValueChange={(value) => setFormData({...formData, opleidingsniveau: value})}
-                className="space-y-3"
-              >
+              <RadioGroup value={formData.opleidingsniveau} onValueChange={value => setFormData({
+              ...formData,
+              opleidingsniveau: value
+            })} className="space-y-3">
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="mbo" id="mbo" />
                   <Label htmlFor="mbo" className="text-lg">Mbo</Label>
@@ -112,12 +104,10 @@ const ExtraInformatieVragen = () => {
               <h3 className="text-xl font-bold text-vinster-blue mb-4">
                 2. Welke beroepsopleiding heb je afgerond?
               </h3>
-              <Textarea
-                placeholder="Bijv. Marketing & Communicatie, Verpleegkunde, Werktuigbouwkunde... (optioneel)"
-                value={formData.beroepsopleiding}
-                onChange={(e) => setFormData({...formData, beroepsopleiding: e.target.value})}
-                className="min-h-[100px] text-lg"
-              />
+              <Textarea placeholder="Bijv. Marketing & Communicatie, Verpleegkunde, Werktuigbouwkunde... (optioneel)" value={formData.beroepsopleiding} onChange={e => setFormData({
+              ...formData,
+              beroepsopleiding: e.target.value
+            })} className="min-h-[100px] text-lg" />
             </div>
 
             {/* Question 3: Fysieke beperkingen - Updated with (fysieke) in parentheses */}
@@ -125,12 +115,10 @@ const ExtraInformatieVragen = () => {
               <h3 className="text-xl font-bold text-vinster-blue mb-4">
                 3. Zijn er (fysieke) beperkingen waar we rekening mee moeten houden?
               </h3>
-              <Textarea
-                placeholder="Bijv. kan niet lang staan, heeft moeite met tillen, is slechtziend... (optioneel)"
-                value={formData.fysieke_beperkingen}
-                onChange={(e) => setFormData({...formData, fysieke_beperkingen: e.target.value})}
-                className="min-h-[100px] text-lg"
-              />
+              <Textarea placeholder="Bijv. kan niet lang staan, heeft moeite met tillen, is slechtziend... (optioneel)" value={formData.fysieke_beperkingen} onChange={e => setFormData({
+              ...formData,
+              fysieke_beperkingen: e.target.value
+            })} className="min-h-[100px] text-lg" />
             </div>
 
             {/* Question 4: Sector voorkeur - Updated question text */}
@@ -142,54 +130,36 @@ const ExtraInformatieVragen = () => {
                 Je kunt dan bijvoorbeeld denken aan de bouw, defensie of de zorg. Als je dat aangeeft, 
                 dan geven we je mogelijkheden binnen die sector.
               </p>
-              <Textarea
-                placeholder="Bijv. zorg, onderwijs, techniek, bouw, defensie, overheid... (optioneel)"
-                value={formData.sector_voorkeur}
-                onChange={(e) => setFormData({...formData, sector_voorkeur: e.target.value})}
-                className="min-h-[100px] text-lg"
-              />
+              <Textarea placeholder="Bijv. zorg, onderwijs, techniek, bouw, defensie, overheid... (optioneel)" value={formData.sector_voorkeur} onChange={e => setFormData({
+              ...formData,
+              sector_voorkeur: e.target.value
+            })} className="min-h-[100px] text-lg" />
             </div>
           </div>
         </Card>
 
         {/* Navigation */}
         <div className="flex justify-between items-center">
-          <Button 
-            onClick={() => navigate("/profiel-voltooien-intro")} 
-            className="bg-blue-900 hover:bg-blue-800 text-white font-bold py-4 px-6 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-200"
-          >
+          <Button onClick={() => navigate("/profiel-voltooien-intro")} className="bg-blue-900 hover:bg-blue-800 text-white font-bold py-4 px-6 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-200">
             <ArrowLeft className="w-5 h-5 mr-2" />
             Terug
           </Button>
           
-          <Button 
-            onClick={handleSave}
-            disabled={!isFormValid || saving}
-            className="bg-yellow-400 hover:bg-yellow-500 text-vinster-blue font-bold py-8 text-xl rounded-3xl shadow-lg hover:shadow-xl transition-all duration-200 disabled:opacity-50" 
-            size="lg"
-          >
-            {saving ? (
-              <>
+          <Button onClick={handleSave} disabled={!isFormValid || saving} className="bg-yellow-400 hover:bg-yellow-500 text-vinster-blue font-bold py-8 text-xl rounded-3xl shadow-lg hover:shadow-xl transition-all duration-200 disabled:opacity-50" size="lg">
+            {saving ? <>
                 <Save className="w-5 h-5 mr-2 animate-spin" />
                 Opslaan...
-              </>
-            ) : (
-              <>
+              </> : <>
                 Doorgaan naar prioriteiten
                 <ArrowRight className="w-5 h-5 ml-2" />
-              </>
-            )}
+              </>}
           </Button>
         </div>
 
-        {!isFormValid && (
-          <p className="text-red-600 text-center mt-4">
+        {!isFormValid && <p className="text-red-600 text-center mt-4">
             Vul je opleidingsniveau in om door te gaan.
-          </p>
-        )}
+          </p>}
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default ExtraInformatieVragen;
