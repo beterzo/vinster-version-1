@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Check, Heart, Briefcase, User, FileText, Search } from 'lucide-react';
+import { Heart, Briefcase, User, FileText, Search } from 'lucide-react';
 import { Progress } from "@/components/ui/progress";
 
 interface ProgressStepProps {
@@ -45,15 +45,13 @@ const ProgressStep = ({ step, isCompleted, isCurrent, progress = 0, onClick }: P
       onClick={onClick}
     >
       <div className="flex items-center gap-3">
-        {/* Icon */}
+        {/* Icon - always show the specific icon, never checkmark */}
         <div className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 ${
           isCompleted 
             ? 'bg-gray-100' 
             : 'bg-gray-100'
         }`}>
-          {isCompleted ? (
-            <Check className="w-4 h-4 text-gray-600" />
-          ) : step.icon ? (
+          {step.icon ? (
             getStepIcon(step.icon, isCompleted)
           ) : (
             <span className="text-xs font-medium text-gray-600">
