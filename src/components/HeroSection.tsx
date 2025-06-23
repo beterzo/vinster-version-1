@@ -24,15 +24,8 @@ const HeroSection = () => {
           {/* Mobile Menu */}
           <MobileMenu />
           
-          {/* Right side buttons */}
-          <div className="flex items-center space-x-4">
-            <Button 
-              onClick={() => navigate('/de-mens-achter-vinster')} 
-              variant="outline"
-              className="bg-transparent hover:bg-white hover:bg-opacity-10 text-white font-semibold px-6 py-3 rounded-full border-2 border-white transition-all duration-200"
-            >
-              De mens achter Vinster
-            </Button>
+          {/* Right side button */}
+          <div className="flex items-center">
             <Button onClick={() => navigate('/login')} className="bg-white hover:bg-gray-100 text-blue-900 font-semibold px-6 py-3 rounded-full border border-gray-200 shadow-sm transition-all duration-200">
               Inloggen
             </Button>

@@ -15,7 +15,6 @@ import EmailVerificationPage from "./pages/EmailVerificationPage";
 import AuthCallbackPage from "./pages/AuthCallbackPage";
 import NotFound from "./pages/NotFound";
 import PaymentRequired from "./pages/PaymentRequired";
-import DeMensAchterVinster from "./pages/DeMensAchterVinster";
 import OverVinster from "./pages/OverVinster";
 import VoorWieIsHet from "./pages/VoorWieIsHet";
 import VeelgesteldeVragen from "./pages/VeelgesteldeVragen";
@@ -117,11 +116,13 @@ const App = () => {
                   </ProtectedRoute>
                 } 
               />
-              <Route path="/de-mens-achter-vinster" element={<DeMensAchterVinster />} />
               <Route path="/over-vinster" element={<OverVinster />} />
               <Route path="/voor-wie-is-het" element={<VoorWieIsHet />} />
               <Route path="/veelgestelde-vragen" element={<VeelgesteldeVragen />} />
               <Route path="/contact" element={<Contact />} />
+              
+              {/* Legacy redirect from old de-mens-achter-vinster to new over-vinster */}
+              <Route path="/de-mens-achter-vinster" element={<Navigate to="/over-vinster" replace />} />
               
               {/* Protected routes that require payment */}
               <Route
