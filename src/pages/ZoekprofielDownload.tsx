@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -80,7 +81,7 @@ const ZoekprofielDownload = () => {
               <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-8">
                 <CheckCircle className="w-10 h-10 text-green-600" />
               </div>
-              <h1 className="text-5xl font-bold text-gray-900 mb-6">Hoera! (over zoekprofiel)</h1>
+              <h1 className="text-5xl font-bold text-gray-900 mb-6">Hoera!</h1>
               <p className="text-2xl text-gray-700 mb-4">Je hebt je keuze gemaakt.</p>
               
             </>}
@@ -139,7 +140,7 @@ const ZoekprofielDownload = () => {
                   {!pdfData && 'Zoekprofiel wordt voorbereid'}
                 </h2>
                 <p className="text-lg mb-6 opacity-95">
-                  {isPdfReady && 'Download je persoonlijke zoekprofiel en ontdek welke functies perfect bij jou passen.'}
+                  {isPdfReady && 'Gebruik de samenvatting van jouw zoekprofiel om aan iedereen te laten weten welke functie jij zoekt!'}
                   {isGenerating && 'We zijn bezig met het genereren van je persoonlijke zoekprofiel PDF. Dit duurt even.'}
                   {pdfData?.pdf_status === 'failed' && 'Er is een fout opgetreden bij het genereren. Probeer het opnieuw.'}
                   {!pdfData && 'Je zoekprofiel wordt voorbereid voor download.'}
