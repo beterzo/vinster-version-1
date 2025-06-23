@@ -1,4 +1,3 @@
-
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "npm:resend@2.0.0";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.50.0";
@@ -87,9 +86,9 @@ const handler = async (req: Request): Promise<Response> => {
       })
     );
 
-    // Send verification email from vinster.ai domain
+    // Send verification email from team@vinster.ai domain
     const emailResponse = await resend.emails.send({
-      from: "Vinster <noreply@vinster.ai>",
+      from: "Vinster <team@vinster.ai>",
       to: [user.email],
       subject: "Bevestig je account bij Vinster",
       html: emailHtml,
