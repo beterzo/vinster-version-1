@@ -6,7 +6,6 @@ import { useToast } from "@/hooks/use-toast";
 import { usePaymentStatus } from "@/hooks/usePaymentStatus";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
 const PaymentRequired = () => {
   const {
     user
@@ -140,7 +139,7 @@ const PaymentRequired = () => {
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-8">
         {/* Header with new logo */}
         <div className="text-center mb-8">
-          <img alt="Vinster Logo" className="h-12 w-auto mx-auto cursor-pointer hover:opacity-80 transition-opacity duration-200 mb-6" onClick={() => navigate('/')} src="/lovable-uploads/vinster-new-logo.png" />
+          <img alt="Vinster Logo" className="h-12 w-auto mx-auto cursor-pointer hover:opacity-80 transition-opacity duration-200 mb-6" onClick={() => navigate('/')} src="/lovable-uploads/23b63bc5-3895-4312-ad2b-36f3e48adb5a.png" />
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-vinster-blue mb-4">
             Welkom bij Vinster, {user?.user_metadata?.first_name || 'daar'}!
           </h1>
@@ -264,5 +263,4 @@ const PaymentRequired = () => {
       </div>
     </div>;
 };
-
 export default PaymentRequired;
