@@ -93,12 +93,32 @@ const Contact = () => {
         </div>
       </div>
 
+      {/* Hero Section with Image */}
+      <div className="bg-white">
+        <div className="max-w-[1440px] mx-auto px-6 py-12">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h1 className="text-4xl font-bold mb-6" style={{ color: '#232D4B' }}>
+                Contact
+              </h1>
+              <p className="text-lg mb-6" style={{ color: '#232D4B' }}>
+                Heb je vragen over Vinster of wil je meer informatie? 
+                We helpen je graag verder! Stuur ons een bericht en we nemen zo snel mogelijk contact met je op.
+              </p>
+            </div>
+            <div className="relative">
+              <img 
+                src="/lovable-uploads/07fedc05-be13-4802-99e6-48bb9fb976e7.png"
+                alt="Vriendelijk contactteam"
+                className="w-full h-auto rounded-xl shadow-lg"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Main Content */}
       <div className="max-w-4xl mx-auto px-6 py-12">
-        <h1 className="text-4xl font-bold mb-8" style={{ color: '#232D4B' }}>
-          Contact
-        </h1>
-        
         <div className="grid md:grid-cols-2 gap-8">
           {/* Contact Form */}
           <div className="bg-white rounded-xl shadow-lg p-8">
