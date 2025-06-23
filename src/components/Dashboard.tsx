@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
@@ -39,9 +40,9 @@ const Dashboard = () => {
       <div className="max-w-[1440px] mx-auto px-6 py-8">
         <DashboardHeader />
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
-          {/* Welcome Section - spans first 2 columns */}
-          <Card className="lg:col-span-2 p-8 border-0 rounded-3xl bg-white">
+        <div className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-2 gap-8 mt-8">
+          {/* Welcome Section - spans first 2 columns on top row */}
+          <Card className="lg:col-span-2 p-8 border-0 rounded-3xl" style={{ backgroundColor: '#E6F0F6' }}>
             <h1 className="text-3xl font-bold text-vinster-blue mb-4">
               Welkom {firstName}!
             </h1>
@@ -70,8 +71,8 @@ const Dashboard = () => {
             </div>
           </Card>
 
-          {/* Right Column - Image and Button - adjusted height */}
-          <Card className="p-6 border-0 rounded-3xl bg-white flex flex-col">
+          {/* Right Column - Image and Button - spans both rows */}
+          <Card className="lg:row-span-2 p-6 border-0 rounded-3xl bg-white flex flex-col">
             <div className="text-center flex-1 flex flex-col justify-between">
               <img alt="Loopbaanonderzoek" className="w-full h-auto rounded-xl mb-6 flex-1 object-cover" src="/lovable-uploads/ee361013-bfc6-485f-b46f-ed87a3cd6c73.jpg" />
               
@@ -82,14 +83,14 @@ const Dashboard = () => {
           </Card>
 
           {/* Left Column - Important Info */}
-          <Card className="p-6 border-0 rounded-3xl" style={{
-          backgroundColor: '#E6F0F6'
+          <Card className="p-6 border-0 rounded-3xl text-white" style={{
+          backgroundColor: '#78BFE3'
         }}>
             <div>
-              <h3 className="font-bold text-lg text-vinster-blue mb-3">
+              <h3 className="font-bold text-lg mb-3">
                 Belangrijk om te weten
               </h3>
-              <ul className="text-gray-700 text-sm leading-relaxed space-y-2">
+              <ul className="text-sm leading-relaxed space-y-2">
                 <li>• Er zijn geen goede of foute antwoorden - wees eerlijk over wat jij echt leuk vindt</li>
                 <li>• Denk aan concrete situaties en ervaringen uit jouw leven</li>
                 <li>• Je kunt zoveel tijd nemen als je wilt - er zit geen tijdsdruk op dit traject</li>
@@ -100,7 +101,7 @@ const Dashboard = () => {
             </div>
           </Card>
 
-          {/* Middle Column - Process Steps - renamed title */}
+          {/* Middle Column - Process Steps */}
           <Card className="p-6 border-0 rounded-3xl bg-white">
             <h3 className="font-bold text-lg text-vinster-blue mb-4">
               Jouw voortgang
