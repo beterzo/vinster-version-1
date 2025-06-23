@@ -1,4 +1,3 @@
-
 import { Routes, Route, Navigate } from "react-router-dom";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import LandingPage from "@/pages/LandingPage";
@@ -6,6 +5,7 @@ import Home from "@/pages/Home";
 import LoginPage from "@/pages/LoginPage";
 import SignupPage from "@/pages/SignupPage";
 import EmailVerificationPage from "@/pages/EmailVerificationPage";
+import AuthVerifyPage from "@/pages/AuthVerifyPage";
 import AuthCallbackPage from "@/pages/AuthCallbackPage";
 import NotFound from "@/pages/NotFound";
 import PaymentRequired from "@/pages/PaymentRequired";
@@ -43,7 +43,9 @@ const AppRouter = () => {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/email-verification" element={<EmailVerificationPage />} />
+      <Route path="/verify" element={<AuthVerifyPage />} />
       <Route path="/auth/callback" element={<AuthCallbackPage />} />
+      
       <Route 
         path="/payment-required" 
         element={

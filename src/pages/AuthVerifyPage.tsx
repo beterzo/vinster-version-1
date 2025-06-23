@@ -28,16 +28,41 @@ const AuthVerifyPage = () => {
           return;
         }
         
-        // Redirect to Supabase auth verification
-        const supabaseUrl = `https://aqajxxevifmhdjlvqhkz.supabase.co/auth/v1/verify?token=${token}&type=${type}&redirect_to=${redirectTo || window.location.origin + '/login'}`;
+        // Verify the token with Supabase
+        console.log('🔄 Verifying token with Supabase...');
         
-        console.log('🔄 Redirecting to Supabase verification:', supabaseUrl);
+        const { data, error } = await supabase.auth.verifyOtp({
+          token_hash: token,
+          type: type as any
+        });
         
-        // Redirect to Supabase
-        window.location.href = supabaseUrl;
+        if (error) {
+          console.error('❌ Verification error:', error);
+          setStatus('error');
+          setMessage('Verificatie mislukt. De link is mogelijk verlopen of al gebruikt.');
+          return;
+        }
+        
+        console.log('✅ Verification successful:', data);
+        setStatus('success');
+        setMessage('Je account is succesvol geverifieerd!');
+        
+        // Check if user is now logged in after verification
+        const { data: { session } } = await supabase.auth.getSession();
+        
+        // Redirect after a short delay to show success message
+        setTimeout(() => {
+          if (session?.user) {
+            console.log('🏠 User is logged in, redirecting to home...');
+            navigate('/home');
+          } else {
+            console.log('🔐 User not logged in, redirecting to login with success message...');
+            navigate('/login?verified=true');
+          }
+        }, 2000);
         
       } catch (error) {
-        console.error('❌ Verification redirect error:', error);
+        console.error('❌ Verification error:', error);
         setStatus('error');
         setMessage('Er is een fout opgetreden bij het verwerken van de verificatie link.');
       }
@@ -59,7 +84,7 @@ const AuthVerifyPage = () => {
                 Account verifiëren...
               </h1>
               <p className="text-gray-600">
-                Je wordt doorgestuurd voor verificatie...
+                Even geduld, je account wordt geverifieerd...
               </p>
             </>
           )}
@@ -74,6 +99,9 @@ const AuthVerifyPage = () => {
               </h1>
               <p className="text-gray-600 mb-4">
                 {message}
+              </p>
+              <p className="text-sm text-gray-500">
+                Je wordt automatisch doorgestuurd...
               </p>
             </>
           )}
