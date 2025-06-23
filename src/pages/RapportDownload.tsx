@@ -1,14 +1,13 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-import { Download, CheckCircle, Home, Clock, AlertTriangle, ArrowRight } from "lucide-react";
+import { Download, CheckCircle, Home, Clock, AlertTriangle, ArrowRight, FileText, AlertCircle } from "lucide-react";
 import { useRapportGeneration } from "@/hooks/useRapportGeneration";
 
 const RapportDownload = () => {
   const navigate = useNavigate();
-  const { userReport, loadUserReport, loading, downloadPdf } = useRapportGeneration();
+  const { userReport, loadUserReport, loading, downloadPdf, isLoading, rapportData, error } = useRapportGeneration();
   const [pollingInterval, setPollingInterval] = useState<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -121,6 +120,42 @@ const RapportDownload = () => {
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 Ga terug naar het dashboard en probeer het opnieuw.
               </p>
+            </>
+          )}
+
+          {isLoading && (
+            <>
+              <div className="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                <FileText className="w-8 h-8 text-blue-600 animate-pulse" />
+              </div>
+              <h1 className="text-xl font-semibold text-vinster-blue mb-2">
+                Rapport wordt gegenereerd...
+              </h1>
+              <p className="text-gray-600">
+                Even geduld terwijl we jouw persoonlijke loopbaanrapport genereren.
+              </p>
+            </>
+          )}
+
+          {rapportData && !isLoading && (
+            <>
+              <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                <CheckCircle className="w-8 h-8 text-green-600" />
+              </div>
+              <h1 className="text-xl font-semibold text-vinster-blue mb-2">
+                Rapport klaar!
+              </h1>
+            </>
+          )}
+
+          {error && (
+            <>
+              <div className="mx-auto w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4">
+                <AlertCircle className="w-8 h-8 text-red-600" />
+              </div>
+              <h1 className="text-xl font-semibold text-vinster-blue mb-2">
+                Er is een fout opgetreden
+              </h1>
             </>
           )}
         </div>

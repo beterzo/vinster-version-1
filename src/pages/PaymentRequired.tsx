@@ -155,8 +155,8 @@ const PaymentRequired = () => {
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-8">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-blue-900 mb-6">Vinster</h1>
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-2xl font-bold text-vinster-blue mb-6">Vinster</h1>
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-vinster-blue mb-4">
             Welkom bij Vinster, {user?.user_metadata?.first_name || 'daar'}!
           </h1>
           <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
@@ -171,7 +171,7 @@ const PaymentRequired = () => {
           <div className="space-y-6 lg:space-y-8">
             {/* Welcome card */}
             <Card className="p-6 lg:p-8 border-0 rounded-3xl" style={{ backgroundColor: '#E6F0F6' }}>
-              <h2 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4">Start jouw loopbaanontwikkeling</h2>
+              <h2 className="text-xl lg:text-2xl font-bold text-vinster-blue mb-4">Start jouw loopbaanontwikkeling</h2>
               <p className="text-gray-700 leading-relaxed mb-4">
                 Met Vinster krijg je toegang tot wetenschappelijk onderbouwde tools die je helpen 
                 jouw ideale loopbaan te vinden. Onze methode is gebaseerd op jarenlang onderzoek 
@@ -193,7 +193,7 @@ const PaymentRequired = () => {
                       {feature.icon}
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900 mb-2">{feature.title}</h3>
+                      <h3 className="font-semibold text-vinster-blue mb-2">{feature.title}</h3>
                       <p className="text-sm text-gray-600">{feature.description}</p>
                     </div>
                   </div>
@@ -208,7 +208,7 @@ const PaymentRequired = () => {
                   <Shield className="w-6 h-6 text-blue-600" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-lg text-gray-900 mb-3">100% Veilig & GDPR-compliant</h3>
+                  <h3 className="font-bold text-lg text-vinster-blue mb-3">100% Veilig & GDPR-compliant</h3>
                   <p className="text-gray-700 leading-relaxed text-sm">
                     Jouw gegevens zijn volledig veilig en GDPR-compliant. We gebruiken AI-modellen om je persoonlijke 
                     inzichten te genereren, maar jouw gegevens worden nooit opgeslagen door deze modellen. 
@@ -224,7 +224,7 @@ const PaymentRequired = () => {
                   <Clock className="w-6 h-6 text-yellow-600" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-lg text-gray-900 mb-3">Eén keer door, alle tijd die je nodig hebt</h3>
+                  <h3 className="font-bold text-lg text-vinster-blue mb-3">Eén keer door, alle tijd die je nodig hebt</h3>
                   <p className="text-gray-700 leading-relaxed text-sm">
                     Je doorloopt het programma één keer, maar je kunt zo lang je wilt nadenken tussen de stappen. 
                     Neem alle tijd die je nodig hebt om over de vragen na te denken - jouw data blijft altijd toegankelijk 
@@ -261,9 +261,9 @@ const PaymentRequired = () => {
           <div className="flex flex-col gap-6 lg:gap-8">
             <Card className="p-6 lg:p-8 border-0 rounded-3xl bg-white shadow-lg flex-1">
               <div className="text-center mb-6">
-                <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-2">Volledige toegang</h3>
+                <h3 className="text-xl lg:text-2xl font-bold text-vinster-blue mb-2">Volledige toegang</h3>
                 <p className="text-gray-600 mb-4">Eenmalige betaling voor levenslange toegang</p>
-                <div className="text-3xl lg:text-4xl font-bold text-gray-900 mb-1">€29</div>
+                <div className="text-3xl lg:text-4xl font-bold text-vinster-blue mb-1">€29</div>
                 <p className="text-sm text-gray-500">Eenmalig, geen abonnement</p>
               </div>
 
@@ -293,7 +293,7 @@ const PaymentRequired = () => {
               <Button 
                 onClick={handlePayment} 
                 disabled={isLoading}
-                className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-3 lg:py-4 text-base lg:text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200" 
+                className="w-full bg-yellow-400 hover:bg-yellow-500 text-vinster-blue font-bold py-3 lg:py-4 text-base lg:text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200" 
                 size="lg"
               >
                 {isLoading ? "Verwerken..." : "Start nu voor €29"}
@@ -307,7 +307,7 @@ const PaymentRequired = () => {
             <Card className="p-4 lg:p-6 border-0 rounded-3xl bg-green-50 border-green-200">
               <div className="text-center">
                 <Shield className="w-8 h-8 text-green-600 mx-auto mb-3" />
-                <h4 className="font-semibold text-green-800 mb-2">30 dagen geld-terug garantie</h4>
+                <h4 className="font-semibold text-vinster-blue mb-2">30 dagen geld-terug garantie</h4>
                 <p className="text-sm text-green-700">
                   Niet tevreden? Krijg je geld terug, geen vragen gesteld.
                 </p>

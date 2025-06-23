@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -83,11 +82,9 @@ const EditEnthousiasmeDialog = ({ open, onOpenChange, data, onSave }: EditEnthou
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto font-sans">
+      <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-gray-900">
-            Enthousiasme-scan bewerken
-          </DialogTitle>
+          <DialogTitle className="text-vinster-blue">Enthousiasme gegevens bewerken</DialogTitle>
         </DialogHeader>
 
         <div className="space-y-6">

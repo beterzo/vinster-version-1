@@ -1,148 +1,102 @@
-
+import { useState } from "react";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
+import { Menu } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { Download, FileText, Loader2 } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { useDashboard } from "@/hooks/useDashboard";
 
-interface DashboardSidebarProps {
-  getNextStep: () => string;
-  hasUserReport: boolean;
-  hasStarted: boolean;
-  hasZoekprofielPdf: boolean;
-  downloadRapportPdf: () => Promise<void>;
-  downloadZoekprofielPdf: () => Promise<void>;
-  downloadingRapport?: boolean;
-  downloadingZoekprofiel?: boolean;
-}
-
-const DashboardSidebar = ({ 
-  getNextStep, 
-  hasUserReport, 
-  hasStarted, 
-  hasZoekprofielPdf,
-  downloadRapportPdf,
-  downloadZoekprofielPdf,
-  downloadingRapport = false,
-  downloadingZoekprofiel = false
-}: DashboardSidebarProps) => {
+const DashboardSidebar = () => {
   const navigate = useNavigate();
-
-  // Check if both documents are ready for download
-  const bothDocumentsReady = hasUserReport && hasZoekprofielPdf;
-
-  const handleRapportDownload = async () => {
-    console.log('🎯 Loopbaanrapport download button clicked');
-    try {
-      await downloadRapportPdf();
-    } catch (error) {
-      console.error('❌ Error in loopbaanrapport download handler:', error);
-    }
-  };
-
-  const handleZoekprofielDownload = async () => {
-    console.log('🎯 Zoekprofiel download button clicked');
-    try {
-      await downloadZoekprofielPdf();
-    } catch (error) {
-      console.error('❌ Error in zoekprofiel download handler:', error);
-    }
-  };
+  const { canStartEnthousiasme, canStartWensberoepen } = useDashboard();
+  const { signOut } = useAuth();
+  const [open, setOpen] = useState(false);
 
   return (
-    <div className="h-full flex flex-col gap-8 lg:justify-between">
-      {/* Afbeelding - neemt alle beschikbare ruimte op desktop */}
-      <div className="rounded-2xl flex-1 overflow-hidden">
-        <img 
-          src="/lovable-uploads/4d34612b-df14-4f89-abac-7542126c6ac2.png"
-          alt="Professionele vrouw met loopbaanontwikkeling materialen"
-          className="w-full h-full object-cover"
-        />
-      </div>
+    <Sheet open={open} onOpenChange={setOpen}>
+      <SheetTrigger asChild>
+        <Button variant="ghost" size="sm" className="md:hidden">
+          <Menu className="h-4 w-4" />
+        </Button>
+      </SheetTrigger>
+      <SheetContent className="w-full sm:w-64 border-r p-4 pt-6">
+        <SheetHeader>
+          <SheetTitle>Menu</SheetTitle>
+          <SheetDescription>
+            Navigeer door de verschillende onderdelen van de website.
+          </SheetDescription>
+        </SheetHeader>
+        <div className="py-4">
+          <Button
+            variant="ghost"
+            className="w-full justify-start font-normal"
+            onClick={() => navigate("/")}
+          >
+            Dashboard
+          </Button>
+          <Button
+            variant="ghost"
+            className="w-full justify-start font-normal"
+            onClick={() => navigate("/rapport-review")}
+          >
+            Loopbaanrapport
+          </Button>
+          <Button
+            variant="ghost"
+            className="w-full justify-start font-normal"
+            onClick={() => navigate("/zoekprofiel-download")}
+          >
+            Zoekprofiel
+          </Button>
+          <Button
+            variant="ghost"
+            className="w-full justify-start font-normal"
+            onClick={() => navigate("/profiel-voltooien-intro")}
+          >
+            Profiel voltooien
+          </Button>
+          <Button
+            variant="ghost"
+            className="w-full justify-start font-normal"
+            onClick={() => navigate("/payment-required")}
+          >
+            Betaalpagina
+          </Button>
+          <Button
+            variant="ghost"
+            className="w-full justify-start font-normal"
+            onClick={() => signOut()}
+          >
+            Uitloggen
+          </Button>
+        </div>
 
-      {/* Knoppen - onderaan, flexibel op mobiel, gefixeerd op desktop */}
-      <div className="space-y-4 lg:flex-shrink-0">
-        {bothDocumentsReady ? (
-          // Beide documenten zijn klaar - toon download knoppen
-          <>
-            <Button 
-              className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-8 text-xl rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-3 disabled:opacity-50"
-              size="lg"
-              onClick={handleZoekprofielDownload}
-              disabled={downloadingZoekprofiel}
-            >
-              {downloadingZoekprofiel ? (
-                <>
-                  <Loader2 className="w-6 h-6 animate-spin" />
-                  Downloaden...
-                </>
-              ) : (
-                <>
-                  <FileText className="w-6 h-6" />
-                  Bekijk mijn zoekprofiel
-                </>
-              )}
-            </Button>
-
-            <Button 
-              className="w-full text-white font-bold py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50"
-              style={{ backgroundColor: '#21324E' }}
-              onMouseEnter={(e) => !downloadingRapport && (e.currentTarget.style.backgroundColor = '#2a3b5c')}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#21324E'}
-              size="lg"
-              onClick={handleRapportDownload}
-              disabled={downloadingRapport}
-            >
-              {downloadingRapport ? (
-                <>
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                  Downloaden...
-                </>
-              ) : (
-                <>
-                  <Download className="w-5 h-5" />
-                  Bekijk mijn loopbaanrapport
-                </>
-              )}
-            </Button>
-          </>
-        ) : (
-          // Normale navigatie knoppen (huidige gedrag)
-          <>
-            <Button 
-              className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-8 text-xl rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
-              size="lg"
-              onClick={() => navigate(getNextStep())}
-            >
-              {hasStarted ? "Ga verder waar je gebleven was" : "Begin hier"}
-            </Button>
-
-            {/* Conditionale "Bekijk mijn loopbaanrapport" knop - naar donkerblauw #21324E */}
-            {hasUserReport && (
-              <Button 
-                className="w-full text-white font-bold py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50"
-                style={{ backgroundColor: '#21324E' }}
-                onMouseEnter={(e) => !downloadingRapport && (e.currentTarget.style.backgroundColor = '#2a3b5c')}
-                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#21324E'}
-                size="lg"
-                onClick={handleRapportDownload}
-                disabled={downloadingRapport}
-              >
-                {downloadingRapport ? (
-                  <>
-                    <Loader2 className="w-5 h-5 animate-spin" />
-                    Downloaden...
-                  </>
-                ) : (
-                  <>
-                    <Download className="w-5 h-5" />
-                    Bekijk mijn loopbaanrapport
-                  </>
-                )}
-              </Button>
-            )}
-          </>
+        {canStartEnthousiasme && (
+          <Button 
+            onClick={() => navigate("/enthousiasme-intro")} 
+            className="w-full bg-yellow-400 hover:bg-yellow-500 text-vinster-blue font-bold rounded-xl"
+          >
+            Start enthousiasmescan
+          </Button>
         )}
-      </div>
-    </div>
+
+        {canStartWensberoepen && (
+          <Button 
+            onClick={() => navigate("/wensberoepen-intro")} 
+            className="w-full bg-yellow-400 hover:bg-yellow-500 text-vinster-blue font-bold rounded-xl"
+          >
+            Start wensberoepen
+          </Button>
+        )}
+      </SheetContent>
+    </Sheet>
   );
 };
 

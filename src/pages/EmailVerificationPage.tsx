@@ -77,7 +77,7 @@ const EmailVerificationPage = () => {
               <Mail className="w-8 h-8 text-blue-900" />
             </div>
             
-            <h1 className="text-2xl sm:text-3xl font-bold text-blue-900">
+            <h1 className="text-2xl sm:text-3xl font-bold text-vinster-blue">
               Controleer je email
             </h1>
             
@@ -102,7 +102,7 @@ const EmailVerificationPage = () => {
             <div className="border border-gray-200 rounded-lg p-6 space-y-4">
               <div className="flex items-center space-x-3">
                 <RefreshCw className="w-5 h-5 text-blue-600" />
-                <h3 className="font-semibold text-gray-900">Nieuwe verificatie email versturen</h3>
+                <h3 className="font-semibold text-vinster-blue">Nieuwe verificatie email versturen</h3>
               </div>
               
               <div className="space-y-3">
@@ -134,7 +134,7 @@ const EmailVerificationPage = () => {
             <div className="border border-gray-200 rounded-lg p-6 space-y-4">
               <div className="flex items-center space-x-3">
                 <ArrowRight className="w-5 h-5" style={{ color: '#E4C05B' }} />
-                <h3 className="font-semibold text-gray-900">Al geverifieerd?</h3>
+                <h3 className="font-semibold text-vinster-blue">Al geverifieerd?</h3>
               </div>
               
               <p className="text-sm text-gray-600 mb-4">

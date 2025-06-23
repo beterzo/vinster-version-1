@@ -89,7 +89,7 @@ const AuthCallbackPage = () => {
               <div className="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
                 <Loader className="w-8 h-8 text-blue-600 animate-spin" />
               </div>
-              <h1 className="text-xl font-semibold text-gray-900 mb-2">
+              <h1 className="text-xl font-semibold text-vinster-blue mb-2">
                 Account verifiëren...
               </h1>
               <p className="text-gray-600">
@@ -103,7 +103,7 @@ const AuthCallbackPage = () => {
               <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
                 <CheckCircle className="w-8 h-8 text-green-600" />
               </div>
-              <h1 className="text-xl font-semibold text-gray-900 mb-2">
+              <h1 className="text-xl font-semibold text-vinster-blue mb-2">
                 Verificatie geslaagd!
               </h1>
               <p className="text-gray-600 mb-4">
@@ -120,7 +120,7 @@ const AuthCallbackPage = () => {
               <div className="mx-auto w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4">
                 <AlertCircle className="w-8 h-8 text-red-600" />
               </div>
-              <h1 className="text-xl font-semibold text-gray-900 mb-2">
+              <h1 className="text-xl font-semibold text-vinster-blue mb-2">
                 Verificatie mislukt
               </h1>
               <p className="text-gray-600 mb-6">

@@ -1,45 +1,24 @@
-
 import { Card } from "@/components/ui/card";
-import { useAuth } from "@/hooks/useAuth";
+import { Star } from "lucide-react";
 
 const WelcomeCard = () => {
-  const { user } = useAuth();
-  
-  const getUserName = () => {
-    if (user?.user_metadata?.first_name) {
-      return user.user_metadata.first_name;
-    }
-    if (user?.email) {
-      return user.email.split('@')[0];
-    }
-    return '';
-  };
-
-  const userName = getUserName();
-
   return (
-    <Card className="p-8 border-0 rounded-3xl" style={{ backgroundColor: '#E6F0F6' }}>
-      <div className="space-y-4 text-left">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">
-          Welkom{userName && ` ${userName}`}
-        </h1>
-        <p className="text-gray-700 font-medium leading-relaxed mb-4">
-          Dit is jouw persoonlijke dashboard. Hier zie je de voortgang van jouw loopbaanonderzoek en kun je 
-          verder gaan waar je gebleven bent.
-        </p>
-        <p className="text-gray-600 text-sm leading-relaxed mb-3">
-          We beginnen met de enthousiasmescan, de eerste stap om te 
-          ontdekken wat jij graag doet en hoe jij graag werkt. In deze scan gaan we op zoek naar momenten 
-          waarop jij in je element bent.
-        </p>
-        <p className="text-gray-600 text-sm leading-relaxed mb-3">
-          Door vragen te stellen over je jeugd, schooltijd en werkervaringen brengen we jouw unieke patroon 
-          van voorkeuren en interesses in kaart.
-        </p>
-        <p className="text-gray-600 text-sm leading-relaxed">
-          Jouw enthousiasme is een belangrijke indicator voor wat je echt leuk vindt. Wanneer je iets doet 
-          waar je enthousiast van wordt, ontstaat er energie en voldoening. Dáár gaan we naar op zoek.
-        </p>
+    <Card className="p-6 border-0 rounded-3xl" style={{ backgroundColor: '#E6F0F6' }}>
+      <div className="flex items-start space-x-4">
+        <div className="flex-shrink-0">
+          <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+            <Star className="w-6 h-6" style={{ color: '#78BFE3' }} />
+          </div>
+        </div>
+        <div>
+          <h3 className="font-bold text-lg text-vinster-blue mb-3">
+            Welkom bij Vinster!
+          </h3>
+          <p className="text-gray-700 text-sm leading-relaxed">
+            Begin met de enthousiasmescan om erachter te komen wat je echt drijft. 
+            Dit vormt de basis voor het vinden van je ideale loopbaan.
+          </p>
+        </div>
       </div>
     </Card>
   );

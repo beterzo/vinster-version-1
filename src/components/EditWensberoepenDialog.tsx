@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
@@ -150,17 +149,12 @@ const EditWensberoepenDialog = ({ open, onOpenChange, data, onSave }: EditWensbe
             <X className="w-4 h-4 mr-2" />
             Annuleren
           </Button>
-          <Button
-            onClick={handleSave}
+          <Button 
+            type="submit" 
             disabled={isSaving}
-            className="bg-vinster-yellow hover:bg-yellow-600 text-gray-900 font-medium rounded-xl"
+            className="bg-yellow-400 hover:bg-yellow-500 text-vinster-blue"
           >
-            {isSaving ? (
-              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-            ) : (
-              <Save className="w-4 h-4 mr-2" />
-            )}
-            {isSaving ? 'Opslaan...' : 'Opslaan'}
+            {isSaving ? "Opslaan..." : "Opslaan"}
           </Button>
         </DialogFooter>
       </DialogContent>

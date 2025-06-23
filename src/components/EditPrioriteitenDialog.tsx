@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -24,6 +23,7 @@ const EditPrioriteitenDialog = ({ open, onOpenChange, data, onSave }: EditPriori
   const [extraActiviteitenTekst, setExtraActiviteitenTekst] = useState('');
   const [extraWerkomstandighedenTekst, setExtraWerkomstandighedenTekst] = useState('');
   const [extraInteressesToekst, setExtraInteressesToekst] = useState('');
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     if (data && open) {
@@ -60,6 +60,7 @@ const EditPrioriteitenDialog = ({ open, onOpenChange, data, onSave }: EditPriori
 
   const handleSave = async () => {
     try {
+      setSaving(true);
       const updateData = {
         selected_activiteiten_keywords: selectedActiviteiten,
         selected_werkomstandigheden_keywords: selectedWerkomstandigheden,
@@ -76,6 +77,8 @@ const EditPrioriteitenDialog = ({ open, onOpenChange, data, onSave }: EditPriori
       }
     } catch (error) {
       console.error('Error saving prioriteiten:', error);
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -176,17 +179,12 @@ const EditPrioriteitenDialog = ({ open, onOpenChange, data, onSave }: EditPriori
             <X className="w-4 h-4 mr-2" />
             Annuleren
           </Button>
-          <Button
-            onClick={handleSave}
-            disabled={loading}
-            className="bg-vinster-yellow hover:bg-yellow-600 text-gray-900 font-medium rounded-xl"
+          <Button 
+            type="submit" 
+            disabled={saving}
+            className="bg-yellow-400 hover:bg-yellow-500 text-vinster-blue"
           >
-            {loading ? (
-              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-            ) : (
-              <Save className="w-4 h-4 mr-2" />
-            )}
-            {loading ? 'Opslaan...' : 'Opslaan'}
+            {saving ? "Opslaan..." : "Opslaan"}
           </Button>
         </DialogFooter>
       </DialogContent>

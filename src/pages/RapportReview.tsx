@@ -1,260 +1,230 @@
-
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { useNavigate } from "react-router-dom";
-import { ArrowRight, ArrowLeft, Edit, FileText, Heart, Target, Info, Activity } from "lucide-react";
-import { useRapportData } from "@/hooks/useRapportData";
-import { useRapportGeneration } from "@/hooks/useRapportGeneration";
-import EditEnthousiasmeDialog from "@/components/EditEnthousiasmeDialog";
-import EditExtraInfoDialog from "@/components/EditExtraInfoDialog";
-import EditWensberoepenDialog from "@/components/EditWensberoepenDialog";
-import EditPrioriteitenDialog from "@/components/EditPrioriteitenDialog";
+import { FileText, CheckCircle, AlertCircle, Target, Heart, User, Lightbulb, Download, Search, ArrowLeft, ArrowRight } from "lucide-react";
 
 const RapportReview = () => {
   const navigate = useNavigate();
-  const { data, loading, refreshData } = useRapportData();
-  const { generateReport, generating } = useRapportGeneration();
+  const [rapportData, setRapportData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const [editEnthousiasmeOpen, setEditEnthousiasmeOpen] = useState(false);
-  const [editExtraInfoOpen, setEditExtraInfoOpen] = useState(false);
-  const [editWensberoepenOpen, setEditWensberoepenOpen] = useState(false);
-  const [editPrioriteitenOpen, setEditPrioriteitenOpen] = useState(false);
+  useEffect(() => {
+    const fetchRapportData = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        // Simulate fetching data from API or local storage
+        const response = await fetch('/api/rapport');
+        if (!response.ok) {
+          throw new Error('Failed to fetch rapport data');
+        }
+        const data = await response.json();
+        setRapportData(data);
+      } catch (err: any) {
+        setError(err.message || 'Onbekende fout');
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const handleGenerateReports = async () => {
-    const success = await generateReport({
-      enthousiasme: data.enthousiasme,
-      wensberoepen: data.wensberoepen,
-      extraInformatie: data.extraInformatie,
-      prioriteiten: data.prioriteiten,
-      timestamp: new Date().toISOString()
-    });
-    
-    if (success) {
-      // Navigate to download page to show PDF generation progress
-      navigate('/rapport-download');
-    }
-  };
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50 font-sans flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-900 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Gegevens laden...</p>
-        </div>
-      </div>
-    );
-  }
+    fetchRapportData();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
       <div className="max-w-4xl mx-auto px-6 py-8">
         {/* Header */}
         <div className="mb-8">
-          <img 
-            src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" 
-            alt="Vinster Logo" 
-            className="h-8 w-auto mb-6" 
-          />
+          <div className="mb-6">
+            <img 
+              alt="Vinster Logo" 
+              className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              onClick={() => navigate('/')} 
+              src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
+            />
+          </div>
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
               <FileText className="w-5 h-5 text-blue-600" />
             </div>
-            <h1 className="text-3xl font-bold text-gray-900">Controleer je antwoorden</h1>
+            <h1 className="text-3xl font-bold text-vinster-blue">Jouw loopbaanrapport</h1>
           </div>
           <p className="text-lg text-gray-700">
-            Bekijk hier al je antwoorden nog een keer. Je kunt ze aanpassen voordat je loopbaanrapport wordt gegenereerd.
+            Bekijk hier een samenvatting van jouw persoonlijke loopbaananalyse voordat je het volledige rapport downloadt.
           </p>
         </div>
 
-        <div className="space-y-6">
-          {/* Enthousiasme-scan sectie */}
-          <Card className="p-6">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">
-                  <Heart className="w-5 h-5 text-yellow-600" />
-                </div>
-                <h2 className="text-xl font-bold text-gray-900">Enthousiasme-scan</h2>
-              </div>
-              <Button
-                onClick={() => setEditEnthousiasmeOpen(true)}
-                variant="outline"
-                className="gap-2 rounded-xl"
-                disabled={!data.enthousiasme}
-              >
-                <Edit className="w-4 h-4" />
-                Bewerk
-              </Button>
-            </div>
-            
-            {data.enthousiasme ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                <div className="space-y-2">
-                  <p><strong>Kindertijd activiteiten:</strong> {data.enthousiasme.kindertijd_liefste_activiteiten?.substring(0, 100)}...</p>
-                  <p><strong>Favoriete plekken:</strong> {data.enthousiasme.kindertijd_favoriete_plekken?.substring(0, 100)}...</p>
-                  <p><strong>Interesses:</strong> {data.enthousiasme.kindertijd_interesses?.substring(0, 100)}...</p>
-                </div>
-                <div className="space-y-2">
-                  <p><strong>School vakken:</strong> {data.enthousiasme.school_interessantste_vakken?.substring(0, 100)}...</p>
-                  <p><strong>Werk aspecten:</strong> {data.enthousiasme.eerste_werk_leukste_aspecten?.substring(0, 100)}...</p>
-                  <p><strong>Werkomgeving:</strong> {data.enthousiasme.werkomgeving_aantrekkelijke_elementen?.substring(0, 100)}...</p>
-                </div>
-              </div>
-            ) : (
-              <p className="text-gray-500">Nog geen enthousiasme-scan ingevuld</p>
-            )}
-          </Card>
+        {loading && (
+          <div className="text-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <p className="text-gray-600">Rapport wordt geladen...</p>
+          </div>
+        )}
 
-          {/* Wensberoepen sectie */}
-          <Card className="p-6">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                  <Target className="w-5 h-5 text-blue-600" />
-                </div>
-                <h2 className="text-xl font-bold text-gray-900">Wensberoepen</h2>
+        {error && (
+          <Card className="p-8 text-center border-red-200 bg-red-50">
+            <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
+            <h2 className="text-xl font-bold text-vinster-blue mb-2">Fout bij laden rapport</h2>
+            <p className="text-gray-700 mb-4">{error}</p>
+            <Button onClick={() => window.location.reload()} className="bg-blue-600 hover:bg-blue-700 text-white">
+              Probeer opnieuw
+            </Button>
+          </Card>
+        )}
+
+        {rapportData && (
+          <div className="space-y-8">
+            {/* Top Functies */}
+            <Card className="p-8 border-0 rounded-3xl" style={{ backgroundColor: '#E6F0F6' }}>
+              <div className="flex items-center gap-3 mb-6">
+                <Target className="w-6 h-6" style={{ color: '#78BFE3' }} />
+                <h2 className="text-2xl font-bold text-vinster-blue">Jouw top functies</h2>
               </div>
-              <Button
-                onClick={() => setEditWensberoepenOpen(true)}
-                variant="outline"
-                className="gap-2 rounded-xl"
-                disabled={!data.wensberoepen}
-              >
-                <Edit className="w-4 h-4" />
-                Bewerk
-              </Button>
-            </div>
-            
-            {data.wensberoepen ? (
+              <div className="grid gap-4">
+                {rapportData.top_functies?.map((functie: any, index: number) => (
+                  <div key={index} className="bg-white p-6 rounded-xl">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center">
+                        <span className="font-bold text-vinster-blue">{index + 1}</span>
+                      </div>
+                      <h3 className="text-xl font-bold text-vinster-blue">{functie.naam}</h3>
+                    </div>
+                    <p className="text-gray-700 leading-relaxed">{functie.beschrijving}</p>
+                  </div>
+                ))}
+              </div>
+            </Card>
+
+            {/* Enthousiasme Samenvatting */}
+            <Card className="p-8 border-0 rounded-3xl bg-white">
+              <div className="flex items-center gap-3 mb-6">
+                <Heart className="w-6 h-6 text-red-500" />
+                <h2 className="text-2xl font-bold text-vinster-blue">Wat jou enthousiast maakt</h2>
+              </div>
               <div className="space-y-4">
-                {[1, 2, 3].map((num) => {
-                  const titel = data.wensberoepen[`wensberoep_${num}_titel`];
-                  if (!titel) return null;
-                  
-                  return (
-                    <div key={num} className="border-l-4 border-blue-400 pl-4">
-                      <h3 className="font-semibold text-gray-900">{num}. {titel}</h3>
-                      <p className="text-sm text-gray-600 mt-1">
-                        {data.wensberoepen[`wensberoep_${num}_werkweek_activiteiten`]?.substring(0, 150)}...
-                      </p>
-                    </div>
-                  );
-                })}
+                <div>
+                  <h3 className="text-lg font-semibold text-vinster-blue mb-2">Belangrijkste activiteiten:</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {rapportData.belangrijkste_activiteiten?.map((activiteit: string, index: number) => (
+                      <span key={index} className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">
+                        {activiteit}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-vinster-blue mb-2">Ideale werkomgeving:</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {rapportData.ideale_werkomgeving?.map((omgeving: string, index: number) => (
+                      <span key={index} className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+                        {omgeving}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-vinster-blue mb-2">Interessegebieden:</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {rapportData.interessegebieden?.map((interesse: string, index: number) => (
+                      <span key={index} className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">
+                        {interesse}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
-            ) : (
-              <p className="text-gray-500">Nog geen wensberoepen ingevuld</p>
-            )}
-          </Card>
+            </Card>
 
-          {/* Extra informatie sectie */}
-          <Card className="p-6">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                  <Info className="w-5 h-5 text-blue-600" />
-                </div>
-                <h2 className="text-xl font-bold text-gray-900">Extra informatie</h2>
+            {/* Persoonlijke Informatie */}
+            <Card className="p-8 border-0 rounded-3xl bg-white">
+              <div className="flex items-center gap-3 mb-6">
+                <User className="w-6 h-6 text-blue-600" />
+                <h2 className="text-2xl font-bold text-vinster-blue">Jouw profiel</h2>
               </div>
-              <Button
-                onClick={() => setEditExtraInfoOpen(true)}
-                variant="outline"
-                className="gap-2 rounded-xl"
-                disabled={!data.extraInformatie}
-              >
-                <Edit className="w-4 h-4" />
-                Bewerk
-              </Button>
-            </div>
-            
-            {data.extraInformatie ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                <div className="space-y-2">
-                  <p><strong>Opleidingsniveau:</strong> {data.extraInformatie.opleidingsniveau}</p>
-                  <p><strong>Beroepsopleiding:</strong> {data.extraInformatie.beroepsopleiding?.substring(0, 100)}...</p>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h3 className="text-lg font-semibold text-vinster-blue mb-2">Opleidingsniveau:</h3>
+                  <p className="text-gray-700">{rapportData.opleidingsniveau || 'Niet opgegeven'}</p>
                 </div>
-                <div className="space-y-2">
-                  <p><strong>Fysieke beperkingen:</strong> {data.extraInformatie.fysieke_beperkingen?.substring(0, 100) || 'Geen'}</p>
-                  <p><strong>Sector voorkeur:</strong> {data.extraInformatie.sector_voorkeur?.substring(0, 100) || 'Geen voorkeur'}</p>
+                <div>
+                  <h3 className="text-lg font-semibold text-vinster-blue mb-2">Beroepsopleiding:</h3>
+                  <p className="text-gray-700">{rapportData.beroepsopleiding || 'Niet opgegeven'}</p>
                 </div>
+                {rapportData.fysieke_beperkingen && (
+                  <div>
+                    <h3 className="text-lg font-semibold text-vinster-blue mb-2">Aandachtspunten:</h3>
+                    <p className="text-gray-700">{rapportData.fysieke_beperkingen}</p>
+                  </div>
+                )}
+                {rapportData.sector_voorkeur && (
+                  <div>
+                    <h3 className="text-lg font-semibold text-vinster-blue mb-2">Sectorvoorkeur:</h3>
+                    <p className="text-gray-700">{rapportData.sector_voorkeur}</p>
+                  </div>
+                )}
               </div>
-            ) : (
-              <p className="text-gray-500">Nog geen extra informatie ingevuld</p>
-            )}
-          </Card>
+            </Card>
 
-          {/* Prioriteiten sectie */}
-          <Card className="p-6">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">
-                  <Activity className="w-5 h-5 text-yellow-600" />
-                </div>
-                <h2 className="text-xl font-bold text-gray-900">Prioriteiten</h2>
+            {/* Advies sectie */}
+            <Card className="p-8 border-0 rounded-3xl" style={{ backgroundColor: '#FEF3C7' }}>
+              <div className="flex items-center gap-3 mb-6">
+                <Lightbulb className="w-6 h-6 text-yellow-600" />
+                <h2 className="text-2xl font-bold text-vinster-blue">Jouw vervolgstappen</h2>
               </div>
-              <Button
-                onClick={() => setEditPrioriteitenOpen(true)}
-                variant="outline"
-                className="gap-2 rounded-xl"
-                disabled={!data.prioriteiten}
-              >
-                <Edit className="w-4 h-4" />
-                Bewerk
-              </Button>
-            </div>
-            
-            {data.prioriteiten ? (
               <div className="space-y-4">
-                {data.prioriteiten.selected_activiteiten_keywords && (
-                  <div>
-                    <h3 className="font-medium text-gray-900 mb-2">Geselecteerde activiteiten:</h3>
-                    <div className="flex flex-wrap gap-2">
-                      {data.prioriteiten.selected_activiteiten_keywords.map((keyword: string, index: number) => (
-                        <span key={index} className="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-sm">
-                          {keyword}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-                
-                {data.prioriteiten.selected_werkomstandigheden_keywords && (
-                  <div>
-                    <h3 className="font-medium text-gray-900 mb-2">Geselecteerde werkomstandigheden:</h3>
-                    <div className="flex flex-wrap gap-2">
-                      {data.prioriteiten.selected_werkomstandigheden_keywords.map((keyword: string, index: number) => (
-                        <span key={index} className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">
-                          {keyword}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {data.prioriteiten.selected_interesses_keywords && (
-                  <div>
-                    <h3 className="font-medium text-gray-900 mb-2">Geselecteerde interesses:</h3>
-                    <div className="flex flex-wrap gap-2">
-                      {data.prioriteiten.selected_interesses_keywords.map((keyword: string, index: number) => (
-                        <span key={index} className="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-sm">
-                          {keyword}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
+                <p className="text-gray-700 leading-relaxed">
+                  Gebaseerd op jouw profiel raden we je aan om verder onderzoek te doen naar de voorgestelde functies. 
+                  Kijk naar vacatures, zoek contactpersonen op LinkedIn en informeer naar de dagelijkse praktijk van deze beroepen.
+                </p>
+                <div className="bg-white p-4 rounded-lg">
+                  <h3 className="font-semibold text-vinster-blue mb-2">Aanbevolen acties:</h3>
+                  <ul className="list-disc list-inside space-y-1 text-gray-700">
+                    <li>Zoek vacatures voor de voorgestelde functies</li>
+                    <li>Maak een lijst van bedrijven die je interesseren</li>
+                    <li>Zoek contactpersonen via LinkedIn</li>
+                    <li>Informeer naar benodigde aanvullende vaardigheden</li>
+                    <li>Overweeg een zoekprofiel aan te maken</li>
+                  </ul>
+                </div>
               </div>
-            ) : (
-              <p className="text-gray-500">Nog geen prioriteiten ingevuld</p>
-            )}
-          </Card>
-        </div>
+            </Card>
+
+            {/* Download sectie */}
+            <Card className="p-8 text-center border-0 rounded-3xl bg-white">
+              <FileText className="w-16 h-16 text-blue-600 mx-auto mb-4" />
+              <h2 className="text-2xl font-bold text-vinster-blue mb-4">Download je volledige rapport</h2>
+              <p className="text-gray-700 mb-6">
+                Krijg toegang tot je complete persoonlijke loopbaananalyse in PDF-formaat.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button
+                  onClick={() => navigate('/rapport-download')}
+                  className="bg-yellow-400 hover:bg-yellow-500 text-vinster-blue font-bold px-8 py-3 rounded-xl"
+                  size="lg"
+                >
+                  <Download className="w-5 h-5 mr-2" />
+                  Download rapport (PDF)
+                </Button>
+                <Button
+                  onClick={() => navigate('/onderzoeksplan')}
+                  variant="outline"
+                  className="border-blue-600 text-blue-600 hover:bg-blue-50 px-8 py-3 rounded-xl"
+                  size="lg"
+                >
+                  <Search className="w-5 h-5 mr-2" />
+                  Bekijk onderzoeksplan
+                </Button>
+              </div>
+            </Card>
+          </div>
+        )}
 
         {/* Navigation */}
         <div className="flex justify-between items-center mt-8">
           <Button
-            onClick={() => navigate("/home")}
+            onClick={() => navigate("/")}
             className="bg-blue-900 hover:bg-blue-800 text-white rounded-xl"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
@@ -262,44 +232,13 @@ const RapportReview = () => {
           </Button>
           
           <Button
-            onClick={handleGenerateReports}
-            disabled={generating || !data.enthousiasme || !data.wensberoepen}
-            className="bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl"
-            size="lg"
+            onClick={() => navigate("/zoekprofiel-intro")}
+            className="bg-yellow-500 hover:bg-yellow-600 text-vinster-blue rounded-xl"
           >
-            {generating ? "Loopbaanrapport genereren..." : "Genereer mijn loopbaanrapport"}
-            <ArrowRight className="w-5 h-5 ml-2" />
+            Maak zoekprofiel
+            <ArrowRight className="w-4 h-4 ml-2" />
           </Button>
         </div>
-
-        {/* Edit Dialogs */}
-        <EditEnthousiasmeDialog
-          open={editEnthousiasmeOpen}
-          onOpenChange={setEditEnthousiasmeOpen}
-          data={data.enthousiasme}
-          onSave={refreshData}
-        />
-
-        <EditWensberoepenDialog
-          open={editWensberoepenOpen}
-          onOpenChange={setEditWensberoepenOpen}
-          data={data.wensberoepen}
-          onSave={refreshData}
-        />
-
-        <EditExtraInfoDialog
-          open={editExtraInfoOpen}
-          onOpenChange={setEditExtraInfoOpen}
-          data={data.extraInformatie}
-          onSave={refreshData}
-        />
-
-        <EditPrioriteitenDialog
-          open={editPrioriteitenOpen}
-          onOpenChange={setEditPrioriteitenOpen}
-          data={data.prioriteiten}
-          onSave={refreshData}
-        />
       </div>
     </div>
   );
