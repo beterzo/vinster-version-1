@@ -36,73 +36,82 @@ const Dashboard = () => {
   const [downloadingRapport, setDownloadingRapport] = useState(false);
   const [downloadingZoekprofiel, setDownloadingZoekprofiel] = useState(false);
 
-  // Calculate progress for each section
+  // Calculate progress based on completed pages
   const enthousiasmeProgress = useMemo(() => {
     if (enthousiasmeLoading || !enthousiasmeResponses) return 0;
     
-    const fields = [
-      enthousiasmeResponses.kindertijd_activiteiten,
-      enthousiasmeResponses.kindertijd_interesses_nieuw,
-      enthousiasmeResponses.kindertijd_plekken,
-      enthousiasmeResponses.eerste_werk_onderwerpen,
-      enthousiasmeResponses.eerste_werk_werkomstandigheden,
-      enthousiasmeResponses.eerste_werk_leukste_taken,
-      enthousiasmeResponses.leuk_project_en_rol,
-      enthousiasmeResponses.plezierige_werkperiode_beschrijving,
-      enthousiasmeResponses.fluitend_thuiskomen_dag
-    ];
+    // Check each page completion (3 pages total, 33.33% each)
+    const page1Complete = !!(
+      enthousiasmeResponses.kindertijd_activiteiten?.trim() &&
+      enthousiasmeResponses.kindertijd_plekken?.trim() &&
+      enthousiasmeResponses.kindertijd_interesses_nieuw?.trim()
+    );
     
-    const filledFields = fields.filter(field => field && field.trim() !== '').length;
-    return Math.round((filledFields / fields.length) * 100);
+    const page2Complete = !!(
+      enthousiasmeResponses.eerste_werk_leukste_taken?.trim() &&
+      enthousiasmeResponses.eerste_werk_werkomstandigheden?.trim() &&
+      enthousiasmeResponses.eerste_werk_onderwerpen?.trim()
+    );
+    
+    const page3Complete = !!(
+      enthousiasmeResponses.plezierige_werkperiode_beschrijving?.trim() &&
+      enthousiasmeResponses.leuk_project_en_rol?.trim() &&
+      enthousiasmeResponses.fluitend_thuiskomen_dag?.trim()
+    );
+    
+    const completedPages = [page1Complete, page2Complete, page3Complete].filter(Boolean).length;
+    return Math.round((completedPages / 3) * 100);
   }, [enthousiasmeResponses, enthousiasmeLoading]);
 
   const wensberoepenProgress = useMemo(() => {
     if (wensberoepenLoading || !wensberoepenResponses) return 0;
     
+    // Check each wensberoep page completion (3 pages total, 33.33% each)
     const fieldSuffixes = [
       'titel', 'werkweek_activiteiten', 'werklocatie_omgeving', 'samenwerking_contacten',
       'fluitend_thuiskomen_dag', 'werk_doel', 'leukste_onderdelen', 'belangrijke_aspecten', 'kennis_focus'
     ];
     
-    const wensberoepPrefixes = ['wensberoep_1', 'wensberoep_2', 'wensberoep_3'];
-    let totalFields = 0;
-    let filledFields = 0;
-    
-    wensberoepPrefixes.forEach(prefix => {
-      fieldSuffixes.forEach(suffix => {
-        totalFields++;
-        const fieldName = `${prefix}_${suffix}`;
-        const value = wensberoepenResponses[fieldName as keyof typeof wensberoepenResponses];
-        if (value && String(value).trim() !== '') filledFields++;
-      });
+    const wensberoep1Complete = fieldSuffixes.every(suffix => {
+      const fieldName = `wensberoep_1_${suffix}`;
+      const value = wensberoepenResponses[fieldName as keyof typeof wensberoepenResponses];
+      return value && String(value).trim() !== '';
     });
     
-    return Math.round((filledFields / totalFields) * 100);
+    const wensberoep2Complete = fieldSuffixes.every(suffix => {
+      const fieldName = `wensberoep_2_${suffix}`;
+      const value = wensberoepenResponses[fieldName as keyof typeof wensberoepenResponses];
+      return value && String(value).trim() !== '';
+    });
+    
+    const wensberoep3Complete = fieldSuffixes.every(suffix => {
+      const fieldName = `wensberoep_3_${suffix}`;
+      const value = wensberoepenResponses[fieldName as keyof typeof wensberoepenResponses];
+      return value && String(value).trim() !== '';
+    });
+    
+    const completedPages = [wensberoep1Complete, wensberoep2Complete, wensberoep3Complete].filter(Boolean).length;
+    return Math.round((completedPages / 3) * 100);
   }, [wensberoepenResponses, wensberoepenLoading]);
 
   const extraInformatieProgress = useMemo(() => {
     if (extraInformatieLoading || !extraInformatieResponses) return 0;
     
-    const fields = [
-      extraInformatieResponses.opleidingsniveau,
-      extraInformatieResponses.beroepsopleiding,
-      extraInformatieResponses.sector_voorkeur,
-      extraInformatieResponses.fysieke_beperkingen
-    ];
-    
-    const filledFields = fields.filter(field => field && field.trim() !== '').length;
-    return Math.round((filledFields / fields.length) * 100);
+    // Extra informatie is a single page - either 0% or 100%
+    const isComplete = !!(extraInformatieResponses.opleidingsniveau?.trim());
+    return isComplete ? 100 : 0;
   }, [extraInformatieResponses, extraInformatieLoading]);
 
   const prioriteitenProgress = useMemo(() => {
     if (prioriteitenLoading || !prioriteitenResponses) return 0;
     
-    const hasActiviteiten = prioriteitenResponses.selected_activiteiten_keywords && prioriteitenResponses.selected_activiteiten_keywords.length > 0;
-    const hasInteresses = prioriteitenResponses.selected_interesses_keywords && prioriteitenResponses.selected_interesses_keywords.length > 0;
-    const hasWerkomstandigheden = prioriteitenResponses.selected_werkomstandigheden_keywords && prioriteitenResponses.selected_werkomstandigheden_keywords.length > 0;
+    // Check each prioriteiten page completion (3 pages total, 33.33% each)
+    const activiteitenComplete = !!(prioriteitenResponses.selected_activiteiten_keywords && prioriteitenResponses.selected_activiteiten_keywords.length > 0);
+    const werkomstandighedenComplete = !!(prioriteitenResponses.selected_werkomstandigheden_keywords && prioriteitenResponses.selected_werkomstandigheden_keywords.length > 0);
+    const interessesComplete = !!(prioriteitenResponses.selected_interesses_keywords && prioriteitenResponses.selected_interesses_keywords.length > 0);
     
-    const completedSections = [hasActiviteiten, hasInteresses, hasWerkomstandigheden].filter(Boolean).length;
-    return Math.round((completedSections / 3) * 100);
+    const completedPages = [activiteitenComplete, werkomstandighedenComplete, interessesComplete].filter(Boolean).length;
+    return Math.round((completedPages / 3) * 100);
   }, [prioriteitenResponses, prioriteitenLoading]);
 
   // Completion states

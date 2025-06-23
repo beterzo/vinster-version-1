@@ -31,11 +31,6 @@ const ProgressStep = ({
           <div className="flex-1 space-y-2">
             <h3 className="font-semibold text-gray-900 text-base text-left">{title}</h3>
             <div className="space-y-1">
-              <div className="flex justify-between items-center">
-                <span className="text-xs text-gray-500">
-                  {isCompleted ? '✔️ Klaar' : `${progress}% voltooid`}
-                </span>
-              </div>
               <Progress value={progress} className="h-1.5 bg-gray-100" />
             </div>
           </div>
@@ -54,11 +49,6 @@ const ProgressStep = ({
             </div>
             
             <div className="space-y-2">
-              <div className="flex justify-between items-center">
-                <span className="text-xs text-gray-500">
-                  {isCompleted ? '✔️ Klaar' : `${progress}% voltooid`}
-                </span>
-              </div>
               <Progress value={progress} className="h-2 bg-gray-100" />
             </div>
           </div>
