@@ -1,52 +1,43 @@
-
 import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
-
 const DashboardHeader = () => {
-  const { signOut } = useAuth();
+  const {
+    signOut
+  } = useAuth();
   const navigate = useNavigate();
-  const { toast } = useToast();
-
+  const {
+    toast
+  } = useToast();
   const handleLogout = async () => {
-    const { error } = await signOut();
+    const {
+      error
+    } = await signOut();
     if (error) {
       toast({
         title: "Fout bij uitloggen",
         description: error.message,
-        variant: "destructive",
+        variant: "destructive"
       });
     } else {
       toast({
         title: "Succesvol uitgelogd",
-        description: "Tot ziens!",
+        description: "Tot ziens!"
       });
       navigate("/");
     }
   };
-
-  return (
-    <div className="flex justify-between items-center mb-8">
+  return <div className="flex justify-between items-center mb-8">
       <div className="flex items-center">
-        <img 
-          alt="Vinster Logo" 
-          className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200 mr-4" 
-          onClick={() => navigate('/')} 
-          src="/lovable-uploads/846d1ec8-bb91-46f6-a16d-1b1c39ebe829.png" 
-        />
-        <h1 className="text-2xl font-bold text-blue-900">Dashboard</h1>
+        <img alt="Vinster Logo" className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200 mr-4" onClick={() => navigate('/')} src="/lovable-uploads/846d1ec8-bb91-46f6-a16d-1b1c39ebe829.png" />
+        
       </div>
-      <Button 
-        onClick={handleLogout}
-        className="bg-white hover:bg-gray-100 text-blue-900 font-semibold px-6 py-3 rounded-full border border-gray-200 shadow-sm transition-all duration-200 flex items-center space-x-2"
-      >
+      <Button onClick={handleLogout} className="bg-white hover:bg-gray-100 text-blue-900 font-semibold px-6 py-3 rounded-full border border-gray-200 shadow-sm transition-all duration-200 flex items-center space-x-2">
         <LogOut className="w-4 h-4" />
         <span>Uitloggen</span>
       </Button>
-    </div>
-  );
+    </div>;
 };
-
 export default DashboardHeader;
