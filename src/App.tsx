@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -25,6 +26,20 @@ import OnderzoeksplanPagina from "./pages/OnderzoeksplanPagina";
 import ZoekprofielIntro from "./pages/ZoekprofielIntro";
 import ZoekprofielVragen from "./pages/ZoekprofielVragen";
 import ZoekprofielDownload from "./pages/ZoekprofielDownload";
+import EnthousiasmeIntro from "./pages/EnthousiasmeIntro";
+import EnthousiasmeStep1 from "./pages/EnthousiasmeStep1";
+import EnthousiasmeStep2 from "./pages/EnthousiasmeStep2";
+import EnthousiasmeStep3 from "./pages/EnthousiasmeStep3";
+import WensberoepenIntro from "./pages/WensberoepenIntro";
+import WensberoepenStep1 from "./pages/WensberoepenStep1";
+import WensberoepenStep2 from "./pages/WensberoepenStep2";
+import WensberoepenStep3 from "./pages/WensberoepenStep3";
+import WensberoepenVoltooiPagina from "./pages/WensberoepenVoltooiPagina";
+import ProfielVoltooienIntro from "./pages/ProfielVoltooienIntro";
+import ExtraInformatieVragen from "./pages/ExtraInformatieVragen";
+import PrioriteitenActiviteiten from "./pages/PrioriteitenActiviteiten";
+import PrioriteitenInteresses from "./pages/PrioriteitenInteresses";
+import PrioriteitenWerkomstandigheden from "./pages/PrioriteitenWerkomstandigheden";
 
 const queryClient = new QueryClient();
 
