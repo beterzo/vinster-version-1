@@ -41,7 +41,7 @@ const MobileMenu = () => {
         </Button>
       </DrawerTrigger>
       <DrawerContent className="bg-white">
-        <DrawerHeader className="flex items-center justify-between">
+        <DrawerHeader className="flex items-center justify-between px-6">
           <DrawerTitle className="text-xl font-bold text-vinster-blue">
             Menu
           </DrawerTitle>
@@ -57,7 +57,7 @@ const MobileMenu = () => {
               <button
                 key={item.path}
                 onClick={() => handleNavigation(item.path)}
-                className="block w-full text-left py-3 px-4 text-lg font-medium text-gray-700 hover:bg-gray-50 hover:text-vinster-blue rounded-lg transition-colors duration-200"
+                className="block w-full text-left py-3 px-0 text-lg font-medium text-gray-700 hover:bg-gray-50 hover:text-vinster-blue rounded-lg transition-colors duration-200"
               >
                 {item.title}
               </button>
