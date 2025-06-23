@@ -36,7 +36,7 @@ const WhatDoYouGetCard = () => {
             <CheckCircle className="w-5 h-5 md:w-6 md:h-6 flex-shrink-0 mt-1" style={{
             color: '#FFCD3E'
           }} />
-            <span className="text-left">Nieuw perspectief, zonder dat je meteen iets moet</span>
+            <span className="text-left">Een zoekprofiel voor jouw uiteindelijke keuze</span>
           </li>
         </ul>
       </div>
