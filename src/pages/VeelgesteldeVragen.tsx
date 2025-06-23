@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import {
@@ -8,6 +7,7 @@ import {
 } from "@/components/ui/collapsible";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
+import Footer from "@/components/Footer";
 
 const VeelgesteldeVragen = () => {
   const navigate = useNavigate();
@@ -119,6 +119,8 @@ const VeelgesteldeVragen = () => {
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 };

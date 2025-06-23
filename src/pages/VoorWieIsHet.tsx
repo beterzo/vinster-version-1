@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
+import Footer from "@/components/Footer";
 
 const VoorWieIsHet = () => {
   const navigate = useNavigate();
@@ -106,6 +107,8 @@ const VoorWieIsHet = () => {
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 };

@@ -4,6 +4,7 @@ import FeatureCards from "@/components/FeatureCards";
 import ProcessSteps from "@/components/ProcessSteps";
 import DataSafetySection from "@/components/DataSafetySection";
 import TestimonialSection from "@/components/TestimonialSection";
+import Footer from "@/components/Footer";
 
 const LandingPage = () => {
   return (
@@ -22,6 +23,9 @@ const LandingPage = () => {
 
       {/* Testimonial Section as Block on Page */}
       <TestimonialSection />
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };

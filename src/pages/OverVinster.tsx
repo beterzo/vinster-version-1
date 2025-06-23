@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import Footer from "@/components/Footer";
 
 const OverVinster = () => {
   const navigate = useNavigate();
@@ -74,6 +75,8 @@ const OverVinster = () => {
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 };

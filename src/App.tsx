@@ -19,6 +19,8 @@ import OverVinster from "./pages/OverVinster";
 import VoorWieIsHet from "./pages/VoorWieIsHet";
 import VeelgesteldeVragen from "./pages/VeelgesteldeVragen";
 import Contact from "./pages/Contact";
+import PrivacyVerklaring from "./pages/PrivacyVerklaring";
+import AlgemeneVoorwaarden from "./pages/AlgemeneVoorwaarden";
 import RapportReview from "./pages/RapportReview";
 import RapportDownload from "./pages/RapportDownload";
 import OnderzoeksplanPagina from "./pages/OnderzoeksplanPagina";
@@ -120,6 +122,8 @@ const App = () => {
               <Route path="/voor-wie-is-het" element={<VoorWieIsHet />} />
               <Route path="/veelgestelde-vragen" element={<VeelgesteldeVragen />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/privacy-verklaring" element={<PrivacyVerklaring />} />
+              <Route path="/algemene-voorwaarden" element={<AlgemeneVoorwaarden />} />
               
               {/* Legacy redirect from old de-mens-achter-vinster to new over-vinster */}
               <Route path="/de-mens-achter-vinster" element={<Navigate to="/over-vinster" replace />} />
