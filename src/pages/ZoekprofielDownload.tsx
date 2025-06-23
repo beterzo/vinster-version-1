@@ -85,9 +85,10 @@ const ZoekprofielDownload = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <img 
-            src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" 
+            src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
             alt="Vinster Logo" 
-            className="h-8 w-auto mx-auto mb-8" 
+            className="h-8 w-auto mx-auto mb-8 cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+            onClick={() => navigate('/')}
           />
           
           {isPdfReady && (
