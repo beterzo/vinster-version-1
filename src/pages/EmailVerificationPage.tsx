@@ -3,14 +3,15 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
-import { Link } from "react-router-dom";
-import { Mail, CheckCircle, AlertCircle } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { Mail, CheckCircle, ArrowRight, RefreshCw } from "lucide-react";
 
 const EmailVerificationPage = () => {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { resendConfirmation } = useAuth();
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleResendEmail = async () => {
     if (!email) {
@@ -40,6 +41,10 @@ const EmailVerificationPage = () => {
     }
 
     setIsLoading(false);
+  };
+
+  const handleGoToLogin = () => {
+    navigate('/login');
   };
 
   return (
@@ -86,41 +91,72 @@ const EmailVerificationPage = () => {
               <CheckCircle className="w-5 h-5 text-blue-600 mt-0.5" />
               <div className="text-sm text-blue-800">
                 <p className="font-medium">Email niet ontvangen?</p>
-                <p>Controleer je spam folder of vraag een nieuwe email aan.</p>
+                <p>Controleer je spam folder of kies een van de opties hieronder.</p>
               </div>
             </div>
           </div>
 
-          <div className="space-y-4">
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                Email adres
-              </label>
-              <input
-                id="email"
-                type="email"
-                placeholder="je@email.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              />
+          {/* Two main options */}
+          <div className="space-y-6">
+            {/* Option 1: Resend verification email */}
+            <div className="border border-gray-200 rounded-lg p-6 space-y-4">
+              <div className="flex items-center space-x-3">
+                <RefreshCw className="w-5 h-5 text-blue-600" />
+                <h3 className="font-semibold text-gray-900">Nieuwe verificatie email versturen</h3>
+              </div>
+              
+              <div className="space-y-3">
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                    Email adres
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    placeholder="je@email.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+
+                <Button 
+                  onClick={handleResendEmail}
+                  disabled={isLoading}
+                  className="w-full bg-blue-900 hover:bg-blue-800 text-white"
+                >
+                  {isLoading ? "Versturen..." : "Verstuur nieuwe email"}
+                </Button>
+              </div>
             </div>
 
-            <Button 
-              onClick={handleResendEmail}
-              disabled={isLoading}
-              className="w-full bg-blue-900 hover:bg-blue-800 text-white"
-            >
-              {isLoading ? "Versturen..." : "Verstuur nieuwe verificatie email"}
-            </Button>
+            {/* Option 2: Go to login */}
+            <div className="border border-gray-200 rounded-lg p-6 space-y-4">
+              <div className="flex items-center space-x-3">
+                <ArrowRight className="w-5 h-5 text-green-600" />
+                <h3 className="font-semibold text-gray-900">Al geverifieerd?</h3>
+              </div>
+              
+              <p className="text-sm text-gray-600 mb-4">
+                Als je account al geverifieerd is, kun je direct inloggen.
+              </p>
+              
+              <Button 
+                onClick={handleGoToLogin}
+                variant="outline"
+                className="w-full border-green-600 text-green-600 hover:bg-green-50"
+              >
+                Ga naar inloggen
+              </Button>
+            </div>
           </div>
 
           <div className="text-center">
             <Link 
-              to="/login" 
+              to="/" 
               className="text-sm text-blue-600 hover:text-blue-800 underline"
             >
-              Terug naar inloggen
+              Terug naar startpagina
             </Link>
           </div>
         </div>
