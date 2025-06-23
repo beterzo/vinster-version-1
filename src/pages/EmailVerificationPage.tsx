@@ -133,7 +133,7 @@ const EmailVerificationPage = () => {
             {/* Option 2: Go to login */}
             <div className="border border-gray-200 rounded-lg p-6 space-y-4">
               <div className="flex items-center space-x-3">
-                <ArrowRight className="w-5 h-5 text-green-600" />
+                <ArrowRight className="w-5 h-5" style={{ color: '#E4C05B' }} />
                 <h3 className="font-semibold text-gray-900">Al geverifieerd?</h3>
               </div>
               
@@ -144,7 +144,11 @@ const EmailVerificationPage = () => {
               <Button 
                 onClick={handleGoToLogin}
                 variant="outline"
-                className="w-full border-green-600 text-green-600 hover:bg-green-50"
+                className="w-full hover:bg-yellow-50"
+                style={{ 
+                  borderColor: '#E4C05B', 
+                  color: '#E4C05B'
+                }}
               >
                 Ga naar inloggen
               </Button>
