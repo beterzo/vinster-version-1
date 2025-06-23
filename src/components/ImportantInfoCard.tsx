@@ -1,3 +1,4 @@
+
 import { Card } from "@/components/ui/card";
 const ImportantInfoCard = () => {
   return <Card className="p-6 border-0 rounded-3xl text-white flex flex-col text-left h-full w-full" style={{
@@ -12,6 +13,14 @@ const ImportantInfoCard = () => {
         <li className="flex items-start gap-3">
           <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
           <span>Denk aan concrete situaties en ervaringen uit jouw leven</span>
+        </li>
+        <li className="flex items-start gap-3">
+          <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+          <span>Neem de tijd om rustig na te denken tussen de stappen door</span>
+        </li>
+        <li className="flex items-start gap-3">
+          <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+          <span>Laat je antwoorden een dag bezinken voordat je verdergaat naar de volgende stap</span>
         </li>
         <li className="flex items-start gap-3">
           <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
