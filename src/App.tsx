@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -16,20 +15,10 @@ import AuthCallbackPage from "./pages/AuthCallbackPage";
 import NotFound from "./pages/NotFound";
 import PaymentRequired from "./pages/PaymentRequired";
 import DeMensAchterVinster from "./pages/DeMensAchterVinster";
-import EnthousiasmeIntro from "./pages/EnthousiasmeIntro";
-import EnthousiasmeStep1 from "./pages/EnthousiasmeStep1";
-import EnthousiasmeStep2 from "./pages/EnthousiasmeStep2";
-import EnthousiasmeStep3 from "./pages/EnthousiasmeStep3";
-import WensberoepenIntro from "./pages/WensberoepenIntro";
-import WensberoepenStep1 from "./pages/WensberoepenStep1";
-import WensberoepenStep2 from "./pages/WensberoepenStep2";
-import WensberoepenStep3 from "./pages/WensberoepenStep3";
-import WensberoepenVoltooiPagina from "./pages/WensberoepenVoltooiPagina";
-import ProfielVoltooienIntro from "./pages/ProfielVoltooienIntro";
-import ExtraInformatieVragen from "./pages/ExtraInformatieVragen";
-import PrioriteitenActiviteiten from "./pages/PrioriteitenActiviteiten";
-import PrioriteitenInteresses from "./pages/PrioriteitenInteresses";
-import PrioriteitenWerkomstandigheden from "./pages/PrioriteitenWerkomstandigheden";
+import OverVinster from "./pages/OverVinster";
+import VoorWieIsHet from "./pages/VoorWieIsHet";
+import VeelgesteldeVragen from "./pages/VeelgesteldeVragen";
+import Contact from "./pages/Contact";
 import RapportReview from "./pages/RapportReview";
 import RapportDownload from "./pages/RapportDownload";
 import OnderzoeksplanPagina from "./pages/OnderzoeksplanPagina";
@@ -114,6 +103,10 @@ const App = () => {
                 } 
               />
               <Route path="/de-mens-achter-vinster" element={<DeMensAchterVinster />} />
+              <Route path="/over-vinster" element={<OverVinster />} />
+              <Route path="/voor-wie-is-het" element={<VoorWieIsHet />} />
+              <Route path="/veelgestelde-vragen" element={<VeelgesteldeVragen />} />
+              <Route path="/contact" element={<Contact />} />
               
               {/* Protected routes that require payment */}
               <Route
