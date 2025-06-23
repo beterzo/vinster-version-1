@@ -10,10 +10,10 @@ const TestimonialSection = () => {
       }}>
         {/* Slightly darker overlay for better text readability */}
         <div className="absolute inset-0 bg-black bg-opacity-30"></div>
-        <div className="relative z-10 px-12 py-16 flex items-center min-h-[300px] justify-end">
-          {/* Text positioned on the right */}
+        <div className="relative z-10 px-12 py-16 flex items-center min-h-[300px]">
+          {/* Text positioned on the left */}
           <div className="max-w-lg">
-            <blockquote className="text-3xl font-bold leading-tight text-right" style={{
+            <blockquote className="text-3xl font-bold leading-tight text-left" style={{
               color: '#FFFFFF',
               textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
             }}>
