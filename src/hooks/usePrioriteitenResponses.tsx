@@ -116,6 +116,18 @@ export const usePrioriteitenResponses = () => {
     }
   };
 
+  // Check if a category has minimum 3 keywords selected
+  const hasMinimumKeywords = (category: 'activiteiten' | 'werkomstandigheden' | 'interesses') => {
+    const fieldMap = {
+      activiteiten: 'selected_activiteiten_keywords',
+      werkomstandigheden: 'selected_werkomstandigheden_keywords',
+      interesses: 'selected_interesses_keywords'
+    };
+    
+    const keywords = responses[fieldMap[category]] || [];
+    return keywords.length >= 3;
+  };
+
   // Direct save function for keyword selections - saves immediately to Supabase
   const saveKeywordSelection = async (category: 'activiteiten' | 'werkomstandigheden' | 'interesses', keywords: string[]) => {
     if (!user) return false;
@@ -212,9 +224,11 @@ export const usePrioriteitenResponses = () => {
     }
   };
 
-  // Check if a page has been visited/used (any data entered)
+  // Check if a page has been visited/used (any data entered AND minimum keywords)
   const isPageComplete = (keywords?: string[], extraText?: string) => {
-    return (keywords && keywords.length > 0) || (extraText && extraText.trim() !== '');
+    const hasMinKeywords = keywords && keywords.length >= 3;
+    const hasExtraText = extraText && extraText.trim() !== '';
+    return hasMinKeywords || hasExtraText;
   };
 
   const isCompleted = () => {
@@ -252,6 +266,7 @@ export const usePrioriteitenResponses = () => {
     loading,
     saveResponses,
     saveKeywordSelection,
+    hasMinimumKeywords,
     isCompleted: isCompleted(),
     progress: getProgress()
   };

@@ -9,7 +9,7 @@ import { usePrioriteitenResponses } from "@/hooks/usePrioriteitenResponses";
 
 const PrioriteitenWerkomstandigheden = () => {
   const navigate = useNavigate();
-  const { responses, aiKeywords, saveResponses, saveKeywordSelection, loading } = usePrioriteitenResponses();
+  const { responses, aiKeywords, saveResponses, saveKeywordSelection, hasMinimumKeywords, loading } = usePrioriteitenResponses();
   
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
   const [extraText, setExtraText] = useState("");
@@ -44,6 +44,8 @@ const PrioriteitenWerkomstandigheden = () => {
   };
 
   const keywords = aiKeywords?.werkomstandigheden || [];
+  const canProceed = hasMinimumKeywords('werkomstandigheden') || (extraText && extraText.trim() !== '');
+  const selectedCount = selectedKeywords.length;
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
@@ -93,12 +95,27 @@ const PrioriteitenWerkomstandigheden = () => {
 
         {/* Keywords grid */}
         <Card className="p-6 mb-6">
-          <h2 className="text-xl font-bold mb-4">
-            Kernwoorden gebaseerd op jouw antwoorden
-          </h2>
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-bold">
+              Kernwoorden gebaseerd op jouw antwoorden
+            </h2>
+            <div className="text-sm text-gray-600">
+              <span className={`font-medium ${selectedCount >= 3 ? 'text-green-600' : 'text-orange-600'}`}>
+                {selectedCount}/3 kernwoorden geselecteerd
+              </span>
+            </div>
+          </div>
           <p className="text-gray-600 mb-6">
-            Klik op de werkomstandigheden die voor jou belangrijk zijn. Je selecties worden automatisch opgeslagen.
+            Selecteer minimaal 3 kernwoorden die voor jou belangrijk zijn. Je selecties worden automatisch opgeslagen.
           </p>
+          
+          {selectedCount < 3 && (
+            <div className="mb-4 p-3 bg-orange-50 border border-orange-200 rounded-lg">
+              <p className="text-orange-700 text-sm">
+                ⚠️ Selecteer nog {3 - selectedCount} kernwoord{3 - selectedCount !== 1 ? 'en' : ''} om door te kunnen gaan naar de volgende stap.
+              </p>
+            </div>
+          )}
           
           {keywords.length > 0 ? (
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
@@ -153,7 +170,7 @@ const PrioriteitenWerkomstandigheden = () => {
           <h3 className="text-lg font-bold mb-4">Aanvullende informatie</h3>
           <p className="text-gray-600 mb-4">
             Zijn er andere werkomstandigheden die voor jou belangrijk zijn? 
-            Voeg hier je eigen informatie toe.
+            Voeg hier je eigen informatie toe. (Dit kan een alternatief zijn voor de 3 kernwoorden)
           </p>
           <Textarea
             value={extraText}
@@ -173,15 +190,26 @@ const PrioriteitenWerkomstandigheden = () => {
             Terug
           </Button>
           
-          <Button
-            onClick={handleSave}
-            disabled={loading}
-            className="bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl"
-            size="lg"
-          >
-            {loading ? "Opslaan..." : "Volgende: interesses"}
-            <ArrowRight className="w-5 h-5 ml-2" />
-          </Button>
+          <div className="flex flex-col items-end gap-2">
+            {!canProceed && (
+              <p className="text-sm text-red-600">
+                Selecteer minimaal 3 kernwoorden of voeg aanvullende informatie toe
+              </p>
+            )}
+            <Button
+              onClick={handleSave}
+              disabled={loading || !canProceed}
+              className={`rounded-xl ${
+                canProceed 
+                  ? 'bg-yellow-500 hover:bg-yellow-600 text-white' 
+                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              }`}
+              size="lg"
+            >
+              {loading ? "Opslaan..." : "Volgende: interesses"}
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
+          </div>
         </div>
       </div>
     </div>
