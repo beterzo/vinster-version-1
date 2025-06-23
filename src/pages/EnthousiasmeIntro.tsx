@@ -58,7 +58,7 @@ const EnthousiasmeIntro = () => {
               {/* Start Button */}
               <div className="text-center pt-8">
                 <Button 
-                  onClick={() => navigate('/enthousiasme-stap-1')}
+                  onClick={() => navigate('/enthousiasme-step-1')}
                   className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold text-lg px-12 py-4 rounded-lg"
                 >
                   Start de scan

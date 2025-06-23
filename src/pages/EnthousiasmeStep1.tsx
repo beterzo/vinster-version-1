@@ -129,7 +129,7 @@ const EnthousiasmeStep1 = () => {
                 Terug naar intro
               </Button>
               <Button 
-                onClick={() => navigate('/enthousiasme-stap-2')}
+                onClick={() => navigate('/enthousiasme-step-2')}
                 className={`font-semibold px-8 ${
                   step1Complete
                     ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 

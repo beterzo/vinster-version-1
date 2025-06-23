@@ -122,7 +122,7 @@ const EnthousiasmeStep3 = () => {
             {/* Navigation */}
             <div className="flex justify-between pt-12">
               <Button 
-                onClick={() => navigate('/enthousiasme-stap-2')}
+                onClick={() => navigate('/enthousiasme-step-2')}
                 variant="outline"
                 className="border-blue-900 text-blue-900 hover:bg-blue-50"
               >
