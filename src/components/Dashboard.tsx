@@ -144,7 +144,6 @@ const Dashboard = () => {
     
     setDownloadingRapport(true);
     try {
-      // For now, just navigate to rapport download page
       navigate('/rapport-download');
     } catch (error) {
       console.error('❌ Error downloading rapport:', error);
@@ -200,26 +199,30 @@ const Dashboard = () => {
               {/* Welcome Card - Full Width */}
               <WelcomeCard />
               
-              {/* Bottom Row: Important Info and Progress */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Bottom Row: Important Info and Progress - Equal Heights */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Important Info Card */}
-                <ImportantInfoCard />
+                <div className="flex">
+                  <ImportantInfoCard />
+                </div>
                 
                 {/* Progress Overview */}
-                <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 h-full">
+                <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex flex-col">
                   <h3 className="text-xl font-bold text-gray-900 mb-6">Jouw voortgang</h3>
-                  <ProgressStepsGrid
-                    enthousiasmeProgress={enthousiasmeProgress}
-                    enthousiasmeCompleted={enthousiasmeCompleted}
-                    wensberoepenProgress={wensberoepenProgress}
-                    wensberoepenCompleted={wensberoepenCompleted}
-                    prioriteitenProgress={prioriteitenProgress}
-                    prioriteitenCompleted={prioriteitenCompleted}
-                    extraInformatieProgress={extraInformatieProgress}
-                    extraInformatieCompleted={extraInformatieCompleted}
-                    hasUserReport={hasUserReport}
-                    onStepClick={handleStepClick}
-                  />
+                  <div className="flex-1">
+                    <ProgressStepsGrid
+                      enthousiasmeProgress={enthousiasmeProgress}
+                      enthousiasmeCompleted={enthousiasmeCompleted}
+                      wensberoepenProgress={wensberoepenProgress}
+                      wensberoepenCompleted={wensberoepenCompleted}
+                      prioriteitenProgress={prioriteitenProgress}
+                      prioriteitenCompleted={prioriteitenCompleted}
+                      extraInformatieProgress={extraInformatieProgress}
+                      extraInformatieCompleted={extraInformatieCompleted}
+                      hasUserReport={hasUserReport}
+                      onStepClick={handleStepClick}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
