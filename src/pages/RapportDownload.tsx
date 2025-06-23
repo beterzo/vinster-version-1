@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -7,7 +8,7 @@ import { useRapportGeneration } from "@/hooks/useRapportGeneration";
 
 const RapportDownload = () => {
   const navigate = useNavigate();
-  const { userReport, loadUserReport, loading, downloadPdf, isLoading, rapportData, error } = useRapportGeneration();
+  const { userReport, loadUserReport, loading, downloadPdf } = useRapportGeneration();
   const [pollingInterval, setPollingInterval] = useState<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -123,39 +124,17 @@ const RapportDownload = () => {
             </>
           )}
 
-          {isLoading && (
+          {!userReport && (
             <>
               <div className="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
                 <FileText className="w-8 h-8 text-blue-600 animate-pulse" />
               </div>
               <h1 className="text-xl font-semibold text-vinster-blue mb-2">
-                Rapport wordt gegenereerd...
+                Geen rapport gevonden
               </h1>
               <p className="text-gray-600">
-                Even geduld terwijl we jouw persoonlijke loopbaanrapport genereren.
+                Er is nog geen loopbaanrapport beschikbaar voor je account.
               </p>
-            </>
-          )}
-
-          {rapportData && !isLoading && (
-            <>
-              <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
-                <CheckCircle className="w-8 h-8 text-green-600" />
-              </div>
-              <h1 className="text-xl font-semibold text-vinster-blue mb-2">
-                Rapport klaar!
-              </h1>
-            </>
-          )}
-
-          {error && (
-            <>
-              <div className="mx-auto w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4">
-                <AlertCircle className="w-8 h-8 text-red-600" />
-              </div>
-              <h1 className="text-xl font-semibold text-vinster-blue mb-2">
-                Er is een fout opgetreden
-              </h1>
             </>
           )}
         </div>
@@ -169,6 +148,7 @@ const RapportDownload = () => {
                   {userReport?.report_status === 'completed' && 'Je loopbaanrapport is klaar!'}
                   {userReport?.report_status === 'generating' && 'Je loopbaanrapport wordt gegenereerd!'}
                   {userReport?.report_status === 'failed' && 'Loopbaanrapport generatie mislukt'}
+                  {!userReport && 'Nog geen rapport beschikbaar'}
                 </h2>
                 <p className="text-lg mb-6 opacity-95">
                   {userReport?.report_status === 'completed' && 
@@ -179,6 +159,9 @@ const RapportDownload = () => {
                   }
                   {userReport?.report_status === 'failed' && 
                     'Er is een fout opgetreden bij het genereren. Probeer het opnieuw.'
+                  }
+                  {!userReport && 
+                    'Voltooi eerst je loopbaanrapport op het dashboard.'
                   }
                 </p>
                 
