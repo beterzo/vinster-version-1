@@ -1,3 +1,4 @@
+
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "npm:resend@2.0.0";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.50.0";
@@ -57,13 +58,12 @@ const handler = async (req: Request): Promise<Response> => {
       lastName: user.user_metadata?.last_name
     });
 
-    // Use our own domain for the verification URL to avoid spam filter issues
-    const redirectUrl = 'https://vinster.ai/login';
+    // Direct redirect to login page
+    const redirectUrl = 'https://vinster.ai/login?verified=true';
     console.log("🔗 Using redirect URL:", redirectUrl);
-    console.log("📋 Original redirect from payload:", payload.email_data.redirect_to);
 
-    // Create verification URL that goes through our domain first
-    const verificationUrl = `https://vinster.ai/verify?token=${payload.email_data.token_hash}&type=${payload.email_data.email_action_type}&redirect_to=${redirectUrl}`;
+    // Use Supabase's default verification URL - no custom /verify route needed
+    const verificationUrl = `https://aqajxxevifmhdjlvqhkz.supabase.co/auth/v1/verify?token=${payload.email_data.token_hash}&type=${payload.email_data.email_action_type}&redirect_to=${encodeURIComponent(redirectUrl)}`;
 
     console.log("✅ Verification URL created:", verificationUrl);
     console.log("🔗 Token details:", {
