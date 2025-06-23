@@ -1,18 +1,14 @@
-
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
-
 const HeroSection = () => {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
-
-  return (
-    <div className="relative overflow-hidden">
+  return <div className="relative overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
-        backgroundImage: "url('/lovable-uploads/b67ce5d1-c717-4a77-b5ad-550d88a42378.png')"
-      }}>
+      backgroundImage: "url('/lovable-uploads/b67ce5d1-c717-4a77-b5ad-550d88a42378.png')"
+    }}>
         {/* Overlay for better text readability - made lighter */}
         <div className="absolute inset-0 bg-black bg-opacity-20"></div>
       </div>
@@ -22,21 +18,12 @@ const HeroSection = () => {
         <div className="py-6 flex items-center justify-between">
           {/* Logo - Left side */}
           <div className="flex items-center">
-            <img 
-              src="/lovable-uploads/cc464bcb-5852-4b13-a7bc-43d0d85ec577.png" 
-              alt="Vinster Logo" 
-              className="h-10 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200"
-              onClick={() => navigate('/')}
-            />
+            <img alt="Vinster Logo" className="h-10 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" onClick={() => navigate('/')} src="/lovable-uploads/018d3dfd-bf16-46ee-97e1-36329527be33.png" />
           </div>
           
           {/* Navigation Buttons - Right side */}
           <div className="flex items-center space-x-4">
-            <Button 
-              onClick={() => navigate('/de-mens-achter-vinster')} 
-              variant="outline"
-              className="bg-transparent hover:bg-white hover:bg-opacity-10 text-white font-semibold px-6 py-3 rounded-full border-2 border-white transition-all duration-200"
-            >
+            <Button onClick={() => navigate('/de-mens-achter-vinster')} variant="outline" className="bg-transparent hover:bg-white hover:bg-opacity-10 text-white font-semibold px-6 py-3 rounded-full border-2 border-white transition-all duration-200">
               De mens achter Vinster
             </Button>
             <Button onClick={() => navigate('/login')} className="bg-white hover:bg-gray-100 text-blue-900 font-semibold px-6 py-3 rounded-full border border-gray-200 shadow-sm transition-all duration-200">
@@ -55,18 +42,20 @@ const HeroSection = () => {
             </div>
             
             <h1 className="text-4xl font-bold text-white leading-tight">
-              Welkom bij <span style={{ color: '#FFCD3E' }}>Vinster</span>
+              Welkom bij <span style={{
+              color: '#FFCD3E'
+            }}>Vinster</span>
             </h1>
             
             <p className="text-xl text-white leading-relaxed">
               Voor iedereen die denkt: "Wat wil ik eigenlijk écht met mijn werk?"<br />
-              Of je nu net begint, vastloopt, iets nieuws zoekt of gewoon even wilt heroriënteren – <span style={{ color: '#FFCD3E' }}>Vinster</span> geeft overzicht, houvast en richting.
+              Of je nu net begint, vastloopt, iets nieuws zoekt of gewoon even wilt heroriënteren – <span style={{
+              color: '#FFCD3E'
+            }}>Vinster</span> geeft overzicht, houvast en richting.
             </p>
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default HeroSection;
