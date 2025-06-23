@@ -66,7 +66,7 @@ const PrioriteitenActiviteiten = () => {
             <div className="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">
               <Star className="w-5 h-5 text-yellow-600" />
             </div>
-            <h1 className="text-3xl font-bold text-gray-900">Wat je graag doet</h1>
+            <h1 className="text-3xl font-bold text-vinster-blue">Wat je graag doet</h1>
           </div>
           <p className="text-lg text-gray-700">
             Selecteer de activiteiten en taken die voor jou het allerbelangrijkste zijn (minimaal 3)

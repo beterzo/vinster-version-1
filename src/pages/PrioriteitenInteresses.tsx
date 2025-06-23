@@ -71,7 +71,7 @@ const PrioriteitenInteresses = () => {
             <div className="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">
               <Heart className="w-5 h-5 text-yellow-600" />
             </div>
-            <h1 className="text-3xl font-bold text-gray-900">Jouw interesses</h1>
+            <h1 className="text-3xl font-bold text-vinster-blue">Jouw interesses</h1>
           </div>
           <p className="text-lg text-gray-700">
             Selecteer de onderwerpen en gebieden die voor jou het allerbelangrijkste zijn (minimaal 3)
