@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
@@ -90,7 +89,7 @@ const Dashboard = () => {
               <h3 className="font-bold text-lg mb-3">
                 Belangrijk om te weten
               </h3>
-              <ul className="text-sm leading-relaxed space-y-2">
+              <ul className="text-sm leading-relaxed space-y-4">
                 <li>• Er zijn geen goede of foute antwoorden - wees eerlijk over wat jij echt leuk vindt</li>
                 <li>• Denk aan concrete situaties en ervaringen uit jouw leven</li>
                 <li>• Je kunt zoveel tijd nemen als je wilt - er zit geen tijdsdruk op dit traject</li>
