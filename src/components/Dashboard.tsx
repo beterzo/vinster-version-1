@@ -1,12 +1,11 @@
-
 import { useAuth } from '@/hooks/useAuth';
 import { useEnthousiasmeResponses } from '@/hooks/useEnthousiasmeResponses';
 import { useWensberoepenResponses } from '@/hooks/useWensberoepenResponses';
 import { useExtraInformatieResponses } from '@/hooks/useExtraInformatieResponses';
 import { usePrioriteitenResponses } from '@/hooks/usePrioriteitenResponses';
-import { useFunctieprofielResponses } from '@/hooks/useFunctieprofielResponses';
+import { useZoekprofielResponses } from '@/hooks/useZoekprofielResponses';
 import { useRapportData } from '@/hooks/useRapportData';
-import { useFunctieprofielPdf } from '@/hooks/useFunctieprofielPdf';
+import { useZoekprofielPdf } from '@/hooks/useZoekprofielPdf';
 import { useNavigate } from 'react-router-dom';
 import { useState, useCallback, useMemo } from 'react';
 import DashboardHeader from './DashboardHeader';
@@ -26,15 +25,15 @@ const Dashboard = () => {
   const { responses: wensberoepenResponses, isLoading: wensberoepenLoading } = useWensberoepenResponses();
   const { responses: extraInformatieResponses, loading: extraInformatieLoading } = useExtraInformatieResponses();
   const { responses: prioriteitenResponses, loading: prioriteitenLoading } = usePrioriteitenResponses();
-  const { progress: functieprofielProgress, isCompleted: functieprofielCompleted, loading: functieprofielLoading } = useFunctieprofielResponses();
+  const { progress: zoekprofielProgress, isCompleted: zoekprofielCompleted, loading: zoekprofielLoading } = useZoekprofielResponses();
 
   // Report and PDF states
   const { data: userReport, loading: rapportLoading } = useRapportData();
-  const { isPdfReady, downloadPdf: downloadFunctieprofielPdf } = useFunctieprofielPdf();
+  const { isPdfReady, downloadPdf: downloadZoekprofielPdf } = useZoekprofielPdf();
 
   // Loading states for downloads
   const [downloadingRapport, setDownloadingRapport] = useState(false);
-  const [downloadingFunctieprofiel, setDownloadingFunctieprofiel] = useState(false);
+  const [downloadingZoekprofiel, setDownloadingZoekprofiel] = useState(false);
 
   // Calculate progress for each section
   const enthousiasmeProgress = useMemo(() => {
@@ -112,7 +111,7 @@ const Dashboard = () => {
   const prioriteitenCompleted = prioriteitenProgress === 100;
 
   // Overall completion tracking
-  const hasStarted = enthousiasmeProgress > 0 || wensberoepenProgress > 0 || extraInformatieProgress > 0 || prioriteitenProgress > 0 || functieprofielProgress > 0;
+  const hasStarted = enthousiasmeProgress > 0 || wensberoepenProgress > 0 || extraInformatieProgress > 0 || prioriteitenProgress > 0 || zoekprofielProgress > 0;
   const hasUserReport = !!userReport;
 
   // Navigation logic
@@ -121,9 +120,9 @@ const Dashboard = () => {
     if (!wensberoepenCompleted) return '/wensberoepen-intro';
     if (!extraInformatieCompleted || !prioriteitenCompleted) return '/profiel-voltooien-intro';
     if (!hasUserReport) return '/rapport-review';
-    if (!functieprofielCompleted) return '/functieprofiel-intro';
-    return '/functieprofiel-download';
-  }, [enthousiasmeCompleted, wensberoepenCompleted, extraInformatieCompleted, prioriteitenCompleted, hasUserReport, functieprofielCompleted]);
+    if (!zoekprofielCompleted) return '/zoekprofiel-intro';
+    return '/zoekprofiel-download';
+  }, [enthousiasmeCompleted, wensberoepenCompleted, extraInformatieCompleted, prioriteitenCompleted, hasUserReport, zoekprofielCompleted]);
 
   const handleStepClick = useCallback((stepTitle: string) => {
     const stepRoutes = {
@@ -131,12 +130,12 @@ const Dashboard = () => {
       'Wensberoepen': '/wensberoepen-intro',
       'Loopbaanrapport maken': '/profiel-voltooien-intro',
       'Loopbaanrapport & onderzoeksplan': hasUserReport ? '/rapport-download' : '/rapport-review',
-      'Functieprofiel': functieprofielCompleted ? '/functieprofiel-download' : '/functieprofiel-intro'
+      'Zoekprofiel': zoekprofielCompleted ? '/zoekprofiel-download' : '/zoekprofiel-intro'
     };
     
     const route = stepRoutes[stepTitle as keyof typeof stepRoutes];
     if (route) navigate(route);
-  }, [navigate, hasUserReport, functieprofielCompleted]);
+  }, [navigate, hasUserReport, zoekprofielCompleted]);
 
   // Mock rapport download for now since useRapportData doesn't provide downloadPdf
   const handleRapportDownload = useCallback(async () => {
@@ -158,26 +157,26 @@ const Dashboard = () => {
     }
   }, [userReport, downloadingRapport, toast, navigate]);
 
-  const handleFunctieprofielDownload = useCallback(async () => {
-    if (!isPdfReady || downloadingFunctieprofiel) return;
+  const handleZoekprofielDownload = useCallback(async () => {
+    if (!isPdfReady || downloadingZoekprofiel) return;
     
-    setDownloadingFunctieprofiel(true);
+    setDownloadingZoekprofiel(true);
     try {
-      await downloadFunctieprofielPdf();
+      await downloadZoekprofielPdf();
     } catch (error) {
-      console.error('❌ Error downloading functieprofiel:', error);
+      console.error('❌ Error downloading zoekprofiel:', error);
       toast({
         title: "Download mislukt",
-        description: "Er ging iets mis bij het downloaden van je functieprofiel.",
+        description: "Er ging iets mis bij het downloaden van je zoekprofiel.",
         variant: "destructive"
       });
     } finally {
-      setDownloadingFunctieprofiel(false);
+      setDownloadingZoekprofiel(false);
     }
-  }, [isPdfReady, downloadFunctieprofielPdf, downloadingFunctieprofiel, toast]);
+  }, [isPdfReady, downloadZoekprofielPdf, downloadingZoekprofiel, toast]);
 
   // Early loading state
-  if (enthousiasmeLoading || wensberoepenLoading || extraInformatieLoading || prioriteitenLoading || functieprofielLoading || rapportLoading) {
+  if (enthousiasmeLoading || wensberoepenLoading || extraInformatieLoading || prioriteitenLoading || zoekprofielLoading || rapportLoading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
@@ -225,11 +224,11 @@ const Dashboard = () => {
                 getNextStep={getNextStep}
                 hasUserReport={hasUserReport}
                 hasStarted={hasStarted}
-                hasFunctieprofielPdf={Boolean(isPdfReady)}
+                hasZoekprofielPdf={Boolean(isPdfReady)}
                 downloadRapportPdf={handleRapportDownload}
-                downloadFunctieprofielPdf={handleFunctieprofielDownload}
+                downloadZoekprofielPdf={handleZoekprofielDownload}
                 downloadingRapport={downloadingRapport}
-                downloadingFunctieprofiel={downloadingFunctieprofiel}
+                downloadingZoekprofiel={downloadingZoekprofiel}
               />
             </div>
           </div>

@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -32,9 +33,9 @@ import PrioriteitenWerkomstandigheden from "./pages/PrioriteitenWerkomstandighed
 import RapportReview from "./pages/RapportReview";
 import RapportDownload from "./pages/RapportDownload";
 import OnderzoeksplanPagina from "./pages/OnderzoeksplanPagina";
-import FunctieprofielIntro from "./pages/FunctieprofielIntro";
-import FunctieprofielVragen from "./pages/FunctieprofielVragen";
-import FunctieprofielDownload from "./pages/FunctieprofielDownload";
+import ZoekprofielIntro from "./pages/ZoekprofielIntro";
+import ZoekprofielVragen from "./pages/ZoekprofielVragen";
+import ZoekprofielDownload from "./pages/ZoekprofielDownload";
 
 const queryClient = new QueryClient();
 
@@ -278,36 +279,36 @@ const App = () => {
               />
               
               <Route
-                path="/functieprofiel-intro"
+                path="/zoekprofiel-intro"
                 element={
                   <ProtectedRoute>
-                    <FunctieprofielIntro />
+                    <ZoekprofielIntro />
                   </ProtectedRoute>
                 }
               />
               
               <Route
-                path="/functieprofiel-vragen"
+                path="/zoekprofiel-vragen"
                 element={
                   <ProtectedRoute>
-                    <FunctieprofielVragen />
+                    <ZoekprofielVragen />
                   </ProtectedRoute>
                 }
               />
               
               <Route
-                path="/functieprofiel-download"
+                path="/zoekprofiel-download"
                 element={
                   <ProtectedRoute>
-                    <FunctieprofielDownload />
+                    <ZoekprofielDownload />
                   </ProtectedRoute>
                 }
               />
               
-              {/* Legacy redirects */}
-              <Route path="/zoekprofiel-intro" element={<Navigate to="/functieprofiel-intro" replace />} />
-              <Route path="/zoekprofiel-vragen" element={<Navigate to="/functieprofiel-vragen" replace />} />
-              <Route path="/zoekprofiel-download" element={<Navigate to="/functieprofiel-download" replace />} />
+              {/* Legacy redirects - from old functieprofiel to new zoekprofiel routes */}
+              <Route path="/functieprofiel-intro" element={<Navigate to="/zoekprofiel-intro" replace />} />
+              <Route path="/functieprofiel-vragen" element={<Navigate to="/zoekprofiel-vragen" replace />} />
+              <Route path="/functieprofiel-download" element={<Navigate to="/zoekprofiel-download" replace />} />
               
               <Route path="*" element={<NotFound />} />
             </Routes>

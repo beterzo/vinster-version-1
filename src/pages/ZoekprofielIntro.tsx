@@ -1,9 +1,10 @@
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { Search, ArrowRight, Target, Users, MapPin } from "lucide-react";
 
-const FunctieprofielIntro = () => {
+const ZoekprofielIntro = () => {
   const navigate = useNavigate();
 
   const benefits = [
@@ -44,7 +45,7 @@ const FunctieprofielIntro = () => {
           
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Je bent er bijna!</h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Dit is de laatste stap in Vinster. Je hebt onderzoek gedaan en je gaat nu je functieprofiel opstellen. Een functieprofiel is een duidelijk overzicht van de baan die jij zoekt.
+            Dit is de laatste stap in Vinster. Je hebt onderzoek gedaan en je gaat nu je zoekprofiel opstellen. Een zoekprofiel is een duidelijk overzicht van de baan die jij zoekt.
           </p>
         </div>
 
@@ -82,12 +83,12 @@ const FunctieprofielIntro = () => {
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button
-            onClick={() => navigate("/functieprofiel-vragen")}
+            onClick={() => navigate("/zoekprofiel-vragen")}
             className="bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl text-xl py-6 px-8 h-auto"
             size="lg"
           >
             <ArrowRight className="w-6 h-6 mr-3" />
-            Start met je functieprofiel
+            Start met je zoekprofiel
           </Button>
           
           <Button
@@ -103,4 +104,4 @@ const FunctieprofielIntro = () => {
   );
 };
 
-export default FunctieprofielIntro;
+export default ZoekprofielIntro;

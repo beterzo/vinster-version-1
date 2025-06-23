@@ -1,7 +1,7 @@
 
 import ProgressStep from "./ProgressStep";
 import { CircleUser, Target, Star, CheckCircle, Search, FileText, ListTodo, UserCheck, Info, ClipboardList } from "lucide-react";
-import { useFunctieprofielResponses } from "@/hooks/useFunctieprofielResponses";
+import { useZoekprofielResponses } from "@/hooks/useZoekprofielResponses";
 
 interface ProgressStepsGridProps {
   enthousiasmeProgress: number;
@@ -28,7 +28,7 @@ const ProgressStepsGrid = ({
   hasUserReport,
   onStepClick
 }: ProgressStepsGridProps) => {
-  const { progress: functieprofielProgress, isCompleted: functieprofielCompleted } = useFunctieprofielResponses();
+  const { progress: zoekprofielProgress, isCompleted: zoekprofielCompleted } = useZoekprofielResponses();
 
   // Calculate page-based progress for "Profiel voltooien"
   const combinedProgress = () => {
@@ -71,9 +71,9 @@ const ProgressStepsGrid = ({
       tooltipContent: "Ontvang je persoonlijke loopbaanadvies en concrete actieplan"
     },
     {
-      title: "Functieprofiel",
-      progress: functieprofielProgress,
-      isCompleted: functieprofielCompleted,
+      title: "Zoekprofiel",
+      progress: zoekprofielProgress,
+      isCompleted: zoekprofielCompleted,
       icon: <Search className="w-5 h-5 text-yellow-500" />,
       tooltipContent: "Creëer een professioneel document voor je sollicitaties"
     }

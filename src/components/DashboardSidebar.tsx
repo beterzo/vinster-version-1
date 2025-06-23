@@ -7,27 +7,27 @@ interface DashboardSidebarProps {
   getNextStep: () => string;
   hasUserReport: boolean;
   hasStarted: boolean;
-  hasFunctieprofielPdf: boolean;
+  hasZoekprofielPdf: boolean;
   downloadRapportPdf: () => Promise<void>;
-  downloadFunctieprofielPdf: () => Promise<void>;
+  downloadZoekprofielPdf: () => Promise<void>;
   downloadingRapport?: boolean;
-  downloadingFunctieprofiel?: boolean;
+  downloadingZoekprofiel?: boolean;
 }
 
 const DashboardSidebar = ({ 
   getNextStep, 
   hasUserReport, 
   hasStarted, 
-  hasFunctieprofielPdf,
+  hasZoekprofielPdf,
   downloadRapportPdf,
-  downloadFunctieprofielPdf,
+  downloadZoekprofielPdf,
   downloadingRapport = false,
-  downloadingFunctieprofiel = false
+  downloadingZoekprofiel = false
 }: DashboardSidebarProps) => {
   const navigate = useNavigate();
 
   // Check if both documents are ready for download
-  const bothDocumentsReady = hasUserReport && hasFunctieprofielPdf;
+  const bothDocumentsReady = hasUserReport && hasZoekprofielPdf;
 
   const handleRapportDownload = async () => {
     console.log('🎯 Loopbaanrapport download button clicked');
@@ -38,12 +38,12 @@ const DashboardSidebar = ({
     }
   };
 
-  const handleFunctieprofielDownload = async () => {
-    console.log('🎯 Functieprofiel download button clicked');
+  const handleZoekprofielDownload = async () => {
+    console.log('🎯 Zoekprofiel download button clicked');
     try {
-      await downloadFunctieprofielPdf();
+      await downloadZoekprofielPdf();
     } catch (error) {
-      console.error('❌ Error in functieprofiel download handler:', error);
+      console.error('❌ Error in zoekprofiel download handler:', error);
     }
   };
 
@@ -66,10 +66,10 @@ const DashboardSidebar = ({
             <Button 
               className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-8 text-xl rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-3 disabled:opacity-50"
               size="lg"
-              onClick={handleFunctieprofielDownload}
-              disabled={downloadingFunctieprofiel}
+              onClick={handleZoekprofielDownload}
+              disabled={downloadingZoekprofiel}
             >
-              {downloadingFunctieprofiel ? (
+              {downloadingZoekprofiel ? (
                 <>
                   <Loader2 className="w-6 h-6 animate-spin" />
                   Downloaden...
@@ -77,7 +77,7 @@ const DashboardSidebar = ({
               ) : (
                 <>
                   <FileText className="w-6 h-6" />
-                  Bekijk mijn functieprofiel
+                  Bekijk mijn zoekprofiel
                 </>
               )}
             </Button>

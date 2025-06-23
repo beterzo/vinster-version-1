@@ -1,12 +1,13 @@
+
 import { useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { Download, CheckCircle, Home, Share2, Target, ArrowRight, Clock, Linkedin } from "lucide-react";
-import { useFunctieprofielPdf } from "@/hooks/useFunctieprofielPdf";
+import { useZoekprofielPdf } from "@/hooks/useZoekprofielPdf";
 import { useToast } from "@/hooks/use-toast";
 
-const FunctieprofielDownload = () => {
+const ZoekprofielDownload = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const {
@@ -17,7 +18,7 @@ const FunctieprofielDownload = () => {
     downloadPdf,
     loadPdfData,
     initializePdfGeneration
-  } = useFunctieprofielPdf();
+  } = useZoekprofielPdf();
 
   useEffect(() => {
     loadPdfData();
@@ -36,7 +37,7 @@ const FunctieprofielDownload = () => {
       await navigator.clipboard.writeText(pdfData.pdf_url);
       toast({
         title: "PDF URL gekopieerd!",
-        description: "De link naar je functieprofiel is gekopieerd naar het klembord."
+        description: "De link naar je zoekprofiel is gekopieerd naar het klembord."
       });
     } catch (error) {
       console.error('Failed to copy PDF URL:', error);
@@ -53,7 +54,7 @@ const FunctieprofielDownload = () => {
       <div className="min-h-screen bg-gray-50 font-sans flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-900 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Functieprofiel laden...</p>
+          <p className="mt-4 text-gray-600">Zoekprofiel laden...</p>
         </div>
       </div>
     );
@@ -75,7 +76,7 @@ const FunctieprofielDownload = () => {
             Je hebt een belangrijke stap gezet in je loopbaan
           </p>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Bedankt dat je de tijd hebt genomen om je functieprofiel op te stellen. 
+            Bedankt dat je de tijd hebt genomen om je zoekprofiel op te stellen. 
             Je weet nu precies wat je zoekt in je volgende baan!
           </p>
         </div>
@@ -86,10 +87,10 @@ const FunctieprofielDownload = () => {
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div className="text-white">
                 <h2 className="text-3xl font-bold mb-4">
-                  {isPdfReady ? 'Je functieprofiel is klaar!' : 'Je functieprofiel wordt gegenereerd!'}
+                  {isPdfReady ? 'Je zoekprofiel is klaar!' : 'Je zoekprofiel wordt gegenereerd!'}
                 </h2>
                 <p className="text-lg mb-6 opacity-95">
-                  {isPdfReady ? 'Download je persoonlijke functieprofiel en gebruik het om gericht op zoek te gaan naar banen die echt bij je passen.' : 'We zijn bezig met het genereren van je persoonlijke functieprofiel PDF. Dit duurt even.'}
+                  {isPdfReady ? 'Download je persoonlijke zoekprofiel en gebruik het om gericht op zoek te gaan naar banen die echt bij je passen.' : 'We zijn bezig met het genereren van je persoonlijke zoekprofiel PDF. Dit duurt even.'}
                 </p>
                 
                 {isPdfReady ? (
@@ -99,7 +100,7 @@ const FunctieprofielDownload = () => {
                     size="lg"
                   >
                     <Download className="w-6 h-6 mr-3" />
-                    Download je functieprofiel
+                    Download je zoekprofiel
                   </Button>
                 ) : (
                   <div className="flex items-center space-x-3">
@@ -173,7 +174,7 @@ const FunctieprofielDownload = () => {
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Voeg toe aan LinkedIn</h3>
               <p className="text-gray-600 mb-4 flex-1">
-                Update je LinkedIn profiel met je functieprofiel om 
+                Update je LinkedIn profiel met je zoekprofiel om 
                 recruiters te laten weten wat je zoekt.
               </p>
               <div className="flex justify-center">
@@ -198,4 +199,4 @@ const FunctieprofielDownload = () => {
   );
 };
 
-export default FunctieprofielDownload;
+export default ZoekprofielDownload;

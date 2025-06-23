@@ -4,14 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { useNavigate } from "react-router-dom";
-import { useFunctieprofielResponses } from "@/hooks/useFunctieprofielResponses";
+import { useZoekprofielResponses } from "@/hooks/useZoekprofielResponses";
 import { Search, ArrowRight, Home, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
-const FunctieprofielVragen = () => {
+const ZoekprofielVragen = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { responses, loading, saveResponse, submitToWebhook, isCompleted } = useFunctieprofielResponses();
+  const { responses, loading, saveResponse, submitToWebhook, isCompleted } = useZoekprofielResponses();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Memoized questions array to prevent unnecessary re-renders
@@ -67,7 +67,7 @@ const FunctieprofielVragen = () => {
     const success = await submitToWebhook();
     
     if (success) {
-      navigate("/functieprofiel-download");
+      navigate("/zoekprofiel-download");
     }
     
     setIsSubmitting(false);
@@ -78,7 +78,7 @@ const FunctieprofielVragen = () => {
       <div className="min-h-screen bg-gray-50 font-sans flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-900 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Functieprofiel laden...</p>
+          <p className="mt-4 text-gray-600">Zoekprofiel laden...</p>
         </div>
       </div>
     );
@@ -95,9 +95,9 @@ const FunctieprofielVragen = () => {
             <Search className="w-8 h-8 text-blue-600" />
           </div>
           
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Stel je functieprofiel op</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Stel je zoekprofiel op</h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Beantwoord de onderstaande vragen om je persoonlijke functieprofiel te maken.
+            Beantwoord de onderstaande vragen om je persoonlijke zoekprofiel te maken.
           </p>
         </div>
 
@@ -140,7 +140,7 @@ const FunctieprofielVragen = () => {
             <div>
               <h3 className="text-2xl font-bold text-gray-900 mb-4">Je weet wat je wilt!</h3>
               <p className="text-gray-600">
-                Je antwoorden worden automatisch opgeslagen. Klik op 'Profiel afronden' om je functieprofiel te voltooien.
+                Je antwoorden worden automatisch opgeslagen. Klik op 'Profiel afronden' om je zoekprofiel te voltooien.
               </p>
             </div>
             
@@ -176,7 +176,7 @@ const FunctieprofielVragen = () => {
             
             {!isCompleted && (
               <p className="text-amber-600 text-sm">
-                Vul alle vragen in om je functieprofiel af te kunnen ronden.
+                Vul alle vragen in om je zoekprofiel af te kunnen ronden.
               </p>
             )}
           </div>
@@ -186,4 +186,4 @@ const FunctieprofielVragen = () => {
   );
 };
 
-export default FunctieprofielVragen;
+export default ZoekprofielVragen;
