@@ -97,8 +97,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     console.log('🔐 Attempting signup for:', email);
     
     try {
-      // Updated redirect URL to login page instead of auth/callback
-      const redirectUrl = 'https://228ae9dd-6d6a-406b-9dbd-95adecbe51b0.lovableproject.com/login';
+      // Use vinster.ai domain for redirect
+      const redirectUrl = 'https://vinster.ai/login';
       console.log('🔗 Using redirect URL:', redirectUrl);
       
       const { data, error } = await supabase.auth.signUp({
@@ -177,8 +177,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     console.log('🔐 Resending confirmation email for:', email);
     
     try {
-      // Updated redirect URL to login page instead of auth/callback
-      const redirectUrl = 'https://228ae9dd-6d6a-406b-9dbd-95adecbe51b0.lovableproject.com/login';
+      // Use vinster.ai domain for redirect
+      const redirectUrl = 'https://vinster.ai/login';
       console.log('🔗 Using redirect URL for resend:', redirectUrl);
       
       const { error } = await supabase.auth.resend({

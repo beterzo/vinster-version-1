@@ -58,13 +58,13 @@ const handler = async (req: Request): Promise<Response> => {
       lastName: user.user_metadata?.last_name
     });
 
-    // Updated redirect URL to login page instead of auth/callback
-    const correctRedirectUrl = 'https://228ae9dd-6d6a-406b-9dbd-95adecbe51b0.lovableproject.com/login';
-    console.log("🔗 Using correct redirect URL:", correctRedirectUrl);
+    // Use our own domain for the verification URL to avoid spam filter issues
+    const redirectUrl = 'https://vinster.ai/login';
+    console.log("🔗 Using redirect URL:", redirectUrl);
     console.log("📋 Original redirect from payload:", payload.email_data.redirect_to);
 
-    // Create verification URL using the login page redirect URL
-    const verificationUrl = `${Deno.env.get("SUPABASE_URL")}/auth/v1/verify?token=${payload.email_data.token_hash}&type=${payload.email_data.email_action_type}&redirect_to=${correctRedirectUrl}`;
+    // Create verification URL that goes through our domain first
+    const verificationUrl = `https://vinster.ai/verify?token=${payload.email_data.token_hash}&type=${payload.email_data.email_action_type}&redirect_to=${redirectUrl}`;
 
     console.log("✅ Verification URL created:", verificationUrl);
     console.log("🔗 Token details:", {
@@ -87,9 +87,9 @@ const handler = async (req: Request): Promise<Response> => {
       })
     );
 
-    // Send verification email
+    // Send verification email from vinster.ai domain
     const emailResponse = await resend.emails.send({
-      from: "Vinster <team@vinster.ai>",
+      from: "Vinster <noreply@vinster.ai>",
       to: [user.email],
       subject: "Bevestig je account bij Vinster",
       html: emailHtml,
@@ -101,7 +101,8 @@ const handler = async (req: Request): Promise<Response> => {
       success: true, 
       message: "Verification email sent",
       emailId: emailResponse.data?.id,
-      redirectUrl: correctRedirectUrl
+      redirectUrl: redirectUrl,
+      verificationUrl: verificationUrl
     }), {
       status: 200,
       headers: { "Content-Type": "application/json", ...corsHeaders },
