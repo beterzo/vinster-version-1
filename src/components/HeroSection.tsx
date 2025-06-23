@@ -19,10 +19,18 @@ const HeroSection = () => {
       </div>
       
       <div className="relative z-10 max-w-[1440px] mx-auto px-6">
-        {/* Header with Menu and Buttons */}
+        {/* Header with Menu, Logo and Buttons */}
         <div className="py-6 flex items-center justify-between">
-          {/* Mobile Menu */}
-          <MobileMenu />
+          {/* Left side with Mobile Menu and Logo */}
+          <div className="flex items-center space-x-4">
+            <MobileMenu />
+            <img 
+              alt="Vinster Logo" 
+              className="h-10 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              onClick={() => navigate('/')} 
+              src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
+            />
+          </div>
           
           {/* Right side button */}
           <div className="flex items-center">
