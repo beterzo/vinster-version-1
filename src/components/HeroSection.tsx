@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -24,7 +25,7 @@ const HeroSection = () => {
             <img 
               alt="Vinster Logo" 
               onClick={() => navigate('/')} 
-              className="h-16 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
               src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
             />
           </div>

@@ -14,7 +14,7 @@ const WensberoepenIntro = () => {
           <div className="flex items-center">
             <img 
               alt="Vinster Logo" 
-              className="h-8 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
               onClick={() => navigate('/')} 
               src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
             />
