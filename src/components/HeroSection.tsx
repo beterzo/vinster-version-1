@@ -1,14 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
+
 const HeroSection = () => {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
-  return <div className="relative overflow-hidden">
+
+  return (
+    <div className="relative overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
-      backgroundImage: "url('/lovable-uploads/b67ce5d1-c717-4a77-b5ad-550d88a42378.png')"
-    }}>
+        backgroundImage: "url('/lovable-uploads/b67ce5d1-c717-4a77-b5ad-550d88a42378.png')"
+      }}>
         {/* Overlay for better text readability - made lighter */}
         <div className="absolute inset-0 bg-black bg-opacity-20"></div>
       </div>
@@ -16,9 +19,14 @@ const HeroSection = () => {
       <div className="relative z-10 max-w-[1440px] mx-auto px-6">
         {/* Header with Logo and Navigation Buttons */}
         <div className="py-6 flex items-center justify-between">
-          {/* Logo - Left side - Made larger */}
+          {/* Logo - Left side */}
           <div className="flex items-center">
-            <img alt="Vinster Logo" onClick={() => navigate('/')} className="h-24 w-24" src="/lovable-uploads/ce1ec128-2090-40f7-98ba-315031148244.png" />
+            <img 
+              alt="Vinster Logo" 
+              onClick={() => navigate('/')} 
+              className="h-16 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
+            />
           </div>
           
           {/* Navigation Buttons - Right side */}
@@ -56,6 +64,8 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default HeroSection;
