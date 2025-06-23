@@ -1,4 +1,3 @@
-
 import {
   Body,
   Container,
@@ -67,7 +66,7 @@ export const VerificationEmail = ({
       <Container style={containerStyle}>
         <Section style={contentSection}>
           <Img
-            src="https://228ae9dd-6d6a-406b-9dbd-95adecbe51b0.lovableproject.com/lovable-uploads/f3a12c87-d122-420f-829e-f68f2d2dfe46.png"
+            src="https://vinster.ai/vinster-logo.png"
             alt="Vinster Logo"
             style={logoStyle}
           />
