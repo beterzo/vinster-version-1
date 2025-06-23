@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -47,7 +48,12 @@ const ExtraInformatieVragen = () => {
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center mb-6">
-            <h1 className="text-xl font-bold text-blue-900">Vinster</h1>
+            <img 
+              alt="Vinster Logo" 
+              className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              onClick={() => navigate('/')} 
+              src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
+            />
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Nog iets meer over jou</h1>
           <p className="text-xl text-gray-700">

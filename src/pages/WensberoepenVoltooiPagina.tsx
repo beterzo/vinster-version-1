@@ -20,7 +20,14 @@ const WensberoepenVoltooiPagina = () => {
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
-          <h1 className="text-xl font-bold text-blue-900">Vinster</h1>
+          <div className="flex items-center">
+            <img 
+              alt="Vinster Logo" 
+              className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              onClick={() => navigate('/')} 
+              src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
+            />
+          </div>
         </div>
       </div>
 

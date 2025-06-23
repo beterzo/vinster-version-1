@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +12,14 @@ const OnderzoeksplanPagina = () => {
       <div className="max-w-4xl mx-auto px-6 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-xl font-bold text-blue-900 mb-6">Vinster</h1>
+          <div className="mb-6">
+            <img 
+              alt="Vinster Logo" 
+              className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              onClick={() => navigate('/')} 
+              src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
+            />
+          </div>
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
               <Search className="w-5 h-5 text-blue-600" />
@@ -146,7 +154,7 @@ const OnderzoeksplanPagina = () => {
         {/* Navigation */}
         <div className="flex justify-center">
           <Button
-            onClick={() => navigate("/home")}
+            onClick={() => navigate("/")}
             className="bg-yellow-500 hover:bg-yellow-600 text-black rounded-xl"
           >
             <Check className="w-4 h-4 mr-2" />

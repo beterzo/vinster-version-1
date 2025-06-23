@@ -30,7 +30,7 @@ const ZoekprofielIntro = () => {
       <div className="max-w-4xl mx-auto px-6 py-16">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="flex items-center cursor-pointer justify-center mb-8" onClick={() => navigate("/home")}>
+          <div className="flex items-center cursor-pointer justify-center mb-8">
             <img 
               alt="Vinster Logo" 
               className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
@@ -92,7 +92,7 @@ const ZoekprofielIntro = () => {
           </Button>
           
           <Button
-            onClick={() => navigate("/home")}
+            onClick={() => navigate("/")}
             variant="outline"
             className="rounded-xl py-6 px-8 h-auto"
           >

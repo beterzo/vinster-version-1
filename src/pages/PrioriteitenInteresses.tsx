@@ -50,7 +50,7 @@ const PrioriteitenInteresses = () => {
     });
     
     if (success) {
-      navigate("/home");
+      navigate("/");
     }
   };
 
@@ -59,11 +59,12 @@ const PrioriteitenInteresses = () => {
       <div className="max-w-4xl mx-auto px-6 py-8">
         {/* Header */}
         <div className="mb-8">
-          <div className="flex items-center mb-6" onClick={() => navigate("/home")}>
+          <div className="flex items-center mb-6">
             <img 
-              src="/lovable-uploads/37a78841-c439-4437-b2de-5adbc7743c68.png" 
               alt="Vinster Logo" 
-              className="h-8 w-auto" 
+              className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              onClick={() => navigate('/')} 
+              src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
             />
           </div>
           <div className="flex items-center gap-3 mb-4">

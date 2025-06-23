@@ -54,7 +54,14 @@ const PrioriteitenWerkomstandigheden = () => {
       <div className="max-w-4xl mx-auto px-6 py-8">
         {/* Header */}
         <div className="mb-8">
-          <img src="/lovable-uploads/2e668999-7dcb-4ce4-b077-05e65938fe2e.png" alt="Vinster Logo" className="h-8 w-auto mb-6" />
+          <div className="mb-6">
+            <img 
+              alt="Vinster Logo" 
+              className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              onClick={() => navigate('/')} 
+              src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
+            />
+          </div>
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: '#E6F0F6' }}>
               <Briefcase className="w-5 h-5" style={{ color: '#78BFE3' }} />
@@ -130,7 +137,7 @@ const PrioriteitenWerkomstandigheden = () => {
                   <div className="flex items-center justify-between">
                     <span className="font-medium text-sm">{keyword}</span>
                     {selectedKeywords.includes(keyword) && (
-                      <Check className="w-4 h-4 text-white" />
+                      <Check className="w-4 h-4" />
                     )}
                   </div>
                 </button>
@@ -149,13 +156,13 @@ const PrioriteitenWerkomstandigheden = () => {
         <Card className="p-6 mb-8">
           <h3 className="text-lg font-bold mb-4">Aanvullende informatie</h3>
           <p className="text-gray-600 mb-4">
-            Zijn er nog andere werkomstandigheden die je belangrijk vindt en die hierboven niet staan? 
+            Zijn er andere werkomstandigheden die voor jou belangrijk zijn? 
             Voeg hier je eigen informatie toe.
           </p>
           <Textarea
             value={extraText}
             onChange={(e) => setExtraText(e.target.value)}
-            placeholder="Beschrijf hier andere werkomstandigheden, werksfeer elementen of omgevingsfactoren die je belangrijk vindt..."
+            placeholder="Beschrijf hier andere werkomstandigheden die belangrijk voor je zijn..."
             className="min-h-24"
           />
         </Card>
@@ -185,23 +192,12 @@ const PrioriteitenWerkomstandigheden = () => {
             disabled={loading || !isValidToProgress()}
             className={`rounded-xl ${
               isValidToProgress() 
-                ? 'text-white' 
+                ? 'bg-yellow-500 hover:bg-yellow-600 text-white' 
                 : 'bg-gray-300 text-gray-500 cursor-not-allowed'
             }`}
-            style={isValidToProgress() ? { backgroundColor: '#78BFE3' } : {}}
             size="lg"
-            onMouseEnter={(e) => {
-              if (isValidToProgress()) {
-                e.currentTarget.style.backgroundColor = '#5AADD9';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (isValidToProgress()) {
-                e.currentTarget.style.backgroundColor = '#78BFE3';
-              }
-            }}
           >
-            {loading ? "Opslaan..." : "Volgende: Interesses"}
+            {loading ? "Opslaan..." : "Volgende: interesses"}
             <ArrowRight className="w-5 h-5 ml-2" />
           </Button>
         </div>

@@ -54,6 +54,14 @@ const PrioriteitenActiviteiten = () => {
       <div className="max-w-4xl mx-auto px-6 py-8">
         {/* Header */}
         <div className="mb-8">
+          <div className="mb-6">
+            <img 
+              alt="Vinster Logo" 
+              className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              onClick={() => navigate('/')} 
+              src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
+            />
+          </div>
           <div className="flex items-center gap-3 mb-4">
             <div className="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">
               <Star className="w-5 h-5 text-yellow-600" />

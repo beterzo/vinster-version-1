@@ -89,7 +89,14 @@ const ZoekprofielVragen = () => {
       <div className="max-w-4xl mx-auto px-6 py-16">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-2xl font-bold text-blue-900 mb-8">Vinster</h1>
+          <div className="mb-8">
+            <img 
+              alt="Vinster Logo" 
+              className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200 mx-auto" 
+              onClick={() => navigate('/')} 
+              src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
+            />
+          </div>
           
           <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
             <Search className="w-8 h-8 text-blue-600" />
@@ -165,7 +172,7 @@ const ZoekprofielVragen = () => {
               </Button>
               
               <Button
-                onClick={() => navigate("/home")}
+                onClick={() => navigate("/")}
                 variant="outline"
                 className="rounded-xl py-6 px-8 h-auto"
               >

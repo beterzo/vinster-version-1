@@ -13,7 +13,12 @@ const ProfielVoltooienIntro = () => {
         {/* Header */}
         <div className="mb-8">
           <div className="mb-6">
-            <h1 className="text-xl font-bold text-blue-900">Vinster</h1>
+            <img 
+              alt="Vinster Logo" 
+              className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              onClick={() => navigate('/')} 
+              src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
+            />
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Loopbaanrapport maken</h1>
           <p className="text-xl text-gray-700">
@@ -112,7 +117,7 @@ const ProfielVoltooienIntro = () => {
         {/* Navigation */}
         <div className="flex justify-between items-center">
           <Button 
-            onClick={() => navigate("/home")} 
+            onClick={() => navigate("/")} 
             className="bg-blue-900 hover:bg-blue-800 text-white font-bold py-4 px-6 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-200"
           >
             Terug naar dashboard
