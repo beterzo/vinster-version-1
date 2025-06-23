@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
@@ -8,24 +7,25 @@ import ProgressStepsGrid from "./ProgressStepsGrid";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Target } from "lucide-react";
-
 const Dashboard = () => {
-  const { user } = useAuth();
+  const {
+    user
+  } = useAuth();
   const navigate = useNavigate();
-  const { progress, canStartEnthousiasme, canStartWensberoepen } = useDashboard();
-
+  const {
+    progress,
+    canStartEnthousiasme,
+    canStartWensberoepen
+  } = useDashboard();
   useEffect(() => {
     if (!user) {
       navigate('/login');
     }
   }, [user, navigate]);
-
   if (!user) {
     return <div>Loading...</div>;
   }
-
   const firstName = user.user_metadata?.first_name || user.email?.split('@')[0] || 'Gebruiker';
-
   const getNextStep = () => {
     if (canStartEnthousiasme) {
       return "/enthousiasme-intro";
@@ -35,9 +35,7 @@ const Dashboard = () => {
     }
     return "/profiel-voltooien-intro";
   };
-
-  return (
-    <div className="min-h-screen bg-gray-50 font-sans">
+  return <div className="min-h-screen bg-gray-50 font-sans">
       <div className="max-w-[1440px] mx-auto px-6 py-8">
         <DashboardHeader />
 
@@ -75,27 +73,24 @@ const Dashboard = () => {
           {/* Right Column - Image and Button */}
           <Card className="p-6 border-0 rounded-3xl bg-white">
             <div className="text-center">
-              <img 
-                alt="Loopbaanonderzoek" 
-                className="w-full h-auto rounded-xl mb-6" 
-                src="/lovable-uploads/c1b77eab-70ba-4d41-85ea-5ec3b49d96b4.png" 
-              />
+              <img alt="Loopbaanonderzoek" className="w-full h-auto rounded-xl mb-6" src="/lovable-uploads/ee361013-bfc6-485f-b46f-ed87a3cd6c73.jpg" />
               
-              <Button 
-                onClick={() => navigate(getNextStep())} 
-                className="bg-yellow-400 hover:bg-yellow-500 text-vinster-blue font-bold rounded-xl px-8 py-4 text-lg w-full"
-              >
+              <Button onClick={() => navigate(getNextStep())} className="bg-yellow-400 hover:bg-yellow-500 text-vinster-blue font-bold rounded-xl px-8 py-4 text-lg w-full">
                 Ga verder
               </Button>
             </div>
           </Card>
 
           {/* Left Column - Important Info */}
-          <Card className="p-6 border-0 rounded-3xl" style={{ backgroundColor: '#E6F0F6' }}>
+          <Card className="p-6 border-0 rounded-3xl" style={{
+          backgroundColor: '#E6F0F6'
+        }}>
             <div className="flex items-start space-x-4">
               <div className="flex-shrink-0">
                 <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                  <Target className="w-6 h-6" style={{ color: '#78BFE3' }} />
+                  <Target className="w-6 h-6" style={{
+                  color: '#78BFE3'
+                }} />
                 </div>
               </div>
               <div>
@@ -117,18 +112,10 @@ const Dashboard = () => {
             <h3 className="font-bold text-lg text-vinster-blue mb-4">
               Stappen in het proces
             </h3>
-            <ProgressStepsGrid 
-              enthousiasmeCompleted={progress.enthousiasme === 'completed'} 
-              wensberoepenCompleted={progress.wensberoepen === 'completed'} 
-              prioriteitenCompleted={progress.prioriteiten === 'completed'} 
-              extraInformatieCompleted={progress.extraInformatie === 'completed'} 
-              hasUserReport={false} 
-            />
+            <ProgressStepsGrid enthousiasmeCompleted={progress.enthousiasme === 'completed'} wensberoepenCompleted={progress.wensberoepen === 'completed'} prioriteitenCompleted={progress.prioriteiten === 'completed'} extraInformatieCompleted={progress.extraInformatie === 'completed'} hasUserReport={false} />
           </Card>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Dashboard;
