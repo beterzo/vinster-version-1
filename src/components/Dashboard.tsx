@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
@@ -6,7 +7,7 @@ import DashboardHeader from "./DashboardHeader";
 import ProgressStepsGrid from "./ProgressStepsGrid";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Target } from "lucide-react";
+
 const Dashboard = () => {
   const {
     user
@@ -85,25 +86,18 @@ const Dashboard = () => {
           <Card className="p-6 border-0 rounded-3xl" style={{
           backgroundColor: '#E6F0F6'
         }}>
-            <div className="flex items-start space-x-4">
-              <div className="flex-shrink-0">
-                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                  <Target className="w-6 h-6" style={{
-                  color: '#78BFE3'
-                }} />
-                </div>
-              </div>
-              <div>
-                <h3 className="font-bold text-lg text-vinster-blue mb-3">
-                  Belangrijk om te weten
-                </h3>
-                <ul className="text-gray-700 text-sm leading-relaxed space-y-2">
-                  <li>• Er zijn geen goede of foute antwoorden - wees eerlijk over wat jij echt leuk vindt</li>
-                  <li>• Denk aan concrete situaties en ervaringen uit jouw leven</li>
-                  <li>• Je kunt je antwoorden altijd aanpassen tijdens het traject</li>
-                  <li>• Je voortgang wordt automatisch opgeslagen</li>
-                </ul>
-              </div>
+            <div>
+              <h3 className="font-bold text-lg text-vinster-blue mb-3">
+                Belangrijk om te weten
+              </h3>
+              <ul className="text-gray-700 text-sm leading-relaxed space-y-2">
+                <li>• Er zijn geen goede of foute antwoorden - wees eerlijk over wat jij echt leuk vindt</li>
+                <li>• Denk aan concrete situaties en ervaringen uit jouw leven</li>
+                <li>• Je kunt zoveel tijd nemen als je wilt - er zit geen tijdsdruk op dit traject</li>
+                <li>• Het is juist goed om de antwoorden een dag te laten bezinken voordat je verdergaat</li>
+                <li>• Je kunt je antwoorden altijd aanpassen tijdens het traject</li>
+                <li>• Je voortgang wordt automatisch opgeslagen</li>
+              </ul>
             </div>
           </Card>
 
