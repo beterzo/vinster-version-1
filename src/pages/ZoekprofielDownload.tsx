@@ -3,11 +3,13 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-import { CheckCircle, AlertCircle, FileText, Download, ArrowLeft, Clock, AlertTriangle, Home, ArrowRight } from "lucide-react";
+import { CheckCircle, AlertCircle, FileText, Download, ArrowLeft, Clock, AlertTriangle, Home, ArrowRight, Copy, Linkedin } from "lucide-react";
 import { useZoekprofielPdf } from "@/hooks/useZoekprofielPdf";
+import { useToast } from "@/hooks/use-toast";
 
 const ZoekprofielDownload = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const {
     pdfData,
     loading,
@@ -25,6 +27,46 @@ const ZoekprofielDownload = () => {
       initializePdfGeneration();
     }
   }, [loading, pdfData, initializePdfGeneration]);
+
+  const handleCopyLink = async () => {
+    if (!pdfData?.pdf_url) {
+      toast({
+        title: "Geen PDF beschikbaar",
+        description: "Er is nog geen PDF link om te kopiëren.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(pdfData.pdf_url);
+      toast({
+        title: "Link gekopieerd!",
+        description: "De link naar je zoekprofiel is gekopieerd naar het klembord.",
+      });
+    } catch (error) {
+      console.error('Failed to copy link:', error);
+      toast({
+        title: "Kopiëren mislukt",
+        description: "Kon de link niet kopiëren naar het klembord.",
+        variant: "destructive"
+      });
+    }
+  };
+
+  const handleLinkedInShare = () => {
+    if (!pdfData?.pdf_url) {
+      toast({
+        title: "Geen PDF beschikbaar",
+        description: "Er is nog geen PDF om te delen.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pdfData.pdf_url)}`;
+    window.open(linkedInUrl, '_blank', 'noopener,noreferrer');
+  };
 
   if (loading) {
     return (
@@ -53,9 +95,11 @@ const ZoekprofielDownload = () => {
               <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-8">
                 <CheckCircle className="w-10 h-10 text-green-600" />
               </div>
-              <h1 className="text-5xl font-bold text-gray-900 mb-6">Zoekprofiel klaar!</h1>
-              <p className="text-2xl text-gray-700 mb-4">Je zoekprofiel is succesvol aangemaakt</p>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">Download je persoonlijke zoekprofiel en ontdek de functies die perfect bij jou passen!</p>
+              <h1 className="text-5xl font-bold text-gray-900 mb-6">Hoera! (over zoekprofiel)</h1>
+              <p className="text-2xl text-gray-700 mb-4">Je hebt je keuze gemaakt.</p>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Je weet wat je wilt en kunt nu op zoek naar die baan. Gebruik de samenvatting van jouw zoekprofiel om aan iedereen te laten weten welke functie jij zoekt!
+              </p>
             </>
           )}
 
@@ -187,6 +231,42 @@ const ZoekprofielDownload = () => {
             </div>
           </div>
         </Card>
+
+        {/* Share Section */}
+        {isPdfReady && (
+          <Card className="mb-12 rounded-3xl shadow-lg border-0 overflow-hidden">
+            <div className="p-8 md:p-12 bg-white">
+              <div className="text-center">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Deel je zoekprofiel</h3>
+                <p className="text-gray-600 mb-8">Laat anderen weten waar je naar op zoek bent</p>
+                
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button 
+                    onClick={handleCopyLink}
+                    variant="outline"
+                    className="rounded-xl px-6 py-3 font-medium border-2 hover:bg-gray-50"
+                    size="lg"
+                  >
+                    <Copy className="w-5 h-5 mr-2" />
+                    Link kopiëren
+                  </Button>
+                  
+                  <Button 
+                    onClick={handleLinkedInShare}
+                    className="rounded-xl px-6 py-3 font-medium text-white"
+                    style={{ backgroundColor: '#0077B5' }}
+                    onMouseEnter={e => e.currentTarget.style.backgroundColor = '#005885'}
+                    onMouseLeave={e => e.currentTarget.style.backgroundColor = '#0077B5'}
+                    size="lg"
+                  >
+                    <Linkedin className="w-5 h-5 mr-2" />
+                    Delen op LinkedIn
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </Card>
+        )}
 
         {/* Status Info */}
         {pdfData && (
