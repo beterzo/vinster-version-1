@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
 import ProtectedRoute from "@/components/ProtectedRoute";
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import LandingPage from "./pages/LandingPage";
 import Home from "./pages/Home";
 import LoginPage from "./pages/LoginPage";
@@ -39,23 +39,56 @@ import FunctieprofielDownload from "./pages/FunctieprofielDownload";
 const queryClient = new QueryClient();
 
 const App = () => {
-  // Global title manager - ensures all pages show "Vinster" as title
+  // Improved global title manager - ensures all pages show "Vinster" as title
+  useLayoutEffect(() => {
+    // Set title immediately before any rendering
+    document.title = "Vinster";
+  }, []);
+
   useEffect(() => {
+    // Set title again after component mount
     document.title = "Vinster";
     
-    // Create a mutation observer to watch for title changes and revert them
-    const observer = new MutationObserver(() => {
+    // Create a more robust mutation observer to watch for title changes
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'childList' || mutation.type === 'characterData') {
+          if (document.title !== "Vinster") {
+            console.log('Title changed to:', document.title, 'reverting to Vinster');
+            document.title = "Vinster";
+          }
+        }
+      });
+    });
+    
+    // Observe title element and entire head for changes
+    const titleElement = document.querySelector('title');
+    if (titleElement) {
+      observer.observe(titleElement, {
+        childList: true,
+        subtree: true,
+        characterData: true
+      });
+    }
+    
+    observer.observe(document.head, {
+      childList: true,
+      subtree: true,
+      characterData: true
+    });
+    
+    // Additional backup interval check every 500ms
+    const titleInterval = setInterval(() => {
       if (document.title !== "Vinster") {
+        console.log('Interval check: Title was', document.title, 'setting to Vinster');
         document.title = "Vinster";
       }
-    });
+    }, 500);
     
-    observer.observe(document.querySelector('title') || document.head, {
-      childList: true,
-      subtree: true
-    });
-    
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      clearInterval(titleInterval);
+    };
   }, []);
 
   return (
