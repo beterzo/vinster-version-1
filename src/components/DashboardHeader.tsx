@@ -30,6 +30,12 @@ const DashboardHeader = () => {
   return (
     <div className="flex justify-between items-center mb-8">
       <div className="flex items-center">
+        <img 
+          alt="Vinster Logo" 
+          className="h-8 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200 mr-4" 
+          onClick={() => navigate('/')} 
+          src="/lovable-uploads/vinster-new-logo.png" 
+        />
         <h1 className="text-2xl font-bold text-blue-900">Dashboard</h1>
       </div>
       <Button 

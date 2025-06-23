@@ -31,7 +31,12 @@ const FunctieprofielIntro = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <div className="flex items-center cursor-pointer justify-center mb-8" onClick={() => navigate("/home")}>
-            <h1 className="text-2xl font-bold text-blue-900">Vinster</h1>
+            <img 
+              alt="Vinster Logo" 
+              className="h-8 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              onClick={() => navigate('/')} 
+              src="/lovable-uploads/vinster-new-logo.png" 
+            />
           </div>
           
           <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
