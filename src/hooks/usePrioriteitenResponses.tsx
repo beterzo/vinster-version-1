@@ -116,33 +116,58 @@ export const usePrioriteitenResponses = () => {
     }
   };
 
-  const saveResponses = async (data: Partial<PrioriteitenData>) => {
+  // Direct save function for keyword selections - saves immediately to Supabase
+  const saveKeywordSelection = async (category: 'activiteiten' | 'werkomstandigheden' | 'interesses', keywords: string[]) => {
     if (!user) return false;
 
-    // Extra validation: ensure we have at least 3 keywords for any category being saved
-    const validationErrors: string[] = [];
-    
-    if (data.selected_activiteiten_keywords !== undefined && data.selected_activiteiten_keywords.length < 3) {
-      validationErrors.push('activiteiten (minimaal 3 vereist)');
-    }
-    
-    if (data.selected_werkomstandigheden_keywords !== undefined && data.selected_werkomstandigheden_keywords.length < 3) {
-      validationErrors.push('werkomstandigheden (minimaal 3 vereist)');
-    }
-    
-    if (data.selected_interesses_keywords !== undefined && data.selected_interesses_keywords.length < 3) {
-      validationErrors.push('interesses (minimaal 3 vereist)');
-    }
+    try {
+      console.log(`Saving ${category} keywords:`, keywords);
 
-    if (validationErrors.length > 0) {
-      console.error('Validation failed for:', validationErrors);
+      const fieldMap = {
+        activiteiten: 'selected_activiteiten_keywords',
+        werkomstandigheden: 'selected_werkomstandigheden_keywords', 
+        interesses: 'selected_interesses_keywords'
+      };
+
+      const updateData = {
+        user_id: user.id,
+        ...responses,
+        [fieldMap[category]]: keywords,
+        updated_at: new Date().toISOString()
+      };
+
+      const { error } = await supabase
+        .from('prioriteiten_responses')
+        .upsert(updateData, {
+          onConflict: 'user_id'
+        });
+
+      if (error) {
+        console.error(`Error saving ${category} keywords:`, error);
+        throw error;
+      }
+
+      // Update local state
+      setResponses(prev => ({ 
+        ...prev, 
+        [fieldMap[category]]: keywords 
+      }));
+
+      return true;
+    } catch (error) {
+      console.error(`Error saving ${category} keywords:`, error);
       toast({
-        title: "Onvoldoende keywords geselecteerd",
-        description: `Selecteer minimaal 3 keywords voor: ${validationErrors.join(', ')}`,
+        title: "Fout bij opslaan",
+        description: `Er is een fout opgetreden bij het opslaan van je ${category}.`,
         variant: "destructive",
       });
       return false;
     }
+  };
+
+  // Save other responses (extra text fields)
+  const saveResponses = async (data: Partial<PrioriteitenData>) => {
+    if (!user) return false;
 
     setLoading(true);
     try {
@@ -187,15 +212,15 @@ export const usePrioriteitenResponses = () => {
     }
   };
 
-  // Updated: require at least 3 keywords for a page to be considered complete
-  const isPageComplete = (keywords?: string[]) => {
-    return keywords && keywords.length >= 3;
+  // Check if a page has been visited/used (any data entered)
+  const isPageComplete = (keywords?: string[], extraText?: string) => {
+    return (keywords && keywords.length > 0) || (extraText && extraText.trim() !== '');
   };
 
   const isCompleted = () => {
-    const activiteitenComplete = isPageComplete(responses?.selected_activiteiten_keywords);
-    const werkomstandighedenComplete = isPageComplete(responses?.selected_werkomstandigheden_keywords);
-    const interessesComplete = isPageComplete(responses?.selected_interesses_keywords);
+    const activiteitenComplete = isPageComplete(responses?.selected_activiteiten_keywords, responses?.extra_activiteiten_tekst);
+    const werkomstandighedenComplete = isPageComplete(responses?.selected_werkomstandigheden_keywords, responses?.extra_werkomstandigheden_tekst);
+    const interessesComplete = isPageComplete(responses?.selected_interesses_keywords, responses?.extra_interesses_tekst);
     
     console.log('Prioriteiten completion check:', {
       activiteitenComplete,
@@ -212,9 +237,9 @@ export const usePrioriteitenResponses = () => {
   // Calculate progress percentage based on completed pages (each page = 33.33%)
   const getProgress = () => {
     const pages = [
-      isPageComplete(responses?.selected_activiteiten_keywords),
-      isPageComplete(responses?.selected_werkomstandigheden_keywords),
-      isPageComplete(responses?.selected_interesses_keywords)
+      isPageComplete(responses?.selected_activiteiten_keywords, responses?.extra_activiteiten_tekst),
+      isPageComplete(responses?.selected_werkomstandigheden_keywords, responses?.extra_werkomstandigheden_tekst),
+      isPageComplete(responses?.selected_interesses_keywords, responses?.extra_interesses_tekst)
     ];
     
     const completedPages = pages.filter(Boolean).length;
@@ -226,6 +251,7 @@ export const usePrioriteitenResponses = () => {
     aiKeywords,
     loading,
     saveResponses,
+    saveKeywordSelection,
     isCompleted: isCompleted(),
     progress: getProgress()
   };

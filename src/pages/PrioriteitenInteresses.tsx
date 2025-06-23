@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { useNavigate } from "react-router-dom";
-import { ArrowRight, ArrowLeft, Heart, Check, AlertCircle } from "lucide-react";
+import { ArrowRight, ArrowLeft, Heart, Check } from "lucide-react";
 import { usePrioriteitenResponses } from "@/hooks/usePrioriteitenResponses";
 
 const PrioriteitenInteresses = () => {
@@ -13,6 +13,7 @@ const PrioriteitenInteresses = () => {
     responses, 
     loading, 
     saveResponses, 
+    saveKeywordSelection,
     aiKeywords 
   } = usePrioriteitenResponses();
   
@@ -29,28 +30,19 @@ const PrioriteitenInteresses = () => {
 
   const availableInteressesKeywords = aiKeywords?.interesses || [];
 
-  const toggleKeyword = (keyword: string) => {
-    setSelectedKeywords(prev => 
-      prev.includes(keyword)
-        ? prev.filter(k => k !== keyword)
-        : [...prev, keyword]
-    );
-  };
-
-  const isValidToProgress = () => {
-    return selectedKeywords.length >= 3;
+  const toggleKeyword = async (keyword: string) => {
+    const newKeywords = selectedKeywords.includes(keyword)
+      ? selectedKeywords.filter(k => k !== keyword)
+      : [...selectedKeywords, keyword];
+    
+    setSelectedKeywords(newKeywords);
+    
+    // Save immediately to Supabase
+    await saveKeywordSelection('interesses', newKeywords);
   };
 
   const handleSave = async () => {
-    if (!isValidToProgress()) {
-      console.log('Cannot save: insufficient keywords selected', selectedKeywords.length);
-      return;
-    }
-    
-    console.log('Saving interesses with keywords:', selectedKeywords);
-    
     const success = await saveResponses({
-      selected_interesses_keywords: selectedKeywords,
       extra_interesses_tekst: extraText
     });
     
@@ -79,7 +71,7 @@ const PrioriteitenInteresses = () => {
             <h1 className="text-3xl font-bold text-vinster-blue">Jouw interesses</h1>
           </div>
           <p className="text-lg text-gray-700">
-            Selecteer de onderwerpen en gebieden die voor jou het allerbelangrijkste zijn (minimaal 3)
+            Selecteer de onderwerpen en gebieden die voor jou belangrijk zijn
           </p>
         </div>
 
@@ -111,7 +103,7 @@ const PrioriteitenInteresses = () => {
             Kernwoorden gebaseerd op jouw antwoorden
           </h2>
           <p className="text-gray-600 mb-6">
-            Klik op de interesses die voor jou het allerbelangrijkste zijn. Je moet er minimaal 3 selecteren.
+            Klik op de interesses die voor jou belangrijk zijn. Je selecties worden automatisch opgeslagen.
           </p>
           
           {availableInteressesKeywords.length > 0 ? (
@@ -159,25 +151,6 @@ const PrioriteitenInteresses = () => {
           />
         </Card>
 
-        {/* Validation error message */}
-        {!isValidToProgress() && selectedKeywords.length > 0 && (
-          <div className="mb-6 flex items-center gap-2 text-orange-600 bg-orange-50 p-4 rounded-lg">
-            <AlertCircle className="w-5 h-5" />
-            <span className="text-sm">
-              Selecteer nog {3 - selectedKeywords.length} kernwoord{3 - selectedKeywords.length === 1 ? '' : 'en'} om door te gaan naar de volgende stap.
-            </span>
-          </div>
-        )}
-
-        {!isValidToProgress() && selectedKeywords.length === 0 && (
-          <div className="mb-6 flex items-center gap-2 text-red-600 bg-red-50 p-4 rounded-lg">
-            <AlertCircle className="w-5 h-5" />
-            <span className="text-sm">
-              Je moet minimaal 3 kernwoorden selecteren voordat je kunt doorgaan.
-            </span>
-          </div>
-        )}
-
         {/* Navigation */}
         <div className="flex justify-between items-center">
           <Button
@@ -190,12 +163,8 @@ const PrioriteitenInteresses = () => {
           
           <Button
             onClick={handleSave}
-            disabled={loading || !isValidToProgress()}
-            className={`rounded-xl ${
-              isValidToProgress() 
-                ? 'bg-yellow-500 hover:bg-yellow-600 text-white' 
-                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-            }`}
+            disabled={loading}
+            className="bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl"
             size="lg"
           >
             {loading ? "Opslaan..." : "Loopbaanrapport voltooien"}

@@ -4,12 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { useNavigate } from "react-router-dom";
-import { ArrowRight, ArrowLeft, Briefcase, Check, AlertCircle } from "lucide-react";
+import { ArrowRight, ArrowLeft, Briefcase, Check } from "lucide-react";
 import { usePrioriteitenResponses } from "@/hooks/usePrioriteitenResponses";
 
 const PrioriteitenWerkomstandigheden = () => {
   const navigate = useNavigate();
-  const { responses, aiKeywords, saveResponses, loading } = usePrioriteitenResponses();
+  const { responses, aiKeywords, saveResponses, saveKeywordSelection, loading } = usePrioriteitenResponses();
   
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
   const [extraText, setExtraText] = useState("");
@@ -22,23 +22,19 @@ const PrioriteitenWerkomstandigheden = () => {
     }
   }, [responses]);
 
-  const toggleKeyword = (keyword: string) => {
-    setSelectedKeywords(prev => 
-      prev.includes(keyword) 
-        ? prev.filter(k => k !== keyword)
-        : [...prev, keyword]
-    );
-  };
-
-  const isValidToProgress = () => {
-    return selectedKeywords.length >= 3;
+  const toggleKeyword = async (keyword: string) => {
+    const newKeywords = selectedKeywords.includes(keyword)
+      ? selectedKeywords.filter(k => k !== keyword)
+      : [...selectedKeywords, keyword];
+    
+    setSelectedKeywords(newKeywords);
+    
+    // Save immediately to Supabase
+    await saveKeywordSelection('werkomstandigheden', newKeywords);
   };
 
   const handleSave = async () => {
-    if (!isValidToProgress()) return;
-    
     const success = await saveResponses({
-      selected_werkomstandigheden_keywords: selectedKeywords,
       extra_werkomstandigheden_tekst: extraText
     });
     
@@ -69,7 +65,7 @@ const PrioriteitenWerkomstandigheden = () => {
             <h1 className="text-3xl font-bold text-vinster-blue">Fijne werkomstandigheden</h1>
           </div>
           <p className="text-lg text-gray-700">
-            Selecteer de werkomstandigheden die voor jou het allerbelangrijkste zijn (minimaal 3)
+            Selecteer de werkomstandigheden die voor jou belangrijk zijn
           </p>
         </div>
 
@@ -101,7 +97,7 @@ const PrioriteitenWerkomstandigheden = () => {
             Kernwoorden gebaseerd op jouw antwoorden
           </h2>
           <p className="text-gray-600 mb-6">
-            Klik op de werkomstandigheden die voor jou het allerbelangrijkste zijn. Je moet er minimaal 3 selecteren.
+            Klik op de werkomstandigheden die voor jou belangrijk zijn. Je selecties worden automatisch opgeslagen.
           </p>
           
           {keywords.length > 0 ? (
@@ -167,16 +163,6 @@ const PrioriteitenWerkomstandigheden = () => {
           />
         </Card>
 
-        {/* Validation error message */}
-        {!isValidToProgress() && selectedKeywords.length > 0 && (
-          <div className="mb-6 flex items-center gap-2 text-orange-600 bg-orange-50 p-4 rounded-lg">
-            <AlertCircle className="w-5 h-5" />
-            <span className="text-sm">
-              Selecteer nog {3 - selectedKeywords.length} kernwoord{3 - selectedKeywords.length === 1 ? '' : 'en'} om door te gaan naar de volgende stap.
-            </span>
-          </div>
-        )}
-
         {/* Navigation */}
         <div className="flex justify-between items-center">
           <Button
@@ -189,12 +175,8 @@ const PrioriteitenWerkomstandigheden = () => {
           
           <Button
             onClick={handleSave}
-            disabled={loading || !isValidToProgress()}
-            className={`rounded-xl ${
-              isValidToProgress() 
-                ? 'bg-yellow-500 hover:bg-yellow-600 text-white' 
-                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-            }`}
+            disabled={loading}
+            className="bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl"
             size="lg"
           >
             {loading ? "Opslaan..." : "Volgende: interesses"}
