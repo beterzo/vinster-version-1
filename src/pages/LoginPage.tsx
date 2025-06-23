@@ -88,7 +88,12 @@ const LoginPage = () => {
       <div className="bg-white flex items-center justify-center p-4 sm:p-6 lg:p-12">
         <div className="w-full max-w-md space-y-6 lg:space-y-8">
           <div className="text-center">
-            <h1 className="text-2xl font-bold text-blue-900 mb-6">Vinster</h1>
+            <img 
+              alt="Vinster Logo" 
+              className="h-12 w-auto mx-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              onClick={() => navigate('/')} 
+              src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
+            />
           </div>
 
           {/* Login form title */}
