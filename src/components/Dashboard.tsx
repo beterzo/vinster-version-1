@@ -12,6 +12,7 @@ import DashboardHeader from './DashboardHeader';
 import DashboardSidebar from './DashboardSidebar';
 import ProgressStepsGrid from './ProgressStepsGrid';
 import WelcomeCard from './WelcomeCard';
+import ImportantInfoCard from './ImportantInfoCard';
 import { useToast } from '@/hooks/use-toast';
 import { TooltipProvider } from '@/components/ui/tooltip';
 
@@ -194,27 +195,32 @@ const Dashboard = () => {
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 h-full">
-            {/* Left: Welcome Card */}
-            <div className="lg:col-span-1">
+            {/* Left: Content Area (2 columns) */}
+            <div className="lg:col-span-2 space-y-8">
+              {/* Welcome Card - Full Width */}
               <WelcomeCard />
-            </div>
-
-            {/* Middle: Progress Overview */}
-            <div className="lg:col-span-1">
-              <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 h-full">
-                <h3 className="text-xl font-bold text-gray-900 mb-6">Jouw voortgang</h3>
-                <ProgressStepsGrid
-                  enthousiasmeProgress={enthousiasmeProgress}
-                  enthousiasmeCompleted={enthousiasmeCompleted}
-                  wensberoepenProgress={wensberoepenProgress}
-                  wensberoepenCompleted={wensberoepenCompleted}
-                  prioriteitenProgress={prioriteitenProgress}
-                  prioriteitenCompleted={prioriteitenCompleted}
-                  extraInformatieProgress={extraInformatieProgress}
-                  extraInformatieCompleted={extraInformatieCompleted}
-                  hasUserReport={hasUserReport}
-                  onStepClick={handleStepClick}
-                />
+              
+              {/* Bottom Row: Important Info and Progress */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {/* Important Info Card */}
+                <ImportantInfoCard />
+                
+                {/* Progress Overview */}
+                <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 h-full">
+                  <h3 className="text-xl font-bold text-gray-900 mb-6">Jouw voortgang</h3>
+                  <ProgressStepsGrid
+                    enthousiasmeProgress={enthousiasmeProgress}
+                    enthousiasmeCompleted={enthousiasmeCompleted}
+                    wensberoepenProgress={wensberoepenProgress}
+                    wensberoepenCompleted={wensberoepenCompleted}
+                    prioriteitenProgress={prioriteitenProgress}
+                    prioriteitenCompleted={prioriteitenCompleted}
+                    extraInformatieProgress={extraInformatieProgress}
+                    extraInformatieCompleted={extraInformatieCompleted}
+                    hasUserReport={hasUserReport}
+                    onStepClick={handleStepClick}
+                  />
+                </div>
               </div>
             </div>
 

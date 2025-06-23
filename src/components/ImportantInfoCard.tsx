@@ -8,15 +8,15 @@ const ImportantInfoCard = () => {
       <ul className="space-y-4 text-sm flex-1 flex flex-col justify-between">
         <li className="flex items-start gap-3">
           <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
-          <span>Er zijn geen goede of foute antwoorden, wees eerlijk over wat jij echt leuk vindt</span>
+          <span>Er zijn geen goede of foute antwoorden - wees eerlijk over wat jij echt leuk vindt</span>
         </li>
         <li className="flex items-start gap-3">
           <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
-          <span>Denk aan concrete situaties uit jouw leven</span>
+          <span>Denk aan concrete situaties en ervaringen uit jouw leven</span>
         </li>
         <li className="flex items-start gap-3">
           <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
-          <span>Je kunt je antwoorden altijd aanpassen tijdens dit traject</span>
+          <span>Je kunt je antwoorden altijd aanpassen tijdens het traject</span>
         </li>
         <li className="flex items-start gap-3">
           <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
@@ -24,11 +24,7 @@ const ImportantInfoCard = () => {
         </li>
         <li className="flex items-start gap-3">
           <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
-          <span>Na het invullen van de enthousiasmescan, de vragen over de wensberoepen en jouw check daarvan wordt automatisch een persoonlijk loopbaanrapport gegenereerd</span>
-        </li>
-        <li className="flex items-start gap-3">
-          <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
-          <span>Je kunt tijdens het invullen van alles wijzigen. Als jouw loopbaanrapport gemaakt is, kan dat niet meer</span>
+          <span>Na het invullen van beide interviews wordt automatisch een persoonlijk rapport gegenereerd</span>
         </li>
       </ul>
     </Card>
