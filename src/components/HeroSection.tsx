@@ -26,7 +26,7 @@ const HeroSection = () => {
               alt="Vinster Logo" 
               onClick={() => navigate('/')} 
               className="h-16 md:h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
-              src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
+              src="/lovable-uploads/fcb9470e-cf7e-4730-bfcb-62686a840654.png" 
             />
           </div>
           
