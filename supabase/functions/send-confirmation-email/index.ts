@@ -58,12 +58,12 @@ const handler = async (req: Request): Promise<Response> => {
       lastName: user.user_metadata?.last_name
     });
 
-    // Direct redirect to login page
+    // Direct redirect to login page with verified parameter
     const redirectUrl = 'https://vinster.ai/login?verified=true';
     console.log("🔗 Using redirect URL:", redirectUrl);
 
-    // Use Supabase's default verification URL - no custom /verify route needed
-    const verificationUrl = `https://aqajxxevifmhdjlvqhkz.supabase.co/auth/v1/verify?token=${payload.email_data.token_hash}&type=${payload.email_data.email_action_type}&redirect_to=${encodeURIComponent(redirectUrl)}`;
+    // Use Supabase's auth verification endpoint directly
+    const verificationUrl = `https://aqajxxevifmhdjlvqhkz.supabase.co/auth/v1/verify?token=${payload.email_data.token_hash}&type=signup&redirect_to=${encodeURIComponent(redirectUrl)}`;
 
     console.log("✅ Verification URL created:", verificationUrl);
     console.log("🔗 Token details:", {
