@@ -45,31 +45,36 @@ const ProgressStepsGrid = ({
       step: 1,
       title: "Enthousiasmescan",
       description: "Ontdek wat je echt drijft en motiveert",
-      actionButton: "Start scan"
+      actionButton: "Start scan",
+      icon: "heart"
     },
     {
       step: 2,
       title: "Wensberoepen",
       description: "Verken verschillende carrièremogelijkheden",
-      actionButton: "Bekijk beroepen"
+      actionButton: "Bekijk beroepen",
+      icon: "briefcase"
     },
     {
       step: 3,
       title: "Persoonsprofiel",
       description: "Bouw je persoonlijke profiel op",
-      actionButton: "Voltooien"
+      actionButton: "Voltooien",
+      icon: "user"
     },
     {
       step: 4,
       title: "Loopbaanrapport",
       description: "Ontvang je persoonlijke aanbevelingen",
-      actionButton: "Bekijk rapport"
+      actionButton: "Bekijk rapport",
+      icon: "file-text"
     },
     {
       step: 5,
       title: "Zoekprofiel",
       description: "Download je zoekprofiel",
-      actionButton: "Download"
+      actionButton: "Download",
+      icon: "search"
     }
   ];
 

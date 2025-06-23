@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
@@ -71,12 +70,12 @@ const Dashboard = () => {
             </div>
           </Card>
 
-          {/* Right Column - Image and Button */}
-          <Card className="p-6 border-0 rounded-3xl bg-white">
-            <div className="text-center">
-              <img alt="Loopbaanonderzoek" className="w-full h-auto rounded-xl mb-6" src="/lovable-uploads/ee361013-bfc6-485f-b46f-ed87a3cd6c73.jpg" />
+          {/* Right Column - Image and Button - adjusted height */}
+          <Card className="p-6 border-0 rounded-3xl bg-white flex flex-col">
+            <div className="text-center flex-1 flex flex-col justify-between">
+              <img alt="Loopbaanonderzoek" className="w-full h-auto rounded-xl mb-6 flex-1 object-cover" src="/lovable-uploads/ee361013-bfc6-485f-b46f-ed87a3cd6c73.jpg" />
               
-              <Button onClick={() => navigate(getNextStep())} className="bg-yellow-400 hover:bg-yellow-500 text-vinster-blue font-bold rounded-xl px-8 py-4 text-lg w-full">
+              <Button onClick={() => navigate(getNextStep())} className="bg-yellow-400 hover:bg-yellow-500 text-vinster-blue font-bold rounded-xl px-8 py-4 text-lg w-full mt-auto">
                 Ga verder
               </Button>
             </div>
@@ -101,10 +100,10 @@ const Dashboard = () => {
             </div>
           </Card>
 
-          {/* Middle Column - Process Steps */}
+          {/* Middle Column - Process Steps - renamed title */}
           <Card className="p-6 border-0 rounded-3xl bg-white">
             <h3 className="font-bold text-lg text-vinster-blue mb-4">
-              Stappen in het proces
+              Jouw voortgang
             </h3>
             <ProgressStepsGrid enthousiasmeCompleted={progress.enthousiasme === 'completed'} wensberoepenCompleted={progress.wensberoepen === 'completed'} prioriteitenCompleted={progress.prioriteiten === 'completed'} extraInformatieCompleted={progress.extraInformatie === 'completed'} hasUserReport={false} />
           </Card>

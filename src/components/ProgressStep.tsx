@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Check } from 'lucide-react';
+import { Check, Heart, Briefcase, User, FileText, Search } from 'lucide-react';
 import { Progress } from "@/components/ui/progress";
 
 interface ProgressStepProps {
@@ -9,12 +9,34 @@ interface ProgressStepProps {
     title: string;
     description: string;
     actionButton?: string;
+    icon?: string;
   };
   isCompleted: boolean;
   isCurrent: boolean;
   progress?: number;
   onClick: () => void;
 }
+
+const getStepIcon = (iconName: string, isCompleted: boolean) => {
+  const iconProps = {
+    className: `w-4 h-4 ${isCompleted ? 'text-gray-600' : 'text-gray-500'}`,
+  };
+
+  switch (iconName) {
+    case 'heart':
+      return <Heart {...iconProps} />;
+    case 'briefcase':
+      return <Briefcase {...iconProps} />;
+    case 'user':
+      return <User {...iconProps} />;
+    case 'file-text':
+      return <FileText {...iconProps} />;
+    case 'search':
+      return <Search {...iconProps} />;
+    default:
+      return <span className="text-xs font-medium text-gray-600">{iconName}</span>;
+  }
+};
 
 const ProgressStep = ({ step, isCompleted, isCurrent, progress = 0, onClick }: ProgressStepProps) => {
   return (
@@ -31,6 +53,8 @@ const ProgressStep = ({ step, isCompleted, isCurrent, progress = 0, onClick }: P
         }`}>
           {isCompleted ? (
             <Check className="w-4 h-4 text-gray-600" />
+          ) : step.icon ? (
+            getStepIcon(step.icon, isCompleted)
           ) : (
             <span className="text-xs font-medium text-gray-600">
               {step.step}
@@ -40,21 +64,17 @@ const ProgressStep = ({ step, isCompleted, isCurrent, progress = 0, onClick }: P
         
         {/* Content */}
         <div className="flex-1 min-w-0">
-          <div className="flex items-center justify-between">
-            <h3 className="text-sm font-medium text-gray-900 truncate">
-              {step.title}
-            </h3>
-            <span className="text-xs text-gray-500 ml-2 flex-shrink-0">
-              {isCompleted ? '✓ Klaar' : `${progress}%`}
-            </span>
-          </div>
+          <h3 className="text-sm font-medium text-gray-900 truncate mb-2">
+            {step.title}
+          </h3>
           
-          {/* Progress bar - only show for incomplete items with progress */}
-          {!isCompleted && progress > 0 && (
-            <div className="mt-2">
-              <Progress value={progress} className="h-1" />
-            </div>
-          )}
+          {/* Progress bar - always show */}
+          <div className="mt-1">
+            <Progress 
+              value={isCompleted ? 100 : progress} 
+              className="h-1" 
+            />
+          </div>
         </div>
       </div>
     </div>
