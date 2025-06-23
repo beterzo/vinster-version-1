@@ -39,7 +39,7 @@ const OnderzoeksplanPagina = () => {
 
           <div className="space-y-6">
             <div className="flex items-start gap-4">
-              <div className="w-8 h-8 bg-vinster-blue rounded-full flex items-center justify-center shrink-0 mt-1">
+              <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center shrink-0 mt-1">
                 <span className="text-white font-bold text-sm">1</span>
               </div>
               <p className="text-gray-700 text-left leading-relaxed">
@@ -50,7 +50,7 @@ const OnderzoeksplanPagina = () => {
             </div>
 
             <div className="flex items-start gap-4">
-              <div className="w-8 h-8 bg-vinster-blue rounded-full flex items-center justify-center shrink-0 mt-1">
+              <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center shrink-0 mt-1">
                 <span className="text-white font-bold text-sm">2</span>
               </div>
               <p className="text-gray-700 text-left leading-relaxed">
@@ -60,7 +60,7 @@ const OnderzoeksplanPagina = () => {
             </div>
 
             <div className="flex items-start gap-4">
-              <div className="w-8 h-8 bg-vinster-blue rounded-full flex items-center justify-center shrink-0 mt-1">
+              <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center shrink-0 mt-1">
                 <span className="text-white font-bold text-sm">3</span>
               </div>
               <p className="text-gray-700 text-left leading-relaxed">
@@ -69,7 +69,7 @@ const OnderzoeksplanPagina = () => {
             </div>
 
             <div className="flex items-start gap-4">
-              <div className="w-8 h-8 bg-vinster-blue rounded-full flex items-center justify-center shrink-0 mt-1">
+              <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center shrink-0 mt-1">
                 <span className="text-white font-bold text-sm">4</span>
               </div>
               <p className="text-gray-700 text-left leading-relaxed">
@@ -78,7 +78,7 @@ const OnderzoeksplanPagina = () => {
             </div>
 
             <div className="flex items-start gap-4">
-              <div className="w-8 h-8 bg-vinster-blue rounded-full flex items-center justify-center shrink-0 mt-1">
+              <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center shrink-0 mt-1">
                 <span className="text-white font-bold text-sm">5</span>
               </div>
               <p className="text-gray-700 text-left leading-relaxed">
@@ -88,7 +88,7 @@ const OnderzoeksplanPagina = () => {
             </div>
 
             <div className="flex items-start gap-4">
-              <div className="w-8 h-8 bg-vinster-blue rounded-full flex items-center justify-center shrink-0 mt-1">
+              <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center shrink-0 mt-1">
                 <span className="text-white font-bold text-sm">6</span>
               </div>
               <p className="text-gray-700 text-left leading-relaxed">
@@ -97,7 +97,7 @@ const OnderzoeksplanPagina = () => {
             </div>
 
             <div className="flex items-start gap-4">
-              <div className="w-8 h-8 bg-vinster-blue rounded-full flex items-center justify-center shrink-0 mt-1">
+              <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center shrink-0 mt-1">
                 <span className="text-white font-bold text-sm">7</span>
               </div>
               <p className="text-gray-700 text-left leading-relaxed">
@@ -106,7 +106,7 @@ const OnderzoeksplanPagina = () => {
             </div>
 
             <div className="flex items-start gap-4">
-              <div className="w-8 h-8 bg-vinster-blue rounded-full flex items-center justify-center shrink-0 mt-1">
+              <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center shrink-0 mt-1">
                 <span className="text-white font-bold text-sm">8</span>
               </div>
               <p className="text-gray-700 text-left leading-relaxed">
