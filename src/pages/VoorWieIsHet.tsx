@@ -9,7 +9,7 @@ const VoorWieIsHet = () => {
   const targetGroups = [
     {
       title: "Voor wie toe is aan een volgende stap",
-      description: "Je wilt doorgroeien, maar je weet niet waar naartoe. Of je hebt juist honderd ideeën, maar geen richting. Vinster helpt je ontdekken waar je energie van krijgt, wat voor werk bij je past en wat jouw volgende stap kan zijn. Zonder eindeloze testen of vaag advies. Gewoon helder, concreet en visueel(?) tastbaar."
+      description: "Je wilt doorgroeien, maar je weet niet waar naartoe. Of je hebt juist honderd ideeën, maar geen richting. Vinster helpt je ontdekken waar je energie van krijgt, wat voor werk bij je past en wat jouw volgende stap kan zijn. Zonder eindeloze testen of vaag advies. Gewoon helder, concreet en visueel tastbaar."
     },
     {
       title: "Voor werkenden die vastlopen",
