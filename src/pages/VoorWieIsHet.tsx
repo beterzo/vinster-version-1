@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
@@ -9,20 +8,20 @@ const VoorWieIsHet = () => {
 
   const targetGroups = [
     {
-      title: "Voor jongeren (16-30 jaar)",
-      description: "Je hebt geen idee wat je wil. Of juist honderd ideeën, maar geen richting. Vinster helpt je ontdekken waar je energie van krijgt, wat voor werk bij je past en wat jouw volgende stap kan zijn. Zonder eindeloze testen of vaag advies. Gewoon helder, concreet en visueel."
+      title: "Voor wie toe is aan een volgende stap",
+      description: "Je wilt doorgroeien, maar je weet niet waar naartoe. Of je hebt juist honderd ideeën, maar geen richting. Vinster helpt je ontdekken waar je energie van krijgt, wat voor werk bij je past en wat jouw volgende stap kan zijn. Zonder eindeloze testen of vaag advies. Gewoon helder, concreet en visueel(?) tastbaar."
     },
     {
       title: "Voor werkenden die vastlopen",
-      description: "Je merkt dat je werk niet meer past. Je mist zingeving, energie of het gevoel dat je ergens naartoe werkt. Dit traject geeft je inzicht in wie je bent, wat je belangrijk vindt en welke functie of omgeving beter bij je aansluit."
-    },
-    {
-      title: "Voor ouders/verzorgers die willen helpen kiezen",
-      description: "Je wil je kind helpen, maar je weet niet goed hoe. Vinster maakt het makkelijk om samen het gesprek aan te gaan. De tool maakt talenten, voorkeuren en richtingen inzichtelijk — zodat je geen druk hoeft te zetten, maar echt kunt begeleiden."
+      description: "Je merkt dat je werk niet meer past. Je mist zingeving, energie of het gevoel dat je ergens naartoe werkt. Dit traject geeft je inzicht in wat je wilt, wat je belangrijk vindt en welke functie of omgeving beter bij je aansluit."
     },
     {
       title: "Voor loopbaanbegeleiders en coaches",
-      description: "Vinster ondersteunt jouw begeleidingstraject met slimme technologie. Laat jouw cliënten thuis hun profiel doorlopen en gebruik het resultaat als vertrekpunt voor verdieping. Zo ga je sneller de diepte in én houd je ruimte voor het echte gesprek."
+      description: "Vinster ondersteunt jouw begeleidingstraject met slimme technologie. Laat jouw cliënten thuis voorwerk doen en gebruik het resultaat als vertrekpunt voor verdieping en actie."
+    },
+    {
+      title: "Voor ouders/verzorgers die willen helpen kiezen",
+      description: "Je wil je kind helpen, maar je weet niet goed hoe. Vinster maakt het makkelijk om samen het gesprek aan te gaan. De tool maakt wensen, voorkeuren en richtingen inzichtelijk — zodat jullie zicht krijgen op passende mogelijkheden."
     }
   ];
 
