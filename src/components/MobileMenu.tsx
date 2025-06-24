@@ -21,6 +21,7 @@ const MobileMenu = () => {
     { title: "Over Vinster", path: "/over-vinster" },
     { title: "Voor wie is het?", path: "/voor-wie-is-het" },
     { title: "Veelgestelde vragen", path: "/veelgestelde-vragen" },
+    { title: "Ervaringen", path: "/ervaringen" },
     { title: "Contact", path: "/contact" },
   ];
 

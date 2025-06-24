@@ -12,6 +12,7 @@ import PaymentRequired from "@/pages/PaymentRequired";
 import OverVinster from "@/pages/OverVinster";
 import VoorWieIsHet from "@/pages/VoorWieIsHet";
 import VeelgesteldeVragen from "@/pages/VeelgesteldeVragen";
+import Ervaringen from "@/pages/Ervaringen";
 import Contact from "@/pages/Contact";
 import PrivacyVerklaring from "@/pages/PrivacyVerklaring";
 import AlgemeneVoorwaarden from "@/pages/AlgemeneVoorwaarden";
@@ -57,6 +58,7 @@ const AppRouter = () => {
       <Route path="/over-vinster" element={<OverVinster />} />
       <Route path="/voor-wie-is-het" element={<VoorWieIsHet />} />
       <Route path="/veelgestelde-vragen" element={<VeelgesteldeVragen />} />
+      <Route path="/ervaringen" element={<Ervaringen />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/privacy-verklaring" element={<PrivacyVerklaring />} />
       <Route path="/algemene-voorwaarden" element={<AlgemeneVoorwaarden />} />
