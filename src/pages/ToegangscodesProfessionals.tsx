@@ -60,10 +60,25 @@ const ToegangscodesProfessionals = () => {
       });
 
       if (response.ok) {
+        const responseData = await response.json();
+        
         toast({
           title: "Aanvraag verzonden!",
-          description: "We nemen zo snel mogelijk contact met je op voor de betaling en levering van je kortingscodes.",
+          description: "Je wordt doorgestuurd naar de betalingspagina...",
         });
+        
+        // Check if webhook returned a checkout URL
+        if (responseData && responseData.checkout_url) {
+          // Open payment page in new tab
+          window.open(responseData.checkout_url, '_blank');
+        } else {
+          console.log('No checkout_url in webhook response:', responseData);
+          toast({
+            title: "Let op",
+            description: "We nemen zo snel mogelijk contact met je op voor de betaling.",
+          });
+        }
+        
         setFormData({ email: "", quantity: "" });
       } else {
         throw new Error('Failed to send request');
