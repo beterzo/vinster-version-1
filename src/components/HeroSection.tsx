@@ -36,7 +36,11 @@ const HeroSection = () => {
             <div className="flex items-center">
               <MobileMenu />
             </div>
-            <Button onClick={() => navigate('/login')} className="bg-white hover:bg-gray-100 text-blue-900 font-semibold px-6 py-3 rounded-full border border-gray-200 shadow-sm transition-all duration-200 h-12">
+            {/* Hide login button on mobile */}
+            <Button 
+              onClick={() => navigate('/login')} 
+              className="hidden md:block bg-white hover:bg-gray-100 text-blue-900 font-semibold px-6 py-3 rounded-full border border-gray-200 shadow-sm transition-all duration-200 h-12"
+            >
               Inloggen
             </Button>
           </div>
