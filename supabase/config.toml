@@ -10,43 +10,170 @@ max_rows = 1000
 
 [db]
 port = 54322
+shadow_port = 54320
+major_version = 15
+
+[db.pooler]
+enabled = false
+port = 54329
+pool_mode = "transaction"
+default_pool_size = 20
+max_client_conn = 100
+
+[realtime]
+enabled = true
+ip_version = "ipv4"
+port = 54323
+max_header_length = 4096
 
 [studio]
 enabled = true
-port = 54323
+port = 54324
+api_url = "http://127.0.0.1:54321"
+openai_api_key = "env(OPENAI_API_KEY)"
 
 [inbucket]
 enabled = true
-port = 54324
-smtp_port = 54325
-pop3_port = 54326
+port = 54325
+smtp_port = 54326
+pop3_port = 54327
 
-[storage]
-enabled = true
-port = 54327
-file_size_limit = "50MiB"
-
-[auth]
-enabled = true
-port = 54328
-site_url = "http://localhost:3000"
-additional_redirect_urls = ["https://vinster-version-1.lovable.app"]
-jwt_expiry = 3600
-refresh_token_rotation_enabled = true
-security_update_password_require_reauthentication = true
-
-[edge_functions]
-enabled = true
-port = 54329
+[functions]
+verify_jwt = true
 
 [functions.send-confirmation-email]
 verify_jwt = false
 
-[functions.generate-ai-keywords]
-verify_jwt = true
+[functions.send-contact-email]
+verify_jwt = false
 
-[functions.store-zoekprofiel-pdf]
-verify_jwt = true
+[auth]
+enabled = true
+site_url = "https://vinster.ai"
+additional_redirect_urls = ["https://vinster.ai/**"]
+jwt_expiry = 3600
+enable_signup = true
+enable_anonymous_users = false
+enable_confirmations = true
+secure_password_change = false
+enable_manual_linking = false
 
-[functions.upload-user-pdf]
-verify_jwt = true
+[auth.email]
+enable_signup = true
+double_confirm_changes = true
+enable_confirmations = true
+template_confirmation = "Hi {{ .Name }}, please confirm your email."
+template_invite = "Hi {{ .Name }}, you've been invited to {{ .SiteName }}."
+template_magic_link = "Hi {{ .Name }}, click here to sign in."
+template_recovery = "Hi {{ .Name }}, click here to reset your password."
+template_email_change = "Hi {{ .Name }}, click here to confirm your email change."
+
+[auth.external.apple]
+enabled = false
+client_id = ""
+secret = "env(SUPABASE_AUTH_EXTERNAL_APPLE_SECRET)"
+redirect_uri = ""
+
+[auth.external.azure]
+enabled = false
+client_id = ""
+secret = "env(SUPABASE_AUTH_EXTERNAL_AZURE_SECRET)"
+url = ""
+tenant = "common"
+
+[auth.external.bitbucket]
+enabled = false
+client_id = ""
+secret = "env(SUPABASE_AUTH_EXTERNAL_BITBUCKET_SECRET)"
+
+[auth.external.discord]
+enabled = false
+client_id = ""
+secret = "env(SUPABASE_AUTH_EXTERNAL_DISCORD_SECRET)"
+
+[auth.external.facebook]
+enabled = false
+client_id = ""
+secret = "env(SUPABASE_AUTH_EXTERNAL_FACEBOOK_SECRET)"
+
+[auth.external.figma]
+enabled = false
+client_id = ""
+secret = "env(SUPABASE_AUTH_EXTERNAL_FIGMA_SECRET)"
+
+[auth.external.github]
+enabled = false
+client_id = ""
+secret = "env(SUPABASE_AUTH_EXTERNAL_GITHUB_SECRET)"
+
+[auth.external.gitlab]
+enabled = false
+client_id = ""
+secret = "env(SUPABASE_AUTH_EXTERNAL_GITLAB_SECRET)"
+
+[auth.external.google]
+enabled = false
+client_id = ""
+secret = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET)"
+skip_nonce_check = false
+
+[auth.external.keycloak]
+enabled = false
+client_id = ""
+secret = "env(SUPABASE_AUTH_EXTERNAL_KEYCLOAK_SECRET)"
+url = ""
+
+[auth.external.linkedin]
+enabled = false
+client_id = ""
+secret = "env(SUPABASE_AUTH_EXTERNAL_LINKEDIN_SECRET)"
+
+[auth.external.notion]
+enabled = false
+client_id = ""
+secret = "env(SUPABASE_AUTH_EXTERNAL_NOTION_SECRET)"
+
+[auth.external.twitch]
+enabled = false
+client_id = ""
+secret = "env(SUPABASE_AUTH_EXTERNAL_TWITCH_SECRET)"
+
+[auth.external.twitter]
+enabled = false
+client_id = ""
+secret = "env(SUPABASE_AUTH_EXTERNAL_TWITTER_SECRET)"
+
+[auth.external.slack]
+enabled = false
+client_id = ""
+secret = "env(SUPABASE_AUTH_EXTERNAL_SLACK_SECRET)"
+
+[auth.external.spotify]
+enabled = false
+client_id = ""
+secret = "env(SUPABASE_AUTH_EXTERNAL_SPOTIFY_SECRET)"
+
+[auth.external.workos]
+enabled = false
+client_id = ""
+secret = "env(SUPABASE_AUTH_EXTERNAL_WORKOS_SECRET)"
+
+[auth.external.zoom]
+enabled = false
+client_id = ""
+secret = "env(SUPABASE_AUTH_EXTERNAL_ZOOM_SECRET)"
+
+[auth.hook.send_email]
+enabled = true
+uri = "https://aqajxxevifmhdjlvqhkz.supabase.co/functions/v1/send-confirmation-email"
+secrets = ["RESEND_API_KEY"]
+
+[edge_runtime]
+enabled = true
+policy = "per_worker"
+
+[analytics]
+enabled = false
+port = 54327
+vector_port = 54328
+backend = "postgres"
