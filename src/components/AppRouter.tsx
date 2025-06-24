@@ -16,6 +16,7 @@ import Ervaringen from "@/pages/Ervaringen";
 import Contact from "@/pages/Contact";
 import PrivacyVerklaring from "@/pages/PrivacyVerklaring";
 import AlgemeneVoorwaarden from "@/pages/AlgemeneVoorwaarden";
+import ToegangscodesProfessionals from "@/pages/ToegangscodesProfessionals";
 
 // Protected route imports
 import ProtectedRoute from "@/components/ProtectedRoute";
@@ -60,6 +61,7 @@ const AppRouter = () => {
       <Route path="/contact" element={<Contact />} />
       <Route path="/privacy-verklaring" element={<PrivacyVerklaring />} />
       <Route path="/algemene-voorwaarden" element={<AlgemeneVoorwaarden />} />
+      <Route path="/toegangscodes-professionals" element={<ToegangscodesProfessionals />} />
       
       {/* Legacy redirect from old de-mens-achter-vinster to new over-vinster */}
       <Route path="/de-mens-achter-vinster" element={<Navigate to="/over-vinster" replace />} />

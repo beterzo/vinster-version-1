@@ -23,6 +23,7 @@ const MobileMenu = () => {
     { title: "Veelgestelde vragen", path: "/veelgestelde-vragen" },
     { title: "Ervaringen", path: "/ervaringen" },
     { title: "Contact", path: "/contact" },
+    { title: "Toegangscodes voor professionals", path: "/toegangscodes-professionals" },
   ];
 
   const handleNavigation = (path: string) => {
