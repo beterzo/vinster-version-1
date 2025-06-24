@@ -1,24 +1,15 @@
-
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import Footer from "@/components/Footer";
-
 const OverVinster = () => {
   const navigate = useNavigate();
-
-  return (
-    <div className="min-h-screen bg-gray-50">
+  return <div className="min-h-screen bg-gray-50">
       {/* Header with Logo */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-6 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <img 
-                alt="Vinster Logo" 
-                className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
-                onClick={() => navigate('/')} 
-                src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
-              />
+              <img alt="Vinster Logo" className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" onClick={() => navigate('/')} src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" />
             </div>
           </div>
         </div>
@@ -31,11 +22,7 @@ const OverVinster = () => {
             {/* Photo */}
             <div className="order-2 md:order-1">
               <div className="relative">
-                <img 
-                  src="/lovable-uploads/heidi-jansen.jpg" 
-                  alt="Heidi Jansen - Oprichter van Vinster" 
-                  className="w-full max-w-md mx-auto rounded-2xl shadow-lg object-cover aspect-[3/4]"
-                />
+                <img alt="Heidi Jansen - Oprichter van Vinster" className="w-full max-w-md mx-auto rounded-2xl shadow-lg object-cover aspect-[3/4]" src="/lovable-uploads/790a1059-98fe-415f-bc29-f36d00c53e4c.jpg" />
                 <div className="absolute -bottom-4 -right-4 bg-blue-900 text-white p-4 rounded-xl shadow-lg">
                   <p className="text-sm font-semibold">25+ jaar ervaring</p>
                   <p className="text-xs opacity-90">Loopbaanadviseur</p>
@@ -124,17 +111,10 @@ const OverVinster = () => {
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              onClick={() => navigate('/')}
-              variant="outline"
-              className="h-12 px-8 border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold"
-            >
+            <Button onClick={() => navigate('/')} variant="outline" className="h-12 px-8 border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold">
               Terug naar homepage
             </Button>
-            <Button
-              onClick={() => navigate('/signup')}
-              className="h-12 px-8 bg-blue-900 hover:bg-blue-800 text-white font-semibold"
-            >
+            <Button onClick={() => navigate('/signup')} className="h-12 px-8 bg-blue-900 hover:bg-blue-800 text-white font-semibold">
               Starten
             </Button>
           </div>
@@ -142,8 +122,6 @@ const OverVinster = () => {
       </div>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default OverVinster;
