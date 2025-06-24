@@ -32,7 +32,7 @@ const VeelgesteldeVragen = () => {
     },
     {
       question: "Hoe lang duurt het traject?",
-      answer: "De meeste mensen ronden alles binnen 1 tot 2 uur af. Maar je mag je tijd nemen. Je voortgang wordt automatisch opgeslagen."
+      answer: "De meeste mensen ronden alles binnen een uur af. We raden wel aan om tussen de stappen door goed de tijd te nemen om na te denken. Je voortgang wordt automatisch opgeslagen."
     },
     {
       question: "Wat zit er in het rapport?",
