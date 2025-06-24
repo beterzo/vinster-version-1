@@ -13,8 +13,7 @@ const ProcessSteps = () => {
           Hoe werkt het?
         </div>
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-900 leading-tight max-w-4xl mx-auto">
-          Samen ontdekken we stap voor stap<br className="hidden sm:block" />
-          wat jou boeit en hoe jij graag werkt
+          Samen ontdekken we stap voor stap wat jou boeit en hoe jij graag werkt
         </h2>
       </div>
 
