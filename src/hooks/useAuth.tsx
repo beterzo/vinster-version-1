@@ -97,8 +97,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     console.log('🔐 Attempting signup for:', email);
     
     try {
-      // Use vinster.ai domain for redirect
-      const redirectUrl = 'https://vinster.ai/login';
+      // Use vinster.ai domain for redirect to new email confirmed page
+      const redirectUrl = 'https://vinster.ai/email-confirmed';
       console.log('🔗 Using redirect URL:', redirectUrl);
       
       const { data, error } = await supabase.auth.signUp({
@@ -177,8 +177,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     console.log('🔐 Resending confirmation email for:', email);
     
     try {
-      // Use vinster.ai domain for redirect
-      const redirectUrl = 'https://vinster.ai/login';
+      // Use vinster.ai domain for redirect to new email confirmed page
+      const redirectUrl = 'https://vinster.ai/email-confirmed';
       console.log('🔗 Using redirect URL for resend:', redirectUrl);
       
       const { error } = await supabase.auth.resend({

@@ -58,8 +58,8 @@ const handler = async (req: Request): Promise<Response> => {
       lastName: user.user_metadata?.last_name
     });
 
-    // Direct redirect to login page with verified parameter
-    const redirectUrl = 'https://vinster.ai/login?verified=true';
+    // Direct redirect to email confirmed page
+    const redirectUrl = 'https://vinster.ai/email-confirmed';
     console.log("🔗 Using redirect URL:", redirectUrl);
 
     // Use Supabase's auth verification endpoint directly
