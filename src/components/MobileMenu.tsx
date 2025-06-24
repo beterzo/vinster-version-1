@@ -62,10 +62,10 @@ const MobileMenu = () => {
                 {item.title}
               </button>
             ))}
-            {/* Inloggen button toegevoegd aan het menu */}
+            {/* Inloggen button met dezelfde styling als andere menu items */}
             <button
               onClick={() => handleNavigation('/login')}
-              className="block w-full text-left py-3 px-0 text-lg font-medium bg-vinster-blue text-white hover:bg-blue-700 rounded-lg transition-colors duration-200 mt-4"
+              className="block w-full text-left py-3 px-0 text-lg font-medium text-gray-700 hover:bg-gray-50 hover:text-vinster-blue rounded-lg transition-colors duration-200"
             >
               Inloggen
             </button>
