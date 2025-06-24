@@ -36,10 +36,10 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    // Send email to info@deloopbaanopleiding.nl
+    // Send email to team@vinster.ai
     const emailResponse = await resend.emails.send({
       from: "Team Vinster <team@vinster.ai>",
-      to: ["info@deloopbaanopleiding.nl"],
+      to: ["team@vinster.ai"],
       subject: `Nieuwe contactaanvraag van ${name}`,
       html: `
         <h2>Nieuwe contactaanvraag via Vinster</h2>

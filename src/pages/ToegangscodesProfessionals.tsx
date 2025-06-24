@@ -167,8 +167,8 @@ const ToegangscodesProfessionals = () => {
             <div className="mt-6 text-center">
               <p className="text-sm text-gray-600">
                 Vragen? Neem contact op via<br />
-                <a href="mailto:info@deloopbaanopleiding.nl" className="text-blue-600 hover:underline">
-                  info@deloopbaanopleiding.nl
+                <a href="mailto:team@vinster.ai" className="text-blue-600 hover:underline">
+                  team@vinster.ai
                 </a>
               </p>
             </div>

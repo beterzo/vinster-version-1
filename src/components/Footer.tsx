@@ -50,7 +50,7 @@ const Footer = () => {
             <div className="space-y-2 text-gray-600">
               <p>
                 <span className="font-medium">Email:</span><br />
-                info@deloopbaanopleiding.nl
+                team@vinster.ai
               </p>
               <p>
                 <span className="font-medium">Telefoon:</span><br />

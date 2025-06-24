@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -198,10 +199,10 @@ const Contact = () => {
                     E-mail
                   </h3>
                   <a 
-                    href="mailto:info@deloopbaanopleiding.nl"
+                    href="mailto:team@vinster.ai"
                     className="text-blue-600 hover:text-blue-800 transition-colors"
                   >
-                    info@deloopbaanopleiding.nl
+                    team@vinster.ai
                   </a>
                 </div>
               </div>
