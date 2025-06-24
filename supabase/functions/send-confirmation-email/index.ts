@@ -62,7 +62,7 @@ const handler = async (req: Request): Promise<Response> => {
     const redirectUrl = 'https://vinster.ai/email-confirmed';
     console.log("🔗 Using redirect URL:", redirectUrl);
 
-    // Use Supabase's auth verification endpoint directly
+    // Use Supabase's auth verification endpoint directly with proper parameters
     const verificationUrl = `https://aqajxxevifmhdjlvqhkz.supabase.co/auth/v1/verify?token=${payload.email_data.token_hash}&type=signup&redirect_to=${encodeURIComponent(redirectUrl)}`;
 
     console.log("✅ Verification URL created:", verificationUrl);
