@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +14,7 @@ const VoorWieIsHet = () => {
     },
     {
       title: "Voor werkenden die vastlopen",
-      description: "Je merkt dat je werk niet meer past. Je mist zingeving, energie of het gevoel dat je ergens naartoe werkt. Dit traject geeft je inzicht in wat je wilt, wat je belangrijk vindt en welke functie of omgeving beter bij je aansluit."
+      description: "Je merkt dat je werk niet meer past. Je mist richting, energie of het gevoel dat je ergens naartoe werkt. Dit traject geeft je inzicht in wat je wilt, wat je belangrijk vindt en welke functie of omgeving beter bij je aansluit."
     },
     {
       title: "Voor loopbaanbegeleiders en coaches",

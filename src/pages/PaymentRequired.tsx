@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CheckCircle, Star, Shield, Zap, Clock, HelpCircle } from "lucide-react";
@@ -29,7 +30,7 @@ const PaymentRequired = () => {
   }, [hasPaid, navigate]);
   const features = [{
     title: "Volledige enthousiasmescan",
-    description: "Ontdek waar jouw echte passies liggen",
+    description: "Ontdek waar jouw interessegebieden liggen",
     icon: <Star className="w-5 h-5 text-yellow-400" />
   }, {
     title: "Wensberoepen analyse",
@@ -144,7 +145,7 @@ const PaymentRequired = () => {
             Welkom bij Vinster, {user?.user_metadata?.first_name || 'daar'}!
           </h1>
           <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
-            Je bent nog maar één stap verwijderd van het ontdekken van jouw ideale loopbaan!
+            Je bent nog maar één stap verwijderd van het ontdekken van jouw passende loopbaan!
           </p>
         </div>
 
@@ -160,13 +161,13 @@ const PaymentRequired = () => {
               <h2 className="text-xl lg:text-2xl font-bold text-vinster-blue mb-4">Start jouw loopbaanontwikkeling</h2>
               <p className="text-gray-700 leading-relaxed mb-4">
                 Met Vinster krijg je toegang tot wetenschappelijk onderbouwde tools die je helpen 
-                jouw ideale loopbaan te vinden. Onze methode is gebaseerd op jarenlang onderzoek 
+                jouw passende loopbaan te vinden. Onze methode is gebaseerd op jarenlang onderzoek 
                 en heeft al duizenden mensen geholpen.
               </p>
               <p className="text-gray-600 text-sm leading-relaxed">
                 Begin vandaag nog met de enthousiasmescan en ontdek wat je echt drijft in je werk. 
                 Het complete programma duurt ongeveer 45 minuten en geeft je direct inzicht in 
-                jouw unieke loopbaanprofiel.
+                jouw persoonlijke loopbaanprofiel.
               </p>
             </Card>
 

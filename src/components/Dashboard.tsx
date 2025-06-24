@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
@@ -59,7 +60,7 @@ const Dashboard = () => {
               
               <p>
                 Door vragen te stellen over je jeugd, schooltijd en werkervaringen brengen we jouw 
-                unieke patroon van voorkeuren en interesses in kaart.
+                persoonlijke patroon van voorkeuren en interesses in kaart.
               </p>
               
               <p>

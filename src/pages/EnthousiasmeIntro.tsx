@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
@@ -40,7 +41,7 @@ const EnthousiasmeIntro = () => {
                   Voor je start
                 </h3>
                 <p className="text-gray-700 leading-relaxed">
-                  Denk terug aan vroeger en leef je even in in de periode die genoemd wordt. Wat deed jij toen graag? Waar was je veel mee bezig? Wat boeide jou? Waar heb je de beste herinneringen aan? Wat was speciaal in die periode? Waar was je graag?
+                  Denk terug aan vroeger en leef je even in in de periode die genoemd wordt. Wat deed jij toen graag? Waar was je veel mee bezig? Wat boeide jou? Waar heb je de beste herinneringen aan? Wat was belangrijk in die periode? Waar was je graag?
                 </p>
               </div>
 
