@@ -21,11 +21,11 @@ const HeroSection = () => {
       <div className="relative z-10 max-w-[1440px] mx-auto px-6">
         {/* Header with Logo (left) and Menu + Button (right) */}
         <div className="py-6 flex items-center justify-between">
-          {/* Left side - Logo only, larger */}
+          {/* Left side - Logo only, made bigger */}
           <div className="flex items-center pt-1">
             <img 
               alt="Vinster Logo" 
-              className="h-14 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              className="h-16 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
               onClick={() => navigate('/')} 
               src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
             />
