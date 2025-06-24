@@ -28,8 +28,8 @@ const DashboardSidebar = () => {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="sm" className="md:hidden">
-          <Menu className="h-4 w-4" />
+        <Button variant="ghost" size="lg" className="md:hidden h-12 w-12">
+          <Menu className="h-8 w-8" />
         </Button>
       </SheetTrigger>
       <SheetContent className="w-full sm:w-64 border-r p-4 pt-6">

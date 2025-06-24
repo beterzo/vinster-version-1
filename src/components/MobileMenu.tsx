@@ -36,10 +36,10 @@ const MobileMenu = () => {
       <DrawerTrigger asChild>
         <Button
           variant="ghost"
-          size="icon"
-          className="text-white hover:bg-white hover:bg-opacity-10 transition-all duration-200 h-12 w-12"
+          size="lg"
+          className="text-white hover:bg-white hover:bg-opacity-10 transition-all duration-200 h-14 w-14"
         >
-          <Menu className="h-8 w-8" />
+          <Menu className="h-10 w-10" />
         </Button>
       </DrawerTrigger>
       <DrawerContent className="bg-white">
