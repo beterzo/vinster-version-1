@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CheckCircle, Star, Shield, Zap, Clock, HelpCircle } from "lucide-react";
@@ -7,17 +6,11 @@ import { useToast } from "@/hooks/use-toast";
 import { usePaymentStatus } from "@/hooks/usePaymentStatus";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
 const PaymentRequired = () => {
-  const {
-    user
-  } = useAuth();
-  const {
-    toast
-  } = useToast();
-  const {
-    hasPaid,
-    refreshPaymentStatus
-  } = usePaymentStatus();
+  const { user } = useAuth();
+  const { toast } = useToast();
+  const { hasPaid, refreshPaymentStatus } = usePaymentStatus();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -28,23 +21,30 @@ const PaymentRequired = () => {
       navigate('/home');
     }
   }, [hasPaid, navigate]);
-  const features = [{
-    title: "Volledige enthousiasmescan",
-    description: "Ontdek waar jouw interessegebieden liggen",
-    icon: <Star className="w-5 h-5 text-yellow-400" />
-  }, {
-    title: "Wensberoepen analyse",
-    description: "Krijg gepersonaliseerde beroepsadviezen",
-    icon: <CheckCircle className="w-5 h-5 text-yellow-400" />
-  }, {
-    title: "Persoonlijk rapport",
-    description: "Uitgebreide analyse van jouw loopbaanprofiel",
-    icon: <Shield className="w-5 h-5 text-yellow-400" />
-  }, {
-    title: "Zoekprofiel generator",
-    description: "Automatisch gegenereerd profiel voor vacatures",
-    icon: <Zap className="w-5 h-5 text-yellow-400" />
-  }];
+
+  const features = [
+    {
+      title: "Volledige enthousiasmescan",
+      description: "Ontdek wanneer jij in je element bent",
+      icon: <Star className="w-5 h-5 text-yellow-400" />
+    },
+    {
+      title: "Wensberoepenanalyse",
+      description: "Verken verschillende mogelijkheden die bij jou passen",
+      icon: <CheckCircle className="w-5 h-5 text-yellow-400" />
+    },
+    {
+      title: "Persoonlijk rapport",
+      description: "Met drie functies die bij je passen",
+      icon: <Shield className="w-5 h-5 text-yellow-400" />
+    },
+    {
+      title: "Zoekprofiel",
+      description: "Jouw ideale functie in één krachtige zin samengevat",
+      icon: <Zap className="w-5 h-5 text-yellow-400" />
+    }
+  ];
+
   const handlePayment = async () => {
     if (!user) {
       toast({
@@ -136,11 +136,18 @@ const PaymentRequired = () => {
       setIsLoading(false);
     }
   };
-  return <div className="min-h-screen bg-gray-50 font-sans">
+
+  return (
+    <div className="min-h-screen bg-gray-50 font-sans">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-8">
         {/* Header with new logo */}
         <div className="text-center mb-8">
-          <img alt="Vinster Logo" className="h-12 w-auto mx-auto cursor-pointer hover:opacity-80 transition-opacity duration-200 mb-6" onClick={() => navigate('/')} src="/lovable-uploads/23b63bc5-3895-4312-ad2b-36f3e48adb5a.png" />
+          <img 
+            alt="Vinster Logo" 
+            className="h-12 w-auto mx-auto cursor-pointer hover:opacity-80 transition-opacity duration-200 mb-6" 
+            onClick={() => navigate('/')} 
+            src="/lovable-uploads/23b63bc5-3895-4312-ad2b-36f3e48adb5a.png" 
+          />
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-vinster-blue mb-4">
             Welkom bij Vinster, {user?.user_metadata?.first_name || 'daar'}!
           </h1>
@@ -155,14 +162,12 @@ const PaymentRequired = () => {
           {/* Left column: Content */}
           <div className="space-y-6 lg:space-y-8 flex flex-col">
             {/* Welcome card */}
-            <Card className="p-6 lg:p-8 border-0 rounded-3xl" style={{
-            backgroundColor: '#E6F0F6'
-          }}>
+            <Card className="p-6 lg:p-8 border-0 rounded-3xl" style={{ backgroundColor: '#E6F0F6' }}>
               <h2 className="text-xl lg:text-2xl font-bold text-vinster-blue mb-4">Start jouw loopbaanontwikkeling</h2>
               <p className="text-gray-700 leading-relaxed mb-4">
-                Met Vinster krijg je toegang tot wetenschappelijk onderbouwde tools die je helpen 
-                jouw passende loopbaan te vinden. Onze methode is gebaseerd op jarenlang onderzoek 
-                en heeft al duizenden mensen geholpen.
+                Met Vinster ga jij ontdekken wat jouw best passende volgende loopbaanstap is. De methode achter 
+                Vinster is gebaseerd op jarenlange ervaring met loopbaanonderzoek en heeft al duizenden mensen 
+                geholpen.
               </p>
               <p className="text-gray-600 text-sm leading-relaxed">
                 Begin vandaag nog met de enthousiasmescan en ontdek wat je echt drijft in je werk. 
@@ -173,7 +178,8 @@ const PaymentRequired = () => {
 
             {/* Features grid - responsive */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 flex-grow">
-              {features.map((feature, index) => <Card key={index} className="p-4 lg:p-6 border-0 rounded-3xl bg-white shadow-sm">
+              {features.map((feature, index) => (
+                <Card key={index} className="p-4 lg:p-6 border-0 rounded-3xl bg-white shadow-sm">
                   <div className="flex items-start space-x-4">
                     <div className="flex-shrink-0">
                       {feature.icon}
@@ -183,13 +189,12 @@ const PaymentRequired = () => {
                       <p className="text-sm text-gray-600">{feature.description}</p>
                     </div>
                   </div>
-                </Card>)}
+                </Card>
+              ))}
             </div>
 
             {/* Data Safety Card */}
-            <Card className="p-6 lg:p-8 border-0 rounded-3xl" style={{
-            backgroundColor: '#E6F0F6'
-          }}>
+            <Card className="p-6 lg:p-8 border-0 rounded-3xl" style={{ backgroundColor: '#E6F0F6' }}>
               <div className="flex items-start space-x-4">
                 <div className="flex-shrink-0">
                   <Shield className="w-6 h-6 text-blue-600" />
@@ -224,7 +229,7 @@ const PaymentRequired = () => {
                 </div>
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                  <span className="text-sm">Wensberoepen analyse</span>
+                  <span className="text-sm">Wensberoepenanalyse</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
@@ -240,7 +245,12 @@ const PaymentRequired = () => {
                 </div>
               </div>
 
-              <Button onClick={handlePayment} disabled={isLoading} className="w-full bg-yellow-400 hover:bg-yellow-500 text-vinster-blue font-bold py-3 lg:py-4 text-base lg:text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200" size="lg">
+              <Button 
+                onClick={handlePayment} 
+                disabled={isLoading} 
+                className="w-full bg-yellow-400 hover:bg-yellow-500 text-vinster-blue font-bold py-3 lg:py-4 text-base lg:text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200" 
+                size="lg"
+              >
                 {isLoading ? "Verwerken..." : "Start nu voor €29"}
               </Button>
 
@@ -262,6 +272,8 @@ const PaymentRequired = () => {
           </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default PaymentRequired;
