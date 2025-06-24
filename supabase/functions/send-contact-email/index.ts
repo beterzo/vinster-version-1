@@ -38,7 +38,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send email to info@deloopbaanopleiding.nl
     const emailResponse = await resend.emails.send({
-      from: "Vinster Contact <noreply@resend.dev>",
+      from: "Team Vinster <team@vinster.ai>",
       to: ["info@deloopbaanopleiding.nl"],
       subject: `Nieuwe contactaanvraag van ${name}`,
       html: `
@@ -54,7 +54,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send confirmation email to the sender
     await resend.emails.send({
-      from: "Vinster <noreply@resend.dev>",
+      from: "Team Vinster <team@vinster.ai>",
       to: [email],
       subject: "Bedankt voor je bericht aan Vinster",
       html: `
