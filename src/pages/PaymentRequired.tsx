@@ -192,26 +192,9 @@ const PaymentRequired = () => {
                 </Card>
               ))}
             </div>
-
-            {/* Data Safety Card */}
-            <Card className="p-6 lg:p-8 border-0 rounded-3xl" style={{ backgroundColor: '#E6F0F6' }}>
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0">
-                  <Shield className="w-6 h-6 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-lg text-vinster-blue mb-3">100% Veilig & GDPR-compliant</h3>
-                  <p className="text-gray-700 leading-relaxed text-sm">
-                    Jouw gegevens zijn volledig veilig en GDPR-compliant. We gebruiken AI-modellen om je persoonlijke 
-                    inzichten te genereren, maar jouw gegevens worden nooit opgeslagen door deze modellen. 
-                    Alles blijft privé en vertrouwelijk bij jou.
-                  </p>
-                </div>
-              </div>
-            </Card>
           </div>
 
-          {/* Right column: Pricing + Additional content */}
+          {/* Right column: Pricing */}
           <div className="flex flex-col gap-6 lg:gap-6">
             {/* Pricing Card */}
             <Card className="p-6 lg:p-8 border-0 rounded-3xl bg-white shadow-lg">
@@ -239,10 +222,6 @@ const PaymentRequired = () => {
                   <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
                   <span className="text-sm">Zoekprofiel generator</span>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                  <span className="text-sm">Levenslange toegang</span>
-                </div>
               </div>
 
               <Button 
@@ -258,19 +237,25 @@ const PaymentRequired = () => {
                 Veilig betalen met iDEAL, creditcard of PayPal
               </p>
             </Card>
-
-            {/* Money-back guarantee */}
-            <Card className="p-4 lg:p-6 border-0 rounded-3xl bg-green-50 border-green-200">
-              <div className="text-center">
-                <Shield className="w-8 h-8 text-green-600 mx-auto mb-3" />
-                <h4 className="font-semibold text-vinster-blue mb-2">30 dagen geld-terug garantie</h4>
-                <p className="text-sm text-green-700">
-                  Niet tevreden? Krijg je geld terug, geen vragen gesteld.
-                </p>
-              </div>
-            </Card>
           </div>
         </div>
+
+        {/* Data Safety Card - Full width below the main content */}
+        <Card className="p-6 lg:p-8 border-0 rounded-3xl mt-6 lg:mt-8" style={{ backgroundColor: '#E6F0F6' }}>
+          <div className="flex items-start space-x-4">
+            <div className="flex-shrink-0">
+              <Shield className="w-6 h-6 text-blue-600" />
+            </div>
+            <div>
+              <h3 className="font-bold text-lg text-vinster-blue mb-3">100% Veilig & GDPR-compliant</h3>
+              <p className="text-gray-700 leading-relaxed text-sm">
+                Jouw gegevens zijn volledig veilig en GDPR-compliant. We gebruiken AI-modellen om je persoonlijke 
+                inzichten te genereren, maar jouw gegevens worden nooit opgeslagen door deze modellen. 
+                Alles blijft privé en vertrouwelijk bij jou.
+              </p>
+            </div>
+          </div>
+        </Card>
       </div>
     </div>
   );
