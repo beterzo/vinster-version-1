@@ -28,7 +28,7 @@ const VeelgesteldeVragen = () => {
     },
     {
       question: "Voor wie is Vinster bedoeld?",
-      answer: "Voor iedereen die keuzes wil maken die écht bij ze passen. Jongeren, werkzoekenden, heroriënteerders, ouders die hun kind willen helpen, loopbaancoaches en scholen."
+      answer: "Voor iedereen die loopbaankeuzes wil maken die passen. High potentials, doorgroeiers, richting zoekers, heroriënteerders, loopbaancoaches en ouders/verzorgers die willen helpen."
     },
     {
       question: "Hoe lang duurt het traject?",
