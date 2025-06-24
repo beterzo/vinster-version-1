@@ -1,114 +1,13 @@
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useNavigate } from "react-router-dom";
-import { useToast } from "@/hooks/use-toast";
 import Footer from "@/components/Footer";
 
 const ToegangscodesProfessionals = () => {
   const navigate = useNavigate();
-  const { toast } = useToast();
-  const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    company: "",
-    quantity: "5",
-    customQuantity: ""
-  });
 
-  const pricePerTraject = 29;
-
-  const getQuantity = () => {
-    if (formData.quantity === "custom") {
-      return parseInt(formData.customQuantity) || 0;
-    }
-    return parseInt(formData.quantity);
-  };
-
-  const getTotalPrice = () => {
-    return getQuantity() * pricePerTraject;
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleQuantityChange = (value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      quantity: value,
-      customQuantity: value === "custom" ? prev.customQuantity : ""
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!formData.name || !formData.email || !formData.company) {
-      toast({
-        title: "Vul alle velden in",
-        description: "Naam, e-mailadres en bedrijf zijn verplicht.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    const quantity = getQuantity();
-    if (quantity < 5) {
-      toast({
-        title: "Minimum aantal trajecten",
-        description: "Het minimum aantal trajecten is 5.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setIsLoading(true);
-
-    try {
-      // Here we will call the webhook that you'll provide
-      const webhookData = {
-        name: formData.name,
-        email: formData.email,
-        company: formData.company,
-        quantity: quantity,
-        totalPrice: getTotalPrice(),
-        pricePerTraject: pricePerTraject
-      };
-
-      console.log('Webhook data:', webhookData);
-      
-      // TODO: Replace with actual webhook URL
-      // const response = await fetch('YOUR_WEBHOOK_URL', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify(webhookData),
-      // });
-
-      toast({
-        title: "Bestelling geregistreerd!",
-        description: "We nemen zo snel mogelijk contact met je op.",
-      });
-      
-    } catch (error) {
-      toast({
-        title: "Fout bij verzenden",
-        description: "Er is iets misgegaan. Probeer het later opnieuw.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
-    }
+  const handlePurchase = () => {
+    window.open('https://buy.stripe.com/4gM5kC89K1cX4zt2aV8EM00', '_blank');
   };
 
   return (
@@ -145,129 +44,27 @@ const ToegangscodesProfessionals = () => {
               Als professional, coach of adviseur kunt u toegangscodes aanschaffen voor uw cliënten. 
               Koop meerdere trajecten tegelijk en geef uw cliënten direct toegang tot Vinster.
             </p>
+            
+            {/* Main Call-to-Action Button */}
+            <div className="mt-12">
+              <Button 
+                onClick={handlePurchase}
+                className="bg-blue-900 hover:bg-blue-800 text-white font-semibold text-lg px-12 py-6 h-auto"
+              >
+                Koop toegangscodes
+              </Button>
+              <p className="text-sm text-gray-600 mt-4">
+                Je wordt doorgestuurd naar onze veilige betaalpagina
+              </p>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Main Content */}
+      {/* Information Section */}
       <div className="max-w-4xl mx-auto px-6 py-12">
         <div className="grid md:grid-cols-2 gap-8">
-          {/* Order Form */}
-          <div className="bg-white rounded-xl shadow-lg p-8">
-            <h2 className="text-2xl font-semibold mb-6" style={{ color: '#232D4B' }}>
-              Bestelling plaatsen
-            </h2>
-            
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="space-y-2">
-                <Label htmlFor="name" className="text-sm font-medium" style={{ color: '#232D4B' }}>
-                  Naam *
-                </Label>
-                <Input
-                  id="name"
-                  name="name"
-                  type="text"
-                  placeholder="Je naam"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900"
-                  required
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-sm font-medium" style={{ color: '#232D4B' }}>
-                  E-mailadres *
-                </Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="je@bedrijf.nl"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900"
-                  required
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="company" className="text-sm font-medium" style={{ color: '#232D4B' }}>
-                  Bedrijf *
-                </Label>
-                <Input
-                  id="company"
-                  name="company"
-                  type="text"
-                  placeholder="Jouw bedrijfsnaam"
-                  value={formData.company}
-                  onChange={handleInputChange}
-                  className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900"
-                  required
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label className="text-sm font-medium" style={{ color: '#232D4B' }}>
-                  Aantal trajecten *
-                </Label>
-                <Select value={formData.quantity} onValueChange={handleQuantityChange}>
-                  <SelectTrigger className="h-12 border-gray-300 focus:border-blue-900 focus:ring-blue-900">
-                    <SelectValue placeholder="Selecteer aantal trajecten" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="5">5 trajecten</SelectItem>
-                    <SelectItem value="10">10 trajecten</SelectItem>
-                    <SelectItem value="25">25 trajecten</SelectItem>
-                    <SelectItem value="50">50 trajecten</SelectItem>
-                    <SelectItem value="custom">Ander aantal</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              {formData.quantity === "custom" && (
-                <div className="space-y-2">
-                  <Label htmlFor="customQuantity" className="text-sm font-medium" style={{ color: '#232D4B' }}>
-                    Aantal trajecten (minimum 5)
-                  </Label>
-                  <Input
-                    id="customQuantity"
-                    name="customQuantity"
-                    type="number"
-                    min="5"
-                    placeholder="Aantal trajecten"
-                    value={formData.customQuantity}
-                    onChange={handleInputChange}
-                    className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900"
-                  />
-                </div>
-              )}
-
-              <div className="bg-gray-50 p-4 rounded-lg">
-                <div className="flex justify-between items-center">
-                  <span className="font-medium" style={{ color: '#232D4B' }}>
-                    Totaalprijs:
-                  </span>
-                  <span className="text-xl font-bold" style={{ color: '#232D4B' }}>
-                    €{getTotalPrice()}
-                  </span>
-                </div>
-                <p className="text-sm text-gray-600 mt-1">
-                  {getQuantity()} trajecten × €{pricePerTraject}
-                </p>
-              </div>
-
-              <Button 
-                type="submit"
-                className="w-full h-12 bg-blue-900 hover:bg-blue-800 text-white font-semibold"
-                disabled={isLoading}
-              >
-                {isLoading ? "Bezig met verzenden..." : "Bestelling plaatsen"}
-              </Button>
-            </form>
-          </div>
-
-          {/* Information */}
+          {/* What You Get */}
           <div className="bg-white rounded-xl shadow-lg p-8">
             <h2 className="text-2xl font-semibold mb-6" style={{ color: '#232D4B' }}>
               Wat krijg je?
@@ -302,18 +99,69 @@ const ToegangscodesProfessionals = () => {
                 </p>
               </div>
             </div>
+          </div>
+
+          {/* How It Works */}
+          <div className="bg-white rounded-xl shadow-lg p-8">
+            <h2 className="text-2xl font-semibold mb-6" style={{ color: '#232D4B' }}>
+              Hoe werkt het?
+            </h2>
+            
+            <div className="space-y-4">
+              <div className="flex items-start space-x-3">
+                <div className="w-6 h-6 bg-blue-900 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                  1
+                </div>
+                <p className="text-gray-700">
+                  Klik op "Koop toegangscodes" hierboven
+                </p>
+              </div>
+              
+              <div className="flex items-start space-x-3">
+                <div className="w-6 h-6 bg-blue-900 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                  2
+                </div>
+                <p className="text-gray-700">
+                  Kies het aantal trajecten dat je nodig hebt
+                </p>
+              </div>
+              
+              <div className="flex items-start space-x-3">
+                <div className="w-6 h-6 bg-blue-900 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                  3
+                </div>
+                <p className="text-gray-700">
+                  Vul je gegevens in en betaal veilig
+                </p>
+              </div>
+              
+              <div className="flex items-start space-x-3">
+                <div className="w-6 h-6 bg-blue-900 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                  4
+                </div>
+                <p className="text-gray-700">
+                  Ontvang de toegangscodes per email
+                </p>
+              </div>
+              
+              <div className="flex items-start space-x-3">
+                <div className="w-6 h-6 bg-blue-900 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                  5
+                </div>
+                <p className="text-gray-700">
+                  Deel de codes met je cliënten
+                </p>
+              </div>
+            </div>
 
             <div className="mt-8 p-4 bg-blue-50 rounded-lg">
               <h3 className="font-semibold mb-2" style={{ color: '#232D4B' }}>
-                Hoe werkt het?
+                Prijzen
               </h3>
-              <ol className="text-sm text-gray-700 space-y-1">
-                <li>1. Vul het formulier in met je gegevens</li>
-                <li>2. Kies het aantal trajecten dat je nodig hebt</li>
-                <li>3. Plaats je bestelling</li>
-                <li>4. Je ontvangt de toegangscodes per email</li>
-                <li>5. Deel de codes met je cliënten</li>
-              </ol>
+              <p className="text-sm text-gray-700">
+                €29 per traject<br />
+                Verschillende pakketten beschikbaar
+              </p>
             </div>
 
             <div className="mt-6 text-center">
