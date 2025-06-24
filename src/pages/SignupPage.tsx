@@ -114,7 +114,7 @@ const SignupPage = () => {
               Maak je account aan
             </h1>
             <p className="text-gray-600">
-              Begin je reis naar een betere loopbaan
+              Op weg naar een betere loopbaan
             </p>
           </div>
 

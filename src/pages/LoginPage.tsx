@@ -114,7 +114,7 @@ const LoginPage = () => {
               Log in om te beginnen
             </h1>
             <p className="text-gray-600">
-              Start je reis naar een betere loopbaan
+              Op weg naar een betere loopbaan
             </p>
           </div>
 
