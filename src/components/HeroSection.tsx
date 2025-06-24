@@ -25,7 +25,7 @@ const HeroSection = () => {
           <div className="flex items-center pt-1">
             <img 
               alt="Vinster Logo" 
-              className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              className="h-24 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
               onClick={() => navigate('/')} 
               src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
             />
@@ -46,7 +46,7 @@ const HeroSection = () => {
         <div className="flex items-center min-h-[400px]">
           {/* Left Content - Made wider and fully left-aligned */}
           <div className="w-full max-w-2xl space-y-6 text-left pb-8">
-            <div className="text-sm text-white leading-relaxed">
+            <div className="text-xl text-white leading-relaxed">
               Vind werk dat bij je past, met AI.<br />
               Slim, persoonlijk en verrassend.
             </div>
