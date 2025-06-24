@@ -54,6 +54,7 @@ const PaymentRequired = () => {
       });
       return;
     }
+
     setIsLoading(true);
     try {
       const webhookData = {
@@ -62,7 +63,9 @@ const PaymentRequired = () => {
         email: user.email || '',
         userId: user.id
       };
+
       console.log('Sending webhook data:', webhookData);
+
       const response = await fetch('https://hook.eu2.make.com/byf77ioiyyzqrsri73hmsri7hjhjyoup', {
         method: 'POST',
         headers: {
@@ -70,11 +73,15 @@ const PaymentRequired = () => {
         },
         body: JSON.stringify(webhookData)
       });
+
       console.log('Webhook response status:', response.status);
+
       if (response.ok) {
         console.log('Webhook successfully sent');
+        
         const contentType = response.headers.get('content-type');
         console.log('Response content-type:', contentType);
+        
         let responseData;
         try {
           responseData = await response.json();
@@ -85,9 +92,11 @@ const PaymentRequired = () => {
           console.log('Response as text:', textResponse);
           throw new Error('Invalid JSON response from webhook');
         }
+
         if (responseData && responseData.checkout_url) {
           console.log('Opening checkout URL in new tab:', responseData.checkout_url);
           const newWindow = window.open(responseData.checkout_url, '_blank');
+          
           if (newWindow) {
             toast({
               title: "Succes",
