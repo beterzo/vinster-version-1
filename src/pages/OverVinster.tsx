@@ -106,9 +106,7 @@ const OverVinster = () => {
             <h3 className="text-2xl font-bold text-blue-900 mb-4">
               Klaar om te beginnen?
             </h3>
-            <p className="text-gray-600">
-              Start je reis naar werk waar je blij van wordt
-            </p>
+            <p className="text-gray-600">Op weg naar een betere loopbaan</p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button onClick={() => navigate('/')} variant="outline" className="h-12 px-8 border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold">
