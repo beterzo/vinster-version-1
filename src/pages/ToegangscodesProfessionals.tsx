@@ -142,9 +142,7 @@ Vul hiervoor het onderstaande formulier in.</p>
               <div className="space-y-2">
                 <Label htmlFor="quantity" className="text-sm font-medium" style={{
                 color: '#232D4B'
-              }}>
-                  Aantal kortingscodes *
-                </Label>
+              }}>Aantal toegangscodes *</Label>
                 <Select value={formData.quantity} onValueChange={handleQuantityChange}>
                   <SelectTrigger className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900">
                     <SelectValue placeholder="Selecteer aantal" />
