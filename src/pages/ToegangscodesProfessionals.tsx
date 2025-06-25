@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import Footer from "@/components/Footer";
+
 const ToegangscodesProfessionals = () => {
   const navigate = useNavigate();
   const {
@@ -95,8 +96,17 @@ const ToegangscodesProfessionals = () => {
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <img alt="Vinster Logo" className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" onClick={() => navigate('/')} src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" />
-            <Button onClick={() => navigate('/')} variant="outline" className="text-vinster-blue border-vinster-blue hover:bg-vinster-blue hover:text-white">
+            <img 
+              alt="Vinster Logo" 
+              className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              onClick={() => navigate('/')} 
+              src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
+            />
+            <Button 
+              onClick={() => navigate('/')} 
+              variant="outline" 
+              className="text-vinster-blue border-vinster-blue hover:bg-vinster-blue hover:text-white"
+            >
               Terug naar Home
             </Button>
           </div>
@@ -148,11 +158,11 @@ Vul hiervoor het onderstaande formulier in.</p>
                     <SelectValue placeholder="Selecteer aantal" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="5">5 kortingscodes</SelectItem>
-                    <SelectItem value="10">10 kortingscodes</SelectItem>
-                    <SelectItem value="25">25 kortingscodes</SelectItem>
-                    <SelectItem value="50">50 kortingscodes</SelectItem>
-                    <SelectItem value="100">100 kortingscodes</SelectItem>
+                    <SelectItem value="5">5 toegangscodes</SelectItem>
+                    <SelectItem value="10">10 toegangscodes</SelectItem>
+                    <SelectItem value="25">25 toegangscodes</SelectItem>
+                    <SelectItem value="50">50 toegangscodes</SelectItem>
+                    <SelectItem value="100">100 toegangscodes</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -164,13 +174,13 @@ Vul hiervoor het onderstaande formulier in.</p>
                   Prijsinformatie
                 </h3>
                 <p className="text-sm text-gray-700">
-                  €29 per kortingscode<br />
+                  €29 per toegangscode<br />
                   Na uw aanvraag nemen we contact op voor betaling en levering
                 </p>
               </div>
 
               <Button type="submit" className="w-full h-12 bg-blue-900 hover:bg-blue-800 text-white font-semibold" disabled={isLoading}>
-                {isLoading ? "Bezig met verzenden..." : "Kortingscodes aanvragen"}
+                {isLoading ? "Bezig met verzenden..." : "Toegangscodes aanvragen"}
               </Button>
             </form>
           </div>
@@ -256,7 +266,9 @@ Vul hiervoor het onderstaande formulier in.</p>
                   <div className="w-6 h-6 bg-blue-900 text-white rounded-full flex items-center justify-center text-sm font-bold">
                     4
                   </div>
-                  <p className="text-gray-700">Ontvang de toegangscodes direct na betaling</p>
+                  <p className="text-gray-700">
+                    Ontvang de toegangscodes direct na betaling
+                  </p>
                 </div>
                 
                 <div className="flex items-start space-x-3">
@@ -285,4 +297,5 @@ Vul hiervoor het onderstaande formulier in.</p>
       <Footer />
     </div>;
 };
+
 export default ToegangscodesProfessionals;
