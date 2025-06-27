@@ -18,15 +18,19 @@ const Dashboard = () => {
     canStartEnthousiasme,
     canStartWensberoepen
   } = useDashboard();
+
   useEffect(() => {
     if (!user) {
       navigate('/login');
     }
   }, [user, navigate]);
+
   if (!user) {
     return <div>Loading...</div>;
   }
+
   const firstName = user.user_metadata?.first_name || user.email?.split('@')[0] || 'Gebruiker';
+
   const getNextStep = () => {
     if (canStartEnthousiasme) {
       return "/enthousiasme-intro";
@@ -36,6 +40,32 @@ const Dashboard = () => {
     }
     return "/profiel-voltooien-intro";
   };
+
+  const handleStepClick = (stepTitle: string) => {
+    console.log("Step clicked:", stepTitle);
+    
+    switch (stepTitle) {
+      case "Enthousiasmescan":
+        navigate("/enthousiasme-intro");
+        break;
+      case "Wensberoepen":
+        navigate("/wensberoepen-intro");
+        break;
+      case "Persoonsprofiel":
+        navigate("/profiel-voltooien-intro");
+        break;
+      case "Loopbaanrapport":
+        // Navigate to rapport review/download when available
+        navigate("/rapport-review");
+        break;
+      case "Zoekprofiel":
+        navigate("/zoekprofiel-intro");
+        break;
+      default:
+        console.log("Unknown step:", stepTitle);
+    }
+  };
+
   return <div className="min-h-screen bg-gray-50 font-sans">
       <div className="max-w-[1440px] mx-auto px-6 py-8">
         <DashboardHeader />
@@ -107,10 +137,18 @@ const Dashboard = () => {
             <h3 className="font-bold text-lg text-vinster-blue mb-4">
               Jouw voortgang
             </h3>
-            <ProgressStepsGrid enthousiasmeCompleted={progress.enthousiasme === 'completed'} wensberoepenCompleted={progress.wensberoepen === 'completed'} prioriteitenCompleted={progress.prioriteiten === 'completed'} extraInformatieCompleted={progress.extraInformatie === 'completed'} hasUserReport={false} />
+            <ProgressStepsGrid 
+              enthousiasmeCompleted={progress.enthousiasme === 'completed'} 
+              wensberoepenCompleted={progress.wensberoepen === 'completed'} 
+              prioriteitenCompleted={progress.prioriteiten === 'completed'} 
+              extraInformatieCompleted={progress.extraInformatie === 'completed'} 
+              hasUserReport={false} 
+              onStepClick={handleStepClick}
+            />
           </Card>
         </div>
       </div>
     </div>;
 };
+
 export default Dashboard;

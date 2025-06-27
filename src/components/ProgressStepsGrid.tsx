@@ -86,6 +86,11 @@ const ProgressStepsGrid = ({
     { progress: zoekprofielCompleted ? 100 : zoekprofielProgress, isCompleted: zoekprofielCompleted }
   ];
 
+  const handleStepClick = (stepTitle: string) => {
+    console.log("ProgressStepsGrid - step clicked:", stepTitle);
+    onStepClick(stepTitle);
+  };
+
   return (
     <div className="space-y-1">
       {progressSteps.map((step, index) => {
@@ -93,13 +98,13 @@ const ProgressStepsGrid = ({
         const isCurrent = !isCompleted && (index === 0 || stepProgress[index - 1]?.isCompleted);
         
         return (
-          <div key={index} onClick={() => onStepClick(step.title)}>
+          <div key={index}>
             <ProgressStep
               step={step}
               isCompleted={isCompleted}
               isCurrent={isCurrent}
               progress={progress}
-              onClick={() => onStepClick(step.title)}
+              onClick={() => handleStepClick(step.title)}
             />
           </div>
         );
