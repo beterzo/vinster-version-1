@@ -78,11 +78,11 @@ const EnthousiasmeStep3 = () => {
             <div className="space-y-8">
               <div>
                 <Label htmlFor="question1" className="text-blue-900 font-medium text-lg mb-3 block text-left">
-                  Aan welke periode denk je met heel veel plezier terug?
+                  Aan welke periode denk je met heel veel plezier terug? Beschrijf een werkperiode waar je met heel veel plezier aan terugdenkt...
                 </Label>
                 <Textarea
                   id="question1"
-                  placeholder="Beschrijf een werkperiode waar je met heel veel plezier aan terugdenkt..."
+                  placeholder="Deel hier je verhaal over een geweldige werkperiode..."
                   value={responses.plezierige_werkperiode_beschrijving || ''}
                   onChange={(e) => handleInputChange('plezierige_werkperiode_beschrijving', e.target.value)}
                   onBlur={(e) => handleInputBlur('plezierige_werkperiode_beschrijving', e.target.value)}
@@ -92,11 +92,11 @@ const EnthousiasmeStep3 = () => {
 
               <div>
                 <Label htmlFor="question2" className="text-blue-900 font-medium text-lg mb-3 block text-left">
-                  Kun je nog een leuke periode of project noemen?
+                  Kun je nog een leuke periode of project noemen? Vertel over een ander leuk project of periode en je rol daarin...
                 </Label>
                 <Textarea
                   id="question2"
-                  placeholder="Vertel over een ander leuk project of periode en je rol daarin..."
+                  placeholder="Vertel hier over nog een leuke ervaring..."
                   value={responses.leuk_project_en_rol || ''}
                   onChange={(e) => handleInputChange('leuk_project_en_rol', e.target.value)}
                   onBlur={(e) => handleInputBlur('leuk_project_en_rol', e.target.value)}
@@ -106,11 +106,11 @@ const EnthousiasmeStep3 = () => {
 
               <div>
                 <Label htmlFor="question3" className="text-blue-900 font-medium text-lg mb-3 block text-left">
-                  Wanneer kom jij fluitend thuis?
+                  Wanneer kom jij fluitend thuis? Beschrijf een dag waarvan je fluitend thuiskwam van je werk...
                 </Label>
                 <Textarea
                   id="question3"
-                  placeholder="Beschrijf een dag waarvan je fluitend thuiskwam van je werk..."
+                  placeholder="Beschrijf hier zo'n perfecte werkdag..."
                   value={responses.fluitend_thuiskomen_dag || ''}
                   onChange={(e) => handleInputChange('fluitend_thuiskomen_dag', e.target.value)}
                   onBlur={(e) => handleInputBlur('fluitend_thuiskomen_dag', e.target.value)}
