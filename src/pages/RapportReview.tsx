@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -41,7 +42,7 @@ const RapportReview = () => {
             <img 
               alt="Vinster Logo" 
               className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
-              onClick={() => navigate('/')} 
+              onClick={() => navigate('/home')} 
               src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
             />
           </div>
@@ -224,7 +225,7 @@ const RapportReview = () => {
         {/* Navigation */}
         <div className="flex justify-between items-center mt-8">
           <Button
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/home")}
             className="bg-blue-900 hover:bg-blue-800 text-white rounded-xl"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />

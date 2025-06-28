@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -93,7 +92,7 @@ const ZoekprofielVragen = () => {
             <img 
               alt="Vinster Logo" 
               className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200 mx-auto" 
-              onClick={() => navigate('/')} 
+              onClick={() => navigate('/home')} 
               src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
             />
           </div>
@@ -172,7 +171,7 @@ const ZoekprofielVragen = () => {
               </Button>
               
               <Button
-                onClick={() => navigate("/")}
+                onClick={() => navigate("/home")}
                 variant="outline"
                 className="rounded-xl py-6 px-8 h-auto"
               >

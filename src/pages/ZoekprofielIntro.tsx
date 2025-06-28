@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
@@ -34,7 +33,7 @@ const ZoekprofielIntro = () => {
             <img 
               alt="Vinster Logo" 
               className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
-              onClick={() => navigate('/')} 
+              onClick={() => navigate('/home')} 
               src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
             />
           </div>
@@ -92,7 +91,7 @@ const ZoekprofielIntro = () => {
           </Button>
           
           <Button
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/home")}
             variant="outline"
             className="rounded-xl py-6 px-8 h-auto"
           >

@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +10,7 @@ const ProfielVoltooienIntro = () => {
         {/* Header */}
         <div className="mb-8">
           <div className="mb-6">
-            <img alt="Vinster Logo" className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" onClick={() => navigate('/')} src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" />
+            <img alt="Vinster Logo" className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" onClick={() => navigate('/home')} src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" />
           </div>
           
           
@@ -129,7 +130,7 @@ const ProfielVoltooienIntro = () => {
 
         {/* Navigation */}
         <div className="flex justify-between items-center">
-          <Button onClick={() => navigate("/")} className="bg-blue-900 hover:bg-blue-800 text-white font-bold py-4 px-6 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-200">
+          <Button onClick={() => navigate("/home")} className="bg-blue-900 hover:bg-blue-800 text-white font-bold py-4 px-6 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-200">
             Terug naar dashboard
           </Button>
           
