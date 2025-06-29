@@ -172,7 +172,7 @@ export const useZoekprofielResponses = () => {
     }, 1000);
   }, [calculateProgress, debouncedSave]);
 
-  const submitToWebhook = async () => {
+  const submitToWebhook = async (language: string = 'nl') => {
     // Use local state for submission to ensure we have the latest values
     const dataToSubmit = { ...responses, ...localState };
     
@@ -197,6 +197,7 @@ export const useZoekprofielResponses = () => {
         body: JSON.stringify({
           user_id: user?.id,
           email: user?.email || "",
+          language: language,
           functie_als: dataToSubmit.functie_als,
           kerntaken: dataToSubmit.kerntaken,
           sector: dataToSubmit.sector,
