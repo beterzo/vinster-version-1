@@ -11,19 +11,21 @@ import {
 } from "@/components/ui/drawer";
 import { Menu, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const MobileMenu = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const menuItems = [
-    { title: "Home", path: "/" },
-    { title: "Over Vinster", path: "/over-vinster" },
-    { title: "Voor wie is het?", path: "/voor-wie-is-het" },
-    { title: "Veelgestelde vragen", path: "/veelgestelde-vragen" },
-    { title: "Ervaringen", path: "/ervaringen" },
-    { title: "Contact", path: "/contact" },
-    { title: "Toegangscodes voor professionals", path: "/toegangscodes-professionals" },
+    { title: t('mobile_menu.home'), path: "/" },
+    { title: t('mobile_menu.about_vinster'), path: "/over-vinster" },
+    { title: t('mobile_menu.for_whom'), path: "/voor-wie-is-het" },
+    { title: t('mobile_menu.faq'), path: "/veelgestelde-vragen" },
+    { title: t('mobile_menu.experiences'), path: "/ervaringen" },
+    { title: t('mobile_menu.contact'), path: "/contact" },
+    { title: t('mobile_menu.access_codes'), path: "/toegangscodes-professionals" },
   ];
 
   const handleNavigation = (path: string) => {
@@ -45,7 +47,7 @@ const MobileMenu = () => {
       <DrawerContent className="bg-white">
         <DrawerHeader className="flex items-center justify-between px-6">
           <DrawerTitle className="text-xl font-bold text-vinster-blue">
-            Menu
+            {t('mobile_menu.menu')}
           </DrawerTitle>
           <DrawerClose asChild>
             <Button variant="ghost" size="icon">
@@ -64,12 +66,12 @@ const MobileMenu = () => {
                 {item.title}
               </button>
             ))}
-            {/* Inloggen button met dezelfde styling als andere menu items */}
+            {/* Login button with the same styling as other menu items */}
             <button
               onClick={() => handleNavigation('/login')}
               className="block w-full text-left py-3 px-0 text-lg font-medium text-gray-700 hover:bg-gray-50 hover:text-vinster-blue rounded-lg transition-colors duration-200"
             >
-              Inloggen
+              {t('mobile_menu.login')}
             </button>
           </nav>
         </div>

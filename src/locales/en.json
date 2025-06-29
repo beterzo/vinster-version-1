@@ -4,6 +4,17 @@
     "home": "Home",
     "dashboard": "Dashboard"
   },
+  "mobile_menu": {
+    "menu": "Menu",
+    "home": "Home",
+    "about_vinster": "About Vinster",
+    "for_whom": "For whom is it?",
+    "faq": "Frequently asked questions",
+    "experiences": "Experiences",
+    "contact": "Contact",
+    "access_codes": "Access codes for professionals",
+    "login": "Login"
+  },
   "landing": {
     "login": "Login",
     "tagline": "Find work that fits you, with AI.\nSmart, personal and surprising.",
