@@ -1,0 +1,64 @@
+
+{
+  "landing": {
+    "login": "Login",
+    "tagline": "Find work that fits you, with AI.\nSmart, personal and surprising.",
+    "welcome": "Welcome to",
+    "description": "For everyone who thinks: \"What do I really want with my work?\"\nWhether you're just starting, stuck, looking for something new, or just want to reorient yourself – Vinster provides overview, guidance and direction.",
+    "what_is_vinster": {
+      "title": "What is Vinster?",
+      "description": "Vinster is a smart online tool that helps you discover which functions suit you.",
+      "based_on": "Based on what you tell us — about what you like to do, what you find important and how you prefer to work — you get personal career advice with:",
+      "two_matching_functions": "two matching functions",
+      "one_surprising_suggestion": "one surprising suggestion",
+      "clear_action_plan": "a clear action plan to realize your choice",
+      "no_tests": "You don't have to fill in tests or make difficult choices. You tell. The AI tool listens. And gives direction."
+    },
+    "what_do_you_get": {
+      "title": "What do you get?",
+      "subtitle": "A career report with:",
+      "insight_interests": "Insight into your interests and work preferences",
+      "job_suggestions": "Suggestions for work that really fits you: two matching functions and one surprising one",
+      "research_plan": "A concrete research plan to move forward",
+      "search_profile": "A search profile for your final choice",
+      "start_now": "Start now for €29 →",
+      "view_sample": "View sample report"
+    },
+    "process_steps": {
+      "subtitle": "How does it work?",
+      "title": "Together we discover step by step what interests you and how you like to work",
+      "step1_title": "Enthusiasm scan",
+      "step1_desc": "Discover when you are in your element",
+      "step2_title": "Dream jobs",
+      "step2_desc": "Explore different possibilities that suit you",
+      "step3_title": "Setting priorities",
+      "step3_desc": "Determine what is most important to you in your work",
+      "step4_title": "Final check",
+      "step4_desc": "Refine your choices and get a personal career report",
+      "start_button": "Start"
+    },
+    "data_safety": {
+      "title": "100% Safe & GDPR-compliant",
+      "description": "Your data is completely safe and GDPR-compliant. We use AI models to generate your personal insights, but your data is never stored by these models. Everything remains private and confidential with you."
+    },
+    "flexible_journey": {
+      "title": "One time through, all the time you need",
+      "description": "You go through the program once, but you can think as long as you want between steps. Take all the time you need to think about the questions - your data remains always accessible when you return. No time pressure, no expiration date."
+    },
+    "testimonial": "\"It's impressive that a few questions can produce such suitable functions!\"",
+    "footer": {
+      "navigation_title": "Navigation",
+      "contact_title": "Contact",
+      "about_vinster": "About Vinster",
+      "for_whom": "For whom is it",
+      "faq": "Frequently asked questions",
+      "contact": "Contact",
+      "privacy_policy": "Privacy policy",
+      "terms_conditions": "Terms and conditions",
+      "email": "Email:",
+      "phone": "Phone:",
+      "kvk": "Chamber of Commerce nr:",
+      "copyright": "© 2024 Vinster. All rights reserved."
+    }
+  }
+}

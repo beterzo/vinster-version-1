@@ -1,15 +1,9 @@
 
 import { useLanguage } from '@/contexts/LanguageContext';
-import nlTranslations from '@/locales/nl.json';
-import enTranslations from '@/locales/en.json';
+import { translations } from '@/locales';
 
 type TranslationKey = string;
 type TranslationValue = string | { [key: string]: any };
-
-const translations = {
-  nl: nlTranslations,
-  en: enTranslations
-};
 
 export const useTranslation = () => {
   const { language } = useLanguage();

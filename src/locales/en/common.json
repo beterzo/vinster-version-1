@@ -1,0 +1,10 @@
+
+{
+  "common": {
+    "loading": "Loading...",
+    "back": "Back",
+    "next": "Next",
+    "save": "Save",
+    "cancel": "Cancel"
+  }
+}

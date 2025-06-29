@@ -1,0 +1,60 @@
+
+{
+  "payment": {
+    "welcome": "Welkom bij Vinster, {name}!",
+    "subtitle": "Je bent nog maar één stap verwijderd van het ontdekken van jouw passende loopbaan!",
+    "start_career": "Start jouw loopbaanontwikkeling",
+    "description": "Met Vinster ga jij ontdekken wat jouw best passende volgende loopbaanstap is. De methode achter Vinster is gebaseerd op jarenlange ervaring met loopbaanonderzoek en heeft al duizenden mensen geholpen.",
+    "get_started": "Begin vandaag nog met de enthousiasmescan en ontdek wat je echt drijft in je werk. Het complete programma duurt ongeveer 45 minuten en geeft je direct inzicht in jouw persoonlijke loopbaanprofiel.",
+    "features": {
+      "full_scan": "Volledige enthousiasmescan",
+      "full_scan_desc": "Ontdek wanneer jij in je element bent",
+      "dream_jobs": "Wensberoepenanalyse",
+      "dream_jobs_desc": "Verken verschillende mogelijkheden die bij jou passen",
+      "personal_report": "Persoonlijk rapport",
+      "personal_report_desc": "Met drie functies die bij je passen",
+      "search_profile": "Zoekprofiel",
+      "search_profile_desc": "Jouw ideale functie in één krachtige zin samengevat"
+    },
+    "pricing": {
+      "title": "Volledige toegang",
+      "subtitle": "Eenmalige betaling voor levenslange toegang",
+      "price": "€29",
+      "price_desc": "Eenmalig, geen abonnement",
+      "feature1": "Volledige enthousiasmescan",
+      "feature2": "Wensberoepenanalyse",
+      "feature3": "Persoonlijk rapport (PDF)",
+      "feature4": "Zoekprofiel generator",
+      "start_button": "Start nu voor €29",
+      "processing": "Verwerken...",
+      "payment_methods": "Veilig betalen met iDEAL, creditcard of PayPal"
+    },
+    "data_safety": {
+      "title": "100% Veilig & GDPR-compliant",
+      "description": "Jouw gegevens zijn volledig veilig en GDPR-compliant. We gebruiken AI-modellen om je persoonlijke inzichten te genereren, maar jouw gegevens worden nooit opgeslagen door deze modellen. Alles blijft privé en vertrouwelijk bij jou."
+    }
+  },
+  "dashboard": {
+    "welcome": "Welkom {name}!",
+    "description": "Dit is jouw persoonlijke dashboard. Hier zie je de voortgang van jouw loopbaanonderzoek en kun je verder gaan waar je gebleven bent.",
+    "intro_paragraph1": "Hier start jouw loopbaantraject! We beginnen met de enthousiasmescan, de eerste stap om te ontdekken wat jij graag doet en hoe jij graag werkt. In deze scan gaan we op zoek naar momenten waarop jij in je element bent.",
+    "intro_paragraph2": "Door vragen te stellen over je jeugd, schooltijd en werkervaringen brengen we jouw persoonlijke patroon van voorkeuren en interesses in kaart.",
+    "intro_paragraph3": "Jouw enthousiasme is een belangrijke indicator voor wat je echt leuk vindt. Wanneer je iets doet waar je enthousiast van wordt, ontstaat er energie en voldoening. Dáár gaan we naar op zoek.",
+    "continue_button": "Ga verder",
+    "important_info": {
+      "title": "Belangrijk om te weten",
+      "point1": "• Er zijn geen goede of foute antwoorden - wees eerlijk over wat jij echt leuk vindt",
+      "point2": "• Denk aan concrete situaties en ervaringen uit jouw leven",
+      "point3": "• Je kunt zoveel tijd nemen als je wilt - er zit geen tijdsdruk op dit traject",
+      "point4": "• Het is juist goed om de antwoorden een dag te laten bezinken voordat je verdergaat",
+      "point5": "• Je kunt je antwoorden altijd aanpassen tijdens het traject",
+      "point6": "• Je voortgang wordt automatisch opgeslagen",
+      "point7": "• Alle informatie wordt vertrouwelijk behandeld"
+    },
+    "progress_title": "Jouw voortgang",
+    "logout": "Uitloggen",
+    "logout_success": "Succesvol uitgelogd",
+    "logout_success_desc": "Tot ziens!",
+    "logout_error": "Fout bij uitloggen"
+  }
+}

@@ -1,0 +1,10 @@
+
+{
+  "common": {
+    "loading": "Laden...",
+    "back": "Terug",
+    "next": "Volgende",
+    "save": "Opslaan",
+    "cancel": "Annuleren"
+  }
+}

@@ -1,0 +1,18 @@
+
+{
+  "navigation": {
+    "home": "Home",
+    "dashboard": "Dashboard"
+  },
+  "mobile_menu": {
+    "menu": "Menu",
+    "home": "Home",
+    "about_vinster": "Over Vinster",
+    "for_whom": "Voor wie is het?",
+    "faq": "Veelgestelde vragen",
+    "experiences": "Ervaringen",
+    "contact": "Contact",
+    "access_codes": "Toegangscodes voor professionals",
+    "login": "Inloggen"
+  }
+}
