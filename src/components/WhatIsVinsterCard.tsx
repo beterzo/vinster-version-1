@@ -6,17 +6,29 @@ import { useTranslation } from "@/hooks/useTranslation";
 const WhatIsVinsterCard = () => {
   const { t } = useTranslation();
 
+  const renderTextWithHighlight = (text: string, highlight: string) => {
+    const parts = text.split(highlight);
+    return parts.map((part, index) => (
+      <span key={index}>
+        {part}
+        {index < parts.length - 1 && (
+          <span style={{ color: '#FFCD3E' }}>{highlight}</span>
+        )}
+      </span>
+    ));
+  };
+
   return (
     <Card className="text-white p-6 md:p-8 rounded-3xl border-0 relative overflow-hidden h-full" style={{
       backgroundColor: '#A8C6E3'
     }}>
       <div className="space-y-6">
         <h2 className="text-2xl md:text-3xl font-bold leading-tight text-left">
-          {t('landing.what_is_vinster.title').replace('Vinster', <span style={{ color: '#FFCD3E' }}>Vinster</span>)}
+          {renderTextWithHighlight(t('landing.what_is_vinster.title'), 'Vinster')}
         </h2>
         
         <p className="text-base md:text-lg leading-relaxed opacity-95 text-left">
-          {t('landing.what_is_vinster.description').replace('Vinster', <span style={{ color: '#FFCD3E' }}>Vinster</span>)}
+          {renderTextWithHighlight(t('landing.what_is_vinster.description'), 'Vinster')}
         </p>
         
         <p className="text-base md:text-lg leading-relaxed opacity-95 text-left">
