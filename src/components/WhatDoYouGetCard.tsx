@@ -3,9 +3,11 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const WhatDoYouGetCard = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleStartClick = () => {
     navigate('/signup');
@@ -21,11 +23,11 @@ const WhatDoYouGetCard = () => {
     }}>
       <div className="space-y-6 flex-grow">
         <h2 className="text-2xl md:text-3xl font-bold leading-tight text-left">
-          Wat krijg je?
+          {t('landing.what_do_you_get.title')}
         </h2>
         
         <p className="text-base md:text-lg opacity-95 text-left">
-          Een loopbaanrapport met:
+          {t('landing.what_do_you_get.subtitle')}
         </p>
         
         <ul className="space-y-3 text-base md:text-lg opacity-95">
@@ -33,25 +35,25 @@ const WhatDoYouGetCard = () => {
             <CheckCircle className="w-5 h-5 md:w-6 md:h-6 flex-shrink-0 mt-1" style={{
               color: '#FFCD3E'
             }} />
-            <span className="text-left">Inzicht in jouw interesses en werkvoorkeuren</span>
+            <span className="text-left">{t('landing.what_do_you_get.insight_interests')}</span>
           </li>
           <li className="flex items-start gap-3">
             <CheckCircle className="w-5 h-5 md:w-6 md:h-6 flex-shrink-0 mt-1" style={{
               color: '#FFCD3E'
             }} />
-            <span className="text-left">Suggesties voor werk dat écht bij je past: twee passende functies en één verrassende</span>
+            <span className="text-left">{t('landing.what_do_you_get.job_suggestions')}</span>
           </li>
           <li className="flex items-start gap-3">
             <CheckCircle className="w-5 h-5 md:w-6 md:h-6 flex-shrink-0 mt-1" style={{
               color: '#FFCD3E'
             }} />
-            <span className="text-left">Een concreet onderzoeksplan om verder te komen</span>
+            <span className="text-left">{t('landing.what_do_you_get.research_plan')}</span>
           </li>
           <li className="flex items-start gap-3">
             <CheckCircle className="w-5 h-5 md:w-6 md:h-6 flex-shrink-0 mt-1" style={{
               color: '#FFCD3E'
             }} />
-            <span className="text-left">Een zoekprofiel voor jouw uiteindelijke keuze</span>
+            <span className="text-left">{t('landing.what_do_you_get.search_profile')}</span>
           </li>
         </ul>
       </div>
@@ -62,13 +64,13 @@ const WhatDoYouGetCard = () => {
           className="bg-white hover:bg-gray-100 font-bold px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 w-full"
           style={{ color: '#0476B9' }}
         >
-          Start nu voor €29 →
+          {t('landing.what_do_you_get.start_now')}
         </Button>
         <Button 
           onClick={handleViewSampleReport}
           className="border-2 border-white hover:bg-white hover:bg-opacity-10 font-bold px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 w-full bg-transparent text-white"
         >
-          Bekijk voorbeeld rapport
+          {t('landing.what_do_you_get.view_sample')}
         </Button>
       </div>
     </Card>

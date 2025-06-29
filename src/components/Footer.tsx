@@ -1,16 +1,18 @@
 
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const Footer = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const navigationLinks = [
-    { title: "Over Vinster", path: "/over-vinster" },
-    { title: "Voor wie is het", path: "/voor-wie-is-het" },
-    { title: "Veelgestelde vragen", path: "/veelgestelde-vragen" },
-    { title: "Contact", path: "/contact" },
-    { title: "Privacy verklaring", path: "/privacy-verklaring" },
-    { title: "Algemene voorwaarden", path: "/algemene-voorwaarden" },
+    { title: t('landing.footer.about_vinster'), path: "/over-vinster" },
+    { title: t('landing.footer.for_whom'), path: "/voor-wie-is-het" },
+    { title: t('landing.footer.faq'), path: "/veelgestelde-vragen" },
+    { title: t('landing.footer.contact'), path: "/contact" },
+    { title: t('landing.footer.privacy_policy'), path: "/privacy-verklaring" },
+    { title: t('landing.footer.terms_conditions'), path: "/algemene-voorwaarden" },
   ];
 
   return (
@@ -29,7 +31,9 @@ const Footer = () => {
 
           {/* Navigation links */}
           <div>
-            <h3 className="text-lg font-semibold text-blue-900 mb-4">Navigatie</h3>
+            <h3 className="text-lg font-semibold text-blue-900 mb-4">
+              {t('landing.footer.navigation_title')}
+            </h3>
             <ul className="space-y-2">
               {navigationLinks.map((link) => (
                 <li key={link.path}>
@@ -46,18 +50,20 @@ const Footer = () => {
 
           {/* Contact information */}
           <div>
-            <h3 className="text-lg font-semibold text-blue-900 mb-4">Contact</h3>
+            <h3 className="text-lg font-semibold text-blue-900 mb-4">
+              {t('landing.footer.contact_title')}
+            </h3>
             <div className="space-y-2 text-gray-600">
               <p>
-                <span className="font-medium">Email:</span><br />
+                <span className="font-medium">{t('landing.footer.email')}</span><br />
                 team@vinster.ai
               </p>
               <p>
-                <span className="font-medium">Telefoon:</span><br />
+                <span className="font-medium">{t('landing.footer.phone')}</span><br />
                 +31 6 22 23 85 95
               </p>
               <p>
-                <span className="font-medium">KvK nr:</span><br />
+                <span className="font-medium">{t('landing.footer.kvk')}</span><br />
                 04050762
               </p>
             </div>
@@ -67,7 +73,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="border-t border-gray-300 mt-8 pt-6 text-center">
           <p className="text-gray-500 text-sm">
-            © 2024 Vinster. Alle rechten voorbehouden.
+            {t('landing.footer.copyright')}
           </p>
         </div>
       </div>

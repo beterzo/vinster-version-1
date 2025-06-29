@@ -1,5 +1,9 @@
 
+import { useTranslation } from "@/hooks/useTranslation";
+
 const TestimonialSection = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="max-w-[1440px] mx-auto px-6 py-8 bg-gray-50">
       <div className="relative overflow-hidden rounded-3xl shadow-xl min-h-[300px]" style={{
@@ -17,9 +21,7 @@ const TestimonialSection = () => {
               color: '#FFFFFF',
               textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
             }}>
-              "Het is indrukwekkend dat een<br />
-              paar vragen zulke passende<br />
-              functies op kunnen leveren!"
+              {t('landing.testimonial')}
             </blockquote>
           </div>
         </div>

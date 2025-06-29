@@ -2,18 +2,24 @@
 import { Button } from "@/components/ui/button";
 import { Sparkles, Target, Search, Users } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "@/hooks/useTranslation";
+
 const ProcessSteps = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  
   const handleStartJourney = () => {
     navigate('/signup');
   };
-  return <div id="het-proces" className="max-w-[1440px] mx-auto px-4 sm:px-6 py-16 bg-gray-50">
+
+  return (
+    <div id="het-proces" className="max-w-[1440px] mx-auto px-4 sm:px-6 py-16 bg-gray-50">
       <div className="text-center mb-16">
         <div className="text-yellow-400 text-sm font-semibold mb-4 uppercase tracking-wider">
-          Hoe werkt het?
+          {t('landing.process_steps.subtitle')}
         </div>
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-900 leading-tight max-w-4xl mx-auto">
-          Samen ontdekken we stap voor stap wat jou boeit en hoe jij graag werkt
+          {t('landing.process_steps.title')}
         </h2>
       </div>
 
@@ -33,9 +39,11 @@ const ProcessSteps = () => {
                 <Sparkles className="w-8 h-8 lg:w-10 lg:h-10 text-white" />
               </div>
             </div>
-            <h3 className="text-lg lg:text-xl font-bold text-blue-900 mb-3 text-center">Enthousiasmescan</h3>
+            <h3 className="text-lg lg:text-xl font-bold text-blue-900 mb-3 text-center">
+              {t('landing.process_steps.step1_title')}
+            </h3>
             <p className="text-gray-600 text-sm text-center leading-relaxed max-w-48">
-              Ontdek wanneer jij in je element bent
+              {t('landing.process_steps.step1_desc')}
             </p>
           </div>
 
@@ -43,14 +51,16 @@ const ProcessSteps = () => {
           <div className="flex flex-col items-center">
             <div className="relative mb-6 lg:mb-8">
               <div className="w-20 h-20 lg:w-24 lg:h-24 rounded-full shadow-lg flex items-center justify-center" style={{
-              backgroundColor: '#A9C5E2'
-            }}>
+                backgroundColor: '#A9C5E2'
+              }}>
                 <Users className="w-8 h-8 lg:w-10 lg:h-10 text-white" />
               </div>
             </div>
-            <h3 className="text-lg lg:text-xl font-bold text-blue-900 mb-3 text-center">Wensberoepen</h3>
+            <h3 className="text-lg lg:text-xl font-bold text-blue-900 mb-3 text-center">
+              {t('landing.process_steps.step2_title')}
+            </h3>
             <p className="text-gray-600 text-sm text-center leading-relaxed max-w-48">
-              Verken verschillende mogelijkheden die bij jou passen
+              {t('landing.process_steps.step2_desc')}
             </p>
           </div>
 
@@ -61,9 +71,11 @@ const ProcessSteps = () => {
                 <Target className="w-8 h-8 lg:w-10 lg:h-10 text-white" />
               </div>
             </div>
-            <h3 className="text-lg lg:text-xl font-bold text-blue-900 mb-3 text-center">Prioriteiten stellen</h3>
+            <h3 className="text-lg lg:text-xl font-bold text-blue-900 mb-3 text-center">
+              {t('landing.process_steps.step3_title')}
+            </h3>
             <p className="text-gray-600 text-sm text-center leading-relaxed max-w-48">
-              Bepaal wat voor jou het belangrijkst is in je werk
+              {t('landing.process_steps.step3_desc')}
             </p>
           </div>
 
@@ -74,19 +86,27 @@ const ProcessSteps = () => {
                 <Search className="w-8 h-8 lg:w-10 lg:h-10 text-blue-900" />
               </div>
             </div>
-            <h3 className="text-lg lg:text-xl font-bold text-blue-900 mb-3 text-center">Laatste check</h3>
+            <h3 className="text-lg lg:text-xl font-bold text-blue-900 mb-3 text-center">
+              {t('landing.process_steps.step4_title')}
+            </h3>
             <p className="text-gray-600 text-sm text-center leading-relaxed max-w-48">
-              Verfijn je keuzes en krijg een persoonlijk loopbaanrapport
+              {t('landing.process_steps.step4_desc')}
             </p>
           </div>
-
         </div>
       </div>
 
       {/* Call to action */}
       <div className="text-center mt-16">
-        <Button onClick={handleStartJourney} className="bg-yellow-400 hover:bg-yellow-500 text-vinster-blue font-bold px-8 sm:px-12 py-3 sm:py-4 rounded-full text-base sm:text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-200">Start</Button>
+        <Button 
+          onClick={handleStartJourney} 
+          className="bg-yellow-400 hover:bg-yellow-500 text-vinster-blue font-bold px-8 sm:px-12 py-3 sm:py-4 rounded-full text-base sm:text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-200"
+        >
+          {t('landing.process_steps.start_button')}
+        </Button>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default ProcessSteps;

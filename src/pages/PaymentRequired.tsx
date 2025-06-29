@@ -1,11 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { CheckCircle, Star, Shield, Zap, Clock, HelpCircle } from "lucide-react";
+import { CheckCircle, Star, Shield, Zap } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { usePaymentStatus } from "@/hooks/usePaymentStatus";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "@/hooks/useTranslation";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const PaymentRequired = () => {
   const { user } = useAuth();
@@ -13,6 +15,7 @@ const PaymentRequired = () => {
   const { hasPaid, refreshPaymentStatus } = usePaymentStatus();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const { t } = useTranslation();
 
   // Redirect if user has already paid
   useEffect(() => {
@@ -24,23 +27,23 @@ const PaymentRequired = () => {
 
   const features = [
     {
-      title: "Volledige enthousiasmescan",
-      description: "Ontdek wanneer jij in je element bent",
+      title: t('payment.features.full_scan'),
+      description: t('payment.features.full_scan_desc'),
       icon: <Star className="w-5 h-5 text-yellow-400" />
     },
     {
-      title: "Wensberoepenanalyse",
-      description: "Verken verschillende mogelijkheden die bij jou passen",
+      title: t('payment.features.dream_jobs'),
+      description: t('payment.features.dream_jobs_desc'),
       icon: <CheckCircle className="w-5 h-5 text-yellow-400" />
     },
     {
-      title: "Persoonlijk rapport",
-      description: "Met drie functies die bij je passen",
+      title: t('payment.features.personal_report'),
+      description: t('payment.features.personal_report_desc'),
       icon: <Shield className="w-5 h-5 text-yellow-400" />
     },
     {
-      title: "Zoekprofiel",
-      description: "Jouw ideale functie in één krachtige zin samengevat",
+      title: t('payment.features.search_profile'),
+      description: t('payment.features.search_profile_desc'),
       icon: <Zap className="w-5 h-5 text-yellow-400" />
     }
   ];
@@ -146,22 +149,29 @@ const PaymentRequired = () => {
     }
   };
 
+  const firstName = user?.user_metadata?.first_name || 'daar';
+
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-8">
-        {/* Header with new logo */}
-        <div className="text-center mb-8">
+        {/* Header with logo and language switcher */}
+        <div className="flex justify-between items-center mb-8">
           <img 
             alt="Vinster Logo" 
-            className="h-12 w-auto mx-auto cursor-pointer hover:opacity-80 transition-opacity duration-200 mb-6" 
+            className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
             onClick={() => navigate('/')} 
             src="/lovable-uploads/23b63bc5-3895-4312-ad2b-36f3e48adb5a.png" 
           />
+          <LanguageSwitcher />
+        </div>
+
+        {/* Welcome section */}
+        <div className="text-center mb-8">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-vinster-blue mb-4">
-            Welkom bij Vinster, {user?.user_metadata?.first_name || 'daar'}!
+            {t('payment.welcome').replace('{name}', firstName)}
           </h1>
           <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
-            Je bent nog maar één stap verwijderd van het ontdekken van jouw passende loopbaan!
+            {t('payment.subtitle')}
           </p>
         </div>
 
@@ -172,16 +182,14 @@ const PaymentRequired = () => {
           <div className="space-y-6 lg:space-y-8 flex flex-col">
             {/* Welcome card */}
             <Card className="p-6 lg:p-8 border-0 rounded-3xl" style={{ backgroundColor: '#E6F0F6' }}>
-              <h2 className="text-xl lg:text-2xl font-bold text-vinster-blue mb-4">Start jouw loopbaanontwikkeling</h2>
+              <h2 className="text-xl lg:text-2xl font-bold text-vinster-blue mb-4">
+                {t('payment.start_career')}
+              </h2>
               <p className="text-gray-700 leading-relaxed mb-4">
-                Met Vinster ga jij ontdekken wat jouw best passende volgende loopbaanstap is. De methode achter 
-                Vinster is gebaseerd op jarenlange ervaring met loopbaanonderzoek en heeft al duizenden mensen 
-                geholpen.
+                {t('payment.description')}
               </p>
               <p className="text-gray-600 text-sm leading-relaxed">
-                Begin vandaag nog met de enthousiasmescan en ontdek wat je echt drijft in je werk. 
-                Het complete programma duurt ongeveer 45 minuten en geeft je direct inzicht in 
-                jouw persoonlijke loopbaanprofiel.
+                {t('payment.get_started')}
               </p>
             </Card>
 
@@ -208,28 +216,32 @@ const PaymentRequired = () => {
             {/* Pricing Card */}
             <Card className="p-6 lg:p-8 border-0 rounded-3xl bg-white shadow-lg">
               <div className="text-center mb-6">
-                <h3 className="text-xl lg:text-2xl font-bold text-vinster-blue mb-2">Volledige toegang</h3>
-                <p className="text-gray-600 mb-4">Eenmalige betaling voor levenslange toegang</p>
-                <div className="text-3xl lg:text-4xl font-bold text-vinster-blue mb-1">€29</div>
-                <p className="text-sm text-gray-500">Eenmalig, geen abonnement</p>
+                <h3 className="text-xl lg:text-2xl font-bold text-vinster-blue mb-2">
+                  {t('payment.pricing.title')}
+                </h3>
+                <p className="text-gray-600 mb-4">{t('payment.pricing.subtitle')}</p>
+                <div className="text-3xl lg:text-4xl font-bold text-vinster-blue mb-1">
+                  {t('payment.pricing.price')}
+                </div>
+                <p className="text-sm text-gray-500">{t('payment.pricing.price_desc')}</p>
               </div>
 
               <div className="space-y-4 mb-8">
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                  <span className="text-sm">Volledige enthousiasmescan</span>
+                  <span className="text-sm">{t('payment.pricing.feature1')}</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                  <span className="text-sm">Wensberoepenanalyse</span>
+                  <span className="text-sm">{t('payment.pricing.feature2')}</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                  <span className="text-sm">Persoonlijk rapport (PDF)</span>
+                  <span className="text-sm">{t('payment.pricing.feature3')}</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                  <span className="text-sm">Zoekprofiel generator</span>
+                  <span className="text-sm">{t('payment.pricing.feature4')}</span>
                 </div>
               </div>
 
@@ -239,11 +251,11 @@ const PaymentRequired = () => {
                 className="w-full bg-yellow-400 hover:bg-yellow-500 text-vinster-blue font-bold py-3 lg:py-4 text-base lg:text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200" 
                 size="lg"
               >
-                {isLoading ? "Verwerken..." : "Start nu voor €29"}
+                {isLoading ? t('payment.pricing.processing') : t('payment.pricing.start_button')}
               </Button>
 
               <p className="text-xs text-gray-500 text-center mt-4">
-                Veilig betalen met iDEAL, creditcard of PayPal
+                {t('payment.pricing.payment_methods')}
               </p>
             </Card>
           </div>
@@ -256,11 +268,11 @@ const PaymentRequired = () => {
               <Shield className="w-6 h-6 text-blue-600" />
             </div>
             <div>
-              <h3 className="font-bold text-lg text-vinster-blue mb-3">100% Veilig & GDPR-compliant</h3>
+              <h3 className="font-bold text-lg text-vinster-blue mb-3">
+                {t('payment.data_safety.title')}
+              </h3>
               <p className="text-gray-700 leading-relaxed text-sm">
-                Jouw gegevens zijn volledig veilig en GDPR-compliant. We gebruiken AI-modellen om je persoonlijke 
-                inzichten te genereren, maar jouw gegevens worden nooit opgeslagen door deze modellen. 
-                Alles blijft privé en vertrouwelijk bij jou.
+                {t('payment.data_safety.description')}
               </p>
             </div>
           </div>

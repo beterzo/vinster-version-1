@@ -1,8 +1,11 @@
 
 import { Card } from "@/components/ui/card";
 import { Shield, Clock } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const DataSafetySection = () => {
+  const { t } = useTranslation();
+
   return (
     <section className="py-16 bg-gray-50">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -14,11 +17,11 @@ const DataSafetySection = () => {
                 <Shield className="w-6 h-6 text-blue-600" />
               </div>
               <div>
-                <h3 className="font-bold text-lg text-vinster-blue mb-3">100% Veilig & GDPR-compliant</h3>
+                <h3 className="font-bold text-lg text-vinster-blue mb-3">
+                  {t('landing.data_safety.title')}
+                </h3>
                 <p className="text-gray-700 leading-relaxed text-sm">
-                  Jouw gegevens zijn volledig veilig en GDPR-compliant. We gebruiken AI-modellen om je persoonlijke 
-                  inzichten te genereren, maar jouw gegevens worden nooit opgeslagen door deze modellen. 
-                  Alles blijft privé en vertrouwelijk bij jou.
+                  {t('landing.data_safety.description')}
                 </p>
               </div>
             </div>
@@ -31,11 +34,11 @@ const DataSafetySection = () => {
                 <Clock className="w-6 h-6 text-yellow-600" />
               </div>
               <div>
-                <h3 className="font-bold text-lg text-vinster-blue mb-3">Eén keer door, alle tijd die je nodig hebt</h3>
+                <h3 className="font-bold text-lg text-vinster-blue mb-3">
+                  {t('landing.flexible_journey.title')}
+                </h3>
                 <p className="text-gray-700 leading-relaxed text-sm">
-                  Je doorloopt het programma één keer, maar je kunt zo lang je wilt nadenken tussen de stappen. 
-                  Neem alle tijd die je nodig hebt om over de vragen na te denken - jouw data blijft altijd toegankelijk 
-                  wanneer je terugkomt. Geen tijdsdruk, geen vervaldatum.
+                  {t('landing.flexible_journey.description')}
                 </p>
               </div>
             </div>

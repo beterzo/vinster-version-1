@@ -7,12 +7,12 @@ import DashboardHeader from "./DashboardHeader";
 import ProgressStepsGrid from "./ProgressStepsGrid";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const Dashboard = () => {
-  const {
-    user
-  } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const {
     progress,
     canStartEnthousiasme,
@@ -26,7 +26,7 @@ const Dashboard = () => {
   }, [user, navigate]);
 
   if (!user) {
-    return <div>Loading...</div>;
+    return <div>{t('common.loading')}</div>;
   }
 
   const firstName = user.user_metadata?.first_name || user.email?.split('@')[0] || 'Gebruiker';
@@ -66,7 +66,8 @@ const Dashboard = () => {
     }
   };
 
-  return <div className="min-h-screen bg-gray-50 font-sans">
+  return (
+    <div className="min-h-screen bg-gray-50 font-sans">
       <div className="max-w-[1440px] mx-auto px-6 py-8">
         <DashboardHeader />
 
@@ -74,60 +75,53 @@ const Dashboard = () => {
           {/* Welcome Section - spans first 2 columns on top row */}
           <Card className="lg:col-span-2 p-8 border-0 rounded-3xl" style={{ backgroundColor: '#E6F0F6' }}>
             <h1 className="text-3xl font-bold text-vinster-blue mb-4">
-              Welkom {firstName}!
+              {t('dashboard.welcome').replace('{name}', firstName)}
             </h1>
             <p className="text-gray-700 leading-relaxed mb-6">
-              Dit is jouw persoonlijke dashboard. Hier zie je de voortgang van jouw loopbaanonderzoek 
-              en kun je verder gaan waar je gebleven bent.
+              {t('dashboard.description')}
             </p>
             
             <div className="space-y-4 text-gray-700 leading-relaxed">
-              <p>
-                Hier start jouw loopbaantraject! We beginnen met de enthousiasmescan, de eerste stap 
-                om te ontdekken wat jij graag doet en hoe jij graag werkt. In deze scan gaan we op zoek 
-                naar momenten waarop jij in je element bent.
-              </p>
-              
-              <p>
-                Door vragen te stellen over je jeugd, schooltijd en werkervaringen brengen we jouw 
-                persoonlijke patroon van voorkeuren en interesses in kaart.
-              </p>
-              
-              <p>
-                Jouw enthousiasme is een belangrijke indicator voor wat je echt leuk vindt. Wanneer je 
-                iets doet waar je enthousiast van wordt, ontstaat er energie en voldoening. Dáár gaan 
-                we naar op zoek.
-              </p>
+              <p>{t('dashboard.intro_paragraph1')}</p>
+              <p>{t('dashboard.intro_paragraph2')}</p>
+              <p>{t('dashboard.intro_paragraph3')}</p>
             </div>
           </Card>
 
           {/* Right Column - Image and Button - spans both rows */}
           <Card className="lg:row-span-2 p-6 border-0 rounded-3xl bg-white flex flex-col">
             <div className="text-center flex-1 flex flex-col justify-between">
-              <img alt="Loopbaanonderzoek" className="w-full h-auto rounded-xl mb-6 flex-1 object-cover" src="/lovable-uploads/ee361013-bfc6-485f-b46f-ed87a3cd6c73.jpg" />
+              <img 
+                alt="Loopbaanonderzoek" 
+                className="w-full h-auto rounded-xl mb-6 flex-1 object-cover" 
+                src="/lovable-uploads/ee361013-bfc6-485f-b46f-ed87a3cd6c73.jpg" 
+              />
               
-              <Button onClick={() => navigate(getNextStep())} className="bg-yellow-400 hover:bg-yellow-500 text-vinster-blue font-bold rounded-xl px-8 py-4 text-lg w-full mt-auto">
-                Ga verder
+              <Button 
+                onClick={() => navigate(getNextStep())} 
+                className="bg-yellow-400 hover:bg-yellow-500 text-vinster-blue font-bold rounded-xl px-8 py-4 text-lg w-full mt-auto"
+              >
+                {t('dashboard.continue_button')}
               </Button>
             </div>
           </Card>
 
           {/* Left Column - Important Info */}
           <Card className="p-6 border-0 rounded-3xl text-white" style={{
-          backgroundColor: '#78BFE3'
-        }}>
+            backgroundColor: '#78BFE3'
+          }}>
             <div>
               <h3 className="font-bold text-xl mb-3">
-                Belangrijk om te weten
+                {t('dashboard.important_info.title')}
               </h3>
               <ul className="text-sm leading-relaxed space-y-5">
-                <li>• Er zijn geen goede of foute antwoorden - wees eerlijk over wat jij echt leuk vindt</li>
-                <li>• Denk aan concrete situaties en ervaringen uit jouw leven</li>
-                <li>• Je kunt zoveel tijd nemen als je wilt - er zit geen tijdsdruk op dit traject</li>
-                <li>• Het is juist goed om de antwoorden een dag te laten bezinken voordat je verdergaat</li>
-                <li>• Je kunt je antwoorden altijd aanpassen tijdens het traject</li>
-                <li>• Je voortgang wordt automatisch opgeslagen</li>
-                <li>• Alle informatie wordt vertrouwelijk behandeld</li>
+                <li>{t('dashboard.important_info.point1')}</li>
+                <li>{t('dashboard.important_info.point2')}</li>
+                <li>{t('dashboard.important_info.point3')}</li>
+                <li>{t('dashboard.important_info.point4')}</li>
+                <li>{t('dashboard.important_info.point5')}</li>
+                <li>{t('dashboard.important_info.point6')}</li>
+                <li>{t('dashboard.important_info.point7')}</li>
               </ul>
             </div>
           </Card>
@@ -135,7 +129,7 @@ const Dashboard = () => {
           {/* Middle Column - Process Steps */}
           <Card className="p-6 border-0 rounded-3xl bg-white">
             <h3 className="font-bold text-lg text-vinster-blue mb-4">
-              Jouw voortgang
+              {t('dashboard.progress_title')}
             </h3>
             <ProgressStepsGrid 
               enthousiasmeCompleted={progress.enthousiasme === 'completed'} 
@@ -148,7 +142,8 @@ const Dashboard = () => {
           </Card>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
 
 export default Dashboard;
