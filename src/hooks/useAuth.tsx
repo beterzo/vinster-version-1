@@ -1,7 +1,7 @@
-
 import { createContext, useContext, useEffect, useState } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface AuthContextType {
   user: User | null;
@@ -27,6 +27,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
+  const { language } = useLanguage();
 
   useEffect(() => {
     console.log('🔐 AuthProvider: Initializing auth state');
@@ -107,7 +108,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         options: {
           data: {
             first_name: firstName,
-            last_name: lastName
+            last_name: lastName,
+            language: language // Include current language in user metadata
           },
           emailRedirectTo: redirectUrl
         }
@@ -121,6 +123,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           user: data.user?.email,
           emailConfirmed: data.user?.email_confirmed_at,
           needsConfirmation: !data.user?.email_confirmed_at,
+          language: language,
           redirectUrl: redirectUrl
         });
       }
@@ -217,7 +220,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     hasSession: !!session, 
     loading,
     userEmail: user?.email,
-    emailConfirmed: user?.email_confirmed_at
+    emailConfirmed: user?.email_confirmed_at,
+    currentLanguage: language
   });
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

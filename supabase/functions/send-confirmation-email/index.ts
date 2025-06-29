@@ -19,6 +19,7 @@ interface AuthEventPayload {
     user_metadata: {
       first_name?: string;
       last_name?: string;
+      language?: string;
     };
   };
   email_data: {
@@ -28,6 +29,12 @@ interface AuthEventPayload {
     email_action_type: string;
   };
 }
+
+// Email subjects in different languages
+const emailSubjects = {
+  nl: "Bevestig je account bij Vinster",
+  en: "Confirm your Vinster account"
+};
 
 const handler = async (req: Request): Promise<Response> => {
   console.log("🔐 Verification email webhook called");
@@ -51,12 +58,10 @@ const handler = async (req: Request): Promise<Response> => {
 
     const user = payload.user;
     console.log("👤 New user signup:", user.email);
-    console.log("🔍 User details:", {
-      id: user.id,
-      email: user.email,
-      firstName: user.user_metadata?.first_name,
-      lastName: user.user_metadata?.last_name
-    });
+
+    // Detect language from user metadata, default to Dutch
+    const userLanguage = user.user_metadata?.language || 'nl';
+    console.log("🌍 User language detected:", userLanguage);
 
     // Create the correct verification URL that will redirect to email-confirmed
     const redirectUrl = 'https://vinster.ai/email-confirmed';
@@ -66,23 +71,22 @@ const handler = async (req: Request): Promise<Response> => {
     const verificationUrl = `https://aqajxxevifmhdjlvqhkz.supabase.co/auth/v1/verify?token=${payload.email_data.token_hash}&type=signup&redirect_to=${encodeURIComponent(redirectUrl)}`;
 
     console.log("✅ Verification URL created:", verificationUrl);
-    console.log("🔗 Token details:", {
-      token: payload.email_data.token,
-      tokenHash: payload.email_data.token_hash,
-      actionType: payload.email_data.email_action_type
-    });
 
     // Get user metadata
-    const firstName = user.user_metadata?.first_name || 'daar';
+    const firstName = user.user_metadata?.first_name || (userLanguage === 'en' ? 'there' : 'daar');
     const lastName = user.user_metadata?.last_name || '';
 
-    // Render email template
+    // Get appropriate email subject
+    const emailSubject = emailSubjects[userLanguage as keyof typeof emailSubjects] || emailSubjects.nl;
+
+    // Render email template with language
     const emailHtml = await renderAsync(
       VerificationEmail({
         firstName,
         lastName,
         verificationUrl,
-        email: user.email
+        email: user.email,
+        language: userLanguage
       })
     );
 
@@ -90,16 +94,19 @@ const handler = async (req: Request): Promise<Response> => {
     const emailResponse = await resend.emails.send({
       from: "Team Vinster <team@vinster.ai>",
       to: [user.email],
-      subject: "Bevestig je account bij Vinster",
+      subject: emailSubject,
       html: emailHtml,
     });
 
     console.log("📧 Email sent:", emailResponse);
+    console.log("🌍 Email sent in language:", userLanguage);
 
     return new Response(JSON.stringify({ 
       success: true, 
       message: "Verification email sent",
       emailId: emailResponse.data?.id,
+      language: userLanguage,
+      subject: emailSubject,
       redirectUrl: redirectUrl,
       verificationUrl: verificationUrl
     }), {

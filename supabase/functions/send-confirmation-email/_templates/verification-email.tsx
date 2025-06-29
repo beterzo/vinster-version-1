@@ -1,4 +1,3 @@
-
 import {
   Body,
   Container,
@@ -19,83 +18,113 @@ interface VerificationEmailProps {
   lastName: string;
   verificationUrl: string;
   email: string;
+  language?: string;
 }
+
+// Translation object for email content
+const translations = {
+  nl: {
+    preview: "Activeer je account en log direct in",
+    tagline: "Jouw venster op de toekomst",
+    heading: "Bevestig je email adres",
+    description: "Bedankt voor je aanmelding! Klik op de knop hieronder om je account te activeren en direct in te loggen.",
+    buttonText: "Activeer mijn account",
+    footerDisclaimer: "Als je dit account niet hebt aangemaakt, kun je deze email negeren.",
+    footerGreeting: "Met vriendelijke groet,",
+    footerSignature: "Team Vinster"
+  },
+  en: {
+    preview: "Activate your account and log in directly",
+    tagline: "Your window to the future",
+    heading: "Confirm your email address",
+    description: "Thanks for signing up! Click the button below to activate your account and log in directly.",
+    buttonText: "Activate my account",
+    footerDisclaimer: "If you didn't create this account, you can safely ignore this email.",
+    footerGreeting: "Best regards,",
+    footerSignature: "Team Vinster"
+  }
+};
 
 export const VerificationEmail = ({
   firstName,
   lastName,
   verificationUrl,
   email,
-}: VerificationEmailProps) => (
-  <Html dir="ltr" lang="nl">
-    <Head>
-      <style>
-        {`
-          @font-face {
-            font-family: 'Inter';
-            font-style: normal;
-            font-weight: 400;
-            mso-font-alt: 'Helvetica';
-            src: url(https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hiA.woff2) format('woff2');
-          }
+  language = 'nl',
+}: VerificationEmailProps) => {
+  const t = translations[language as keyof typeof translations] || translations.nl;
+  
+  return (
+    <Html dir="ltr" lang={language}>
+      <Head>
+        <style>
+          {`
+            @font-face {
+              font-family: 'Inter';
+              font-style: normal;
+              font-weight: 400;
+              mso-font-alt: 'Helvetica';
+              src: url(https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hiA.woff2) format('woff2');
+            }
+            
+            @font-face {
+              font-family: 'Inter';
+              font-style: normal;
+              font-weight: 600;
+              mso-font-alt: 'Helvetica';
+              src: url(https://fonts.gstatic.com/s/inter/v18/UcC73FwrK3iLTeHuS_fjbvMwCp50PDca1ZL7.woff2) format('woff2');
+            }
+            
+            @font-face {
+              font-family: 'Inter';
+              font-style: normal;
+              font-weight: 700;
+              mso-font-alt: 'Helvetica';
+              src: url(https://fonts.gstatic.com/s/inter/v18/UcC73FwrK3iLTeHuS_fjbvMwCp50BTca1ZL7.woff2) format('woff2');
+            }
+            
+            * {
+              font-family: 'Inter', Helvetica;
+            }
+          `}
+        </style>
+      </Head>
+      <Preview>{t.preview}</Preview>
+      <Body style={bodyStyle}>
+        <Container style={containerStyle}>
+          <Section style={contentSection}>
+            <Heading style={vinsterTitleStyle}>
+              Vinster
+            </Heading>
+            <Text style={taglineStyle}>
+              {t.tagline}
+            </Text>
+            <Heading style={headingStyle}>
+              {t.heading}
+            </Heading>
+            <Text style={descriptionStyle}>
+              {t.description}
+            </Text>
+            <Button style={buttonStyle} href={verificationUrl}>
+              {t.buttonText}
+            </Button>
+          </Section>
           
-          @font-face {
-            font-family: 'Inter';
-            font-style: normal;
-            font-weight: 600;
-            mso-font-alt: 'Helvetica';
-            src: url(https://fonts.gstatic.com/s/inter/v18/UcC73FwrK3iLTeHuS_fjbvMwCp50PDca1ZL7.woff2) format('woff2');
-          }
+          <Hr style={hrStyle} />
           
-          @font-face {
-            font-family: 'Inter';
-            font-style: normal;
-            font-weight: 700;
-            mso-font-alt: 'Helvetica';
-            src: url(https://fonts.gstatic.com/s/inter/v18/UcC73FwrK3iLTeHuS_fjbvMwCp50BTca1ZL7.woff2) format('woff2');
-          }
-          
-          * {
-            font-family: 'Inter', Helvetica;
-          }
-        `}
-      </style>
-    </Head>
-    <Preview>Activeer je account en log direct in</Preview>
-    <Body style={bodyStyle}>
-      <Container style={containerStyle}>
-        <Section style={contentSection}>
-          <Heading style={vinsterTitleStyle}>
-            Vinster
-          </Heading>
-          <Text style={taglineStyle}>
-            Jouw venster op de toekomst
+          <Text style={footerStyle}>
+            {t.footerDisclaimer}
           </Text>
-          <Heading style={headingStyle}>
-            Bevestig je email adres
-          </Heading>
-          <Text style={descriptionStyle}>
-            Bedankt voor je aanmelding! Klik op de knop hieronder om je account te activeren en direct in te loggen.
+          
+          <Text style={footerStyle}>
+            {t.footerGreeting}<br />
+            {t.footerSignature}
           </Text>
-          <Button style={buttonStyle} href={verificationUrl}>
-            Activeer mijn account
-          </Button>
-        </Section>
-        
-        <Hr style={hrStyle} />
-        
-        <Text style={footerStyle}>
-          Als je dit account niet hebt aangemaakt, kun je deze email negeren.
-        </Text>
-        
-        <Text style={footerStyle}>
-          Met vriendelijke groet,<br />
-          Team Vinster
-        </Text>
-      </Container>
-    </Body>
-  </Html>
-);
+        </Container>
+      </Body>
+    </Html>
+  );
+};
 
 export default VerificationEmail;
 
