@@ -6,6 +6,8 @@ import { Label } from "@/components/ui/label";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate, Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from "@/hooks/useTranslation";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const SignupPage = () => {
   const [firstName, setFirstName] = useState("");
@@ -18,14 +20,15 @@ const SignupPage = () => {
   const { signUp } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { t } = useTranslation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (password !== confirmPassword) {
       toast({
-        title: "Wachtwoorden komen niet overeen",
-        description: "Controleer of beide wachtwoorden hetzelfde zijn.",
+        title: t('signup.passwords_dont_match'),
+        description: t('signup.passwords_dont_match_desc'),
         variant: "destructive",
       });
       return;
@@ -33,8 +36,8 @@ const SignupPage = () => {
 
     if (!firstName || !lastName || !email || !password) {
       toast({
-        title: "Vul alle velden in",
-        description: "Alle velden zijn verplicht.",
+        title: t('signup.fill_all_fields'),
+        description: t('signup.fill_all_fields_desc'),
         variant: "destructive",
       });
       return;
@@ -45,25 +48,25 @@ const SignupPage = () => {
     const { error } = await signUp(email, password, firstName, lastName);
 
     if (error) {
-      let errorMessage = "Er is een onbekende fout opgetreden.";
+      let errorMessage = t('signup.unknown_error');
       
       if (error.message === "User already registered") {
-        errorMessage = "Dit e-mailadres is al geregistreerd. Probeer in te loggen.";
+        errorMessage = t('signup.user_already_registered');
       } else if (error.message.includes("Password")) {
-        errorMessage = "Het wachtwoord voldoet niet aan de vereisten. Gebruik minimaal 6 karakters.";
+        errorMessage = t('signup.password_requirements');
       } else {
         errorMessage = error.message;
       }
 
       toast({
-        title: "Fout bij registreren",
+        title: t('signup.registration_error'),
         description: errorMessage,
         variant: "destructive",
       });
     } else {
       toast({
-        title: "Account aangemaakt!",
-        description: "We hebben een verificatie email naar je gestuurd. Controleer je inbox.",
+        title: t('signup.account_created'),
+        description: t('signup.verification_email_sent'),
         duration: 6000,
       });
       
@@ -90,7 +93,7 @@ const SignupPage = () => {
         <div className="relative z-10 h-full flex items-end p-12">
           <div className="bg-white bg-opacity-90 rounded-2xl p-8 max-w-md">
             <blockquote className="text-xl font-medium text-blue-900 leading-relaxed">
-              "Nu ik weet wat ik wil, kan ik stappen zetten."
+              {t('signup.quote')}
             </blockquote>
           </div>
         </div>
@@ -99,22 +102,24 @@ const SignupPage = () => {
       {/* Right side - Signup form */}
       <div className="bg-white flex items-center justify-center p-4 sm:p-6 lg:p-12">
         <div className="w-full max-w-md space-y-6 lg:space-y-8">
-          <div className="text-center">
+          {/* Header with Logo and Language Switcher */}
+          <div className="flex items-center justify-between">
             <img 
               alt="Vinster Logo" 
-              className="h-12 w-auto mx-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
               onClick={() => navigate('/')} 
               src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
             />
+            <LanguageSwitcher />
           </div>
 
           {/* Signup form title */}
           <div className="text-center space-y-2">
             <h1 className="text-2xl sm:text-3xl font-bold text-blue-900">
-              Maak je account aan
+              {t('signup.title')}
             </h1>
             <p className="text-gray-600">
-              Op weg naar een betere loopbaan
+              {t('signup.subtitle')}
             </p>
           </div>
 
@@ -122,12 +127,12 @@ const SignupPage = () => {
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="firstName" className="text-blue-900 font-medium text-left block">
-                  Voornaam
+                  {t('signup.first_name')}
                 </Label>
                 <Input
                   id="firstName"
                   type="text"
-                  placeholder="Voornaam"
+                  placeholder={t('signup.first_name_placeholder')}
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
                   className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900"
@@ -137,12 +142,12 @@ const SignupPage = () => {
 
               <div className="space-y-2">
                 <Label htmlFor="lastName" className="text-blue-900 font-medium text-left block">
-                  Achternaam
+                  {t('signup.last_name')}
                 </Label>
                 <Input
                   id="lastName"
                   type="text"
-                  placeholder="Achternaam"
+                  placeholder={t('signup.last_name_placeholder')}
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
                   className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900"
@@ -153,12 +158,12 @@ const SignupPage = () => {
 
             <div className="space-y-2">
               <Label htmlFor="email" className="text-blue-900 font-medium text-left block">
-                E-mailadres
+                {t('signup.email')}
               </Label>
               <Input
                 id="email"
                 type="email"
-                placeholder="emailadres"
+                placeholder={t('signup.email_placeholder')}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900"
@@ -168,12 +173,12 @@ const SignupPage = () => {
 
             <div className="space-y-2">
               <Label htmlFor="password" className="text-blue-900 font-medium text-left block">
-                Wachtwoord
+                {t('signup.password')}
               </Label>
               <Input
                 id="password"
                 type="password"
-                placeholder="wachtwoord"
+                placeholder={t('signup.password_placeholder')}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900"
@@ -183,12 +188,12 @@ const SignupPage = () => {
 
             <div className="space-y-2">
               <Label htmlFor="confirmPassword" className="text-blue-900 font-medium text-left block">
-                Bevestig wachtwoord
+                {t('signup.confirm_password')}
               </Label>
               <Input
                 id="confirmPassword"
                 type="password"
-                placeholder="bevestig wachtwoord"
+                placeholder={t('signup.confirm_password_placeholder')}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900"
@@ -201,14 +206,14 @@ const SignupPage = () => {
               className="w-full h-12 bg-blue-900 hover:bg-blue-800 text-white font-semibold text-base rounded-lg"
               disabled={isLoading}
             >
-              {isLoading ? "Account aanmaken..." : "Account aanmaken"}
+              {isLoading ? t('signup.creating_account') : t('signup.create_account')}
             </Button>
 
             <div className="text-center">
               <p className="text-sm text-gray-600">
-                Heb je al een account?{" "}
+                {t('signup.have_account')}{" "}
                 <Link to="/login" className="font-semibold text-yellow-500 hover:text-yellow-600">
-                  Log hier in
+                  {t('signup.login_here')}
                 </Link>
               </p>
             </div>

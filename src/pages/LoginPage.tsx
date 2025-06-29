@@ -7,6 +7,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from "@/hooks/useTranslation";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -17,25 +19,26 @@ const LoginPage = () => {
   const { signIn } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { t } = useTranslation();
 
   // Check for verification success parameter
   useEffect(() => {
     const verified = searchParams.get('verified');
     if (verified === 'true') {
       toast({
-        title: "Account geverifieerd!",
-        description: "Je account is succesvol geverifieerd. Je kunt nu inloggen.",
+        title: t('login.account_verified'),
+        description: t('login.account_verified_desc'),
       });
     }
-  }, [searchParams, toast]);
+  }, [searchParams, toast, t]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!email || !password) {
       toast({
-        title: "Vul alle velden in",
-        description: "E-mailadres en wachtwoord zijn verplicht.",
+        title: t('login.fill_all_fields'),
+        description: t('login.fill_all_fields_desc'),
         variant: "destructive",
       });
       return;
@@ -46,27 +49,25 @@ const LoginPage = () => {
     const { error } = await signIn(email, password);
 
     if (error) {
-      let errorMessage = "Er is een onbekende fout opgetreden.";
+      let errorMessage = t('login.unknown_error');
       
       if (error.message === "Invalid login credentials") {
-        errorMessage = "Onjuiste inloggegevens. Controleer je e-mailadres en wachtwoord.";
-      } else if (error.message === "Email not confirmed") {
-        errorMessage = "Je e-mailadres is nog niet bevestigd. Check je inbox voor de bevestigingsmail.";
-      } else if (error.message.includes("Email not confirmed")) {
-        errorMessage = "Je e-mailadres is nog niet bevestigd. Check je inbox voor de bevestigingsmail.";
+        errorMessage = t('login.invalid_credentials');
+      } else if (error.message === "Email not confirmed" || error.message.includes("Email not confirmed")) {
+        errorMessage = t('login.email_not_confirmed');
       } else {
         errorMessage = error.message;
       }
 
       toast({
-        title: "Fout bij inloggen",
+        title: t('login.login_error'),
         description: errorMessage,
         variant: "destructive",
       });
     } else {
       toast({
-        title: "Succesvol ingelogd!",
-        description: "Welkom terug.",
+        title: t('login.login_success'),
+        description: t('login.welcome_back'),
       });
       navigate("/home");
     }
@@ -90,7 +91,7 @@ const LoginPage = () => {
         <div className="relative z-10 h-full flex items-end p-12">
           <div className="bg-white bg-opacity-90 rounded-2xl p-8 max-w-md">
             <blockquote className="text-xl font-medium text-blue-900 leading-relaxed">
-              "Nu ik weet wat ik wil, kan ik stappen zetten."
+              {t('login.quote')}
             </blockquote>
           </div>
         </div>
@@ -99,34 +100,36 @@ const LoginPage = () => {
       {/* Right side - Login form */}
       <div className="bg-white flex items-center justify-center p-4 sm:p-6 lg:p-12">
         <div className="w-full max-w-md space-y-6 lg:space-y-8">
-          <div className="text-center">
+          {/* Header with Logo and Language Switcher */}
+          <div className="flex items-center justify-between">
             <img 
               alt="Vinster Logo" 
-              className="h-12 w-auto mx-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
               onClick={() => navigate('/')} 
               src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
             />
+            <LanguageSwitcher />
           </div>
 
           {/* Login form title */}
           <div className="text-center space-y-2">
             <h1 className="text-2xl sm:text-3xl font-bold text-blue-900">
-              Log in om te beginnen
+              {t('login.title')}
             </h1>
             <p className="text-gray-600">
-              Op weg naar een betere loopbaan
+              {t('login.subtitle')}
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
               <Label htmlFor="email" className="text-blue-900 font-medium text-left block">
-                E-mailadres
+                {t('login.email')}
               </Label>
               <Input
                 id="email"
                 type="email"
-                placeholder="emailadres"
+                placeholder={t('login.email_placeholder')}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900"
@@ -136,12 +139,12 @@ const LoginPage = () => {
 
             <div className="space-y-2">
               <Label htmlFor="password" className="text-blue-900 font-medium text-left block">
-                Wachtwoord
+                {t('login.password')}
               </Label>
               <Input
                 id="password"
                 type="password"
-                placeholder="wachtwoord"
+                placeholder={t('login.password_placeholder')}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900"
@@ -152,7 +155,7 @@ const LoginPage = () => {
             <div className="flex items-center space-x-2">
               <Checkbox id="remember" />
               <Label htmlFor="remember" className="text-sm text-gray-600">
-                Onthoud mij
+                {t('login.remember_me')}
               </Label>
             </div>
 
@@ -161,14 +164,14 @@ const LoginPage = () => {
               className="w-full h-12 bg-blue-900 hover:bg-blue-800 text-white font-semibold text-base rounded-lg"
               disabled={isLoading}
             >
-              {isLoading ? "Bezig met inloggen..." : "Aanmelden"}
+              {isLoading ? t('login.logging_in') : t('login.sign_in')}
             </Button>
 
             <div className="text-center">
               <p className="text-sm text-gray-600">
-                Heb je nog geen account?{" "}
+                {t('login.no_account')}{" "}
                 <Link to="/signup" className="font-semibold text-yellow-500 hover:text-yellow-600">
-                  Maak hier een aan
+                  {t('login.create_account')}
                 </Link>
               </p>
             </div>
