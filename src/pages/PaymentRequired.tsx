@@ -15,7 +15,7 @@ const PaymentRequired = () => {
   const { hasPaid, refreshPaymentStatus } = usePaymentStatus();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
 
   // Redirect if user has already paid
   useEffect(() => {
@@ -64,7 +64,8 @@ const PaymentRequired = () => {
         firstName: user.user_metadata?.first_name || '',
         lastName: user.user_metadata?.last_name || '',
         email: user.email || '',
-        userId: user.id
+        userId: user.id,
+        language: language
       };
 
       console.log('Sending webhook data:', webhookData);
