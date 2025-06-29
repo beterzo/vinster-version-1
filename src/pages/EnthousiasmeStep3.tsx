@@ -78,7 +78,7 @@ const EnthousiasmeStep3 = () => {
             <div className="space-y-8">
               <div>
                 <Label htmlFor="question1" className="text-blue-900 font-medium text-lg mb-3 block text-left">
-                  Aan welke periode denk je met heel veel plezier terug? Beschrijf een werkperiode waar je met heel veel plezier aan terugdenkt...
+                  Aan welke periode denk je met heel veel plezier terug? Wat maakte die tijd zo leuk? Wat deed je?
                 </Label>
                 <Textarea
                   id="question1"
@@ -92,7 +92,7 @@ const EnthousiasmeStep3 = () => {
 
               <div>
                 <Label htmlFor="question2" className="text-blue-900 font-medium text-lg mb-3 block text-left">
-                  Kun je nog een leuke periode of project noemen? Vertel over een ander leuk project of periode en je rol daarin...
+                  Kun je nog een leuke periode of project noemen? Wat deed je toen vooral?
                 </Label>
                 <Textarea
                   id="question2"
@@ -106,7 +106,7 @@ const EnthousiasmeStep3 = () => {
 
               <div>
                 <Label htmlFor="question3" className="text-blue-900 font-medium text-lg mb-3 block text-left">
-                  Wanneer kom jij fluitend thuis? Beschrijf een dag waarvan je fluitend thuiskwam van je werk...
+                  Wanneer kom jij fluitend thuis? Wat heb je op zo'n dag gedaan en meegemaakt?
                 </Label>
                 <Textarea
                   id="question3"
