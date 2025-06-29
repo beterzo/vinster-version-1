@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,7 +12,7 @@ import Footer from "@/components/Footer";
 const ToegangscodesProfessionals = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -56,6 +55,7 @@ const ToegangscodesProfessionals = () => {
         body: JSON.stringify({
           email: formData.email,
           quantity: parseInt(formData.quantity),
+          language: language,
           timestamp: new Date().toISOString()
         })
       });
