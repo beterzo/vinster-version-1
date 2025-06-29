@@ -1,0 +1,65 @@
+
+{
+  "navigation": {
+    "home": "Home",
+    "dashboard": "Dashboard"
+  },
+  "enthousiasme": {
+    "step3": {
+      "title": "Your best work experience",
+      "saving": "Saving...",
+      "question1": "Which period do you think back to with great pleasure? What made that time so enjoyable? What did you do?",
+      "question2": "Can you mention another nice period or project? What did you mainly do then?",
+      "question3": "When do you come home whistling? What did you do and experience on such a day?",
+      "placeholder1": "Share your story about a wonderful work period here...",
+      "placeholder2": "Tell about another nice experience here...",
+      "placeholder3": "Describe such a perfect workday here...",
+      "previous": "Previous",
+      "finish": "Complete"
+    }
+  },
+  "zoekprofiel": {
+    "intro": {
+      "title": "You're almost there!",
+      "description": "This is the final step in Vinster. You've done your research and now you're going to create your search profile. A search profile is a clear overview of the job you're looking for.",
+      "benefits": {
+        "targeted_search": "Targeted search",
+        "targeted_search_desc": "Find suitable vacancies faster",
+        "better_conversations": "Better conversations",
+        "better_conversations_desc": "Have targeted conversations with your network",
+        "visibility": "Make visible",
+        "visibility_desc": "Let others know what you're looking for"
+      },
+      "start_button": "Start with your search profile",
+      "back_button": "Back to dashboard"
+    }
+  },
+  "profiel_voltooien": {
+    "title": "Two final steps to generate your career report",
+    "description": "You'll first fill in some additional information about yourself. Then you'll indicate what's most important to you from your previous answers.",
+    "step1_title": "Additional information",
+    "step2_title": "Setting priorities",
+    "back_button": "Back to dashboard",
+    "start_button": "Create career report"
+  },
+  "wensberoepen": {
+    "step3": {
+      "title": "Dream job 3",
+      "subtitle": "What would you like to do for a while, or even always?",
+      "job_title_label": "Name of the profession",
+      "job_title_placeholder": "Enter the name of your dream job here...",
+      "answer_placeholder": "Describe your answer here...",
+      "previous_button": "Previous dream job",
+      "finish_button": "Complete",
+      "finishing": "Completing...",
+      "sending_data": "Sending data..."
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "back": "Back",
+    "next": "Next",
+    "save": "Save",
+    "cancel": "Cancel"
+  }
+}

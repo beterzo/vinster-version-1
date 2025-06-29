@@ -6,10 +6,12 @@ import { useEnthousiasmeResponses } from "./useEnthousiasmeResponses";
 import { useWensberoepenResponses } from "./useWensberoepenResponses";
 import { useExtraInformatieResponses } from "./useExtraInformatieResponses";
 import { usePrioriteitenResponses } from "./usePrioriteitenResponses";
+import { useLanguage } from "@/contexts/LanguageContext";
 import type { MakeWebhookData } from "@/services/webhookService";
 
 export const useMakeWebhookData = () => {
   const { user } = useAuth();
+  const { language } = useLanguage();
   const { responses: enthousiasmeResponses } = useEnthousiasmeResponses();
   const { responses: wensberoepenResponses } = useWensberoepenResponses();
   const { responses: extraInformatieResponses } = useExtraInformatieResponses();
@@ -55,6 +57,7 @@ export const useMakeWebhookData = () => {
       first_name: profileData?.first_name || "",
       last_name: profileData?.last_name || "",
       email: user.email || "",
+      language: language,
       
       // AI-generated keywords (stored as JSON strings in database)
       ai_lievelings_activiteiten: profileData?.ai_lievelings_activiteiten || "",

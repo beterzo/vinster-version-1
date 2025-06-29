@@ -1,6 +1,7 @@
 
 export interface WebhookData {
   user_id: string;
+  language: string;
   [key: string]: string;
 }
 
@@ -9,6 +10,7 @@ export interface MakeWebhookData {
   first_name: string;
   last_name: string;
   email: string;
+  language: string;
   ai_lievelings_activiteiten: string;
   ai_werkomstandigheden: string;
   ai_interesses: string;

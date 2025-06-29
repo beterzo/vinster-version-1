@@ -4,12 +4,15 @@ import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { useNavigate } from "react-router-dom";
 import { useZoekprofielResponses } from "@/hooks/useZoekprofielResponses";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Search, ArrowRight, Home, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const ZoekprofielVragen = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { language } = useLanguage();
   const { responses, loading, saveResponse, submitToWebhook, isCompleted } = useZoekprofielResponses();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -63,14 +66,16 @@ const ZoekprofielVragen = () => {
     }
 
     setIsSubmitting(true);
-    const success = await submitToWebhook();
+    
+    // Submit with language information
+    const success = await submitToWebhook(language);
     
     if (success) {
       navigate("/zoekprofiel-download");
     }
     
     setIsSubmitting(false);
-  }, [isCompleted, submitToWebhook, navigate, toast]);
+  }, [isCompleted, submitToWebhook, navigate, toast, language]);
 
   if (loading) {
     return (
@@ -88,13 +93,16 @@ const ZoekprofielVragen = () => {
       <div className="max-w-4xl mx-auto px-6 py-16">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="mb-8">
+          <div className="mb-8 flex items-center justify-center relative">
             <img 
               alt="Vinster Logo" 
-              className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200 mx-auto" 
+              className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
               onClick={() => navigate('/home')} 
               src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
             />
+            <div className="absolute right-0">
+              <LanguageSwitcher />
+            </div>
           </div>
           
           <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">

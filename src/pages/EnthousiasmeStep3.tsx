@@ -7,9 +7,12 @@ import { useNavigate } from "react-router-dom";
 import EnthousiasmeProgress from "@/components/EnthousiasmeProgress";
 import { useEnthousiasmeResponses } from "@/hooks/useEnthousiasmeResponses";
 import { Loader2 } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const EnthousiasmeStep3 = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { responses, loading, saving, saveResponse, updateLocalResponse } = useEnthousiasmeResponses();
 
   // Local validation for step 3 only
@@ -44,13 +47,14 @@ const EnthousiasmeStep3 = () => {
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
-          <div className="flex items-center">
+          <div className="flex items-center justify-between">
             <img 
               alt="Vinster Logo" 
               className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
               onClick={() => navigate('/')} 
               src="/lovable-uploads/846d1ec8-bb91-46f6-a16d-1b1c39ebe829.png" 
             />
+            <LanguageSwitcher />
           </div>
         </div>
       </div>
@@ -64,12 +68,12 @@ const EnthousiasmeStep3 = () => {
             {/* Title */}
             <div className="text-center mb-12">
               <h1 className="text-3xl font-bold text-blue-900 mb-2">
-                Je beste werkervaring
+                {t('enthousiasme.step3.title')}
               </h1>
               {saving && (
                 <p className="text-sm text-gray-500 flex items-center justify-center gap-2">
                   <Loader2 className="h-4 w-4 animate-spin" />
-                  Bezig met opslaan...
+                  {t('enthousiasme.step3.saving')}
                 </p>
               )}
             </div>
@@ -78,11 +82,11 @@ const EnthousiasmeStep3 = () => {
             <div className="space-y-8">
               <div>
                 <Label htmlFor="question1" className="text-blue-900 font-medium text-lg mb-3 block text-left">
-                  Aan welke periode denk je met heel veel plezier terug? Wat maakte die tijd zo leuk? Wat deed je?
+                  {t('enthousiasme.step3.question1')}
                 </Label>
                 <Textarea
                   id="question1"
-                  placeholder="Deel hier je verhaal over een geweldige werkperiode..."
+                  placeholder={t('enthousiasme.step3.placeholder1')}
                   value={responses.plezierige_werkperiode_beschrijving || ''}
                   onChange={(e) => handleInputChange('plezierige_werkperiode_beschrijving', e.target.value)}
                   onBlur={(e) => handleInputBlur('plezierige_werkperiode_beschrijving', e.target.value)}
@@ -92,11 +96,11 @@ const EnthousiasmeStep3 = () => {
 
               <div>
                 <Label htmlFor="question2" className="text-blue-900 font-medium text-lg mb-3 block text-left">
-                  Kun je nog een leuke periode of project noemen? Wat deed je toen vooral?
+                  {t('enthousiasme.step3.question2')}
                 </Label>
                 <Textarea
                   id="question2"
-                  placeholder="Vertel hier over nog een leuke ervaring..."
+                  placeholder={t('enthousiasme.step3.placeholder2')}
                   value={responses.leuk_project_en_rol || ''}
                   onChange={(e) => handleInputChange('leuk_project_en_rol', e.target.value)}
                   onBlur={(e) => handleInputBlur('leuk_project_en_rol', e.target.value)}
@@ -106,11 +110,11 @@ const EnthousiasmeStep3 = () => {
 
               <div>
                 <Label htmlFor="question3" className="text-blue-900 font-medium text-lg mb-3 block text-left">
-                  Wanneer kom jij fluitend thuis? Wat heb je op zo'n dag gedaan en meegemaakt?
+                  {t('enthousiasme.step3.question3')}
                 </Label>
                 <Textarea
                   id="question3"
-                  placeholder="Beschrijf hier zo'n perfecte werkdag..."
+                  placeholder={t('enthousiasme.step3.placeholder3')}
                   value={responses.fluitend_thuiskomen_dag || ''}
                   onChange={(e) => handleInputChange('fluitend_thuiskomen_dag', e.target.value)}
                   onBlur={(e) => handleInputBlur('fluitend_thuiskomen_dag', e.target.value)}
@@ -126,7 +130,7 @@ const EnthousiasmeStep3 = () => {
                 variant="outline"
                 className="border-blue-900 text-blue-900 hover:bg-blue-50"
               >
-                Vorige
+                {t('enthousiasme.step3.previous')}
               </Button>
               <Button 
                 onClick={() => navigate('/wensberoepen-intro')}
@@ -137,7 +141,7 @@ const EnthousiasmeStep3 = () => {
                 }`}
                 disabled={!step3Complete}
               >
-                Afronden
+                {t('enthousiasme.step3.finish')}
               </Button>
             </div>
           </CardContent>

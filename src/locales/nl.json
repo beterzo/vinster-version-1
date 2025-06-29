@@ -1,0 +1,65 @@
+
+{
+  "navigation": {
+    "home": "Home",
+    "dashboard": "Dashboard"
+  },
+  "enthousiasme": {
+    "step3": {
+      "title": "Je beste werkervaring",
+      "saving": "Bezig met opslaan...",
+      "question1": "Aan welke periode denk je met heel veel plezier terug? Wat maakte die tijd zo leuk? Wat deed je?",
+      "question2": "Kun je nog een leuke periode of project noemen? Wat deed je toen vooral?",
+      "question3": "Wanneer kom jij fluitend thuis? Wat heb je op zo'n dag gedaan en meegemaakt?",
+      "placeholder1": "Deel hier je verhaal over een geweldige werkperiode...",
+      "placeholder2": "Vertel hier over nog een leuke ervaring...",
+      "placeholder3": "Beschrijf hier zo'n perfecte werkdag...",
+      "previous": "Vorige",
+      "finish": "Afronden"
+    }
+  },
+  "zoekprofiel": {
+    "intro": {
+      "title": "Je bent er bijna!",
+      "description": "Dit is de laatste stap in Vinster. Je hebt onderzoek gedaan en je gaat nu je zoekprofiel opstellen. Een zoekprofiel is een duidelijk overzicht van de baan die jij zoekt.",
+      "benefits": {
+        "targeted_search": "Gericht zoeken",
+        "targeted_search_desc": "Vind passende vacatures sneller",
+        "better_conversations": "Betere gesprekken",
+        "better_conversations_desc": "Voer gerichte gesprekken met je netwerk",
+        "visibility": "Zichtbaar maken",
+        "visibility_desc": "Laat anderen weten waar je naar zoekt"
+      },
+      "start_button": "Start met je zoekprofiel",
+      "back_button": "Terug naar dashboard"
+    }
+  },
+  "profiel_voltooien": {
+    "title": "Twee laatste stappen om jouw loopbaanrapport te genereren",
+    "description": "Je gaat eerst wat aanvullende informatie invullen over jezelf. Daarna ga je aangeven wat voor jou het allerbelangrijkste is uit je eerdere antwoorden.",
+    "step1_title": "Extra informatie",
+    "step2_title": "Prioriteiten stellen",
+    "back_button": "Terug naar dashboard",
+    "start_button": "Loopbaanrapport aanmaken"
+  },
+  "wensberoepen": {
+    "step3": {
+      "title": "Wensberoep 3",
+      "subtitle": "Wat zou jij wel een poosje, of zelfs altijd, willen doen?",
+      "job_title_label": "Naam van het beroep",
+      "job_title_placeholder": "Vul hier de naam van je wensberoep in...",
+      "answer_placeholder": "Beschrijf hier je antwoord...",
+      "previous_button": "Vorige wensberoep",
+      "finish_button": "Afronden",
+      "finishing": "Bezig met afronden...",
+      "sending_data": "Bezig met verzenden van gegevens..."
+    }
+  },
+  "common": {
+    "loading": "Laden...",
+    "back": "Terug",
+    "next": "Volgende",
+    "save": "Opslaan",
+    "cancel": "Annuleren"
+  }
+}

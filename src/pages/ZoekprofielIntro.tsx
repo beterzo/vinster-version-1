@@ -2,25 +2,28 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { Search, ArrowRight, Target, Users, MapPin } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const ZoekprofielIntro = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const benefits = [
     {
       icon: <Target className="w-6 h-6 text-blue-500" />,
-      title: "Gericht zoeken",
-      description: "Vind passende vacatures sneller"
+      title: t('zoekprofiel.intro.benefits.targeted_search'),
+      description: t('zoekprofiel.intro.benefits.targeted_search_desc')
     },
     {
       icon: <Users className="w-6 h-6 text-yellow-500" />,
-      title: "Betere gesprekken",
-      description: "Voer gerichte gesprekken met je netwerk"
+      title: t('zoekprofiel.intro.benefits.better_conversations'),
+      description: t('zoekprofiel.intro.benefits.better_conversations_desc')
     },
     {
       icon: <MapPin className="w-6 h-6 text-blue-500" />,
-      title: "Zichtbaar maken",
-      description: "Laat anderen weten waar je naar zoekt"
+      title: t('zoekprofiel.intro.benefits.visibility'),
+      description: t('zoekprofiel.intro.benefits.visibility_desc')
     }
   ];
 
@@ -29,22 +32,25 @@ const ZoekprofielIntro = () => {
       <div className="max-w-4xl mx-auto px-6 py-16">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="flex items-center cursor-pointer justify-center mb-8">
+          <div className="flex items-center cursor-pointer justify-center mb-8 relative">
             <img 
               alt="Vinster Logo" 
               className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
               onClick={() => navigate('/home')} 
               src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
             />
+            <div className="absolute right-0">
+              <LanguageSwitcher />
+            </div>
           </div>
           
           <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
             <Search className="w-8 h-8 text-blue-600" />
           </div>
           
-          <h1 className="text-4xl font-bold text-vinster-blue mb-4">Je bent er bijna!</h1>
+          <h1 className="text-4xl font-bold text-vinster-blue mb-4">{t('zoekprofiel.intro.title')}</h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Dit is de laatste stap in Vinster. Je hebt onderzoek gedaan en je gaat nu je zoekprofiel opstellen. Een zoekprofiel is een duidelijk overzicht van de baan die jij zoekt.
+            {t('zoekprofiel.intro.description')}
           </p>
         </div>
 
@@ -87,7 +93,7 @@ const ZoekprofielIntro = () => {
             size="lg"
           >
             <ArrowRight className="w-6 h-6 mr-3" />
-            Start met je zoekprofiel
+            {t('zoekprofiel.intro.start_button')}
           </Button>
           
           <Button
@@ -95,7 +101,7 @@ const ZoekprofielIntro = () => {
             variant="outline"
             className="rounded-xl py-6 px-8 h-auto"
           >
-            Terug naar dashboard
+            {t('zoekprofiel.intro.back_button')}
           </Button>
         </div>
       </div>

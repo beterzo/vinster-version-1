@@ -3,17 +3,27 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, ClipboardList, Info, Target, CheckCircle } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+
 const ProfielVoltooienIntro = () => {
   const navigate = useNavigate();
-  return <div className="min-h-screen bg-gray-50 font-sans">
+  const { t } = useTranslation();
+
+  return (
+    <div className="min-h-screen bg-gray-50 font-sans">
       <div className="max-w-4xl mx-auto px-6 py-8">
         {/* Header */}
         <div className="mb-8">
-          <div className="mb-6">
-            <img alt="Vinster Logo" className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" onClick={() => navigate('/home')} src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" />
+          <div className="mb-6 flex items-center justify-between">
+            <img 
+              alt="Vinster Logo" 
+              className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              onClick={() => navigate('/home')} 
+              src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
+            />
+            <LanguageSwitcher />
           </div>
-          
-          
         </div>
 
         {/* Main content */}
@@ -27,11 +37,10 @@ const ProfielVoltooienIntro = () => {
             }} />
             </div>
             <h2 className="text-2xl font-bold text-vinster-blue mb-4">
-              Twee laatste stappen om jouw loopbaanrapport te genereren
+              {t('profiel_voltooien.title')}
             </h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Je gaat eerst wat aanvullende informatie invullen over jezelf. 
-              Daarna ga je aangeven wat voor jou het allerbelangrijkste is uit je eerdere antwoorden.
+              {t('profiel_voltooien.description')}
             </p>
           </div>
 
@@ -42,7 +51,7 @@ const ProfielVoltooienIntro = () => {
                 <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
                   <span className="text-blue-600 font-bold">1</span>
                 </div>
-                <h3 className="text-xl font-bold text-vinster-blue">Extra informatie</h3>
+                <h3 className="text-xl font-bold text-vinster-blue">{t('profiel_voltooien.step1_title')}</h3>
               </div>
               <div className="space-y-3 text-gray-700">
                 <div className="flex items-start gap-3">
@@ -71,7 +80,7 @@ const ProfielVoltooienIntro = () => {
                 <div className="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">
                   <span className="text-yellow-600 font-bold">2</span>
                 </div>
-                <h3 className="text-xl font-bold text-vinster-blue">Prioriteiten stellen</h3>
+                <h3 className="text-xl font-bold text-vinster-blue">{t('profiel_voltooien.step2_title')}</h3>
               </div>
               <div className="space-y-3 text-gray-700">
                 <div className="flex items-start gap-3">
@@ -131,15 +140,17 @@ const ProfielVoltooienIntro = () => {
         {/* Navigation */}
         <div className="flex justify-between items-center">
           <Button onClick={() => navigate("/home")} className="bg-blue-900 hover:bg-blue-800 text-white font-bold py-4 px-6 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-200">
-            Terug naar dashboard
+            {t('profiel_voltooien.back_button')}
           </Button>
           
           <Button onClick={() => navigate("/extra-informatie-vragen")} className="bg-yellow-400 hover:bg-yellow-500 text-vinster-blue font-bold py-8 text-xl rounded-3xl shadow-lg hover:shadow-xl transition-all duration-200" size="lg">
-            Loopbaanrapport aanmaken
+            {t('profiel_voltooien.start_button')}
             <ArrowRight className="w-5 h-5 ml-2" />
           </Button>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default ProfielVoltooienIntro;

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -12,6 +11,8 @@ import { useWebhookData } from "@/hooks/useWebhookData";
 import { sendWebhookData } from "@/services/webhookService";
 import { useToast } from "@/hooks/use-toast";
 import { useWensberoepenValidation } from "@/hooks/useWensberoepenValidation";
+import { useTranslation } from "@/hooks/useTranslation";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import type { Tables } from "@/integrations/supabase/types";
 
 type WensberoepenResponse = Tables<"wensberoepen_responses">;
@@ -19,6 +20,7 @@ type WensberoepenResponse = Tables<"wensberoepen_responses">;
 const WensberoepenStep3 = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { t } = useTranslation();
   const { responses, getFieldValue, saveResponse, isLoading } = useWensberoepenResponses();
   const { collectWebhookData } = useWebhookData();
   const { 
@@ -119,7 +121,7 @@ const WensberoepenStep3 = () => {
     try {
       setIsSubmitting(true);
       
-      // Collect all data for webhook
+      // Collect all data for webhook (now includes language)
       const webhookData = collectWebhookData();
       
       if (!webhookData) {
@@ -168,7 +170,7 @@ const WensberoepenStep3 = () => {
   ];
 
   if (isLoading) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Laden...</div>;
+    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">{t('common.loading')}</div>;
   }
 
   const step3Complete = isStep3Complete();
@@ -178,13 +180,14 @@ const WensberoepenStep3 = () => {
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
-          <div className="flex items-center">
+          <div className="flex items-center justify-between">
             <img 
               alt="Vinster Logo" 
               className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
               onClick={() => navigate('/')} 
               src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
             />
+            <LanguageSwitcher />
           </div>
         </div>
       </div>
@@ -198,15 +201,15 @@ const WensberoepenStep3 = () => {
             {/* Title */}
             <div className="text-center mb-12">
               <h1 className="text-3xl font-bold text-blue-900 mb-2">
-                Wensberoep 3
+                {t('wensberoepen.step3.title')}
               </h1>
               <p className="text-xl text-gray-600">
-                Wat zou jij wel een poosje, of zelfs altijd, willen doen?
+                {t('wensberoepen.step3.subtitle')}
               </p>
               {isSubmitting && (
                 <div className="mt-4 p-3 bg-blue-50 rounded-lg">
                   <p className="text-sm text-blue-700">
-                    📤 Bezig met verzenden van gegevens...
+                    📤 {t('wensberoepen.step3.sending_data')}
                   </p>
                 </div>
               )}
@@ -215,11 +218,11 @@ const WensberoepenStep3 = () => {
             {/* Job Title Input */}
             <div className="mb-8">
               <Label htmlFor="jobTitle" className="text-blue-900 font-medium text-lg mb-3 block text-left">
-                Naam van het beroep
+                {t('wensberoepen.step3.job_title_label')}
               </Label>
               <Input
                 id="jobTitle"
-                placeholder="Vul hier de naam van je wensberoep in..."
+                placeholder={t('wensberoepen.step3.job_title_placeholder')}
                 value={jobTitle}
                 onChange={(e) => handleJobTitleChange(e.target.value)}
                 onBlur={handleJobTitleBlur}
@@ -236,7 +239,7 @@ const WensberoepenStep3 = () => {
                   </Label>
                   <Textarea
                     id={`question${index + 1}`}
-                    placeholder="Beschrijf hier je antwoord..."
+                    placeholder={t('wensberoepen.step3.answer_placeholder')}
                     value={answers[`question${index + 1}` as keyof typeof answers]}
                     onChange={(e) => handleInputChange(`question${index + 1}`, e.target.value)}
                     onBlur={(e) => handleInputBlur(`question${index + 1}`, e.target.value)}
@@ -254,7 +257,7 @@ const WensberoepenStep3 = () => {
                 className="border-blue-900 text-blue-900 hover:bg-blue-50"
                 disabled={isSubmitting}
               >
-                Vorige wensberoep
+                {t('wensberoepen.step3.previous_button')}
               </Button>
               <Button 
                 onClick={handleComplete}
@@ -265,7 +268,7 @@ const WensberoepenStep3 = () => {
                 }`}
                 disabled={isSubmitting || !step3Complete || !isWensberoepenComplete || validationLoading}
               >
-                {isSubmitting ? "Bezig met afronden..." : "Afronden"}
+                {isSubmitting ? t('wensberoepen.step3.finishing') : t('wensberoepen.step3.finish_button')}
               </Button>
             </div>
           </CardContent>

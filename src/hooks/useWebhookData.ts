@@ -1,13 +1,14 @@
-
 import { useEnthousiasmeResponses } from "./useEnthousiasmeResponses";
 import { useWensberoepenResponses } from "./useWensberoepenResponses";
 import { useAuth } from "./useAuth";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { WebhookData } from "@/services/webhookService";
 
 export const useWebhookData = () => {
   const { user } = useAuth();
+  const { language } = useLanguage();
   const { responses: enthousiasmeResponses } = useEnthousiasmeResponses();
   const { responses: wensberoepenResponses } = useWensberoepenResponses();
   const [profileData, setProfileData] = useState<any>(null);
@@ -48,6 +49,7 @@ export const useWebhookData = () => {
 
     const data: WebhookData = {
       user_id: user.id,
+      language: language,
       
       // Profile data
       first_name: profileData?.first_name || "",
