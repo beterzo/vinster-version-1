@@ -2,11 +2,14 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useTranslation } from "@/hooks/useTranslation";
+import LanguageSwitcher from "./LanguageSwitcher";
 import MobileMenu from "./MobileMenu";
 
 const HeroSection = () => {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
+  const { t } = useTranslation();
 
   return (
     <div className="relative overflow-hidden">
@@ -19,7 +22,7 @@ const HeroSection = () => {
       </div>
       
       <div className="relative z-10 max-w-[1440px] mx-auto px-6">
-        {/* Header with Logo (left) and Menu + Button (right) */}
+        {/* Header with Logo (left) and Menu + LanguageSwitcher + Button (right) */}
         <div className="py-6 flex items-center justify-between">
           {/* Left side - Logo only, made bigger and moved more to the left */}
           <div className="flex items-center pt-1 -ml-4">
@@ -31,17 +34,19 @@ const HeroSection = () => {
             />
           </div>
           
-          {/* Right side - Mobile Menu and Login Button aligned */}
+          {/* Right side - Mobile Menu, Language Switcher and Login Button aligned */}
           <div className="flex items-center space-x-4">
             <div className="flex items-center">
               <MobileMenu />
             </div>
+            {/* Language Switcher - visible on all screen sizes */}
+            <LanguageSwitcher />
             {/* Hide login button on mobile */}
             <Button 
               onClick={() => navigate('/login')} 
               className="hidden md:block bg-white hover:bg-gray-100 text-blue-900 font-semibold px-6 py-3 rounded-full border border-gray-200 shadow-sm transition-all duration-200 h-12"
             >
-              Inloggen
+              {t('landing.login')}
             </Button>
           </div>
         </div>
@@ -51,17 +56,15 @@ const HeroSection = () => {
           {/* Left Content - Made wider and fully left-aligned */}
           <div className="w-full max-w-2xl space-y-6 text-left pb-8">
             <div className="text-xl text-white leading-relaxed">
-              Vind werk dat bij je past, met AI.<br />
-              Slim, persoonlijk en verrassend.
+              {t('landing.tagline')}
             </div>
             
             <h1 className="text-4xl font-bold text-white leading-tight">
-              Welkom bij <span style={{ color: '#FFCD3E' }}>Vinster</span>
+              {t('landing.welcome')} <span style={{ color: '#FFCD3E' }}>Vinster</span>
             </h1>
             
             <p className="text-xl text-white leading-relaxed">
-              Voor iedereen die denkt: "Wat wil ik eigenlijk écht met mijn werk?"<br />
-              Of je nu net begint, vastloopt, iets nieuws zoekt of gewoon even wilt heroriënteren – <span style={{ color: '#FFCD3E' }}>Vinster</span> geeft overzicht, houvast en richting.
+              {t('landing.description')}
             </p>
           </div>
         </div>

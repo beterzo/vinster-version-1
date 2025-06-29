@@ -4,6 +4,12 @@
     "home": "Home",
     "dashboard": "Dashboard"
   },
+  "landing": {
+    "login": "Inloggen",
+    "tagline": "Vind werk dat bij je past, met AI.\nSlim, persoonlijk en verrassend.",
+    "welcome": "Welkom bij",
+    "description": "Voor iedereen die denkt: \"Wat wil ik eigenlijk écht met mijn werk?\"\nOf je nu net begint, vastloopt, iets nieuws zoekt of gewoon even wilt heroriënteren – Vinster geeft overzicht, houvast en richting."
+  },
   "enthousiasme": {
     "step3": {
       "title": "Je beste werkervaring",

@@ -4,6 +4,12 @@
     "home": "Home",
     "dashboard": "Dashboard"
   },
+  "landing": {
+    "login": "Login",
+    "tagline": "Find work that fits you, with AI.\nSmart, personal and surprising.",
+    "welcome": "Welcome to",
+    "description": "For everyone who thinks: \"What do I really want with my work?\"\nWhether you're just starting, stuck, looking for something new, or just want to reorient yourself – Vinster provides overview, guidance and direction."
+  },
   "enthousiasme": {
     "step3": {
       "title": "Your best work experience",
