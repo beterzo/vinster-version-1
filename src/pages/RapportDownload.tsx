@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -16,22 +17,40 @@ const RapportDownload = () => {
 
   useEffect(() => {
     if (reportData?.pdf_file_path) {
+      console.log('PDF file path found:', reportData.pdf_file_path);
+      
       // Get the public URL for the PDF
       const { data } = supabase.storage
         .from('user-reports')
         .getPublicUrl(reportData.pdf_file_path);
       
+      console.log('Generated public URL:', data.publicUrl);
       setPdfUrl(data.publicUrl);
+    } else {
+      console.log('No PDF file path found in report data:', reportData);
     }
   }, [reportData]);
 
   const handleDownload = async () => {
-    if (!pdfUrl) return;
+    if (!pdfUrl) {
+      console.warn('No PDF URL available for download');
+      return;
+    }
     
     setIsDownloading(true);
+    console.log('Starting download from URL:', pdfUrl);
+    
     try {
       const response = await fetch(pdfUrl);
+      console.log('Fetch response status:', response.status, response.statusText);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
       const blob = await response.blob();
+      console.log('Downloaded blob size:', blob.size, 'bytes');
+      
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.style.display = 'none';
@@ -50,7 +69,7 @@ const RapportDownload = () => {
       console.error('Download error:', error);
       toast({
         title: "Download mislukt",
-        description: "Er ging iets mis bij het downloaden van je rapport.",
+        description: `Er ging iets mis bij het downloaden: ${error instanceof Error ? error.message : 'Onbekende fout'}`,
         variant: "destructive",
       });
     } finally {
@@ -60,6 +79,7 @@ const RapportDownload = () => {
 
   const handleOpenInNewTab = () => {
     if (pdfUrl) {
+      console.log('Opening PDF in new tab:', pdfUrl);
       window.open(pdfUrl, '_blank');
     }
   };
