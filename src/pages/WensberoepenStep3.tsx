@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -10,7 +11,6 @@ import { useWensberoepenResponses } from "@/hooks/useWensberoepenResponses";
 import { useWebhookData } from "@/hooks/useWebhookData";
 import { sendWebhookData } from "@/services/webhookService";
 import { useToast } from "@/hooks/use-toast";
-import { useWensberoepenValidation } from "@/hooks/useWensberoepenValidation";
 import { useTranslation } from "@/hooks/useTranslation";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import type { Tables } from "@/integrations/supabase/types";
@@ -23,14 +23,21 @@ const WensberoepenStep3 = () => {
   const { t } = useTranslation();
   const { responses, getFieldValue, saveResponse, isLoading } = useWensberoepenResponses();
   const { collectWebhookData } = useWebhookData();
-  const { 
-    isWensberoepenComplete,
-    isLoading: validationLoading
-  } = useWensberoepenValidation();
   
   const [jobTitle, setJobTitle] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [lastSavedJobTitle, setLastSavedJobTitle] = useState("");
   const [answers, setAnswers] = useState({
+    question1: "",
+    question2: "",
+    question3: "",
+    question4: "",
+    question5: "",
+    question6: "",
+    question7: "",
+    question8: ""
+  });
+  const [lastSavedAnswers, setLastSavedAnswers] = useState({
     question1: "",
     question2: "",
     question3: "",
@@ -45,19 +52,56 @@ const WensberoepenStep3 = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Local validation for step 3 only
-  const isStep3Complete = () => {
-    if (!jobTitle.trim()) return false;
+  // Comprehensive validation function that checks all wensberoepen
+  const isAllWensberoepenComplete = () => {
+    if (!responses) return false;
     
-    return Object.values(answers).every(answer => answer.trim() !== "");
+    // Check current step 3 with local state (includes unsaved changes)
+    const step3JobTitle = jobTitle.trim() || responses.wensberoep_3_titel?.trim() || '';
+    const step3Complete = step3JobTitle !== '' && Object.values(answers).every(answer => answer.trim() !== "");
+    
+    // Check step 1 from database
+    const step1Complete = [
+      'wensberoep_1_titel',
+      'wensberoep_1_werkweek_activiteiten',
+      'wensberoep_1_werklocatie_omgeving',
+      'wensberoep_1_samenwerking_contacten',
+      'wensberoep_1_fluitend_thuiskomen_dag',
+      'wensberoep_1_werk_doel',
+      'wensberoep_1_leukste_onderdelen',
+      'wensberoep_1_belangrijke_aspecten',
+      'wensberoep_1_kennis_focus'
+    ].every(field => {
+      const value = responses[field as keyof typeof responses];
+      return value && String(value).trim() !== '';
+    });
+    
+    // Check step 2 from database
+    const step2Complete = [
+      'wensberoep_2_titel',
+      'wensberoep_2_werkweek_activiteiten',
+      'wensberoep_2_werklocatie_omgeving',
+      'wensberoep_2_samenwerking_contacten',
+      'wensberoep_2_fluitend_thuiskomen_dag',
+      'wensberoep_2_werk_doel',
+      'wensberoep_2_leukste_onderdelen',
+      'wensberoep_2_belangrijke_aspecten',
+      'wensberoep_2_kennis_focus'
+    ].every(field => {
+      const value = responses[field as keyof typeof responses];
+      return value && String(value).trim() !== '';
+    });
+    
+    console.log('Validation status:', { step1Complete, step2Complete, step3Complete });
+    return step1Complete && step2Complete && step3Complete;
   };
 
   // Load saved data when responses change (only when data is loaded)
   useEffect(() => {
     if (!isLoading && responses) {
       console.log("Loading saved responses into form:", responses);
-      setJobTitle(responses.wensberoep_3_titel || "");
-      setAnswers({
+      const savedJobTitle = responses.wensberoep_3_titel || "";
+      const savedAnswers = {
         question1: responses.wensberoep_3_werkweek_activiteiten || "",
         question2: responses.wensberoep_3_werklocatie_omgeving || "",
         question3: responses.wensberoep_3_samenwerking_contacten || "",
@@ -66,40 +110,72 @@ const WensberoepenStep3 = () => {
         question6: responses.wensberoep_3_leukste_onderdelen || "",
         question7: responses.wensberoep_3_belangrijke_aspecten || "",
         question8: responses.wensberoep_3_kennis_focus || ""
-      });
+      };
+      
+      setJobTitle(savedJobTitle);
+      setLastSavedJobTitle(savedJobTitle);
+      setAnswers(savedAnswers);
+      setLastSavedAnswers(savedAnswers);
     }
   }, [isLoading, responses]);
+
+  // Auto-save job title when it changes
+  useEffect(() => {
+    if (jobTitle !== lastSavedJobTitle && jobTitle.trim() !== "") {
+      const timeoutId = setTimeout(() => {
+        console.log("Auto-saving job title:", jobTitle);
+        saveResponse("wensberoep_3_titel", jobTitle);
+        setLastSavedJobTitle(jobTitle);
+      }, 1000); // Save after 1 second of no typing
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [jobTitle, lastSavedJobTitle, saveResponse]);
 
   const handleJobTitleChange = (value: string) => {
     setJobTitle(value);
   };
 
   const handleJobTitleBlur = () => {
-    console.log("Saving job title:", jobTitle);
-    saveResponse("wensberoep_3_titel", jobTitle);
+    if (jobTitle !== lastSavedJobTitle) {
+      console.log("Saving job title on blur:", jobTitle);
+      saveResponse("wensberoep_3_titel", jobTitle);
+      setLastSavedJobTitle(jobTitle);
+    }
   };
 
   const handleInputChange = (field: string, value: string) => {
     console.log(`Updating ${field}:`, value);
     setAnswers(prev => ({ ...prev, [field]: value }));
+    
+    // Auto-save after 1 second if not empty
+    if (value.trim() !== "") {
+      setTimeout(() => {
+        handleInputBlur(field, value);
+      }, 1000);
+    }
   };
 
   const handleInputBlur = (field: string, value: string) => {
-    console.log(`Saving ${field}:`, value);
-    const fieldMap: Record<string, keyof WensberoepenResponse> = {
-      question1: "wensberoep_3_werkweek_activiteiten",
-      question2: "wensberoep_3_werklocatie_omgeving",
-      question3: "wensberoep_3_samenwerking_contacten",
-      question4: "wensberoep_3_fluitend_thuiskomen_dag",
-      question5: "wensberoep_3_werk_doel",
-      question6: "wensberoep_3_leukste_onderdelen",
-      question7: "wensberoep_3_belangrijke_aspecten",
-      question8: "wensberoep_3_kennis_focus"
-    };
-    
-    const dbField = fieldMap[field];
-    if (dbField) {
-      saveResponse(dbField, value);
+    const currentSavedValue = lastSavedAnswers[field as keyof typeof lastSavedAnswers];
+    if (value !== currentSavedValue) {
+      console.log(`Saving ${field}:`, value);
+      const fieldMap: Record<string, keyof WensberoepenResponse> = {
+        question1: "wensberoep_3_werkweek_activiteiten",
+        question2: "wensberoep_3_werklocatie_omgeving",
+        question3: "wensberoep_3_samenwerking_contacten",
+        question4: "wensberoep_3_fluitend_thuiskomen_dag",
+        question5: "wensberoep_3_werk_doel",
+        question6: "wensberoep_3_leukste_onderdelen",
+        question7: "wensberoep_3_belangrijke_aspecten",
+        question8: "wensberoep_3_kennis_focus"
+      };
+      
+      const dbField = fieldMap[field];
+      if (dbField) {
+        saveResponse(dbField, value);
+        setLastSavedAnswers(prev => ({ ...prev, [field]: value }));
+      }
     }
   };
 
@@ -109,7 +185,7 @@ const WensberoepenStep3 = () => {
   };
 
   const handleComplete = async () => {
-    if (!isWensberoepenComplete) {
+    if (!isAllWensberoepenComplete()) {
       toast({
         title: "Wensberoepen scan niet compleet",
         description: "Vul alle wensberoepen velden in voordat je de scan afrondt.",
@@ -173,7 +249,7 @@ const WensberoepenStep3 = () => {
     return <div className="min-h-screen bg-gray-50 flex items-center justify-center">{t('common.loading')}</div>;
   }
 
-  const step3Complete = isStep3Complete();
+  const canComplete = isAllWensberoepenComplete();
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
@@ -262,11 +338,11 @@ const WensberoepenStep3 = () => {
               <Button 
                 onClick={handleComplete}
                 className={`font-semibold px-8 ${
-                  step3Complete && isWensberoepenComplete
+                  canComplete
                     ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 
                     : "bg-gray-300 text-gray-500 cursor-not-allowed"
                 }`}
-                disabled={isSubmitting || !step3Complete || !isWensberoepenComplete || validationLoading}
+                disabled={isSubmitting || !canComplete}
               >
                 {isSubmitting ? t('wensberoepen.step3.finishing') : t('wensberoepen.step3.finish_button')}
               </Button>
