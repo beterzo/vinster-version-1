@@ -1,32 +1,21 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { CheckCircle, ArrowRight, User, Target, Heart } from "lucide-react";
-
 const WensberoepenVoltooiPagina = () => {
   const navigate = useNavigate();
-
   const handleProfielVoltooien = () => {
     navigate("/profiel-voltooien-intro");
   };
-
   const handleNaarDashboard = () => {
     navigate("/home");
   };
-
-  return (
-    <div className="min-h-screen bg-gray-50 font-sans">
+  return <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
           <div className="flex items-center">
-            <img 
-              alt="Vinster Logo" 
-              className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
-              onClick={() => navigate('/')} 
-              src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
-            />
+            <img alt="Vinster Logo" className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" onClick={() => navigate('/')} src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" />
           </div>
         </div>
       </div>
@@ -55,9 +44,7 @@ const WensberoepenVoltooiPagina = () => {
               <h2 className="text-2xl font-semibold text-blue-900 mb-4">
                 Wat er nu is gebeurd:
               </h2>
-              <p className="text-gray-700">
-                Er worden nu kernwoorden samengesteld om te bepalen wat jij belangrijk vind in jouw werk
-              </p>
+              <p className="text-gray-700">Er zijn nu kernwoorden samengesteld om te bepalen wat jij belangrijk vind in jouw werk</p>
             </div>
 
             {/* Next steps */}
@@ -75,7 +62,8 @@ const WensberoepenVoltooiPagina = () => {
                     <Heart className="h-8 w-8 text-yellow-600" />
                   </div>
                   <h3 className="font-semibold text-blue-900 mb-2">Prioriteiten</h3>
-                  <p className="text-sm text-gray-600">Activiteiten, interesses en werkomstandigheden</p>
+                  <p className="text-sm text-gray-600">De kernwoorden worden opgedeeld in 3 onderdelen: activiteiten, interesses en werkomstandigheden.
+Het is nu aan jou om de nadruk te leggen op de kernwoorden die je het belangrijkste vind.</p>
                 </div>
                 
                 <div className="flex flex-col items-center text-center p-4">
@@ -83,7 +71,7 @@ const WensberoepenVoltooiPagina = () => {
                     <User className="h-8 w-8 text-yellow-600" />
                   </div>
                   <h3 className="font-semibold text-blue-900 mb-2">Extra informatie</h3>
-                  <p className="text-sm text-gray-600">Aanvullende vragen over je achtergrond</p>
+                  <p className="text-sm text-gray-600">Aanvullende vragen over je achtergrond. Denk hier bijvoorbeeld aan informatie zoals jouw opleiding en opleidingsniveau maar ook of er een specifieke sector is waar je in wilt zoeken.</p>
                 </div>
                 
                 <div className="flex flex-col items-center text-center p-4">
@@ -91,25 +79,19 @@ const WensberoepenVoltooiPagina = () => {
                     <Target className="h-8 w-8 text-yellow-600" />
                   </div>
                   <h3 className="font-semibold text-blue-900 mb-2">Rapport</h3>
-                  <p className="text-sm text-gray-600">Je persoonlijke loopbaanadvies ontvangen</p>
+                  <p className="text-sm text-gray-600">Je persoonlijke loopbaanadvies ontvangen. 
+Nadat we alle informatie van je hebben ontvangen ontvang jij een volledig persoonlijk loopbaanrapport waarmee jij verder kan!</p>
                 </div>
               </div>
             </div>
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Button 
-                onClick={handleProfielVoltooien}
-                className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold px-8 py-3 text-lg"
-              >
+              <Button onClick={handleProfielVoltooien} className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold px-8 py-3 text-lg">
                 Loopbaanrapport maken
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button 
-                onClick={handleNaarDashboard}
-                variant="outline"
-                className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold px-8 py-3 text-lg"
-              >
+              <Button onClick={handleNaarDashboard} variant="outline" className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold px-8 py-3 text-lg">
                 Naar dashboard
               </Button>
             </div>
@@ -121,8 +103,6 @@ const WensberoepenVoltooiPagina = () => {
           </CardContent>
         </Card>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default WensberoepenVoltooiPagina;
