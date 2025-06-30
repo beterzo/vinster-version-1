@@ -18,7 +18,7 @@ const ACTIVITEITEN_KEYWORDS = [
 
 const PrioriteitenActiviteiten = () => {
   const navigate = useNavigate();
-  const { responses, saveResponse, isLoading } = usePrioriteitenResponses();
+  const { responses, saveKeywordSelection, saveResponses, loading } = usePrioriteitenResponses();
   
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
   const [extraText, setExtraText] = useState("");
@@ -29,12 +29,12 @@ const PrioriteitenActiviteiten = () => {
 
   // Load saved data when responses change
   useEffect(() => {
-    if (!isLoading && responses) {
+    if (!loading && responses) {
       console.log("Loading saved responses into form:", responses);
       setSelectedKeywords(responses.selected_activiteiten_keywords || []);
       setExtraText(responses.extra_activiteiten_tekst || "");
     }
-  }, [isLoading, responses]);
+  }, [loading, responses]);
 
   const handleKeywordToggle = (keyword: string) => {
     const newSelection = selectedKeywords.includes(keyword)
@@ -42,7 +42,7 @@ const PrioriteitenActiviteiten = () => {
       : [...selectedKeywords, keyword];
     
     setSelectedKeywords(newSelection);
-    saveResponse('selected_activiteiten_keywords', newSelection);
+    saveKeywordSelection('activiteiten', newSelection);
   };
 
   const handleExtraTextChange = (value: string) => {
@@ -51,7 +51,7 @@ const PrioriteitenActiviteiten = () => {
 
   const handleExtraTextBlur = () => {
     console.log("Saving extra text:", extraText);
-    saveResponse('extra_activiteiten_tekst', extraText);
+    saveResponses({ extra_activiteiten_tekst: extraText });
   };
 
   const handleNext = () => {
@@ -59,7 +59,7 @@ const PrioriteitenActiviteiten = () => {
     navigate('/prioriteiten-interesses');
   };
 
-  if (isLoading) {
+  if (loading) {
     return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Laden...</div>;
   }
 

@@ -18,7 +18,7 @@ const INTERESSES_KEYWORDS = [
 
 const PrioriteitenInteresses = () => {
   const navigate = useNavigate();
-  const { responses, saveResponse, isLoading } = usePrioriteitenResponses();
+  const { responses, saveKeywordSelection, saveResponses, loading } = usePrioriteitenResponses();
   
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
   const [extraText, setExtraText] = useState("");
@@ -29,12 +29,12 @@ const PrioriteitenInteresses = () => {
 
   // Load saved data when responses change
   useEffect(() => {
-    if (!isLoading && responses) {
+    if (!loading && responses) {
       console.log("Loading saved responses into form:", responses);
       setSelectedKeywords(responses.selected_interesses_keywords || []);
       setExtraText(responses.extra_interesses_tekst || "");
     }
-  }, [isLoading, responses]);
+  }, [loading, responses]);
 
   const handleKeywordToggle = (keyword: string) => {
     const newSelection = selectedKeywords.includes(keyword)
@@ -42,7 +42,7 @@ const PrioriteitenInteresses = () => {
       : [...selectedKeywords, keyword];
     
     setSelectedKeywords(newSelection);
-    saveResponse('selected_interesses_keywords', newSelection);
+    saveKeywordSelection('interesses', newSelection);
   };
 
   const handleExtraTextChange = (value: string) => {
@@ -51,7 +51,7 @@ const PrioriteitenInteresses = () => {
 
   const handleExtraTextBlur = () => {
     console.log("Saving extra text:", extraText);
-    saveResponse('extra_interesses_tekst', extraText);
+    saveResponses({ extra_interesses_tekst: extraText });
   };
 
   const handlePrevious = () => {
@@ -64,7 +64,7 @@ const PrioriteitenInteresses = () => {
     navigate('/prioriteiten-werkomstandigheden');
   };
 
-  if (isLoading) {
+  if (loading) {
     return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Laden...</div>;
   }
 

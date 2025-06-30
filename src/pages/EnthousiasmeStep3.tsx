@@ -10,7 +10,7 @@ import { useEnthousiasmeResponses } from "@/hooks/useEnthousiasmeResponses";
 
 const EnthousiasmeStep3 = () => {
   const navigate = useNavigate();
-  const { responses, saveResponse, isLoading } = useEnthousiasmeResponses();
+  const { responses, saveResponse, loading } = useEnthousiasmeResponses();
   
   const [answers, setAnswers] = useState({
     plezierige_werkperiode_beschrijving: "",
@@ -24,7 +24,7 @@ const EnthousiasmeStep3 = () => {
 
   // Load saved data when responses change
   useEffect(() => {
-    if (!isLoading && responses) {
+    if (!loading && responses) {
       console.log("Loading saved responses into form:", responses);
       setAnswers({
         plezierige_werkperiode_beschrijving: responses.plezierige_werkperiode_beschrijving || "",
@@ -32,7 +32,7 @@ const EnthousiasmeStep3 = () => {
         fluitend_thuiskomen_dag: responses.fluitend_thuiskomen_dag || ""
       });
     }
-  }, [isLoading, responses]);
+  }, [loading, responses]);
 
   const handleInputChange = (field: string, value: string) => {
     console.log(`Updating ${field}:`, value);
@@ -69,7 +69,7 @@ const EnthousiasmeStep3 = () => {
     }
   ];
 
-  if (isLoading) {
+  if (loading) {
     return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Laden...</div>;
   }
 

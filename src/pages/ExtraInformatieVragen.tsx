@@ -13,7 +13,7 @@ import { useToast } from "@/hooks/use-toast";
 const ExtraInformatieVragen = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { responses, saveResponse, isLoading } = useExtraInformatieResponses();
+  const { responses, saveResponses, loading } = useExtraInformatieResponses();
   const { collectWebhookData } = useWebhookData();
   
   const [answers, setAnswers] = useState({
@@ -31,7 +31,7 @@ const ExtraInformatieVragen = () => {
 
   // Load saved data when responses change
   useEffect(() => {
-    if (!isLoading && responses) {
+    if (!loading && responses) {
       console.log("Loading saved responses into form:", responses);
       setAnswers({
         opleidingsniveau: responses.opleidingsniveau || "",
@@ -40,16 +40,16 @@ const ExtraInformatieVragen = () => {
         fysieke_beperkingen: responses.fysieke_beperkingen || ""
       });
     }
-  }, [isLoading, responses]);
+  }, [loading, responses]);
 
   const handleInputChange = (field: string, value: string) => {
     console.log(`Updating ${field}:`, value);
     setAnswers(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleInputBlur = (field: string, value: string) => {
+  const handleInputBlur = async (field: string, value: string) => {
     console.log(`Saving ${field}:`, value);
-    saveResponse(field as keyof typeof responses, value);
+    await saveResponses({ ...answers, [field]: value });
   };
 
   const handleBackToPriorities = () => {
@@ -69,6 +69,9 @@ const ExtraInformatieVragen = () => {
 
     try {
       setIsSubmitting(true);
+      
+      // Save current answers first
+      await saveResponses(answers);
       
       // Collect all data for webhook
       const webhookData = collectWebhookData();
@@ -130,7 +133,7 @@ const ExtraInformatieVragen = () => {
     }
   ];
 
-  if (isLoading) {
+  if (loading) {
     return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Laden...</div>;
   }
 

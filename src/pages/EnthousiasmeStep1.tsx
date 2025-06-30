@@ -10,7 +10,7 @@ import { useEnthousiasmeResponses } from "@/hooks/useEnthousiasmeResponses";
 
 const EnthousiasmeStep1 = () => {
   const navigate = useNavigate();
-  const { responses, saveResponse, isLoading } = useEnthousiasmeResponses();
+  const { responses, saveResponse, loading } = useEnthousiasmeResponses();
   
   const [answers, setAnswers] = useState({
     kindertijd_activiteiten: "",
@@ -24,7 +24,7 @@ const EnthousiasmeStep1 = () => {
 
   // Load saved data when responses change
   useEffect(() => {
-    if (!isLoading && responses) {
+    if (!loading && responses) {
       console.log("Loading saved responses into form:", responses);
       setAnswers({
         kindertijd_activiteiten: responses.kindertijd_activiteiten || "",
@@ -32,7 +32,7 @@ const EnthousiasmeStep1 = () => {
         kindertijd_interesses_nieuw: responses.kindertijd_interesses_nieuw || ""
       });
     }
-  }, [isLoading, responses]);
+  }, [loading, responses]);
 
   const handleInputChange = (field: string, value: string) => {
     console.log(`Updating ${field}:`, value);
@@ -69,7 +69,7 @@ const EnthousiasmeStep1 = () => {
     }
   ];
 
-  if (isLoading) {
+  if (loading) {
     return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Laden...</div>;
   }
 

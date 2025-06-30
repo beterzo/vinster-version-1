@@ -10,7 +10,7 @@ import { useEnthousiasmeResponses } from "@/hooks/useEnthousiasmeResponses";
 
 const EnthousiasmeStep2 = () => {
   const navigate = useNavigate();
-  const { responses, saveResponse, isLoading } = useEnthousiasmeResponses();
+  const { responses, saveResponse, loading } = useEnthousiasmeResponses();
   
   const [answers, setAnswers] = useState({
     eerste_werk_leukste_taken: "",
@@ -24,7 +24,7 @@ const EnthousiasmeStep2 = () => {
 
   // Load saved data when responses change
   useEffect(() => {
-    if (!isLoading && responses) {
+    if (!loading && responses) {
       console.log("Loading saved responses into form:", responses);
       setAnswers({
         eerste_werk_leukste_taken: responses.eerste_werk_leukste_taken || "",
@@ -32,7 +32,7 @@ const EnthousiasmeStep2 = () => {
         eerste_werk_onderwerpen: responses.eerste_werk_onderwerpen || ""
       });
     }
-  }, [isLoading, responses]);
+  }, [loading, responses]);
 
   const handleInputChange = (field: string, value: string) => {
     console.log(`Updating ${field}:`, value);
@@ -69,7 +69,7 @@ const EnthousiasmeStep2 = () => {
     }
   ];
 
-  if (isLoading) {
+  if (loading) {
     return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Laden...</div>;
   }
 
