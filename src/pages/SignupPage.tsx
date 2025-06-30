@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate, Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
@@ -15,6 +16,7 @@ const SignupPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [selectedLanguage, setSelectedLanguage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const { signUp } = useAuth();
@@ -34,7 +36,7 @@ const SignupPage = () => {
       return;
     }
 
-    if (!firstName || !lastName || !email || !password) {
+    if (!firstName || !lastName || !email || !password || !selectedLanguage) {
       toast({
         title: t('signup.fill_all_fields'),
         description: t('signup.fill_all_fields_desc'),
@@ -45,7 +47,7 @@ const SignupPage = () => {
 
     setIsLoading(true);
 
-    const { error } = await signUp(email, password, firstName, lastName);
+    const { error } = await signUp(email, password, firstName, lastName, selectedLanguage);
 
     if (error) {
       let errorMessage = t('signup.unknown_error');
@@ -199,6 +201,21 @@ const SignupPage = () => {
                 className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900"
                 required
               />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="language" className="text-blue-900 font-medium text-left block">
+                {t('signup.preferred_language')} *
+              </Label>
+              <Select value={selectedLanguage} onValueChange={setSelectedLanguage} required>
+                <SelectTrigger className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900">
+                  <SelectValue placeholder={t('signup.select_language')} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="nl">Nederlands</SelectItem>
+                  <SelectItem value="en">English</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
 
             <Button 

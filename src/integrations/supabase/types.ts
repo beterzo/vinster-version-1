@@ -146,6 +146,7 @@ export type Database = {
           first_name: string
           has_paid: boolean
           id: string
+          language: string | null
           last_name: string
           updated_at: string
         }
@@ -157,6 +158,7 @@ export type Database = {
           first_name: string
           has_paid?: boolean
           id: string
+          language?: string | null
           last_name: string
           updated_at?: string
         }
@@ -168,6 +170,7 @@ export type Database = {
           first_name?: string
           has_paid?: boolean
           id?: string
+          language?: string | null
           last_name?: string
           updated_at?: string
         }

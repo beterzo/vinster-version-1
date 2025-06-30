@@ -1,3 +1,4 @@
+
 import { createContext, useContext, useEffect, useState } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
@@ -7,7 +8,7 @@ interface AuthContextType {
   user: User | null;
   session: Session | null;
   loading: boolean;
-  signUp: (email: string, password: string, firstName: string, lastName: string) => Promise<{ error: any }>;
+  signUp: (email: string, password: string, firstName: string, lastName: string, language: string) => Promise<{ error: any }>;
   signIn: (email: string, password: string) => Promise<{ error: any }>;
   signOut: () => Promise<{ error: any }>;
   resendConfirmation: (email: string) => Promise<{ error: any }>;
@@ -27,7 +28,25 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
-  const { language } = useLanguage();
+  const { setLanguage } = useLanguage();
+
+  // Function to fetch user profile and set language
+  const fetchUserProfileAndSetLanguage = async (userId: string) => {
+    try {
+      const { data: profile, error } = await supabase
+        .from('profiles')
+        .select('language')
+        .eq('id', userId)
+        .single();
+
+      if (!error && profile?.language) {
+        setLanguage(profile.language as 'nl' | 'en');
+        console.log('🌐 Language set from profile:', profile.language);
+      }
+    } catch (error) {
+      console.error('❌ Error fetching user profile:', error);
+    }
+  };
 
   useEffect(() => {
     console.log('🔐 AuthProvider: Initializing auth state');
@@ -45,6 +64,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setSession(session);
         setUser(session?.user ?? null);
         setLoading(false);
+
+        // Set language from user profile when user logs in
+        if (session?.user && event === 'SIGNED_IN') {
+          setTimeout(() => {
+            fetchUserProfileAndSetLanguage(session.user.id);
+          }, 0);
+        }
 
         // Log session details for debugging
         if (session) {
@@ -79,6 +105,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         });
         setSession(session);
         setUser(session?.user ?? null);
+        
+        // Set language from profile for existing session
+        if (session?.user) {
+          await fetchUserProfileAndSetLanguage(session.user.id);
+        }
+        
         setLoading(false);
       } catch (error) {
         console.error('❌ Auth initialization error:', error);
@@ -92,10 +124,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       console.log('🔐 Cleaning up auth subscription');
       subscription.unsubscribe();
     };
-  }, []);
+  }, [setLanguage]);
 
-  const signUp = async (email: string, password: string, firstName: string, lastName: string) => {
-    console.log('🔐 Attempting signup for:', email);
+  const signUp = async (email: string, password: string, firstName: string, lastName: string, language: string) => {
+    console.log('🔐 Attempting signup for:', email, 'with language:', language);
     
     try {
       // Use vinster.ai domain for redirect to new email confirmed page
@@ -109,7 +141,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           data: {
             first_name: firstName,
             last_name: lastName,
-            language: language // Include current language in user metadata
+            language: language // Include selected language in user metadata
           },
           emailRedirectTo: redirectUrl
         }
@@ -220,8 +252,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     hasSession: !!session, 
     loading,
     userEmail: user?.email,
-    emailConfirmed: user?.email_confirmed_at,
-    currentLanguage: language
+    emailConfirmed: user?.email_confirmed_at
   });
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
