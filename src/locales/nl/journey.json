@@ -49,6 +49,23 @@
       "finish_button": "Afronden",
       "finishing": "Bezig met afronden...",
       "sending_data": "Bezig met verzenden van gegevens..."
+    },
+    "voltooi": {
+      "title": "Gefeliciteerd! 🎉",
+      "subtitle": "Je hebt succesvol de vragen over je wensberoepen afgerond",
+      "what_happened_title": "Wat er nu is gebeurd:",
+      "what_happened_description": "Er zijn nu kernwoorden samengesteld om te bepalen wat jij belangrijk vindt in je werk",
+      "next_step_title": "Volgende stap: Loopbaanrapport aanmaken",
+      "next_step_description": "Om jouw persoonlijke loopbaanrapport te genereren, hebben we nog wat aanvullende informatie van je nodig:",
+      "priorities_title": "Prioriteiten",
+      "priorities_description": "De kernwoorden worden onderverdeeld in 3 onderdelen: activiteiten, interesses en werkomstandigheden. Het is nu aan jou om de kernwoorden te benadrukken die je het belangrijkst vindt.",
+      "extra_info_title": "Extra informatie",
+      "extra_info_description": "Aanvullende vragen over je achtergrond. Denk aan informatie zoals je opleiding en opleidingsniveau, maar ook of er een specifieke sector is waarin je wilt zoeken.",
+      "report_title": "Rapport",
+      "report_description": "Ontvang jouw persoonlijke loopbaanadviezen. Nadat we alle informatie van je hebben ontvangen, krijg je een compleet persoonlijk loopbaanrapport waarmee je verder kunt!",
+      "create_report_button": "Loopbaanrapport aanmaken",
+      "to_dashboard_button": "Naar dashboard",
+      "tip_text": "💡 Je kunt jouw loopbaanrapport altijd later aanmaken via het dashboard"
     }
   }
 }
