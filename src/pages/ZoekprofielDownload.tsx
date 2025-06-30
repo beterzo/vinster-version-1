@@ -11,15 +11,15 @@ import { useToast } from "@/hooks/use-toast";
 const ZoekprofielDownload = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { zoekprofiel, isLoading } = useZoekprofiel();
+  const { downloadUrl, isLoading } = useZoekprofiel();
   const [pdfUrl, setPdfUrl] = useState<string | null>(null);
   const [isDownloading, setIsDownloading] = useState(false);
 
   useEffect(() => {
-    if (zoekprofiel?.pdf_url) {
-      setPdfUrl(zoekprofiel.pdf_url);
+    if (downloadUrl) {
+      setPdfUrl(downloadUrl);
     }
-  }, [zoekprofiel]);
+  }, [downloadUrl]);
 
   const handleDownload = async () => {
     if (!pdfUrl) return;

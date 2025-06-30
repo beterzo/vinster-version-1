@@ -21,7 +21,7 @@ const WERKOMSTANDIGHEDEN_KEYWORDS = [
 
 const PrioriteitenWerkomstandigheden = () => {
   const navigate = useNavigate();
-  const { responses, saveResponse, isLoading } = usePrioriteitenResponses();
+  const { responses, saveResponses, loading } = usePrioriteitenResponses();
   
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
   const [extraText, setExtraText] = useState("");
@@ -32,12 +32,12 @@ const PrioriteitenWerkomstandigheden = () => {
 
   // Load saved data when responses change
   useEffect(() => {
-    if (!isLoading && responses) {
+    if (!loading && responses) {
       console.log("Loading saved responses into form:", responses);
       setSelectedKeywords(responses.selected_werkomstandigheden_keywords || []);
       setExtraText(responses.extra_werkomstandigheden_tekst || "");
     }
-  }, [isLoading, responses]);
+  }, [loading, responses]);
 
   const handleKeywordToggle = (keyword: string) => {
     const newSelection = selectedKeywords.includes(keyword)
@@ -45,7 +45,7 @@ const PrioriteitenWerkomstandigheden = () => {
       : [...selectedKeywords, keyword];
     
     setSelectedKeywords(newSelection);
-    saveResponse('selected_werkomstandigheden_keywords', newSelection);
+    saveResponses({ selected_werkomstandigheden_keywords: newSelection });
   };
 
   const handleExtraTextChange = (value: string) => {
@@ -54,7 +54,7 @@ const PrioriteitenWerkomstandigheden = () => {
 
   const handleExtraTextBlur = () => {
     console.log("Saving extra text:", extraText);
-    saveResponse('extra_werkomstandigheden_tekst', extraText);
+    saveResponses({ extra_werkomstandigheden_tekst: extraText });
   };
 
   const handlePrevious = () => {
@@ -67,7 +67,7 @@ const PrioriteitenWerkomstandigheden = () => {
     navigate('/profiel-voltooien-intro');
   };
 
-  if (isLoading) {
+  if (loading) {
     return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Laden...</div>;
   }
 

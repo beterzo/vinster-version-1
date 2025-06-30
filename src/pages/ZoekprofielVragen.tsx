@@ -12,8 +12,8 @@ import { useToast } from "@/hooks/use-toast";
 const ZoekprofielVragen = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { responses, saveResponse, isLoading } = useZoekprofielResponses();
-  const { generatePdf, isGenerating } = useZoekprofielPdf();
+  const { responses, saveResponse, loading } = useZoekprofielResponses();
+  const { initializePdfGeneration, isGenerating } = useZoekprofielPdf();
   
   const [answers, setAnswers] = useState({
     functie_als: "",
@@ -30,7 +30,7 @@ const ZoekprofielVragen = () => {
 
   // Load saved data when responses change
   useEffect(() => {
-    if (!isLoading && responses) {
+    if (!loading && responses) {
       console.log("Loading saved responses into form:", responses);
       setAnswers({
         functie_als: responses.functie_als || "",
@@ -41,7 +41,7 @@ const ZoekprofielVragen = () => {
         arbeidsvoorwaarden: responses.arbeidsvoorwaarden || ""
       });
     }
-  }, [isLoading, responses]);
+  }, [loading, responses]);
 
   const handleInputChange = (field: string, value: string) => {
     console.log(`Updating ${field}:`, value);
@@ -65,7 +65,7 @@ const ZoekprofielVragen = () => {
 
     try {
       console.log("Generating zoekprofiel PDF...");
-      await generatePdf();
+      await initializePdfGeneration();
       
       toast({
         title: "Zoekprofiel gegenereerd!",
@@ -117,7 +117,7 @@ const ZoekprofielVragen = () => {
     }
   ];
 
-  if (isLoading) {
+  if (loading) {
     return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Laden...</div>;
   }
 

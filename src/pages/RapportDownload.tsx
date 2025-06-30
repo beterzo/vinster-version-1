@@ -11,7 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 const RapportDownload = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { reportData, isLoading } = useRapportData();
+  const { data: reportData, loading } = useRapportData();
   const [pdfUrl, setPdfUrl] = useState<string | null>(null);
   const [isDownloading, setIsDownloading] = useState(false);
 
@@ -65,7 +65,7 @@ const RapportDownload = () => {
     }
   };
 
-  if (isLoading) {
+  if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">

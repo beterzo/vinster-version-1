@@ -9,8 +9,8 @@ import { useRapportData } from "@/hooks/useRapportData";
 
 const RapportReview = () => {
   const navigate = useNavigate();
-  const { generateReport, isGenerating } = useRapportGeneration();
-  const { reportData, isLoading: isLoadingData } = useRapportData();
+  const { generateReport, generating } = useRapportGeneration();
+  const { data: reportData, loading } = useRapportData();
   const [reportStatus, setReportStatus] = useState<'pending' | 'generating' | 'ready' | 'error'>('pending');
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const RapportReview = () => {
 
   const handleGenerateReport = async () => {
     try {
-      await generateReport();
+      await generateReport({ includeUserData: true });
       // After generation starts, poll for status
       setReportStatus('generating');
     } catch (error) {
@@ -72,11 +72,11 @@ const RapportReview = () => {
     }
   };
 
-  if (isLoadingData) {
+  if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 W-12 border-b-2 border-blue-900 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-900 mx-auto mb-4"></div>
           <p className="text-gray-700">Rapport status laden...</p>
         </div>
       </div>
@@ -133,11 +133,11 @@ const RapportReview = () => {
               {reportStatus === 'pending' && (
                 <Button
                   onClick={handleGenerateReport}
-                  disabled={isGenerating}
+                  disabled={generating}
                   size="lg"
                   className="bg-blue-900 hover:bg-blue-800 text-white font-semibold px-8 py-4 rounded-lg"
                 >
-                  {isGenerating ? "Genereren..." : "Genereer rapport"}
+                  {generating ? "Genereren..." : "Genereer rapport"}
                 </Button>
               )}
 
@@ -160,12 +160,12 @@ const RapportReview = () => {
               {reportStatus === 'error' && (
                 <Button
                   onClick={handleGenerateReport}
-                  disabled={isGenerating}
+                  disabled={generating}
                   variant="outline"
                   size="lg"
                   className="border-red-600 text-red-600 hover:bg-red-50 font-semibold px-8 py-4 rounded-lg"
                 >
-                  {isGenerating ? "Opnieuw genereren..." : "Probeer opnieuw"}
+                  {generating ? "Opnieuw genereren..." : "Probeer opnieuw"}
                 </Button>
               )}
             </div>
