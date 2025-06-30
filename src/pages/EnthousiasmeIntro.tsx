@@ -2,14 +2,22 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
+
 const EnthousiasmeIntro = () => {
   const navigate = useNavigate();
-  return <div className="min-h-screen bg-gray-50 font-sans">
+
+  return (
+    <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
           <div className="flex items-center">
-            <img alt="Vinster Logo" className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" onClick={() => navigate('/')} src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" />
+            <img 
+              alt="Vinster Logo" 
+              className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              onClick={() => navigate('/home')} 
+              src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
+            />
           </div>
         </div>
       </div>
@@ -20,41 +28,41 @@ const EnthousiasmeIntro = () => {
           <CardContent className="p-12">
             {/* Main Title */}
             <h1 className="text-4xl font-bold text-blue-900 mb-8 text-center">
-              We gaan van start!
+              Wat brengt je tot leven?
             </h1>
 
             {/* Instructions Section */}
             <div className="space-y-8">
               <div>
                 <h2 className="text-2xl font-semibold text-blue-900 mb-4">
-                  Instructie enthousiasmescan
+                  Instructie enthousiasme
                 </h2>
                 <p className="text-lg text-gray-700 leading-relaxed mb-4">
-                  We gaan ontdekken wanneer jij in je element bent en stellen je daarvoor vragen over drie verschillende periodes in je leven. Je kunt later terug als je nog iets bedenkt. Je krijgt drie vragen per periode.
+                  In dit deel willen we weten wat je tot leven brengt. Het gaat om enthousiasme, interesse en passie. We vragen je terug te kijken naar vroeger, naar je eerste baan en naar wat je nu aanspreekt.
                 </p>
-                <p className="text-lg text-gray-700 leading-relaxed">Beantwoord elke vraag met 10 tot 20 woorden, meer mag ook. Beantwoord de vragen zo precies mogelijk. Je mag in steekwoorden of in zinnen antwoorden. Wat jij prettig vindt.</p>
-              </div>
-
-              {/* Before You Start Section */}
-              <div className="bg-blue-50 rounded-2xl p-8">
-                <h3 className="text-xl font-semibold text-blue-900 mb-4">
-                  Voor je start
-                </h3>
-                <p className="text-gray-700 leading-relaxed">
-                  Denk terug aan vroeger en leef je even in in de periode die genoemd wordt. Wat deed jij toen graag? Waar was je veel mee bezig? Wat boeide jou? Waar heb je de beste herinneringen aan? Wat was belangrijk in die periode? Waar was je graag?
+                <p className="text-lg text-gray-700 leading-relaxed mb-4">
+                  Beantwoord elke vraag met 10-20 woorden, meer mag ook. Sommige vragen lijken op elkaar. Beantwoord ze toch allemaal zo precies mogelijk.
+                </p>
+                <p className="text-lg text-gray-700 leading-relaxed">
+                  Je krijgt in totaal acht vragen.
                 </p>
               </div>
 
               {/* Start Button */}
               <div className="text-center pt-8">
-                <Button onClick={() => navigate('/enthousiasme-step-1')} className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold text-lg px-12 py-4 rounded-lg">
-                  Start de scan
+                <Button 
+                  onClick={() => navigate('/enthousiasme-step-1')} 
+                  className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold text-lg px-12 py-4 rounded-lg"
+                >
+                  Start met enthousiasme
                 </Button>
               </div>
             </div>
           </CardContent>
         </Card>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default EnthousiasmeIntro;

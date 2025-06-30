@@ -1,198 +1,151 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
-import { ArrowRight, ArrowLeft, Star, Check } from "lucide-react";
 import { usePrioriteitenResponses } from "@/hooks/usePrioriteitenResponses";
+
+const ACTIVITEITEN_KEYWORDS = [
+  "Analyseren", "Begeleiden", "Beheren", "Bereiden", "Besturen", "Bouwen", "Communiceren",
+  "Controleren", "Creëren", "Demonstreren", "Designen", "Experimenteren", "Geven",
+  "Inspireren", "Instrueren", "Leiden", "Maken", "Motiveren", "Onderhandelen", "Onderzoeken",
+  "Ondersteunen", "Ontwikkelen", "Oplossen", "Optreden", "Organiseren", "Plannen",
+  "Presenteren", "Produceren", "Programmeren", "Repareren", "Spelen", "Stimuleren",
+  "Trainen", "Uitleggen", "Uitvoeren", "Verkopen", "Verzorgen", "Voorbereiden"
+];
 
 const PrioriteitenActiviteiten = () => {
   const navigate = useNavigate();
-  const { responses, aiKeywords, saveResponses, saveKeywordSelection, hasMinimumKeywords, loading } = usePrioriteitenResponses();
+  const { responses, saveResponse, isLoading } = usePrioriteitenResponses();
   
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
   const [extraText, setExtraText] = useState("");
 
-  // Sync local state with loaded responses
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Load saved data when responses change
   useEffect(() => {
-    if (responses) {
+    if (!isLoading && responses) {
+      console.log("Loading saved responses into form:", responses);
       setSelectedKeywords(responses.selected_activiteiten_keywords || []);
       setExtraText(responses.extra_activiteiten_tekst || "");
     }
-  }, [responses]);
+  }, [isLoading, responses]);
 
-  const toggleKeyword = async (keyword: string) => {
-    const newKeywords = selectedKeywords.includes(keyword)
+  const handleKeywordToggle = (keyword: string) => {
+    const newSelection = selectedKeywords.includes(keyword)
       ? selectedKeywords.filter(k => k !== keyword)
       : [...selectedKeywords, keyword];
     
-    setSelectedKeywords(newKeywords);
-    
-    // Save immediately to Supabase
-    await saveKeywordSelection('activiteiten', newKeywords);
+    setSelectedKeywords(newSelection);
+    saveResponse('selected_activiteiten_keywords', newSelection);
   };
 
-  const handleSave = async () => {
-    const success = await saveResponses({
-      extra_activiteiten_tekst: extraText
-    });
-    
-    if (success) {
-      navigate("/prioriteiten-werkomstandigheden");
-    }
+  const handleExtraTextChange = (value: string) => {
+    setExtraText(value);
   };
 
-  const keywords = aiKeywords?.activiteiten || [];
-  const canProceed = hasMinimumKeywords('activiteiten') || (extraText && extraText.trim() !== '');
-  const selectedCount = selectedKeywords.length;
+  const handleExtraTextBlur = () => {
+    console.log("Saving extra text:", extraText);
+    saveResponse('extra_activiteiten_tekst', extraText);
+  };
+
+  const handleNext = () => {
+    scrollToTop();
+    navigate('/prioriteiten-interesses');
+  };
+
+  if (isLoading) {
+    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Laden...</div>;
+  }
+
+  const canProceed = selectedKeywords.length >= 5;
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
-      <div className="max-w-4xl mx-auto px-6 py-8">
-        {/* Header */}
-        <div className="mb-8">
-          <div className="mb-6">
+      {/* Header */}
+      <div className="bg-white shadow-sm">
+        <div className="max-w-[1440px] mx-auto px-6 py-4">
+          <div className="flex items-center">
             <img 
               alt="Vinster Logo" 
               className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
-              onClick={() => navigate('/')} 
+              onClick={() => navigate('/home')} 
               src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
             />
           </div>
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">
-              <Star className="w-5 h-5 text-yellow-600" />
-            </div>
-            <h1 className="text-3xl font-bold text-vinster-blue">Wat je graag doet</h1>
-          </div>
-          <p className="text-lg text-gray-700">
-            Selecteer de activiteiten en taken die voor jou belangrijk zijn
-          </p>
         </div>
+      </div>
 
-        {/* Progress indicator */}
-        <div className="mb-8">
-          <div className="flex items-center gap-4 text-sm text-gray-500">
-            <span className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-              Extra informatie
-            </span>
-            <span className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-              Activiteiten
-            </span>
-            <span className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-gray-300 rounded-full"></div>
-              Werkomgeving
-            </span>
-            <span className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-gray-300 rounded-full"></div>
-              Interesses
-            </span>
-          </div>
-        </div>
-
-        {/* Keywords grid */}
-        <Card className="p-6 mb-6">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold">
-              Kernwoorden gebaseerd op jouw antwoorden
-            </h2>
-            <div className="text-sm text-gray-600">
-              <span className={`font-medium ${selectedCount >= 3 ? 'text-green-600' : 'text-orange-600'}`}>
-                {selectedCount}/3 kernwoorden geselecteerd
-              </span>
-            </div>
-          </div>
-          <p className="text-gray-600 mb-6">
-            Selecteer minimaal 3 kernwoorden die voor jou belangrijk zijn. Je selecties worden automatisch opgeslagen.
-          </p>
-          
-          {selectedCount < 3 && (
-            <div className="mb-4 p-3 bg-orange-50 border border-orange-200 rounded-lg">
-              <p className="text-orange-700 text-sm">
-                ⚠️ Selecteer nog {3 - selectedCount} kernwoord{3 - selectedCount !== 1 ? 'en' : ''} om door te kunnen gaan naar de volgende stap.
+      {/* Main Content */}
+      <div className="max-w-[1440px] mx-auto px-6 py-12">
+        <Card className="rounded-3xl shadow-xl">
+          <CardContent className="p-12">
+            {/* Title */}
+            <div className="text-center mb-12">
+              <h1 className="text-3xl font-bold text-blue-900 mb-2">
+                Prioriteiten - Activiteiten
+              </h1>
+              <p className="text-xl text-gray-600">
+                Selecteer minimaal 5 activiteiten die je leuk vindt om te doen
+              </p>
+              <p className="text-sm text-gray-500 mt-2">
+                Geselecteerd: {selectedKeywords.length} van minimaal 5
               </p>
             </div>
-          )}
-          
-          {keywords.length > 0 ? (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-              {keywords.map((keyword, index) => (
+
+            {/* Keywords Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mb-8">
+              {ACTIVITEITEN_KEYWORDS.map((keyword) => (
                 <button
-                  key={index}
-                  onClick={() => toggleKeyword(keyword)}
-                  className={`p-4 rounded-xl border-2 text-left transition-all duration-200 ${
+                  key={keyword}
+                  onClick={() => handleKeywordToggle(keyword)}
+                  className={`p-3 rounded-lg border-2 transition-all duration-200 text-sm font-medium ${
                     selectedKeywords.includes(keyword)
-                      ? 'border-yellow-500 bg-yellow-50 text-yellow-700 shadow-sm'
-                      : 'border-gray-200 bg-white hover:border-yellow-300 hover:bg-yellow-25 hover:shadow-sm'
+                      ? "bg-blue-900 text-white border-blue-900 shadow-md"
+                      : "bg-white text-blue-900 border-gray-300 hover:border-blue-900 hover:bg-blue-50"
                   }`}
                 >
-                  <div className="flex items-center justify-between">
-                    <span className="font-medium text-sm">{keyword}</span>
-                    {selectedKeywords.includes(keyword) && (
-                      <Check className="w-4 h-4 text-yellow-600" />
-                    )}
-                  </div>
+                  {keyword}
                 </button>
               ))}
             </div>
-          ) : (
-            <div className="text-center py-8 text-gray-500">
-              <Star className="w-12 h-12 mx-auto mb-4 text-gray-300" />
-              <p>Er zijn nog geen kernwoorden beschikbaar.</p>
-              <p className="text-sm">Zorg ervoor dat je eerst de enthousiasme-scan en wensberoepen hebt ingevuld.</p>
+
+            {/* Extra Text Field */}
+            <div className="mb-8">
+              <Label htmlFor="extraText" className="text-blue-900 font-medium text-lg mb-3 block text-left">
+                Mis je nog activiteiten? Voeg ze hier toe (optioneel)
+              </Label>
+              <Textarea
+                id="extraText"
+                placeholder="Bijvoorbeeld: Fotograferen, Programmeren, Tuinieren..."
+                value={extraText}
+                onChange={(e) => handleExtraTextChange(e.target.value)}
+                onBlur={handleExtraTextBlur}
+                className="min-h-[80px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
+              />
             </div>
-          )}
-        </Card>
 
-        {/* Additional text input */}
-        <Card className="p-6 mb-8">
-          <h3 className="text-lg font-bold mb-4">Aanvullende informatie</h3>
-          <p className="text-gray-600 mb-4">
-            Is er nog iets anders wat je graag doet of belangrijke activiteiten die hierboven niet staan? 
-            Voeg hier je eigen informatie toe. (Dit kan een alternatief zijn voor de 3 kernwoorden)
-          </p>
-          <Textarea
-            value={extraText}
-            onChange={(e) => setExtraText(e.target.value)}
-            placeholder="Beschrijf hier andere activiteiten, taken of werkzaamheden die je graag doet..."
-            className="min-h-24"
-          />
+            {/* Navigation */}
+            <div className="flex justify-end pt-8">
+              <Button 
+                onClick={handleNext}
+                className={`font-semibold px-8 ${
+                  canProceed
+                    ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 
+                    : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                }`}
+                disabled={!canProceed}
+              >
+                Volgende: Interesses
+              </Button>
+            </div>
+          </CardContent>
         </Card>
-
-        {/* Navigation */}
-        <div className="flex justify-between items-center">
-          <Button
-            onClick={() => navigate("/extra-informatie-vragen")}
-            className="bg-blue-900 hover:bg-blue-800 text-white rounded-xl"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Terug
-          </Button>
-          
-          <div className="flex flex-col items-end gap-2">
-            {!canProceed && (
-              <p className="text-sm text-red-600">
-                Selecteer minimaal 3 kernwoorden of voeg aanvullende informatie toe
-              </p>
-            )}
-            <Button
-              onClick={handleSave}
-              disabled={loading || !canProceed}
-              className={`rounded-xl ${
-                canProceed 
-                  ? 'bg-yellow-500 hover:bg-yellow-600 text-white' 
-                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              }`}
-              size="lg"
-            >
-              {loading ? "Opslaan..." : "Volgende: werkomgeving"}
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
-          </div>
-        </div>
       </div>
     </div>
   );

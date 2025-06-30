@@ -1,224 +1,169 @@
 
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-import { CheckCircle, AlertCircle, FileText, Download, ArrowLeft, Clock, AlertTriangle, Home, ArrowRight, Copy, Linkedin } from "lucide-react";
-import { useZoekprofielPdf } from "@/hooks/useZoekprofielPdf";
+import { FileText, Download, ExternalLink } from "lucide-react";
+import { useZoekprofiel } from "@/hooks/useZoekprofiel";
+import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+
 const ZoekprofielDownload = () => {
   const navigate = useNavigate();
-  const {
-    toast
-  } = useToast();
-  const {
-    pdfData,
-    loading,
-    downloading,
-    isPdfReady,
-    isGenerating,
-    downloadPdf,
-    initializePdfGeneration
-  } = useZoekprofielPdf();
+  const { toast } = useToast();
+  const { zoekprofiel, isLoading } = useZoekprofiel();
+  const [pdfUrl, setPdfUrl] = useState<string | null>(null);
+  const [isDownloading, setIsDownloading] = useState(false);
+
   useEffect(() => {
-    // Initialize PDF generation when component mounts if no data exists
-    if (!loading && !pdfData) {
-      console.log('No zoekprofiel data found, initializing PDF generation...');
-      initializePdfGeneration();
+    if (zoekprofiel?.pdf_url) {
+      setPdfUrl(zoekprofiel.pdf_url);
     }
-  }, [loading, pdfData, initializePdfGeneration]);
-  const handleCopyLink = async () => {
-    if (!pdfData?.pdf_url) {
-      toast({
-        title: "Geen PDF beschikbaar",
-        description: "Er is nog geen PDF link om te kopiëren.",
-        variant: "destructive"
-      });
-      return;
-    }
+  }, [zoekprofiel]);
+
+  const handleDownload = async () => {
+    if (!pdfUrl) return;
+    
+    setIsDownloading(true);
     try {
-      await navigator.clipboard.writeText(pdfData.pdf_url);
+      const response = await fetch(pdfUrl);
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = url;
+      a.download = 'vinster-zoekprofiel.pdf';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+      
       toast({
-        title: "Link gekopieerd!",
-        description: "De link naar je zoekprofiel is gekopieerd naar het klembord."
+        title: "Download gestart",
+        description: "Je zoekprofiel wordt gedownload.",
       });
     } catch (error) {
-      console.error('Failed to copy link:', error);
+      console.error('Download error:', error);
       toast({
-        title: "Kopiëren mislukt",
-        description: "Kon de link niet kopiëren naar het klembord.",
-        variant: "destructive"
+        title: "Download mislukt",
+        description: "Er ging iets mis bij het downloaden van je zoekprofiel.",
+        variant: "destructive",
       });
+    } finally {
+      setIsDownloading(false);
     }
   };
-  const handleLinkedInShare = () => {
-    if (!pdfData?.pdf_url) {
-      toast({
-        title: "Geen PDF beschikbaar",
-        description: "Er is nog geen PDF om te delen.",
-        variant: "destructive"
-      });
-      return;
+
+  const handleOpenInNewTab = () => {
+    if (pdfUrl) {
+      window.open(pdfUrl, '_blank');
     }
-    const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pdfData.pdf_url)}`;
-    window.open(linkedInUrl, '_blank', 'noopener,noreferrer');
   };
-  if (loading) {
-    return <div className="min-h-screen bg-gray-50 font-sans flex items-center justify-center">
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-900 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Zoekprofiel gegevens laden...</p>
-        </div>
-      </div>;
-  }
-  return <div className="min-h-screen bg-gray-50 font-sans">
-      <div className="max-w-4xl mx-auto px-6 py-16">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <img src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" alt="Vinster Logo" className="h-16 w-auto mx-auto mb-8 cursor-pointer hover:opacity-80 transition-opacity duration-200" onClick={() => navigate('/')} />
-          
-          {isPdfReady && <>
-              <h1 className="text-5xl font-bold text-gray-900 mb-6">Hoera!</h1>
-              <p className="text-2xl text-gray-700 mb-4">Je hebt je keuze gemaakt.</p>
-              
-            </>}
-
-          {isGenerating && <>
-              <h1 className="text-5xl font-bold text-gray-900 mb-6">Zoekprofiel wordt gemaakt!</h1>
-              <p className="text-2xl text-gray-700 mb-4">
-                Je zoekprofiel wordt momenteel gegenereerd
-              </p>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                We zijn bezig met het creëren van je persoonlijke zoekprofiel. 
-                Dit duurt enkele minuten.
-              </p>
-            </>}
-
-          {pdfData?.pdf_status === 'failed' && <>
-              <h1 className="text-5xl font-bold text-gray-900 mb-6">Er ging iets mis</h1>
-              <p className="text-2xl text-gray-700 mb-4">
-                Het genereren van je zoekprofiel is mislukt
-              </p>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Ga terug naar het dashboard en probeer het opnieuw.
-              </p>
-            </>}
-
-          {!pdfData && !loading && <>
-              <h1 className="text-xl font-semibold text-vinster-blue mb-2">
-                Zoekprofiel wordt geïnitialiseerd...
-              </h1>
-              <p className="text-gray-600">
-                We starten de generatie van je zoekprofiel PDF.
-              </p>
-            </>}
-        </div>
-
-        {/* Main Download Section */}
-        <Card className="mb-12 rounded-3xl shadow-xl border-0 overflow-hidden">
-          <div className="p-8 md:p-12" style={{
-          backgroundColor: '#A9C5E2'
-        }}>
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div className="text-white">
-                <h2 className="text-3xl font-bold mb-4">
-                  {isPdfReady && 'Je zoekprofiel is klaar!'}
-                  {isGenerating && 'Je zoekprofiel wordt gegenereerd!'}
-                  {pdfData?.pdf_status === 'failed' && 'Zoekprofiel generatie mislukt'}
-                  {!pdfData && 'Zoekprofiel wordt voorbereid'}
-                </h2>
-                <p className="text-lg mb-6 opacity-95">
-                  {isPdfReady && 'Gebruik de samenvatting van jouw zoekprofiel om aan iedereen te laten weten welke functie jij zoekt!'}
-                  {isGenerating && 'We zijn bezig met het genereren van je persoonlijke zoekprofiel PDF. Dit duurt even.'}
-                  {pdfData?.pdf_status === 'failed' && 'Er is een fout opgetreden bij het genereren. Probeer het opnieuw.'}
-                  {!pdfData && 'Je zoekprofiel wordt voorbereid voor download.'}
-                </p>
-                
-                {isPdfReady ? <Button onClick={downloadPdf} disabled={downloading} className="bg-white text-blue-900 hover:bg-gray-100 font-bold px-8 py-4 rounded-full text-lg shadow-lg hover:shadow-xl transition-all duration-200" size="lg">
-                    {downloading ? <>
-                        <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-900 mr-3"></div>
-                        Downloaden...
-                      </> : <>
-                        <Download className="w-6 h-6 mr-3" />
-                        Download je zoekprofiel
-                      </>}
-                  </Button> : isGenerating ? <div className="flex items-center space-x-3">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
-                    <span className="text-lg font-medium">Genereren...</span>
-                  </div> : null}
-              </div>
-              
-              <div className="flex justify-center">
-                <div className="w-40 h-56 bg-white rounded-xl shadow-2xl transform rotate-3 relative overflow-hidden">
-                  <div className="h-8 flex items-center px-4" style={{
-                  backgroundColor: '#78BFE3'
-                }}>
-                    <div className="flex gap-1">
-                      <div className="w-2 h-2 bg-white rounded-full opacity-80"></div>
-                      <div className="w-2 h-2 bg-white rounded-full opacity-80"></div>
-                      <div className="w-2 h-2 bg-white rounded-full opacity-80"></div>
-                    </div>
-                  </div>
-                  <div className="p-4 space-y-2">
-                    <div className="h-2 bg-gray-300 rounded w-full"></div>
-                    <div className="h-2 bg-gray-300 rounded w-4/5"></div>
-                    <div className="h-2 bg-gray-300 rounded w-full"></div>
-                    <div className="h-4 rounded w-full mt-4" style={{
-                    backgroundColor: '#78BFE3',
-                    opacity: 0.7
-                  }}></div>
-                    <div className="space-y-1.5">
-                      <div className="h-1.5 bg-gray-300 rounded w-full"></div>
-                      <div className="h-1.5 bg-gray-300 rounded w-5/6"></div>
-                      <div className="h-1.5 bg-gray-300 rounded w-full"></div>
-                      <div className="h-1.5 bg-gray-300 rounded w-3/4"></div>
-                      <div className="h-1.5 bg-gray-300 rounded w-full"></div>
-                    </div>
-                  </div>
-                  
-                  {!isPdfReady && <div className="absolute inset-0 bg-gray-200 bg-opacity-50 flex items-center justify-center">
-                      {isGenerating ? <Clock className="w-8 h-8 text-gray-500" /> : <AlertTriangle className="w-8 h-8 text-red-500" />}
-                    </div>}
-                </div>
-              </div>
-            </div>
-          </div>
-        </Card>
-
-        {/* Share Section */}
-        {isPdfReady && <Card className="mb-12 rounded-3xl shadow-lg border-0 overflow-hidden">
-            <div className="p-8 md:p-12 bg-white">
-              <div className="text-center">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Deel je zoekprofiel</h3>
-                <p className="text-gray-600 mb-8">Laat anderen weten waar je naar op zoek bent</p>
-                
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button onClick={handleCopyLink} variant="outline" className="rounded-xl px-6 py-3 font-medium border-2 hover:bg-gray-50" size="lg">
-                    <Copy className="w-5 h-5 mr-2" />
-                    Link kopiëren
-                  </Button>
-                  
-                  <Button onClick={handleLinkedInShare} className="rounded-xl px-6 py-3 font-medium text-white" style={{
-                backgroundColor: '#0077B5'
-              }} onMouseEnter={e => e.currentTarget.style.backgroundColor = '#005885'} onMouseLeave={e => e.currentTarget.style.backgroundColor = '#0077B5'} size="lg">
-                    <Linkedin className="w-5 h-5 mr-2" />
-                    Delen op LinkedIn
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </Card>}
-
-        {/* Navigation */}
-        <div className="flex justify-center">
-          <Button onClick={() => navigate("/home")} variant="outline" className="rounded-xl px-8 py-3">
-            <Home className="w-4 h-4 mr-2" />
-            Terug naar dashboard
-          </Button>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-900 mx-auto mb-4"></div>
+          <p className="text-gray-700">Zoekprofiel gegevens laden...</p>
         </div>
       </div>
-    </div>;
-};
-export default ZoekprofielDownload;
+    );
+  }
 
+  return (
+    <div className="min-h-screen bg-gray-50 font-sans">
+      {/* Header */}
+      <div className="bg-white shadow-sm">
+        <div className="max-w-[1440px] mx-auto px-6 py-4">
+          <div className="flex items-center">
+            <img 
+              alt="Vinster Logo" 
+              className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              onClick={() => navigate('/home')} 
+              src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="max-w-[1440px] mx-auto px-6 py-12">
+        <Card className="rounded-3xl shadow-xl">
+          <CardContent className="p-12 text-center">
+            <div className="mb-8">
+              <div className="mx-auto w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                <FileText className="w-10 h-10 text-green-600" />
+              </div>
+              
+              <h1 className="text-4xl font-bold text-blue-900 mb-4">
+                Je zoekprofiel is klaar!
+              </h1>
+              
+              <p className="text-xl text-gray-600 mb-8">
+                Je persoonlijke zoekprofiel is succesvol gegenereerd en klaar om te gebruiken bij sollicitaties.
+              </p>
+            </div>
+
+            {pdfUrl ? (
+              <div className="space-y-4">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button
+                    onClick={handleDownload}
+                    disabled={isDownloading}
+                    size="lg"
+                    className="bg-blue-900 hover:bg-blue-800 text-white font-semibold px-8 py-4 rounded-lg flex items-center gap-2"
+                  >
+                    <Download className="w-5 h-5" />
+                    {isDownloading ? "Downloaden..." : "Download zoekprofiel"}
+                  </Button>
+                  
+                  <Button
+                    onClick={handleOpenInNewTab}
+                    variant="outline"
+                    size="lg"
+                    className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold px-8 py-4 rounded-lg flex items-center gap-2"
+                  >
+                    <ExternalLink className="w-5 h-5" />
+                    Bekijk in browser
+                  </Button>
+                </div>
+                
+                <div className="mt-8 p-4 bg-blue-50 rounded-lg">
+                  <p className="text-sm text-blue-700">
+                    💡 <strong>Tip:</strong> Gebruik je zoekprofiel bij sollicitaties en deel het met recruiters!
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <div className="text-center">
+                <p className="text-gray-600 mb-4">
+                  Je zoekprofiel wordt nog gegenereerd. Dit kan enkele minuten duren.
+                </p>
+                <Button
+                  onClick={() => window.location.reload()}
+                  variant="outline"
+                  className="border-blue-900 text-blue-900 hover:bg-blue-50"
+                >
+                  Pagina verversen
+                </Button>
+              </div>
+            )}
+
+            <div className="mt-12 pt-8 border-t border-gray-200">
+              <Button
+                onClick={() => navigate('/home')}
+                variant="outline"
+                className="border-blue-900 text-blue-900 hover:bg-blue-50"
+              >
+                Terug naar dashboard
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+};
+
+export default ZoekprofielDownload;

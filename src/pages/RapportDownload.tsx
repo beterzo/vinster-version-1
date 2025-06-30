@@ -1,72 +1,76 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-import { Download, CheckCircle, Home, Clock, AlertTriangle, ArrowRight, FileText, AlertCircle } from "lucide-react";
-import { useRapportGeneration } from "@/hooks/useRapportGeneration";
+import { FileText, Download, ExternalLink } from "lucide-react";
+import { useRapportData } from "@/hooks/useRapportData";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const RapportDownload = () => {
   const navigate = useNavigate();
-  const {
-    userReport,
-    loadUserReport,
-    loading,
-    downloadPdf
-  } = useRapportGeneration();
-
-  const [pollingInterval, setPollingInterval] = useState<NodeJS.Timeout | null>(null);
+  const { toast } = useToast();
+  const { reportData, isLoading } = useRapportData();
+  const [pdfUrl, setPdfUrl] = useState<string | null>(null);
+  const [isDownloading, setIsDownloading] = useState(false);
 
   useEffect(() => {
-    loadUserReport();
-  }, []);
-
-  // Set up polling for generating status
-  useEffect(() => {
-    if (userReport?.report_status === 'generating') {
-      const interval = setInterval(() => {
-        console.log('Polling for PDF status...');
-        loadUserReport();
-      }, 5000);
-      setPollingInterval(interval);
-      return () => {
-        clearInterval(interval);
-        setPollingInterval(null);
-      };
-    } else if (pollingInterval) {
-      clearInterval(pollingInterval);
-      setPollingInterval(null);
+    if (reportData?.pdf_file_path) {
+      // Get the public URL for the PDF
+      const { data } = supabase.storage
+        .from('user-pdfs')
+        .getPublicUrl(reportData.pdf_file_path);
+      
+      setPdfUrl(data.publicUrl);
     }
-  }, [userReport?.report_status]);
+  }, [reportData]);
 
-  const handleDownload = () => {
-    if (userReport?.pdf_file_path) {
-      downloadPdf();
-    } else {
-      // Fallback to JSON download if PDF not available
-      if (userReport?.report_data) {
-        const dataStr = JSON.stringify(userReport.report_data, null, 2);
-        const dataBlob = new Blob([dataStr], {
-          type: 'application/json'
-        });
-        const url = URL.createObjectURL(dataBlob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'mijn-loopbaanrapport.json';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-      }
+  const handleDownload = async () => {
+    if (!pdfUrl) return;
+    
+    setIsDownloading(true);
+    try {
+      const response = await fetch(pdfUrl);
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = url;
+      a.download = 'vinster-rapport.pdf';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+      
+      toast({
+        title: "Download gestart",
+        description: "Je rapport wordt gedownload.",
+      });
+    } catch (error) {
+      console.error('Download error:', error);
+      toast({
+        title: "Download mislukt",
+        description: "Er ging iets mis bij het downloaden van je rapport.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsDownloading(false);
     }
   };
 
-  if (loading) {
+  const handleOpenInNewTab = () => {
+    if (pdfUrl) {
+      window.open(pdfUrl, '_blank');
+    }
+  };
+
+  if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 font-sans flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-900 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loopbaanrapport laden...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-900 mx-auto mb-4"></div>
+          <p className="text-gray-700">Rapport gegevens laden...</p>
         </div>
       </div>
     );
@@ -74,190 +78,94 @@ const RapportDownload = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
-      <div className="max-w-4xl mx-auto px-6 py-16">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <img 
-            src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
-            alt="Vinster Logo" 
-            className="h-16 w-auto mx-auto mb-8 cursor-pointer hover:opacity-80 transition-opacity duration-200" 
-            onClick={() => navigate('/')}
-          />
-          
-          {userReport?.report_status === 'completed' && (
-            <>
-              <h1 className="text-5xl font-bold text-gray-900 mb-6">Gefeliciteerd!</h1>
-              <p className="text-2xl text-gray-700 mb-4">Je hebt een belangrijke stap gezet in je loopbaan</p>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">Je krijgt nu zicht op de functies die bij jou passen!</p>
-            </>
-          )}
-
-          {userReport?.report_status === 'generating' && (
-            <>
-              <h1 className="text-5xl font-bold text-gray-900 mb-6">Loopbaanrapport wordt gemaakt!</h1>
-              <p className="text-2xl text-gray-700 mb-4">
-                Je loopbaanrapport wordt momenteel gegenereerd
-              </p>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                We zijn bezig met het creëren van je persoonlijke loopbaanrapport. 
-                Dit duurt enkele minuten.
-              </p>
-            </>
-          )}
-
-          {userReport?.report_status === 'failed' && (
-            <>
-              <h1 className="text-5xl font-bold text-gray-900 mb-6">Er ging iets mis</h1>
-              <p className="text-2xl text-gray-700 mb-4">
-                Het genereren van je loopbaanrapport is mislukt
-              </p>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Ga terug naar het dashboard en probeer het opnieuw.
-              </p>
-            </>
-          )}
-
-          {!userReport && (
-            <>
-              <h1 className="text-xl font-semibold text-vinster-blue mb-2">
-                Geen rapport gevonden
-              </h1>
-              <p className="text-gray-600">
-                Er is nog geen loopbaanrapport beschikbaar voor je account.
-              </p>
-            </>
-          )}
+      {/* Header */}
+      <div className="bg-white shadow-sm">
+        <div className="max-w-[1440px] mx-auto px-6 py-4">
+          <div className="flex items-center">
+            <img 
+              alt="Vinster Logo" 
+              className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              onClick={() => navigate('/home')} 
+              src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
+            />
+          </div>
         </div>
+      </div>
 
-        {/* Main Download Section */}
-        <Card className="mb-12 rounded-3xl shadow-xl border-0 overflow-hidden">
-          <div className="p-8 md:p-12" style={{ backgroundColor: '#A9C5E2' }}>
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div className="text-white">
-                <h2 className="text-3xl font-bold mb-4">
-                  {userReport?.report_status === 'completed' && 'Je loopbaanrapport is klaar!'}
-                  {userReport?.report_status === 'generating' && 'Je loopbaanrapport wordt gegenereerd!'}
-                  {userReport?.report_status === 'failed' && 'Loopbaanrapport generatie mislukt'}
-                  {!userReport && 'Nog geen rapport beschikbaar'}
-                </h2>
-                <p className="text-lg mb-6 opacity-95">
-                  {userReport?.report_status === 'completed' && 'Download je persoonlijke loopbaanrapport en ontdek de volgende stappen in je carrière.'}
-                  {userReport?.report_status === 'generating' && 'We zijn bezig met het genereren van je persoonlijke loopbaanrapport PDF. Dit duurt even.'}
-                  {userReport?.report_status === 'failed' && 'Er is een fout opgetreden bij het genereren. Probeer het opnieuw.'}
-                  {!userReport && 'Voltooi eerst je loopbaanrapport op het dashboard.'}
-                </p>
-                
-                {userReport?.report_status === 'completed' ? (
-                  <Button 
-                    onClick={handleDownload} 
-                    className="bg-white text-blue-900 hover:bg-gray-100 font-bold px-8 py-4 rounded-full text-lg shadow-lg hover:shadow-xl transition-all duration-200" 
-                    size="lg"
-                  >
-                    <Download className="w-6 h-6 mr-3" />
-                    Download je loopbaanrapport
-                  </Button>
-                ) : userReport?.report_status === 'generating' ? (
-                  <div className="flex items-center space-x-3">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
-                    <span className="text-lg font-medium">Genereren...</span>
-                  </div>
-                ) : null}
+      {/* Main Content */}
+      <div className="max-w-[1440px] mx-auto px-6 py-12">
+        <Card className="rounded-3xl shadow-xl">
+          <CardContent className="p-12 text-center">
+            <div className="mb-8">
+              <div className="mx-auto w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                <FileText className="w-10 h-10 text-green-600" />
               </div>
               
-              <div className="flex justify-center">
-                <div className="w-40 h-56 bg-white rounded-xl shadow-2xl transform rotate-3 relative overflow-hidden">
-                  <div className="h-8 flex items-center px-4" style={{ backgroundColor: '#78BFE3' }}>
-                    <div className="flex gap-1">
-                      <div className="w-2 h-2 bg-white rounded-full opacity-80"></div>
-                      <div className="w-2 h-2 bg-white rounded-full opacity-80"></div>
-                      <div className="w-2 h-2 bg-white rounded-full opacity-80"></div>
-                    </div>
-                  </div>
-                  <div className="p-4 space-y-2">
-                    <div className="h-2 bg-gray-300 rounded w-full"></div>
-                    <div className="h-2 bg-gray-300 rounded w-4/5"></div>
-                    <div className="h-2 bg-gray-300 rounded w-full"></div>
-                    <div className="h-4 rounded w-full mt-4" style={{ backgroundColor: '#78BFE3', opacity: 0.7 }}></div>
-                    <div className="space-y-1.5">
-                      <div className="h-1.5 bg-gray-300 rounded w-full"></div>
-                      <div className="h-1.5 bg-gray-300 rounded w-5/6"></div>
-                      <div className="h-1.5 bg-gray-300 rounded w-full"></div>
-                      <div className="h-1.5 bg-gray-300 rounded w-3/4"></div>
-                      <div className="h-1.5 bg-gray-300 rounded w-full"></div>
-                    </div>
-                  </div>
+              <h1 className="text-4xl font-bold text-blue-900 mb-4">
+                Je rapport is klaar!
+              </h1>
+              
+              <p className="text-xl text-gray-600 mb-8">
+                Je persoonlijke carrièrerapport is succesvol gegenereerd en klaar om te bekijken.
+              </p>
+            </div>
+
+            {pdfUrl ? (
+              <div className="space-y-4">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button
+                    onClick={handleDownload}
+                    disabled={isDownloading}
+                    size="lg"
+                    className="bg-blue-900 hover:bg-blue-800 text-white font-semibold px-8 py-4 rounded-lg flex items-center gap-2"
+                  >
+                    <Download className="w-5 h-5" />
+                    {isDownloading ? "Downloaden..." : "Download rapport"}
+                  </Button>
                   
-                  {userReport?.report_status !== 'completed' && (
-                    <div className="absolute inset-0 bg-gray-200 bg-opacity-50 flex items-center justify-center">
-                      {userReport?.report_status === 'generating' ? (
-                        <Clock className="w-8 h-8 text-gray-500" />
-                      ) : (
-                        <AlertTriangle className="w-8 h-8 text-red-500" />
-                      )}
-                    </div>
-                  )}
+                  <Button
+                    onClick={handleOpenInNewTab}
+                    variant="outline"
+                    size="lg"
+                    className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold px-8 py-4 rounded-lg flex items-center gap-2"
+                  >
+                    <ExternalLink className="w-5 h-5" />
+                    Bekijk in browser
+                  </Button>
+                </div>
+                
+                <div className="mt-8 p-4 bg-blue-50 rounded-lg">
+                  <p className="text-sm text-blue-700">
+                    💡 <strong>Tip:</strong> Bewaar je rapport goed. Het bevat waardevolle inzichten voor je carrière!
+                  </p>
                 </div>
               </div>
-            </div>
-          </div>
-        </Card>
-
-        {/* Action Button - Only show when completed */}
-        {userReport?.report_status === 'completed' && (
-          <div className="flex justify-center mb-12">
-            <Button 
-              onClick={() => navigate("/onderzoeksplan")} 
-              className="text-white rounded-xl text-xl py-6 h-auto px-8" 
-              style={{ backgroundColor: '#21324E' }}
-              onMouseEnter={e => e.currentTarget.style.backgroundColor = '#2a3b5c'}
-              onMouseLeave={e => e.currentTarget.style.backgroundColor = '#21324E'}
-              size="lg"
-            >
-              <ArrowRight className="w-6 h-6 mr-3" />
-              Ga verder met je onderzoeksplan
-            </Button>
-          </div>
-        )}
-
-        {/* Simple Status Info */}
-        {userReport && (
-          <Card className="p-6 bg-white rounded-3xl shadow-sm border border-gray-100 mb-12">
-            <div className="text-center text-sm text-gray-500 space-y-2">
-              <p>
-                Loopbaanrapport aangemaakt: {new Date(userReport.generated_at).toLocaleDateString('nl-NL', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                  hour: '2-digit',
-                  minute: '2-digit'
-                })}
-              </p>
-              {userReport.pdf_generated_at && (
-                <p>
-                  PDF beschikbaar sinds: {new Date(userReport.pdf_generated_at).toLocaleDateString('nl-NL', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                  })}
+            ) : (
+              <div className="text-center">
+                <p className="text-gray-600 mb-4">
+                  Je rapport wordt nog gegenereerd. Dit kan enkele minuten duren.
                 </p>
-              )}
-            </div>
-          </Card>
-        )}
+                <Button
+                  onClick={() => window.location.reload()}
+                  variant="outline"
+                  className="border-blue-900 text-blue-900 hover:bg-blue-50"
+                >
+                  Pagina verversen
+                </Button>
+              </div>
+            )}
 
-        {/* Navigation */}
-        <div className="flex justify-center">
-          <Button 
-            onClick={() => navigate("/home")} 
-            variant="outline" 
-            className="rounded-xl px-8 py-3"
-          >
-            <Home className="w-4 h-4 mr-2" />
-            Terug naar dashboard
-          </Button>
-        </div>
+            <div className="mt-12 pt-8 border-t border-gray-200">
+              <Button
+                onClick={() => navigate('/home')}
+                variant="outline"
+                className="border-blue-900 text-blue-900 hover:bg-blue-50"
+              >
+                Terug naar dashboard
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

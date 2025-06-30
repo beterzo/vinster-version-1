@@ -1,109 +1,65 @@
+
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-import { Search, ArrowRight, Target, Users, MapPin } from "lucide-react";
-import { useTranslation } from "@/hooks/useTranslation";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const ZoekprofielIntro = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
-
-  const benefits = [
-    {
-      icon: <Target className="w-6 h-6 text-blue-500" />,
-      title: t('zoekprofiel.intro.benefits.targeted_search'),
-      description: t('zoekprofiel.intro.benefits.targeted_search_desc')
-    },
-    {
-      icon: <Users className="w-6 h-6 text-yellow-500" />,
-      title: t('zoekprofiel.intro.benefits.better_conversations'),
-      description: t('zoekprofiel.intro.benefits.better_conversations_desc')
-    },
-    {
-      icon: <MapPin className="w-6 h-6 text-blue-500" />,
-      title: t('zoekprofiel.intro.benefits.visibility'),
-      description: t('zoekprofiel.intro.benefits.visibility_desc')
-    }
-  ];
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
-      <div className="max-w-4xl mx-auto px-6 py-16">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <div className="flex items-center cursor-pointer justify-center mb-8 relative">
+      {/* Header */}
+      <div className="bg-white shadow-sm">
+        <div className="max-w-[1440px] mx-auto px-6 py-4">
+          <div className="flex items-center">
             <img 
               alt="Vinster Logo" 
               className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
               onClick={() => navigate('/home')} 
               src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
             />
-            <div className="absolute right-0">
-              <LanguageSwitcher />
-            </div>
           </div>
-          
-          <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <Search className="w-8 h-8 text-blue-600" />
-          </div>
-          
-          <h1 className="text-4xl font-bold text-vinster-blue mb-4">{t('zoekprofiel.intro.title')}</h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            {t('zoekprofiel.intro.description')}
-          </p>
         </div>
+      </div>
 
-        {/* Main Content - New Layout */}
-        <div className="grid md:grid-cols-2 gap-12 items-stretch mb-12">
-          {/* Left side - Large text block */}
-          <div className="flex">
-            <Card className="p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow h-full flex items-center">
-              <div className="text-left">
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  Je geeft aan welk werk je graag wilt doen, in welke branche of richting je dat zoekt, en waar jij energie van krijgt in je werk. Ook vul je in bij wat voor type organisatie je het liefst werkt, in welke regio, en welke voorwaarden jij belangrijk vindt. Dit profiel kun je gebruiken bij het zoeken van vacatures, in gesprekken met mensen uit je netwerk, of als je een open sollicitatie stuurt. Het maakt jouw loopbaankeuze concreet en zichtbaar.
+      {/* Main Content */}
+      <div className="max-w-[1440px] mx-auto px-6 py-12">
+        <Card className="rounded-3xl shadow-xl">
+          <CardContent className="p-12">
+            {/* Main Title */}
+            <h1 className="text-4xl font-bold text-blue-900 mb-8 text-center">
+              Zoekprofiel opstellen
+            </h1>
+
+            {/* Instructions Section */}
+            <div className="space-y-8">
+              <div>
+                <h2 className="text-2xl font-semibold text-blue-900 mb-4">
+                  Wat is een zoekprofiel?
+                </h2>
+                <p className="text-lg text-gray-700 leading-relaxed mb-4">
+                  Een zoekprofiel is jouw persoonlijke document waarin staat wat voor soort werk je zoekt. Het helpt je om gericht te solliciteren en laat werkgevers zien wat jij te bieden hebt.
+                </p>
+                <p className="text-lg text-gray-700 leading-relaxed mb-4">
+                  Op basis van je antwoorden maken we een professioneel zoekprofiel dat je kunt gebruiken bij je sollicitaties of delen met recruiters.
+                </p>
+                <p className="text-lg text-gray-700 leading-relaxed">
+                  Het invullen duurt ongeveer 10 minuten.
                 </p>
               </div>
-            </Card>
-          </div>
 
-          {/* Right side - Benefit cards */}
-          <div className="space-y-4 flex flex-col">
-            {benefits.map((benefit, index) => (
-              <Card key={index} className="p-6 bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow flex-1">
-                <div className="flex items-start gap-4 h-full">
-                  <div className="flex-shrink-0 w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center">
-                    {benefit.icon}
-                  </div>
-                  <div className="text-left flex-1">
-                    <h3 className="font-semibold text-vinster-blue mb-2">{benefit.title}</h3>
-                    <p className="text-gray-600 text-sm">{benefit.description}</p>
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-
-        {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button
-            onClick={() => navigate("/zoekprofiel-vragen")}
-            className="bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl text-xl py-6 px-8 h-auto"
-            size="lg"
-          >
-            <ArrowRight className="w-6 h-6 mr-3" />
-            {t('zoekprofiel.intro.start_button')}
-          </Button>
-          
-          <Button
-            onClick={() => navigate("/home")}
-            variant="outline"
-            className="rounded-xl py-6 px-8 h-auto"
-          >
-            {t('zoekprofiel.intro.back_button')}
-          </Button>
-        </div>
+              {/* Start Button */}
+              <div className="text-center pt-8">
+                <Button 
+                  onClick={() => navigate('/zoekprofiel-vragen')} 
+                  className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold text-lg px-12 py-4 rounded-lg"
+                >
+                  Start zoekprofiel
+                </Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

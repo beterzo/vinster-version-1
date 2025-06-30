@@ -1,4 +1,5 @@
 
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -6,55 +7,86 @@ import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 import EnthousiasmeProgress from "@/components/EnthousiasmeProgress";
 import { useEnthousiasmeResponses } from "@/hooks/useEnthousiasmeResponses";
-import { Loader2 } from "lucide-react";
-import { useTranslation } from "@/hooks/useTranslation";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const EnthousiasmeStep3 = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
-  const { responses, loading, saving, saveResponse, updateLocalResponse } = useEnthousiasmeResponses();
+  const { responses, saveResponse, isLoading } = useEnthousiasmeResponses();
+  
+  const [answers, setAnswers] = useState({
+    plezierige_werkperiode_beschrijving: "",
+    leuk_project_en_rol: "",
+    fluitend_thuiskomen_dag: ""
+  });
 
-  // Local validation for step 3 only
-  const isStep3Complete = () => {
-    const question1 = responses.plezierige_werkperiode_beschrijving?.trim() || '';
-    const question2 = responses.leuk_project_en_rol?.trim() || '';
-    const question3 = responses.fluitend_thuiskomen_dag?.trim() || '';
-    
-    return question1 !== '' && question2 !== '' && question3 !== '';
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleInputChange = (field: 'plezierige_werkperiode_beschrijving' | 'leuk_project_en_rol' | 'fluitend_thuiskomen_dag', value: string) => {
-    updateLocalResponse(field, value);
+  // Load saved data when responses change
+  useEffect(() => {
+    if (!isLoading && responses) {
+      console.log("Loading saved responses into form:", responses);
+      setAnswers({
+        plezierige_werkperiode_beschrijving: responses.plezierige_werkperiode_beschrijving || "",
+        leuk_project_en_rol: responses.leuk_project_en_rol || "",
+        fluitend_thuiskomen_dag: responses.fluitend_thuiskomen_dag || ""
+      });
+    }
+  }, [isLoading, responses]);
+
+  const handleInputChange = (field: string, value: string) => {
+    console.log(`Updating ${field}:`, value);
+    setAnswers(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleInputBlur = (field: 'plezierige_werkperiode_beschrijving' | 'leuk_project_en_rol' | 'fluitend_thuiskomen_dag', value: string) => {
-    saveResponse(field, value);
+  const handleInputBlur = (field: string, value: string) => {
+    console.log(`Saving ${field}:`, value);
+    saveResponse(field as keyof typeof responses, value);
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50 font-sans flex items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin" />
-      </div>
-    );
+  const handlePrevious = () => {
+    scrollToTop();
+    navigate('/enthousiasme-step-2');
+  };
+
+  const handleComplete = () => {
+    scrollToTop();
+    navigate('/prioriteiten-activiteiten');
+  };
+
+  const questions = [
+    {
+      field: "plezierige_werkperiode_beschrijving",
+      question: "Beschrijf de meest plezierige werkperiode in je loopbaan. Wat maakte het zo leuk?"
+    },
+    {
+      field: "leuk_project_en_rol", 
+      question: "Denk aan het leukste project waar je aan hebt gewerkt. Wat was je rol daarin?"
+    },
+    {
+      field: "fluitend_thuiskomen_dag",
+      question: "Beschrijf een dag waarop je fluitend thuiskwam van je werk. Wat was er die dag zo bijzonder?"
+    }
+  ];
+
+  if (isLoading) {
+    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Laden...</div>;
   }
 
-  const step3Complete = isStep3Complete();
+  const allFieldsFilled = Object.values(answers).every(answer => answer.trim() !== "");
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center">
             <img 
               alt="Vinster Logo" 
               className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
-              onClick={() => navigate('/')} 
-              src="/lovable-uploads/846d1ec8-bb91-46f6-a16d-1b1c39ebe829.png" 
+              onClick={() => navigate('/home')} 
+              src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
             />
-            <LanguageSwitcher />
           </div>
         </div>
       </div>
@@ -68,80 +100,51 @@ const EnthousiasmeStep3 = () => {
             {/* Title */}
             <div className="text-center mb-12">
               <h1 className="text-3xl font-bold text-blue-900 mb-2">
-                {t('enthousiasme.step3.title')}
+                Enthousiasme - Stap 3
               </h1>
-              {saving && (
-                <p className="text-sm text-gray-500 flex items-center justify-center gap-2">
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  {t('enthousiasme.step3.saving')}
-                </p>
-              )}
+              <p className="text-xl text-gray-600">
+                Vragen over plezierige werkervaringen
+              </p>
             </div>
 
             {/* Questions */}
             <div className="space-y-8">
-              <div>
-                <Label htmlFor="question1" className="text-blue-900 font-medium text-lg mb-3 block text-left">
-                  {t('enthousiasme.step3.question1')}
-                </Label>
-                <Textarea
-                  id="question1"
-                  placeholder={t('enthousiasme.step3.placeholder1')}
-                  value={responses.plezierige_werkperiode_beschrijving || ''}
-                  onChange={(e) => handleInputChange('plezierige_werkperiode_beschrijving', e.target.value)}
-                  onBlur={(e) => handleInputBlur('plezierige_werkperiode_beschrijving', e.target.value)}
-                  className="min-h-[120px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="question2" className="text-blue-900 font-medium text-lg mb-3 block text-left">
-                  {t('enthousiasme.step3.question2')}
-                </Label>
-                <Textarea
-                  id="question2"
-                  placeholder={t('enthousiasme.step3.placeholder2')}
-                  value={responses.leuk_project_en_rol || ''}
-                  onChange={(e) => handleInputChange('leuk_project_en_rol', e.target.value)}
-                  onBlur={(e) => handleInputBlur('leuk_project_en_rol', e.target.value)}
-                  className="min-h-[120px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="question3" className="text-blue-900 font-medium text-lg mb-3 block text-left">
-                  {t('enthousiasme.step3.question3')}
-                </Label>
-                <Textarea
-                  id="question3"
-                  placeholder={t('enthousiasme.step3.placeholder3')}
-                  value={responses.fluitend_thuiskomen_dag || ''}
-                  onChange={(e) => handleInputChange('fluitend_thuiskomen_dag', e.target.value)}
-                  onBlur={(e) => handleInputBlur('fluitend_thuiskomen_dag', e.target.value)}
-                  className="min-h-[120px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
-                />
-              </div>
+              {questions.map((item, index) => (
+                <div key={index}>
+                  <Label htmlFor={item.field} className="text-blue-900 font-medium text-lg mb-3 block text-left">
+                    {index + 1}. {item.question}
+                  </Label>
+                  <Textarea
+                    id={item.field}
+                    placeholder="Beschrijf hier je antwoord..."
+                    value={answers[item.field as keyof typeof answers]}
+                    onChange={(e) => handleInputChange(item.field, e.target.value)}
+                    onBlur={(e) => handleInputBlur(item.field, e.target.value)}
+                    className="min-h-[100px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
+                  />
+                </div>
+              ))}
             </div>
 
             {/* Navigation */}
             <div className="flex justify-between pt-12">
               <Button 
-                onClick={() => navigate('/enthousiasme-step-2')}
+                onClick={handlePrevious}
                 variant="outline"
                 className="border-blue-900 text-blue-900 hover:bg-blue-50"
               >
-                {t('enthousiasme.step3.previous')}
+                Vorige stap
               </Button>
               <Button 
-                onClick={() => navigate('/wensberoepen-intro')}
+                onClick={handleComplete}
                 className={`font-semibold px-8 ${
-                  step3Complete
+                  allFieldsFilled
                     ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 
                     : "bg-gray-300 text-gray-500 cursor-not-allowed"
                 }`}
-                disabled={!step3Complete}
+                disabled={!allFieldsFilled}
               >
-                {t('enthousiasme.step3.finish')}
+                Enthousiasme voltooien
               </Button>
             </div>
           </CardContent>

@@ -1,165 +1,226 @@
-import { useState, useEffect } from 'react';
+
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
-import { ArrowRight, ArrowLeft, Save } from "lucide-react";
 import { useExtraInformatieResponses } from "@/hooks/useExtraInformatieResponses";
+import { useWebhookData } from "@/hooks/useWebhookData";
+import { sendWebhookData } from "@/services/webhookService";
+import { useToast } from "@/hooks/use-toast";
+
 const ExtraInformatieVragen = () => {
   const navigate = useNavigate();
-  const {
-    responses,
-    saving,
-    saveResponses
-  } = useExtraInformatieResponses();
-  const [formData, setFormData] = useState({
-    opleidingsniveau: '',
-    beroepsopleiding: '',
-    fysieke_beperkingen: '',
-    sector_voorkeur: ''
+  const { toast } = useToast();
+  const { responses, saveResponse, isLoading } = useExtraInformatieResponses();
+  const { collectWebhookData } = useWebhookData();
+  
+  const [answers, setAnswers] = useState({
+    opleidingsniveau: "",
+    beroepsopleiding: "",
+    sector_voorkeur: "",
+    fysieke_beperkingen: ""
   });
+  
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Sync local state with loaded responses
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Load saved data when responses change
   useEffect(() => {
-    if (responses) {
-      setFormData({
-        opleidingsniveau: responses.opleidingsniveau || '',
-        beroepsopleiding: responses.beroepsopleiding || '',
-        fysieke_beperkingen: responses.fysieke_beperkingen || '',
-        sector_voorkeur: responses.sector_voorkeur || ''
+    if (!isLoading && responses) {
+      console.log("Loading saved responses into form:", responses);
+      setAnswers({
+        opleidingsniveau: responses.opleidingsniveau || "",
+        beroepsopleiding: responses.beroepsopleiding || "",
+        sector_voorkeur: responses.sector_voorkeur || "",
+        fysieke_beperkingen: responses.fysieke_beperkingen || ""
       });
     }
-  }, [responses]);
-  const handleSave = async () => {
-    const success = await saveResponses(formData);
-    if (success) {
-      navigate("/prioriteiten-activiteiten");
+  }, [isLoading, responses]);
+
+  const handleInputChange = (field: string, value: string) => {
+    console.log(`Updating ${field}:`, value);
+    setAnswers(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleInputBlur = (field: string, value: string) => {
+    console.log(`Saving ${field}:`, value);
+    saveResponse(field as keyof typeof responses, value);
+  };
+
+  const handleBackToPriorities = () => {
+    scrollToTop();
+    navigate('/prioriteiten-werkomstandigheden');
+  };
+
+  const handleComplete = async () => {
+    if (!allFieldsFilled) {
+      toast({
+        title: "Vul alle velden in",
+        description: "Vul alle vragen in voordat je verder gaat.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    try {
+      setIsSubmitting(true);
+      
+      // Collect all data for webhook
+      const webhookData = collectWebhookData();
+      
+      if (!webhookData) {
+        toast({
+          title: "Fout",
+          description: "Kan geen gebruikersgegevens vinden voor het verzenden van data.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      // Send data to webhook
+      await sendWebhookData(webhookData);
+      
+      console.log("Extra informatie completed and data sent to webhook!");
+      
+      toast({
+        title: "Gelukt!",
+        description: "Je gegevens zijn succesvol opgeslagen en verzonden.",
+        variant: "default",
+      });
+      
+      navigate('/wensberoepen-intro');
+    } catch (error) {
+      console.error("Error completing extra informatie:", error);
+      
+      toast({
+        title: "Fout bij opslaan",
+        description: "Er ging iets mis bij het opslaan van je gegevens. Probeer het opnieuw.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
-  // Updated validation - only opleidingsniveau is required
-  const isFormValid = formData.opleidingsniveau !== '';
-  return <div className="min-h-screen bg-gray-50 font-sans">
-      <div className="max-w-4xl mx-auto px-6 py-8">
-        {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center mb-6">
-            <img alt="Vinster Logo" className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" onClick={() => navigate('/')} src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" />
+  const questions = [
+    {
+      field: "opleidingsniveau",
+      question: "Wat is je hoogste opleidingsniveau?",
+      placeholder: "Bijvoorbeeld: HBO, WO, MBO niveau 4, etc."
+    },
+    {
+      field: "beroepsopleiding", 
+      question: "Welke beroepsopleiding heb je gevolgd?",
+      placeholder: "Bijvoorbeeld: Bedrijfskunde, Psychologie, Technische Informatica, etc."
+    },
+    {
+      field: "sector_voorkeur",
+      question: "In welke sector(en) zou je graag willen werken?",
+      placeholder: "Bijvoorbeeld: ICT, Zorg, Onderwijs, Marketing, etc."
+    },
+    {
+      field: "fysieke_beperkingen",
+      question: "Zijn er fysieke beperkingen waar we rekening mee dienen te houden?",
+      placeholder: "Bijvoorbeeld: Geen zware fysieke arbeid, beeldschermwerk beperken, etc. (optioneel)"
+    }
+  ];
+
+  if (isLoading) {
+    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Laden...</div>;
+  }
+
+  const allFieldsFilled = answers.opleidingsniveau.trim() !== "" && 
+                          answers.beroepsopleiding.trim() !== "" && 
+                          answers.sector_voorkeur.trim() !== "";
+
+  return (
+    <div className="min-h-screen bg-gray-50 font-sans">
+      {/* Header */}
+      <div className="bg-white shadow-sm">
+        <div className="max-w-[1440px] mx-auto px-6 py-4">
+          <div className="flex items-center">
+            <img 
+              alt="Vinster Logo" 
+              className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              onClick={() => navigate('/home')} 
+              src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
+            />
           </div>
-          
-          
         </div>
-
-        {/* Progress indicator */}
-        <div className="mb-8">
-          <div className="flex items-center gap-4 text-sm text-gray-500">
-            <span className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-              Extra informatie
-            </span>
-            <span className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-gray-300 rounded-full"></div>
-              Prioriteiten stellen
-            </span>
-          </div>
-        </div>
-
-        {/* Form */}
-        <Card className="p-8 mb-8 border-0 rounded-3xl" style={{
-        backgroundColor: '#E6F0F6'
-      }}>
-          <div className="space-y-8">
-            {/* Question 1: Opleidingsniveau - Updated with "Niet van toepassing" option */}
-            <div>
-              <h3 className="text-xl font-bold text-vinster-blue mb-4">
-                1. Wat is jouw opleidingsniveau?
-              </h3>
-              <RadioGroup value={formData.opleidingsniveau} onValueChange={value => setFormData({
-              ...formData,
-              opleidingsniveau: value
-            })} className="space-y-3">
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="mbo" id="mbo" />
-                  <Label htmlFor="mbo" className="text-lg">Mbo</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="hbo" id="hbo" />
-                  <Label htmlFor="hbo" className="text-lg">Hbo</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="wo" id="wo" />
-                  <Label htmlFor="wo" className="text-lg">Wo</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="niet_van_toepassing" id="niet_van_toepassing" />
-                  <Label htmlFor="niet_van_toepassing" className="text-lg">Niet van toepassing</Label>
-                </div>
-              </RadioGroup>
-            </div>
-
-            {/* Question 2: Beroepsopleiding - Now optional */}
-            <div>
-              <h3 className="text-xl font-bold text-vinster-blue mb-4">
-                2. Welke beroepsopleiding heb je afgerond?
-              </h3>
-              <Textarea placeholder="Bijv. Marketing & Communicatie, Verpleegkunde, Werktuigbouwkunde... (optioneel)" value={formData.beroepsopleiding} onChange={e => setFormData({
-              ...formData,
-              beroepsopleiding: e.target.value
-            })} className="min-h-[100px] text-lg" />
-            </div>
-
-            {/* Question 3: Fysieke beperkingen - Updated with (fysieke) in parentheses */}
-            <div>
-              <h3 className="text-xl font-bold text-vinster-blue mb-4">
-                3. Zijn er (fysieke) beperkingen waar we rekening mee moeten houden?
-              </h3>
-              <Textarea placeholder="Bijv. kan niet lang staan, heeft moeite met tillen, is slechtziend... (optioneel)" value={formData.fysieke_beperkingen} onChange={e => setFormData({
-              ...formData,
-              fysieke_beperkingen: e.target.value
-            })} className="min-h-[100px] text-lg" />
-            </div>
-
-            {/* Question 4: Sector voorkeur - Updated question text */}
-            <div>
-              <h3 className="text-xl font-bold text-vinster-blue mb-4">
-                4. Wil je binnen een bepaalde sector zoeken?
-              </h3>
-              <p className="text-gray-600 mb-4">
-                Je kunt dan bijvoorbeeld denken aan de bouw, defensie of de zorg. Als je dat aangeeft, 
-                dan geven we je mogelijkheden binnen die sector.
-              </p>
-              <Textarea placeholder="Bijv. zorg, onderwijs, techniek, bouw, defensie, overheid... (optioneel)" value={formData.sector_voorkeur} onChange={e => setFormData({
-              ...formData,
-              sector_voorkeur: e.target.value
-            })} className="min-h-[100px] text-lg" />
-            </div>
-          </div>
-        </Card>
-
-        {/* Navigation */}
-        <div className="flex justify-between items-center">
-          <Button onClick={() => navigate("/profiel-voltooien-intro")} className="bg-blue-900 hover:bg-blue-800 text-white font-bold py-4 px-6 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-200">
-            <ArrowLeft className="w-5 h-5 mr-2" />
-            Terug
-          </Button>
-          
-          <Button onClick={handleSave} disabled={!isFormValid || saving} className="bg-yellow-400 hover:bg-yellow-500 text-vinster-blue font-bold py-8 text-xl rounded-3xl shadow-lg hover:shadow-xl transition-all duration-200 disabled:opacity-50" size="lg">
-            {saving ? <>
-                <Save className="w-5 h-5 mr-2 animate-spin" />
-                Opslaan...
-              </> : <>
-                Doorgaan naar prioriteiten
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </>}
-          </Button>
-        </div>
-
-        {!isFormValid && <p className="text-red-600 text-center mt-4">
-            Vul je opleidingsniveau in om door te gaan.
-          </p>}
       </div>
-    </div>;
+
+      {/* Main Content */}
+      <div className="max-w-[1440px] mx-auto px-6 py-12">
+        <Card className="rounded-3xl shadow-xl">
+          <CardContent className="p-12">
+            {/* Title */}
+            <div className="text-center mb-12">
+              <h1 className="text-3xl font-bold text-blue-900 mb-2">
+                Extra informatie
+              </h1>
+              <p className="text-xl text-gray-600">
+                Laatste vragen over je achtergrond
+              </p>
+              {isSubmitting && (
+                <div className="mt-4 p-3 bg-blue-50 rounded-lg">
+                  <p className="text-sm text-blue-700">
+                    📤 Gegevens worden verzonden...
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {/* Questions */}
+            <div className="space-y-8">
+              {questions.map((item, index) => (
+                <div key={index}>
+                  <Label htmlFor={item.field} className="text-blue-900 font-medium text-lg mb-3 block text-left">
+                    {index + 1}. {item.question}
+                  </Label>
+                  <Textarea
+                    id={item.field}
+                    placeholder={item.placeholder}
+                    value={answers[item.field as keyof typeof answers]}
+                    onChange={(e) => handleInputChange(item.field, e.target.value)}
+                    onBlur={(e) => handleInputBlur(item.field, e.target.value)}
+                    className="min-h-[80px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Navigation */}
+            <div className="flex justify-between pt-12">
+              <Button 
+                onClick={handleBackToPriorities}
+                variant="outline"
+                className="border-blue-900 text-blue-900 hover:bg-blue-50"
+                disabled={isSubmitting}
+              >
+                Terug naar prioriteiten
+              </Button>
+              <Button 
+                onClick={handleComplete}
+                className={`font-semibold px-8 ${
+                  allFieldsFilled
+                    ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 
+                    : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                }`}
+                disabled={isSubmitting || !allFieldsFilled}
+              >
+                {isSubmitting ? "Voltooien..." : "Profiel voltooien"}
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
 };
+
 export default ExtraInformatieVragen;

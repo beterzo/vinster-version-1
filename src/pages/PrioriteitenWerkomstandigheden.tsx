@@ -1,216 +1,166 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
-import { ArrowRight, ArrowLeft, Briefcase, Check } from "lucide-react";
 import { usePrioriteitenResponses } from "@/hooks/usePrioriteitenResponses";
+
+const WERKOMSTANDIGHEDEN_KEYWORDS = [
+  "Alleen werken", "Avond/nacht", "Binnen", "Buiten", "Conflicten oplossen",
+  "Creatieve vrijheid", "Deadline druk", "Deeltijd", "Diversiteit", "Eigen tempo",
+  "Flexibele tijden", "Geen hiërarchie", "Geen stress", "Grote organisatie",
+  "Hoge beloning", "Internationale omgeving", "Klein team", "Leidinggevend",
+  "Lichamelijk actief", "Mentaal uitdagend", "Multitasken", "Nieuwe uitdagingen",
+  "Onafhankelijk", "Ondersteunend", "Reizen", "Routine", "Samenwerken",
+  "Snelle beslissingen", "Sociale impact", "Stabiliteit", "Status", "Stil",
+  "Technologie", "Thuiswerken", "Tijd voor privé", "Variatie", "Verantwoordelijkheid",
+  "Volledig", "Werkzekerheid"
+];
 
 const PrioriteitenWerkomstandigheden = () => {
   const navigate = useNavigate();
-  const { responses, aiKeywords, saveResponses, saveKeywordSelection, hasMinimumKeywords, loading } = usePrioriteitenResponses();
+  const { responses, saveResponse, isLoading } = usePrioriteitenResponses();
   
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
   const [extraText, setExtraText] = useState("");
 
-  // Sync local state with loaded responses
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Load saved data when responses change
   useEffect(() => {
-    if (responses) {
+    if (!isLoading && responses) {
+      console.log("Loading saved responses into form:", responses);
       setSelectedKeywords(responses.selected_werkomstandigheden_keywords || []);
       setExtraText(responses.extra_werkomstandigheden_tekst || "");
     }
-  }, [responses]);
+  }, [isLoading, responses]);
 
-  const toggleKeyword = async (keyword: string) => {
-    const newKeywords = selectedKeywords.includes(keyword)
+  const handleKeywordToggle = (keyword: string) => {
+    const newSelection = selectedKeywords.includes(keyword)
       ? selectedKeywords.filter(k => k !== keyword)
       : [...selectedKeywords, keyword];
     
-    setSelectedKeywords(newKeywords);
-    
-    // Save immediately to Supabase
-    await saveKeywordSelection('werkomstandigheden', newKeywords);
+    setSelectedKeywords(newSelection);
+    saveResponse('selected_werkomstandigheden_keywords', newSelection);
   };
 
-  const handleSave = async () => {
-    const success = await saveResponses({
-      extra_werkomstandigheden_tekst: extraText
-    });
-    
-    if (success) {
-      navigate("/prioriteiten-interesses");
-    }
+  const handleExtraTextChange = (value: string) => {
+    setExtraText(value);
   };
 
-  const keywords = aiKeywords?.werkomstandigheden || [];
-  const canProceed = hasMinimumKeywords('werkomstandigheden') || (extraText && extraText.trim() !== '');
-  const selectedCount = selectedKeywords.length;
+  const handleExtraTextBlur = () => {
+    console.log("Saving extra text:", extraText);
+    saveResponse('extra_werkomstandigheden_tekst', extraText);
+  };
+
+  const handlePrevious = () => {
+    scrollToTop();
+    navigate('/prioriteiten-interesses');
+  };
+
+  const handleNext = () => {
+    scrollToTop();
+    navigate('/profiel-voltooien-intro');
+  };
+
+  if (isLoading) {
+    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Laden...</div>;
+  }
+
+  const canProceed = selectedKeywords.length >= 5;
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
-      <div className="max-w-4xl mx-auto px-6 py-8">
-        {/* Header */}
-        <div className="mb-8">
-          <div className="mb-6">
+      {/* Header */}
+      <div className="bg-white shadow-sm">
+        <div className="max-w-[1440px] mx-auto px-6 py-4">
+          <div className="flex items-center">
             <img 
               alt="Vinster Logo" 
               className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
-              onClick={() => navigate('/')} 
+              onClick={() => navigate('/home')} 
               src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
             />
           </div>
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: '#E6F0F6' }}>
-              <Briefcase className="w-5 h-5" style={{ color: '#78BFE3' }} />
-            </div>
-            <h1 className="text-3xl font-bold text-vinster-blue">Fijne werkomstandigheden</h1>
-          </div>
-          <p className="text-lg text-gray-700">
-            Selecteer de werkomstandigheden die voor jou belangrijk zijn
-          </p>
         </div>
+      </div>
 
-        {/* Progress indicator */}
-        <div className="mb-8">
-          <div className="flex items-center gap-4 text-sm text-gray-500">
-            <span className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#78BFE3' }}></div>
-              Extra informatie
-            </span>
-            <span className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-              Activiteiten
-            </span>
-            <span className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#78BFE3' }}></div>
-              Werkomgeving
-            </span>
-            <span className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-gray-300 rounded-full"></div>
-              Interesses
-            </span>
-          </div>
-        </div>
-
-        {/* Keywords grid */}
-        <Card className="p-6 mb-6">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold">
-              Kernwoorden gebaseerd op jouw antwoorden
-            </h2>
-            <div className="text-sm text-gray-600">
-              <span className={`font-medium ${selectedCount >= 3 ? 'text-green-600' : 'text-orange-600'}`}>
-                {selectedCount}/3 kernwoorden geselecteerd
-              </span>
-            </div>
-          </div>
-          <p className="text-gray-600 mb-6">
-            Selecteer minimaal 3 kernwoorden die voor jou belangrijk zijn. Je selecties worden automatisch opgeslagen.
-          </p>
-          
-          {selectedCount < 3 && (
-            <div className="mb-4 p-3 bg-orange-50 border border-orange-200 rounded-lg">
-              <p className="text-orange-700 text-sm">
-                ⚠️ Selecteer nog {3 - selectedCount} kernwoord{3 - selectedCount !== 1 ? 'en' : ''} om door te kunnen gaan naar de volgende stap.
+      {/* Main Content */}
+      <div className="max-w-[1440px] mx-auto px-6 py-12">
+        <Card className="rounded-3xl shadow-xl">
+          <CardContent className="p-12">
+            {/* Title */}
+            <div className="text-center mb-12">
+              <h1 className="text-3xl font-bold text-blue-900 mb-2">
+                Prioriteiten - Werkomstandigheden
+              </h1>
+              <p className="text-xl text-gray-600">
+                Selecteer minimaal 5 werkomstandigheden die belangrijk voor je zijn
+              </p>
+              <p className="text-sm text-gray-500 mt-2">
+                Geselecteerd: {selectedKeywords.length} van minimaal 5
               </p>
             </div>
-          )}
-          
-          {keywords.length > 0 ? (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-              {keywords.map((keyword, index) => (
+
+            {/* Keywords Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mb-8">
+              {WERKOMSTANDIGHEDEN_KEYWORDS.map((keyword) => (
                 <button
-                  key={index}
-                  onClick={() => toggleKeyword(keyword)}
-                  className={`p-4 rounded-xl border-2 text-left transition-all duration-200 ${
+                  key={keyword}
+                  onClick={() => handleKeywordToggle(keyword)}
+                  className={`p-3 rounded-lg border-2 transition-all duration-200 text-sm font-medium ${
                     selectedKeywords.includes(keyword)
-                      ? 'text-white shadow-sm'
-                      : 'border-gray-200 bg-white hover:shadow-sm'
+                      ? "bg-blue-900 text-white border-blue-900 shadow-md"
+                      : "bg-white text-blue-900 border-gray-300 hover:border-blue-900 hover:bg-blue-50"
                   }`}
-                  style={selectedKeywords.includes(keyword) ? {
-                    borderColor: '#78BFE3',
-                    backgroundColor: '#78BFE3'
-                  } : {
-                    borderColor: selectedKeywords.includes(keyword) ? '#78BFE3' : undefined
-                  }}
-                  onMouseEnter={(e) => {
-                    if (!selectedKeywords.includes(keyword)) {
-                      e.currentTarget.style.borderColor = '#78BFE3';
-                      e.currentTarget.style.backgroundColor = '#E6F0F6';
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!selectedKeywords.includes(keyword)) {
-                      e.currentTarget.style.borderColor = '#e5e7eb';
-                      e.currentTarget.style.backgroundColor = 'white';
-                    }
-                  }}
                 >
-                  <div className="flex items-center justify-between">
-                    <span className="font-medium text-sm">{keyword}</span>
-                    {selectedKeywords.includes(keyword) && (
-                      <Check className="w-4 h-4" />
-                    )}
-                  </div>
+                  {keyword}
                 </button>
               ))}
             </div>
-          ) : (
-            <div className="text-center py-8 text-gray-500">
-              <Briefcase className="w-12 h-12 mx-auto mb-4 text-gray-300" />
-              <p>Er zijn nog geen kernwoorden beschikbaar.</p>
-              <p className="text-sm">Zorg ervoor dat je eerst de enthousiasme-scan en wensberoepen hebt ingevuld.</p>
+
+            {/* Extra Text Field */}
+            <div className="mb-8">
+              <Label htmlFor="extraText" className="text-blue-900 font-medium text-lg mb-3 block text-left">
+                Mis je nog werkomstandigheden? Voeg ze hier toe (optioneel)
+              </Label>
+              <Textarea
+                id="extraText"
+                placeholder="Bijvoorbeeld: Hond mee naar kantoor, Goede koffie, Ergonomische werkplek..."
+                value={extraText}
+                onChange={(e) => handleExtraTextChange(e.target.value)}
+                onBlur={handleExtraTextBlur}
+                className="min-h-[80px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
+              />
             </div>
-          )}
-        </Card>
 
-        {/* Additional text input */}
-        <Card className="p-6 mb-8">
-          <h3 className="text-lg font-bold mb-4">Aanvullende informatie</h3>
-          <p className="text-gray-600 mb-4">
-            Zijn er andere werkomstandigheden die voor jou belangrijk zijn? 
-            Voeg hier je eigen informatie toe. (Dit kan een alternatief zijn voor de 3 kernwoorden)
-          </p>
-          <Textarea
-            value={extraText}
-            onChange={(e) => setExtraText(e.target.value)}
-            placeholder="Beschrijf hier andere werkomstandigheden die belangrijk voor je zijn..."
-            className="min-h-24"
-          />
+            {/* Navigation */}
+            <div className="flex justify-between pt-8">
+              <Button 
+                onClick={handlePrevious}
+                variant="outline"
+                className="border-blue-900 text-blue-900 hover:bg-blue-50"
+              >
+                Vorige: Interesses
+              </Button>
+              <Button 
+                onClick={handleNext}
+                className={`font-semibold px-8 ${
+                  canProceed
+                    ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 
+                    : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                }`}
+                disabled={!canProceed}
+              >
+                Prioriteiten voltooien
+              </Button>
+            </div>
+          </CardContent>
         </Card>
-
-        {/* Navigation */}
-        <div className="flex justify-between items-center">
-          <Button
-            onClick={() => navigate("/prioriteiten-activiteiten")}
-            className="bg-blue-900 hover:bg-blue-800 text-white rounded-xl"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Terug
-          </Button>
-          
-          <div className="flex flex-col items-end gap-2">
-            {!canProceed && (
-              <p className="text-sm text-red-600">
-                Selecteer minimaal 3 kernwoorden of voeg aanvullende informatie toe
-              </p>
-            )}
-            <Button
-              onClick={handleSave}
-              disabled={loading || !canProceed}
-              className={`rounded-xl ${
-                canProceed 
-                  ? 'bg-yellow-500 hover:bg-yellow-600 text-white' 
-                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              }`}
-              size="lg"
-            >
-              {loading ? "Opslaan..." : "Volgende: interesses"}
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
-          </div>
-        </div>
       </div>
     </div>
   );

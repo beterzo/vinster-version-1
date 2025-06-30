@@ -1,200 +1,201 @@
-import { useState, useEffect, useMemo, useCallback } from 'react';
+
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 import { useZoekprofielResponses } from "@/hooks/useZoekprofielResponses";
-import { useLanguage } from "@/contexts/LanguageContext";
-import { Search, ArrowRight, Home, Loader2 } from "lucide-react";
+import { useZoekprofielPdf } from "@/hooks/useZoekprofielPdf";
 import { useToast } from "@/hooks/use-toast";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const ZoekprofielVragen = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { language } = useLanguage();
-  const { responses, loading, saveResponse, submitToWebhook, isCompleted } = useZoekprofielResponses();
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { responses, saveResponse, isLoading } = useZoekprofielResponses();
+  const { generatePdf, isGenerating } = useZoekprofielPdf();
+  
+  const [answers, setAnswers] = useState({
+    functie_als: "",
+    kerntaken: "",
+    organisatie_bij: "",
+    sector: "",
+    gewenste_regio: "",
+    arbeidsvoorwaarden: ""
+  });
 
-  // Memoized questions array to prevent unnecessary re-renders
-  const questions = useMemo(() => [
-    {
-      field: 'functie_als',
-      title: 'Ik ga voor een functie als',
-      examples: 'bijvoorbeeld: coördinator, projectleider, afdelingshoofd, adviseur, docent'
-    },
-    {
-      field: 'kerntaken',
-      title: 'Met de volgende kerntaken',
-      examples: 'bijvoorbeeld: adviseren, aansturen, samenstellen, ontwerpen, overdragen, samenwerken, onderzoeken, bedenken'
-    },
-    {
-      field: 'sector',
-      title: 'In de sector',
-      examples: 'bijvoorbeeld: overheid, zorg, zakelijke dienstverlening, onderwijs, media, bouw'
-    },
-    {
-      field: 'organisatie_bij',
-      title: 'Bij een',
-      examples: 'bijvoorbeeld: adviesbureau, kenniscentrum, opleidingsinstituut, bank, gemeente'
-    },
-    {
-      field: 'gewenste_regio',
-      title: 'In deze regio',
-      examples: 'deel van Nederland of buitenland'
-    },
-    {
-      field: 'arbeidsvoorwaarden',
-      title: 'Met deze arbeidsvoorwaarden',
-      examples: 'noem salaris, uren, pensioen, thuis werken'
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Load saved data when responses change
+  useEffect(() => {
+    if (!isLoading && responses) {
+      console.log("Loading saved responses into form:", responses);
+      setAnswers({
+        functie_als: responses.functie_als || "",
+        kerntaken: responses.kerntaken || "",
+        organisatie_bij: responses.organisatie_bij || "",
+        sector: responses.sector || "",
+        gewenste_regio: responses.gewenste_regio || "",
+        arbeidsvoorwaarden: responses.arbeidsvoorwaarden || ""
+      });
     }
-  ], []);
+  }, [isLoading, responses]);
 
-  // Input change handler that directly calls saveResponse
-  const handleInputChange = useCallback((field: string, value: string) => {
-    saveResponse(field, value);
-  }, [saveResponse]);
+  const handleInputChange = (field: string, value: string) => {
+    console.log(`Updating ${field}:`, value);
+    setAnswers(prev => ({ ...prev, [field]: value }));
+  };
 
-  const handleSubmit = useCallback(async () => {
-    if (!isCompleted) {
+  const handleInputBlur = (field: string, value: string) => {
+    console.log(`Saving ${field}:`, value);
+    saveResponse(field as keyof typeof responses, value);
+  };
+
+  const handleComplete = async () => {
+    if (!allFieldsFilled) {
       toast({
-        title: "Profiel niet compleet",
-        description: "Vul alle vragen in voordat je doorgaat.",
-        variant: "destructive"
+        title: "Vul alle velden in",
+        description: "Vul alle vragen in voordat je het zoekprofiel genereert.",
+        variant: "destructive",
       });
       return;
     }
 
-    setIsSubmitting(true);
-    
-    // Submit with language information
-    const success = await submitToWebhook(language);
-    
-    if (success) {
-      navigate("/zoekprofiel-download");
+    try {
+      console.log("Generating zoekprofiel PDF...");
+      await generatePdf();
+      
+      toast({
+        title: "Zoekprofiel gegenereerd!",
+        description: "Je zoekprofiel is succesvol aangemaakt.",
+      });
+      
+      navigate('/zoekprofiel-download');
+    } catch (error) {
+      console.error("Error generating zoekprofiel:", error);
+      
+      toast({
+        title: "Fout bij genereren",
+        description: "Er ging iets mis bij het genereren van je zoekprofiel. Probeer het opnieuw.",
+        variant: "destructive",
+      });
     }
-    
-    setIsSubmitting(false);
-  }, [isCompleted, submitToWebhook, navigate, toast, language]);
+  };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50 font-sans flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-900 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Zoekprofiel laden...</p>
-        </div>
-      </div>
-    );
+  const questions = [
+    {
+      field: "functie_als",
+      question: "Functie als... (Welke functienaam zoek je?)",
+      placeholder: "Bijvoorbeeld: Marketing Manager, Software Developer, HR Adviseur..."
+    },
+    {
+      field: "kerntaken", 
+      question: "Kerntaken (Wat wil je vooral doen in je werk?)",
+      placeholder: "Bijvoorbeeld: Strategieën ontwikkelen, teams aansturen, klanten adviseren..."
+    },
+    {
+      field: "organisatie_bij",
+      question: "Organisatie bij... (Bij wat voor organisatie wil je werken?)",
+      placeholder: "Bijvoorbeeld: Innovatief techbedrijf, Non-profit organisatie, Grote multinational..."
+    },
+    {
+      field: "sector",
+      question: "Sector (In welke sector(en) zoek je werk?)",
+      placeholder: "Bijvoorbeeld: ICT, Zorg, Onderwijs, Marketing & Communicatie..."
+    },
+    {
+      field: "gewenste_regio",
+      question: "Gewenste regio (Waar wil je werken?)",
+      placeholder: "Bijvoorbeeld: Amsterdam en omgeving, geheel Nederland, remote..."
+    },
+    {
+      field: "arbeidsvoorwaarden",
+      question: "Arbeidsvoorwaarden (Wat zijn je wensen qua voorwaarden?)",
+      placeholder: "Bijvoorbeeld: 32-40 uur, flexibele werktijden, thuiswerkmogelijkheden..."
+    }
+  ];
+
+  if (isLoading) {
+    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Laden...</div>;
   }
+
+  const allFieldsFilled = Object.values(answers).every(answer => answer.trim() !== "");
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
-      <div className="max-w-4xl mx-auto px-6 py-16">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <div className="mb-8 flex items-center justify-center relative">
+      {/* Header */}
+      <div className="bg-white shadow-sm">
+        <div className="max-w-[1440px] mx-auto px-6 py-4">
+          <div className="flex items-center">
             <img 
               alt="Vinster Logo" 
               className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
               onClick={() => navigate('/home')} 
               src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
             />
-            <div className="absolute right-0">
-              <LanguageSwitcher />
-            </div>
           </div>
-          
-          <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <Search className="w-8 h-8 text-blue-600" />
-          </div>
-          
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Stel je zoekprofiel op</h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Beantwoord de onderstaande vragen om je persoonlijke zoekprofiel te maken.
-          </p>
         </div>
+      </div>
 
-        {/* Questions */}
-        <div className="space-y-8 mb-12">
-          {questions.map((question, index) => (
-            <Card key={question.field} className="p-8 bg-white border border-gray-100 rounded-3xl shadow-sm">
-              <div className="space-y-4">
-                <div className="text-left">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-sm">
-                      {index + 1}
-                    </div>
-                    <h2 className="text-xl font-bold text-gray-900">{question.title}</h2>
-                  </div>
-                  <p className="text-gray-500 text-sm mb-4 italic">({question.examples})</p>
+      {/* Main Content */}
+      <div className="max-w-[1440px] mx-auto px-6 py-12">
+        <Card className="rounded-3xl shadow-xl">
+          <CardContent className="p-12">
+            {/* Title */}
+            <div className="text-center mb-12">
+              <h1 className="text-3xl font-bold text-blue-900 mb-2">
+                Zoekprofiel vragen
+              </h1>
+              <p className="text-xl text-gray-600">
+                Beantwoord de vragen om je persoonlijke zoekprofiel te maken
+              </p>
+            </div>
+
+            {/* Questions */}
+            <div className="space-y-8">
+              {questions.map((item, index) => (
+                <div key={index}>
+                  <Label htmlFor={item.field} className="text-blue-900 font-medium text-lg mb-3 block text-left">
+                    {index + 1}. {item.question}
+                  </Label>
+                  <Textarea
+                    id={item.field}
+                    placeholder={item.placeholder}
+                    value={answers[item.field as keyof typeof answers]}
+                    onChange={(e) => handleInputChange(item.field, e.target.value)}
+                    onBlur={(e) => handleInputBlur(item.field, e.target.value)}
+                    className="min-h-[80px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
+                  />
                 </div>
-                
-                <Textarea
-                  value={responses?.[question.field as keyof typeof responses] || ''}
-                  onChange={(e) => handleInputChange(question.field, e.target.value)}
-                  className="min-h-[120px] text-base text-left"
-                  placeholder={`Vul hier je antwoord in...`}
-                />
-              </div>
-            </Card>
-          ))}
-
-          {/* Special section after kerntaken */}
-          <div className="text-left">
-            <p className="text-lg text-gray-700 font-medium">
-              Pak het overzicht van jouw ideale werk er even bij.
-            </p>
-          </div>
-        </div>
-
-        {/* Submit Section */}
-        <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm">
-          <div className="text-left space-y-6">
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Je weet wat je wilt!</h3>
-              <p className="text-gray-600">
-                Je antwoorden worden automatisch opgeslagen. Klik op 'Profiel afronden' om je zoekprofiel te voltooien.
-              </p>
+              ))}
             </div>
-            
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button
-                onClick={handleSubmit}
-                disabled={!isCompleted || isSubmitting}
-                className="bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl text-xl py-6 px-8 h-auto disabled:opacity-50"
-                size="lg"
-              >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="w-6 h-6 mr-3 animate-spin" />
-                    Profiel verwerken...
-                  </>
-                ) : (
-                  <>
-                    <ArrowRight className="w-6 h-6 mr-3" />
-                    Profiel afronden
-                  </>
-                )}
-              </Button>
-              
-              <Button
-                onClick={() => navigate("/home")}
+
+            {/* Navigation */}
+            <div className="flex justify-between pt-12">
+              <Button 
+                onClick={() => navigate('/zoekprofiel-intro')}
                 variant="outline"
-                className="rounded-xl py-6 px-8 h-auto"
+                className="border-blue-900 text-blue-900 hover:bg-blue-50"
+                disabled={isGenerating}
               >
-                <Home className="w-4 h-4 mr-2" />
-                Terug naar dashboard
+                Terug naar intro
+              </Button>
+              <Button 
+                onClick={handleComplete}
+                className={`font-semibold px-8 ${
+                  allFieldsFilled
+                    ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 
+                    : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                }`}
+                disabled={isGenerating || !allFieldsFilled}
+              >
+                {isGenerating ? "Genereren..." : "Zoekprofiel genereren"}
               </Button>
             </div>
-            
-            {!isCompleted && (
-              <p className="text-amber-600 text-sm">
-                Vul alle vragen in om je zoekprofiel af te kunnen ronden.
-              </p>
-            )}
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

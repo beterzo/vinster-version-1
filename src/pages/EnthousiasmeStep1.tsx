@@ -1,4 +1,5 @@
 
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -6,38 +7,73 @@ import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 import EnthousiasmeProgress from "@/components/EnthousiasmeProgress";
 import { useEnthousiasmeResponses } from "@/hooks/useEnthousiasmeResponses";
-import { Loader2 } from "lucide-react";
 
 const EnthousiasmeStep1 = () => {
   const navigate = useNavigate();
-  const { responses, loading, saving, saveResponse, updateLocalResponse } = useEnthousiasmeResponses();
+  const { responses, saveResponse, isLoading } = useEnthousiasmeResponses();
+  
+  const [answers, setAnswers] = useState({
+    kindertijd_activiteiten: "",
+    kindertijd_plekken: "",
+    kindertijd_interesses_nieuw: ""
+  });
 
-  // Local validation for step 1 only
-  const isStep1Complete = () => {
-    const question1 = responses.kindertijd_activiteiten?.trim() || '';
-    const question2 = responses.kindertijd_plekken?.trim() || '';
-    const question3 = responses.kindertijd_interesses_nieuw?.trim() || '';
-    
-    return question1 !== '' && question2 !== '' && question3 !== '';
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleInputChange = (field: 'kindertijd_activiteiten' | 'kindertijd_plekken' | 'kindertijd_interesses_nieuw', value: string) => {
-    updateLocalResponse(field, value);
+  // Load saved data when responses change
+  useEffect(() => {
+    if (!isLoading && responses) {
+      console.log("Loading saved responses into form:", responses);
+      setAnswers({
+        kindertijd_activiteiten: responses.kindertijd_activiteiten || "",
+        kindertijd_plekken: responses.kindertijd_plekken || "",
+        kindertijd_interesses_nieuw: responses.kindertijd_interesses_nieuw || ""
+      });
+    }
+  }, [isLoading, responses]);
+
+  const handleInputChange = (field: string, value: string) => {
+    console.log(`Updating ${field}:`, value);
+    setAnswers(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleInputBlur = (field: 'kindertijd_activiteiten' | 'kindertijd_plekken' | 'kindertijd_interesses_nieuw', value: string) => {
-    saveResponse(field, value);
+  const handleInputBlur = (field: string, value: string) => {
+    console.log(`Saving ${field}:`, value);
+    saveResponse(field as keyof typeof responses, value);
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50 font-sans flex items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin" />
-      </div>
-    );
+  const handleBackToIntro = () => {
+    scrollToTop();
+    navigate('/enthousiasme-intro');
+  };
+
+  const handleNext = () => {
+    scrollToTop();
+    navigate('/enthousiasme-step-2');
+  };
+
+  const questions = [
+    {
+      field: "kindertijd_activiteiten",
+      question: "Waar was je als kind het liefst mee bezig?"
+    },
+    {
+      field: "kindertijd_plekken", 
+      question: "Waar hield je je als kind het liefst op?"
+    },
+    {
+      field: "kindertijd_interesses_nieuw",
+      question: "Wat interesseerde je als kind? Waar was je nieuwsgierig naar?"
+    }
+  ];
+
+  if (isLoading) {
+    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Laden...</div>;
   }
 
-  const step1Complete = isStep1Complete();
+  const allFieldsFilled = Object.values(answers).every(answer => answer.trim() !== "");
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
@@ -48,8 +84,8 @@ const EnthousiasmeStep1 = () => {
             <img 
               alt="Vinster Logo" 
               className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
-              onClick={() => navigate('/')} 
-              src="/lovable-uploads/846d1ec8-bb91-46f6-a16d-1b1c39ebe829.png" 
+              onClick={() => navigate('/home')} 
+              src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
             />
           </div>
         </div>
@@ -64,80 +100,51 @@ const EnthousiasmeStep1 = () => {
             {/* Title */}
             <div className="text-center mb-12">
               <h1 className="text-3xl font-bold text-blue-900 mb-2">
-                Jouw kindertijd & tienertijd
+                Enthousiasme - Stap 1
               </h1>
-              {saving && (
-                <p className="text-sm text-gray-500 flex items-center justify-center gap-2">
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  Bezig met opslaan...
-                </p>
-              )}
+              <p className="text-xl text-gray-600">
+                Vragen over je kindertijd
+              </p>
             </div>
 
             {/* Questions */}
             <div className="space-y-8">
-              <div>
-                <Label htmlFor="question1" className="text-blue-900 font-medium text-lg mb-3 block text-left">
-                  Wat deed je graag? (op school en buiten school)
-                </Label>
-                <Textarea
-                  id="question1"
-                  placeholder="Bijvoorbeeld: voetballen, tekenen, computerspelletjes, muziek maken..."
-                  value={responses.kindertijd_activiteiten || ''}
-                  onChange={(e) => handleInputChange('kindertijd_activiteiten', e.target.value)}
-                  onBlur={(e) => handleInputBlur('kindertijd_activiteiten', e.target.value)}
-                  className="min-h-[120px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="question2" className="text-blue-900 font-medium text-lg mb-3 block text-left">
-                  Waar was je veel te vinden? (als je uit school kwam of in het weekend)
-                </Label>
-                <Textarea
-                  id="question2"
-                  placeholder="Bijvoorbeeld: bij vrienden thuis, op het sportveld, in mijn kamer, buiten in de natuur..."
-                  value={responses.kindertijd_plekken || ''}
-                  onChange={(e) => handleInputChange('kindertijd_plekken', e.target.value)}
-                  onBlur={(e) => handleInputBlur('kindertijd_plekken', e.target.value)}
-                  className="min-h-[120px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="question3" className="text-blue-900 font-medium text-lg mb-3 block text-left">
-                  Wat interesseerde jou? (denk aan schoolvakken, hobby's, onderwerpen op tv of in boeken)
-                </Label>
-                <Textarea
-                  id="question3"
-                  placeholder="Bijvoorbeeld: geschiedenis, dieren, techniek, kunst, sport..."
-                  value={responses.kindertijd_interesses_nieuw || ''}
-                  onChange={(e) => handleInputChange('kindertijd_interesses_nieuw', e.target.value)}
-                  onBlur={(e) => handleInputBlur('kindertijd_interesses_nieuw', e.target.value)}
-                  className="min-h-[120px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
-                />
-              </div>
+              {questions.map((item, index) => (
+                <div key={index}>
+                  <Label htmlFor={item.field} className="text-blue-900 font-medium text-lg mb-3 block text-left">
+                    {index + 1}. {item.question}
+                  </Label>
+                  <Textarea
+                    id={item.field}
+                    placeholder="Beschrijf hier je antwoord..."
+                    value={answers[item.field as keyof typeof answers]}
+                    onChange={(e) => handleInputChange(item.field, e.target.value)}
+                    onBlur={(e) => handleInputBlur(item.field, e.target.value)}
+                    className="min-h-[100px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
+                  />
+                </div>
+              ))}
             </div>
 
             {/* Navigation */}
             <div className="flex justify-between pt-12">
               <Button 
-                onClick={() => navigate('/enthousiasme-intro')}
+                onClick={handleBackToIntro}
                 variant="outline"
                 className="border-blue-900 text-blue-900 hover:bg-blue-50"
               >
                 Terug naar intro
               </Button>
               <Button 
-                onClick={() => navigate('/enthousiasme-step-2')}
+                onClick={handleNext}
                 className={`font-semibold px-8 ${
-                  step1Complete
+                  allFieldsFilled
                     ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 
                     : "bg-gray-300 text-gray-500 cursor-not-allowed"
                 }`}
-                disabled={!step1Complete}
+                disabled={!allFieldsFilled}
               >
-                Volgende
+                Volgende stap
               </Button>
             </div>
           </CardContent>
