@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { CheckCircle, ArrowRight } from "lucide-react";
+import { CheckCircle, ArrowRight, Home } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const OnderzoeksplanPagina = () => {
@@ -9,34 +9,44 @@ const OnderzoeksplanPagina = () => {
 
   const steps = [
     {
-      title: "Enthousiasme ontdekken",
-      description: "We beginnen met vragen over wat je tot leven brengt - je kindertijd, eerste baan en positieve werkervaringen.",
-      duration: "10-15 minuten",
-      completed: false
+      number: 1,
+      text: "Vraag AI (of Google) naar een uitgebreide functiebeschrijving van de functies uit je loopbaanrapport. Vraag AI ook naar vergelijkbare functies. Welk werk lijkt erop? Wat spreekt je aan in de antwoorden die je krijgt?"
     },
     {
-      title: "Prioriteiten bepalen", 
-      description: "Je selecteert je favoriete activiteiten, interessegebieden en gewenste werkomstandigheden.",
-      duration: "15-20 minuten",
-      completed: false
+      number: 2,
+      text: "Kijk of je vacatures kunt vinden die een beeld geven van de inhoud van deze functie en van de organisaties die deze functies hebben."
     },
     {
-      title: "Wensberoepen verkennen",
-      description: "Met je fantasie bedenk je drie beroepen die je aantrekelijk vindt en beschrijf je wat je erin aanspreekt.",
-      duration: "20-25 minuten", 
-      completed: false
+      number: 3,
+      text: "Zoek op LinkedIn naar mensen die dit werk doen. Wat is hun achtergrond?"
     },
     {
-      title: "Profiel voltooien",
-      description: "Laatste vragen over je achtergrond om je advies nog specifieker te maken.",
-      duration: "5-10 minuten",
-      completed: false
+      number: 4,
+      text: "Is er een beroepsvereniging? Wat lees je op de website over ontwikkelingen in de sector en het beroep?"
     },
     {
-      title: "Persoonlijk rapport ontvangen",
-      description: "Je krijgt een uitgebreid PDF-rapport met je carrièreadvies, passende beroepen en vervolgstappen.",
-      duration: "Direct beschikbaar",
-      completed: false
+      number: 5,
+      text: "Heeft het beroep een vakblad? Zo ja, vraag er één of meerdere aan en lees ze. Wat valt je op? Word je enthousiast van de onderwerpen?"
+    },
+    {
+      number: 6,
+      text: "Zoek organisaties waar mensen met dit beroep werken."
+    },
+    {
+      number: 7,
+      text: "Welke opleiding heb je eventueel nodig voor dit werk? Vraag het AI of Google."
+    },
+    {
+      number: 8,
+      text: "Schrijf alle vragen op die bij je opkomen tijdens het onderzoek. Die kun je gaan stellen aan mensen die al werkzaam zijn in deze richting."
+    },
+    {
+      number: 9,
+      text: "Maak een lijstje met mensen die je zou willen spreken over dit werk en benader hen. Je vindt die mensen via LinkedIn en/of via je persoonlijke netwerk."
+    },
+    {
+      number: 10,
+      text: "Verzamel genoeg informatie om een keuze te maken. Neem de tijd en praat er met anderen over."
     }
   ];
 
@@ -60,116 +70,84 @@ const OnderzoeksplanPagina = () => {
       <div className="max-w-[1440px] mx-auto px-6 py-12">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-blue-900 mb-4">
-            Jouw carrière-onderzoeksplan
+            Onderzoeksplan
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Ontdek stap voor stap wat jou motiveert en welke carrièrepaden bij je passen. 
-            Volg deze wetenschappelijk onderbouwde methode voor persoonlijk inzicht.
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-6">
+            Dit is jouw stappenplan om te bepalen hoe je volgende functie eruit moet komen te zien.
           </p>
+          <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 max-w-3xl mx-auto">
+            <p className="text-yellow-800 font-medium">
+              💡 Dit onderzoeksplan staat ook onderaan jouw loopbaanrapport, dus daar kun je hem altijd terugvinden.
+            </p>
+          </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 mb-12">
-          {/* Steps */}
-          <div className="space-y-6">
-            {steps.map((step, index) => (
-              <Card key={index} className="relative overflow-hidden">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0">
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white font-bold ${
-                        step.completed ? 'bg-green-500' : 'bg-blue-900'
-                      }`}>
-                        {step.completed ? <CheckCircle className="w-5 h-5" /> : index + 1}
-                      </div>
-                    </div>
-                    
-                    <div className="flex-grow">
-                      <h3 className="text-lg font-semibold text-blue-900 mb-2">
-                        {step.title}
-                      </h3>
-                      <p className="text-gray-600 mb-3">
-                        {step.description}
-                      </p>
-                      <div className="flex items-center gap-2 text-sm text-gray-500">
-                        <span>⏱️ {step.duration}</span>
-                      </div>
+        <Card className="rounded-3xl shadow-xl mb-8">
+          <CardContent className="p-12">
+            <h2 className="text-2xl font-bold text-blue-900 mb-8 text-center">
+              Dit is jouw stappenplan:
+            </h2>
+            
+            {/* Steps */}
+            <div className="space-y-6 mb-12">
+              {steps.map((step, index) => (
+                <div key={index} className="flex items-start gap-4">
+                  <div className="flex-shrink-0">
+                    <div className="w-8 h-8 rounded-full bg-blue-900 text-white font-bold flex items-center justify-center">
+                      {step.number}
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          {/* Info Panel */}
-          <div className="space-y-6">
-            <Card className="bg-blue-50 border-blue-200">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-blue-900 mb-4">
-                  💡 Wat maakt dit onderzoek bijzonder?
-                </h3>
-                <ul className="space-y-3 text-gray-700">
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                    <span>Gebaseerd op wetenschappelijke loopbaantheorieën</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                    <span>Persoonlijke benadering, niet generiek</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                    <span>Praktische vervolgstappen</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                    <span>Direct bruikbaar rapport</span>
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-yellow-50 border-yellow-200">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-blue-900 mb-4">
-                  ⏰ Totale tijdsinvestering
-                </h3>
-                <div className="text-2xl font-bold text-blue-900 mb-2">
-                  50-70 minuten
+                  <div className="flex-grow">
+                    <p className="text-gray-700 leading-relaxed">
+                      {step.text}
+                    </p>
+                  </div>
                 </div>
-                <p className="text-gray-600 mb-4">
-                  Je kunt tussendoor pauzeren en later verder gaan. 
-                  Je voortgang wordt automatisch opgeslagen.
-                </p>
-                <div className="text-sm text-gray-500">
-                  💾 Automatisch opslaan geactiveerd
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
+              ))}
+            </div>
 
-        {/* Start Button */}
-        <div className="text-center">
-          <Card className="inline-block">
-            <CardContent className="p-8">
-              <h2 className="text-2xl font-bold text-blue-900 mb-4">
-                Klaar om te beginnen?
-              </h2>
-              <p className="text-gray-600 mb-6">
-                Start je persoonlijke carrière-onderzoek en ontdek welke richting bij je past.
+            {/* Final Instructions */}
+            <div className="bg-green-50 border border-green-200 rounded-lg p-6 mb-8">
+              <h3 className="text-lg font-semibold text-green-800 mb-3">
+                Na je onderzoek:
+              </h3>
+              <p className="text-green-700 mb-4">
+                Als je genoeg aan de weet bent gekomen kies dan de functie die het allerbest bij je past en vul het zoekprofiel op de website in. Vinster zal jouw tekst omzetten naar een paar zinnen die je kunt gebruiken om anderen te laten weten wat je zoekt.
               </p>
-              
+              <p className="text-green-700 mb-4">
+                Je kunt nu gericht gaan solliciteren! Zoek vacatures, laat jouw netwerk weten wat je wilt en deel op LinkedIn welke functie je zoekt.
+              </p>
+              <p className="text-green-700 font-semibold">
+                We wensen jou veel werkplezier in je volgende functie!
+              </p>
+            </div>
+
+            {/* Important Notice */}
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
+              <h3 className="text-lg font-semibold text-blue-800 mb-3">
+                ⏰ Neem hier de tijd voor dit onderzoek
+              </h3>
+              <p className="text-blue-700 mb-3">
+                Dit onderzoek is cruciaal voor het vinden van je ideale functie. Neem de tijd om elke stap zorgvuldig uit te voeren.
+              </p>
+              <p className="text-blue-700">
+                Hoe beter je dit onderzoek doet, hoe beter je straks je zoekprofiel kunt invullen en hoe gerichter je kunt solliciteren.
+              </p>
+            </div>
+
+            {/* Navigation */}
+            <div className="text-center">
               <Button 
-                onClick={() => navigate('/enthousiasme-intro')}
+                onClick={() => navigate('/home')}
                 size="lg"
-                className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold px-8 py-4 rounded-lg flex items-center gap-2 mx-auto"
+                className="bg-blue-900 hover:bg-blue-800 text-white font-semibold px-8 py-4 rounded-lg flex items-center gap-2 mx-auto"
               >
-                Start onderzoek
-                <ArrowRight className="w-5 h-5" />
+                <Home className="w-5 h-5" />
+                Terug naar dashboard
               </Button>
-            </CardContent>
-          </Card>
-        </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

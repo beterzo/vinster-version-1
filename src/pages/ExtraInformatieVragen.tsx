@@ -127,8 +127,8 @@ const ExtraInformatieVragen = () => {
         variant: "default",
       });
       
-      // Navigate to rapport review page
-      navigate('/rapport-review');
+      // Navigate to rapport download page instead of rapport review
+      navigate('/rapport-download');
     } catch (error) {
       console.error("Error completing profile:", error);
       

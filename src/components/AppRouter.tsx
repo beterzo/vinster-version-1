@@ -22,7 +22,6 @@ import ToegangscodesProfessionals from "@/pages/ToegangscodesProfessionals";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import Home from "@/pages/Home";
 import PaymentRequired from "@/pages/PaymentRequired";
-import RapportReview from "@/pages/RapportReview";
 import RapportDownload from "@/pages/RapportDownload";
 import OnderzoeksplanPagina from "@/pages/OnderzoeksplanPagina";
 import ZoekprofielIntro from "@/pages/ZoekprofielIntro";
@@ -207,15 +206,6 @@ const AppRouter = () => {
         element={
           <ProtectedRoute>
             <PrioriteitenWerkomstandigheden />
-          </ProtectedRoute>
-        }
-      />
-      
-      <Route
-        path="/rapport-review"
-        element={
-          <ProtectedRoute>
-            <RapportReview />
           </ProtectedRoute>
         }
       />

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-import { FileText, Download, ExternalLink } from "lucide-react";
+import { FileText, Download, ExternalLink, CheckCircle, AlertCircle, Clock, ArrowRight } from "lucide-react";
 import { useRapportData } from "@/hooks/useRapportData";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -11,25 +11,79 @@ import { useToast } from "@/hooks/use-toast";
 const RapportDownload = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { data: reportData, loading } = useRapportData();
+  const { data: reportData, loading, refreshData } = useRapportData();
   const [pdfUrl, setPdfUrl] = useState<string | null>(null);
   const [isDownloading, setIsDownloading] = useState(false);
+  const [reportStatus, setReportStatus] = useState<'pending' | 'generating' | 'completed' | 'failed'>('pending');
 
   useEffect(() => {
-    if (reportData?.pdf_file_path) {
-      console.log('PDF file path found:', reportData.pdf_file_path);
+    if (reportData) {
+      setReportStatus(reportData.report_status as any);
       
-      // Get the public URL for the PDF
-      const { data } = supabase.storage
-        .from('user-reports')
-        .getPublicUrl(reportData.pdf_file_path);
-      
-      console.log('Generated public URL:', data.publicUrl);
-      setPdfUrl(data.publicUrl);
-    } else {
-      console.log('No PDF file path found in report data:', reportData);
+      if (reportData?.pdf_file_path) {
+        console.log('PDF file path found:', reportData.pdf_file_path);
+        
+        // Get the public URL for the PDF
+        const { data } = supabase.storage
+          .from('user-reports')
+          .getPublicUrl(reportData.pdf_file_path);
+        
+        console.log('Generated public URL:', data.publicUrl);
+        setPdfUrl(data.publicUrl);
+      } else {
+        console.log('No PDF file path found in report data:', reportData);
+      }
     }
   }, [reportData]);
+
+  // Set up realtime subscription for report status updates
+  useEffect(() => {
+    if (!reportData?.user_id) return;
+
+    console.log('Setting up realtime subscription for user reports...');
+    
+    const channel = supabase
+      .channel('user-reports-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: 'UPDATE',
+          schema: 'public',
+          table: 'user_reports',
+          filter: `user_id=eq.${reportData.user_id}`
+        },
+        (payload) => {
+          console.log('Realtime update received:', payload);
+          const newData = payload.new as any;
+          if (newData.report_status) {
+            setReportStatus(newData.report_status);
+            
+            // If report is completed, refresh data to get latest info
+            if (newData.report_status === 'completed') {
+              refreshData();
+            }
+          }
+        }
+      )
+      .subscribe();
+
+    return () => {
+      console.log('Cleaning up realtime subscription');
+      supabase.removeChannel(channel);
+    };
+  }, [reportData?.user_id, refreshData]);
+
+  // Auto-refresh status every 30 seconds as backup to realtime
+  useEffect(() => {
+    if (reportStatus === 'generating') {
+      const interval = setInterval(() => {
+        console.log('Polling for report status update...');
+        refreshData();
+      }, 30000); // 30 seconds
+
+      return () => clearInterval(interval);
+    }
+  }, [reportStatus, refreshData]);
 
   const handleDownload = async () => {
     if (!pdfUrl) {
@@ -84,6 +138,48 @@ const RapportDownload = () => {
     }
   };
 
+  const handleNextStep = () => {
+    navigate('/onderzoeksplan');
+  };
+
+  const getStatusIcon = () => {
+    switch (reportStatus) {
+      case 'completed':
+        return <CheckCircle className="w-12 h-12 text-green-600" />;
+      case 'generating':
+        return <Clock className="w-12 h-12 text-blue-600 animate-pulse" />;
+      case 'failed':
+        return <AlertCircle className="w-12 h-12 text-red-600" />;
+      default:
+        return <Clock className="w-12 h-12 text-gray-400" />;
+    }
+  };
+
+  const getStatusMessage = () => {
+    switch (reportStatus) {
+      case 'completed':
+        return {
+          title: "Je rapport is klaar!",
+          description: "Je persoonlijke carrièrerapport is succesvol gegenereerd en klaar om te bekijken."
+        };
+      case 'generating':
+        return {
+          title: "Je rapport wordt gegenereerd...",
+          description: "We werken hard aan je persoonlijke carrièrerapport. Dit kan enkele minuten duren."
+        };
+      case 'failed':
+        return {
+          title: "Er ging iets mis",
+          description: "Er is een fout opgetreden bij het genereren van je rapport. Probeer het opnieuw of neem contact op met support."
+        };
+      default:
+        return {
+          title: "Rapport wordt voorbereid...",
+          description: "Je profiel is voltooid en je rapport wordt automatisch gegenereerd."
+        };
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -94,6 +190,8 @@ const RapportDownload = () => {
       </div>
     );
   }
+
+  const status = getStatusMessage();
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
@@ -116,20 +214,24 @@ const RapportDownload = () => {
         <Card className="rounded-3xl shadow-xl">
           <CardContent className="p-12 text-center">
             <div className="mb-8">
-              <div className="mx-auto w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
-                <FileText className="w-10 h-10 text-green-600" />
+              <div className="mx-auto w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mb-6">
+                {reportStatus === 'completed' ? (
+                  <FileText className="w-10 h-10 text-green-600" />
+                ) : (
+                  getStatusIcon()
+                )}
               </div>
               
               <h1 className="text-4xl font-bold text-blue-900 mb-4">
-                Je rapport is klaar!
+                {status.title}
               </h1>
               
               <p className="text-xl text-gray-600 mb-8">
-                Je persoonlijke carrièrerapport is succesvol gegenereerd en klaar om te bekijken.
+                {status.description}
               </p>
             </div>
 
-            {pdfUrl ? (
+            {reportStatus === 'completed' && pdfUrl && (
               <div className="space-y-4">
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button
@@ -154,12 +256,71 @@ const RapportDownload = () => {
                 </div>
                 
                 <div className="mt-8 p-4 bg-blue-50 rounded-lg">
-                  <p className="text-sm text-blue-700">
+                  <p className="text-sm text-blue-700 mb-4">
                     💡 <strong>Tip:</strong> Bewaar je rapport goed. Het bevat waardevolle inzichten voor je carrière!
                   </p>
                 </div>
+
+                {/* Next Step Button */}
+                <div className="mt-8 pt-6 border-t border-gray-200">
+                  <h3 className="text-lg font-semibold text-blue-900 mb-4">
+                    Klaar voor de volgende stap?
+                  </h3>
+                  <p className="text-gray-600 mb-6">
+                    Volg ons onderzoeksplan om de perfecte functie voor jezelf te vinden.
+                  </p>
+                  <Button
+                    onClick={handleNextStep}
+                    size="lg"
+                    className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold px-8 py-4 rounded-lg flex items-center gap-2 mx-auto"
+                  >
+                    Bekijk onderzoeksplan
+                    <ArrowRight className="w-5 h-5" />
+                  </Button>
+                </div>
               </div>
-            ) : (
+            )}
+
+            {(reportStatus === 'generating' || reportStatus === 'pending') && (
+              <div className="text-center">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-900 mx-auto mb-4"></div>
+                <p className="text-gray-600 mb-4">
+                  Je rapport wordt gegenereerd... Dit kan 2-5 minuten duren.
+                </p>
+                <div className="bg-blue-50 p-4 rounded-lg mb-4">
+                  <p className="text-sm text-blue-700">
+                    💡 <strong>Tip:</strong> Laat deze pagina open. Je krijgt automatisch een melding zodra je rapport klaar is!
+                  </p>
+                </div>
+                <Button
+                  onClick={refreshData}
+                  variant="outline"
+                  className="border-blue-900 text-blue-900 hover:bg-blue-50"
+                >
+                  Status vernieuwen
+                </Button>
+              </div>
+            )}
+
+            {reportStatus === 'failed' && (
+              <div className="text-center">
+                <div className="bg-red-50 p-4 rounded-lg mb-4">
+                  <p className="text-sm text-red-700">
+                    Er is een technische fout opgetreden. Neem contact op met support als dit probleem aanhoudt.
+                  </p>
+                </div>
+                <Button
+                  onClick={refreshData}
+                  variant="outline"
+                  size="lg"
+                  className="border-red-600 text-red-600 hover:bg-red-50 font-semibold px-8 py-4 rounded-lg"
+                >
+                  Status controleren
+                </Button>
+              </div>
+            )}
+
+            {!reportStatus === 'completed' && !pdfUrl && reportStatus !== 'generating' && reportStatus !== 'pending' && reportStatus !== 'failed' && (
               <div className="text-center">
                 <p className="text-gray-600 mb-4">
                   Je rapport wordt nog gegenereerd. Dit kan enkele minuten duren.
