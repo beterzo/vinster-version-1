@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -19,7 +18,7 @@ const RapportDownload = () => {
     if (reportData?.pdf_file_path) {
       // Get the public URL for the PDF
       const { data } = supabase.storage
-        .from('user-pdfs')
+        .from('user-reports')
         .getPublicUrl(reportData.pdf_file_path);
       
       setPdfUrl(data.publicUrl);
