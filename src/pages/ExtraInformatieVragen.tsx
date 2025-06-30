@@ -92,11 +92,11 @@ const ExtraInformatieVragen = () => {
       
       toast({
         title: "Gelukt!",
-        description: "Je gegevens zijn succesvol opgeslagen en verzonden.",
+        description: "Je gegevens zijn succesvol opgeslagen en verzonden. Je rapport wordt nu gegenereerd.",
         variant: "default",
       });
       
-      navigate('/wensberoepen-intro');
+      navigate('/rapport-review');
     } catch (error) {
       console.error("Error completing extra informatie:", error);
       
