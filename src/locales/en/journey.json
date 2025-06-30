@@ -49,6 +49,23 @@
       "finish_button": "Complete",
       "finishing": "Completing...",
       "sending_data": "Sending data..."
+    },
+    "voltooi": {
+      "title": "Congratulations! 🎉",
+      "subtitle": "You have successfully completed the questions about your dream jobs",
+      "what_happened_title": "What has happened now:",
+      "what_happened_description": "Keywords have now been compiled to determine what you find important in your work",
+      "next_step_title": "Next step: Create career report",
+      "next_step_description": "To generate your personal career report, we need some additional information from you:",
+      "priorities_title": "Priorities",
+      "priorities_description": "The keywords are divided into 3 parts: activities, interests and working conditions. It is now up to you to emphasize the keywords that you find most important.",
+      "extra_info_title": "Additional information",
+      "extra_info_description": "Additional questions about your background. Think of information such as your education and education level, but also whether there is a specific sector you want to search in.",
+      "report_title": "Report",
+      "report_description": "Receive your personal career advice. After we have received all information from you, you will receive a complete personal career report that you can continue with!",
+      "create_report_button": "Create career report",
+      "to_dashboard_button": "To dashboard",
+      "tip_text": "💡 You can always create your career report later via the dashboard"
     }
   }
 }
