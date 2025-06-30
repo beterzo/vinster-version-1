@@ -1,8 +1,8 @@
-
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
+import { useTranslation } from '@/hooks/useTranslation';
 
 export interface ZoekprofielPdf {
   id: string;
@@ -17,6 +17,7 @@ export interface ZoekprofielPdf {
 export const useZoekprofielPdf = () => {
   const { user } = useAuth();
   const { toast } = useToast();
+  const { language } = useTranslation();
   const [pdfData, setPdfData] = useState<ZoekprofielPdf | null>(null);
   const [loading, setLoading] = useState(true);
   const [downloading, setDownloading] = useState(false);
@@ -293,6 +294,8 @@ export const useZoekprofielPdf = () => {
       await loadPdfData();
       startFallbackPolling();
 
+      console.log('✅ PDF generation initialized with language:', language);
+
     } catch (error) {
       console.error('❌ Error initializing PDF generation:', error);
       toast({
@@ -301,7 +304,7 @@ export const useZoekprofielPdf = () => {
         variant: "destructive"
       });
     }
-  }, [user?.id, toast, loadPdfData, startFallbackPolling]);
+  }, [user?.id, toast, loadPdfData, startFallbackPolling, language]);
 
   // Initial load
   useEffect(() => {

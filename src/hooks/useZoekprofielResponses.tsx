@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
+import { useTranslation } from '@/hooks/useTranslation';
 
 export interface ZoekprofielResponse {
   id: string;
@@ -19,6 +20,7 @@ export interface ZoekprofielResponse {
 export const useZoekprofielResponses = () => {
   const { user } = useAuth();
   const { toast } = useToast();
+  const { language } = useTranslation();
   const [responses, setResponses] = useState<ZoekprofielResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
@@ -172,7 +174,9 @@ export const useZoekprofielResponses = () => {
     }, 1000);
   }, [calculateProgress, debouncedSave]);
 
-  const submitToWebhook = async (language: string = 'nl') => {
+  const submitToWebhook = async (submissionLanguage?: string) => {
+    const languageToUse = submissionLanguage || language || 'nl';
+    
     // Use local state for submission to ensure we have the latest values
     const dataToSubmit = { ...responses, ...localState };
     
@@ -197,7 +201,9 @@ export const useZoekprofielResponses = () => {
         body: JSON.stringify({
           user_id: user?.id,
           email: user?.email || "",
-          language: language,
+          first_name: user?.user_metadata?.first_name || "",
+          last_name: user?.user_metadata?.last_name || "",
+          language: languageToUse,
           functie_als: dataToSubmit.functie_als,
           kerntaken: dataToSubmit.kerntaken,
           sector: dataToSubmit.sector,
