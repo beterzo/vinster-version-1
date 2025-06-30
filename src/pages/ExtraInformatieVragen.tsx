@@ -6,15 +6,15 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 import { useExtraInformatieResponses } from "@/hooks/useExtraInformatieResponses";
-import { useWebhookData } from "@/hooks/useWebhookData";
-import { sendWebhookData } from "@/services/webhookService";
+import { useMakeWebhookData } from "@/hooks/useMakeWebhookData";
+import { sendMakeWebhook } from "@/services/webhookService";
 import { useToast } from "@/hooks/use-toast";
 
 const ExtraInformatieVragen = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { responses, saveResponses, loading } = useExtraInformatieResponses();
-  const { collectWebhookData } = useWebhookData();
+  const { collectMakeWebhookData } = useMakeWebhookData();
   
   const [answers, setAnswers] = useState({
     opleidingsniveau: "",
@@ -73,8 +73,8 @@ const ExtraInformatieVragen = () => {
       // Save current answers first
       await saveResponses(answers);
       
-      // Collect all data for webhook
-      const webhookData = collectWebhookData();
+      // Collect all data for Make.com webhook
+      const webhookData = collectMakeWebhookData();
       
       if (!webhookData) {
         toast({
@@ -85,10 +85,10 @@ const ExtraInformatieVragen = () => {
         return;
       }
 
-      // Send data to webhook
-      await sendWebhookData(webhookData);
+      // Send data to Make.com webhook
+      await sendMakeWebhook(webhookData);
       
-      console.log("Extra informatie completed and data sent to webhook!");
+      console.log("Extra informatie completed and data sent to Make.com webhook!");
       
       toast({
         title: "Gelukt!",

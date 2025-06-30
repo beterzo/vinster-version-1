@@ -5,78 +5,56 @@ import { supabase } from '@/integrations/supabase/client';
 import { useToast } from './use-toast';
 
 interface RapportData {
-  enthousiasme: any;
-  wensberoepen: any;
-  extraInformatie: any;
-  prioriteiten: any;
+  id: string;
+  user_id: string;
+  report_data: any;
+  report_status: string;
+  pdf_file_path: string | null;
+  pdf_generated_at: string | null;
+  generated_at: string | null;
+  created_at: string;
+  updated_at: string;
 }
 
 export const useRapportData = () => {
   const { user } = useAuth();
   const { toast } = useToast();
-  const [data, setData] = useState<RapportData>({
-    enthousiasme: null,
-    wensberoepen: null,
-    extraInformatie: null,
-    prioriteiten: null
-  });
+  const [data, setData] = useState<RapportData | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (user) {
-      loadAllData();
+      loadRapportData();
     }
   }, [user]);
 
-  const loadAllData = async () => {
+  const loadRapportData = async () => {
     if (!user) return;
 
     try {
-      console.log('Loading all rapport data for user:', user.id);
+      console.log('Loading rapport data for user:', user.id);
 
-      // Load all data in parallel
-      const [enthousiasmeResult, wensberoepenResult, extraInfoResult, prioriteitenResult] = await Promise.all([
-        supabase
-          .from('enthousiasme_responses')
-          .select('*')
-          .eq('user_id', user.id)
-          .maybeSingle(),
-        supabase
-          .from('wensberoepen_responses')
-          .select('*')
-          .eq('user_id', user.id)
-          .maybeSingle(),
-        supabase
-          .from('extra_informatie_responses')
-          .select('*')
-          .eq('user_id', user.id)
-          .maybeSingle(),
-        supabase
-          .from('prioriteiten_responses')
-          .select('*')
-          .eq('user_id', user.id)
-          .maybeSingle()
-      ]);
+      const { data: reportData, error } = await supabase
+        .from('user_reports')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .maybeSingle();
 
-      setData({
-        enthousiasme: enthousiasmeResult.data,
-        wensberoepen: wensberoepenResult.data,
-        extraInformatie: extraInfoResult.data,
-        prioriteiten: prioriteitenResult.data
-      });
+      if (error) {
+        console.error('Error loading rapport data:', error);
+        throw error;
+      }
 
-      console.log('Loaded rapport data:', {
-        enthousiasme: !!enthousiasmeResult.data,
-        wensberoepen: !!wensberoepenResult.data,
-        extraInformatie: !!extraInfoResult.data,
-        prioriteiten: !!prioriteitenResult.data
-      });
+      setData(reportData);
+      console.log('Loaded rapport data:', reportData);
 
     } catch (error) {
       console.error('Error loading rapport data:', error);
       toast({
         title: "Fout bij laden",
-        description: "Er is een fout opgetreden bij het laden van je gegevens.",
+        description: "Er is een fout opgetreden bij het laden van je rapport gegevens.",
         variant: "destructive",
       });
     } finally {
@@ -86,7 +64,7 @@ export const useRapportData = () => {
 
   const refreshData = () => {
     setLoading(true);
-    loadAllData();
+    loadRapportData();
   };
 
   return {
