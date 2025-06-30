@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
@@ -55,8 +54,7 @@ const Dashboard = () => {
         navigate("/profiel-voltooien-intro");
         break;
       case "Loopbaanrapport":
-        // Navigate to rapport review/download when available
-        navigate("/rapport-review");
+        navigate("/rapport-download");
         break;
       case "Zoekprofiel":
         navigate("/zoekprofiel-intro");

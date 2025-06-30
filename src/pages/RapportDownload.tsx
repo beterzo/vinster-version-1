@@ -320,7 +320,7 @@ const RapportDownload = () => {
               </div>
             )}
 
-            {!reportStatus === 'completed' && !pdfUrl && reportStatus !== 'generating' && reportStatus !== 'pending' && reportStatus !== 'failed' && (
+            {reportStatus !== 'completed' && reportStatus !== 'generating' && reportStatus !== 'pending' && reportStatus !== 'failed' && !pdfUrl && (
               <div className="text-center">
                 <p className="text-gray-600 mb-4">
                   Je rapport wordt nog gegenereerd. Dit kan enkele minuten duren.
