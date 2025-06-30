@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
@@ -272,8 +272,10 @@ export const useZoekprofielResponses = () => {
     loadResponses();
   }, [user?.id]);
 
-  // Return local state merged with responses for current values
-  const currentData = { ...responses, ...localState };
+  // Use useMemo to prevent unnecessary re-renders of currentData
+  const currentData = useMemo(() => {
+    return { ...responses, ...localState };
+  }, [responses, localState]);
 
   return {
     responses: currentData,

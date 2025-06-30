@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -28,20 +28,30 @@ const ZoekprofielVragen = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // Create a stable reference to responses data to prevent infinite re-renders
+  const stableResponses = useMemo(() => responses, [
+    responses?.functie_als,
+    responses?.kerntaken,
+    responses?.organisatie_bij,
+    responses?.sector,
+    responses?.gewenste_regio,
+    responses?.arbeidsvoorwaarden
+  ]);
+
   // Load saved data when responses change
   useEffect(() => {
-    if (!loading && responses) {
-      console.log("Loading saved responses into form:", responses);
+    if (!loading && stableResponses) {
+      console.log("Loading saved responses into form:", stableResponses);
       setAnswers({
-        functie_als: responses.functie_als || "",
-        kerntaken: responses.kerntaken || "",
-        organisatie_bij: responses.organisatie_bij || "",
-        sector: responses.sector || "",
-        gewenste_regio: responses.gewenste_regio || "",
-        arbeidsvoorwaarden: responses.arbeidsvoorwaarden || ""
+        functie_als: stableResponses.functie_als || "",
+        kerntaken: stableResponses.kerntaken || "",
+        organisatie_bij: stableResponses.organisatie_bij || "",
+        sector: stableResponses.sector || "",
+        gewenste_regio: stableResponses.gewenste_regio || "",
+        arbeidsvoorwaarden: stableResponses.arbeidsvoorwaarden || ""
       });
     }
-  }, [loading, responses]);
+  }, [loading, stableResponses]);
 
   const handleInputChange = (field: string, value: string) => {
     console.log(`Updating ${field}:`, value);
