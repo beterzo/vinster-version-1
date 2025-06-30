@@ -12,7 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 const ZoekprofielVragen = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { responses, saveResponse, loading } = useZoekprofielResponses();
+  const { responses, saveResponse, loading, submitToWebhook } = useZoekprofielResponses();
   const { initializePdfGeneration, isGenerating } = useZoekprofielPdf();
   
   const [answers, setAnswers] = useState({
@@ -23,6 +23,9 @@ const ZoekprofielVragen = () => {
     gewenste_regio: "",
     arbeidsvoorwaarden: ""
   });
+
+  // State to track if we're submitting to webhook
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -68,13 +71,26 @@ const ZoekprofielVragen = () => {
       return;
     }
 
+    setIsSubmitting(true);
+
     try {
-      console.log("Generating zoekprofiel PDF...");
+      console.log("Submitting zoekprofiel data to webhook...");
+      
+      // First submit to webhook with the data
+      const webhookSuccess = await submitToWebhook();
+      
+      if (!webhookSuccess) {
+        throw new Error("Webhook submission failed");
+      }
+
+      console.log("Webhook submission successful, initializing PDF generation...");
+      
+      // Then initialize PDF generation
       await initializePdfGeneration();
       
       toast({
         title: "Zoekprofiel gegenereerd!",
-        description: "Je zoekprofiel is succesvol aangemaakt.",
+        description: "Je zoekprofiel is succesvol aangemaakt en wordt nu verwerkt.",
       });
       
       navigate('/zoekprofiel-download');
@@ -86,6 +102,8 @@ const ZoekprofielVragen = () => {
         description: "Er ging iets mis bij het genereren van je zoekprofiel. Probeer het opnieuw.",
         variant: "destructive",
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -127,6 +145,7 @@ const ZoekprofielVragen = () => {
   }
 
   const allFieldsFilled = Object.values(answers).every(answer => answer.trim() !== "");
+  const isProcessing = isSubmitting || isGenerating;
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
@@ -183,20 +202,20 @@ const ZoekprofielVragen = () => {
                 onClick={() => navigate('/zoekprofiel-intro')}
                 variant="outline"
                 className="border-blue-900 text-blue-900 hover:bg-blue-50"
-                disabled={isGenerating}
+                disabled={isProcessing}
               >
                 Terug naar intro
               </Button>
               <Button 
                 onClick={handleComplete}
                 className={`font-semibold px-8 ${
-                  allFieldsFilled
+                  allFieldsFilled && !isProcessing
                     ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 
                     : "bg-gray-300 text-gray-500 cursor-not-allowed"
                 }`}
-                disabled={isGenerating || !allFieldsFilled}
+                disabled={isProcessing || !allFieldsFilled}
               >
-                {isGenerating ? "Genereren..." : "Zoekprofiel genereren"}
+                {isProcessing ? "Genereren..." : "Zoekprofiel genereren"}
               </Button>
             </div>
           </CardContent>
