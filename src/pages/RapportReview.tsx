@@ -4,14 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { CheckCircle, AlertCircle, Clock } from "lucide-react";
-import { useRapportGeneration } from "@/hooks/useRapportGeneration";
 import { useRapportData } from "@/hooks/useRapportData";
+import { supabase } from "@/integrations/supabase/client";
 
 const RapportReview = () => {
   const navigate = useNavigate();
-  const { generateReport, generating } = useRapportGeneration();
-  const { data: reportData, loading } = useRapportData();
-  const [reportStatus, setReportStatus] = useState<'pending' | 'generating' | 'ready' | 'error'>('pending');
+  const { data: reportData, loading, refreshData } = useRapportData();
+  const [reportStatus, setReportStatus] = useState<'pending' | 'generating' | 'completed' | 'failed'>('pending');
 
   useEffect(() => {
     if (reportData) {
@@ -19,16 +18,54 @@ const RapportReview = () => {
     }
   }, [reportData]);
 
-  const handleGenerateReport = async () => {
-    try {
-      await generateReport({ includeUserData: true });
-      // After generation starts, poll for status
-      setReportStatus('generating');
-    } catch (error) {
-      console.error('Error generating report:', error);
-      setReportStatus('error');
+  // Set up realtime subscription for report status updates
+  useEffect(() => {
+    if (!reportData?.user_id) return;
+
+    console.log('Setting up realtime subscription for user reports...');
+    
+    const channel = supabase
+      .channel('user-reports-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: 'UPDATE',
+          schema: 'public',
+          table: 'user_reports',
+          filter: `user_id=eq.${reportData.user_id}`
+        },
+        (payload) => {
+          console.log('Realtime update received:', payload);
+          const newData = payload.new as any;
+          if (newData.report_status) {
+            setReportStatus(newData.report_status);
+            
+            // If report is completed, refresh data to get latest info
+            if (newData.report_status === 'completed') {
+              refreshData();
+            }
+          }
+        }
+      )
+      .subscribe();
+
+    return () => {
+      console.log('Cleaning up realtime subscription');
+      supabase.removeChannel(channel);
+    };
+  }, [reportData?.user_id, refreshData]);
+
+  // Auto-refresh status every 30 seconds as backup to realtime
+  useEffect(() => {
+    if (reportStatus === 'generating') {
+      const interval = setInterval(() => {
+        console.log('Polling for report status update...');
+        refreshData();
+      }, 30000); // 30 seconds
+
+      return () => clearInterval(interval);
     }
-  };
+  }, [reportStatus, refreshData]);
 
   const handleViewReport = () => {
     navigate('/rapport-download');
@@ -36,11 +73,11 @@ const RapportReview = () => {
 
   const getStatusIcon = () => {
     switch (reportStatus) {
-      case 'ready':
+      case 'completed':
         return <CheckCircle className="w-12 h-12 text-green-600" />;
       case 'generating':
         return <Clock className="w-12 h-12 text-blue-600 animate-pulse" />;
-      case 'error':
+      case 'failed':
         return <AlertCircle className="w-12 h-12 text-red-600" />;
       default:
         return <Clock className="w-12 h-12 text-gray-400" />;
@@ -49,25 +86,25 @@ const RapportReview = () => {
 
   const getStatusMessage = () => {
     switch (reportStatus) {
-      case 'ready':
+      case 'completed':
         return {
           title: "Je rapport is klaar!",
           description: "Je persoonlijke carrièrerapport is succesvol gegenereerd en klaar om te bekijken."
         };
       case 'generating':
         return {
-          title: "Rapport wordt gegenereerd...",
+          title: "Je rapport wordt gegenereerd...",
           description: "We werken hard aan je persoonlijke carrièrerapport. Dit kan enkele minuten duren."
         };
-      case 'error':
+      case 'failed':
         return {
           title: "Er ging iets mis",
-          description: "Er is een fout opgetreden bij het genereren van je rapport. Probeer het opnieuw."
+          description: "Er is een fout opgetreden bij het genereren van je rapport. Probeer het opnieuw of neem contact op met support."
         };
       default:
         return {
-          title: "Klaar voor rapportgeneratie",
-          description: "Je hebt alle stappen voltooid. Klik op de knop om je persoonlijke carrièrerapport te genereren."
+          title: "Rapport wordt voorbereid...",
+          description: "Je profiel is voltooid en je rapport wordt automatisch gegenereerd."
         };
     }
   };
@@ -120,7 +157,7 @@ const RapportReview = () => {
             </div>
 
             <div className="space-y-4">
-              {reportStatus === 'ready' && (
+              {reportStatus === 'completed' && (
                 <Button
                   onClick={handleViewReport}
                   size="lg"
@@ -130,25 +167,19 @@ const RapportReview = () => {
                 </Button>
               )}
 
-              {reportStatus === 'pending' && (
-                <Button
-                  onClick={handleGenerateReport}
-                  disabled={generating}
-                  size="lg"
-                  className="bg-blue-900 hover:bg-blue-800 text-white font-semibold px-8 py-4 rounded-lg"
-                >
-                  {generating ? "Genereren..." : "Genereer rapport"}
-                </Button>
-              )}
-
-              {reportStatus === 'generating' && (
+              {(reportStatus === 'generating' || reportStatus === 'pending') && (
                 <div className="text-center">
                   <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-900 mx-auto mb-4"></div>
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 mb-4">
                     Je rapport wordt gegenereerd... Dit kan 2-5 minuten duren.
                   </p>
+                  <div className="bg-blue-50 p-4 rounded-lg">
+                    <p className="text-sm text-blue-700">
+                      💡 <strong>Tip:</strong> Laat deze pagina open. Je krijgt automatisch een melding zodra je rapport klaar is!
+                    </p>
+                  </div>
                   <Button
-                    onClick={() => window.location.reload()}
+                    onClick={refreshData}
                     variant="outline"
                     className="mt-4 border-blue-900 text-blue-900 hover:bg-blue-50"
                   >
@@ -157,16 +188,22 @@ const RapportReview = () => {
                 </div>
               )}
 
-              {reportStatus === 'error' && (
-                <Button
-                  onClick={handleGenerateReport}
-                  disabled={generating}
-                  variant="outline"
-                  size="lg"
-                  className="border-red-600 text-red-600 hover:bg-red-50 font-semibold px-8 py-4 rounded-lg"
-                >
-                  {generating ? "Opnieuw genereren..." : "Probeer opnieuw"}
-                </Button>
+              {reportStatus === 'failed' && (
+                <div className="text-center">
+                  <div className="bg-red-50 p-4 rounded-lg mb-4">
+                    <p className="text-sm text-red-700">
+                      Er is een technische fout opgetreden. Neem contact op met support als dit probleem aanhoudt.
+                    </p>
+                  </div>
+                  <Button
+                    onClick={refreshData}
+                    variant="outline"
+                    size="lg"
+                    className="border-red-600 text-red-600 hover:bg-red-50 font-semibold px-8 py-4 rounded-lg"
+                  >
+                    Status controleren
+                  </Button>
+                </div>
               )}
             </div>
 

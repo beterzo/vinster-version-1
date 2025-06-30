@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -9,10 +8,13 @@ import { useExtraInformatieResponses } from "@/hooks/useExtraInformatieResponses
 import { useMakeWebhookData } from "@/hooks/useMakeWebhookData";
 import { sendMakeWebhook } from "@/services/webhookService";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
 
 const ExtraInformatieVragen = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { user } = useAuth();
   const { responses, saveResponses, loading } = useExtraInformatieResponses();
   const { collectMakeWebhookData } = useMakeWebhookData();
   
@@ -67,13 +69,43 @@ const ExtraInformatieVragen = () => {
       return;
     }
 
+    if (!user) {
+      toast({
+        title: "Fout",
+        description: "Geen gebruiker gevonden.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     try {
       setIsSubmitting(true);
       
       // Save current answers first
       await saveResponses(answers);
       
-      // Collect all data for Make.com webhook
+      // Create report entry with generating status
+      console.log('Creating user report entry for user:', user.id);
+      const { error: reportError } = await supabase
+        .from('user_reports')
+        .upsert({
+          user_id: user.id,
+          report_data: { profile_completed: true },
+          report_status: 'generating',
+          generated_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        }, {
+          onConflict: 'user_id'
+        });
+
+      if (reportError) {
+        console.error('Error creating report entry:', reportError);
+        throw reportError;
+      }
+
+      console.log('Report entry created successfully with generating status');
+      
+      // Send data to Make.com webhook for PDF generation
       const webhookData = collectMakeWebhookData();
       
       if (!webhookData) {
@@ -85,24 +117,24 @@ const ExtraInformatieVragen = () => {
         return;
       }
 
-      // Send data to Make.com webhook
       await sendMakeWebhook(webhookData);
       
-      console.log("Extra informatie completed and data sent to Make.com webhook!");
+      console.log("Profile completed and Make.com webhook sent - PDF generation started!");
       
       toast({
-        title: "Gelukt!",
-        description: "Je gegevens zijn succesvol opgeslagen en verzonden. Je rapport wordt nu gegenereerd.",
+        title: "Profiel voltooid!",
+        description: "Je rapport wordt nu automatisch gegenereerd. Je wordt doorgestuurd naar de rapport pagina.",
         variant: "default",
       });
       
+      // Navigate to rapport review page
       navigate('/rapport-review');
     } catch (error) {
-      console.error("Error completing extra informatie:", error);
+      console.error("Error completing profile:", error);
       
       toast({
         title: "Fout bij opslaan",
-        description: "Er ging iets mis bij het opslaan van je gegevens. Probeer het opnieuw.",
+        description: "Er ging iets mis bij het voltooien van je profiel. Probeer het opnieuw.",
         variant: "destructive",
       });
     } finally {
@@ -172,7 +204,7 @@ const ExtraInformatieVragen = () => {
               {isSubmitting && (
                 <div className="mt-4 p-3 bg-blue-50 rounded-lg">
                   <p className="text-sm text-blue-700">
-                    📤 Gegevens worden verzonden...
+                    📤 Profiel wordt voltooid en rapport gegenereerd...
                   </p>
                 </div>
               )}
@@ -216,7 +248,7 @@ const ExtraInformatieVragen = () => {
                 }`}
                 disabled={isSubmitting || !allFieldsFilled}
               >
-                {isSubmitting ? "Voltooien..." : "Profiel voltooien"}
+                {isSubmitting ? "Profiel voltooien..." : "Profiel voltooien"}
               </Button>
             </div>
           </CardContent>
