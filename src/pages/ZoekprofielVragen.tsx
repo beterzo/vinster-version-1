@@ -28,15 +28,10 @@ const ZoekprofielVragen = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Create a stable reference to responses data to prevent infinite re-renders
-  const stableResponses = useMemo(() => responses, [
-    responses?.functie_als,
-    responses?.kerntaken,
-    responses?.organisatie_bij,
-    responses?.sector,
-    responses?.gewenste_regio,
-    responses?.arbeidsvoorwaarden
-  ]);
+  // Simplified stable reference - only recreate when responses object changes
+  const stableResponses = useMemo(() => {
+    return responses;
+  }, [responses]);
 
   // Load saved data when responses change
   useEffect(() => {

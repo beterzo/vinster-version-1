@@ -1,7 +1,9 @@
+
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useDashboard } from "@/hooks/useDashboard";
+import { useRapportData } from "@/hooks/useRapportData";
 import DashboardHeader from "./DashboardHeader";
 import ProgressStepsGrid from "./ProgressStepsGrid";
 import { Button } from "@/components/ui/button";
@@ -12,6 +14,7 @@ const Dashboard = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { data: reportData, loading: reportLoading } = useRapportData();
   const {
     progress,
     canStartEnthousiasme,
@@ -29,6 +32,9 @@ const Dashboard = () => {
   }
 
   const firstName = user.user_metadata?.first_name || user.email?.split('@')[0] || 'Gebruiker';
+
+  // Check if user has a completed report
+  const hasUserReport = !reportLoading && reportData && reportData.report_status === 'completed';
 
   const getNextStep = () => {
     if (canStartEnthousiasme) {
@@ -134,7 +140,7 @@ const Dashboard = () => {
               wensberoepenCompleted={progress.wensberoepen === 'completed'} 
               prioriteitenCompleted={progress.prioriteiten === 'completed'} 
               extraInformatieCompleted={progress.extraInformatie === 'completed'} 
-              hasUserReport={false} 
+              hasUserReport={hasUserReport} 
               onStepClick={handleStepClick}
             />
           </Card>
