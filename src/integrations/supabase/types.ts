@@ -344,7 +344,7 @@ export type Database = {
         }
         Relationships: []
       }
-      zoekprofiel_responses: {
+      zoekprofiel_antwoorden: {
         Row: {
           arbeidsvoorwaarden: string | null
           created_at: string

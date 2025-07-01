@@ -51,7 +51,7 @@ const ZoekprofielIntro = () => {
               {/* Start Button */}
               <div className="text-center pt-8">
                 <Button 
-                  onClick={() => navigate('/zoekprofiel-vragen')} 
+                  onClick={() => navigate('/zoekprofiel-antwoorden')} 
                   className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold text-lg px-12 py-4 rounded-lg"
                 >
                   Start zoekprofiel

@@ -5,14 +5,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
-import { useZoekprofielResponses } from "@/hooks/useZoekprofielResponses";
+import { useZoekprofielAntwoorden } from "@/hooks/useZoekprofielAntwoorden";
 import { useZoekprofielPdf } from "@/hooks/useZoekprofielPdf";
 import { useToast } from "@/hooks/use-toast";
 
-const ZoekprofielVragen = () => {
+const ZoekprofielAntwoorden = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { responses, saveResponse, loading, submitToWebhook } = useZoekprofielResponses();
+  const { responses, saveResponse, loading, submitToWebhook } = useZoekprofielAntwoorden();
   const { initializePdfGeneration, isGenerating } = useZoekprofielPdf();
   
   const [answers, setAnswers] = useState({
@@ -26,10 +26,6 @@ const ZoekprofielVragen = () => {
 
   // State to track if we're submitting to webhook
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   // Simplified stable reference - only recreate when responses object changes
   const stableResponses = useMemo(() => {
@@ -61,7 +57,7 @@ const ZoekprofielVragen = () => {
     saveResponse(field as keyof typeof responses, value);
   };
 
-  const handleComplete = async () => {
+  const handleGenereren = async () => {
     if (!allFieldsFilled) {
       toast({
         title: "Vul alle velden in",
@@ -170,7 +166,7 @@ const ZoekprofielVragen = () => {
             {/* Title */}
             <div className="text-center mb-12">
               <h1 className="text-3xl font-bold text-blue-900 mb-2">
-                Zoekprofiel vragen
+                Zoekprofiel antwoorden
               </h1>
               <p className="text-xl text-gray-600">
                 Beantwoord de vragen om je persoonlijke zoekprofiel te maken
@@ -207,7 +203,7 @@ const ZoekprofielVragen = () => {
                 Terug naar intro
               </Button>
               <Button 
-                onClick={handleComplete}
+                onClick={handleGenereren}
                 className={`font-semibold px-8 ${
                   allFieldsFilled && !isProcessing
                     ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 
@@ -215,7 +211,7 @@ const ZoekprofielVragen = () => {
                 }`}
                 disabled={isProcessing || !allFieldsFilled}
               >
-                {isProcessing ? "Genereren..." : "Zoekprofiel genereren"}
+                {isProcessing ? "Genereren..." : "Genereren"}
               </Button>
             </div>
           </CardContent>
@@ -225,4 +221,4 @@ const ZoekprofielVragen = () => {
   );
 };
 
-export default ZoekprofielVragen;
+export default ZoekprofielAntwoorden;

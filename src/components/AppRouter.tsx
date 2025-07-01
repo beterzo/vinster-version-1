@@ -1,4 +1,3 @@
-
 import { Routes, Route } from "react-router-dom";
 import NotFound from "@/pages/NotFound";
 
@@ -25,7 +24,7 @@ import PaymentRequired from "@/pages/PaymentRequired";
 import RapportDownload from "@/pages/RapportDownload";
 import OnderzoeksplanPagina from "@/pages/OnderzoeksplanPagina";
 import ZoekprofielIntro from "@/pages/ZoekprofielIntro";
-import ZoekprofielVragen from "@/pages/ZoekprofielVragen";
+import ZoekprofielAntwoorden from "@/pages/ZoekprofielAntwoorden";
 import ZoekprofielDownload from "@/pages/ZoekprofielDownload";
 import EnthousiasmeIntro from "@/pages/EnthousiasmeIntro";
 import EnthousiasmeStep1 from "@/pages/EnthousiasmeStep1";
@@ -238,10 +237,10 @@ const AppRouter = () => {
       />
       
       <Route
-        path="/zoekprofiel-vragen"
+        path="/zoekprofiel-antwoorden"
         element={
           <ProtectedRoute>
-            <ZoekprofielVragen />
+            <ZoekprofielAntwoorden />
           </ProtectedRoute>
         }
       />
@@ -255,10 +254,11 @@ const AppRouter = () => {
         }
       />
       
-      {/* Legacy redirects - from old functieprofiel to new zoekprofiel routes */}
+      {/* Legacy redirects - from old routes to new zoekprofiel routes */}
       <Route path="/functieprofiel-intro" element={<Navigate to="/zoekprofiel-intro" replace />} />
-      <Route path="/functieprofiel-vragen" element={<Navigate to="/zoekprofiel-vragen" replace />} />
+      <Route path="/functieprofiel-vragen" element={<Navigate to="/zoekprofiel-antwoorden" replace />} />
       <Route path="/functieprofiel-download" element={<Navigate to="/zoekprofiel-download" replace />} />
+      <Route path="/zoekprofiel-vragen" element={<Navigate to="/zoekprofiel-antwoorden" replace />} />
 
       {/* Not Found Route */}
       <Route path="*" element={<NotFound />} />
