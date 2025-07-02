@@ -5,14 +5,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
-import { useZoekprofielAntwoorden } from "@/hooks/useZoekprofielAntwoorden";
+import { useZoekprofielResponses } from "@/hooks/useZoekprofielResponses";
 import { useZoekprofielPdf } from "@/hooks/useZoekprofielPdf";
 import { useToast } from "@/hooks/use-toast";
 
 const ZoekprofielAntwoorden = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { responses, saveResponse, loading, submitToWebhook } = useZoekprofielAntwoorden();
+  const { responses, saveResponse, loading, submitToWebhook, progress, isCompleted } = useZoekprofielResponses();
   const { initializePdfGeneration, isGenerating } = useZoekprofielPdf();
   
   const [answers, setAnswers] = useState({
@@ -50,15 +50,13 @@ const ZoekprofielAntwoorden = () => {
   const handleInputChange = (field: string, value: string) => {
     console.log(`Updating ${field}:`, value);
     setAnswers(prev => ({ ...prev, [field]: value }));
-  };
-
-  const handleInputBlur = (field: string, value: string) => {
-    console.log(`Saving ${field}:`, value);
-    saveResponse(field as keyof typeof responses, value);
+    
+    // Auto-save on every change (with debouncing handled by the hook)
+    saveResponse(field, value);
   };
 
   const handleGenereren = async () => {
-    if (!allFieldsFilled) {
+    if (!isCompleted) {
       toast({
         title: "Vul alle velden in",
         description: "Vul alle vragen in voordat je het zoekprofiel genereert.",
@@ -140,7 +138,6 @@ const ZoekprofielAntwoorden = () => {
     return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Laden...</div>;
   }
 
-  const allFieldsFilled = Object.values(answers).every(answer => answer.trim() !== "");
   const isProcessing = isSubmitting || isGenerating;
 
   return (
@@ -171,6 +168,17 @@ const ZoekprofielAntwoorden = () => {
               <p className="text-xl text-gray-600">
                 Beantwoord de vragen om je persoonlijke zoekprofiel te maken
               </p>
+              {progress > 0 && (
+                <div className="mt-4">
+                  <p className="text-sm text-gray-500 mb-2">Voortgang: {progress}%</p>
+                  <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div 
+                      className="bg-blue-600 h-2 rounded-full transition-all duration-300" 
+                      style={{ width: `${progress}%` }}
+                    ></div>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Questions */}
@@ -185,7 +193,6 @@ const ZoekprofielAntwoorden = () => {
                     placeholder={item.placeholder}
                     value={answers[item.field as keyof typeof answers]}
                     onChange={(e) => handleInputChange(item.field, e.target.value)}
-                    onBlur={(e) => handleInputBlur(item.field, e.target.value)}
                     className="min-h-[80px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
                   />
                 </div>
@@ -205,11 +212,11 @@ const ZoekprofielAntwoorden = () => {
               <Button 
                 onClick={handleGenereren}
                 className={`font-semibold px-8 ${
-                  allFieldsFilled && !isProcessing
+                  isCompleted && !isProcessing
                     ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 
                     : "bg-gray-300 text-gray-500 cursor-not-allowed"
                 }`}
-                disabled={isProcessing || !allFieldsFilled}
+                disabled={isProcessing || !isCompleted}
               >
                 {isProcessing ? "Genereren..." : "Genereren"}
               </Button>
