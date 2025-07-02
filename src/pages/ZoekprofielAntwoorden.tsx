@@ -168,17 +168,6 @@ const ZoekprofielAntwoorden = () => {
               <p className="text-xl text-gray-600">
                 Beantwoord de vragen om je persoonlijke zoekprofiel te maken
               </p>
-              {progress > 0 && (
-                <div className="mt-4">
-                  <p className="text-sm text-gray-500 mb-2">Voortgang: {progress}%</p>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div 
-                      className="bg-blue-600 h-2 rounded-full transition-all duration-300" 
-                      style={{ width: `${progress}%` }}
-                    ></div>
-                  </div>
-                </div>
-              )}
             </div>
 
             {/* Questions */}
@@ -218,7 +207,7 @@ const ZoekprofielAntwoorden = () => {
                 }`}
                 disabled={isProcessing || !isCompleted}
               >
-                {isProcessing ? "Genereren..." : "Genereren"}
+                Genereren
               </Button>
             </div>
           </CardContent>
