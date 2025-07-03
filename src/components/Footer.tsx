@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/hooks/useTranslation";
 
@@ -13,6 +12,7 @@ const Footer = () => {
     { title: t('landing.footer.contact'), path: "/contact" },
     { title: t('landing.footer.privacy_policy'), path: "/privacy-verklaring" },
     { title: t('landing.footer.terms_conditions'), path: "/algemene-voorwaarden" },
+    { title: t('landing.footer.cookie_policy'), path: "/cookiebeleid" },
   ];
 
   return (

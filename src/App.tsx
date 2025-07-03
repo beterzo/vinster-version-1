@@ -7,6 +7,8 @@ import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
 import TitleManager from "@/components/TitleManager";
 import AppRouter from "@/components/AppRouter";
+import CookieBanner from "@/components/CookieBanner";
+import CookieSettings from "@/components/CookieSettings";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +22,8 @@ const App = () => {
           <AuthProvider>
             <TitleManager />
             <AppRouter />
+            <CookieBanner />
+            <CookieSettings />
           </AuthProvider>
         </BrowserRouter>
       </TooltipProvider>
