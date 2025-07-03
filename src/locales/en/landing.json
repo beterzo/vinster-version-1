@@ -1,11 +1,34 @@
 
 {
   "landing": {
+    "tagline": "Find work that fits you, with AI.\nSmart, personal and surprising.",
+    "welcome": "Welcome to",
+    "description": "For everyone who thinks: \"What do I really want with my work?\"\nWhether you're just starting, stuck, looking for something new, or just want to reorient yourself – Vinster provides overview, support and direction.",
+    "login": "Login",
     "hero": {
       "title": "Discover your passion, find your career",
       "subtitle": "Dive deep into yourself and let AI find the perfect career match for you",
       "cta_button": "Start your journey",
       "cta_button_secondary": "Learn more"
+    },
+    "what_is_vinster": {
+      "title": "What is Vinster?",
+      "description": "Vinster is an AI-driven platform that helps you discover your true passions and talents. Through in-depth questions and advanced algorithms, we create a personal profile that helps you make informed career choices.",
+      "based_on": "Based on scientific research and your unique characteristics, you get:",
+      "two_matching_functions": "Two matching functions that fit you perfectly",
+      "one_surprising_suggestion": "One surprising suggestion that opens new possibilities",
+      "clear_action_plan": "A clear action plan to realize your dream career",
+      "no_tests": "No boring tests, but real questions that make you think."
+    },
+    "what_do_you_get": {
+      "title": "What do you get?",
+      "subtitle": "A complete package to shape your career:",
+      "insight_interests": "Deep insight into your interests and motivations",
+      "job_suggestions": "Concrete jobs that fit you",
+      "research_plan": "A research plan to explore further",
+      "search_profile": "A search profile for recruiters and networks",
+      "start_now": "Start now",
+      "view_sample": "View sample report"
     },
     "features": {
       "card1": {
@@ -32,6 +55,14 @@
         "description": "Receive a personal AI report with recommendations"
       }
     },
+    "data_safety": {
+      "title": "Privacy guaranteed",
+      "description": "Your data is stored securely according to the strictest privacy standards. We never share your personal information with third parties."
+    },
+    "flexible_journey": {
+      "title": "Flexible journey",
+      "description": "Start where you want, stop when you want. You can always return to complete or update your profile."
+    },
     "safety": {
       "title": "Safe and flexible",
       "privacy": {
@@ -43,11 +74,7 @@
         "description": "Start where you want, stop when you want"
       }
     },
-    "testimonial": {
-      "quote": "Thanks to Vinster, I finally got clarity about my career path. The report was surprisingly accurate and helped me make the right choices.",
-      "author": "Sarah de Vries",
-      "title": "Marketing Manager"
-    },
+    "testimonial": "Thanks to Vinster, I finally got clarity about my career path. The report was surprisingly accurate and helped me make the right choices.",
     "footer": {
       "navigation_title": "Navigation",
       "contact_title": "Contact",

@@ -1,11 +1,34 @@
 
 {
   "landing": {
+    "tagline": "Vind werk dat bij je past, met AI.\nSlim, persoonlijk en verrassend.",
+    "welcome": "Welkom bij",
+    "description": "Voor iedereen die denkt: \"Wat wil ik eigenlijk écht met mijn werk?\"\nOf je nu net begint, vastloopt, iets nieuws zoekt of gewoon even wilt heroriënteren – Vinster geeft overzicht, houvast en richting.",
+    "login": "Inloggen",
     "hero": {
       "title": "Ontdek je passie, vind je loopbaan",
       "subtitle": "Duik diep in jezelf en laat AI de perfecte carrièrematch voor jou vinden",
       "cta_button": "Begin je reis",
       "cta_button_secondary": "Meer informatie"
+    },
+    "what_is_vinster": {
+      "title": "Wat is Vinster?",
+      "description": "Vinster is een AI-gedreven platform dat je helpt je ware passies en talenten te ontdekken. Door middel van diepgaande vragen en geavanceerde algoritmes creëren we een persoonlijk profiel dat je helpt bij het maken van weloverwogen loopbaankeuzes.",
+      "based_on": "Gebaseerd op wetenschappelijk onderzoek en jouw unieke eigenschappen krijg je:",
+      "two_matching_functions": "Twee matchende functies die perfect bij je passen",
+      "one_surprising_suggestion": "Eén verrassend voorstel dat nieuwe mogelijkheden opent",
+      "clear_action_plan": "Een helder actieplan om je droomcarrière te realiseren",
+      "no_tests": "Geen saaie testen, maar echte vragen die je aan het denken zetten."
+    },
+    "what_do_you_get": {
+      "title": "Wat krijg je?",
+      "subtitle": "Een compleet pakket om je carrière vorm te geven:",
+      "insight_interests": "Diep inzicht in je interesses en motivaties",
+      "job_suggestions": "Concrete banen die bij je passen",
+      "research_plan": "Een onderzoeksplan om verder te verkennen",
+      "search_profile": "Een zoekprofiel voor recruiters en netwerken",
+      "start_now": "Start nu",
+      "view_sample": "Bekijk voorbeeldrapport"
     },
     "features": {
       "card1": {
@@ -32,6 +55,14 @@
         "description": "Ontvang een persoonlijk AI-rapport met aanbevelingen"
       }
     },
+    "data_safety": {
+      "title": "Privacy gegarandeerd",
+      "description": "Jouw gegevens worden veilig bewaard volgens de strengste privacystandaarden. We delen je persoonlijke informatie nooit met derden."
+    },
+    "flexible_journey": {
+      "title": "Flexibele reis",
+      "description": "Begin waar je wilt, stop wanneer je wilt. Je kunt altijd terugkeren om je profiel aan te vullen of bij te werken."
+    },
     "safety": {
       "title": "Veilig en flexibel",
       "privacy": {
@@ -43,11 +74,7 @@
         "description": "Begin waar je wilt, stop wanneer je wilt"
       }
     },
-    "testimonial": {
-      "quote": "Dankzij Vinster heb ik eindelijk duidelijkheid gekregen over mijn carrièrepad. Het rapport was verrassend accuraat en heeft me geholpen de juiste keuzes te maken.",
-      "author": "Sarah de Vries",
-      "title": "Marketing Manager"
-    },
+    "testimonial": "Dankzij Vinster heb ik eindelijk duidelijkheid gekregen over mijn carrièrepad. Het rapport was verrassend accuraat en heeft me geholpen de juiste keuzes te maken.",
     "footer": {
       "navigation_title": "Navigatie",
       "contact_title": "Contact",
