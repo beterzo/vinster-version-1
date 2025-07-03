@@ -91,11 +91,26 @@ export const useZoekprofielResponses = () => {
       data.arbeidsvoorwaarden
     ];
 
-    const filledFields = fields.filter(field => field && field.trim() !== '').length;
+    // Check if field has meaningful content (not just empty or whitespace)
+    const filledFields = fields.filter(field => field && typeof field === 'string' && field.trim().length > 0).length;
     const progressPercentage = Math.round((filledFields / fields.length) * 100);
     
+    console.log('📊 Progress calculation:', {
+      filledFields,
+      totalFields: fields.length,
+      progressPercentage,
+      fields: fields.map((field, index) => ({
+        index,
+        value: field,
+        isFilled: field && typeof field === 'string' && field.trim().length > 0
+      }))
+    });
+    
     setProgress(progressPercentage);
-    setIsCompleted(progressPercentage === 100);
+    const completed = progressPercentage === 100;
+    setIsCompleted(completed);
+    
+    console.log('✅ Progress updated:', { progressPercentage, isCompleted: completed });
   }, []);
 
   const debouncedSave = useCallback(async (field: string, value: string) => {
@@ -130,11 +145,7 @@ export const useZoekprofielResponses = () => {
       // Update the responses state with the saved data
       setResponses(data);
       
-      // Merge the saved field back into local state to ensure consistency
-      setLocalState(prev => ({
-        ...prev,
-        [field]: value
-      }));
+      // No need to update local state here as it's already updated optimistically
 
     } catch (error) {
       console.error(`❌ Error saving zoekprofiel ${field}:`, error);
@@ -156,10 +167,15 @@ export const useZoekprofielResponses = () => {
   }, [user?.id, responses, toast]);
 
   const saveResponse = useCallback((field: string, value: string) => {
+    console.log(`🔄 Updating local state for ${field}:`, value);
+    
     // Immediately update local state for optimistic UI updates
     setLocalState(prev => {
       const newState = { ...prev, [field]: value };
+      
+      // Calculate progress with the new state immediately
       calculateProgress(newState);
+      
       return newState;
     });
 
@@ -180,6 +196,8 @@ export const useZoekprofielResponses = () => {
     
     // Use local state for submission to ensure we have the latest values
     const dataToSubmit = { ...responses, ...localState };
+    
+    console.log('🚀 Submitting data to webhook:', dataToSubmit);
     
     if (!dataToSubmit.functie_als || !dataToSubmit.kerntaken || !dataToSubmit.organisatie_bij || 
         !dataToSubmit.sector || !dataToSubmit.gewenste_regio || !dataToSubmit.arbeidsvoorwaarden) {
