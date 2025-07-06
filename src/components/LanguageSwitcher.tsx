@@ -8,11 +8,6 @@ const LanguageSwitcher = () => {
   const { language, setLanguage } = useLanguage();
   const { user } = useAuth();
 
-  // Hide language switcher for logged-in users since their language is fixed
-  if (user) {
-    return null;
-  }
-
   const toggleLanguage = () => {
     setLanguage(language === 'nl' ? 'en' : 'nl');
   };
@@ -22,7 +17,7 @@ const LanguageSwitcher = () => {
       variant="outline"
       size="sm"
       onClick={toggleLanguage}
-      className="flex items-center gap-2 text-sm"
+      className="flex items-center gap-2 text-sm bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white"
     >
       <Globe className="w-4 h-4" />
       {language === 'nl' ? 'EN' : 'NL'}
