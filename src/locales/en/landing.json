@@ -55,6 +55,19 @@
         "description": "Receive a personal AI report with recommendations"
       }
     },
+    "process_steps": {
+      "subtitle": "The Process",
+      "title": "How it works",
+      "step1_title": "Enthusiasm Scan",
+      "step1_desc": "Discover what truly excites you",
+      "step2_title": "Dream Jobs",
+      "step2_desc": "Explore your ideal work situations",
+      "step3_title": "Set Priorities",
+      "step3_desc": "Determine what matters most to you",
+      "step4_title": "Final Check",
+      "step4_desc": "Complete your profile and receive your report",
+      "start_button": "Start your journey"
+    },
     "data_safety": {
       "title": "Privacy guaranteed",
       "description": "Your data is stored securely according to the strictest privacy standards. We never share your personal information with third parties."

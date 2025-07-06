@@ -55,6 +55,19 @@
         "description": "Ontvang een persoonlijk AI-rapport met aanbevelingen"
       }
     },
+    "process_steps": {
+      "subtitle": "Het Proces",
+      "title": "Hoe het werkt",
+      "step1_title": "Enthousiasmescan",
+      "step1_desc": "Ontdek wat je echt enthousiast maakt",
+      "step2_title": "Wensberoepen",
+      "step2_desc": "Verken je ideale werksituaties",
+      "step3_title": "Prioriteiten stellen",
+      "step3_desc": "Bepaal wat voor jou het belangrijkst is",
+      "step4_title": "Laatste check",
+      "step4_desc": "Voltooi je profiel en ontvang je rapport",
+      "start_button": "Begin je reis"
+    },
     "data_safety": {
       "title": "Privacy gegarandeerd",
       "description": "Jouw gegevens worden veilig bewaard volgens de strengste privacystandaarden. We delen je persoonlijke informatie nooit met derden."
