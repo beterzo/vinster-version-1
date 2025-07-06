@@ -1,4 +1,3 @@
-
 import { createContext, useContext, useEffect, useState } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
@@ -30,9 +29,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState(true);
   const { setLanguage } = useLanguage();
 
-  // Function to fetch user profile and set language
+  // Function to fetch user profile and set language (only if not manually selected)
   const fetchUserProfileAndSetLanguage = async (userId: string) => {
     try {
+      // Check if user has manually selected a language
+      const hasManualSelection = localStorage.getItem('vinster-language-manual-selection');
+      if (hasManualSelection === 'true') {
+        console.log('🌐 Skipping automatic language setting - user has manual selection');
+        return;
+      }
+
       const { data: profile, error } = await supabase
         .from('profiles')
         .select('language')
@@ -65,7 +71,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setUser(session?.user ?? null);
         setLoading(false);
 
-        // Set language from user profile when user logs in
+        // Set language from user profile when user logs in (only if no manual selection)
         if (session?.user && event === 'SIGNED_IN') {
           setTimeout(() => {
             fetchUserProfileAndSetLanguage(session.user.id);
@@ -106,7 +112,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setSession(session);
         setUser(session?.user ?? null);
         
-        // Set language from profile for existing session
+        // Set language from profile for existing session (only if no manual selection)
         if (session?.user) {
           await fetchUserProfileAndSetLanguage(session.user.id);
         }

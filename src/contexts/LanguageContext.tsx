@@ -44,6 +44,8 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
     localStorage.setItem('vinster-language', lang);
+    // Mark that the user has manually selected a language
+    localStorage.setItem('vinster-language-manual-selection', 'true');
   };
 
   return (
