@@ -1,8 +1,6 @@
 
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "npm:resend@2.0.0";
-import { renderAsync } from "npm:@react-email/components@0.0.22";
-import { VerificationEmail } from "./_templates/verification-email.tsx";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -32,8 +30,8 @@ const emailSubjects = {
   en: "Confirm your Vinster account"
 };
 
-// Optimized fallback HTML template
-const createFallbackEmailHtml = (firstName: string, verificationUrl: string, language: string) => {
+// Simplified HTML email template
+const createEmailHtml = (firstName: string, verificationUrl: string, language: string) => {
   const isNl = language === 'nl';
   
   return `
@@ -43,25 +41,22 @@ const createFallbackEmailHtml = (firstName: string, verificationUrl: string, lan
       <meta charset="utf-8">
       <title>${isNl ? 'Bevestig je Vinster account' : 'Confirm your Vinster account'}</title>
       <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background: #f8f9fa; }
-        .container { max-width: 600px; margin: 20px auto; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
-        .header { background: linear-gradient(135deg, #232D4B 0%, #E4C05B 100%); padding: 40px 20px; text-align: center; color: white; }
-        .logo { font-size: 32px; font-weight: bold; margin-bottom: 8px; }
-        .tagline { opacity: 0.9; font-size: 16px; }
-        .content { padding: 40px 30px; text-align: center; }
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 20px; background: #f8f9fa; }
+        .container { max-width: 600px; margin: 0 auto; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .header { background: linear-gradient(135deg, #232D4B 0%, #E4C05B 100%); padding: 30px; text-align: center; color: white; }
+        .logo { font-size: 28px; font-weight: bold; margin-bottom: 8px; }
+        .content { padding: 30px; text-align: center; }
         .title { font-size: 24px; font-weight: 600; color: #232D4B; margin-bottom: 16px; }
-        .message { font-size: 16px; color: #6B7280; margin-bottom: 32px; line-height: 1.5; }
-        .button { display: inline-block; padding: 16px 32px; background: #FFCD3E; color: #1F2937; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; margin: 10px 0; transition: background-color 0.2s; }
-        .button:hover { background: #E4C05B; }
-        .footer { padding: 30px; background: #f8f9fa; text-align: center; color: #6B7280; font-size: 14px; }
-        .footer p { margin: 8px 0; }
+        .message { font-size: 16px; color: #666; margin-bottom: 30px; }
+        .button { display: inline-block; padding: 15px 30px; background: #FFCD3E; color: #1F2937; text-decoration: none; border-radius: 6px; font-weight: 600; }
+        .footer { padding: 20px; background: #f8f9fa; text-align: center; color: #666; font-size: 14px; }
       </style>
     </head>
     <body>
       <div class="container">
         <div class="header">
           <div class="logo">Vinster</div>
-          <div class="tagline">${isNl ? 'Jouw venster op de toekomst' : 'Your window to the future'}</div>
+          <div>${isNl ? 'Jouw venster op de toekomst' : 'Your window to the future'}</div>
         </div>
         <div class="content">
           <h1 class="title">${isNl ? 'Bevestig je email adres' : 'Confirm your email address'}</h1>
@@ -89,7 +84,7 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    // Validate API key first
+    // Validate API key
     const resendApiKey = Deno.env.get("RESEND_API_KEY");
     if (!resendApiKey) {
       console.error("❌ RESEND_API_KEY not configured");
@@ -105,7 +100,7 @@ const handler = async (req: Request): Promise<Response> => {
     console.log("✅ RESEND_API_KEY found, initializing Resend client");
     const resend = new Resend(resendApiKey);
 
-    // Parse and validate payload
+    // Parse payload
     const payload: AuthEventPayload = await req.json();
     console.log("📧 Processing signup for:", payload.user.email, "| Event type:", payload.email_data?.email_action_type);
 
@@ -138,25 +133,8 @@ const handler = async (req: Request): Promise<Response> => {
       subject: emailSubject
     });
 
-    let emailHtml: string;
-    
-    // Try React Email template first, with optimized fallback
-    try {
-      console.log("🎨 Attempting to render React Email template...");
-      emailHtml = await renderAsync(
-        VerificationEmail({
-          firstName,
-          lastName: user.user_metadata?.last_name || '',
-          verificationUrl,
-          email: user.email,
-          language: userLanguage
-        })
-      );
-      console.log("✅ React Email template rendered successfully");
-    } catch (templateError) {
-      console.warn("⚠️ React Email template failed, using optimized fallback:", templateError.message);
-      emailHtml = createFallbackEmailHtml(firstName, verificationUrl, userLanguage);
-    }
+    // Generate HTML email
+    const emailHtml = createEmailHtml(firstName, verificationUrl, userLanguage);
 
     console.log("📤 Sending email via Resend from team@vinster.ai...");
 
@@ -171,7 +149,7 @@ const handler = async (req: Request): Promise<Response> => {
     if (emailResponse.error) {
       console.error("❌ Primary email failed:", emailResponse.error);
       
-      // Fallback to verified domain if primary fails
+      // Fallback to verified domain
       console.log("🔄 Trying with fallback sender domain...");
       
       const fallbackResponse = await resend.emails.send({
@@ -241,4 +219,3 @@ const handler = async (req: Request): Promise<Response> => {
 };
 
 serve(handler);
-
