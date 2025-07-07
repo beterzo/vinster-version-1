@@ -9,7 +9,7 @@ const AlgemeneVoorwaarden = () => {
         <div className="max-w-4xl mx-auto px-6 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <img alt="Vinster Logo" onClick={() => navigate('/')} src="/lovable-uploads/1b9bf08d-0b73-4b0a-bd2d-d82e21d845c4.png" className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" />
+              <img alt="Vinster Logo" onClick={() => navigate('/')} src="/lovable-uploads/d5152e25-b955-4d35-98a4-f2a090b09599.png" className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" />
             </div>
             <Button onClick={() => navigate('/')} variant="outline" className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold">
               Terug naar Home
@@ -33,10 +33,10 @@ const AlgemeneVoorwaarden = () => {
             <section>
               <h2 className="text-2xl font-semibold text-blue-900 mb-4">1. Definities</h2>
               <ul className="list-disc ml-6 space-y-2">
-                <li><strong>Vinster:</strong> De service aangeboden door De Loopbaanopleiding</li>
-                <li><strong>Gebruiker:</strong> Iedere natuurlijke persoon die gebruik maakt van Vinster</li>
-                <li><strong>Service:</strong> De online loopbaantool en bijbehorende diensten</li>
-                <li><strong>Account:</strong> Het persoonlijke profiel van de gebruiker</li>
+                <li><strong>Vinster:</strong> de service aangeboden door De Loopbaanopleiding</li>
+                <li><strong>Gebruiker:</strong> iedere natuurlijke persoon die gebruik maakt van Vinster</li>
+                <li><strong>Service:</strong> de online loopbaantool en bijbehorende diensten</li>
+                <li><strong>Account:</strong> het persoonlijke profiel van de gebruiker</li>
               </ul>
             </section>
 
@@ -156,7 +156,7 @@ const AlgemeneVoorwaarden = () => {
                 Voor vragen over deze algemene voorwaarden kunt u contact met ons opnemen:
               </p>
               <p>
-                Email: info@deloopbaanopleiding.nl<br />
+                Email: team@vinster.ai<br />
                 Telefoon: +31 6 22 23 85 95<br />
                 KvK nr: 04050762
               </p>
