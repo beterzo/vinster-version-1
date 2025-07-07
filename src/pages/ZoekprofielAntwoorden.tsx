@@ -121,51 +121,61 @@ const ZoekprofielAntwoorden = () => {
       <div className="flex">
         <DashboardSidebar />
         <main className="flex-1 p-4 sm:p-6 lg:p-8 ml-0 lg:ml-64">
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-white rounded-lg shadow-sm border p-6 lg:p-8">
-              <div className="mb-8">
-                <h1 className="text-2xl font-bold text-blue-900 mb-2">
-                  Zoekprofiel Antwoorden
-                </h1>
-                <p className="text-gray-600">
-                  Vul onderstaande velden in om je persoonlijke zoekprofiel te maken.
-                </p>
+          <div className="max-w-3xl mx-auto">
+            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+              {/* Header Section */}
+              <div className="bg-gradient-to-r from-blue-50 to-blue-100 px-8 py-10">
+                <div className="text-center">
+                  <h1 className="text-3xl font-bold text-blue-900 mb-3">
+                    Zoekprofiel antwoorden
+                  </h1>
+                  <p className="text-lg text-blue-700 max-w-2xl mx-auto">
+                    Vul onderstaande velden in om je persoonlijke zoekprofiel te maken.
+                  </p>
+                </div>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {questions.map((question, index) => (
-                  <div key={question.id} className="space-y-2">
-                    <Label htmlFor={question.id} className="text-sm font-medium text-gray-700">
-                      {index + 1}. {question.label}
-                    </Label>
-                    <Textarea
-                      id={question.id}
-                      placeholder={question.placeholder}
-                      value={question.value}
-                      onChange={(e) => handleInputChange(question.id, e.target.value)}
-                      className="min-h-[100px] resize-none"
-                    />
-                  </div>
-                ))}
+              {/* Form Section */}
+              <div className="p-8">
+                <form onSubmit={handleSubmit} className="space-y-8">
+                  {questions.map((question, index) => (
+                    <div key={question.id} className="space-y-3">
+                      <Label 
+                        htmlFor={question.id} 
+                        className="text-base font-semibold text-gray-800 block"
+                      >
+                        {index + 1}. {question.label}
+                      </Label>
+                      <Textarea
+                        id={question.id}
+                        placeholder={question.placeholder}
+                        value={question.value}
+                        onChange={(e) => handleInputChange(question.id, e.target.value)}
+                        className="min-h-[120px] resize-none border-gray-200 focus:border-blue-500 focus:ring-blue-500 rounded-lg text-base p-4 transition-colors"
+                      />
+                    </div>
+                  ))}
 
-                <div className="flex gap-4 pt-6">
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={() => navigate("/home")}
-                    className="flex-1"
-                  >
-                    Terug naar Dashboard
-                  </Button>
-                  <Button
-                    type="submit"
-                    disabled={loading}
-                    className="flex-1 bg-blue-900 hover:bg-blue-800"
-                  >
-                    {loading ? "Bezig met opslaan..." : "Opslaan en Doorgaan"}
-                  </Button>
-                </div>
-              </form>
+                  {/* Button Section */}
+                  <div className="flex flex-col sm:flex-row gap-4 pt-8 border-t border-gray-100">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => navigate("/home")}
+                      className="flex-1 h-12 text-base border-gray-300 hover:bg-gray-50 transition-colors"
+                    >
+                      Terug naar Dashboard
+                    </Button>
+                    <Button
+                      type="submit"
+                      disabled={loading}
+                      className="flex-1 h-12 bg-blue-900 hover:bg-blue-800 text-base font-semibold transition-colors"
+                    >
+                      {loading ? "Bezig met opslaan..." : "Zoekprofiel Afronden"}
+                    </Button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </main>
