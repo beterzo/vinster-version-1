@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -8,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
 import { useZoekprofielAntwoorden } from "@/hooks/useZoekprofielAntwoorden";
+import { useExistingZoekprofiel } from "@/hooks/useExistingZoekprofiel";
 import { HelpPopover } from "@/components/HelpPopover";
 
 const ZoekprofielAntwoorden = () => {
@@ -15,6 +15,7 @@ const ZoekprofielAntwoorden = () => {
   const { toast } = useToast();
   const { user } = useAuth();
   const { responses, saveResponse, loading } = useZoekprofielAntwoorden();
+  const { hasExistingZoekprofiel, loading: zoekprofielLoading } = useExistingZoekprofiel();
 
   const [formData, setFormData] = useState({
     functie_als: "",
@@ -31,6 +32,19 @@ const ZoekprofielAntwoorden = () => {
       behavior: 'smooth'
     });
   };
+
+  // Redirect if user already has a zoekprofiel
+  useEffect(() => {
+    if (!zoekprofielLoading && hasExistingZoekprofiel) {
+      console.log('🚫 User already has a zoekprofiel, redirecting to download page');
+      toast({
+        title: "Zoekprofiel al aangemaakt",
+        description: "Je hebt al een zoekprofiel aangemaakt. Je wordt doorgestuurd naar de download pagina.",
+        variant: "default",
+      });
+      navigate('/zoekprofiel-download');
+    }
+  }, [zoekprofielLoading, hasExistingZoekprofiel, navigate, toast]);
 
   useEffect(() => {
     if (responses) {
@@ -67,6 +81,17 @@ const ZoekprofielAntwoorden = () => {
       return;
     }
 
+    // Double-check for existing zoekprofiel before submitting
+    if (hasExistingZoekprofiel) {
+      toast({
+        title: "Zoekprofiel al aangemaakt",
+        description: "Je hebt al een zoekprofiel aangemaakt. Je wordt doorgestuurd naar de download pagina.",
+        variant: "default",
+      });
+      navigate('/zoekprofiel-download');
+      return;
+    }
+
     try {
       toast({
         title: "Antwoorden opgeslagen",
@@ -83,6 +108,15 @@ const ZoekprofielAntwoorden = () => {
       });
     }
   };
+
+  if (loading || zoekprofielLoading) {
+    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Laden...</div>;
+  }
+
+  // Don't show the form if user already has a zoekprofiel
+  if (hasExistingZoekprofiel) {
+    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Je wordt doorgestuurd...</div>;
+  }
 
   const questions = [
     {
@@ -152,10 +186,6 @@ const ZoekprofielAntwoorden = () => {
       ]
     }
   ];
-
-  if (loading) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Laden...</div>;
-  }
 
   const allFieldsFilled = Object.values(formData).every(answer => answer.trim() !== "");
 

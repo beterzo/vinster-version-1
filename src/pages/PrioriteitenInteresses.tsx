@@ -10,6 +10,7 @@ import { sendMakeWebhook } from "@/services/webhookService";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { useExistingReport } from "@/hooks/useExistingReport";
 import { cleanKeywords } from "@/utils/keywordUtils";
 
 const PrioriteitenInteresses = () => {
@@ -24,6 +25,7 @@ const PrioriteitenInteresses = () => {
     loading
   } = usePrioriteitenResponses();
   const { collectMakeWebhookData } = useMakeWebhookData();
+  const { hasExistingReport, existingReport, loading: reportLoading } = useExistingReport();
   
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
   const [extraText, setExtraText] = useState("");
@@ -43,6 +45,19 @@ const PrioriteitenInteresses = () => {
       setExtraText(responses.extra_interesses_tekst || "");
     }
   }, [loading, responses]);
+
+  // Redirect if user already has a report
+  useEffect(() => {
+    if (!reportLoading && hasExistingReport) {
+      console.log('🚫 User already has a report, redirecting to download page');
+      toast({
+        title: "Rapport al gegenereerd",
+        description: "Je hebt al een loopbaanrapport. Je wordt doorgestuurd naar de download pagina.",
+        variant: "default",
+      });
+      navigate('/rapport-download');
+    }
+  }, [reportLoading, hasExistingReport, navigate, toast]);
 
   const handleKeywordToggle = (keyword: string) => {
     const newSelection = selectedKeywords.includes(keyword) 
@@ -85,6 +100,17 @@ const PrioriteitenInteresses = () => {
         description: "Geen gebruiker gevonden.",
         variant: "destructive",
       });
+      return;
+    }
+
+    // Double-check for existing report before creating new one
+    if (hasExistingReport) {
+      toast({
+        title: "Rapport al gegenereerd",
+        description: "Je hebt al een loopbaanrapport gegenereerd. Je wordt doorgestuurd naar de download pagina.",
+        variant: "default",
+      });
+      navigate('/rapport-download');
       return;
     }
 
@@ -153,8 +179,13 @@ const PrioriteitenInteresses = () => {
     }
   };
 
-  if (loading) {
+  if (loading || reportLoading) {
     return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Laden...</div>;
+  }
+
+  // Don't show the page if user already has a report
+  if (hasExistingReport) {
+    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Je wordt doorgestuurd...</div>;
   }
 
   // Use AI-generated keywords or fallback to empty array
