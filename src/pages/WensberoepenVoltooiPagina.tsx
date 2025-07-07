@@ -1,35 +1,26 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { CheckCircle, ArrowRight, User, Target, Heart } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
-
 const WensberoepenVoltooiPagina = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
-
+  const {
+    t
+  } = useTranslation();
   const handleProfielVoltooien = () => {
     navigate("/profiel-voltooien-intro");
   };
-
   const handleNaarDashboard = () => {
     navigate("/home");
   };
-
-  return (
-    <div className="min-h-screen bg-gray-50 font-sans">
+  return <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <img 
-              alt="Vinster Logo" 
-              className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
-              onClick={() => navigate('/')} 
-              src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
-            />
+            <img alt="Vinster Logo" onClick={() => navigate('/')} src="/lovable-uploads/5d3316ef-25de-476e-a36d-e2739fec8439.png" className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" />
             <LanguageSwitcher />
           </div>
         </div>
@@ -116,8 +107,6 @@ const WensberoepenVoltooiPagina = () => {
           </CardContent>
         </Card>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default WensberoepenVoltooiPagina;
