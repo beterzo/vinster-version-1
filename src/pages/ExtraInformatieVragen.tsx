@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -5,18 +6,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 import { useExtraInformatieResponses } from "@/hooks/useExtraInformatieResponses";
-import { useMakeWebhookData } from "@/hooks/useMakeWebhookData";
-import { sendMakeWebhook } from "@/services/webhookService";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
-import { useAuth } from "@/hooks/useAuth";
 
 const ExtraInformatieVragen = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { user } = useAuth();
   const { responses, saveResponses, loading } = useExtraInformatieResponses();
-  const { collectMakeWebhookData } = useMakeWebhookData();
   
   const [answers, setAnswers] = useState({
     opleidingsniveau: "",
@@ -24,8 +19,6 @@ const ExtraInformatieVragen = () => {
     sector_voorkeur: "",
     fysieke_beperkingen: ""
   });
-  
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -68,72 +61,25 @@ const ExtraInformatieVragen = () => {
       return;
     }
 
-    if (!user) {
-      toast({
-        title: "Fout",
-        description: "Geen gebruiker gevonden.",
-        variant: "destructive",
-      });
-      return;
-    }
-
     try {
-      setIsSubmitting(true);
-      
       await saveResponses(answers);
       
-      console.log('Creating user report entry for user:', user.id);
-      const { error: reportError } = await supabase
-        .from('user_reports')
-        .upsert({
-          user_id: user.id,
-          report_data: { profile_completed: true },
-          report_status: 'generating',
-          generated_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        }, {
-          onConflict: 'user_id'
-        });
-
-      if (reportError) {
-        console.error('Error creating report entry:', reportError);
-        throw reportError;
-      }
-
-      console.log('Report entry created successfully with generating status');
-      
-      const webhookData = collectMakeWebhookData();
-      
-      if (!webhookData) {
-        toast({
-          title: "Fout",
-          description: "Kan geen gebruikersgegevens vinden voor het verzenden van data.",
-          variant: "destructive",
-        });
-        return;
-      }
-
-      await sendMakeWebhook(webhookData);
-      
-      console.log("Profile completed and Make.com webhook sent - PDF generation started!");
-      
       toast({
-        title: "Profiel voltooid!",
-        description: "Je rapport wordt nu automatisch gegenereerd. Je wordt doorgestuurd naar de rapport pagina.",
+        title: "Extra informatie opgeslagen!",
+        description: "Nu kun je je prioriteiten bepalen.",
         variant: "default",
       });
       
-      navigate('/rapport-download');
+      scrollToTop();
+      navigate('/prioriteiten-activiteiten');
     } catch (error) {
-      console.error("Error completing profile:", error);
+      console.error("Error saving extra informatie:", error);
       
       toast({
         title: "Fout bij opslaan",
-        description: "Er ging iets mis bij het voltooien van je profiel. Probeer het opnieuw.",
+        description: "Er ging iets mis bij het opslaan van je gegevens. Probeer het opnieuw.",
         variant: "destructive",
       });
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
@@ -196,13 +142,6 @@ const ExtraInformatieVragen = () => {
               <p className="text-xl text-gray-600">
                 Laatste vragen over je achtergrond
               </p>
-              {isSubmitting && (
-                <div className="mt-4 p-3 bg-blue-50 rounded-lg">
-                  <p className="text-sm text-blue-700">
-                    📤 Profiel wordt voltooid en rapport gegenereerd...
-                  </p>
-                </div>
-              )}
             </div>
 
             {/* Questions */}
@@ -230,9 +169,8 @@ const ExtraInformatieVragen = () => {
                 onClick={handleBackToPriorities}
                 variant="outline"
                 className="border-blue-900 text-blue-900 hover:bg-blue-50"
-                disabled={isSubmitting}
               >
-                Terug naar prioriteiten
+                Terug naar profiel intro
               </Button>
               <Button 
                 onClick={handleComplete}
@@ -241,9 +179,9 @@ const ExtraInformatieVragen = () => {
                     ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 
                     : "bg-gray-300 text-gray-500 cursor-not-allowed"
                 }`}
-                disabled={isSubmitting || !allFieldsFilled}
+                disabled={!allFieldsFilled}
               >
-                {isSubmitting ? "Profiel voltooien..." : "Profiel voltooien"}
+                Naar prioriteiten
               </Button>
             </div>
           </CardContent>
