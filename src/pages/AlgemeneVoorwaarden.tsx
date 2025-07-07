@@ -1,30 +1,17 @@
-
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import Footer from "@/components/Footer";
-
 const AlgemeneVoorwaarden = () => {
   const navigate = useNavigate();
-
-  return (
-    <div className="min-h-screen bg-gray-50 font-sans">
+  return <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-6 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <img 
-                alt="Vinster Logo" 
-                className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
-                onClick={() => navigate('/')} 
-                src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
-              />
+              <img alt="Vinster Logo" onClick={() => navigate('/')} src="/lovable-uploads/1b9bf08d-0b73-4b0a-bd2d-d82e21d845c4.png" className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" />
             </div>
-            <Button 
-              onClick={() => navigate('/')}
-              variant="outline"
-              className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold"
-            >
+            <Button onClick={() => navigate('/')} variant="outline" className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold">
               Terug naar Home
             </Button>
           </div>
@@ -179,8 +166,6 @@ const AlgemeneVoorwaarden = () => {
       </div>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default AlgemeneVoorwaarden;
