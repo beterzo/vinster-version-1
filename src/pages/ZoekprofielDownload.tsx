@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -7,46 +6,46 @@ import { FileText, Download, ExternalLink, CheckCircle, AlertCircle, Clock, Arro
 import { useZoekprofielPdf } from "@/hooks/useZoekprofielPdf";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-
 const ZoekprofielDownload = () => {
   const navigate = useNavigate();
-  const { toast } = useToast();
-  const { pdfData, loading, downloading, downloadUrl, isPdfReady, isGenerating, downloadPdf, loadPdfData } = useZoekprofielPdf();
+  const {
+    toast
+  } = useToast();
+  const {
+    pdfData,
+    loading,
+    downloading,
+    downloadUrl,
+    isPdfReady,
+    isGenerating,
+    downloadPdf,
+    loadPdfData
+  } = useZoekprofielPdf();
   const [isDownloading, setIsDownloading] = useState(false);
 
   // Set up realtime subscription for PDF status updates
   useEffect(() => {
     if (!pdfData?.user_id) return;
-
     console.log('Setting up realtime subscription for zoekprofiel PDF updates...');
-    
-    const channel = supabase
-      .channel('zoekprofiel-pdf-changes')
-      .on(
-        'postgres_changes',
-        {
-          event: 'UPDATE',
-          schema: 'public',
-          table: 'user_zoekprofielen',
-          filter: `user_id=eq.${pdfData.user_id}`
-        },
-        (payload) => {
-          console.log('Realtime PDF update received:', payload);
-          const newData = payload.new as any;
-          if (newData.pdf_status) {
-            // If PDF is completed, refresh data to get latest info
-            if (newData.pdf_status === 'completed') {
-              loadPdfData();
-              toast({
-                title: "Zoekprofiel klaar!",
-                description: "Je zoekprofiel PDF is succesvol gegenereerd en kan nu gedownload worden.",
-              });
-            }
-          }
+    const channel = supabase.channel('zoekprofiel-pdf-changes').on('postgres_changes', {
+      event: 'UPDATE',
+      schema: 'public',
+      table: 'user_zoekprofielen',
+      filter: `user_id=eq.${pdfData.user_id}`
+    }, payload => {
+      console.log('Realtime PDF update received:', payload);
+      const newData = payload.new as any;
+      if (newData.pdf_status) {
+        // If PDF is completed, refresh data to get latest info
+        if (newData.pdf_status === 'completed') {
+          loadPdfData();
+          toast({
+            title: "Zoekprofiel klaar!",
+            description: "Je zoekprofiel PDF is succesvol gegenereerd en kan nu gedownload worden."
+          });
         }
-      )
-      .subscribe();
-
+      }
+    }).subscribe();
     return () => {
       console.log('Cleaning up realtime subscription');
       supabase.removeChannel(channel);
@@ -64,16 +63,13 @@ const ZoekprofielDownload = () => {
       return () => clearInterval(interval);
     }
   }, [isGenerating, loadPdfData]);
-
   const handleDownload = async () => {
     if (!downloadUrl) {
       console.warn('No PDF URL available for download');
       return;
     }
-    
     setIsDownloading(true);
     console.log('Starting download from URL:', downloadUrl);
-    
     try {
       await downloadPdf();
     } catch (error) {
@@ -81,24 +77,21 @@ const ZoekprofielDownload = () => {
       toast({
         title: "Download mislukt",
         description: "Er ging iets mis bij het downloaden van je zoekprofiel.",
-        variant: "destructive",
+        variant: "destructive"
       });
     } finally {
       setIsDownloading(false);
     }
   };
-
   const handleOpenInNewTab = () => {
     if (downloadUrl) {
       console.log('Opening PDF in new tab:', downloadUrl);
       window.open(downloadUrl, '_blank');
     }
   };
-
   const handleNextStep = () => {
     navigate('/home');
   };
-
   const getStatusIcon = () => {
     switch (pdfData?.pdf_status) {
       case 'completed':
@@ -111,7 +104,6 @@ const ZoekprofielDownload = () => {
         return <Clock className="w-12 h-12 text-gray-400" />;
     }
   };
-
   const getStatusMessage = () => {
     switch (pdfData?.pdf_status) {
       case 'completed':
@@ -136,32 +128,21 @@ const ZoekprofielDownload = () => {
         };
     }
   };
-
   if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-900 mx-auto mb-4"></div>
           <p className="text-gray-700">Zoekprofiel gegevens laden...</p>
         </div>
-      </div>
-    );
+      </div>;
   }
-
   const status = getStatusMessage();
-
-  return (
-    <div className="min-h-screen bg-gray-50 font-sans">
+  return <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
           <div className="flex items-center">
-            <img 
-              alt="Vinster Logo" 
-              className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
-              onClick={() => navigate('/home')} 
-              src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
-            />
+            <img alt="Vinster Logo" onClick={() => navigate('/home')} src="/lovable-uploads/96b14b9f-3aed-45fa-b573-768a8f04d529.png" className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" />
           </div>
         </div>
       </div>
@@ -172,11 +153,7 @@ const ZoekprofielDownload = () => {
           <CardContent className="p-12 text-center">
             <div className="mb-8">
               <div className="mx-auto w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mb-6">
-                {isPdfReady ? (
-                  <FileText className="w-10 h-10 text-green-600" />
-                ) : (
-                  getStatusIcon()
-                )}
+                {isPdfReady ? <FileText className="w-10 h-10 text-green-600" /> : getStatusIcon()}
               </div>
               
               <h1 className="text-4xl font-bold text-blue-900 mb-4">
@@ -188,25 +165,14 @@ const ZoekprofielDownload = () => {
               </p>
             </div>
 
-            {isPdfReady && downloadUrl && (
-              <div className="space-y-4">
+            {isPdfReady && downloadUrl && <div className="space-y-4">
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button
-                    onClick={handleDownload}
-                    disabled={isDownloading || downloading}
-                    size="lg"
-                    className="bg-blue-900 hover:bg-blue-800 text-white font-semibold px-8 py-4 rounded-lg flex items-center gap-2"
-                  >
+                  <Button onClick={handleDownload} disabled={isDownloading || downloading} size="lg" className="bg-blue-900 hover:bg-blue-800 text-white font-semibold px-8 py-4 rounded-lg flex items-center gap-2">
                     <Download className="w-5 h-5" />
                     {isDownloading || downloading ? "Downloaden..." : "Download zoekprofiel"}
                   </Button>
                   
-                  <Button
-                    onClick={handleOpenInNewTab}
-                    variant="outline"
-                    size="lg"
-                    className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold px-8 py-4 rounded-lg flex items-center gap-2"
-                  >
+                  <Button onClick={handleOpenInNewTab} variant="outline" size="lg" className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold px-8 py-4 rounded-lg flex items-center gap-2">
                     <ExternalLink className="w-5 h-5" />
                     Bekijk in browser
                   </Button>
@@ -226,20 +192,14 @@ const ZoekprofielDownload = () => {
                   <p className="text-gray-600 mb-6">
                     Bekijk je volledige profiel en andere rapporten in je dashboard.
                   </p>
-                  <Button
-                    onClick={handleNextStep}
-                    size="lg"
-                    className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold px-8 py-4 rounded-lg flex items-center gap-2 mx-auto"
-                  >
+                  <Button onClick={handleNextStep} size="lg" className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold px-8 py-4 rounded-lg flex items-center gap-2 mx-auto">
                     Ga naar dashboard
                     <ArrowRight className="w-5 h-5" />
                   </Button>
                 </div>
-              </div>
-            )}
+              </div>}
 
-            {(isGenerating || pdfData?.pdf_status === 'pending') && (
-              <div className="text-center">
+            {(isGenerating || pdfData?.pdf_status === 'pending') && <div className="text-center">
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-900 mx-auto mb-4"></div>
                 <p className="text-gray-600 mb-4">
                   Je zoekprofiel wordt gegenereerd... Dit kan 2-5 minuten duren.
@@ -249,63 +209,39 @@ const ZoekprofielDownload = () => {
                     💡 <strong>Tip:</strong> Laat deze pagina open. Je krijgt automatisch een melding zodra je zoekprofiel klaar is!
                   </p>
                 </div>
-                <Button
-                  onClick={loadPdfData}
-                  variant="outline"
-                  className="border-blue-900 text-blue-900 hover:bg-blue-50"
-                >
+                <Button onClick={loadPdfData} variant="outline" className="border-blue-900 text-blue-900 hover:bg-blue-50">
                   Status vernieuwen
                 </Button>
-              </div>
-            )}
+              </div>}
 
-            {pdfData?.pdf_status === 'failed' && (
-              <div className="text-center">
+            {pdfData?.pdf_status === 'failed' && <div className="text-center">
                 <div className="bg-red-50 p-4 rounded-lg mb-4">
                   <p className="text-sm text-red-700">
                     Er is een technische fout opgetreden. Neem contact op met support als dit probleem aanhoudt.
                   </p>
                 </div>
-                <Button
-                  onClick={loadPdfData}
-                  variant="outline"
-                  size="lg"
-                  className="border-red-600 text-red-600 hover:bg-red-50 font-semibold px-8 py-4 rounded-lg"
-                >
+                <Button onClick={loadPdfData} variant="outline" size="lg" className="border-red-600 text-red-600 hover:bg-red-50 font-semibold px-8 py-4 rounded-lg">
                   Status controleren
                 </Button>
-              </div>
-            )}
+              </div>}
 
-            {!pdfData?.pdf_status && (
-              <div className="text-center">
+            {!pdfData?.pdf_status && <div className="text-center">
                 <p className="text-gray-600 mb-4">
                   Je zoekprofiel wordt nog gegenereerd. Dit kan enkele minuten duren.
                 </p>
-                <Button
-                  onClick={() => window.location.reload()}
-                  variant="outline"
-                  className="border-blue-900 text-blue-900 hover:bg-blue-50"
-                >
+                <Button onClick={() => window.location.reload()} variant="outline" className="border-blue-900 text-blue-900 hover:bg-blue-50">
                   Pagina verversen
                 </Button>
-              </div>
-            )}
+              </div>}
 
             <div className="mt-12 pt-8 border-t border-gray-200">
-              <Button
-                onClick={() => navigate('/home')}
-                variant="outline"
-                className="border-blue-900 text-blue-900 hover:bg-blue-50"
-              >
+              <Button onClick={() => navigate('/home')} variant="outline" className="border-blue-900 text-blue-900 hover:bg-blue-50">
                 Terug naar dashboard
               </Button>
             </div>
           </CardContent>
         </Card>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default ZoekprofielDownload;
