@@ -1,23 +1,14 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-
 const ProfielVoltooienIntro = () => {
   const navigate = useNavigate();
-
-  return (
-    <div className="min-h-screen bg-gray-50 font-sans">
+  return <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
           <div className="flex items-center">
-            <img 
-              alt="Vinster Logo" 
-              className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
-              onClick={() => navigate('/home')} 
-              src="/lovable-uploads/vinster-new-logo.png" 
-            />
+            <img alt="Vinster Logo" className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" onClick={() => navigate('/home')} src="/lovable-uploads/76f1f710-75af-4bc2-9bec-ec5581999434.png" />
           </div>
         </div>
       </div>
@@ -47,10 +38,7 @@ const ProfielVoltooienIntro = () => {
 
               {/* Start Button */}
               <div className="text-center pt-8">
-                <Button 
-                  onClick={() => navigate('/extra-informatie-vragen')} 
-                  className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold text-lg px-12 py-4 rounded-lg"
-                >
+                <Button onClick={() => navigate('/extra-informatie-vragen')} className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold text-lg px-12 py-4 rounded-lg">
                   Profiel voltooien
                 </Button>
               </div>
@@ -58,8 +46,6 @@ const ProfielVoltooienIntro = () => {
           </CardContent>
         </Card>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default ProfielVoltooienIntro;
