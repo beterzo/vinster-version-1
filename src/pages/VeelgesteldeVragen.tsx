@@ -43,7 +43,7 @@ const VeelgesteldeVragen = () => {
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <img alt="Vinster Logo" className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" onClick={() => navigate('/')} src="/lovable-uploads/3e114e47-07e4-4807-a2a3-dd02abb93e9c.png" />
+            <img alt="Vinster Logo" onClick={() => navigate('/')} src="/lovable-uploads/3e114e47-07e4-4807-a2a3-dd02abb93e9c.png" className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" />
             <Button onClick={() => navigate('/')} variant="outline" className="text-vinster-blue border-vinster-blue hover:bg-vinster-blue hover:text-white">
               Terug naar Home
             </Button>
