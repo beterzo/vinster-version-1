@@ -165,7 +165,7 @@ secret = "env(SUPABASE_AUTH_EXTERNAL_ZOOM_SECRET)"
 
 [auth.hook.send_email]
 enabled = true
-uri = "https://aqajxxevifmhdjlvqhkz.supabase.co/functions/v1/send-confirmation-email"
+uri = "http://127.0.0.1:54321/functions/v1/send-confirmation-email"
 secrets = ["RESEND_API_KEY"]
 
 [edge_runtime]

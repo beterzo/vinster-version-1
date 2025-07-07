@@ -8,6 +8,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "@/hooks/useTranslation";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+
 const SignupPage = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -16,9 +17,11 @@ const SignupPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
   const {
     signUp
   } = useAuth();
+
   const navigate = useNavigate();
   const {
     toast
@@ -26,6 +29,7 @@ const SignupPage = () => {
   const {
     t
   } = useTranslation();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== confirmPassword) {
@@ -36,7 +40,7 @@ const SignupPage = () => {
       });
       return;
     }
-    if (!firstName || !lastName || !email || !password || !selectedLanguage) {
+    if (!firstName || !lastName || !email || !selectedLanguage) {
       toast({
         title: t('signup.fill_all_fields'),
         description: t('signup.fill_all_fields_desc'),
@@ -45,35 +49,49 @@ const SignupPage = () => {
       return;
     }
     setIsLoading(true);
-    const {
-      error
-    } = await signUp(email, password, firstName, lastName, selectedLanguage);
-    if (error) {
-      let errorMessage = t('signup.unknown_error');
-      if (error.message === "User already registered") {
-        errorMessage = t('signup.user_already_registered');
-      } else if (error.message.includes("Password")) {
-        errorMessage = t('signup.password_requirements');
+    
+    try {
+      const { error } = await signUp(email, password, firstName, lastName, selectedLanguage);
+      
+      if (error) {
+        let errorMessage = t('signup.unknown_error');
+        
+        // Handle specific hook timeout error
+        if (error.message.includes("Failed to reach hook") || error.message.includes("maximum time")) {
+          errorMessage = "Er is een probleem met het versturen van de verificatie email. Probeer het over een paar minuten opnieuw of neem contact op met support.";
+        } else if (error.message === "User already registered") {
+          errorMessage = t('signup.user_already_registered');
+        } else if (error.message.includes("Password")) {
+          errorMessage = t('signup.password_requirements');
+        } else {
+          errorMessage = error.message;
+        }
+        
+        toast({
+          title: t('signup.registration_error'),
+          description: errorMessage,
+          variant: "destructive"
+        });
       } else {
-        errorMessage = error.message;
+        toast({
+          title: t('signup.account_created'),
+          description: t('signup.verification_email_sent'),
+          duration: 6000
+        });
+        navigate("/email-verification");
       }
+    } catch (error: any) {
+      console.error('Signup error:', error);
       toast({
         title: t('signup.registration_error'),
-        description: errorMessage,
+        description: "Er is een onverwachte fout opgetreden. Probeer het opnieuw.",
         variant: "destructive"
       });
-    } else {
-      toast({
-        title: t('signup.account_created'),
-        description: t('signup.verification_email_sent'),
-        duration: 6000
-      });
-
-      // Navigate to email verification page
-      navigate("/email-verification");
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
+
   return <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2">
       {/* Left side - Image with quote overlay */}
       <div className="relative hidden lg:block">
@@ -181,4 +199,5 @@ const SignupPage = () => {
       </div>
     </div>;
 };
+
 export default SignupPage;
