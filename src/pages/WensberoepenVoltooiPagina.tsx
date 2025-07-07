@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
@@ -68,7 +67,7 @@ const WensberoepenVoltooiPagina = () => {
             {/* Next steps */}
             <div className="bg-yellow-50 rounded-2xl p-8 mb-12 text-left">
               <h2 className="text-2xl font-semibold text-blue-900 mb-6">
-                Volgende stap
+                Volgende stap: persoonsprofiel
               </h2>
               <p className="text-gray-700 mb-6">
                 Vul je persoonsprofiel aan met wat extra informatie over je achtergrond en voorkeuren, 
