@@ -15,9 +15,9 @@ const OverVinster = () => {
             <div className="flex items-center">
               <img 
                 alt="Vinster Logo" 
-                className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+                className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
                 onClick={() => navigate('/')} 
-                src="/lovable-uploads/d5152e25-b955-4d35-98a4-f2a090b09599.png" 
+                src="/lovable-uploads/vinster-new-logo.png" 
               />
             </div>
           </div>
@@ -31,7 +31,11 @@ const OverVinster = () => {
             {/* Photo */}
             <div className="order-2 md:order-1">
               <div className="relative">
-                <img alt="Heidi Jansen - Oprichter van Vinster" className="w-full max-w-md mx-auto rounded-2xl shadow-lg object-cover aspect-[3/4]" src="/lovable-uploads/790a1059-98fe-415f-bc29-f36d00c53e4c.jpg" />
+                <img 
+                  alt="Heidi Jansen - Oprichter van Vinster" 
+                  className="w-full max-w-md mx-auto rounded-2xl shadow-lg object-cover aspect-[3/4]" 
+                  src="/lovable-uploads/790a1059-98fe-415f-bc29-f36d00c53e4c.jpg" 
+                />
                 <div className="absolute -bottom-4 -right-4 bg-blue-900 text-white p-4 rounded-xl shadow-lg">
                   <p className="text-sm font-semibold">25+ jaar ervaring</p>
                   <p className="text-xs opacity-90">Loopbaanadviseur</p>

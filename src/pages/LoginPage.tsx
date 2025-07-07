@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,21 +9,16 @@ import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "@/hooks/useTranslation";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [searchParams] = useSearchParams();
-  const {
-    signIn
-  } = useAuth();
+  const { signIn } = useAuth();
   const navigate = useNavigate();
-  const {
-    toast
-  } = useToast();
-  const {
-    t
-  } = useTranslation();
+  const { toast } = useToast();
+  const { t } = useTranslation();
 
   // Check for verification success parameter
   useEffect(() => {
@@ -34,6 +30,7 @@ const LoginPage = () => {
       });
     }
   }, [searchParams, toast, t]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !password) {
@@ -45,9 +42,7 @@ const LoginPage = () => {
       return;
     }
     setIsLoading(true);
-    const {
-      error
-    } = await signIn(email, password);
+    const { error } = await signIn(email, password);
     if (error) {
       let errorMessage = t('login.unknown_error');
       if (error.message === "Invalid login credentials") {
@@ -71,12 +66,14 @@ const LoginPage = () => {
     }
     setIsLoading(false);
   };
-  return <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2">
+
+  return (
+    <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2">
       {/* Left side - Image with quote overlay */}
       <div className="relative hidden lg:block">
         <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
-        backgroundImage: "url('/lovable-uploads/4bce3129-ec2c-4ee4-a082-bb74962f620e.png')"
-      }}>
+          backgroundImage: "url('/lovable-uploads/4bce3129-ec2c-4ee4-a082-bb74962f620e.png')"
+        }}>
           <div className="absolute inset-0 bg-black bg-opacity-10"></div>
         </div>
         
@@ -94,7 +91,12 @@ const LoginPage = () => {
         <div className="w-full max-w-md space-y-6 lg:space-y-8">
           {/* Header with Logo and Language Switcher */}
           <div className="flex items-center justify-between">
-            <img alt="Vinster Logo" onClick={() => navigate('/')} src="/lovable-uploads/d5152e25-b955-4d35-98a4-f2a090b09599.png" className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" />
+            <img 
+              alt="Vinster Logo" 
+              onClick={() => navigate('/')} 
+              src="/lovable-uploads/vinster-new-logo.png" 
+              className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+            />
             <LanguageSwitcher />
           </div>
 
@@ -113,14 +115,30 @@ const LoginPage = () => {
               <Label htmlFor="email" className="text-blue-900 font-medium text-left block">
                 {t('login.email')}
               </Label>
-              <Input id="email" type="email" placeholder={t('login.email_placeholder')} value={email} onChange={e => setEmail(e.target.value)} className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900" required />
+              <Input 
+                id="email" 
+                type="email" 
+                placeholder={t('login.email_placeholder')} 
+                value={email} 
+                onChange={e => setEmail(e.target.value)} 
+                className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900" 
+                required 
+              />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="password" className="text-blue-900 font-medium text-left block">
                 {t('login.password')}
               </Label>
-              <Input id="password" type="password" placeholder={t('login.password_placeholder')} value={password} onChange={e => setPassword(e.target.value)} className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900" required />
+              <Input 
+                id="password" 
+                type="password" 
+                placeholder={t('login.password_placeholder')} 
+                value={password} 
+                onChange={e => setPassword(e.target.value)} 
+                className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900" 
+                required 
+              />
             </div>
 
             <div className="flex items-center space-x-2">
@@ -130,7 +148,11 @@ const LoginPage = () => {
               </Label>
             </div>
 
-            <Button type="submit" className="w-full h-12 bg-blue-900 hover:bg-blue-800 text-white font-semibold text-base rounded-lg" disabled={isLoading}>
+            <Button 
+              type="submit" 
+              className="w-full h-12 bg-blue-900 hover:bg-blue-800 text-white font-semibold text-base rounded-lg" 
+              disabled={isLoading}
+            >
               {isLoading ? t('login.logging_in') : t('login.sign_in')}
             </Button>
 
@@ -145,6 +167,8 @@ const LoginPage = () => {
           </form>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default LoginPage;
