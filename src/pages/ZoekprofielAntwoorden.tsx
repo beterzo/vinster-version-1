@@ -1,27 +1,22 @@
-import { useState, useEffect, useMemo } from "react";
+
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
-import { useZoekprofielResponses } from "@/hooks/useZoekprofielResponses";
-import { useZoekprofielPdf } from "@/hooks/useZoekprofielPdf";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/useAuth";
+import { useZoekprofielAntwoorden } from "@/hooks/useZoekprofielAntwoorden";
+import DashboardHeader from "@/components/DashboardHeader";
+import DashboardSidebar from "@/components/DashboardSidebar";
 
 const ZoekprofielAntwoorden = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const {
-    responses,
-    saveResponse,
-    loading,
-    submitToWebhook,
-    progress,
-    isCompleted
-  } = useZoekprofielResponses();
-  const { initializePdfGeneration, isGenerating } = useZoekprofielPdf();
-  
-  const [answers, setAnswers] = useState({
+  const { user } = useAuth();
+  const { antwoorden, saveAntwoorden, isLoading } = useZoekprofielAntwoorden();
+
+  const [formData, setFormData] = useState({
     functie_als: "",
     kerntaken: "",
     organisatie_bij: "",
@@ -30,165 +25,151 @@ const ZoekprofielAntwoorden = () => {
     arbeidsvoorwaarden: ""
   });
 
-  // State to track if we're submitting to webhook
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  // Simplified stable reference - only recreate when responses object changes
-  const stableResponses = useMemo(() => {
-    return responses;
-  }, [responses]);
-
-  // Load saved data when responses change
   useEffect(() => {
-    if (!loading && stableResponses) {
-      console.log("Loading saved responses into form:", stableResponses);
-      setAnswers({
-        functie_als: stableResponses.functie_als || "",
-        kerntaken: stableResponses.kerntaken || "",
-        organisatie_bij: stableResponses.organisatie_bij || "",
-        sector: stableResponses.sector || "",
-        gewenste_regio: stableResponses.gewenste_regio || "",
-        arbeidsvoorwaarden: stableResponses.arbeidsvoorwaarden || ""
+    if (antwoorden) {
+      setFormData({
+        functie_als: antwoorden.functie_als || "",
+        kerntaken: antwoorden.kerntaken || "",
+        organisatie_bij: antwoorden.organisatie_bij || "",
+        sector: antwoorden.sector || "",
+        gewenste_regio: antwoorden.gewenste_regio || "",
+        arbeidsvoorwaarden: antwoorden.arbeidsvoorwaarden || ""
       });
     }
-  }, [loading, stableResponses]);
+  }, [antwoorden]);
 
   const handleInputChange = (field: string, value: string) => {
-    console.log(`Updating ${field}:`, value);
-    setAnswers(prev => ({
+    setFormData(prev => ({
       ...prev,
       [field]: value
     }));
-
-    // Auto-save on every change (with debouncing handled by the hook)
-    saveResponse(field, value);
   };
 
-  const handleGenereren = async () => {
-    if (!isCompleted) {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!user) {
       toast({
-        title: "Vul alle velden in",
-        description: "Vul alle vragen in voordat je het zoekprofiel genereert.",
+        title: "Niet ingelogd",
+        description: "Je moet ingelogd zijn om je antwoorden op te slaan.",
         variant: "destructive"
       });
       return;
     }
-    setIsSubmitting(true);
+
     try {
-      console.log("Submitting zoekprofiel data to webhook...");
-
-      // First submit to webhook with the data
-      const webhookSuccess = await submitToWebhook();
-      if (!webhookSuccess) {
-        throw new Error("Webhook submission failed");
-      }
-      console.log("Webhook submission successful, initializing PDF generation...");
-
-      // Then initialize PDF generation
-      await initializePdfGeneration();
+      await saveAntwoorden(formData);
       toast({
-        title: "Zoekprofiel gegenereerd!",
-        description: "Je zoekprofiel is succesvol aangemaakt en wordt nu verwerkt."
+        title: "Antwoorden opgeslagen",
+        description: "Je zoekprofiel antwoorden zijn succesvol opgeslagen."
       });
-      navigate('/zoekprofiel-download');
+      navigate("/zoekprofiel-download");
     } catch (error) {
-      console.error("Error generating zoekprofiel:", error);
+      console.error("Error saving answers:", error);
       toast({
-        title: "Fout bij genereren",
-        description: "Er ging iets mis bij het genereren van je zoekprofiel. Probeer het opnieuw.",
+        title: "Fout bij opslaan",
+        description: "Er is een fout opgetreden bij het opslaan van je antwoorden.",
         variant: "destructive"
       });
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
   const questions = [
     {
-      field: "functie_als",
-      question: "Ik ga voor een functie als... (Welke functienaam zoek je?)",
-      placeholder: "Bijvoorbeeld: Marketing Manager, Software Developer, HR Adviseur..."
+      id: "functie_als",
+      label: "Ik ga voor een functie als...",
+      placeholder: "Welke functienaam zoek je?",
+      value: formData.functie_als
     },
     {
-      field: "kerntaken",
-      question: "Met de volgende kerntaken... (Wat wil je vooral doen in je werk?)",
-      placeholder: "Bijvoorbeeld: Strategieën ontwikkelen, teams aansturen, klanten adviseren..."
+      id: "kerntaken",
+      label: "Met de volgende kerntaken...",
+      placeholder: "Wat wil je vooral doen in je werk?",
+      value: formData.kerntaken
     },
     {
-      field: "organisatie_bij",
-      question: "Bij de volgende soort organisatie... (Bij wat voor organisatie wil je werken?)",
-      placeholder: "Bijvoorbeeld: Innovatief techbedrijf, Non-profit organisatie, Grote multinational..."
+      id: "organisatie_bij",
+      label: "Bij de volgende soort organisatie...",
+      placeholder: "Bij wat voor organisatie wil je werken?",
+      value: formData.organisatie_bij
     },
     {
-      field: "sector",
-      question: "In deze sector... (In welke sector zoek je werk?)",
-      placeholder: "Bijvoorbeeld: ICT, Zorg, Onderwijs, Marketing & Communicatie..."
+      id: "sector",
+      label: "In deze sector...",
+      placeholder: "In welke sector zoek je werk?",
+      value: formData.sector
     },
     {
-      field: "gewenste_regio",
-      question: "In deze regio... (Waar wil je werken?)",
-      placeholder: "Bijvoorbeeld: Amsterdam en omgeving, geheel Nederland, remote..."
+      id: "gewenste_regio",
+      label: "In deze regio...",
+      placeholder: "Waar wil je werken?",
+      value: formData.gewenste_regio
     },
     {
-      field: "arbeidsvoorwaarden",
-      question: "Met deze arbeidsvoorwaarden... (Wat zijn je wensen qua voorwaarden?)",
-      placeholder: "Bijvoorbeeld: 32-40 uur, flexibele werktijden, thuiswerkmogelijkheden..."
+      id: "arbeidsvoorwaarden",
+      label: "Met deze arbeidsvoorwaarden...",
+      placeholder: "Wat zijn je wensen qua voorwaarden?",
+      value: formData.arbeidsvoorwaarden
     }
   ];
 
-  if (loading) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Laden...</div>;
-  }
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <DashboardHeader />
+      <div className="flex">
+        <DashboardSidebar />
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 ml-0 lg:ml-64">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white rounded-lg shadow-sm border p-6 lg:p-8">
+              <div className="mb-8">
+                <h1 className="text-2xl font-bold text-blue-900 mb-2">
+                  Zoekprofiel Antwoorden
+                </h1>
+                <p className="text-gray-600">
+                  Vul onderstaande velden in om je persoonlijke zoekprofiel te maken.
+                </p>
+              </div>
 
-  const isProcessing = isSubmitting || isGenerating;
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {questions.map((question, index) => (
+                  <div key={question.id} className="space-y-2">
+                    <Label htmlFor={question.id} className="text-sm font-medium text-gray-700">
+                      {index + 1}. {question.label}
+                    </Label>
+                    <Textarea
+                      id={question.id}
+                      placeholder={question.placeholder}
+                      value={question.value}
+                      onChange={(e) => handleInputChange(question.id, e.target.value)}
+                      className="min-h-[100px] resize-none"
+                    />
+                  </div>
+                ))}
 
-  return <div className="min-h-screen bg-gray-50 font-sans">
-      {/* Header */}
-      <div className="bg-white shadow-sm">
-        <div className="max-w-[1440px] mx-auto px-6 py-4">
-          <div className="flex items-center">
-            <img alt="Vinster Logo" onClick={() => navigate('/home')} src="/lovable-uploads/52c05db7-79a1-4b40-becc-e64e3c873268.png" className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" />
+                <div className="flex gap-4 pt-6">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => navigate("/home")}
+                    className="flex-1"
+                  >
+                    Terug naar Dashboard
+                  </Button>
+                  <Button
+                    type="submit"
+                    disabled={isLoading}
+                    className="flex-1 bg-blue-900 hover:bg-blue-800"
+                  >
+                    {isLoading ? "Bezig met opslaan..." : "Opslaan en Doorgaan"}
+                  </Button>
+                </div>
+              </form>
+            </div>
           </div>
-        </div>
+        </main>
       </div>
-
-      {/* Main Content */}
-      <div className="max-w-[1440px] mx-auto px-6 py-12">
-        <Card className="rounded-3xl shadow-xl">
-          <CardContent className="p-12">
-            {/* Title */}
-            <div className="text-center mb-12">
-              <h1 className="text-3xl font-bold text-blue-900 mb-2">
-                Zoekprofiel antwoorden
-              </h1>
-              <p className="text-xl text-gray-600">
-                Beantwoord de vragen om je persoonlijke zoekprofiel te maken
-              </p>
-            </div>
-
-            {/* Questions */}
-            <div className="space-y-8">
-              {questions.map((item, index) => <div key={index}>
-                  <Label htmlFor={item.field} className="text-blue-900 font-medium text-lg mb-3 block text-left">
-                    {index + 1}. {item.question}
-                  </Label>
-                  <Textarea id={item.field} placeholder={item.placeholder} value={answers[item.field as keyof typeof answers]} onChange={e => handleInputChange(item.field, e.target.value)} className="min-h-[80px] border-gray-300 focus:border-blue-900 focus:ring-blue-900" />
-                </div>)}
-            </div>
-
-            {/* Navigation */}
-            <div className="flex justify-between pt-12">
-              <Button onClick={() => navigate('/zoekprofiel-intro')} variant="outline" className="border-blue-900 text-blue-900 hover:bg-blue-50" disabled={isProcessing}>
-                Terug naar intro
-              </Button>
-              <Button onClick={handleGenereren} className={`font-semibold px-8 ${isCompleted && !isProcessing ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" : "bg-gray-300 text-gray-500 cursor-not-allowed"}`} disabled={isProcessing || !isCompleted}>
-                Genereren
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    </div>;
+    </div>
+  );
 };
 
 export default ZoekprofielAntwoorden;
