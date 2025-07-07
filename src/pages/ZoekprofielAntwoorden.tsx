@@ -1,14 +1,13 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
 import { useZoekprofielAntwoorden } from "@/hooks/useZoekprofielAntwoorden";
-import DashboardHeader from "@/components/DashboardHeader";
-import DashboardSidebar from "@/components/DashboardSidebar";
 import { HelpPopover } from "@/components/HelpPopover";
 
 const ZoekprofielAntwoorden = () => {
@@ -25,6 +24,13 @@ const ZoekprofielAntwoorden = () => {
     gewenste_regio: "",
     arbeidsvoorwaarden: ""
   });
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
 
   useEffect(() => {
     if (responses) {
@@ -66,6 +72,7 @@ const ZoekprofielAntwoorden = () => {
         title: "Antwoorden opgeslagen",
         description: "Je zoekprofiel antwoorden zijn succesvol opgeslagen."
       });
+      scrollToTop();
       navigate("/zoekprofiel-download");
     } catch (error) {
       console.error("Error saving answers:", error);
@@ -81,7 +88,7 @@ const ZoekprofielAntwoorden = () => {
     {
       id: "functie_als",
       label: "Ik ga voor een functie als...",
-      placeholder: "Welke functienaam zoek je?",
+      placeholder: "Beschrijf hier je antwoord...",
       value: formData.functie_als,
       examples: [
         "Marketing manager bij een tech startup",
@@ -92,7 +99,7 @@ const ZoekprofielAntwoorden = () => {
     {
       id: "kerntaken",
       label: "Met de volgende kerntaken...",
-      placeholder: "Wat wil je vooral doen in je werk?",
+      placeholder: "Beschrijf hier je antwoord...",
       value: formData.kerntaken,
       examples: [
         "Strategie ontwikkelen, teams aansturen, klantcontact onderhouden",
@@ -103,7 +110,7 @@ const ZoekprofielAntwoorden = () => {
     {
       id: "organisatie_bij",
       label: "Bij de volgende soort organisatie...",
-      placeholder: "Bij wat voor organisatie wil je werken?",
+      placeholder: "Beschrijf hier je antwoord...",
       value: formData.organisatie_bij,
       examples: [
         "Een innovatief bedrijf met jonge collega's en informele sfeer",
@@ -114,7 +121,7 @@ const ZoekprofielAntwoorden = () => {
     {
       id: "sector",
       label: "In deze sector...",
-      placeholder: "In welke sector zoek je werk?",
+      placeholder: "Beschrijf hier je antwoord...",
       value: formData.sector,
       examples: [
         "Technologie en software ontwikkeling",
@@ -125,7 +132,7 @@ const ZoekprofielAntwoorden = () => {
     {
       id: "gewenste_regio",
       label: "In deze regio...",
-      placeholder: "Waar wil je werken?",
+      placeholder: "Beschrijf hier je antwoord...",
       value: formData.gewenste_regio,
       examples: [
         "Amsterdam en omgeving, max 45 min reizen",
@@ -136,7 +143,7 @@ const ZoekprofielAntwoorden = () => {
     {
       id: "arbeidsvoorwaarden",
       label: "Met deze arbeidsvoorwaarden...",
-      placeholder: "Wat zijn je wensen qua voorwaarden?",
+      placeholder: "Beschrijf hier je antwoord...",
       value: formData.arbeidsvoorwaarden,
       examples: [
         "€4000-5000 bruto, 32-36 uur, thuiswerken mogelijk",
@@ -146,76 +153,93 @@ const ZoekprofielAntwoorden = () => {
     }
   ];
 
+  if (loading) {
+    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Laden...</div>;
+  }
+
+  const allFieldsFilled = Object.values(formData).every(answer => answer.trim() !== "");
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      <DashboardHeader />
-      <div className="flex">
-        <DashboardSidebar />
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 ml-0 lg:ml-64">
-          <div className="max-w-3xl mx-auto">
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-              {/* Header Section */}
-              <div className="bg-gradient-to-r from-blue-50 to-blue-100 px-8 py-10">
-                <div className="text-center">
-                  <h1 className="text-3xl font-bold text-blue-900 mb-3">
-                    Zoekprofiel antwoorden
-                  </h1>
-                  <p className="text-lg text-blue-700 max-w-2xl mx-auto">
-                    Vul onderstaande velden in om je persoonlijke zoekprofiel te maken.
-                  </p>
-                </div>
-              </div>
-
-              {/* Form Section */}
-              <div className="p-8">
-                <form onSubmit={handleSubmit} className="space-y-8">
-                  {questions.map((question, index) => (
-                    <div key={question.id} className="space-y-3">
-                      <div className="flex items-center gap-2">
-                        <Label 
-                          htmlFor={question.id} 
-                          className="text-base font-semibold text-gray-800"
-                        >
-                          {index + 1}. {question.label}
-                        </Label>
-                        <HelpPopover 
-                          examples={question.examples} 
-                          title={question.label}
-                        />
-                      </div>
-                      <Textarea
-                        id={question.id}
-                        placeholder={question.placeholder}
-                        value={question.value}
-                        onChange={(e) => handleInputChange(question.id, e.target.value)}
-                        className="min-h-[120px] resize-none border-gray-200 focus:border-blue-500 focus:ring-blue-500 rounded-lg text-base p-4 transition-colors"
-                      />
-                    </div>
-                  ))}
-
-                  {/* Button Section */}
-                  <div className="flex flex-col sm:flex-row gap-4 pt-8 border-t border-gray-100">
-                    <Button
-                      type="button"
-                      variant="outline"
-                      onClick={() => navigate("/home")}
-                      className="flex-1 h-12 text-base border-gray-300 hover:bg-gray-50 transition-colors"
-                    >
-                      Terug naar Dashboard
-                    </Button>
-                    <Button
-                      type="submit"
-                      disabled={loading}
-                      className="flex-1 h-12 bg-blue-900 hover:bg-blue-800 text-base font-semibold transition-colors"
-                    >
-                      {loading ? "Bezig met opslaan..." : "Zoekprofiel afronden"}
-                    </Button>
-                  </div>
-                </form>
-              </div>
-            </div>
+    <div className="min-h-screen bg-gray-50 font-sans">
+      {/* Header */}
+      <div className="bg-white shadow-sm">
+        <div className="max-w-[1440px] mx-auto px-6 py-4">
+          <div className="flex items-center">
+            <img 
+              alt="Vinster Logo" 
+              className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              onClick={() => navigate('/home')} 
+              src="/lovable-uploads/0a60c164-79b3-4ce8-80cb-a3d37886f987.png" 
+            />
           </div>
-        </main>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="max-w-[1440px] mx-auto px-6 py-12">
+        <Card className="rounded-3xl shadow-xl">
+          <CardContent className="p-12">
+            {/* Title */}
+            <div className="text-center mb-12">
+              <h1 className="text-3xl font-bold text-blue-900 mb-2">
+                Zoekprofiel antwoorden
+              </h1>
+              <p className="text-xl text-gray-600">
+                Vul onderstaande velden in om je persoonlijke zoekprofiel te maken
+              </p>
+            </div>
+
+            {/* Questions */}
+            <form onSubmit={handleSubmit} className="space-y-8">
+              {questions.map((question, index) => (
+                <div key={question.id}>
+                  <div className="flex items-center gap-2 mb-3">
+                    <Label 
+                      htmlFor={question.id} 
+                      className="text-blue-900 font-medium text-lg block text-left"
+                    >
+                      {index + 1}. {question.label}
+                    </Label>
+                    <HelpPopover 
+                      examples={question.examples} 
+                      title={question.label}
+                    />
+                  </div>
+                  <Textarea
+                    id={question.id}
+                    placeholder={question.placeholder}
+                    value={question.value}
+                    onChange={(e) => handleInputChange(question.id, e.target.value)}
+                    className="min-h-[100px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
+                  />
+                </div>
+              ))}
+
+              {/* Navigation */}
+              <div className="flex justify-between pt-12">
+                <Button 
+                  type="button"
+                  onClick={() => navigate("/home")}
+                  variant="outline"
+                  className="border-blue-900 text-blue-900 hover:bg-blue-50"
+                >
+                  Terug naar Dashboard
+                </Button>
+                <Button 
+                  type="submit"
+                  disabled={loading || !allFieldsFilled}
+                  className={`font-semibold px-8 ${
+                    allFieldsFilled && !loading
+                      ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 
+                      : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  }`}
+                >
+                  {loading ? "Bezig met opslaan..." : "Zoekprofiel afronden"}
+                </Button>
+              </div>
+            </form>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
