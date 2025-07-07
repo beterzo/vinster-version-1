@@ -9,6 +9,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useZoekprofielAntwoorden } from "@/hooks/useZoekprofielAntwoorden";
 import DashboardHeader from "@/components/DashboardHeader";
 import DashboardSidebar from "@/components/DashboardSidebar";
+import { HelpPopover } from "@/components/HelpPopover";
 
 const ZoekprofielAntwoorden = () => {
   const navigate = useNavigate();
@@ -81,37 +82,67 @@ const ZoekprofielAntwoorden = () => {
       id: "functie_als",
       label: "Ik ga voor een functie als...",
       placeholder: "Welke functienaam zoek je?",
-      value: formData.functie_als
+      value: formData.functie_als,
+      examples: [
+        "Marketing manager bij een tech startup",
+        "Leraar op een basisschool in Amsterdam",
+        "Accountant bij een middelgroot accountantskantoor"
+      ]
     },
     {
       id: "kerntaken",
       label: "Met de volgende kerntaken...",
       placeholder: "Wat wil je vooral doen in je werk?",
-      value: formData.kerntaken
+      value: formData.kerntaken,
+      examples: [
+        "Strategie ontwikkelen, teams aansturen, klantcontact onderhouden",
+        "Lesgeven, ouders begeleiden, projecten organiseren",
+        "Financiële administratie, belastingaangiftes, advisering"
+      ]
     },
     {
       id: "organisatie_bij",
       label: "Bij de volgende soort organisatie...",
       placeholder: "Bij wat voor organisatie wil je werken?",
-      value: formData.organisatie_bij
+      value: formData.organisatie_bij,
+      examples: [
+        "Een innovatief bedrijf met jonge collega's en informele sfeer",
+        "Een school met betrokken ouders en gemotiveerde leerlingen",
+        "Een gerenommeerd kantoor met professionele uitstraling"
+      ]
     },
     {
       id: "sector",
       label: "In deze sector...",
       placeholder: "In welke sector zoek je werk?",
-      value: formData.sector
+      value: formData.sector,
+      examples: [
+        "Technologie en software ontwikkeling",
+        "Onderwijs en jeugdzorg",
+        "Financiële dienstverlening"
+      ]
     },
     {
       id: "gewenste_regio",
       label: "In deze regio...",
       placeholder: "Waar wil je werken?",
-      value: formData.gewenste_regio
+      value: formData.gewenste_regio,
+      examples: [
+        "Amsterdam en omgeving, max 45 min reizen",
+        "Utrecht centrum, liefst op fietsafstand",
+        "Rotterdam Zuid, goed bereikbaar met OV"
+      ]
     },
     {
       id: "arbeidsvoorwaarden",
       label: "Met deze arbeidsvoorwaarden...",
       placeholder: "Wat zijn je wensen qua voorwaarden?",
-      value: formData.arbeidsvoorwaarden
+      value: formData.arbeidsvoorwaarden,
+      examples: [
+        "€4000-5000 bruto, 32-36 uur, thuiswerken mogelijk",
+        "€3500-4200 bruto, 40 uur, goede pensioenregeling",
+        "€4500-6000 bruto, flexibele werktijden, doorgroeimogelijkheden"
+      ]
     }
   ];
 
@@ -140,12 +171,18 @@ const ZoekprofielAntwoorden = () => {
                 <form onSubmit={handleSubmit} className="space-y-8">
                   {questions.map((question, index) => (
                     <div key={question.id} className="space-y-3">
-                      <Label 
-                        htmlFor={question.id} 
-                        className="text-base font-semibold text-gray-800 block"
-                      >
-                        {index + 1}. {question.label}
-                      </Label>
+                      <div className="flex items-center gap-2">
+                        <Label 
+                          htmlFor={question.id} 
+                          className="text-base font-semibold text-gray-800"
+                        >
+                          {index + 1}. {question.label}
+                        </Label>
+                        <HelpPopover 
+                          examples={question.examples} 
+                          title={question.label}
+                        />
+                      </div>
                       <Textarea
                         id={question.id}
                         placeholder={question.placeholder}
@@ -171,7 +208,7 @@ const ZoekprofielAntwoorden = () => {
                       disabled={loading}
                       className="flex-1 h-12 bg-blue-900 hover:bg-blue-800 text-base font-semibold transition-colors"
                     >
-                      {loading ? "Bezig met opslaan..." : "Zoekprofiel Afronden"}
+                      {loading ? "Bezig met opslaan..." : "Zoekprofiel afronden"}
                     </Button>
                   </div>
                 </form>
