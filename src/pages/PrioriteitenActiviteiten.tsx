@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -5,17 +6,20 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 import { usePrioriteitenResponses } from "@/hooks/usePrioriteitenResponses";
-const ACTIVITEITEN_KEYWORDS = ["Analyseren", "Begeleiden", "Beheren", "Bereiden", "Besturen", "Bouwen", "Communiceren", "Controleren", "Creëren", "Demonstreren", "Designen", "Experimenteren", "Geven", "Inspireren", "Instrueren", "Leiden", "Maken", "Motiveren", "Onderhandelen", "Onderzoeken", "Ondersteunen", "Ontwikkelen", "Oplossen", "Optreden", "Organiseren", "Plannen", "Presenteren", "Produceren", "Programmeren", "Repareren", "Spelen", "Stimuleren", "Trainen", "Uitleggen", "Uitvoeren", "Verkopen", "Verzorgen", "Voorbereiden"];
+import { cleanKeywords } from "@/utils/keywordUtils";
+
 const PrioriteitenActiviteiten = () => {
   const navigate = useNavigate();
   const {
     responses,
+    aiKeywords,
     saveKeywordSelection,
     saveResponses,
     loading
   } = usePrioriteitenResponses();
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
   const [extraText, setExtraText] = useState("");
+
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -31,34 +35,52 @@ const PrioriteitenActiviteiten = () => {
       setExtraText(responses.extra_activiteiten_tekst || "");
     }
   }, [loading, responses]);
+
   const handleKeywordToggle = (keyword: string) => {
-    const newSelection = selectedKeywords.includes(keyword) ? selectedKeywords.filter(k => k !== keyword) : [...selectedKeywords, keyword];
+    const newSelection = selectedKeywords.includes(keyword) 
+      ? selectedKeywords.filter(k => k !== keyword) 
+      : [...selectedKeywords, keyword];
+    
     setSelectedKeywords(newSelection);
     saveKeywordSelection('activiteiten', newSelection);
   };
+
   const handleExtraTextChange = (value: string) => {
     setExtraText(value);
   };
+
   const handleExtraTextBlur = () => {
     console.log("Saving extra text:", extraText);
     saveResponses({
       extra_activiteiten_tekst: extraText
     });
   };
+
   const handleNext = () => {
     scrollToTop();
     navigate('/prioriteiten-interesses');
   };
+
   if (loading) {
     return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Laden...</div>;
   }
+
+  // Use AI-generated keywords or fallback to empty array
+  const availableKeywords = cleanKeywords(aiKeywords.activiteiten || []);
   const canProceed = selectedKeywords.length >= 5;
-  return <div className="min-h-screen bg-gray-50 font-sans">
+
+  return (
+    <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
           <div className="flex items-center">
-            <img alt="Vinster Logo" className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" onClick={() => navigate('/home')} src="/lovable-uploads/de909d64-605c-4854-a230-7da63202afba.png" />
+            <img 
+              alt="Vinster Logo" 
+              className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              onClick={() => navigate('/home')} 
+              src="/lovable-uploads/de909d64-605c-4854-a230-7da63202afba.png" 
+            />
           </div>
         </div>
       </div>
@@ -70,7 +92,7 @@ const PrioriteitenActiviteiten = () => {
             {/* Title */}
             <div className="text-center mb-12">
               <h1 className="text-3xl font-bold text-blue-900 mb-2">
-                Prioriteiten - Activiteiten
+                Prioriteiten - activiteiten
               </h1>
               <p className="text-xl text-gray-600">
                 Selecteer minimaal 5 activiteiten die je leuk vindt om te doen
@@ -81,29 +103,65 @@ const PrioriteitenActiviteiten = () => {
             </div>
 
             {/* Keywords Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mb-8">
-              {ACTIVITEITEN_KEYWORDS.map(keyword => <button key={keyword} onClick={() => handleKeywordToggle(keyword)} className={`p-3 rounded-lg border-2 transition-all duration-200 text-sm font-medium ${selectedKeywords.includes(keyword) ? "bg-blue-900 text-white border-blue-900 shadow-md" : "bg-white text-blue-900 border-gray-300 hover:border-blue-900 hover:bg-blue-50"}`}>
-                  {keyword}
-                </button>)}
-            </div>
+            {availableKeywords.length > 0 ? (
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mb-8">
+                {availableKeywords.map(keyword => (
+                  <button
+                    key={keyword}
+                    onClick={() => handleKeywordToggle(keyword)}
+                    className={`p-3 rounded-lg border-2 transition-all duration-200 text-sm font-medium ${
+                      selectedKeywords.includes(keyword)
+                        ? "bg-blue-900 text-white border-blue-900 shadow-md"
+                        : "bg-white text-blue-900 border-gray-300 hover:border-blue-900 hover:bg-blue-50"
+                    }`}
+                  >
+                    {keyword}
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center mb-8 p-8 bg-gray-100 rounded-lg">
+                <p className="text-gray-600">
+                  Er zijn nog geen persoonlijke activiteiten gegenereerd. 
+                  Vul eerst je enthousiasme scan en wensberoepen in.
+                </p>
+              </div>
+            )}
 
             {/* Extra Text Field */}
             <div className="mb-8">
               <Label htmlFor="extraText" className="text-blue-900 font-medium text-lg mb-3 block text-left">
                 Mis je nog activiteiten? Voeg ze hier toe (optioneel)
               </Label>
-              <Textarea id="extraText" placeholder="Bijvoorbeeld: Fotograferen, Programmeren, Tuinieren..." value={extraText} onChange={e => handleExtraTextChange(e.target.value)} onBlur={handleExtraTextBlur} className="min-h-[80px] border-gray-300 focus:border-blue-900 focus:ring-blue-900" />
+              <Textarea 
+                id="extraText" 
+                placeholder="Bijvoorbeeld: Fotograferen, Programmeren, Tuinieren..." 
+                value={extraText} 
+                onChange={e => handleExtraTextChange(e.target.value)} 
+                onBlur={handleExtraTextBlur} 
+                className="min-h-[80px] border-gray-300 focus:border-blue-900 focus:ring-blue-900" 
+              />
             </div>
 
             {/* Navigation */}
             <div className="flex justify-end pt-8">
-              <Button onClick={handleNext} className={`font-semibold px-8 ${canProceed ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" : "bg-gray-300 text-gray-500 cursor-not-allowed"}`} disabled={!canProceed}>
+              <Button 
+                onClick={handleNext} 
+                className={`font-semibold px-8 ${
+                  canProceed 
+                    ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 
+                    : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                }`} 
+                disabled={!canProceed}
+              >
                 Volgende: Interesses
               </Button>
             </div>
           </CardContent>
         </Card>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default PrioriteitenActiviteiten;

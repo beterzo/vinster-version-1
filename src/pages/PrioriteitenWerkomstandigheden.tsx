@@ -11,24 +11,13 @@ import { sendMakeWebhook } from "@/services/webhookService";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
-
-const WERKOMSTANDIGHEDEN_KEYWORDS = [
-  "Alleen werken", "Avond/nacht", "Binnen", "Buiten", "Conflicten oplossen",
-  "Creatieve vrijheid", "Deadline druk", "Deeltijd", "Diversiteit", "Eigen tempo",
-  "Flexibele tijden", "Geen hiërarchie", "Geen stress", "Grote organisatie",
-  "Hoge beloning", "Internationale omgeving", "Klein team", "Leidinggevend",
-  "Lichamelijk actief", "Mentaal uitdagend", "Multitasken", "Nieuwe uitdagingen",
-  "Onafhankelijk", "Ondersteunend", "Reizen", "Routine", "Samenwerken",
-  "Snelle beslissingen", "Sociale impact", "Stabiliteit", "Status", "Stil",
-  "Technologie", "Thuiswerken", "Tijd voor privé", "Variatie", "Verantwoordelijkheid",
-  "Volledig", "Werkzekerheid"
-];
+import { cleanKeywords } from "@/utils/keywordUtils";
 
 const PrioriteitenWerkomstandigheden = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { toast } = useToast();
-  const { responses, saveResponses, loading } = usePrioriteitenResponses();
+  const { responses, aiKeywords, saveResponses, loading } = usePrioriteitenResponses();
   const { collectMakeWebhookData } = useMakeWebhookData();
   
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
@@ -158,6 +147,8 @@ const PrioriteitenWerkomstandigheden = () => {
     return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Laden...</div>;
   }
 
+  // Use AI-generated keywords or fallback to empty array
+  const availableKeywords = cleanKeywords(aiKeywords.werkomstandigheden || []);
   const canProceed = selectedKeywords.length >= 5;
 
   return (
@@ -183,7 +174,7 @@ const PrioriteitenWerkomstandigheden = () => {
             {/* Title */}
             <div className="text-center mb-12">
               <h1 className="text-3xl font-bold text-blue-900 mb-2">
-                Prioriteiten - Werkomstandigheden
+                Prioriteiten - werkomstandigheden
               </h1>
               <p className="text-xl text-gray-600">
                 Selecteer minimaal 5 werkomstandigheden die belangrijk voor je zijn
@@ -201,22 +192,31 @@ const PrioriteitenWerkomstandigheden = () => {
             </div>
 
             {/* Keywords Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mb-8">
-              {WERKOMSTANDIGHEDEN_KEYWORDS.map((keyword) => (
-                <button
-                  key={keyword}
-                  onClick={() => handleKeywordToggle(keyword)}
-                  className={`p-3 rounded-lg border-2 transition-all duration-200 text-sm font-medium ${
-                    selectedKeywords.includes(keyword)
-                      ? "bg-blue-900 text-white border-blue-900 shadow-md"
-                      : "bg-white text-blue-900 border-gray-300 hover:border-blue-900 hover:bg-blue-50"
-                  }`}
-                  disabled={isSubmitting}
-                >
-                  {keyword}
-                </button>
-              ))}
-            </div>
+            {availableKeywords.length > 0 ? (
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mb-8">
+                {availableKeywords.map((keyword) => (
+                  <button
+                    key={keyword}
+                    onClick={() => handleKeywordToggle(keyword)}
+                    className={`p-3 rounded-lg border-2 transition-all duration-200 text-sm font-medium ${
+                      selectedKeywords.includes(keyword)
+                        ? "bg-blue-900 text-white border-blue-900 shadow-md"
+                        : "bg-white text-blue-900 border-gray-300 hover:border-blue-900 hover:bg-blue-50"
+                    }`}
+                    disabled={isSubmitting}
+                  >
+                    {keyword}
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center mb-8 p-8 bg-gray-100 rounded-lg">
+                <p className="text-gray-600">
+                  Er zijn nog geen persoonlijke werkomstandigheden gegenereerd. 
+                  Vul eerst je enthousiasme scan en wensberoepen in.
+                </p>
+              </div>
+            )}
 
             {/* Extra Text Field */}
             <div className="mb-8">
