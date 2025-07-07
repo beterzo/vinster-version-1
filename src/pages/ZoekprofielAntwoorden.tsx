@@ -7,11 +7,10 @@ import { useNavigate } from "react-router-dom";
 import { useZoekprofielResponses } from "@/hooks/useZoekprofielResponses";
 import { useZoekprofielPdf } from "@/hooks/useZoekprofielPdf";
 import { useToast } from "@/hooks/use-toast";
+
 const ZoekprofielAntwoorden = () => {
   const navigate = useNavigate();
-  const {
-    toast
-  } = useToast();
+  const { toast } = useToast();
   const {
     responses,
     saveResponse,
@@ -20,10 +19,8 @@ const ZoekprofielAntwoorden = () => {
     progress,
     isCompleted
   } = useZoekprofielResponses();
-  const {
-    initializePdfGeneration,
-    isGenerating
-  } = useZoekprofielPdf();
+  const { initializePdfGeneration, isGenerating } = useZoekprofielPdf();
+  
   const [answers, setAnswers] = useState({
     functie_als: "",
     kerntaken: "",
@@ -55,6 +52,7 @@ const ZoekprofielAntwoorden = () => {
       });
     }
   }, [loading, stableResponses]);
+
   const handleInputChange = (field: string, value: string) => {
     console.log(`Updating ${field}:`, value);
     setAnswers(prev => ({
@@ -65,6 +63,7 @@ const ZoekprofielAntwoorden = () => {
     // Auto-save on every change (with debouncing handled by the hook)
     saveResponse(field, value);
   };
+
   const handleGenereren = async () => {
     if (!isCompleted) {
       toast({
@@ -103,35 +102,46 @@ const ZoekprofielAntwoorden = () => {
       setIsSubmitting(false);
     }
   };
-  const questions = [{
-    field: "functie_als",
-    question: "Functie als... (Welke functienaam zoek je?)",
-    placeholder: "Bijvoorbeeld: Marketing Manager, Software Developer, HR Adviseur..."
-  }, {
-    field: "kerntaken",
-    question: "Kerntaken (Wat wil je vooral doen in je werk?)",
-    placeholder: "Bijvoorbeeld: Strategieën ontwikkelen, teams aansturen, klanten adviseren..."
-  }, {
-    field: "organisatie_bij",
-    question: "Organisatie bij... (Bij wat voor organisatie wil je werken?)",
-    placeholder: "Bijvoorbeeld: Innovatief techbedrijf, Non-profit organisatie, Grote multinational..."
-  }, {
-    field: "sector",
-    question: "Sector (In welke sector(en) zoek je werk?)",
-    placeholder: "Bijvoorbeeld: ICT, Zorg, Onderwijs, Marketing & Communicatie..."
-  }, {
-    field: "gewenste_regio",
-    question: "Gewenste regio (Waar wil je werken?)",
-    placeholder: "Bijvoorbeeld: Amsterdam en omgeving, geheel Nederland, remote..."
-  }, {
-    field: "arbeidsvoorwaarden",
-    question: "Arbeidsvoorwaarden (Wat zijn je wensen qua voorwaarden?)",
-    placeholder: "Bijvoorbeeld: 32-40 uur, flexibele werktijden, thuiswerkmogelijkheden..."
-  }];
+
+  const questions = [
+    {
+      field: "functie_als",
+      question: "Ik ga voor een functie als... (Welke functienaam zoek je?)",
+      placeholder: "Bijvoorbeeld: Marketing Manager, Software Developer, HR Adviseur..."
+    },
+    {
+      field: "kerntaken",
+      question: "Met de volgende kerntaken... (Wat wil je vooral doen in je werk?)",
+      placeholder: "Bijvoorbeeld: Strategieën ontwikkelen, teams aansturen, klanten adviseren..."
+    },
+    {
+      field: "organisatie_bij",
+      question: "Bij de volgende soort organisatie... (Bij wat voor organisatie wil je werken?)",
+      placeholder: "Bijvoorbeeld: Innovatief techbedrijf, Non-profit organisatie, Grote multinational..."
+    },
+    {
+      field: "sector",
+      question: "In deze sector... (In welke sector zoek je werk?)",
+      placeholder: "Bijvoorbeeld: ICT, Zorg, Onderwijs, Marketing & Communicatie..."
+    },
+    {
+      field: "gewenste_regio",
+      question: "In deze regio... (Waar wil je werken?)",
+      placeholder: "Bijvoorbeeld: Amsterdam en omgeving, geheel Nederland, remote..."
+    },
+    {
+      field: "arbeidsvoorwaarden",
+      question: "Met deze arbeidsvoorwaarden... (Wat zijn je wensen qua voorwaarden?)",
+      placeholder: "Bijvoorbeeld: 32-40 uur, flexibele werktijden, thuiswerkmogelijkheden..."
+    }
+  ];
+
   if (loading) {
     return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Laden...</div>;
   }
+
   const isProcessing = isSubmitting || isGenerating;
+
   return <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header */}
       <div className="bg-white shadow-sm">
@@ -180,4 +190,5 @@ const ZoekprofielAntwoorden = () => {
       </div>
     </div>;
 };
+
 export default ZoekprofielAntwoorden;
