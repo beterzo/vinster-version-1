@@ -32,7 +32,7 @@ const emailSubjects = {
   en: "Confirm your Vinster account"
 };
 
-// Fallback HTML template in case React Email fails
+// Optimized fallback HTML template
 const createFallbackEmailHtml = (firstName: string, verificationUrl: string, language: string) => {
   const isNl = language === 'nl';
   
@@ -41,15 +41,20 @@ const createFallbackEmailHtml = (firstName: string, verificationUrl: string, lan
     <html>
     <head>
       <meta charset="utf-8">
+      <title>${isNl ? 'Bevestig je Vinster account' : 'Confirm your Vinster account'}</title>
       <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-        .header { text-align: center; margin-bottom: 30px; }
-        .logo { font-size: 32px; font-weight: bold; color: #E4C05B; }
-        .tagline { color: #232D4B; font-size: 14px; }
-        .content { background: #f9f9f9; padding: 30px; border-radius: 10px; }
-        .button { display: inline-block; padding: 16px 40px; background: #FFCD3E; color: #1F2937; text-decoration: none; border-radius: 8px; font-weight: bold; margin: 20px 0; }
-        .footer { text-align: center; margin-top: 30px; color: #666; font-size: 12px; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background: #f8f9fa; }
+        .container { max-width: 600px; margin: 20px auto; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
+        .header { background: linear-gradient(135deg, #232D4B 0%, #E4C05B 100%); padding: 40px 20px; text-align: center; color: white; }
+        .logo { font-size: 32px; font-weight: bold; margin-bottom: 8px; }
+        .tagline { opacity: 0.9; font-size: 16px; }
+        .content { padding: 40px 30px; text-align: center; }
+        .title { font-size: 24px; font-weight: 600; color: #232D4B; margin-bottom: 16px; }
+        .message { font-size: 16px; color: #6B7280; margin-bottom: 32px; line-height: 1.5; }
+        .button { display: inline-block; padding: 16px 32px; background: #FFCD3E; color: #1F2937; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; margin: 10px 0; transition: background-color 0.2s; }
+        .button:hover { background: #E4C05B; }
+        .footer { padding: 30px; background: #f8f9fa; text-align: center; color: #6B7280; font-size: 14px; }
+        .footer p { margin: 8px 0; }
       </style>
     </head>
     <body>
@@ -59,17 +64,15 @@ const createFallbackEmailHtml = (firstName: string, verificationUrl: string, lan
           <div class="tagline">${isNl ? 'Jouw venster op de toekomst' : 'Your window to the future'}</div>
         </div>
         <div class="content">
-          <h2>${isNl ? 'Bevestig je email adres' : 'Confirm your email address'}</h2>
-          <p>${isNl ? `Hoi ${firstName}, bedankt voor je aanmelding! Klik op de knop hieronder om je account te activeren.` : `Hi ${firstName}, thanks for signing up! Click the button below to activate your account.`}</p>
-          <div style="text-align: center;">
-            <a href="${verificationUrl}" class="button">
-              ${isNl ? 'Activeer mijn account' : 'Activate my account'}
-            </a>
-          </div>
+          <h1 class="title">${isNl ? 'Bevestig je email adres' : 'Confirm your email address'}</h1>
+          <p class="message">${isNl ? `Hoi ${firstName}, bedankt voor je aanmelding! Klik op de knop hieronder om je account te activeren.` : `Hi ${firstName}, thanks for signing up! Click the button below to activate your account.`}</p>
+          <a href="${verificationUrl}" class="button">
+            ${isNl ? 'Activeer mijn account' : 'Activate my account'}
+          </a>
         </div>
         <div class="footer">
           <p>${isNl ? 'Als je dit account niet hebt aangemaakt, kun je deze email negeren.' : "If you didn't create this account, you can safely ignore this email."}</p>
-          <p>${isNl ? 'Met vriendelijke groet,' : 'Best regards,'}<br>Team Vinster</p>
+          <p>${isNl ? 'Met vriendelijke groet,' : 'Best regards,'}<br><strong>Team Vinster</strong></p>
         </div>
       </div>
     </body>
@@ -86,7 +89,7 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    // Validate API key
+    // Validate API key first
     const resendApiKey = Deno.env.get("RESEND_API_KEY");
     if (!resendApiKey) {
       console.error("❌ RESEND_API_KEY not configured");
@@ -99,14 +102,14 @@ const handler = async (req: Request): Promise<Response> => {
       });
     }
 
-    console.log("✅ RESEND_API_KEY found");
+    console.log("✅ RESEND_API_KEY found, initializing Resend client");
     const resend = new Resend(resendApiKey);
 
-    // Parse payload
+    // Parse and validate payload
     const payload: AuthEventPayload = await req.json();
-    console.log("📧 Processing signup for:", payload.user.email);
+    console.log("📧 Processing signup for:", payload.user.email, "| Event type:", payload.email_data?.email_action_type);
 
-    // Validate event type
+    // Only process signup events
     if (payload.email_data?.email_action_type !== "signup") {
       console.log("⚠️ Not a signup event, ignoring");
       return new Response(JSON.stringify({ 
@@ -126,19 +129,24 @@ const handler = async (req: Request): Promise<Response> => {
     const verificationUrl = `https://aqajxxevifmhdjlvqhkz.supabase.co/auth/v1/verify?token=${payload.email_data.token_hash}&type=signup&redirect_to=${encodeURIComponent(redirectUrl)}`;
 
     const firstName = user.user_metadata?.first_name || (userLanguage === 'en' ? 'there' : 'daar');
-    const lastName = user.user_metadata?.last_name || '';
     const emailSubject = emailSubjects[userLanguage as keyof typeof emailSubjects] || emailSubjects.nl;
 
-    console.log("📧 Attempting to render email template...");
+    console.log("📧 Preparing email with:", {
+      to: user.email,
+      language: userLanguage,
+      firstName: firstName,
+      subject: emailSubject
+    });
 
     let emailHtml: string;
     
-    // Try React Email template first, with fallback
+    // Try React Email template first, with optimized fallback
     try {
+      console.log("🎨 Attempting to render React Email template...");
       emailHtml = await renderAsync(
         VerificationEmail({
           firstName,
-          lastName,
+          lastName: user.user_metadata?.last_name || '',
           verificationUrl,
           email: user.email,
           language: userLanguage
@@ -146,13 +154,13 @@ const handler = async (req: Request): Promise<Response> => {
       );
       console.log("✅ React Email template rendered successfully");
     } catch (templateError) {
-      console.warn("⚠️ React Email template failed, using fallback:", templateError.message);
+      console.warn("⚠️ React Email template failed, using optimized fallback:", templateError.message);
       emailHtml = createFallbackEmailHtml(firstName, verificationUrl, userLanguage);
     }
 
-    console.log("📧 Sending email via Resend...");
+    console.log("📤 Sending email via Resend from team@vinster.ai...");
 
-    // Send email with team@vinster.ai as sender
+    // Primary attempt with team@vinster.ai
     const emailResponse = await resend.emails.send({
       from: "Team Vinster <team@vinster.ai>",
       to: [user.email],
@@ -161,61 +169,53 @@ const handler = async (req: Request): Promise<Response> => {
     });
 
     if (emailResponse.error) {
-      console.error("❌ Resend error:", emailResponse.error);
+      console.error("❌ Primary email failed:", emailResponse.error);
       
-      // If domain not verified, try with fallback domain
-      if (emailResponse.error.message?.includes('domain') || emailResponse.error.message?.includes('verify')) {
-        console.log("🔄 Trying with fallback domain...");
-        
-        const fallbackResponse = await resend.emails.send({
-          from: "Team Vinster <onboarding@resend.dev>",
-          to: [user.email],
-          subject: emailSubject,
-          html: emailHtml,
-        });
+      // Fallback to verified domain if primary fails
+      console.log("🔄 Trying with fallback sender domain...");
+      
+      const fallbackResponse = await resend.emails.send({
+        from: "Team Vinster <onboarding@resend.dev>",
+        to: [user.email],
+        subject: emailSubject,
+        html: emailHtml,
+      });
 
-        if (fallbackResponse.error) {
-          console.error("❌ Fallback email also failed:", fallbackResponse.error);
-          return new Response(JSON.stringify({ 
-            success: false, 
-            error: "Email sending failed: " + fallbackResponse.error.message 
-          }), {
-            status: 500,
-            headers: { "Content-Type": "application/json", ...corsHeaders },
-          });
-        }
-
-        const duration = Date.now() - startTime;
-        console.log(`✅ Fallback email sent successfully in ${duration}ms:`, fallbackResponse.data?.id);
-
+      if (fallbackResponse.error) {
+        console.error("❌ Fallback email also failed:", fallbackResponse.error);
         return new Response(JSON.stringify({ 
-          success: true, 
-          message: "Verification email sent successfully (fallback domain used)",
-          emailId: fallbackResponse.data?.id,
-          language: userLanguage,
-          duration: `${duration}ms`
+          success: false, 
+          error: "Email sending failed: " + fallbackResponse.error.message 
         }), {
-          status: 200,
+          status: 500,
           headers: { "Content-Type": "application/json", ...corsHeaders },
         });
       }
 
+      const duration = Date.now() - startTime;
+      console.log(`✅ Fallback email sent successfully in ${duration}ms:`, fallbackResponse.data?.id);
+
       return new Response(JSON.stringify({ 
-        success: false, 
-        error: "Email sending failed: " + emailResponse.error.message 
+        success: true, 
+        message: "Verification email sent successfully (using fallback sender)",
+        emailId: fallbackResponse.data?.id,
+        sender: "onboarding@resend.dev",
+        language: userLanguage,
+        duration: `${duration}ms`
       }), {
-        status: 500,
+        status: 200,
         headers: { "Content-Type": "application/json", ...corsHeaders },
       });
     }
 
     const duration = Date.now() - startTime;
-    console.log(`✅ Email sent successfully in ${duration}ms:`, emailResponse.data?.id);
+    console.log(`✅ Primary email sent successfully in ${duration}ms:`, emailResponse.data?.id);
 
     return new Response(JSON.stringify({ 
       success: true, 
       message: "Verification email sent successfully",
       emailId: emailResponse.data?.id,
+      sender: "team@vinster.ai",
       language: userLanguage,
       duration: `${duration}ms`
     }), {
@@ -225,13 +225,14 @@ const handler = async (req: Request): Promise<Response> => {
 
   } catch (error: any) {
     const duration = Date.now() - startTime;
-    console.error(`❌ Error after ${duration}ms:`, error.message);
-    console.error("Stack:", error.stack);
+    console.error(`❌ Webhook error after ${duration}ms:`, error.message);
+    console.error("Stack trace:", error.stack);
     
     return new Response(JSON.stringify({ 
       success: false, 
       error: error.message,
-      duration: `${duration}ms`
+      duration: `${duration}ms`,
+      timestamp: new Date().toISOString()
     }), {
       status: 500,
       headers: { "Content-Type": "application/json", ...corsHeaders },
@@ -240,3 +241,4 @@ const handler = async (req: Request): Promise<Response> => {
 };
 
 serve(handler);
+
