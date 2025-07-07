@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -79,9 +78,9 @@ const Contact = () => {
           <div className="flex items-center justify-between">
             <img 
               alt="Vinster Logo" 
-              className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
               onClick={() => navigate('/')} 
-              src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
+              src="/lovable-uploads/0a60c164-79b3-4ce8-80cb-a3d37886f987.png" 
             />
             <Button 
               onClick={() => navigate('/')}

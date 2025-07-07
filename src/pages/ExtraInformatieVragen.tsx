@@ -31,7 +31,6 @@ const ExtraInformatieVragen = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Load saved data when responses change
   useEffect(() => {
     if (!loading && responses) {
       console.log("Loading saved responses into form:", responses);
@@ -81,10 +80,8 @@ const ExtraInformatieVragen = () => {
     try {
       setIsSubmitting(true);
       
-      // Save current answers first
       await saveResponses(answers);
       
-      // Create report entry with generating status
       console.log('Creating user report entry for user:', user.id);
       const { error: reportError } = await supabase
         .from('user_reports')
@@ -105,7 +102,6 @@ const ExtraInformatieVragen = () => {
 
       console.log('Report entry created successfully with generating status');
       
-      // Send data to Make.com webhook for PDF generation
       const webhookData = collectMakeWebhookData();
       
       if (!webhookData) {
@@ -127,7 +123,6 @@ const ExtraInformatieVragen = () => {
         variant: "default",
       });
       
-      // Navigate to rapport download page instead of rapport review
       navigate('/rapport-download');
     } catch (error) {
       console.error("Error completing profile:", error);
@@ -181,9 +176,9 @@ const ExtraInformatieVragen = () => {
           <div className="flex items-center">
             <img 
               alt="Vinster Logo" 
-              className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
               onClick={() => navigate('/home')} 
-              src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
+              src="/lovable-uploads/0a60c164-79b3-4ce8-80cb-a3d37886f987.png" 
             />
           </div>
         </div>

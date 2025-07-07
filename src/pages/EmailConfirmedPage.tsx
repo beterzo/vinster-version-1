@@ -1,17 +1,21 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
+
 const EmailConfirmedPage = () => {
   const navigate = useNavigate();
+
   const handleGoToLogin = () => {
     navigate('/login');
   };
-  return <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2">
+
+  return (
+    <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2">
       {/* Left side - Image */}
       <div className="relative hidden lg:block">
         <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
-        backgroundImage: "url('/lovable-uploads/4bce3129-ec2c-4ee4-a082-bb74962f620e.png')"
-      }}>
+          backgroundImage: "url('/lovable-uploads/4bce3129-ec2c-4ee4-a082-bb74962f620e.png')"
+        }}>
           <div className="absolute inset-0 bg-black bg-opacity-10"></div>
         </div>
         
@@ -28,7 +32,12 @@ const EmailConfirmedPage = () => {
       <div className="bg-white flex items-center justify-center p-4 sm:p-6 lg:p-12">
         <div className="w-full max-w-md space-y-6 lg:space-y-8 text-center">
           <div className="text-center">
-            <img alt="Vinster Logo" onClick={() => navigate('/')} src="/lovable-uploads/a1545c1d-6a6b-475e-9e50-3519f1d35965.png" className="h-20 w-auto mx-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" />
+            <img 
+              alt="Vinster Logo" 
+              onClick={() => navigate('/')} 
+              src="/lovable-uploads/0a60c164-79b3-4ce8-80cb-a3d37886f987.png" 
+              className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200 mx-auto" 
+            />
           </div>
 
           <div className="text-center space-y-4">
@@ -65,6 +74,8 @@ const EmailConfirmedPage = () => {
           </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default EmailConfirmedPage;

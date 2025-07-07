@@ -16,7 +16,7 @@ const AlgemeneVoorwaarden = () => {
               <img 
                 alt="Vinster Logo" 
                 onClick={() => navigate('/')} 
-                src="/lovable-uploads/vinster-new-logo.png" 
+                src="/lovable-uploads/0a60c164-79b3-4ce8-80cb-a3d37886f987.png" 
                 className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
               />
             </div>
