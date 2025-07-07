@@ -72,8 +72,7 @@ const LoginPage = () => {
       {/* Left side - Image with quote overlay */}
       <div className="relative hidden lg:block">
         <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
-          backgroundImage: "url('/lovable-uploads
-/4bce3129-ec2c-4ee4-a082-bb74962f620e.png')"
+          backgroundImage: "url('/lovable-uploads/4bce3129-ec2c-4ee4-a082-bb74962f620e.png')"
         }}>
           <div className="absolute inset-0 bg-black bg-opacity-10"></div>
         </div>
