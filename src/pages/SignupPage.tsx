@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,7 +8,6 @@ import { useNavigate, Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "@/hooks/useTranslation";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
-
 const SignupPage = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -18,40 +16,40 @@ const SignupPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-  const { signUp } = useAuth();
+  const {
+    signUp
+  } = useAuth();
   const navigate = useNavigate();
-  const { toast } = useToast();
-  const { t } = useTranslation();
-
+  const {
+    toast
+  } = useToast();
+  const {
+    t
+  } = useTranslation();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (password !== confirmPassword) {
       toast({
         title: t('signup.passwords_dont_match'),
         description: t('signup.passwords_dont_match_desc'),
-        variant: "destructive",
+        variant: "destructive"
       });
       return;
     }
-
     if (!firstName || !lastName || !email || !password || !selectedLanguage) {
       toast({
         title: t('signup.fill_all_fields'),
         description: t('signup.fill_all_fields_desc'),
-        variant: "destructive",
+        variant: "destructive"
       });
       return;
     }
-
     setIsLoading(true);
-
-    const { error } = await signUp(email, password, firstName, lastName, selectedLanguage);
-
+    const {
+      error
+    } = await signUp(email, password, firstName, lastName, selectedLanguage);
     if (error) {
       let errorMessage = t('signup.unknown_error');
-      
       if (error.message === "User already registered") {
         errorMessage = t('signup.user_already_registered');
       } else if (error.message.includes("Password")) {
@@ -59,36 +57,29 @@ const SignupPage = () => {
       } else {
         errorMessage = error.message;
       }
-
       toast({
         title: t('signup.registration_error'),
         description: errorMessage,
-        variant: "destructive",
+        variant: "destructive"
       });
     } else {
       toast({
         title: t('signup.account_created'),
         description: t('signup.verification_email_sent'),
-        duration: 6000,
+        duration: 6000
       });
-      
+
       // Navigate to email verification page
       navigate("/email-verification");
     }
-
     setIsLoading(false);
   };
-
-  return (
-    <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2">
+  return <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2">
       {/* Left side - Image with quote overlay */}
       <div className="relative hidden lg:block">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: "url('/lovable-uploads/4bce3129-ec2c-4ee4-a082-bb74962f620e.png')"
-          }}
-        >
+        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
+        backgroundImage: "url('/lovable-uploads/4bce3129-ec2c-4ee4-a082-bb74962f620e.png')"
+      }}>
           <div className="absolute inset-0 bg-black bg-opacity-10"></div>
         </div>
         
@@ -106,12 +97,7 @@ const SignupPage = () => {
         <div className="w-full max-w-md space-y-6 lg:space-y-8">
           {/* Header with Logo and Language Switcher */}
           <div className="flex items-center justify-between">
-            <img 
-              alt="Vinster Logo" 
-              className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
-              onClick={() => navigate('/')} 
-              src="/lovable-uploads/vinster-new-logo.png" 
-            />
+            <img alt="Vinster Logo" onClick={() => navigate('/')} src="/lovable-uploads/0a60c164-79b3-4ce8-80cb-a3d37886f987.png" className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" />
             <LanguageSwitcher />
           </div>
 
@@ -131,30 +117,14 @@ const SignupPage = () => {
                 <Label htmlFor="firstName" className="text-blue-900 font-medium text-left block">
                   {t('signup.first_name')}
                 </Label>
-                <Input
-                  id="firstName"
-                  type="text"
-                  placeholder={t('signup.first_name_placeholder')}
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900"
-                  required
-                />
+                <Input id="firstName" type="text" placeholder={t('signup.first_name_placeholder')} value={firstName} onChange={e => setFirstName(e.target.value)} className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900" required />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="lastName" className="text-blue-900 font-medium text-left block">
                   {t('signup.last_name')}
                 </Label>
-                <Input
-                  id="lastName"
-                  type="text"
-                  placeholder={t('signup.last_name_placeholder')}
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                  className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900"
-                  required
-                />
+                <Input id="lastName" type="text" placeholder={t('signup.last_name_placeholder')} value={lastName} onChange={e => setLastName(e.target.value)} className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900" required />
               </div>
             </div>
 
@@ -162,45 +132,21 @@ const SignupPage = () => {
               <Label htmlFor="email" className="text-blue-900 font-medium text-left block">
                 {t('signup.email')}
               </Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder={t('signup.email_placeholder')}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900"
-                required
-              />
+              <Input id="email" type="email" placeholder={t('signup.email_placeholder')} value={email} onChange={e => setEmail(e.target.value)} className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900" required />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="password" className="text-blue-900 font-medium text-left block">
                 {t('signup.password')}
               </Label>
-              <Input
-                id="password"
-                type="password"
-                placeholder={t('signup.password_placeholder')}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900"
-                required
-              />
+              <Input id="password" type="password" placeholder={t('signup.password_placeholder')} value={password} onChange={e => setPassword(e.target.value)} className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900" required />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="confirmPassword" className="text-blue-900 font-medium text-left block">
                 {t('signup.confirm_password')}
               </Label>
-              <Input
-                id="confirmPassword"
-                type="password"
-                placeholder={t('signup.confirm_password_placeholder')}
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900"
-                required
-              />
+              <Input id="confirmPassword" type="password" placeholder={t('signup.confirm_password_placeholder')} value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900" required />
             </div>
 
             <div className="space-y-2">
@@ -218,11 +164,7 @@ const SignupPage = () => {
               </Select>
             </div>
 
-            <Button 
-              type="submit"
-              className="w-full h-12 bg-blue-900 hover:bg-blue-800 text-white font-semibold text-base rounded-lg"
-              disabled={isLoading}
-            >
+            <Button type="submit" className="w-full h-12 bg-blue-900 hover:bg-blue-800 text-white font-semibold text-base rounded-lg" disabled={isLoading}>
               {isLoading ? t('signup.creating_account') : t('signup.create_account')}
             </Button>
 
@@ -237,8 +179,6 @@ const SignupPage = () => {
           </form>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default SignupPage;
