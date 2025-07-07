@@ -8,32 +8,36 @@ import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "@/hooks/useTranslation";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import Footer from "@/components/Footer";
-
 const ToegangscodesProfessionals = () => {
   const navigate = useNavigate();
-  const { toast } = useToast();
-  const { t, language } = useTranslation();
+  const {
+    toast
+  } = useToast();
+  const {
+    t,
+    language
+  } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     quantity: ""
   });
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const {
+      name,
+      value
+    } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
   };
-
   const handleQuantityChange = (value: string) => {
     setFormData(prev => ({
       ...prev,
       quantity: value
     }));
   };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.email || !formData.quantity) {
@@ -44,7 +48,6 @@ const ToegangscodesProfessionals = () => {
       });
       return;
     }
-
     setIsLoading(true);
     try {
       const response = await fetch('https://hook.eu2.make.com/t82267kxgdplyqkpejofmt4fi1jnbyy9', {
@@ -59,7 +62,6 @@ const ToegangscodesProfessionals = () => {
           timestamp: new Date().toISOString()
         })
       });
-
       if (response.ok) {
         const responseData = await response.json();
         toast({
@@ -95,26 +97,15 @@ const ToegangscodesProfessionals = () => {
       setIsLoading(false);
     }
   };
-
-  return (
-    <div className="min-h-screen bg-gray-50 font-sans">
+  return <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <img 
-              alt="Vinster Logo" 
-              className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
-              onClick={() => navigate('/')} 
-              src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
-            />
+            <img alt="Vinster Logo" onClick={() => navigate('/')} src="/lovable-uploads/597d8366-bb5f-4218-8d55-ff225da64b7d.png" className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" />
             <div className="flex items-center gap-4">
               <LanguageSwitcher />
-              <Button 
-                onClick={() => navigate('/')} 
-                variant="outline" 
-                className="text-vinster-blue border-vinster-blue hover:bg-vinster-blue hover:text-white"
-              >
+              <Button onClick={() => navigate('/')} variant="outline" className="text-vinster-blue border-vinster-blue hover:bg-vinster-blue hover:text-white">
                 {t('professionals.back_to_home')}
               </Button>
             </div>
@@ -126,10 +117,14 @@ const ToegangscodesProfessionals = () => {
       <div className="bg-white">
         <div className="max-w-[1440px] mx-auto px-6 py-12">
           <div className="text-center">
-            <h1 className="text-4xl font-bold mb-6" style={{ color: '#232D4B' }}>
+            <h1 className="text-4xl font-bold mb-6" style={{
+            color: '#232D4B'
+          }}>
               {t('professionals.page_title')}
             </h1>
-            <p className="text-lg mb-8 max-w-3xl mx-auto" style={{ color: '#232D4B' }}>
+            <p className="text-lg mb-8 max-w-3xl mx-auto" style={{
+            color: '#232D4B'
+          }}>
               {t('professionals.page_description')}
             </p>
           </div>
@@ -141,29 +136,26 @@ const ToegangscodesProfessionals = () => {
         <div className="grid md:grid-cols-2 gap-8">
           {/* Order Form */}
           <div className="bg-white rounded-xl shadow-lg p-8">
-            <h2 className="text-2xl font-semibold mb-6" style={{ color: '#232D4B' }}>
+            <h2 className="text-2xl font-semibold mb-6" style={{
+            color: '#232D4B'
+          }}>
               {t('professionals.order_section.title')}
             </h2>
             
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-sm font-medium" style={{ color: '#232D4B' }}>
+                <Label htmlFor="email" className="text-sm font-medium" style={{
+                color: '#232D4B'
+              }}>
                   {t('professionals.order_section.email_label')}
                 </Label>
-                <Input 
-                  id="email" 
-                  name="email" 
-                  type="email" 
-                  placeholder={t('professionals.order_section.email_placeholder')} 
-                  value={formData.email} 
-                  onChange={handleInputChange} 
-                  className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900" 
-                  required 
-                />
+                <Input id="email" name="email" type="email" placeholder={t('professionals.order_section.email_placeholder')} value={formData.email} onChange={handleInputChange} className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900" required />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="quantity" className="text-sm font-medium" style={{ color: '#232D4B' }}>
+                <Label htmlFor="quantity" className="text-sm font-medium" style={{
+                color: '#232D4B'
+              }}>
                   {t('professionals.order_section.quantity_label')}
                 </Label>
                 <Select value={formData.quantity} onValueChange={handleQuantityChange}>
@@ -181,7 +173,9 @@ const ToegangscodesProfessionals = () => {
               </div>
 
               <div className="bg-blue-50 p-4 rounded-lg">
-                <h3 className="font-semibold mb-2" style={{ color: '#232D4B' }}>
+                <h3 className="font-semibold mb-2" style={{
+                color: '#232D4B'
+              }}>
                   {t('professionals.order_section.pricing_info.title')}
                 </h3>
                 <p className="text-sm text-gray-700">
@@ -190,11 +184,7 @@ const ToegangscodesProfessionals = () => {
                 </p>
               </div>
 
-              <Button 
-                type="submit" 
-                className="w-full h-12 bg-blue-900 hover:bg-blue-800 text-white font-semibold" 
-                disabled={isLoading}
-              >
+              <Button type="submit" className="w-full h-12 bg-blue-900 hover:bg-blue-800 text-white font-semibold" disabled={isLoading}>
                 {isLoading ? t('professionals.order_section.submitting') : t('professionals.order_section.submit_button')}
               </Button>
             </form>
@@ -204,7 +194,9 @@ const ToegangscodesProfessionals = () => {
           <div className="space-y-8">
             {/* What You Get */}
             <div className="bg-white rounded-xl shadow-lg p-8">
-              <h2 className="text-2xl font-semibold mb-6" style={{ color: '#232D4B' }}>
+              <h2 className="text-2xl font-semibold mb-6" style={{
+              color: '#232D4B'
+            }}>
                 {t('professionals.what_you_get.title')}
               </h2>
               
@@ -241,7 +233,9 @@ const ToegangscodesProfessionals = () => {
 
             {/* How It Works */}
             <div className="bg-white rounded-xl shadow-lg p-8">
-              <h2 className="text-2xl font-semibold mb-6" style={{ color: '#232D4B' }}>
+              <h2 className="text-2xl font-semibold mb-6" style={{
+              color: '#232D4B'
+            }}>
                 {t('professionals.how_it_works.title')}
               </h2>
               
@@ -306,8 +300,6 @@ const ToegangscodesProfessionals = () => {
       </div>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default ToegangscodesProfessionals;
