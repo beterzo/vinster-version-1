@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CheckCircle, Star, Shield, Zap } from "lucide-react";
@@ -9,14 +8,23 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/hooks/useTranslation";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
-
 const PaymentRequired = () => {
-  const { user } = useAuth();
-  const { toast } = useToast();
-  const { hasPaid, refreshPaymentStatus } = usePaymentStatus();
+  const {
+    user
+  } = useAuth();
+  const {
+    toast
+  } = useToast();
+  const {
+    hasPaid,
+    refreshPaymentStatus
+  } = usePaymentStatus();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const { t, language } = useTranslation();
+  const {
+    t,
+    language
+  } = useTranslation();
 
   // Redirect if user has already paid
   useEffect(() => {
@@ -25,30 +33,23 @@ const PaymentRequired = () => {
       navigate('/home');
     }
   }, [hasPaid, navigate]);
-
-  const features = [
-    {
-      title: t('payment.features.full_scan'),
-      description: t('payment.features.full_scan_desc'),
-      icon: <Star className="w-5 h-5 text-yellow-400" />
-    },
-    {
-      title: t('payment.features.dream_jobs'),
-      description: t('payment.features.dream_jobs_desc'),
-      icon: <CheckCircle className="w-5 h-5 text-yellow-400" />
-    },
-    {
-      title: t('payment.features.personal_report'),
-      description: t('payment.features.personal_report_desc'),
-      icon: <Shield className="w-5 h-5 text-yellow-400" />
-    },
-    {
-      title: t('payment.features.search_profile'),
-      description: t('payment.features.search_profile_desc'),
-      icon: <Zap className="w-5 h-5 text-yellow-400" />
-    }
-  ];
-
+  const features = [{
+    title: t('payment.features.full_scan'),
+    description: t('payment.features.full_scan_desc'),
+    icon: <Star className="w-5 h-5 text-yellow-400" />
+  }, {
+    title: t('payment.features.dream_jobs'),
+    description: t('payment.features.dream_jobs_desc'),
+    icon: <CheckCircle className="w-5 h-5 text-yellow-400" />
+  }, {
+    title: t('payment.features.personal_report'),
+    description: t('payment.features.personal_report_desc'),
+    icon: <Shield className="w-5 h-5 text-yellow-400" />
+  }, {
+    title: t('payment.features.search_profile'),
+    description: t('payment.features.search_profile_desc'),
+    icon: <Zap className="w-5 h-5 text-yellow-400" />
+  }];
   const handlePayment = async () => {
     if (!user) {
       toast({
@@ -58,7 +59,6 @@ const PaymentRequired = () => {
       });
       return;
     }
-
     setIsLoading(true);
     try {
       const webhookData = {
@@ -68,9 +68,7 @@ const PaymentRequired = () => {
         userId: user.id,
         language: language
       };
-
       console.log('Sending webhook data:', webhookData);
-
       const response = await fetch('https://hook.eu2.make.com/byf77ioiyyzqrsri73hmsri7hjhjyoup', {
         method: 'POST',
         headers: {
@@ -78,15 +76,11 @@ const PaymentRequired = () => {
         },
         body: JSON.stringify(webhookData)
       });
-
       console.log('Webhook response status:', response.status);
-
       if (response.ok) {
         console.log('Webhook successfully sent');
-        
         const contentType = response.headers.get('content-type');
         console.log('Response content-type:', contentType);
-        
         let responseData;
         try {
           responseData = await response.json();
@@ -97,11 +91,9 @@ const PaymentRequired = () => {
           console.log('Response as text:', textResponse);
           throw new Error('Invalid JSON response from webhook');
         }
-
         if (responseData && responseData.checkout_url) {
           console.log('Opening checkout URL in new tab:', responseData.checkout_url);
           const newWindow = window.open(responseData.checkout_url, '_blank');
-          
           if (newWindow) {
             toast({
               title: "Succes",
@@ -150,20 +142,12 @@ const PaymentRequired = () => {
       setIsLoading(false);
     }
   };
-
   const firstName = user?.user_metadata?.first_name || 'daar';
-
-  return (
-    <div className="min-h-screen bg-gray-50 font-sans">
+  return <div className="min-h-screen bg-gray-50 font-sans">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-8">
         {/* Header with logo and language switcher */}
         <div className="flex justify-between items-center mb-8">
-          <img 
-            alt="Vinster Logo" 
-            className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
-            onClick={() => navigate('/')} 
-            src="/lovable-uploads/vinster-new-logo.png" 
-          />
+          <img alt="Vinster Logo" className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" onClick={() => navigate('/')} src="/lovable-uploads/77b209e1-9056-49f8-96af-96495c9cfc8c.png" />
           <LanguageSwitcher />
         </div>
 
@@ -183,7 +167,9 @@ const PaymentRequired = () => {
           {/* Left column: Content */}
           <div className="space-y-6 lg:space-y-8 flex flex-col">
             {/* Welcome card */}
-            <Card className="p-6 lg:p-8 border-0 rounded-3xl" style={{ backgroundColor: '#E6F0F6' }}>
+            <Card className="p-6 lg:p-8 border-0 rounded-3xl" style={{
+            backgroundColor: '#E6F0F6'
+          }}>
               <h2 className="text-xl lg:text-2xl font-bold text-vinster-blue mb-4">
                 {t('payment.start_career')}
               </h2>
@@ -197,8 +183,7 @@ const PaymentRequired = () => {
 
             {/* Features grid - responsive */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 flex-grow">
-              {features.map((feature, index) => (
-                <Card key={index} className="p-4 lg:p-6 border-0 rounded-3xl bg-white shadow-sm">
+              {features.map((feature, index) => <Card key={index} className="p-4 lg:p-6 border-0 rounded-3xl bg-white shadow-sm">
                   <div className="flex items-start space-x-4">
                     <div className="flex-shrink-0">
                       {feature.icon}
@@ -208,8 +193,7 @@ const PaymentRequired = () => {
                       <p className="text-sm text-gray-600">{feature.description}</p>
                     </div>
                   </div>
-                </Card>
-              ))}
+                </Card>)}
             </div>
           </div>
 
@@ -247,12 +231,7 @@ const PaymentRequired = () => {
                 </div>
               </div>
 
-              <Button 
-                onClick={handlePayment} 
-                disabled={isLoading} 
-                className="w-full bg-yellow-400 hover:bg-yellow-500 text-vinster-blue font-bold py-3 lg:py-4 text-base lg:text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200" 
-                size="lg"
-              >
+              <Button onClick={handlePayment} disabled={isLoading} className="w-full bg-yellow-400 hover:bg-yellow-500 text-vinster-blue font-bold py-3 lg:py-4 text-base lg:text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200" size="lg">
                 {isLoading ? t('payment.pricing.processing') : t('payment.pricing.start_button')}
               </Button>
 
@@ -264,7 +243,9 @@ const PaymentRequired = () => {
         </div>
 
         {/* Data Safety Card - Full width below the main content */}
-        <Card className="p-6 lg:p-8 border-0 rounded-3xl mt-6 lg:mt-8" style={{ backgroundColor: '#E6F0F6' }}>
+        <Card className="p-6 lg:p-8 border-0 rounded-3xl mt-6 lg:mt-8" style={{
+        backgroundColor: '#E6F0F6'
+      }}>
           <div className="flex items-start space-x-4">
             <div className="flex-shrink-0">
               <Shield className="w-6 h-6 text-blue-600" />
@@ -280,8 +261,6 @@ const PaymentRequired = () => {
           </div>
         </Card>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default PaymentRequired;
