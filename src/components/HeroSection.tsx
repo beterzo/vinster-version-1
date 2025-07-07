@@ -24,7 +24,7 @@ const HeroSection = () => {
         <div className="py-6 flex items-center justify-between">
           {/* Left side - Logo only, made bigger and moved more to the left */}
           <div className="flex items-center pt-1 -ml-4">
-            <img alt="Vinster Logo" className="h-24 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" onClick={() => navigate('/')} src="/lovable-uploads/7d83f1e6-d45a-4105-b751-a28d8bd17de3.png" />
+            <img alt="Vinster Logo" onClick={() => navigate('/')} className="h-40 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" src="/lovable-uploads/d998ba0c-f3ee-4304-8c65-e962b9cb0100.png" />
           </div>
           
           {/* Right side - Mobile Menu, Language Switcher and Login Button aligned */}
