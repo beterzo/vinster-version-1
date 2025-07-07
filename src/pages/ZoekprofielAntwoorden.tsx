@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -8,13 +7,23 @@ import { useNavigate } from "react-router-dom";
 import { useZoekprofielResponses } from "@/hooks/useZoekprofielResponses";
 import { useZoekprofielPdf } from "@/hooks/useZoekprofielPdf";
 import { useToast } from "@/hooks/use-toast";
-
 const ZoekprofielAntwoorden = () => {
   const navigate = useNavigate();
-  const { toast } = useToast();
-  const { responses, saveResponse, loading, submitToWebhook, progress, isCompleted } = useZoekprofielResponses();
-  const { initializePdfGeneration, isGenerating } = useZoekprofielPdf();
-  
+  const {
+    toast
+  } = useToast();
+  const {
+    responses,
+    saveResponse,
+    loading,
+    submitToWebhook,
+    progress,
+    isCompleted
+  } = useZoekprofielResponses();
+  const {
+    initializePdfGeneration,
+    isGenerating
+  } = useZoekprofielPdf();
   const [answers, setAnswers] = useState({
     functie_als: "",
     kerntaken: "",
@@ -46,112 +55,89 @@ const ZoekprofielAntwoorden = () => {
       });
     }
   }, [loading, stableResponses]);
-
   const handleInputChange = (field: string, value: string) => {
     console.log(`Updating ${field}:`, value);
-    setAnswers(prev => ({ ...prev, [field]: value }));
-    
+    setAnswers(prev => ({
+      ...prev,
+      [field]: value
+    }));
+
     // Auto-save on every change (with debouncing handled by the hook)
     saveResponse(field, value);
   };
-
   const handleGenereren = async () => {
     if (!isCompleted) {
       toast({
         title: "Vul alle velden in",
         description: "Vul alle vragen in voordat je het zoekprofiel genereert.",
-        variant: "destructive",
+        variant: "destructive"
       });
       return;
     }
-
     setIsSubmitting(true);
-
     try {
       console.log("Submitting zoekprofiel data to webhook...");
-      
+
       // First submit to webhook with the data
       const webhookSuccess = await submitToWebhook();
-      
       if (!webhookSuccess) {
         throw new Error("Webhook submission failed");
       }
-
       console.log("Webhook submission successful, initializing PDF generation...");
-      
+
       // Then initialize PDF generation
       await initializePdfGeneration();
-      
       toast({
         title: "Zoekprofiel gegenereerd!",
-        description: "Je zoekprofiel is succesvol aangemaakt en wordt nu verwerkt.",
+        description: "Je zoekprofiel is succesvol aangemaakt en wordt nu verwerkt."
       });
-      
       navigate('/zoekprofiel-download');
     } catch (error) {
       console.error("Error generating zoekprofiel:", error);
-      
       toast({
         title: "Fout bij genereren",
         description: "Er ging iets mis bij het genereren van je zoekprofiel. Probeer het opnieuw.",
-        variant: "destructive",
+        variant: "destructive"
       });
     } finally {
       setIsSubmitting(false);
     }
   };
-
-  const questions = [
-    {
-      field: "functie_als",
-      question: "Functie als... (Welke functienaam zoek je?)",
-      placeholder: "Bijvoorbeeld: Marketing Manager, Software Developer, HR Adviseur..."
-    },
-    {
-      field: "kerntaken", 
-      question: "Kerntaken (Wat wil je vooral doen in je werk?)",
-      placeholder: "Bijvoorbeeld: Strategieën ontwikkelen, teams aansturen, klanten adviseren..."
-    },
-    {
-      field: "organisatie_bij",
-      question: "Organisatie bij... (Bij wat voor organisatie wil je werken?)",
-      placeholder: "Bijvoorbeeld: Innovatief techbedrijf, Non-profit organisatie, Grote multinational..."
-    },
-    {
-      field: "sector",
-      question: "Sector (In welke sector(en) zoek je werk?)",
-      placeholder: "Bijvoorbeeld: ICT, Zorg, Onderwijs, Marketing & Communicatie..."
-    },
-    {
-      field: "gewenste_regio",
-      question: "Gewenste regio (Waar wil je werken?)",
-      placeholder: "Bijvoorbeeld: Amsterdam en omgeving, geheel Nederland, remote..."
-    },
-    {
-      field: "arbeidsvoorwaarden",
-      question: "Arbeidsvoorwaarden (Wat zijn je wensen qua voorwaarden?)",
-      placeholder: "Bijvoorbeeld: 32-40 uur, flexibele werktijden, thuiswerkmogelijkheden..."
-    }
-  ];
-
+  const questions = [{
+    field: "functie_als",
+    question: "Functie als... (Welke functienaam zoek je?)",
+    placeholder: "Bijvoorbeeld: Marketing Manager, Software Developer, HR Adviseur..."
+  }, {
+    field: "kerntaken",
+    question: "Kerntaken (Wat wil je vooral doen in je werk?)",
+    placeholder: "Bijvoorbeeld: Strategieën ontwikkelen, teams aansturen, klanten adviseren..."
+  }, {
+    field: "organisatie_bij",
+    question: "Organisatie bij... (Bij wat voor organisatie wil je werken?)",
+    placeholder: "Bijvoorbeeld: Innovatief techbedrijf, Non-profit organisatie, Grote multinational..."
+  }, {
+    field: "sector",
+    question: "Sector (In welke sector(en) zoek je werk?)",
+    placeholder: "Bijvoorbeeld: ICT, Zorg, Onderwijs, Marketing & Communicatie..."
+  }, {
+    field: "gewenste_regio",
+    question: "Gewenste regio (Waar wil je werken?)",
+    placeholder: "Bijvoorbeeld: Amsterdam en omgeving, geheel Nederland, remote..."
+  }, {
+    field: "arbeidsvoorwaarden",
+    question: "Arbeidsvoorwaarden (Wat zijn je wensen qua voorwaarden?)",
+    placeholder: "Bijvoorbeeld: 32-40 uur, flexibele werktijden, thuiswerkmogelijkheden..."
+  }];
   if (loading) {
     return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Laden...</div>;
   }
-
   const isProcessing = isSubmitting || isGenerating;
-
-  return (
-    <div className="min-h-screen bg-gray-50 font-sans">
+  return <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
           <div className="flex items-center">
-            <img 
-              alt="Vinster Logo" 
-              className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
-              onClick={() => navigate('/home')} 
-              src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
-            />
+            <img alt="Vinster Logo" onClick={() => navigate('/home')} src="/lovable-uploads/52c05db7-79a1-4b40-becc-e64e3c873268.png" className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" />
           </div>
         </div>
       </div>
@@ -172,49 +158,26 @@ const ZoekprofielAntwoorden = () => {
 
             {/* Questions */}
             <div className="space-y-8">
-              {questions.map((item, index) => (
-                <div key={index}>
+              {questions.map((item, index) => <div key={index}>
                   <Label htmlFor={item.field} className="text-blue-900 font-medium text-lg mb-3 block text-left">
                     {index + 1}. {item.question}
                   </Label>
-                  <Textarea
-                    id={item.field}
-                    placeholder={item.placeholder}
-                    value={answers[item.field as keyof typeof answers]}
-                    onChange={(e) => handleInputChange(item.field, e.target.value)}
-                    className="min-h-[80px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
-                  />
-                </div>
-              ))}
+                  <Textarea id={item.field} placeholder={item.placeholder} value={answers[item.field as keyof typeof answers]} onChange={e => handleInputChange(item.field, e.target.value)} className="min-h-[80px] border-gray-300 focus:border-blue-900 focus:ring-blue-900" />
+                </div>)}
             </div>
 
             {/* Navigation */}
             <div className="flex justify-between pt-12">
-              <Button 
-                onClick={() => navigate('/zoekprofiel-intro')}
-                variant="outline"
-                className="border-blue-900 text-blue-900 hover:bg-blue-50"
-                disabled={isProcessing}
-              >
+              <Button onClick={() => navigate('/zoekprofiel-intro')} variant="outline" className="border-blue-900 text-blue-900 hover:bg-blue-50" disabled={isProcessing}>
                 Terug naar intro
               </Button>
-              <Button 
-                onClick={handleGenereren}
-                className={`font-semibold px-8 ${
-                  isCompleted && !isProcessing
-                    ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 
-                    : "bg-gray-300 text-gray-500 cursor-not-allowed"
-                }`}
-                disabled={isProcessing || !isCompleted}
-              >
+              <Button onClick={handleGenereren} className={`font-semibold px-8 ${isCompleted && !isProcessing ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" : "bg-gray-300 text-gray-500 cursor-not-allowed"}`} disabled={isProcessing || !isCompleted}>
                 Genereren
               </Button>
             </div>
           </CardContent>
         </Card>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default ZoekprofielAntwoorden;
