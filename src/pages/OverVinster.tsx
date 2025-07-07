@@ -1,15 +1,24 @@
+
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import Footer from "@/components/Footer";
+
 const OverVinster = () => {
   const navigate = useNavigate();
-  return <div className="min-h-screen bg-gray-50">
+
+  return (
+    <div className="min-h-screen bg-gray-50">
       {/* Header with Logo */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-6 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <img alt="Vinster Logo" className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" onClick={() => navigate('/')} src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" />
+              <img 
+                alt="Vinster Logo" 
+                className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+                onClick={() => navigate('/')} 
+                src="/lovable-uploads/d5152e25-b955-4d35-98a4-f2a090b09599.png" 
+              />
             </div>
           </div>
         </div>
@@ -120,6 +129,8 @@ const OverVinster = () => {
       </div>
 
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 export default OverVinster;

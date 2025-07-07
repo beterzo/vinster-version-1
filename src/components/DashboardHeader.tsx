@@ -37,7 +37,7 @@ const DashboardHeader = () => {
           alt="Vinster Logo" 
           className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200 mr-4" 
           onClick={() => navigate('/home')} 
-          src="/lovable-uploads/846d1ec8-bb91-46f6-a16d-1b1c39ebe829.png" 
+          src="/lovable-uploads/d5152e25-b955-4d35-98a4-f2a090b09599.png" 
         />
       </div>
       

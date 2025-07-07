@@ -1,20 +1,22 @@
+
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useTranslation } from "@/hooks/useTranslation";
 import LanguageSwitcher from "./LanguageSwitcher";
 import MobileMenu from "./MobileMenu";
+
 const HeroSection = () => {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
-  const {
-    t
-  } = useTranslation();
-  return <div className="relative overflow-hidden">
+  const { t } = useTranslation();
+
+  return (
+    <div className="relative overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
-      backgroundImage: "url('/lovable-uploads/b67ce5d1-c717-4a77-b5ad-550d88a42378.png')"
-    }}>
+        backgroundImage: "url('/lovable-uploads/b67ce5d1-c717-4a77-b5ad-550d88a42378.png')"
+      }}>
         {/* Overlay for better text readability - made lighter */}
         <div className="absolute inset-0 bg-black bg-opacity-20"></div>
       </div>
@@ -24,7 +26,12 @@ const HeroSection = () => {
         <div className="py-6 flex items-center justify-between">
           {/* Left side - Logo only, made bigger and moved more to the left */}
           <div className="flex items-center pt-1 -ml-4">
-            <img alt="Vinster Logo" onClick={() => navigate('/')} className="h-40 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" src="/lovable-uploads/9b4eb490-f4f9-4b6d-a0a5-ef006e5ad528.png" />
+            <img 
+              alt="Vinster Logo" 
+              onClick={() => navigate('/')} 
+              className="h-40 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              src="/lovable-uploads/d5152e25-b955-4d35-98a4-f2a090b09599.png" 
+            />
           </div>
           
           {/* Right side - Mobile Menu, Language Switcher and Login Button aligned */}
@@ -35,7 +42,10 @@ const HeroSection = () => {
             {/* Language Switcher - visible on all screen sizes */}
             <LanguageSwitcher />
             {/* Hide login button on mobile */}
-            <Button onClick={() => navigate('/login')} className="hidden md:block bg-white hover:bg-gray-100 text-blue-900 font-semibold px-6 py-3 rounded-full border border-gray-200 shadow-sm transition-all duration-200 h-12">
+            <Button 
+              onClick={() => navigate('/login')} 
+              className="hidden md:block bg-white hover:bg-gray-100 text-blue-900 font-semibold px-6 py-3 rounded-full border border-gray-200 shadow-sm transition-all duration-200 h-12"
+            >
               {t('landing.login')}
             </Button>
           </div>
@@ -50,9 +60,7 @@ const HeroSection = () => {
             </div>
             
             <h1 className="text-4xl font-bold text-white leading-tight">
-              {t('landing.welcome')} <span style={{
-              color: '#FFCD3E'
-            }}>Vinster</span>
+              {t('landing.welcome')} <span style={{ color: '#FFCD3E' }}>Vinster</span>
             </h1>
             
             <p className="text-xl text-white leading-relaxed">
@@ -61,6 +69,8 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default HeroSection;

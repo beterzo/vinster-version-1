@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CheckCircle, Star, Shield, Zap } from "lucide-react";
@@ -161,7 +162,7 @@ const PaymentRequired = () => {
             alt="Vinster Logo" 
             className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
             onClick={() => navigate('/')} 
-            src="/lovable-uploads/23b63bc5-3895-4312-ad2b-36f3e48adb5a.png" 
+            src="/lovable-uploads/d5152e25-b955-4d35-98a4-f2a090b09599.png" 
           />
           <LanguageSwitcher />
         </div>
