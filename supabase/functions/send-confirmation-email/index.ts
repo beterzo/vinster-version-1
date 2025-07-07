@@ -37,27 +37,62 @@ const emailSubjects = {
 };
 
 const handler = async (req: Request): Promise<Response> => {
-  console.log("🔐 Verification email webhook called");
+  console.log("🔐 Verification email webhook called - Method:", req.method);
+  console.log("🔐 Request headers:", Object.fromEntries(req.headers.entries()));
 
   if (req.method === "OPTIONS") {
+    console.log("🔐 Handling OPTIONS request");
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    const payload: AuthEventPayload = await req.json();
-    console.log("📧 Auth Event payload received:", JSON.stringify(payload, null, 2));
+    // Check if RESEND_API_KEY is configured
+    const resendApiKey = Deno.env.get("RESEND_API_KEY");
+    if (!resendApiKey) {
+      console.error("❌ RESEND_API_KEY not configured");
+      return new Response(JSON.stringify({ 
+        success: false, 
+        error: "RESEND_API_KEY not configured" 
+      }), {
+        status: 500,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
+    console.log("✅ RESEND_API_KEY is configured");
+
+    const rawPayload = await req.text();
+    console.log("📧 Raw payload received:", rawPayload);
+
+    let payload: AuthEventPayload;
+    try {
+      payload = JSON.parse(rawPayload);
+    } catch (parseError) {
+      console.error("❌ Error parsing JSON payload:", parseError);
+      return new Response(JSON.stringify({ 
+        success: false, 
+        error: "Invalid JSON payload" 
+      }), {
+        status: 400,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
+
+    console.log("📧 Parsed Auth Event payload:", JSON.stringify(payload, null, 2));
 
     // Check if it's a signup event
     if (payload.email_data?.email_action_type !== "signup") {
-      console.log("❌ Not a signup event, ignoring");
-      return new Response(JSON.stringify({ success: false, message: "Not a signup event" }), {
+      console.log("❌ Not a signup event, ignoring. Event type:", payload.email_data?.email_action_type);
+      return new Response(JSON.stringify({ 
+        success: false, 
+        message: "Not a signup event" 
+      }), {
         status: 200,
         headers: { "Content-Type": "application/json", ...corsHeaders },
       });
     }
 
     const user = payload.user;
-    console.log("👤 New user signup:", user.email);
+    console.log("👤 Processing signup for user:", user.email, "with ID:", user.id);
 
     // Detect language from user metadata, default to Dutch
     const userLanguage = user.user_metadata?.language || 'nl';
@@ -79,31 +114,78 @@ const handler = async (req: Request): Promise<Response> => {
     // Get appropriate email subject
     const emailSubject = emailSubjects[userLanguage as keyof typeof emailSubjects] || emailSubjects.nl;
 
-    // Render email template with language
-    const emailHtml = await renderAsync(
-      VerificationEmail({
-        firstName,
-        lastName,
-        verificationUrl,
-        email: user.email,
-        language: userLanguage
-      })
-    );
-
-    // Send verification email from team@vinster.ai domain
-    const emailResponse = await resend.emails.send({
-      from: "Team Vinster <team@vinster.ai>",
-      to: [user.email],
-      subject: emailSubject,
-      html: emailHtml,
+    console.log("📧 Preparing to render email template with data:", {
+      firstName,
+      lastName,
+      email: user.email,
+      language: userLanguage,
+      subject: emailSubject
     });
 
-    console.log("📧 Email sent:", emailResponse);
+    // Render email template with language
+    let emailHtml: string;
+    try {
+      emailHtml = await renderAsync(
+        VerificationEmail({
+          firstName,
+          lastName,
+          verificationUrl,
+          email: user.email,
+          language: userLanguage
+        })
+      );
+      console.log("✅ Email template rendered successfully");
+    } catch (renderError) {
+      console.error("❌ Error rendering email template:", renderError);
+      return new Response(JSON.stringify({ 
+        success: false, 
+        error: "Failed to render email template: " + renderError.message 
+      }), {
+        status: 500,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
+
+    console.log("📧 Attempting to send email via Resend...");
+
+    // Send verification email from team@vinster.ai domain
+    let emailResponse;
+    try {
+      emailResponse = await resend.emails.send({
+        from: "Team Vinster <team@vinster.ai>",
+        to: [user.email],
+        subject: emailSubject,
+        html: emailHtml,
+      });
+      console.log("📧 Resend API response:", emailResponse);
+    } catch (resendError) {
+      console.error("❌ Resend API error:", resendError);
+      return new Response(JSON.stringify({ 
+        success: false, 
+        error: "Resend API error: " + resendError.message 
+      }), {
+        status: 500,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
+
+    if (emailResponse.error) {
+      console.error("❌ Resend returned error:", emailResponse.error);
+      return new Response(JSON.stringify({ 
+        success: false, 
+        error: "Email sending failed: " + emailResponse.error.message 
+      }), {
+        status: 500,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
+
+    console.log("✅ Email sent successfully:", emailResponse);
     console.log("🌍 Email sent in language:", userLanguage);
 
     return new Response(JSON.stringify({ 
       success: true, 
-      message: "Verification email sent",
+      message: "Verification email sent successfully",
       emailId: emailResponse.data?.id,
       language: userLanguage,
       subject: emailSubject,
@@ -115,11 +197,13 @@ const handler = async (req: Request): Promise<Response> => {
     });
 
   } catch (error: any) {
-    console.error("❌ Error in verification email function:", error);
+    console.error("❌ Unexpected error in verification email function:", error);
+    console.error("❌ Error stack:", error.stack);
     return new Response(
       JSON.stringify({ 
         success: false, 
-        error: error.message 
+        error: error.message,
+        stack: error.stack
       }),
       {
         status: 500,

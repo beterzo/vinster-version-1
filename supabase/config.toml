@@ -39,7 +39,7 @@ smtp_port = 54326
 pop3_port = 54327
 
 [functions]
-verify_jwt = true
+verify_jwt = false
 
 [functions.send-confirmation-email]
 verify_jwt = false
