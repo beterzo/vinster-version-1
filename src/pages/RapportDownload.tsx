@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -7,27 +6,29 @@ import { FileText, Download, ExternalLink, CheckCircle, AlertCircle, Clock, Arro
 import { useRapportData } from "@/hooks/useRapportData";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-
 const RapportDownload = () => {
   const navigate = useNavigate();
-  const { toast } = useToast();
-  const { data: reportData, loading, refreshData } = useRapportData();
+  const {
+    toast
+  } = useToast();
+  const {
+    data: reportData,
+    loading,
+    refreshData
+  } = useRapportData();
   const [pdfUrl, setPdfUrl] = useState<string | null>(null);
   const [isDownloading, setIsDownloading] = useState(false);
   const [reportStatus, setReportStatus] = useState<'pending' | 'generating' | 'completed' | 'failed'>('pending');
-
   useEffect(() => {
     if (reportData) {
       setReportStatus(reportData.report_status as any);
-      
       if (reportData?.pdf_file_path) {
         console.log('PDF file path found:', reportData.pdf_file_path);
-        
+
         // Get the public URL for the PDF
-        const { data } = supabase.storage
-          .from('user-reports')
-          .getPublicUrl(reportData.pdf_file_path);
-        
+        const {
+          data
+        } = supabase.storage.from('user-reports').getPublicUrl(reportData.pdf_file_path);
         console.log('Generated public URL:', data.publicUrl);
         setPdfUrl(data.publicUrl);
       } else {
@@ -39,34 +40,24 @@ const RapportDownload = () => {
   // Set up realtime subscription for report status updates
   useEffect(() => {
     if (!reportData?.user_id) return;
-
     console.log('Setting up realtime subscription for user reports...');
-    
-    const channel = supabase
-      .channel('user-reports-changes')
-      .on(
-        'postgres_changes',
-        {
-          event: 'UPDATE',
-          schema: 'public',
-          table: 'user_reports',
-          filter: `user_id=eq.${reportData.user_id}`
-        },
-        (payload) => {
-          console.log('Realtime update received:', payload);
-          const newData = payload.new as any;
-          if (newData.report_status) {
-            setReportStatus(newData.report_status);
-            
-            // If report is completed, refresh data to get latest info
-            if (newData.report_status === 'completed') {
-              refreshData();
-            }
-          }
-        }
-      )
-      .subscribe();
+    const channel = supabase.channel('user-reports-changes').on('postgres_changes', {
+      event: 'UPDATE',
+      schema: 'public',
+      table: 'user_reports',
+      filter: `user_id=eq.${reportData.user_id}`
+    }, payload => {
+      console.log('Realtime update received:', payload);
+      const newData = payload.new as any;
+      if (newData.report_status) {
+        setReportStatus(newData.report_status);
 
+        // If report is completed, refresh data to get latest info
+        if (newData.report_status === 'completed') {
+          refreshData();
+        }
+      }
+    }).subscribe();
     return () => {
       console.log('Cleaning up realtime subscription');
       supabase.removeChannel(channel);
@@ -84,27 +75,21 @@ const RapportDownload = () => {
       return () => clearInterval(interval);
     }
   }, [reportStatus, refreshData]);
-
   const handleDownload = async () => {
     if (!pdfUrl) {
       console.warn('No PDF URL available for download');
       return;
     }
-    
     setIsDownloading(true);
     console.log('Starting download from URL:', pdfUrl);
-    
     try {
       const response = await fetch(pdfUrl);
       console.log('Fetch response status:', response.status, response.statusText);
-      
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);
       }
-
       const blob = await response.blob();
       console.log('Downloaded blob size:', blob.size, 'bytes');
-      
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.style.display = 'none';
@@ -114,34 +99,30 @@ const RapportDownload = () => {
       a.click();
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
-      
       toast({
         title: "Download gestart",
-        description: "Je rapport wordt gedownload.",
+        description: "Je rapport wordt gedownload."
       });
     } catch (error) {
       console.error('Download error:', error);
       toast({
         title: "Download mislukt",
         description: `Er ging iets mis bij het downloaden: ${error instanceof Error ? error.message : 'Onbekende fout'}`,
-        variant: "destructive",
+        variant: "destructive"
       });
     } finally {
       setIsDownloading(false);
     }
   };
-
   const handleOpenInNewTab = () => {
     if (pdfUrl) {
       console.log('Opening PDF in new tab:', pdfUrl);
       window.open(pdfUrl, '_blank');
     }
   };
-
   const handleNextStep = () => {
     navigate('/onderzoeksplan');
   };
-
   const getStatusIcon = () => {
     switch (reportStatus) {
       case 'completed':
@@ -154,7 +135,6 @@ const RapportDownload = () => {
         return <Clock className="w-12 h-12 text-gray-400" />;
     }
   };
-
   const getStatusMessage = () => {
     switch (reportStatus) {
       case 'completed':
@@ -179,32 +159,21 @@ const RapportDownload = () => {
         };
     }
   };
-
   if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-900 mx-auto mb-4"></div>
           <p className="text-gray-700">Rapport gegevens laden...</p>
         </div>
-      </div>
-    );
+      </div>;
   }
-
   const status = getStatusMessage();
-
-  return (
-    <div className="min-h-screen bg-gray-50 font-sans">
+  return <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
           <div className="flex items-center">
-            <img 
-              alt="Vinster Logo" 
-              className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
-              onClick={() => navigate('/home')} 
-              src="/lovable-uploads/208c47cf-042c-4499-94c1-33708e0f5639.png" 
-            />
+            <img alt="Vinster Logo" className="h-12 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" onClick={() => navigate('/home')} src="/lovable-uploads/de495604-1c6f-44c1-b2ab-a9018e806bda.png" />
           </div>
         </div>
       </div>
@@ -215,11 +184,7 @@ const RapportDownload = () => {
           <CardContent className="p-12 text-center">
             <div className="mb-8">
               <div className="mx-auto w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mb-6">
-                {reportStatus === 'completed' ? (
-                  <FileText className="w-10 h-10 text-green-600" />
-                ) : (
-                  getStatusIcon()
-                )}
+                {reportStatus === 'completed' ? <FileText className="w-10 h-10 text-green-600" /> : getStatusIcon()}
               </div>
               
               <h1 className="text-4xl font-bold text-blue-900 mb-4">
@@ -231,25 +196,14 @@ const RapportDownload = () => {
               </p>
             </div>
 
-            {reportStatus === 'completed' && pdfUrl && (
-              <div className="space-y-4">
+            {reportStatus === 'completed' && pdfUrl && <div className="space-y-4">
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button
-                    onClick={handleDownload}
-                    disabled={isDownloading}
-                    size="lg"
-                    className="bg-blue-900 hover:bg-blue-800 text-white font-semibold px-8 py-4 rounded-lg flex items-center gap-2"
-                  >
+                  <Button onClick={handleDownload} disabled={isDownloading} size="lg" className="bg-blue-900 hover:bg-blue-800 text-white font-semibold px-8 py-4 rounded-lg flex items-center gap-2">
                     <Download className="w-5 h-5" />
                     {isDownloading ? "Downloaden..." : "Download rapport"}
                   </Button>
                   
-                  <Button
-                    onClick={handleOpenInNewTab}
-                    variant="outline"
-                    size="lg"
-                    className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold px-8 py-4 rounded-lg flex items-center gap-2"
-                  >
+                  <Button onClick={handleOpenInNewTab} variant="outline" size="lg" className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold px-8 py-4 rounded-lg flex items-center gap-2">
                     <ExternalLink className="w-5 h-5" />
                     Bekijk in browser
                   </Button>
@@ -269,20 +223,14 @@ const RapportDownload = () => {
                   <p className="text-gray-600 mb-6">
                     Volg ons onderzoeksplan om de perfecte functie voor jezelf te vinden.
                   </p>
-                  <Button
-                    onClick={handleNextStep}
-                    size="lg"
-                    className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold px-8 py-4 rounded-lg flex items-center gap-2 mx-auto"
-                  >
+                  <Button onClick={handleNextStep} size="lg" className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold px-8 py-4 rounded-lg flex items-center gap-2 mx-auto">
                     Bekijk onderzoeksplan
                     <ArrowRight className="w-5 h-5" />
                   </Button>
                 </div>
-              </div>
-            )}
+              </div>}
 
-            {(reportStatus === 'generating' || reportStatus === 'pending') && (
-              <div className="text-center">
+            {(reportStatus === 'generating' || reportStatus === 'pending') && <div className="text-center">
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-900 mx-auto mb-4"></div>
                 <p className="text-gray-600 mb-4">
                   Je rapport wordt gegenereerd... Dit kan 2-5 minuten duren.
@@ -292,63 +240,39 @@ const RapportDownload = () => {
                     💡 <strong>Tip:</strong> Laat deze pagina open. Je krijgt automatisch een melding zodra je rapport klaar is!
                   </p>
                 </div>
-                <Button
-                  onClick={refreshData}
-                  variant="outline"
-                  className="border-blue-900 text-blue-900 hover:bg-blue-50"
-                >
+                <Button onClick={refreshData} variant="outline" className="border-blue-900 text-blue-900 hover:bg-blue-50">
                   Status vernieuwen
                 </Button>
-              </div>
-            )}
+              </div>}
 
-            {reportStatus === 'failed' && (
-              <div className="text-center">
+            {reportStatus === 'failed' && <div className="text-center">
                 <div className="bg-red-50 p-4 rounded-lg mb-4">
                   <p className="text-sm text-red-700">
                     Er is een technische fout opgetreden. Neem contact op met support als dit probleem aanhoudt.
                   </p>
                 </div>
-                <Button
-                  onClick={refreshData}
-                  variant="outline"
-                  size="lg"
-                  className="border-red-600 text-red-600 hover:bg-red-50 font-semibold px-8 py-4 rounded-lg"
-                >
+                <Button onClick={refreshData} variant="outline" size="lg" className="border-red-600 text-red-600 hover:bg-red-50 font-semibold px-8 py-4 rounded-lg">
                   Status controleren
                 </Button>
-              </div>
-            )}
+              </div>}
 
-            {reportStatus !== 'completed' && reportStatus !== 'generating' && reportStatus !== 'pending' && reportStatus !== 'failed' && !pdfUrl && (
-              <div className="text-center">
+            {reportStatus !== 'completed' && reportStatus !== 'generating' && reportStatus !== 'pending' && reportStatus !== 'failed' && !pdfUrl && <div className="text-center">
                 <p className="text-gray-600 mb-4">
                   Je rapport wordt nog gegenereerd. Dit kan enkele minuten duren.
                 </p>
-                <Button
-                  onClick={() => window.location.reload()}
-                  variant="outline"
-                  className="border-blue-900 text-blue-900 hover:bg-blue-50"
-                >
+                <Button onClick={() => window.location.reload()} variant="outline" className="border-blue-900 text-blue-900 hover:bg-blue-50">
                   Pagina verversen
                 </Button>
-              </div>
-            )}
+              </div>}
 
             <div className="mt-12 pt-8 border-t border-gray-200">
-              <Button
-                onClick={() => navigate('/home')}
-                variant="outline"
-                className="border-blue-900 text-blue-900 hover:bg-blue-50"
-              >
+              <Button onClick={() => navigate('/home')} variant="outline" className="border-blue-900 text-blue-900 hover:bg-blue-50">
                 Terug naar dashboard
               </Button>
             </div>
           </CardContent>
         </Card>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default RapportDownload;
