@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { useAuth } from './useAuth';
 import { supabase } from '@/integrations/supabase/client';
@@ -94,11 +95,8 @@ export const useExtraInformatieResponses = () => {
 
       setResponses(data);
       
-      toast({
-        title: "Gegevens opgeslagen",
-        description: "Jouw extra informatie is succesvol opgeslagen.",
-      });
-
+      // Removed automatic success toast notification
+      
       return true;
     } catch (error) {
       console.error('Error saving extra informatie responses:', error);
