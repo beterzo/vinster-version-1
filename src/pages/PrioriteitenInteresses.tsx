@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -6,10 +5,17 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 import { usePrioriteitenResponses } from "@/hooks/usePrioriteitenResponses";
+import { useMakeWebhookData } from "@/hooks/useMakeWebhookData";
+import { sendMakeWebhook } from "@/services/webhookService";
+import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
 import { cleanKeywords } from "@/utils/keywordUtils";
 
 const PrioriteitenInteresses = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const { toast } = useToast();
   const {
     responses,
     aiKeywords,
@@ -17,8 +23,11 @@ const PrioriteitenInteresses = () => {
     saveResponses,
     loading
   } = usePrioriteitenResponses();
+  const { collectMakeWebhookData } = useMakeWebhookData();
+  
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
   const [extraText, setExtraText] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -27,7 +36,6 @@ const PrioriteitenInteresses = () => {
     });
   };
 
-  // Load saved data when responses change
   useEffect(() => {
     if (!loading && responses) {
       console.log("Loading saved responses into form:", responses);
@@ -58,12 +66,91 @@ const PrioriteitenInteresses = () => {
 
   const handlePrevious = () => {
     scrollToTop();
-    navigate('/prioriteiten-activiteiten');
+    navigate('/prioriteiten-werkomstandigheden');
   };
 
-  const handleNext = () => {
-    scrollToTop();
-    navigate('/prioriteiten-werkomstandigheden');
+  const handleComplete = async () => {
+    if (!canProceed) {
+      toast({
+        title: "Selecteer minimaal 5 interesses",
+        description: "Je moet minimaal 5 interesses selecteren voordat je kunt afronden.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!user) {
+      toast({
+        title: "Fout",
+        description: "Geen gebruiker gevonden.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    try {
+      setIsSubmitting(true);
+      
+      // Save current responses
+      await saveResponses({ 
+        selected_interesses_keywords: selectedKeywords,
+        extra_interesses_tekst: extraText 
+      });
+      
+      console.log('Creating user report entry for user:', user.id);
+      const { error: reportError } = await supabase
+        .from('user_reports')
+        .upsert({
+          user_id: user.id,
+          report_data: { profile_completed: true },
+          report_status: 'generating',
+          generated_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        }, {
+          onConflict: 'user_id'
+        });
+
+      if (reportError) {
+        console.error('Error creating report entry:', reportError);
+        throw reportError;
+      }
+
+      console.log('Report entry created successfully with generating status');
+      
+      const webhookData = collectMakeWebhookData();
+      
+      if (!webhookData) {
+        toast({
+          title: "Fout",
+          description: "Kan geen gebruikersgegevens vinden voor het verzenden van data.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      await sendMakeWebhook(webhookData);
+      
+      console.log("Profile completed and Make.com webhook sent - PDF generation started!");
+      
+      toast({
+        title: "Profiel afgerond!",
+        description: "Je rapport wordt nu automatisch gegenereerd. Je wordt doorgestuurd naar de rapport pagina.",
+        variant: "default",
+      });
+      
+      scrollToTop();
+      navigate('/rapport-download');
+    } catch (error) {
+      console.error("Error completing profile:", error);
+      
+      toast({
+        title: "Fout bij afronden",
+        description: "Er ging iets mis bij het afronden van je profiel. Probeer het opnieuw.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (loading) {
@@ -105,6 +192,13 @@ const PrioriteitenInteresses = () => {
               <p className="text-sm text-gray-500 mt-2">
                 Geselecteerd: {selectedKeywords.length} van minimaal 5
               </p>
+              {isSubmitting && (
+                <div className="mt-4 p-3 bg-blue-50 rounded-lg">
+                  <p className="text-sm text-blue-700">
+                    📤 Profiel wordt afgerond en rapport gegenereerd...
+                  </p>
+                </div>
+              )}
             </div>
 
             {/* Keywords Grid */}
@@ -119,6 +213,7 @@ const PrioriteitenInteresses = () => {
                         ? "bg-blue-900 text-white border-blue-900 shadow-md"
                         : "bg-white text-blue-900 border-gray-300 hover:border-blue-900 hover:bg-blue-50"
                     }`}
+                    disabled={isSubmitting}
                   >
                     {keyword}
                   </button>
@@ -144,7 +239,8 @@ const PrioriteitenInteresses = () => {
                 value={extraText} 
                 onChange={e => handleExtraTextChange(e.target.value)} 
                 onBlur={handleExtraTextBlur} 
-                className="min-h-[80px] border-gray-300 focus:border-blue-900 focus:ring-blue-900" 
+                className="min-h-[80px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
+                disabled={isSubmitting}
               />
             </div>
 
@@ -154,19 +250,20 @@ const PrioriteitenInteresses = () => {
                 onClick={handlePrevious} 
                 variant="outline" 
                 className="border-blue-900 text-blue-900 hover:bg-blue-50"
+                disabled={isSubmitting}
               >
-                Vorige: Activiteiten
+                Vorige: Werkomstandigheden
               </Button>
               <Button 
-                onClick={handleNext} 
+                onClick={handleComplete} 
                 className={`font-semibold px-8 ${
-                  canProceed 
+                  canProceed && !isSubmitting
                     ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 
                     : "bg-gray-300 text-gray-500 cursor-not-allowed"
                 }`} 
-                disabled={!canProceed}
+                disabled={!canProceed || isSubmitting}
               >
-                Volgende: Werkomstandigheden
+                {isSubmitting ? "Afronden..." : "Afronden"}
               </Button>
             </div>
           </CardContent>

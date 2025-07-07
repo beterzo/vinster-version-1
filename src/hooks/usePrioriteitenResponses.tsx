@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useAuth } from './useAuth';
 import { supabase } from '@/integrations/supabase/client';
@@ -168,11 +167,6 @@ export const usePrioriteitenResponses = () => {
       return true;
     } catch (error) {
       console.error(`Error saving ${category} keywords:`, error);
-      toast({
-        title: "Fout bij opslaan",
-        description: `Er is een fout opgetreden bij het opslaan van je ${category}.`,
-        variant: "destructive",
-      });
       return false;
     }
   };

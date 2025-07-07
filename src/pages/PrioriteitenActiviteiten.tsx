@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -58,7 +57,7 @@ const PrioriteitenActiviteiten = () => {
 
   const handleNext = () => {
     scrollToTop();
-    navigate('/prioriteiten-interesses');
+    navigate('/prioriteiten-werkomstandigheden');
   };
 
   if (loading) {
@@ -154,7 +153,7 @@ const PrioriteitenActiviteiten = () => {
                 }`} 
                 disabled={!canProceed}
               >
-                Volgende: Interesses
+                Volgende: Werkomstandigheden
               </Button>
             </div>
           </CardContent>
