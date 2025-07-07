@@ -98,7 +98,7 @@ const EnthousiasmeStep2 = () => {
             {/* Title */}
             <div className="text-center mb-12">
               <h1 className="text-3xl font-bold text-blue-900 mb-2">
-                Enthousiasme - Stap 2
+                Enthousiasme scan - Stap 2
               </h1>
               <p className="text-xl text-gray-600">
                 Vragen over je eerste baan
