@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -49,7 +50,7 @@ const EnthousiasmeStep3 = () => {
 
   const handleComplete = () => {
     scrollToTop();
-    navigate('/prioriteiten-activiteiten');
+    navigate('/wensberoepen-intro');
   };
 
   const questions = [
