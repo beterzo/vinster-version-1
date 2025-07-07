@@ -1,38 +1,54 @@
+
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/hooks/useTranslation";
+
 const Footer = () => {
   const navigate = useNavigate();
-  const {
-    t
-  } = useTranslation();
-  const navigationLinks = [{
-    title: t('landing.footer.about_vinster'),
-    path: "/over-vinster"
-  }, {
-    title: t('landing.footer.for_whom'),
-    path: "/voor-wie-is-het"
-  }, {
-    title: t('landing.footer.faq'),
-    path: "/veelgestelde-vragen"
-  }, {
-    title: t('landing.footer.contact'),
-    path: "/contact"
-  }, {
-    title: t('landing.footer.privacy_policy'),
-    path: "/privacy-verklaring"
-  }, {
-    title: t('landing.footer.terms_conditions'),
-    path: "/algemene-voorwaarden"
-  }, {
-    title: t('landing.footer.cookie_policy'),
-    path: "/cookiebeleid"
-  }];
-  return <footer className="bg-gray-100 border-t border-gray-200 mt-16">
+  const { t } = useTranslation();
+
+  const navigationLinks = [
+    {
+      title: t('landing.footer.about_vinster'),
+      path: "/over-vinster"
+    },
+    {
+      title: t('landing.footer.for_whom'),
+      path: "/voor-wie-is-het"
+    },
+    {
+      title: t('landing.footer.faq'),
+      path: "/veelgestelde-vragen"
+    },
+    {
+      title: t('landing.footer.contact'),
+      path: "/contact"
+    },
+    {
+      title: t('landing.footer.privacy_policy'),
+      path: "/privacy-verklaring"
+    },
+    {
+      title: t('landing.footer.terms_conditions'),
+      path: "/algemene-voorwaarden"
+    },
+    {
+      title: t('landing.footer.cookie_policy'),
+      path: "/cookiebeleid"
+    }
+  ];
+
+  return (
+    <footer className="bg-gray-100 border-t border-gray-200 mt-16">
       <div className="max-w-[1440px] mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Logo section */}
           <div className="flex items-start">
-            <img alt="Vinster Logo" className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" onClick={() => navigate('/')} src="/lovable-uploads/12464f1f-0e4b-46f4-9eb3-e8f96be183ca.png" />
+            <img 
+              alt="Vinster Logo" 
+              className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              onClick={() => navigate('/')} 
+              src="/lovable-uploads/0a60c164-79b3-4ce8-80cb-a3d37886f987.png" 
+            />
           </div>
 
           {/* Navigation links */}
@@ -41,11 +57,16 @@ const Footer = () => {
               {t('landing.footer.navigation_title')}
             </h3>
             <ul className="space-y-2">
-              {navigationLinks.map(link => <li key={link.path}>
-                  <button onClick={() => navigate(link.path)} className="text-gray-600 hover:text-blue-900 transition-colors duration-200 text-left">
+              {navigationLinks.map(link => (
+                <li key={link.path}>
+                  <button 
+                    onClick={() => navigate(link.path)} 
+                    className="text-gray-600 hover:text-blue-900 transition-colors duration-200 text-left"
+                  >
                     {link.title}
                   </button>
-                </li>)}
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -78,6 +99,8 @@ const Footer = () => {
           </p>
         </div>
       </div>
-    </footer>;
+    </footer>
+  );
 };
+
 export default Footer;

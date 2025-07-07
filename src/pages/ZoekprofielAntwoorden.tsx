@@ -14,7 +14,7 @@ const ZoekprofielAntwoorden = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { user } = useAuth();
-  const { antwoorden, saveAntwoorden, isLoading } = useZoekprofielAntwoorden();
+  const { responses, saveResponse, loading } = useZoekprofielAntwoorden();
 
   const [formData, setFormData] = useState({
     functie_als: "",
@@ -26,23 +26,26 @@ const ZoekprofielAntwoorden = () => {
   });
 
   useEffect(() => {
-    if (antwoorden) {
+    if (responses) {
       setFormData({
-        functie_als: antwoorden.functie_als || "",
-        kerntaken: antwoorden.kerntaken || "",
-        organisatie_bij: antwoorden.organisatie_bij || "",
-        sector: antwoorden.sector || "",
-        gewenste_regio: antwoorden.gewenste_regio || "",
-        arbeidsvoorwaarden: antwoorden.arbeidsvoorwaarden || ""
+        functie_als: responses.functie_als || "",
+        kerntaken: responses.kerntaken || "",
+        organisatie_bij: responses.organisatie_bij || "",
+        sector: responses.sector || "",
+        gewenste_regio: responses.gewenste_regio || "",
+        arbeidsvoorwaarden: responses.arbeidsvoorwaarden || ""
       });
     }
-  }, [antwoorden]);
+  }, [responses]);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
     }));
+    
+    // Save to backend with debouncing
+    saveResponse(field, value);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -58,7 +61,6 @@ const ZoekprofielAntwoorden = () => {
     }
 
     try {
-      await saveAntwoorden(formData);
       toast({
         title: "Antwoorden opgeslagen",
         description: "Je zoekprofiel antwoorden zijn succesvol opgeslagen."
@@ -157,10 +159,10 @@ const ZoekprofielAntwoorden = () => {
                   </Button>
                   <Button
                     type="submit"
-                    disabled={isLoading}
+                    disabled={loading}
                     className="flex-1 bg-blue-900 hover:bg-blue-800"
                   >
-                    {isLoading ? "Bezig met opslaan..." : "Opslaan en Doorgaan"}
+                    {loading ? "Bezig met opslaan..." : "Opslaan en Doorgaan"}
                   </Button>
                 </div>
               </form>
