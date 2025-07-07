@@ -1,4 +1,3 @@
-
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
@@ -7,14 +6,21 @@ import { useTranslation } from "@/hooks/useTranslation";
 
 const WhatDoYouGetCard = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
 
   const handleStartClick = () => {
     navigate('/signup');
   };
 
   const handleViewSampleReport = () => {
-    window.open('/sample-report.pdf', '_blank');
+    // Language-specific PDF URLs
+    const dutchPdfUrl = 'https://api.pdf4me.com/Document/GetDoc?d=eyJUZW5hbnRJZCI6IjQxNDJiMWY0LWRkYTYtNDE3ZC05ODMwLWYyYTFjZmQ5ZjBiNCIsIkFwaUNhbGxJZCI6ImFjNDcwYTQ3LTVlNjYtNDIzYy04MWU0LWU4MDI5MGZlYzM0MSIsIkpvYklkIjoiYWM0NzBhNDctNWU2Ni00MjNjLTgxZTQtZTgwMjkwZmVjMzQxIiwiRG9jdW1lbnRJZCI6IjZlYjVjODAzLWI4OGEtNGFhMi1hNzFjLWQ2Nzg5NDM1ZTNmZCIsIkZpbGVOYW1lIjoibWVyZ2VkLnBkZiIsIlBhZ2VJZCI6bnVsbH0=';
+    const englishPdfUrl = 'https://api.pdf4me.com/Document/GetDoc?d=eyJUZW5hbnRJZCI6IjQxNDJiMWY0LWRkYTYtNDE3ZC05ODMwLWYyYTFjZmQ5ZjBiNCIsIkFwaUNhbGxJZCI6Ijc3NjcxOTViLWNlMzctNGRlMi04NTExLTQ2NzVkNjJjZTI2OCIsIkpvYklkIjoiNzc2NzE5NWItY2UzNy00ZGUyLTg1MTEtNDY3NWQ2MmNlMjY4IiwiRG9jdW1lbnRJZCI6IjQ2YzNhMjM2LTZkODYtNDhiNy04ZDcyLTJkZmIyZGMxZjlmZiIsIkZpbGVOYW1lIjoibWVyZ2VkLnBkZiIsIlBhZ2VJZCI6bnVsbH0=';
+    
+    // Select URL based on current language, fallback to Dutch
+    const pdfUrl = language === 'en' ? englishPdfUrl : dutchPdfUrl;
+    
+    window.open(pdfUrl, '_blank');
   };
 
   return (
