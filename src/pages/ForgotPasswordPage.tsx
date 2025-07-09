@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -30,17 +29,23 @@ const ForgotPasswordPage = () => {
     setIsLoading(true);
     
     try {
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/reset-password?lang=${language}`,
+      // Call our custom edge function instead of Supabase's built-in function
+      const { data, error } = await supabase.functions.invoke('send-password-reset-email', {
+        body: {
+          email: email,
+          language: language
+        }
       });
 
       if (error) {
+        console.error('Error calling password reset function:', error);
         toast({
           title: t('forgot_password.error_sending'),
           description: error.message,
           variant: "destructive"
         });
       } else {
+        console.log('Password reset email sent successfully:', data);
         setEmailSent(true);
         toast({
           title: t('forgot_password.email_sent'),
@@ -48,6 +53,7 @@ const ForgotPasswordPage = () => {
         });
       }
     } catch (error) {
+      console.error('Exception in password reset:', error);
       toast({
         title: t('forgot_password.error_sending'),
         description: t('login.unknown_error'),
