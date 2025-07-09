@@ -29,23 +29,20 @@ const ForgotPasswordPage = () => {
     setIsLoading(true);
     
     try {
-      // Call our custom edge function instead of Supabase's built-in function
-      const { data, error } = await supabase.functions.invoke('send-password-reset-email', {
-        body: {
-          email: email,
-          language: language
-        }
+      // Use Supabase's built-in password reset which triggers the auth hook
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/reset-password?lang=${language}`
       });
 
       if (error) {
-        console.error('Error calling password reset function:', error);
+        console.error('Error sending password reset email:', error);
         toast({
           title: t('forgot_password.error_sending'),
           description: error.message,
           variant: "destructive"
         });
       } else {
-        console.log('Password reset email sent successfully:', data);
+        console.log('Password reset email sent successfully via auth hook');
         setEmailSent(true);
         toast({
           title: t('forgot_password.email_sent'),
