@@ -14,7 +14,7 @@
     "what_is_vinster": {
       "title": "What is Vinster?",
       "description": "Vinster is an AI-driven platform that helps you discover your true passions and talents. Through in-depth questions and advanced algorithms, we create a personal profile that helps you make informed career choices.",
-      "based_on": "Based on scientific research and your unique characteristics, you get:",
+      "based_on": "Built on proven methods from practice and your unique characteristics, you get:",
       "two_matching_functions": "Two matching functions that fit you perfectly",
       "one_surprising_suggestion": "One surprising suggestion that opens new possibilities",
       "clear_action_plan": "A clear action plan to realize your dream career",
@@ -37,7 +37,7 @@
       },
       "card2": {
         "title": "What do you get?",
-        "description": "A comprehensive personality report, a customized search profile, and concrete steps to realize your dream career. All based on scientific research and your unique characteristics."
+        "description": "A comprehensive personality report, a customized search profile, and concrete steps to realize your dream career. All built on proven methods from practice and your unique characteristics."
       }
     },
     "process": {
@@ -99,7 +99,6 @@
       "terms_conditions": "Terms & Conditions",
       "cookie_policy": "Cookie Policy",
       "email": "Email",
-      "phone": "Phone",
       "kvk": "Chamber of Commerce",
       "copyright": "© 2024 Vinster. All rights reserved."
     }

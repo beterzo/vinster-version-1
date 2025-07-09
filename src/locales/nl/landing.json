@@ -14,7 +14,7 @@
     "what_is_vinster": {
       "title": "Wat is Vinster?",
       "description": "Vinster is een AI-gedreven platform dat je helpt je ware passies en talenten te ontdekken. Door middel van diepgaande vragen en geavanceerde algoritmes creëren we een persoonlijk profiel dat je helpt bij het maken van weloverwogen loopbaankeuzes.",
-      "based_on": "Gebaseerd op wetenschappelijk onderzoek en jouw unieke eigenschappen krijg je:",
+      "based_on": "Gebouwd op bewezen methodes uit de praktijk en jouw unieke eigenschappen krijg je:",
       "two_matching_functions": "Twee matchende functies die perfect bij je passen",
       "one_surprising_suggestion": "Eén verrassend voorstel dat nieuwe mogelijkheden opent",
       "clear_action_plan": "Een helder actieplan om je droomcarrière te realiseren",
@@ -37,7 +37,7 @@
       },
       "card2": {
         "title": "Wat krijg je?",
-        "description": "Een uitgebreid persoonlijkheidsrapport, een op maat gemaakt zoekprofiel, en concrete stappen om je droomcarrière te realiseren. Alles gebaseerd op wetenschappelijk onderzoek en jouw unieke eigenschappen."
+        "description": "Een uitgebreid persoonlijkheidsrapport, een op maat gemaakt zoekprofiel, en concrete stappen om je droomcarrière te realiseren. Alles gebouwd op bewezen methodes uit de praktijk en jouw unieke eigenschappen."
       }
     },
     "process": {
@@ -99,7 +99,6 @@
       "terms_conditions": "Algemene voorwaarden",
       "cookie_policy": "Cookiebeleid",
       "email": "E-mail",
-      "phone": "Telefoon",
       "kvk": "KvK-nummer",
       "copyright": "© 2024 Vinster. Alle rechten voorbehouden."
     }
