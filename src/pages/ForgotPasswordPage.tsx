@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,6 +14,7 @@ const ForgotPasswordPage = () => {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
+  const { resetPassword } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
   const { t } = useTranslation();
@@ -34,18 +34,14 @@ const ForgotPasswordPage = () => {
     setIsLoading(true);
 
     try {
-      // First, send the reset email via Supabase
-      const redirectUrl = `https://vinster.ai/reset-password?lang=${language}`;
-      
-      const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: redirectUrl,
-      });
+      // Use the resetPassword from auth hook (which now uses the correct redirect URL)
+      const { error } = await resetPassword(email);
 
-      if (resetError) {
-        console.error('Reset password error:', resetError);
+      if (error) {
+        console.error('Reset password error:', error);
         toast({
           title: t('forgot_password.error_sending'),
-          description: resetError.message,
+          description: error.message,
           variant: "destructive"
         });
         setIsLoading(false);
@@ -58,7 +54,7 @@ const ForgotPasswordPage = () => {
           body: {
             email,
             language,
-            resetUrl: redirectUrl
+            resetUrl: `https://vinster.ai/auth/callback?type=recovery&next=/reset-password&lang=${language}`
           }
         });
 

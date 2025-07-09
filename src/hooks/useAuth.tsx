@@ -250,7 +250,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     
     try {
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: 'https://vinster.ai/reset-password',
+        redirectTo: 'https://vinster.ai/auth/callback?type=recovery&next=/reset-password',
       });
 
       if (error) {

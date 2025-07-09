@@ -16,6 +16,37 @@ const AuthCallbackPage = () => {
         console.log('🔐 Processing auth callback...');
         console.log('📝 Search params:', Object.fromEntries(searchParams.entries()));
         
+        const type = searchParams.get('type');
+        const next = searchParams.get('next');
+        
+        // Check if this is a password recovery callback
+        if (type === 'recovery') {
+          console.log('🔓 Processing password recovery callback');
+          
+          // Get the session to check if the recovery was successful
+          const { data, error } = await supabase.auth.getSession();
+          
+          if (error) {
+            console.error('❌ Recovery callback error:', error);
+            setStatus('error');
+            setMessage('Er is een fout opgetreden bij het verwerken van de wachtwoord reset link.');
+            return;
+          }
+
+          if (data.session) {
+            console.log('✅ Recovery successful, redirecting to reset password page');
+            // Redirect to the reset password page with the next parameter
+            const redirectUrl = next || '/reset-password';
+            navigate(redirectUrl);
+            return;
+          } else {
+            console.log('❌ No session found for recovery');
+            setStatus('error');
+            setMessage('Wachtwoord reset link is verlopen of ongeldig. Vraag een nieuwe aan.');
+            return;
+          }
+        }
+        
         // Log current session state before verification
         const { data: initialSession } = await supabase.auth.getSession();
         console.log('📊 Initial session state:', {
@@ -90,10 +121,10 @@ const AuthCallbackPage = () => {
                 <Loader className="w-8 h-8 text-blue-600 animate-spin" />
               </div>
               <h1 className="text-xl font-semibold text-vinster-blue mb-2">
-                Account verifiëren...
+                Verwerken...
               </h1>
               <p className="text-gray-600">
-                Even geduld terwijl we je account verifiëren.
+                Even geduld terwijl we je verzoek verwerken.
               </p>
             </>
           )}
@@ -104,13 +135,13 @@ const AuthCallbackPage = () => {
                 <CheckCircle className="w-8 h-8 text-green-600" />
               </div>
               <h1 className="text-xl font-semibold text-vinster-blue mb-2">
-                Verificatie geslaagd!
+                Gelukt!
               </h1>
               <p className="text-gray-600 mb-4">
                 {message}
               </p>
               <p className="text-sm text-gray-500">
-                Je wordt automatisch doorgestuurd naar de inlogpagina...
+                Je wordt automatisch doorgestuurd...
               </p>
             </>
           )}
@@ -121,16 +152,22 @@ const AuthCallbackPage = () => {
                 <AlertCircle className="w-8 h-8 text-red-600" />
               </div>
               <h1 className="text-xl font-semibold text-vinster-blue mb-2">
-                Verificatie mislukt
+                Er is iets misgegaan
               </h1>
               <p className="text-gray-600 mb-6">
                 {message}
               </p>
               <button
-                onClick={() => navigate('/email-verification')}
-                className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors"
+                onClick={() => navigate('/forgot-password')}
+                className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors mr-2"
               >
-                Nieuwe verificatie email aanvragen
+                Nieuwe reset aanvragen
+              </button>
+              <button
+                onClick={() => navigate('/login')}
+                className="bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-md transition-colors"
+              >
+                Terug naar login
               </button>
             </>
           )}
