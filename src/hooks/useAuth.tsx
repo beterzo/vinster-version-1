@@ -12,7 +12,6 @@ interface AuthContextType {
   signIn: (email: string, password: string) => Promise<{ error: any }>;
   signOut: () => Promise<{ error: any }>;
   resendConfirmation: (email: string) => Promise<{ error: any }>;
-  resetPassword: (email: string, language?: string) => Promise<{ error: any }>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -245,54 +244,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const resetPassword = async (email: string, language: string = 'nl') => {
-    console.log('🔐 Resetting password for:', email, 'with language:', language);
-    
-    try {
-      const redirectUrl = `https://vinster.ai/auth/callback?type=recovery&lang=${language}&next=/reset-password`;
-      console.log('🔗 Using recovery redirect URL:', redirectUrl);
-      
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: redirectUrl,
-      });
-
-      if (error) {
-        console.error('❌ Reset password error:', error);
-        
-        // If Supabase auth fails, try our direct edge function as fallback
-        console.log('🔄 Trying direct edge function as fallback...');
-        
-        try {
-          const response = await supabase.functions.invoke('send-password-reset', {
-            body: {
-              email,
-              language,
-              resetUrl: redirectUrl
-            }
-          });
-          
-          if (response.error) {
-            console.error('❌ Edge function error:', response.error);
-            return { error: response.error };
-          }
-          
-          console.log('✅ Fallback edge function succeeded');
-          return { error: null };
-        } catch (fallbackError) {
-          console.error('❌ Fallback edge function failed:', fallbackError);
-          return { error };
-        }
-      } else {
-        console.log('✅ Password reset email sent with redirect:', redirectUrl);
-      }
-
-      return { error };
-    } catch (error) {
-      console.error('❌ Reset password exception:', error);
-      return { error };
-    }
-  };
-
   const value = {
     user,
     session,
@@ -301,7 +252,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     signIn,
     signOut,
     resendConfirmation,
-    resetPassword,
   };
 
   console.log('🔐 AuthProvider render:', { 

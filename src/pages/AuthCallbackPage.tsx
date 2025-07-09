@@ -27,38 +27,6 @@ const AuthCallbackPage = () => {
         console.log('🔐 Processing auth callback...');
         console.log('📝 Search params:', Object.fromEntries(searchParams.entries()));
         
-        const type = searchParams.get('type');
-        const next = searchParams.get('next');
-        
-        // Check if this is a password recovery callback
-        if (type === 'recovery') {
-          console.log('🔓 Processing password recovery callback');
-          
-          // Get the session to check if the recovery was successful
-          const { data, error } = await supabase.auth.getSession();
-          
-          if (error) {
-            console.error('❌ Recovery callback error:', error);
-            setStatus('error');
-            setMessage(t('reset_password.invalid_token_desc'));
-            return;
-          }
-
-          if (data.session) {
-            console.log('✅ Recovery successful, redirecting to reset password page');
-            // Add language parameter to the redirect
-            const langParam = searchParams.get('lang') || 'nl';
-            const redirectUrl = `${next || '/reset-password'}?lang=${langParam}`;
-            navigate(redirectUrl);
-            return;
-          } else {
-            console.log('❌ No session found for recovery');
-            setStatus('error');
-            setMessage(t('reset_password.invalid_token_desc'));
-            return;
-          }
-        }
-        
         // Handle email verification
         console.log('📧 Processing email verification callback');
         
@@ -162,25 +130,17 @@ const AuthCallbackPage = () => {
                 <AlertCircle className="w-8 h-8 text-red-600" />
               </div>
               <h1 className="text-xl font-semibold text-vinster-blue mb-2">
-                {t('reset_password.invalid_token')}
+                {t('common.error')}
               </h1>
               <p className="text-gray-600 mb-6">
                 {message}
               </p>
-              <div className="space-y-3">
-                <button
-                  onClick={() => navigate('/forgot-password')}
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors"
-                >
-                  {t('reset_password.request_new_reset')}
-                </button>
-                <button
-                  onClick={() => navigate('/login')}
-                  className="w-full bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-md transition-colors"
-                >
-                  {t('reset_password.continue_to_login')}
-                </button>
-              </div>
+              <button
+                onClick={() => navigate('/login')}
+                className="w-full bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-md transition-colors"
+              >
+                {t('email_verification.back_to_login')}
+              </button>
             </>
           )}
         </div>
