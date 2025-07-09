@@ -12,7 +12,7 @@ interface AuthContextType {
   signIn: (email: string, password: string) => Promise<{ error: any }>;
   signOut: () => Promise<{ error: any }>;
   resendConfirmation: (email: string) => Promise<{ error: any }>;
-  resetPassword: (email: string) => Promise<{ error: any }>;
+  resetPassword: (email: string, language?: string) => Promise<{ error: any }>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -245,18 +245,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const resetPassword = async (email: string) => {
-    console.log('🔐 Resetting password for:', email);
+  const resetPassword = async (email: string, language: string = 'nl') => {
+    console.log('🔐 Resetting password for:', email, 'with language:', language);
     
     try {
+      const redirectUrl = `https://vinster.ai/auth/callback?type=recovery&lang=${language}&next=/reset-password`;
+      console.log('🔗 Using recovery redirect URL:', redirectUrl);
+      
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: 'https://vinster.ai/auth/callback?type=recovery&next=/reset-password',
+        redirectTo: redirectUrl,
       });
 
       if (error) {
         console.error('❌ Reset password error:', error);
       } else {
-        console.log('✅ Password reset email sent');
+        console.log('✅ Password reset email sent with redirect:', redirectUrl);
       }
 
       return { error };

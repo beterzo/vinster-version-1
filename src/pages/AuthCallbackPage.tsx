@@ -3,14 +3,25 @@ import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { CheckCircle, AlertCircle, Loader } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
+import { useLanguage } from "@/contexts/LanguageContext";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const AuthCallbackPage = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
   const [message, setMessage] = useState('');
+  const { t } = useTranslation();
+  const { setLanguage } = useLanguage();
 
   useEffect(() => {
+    // Set language from URL parameter if present
+    const langParam = searchParams.get('lang');
+    if (langParam === 'nl' || langParam === 'en') {
+      setLanguage(langParam);
+    }
+
     const handleAuthCallback = async () => {
       try {
         console.log('🔐 Processing auth callback...');
@@ -29,102 +40,101 @@ const AuthCallbackPage = () => {
           if (error) {
             console.error('❌ Recovery callback error:', error);
             setStatus('error');
-            setMessage('Er is een fout opgetreden bij het verwerken van de wachtwoord reset link.');
+            setMessage(t('reset_password.invalid_token_desc'));
             return;
           }
 
           if (data.session) {
             console.log('✅ Recovery successful, redirecting to reset password page');
-            // Redirect to the reset password page with the next parameter
-            const redirectUrl = next || '/reset-password';
+            // Add language parameter to the redirect
+            const langParam = searchParams.get('lang') || 'nl';
+            const redirectUrl = `${next || '/reset-password'}?lang=${langParam}`;
             navigate(redirectUrl);
             return;
           } else {
             console.log('❌ No session found for recovery');
             setStatus('error');
-            setMessage('Wachtwoord reset link is verlopen of ongeldig. Vraag een nieuwe aan.');
+            setMessage(t('reset_password.invalid_token_desc'));
             return;
           }
         }
         
-        // Log current session state before verification
-        const { data: initialSession } = await supabase.auth.getSession();
-        console.log('📊 Initial session state:', {
-          hasSession: !!initialSession.session,
-          user: initialSession.session?.user?.email,
-          emailConfirmed: initialSession.session?.user?.email_confirmed_at
-        });
+        // Handle email verification
+        console.log('📧 Processing email verification callback');
         
         const { data, error } = await supabase.auth.getSession();
         
         if (error) {
           console.error('❌ Auth callback error:', error);
           
-          // Check if it's a token already used error
           if (error.message.includes('Email link is invalid or has expired')) {
             setStatus('error');
-            setMessage('Deze verificatie link is al gebruikt of verlopen. Probeer een nieuwe verificatie email aan te vragen.');
+            setMessage(t('email_verification.not_received'));
             return;
           }
           
           setStatus('error');
-          setMessage('Er is een fout opgetreden bij het verifiëren van je account.');
+          setMessage(t('login.unknown_error'));
           return;
         }
 
         if (data.session) {
-          console.log('✅ Email verification successful:', {
-            email: data.session.user.email,
-            emailConfirmed: data.session.user.email_confirmed_at,
-            userCreated: data.session.user.created_at,
-            lastSignIn: data.session.user.last_sign_in_at
-          });
+          console.log('✅ Email verification successful');
           
-          // Check if user was just verified or was already verified
           const wasJustVerified = data.session.user.email_confirmed_at && 
-            new Date(data.session.user.email_confirmed_at).getTime() > (Date.now() - 30000); // within last 30 seconds
+            new Date(data.session.user.email_confirmed_at).getTime() > (Date.now() - 30000);
           
           if (wasJustVerified) {
             setStatus('success');
-            setMessage('Je account is succesvol geverifieerd! Je kunt nu inloggen.');
+            setMessage(t('email_confirmed.description'));
           } else {
             setStatus('success');
-            setMessage('Je account was al geverifieerd. Je kunt nu inloggen.');
+            setMessage(t('email_confirmed.description'));
           }
           
-          // Redirect to login page after short delay
           setTimeout(() => {
             navigate('/login');
           }, 2000);
         } else {
           console.log('❌ No session found after callback');
           setStatus('error');
-          setMessage('Verificatie link is verlopen, al gebruikt, of ongeldig. Vraag een nieuwe verificatie email aan.');
+          setMessage(t('email_verification.not_received'));
         }
       } catch (error) {
         console.error('❌ Auth callback exception:', error);
         setStatus('error');
-        setMessage('Er is een onverwachte fout opgetreden.');
+        setMessage(t('login.unknown_error'));
       }
     };
 
     handleAuthCallback();
-  }, [navigate, searchParams]);
+  }, [navigate, searchParams, t, setLanguage]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="max-w-md w-full mx-auto">
         <div className="bg-white shadow-lg rounded-lg p-8 text-center">
+          {/* Header with Logo and Language Switcher */}
+          <div className="flex items-center justify-between mb-6">
+            <img 
+              alt="Vinster Logo" 
+              onClick={() => navigate('/')} 
+              src="/lovable-uploads/0a60c164-79b3-4ce8-80cb-a3d37886f987.png" 
+              className="h-16 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+            />
+            <LanguageSwitcher />
+          </div>
+
           {status === 'loading' && (
             <>
               <div className="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
                 <Loader className="w-8 h-8 text-blue-600 animate-spin" />
               </div>
               <h1 className="text-xl font-semibold text-vinster-blue mb-2">
-                Verwerken...
+                {t('common.loading')}
               </h1>
               <p className="text-gray-600">
-                Even geduld terwijl we je verzoek verwerken.
+                {t('common.please_wait')}
               </p>
             </>
           )}
@@ -135,13 +145,13 @@ const AuthCallbackPage = () => {
                 <CheckCircle className="w-8 h-8 text-green-600" />
               </div>
               <h1 className="text-xl font-semibold text-vinster-blue mb-2">
-                Gelukt!
+                {t('common.success')}
               </h1>
               <p className="text-gray-600 mb-4">
                 {message}
               </p>
               <p className="text-sm text-gray-500">
-                Je wordt automatisch doorgestuurd...
+                {t('common.redirecting')}
               </p>
             </>
           )}
@@ -152,23 +162,25 @@ const AuthCallbackPage = () => {
                 <AlertCircle className="w-8 h-8 text-red-600" />
               </div>
               <h1 className="text-xl font-semibold text-vinster-blue mb-2">
-                Er is iets misgegaan
+                {t('reset_password.invalid_token')}
               </h1>
               <p className="text-gray-600 mb-6">
                 {message}
               </p>
-              <button
-                onClick={() => navigate('/forgot-password')}
-                className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors mr-2"
-              >
-                Nieuwe reset aanvragen
-              </button>
-              <button
-                onClick={() => navigate('/login')}
-                className="bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-md transition-colors"
-              >
-                Terug naar login
-              </button>
+              <div className="space-y-3">
+                <button
+                  onClick={() => navigate('/forgot-password')}
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors"
+                >
+                  {t('reset_password.request_new_reset')}
+                </button>
+                <button
+                  onClick={() => navigate('/login')}
+                  className="w-full bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-md transition-colors"
+                >
+                  {t('reset_password.continue_to_login')}
+                </button>
+              </div>
             </>
           )}
         </div>

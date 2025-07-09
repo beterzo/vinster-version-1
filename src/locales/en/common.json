@@ -1,77 +1,8 @@
 
 {
-  "common": {
-    "loading": "Loading...",
-    "back": "Back",
-    "next": "Next",
-    "save": "Save",
-    "cancel": "Cancel"
-  },
-  "cookies": {
-    "banner": {
-      "message": "This website uses cookies to improve your experience and to gain insight into website usage. By continuing, you accept our use of cookies. Read more in our cookie policy.",
-      "accept": "Accept",
-      "customize": "Customize settings"
-    },
-    "settings": {
-      "title": "Cookie Settings",
-      "description": "Here you can adjust your cookie preferences. You can choose which cookies to accept for each category.",
-      "save": "Save and close",
-      "accept_all": "Accept all"
-    },
-    "categories": {
-      "necessary": {
-        "title": "Necessary cookies",
-        "description": "These cookies are essential for the website to function and cannot be disabled."
-      },
-      "statistics": {
-        "title": "Statistics cookies",
-        "description": "These cookies help us understand how visitors use the website by collecting anonymous information."
-      },
-      "marketing": {
-        "title": "Marketing cookies",
-        "description": "These cookies are used to show visitors relevant advertisements and marketing campaigns."
-      }
-    },
-    "policy": {
-      "title": "Cookie Policy",
-      "what_are_cookies": {
-        "title": "What are cookies?",
-        "description": "Cookies are small text files that are placed on your computer or mobile device when you visit a website. They are widely used to make websites work, or work more efficiently, as well as to provide information to the owners of the site."
-      },
-      "which_cookies": {
-        "title": "Which cookies does Vinster use?"
-      },
-      "necessary": {
-        "description": "These cookies are necessary for the proper functioning of our website. They cannot be disabled in our systems.",
-        "session": "Session cookies for login and navigation",
-        "auth": "Authentication cookies to keep you logged in",
-        "preferences": "Preference cookies for language settings"
-      },
-      "statistics": {
-        "description": "These cookies allow us to count visits and traffic sources so we can measure and improve the performance of our site.",
-        "analytics": "Google Analytics for website statistics",
-        "usage": "Usage data for improving our services"
-      },
-      "marketing": {
-        "description": "These cookies may be set through our site by our advertising partners to build a profile of your interests.",
-        "tracking": "Tracking pixels for advertising purposes",
-        "remarketing": "Remarketing cookies for personalized advertisements"
-      },
-      "retention": {
-        "title": "How long do we keep cookies?",
-        "description": "The retention period of cookies varies by type. Session cookies are deleted when you close your browser. Persistent cookies remain on your device until they expire or are deleted by you. Our cookies typically have a retention period of 1 to 2 years."
-      },
-      "manage": {
-        "title": "How can you manage your cookie preferences?",
-        "description": "You can change your cookie preferences at any time by returning to this page or by using the cookie settings available on our website.",
-        "browser": "You can also manage cookies through your browser settings. Most browsers allow you to refuse cookies or receive a warning before cookies are placed."
-      },
-      "contact": {
-        "title": "Contact",
-        "description": "If you have questions about our cookie policy, you can contact us:"
-      },
-      "last_updated": "Last updated"
-    }
-  }
+  "loading": "Loading...",
+  "please_wait": "Please wait while we process your request.",
+  "success": "Success!",
+  "error": "Error",
+  "redirecting": "You will be redirected automatically..."
 }

@@ -1,13 +1,13 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useAuth } from "@/hooks/useAuth";
-import { useNavigate, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/useAuth";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { supabase } from "@/integrations/supabase/client";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const ForgotPasswordPage = () => {
@@ -15,17 +15,27 @@ const ForgotPasswordPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
   const { resetPassword } = useAuth();
-  const navigate = useNavigate();
   const { toast } = useToast();
   const { t } = useTranslation();
   const { language } = useLanguage();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
     if (!email) {
       toast({
-        title: t('forgot_password.error_sending'),
+        title: t('login.fill_all_fields'),
         description: t('login.fill_all_fields_desc'),
+        variant: "destructive"
+      });
+      return;
+    }
+
+    if (!email.includes('@')) {
+      toast({
+        title: t('login.login_error'),
+        description: "Please enter a valid email address",
         variant: "destructive"
       });
       return;
@@ -34,49 +44,37 @@ const ForgotPasswordPage = () => {
     setIsLoading(true);
 
     try {
-      // Use the resetPassword from auth hook (which now uses the correct redirect URL)
-      const { error } = await resetPassword(email);
+      console.log('🔐 Sending password reset for:', email, 'in language:', language);
+      const { error } = await resetPassword(email, language);
 
       if (error) {
-        console.error('Reset password error:', error);
-        toast({
-          title: t('forgot_password.error_sending'),
-          description: error.message,
-          variant: "destructive"
-        });
-        setIsLoading(false);
-        return;
-      }
-
-      // Then send our custom styled email
-      try {
-        const response = await supabase.functions.invoke('send-password-reset', {
-          body: {
-            email,
-            language,
-            resetUrl: `https://vinster.ai/auth/callback?type=recovery&next=/reset-password&lang=${language}`
-          }
-        });
-
-        if (response.error) {
-          console.error('Custom email error:', response.error);
-          // Don't show error to user since the reset link still works
+        console.error('Password reset error:', error);
+        if (error.message.includes('User not found')) {
+          toast({
+            title: t('forgot_password.email_not_found'),
+            description: t('forgot_password.email_not_found'),
+            variant: "destructive"
+          });
+        } else {
+          toast({
+            title: t('forgot_password.error_sending'),
+            description: error.message,
+            variant: "destructive"
+          });
         }
-      } catch (customEmailError) {
-        console.error('Failed to send custom email:', customEmailError);
-        // Don't show error to user since the reset link still works
+      } else {
+        console.log('✅ Password reset email sent successfully');
+        setEmailSent(true);
+        toast({
+          title: t('forgot_password.email_sent'),
+          description: t('forgot_password.email_sent_desc')
+        });
       }
-
-      setEmailSent(true);
-      toast({
-        title: t('forgot_password.email_sent'),
-        description: t('forgot_password.email_sent_desc')
-      });
     } catch (error: any) {
-      console.error('Forgot password error:', error);
+      console.error('Password reset exception:', error);
       toast({
         title: t('forgot_password.error_sending'),
-        description: error.message || t('login.unknown_error'),
+        description: error.message,
         variant: "destructive"
       });
     } finally {
@@ -114,7 +112,7 @@ const ForgotPasswordPage = () => {
             <div className="text-center space-y-4">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
                 <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 3.26a2 2 0 001.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
               </div>
               

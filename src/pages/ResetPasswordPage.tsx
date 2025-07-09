@@ -15,7 +15,7 @@ const ResetPasswordPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [passwordUpdated, setPasswordUpdated] = useState(false);
-  const [hasValidToken, setHasValidToken] = useState<boolean | null>(null);
+  const [hasValidSession, setHasValidSession] = useState<boolean | null>(null);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -29,41 +29,39 @@ const ResetPasswordPage = () => {
       setLanguage(langParam);
     }
 
-    // Check if we have a valid session/token from the URL
+    // Check if we have a valid session for password recovery
     const checkSession = async () => {
       try {
         const { data: { session }, error } = await supabase.auth.getSession();
+        
         if (error) {
           console.error('Session error:', error);
-          setHasValidToken(false);
+          setHasValidSession(false);
           return;
         }
         
-        // Check if this is a password recovery session
-        if (session?.user && !session.user.email_confirmed_at) {
-          // This might be a password reset session
-          setHasValidToken(true);
-        } else if (session?.user) {
-          // User is already logged in, redirect to home
-          navigate('/home');
+        if (session?.user) {
+          console.log('✅ Valid session found for password reset');
+          setHasValidSession(true);
         } else {
-          setHasValidToken(false);
+          console.log('❌ No valid session for password reset');
+          setHasValidSession(false);
         }
       } catch (error) {
         console.error('Error checking session:', error);
-        setHasValidToken(false);
+        setHasValidSession(false);
       }
     };
 
     checkSession();
-  }, [searchParams, setLanguage, navigate]);
+  }, [searchParams, setLanguage]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!password || !confirmPassword) {
       toast({
-        title: t('reset_password.passwords_dont_match'),
+        title: t('login.fill_all_fields'),
         description: t('login.fill_all_fields_desc'),
         variant: "destructive"
       });
@@ -103,6 +101,7 @@ const ResetPasswordPage = () => {
           variant: "destructive"
         });
       } else {
+        console.log('✅ Password updated successfully');
         setPasswordUpdated(true);
         toast({
           title: t('reset_password.password_updated'),
@@ -110,7 +109,9 @@ const ResetPasswordPage = () => {
         });
         
         // Sign out the user so they can sign in with their new password
-        await supabase.auth.signOut();
+        setTimeout(async () => {
+          await supabase.auth.signOut();
+        }, 1000);
       }
     } catch (error: any) {
       console.error('Reset password error:', error);
@@ -124,20 +125,20 @@ const ResetPasswordPage = () => {
     }
   };
 
-  // Loading state while checking token
-  if (hasValidToken === null) {
+  // Loading state while checking session
+  if (hasValidSession === null) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-900 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Laden...</p>
+          <p className="mt-4 text-gray-600">{t('common.loading')}</p>
         </div>
       </div>
     );
   }
 
-  // Invalid token state
-  if (hasValidToken === false) {
+  // Invalid session state
+  if (hasValidSession === false) {
     return (
       <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2">
         {/* Left side - Image */}

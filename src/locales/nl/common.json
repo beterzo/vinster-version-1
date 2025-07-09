@@ -1,77 +1,8 @@
 
 {
-  "common": {
-    "loading": "Laden...",
-    "back": "Terug",
-    "next": "Volgende",
-    "save": "Opslaan",
-    "cancel": "Annuleren"
-  },
-  "cookies": {
-    "banner": {
-      "message": "Deze website gebruikt cookies om je ervaring te verbeteren en om inzicht te krijgen in het gebruik van de website. Door verder te gaan, accepteer je ons gebruik van cookies. Lees meer in ons cookiebeleid.",
-      "accept": "Accepteren",
-      "customize": "Instellingen aanpassen"
-    },
-    "settings": {
-      "title": "Cookie-instellingen",
-      "description": "Hier kun je je cookie-voorkeuren aanpassen. Je kunt per categorie kiezen welke cookies je wilt accepteren.",
-      "save": "Opslaan en sluiten",
-      "accept_all": "Alles accepteren"
-    },
-    "categories": {
-      "necessary": {
-        "title": "Noodzakelijke cookies",
-        "description": "Deze cookies zijn essentieel voor het functioneren van de website en kunnen niet worden uitgeschakeld."
-      },
-      "statistics": {
-        "title": "Statistiek cookies",
-        "description": "Deze cookies helpen ons om te begrijpen hoe bezoekers de website gebruiken door anoniem informatie te verzamelen."
-      },
-      "marketing": {
-        "title": "Marketing cookies",
-        "description": "Deze cookies worden gebruikt om bezoekers relevante advertenties en marketingcampagnes te tonen."
-      }
-    },
-    "policy": {
-      "title": "Cookiebeleid",
-      "what_are_cookies": {
-        "title": "Wat zijn cookies?",
-        "description": "Cookies zijn kleine tekstbestanden die op je computer of mobiele apparaat worden geplaatst wanneer je een website bezoekt. Ze worden veel gebruikt om websites te laten werken, of om efficiënter te werken, evenals om informatie te verstrekken aan de eigenaren van de site."
-      },
-      "which_cookies": {
-        "title": "Welke cookies gebruikt Vinster?"
-      },
-      "necessary": {
-        "description": "Deze cookies zijn noodzakelijk voor het correct functioneren van onze website. Ze kunnen niet worden uitgeschakeld in onze systemen.",
-        "session": "Sessie cookies voor inloggen en navigatie",
-        "auth": "Authenticatie cookies om je ingelogd te houden",
-        "preferences": "Voorkeur cookies voor taalinstellingen"
-      },
-      "statistics": {
-        "description": "Deze cookies stellen ons in staat om bezoeken en verkeersbronnen te tellen, zodat we de prestaties van onze site kunnen meten en verbeteren.",
-        "analytics": "Google Analytics voor websitestatistieken",
-        "usage": "Gebruiksgegevens voor het verbeteren van onze diensten"
-      },
-      "marketing": {
-        "description": "Deze cookies kunnen via onze site worden ingesteld door onze advertentiepartners om een profiel van je interesses op te bouwen.",
-        "tracking": "Tracking pixels voor advertentiedoeleinden",
-        "remarketing": "Remarketing cookies voor gepersonaliseerde advertenties"
-      },
-      "retention": {
-        "title": "Hoe lang bewaren we cookies?",
-        "description": "De bewaartermijn van cookies verschilt per type. Sessie cookies worden verwijderd wanneer je je browser sluit. Permanente cookies blijven op je apparaat totdat ze verlopen of door jou worden verwijderd. Onze cookies hebben meestal een bewaartermijn van 1 tot 2 jaar."
-      },
-      "manage": {
-        "title": "Hoe kun je je cookie-voorkeuren beheren?",
-        "description": "Je kunt je cookie-voorkeuren op elk moment wijzigen door terug te keren naar deze pagina of door gebruik te maken van de cookie-instellingen die beschikbaar zijn op onze website.",
-        "browser": "Je kunt ook cookies beheren via je browserinstellingen. De meeste browsers stellen je in staat om cookies te weigeren of om een waarschuwing te ontvangen voordat cookies worden geplaatst."
-      },
-      "contact": {
-        "title": "Contact",
-        "description": "Als je vragen hebt over ons cookiebeleid, kun je contact met ons opnemen:"
-      },
-      "last_updated": "Laatst bijgewerkt"
-    }
-  }
+  "loading": "Laden...",
+  "please_wait": "Even geduld terwijl we je verzoek verwerken.",
+  "success": "Gelukt!",
+  "error": "Fout",
+  "redirecting": "Je wordt automatisch doorgestuurd..."
 }
