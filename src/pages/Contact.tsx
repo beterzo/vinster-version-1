@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -5,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
-import { Mail, Phone } from "lucide-react";
+import { Mail } from "lucide-react";
 import Footer from "@/components/Footer";
 
 const Contact = () => {
@@ -206,21 +207,6 @@ const Contact = () => {
                 </div>
               </div>
 
-              <div className="flex items-start space-x-4">
-                <Phone className="h-6 w-6 mt-1" style={{ color: '#232D4B' }} />
-                <div>
-                  <h3 className="font-semibold mb-1" style={{ color: '#232D4B' }}>
-                    Telefoon
-                  </h3>
-                  <a 
-                    href="tel:+31622238595"
-                    className="text-blue-600 hover:text-blue-800 transition-colors"
-                  >
-                    +31 6 22 23 85 95
-                  </a>
-                </div>
-              </div>
-
               <div className="pt-4 border-t border-gray-200">
                 <h3 className="font-semibold mb-2" style={{ color: '#232D4B' }}>
                   Bedrijfsgegevens
@@ -233,7 +219,7 @@ const Contact = () => {
               <div className="pt-4">
                 <p className="text-sm text-gray-600 leading-relaxed">
                   We proberen binnen 24 uur te reageren op je bericht. 
-                  Voor dringende vragen kun je ons ook telefonisch bereiken.
+                  Voor vragen kun je ons ook een e-mail sturen.
                 </p>
               </div>
             </div>

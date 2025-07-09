@@ -81,10 +81,6 @@ const Footer = () => {
                 team@vinster.ai
               </p>
               <p>
-                <span className="font-medium">{t('landing.footer.phone')}</span><br />
-                +31 6 22 23 85 95
-              </p>
-              <p>
                 <span className="font-medium">{t('landing.footer.kvk')}</span><br />
                 04050762
               </p>
