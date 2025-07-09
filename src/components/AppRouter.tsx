@@ -8,6 +8,8 @@ import LoginPage from "@/pages/LoginPage";
 import SignupPage from "@/pages/SignupPage";
 import EmailVerificationPage from "@/pages/EmailVerificationPage";
 import EmailConfirmedPage from "@/pages/EmailConfirmedPage";
+import ForgotPasswordPage from "@/pages/ForgotPasswordPage";
+import ResetPasswordPage from "@/pages/ResetPasswordPage";
 import AuthCallbackPage from "@/pages/AuthCallbackPage";
 import OverVinster from "@/pages/OverVinster";
 import VoorWieIsHet from "@/pages/VoorWieIsHet";
@@ -53,6 +55,8 @@ const AppRouter = () => {
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/email-verification" element={<EmailVerificationPage />} />
       <Route path="/email-confirmed" element={<EmailConfirmedPage />} />
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+      <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="/auth/callback" element={<AuthCallbackPage />} />
       
       {/* Dutch Routes */}

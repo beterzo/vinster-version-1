@@ -1,3 +1,4 @@
+
 import { createContext, useContext, useEffect, useState } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
@@ -11,6 +12,7 @@ interface AuthContextType {
   signIn: (email: string, password: string) => Promise<{ error: any }>;
   signOut: () => Promise<{ error: any }>;
   resendConfirmation: (email: string) => Promise<{ error: any }>;
+  resetPassword: (email: string) => Promise<{ error: any }>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -243,6 +245,27 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const resetPassword = async (email: string) => {
+    console.log('🔐 Resetting password for:', email);
+    
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: 'https://vinster.ai/reset-password',
+      });
+
+      if (error) {
+        console.error('❌ Reset password error:', error);
+      } else {
+        console.log('✅ Password reset email sent');
+      }
+
+      return { error };
+    } catch (error) {
+      console.error('❌ Reset password exception:', error);
+      return { error };
+    }
+  };
+
   const value = {
     user,
     session,
@@ -251,6 +274,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     signIn,
     signOut,
     resendConfirmation,
+    resetPassword,
   };
 
   console.log('🔐 AuthProvider render:', { 

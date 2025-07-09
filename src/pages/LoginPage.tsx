@@ -141,11 +141,17 @@ const LoginPage = () => {
               />
             </div>
 
-            <div className="flex items-center space-x-2">
-              <Checkbox id="remember" />
-              <Label htmlFor="remember" className="text-sm text-gray-600">
-                {t('login.remember_me')}
-              </Label>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <Checkbox id="remember" />
+                <Label htmlFor="remember" className="text-sm text-gray-600">
+                  {t('login.remember_me')}
+                </Label>
+              </div>
+              
+              <Link to="/forgot-password" className="text-sm font-semibold text-blue-900 hover:text-blue-800">
+                {t('login.forgot_password')}
+              </Link>
             </div>
 
             <Button 
