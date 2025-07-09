@@ -3,68 +3,89 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
-import { useAuth } from "@/hooks/useAuth";
-import { useNavigate, Link, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { supabase } from "@/integrations/supabase/client";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
-const LoginPage = () => {
-  const [email, setEmail] = useState("");
+const ResetPasswordPage = () => {
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [searchParams] = useSearchParams();
-  const { signIn } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
   const { t } = useTranslation();
+  const { setLanguage } = useLanguage();
 
-  // Check for verification success parameter
   useEffect(() => {
-    const verified = searchParams.get('verified');
-    if (verified === 'true') {
-      toast({
-        title: t('login.account_verified'),
-        description: t('login.account_verified_desc')
-      });
+    // Set language from URL parameter if provided
+    const langParam = searchParams.get('lang');
+    if (langParam && (langParam === 'nl' || langParam === 'en')) {
+      setLanguage(langParam);
     }
-  }, [searchParams, toast, t]);
+  }, [searchParams, setLanguage]);
+
+  const validatePassword = (password: string) => {
+    return password.length >= 8;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !password) {
+    
+    if (!validatePassword(password)) {
       toast({
-        title: t('login.fill_all_fields'),
-        description: t('login.fill_all_fields_desc'),
+        title: t('reset_password.password_too_short'),
+        description: t('reset_password.password_too_short_desc'),
         variant: "destructive"
       });
       return;
     }
-    setIsLoading(true);
-    const { error } = await signIn(email, password);
-    if (error) {
-      let errorMessage = t('login.unknown_error');
-      if (error.message === "Invalid login credentials") {
-        errorMessage = t('login.invalid_credentials');
-      } else if (error.message === "Email not confirmed" || error.message.includes("Email not confirmed")) {
-        errorMessage = t('login.email_not_confirmed');
-      } else {
-        errorMessage = error.message;
-      }
+
+    if (password !== confirmPassword) {
       toast({
-        title: t('login.login_error'),
-        description: errorMessage,
+        title: t('reset_password.passwords_dont_match'),
+        description: t('reset_password.passwords_dont_match_desc'),
         variant: "destructive"
       });
-    } else {
-      toast({
-        title: t('login.login_success'),
-        description: t('login.welcome_back')
-      });
-      navigate("/home");
+      return;
     }
-    setIsLoading(false);
+
+    setIsLoading(true);
+    
+    try {
+      const { error } = await supabase.auth.updateUser({
+        password: password
+      });
+
+      if (error) {
+        if (error.message.includes('invalid') || error.message.includes('expired')) {
+          toast({
+            title: t('reset_password.invalid_token'),
+            description: t('reset_password.invalid_token_desc'),
+            variant: "destructive"
+          });
+        } else {
+          toast({
+            title: t('reset_password.error_updating'),
+            description: error.message,
+            variant: "destructive"
+          });
+        }
+      } else {
+        navigate('/password-reset-success');
+      }
+    } catch (error) {
+      toast({
+        title: t('reset_password.error_updating'),
+        description: t('login.unknown_error'),
+        variant: "destructive"
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -86,54 +107,38 @@ const LoginPage = () => {
         </div>
       </div>
 
-      {/* Right side - Login form */}
+      {/* Right side - Reset password form */}
       <div className="bg-white flex items-center justify-center p-4 sm:p-6 lg:p-12">
         <div className="w-full max-w-md space-y-6 lg:space-y-8">
           {/* Header with Logo and Language Switcher */}
           <div className="flex items-center justify-between">
             <img 
               alt="Vinster Logo" 
-              onClick={() => navigate('/')} 
               src="/lovable-uploads/0a60c164-79b3-4ce8-80cb-a3d37886f987.png" 
-              className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              className="h-20 w-auto" 
             />
             <LanguageSwitcher />
           </div>
 
-          {/* Login form title */}
+          {/* Form title */}
           <div className="text-center space-y-2">
             <h1 className="text-2xl sm:text-3xl font-bold text-blue-900">
-              {t('login.title')}
+              {t('reset_password.title')}
             </h1>
             <p className="text-gray-600">
-              {t('login.subtitle')}
+              {t('reset_password.subtitle')}
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-blue-900 font-medium text-left block">
-                {t('login.email')}
-              </Label>
-              <Input 
-                id="email" 
-                type="email" 
-                placeholder={t('login.email_placeholder')} 
-                value={email} 
-                onChange={e => setEmail(e.target.value)} 
-                className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900" 
-                required 
-              />
-            </div>
-
-            <div className="space-y-2">
               <Label htmlFor="password" className="text-blue-900 font-medium text-left block">
-                {t('login.password')}
+                {t('reset_password.new_password')}
               </Label>
               <Input 
                 id="password" 
                 type="password" 
-                placeholder={t('login.password_placeholder')} 
+                placeholder={t('reset_password.new_password_placeholder')} 
                 value={password} 
                 onChange={e => setPassword(e.target.value)} 
                 className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900" 
@@ -141,17 +146,19 @@ const LoginPage = () => {
               />
             </div>
 
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <Checkbox id="remember" />
-                <Label htmlFor="remember" className="text-sm text-gray-600">
-                  {t('login.remember_me')}
-                </Label>
-              </div>
-              
-              <Link to="/forgot-password" className="text-sm font-semibold text-yellow-500 hover:text-yellow-600">
-                {t('login.forgot_password')}
-              </Link>
+            <div className="space-y-2">
+              <Label htmlFor="confirmPassword" className="text-blue-900 font-medium text-left block">
+                {t('reset_password.confirm_password')}
+              </Label>
+              <Input 
+                id="confirmPassword" 
+                type="password" 
+                placeholder={t('reset_password.confirm_password_placeholder')} 
+                value={confirmPassword} 
+                onChange={e => setConfirmPassword(e.target.value)} 
+                className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900" 
+                required 
+              />
             </div>
 
             <Button 
@@ -159,16 +166,13 @@ const LoginPage = () => {
               className="w-full h-12 bg-blue-900 hover:bg-blue-800 text-white font-semibold text-base rounded-lg" 
               disabled={isLoading}
             >
-              {isLoading ? t('login.logging_in') : t('login.sign_in')}
+              {isLoading ? t('reset_password.updating') : t('reset_password.update_password')}
             </Button>
 
             <div className="text-center">
-              <p className="text-sm text-gray-600">
-                {t('login.no_account')}{" "}
-                <Link to="/signup" className="font-semibold text-yellow-500 hover:text-yellow-600">
-                  {t('login.create_account')}
-                </Link>
-              </p>
+              <Link to="/login" className="font-semibold text-yellow-500 hover:text-yellow-600">
+                {t('forgot_password.back_to_login')}
+              </Link>
             </div>
           </form>
         </div>
@@ -177,4 +181,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default ResetPasswordPage;

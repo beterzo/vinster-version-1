@@ -5,6 +5,9 @@ import NotFound from "@/pages/NotFound";
 import LandingPage from "@/pages/LandingPage";
 import LoginPage from "@/pages/LoginPage";
 import SignupPage from "@/pages/SignupPage";
+import ForgotPasswordPage from "@/pages/ForgotPasswordPage";
+import ResetPasswordPage from "@/pages/ResetPasswordPage";
+import PasswordResetSuccessPage from "@/pages/PasswordResetSuccessPage";
 import EmailVerificationPage from "@/pages/EmailVerificationPage";
 import EmailConfirmedPage from "@/pages/EmailConfirmedPage";
 import AuthCallbackPage from "@/pages/AuthCallbackPage";
@@ -50,6 +53,9 @@ const AppRouter = () => {
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+      <Route path="/reset-password" element={<ResetPasswordPage />} />
+      <Route path="/password-reset-success" element={<PasswordResetSuccessPage />} />
       <Route path="/email-verification" element={<EmailVerificationPage />} />
       <Route path="/email-confirmed" element={<EmailConfirmedPage />} />
       <Route path="/auth/callback" element={<AuthCallbackPage />} />
