@@ -29,20 +29,25 @@ const ForgotPasswordPage = () => {
     setIsLoading(true);
     
     try {
-      // Use Supabase's built-in password reset which triggers the auth hook
+      console.log('🔐 Sending password reset email to:', email);
+      
+      // Enhanced redirect URL with recovery parameter for better detection
+      const redirectUrl = `${window.location.origin}/auth/callback?type=recovery&lang=${language}&recovery=true`;
+      console.log('🔗 Using redirect URL for password reset:', redirectUrl);
+      
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/reset-password?lang=${language}`
+        redirectTo: redirectUrl
       });
 
       if (error) {
-        console.error('Error sending password reset email:', error);
+        console.error('❌ Password reset error:', error);
         toast({
           title: t('forgot_password.error_sending'),
           description: error.message,
           variant: "destructive"
         });
       } else {
-        console.log('Password reset email sent successfully via auth hook');
+        console.log('✅ Password reset email sent successfully');
         setEmailSent(true);
         toast({
           title: t('forgot_password.email_sent'),
@@ -50,7 +55,7 @@ const ForgotPasswordPage = () => {
         });
       }
     } catch (error) {
-      console.error('Exception in password reset:', error);
+      console.error('❌ Exception in password reset:', error);
       toast({
         title: t('forgot_password.error_sending'),
         description: t('login.unknown_error'),
