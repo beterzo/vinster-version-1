@@ -258,6 +258,30 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       if (error) {
         console.error('❌ Reset password error:', error);
+        
+        // If Supabase auth fails, try our direct edge function as fallback
+        console.log('🔄 Trying direct edge function as fallback...');
+        
+        try {
+          const response = await supabase.functions.invoke('send-password-reset', {
+            body: {
+              email,
+              language,
+              resetUrl: redirectUrl
+            }
+          });
+          
+          if (response.error) {
+            console.error('❌ Edge function error:', response.error);
+            return { error: response.error };
+          }
+          
+          console.log('✅ Fallback edge function succeeded');
+          return { error: null };
+        } catch (fallbackError) {
+          console.error('❌ Fallback edge function failed:', fallbackError);
+          return { error };
+        }
       } else {
         console.log('✅ Password reset email sent with redirect:', redirectUrl);
       }
