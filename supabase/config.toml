@@ -47,9 +47,6 @@ verify_jwt = false
 [functions.send-contact-email]
 verify_jwt = false
 
-[functions.send-password-reset-email]
-verify_jwt = false
-
 [auth]
 enabled = true
 site_url = "https://vinster.ai"

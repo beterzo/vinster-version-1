@@ -1,7 +1,7 @@
 
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "npm:resend@2.0.0";
-import { supabase } from "https://esm.sh/@supabase/supabase-js@2.50.0";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.50.0";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -26,6 +26,7 @@ interface AuthEventPayload {
   };
 }
 
+// Email subjects for different languages and actions
 const emailSubjects = {
   signup: {
     nl: "Bevestig je account bij Vinster",
@@ -37,28 +38,53 @@ const emailSubjects = {
   }
 };
 
-// Create Supabase client for database queries
-const supabaseClient = supabase(
-  Deno.env.get("SUPABASE_URL") || "",
-  Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || ""
-);
+// Initialize Supabase client with proper error handling
+let supabaseClient: any = null;
+try {
+  const supabaseUrl = Deno.env.get("SUPABASE_URL");
+  const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+  
+  if (!supabaseUrl || !supabaseServiceKey) {
+    console.error("❌ Missing Supabase environment variables");
+    throw new Error("Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY");
+  }
+  
+  supabaseClient = createClient(supabaseUrl, supabaseServiceKey);
+  console.log("✅ Supabase client initialized successfully");
+} catch (error) {
+  console.error("❌ Failed to initialize Supabase client:", error);
+}
 
 // Get user language from database
 const getUserLanguage = async (userId: string): Promise<string> => {
+  if (!supabaseClient) {
+    console.log("⚠️ Supabase client not available, using default language");
+    return 'nl';
+  }
+
   try {
+    console.log(`🔍 Fetching language for user: ${userId}`);
     const { data, error } = await supabaseClient
       .from('profiles')
       .select('language')
       .eq('id', userId)
       .single();
     
-    if (!error && data?.language) {
+    if (error) {
+      console.log("⚠️ Could not fetch user language from database:", error.message);
+      return 'nl';
+    }
+    
+    if (data?.language) {
+      console.log(`✅ Found user language: ${data.language}`);
       return data.language;
     }
   } catch (error) {
-    console.log("Could not fetch user language from database:", error);
+    console.log("⚠️ Exception fetching user language:", error);
   }
-  return 'nl'; // Default to Dutch
+  
+  console.log("🔄 Using default language: nl");
+  return 'nl';
 };
 
 // Extract language from redirect URL
@@ -67,12 +93,13 @@ const getLanguageFromRedirect = (redirectUrl: string): string => {
     const url = new URL(redirectUrl);
     const langParam = url.searchParams.get('lang');
     if (langParam && (langParam === 'nl' || langParam === 'en')) {
+      console.log(`✅ Language from redirect URL: ${langParam}`);
       return langParam;
     }
   } catch (error) {
-    console.log("Could not extract language from redirect URL:", error);
+    console.log("⚠️ Could not extract language from redirect URL:", error);
   }
-  return 'nl'; // Default to Dutch
+  return 'nl';
 };
 
 // Signup email template
@@ -174,12 +201,13 @@ const handler = async (req: Request): Promise<Response> => {
   const startTime = Date.now();
   console.log("🚀 Email webhook started at:", new Date().toISOString());
 
+  // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    // Validate API key
+    // Validate environment variables
     const resendApiKey = Deno.env.get("RESEND_API_KEY");
     if (!resendApiKey) {
       console.error("❌ RESEND_API_KEY not configured");
@@ -195,17 +223,45 @@ const handler = async (req: Request): Promise<Response> => {
     console.log("✅ RESEND_API_KEY found, initializing Resend client");
     const resend = new Resend(resendApiKey);
 
-    // Parse payload
-    const payload: AuthEventPayload = await req.json();
-    console.log("📧 Processing auth event for:", payload.user.email, "| Event type:", payload.email_data?.email_action_type);
-
-    // Process signup and recovery events
-    const eventType = payload.email_data?.email_action_type;
-    if (eventType !== "signup" && eventType !== "recovery") {
-      console.log("⚠️ Not a signup or recovery event, ignoring");
+    // Parse and validate payload
+    let payload: AuthEventPayload;
+    try {
+      payload = await req.json();
+      console.log("📧 Received auth event:", {
+        email: payload.user?.email,
+        eventType: payload.email_data?.email_action_type,
+        userId: payload.user?.id
+      });
+    } catch (error) {
+      console.error("❌ Failed to parse request payload:", error);
       return new Response(JSON.stringify({ 
         success: false, 
-        message: `Not a supported event type: ${eventType}` 
+        error: "Invalid request payload" 
+      }), {
+        status: 400,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
+
+    // Validate required fields
+    if (!payload.user?.email || !payload.email_data?.email_action_type) {
+      console.error("❌ Missing required fields in payload");
+      return new Response(JSON.stringify({ 
+        success: false, 
+        error: "Missing required fields" 
+      }), {
+        status: 400,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
+
+    // Process only signup and recovery events
+    const eventType = payload.email_data.email_action_type;
+    if (eventType !== "signup" && eventType !== "recovery") {
+      console.log(`⚠️ Ignoring unsupported event type: ${eventType}`);
+      return new Response(JSON.stringify({ 
+        success: true, 
+        message: `Event type ${eventType} not processed by this function` 
       }), {
         status: 200,
         headers: { "Content-Type": "application/json", ...corsHeaders },
@@ -214,23 +270,28 @@ const handler = async (req: Request): Promise<Response> => {
 
     const user = payload.user;
     
-    // Determine language (priority: database > redirect URL > default)
+    // Determine language (priority: database > redirect URL > metadata > default)
     let userLanguage = 'nl';
     
-    // Try to get language from database first
-    const dbLanguage = await getUserLanguage(user.id);
-    if (dbLanguage) {
-      userLanguage = dbLanguage;
+    // Try database first
+    if (supabaseClient) {
+      userLanguage = await getUserLanguage(user.id);
     } else {
-      // Fallback to redirect URL parameter
-      const redirectLanguage = getLanguageFromRedirect(payload.email_data.redirect_to);
-      userLanguage = redirectLanguage;
+      console.log("⚠️ Supabase client not available, using fallback language detection");
+      
+      // Fallback to redirect URL
+      if (payload.email_data.redirect_to) {
+        userLanguage = getLanguageFromRedirect(payload.email_data.redirect_to);
+      } else if (user.user_metadata?.language) {
+        userLanguage = user.user_metadata.language;
+        console.log(`✅ Language from user metadata: ${userLanguage}`);
+      }
     }
     
     const firstName = user.user_metadata?.first_name || (userLanguage === 'en' ? 'there' : 'daar');
     const emailSubject = emailSubjects[eventType as keyof typeof emailSubjects][userLanguage as keyof typeof emailSubjects.signup] || emailSubjects[eventType as keyof typeof emailSubjects].nl;
 
-    console.log("📧 Preparing email with:", {
+    console.log("📧 Preparing email:", {
       to: user.email,
       language: userLanguage,
       firstName: firstName,
@@ -238,78 +299,70 @@ const handler = async (req: Request): Promise<Response> => {
       eventType: eventType
     });
 
+    // Create the appropriate email content and action URL
     let emailHtml: string;
     let actionUrl: string;
 
     if (eventType === "signup") {
-      // Create verification URL for signup
       actionUrl = `https://aqajxxevifmhdjlvqhkz.supabase.co/auth/v1/verify?token=${payload.email_data.token_hash}&type=signup&redirect_to=${encodeURIComponent(payload.email_data.redirect_to)}`;
       emailHtml = createSignupEmailHtml(firstName, actionUrl, userLanguage);
     } else {
-      // Create reset URL for password recovery
       actionUrl = `https://aqajxxevifmhdjlvqhkz.supabase.co/auth/v1/verify?token=${payload.email_data.token_hash}&type=recovery&redirect_to=${encodeURIComponent(payload.email_data.redirect_to)}`;
       emailHtml = createPasswordResetEmailHtml(firstName, actionUrl, userLanguage);
     }
 
-    console.log("📤 Sending email via Resend from team@vinster.ai...");
+    console.log("📤 Sending email via Resend...");
 
-    // Primary attempt with team@vinster.ai
-    const emailResponse = await resend.emails.send({
-      from: "Team Vinster <team@vinster.ai>",
-      to: [user.email],
-      subject: emailSubject,
-      html: emailHtml,
-    });
-
-    if (emailResponse.error) {
-      console.error("❌ Primary email failed:", emailResponse.error);
-      
-      // Fallback to verified domain
-      console.log("🔄 Trying with fallback sender domain...");
-      
-      const fallbackResponse = await resend.emails.send({
-        from: "Team Vinster <onboarding@resend.dev>",
+    // Try to send email with primary sender
+    let emailResponse;
+    try {
+      emailResponse = await resend.emails.send({
+        from: "Team Vinster <team@vinster.ai>",
         to: [user.email],
         subject: emailSubject,
         html: emailHtml,
       });
 
-      if (fallbackResponse.error) {
-        console.error("❌ Fallback email also failed:", fallbackResponse.error);
-        return new Response(JSON.stringify({ 
-          success: false, 
-          error: "Email sending failed: " + fallbackResponse.error.message 
-        }), {
-          status: 500,
-          headers: { "Content-Type": "application/json", ...corsHeaders },
+      if (emailResponse.error) {
+        console.log("⚠️ Primary sender failed, trying fallback...");
+        
+        // Fallback to verified domain
+        emailResponse = await resend.emails.send({
+          from: "Team Vinster <onboarding@resend.dev>",
+          to: [user.email],
+          subject: emailSubject,
+          html: emailHtml,
         });
       }
-
-      const duration = Date.now() - startTime;
-      console.log(`✅ Fallback email sent successfully in ${duration}ms:`, fallbackResponse.data?.id);
-
+    } catch (error) {
+      console.error("❌ Email sending failed:", error);
       return new Response(JSON.stringify({ 
-        success: true, 
-        message: `${eventType} email sent successfully (using fallback sender)`,
-        emailId: fallbackResponse.data?.id,
-        sender: "onboarding@resend.dev",
-        language: userLanguage,
-        eventType: eventType,
-        duration: `${duration}ms`
+        success: false, 
+        error: "Failed to send email: " + error.message 
       }), {
-        status: 200,
+        status: 500,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
+
+    if (emailResponse.error) {
+      console.error("❌ All email sending attempts failed:", emailResponse.error);
+      return new Response(JSON.stringify({ 
+        success: false, 
+        error: "Email sending failed: " + emailResponse.error.message 
+      }), {
+        status: 500,
         headers: { "Content-Type": "application/json", ...corsHeaders },
       });
     }
 
     const duration = Date.now() - startTime;
-    console.log(`✅ Primary email sent successfully in ${duration}ms:`, emailResponse.data?.id);
+    console.log(`✅ Email sent successfully in ${duration}ms:`, emailResponse.data?.id);
 
     return new Response(JSON.stringify({ 
       success: true, 
       message: `${eventType} email sent successfully`,
       emailId: emailResponse.data?.id,
-      sender: "team@vinster.ai",
       language: userLanguage,
       eventType: eventType,
       duration: `${duration}ms`
@@ -320,8 +373,8 @@ const handler = async (req: Request): Promise<Response> => {
 
   } catch (error: any) {
     const duration = Date.now() - startTime;
-    console.error(`❌ Webhook error after ${duration}ms:`, error.message);
-    console.error("Stack trace:", error.stack);
+    console.error(`❌ Webhook error after ${duration}ms:`, error);
+    console.error("Error stack:", error.stack);
     
     return new Response(JSON.stringify({ 
       success: false, 
