@@ -1,3 +1,4 @@
+
 import { Routes, Route } from "react-router-dom";
 import NotFound from "@/pages/NotFound";
 
@@ -53,6 +54,8 @@ const AppRouter = () => {
       <Route path="/email-verification" element={<EmailVerificationPage />} />
       <Route path="/email-confirmed" element={<EmailConfirmedPage />} />
       <Route path="/auth/callback" element={<AuthCallbackPage />} />
+      
+      {/* Dutch Routes */}
       <Route path="/over-vinster" element={<OverVinster />} />
       <Route path="/voor-wie-is-het" element={<VoorWieIsHet />} />
       <Route path="/veelgestelde-vragen" element={<VeelgesteldeVragen />} />
@@ -62,6 +65,14 @@ const AppRouter = () => {
       <Route path="/algemene-voorwaarden" element={<AlgemeneVoorwaarden />} />
       <Route path="/cookiebeleid" element={<Cookiebeleid />} />
       <Route path="/toegangscodes-professionals" element={<ToegangscodesProfessionals />} />
+      
+      {/* English Routes */}
+      <Route path="/about-vinster" element={<OverVinster />} />
+      <Route path="/who-is-it-for" element={<VoorWieIsHet />} />
+      <Route path="/frequently-asked-questions" element={<VeelgesteldeVragen />} />
+      <Route path="/experiences" element={<Ervaringen />} />
+      <Route path="/contact-us" element={<Contact />} />
+      <Route path="/access-codes-professionals" element={<ToegangscodesProfessionals />} />
       
       {/* Legacy redirect from old de-mens-achter-vinster to new over-vinster */}
       <Route path="/de-mens-achter-vinster" element={<Navigate to="/over-vinster" replace />} />

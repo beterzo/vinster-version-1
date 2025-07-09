@@ -4,24 +4,24 @@ import { useTranslation } from "@/hooks/useTranslation";
 
 const Footer = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
 
-  const navigationLinks = [
+  const getNavigationLinks = () => [
     {
       title: t('landing.footer.about_vinster'),
-      path: "/over-vinster"
+      path: language === 'en' ? "/about-vinster" : "/over-vinster"
     },
     {
       title: t('landing.footer.for_whom'),
-      path: "/voor-wie-is-het"
+      path: language === 'en' ? "/who-is-it-for" : "/voor-wie-is-het"
     },
     {
       title: t('landing.footer.faq'),
-      path: "/veelgestelde-vragen"
+      path: language === 'en' ? "/frequently-asked-questions" : "/veelgestelde-vragen"
     },
     {
       title: t('landing.footer.contact'),
-      path: "/contact"
+      path: language === 'en' ? "/contact-us" : "/contact"
     },
     {
       title: t('landing.footer.privacy_policy'),
@@ -57,7 +57,7 @@ const Footer = () => {
               {t('landing.footer.navigation_title')}
             </h3>
             <ul className="space-y-2">
-              {navigationLinks.map(link => (
+              {getNavigationLinks().map(link => (
                 <li key={link.path}>
                   <button 
                     onClick={() => navigate(link.path)} 

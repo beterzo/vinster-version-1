@@ -1,0 +1,37 @@
+
+{
+  "contact": {
+    "page_title": "Contact",
+    "back_to_home": "Terug naar Home",
+    "hero": {
+      "title": "Contact",
+      "description": "Heb je vragen over Vinster of wil je meer informatie? We helpen je graag verder! Stuur ons een bericht en we nemen zo snel mogelijk contact met je op."
+    },
+    "form": {
+      "title": "Stuur ons een bericht",
+      "name_label": "Naam *",
+      "name_placeholder": "Je naam",
+      "email_label": "E-mailadres *",
+      "email_placeholder": "je@email.nl",
+      "message_label": "Vraag *",
+      "message_placeholder": "Stel hier je vraag...",
+      "submit_button": "Verstuur bericht",
+      "submitting": "Bezig met verzenden..."
+    },
+    "info": {
+      "title": "Contactgegevens",
+      "email_title": "E-mail",
+      "business_title": "Bedrijfsgegevens",
+      "kvk_number": "KvK nr. 04050762",
+      "response_time": "We proberen binnen 24 uur te reageren op je bericht. Voor vragen kun je ons ook een e-mail sturen."
+    },
+    "toasts": {
+      "fill_all_fields": "Vul alle velden in",
+      "fill_all_fields_desc": "Naam, e-mailadres en vraag zijn verplicht.",
+      "message_sent": "Bericht verzonden!",
+      "message_sent_desc": "We nemen zo snel mogelijk contact met je op.",
+      "send_error": "Fout bij verzenden",
+      "send_error_desc": "Er is iets misgegaan. Probeer het later opnieuw."
+    }
+  }
+}

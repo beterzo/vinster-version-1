@@ -1,0 +1,45 @@
+
+{
+  "faq": {
+    "page_title": "Frequently Asked Questions",
+    "back_to_home": "Back to Home",
+    "questions": [
+      {
+        "question": "What exactly is Vinster?",
+        "answer": "Vinster is a smart digital career tool that helps you get clear about what you want, what suits you, and which direction you can go. You answer some targeted questions and then get a personal report with concrete career suggestions and next steps."
+      },
+      {
+        "question": "Who is Vinster intended for?",
+        "answer": "For everyone who wants to make career choices that fit. High potentials, career growers, direction seekers, re-orienters, career coaches, and parents/caregivers who want to help."
+      },
+      {
+        "question": "How long does the process take?",
+        "answer": "Most people complete everything within an hour. We do recommend taking time between steps to think carefully. Your progress is automatically saved."
+      },
+      {
+        "question": "What's in the report?",
+        "answer": "Your report contains a summary of your preferences, a list of suitable functions (one of which is surprising), and a concrete search profile with which you can directly filter vacancies or move on to a coach or next step."
+      },
+      {
+        "question": "Do I need to install anything?",
+        "answer": "No. Everything works online, just in your browser. You don't need to download or install anything."
+      },
+      {
+        "question": "Can I stop in between and continue later?",
+        "answer": "Yes, your progress is automatically saved. You can pause at any time and continue later where you left off."
+      },
+      {
+        "question": "What happens to my data?",
+        "answer": "Your data is stored securely and only used to generate your report. We don't sell anything and comply with GDPR (privacy legislation). Read more in our [privacy policy]."
+      },
+      {
+        "question": "Can I also do this with my coach or parent?",
+        "answer": "Absolutely. Many people do this process together. The report helps to start the conversation, without having to figure it out alone."
+      },
+      {
+        "question": "What does it cost?",
+        "answer": "One-time €29. No subscription, no fine print. You get immediate access to the complete process and your personal report."
+      }
+    ]
+  }
+}

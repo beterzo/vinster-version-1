@@ -1,0 +1,27 @@
+
+{
+  "for_whom": {
+    "page_title": "Who is Vinster for?",
+    "back_to_home": "Back to Home",
+    "start_button": "Get Started with Vinster",
+    "intro": "Vinster is there for everyone who is looking for direction in their career. Whether you're just starting out, getting stuck, or helping someone else who needs to make choices — this process helps you make choices that truly fit you.",
+    "target_groups": {
+      "next_step": {
+        "title": "For those ready for a next step",
+        "description": "You want to grow, but you don't know where to go. Or you have a hundred ideas, but no direction. Vinster helps you discover what energizes you, what kind of work suits you, and what your next step could be. Without endless tests or vague advice. Just clear, concrete, and visually tangible."
+      },
+      "stuck": {
+        "title": "For workers who are stuck",
+        "description": "You notice that your work no longer fits. You miss direction, energy, or the feeling that you're working toward something. This process gives you insight into what you want, what you find important, and which function or environment suits you better."
+      },
+      "coaches": {
+        "title": "For career counselors and coaches",
+        "description": "Vinster supports your guidance process with smart technology. Let your clients do preparatory work at home and use the result as a starting point for deepening and action."
+      },
+      "parents": {
+        "title": "For parents/caregivers who want to help choose",
+        "description": "You want to help your child, but you don't know how. Vinster makes it easy to start the conversation together. The tool makes wishes, preferences, and directions clear — so you get insight into suitable possibilities."
+      }
+    }
+  }
+}

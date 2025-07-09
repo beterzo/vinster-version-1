@@ -1,33 +1,58 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "@/hooks/useTranslation";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import Footer from "@/components/Footer";
+
 const VoorWieIsHet = () => {
   const navigate = useNavigate();
-  const targetGroups = [{
-    title: "Voor wie toe is aan een volgende stap",
-    description: "Je wilt doorgroeien, maar je weet niet waar naartoe. Of je hebt juist honderd ideeën, maar geen richting. Vinster helpt je ontdekken waar je energie van krijgt, wat voor werk bij je past en wat jouw volgende stap kan zijn. Zonder eindeloze testen of vaag advies. Gewoon helder, concreet en visueel tastbaar."
-  }, {
-    title: "Voor werkenden die vastlopen",
-    description: "Je merkt dat je werk niet meer past. Je mist richting, energie of het gevoel dat je ergens naartoe werkt. Dit traject geeft je inzicht in wat je wilt, wat je belangrijk vindt en welke functie of omgeving beter bij je aansluit."
-  }, {
-    title: "Voor loopbaanbegeleiders en coaches",
-    description: "Vinster ondersteunt jouw begeleidingstraject met slimme technologie. Laat jouw cliënten thuis voorwerk doen en gebruik het resultaat als vertrekpunt voor verdieping en actie."
-  }, {
-    title: "Voor ouders/verzorgers die willen helpen kiezen",
-    description: "Je wil je kind helpen, maar je weet niet goed hoe. Vinster maakt het makkelijk om samen het gesprek aan te gaan. De tool maakt wensen, voorkeuren en richtingen inzichtelijk — zodat jullie zicht krijgen op passende mogelijkheden."
-  }];
-  return <div className="min-h-screen bg-gray-50 font-sans">
+  const { t } = useTranslation();
+
+  const targetGroups = [
+    {
+      title: t('for_whom.target_groups.next_step.title'),
+      description: t('for_whom.target_groups.next_step.description')
+    },
+    {
+      title: t('for_whom.target_groups.stuck.title'),
+      description: t('for_whom.target_groups.stuck.description')
+    },
+    {
+      title: t('for_whom.target_groups.coaches.title'),
+      description: t('for_whom.target_groups.coaches.description')
+    },
+    {
+      title: t('for_whom.target_groups.parents.title'),
+      description: t('for_whom.target_groups.parents.description')
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-[1440px] mx-auto px-6 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <img alt="Vinster Logo" onClick={() => navigate('/')} src="/lovable-uploads/3bf8603d-9a08-411e-9eba-08ac95564c64.png" className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" />
+              <img 
+                alt="Vinster Logo" 
+                onClick={() => navigate('/')} 
+                src="/lovable-uploads/3bf8603d-9a08-411e-9eba-08ac95564c64.png" 
+                className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+              />
             </div>
-            <Button onClick={() => navigate('/')} variant="outline" className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold">
-              Terug naar Home
-            </Button>
+            <div className="flex items-center gap-4">
+              <LanguageSwitcher />
+              <Button 
+                onClick={() => navigate('/')} 
+                variant="outline" 
+                className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold"
+              >
+                {t('for_whom.back_to_home')}
+              </Button>
+            </div>
           </div>
         </div>
       </div>
@@ -36,23 +61,28 @@ const VoorWieIsHet = () => {
       <div className="max-w-4xl mx-auto px-6 py-12">
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-12">
           <h1 className="text-3xl md:text-4xl font-bold text-blue-900 mb-8 text-center">
-            Voor wie is Vinster?
+            {t('for_whom.page_title')}
           </h1>
           
           <div className="mb-12">
             <p className="text-lg text-gray-700 leading-relaxed text-center max-w-3xl mx-auto">
-              Vinster is er voor iedereen die richting zoekt in z'n loopbaan. Of je nou net begint, vastloopt of iemand anders helpt die keuzes moet maken — dit traject helpt je om keuzes te maken die écht bij je passen.
+              {t('for_whom.intro')}
             </p>
           </div>
 
           {/* Hero Image */}
           <div className="mb-12 flex justify-center">
-            <img src="/lovable-uploads/634341b7-07f8-4cc2-8ba1-b54650117aae.png" alt="Professionele man in pak die lacht in een moderne kantooromgeving" className="rounded-xl shadow-lg max-w-full h-auto max-h-96 object-cover" />
+            <img 
+              src="/lovable-uploads/634341b7-07f8-4cc2-8ba1-b54650117aae.png" 
+              alt="Professionele man in pak die lacht in een moderne kantooromgeving" 
+              className="rounded-xl shadow-lg max-w-full h-auto max-h-96 object-cover" 
+            />
           </div>
 
           {/* Target Groups */}
           <div className="grid gap-8 md:gap-6">
-            {targetGroups.map((group, index) => <Card key={index} className="border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-200">
+            {targetGroups.map((group, index) => (
+              <Card key={index} className="border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-200">
                 <CardContent className="p-6">
                   <h3 className="text-xl font-semibold text-blue-900 mb-4">
                     {group.title}
@@ -61,22 +91,32 @@ const VoorWieIsHet = () => {
                     {group.description}
                   </p>
                 </CardContent>
-              </Card>)}
+              </Card>
+            ))}
           </div>
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
-            <Button onClick={() => navigate('/')} variant="outline" className="h-12 px-8 border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold">
-              Terug naar homepage
+            <Button 
+              onClick={() => navigate('/')} 
+              variant="outline" 
+              className="h-12 px-8 border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold"
+            >
+              {t('for_whom.back_to_home')}
             </Button>
-            <Button onClick={() => navigate('/signup')} className="h-12 px-8 bg-blue-900 hover:bg-blue-800 text-white font-semibold">
-              Starten met Vinster
+            <Button 
+              onClick={() => navigate('/signup')} 
+              className="h-12 px-8 bg-blue-900 hover:bg-blue-800 text-white font-semibold"
+            >
+              {t('for_whom.start_button')}
             </Button>
           </div>
         </div>
       </div>
 
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 export default VoorWieIsHet;

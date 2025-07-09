@@ -1,0 +1,38 @@
+
+{
+  "about": {
+    "page_title": "About Vinster",
+    "back_to_home": "Back to Home",
+    "start_button": "Get Started",
+    "introduction": {
+      "greeting": "Hello, I'm",
+      "name": "Heidi Jansen",
+      "title": "– career advisor, trainer, and the creator of the method that underlies Vinster.",
+      "description": "For more than 25 years, I have been helping people and professionals in the career field to find direction in work. Because that's what I wish for everyone: work that makes you happy."
+    },
+    "experience": {
+      "title": "My experience in career guidance",
+      "description": "In my work as a career advisor, I have noticed that it can be quite difficult to know exactly where you want to go with your work. You want or need to do something different, you feel that more is possible, but you don't know exactly what or how. There are so many options, so many thoughts – that it's difficult to get clarity. And that's exactly where Vinster helps: overview, insight and outlook."
+    },
+    "method": {
+      "title": "The Career Funnel method",
+      "description": "Vinster is based on the **Career Funnel**, a practical and thoughtful method with which I have guided thousands of people and which I have passed on to countless career professionals over the years – both domestically and internationally. The method works because it connects the personal to the reality of the job market."
+    },
+    "platform": {
+      "title": "Vinster: online career guidance",
+      "description": "With Vinster, I now bring this approach online – supported by AI, but always human-centered. You answer a number of questions, after which Vinster recognizes keywords in your answers. Based on that, you get suggestions for suitable functions and ideas for your next step. No unrealistic dreams, but inspiring and achievable possibilities."
+    },
+    "mission": {
+      "title": "My mission",
+      "description": "My mission? **Contributing to good work for everyone.** Because good work is work that fits who you are, that gives you energy, and where you can make a difference. And that starts with clarity. That's what Vinster is for.",
+      "quote": "\"I wish you work that makes you happy!\"",
+      "signature": "- Heidi Jansen"
+    },
+    "cta": {
+      "title": "Ready to get started?",
+      "subtitle": "On the way to a better career"
+    },
+    "experience_badge": "25+ years experience",
+    "experience_subtitle": "Career Advisor"
+  }
+}

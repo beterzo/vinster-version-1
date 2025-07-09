@@ -7,11 +7,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { Mail } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import Footer from "@/components/Footer";
 
 const Contact = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -32,8 +35,8 @@ const Contact = () => {
     
     if (!formData.name || !formData.email || !formData.message) {
       toast({
-        title: "Vul alle velden in",
-        description: "Naam, e-mailadres en vraag zijn verplicht.",
+        title: t('contact.toasts.fill_all_fields'),
+        description: t('contact.toasts.fill_all_fields_desc'),
         variant: "destructive",
       });
       return;
@@ -42,19 +45,19 @@ const Contact = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-contact-email`, {
+      const response = await fetch(`https://aqajxxevifmhdjlvqhkz.supabase.co/functions/v1/send-contact-email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFxYWp4eGV2aWZtaGRqbHZxaGt6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk4Mzk3MzIsImV4cCI6MjA2NTQxNTczMn0.60qOLNRZJYSsVOFNoW73BULe7vHqiFz1VxD2Z243qWs`,
         },
         body: JSON.stringify(formData),
       });
 
       if (response.ok) {
         toast({
-          title: "Bericht verzonden!",
-          description: "We nemen zo snel mogelijk contact met je op.",
+          title: t('contact.toasts.message_sent'),
+          description: t('contact.toasts.message_sent_desc'),
         });
         setFormData({ name: "", email: "", message: "" });
       } else {
@@ -62,8 +65,8 @@ const Contact = () => {
       }
     } catch (error) {
       toast({
-        title: "Fout bij verzenden",
-        description: "Er is iets misgegaan. Probeer het later opnieuw.",
+        title: t('contact.toasts.send_error'),
+        description: t('contact.toasts.send_error_desc'),
         variant: "destructive",
       });
     } finally {
@@ -83,13 +86,16 @@ const Contact = () => {
               onClick={() => navigate('/')} 
               src="/lovable-uploads/0a60c164-79b3-4ce8-80cb-a3d37886f987.png" 
             />
-            <Button 
-              onClick={() => navigate('/')}
-              variant="outline"
-              className="text-vinster-blue border-vinster-blue hover:bg-vinster-blue hover:text-white"
-            >
-              Terug naar Home
-            </Button>
+            <div className="flex items-center gap-4">
+              <LanguageSwitcher />
+              <Button 
+                onClick={() => navigate('/')}
+                variant="outline"
+                className="text-vinster-blue border-vinster-blue hover:bg-vinster-blue hover:text-white"
+              >
+                {t('contact.back_to_home')}
+              </Button>
+            </div>
           </div>
         </div>
       </div>
@@ -100,11 +106,10 @@ const Contact = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-4xl font-bold mb-6" style={{ color: '#232D4B' }}>
-                Contact
+                {t('contact.hero.title')}
               </h1>
               <p className="text-lg mb-6" style={{ color: '#232D4B' }}>
-                Heb je vragen over Vinster of wil je meer informatie? 
-                We helpen je graag verder! Stuur ons een bericht en we nemen zo snel mogelijk contact met je op.
+                {t('contact.hero.description')}
               </p>
             </div>
             <div className="relative">
@@ -124,19 +129,19 @@ const Contact = () => {
           {/* Contact Form */}
           <div className="bg-white rounded-xl shadow-lg p-8">
             <h2 className="text-2xl font-semibold mb-6" style={{ color: '#232D4B' }}>
-              Stuur ons een bericht
+              {t('contact.form.title')}
             </h2>
             
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="name" className="text-sm font-medium" style={{ color: '#232D4B' }}>
-                  Naam *
+                  {t('contact.form.name_label')}
                 </Label>
                 <Input
                   id="name"
                   name="name"
                   type="text"
-                  placeholder="Je naam"
+                  placeholder={t('contact.form.name_placeholder')}
                   value={formData.name}
                   onChange={handleInputChange}
                   className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900"
@@ -146,13 +151,13 @@ const Contact = () => {
 
               <div className="space-y-2">
                 <Label htmlFor="email" className="text-sm font-medium" style={{ color: '#232D4B' }}>
-                  E-mailadres *
+                  {t('contact.form.email_label')}
                 </Label>
                 <Input
                   id="email"
                   name="email"
                   type="email"
-                  placeholder="je@email.nl"
+                  placeholder={t('contact.form.email_placeholder')}
                   value={formData.email}
                   onChange={handleInputChange}
                   className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900"
@@ -162,12 +167,12 @@ const Contact = () => {
 
               <div className="space-y-2">
                 <Label htmlFor="message" className="text-sm font-medium" style={{ color: '#232D4B' }}>
-                  Vraag *
+                  {t('contact.form.message_label')}
                 </Label>
                 <Textarea
                   id="message"
                   name="message"
-                  placeholder="Stel hier je vraag..."
+                  placeholder={t('contact.form.message_placeholder')}
                   value={formData.message}
                   onChange={handleInputChange}
                   className="min-h-[120px] px-4 py-3 border-gray-300 focus:border-blue-900 focus:ring-blue-900"
@@ -180,7 +185,7 @@ const Contact = () => {
                 className="w-full h-12 bg-blue-900 hover:bg-blue-800 text-white font-semibold"
                 disabled={isLoading}
               >
-                {isLoading ? "Bezig met verzenden..." : "Verstuur bericht"}
+                {isLoading ? t('contact.form.submitting') : t('contact.form.submit_button')}
               </Button>
             </form>
           </div>
@@ -188,7 +193,7 @@ const Contact = () => {
           {/* Contact Information */}
           <div className="bg-white rounded-xl shadow-lg p-8">
             <h2 className="text-2xl font-semibold mb-6" style={{ color: '#232D4B' }}>
-              Contactgegevens
+              {t('contact.info.title')}
             </h2>
             
             <div className="space-y-6">
@@ -196,7 +201,7 @@ const Contact = () => {
                 <Mail className="h-6 w-6 mt-1" style={{ color: '#232D4B' }} />
                 <div>
                   <h3 className="font-semibold mb-1" style={{ color: '#232D4B' }}>
-                    E-mail
+                    {t('contact.info.email_title')}
                   </h3>
                   <a 
                     href="mailto:team@vinster.ai"
@@ -209,17 +214,16 @@ const Contact = () => {
 
               <div className="pt-4 border-t border-gray-200">
                 <h3 className="font-semibold mb-2" style={{ color: '#232D4B' }}>
-                  Bedrijfsgegevens
+                  {t('contact.info.business_title')}
                 </h3>
                 <p className="text-gray-700">
-                  KvK nr. 04050762
+                  {t('contact.info.kvk_number')}
                 </p>
               </div>
 
               <div className="pt-4">
                 <p className="text-sm text-gray-600 leading-relaxed">
-                  We proberen binnen 24 uur te reageren op je bericht. 
-                  Voor vragen kun je ons ook een e-mail sturen.
+                  {t('contact.info.response_time')}
                 </p>
               </div>
             </div>

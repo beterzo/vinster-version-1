@@ -7,6 +7,11 @@ import enDashboard from './en/dashboard.json';
 import enJourney from './en/journey.json';
 import enProfessionals from './en/professionals.json';
 import enCommon from './en/common.json';
+import enAbout from './en/about.json';
+import enForWhom from './en/for-whom.json';
+import enFaq from './en/faq.json';
+import enExperiences from './en/experiences.json';
+import enContact from './en/contact.json';
 
 // Dutch translations
 import nlNavigation from './nl/navigation.json';
@@ -16,6 +21,11 @@ import nlDashboard from './nl/dashboard.json';
 import nlJourney from './nl/journey.json';
 import nlProfessionals from './nl/professionals.json';
 import nlCommon from './nl/common.json';
+import nlAbout from './nl/about.json';
+import nlForWhom from './nl/for-whom.json';
+import nlFaq from './nl/faq.json';
+import nlExperiences from './nl/experiences.json';
+import nlContact from './nl/contact.json';
 
 export const translations = {
   en: {
@@ -25,7 +35,12 @@ export const translations = {
     ...enDashboard,
     ...enJourney,
     ...enProfessionals,
-    ...enCommon
+    ...enCommon,
+    ...enAbout,
+    ...enForWhom,
+    ...enFaq,
+    ...enExperiences,
+    ...enContact
   },
   nl: {
     ...nlNavigation,
@@ -34,6 +49,11 @@ export const translations = {
     ...nlDashboard,
     ...nlJourney,
     ...nlProfessionals,
-    ...nlCommon
+    ...nlCommon,
+    ...nlAbout,
+    ...nlForWhom,
+    ...nlFaq,
+    ...nlExperiences,
+    ...nlContact
   }
 };

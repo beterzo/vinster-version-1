@@ -16,17 +16,21 @@ import { useTranslation } from "@/hooks/useTranslation";
 const MobileMenu = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
 
-  const menuItems = [
-    { title: t('mobile_menu.home'), path: "/" },
-    { title: t('mobile_menu.about_vinster'), path: "/over-vinster" },
-    { title: t('mobile_menu.for_whom'), path: "/voor-wie-is-het" },
-    { title: t('mobile_menu.faq'), path: "/veelgestelde-vragen" },
-    { title: t('mobile_menu.experiences'), path: "/ervaringen" },
-    { title: t('mobile_menu.contact'), path: "/contact" },
-    { title: t('mobile_menu.access_codes'), path: "/toegangscodes-professionals" },
-  ];
+  const getMenuItems = () => {
+    const baseItems = [
+      { title: t('mobile_menu.home'), path: "/" },
+      { title: t('mobile_menu.about_vinster'), path: language === 'en' ? "/about-vinster" : "/over-vinster" },
+      { title: t('mobile_menu.for_whom'), path: language === 'en' ? "/who-is-it-for" : "/voor-wie-is-het" },
+      { title: t('mobile_menu.faq'), path: language === 'en' ? "/frequently-asked-questions" : "/veelgestelde-vragen" },
+      { title: t('mobile_menu.experiences'), path: language === 'en' ? "/experiences" : "/ervaringen" },
+      { title: t('mobile_menu.contact'), path: language === 'en' ? "/contact-us" : "/contact" },
+      { title: t('mobile_menu.access_codes'), path: language === 'en' ? "/access-codes-professionals" : "/toegangscodes-professionals" },
+    ];
+    
+    return baseItems;
+  };
 
   const handleNavigation = (path: string) => {
     navigate(path);
@@ -57,7 +61,7 @@ const MobileMenu = () => {
         </DrawerHeader>
         <div className="px-6 pb-8">
           <nav className="space-y-4">
-            {menuItems.map((item) => (
+            {getMenuItems().map((item) => (
               <button
                 key={item.path}
                 onClick={() => handleNavigation(item.path)}

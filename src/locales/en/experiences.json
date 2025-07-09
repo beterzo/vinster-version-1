@@ -1,0 +1,27 @@
+
+{
+  "experiences": {
+    "page_title": "Experiences",
+    "back_to_home": "Back to homepage",
+    "start_button": "Start now",
+    "intro": "Discover how Vinster has helped others find work that makes them happy.",
+    "testimonials": [
+      {
+        "quote": "I never thought that a few questions would give such a clear picture of my ideal work. Vinster helped me discover what I really want!"
+      },
+      {
+        "quote": "After years of doubting my career, Vinster finally gave me the direction I was looking for. Clear, practical and very recognizable."
+      },
+      {
+        "quote": "The suggestions I received were surprisingly accurate. It felt like someone had really listened to me and understood what I'm looking for in work."
+      },
+      {
+        "quote": "Vinster not only helped me find functions, but also understand why certain work suits me. That insight is priceless."
+      }
+    ],
+    "cta": {
+      "title": "Ready to discover your ideal work?",
+      "description": "Start your career exploration today and discover what possibilities there are for you."
+    }
+  }
+}

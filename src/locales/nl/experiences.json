@@ -1,0 +1,27 @@
+
+{
+  "experiences": {
+    "page_title": "Ervaringen",
+    "back_to_home": "Terug naar homepage",
+    "start_button": "Start nu",
+    "intro": "Ontdek hoe Vinster anderen heeft geholpen bij het vinden van werk waar ze blij van worden.",
+    "testimonials": [
+      {
+        "quote": "Ik had nooit gedacht dat een paar vragen zo'n duidelijk beeld zouden geven van mijn ideale werk. Vinster heeft me geholpen ontdekken wat ik echt wil!"
+      },
+      {
+        "quote": "Na jaren van twijfelen over mijn carrière, gaf Vinster me eindelijk de richting die ik zocht. Helder, praktisch en heel herkenbaar."
+      },
+      {
+        "quote": "De suggesties die ik kreeg waren verrassend accuraat. Het voelde alsof iemand echt naar mij had geluisterd en begreep wat ik zoek in werk."
+      },
+      {
+        "quote": "Vinster heeft me niet alleen geholpen met functies vinden, maar ook met begrijpen waarom bepaald werk bij mij past. Dat inzicht is onbetaalbaar."
+      }
+    ],
+    "cta": {
+      "title": "Klaar om jouw ideale werk te ontdekken?",
+      "description": "Begin vandaag nog met je loopbaanverkenning en ontdek welke mogelijkheden er voor jou zijn."
+    }
+  }
+}

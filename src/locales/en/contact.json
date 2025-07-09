@@ -1,0 +1,37 @@
+
+{
+  "contact": {
+    "page_title": "Contact",
+    "back_to_home": "Back to Home",
+    "hero": {
+      "title": "Contact",
+      "description": "Do you have questions about Vinster or would you like more information? We're happy to help! Send us a message and we'll get back to you as soon as possible."
+    },
+    "form": {
+      "title": "Send us a message",
+      "name_label": "Name *",
+      "name_placeholder": "Your name",
+      "email_label": "Email address *",
+      "email_placeholder": "your@email.com",
+      "message_label": "Question *",
+      "message_placeholder": "Ask your question here...",
+      "submit_button": "Send message",
+      "submitting": "Sending..."
+    },
+    "info": {
+      "title": "Contact details",
+      "email_title": "Email",
+      "business_title": "Business details",
+      "kvk_number": "Chamber of Commerce nr. 04050762",
+      "response_time": "We try to respond to your message within 24 hours. For questions, you can also send us an email."
+    },
+    "toasts": {
+      "fill_all_fields": "Fill in all fields",
+      "fill_all_fields_desc": "Name, email address and question are required.",
+      "message_sent": "Message sent!",
+      "message_sent_desc": "We'll get back to you as soon as possible.",
+      "send_error": "Error sending",
+      "send_error_desc": "Something went wrong. Please try again later."
+    }
+  }
+}
