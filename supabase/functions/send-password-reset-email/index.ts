@@ -13,20 +13,17 @@ interface PasswordResetRequest {
   language: string;
 }
 
-const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
-
-const supabaseAdmin = createClient(
-  Deno.env.get('SUPABASE_URL') ?? '',
-  Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
-);
-
 const handler = async (req: Request): Promise<Response> => {
+  console.log('🔐 Password reset function called');
+  
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
+    console.log('✅ CORS preflight request handled');
     return new Response(null, { headers: corsHeaders });
   }
 
   if (req.method !== 'POST') {
+    console.log('❌ Invalid method:', req.method);
     return new Response('Method not allowed', { 
       status: 405, 
       headers: corsHeaders 
@@ -34,14 +31,57 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { email, language }: PasswordResetRequest = await req.json();
-    console.log('Password reset request for:', email, 'Language:', language);
+    // Validate environment variables
+    const resendApiKey = Deno.env.get("RESEND_API_KEY");
+    const supabaseUrl = Deno.env.get('SUPABASE_URL');
+    const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+
+    console.log('🔍 Environment check:', {
+      hasResendKey: !!resendApiKey,
+      hasSupabaseUrl: !!supabaseUrl,
+      hasServiceKey: !!supabaseServiceKey
+    });
+
+    if (!resendApiKey) {
+      console.error('❌ RESEND_API_KEY not found');
+      throw new Error('RESEND_API_KEY not configured');
+    }
+
+    if (!supabaseUrl || !supabaseServiceKey) {
+      console.error('❌ Supabase credentials not found');
+      throw new Error('Supabase credentials not configured');
+    }
+
+    // Initialize clients
+    const resend = new Resend(resendApiKey);
+    const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey);
+
+    console.log('✅ Clients initialized');
+
+    // Parse request body
+    let requestData: PasswordResetRequest;
+    try {
+      requestData = await req.json();
+      console.log('📝 Request data parsed:', { email: requestData.email, language: requestData.language });
+    } catch (error) {
+      console.error('❌ Failed to parse request body:', error);
+      throw new Error('Invalid request body');
+    }
+
+    const { email, language } = requestData;
+
+    if (!email) {
+      console.error('❌ No email provided');
+      throw new Error('Email is required');
+    }
+
+    console.log('🔍 Looking up user:', email);
 
     // Check if user exists
     const { data: user, error: userError } = await supabaseAdmin.auth.admin.getUserByEmail(email);
     
-    if (userError || !user) {
-      console.log('User not found:', email);
+    if (userError) {
+      console.error('❌ Error looking up user:', userError);
       // Return success anyway for security (don't reveal if email exists)
       return new Response(JSON.stringify({ success: true }), {
         status: 200,
@@ -49,19 +89,37 @@ const handler = async (req: Request): Promise<Response> => {
       });
     }
 
-    // Get user's language preference from profiles table
-    let userLanguage = language || 'nl';
-    const { data: profile } = await supabaseAdmin
-      .from('profiles')
-      .select('language')
-      .eq('id', user.user.id)
-      .single();
-
-    if (profile?.language) {
-      userLanguage = profile.language;
+    if (!user) {
+      console.log('ℹ️ User not found:', email);
+      // Return success anyway for security (don't reveal if email exists)
+      return new Response(JSON.stringify({ success: true }), {
+        status: 200,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
     }
 
-    console.log('Using language:', userLanguage);
+    console.log('✅ User found:', user.user.email);
+
+    // Get user's language preference from profiles table
+    let userLanguage = language || 'nl';
+    try {
+      const { data: profile } = await supabaseAdmin
+        .from('profiles')
+        .select('language')
+        .eq('id', user.user.id)
+        .single();
+
+      if (profile?.language) {
+        userLanguage = profile.language;
+        console.log('📍 Language from profile:', userLanguage);
+      } else {
+        console.log('📍 Using default/provided language:', userLanguage);
+      }
+    } catch (profileError) {
+      console.log('⚠️ Could not fetch user profile, using default language:', profileError);
+    }
+
+    console.log('🔗 Generating reset link...');
 
     // Generate password reset link using Supabase's built-in functionality
     const { data: resetData, error: resetError } = await supabaseAdmin.auth.admin.generateLink({
@@ -72,15 +130,21 @@ const handler = async (req: Request): Promise<Response> => {
       }
     });
 
-    if (resetError || !resetData) {
-      console.error('Error generating reset link:', resetError);
+    if (resetError) {
+      console.error('❌ Error generating reset link:', resetError);
+      throw new Error('Failed to generate reset link: ' + resetError.message);
+    }
+
+    if (!resetData || !resetData.properties?.action_link) {
+      console.error('❌ No reset link generated');
       throw new Error('Failed to generate reset link');
     }
 
-    console.log('Reset link generated successfully');
+    console.log('✅ Reset link generated successfully');
 
     // Prepare email content based on language
     const emailContent = getEmailContent(userLanguage, resetData.properties.action_link);
+    console.log('📧 Sending email with subject:', emailContent.subject);
 
     // Send email using Resend
     const emailResponse = await resend.emails.send({
@@ -90,7 +154,7 @@ const handler = async (req: Request): Promise<Response> => {
       html: emailContent.html,
     });
 
-    console.log('Password reset email sent successfully:', emailResponse);
+    console.log('✅ Password reset email sent successfully:', emailResponse);
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
@@ -98,9 +162,14 @@ const handler = async (req: Request): Promise<Response> => {
     });
 
   } catch (error: any) {
-    console.error('Error in send-password-reset-email function:', error);
+    console.error('❌ Error in send-password-reset-email function:', error);
+    console.error('❌ Error stack:', error.stack);
+    
     return new Response(
-      JSON.stringify({ error: 'Failed to send password reset email' }),
+      JSON.stringify({ 
+        error: 'Failed to send password reset email',
+        details: error.message 
+      }),
       {
         status: 500,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
