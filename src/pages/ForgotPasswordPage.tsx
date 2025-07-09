@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -31,7 +32,7 @@ const ForgotPasswordPage = () => {
     try {
       console.log('🔐 Sending password reset email to:', email);
       
-      // Enhanced redirect URL with recovery parameter for better detection
+      // Use the current window location for the redirect URL
       const redirectUrl = `${window.location.origin}/auth/callback?type=recovery&lang=${language}&recovery=true`;
       console.log('🔗 Using redirect URL for password reset:', redirectUrl);
       
