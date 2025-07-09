@@ -11,6 +11,7 @@ import PasswordResetSuccessPage from "@/pages/PasswordResetSuccessPage";
 import EmailVerificationPage from "@/pages/EmailVerificationPage";
 import EmailConfirmedPage from "@/pages/EmailConfirmedPage";
 import AuthCallbackPage from "@/pages/AuthCallbackPage";
+import DebugPasswordReset from "@/pages/DebugPasswordReset";
 import OverVinster from "@/pages/OverVinster";
 import VoorWieIsHet from "@/pages/VoorWieIsHet";
 import VeelgesteldeVragen from "@/pages/VeelgesteldeVragen";
@@ -59,6 +60,7 @@ const AppRouter = () => {
       <Route path="/email-verification" element={<EmailVerificationPage />} />
       <Route path="/email-confirmed" element={<EmailConfirmedPage />} />
       <Route path="/auth/callback" element={<AuthCallbackPage />} />
+      <Route path="/debug-password-reset" element={<DebugPasswordReset />} />
       
       {/* Dutch Routes */}
       <Route path="/over-vinster" element={<OverVinster />} />
