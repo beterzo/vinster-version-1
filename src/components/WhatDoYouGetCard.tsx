@@ -14,8 +14,8 @@ const WhatDoYouGetCard = () => {
 
   const handleViewSampleReport = () => {
     // Language-specific PDF URLs
-    const dutchPdfUrl = 'https://api.pdf4me.com/Document/GetDoc?d=eyJUZW5hbnRJZCI6IjQxNDJiMWY0LWRkYTYtNDE3ZC05ODMwLWYyYTFjZmQ5ZjBiNCIsIkFwaUNhbGxJZCI6ImFkNDYwYTk1LTEwNzMtNGQ5Yy1hY2ZlLWQ3NmZiYzlmYjllZiIsIkpvYklkIjoiYWQ0NjBhOTUtMTA3My00ZDljLWFjZmUtZDc2ZmJjOWZiOWVmIiwiRG9jdW1lbnRJZCI6ImQyZjg2NTJjLWRkOWUtNDNlMC05MTY1LTEyMGFkNTY2YTUyYiIsIkZpbGVOYW1lIjoibWVyZ2VkLnBkZiIsIlBhZ2VJZCI6bnVsbH0=';
-    const englishPdfUrl = 'https://api.pdf4me.com/Document/GetDoc?d=eyJUZW5hbnRJZCI6IjQxNDJiMWY0LWRkYTYtNDE3ZC05ODMwLWYyYTFjZmQ5ZjBiNCIsIkFwaUNhbGxJZCI6Ijc3NjcxOTViLWNlMzctNGRlMi04NTExLTQ2NzVkNjJjZTI2OCIsIkpvYklkIjoiNzc2NzE5NWItY2UzNy00ZGUyLTg1MTEtNDY3NWQ2MmNlMjY4IiwiRG9jdW1lbnRJZCI6IjQ2YzNhMjM2LTZkODYtNDhiNy04ZDcyLTJkZmIyZGMxZjlmZiIsIkZpbGVOYW1lIjoibWVyZ2VkLnBkZiIsIlBhZ2VJZCI6bnVsbH0=';
+    const dutchPdfUrl = 'https://beterzo.github.io/vinster-version-1/public/Voorbeeld%20loopbaanrapport%20nederlands.pdf';
+    const englishPdfUrl = 'https://beterzo.github.io/vinster-version-1/public/Voorbeeld%20loopbaanrapport%20engels.pdf';
     
     // Select URL based on current language, fallback to Dutch
     const pdfUrl = language === 'en' ? englishPdfUrl : dutchPdfUrl;
