@@ -1,149 +1,108 @@
 
-import { useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
-import { CheckCircle, AlertCircle, Loader } from "lucide-react";
-import { useTranslation } from "@/hooks/useTranslation";
-import { useLanguage } from "@/contexts/LanguageContext";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const AuthCallbackPage = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
-  const [message, setMessage] = useState('');
+  const { toast } = useToast();
   const { t } = useTranslation();
-  const { setLanguage } = useLanguage();
 
   useEffect(() => {
-    // Set language from URL parameter if present
-    const langParam = searchParams.get('lang');
-    if (langParam === 'nl' || langParam === 'en') {
-      setLanguage(langParam);
-    }
-
     const handleAuthCallback = async () => {
+      console.log('🔐 Auth callback page loaded');
+      console.log('🔗 URL params:', Object.fromEntries(searchParams.entries()));
+      console.log('🔗 URL hash:', window.location.hash);
+
       try {
-        console.log('🔐 Processing auth callback...');
-        console.log('📝 Search params:', Object.fromEntries(searchParams.entries()));
+        // Get the session from Supabase
+        const { data: { session }, error } = await supabase.auth.getSession();
         
-        // Handle email verification
-        console.log('📧 Processing email verification callback');
-        
-        const { data, error } = await supabase.auth.getSession();
-        
+        console.log('🔐 Session from callback:', {
+          hasSession: !!session,
+          error: error?.message,
+          userId: session?.user?.id
+        });
+
         if (error) {
           console.error('❌ Auth callback error:', error);
-          
-          if (error.message.includes('Email link is invalid or has expired')) {
-            setStatus('error');
-            setMessage(t('email_verification.not_received'));
-            return;
-          }
-          
-          setStatus('error');
-          setMessage(t('login.unknown_error'));
+          toast({
+            title: 'Authentication Error',
+            description: error.message,
+            variant: 'destructive'
+          });
+          navigate('/login');
           return;
         }
 
-        if (data.session) {
-          console.log('✅ Email verification successful');
-          
-          const wasJustVerified = data.session.user.email_confirmed_at && 
-            new Date(data.session.user.email_confirmed_at).getTime() > (Date.now() - 30000);
-          
-          if (wasJustVerified) {
-            setStatus('success');
-            setMessage(t('email_confirmed.description'));
-          } else {
-            setStatus('success');
-            setMessage(t('email_confirmed.description'));
-          }
-          
-          setTimeout(() => {
-            navigate('/login');
-          }, 2000);
-        } else {
-          console.log('❌ No session found after callback');
-          setStatus('error');
-          setMessage(t('email_verification.not_received'));
+        // Check if this is a password recovery callback
+        const type = searchParams.get('type');
+        const isRecovery = type === 'recovery' || 
+                          session?.user?.recovery_sent_at ||
+                          window.location.hash.includes('recovery');
+
+        console.log('🔐 Callback type check:', {
+          type,
+          recoveryResentAt: session?.user?.recovery_sent_at,
+          hashIncludes: window.location.hash.includes('recovery'),
+          isRecovery
+        });
+
+        if (session && isRecovery) {
+          console.log('✅ Password recovery callback detected, redirecting to reset page');
+          const langParam = searchParams.get('lang');
+          const resetUrl = langParam ? `/reset-password?lang=${langParam}` : '/reset-password';
+          navigate(resetUrl);
+          return;
         }
+
+        if (session && type === 'signup') {
+          console.log('✅ Email confirmation callback detected');
+          toast({
+            title: t('email_confirmed.title'),
+            description: t('email_confirmed.description')
+          });
+          navigate('/');
+          return;
+        }
+
+        if (session) {
+          console.log('✅ General auth callback, redirecting to dashboard');
+          navigate('/');
+          return;
+        }
+
+        // No session found
+        console.log('❌ No session found in callback');
+        toast({
+          title: 'Authentication Failed',
+          description: 'Could not authenticate user',
+          variant: 'destructive'
+        });
+        navigate('/login');
+
       } catch (error) {
         console.error('❌ Auth callback exception:', error);
-        setStatus('error');
-        setMessage(t('login.unknown_error'));
+        toast({
+          title: 'Authentication Error',
+          description: 'An unexpected error occurred',
+          variant: 'destructive'
+        });
+        navigate('/login');
       }
     };
 
     handleAuthCallback();
-  }, [navigate, searchParams, t, setLanguage]);
+  }, [navigate, searchParams, toast, t]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full mx-auto">
-        <div className="bg-white shadow-lg rounded-lg p-8 text-center">
-          {/* Header with Logo and Language Switcher */}
-          <div className="flex items-center justify-between mb-6">
-            <img 
-              alt="Vinster Logo" 
-              onClick={() => navigate('/')} 
-              src="/lovable-uploads/0a60c164-79b3-4ce8-80cb-a3d37886f987.png" 
-              className="h-16 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
-            />
-            <LanguageSwitcher />
-          </div>
-
-          {status === 'loading' && (
-            <>
-              <div className="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                <Loader className="w-8 h-8 text-blue-600 animate-spin" />
-              </div>
-              <h1 className="text-xl font-semibold text-vinster-blue mb-2">
-                {t('common.loading')}
-              </h1>
-              <p className="text-gray-600">
-                {t('common.please_wait')}
-              </p>
-            </>
-          )}
-
-          {status === 'success' && (
-            <>
-              <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
-                <CheckCircle className="w-8 h-8 text-green-600" />
-              </div>
-              <h1 className="text-xl font-semibold text-vinster-blue mb-2">
-                {t('common.success')}
-              </h1>
-              <p className="text-gray-600 mb-4">
-                {message}
-              </p>
-              <p className="text-sm text-gray-500">
-                {t('common.redirecting')}
-              </p>
-            </>
-          )}
-
-          {status === 'error' && (
-            <>
-              <div className="mx-auto w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4">
-                <AlertCircle className="w-8 h-8 text-red-600" />
-              </div>
-              <h1 className="text-xl font-semibold text-vinster-blue mb-2">
-                {t('common.error')}
-              </h1>
-              <p className="text-gray-600 mb-6">
-                {message}
-              </p>
-              <button
-                onClick={() => navigate('/login')}
-                className="w-full bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-md transition-colors"
-              >
-                {t('email_verification.back_to_login')}
-              </button>
-            </>
-          )}
-        </div>
+      <div className="text-center space-y-4">
+        <div className="w-8 h-8 border-4 border-blue-900 border-t-transparent rounded-full animate-spin mx-auto"></div>
+        <p className="text-gray-600">Processing authentication...</p>
       </div>
     </div>
   );
