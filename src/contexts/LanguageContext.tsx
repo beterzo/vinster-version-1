@@ -28,11 +28,13 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   useEffect(() => {
     // Load saved language from localStorage
     const savedLanguage = localStorage.getItem('vinster-language') as Language;
+    console.log('Saved language from localStorage:', savedLanguage);
     if (savedLanguage && (savedLanguage === 'nl' || savedLanguage === 'en')) {
       setLanguageState(savedLanguage);
     } else {
       // Detect browser language
       const browserLang = navigator.language.toLowerCase();
+      console.log('Browser language:', browserLang);
       if (browserLang.startsWith('en')) {
         setLanguageState('en');
       } else {
@@ -42,11 +44,14 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   }, []);
 
   const setLanguage = (lang: Language) => {
+    console.log('Setting language to:', lang);
     setLanguageState(lang);
     localStorage.setItem('vinster-language', lang);
     // Mark that the user has manually selected a language
     localStorage.setItem('vinster-language-manual-selection', 'true');
   };
+
+  console.log('Current language in provider:', language);
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage }}>

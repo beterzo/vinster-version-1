@@ -9,7 +9,10 @@ const LanguageSwitcher = () => {
   const { user } = useAuth();
 
   const toggleLanguage = () => {
-    setLanguage(language === 'nl' ? 'en' : 'nl');
+    console.log('Current language:', language);
+    const newLanguage = language === 'nl' ? 'en' : 'nl';
+    console.log('Switching to language:', newLanguage);
+    setLanguage(newLanguage);
   };
 
   return (
@@ -17,7 +20,7 @@ const LanguageSwitcher = () => {
       variant="outline"
       size="sm"
       onClick={toggleLanguage}
-      className="flex items-center gap-2 text-sm bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white"
+      className="flex items-center gap-2 text-sm border-gray-300 text-gray-700 hover:bg-gray-50 hover:text-gray-900"
     >
       <Globe className="w-4 h-4" />
       {language === 'nl' ? 'EN' : 'NL'}
