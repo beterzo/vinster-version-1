@@ -3,12 +3,12 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { translations } from '@/locales';
 
 type TranslationKey = string;
-type TranslationValue = string | { [key: string]: any };
+type TranslationValue = string | { [key: string]: any } | any[];
 
 export const useTranslation = () => {
   const { language } = useLanguage();
 
-  const t = (key: TranslationKey): string => {
+  const t = (key: TranslationKey): any => {
     const keys = key.split('.');
     let value: TranslationValue = translations[language];
 
@@ -28,7 +28,7 @@ export const useTranslation = () => {
       }
     }
 
-    return typeof value === 'string' ? value : key;
+    return value;
   };
 
   return { t, language };

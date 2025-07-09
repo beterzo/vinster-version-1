@@ -21,7 +21,7 @@ const VeelgesteldeVragen = () => {
     );
   };
 
-  const faqItems = t('faq.questions') as Array<{question: string, answer: string}>;
+  const faqItems = t('faq.questions');
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
@@ -57,7 +57,7 @@ const VeelgesteldeVragen = () => {
         
         <div className="bg-white rounded-xl shadow-lg p-8">
           <div className="space-y-4">
-            {faqItems.map((item, index) => (
+            {faqItems?.map((item: {question: string, answer: string}, index: number) => (
               <Collapsible key={index}>
                 <CollapsibleTrigger 
                   onClick={() => toggleItem(index)} 

@@ -9,7 +9,7 @@ const Ervaringen = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const testimonials = t('experiences.testimonials') as Array<{quote: string}>;
+  const testimonials = t('experiences.testimonials');
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -51,7 +51,7 @@ const Ervaringen = () => {
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 mb-16">
-          {testimonials.map((testimonial, index) => (
+          {testimonials?.map((testimonial: {quote: string}, index: number) => (
             <div key={index} className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100 hover:shadow-xl transition-shadow duration-300">
               <blockquote className="text-lg md:text-xl leading-relaxed text-gray-700 italic">
                 "{testimonial.quote}"
