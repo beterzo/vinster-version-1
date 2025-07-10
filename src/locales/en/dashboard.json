@@ -9,7 +9,7 @@
     "features": {
       "full_scan": "Full enthusiasm scan",
       "full_scan_desc": "Discover when you are in your element",
-      "dream_jobs": "Dream job analysis",
+      "dream_jobs": "Goal job analysis",
       "dream_jobs_desc": "Explore different possibilities that suit you",
       "personal_report": "Personal report",
       "personal_report_desc": "With three functions that suit you",
@@ -22,7 +22,7 @@
       "price": "€29",
       "price_desc": "One-time, no subscription",
       "feature1": "Full enthusiasm scan",
-      "feature2": "Dream job analysis",
+      "feature2": "Goal job analysis",
       "feature3": "Personal report (PDF)",
       "feature4": "Search profile generator",
       "start_button": "Start now for €29",
@@ -37,7 +37,7 @@
   "dashboard": {
     "welcome": "Welcome {name}!",
     "description": "This is your personal dashboard. Here you can see the progress of your career research and continue where you left off.",
-    "intro_paragraph1": "Here starts your career journey! We begin with the enthusiasm scan, the first step to discover what you like to do and how you like to work. In this scan we look for moments when you are in your element.",
+    "intro_paragraph1": "Here starts your career process! We begin with the enthusiasm scan, the first step to discover what you like to do and how you like to work. In this scan we look for moments when you are in your element.",
     "intro_paragraph2": "By asking questions about your childhood, school time and work experiences, we map your personal pattern of preferences and interests.",
     "intro_paragraph3": "Your enthusiasm is an important indicator of what you really enjoy. When you do something that makes you enthusiastic, energy and satisfaction arise. That's what we're looking for.",
     "continue_button": "Continue",
@@ -45,9 +45,9 @@
       "title": "Important to know",
       "point1": "• There are no right or wrong answers - be honest about what you really enjoy",
       "point2": "• Think of concrete situations and experiences from your life",
-      "point3": "• You can take as much time as you want - there is no time pressure on this journey",
+      "point3": "• You can take as much time as you want - there is no time pressure on this process",
       "point4": "• It's actually good to let the answers settle for a day before continuing",
-      "point5": "• You can always adjust your answers during the journey",
+      "point5": "• You can always adjust your answers during the process",
       "point6": "• Your progress is automatically saved",
       "point7": "• All information is treated confidentially"
     },

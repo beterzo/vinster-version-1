@@ -6,18 +6,18 @@
     "description": "Voor iedereen die denkt: \"Wat wil ik eigenlijk écht met mijn werk?\"\nOf je nu net begint, vastloopt, iets nieuws zoekt of gewoon even wilt heroriënteren – Vinster geeft overzicht, houvast en richting.",
     "login": "Inloggen",
     "hero": {
-      "title": "Ontdek je passie, vind je loopbaan",
+      "title": "Ontdek je voorkeuren, vind je loopbaan",
       "subtitle": "Duik diep in jezelf en laat AI de perfecte carrièrematch voor jou vinden",
-      "cta_button": "Begin je reis",
+      "cta_button": "Begin je traject",
       "cta_button_secondary": "Meer informatie"
     },
     "what_is_vinster": {
       "title": "Wat is Vinster?",
-      "description": "Vinster is een AI-gedreven platform dat je helpt je ware passies en talenten te ontdekken. Door middel van diepgaande vragen en geavanceerde algoritmes creëren we een persoonlijk profiel dat je helpt bij het maken van weloverwogen loopbaankeuzes.",
+      "description": "Vinster is een AI-gedreven platform dat je helpt je ware interesses en talenten te ontdekken. Door middel van diepgaande vragen en geavanceerde algoritmes creëren we een persoonlijk profiel dat je helpt bij het maken van weloverwogen loopbaankeuzes.",
       "based_on": "Gebouwd op bewezen methodes uit de praktijk en jouw unieke eigenschappen krijg je:",
       "two_matching_functions": "Twee matchende functies die perfect bij je passen",
       "one_surprising_suggestion": "Eén verrassend voorstel dat nieuwe mogelijkheden opent",
-      "clear_action_plan": "Een helder actieplan om je droomcarrière te realiseren",
+      "clear_action_plan": "Een helder actieplan om je gewenste carrière te realiseren",
       "no_tests": "Geen saaie testen, maar echte vragen die je aan het denken zetten."
     },
     "what_do_you_get": {
@@ -33,17 +33,17 @@
     "features": {
       "card1": {
         "title": "Wat is Vinster?",
-        "description": "Vinster is een AI-gedreven platform dat je helpt je ware passies en talenten te ontdekken. Door middel van diepgaande vragen en geavanceerde algoritmes creëren we een persoonlijk profiel dat je helpt bij het maken van weloverwogen loopbaankeuzes."
+        "description": "Vinster is een AI-gedreven platform dat je helpt je ware interesses en talenten te ontdekken. Door middel van diepgaande vragen en geavanceerde algoritmes creëren we een persoonlijk profiel dat je helpt bij het maken van weloverwogen loopbaankeuzes."
       },
       "card2": {
         "title": "Wat krijg je?",
-        "description": "Een uitgebreid persoonlijkheidsrapport, een op maat gemaakt zoekprofiel, en concrete stappen om je droomcarrière te realiseren. Alles gebouwd op bewezen methodes uit de praktijk en jouw unieke eigenschappen."
+        "description": "Een uitgebreid persoonlijkheidsrapport, een op maat gemaakt zoekprofiel, en concrete stappen om je gewenste carrière te realiseren. Alles gebouwd op bewezen methodes uit de praktijk en jouw unieke eigenschappen."
       }
     },
     "process": {
       "title": "Hoe het werkt",
       "step1": {
-        "title": "Verken je passies",
+        "title": "Verken je voorkeuren",
         "description": "Beantwoord vragen over wat je echt motiveert"
       },
       "step2": {
@@ -66,14 +66,14 @@
       "step3_desc": "Bepaal wat voor jou het belangrijkst is",
       "step4_title": "Laatste check",
       "step4_desc": "Voltooi je profiel en ontvang je rapport",
-      "start_button": "Begin je reis"
+      "start_button": "Begin je traject"
     },
     "data_safety": {
       "title": "Privacy gegarandeerd",
       "description": "Jouw gegevens worden veilig bewaard volgens de strengste privacystandaarden. We delen je persoonlijke informatie nooit met derden."
     },
     "flexible_journey": {
-      "title": "Flexibele reis",
+      "title": "Flexibel traject",
       "description": "Begin waar je wilt, stop wanneer je wilt. Je kunt altijd terugkeren om je profiel aan te vullen of bij te werken."
     },
     "safety": {
@@ -83,7 +83,7 @@
         "description": "Jouw gegevens worden veilig bewaard"
       },
       "flexible": {
-        "title": "Flexibele reis",
+        "title": "Flexibel traject",
         "description": "Begin waar je wilt, stop wanneer je wilt"
       }
     },

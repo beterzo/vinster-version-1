@@ -40,19 +40,19 @@
   },
   "wensberoepen": {
     "step3": {
-      "title": "Dream job 3",
+      "title": "Goal job 3",
       "subtitle": "What would you like to do for a while, or even always?",
       "job_title_label": "Name of the profession",
-      "job_title_placeholder": "Enter the name of your dream job here...",
+      "job_title_placeholder": "Enter the name of your goal job here...",
       "answer_placeholder": "Describe your answer here...",
-      "previous_button": "Previous dream job",
+      "previous_button": "Previous goal job",
       "finish_button": "Complete",
       "finishing": "Completing...",
       "sending_data": "Sending data..."
     },
     "voltooi": {
       "title": "Congratulations! 🎉",
-      "subtitle": "You have successfully completed the questions about your dream jobs",
+      "subtitle": "You have successfully completed the questions about your goal jobs",
       "what_happened_title": "What has happened now:",
       "what_happened_description": "Keywords have now been compiled to determine what you find important in your work",
       "next_step_title": "Next step: Create career report",
