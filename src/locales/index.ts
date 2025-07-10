@@ -40,6 +40,8 @@ export const translations = {
     password_reset_success: enAuth.password_reset_success,
     email_verification: enAuth.email_verification,
     email_confirmed: enAuth.email_confirmed,
+    // Make mobile_menu available at top level
+    mobile_menu: enNavigation.mobile_menu,
     dashboard: enDashboard,
     journey: enJourney,
     professionals: enProfessionals.professionals,
@@ -62,6 +64,8 @@ export const translations = {
     password_reset_success: nlAuth.password_reset_success,
     email_verification: nlAuth.email_verification,
     email_confirmed: nlAuth.email_confirmed,
+    // Make mobile_menu available at top level
+    mobile_menu: nlNavigation.mobile_menu,
     dashboard: nlDashboard,
     journey: nlJourney,
     professionals: nlProfessionals.professionals,
