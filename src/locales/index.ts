@@ -46,6 +46,11 @@ export const translations = {
     dashboard: enDashboard.dashboard,
     payment: enDashboard.payment,
     journey: enJourney,
+    // Make journey keys available at top level
+    enthousiasme: enJourney.enthousiasme,
+    zoekprofiel: enJourney.zoekprofiel,
+    profiel_voltooien: enJourney.profiel_voltooien,
+    wensberoepen: enJourney.wensberoepen,
     professionals: enProfessionals.professionals,
     common: enCommon,
     about: enAbout.about,
@@ -72,6 +77,11 @@ export const translations = {
     dashboard: nlDashboard.dashboard,
     payment: nlDashboard.payment,
     journey: nlJourney,
+    // Make journey keys available at top level
+    enthousiasme: nlJourney.enthousiasme,
+    zoekprofiel: nlJourney.zoekprofiel,
+    profiel_voltooien: nlJourney.profiel_voltooien,
+    wensberoepen: nlJourney.wensberoepen,
     professionals: nlProfessionals.professionals,
     common: nlCommon,
     about: nlAbout.about,
