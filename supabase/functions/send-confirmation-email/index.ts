@@ -1,4 +1,3 @@
-
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "npm:resend@2.0.0";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.50.0";
@@ -55,15 +54,15 @@ try {
   console.error("❌ Failed to initialize Supabase client:", error);
 }
 
-// Get user language from database
-const getUserLanguage = async (userId: string): Promise<string> => {
+// Get user language from database by user ID
+const getUserLanguageById = async (userId: string): Promise<string | null> => {
   if (!supabaseClient) {
-    console.log("⚠️ Supabase client not available, using default language");
-    return 'nl';
+    console.log("⚠️ Supabase client not available for user ID lookup");
+    return null;
   }
 
   try {
-    console.log(`🔍 Fetching language for user: ${userId}`);
+    console.log(`🔍 Fetching language for user ID: ${userId}`);
     const { data, error } = await supabaseClient
       .from('profiles')
       .select('language')
@@ -71,24 +70,72 @@ const getUserLanguage = async (userId: string): Promise<string> => {
       .single();
     
     if (error) {
-      console.log("⚠️ Could not fetch user language from database:", error.message);
-      return 'nl';
+      console.log("⚠️ Could not fetch user language from database by ID:", error.message);
+      return null;
     }
     
     if (data?.language) {
-      console.log(`✅ Found user language: ${data.language}`);
+      console.log(`✅ Found user language by ID: ${data.language}`);
       return data.language;
     }
   } catch (error) {
-    console.log("⚠️ Exception fetching user language:", error);
+    console.log("⚠️ Exception fetching user language by ID:", error);
   }
   
-  console.log("🔄 Using default language: nl");
-  return 'nl';
+  return null;
+};
+
+// Get user language from database by email (for password reset)
+const getUserLanguageByEmail = async (email: string): Promise<string | null> => {
+  if (!supabaseClient) {
+    console.log("⚠️ Supabase client not available for email lookup");
+    return null;
+  }
+
+  try {
+    console.log(`🔍 Fetching user language by email: ${email}`);
+    
+    // First get the user ID from auth.users by email
+    const { data: authData, error: authError } = await supabaseClient.auth.admin.listUsers();
+    
+    if (authError) {
+      console.log("⚠️ Could not fetch users from auth:", authError.message);
+      return null;
+    }
+
+    const user = authData.users.find((u: any) => u.email === email);
+    if (!user) {
+      console.log(`⚠️ User not found with email: ${email}`);
+      return null;
+    }
+
+    console.log(`✅ Found user by email, now fetching profile for ID: ${user.id}`);
+    
+    // Now get the language from profiles table
+    const { data: profileData, error: profileError } = await supabaseClient
+      .from('profiles')
+      .select('language')
+      .eq('id', user.id)
+      .single();
+    
+    if (profileError) {
+      console.log("⚠️ Could not fetch user profile by email lookup:", profileError.message);
+      return null;
+    }
+    
+    if (profileData?.language) {
+      console.log(`✅ Found user language by email lookup: ${profileData.language}`);
+      return profileData.language;
+    }
+  } catch (error) {
+    console.log("⚠️ Exception fetching user language by email:", error);
+  }
+  
+  return null;
 };
 
 // Extract language from redirect URL
-const getLanguageFromRedirect = (redirectUrl: string): string => {
+const getLanguageFromRedirect = (redirectUrl: string): string | null => {
   try {
     const url = new URL(redirectUrl);
     const langParam = url.searchParams.get('lang');
@@ -99,7 +146,73 @@ const getLanguageFromRedirect = (redirectUrl: string): string => {
   } catch (error) {
     console.log("⚠️ Could not extract language from redirect URL:", error);
   }
-  return 'nl';
+  return null;
+};
+
+// Enhanced language detection with priority order
+const detectUserLanguage = async (
+  eventType: string, 
+  userId: string, 
+  email: string, 
+  userMetadata: any, 
+  redirectUrl: string
+): Promise<string> => {
+  console.log(`🌐 Starting language detection for ${eventType} event`);
+  console.log(`📧 User: ${email}, UserID: ${userId}`);
+  console.log(`🔗 Redirect URL: ${redirectUrl}`);
+  console.log(`📝 User metadata:`, userMetadata);
+
+  let detectedLanguage = 'nl'; // Default fallback
+  let detectionMethod = 'default-fallback';
+
+  if (eventType === 'signup') {
+    console.log("📧 SIGNUP: Trying language detection methods...");
+    
+    // For signup: priority is user_metadata > database > redirect URL
+    if (userMetadata?.language) {
+      detectedLanguage = userMetadata.language;
+      detectionMethod = 'user-metadata';
+      console.log(`✅ Language from user metadata: ${detectedLanguage}`);
+    } else {
+      const dbLanguage = await getUserLanguageById(userId);
+      if (dbLanguage) {
+        detectedLanguage = dbLanguage;
+        detectionMethod = 'database-by-id';
+      } else {
+        const urlLanguage = getLanguageFromRedirect(redirectUrl);
+        if (urlLanguage) {
+          detectedLanguage = urlLanguage;
+          detectionMethod = 'redirect-url';
+        }
+      }
+    }
+  } else if (eventType === 'recovery') {
+    console.log("🔑 PASSWORD RESET: Trying language detection methods...");
+    
+    // For password reset: priority is redirect URL > database lookup by email > user metadata > default
+    const urlLanguage = getLanguageFromRedirect(redirectUrl);
+    if (urlLanguage) {
+      detectedLanguage = urlLanguage;
+      detectionMethod = 'redirect-url';
+      console.log(`✅ Language from redirect URL: ${detectedLanguage}`);
+    } else {
+      console.log("🔍 No language in URL, trying database lookup by email...");
+      const dbLanguage = await getUserLanguageByEmail(email);
+      if (dbLanguage) {
+        detectedLanguage = dbLanguage;
+        detectionMethod = 'database-by-email';
+      } else {
+        console.log("🔍 No language from database, trying user metadata...");
+        if (userMetadata?.language) {
+          detectedLanguage = userMetadata.language;
+          detectionMethod = 'user-metadata';
+        }
+      }
+    }
+  }
+
+  console.log(`🎯 Final language decision: ${detectedLanguage} (method: ${detectionMethod})`);
+  return detectedLanguage;
 };
 
 // Signup email template
@@ -231,7 +344,8 @@ const handler = async (req: Request): Promise<Response> => {
         email: payload.user?.email,
         eventType: payload.email_data?.email_action_type,
         userId: payload.user?.id,
-        redirectTo: payload.email_data?.redirect_to
+        redirectTo: payload.email_data?.redirect_to,
+        userMetadata: payload.user?.user_metadata
       });
     } catch (error) {
       console.error("❌ Failed to parse request payload:", error);
@@ -271,26 +385,14 @@ const handler = async (req: Request): Promise<Response> => {
 
     const user = payload.user;
     
-    // DEBUG: Log the redirect URL we received
-    console.log("🔗 DEBUG: Original redirect URL from payload:", payload.email_data.redirect_to);
-    
-    // Determine language (priority: database > redirect URL > metadata > default)
-    let userLanguage = 'nl';
-    
-    // Try database first
-    if (supabaseClient) {
-      userLanguage = await getUserLanguage(user.id);
-    } else {
-      console.log("⚠️ Supabase client not available, using fallback language detection");
-      
-      // Fallback to redirect URL
-      if (payload.email_data.redirect_to) {
-        userLanguage = getLanguageFromRedirect(payload.email_data.redirect_to);
-      } else if (user.user_metadata?.language) {
-        userLanguage = user.user_metadata.language;
-        console.log(`✅ Language from user metadata: ${userLanguage}`);
-      }
-    }
+    // Enhanced language detection
+    const userLanguage = await detectUserLanguage(
+      eventType,
+      user.id,
+      user.email,
+      user.user_metadata,
+      payload.email_data.redirect_to || ''
+    );
     
     const firstName = user.user_metadata?.first_name || (userLanguage === 'en' ? 'there' : 'daar');
     const emailSubject = emailSubjects[eventType as keyof typeof emailSubjects][userLanguage as keyof typeof emailSubjects.signup] || emailSubjects[eventType as keyof typeof emailSubjects].nl;
@@ -313,16 +415,11 @@ const handler = async (req: Request): Promise<Response> => {
       emailHtml = createSignupEmailHtml(firstName, actionUrl, userLanguage);
     } else {
       // For recovery, create a direct link to reset-password page with token parameters
-      // This bypasses the complex Supabase redirect flow and creates a more reliable experience
       const directResetUrl = `https://vinster.ai/reset-password?token_hash=${payload.email_data.token_hash}&type=recovery&lang=${userLanguage}`;
-      console.log("🔗 DEBUG: Creating direct reset URL:", directResetUrl);
+      console.log("🔗 Creating direct reset URL:", directResetUrl);
       
       actionUrl = directResetUrl;
       emailHtml = createPasswordResetEmailHtml(firstName, actionUrl, userLanguage);
-      
-      // DEBUG: Log the final action URL for password reset
-      console.log("🔗 DEBUG: Final password reset action URL (DIRECT):", actionUrl);
-      console.log("🔗 DEBUG: This URL will go directly to /reset-password with token parameters");
     }
 
     console.log("📤 Sending email via Resend...");
