@@ -30,7 +30,7 @@ import nlContact from './nl/contact.json';
 export const translations = {
   en: {
     navigation: enNavigation,
-    landing: enLanding,
+    landing: enLanding.landing,
     auth: enAuth,
     dashboard: enDashboard,
     journey: enJourney,
@@ -44,7 +44,7 @@ export const translations = {
   },
   nl: {
     navigation: nlNavigation,
-    landing: nlLanding,
+    landing: nlLanding.landing,
     auth: nlAuth,
     dashboard: nlDashboard,
     journey: nlJourney,
