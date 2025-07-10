@@ -34,13 +34,13 @@ export const translations = {
     auth: enAuth,
     dashboard: enDashboard,
     journey: enJourney,
-    professionals: enProfessionals,
+    professionals: enProfessionals.professionals,
     common: enCommon,
-    about: enAbout,
-    forWhom: enForWhom,
-    faq: enFaq,
-    experiences: enExperiences,
-    contact: enContact
+    about: enAbout.about,
+    forWhom: enForWhom.for_whom,
+    faq: enFaq.faq,
+    experiences: enExperiences.experiences,
+    contact: enContact.contact
   },
   nl: {
     navigation: nlNavigation,
@@ -48,12 +48,12 @@ export const translations = {
     auth: nlAuth,
     dashboard: nlDashboard,
     journey: nlJourney,
-    professionals: nlProfessionals,
+    professionals: nlProfessionals.professionals,
     common: nlCommon,
-    about: nlAbout,
-    forWhom: nlForWhom,
-    faq: nlFaq,
-    experiences: nlExperiences,
-    contact: nlContact
+    about: nlAbout.about,
+    forWhom: nlForWhom.for_whom,
+    faq: nlFaq.faq,
+    experiences: nlExperiences.experiences,
+    contact: nlContact.contact
   }
 };
