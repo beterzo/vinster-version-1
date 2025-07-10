@@ -2,9 +2,7 @@
 import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import HeroSection from "@/components/HeroSection";
-import WhatIsVinsterCard from "@/components/WhatIsVinsterCard";
 import ProcessSteps from "@/components/ProcessSteps";
-import WhatDoYouGetCard from "@/components/WhatDoYouGetCard";
 import TestimonialSection from "@/components/TestimonialSection";
 import FeatureCards from "@/components/FeatureCards";
 import Footer from "@/components/Footer";
@@ -51,11 +49,9 @@ const LandingPage = () => {
       <TitleManager />
       <div className="min-h-screen bg-white">
         <HeroSection />
-        <WhatIsVinsterCard />
-        <ProcessSteps />
-        <WhatDoYouGetCard />
-        <TestimonialSection />
         <FeatureCards />
+        <ProcessSteps />
+        <TestimonialSection />
         <Footer />
         <CookieBanner />
       </div>
