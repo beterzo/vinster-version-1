@@ -60,7 +60,7 @@
       "title": "How it works",
       "step1_title": "Enthusiasm Scan",
       "step1_desc": "Discover what truly excites you",
-      "step2_title": "Goal Jobs",
+      "step2_title": "Dream Jobs",
       "step2_desc": "Explore your ideal work situations",
       "step3_title": "Set Priorities",
       "step3_desc": "Determine what matters most to you",
@@ -101,6 +101,67 @@
       "email": "Email",
       "kvk": "Chamber of Commerce",
       "copyright": "© 2024 Vinster. All rights reserved."
+    }
+  },
+  "cookies": {
+    "banner": {
+      "message": "We use cookies to improve your experience and optimize our website. You can adjust your preferences below.",
+      "accept": "Accept all",
+      "customize": "Customize preferences"
+    },
+    "categories": {
+      "necessary": {
+        "title": "Necessary cookies",
+        "description": "These cookies are essential for the website to function properly."
+      },
+      "statistics": {
+        "title": "Statistics cookies",
+        "description": "These cookies help us understand how visitors use our website."
+      },
+      "marketing": {
+        "title": "Marketing cookies",
+        "description": "These cookies are used for advertising and marketing purposes."
+      }
+    },
+    "policy": {
+      "title": "Cookie Policy",
+      "what_are_cookies": {
+        "title": "What are cookies?",
+        "description": "Cookies are small text files that are stored on your device when you visit our website. They help us make the website function and improve your experience."
+      },
+      "which_cookies": {
+        "title": "Which cookies do we use?"
+      },
+      "necessary": {
+        "description": "These cookies are essential for our website to function:",
+        "session": "Session cookies for login and navigation",
+        "auth": "Authentication cookies for account access",
+        "preferences": "Preference cookies for language and settings"
+      },
+      "statistics": {
+        "description": "These cookies help us improve our website:",
+        "analytics": "Google Analytics for website statistics",
+        "usage": "Usage data for optimization"
+      },
+      "marketing": {
+        "description": "These cookies are used for marketing:",
+        "tracking": "Tracking pixels for advertisements",
+        "remarketing": "Remarketing cookies for targeted ads"
+      },
+      "retention": {
+        "title": "How long do we keep cookies?",
+        "description": "Session cookies are deleted when you close your browser. Persistent cookies are kept for a maximum of 2 years, unless you delete them earlier."
+      },
+      "manage": {
+        "title": "How can you adjust your preferences?",
+        "description": "You can always adjust your cookie preferences through the settings on this website.",
+        "browser": "You can also manage cookies through your browser settings. Please note that disabling certain cookies may affect the functionality of the website."
+      },
+      "contact": {
+        "title": "Contact",
+        "description": "Do you have questions about our cookie policy? Please contact us:"
+      },
+      "last_updated": "Last updated"
     }
   }
 }

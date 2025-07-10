@@ -60,10 +60,10 @@
       "title": "Hoe het werkt",
       "step1_title": "Enthousiasmescan",
       "step1_desc": "Ontdek wat je echt enthousiast maakt",
-      "step2_title": "Wensberoepen",
+      "step2_title": "Droombanen",
       "step2_desc": "Verken je ideale werksituaties",
       "step3_title": "Prioriteiten stellen",
-      "step3_desc": "Bepaal wat voor jou het belangrijkst is",
+      "step3_desc": "Bepael wat voor jou het belangrijkst is",
       "step4_title": "Laatste check",
       "step4_desc": "Voltooi je profiel en ontvang je rapport",
       "start_button": "Begin je traject"
@@ -101,6 +101,67 @@
       "email": "E-mail",
       "kvk": "KvK-nummer",
       "copyright": "© 2024 Vinster. Alle rechten voorbehouden."
+    }
+  },
+  "cookies": {
+    "banner": {
+      "message": "We gebruiken cookies om je ervaring te verbeteren en onze website te optimaliseren. Je kunt je voorkeuren hieronder aanpassen.",
+      "accept": "Alles accepteren",
+      "customize": "Voorkeuren aanpassen"
+    },
+    "categories": {
+      "necessary": {
+        "title": "Noodzakelijke cookies",
+        "description": "Deze cookies zijn essentieel voor het functioneren van de website."
+      },
+      "statistics": {
+        "title": "Statistiek cookies",
+        "description": "Deze cookies helpen ons begrijpen hoe bezoekers de website gebruiken."
+      },
+      "marketing": {
+        "title": "Marketing cookies",
+        "description": "Deze cookies worden gebruikt voor advertenties en marketing doeleinden."
+      }
+    },
+    "policy": {
+      "title": "Cookiebeleid",
+      "what_are_cookies": {
+        "title": "Wat zijn cookies?",
+        "description": "Cookies zijn kleine tekstbestanden die worden opgeslagen op je apparaat wanneer je onze website bezoekt. Ze helpen ons de website te laten functioneren en je ervaring te verbeteren."
+      },
+      "which_cookies": {
+        "title": "Welke cookies gebruiken we?"
+      },
+      "necessary": {
+        "description": "Deze cookies zijn essentieel voor het functioneren van onze website:",
+        "session": "Sessie cookies voor inloggen en navigatie",
+        "auth": "Authenticatie cookies voor toegang tot je account",
+        "preferences": "Voorkeur cookies voor taal en instellingen"
+      },
+      "statistics": {
+        "description": "Deze cookies helpen ons onze website te verbeteren:",
+        "analytics": "Google Analytics voor websitestatistieken",
+        "usage": "Gebruiksgegevens voor optimalisatie"
+      },
+      "marketing": {
+        "description": "Deze cookies worden gebruikt voor marketing:",
+        "tracking": "Tracking pixels voor advertenties",
+        "remarketing": "Remarketing cookies voor gerichte advertenties"
+      },
+      "retention": {
+        "title": "Hoe lang bewaren we cookies?",
+        "description": "Sessie cookies worden verwijderd wanneer je je browser sluit. Permanente cookies blijven maximaal 2 jaar bewaard, tenzij je ze eerder verwijdert."
+      },
+      "manage": {
+        "title": "Hoe kun je je voorkeuren aanpassen?",
+        "description": "Je kunt je cookie voorkeuren altijd aanpassen via de instellingen op deze website.",
+        "browser": "Je kunt cookies ook beheren via je browser instellingen. Houd er rekening mee dat het uitschakelen van bepaalde cookies de functionaliteit van de website kan beïnvloeden."
+      },
+      "contact": {
+        "title": "Contact",
+        "description": "Heb je vragen over ons cookiebeleid? Neem dan contact met ons op:"
+      },
+      "last_updated": "Laatst bijgewerkt"
     }
   }
 }
