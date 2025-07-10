@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -6,9 +7,11 @@ import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 import { usePrioriteitenResponses } from "@/hooks/usePrioriteitenResponses";
 import { cleanKeywords } from "@/utils/keywordUtils";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const PrioriteitenWerkomstandigheden = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const {
     responses,
     aiKeywords,
@@ -90,13 +93,13 @@ const PrioriteitenWerkomstandigheden = () => {
             {/* Title */}
             <div className="text-center mb-12">
               <h1 className="text-3xl font-bold text-blue-900 mb-2">
-                Prioriteiten - werkomstandigheden
+                {t('profiel_voltooien.prioriteiten.werkomstandigheden.title')}
               </h1>
               <p className="text-xl text-gray-600">
-                Selecteer minimaal 5 werkomstandigheden die belangrijk voor je zijn
+                {t('profiel_voltooien.prioriteiten.werkomstandigheden.subtitle')}
               </p>
               <p className="text-sm text-gray-500 mt-2">
-                Geselecteerd: {selectedKeywords.length} van minimaal 5
+                {t('profiel_voltooien.prioriteiten.werkomstandigheden.selected_count').replace('{count}', selectedKeywords.length.toString())}
               </p>
             </div>
 
@@ -120,8 +123,7 @@ const PrioriteitenWerkomstandigheden = () => {
             ) : (
               <div className="text-center mb-8 p-8 bg-gray-100 rounded-lg">
                 <p className="text-gray-600">
-                  Er zijn nog geen persoonlijke werkomstandigheden gegenereerd. 
-                  Vul eerst je enthousiasme scan en wensberoepen in.
+                  {t('profiel_voltooien.prioriteiten.werkomstandigheden.missing_keywords')}
                 </p>
               </div>
             )}
@@ -129,11 +131,11 @@ const PrioriteitenWerkomstandigheden = () => {
             {/* Extra Text Field */}
             <div className="mb-8">
               <Label htmlFor="extraText" className="text-blue-900 font-medium text-lg mb-3 block text-left">
-                Mis je nog werkomstandigheden? Voeg ze hier toe (optioneel)
+                {t('profiel_voltooien.prioriteiten.werkomstandigheden.extra_text_label')}
               </Label>
               <Textarea
                 id="extraText"
-                placeholder="Bijvoorbeeld: Hond mee naar kantoor, Goede koffie, Ergonomische werkplek..."
+                placeholder={t('profiel_voltooien.prioriteiten.werkomstandigheden.extra_text_placeholder')}
                 value={extraText}
                 onChange={(e) => handleExtraTextChange(e.target.value)}
                 onBlur={handleExtraTextBlur}
@@ -148,7 +150,7 @@ const PrioriteitenWerkomstandigheden = () => {
                 variant="outline"
                 className="border-blue-900 text-blue-900 hover:bg-blue-50"
               >
-                Vorige: Activiteiten
+                {t('profiel_voltooien.prioriteiten.werkomstandigheden.previous_button')}
               </Button>
               <Button 
                 onClick={handleNext}
@@ -159,7 +161,7 @@ const PrioriteitenWerkomstandigheden = () => {
                 }`}
                 disabled={!canProceed}
               >
-                Volgende: Interesses
+                {t('profiel_voltooien.prioriteiten.werkomstandigheden.next_button')}
               </Button>
             </div>
           </CardContent>

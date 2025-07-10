@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -6,9 +7,11 @@ import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 import EnthousiasmeProgress from "@/components/EnthousiasmeProgress";
 import { useEnthousiasmeResponses } from "@/hooks/useEnthousiasmeResponses";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const EnthousiasmeStep1 = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { responses, saveResponse, loading } = useEnthousiasmeResponses();
   
   const [answers, setAnswers] = useState({
@@ -55,15 +58,15 @@ const EnthousiasmeStep1 = () => {
   const questions = [
     {
       field: "kindertijd_activiteiten",
-      question: "Waar was je als kind het liefst mee bezig?"
+      question: t('enthousiasme.step1.question1')
     },
     {
       field: "kindertijd_plekken", 
-      question: "Waar hield je je als kind het liefst op?"
+      question: t('enthousiasme.step1.question2')
     },
     {
       field: "kindertijd_interesses_nieuw",
-      question: "Wat interesseerde je als kind? Waar was je nieuwsgierig naar?"
+      question: t('enthousiasme.step1.question3')
     }
   ];
 
@@ -98,10 +101,10 @@ const EnthousiasmeStep1 = () => {
             {/* Title */}
             <div className="text-center mb-12">
               <h1 className="text-3xl font-bold text-blue-900 mb-2">
-                Enthousiasme scan - Stap 1
+                {t('enthousiasme.step1.title')}
               </h1>
               <p className="text-xl text-gray-600">
-                Vragen over je kindertijd
+                {t('enthousiasme.step1.subtitle')}
               </p>
             </div>
 
@@ -114,7 +117,7 @@ const EnthousiasmeStep1 = () => {
                   </Label>
                   <Textarea
                     id={item.field}
-                    placeholder="Beschrijf hier je antwoord..."
+                    placeholder={t('enthousiasme.step1.placeholder')}
                     value={answers[item.field as keyof typeof answers]}
                     onChange={(e) => handleInputChange(item.field, e.target.value)}
                     onBlur={(e) => handleInputBlur(item.field, e.target.value)}
@@ -131,7 +134,7 @@ const EnthousiasmeStep1 = () => {
                 variant="outline"
                 className="border-blue-900 text-blue-900 hover:bg-blue-50"
               >
-                Terug naar intro
+                {t('enthousiasme.step1.back_button')}
               </Button>
               <Button 
                 onClick={handleNext}
@@ -142,7 +145,7 @@ const EnthousiasmeStep1 = () => {
                 }`}
                 disabled={!allFieldsFilled}
               >
-                Volgende stap
+                {t('enthousiasme.step1.next_button')}
               </Button>
             </div>
           </CardContent>

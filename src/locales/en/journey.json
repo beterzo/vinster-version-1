@@ -1,71 +1,246 @@
 
 {
   "enthousiasme": {
-    "step3": {
-      "title": "Your best work experience",
-      "saving": "Saving...",
-      "question1": "Which period do you think back to with great pleasure? What made that time so enjoyable? What did you do?",
-      "question2": "Can you mention another nice period or project? What did you mainly do then?",
-      "question3": "When do you come home whistling? What did you do and experience on such a day?",
-      "placeholder1": "Share your story about a wonderful work period here...",
-      "placeholder2": "Tell about another nice experience here...",
-      "placeholder3": "Describe such a perfect workday here...",
-      "previous": "Previous",
-      "finish": "Complete"
-    }
-  },
-  "zoekprofiel": {
     "intro": {
-      "title": "You're almost there!",
-      "description": "This is the final step in Vinster. You've done your research and now you're going to create your search profile. A search profile is a clear overview of the job you're looking for.",
-      "benefits": {
-        "targeted_search": "Targeted search",
-        "targeted_search_desc": "Find suitable vacancies faster",
-        "better_conversations": "Better conversations",
-        "better_conversations_desc": "Have targeted conversations with your network",
-        "visibility": "Make visible",
-        "visibility_desc": "Let others know what you're looking for"
-      },
-      "start_button": "Start with your search profile",
+      "title": "Enthusiasm scan",
+      "subtitle": "Discover what energizes you at work",
+      "description": "The enthusiasm scan helps you discover what truly energizes you at work. By looking back at moments of joy and enthusiasm, you gain insight into what's important to you.",
+      "how_it_works_title": "How does it work?",
+      "how_it_works_description": "You'll answer questions about three different periods: your childhood, your first job, and your best work experiences. This takes about 15 minutes.",
+      "start_button": "Start enthusiasm scan",
       "back_button": "Back to dashboard"
+    },
+    "step1": {
+      "title": "Enthusiasm scan - Step 1",
+      "subtitle": "Questions about your childhood",
+      "question1": "What did you like to do most as a child?",
+      "question2": "Where did you like to spend time most as a child?",
+      "question3": "What interested you as a child? What were you curious about?",
+      "placeholder": "Describe your answer here...",
+      "back_button": "Back to intro",
+      "next_button": "Next step"
+    },
+    "step2": {
+      "title": "Enthusiasm scan - Step 2",
+      "subtitle": "Questions about your first job",
+      "question1": "What were the most enjoyable tasks in your first job?",
+      "question2": "What working conditions did you enjoy in your first job?",
+      "question3": "What topics appealed to you in your first job?",
+      "placeholder": "Describe your answer here...",
+      "previous_button": "Previous step",
+      "next_button": "Next step"
+    },
+    "step3": {
+      "title": "Enthusiasm scan - Step 3",
+      "subtitle": "Questions about pleasant work experiences",
+      "saving": "Saving...",
+      "question1": "Describe the most pleasant work period in your career. What made it so enjoyable?",
+      "question2": "Think of the most enjoyable project you worked on. What was your role in it?",
+      "question3": "Describe a day when you came home whistling from work. What was so special about that day?",
+      "placeholder": "Describe your answer here...",
+      "previous_button": "Previous step",
+      "finish_button": "Complete enthusiasm scan"
     }
-  },
-  "profiel_voltooien": {
-    "title": "Two final steps to generate your career report",
-    "description": "You'll first fill in some additional information about yourself. Then you'll indicate what's most important to you from your previous answers.",
-    "step1_title": "Additional information",
-    "step2_title": "Setting priorities",
-    "back_button": "Back to dashboard",
-    "start_button": "Create career report"
   },
   "wensberoepen": {
-    "step3": {
-      "title": "Goal job 3",
+    "intro": {
+      "title": "Now a completely different topic. You'll need your imagination for this.",
+      "instruction_title": "Dream jobs instruction",
+      "instruction_description": "Use your imagination and think of three jobs you would like to do (for a while). Think as freely as possible. There are no limitations for now. Below you'll fill in your dream jobs one by one. Answer the questions as if you're already doing that job. You don't need to think about how it exactly works in that job, just describe what appeals to you about it.",
+      "instruction_details": "Answer each question with 10-20 words, more is also fine. Some questions seem similar. Still answer them all as precisely as possible.",
+      "instruction_questions": "You'll get a total of eight questions per job.",
+      "start_button": "Start with dream jobs"
+    },
+    "step1": {
+      "title": "Dream job 1",
       "subtitle": "What would you like to do for a while, or even always?",
       "job_title_label": "Name of the profession",
-      "job_title_placeholder": "Enter the name of your goal job here...",
+      "job_title_placeholder": "Enter the name of your dream job here...",
+      "question1": "What do you do in a work week? Answer with verbs and activities.",
+      "question2": "Where do you do your work? Describe the environment, the building, the space....",
+      "question3": "Do you work more together or more alone? What kind of people do you have contact with?",
+      "question4": "What did you do on a day when you come home whistling?",
+      "question5": "What is your goal with this work?",
+      "question6": "Which parts of your work are the most enjoyable?",
+      "question7": "What is important to you in this work?",
+      "question8": "What is your work mainly about? What do you need to know a lot about?",
       "answer_placeholder": "Describe your answer here...",
-      "previous_button": "Previous goal job",
+      "back_button": "Back to intro",
+      "next_button": "Next dream job"
+    },
+    "step2": {
+      "title": "Dream job 2",
+      "subtitle": "What would you like to do for a while, or even always?",
+      "job_title_label": "Name of the profession",
+      "job_title_placeholder": "Enter the name of your dream job here...",
+      "question1": "What do you do in a work week? Answer with verbs and activities.",
+      "question2": "Where do you do your work? Describe the environment, the building, the space....",
+      "question3": "Do you work more together or more alone? What kind of people do you have contact with?",
+      "question4": "What did you do on a day when you come home whistling?",
+      "question5": "What is your goal with this work?",
+      "question6": "Which parts of your work are the most enjoyable?",
+      "question7": "What is important to you in this work?",
+      "question8": "What is your work mainly about? What do you need to know a lot about?",
+      "answer_placeholder": "Describe your answer here...",
+      "previous_button": "Previous dream job",
+      "next_button": "Next dream job"
+    },
+    "step3": {
+      "title": "Dream job 3",
+      "subtitle": "What would you like to do for a while, or even always?",
+      "job_title_label": "Name of the profession",
+      "job_title_placeholder": "Enter the name of your dream job here...",
+      "question1": "What do you do in a work week? Answer with verbs and activities.",
+      "question2": "Where do you do your work? Describe the environment, the building, the space....",
+      "question3": "Do you work more together or more alone? What kind of people do you have contact with?",
+      "question4": "What did you do on a day when you come home whistling?",
+      "question5": "What is your goal with this work?",
+      "question6": "Which parts of your work are the most enjoyable?",
+      "question7": "What is important to you in this work?",
+      "question8": "What is your work mainly about? What do you need to know a lot about?",
+      "answer_placeholder": "Describe your answer here...",
+      "previous_button": "Previous dream job",
       "finish_button": "Complete",
-      "finishing": "Completing...",
+      "finishing": "Finishing...",
       "sending_data": "Sending data..."
     },
     "voltooi": {
       "title": "Congratulations! 🎉",
-      "subtitle": "You have successfully completed the questions about your goal jobs",
-      "what_happened_title": "What has happened now:",
-      "what_happened_description": "Keywords have now been compiled to determine what you find important in your work",
-      "next_step_title": "Next step: Create career report",
-      "next_step_description": "To generate your personal career report, we need some additional information from you:",
-      "priorities_title": "Priorities",
-      "priorities_description": "The keywords are divided into 3 parts: activities, interests and working conditions. It is now up to you to emphasize the keywords that you find most important.",
+      "subtitle": "You have successfully completed the questions about your dream jobs",
+      "what_happened_title": "What happened now:",
+      "what_happened_description": "Keywords have now been compiled to determine what you find important in your work. To generate your personal career report, we need some additional information from you.",
+      "next_step_title": "Next step: personal profile",
+      "next_step_description": "Complete your personal profile with some extra information about your background and preferences, and indicate what you find important in your work.",
+      "priorities_title": "Set priorities",
+      "priorities_description": "What do you find important in your work?",
       "extra_info_title": "Additional information",
-      "extra_info_description": "Additional questions about your background. Think of information such as your education and education level, but also whether there is a specific sector you want to search in.",
-      "report_title": "Report",
-      "report_description": "Receive your personal career advice. After we have received all information from you, you will receive a complete personal career report that you can continue with!",
-      "create_report_button": "Create career report",
+      "extra_info_description": "Your background and preferences",
+      "report_title": "Generate report",
+      "report_description": "Your personal career report",
+      "create_report_button": "Complete personal profile",
       "to_dashboard_button": "To dashboard",
-      "tip_text": "💡 You can always create your career report later via the dashboard"
+      "tip_text": "Tip: Completing your personal profile takes about 5-10 minutes."
     }
+  },
+  "profiel_voltooien": {
+    "intro": {
+      "title": "Complete profile",
+      "last_step_title": "Final step",
+      "description": "We have almost all the information we need for your personal career advice. For the final step, we ask you a few short questions about your background and preferences.",
+      "description_details": "This helps us make your advice even more specific and practical.",
+      "start_button": "Complete profile"
+    },
+    "extra_informatie": {
+      "title": "Additional information",
+      "subtitle": "Final questions about your background",
+      "question1": "What is your highest level of education?",
+      "question2": "What professional training have you completed?",
+      "question3": "In which sector(s) would you like to work?",
+      "question4": "Are there any physical limitations we should take into account?",
+      "placeholder1": "For example: Bachelor's, Master's, Vocational level 4, etc.",
+      "placeholder2": "For example: Business Administration, Psychology, Technical Computer Science, etc.",
+      "placeholder3": "For example: IT, Healthcare, Education, Marketing, etc.",
+      "placeholder4": "For example: No heavy physical labor, limit screen work, etc. (optional)",
+      "back_button": "Back to profile intro",
+      "next_button": "To priorities"
+    },
+    "prioriteiten": {
+      "activiteiten": {
+        "title": "Priorities - activities",
+        "subtitle": "Select at least 5 activities that you enjoy doing",
+        "selected_count": "Selected: {count} of at least 5",
+        "missing_keywords": "No personal activities have been generated yet. First complete your enthusiasm scan and dream jobs.",
+        "extra_text_label": "Missing any activities? Add them here (optional)",
+        "extra_text_placeholder": "For example: Photography, Programming, Gardening...",
+        "next_button": "Next: Working conditions"
+      },
+      "werkomstandigheden": {
+        "title": "Priorities - working conditions",
+        "subtitle": "Select at least 5 working conditions that are important to you",
+        "selected_count": "Selected: {count} of at least 5",
+        "missing_keywords": "No personal working conditions have been generated yet. First complete your enthusiasm scan and dream jobs.",
+        "extra_text_label": "Missing any working conditions? Add them here (optional)",
+        "extra_text_placeholder": "For example: Dog to the office, Good coffee, Ergonomic workplace...",
+        "previous_button": "Previous: Activities",
+        "next_button": "Next: Interests"
+      },
+      "interesses": {
+        "title": "Priorities - interests",
+        "subtitle": "Select at least 5 interests that attract you",
+        "selected_count": "Selected: {count} of at least 5",
+        "missing_keywords": "No personal interests have been generated yet. First complete your enthusiasm scan and dream jobs.",
+        "extra_text_label": "Missing any interests? Add them here (optional)",
+        "extra_text_placeholder": "For example: Sustainability, Technology, Art...",
+        "previous_button": "Previous: Working conditions",
+        "finish_button": "Generate career report"
+      }
+    }
+  },
+  "zoekprofiel": {
+    "intro": {
+      "title": "Create search profile",
+      "what_is_title": "What is a search profile?",
+      "description": "A search profile is your personal document that describes what kind of work you're looking for. It helps you apply for jobs in a targeted way and shows employers what you have to offer.",
+      "description_details": "Based on your answers, we create a professional search profile that you can use in your job applications or share with recruiters.",
+      "duration": "Completing this takes about 10 minutes.",
+      "already_created_title": "Search profile already created",
+      "already_created_description": "You have already created a search profile. You can download it or view it on the download page.",
+      "start_button": "Start search profile",
+      "download_button": "To search profile download",
+      "back_button": "Back to dashboard"
+    },
+    "antwoorden": {
+      "title": "Search profile questions",
+      "subtitle": "Answer the questions to create your search profile",
+      "question1": "I'm looking for a position as...",
+      "question2": "My core tasks are...",
+      "question3": "I would like to work at...",
+      "question4": "In the sector...",
+      "question5": "In the region...",
+      "question6": "Working conditions that are important to me...",
+      "placeholder": "Describe your answer here...",
+      "back_button": "Back to intro",
+      "generate_button": "Generate search profile"
+    },
+    "download": {
+      "title": "Download search profile",
+      "description": "Your search profile is ready! You can now download it and use it in your job applications.",
+      "download_button": "Download search profile PDF",
+      "back_button": "Back to dashboard",
+      "regenerate_button": "Create new search profile"
+    }
+  },
+  "rapport": {
+    "download": {
+      "title": "Download career report",
+      "description": "Your personal career report is ready! This report contains all insights and recommendations based on your answers.",
+      "download_button": "Download career report PDF",
+      "research_plan_button": "View research plan",
+      "back_button": "Back to dashboard"
+    }
+  },
+  "onderzoeksplan": {
+    "title": "Research plan",
+    "subtitle": "This is your step-by-step plan to determine what your next job should look like.",
+    "tip": "💡 This research plan is also at the bottom of your career report, so you can always find it there.",
+    "steps_title": "This is your step-by-step plan:",
+    "step1": "Ask AI (or Google) for a detailed job description of the functions from your career report. Also ask AI about similar functions. What work is similar? What appeals to you in the answers you get?",
+    "step2": "See if you can find job postings that give you an idea of the content of this function and of the organizations that have these functions.",
+    "step3": "Search LinkedIn for people who do this work. What is their background?",
+    "step4": "Is there a professional association? What do you read on the website about developments in the sector and the profession?",
+    "step5": "Does the profession have a trade magazine? If so, request one or more and read them. What do you notice? Do you get enthusiastic about the topics?",
+    "step6": "Look for organizations where people with this profession work.",
+    "step7": "What education might you need for this work? Ask AI or Google.",
+    "step8": "Write down all the questions that come to mind during your research. You can ask these to people who are already working in this direction.",
+    "step9": "Make a list of people you would like to talk to about this work and approach them. You can find these people via LinkedIn and/or through your personal network.",
+    "step10": "Gather enough information to make a choice. Take your time and talk to others about it.",
+    "after_research_title": "After your research:",
+    "after_research_description": "Once you've learned enough, choose the function that suits you best and fill in the search profile on the website. Vinster will convert your text into a few sentences that you can use to let others know what you're looking for.",
+    "after_research_action": "You can now apply for jobs in a targeted way! Search for vacancies, let your network know what you want, and share on LinkedIn which function you're looking for.",
+    "final_message": "We wish you much job satisfaction in your next position!",
+    "time_notice_title": "⏰ Take your time for this research",
+    "time_notice_description": "This research is crucial for finding your ideal job. Take the time to carefully execute each step.",
+    "time_notice_details": "The better you do this research, the better you can fill in your search profile later and the more targeted you can apply for jobs.",
+    "back_button": "Back to dashboard"
   }
 }

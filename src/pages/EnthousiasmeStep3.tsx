@@ -7,9 +7,11 @@ import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 import EnthousiasmeProgress from "@/components/EnthousiasmeProgress";
 import { useEnthousiasmeResponses } from "@/hooks/useEnthousiasmeResponses";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const EnthousiasmeStep3 = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { responses, saveResponse, loading } = useEnthousiasmeResponses();
   
   const [answers, setAnswers] = useState({
@@ -56,15 +58,15 @@ const EnthousiasmeStep3 = () => {
   const questions = [
     {
       field: "plezierige_werkperiode_beschrijving",
-      question: "Beschrijf de meest plezierige werkperiode in je loopbaan. Wat maakte het zo leuk?"
+      question: t('enthousiasme.step3.question1')
     },
     {
       field: "leuk_project_en_rol", 
-      question: "Denk aan het leukste project waar je aan hebt gewerkt. Wat was je rol daarin?"
+      question: t('enthousiasme.step3.question2')
     },
     {
       field: "fluitend_thuiskomen_dag",
-      question: "Beschrijf een dag waarop je fluitend thuiskwam van je werk. Wat was er die dag zo bijzonder?"
+      question: t('enthousiasme.step3.question3')
     }
   ];
 
@@ -99,10 +101,10 @@ const EnthousiasmeStep3 = () => {
             {/* Title */}
             <div className="text-center mb-12">
               <h1 className="text-3xl font-bold text-blue-900 mb-2">
-                Enthousiasme scan - Stap 3
+                {t('enthousiasme.step3.title')}
               </h1>
               <p className="text-xl text-gray-600">
-                Vragen over plezierige werkervaringen
+                {t('enthousiasme.step3.subtitle')}
               </p>
             </div>
 
@@ -115,7 +117,7 @@ const EnthousiasmeStep3 = () => {
                   </Label>
                   <Textarea
                     id={item.field}
-                    placeholder="Beschrijf hier je antwoord..."
+                    placeholder={t('enthousiasme.step3.placeholder')}
                     value={answers[item.field as keyof typeof answers]}
                     onChange={(e) => handleInputChange(item.field, e.target.value)}
                     onBlur={(e) => handleInputBlur(item.field, e.target.value)}
@@ -132,7 +134,7 @@ const EnthousiasmeStep3 = () => {
                 variant="outline"
                 className="border-blue-900 text-blue-900 hover:bg-blue-50"
               >
-                Vorige stap
+                {t('enthousiasme.step3.previous_button')}
               </Button>
               <Button 
                 onClick={handleComplete}
@@ -143,7 +145,7 @@ const EnthousiasmeStep3 = () => {
                 }`}
                 disabled={!allFieldsFilled}
               >
-                Enthousiasmescan voltooien
+                {t('enthousiasme.step3.finish_button')}
               </Button>
             </div>
           </CardContent>

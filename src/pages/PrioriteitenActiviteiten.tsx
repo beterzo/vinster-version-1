@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -6,9 +7,11 @@ import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 import { usePrioriteitenResponses } from "@/hooks/usePrioriteitenResponses";
 import { cleanKeywords } from "@/utils/keywordUtils";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const PrioriteitenActiviteiten = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const {
     responses,
     aiKeywords,
@@ -91,13 +94,13 @@ const PrioriteitenActiviteiten = () => {
             {/* Title */}
             <div className="text-center mb-12">
               <h1 className="text-3xl font-bold text-blue-900 mb-2">
-                Prioriteiten - activiteiten
+                {t('profiel_voltooien.prioriteiten.activiteiten.title')}
               </h1>
               <p className="text-xl text-gray-600">
-                Selecteer minimaal 5 activiteiten die je leuk vindt om te doen
+                {t('profiel_voltooien.prioriteiten.activiteiten.subtitle')}
               </p>
               <p className="text-sm text-gray-500 mt-2">
-                Geselecteerd: {selectedKeywords.length} van minimaal 5
+                {t('profiel_voltooien.prioriteiten.activiteiten.selected_count').replace('{count}', selectedKeywords.length.toString())}
               </p>
             </div>
 
@@ -121,8 +124,7 @@ const PrioriteitenActiviteiten = () => {
             ) : (
               <div className="text-center mb-8 p-8 bg-gray-100 rounded-lg">
                 <p className="text-gray-600">
-                  Er zijn nog geen persoonlijke activiteiten gegenereerd. 
-                  Vul eerst je enthousiasme scan en wensberoepen in.
+                  {t('profiel_voltooien.prioriteiten.activiteiten.missing_keywords')}
                 </p>
               </div>
             )}
@@ -130,11 +132,11 @@ const PrioriteitenActiviteiten = () => {
             {/* Extra Text Field */}
             <div className="mb-8">
               <Label htmlFor="extraText" className="text-blue-900 font-medium text-lg mb-3 block text-left">
-                Mis je nog activiteiten? Voeg ze hier toe (optioneel)
+                {t('profiel_voltooien.prioriteiten.activiteiten.extra_text_label')}
               </Label>
               <Textarea 
                 id="extraText" 
-                placeholder="Bijvoorbeeld: Fotograferen, Programmeren, Tuinieren..." 
+                placeholder={t('profiel_voltooien.prioriteiten.activiteiten.extra_text_placeholder')}
                 value={extraText} 
                 onChange={e => handleExtraTextChange(e.target.value)} 
                 onBlur={handleExtraTextBlur} 
@@ -153,7 +155,7 @@ const PrioriteitenActiviteiten = () => {
                 }`} 
                 disabled={!canProceed}
               >
-                Volgende: Werkomstandigheden
+                {t('profiel_voltooien.prioriteiten.activiteiten.next_button')}
               </Button>
             </div>
           </CardContent>

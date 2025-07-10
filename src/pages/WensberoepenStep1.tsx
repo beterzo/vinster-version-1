@@ -8,12 +8,14 @@ import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 import WensberoepenProgress from "@/components/WensberoepenProgress";
 import { useWensberoepenResponses } from "@/hooks/useWensberoepenResponses";
+import { useTranslation } from "@/hooks/useTranslation";
 import type { Tables } from "@/integrations/supabase/types";
 
 type WensberoepenResponse = Tables<"wensberoepen_responses">;
 
 const WensberoepenStep1 = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { responses, saveResponse, isLoading } = useWensberoepenResponses();
   
   const [jobTitle, setJobTitle] = useState("");
@@ -93,14 +95,14 @@ const WensberoepenStep1 = () => {
   };
 
   const questions = [
-    "Wat doe je in een werkweek? Antwoord in werkwoorden en activiteiten.",
-    "Waar doe je je werk? Beschrijf de omgeving, het gebouw, de ruimte ....",
-    "Werk je meer samen of meer alleen? Met wat voor mensen heb je contact?",
-    "Wat heb je gedaan op een dag dat je fluitend thuiskomt?",
-    "Wat is je doel met dit werk?",
-    "Welke onderdelen uit je werk zijn het leukst?",
-    "Wat is voor jou belangrijk in dit werk?",
-    "Waar gaat het vooral over in jouw werk? Waar moet je veel van weten?"
+    t('wensberoepen.step1.question1'),
+    t('wensberoepen.step1.question2'),
+    t('wensberoepen.step1.question3'),
+    t('wensberoepen.step1.question4'),
+    t('wensberoepen.step1.question5'),
+    t('wensberoepen.step1.question6'),
+    t('wensberoepen.step1.question7'),
+    t('wensberoepen.step1.question8')
   ];
 
   if (isLoading) {
@@ -135,21 +137,21 @@ const WensberoepenStep1 = () => {
             {/* Title */}
             <div className="text-center mb-12">
               <h1 className="text-3xl font-bold text-blue-900 mb-2">
-                Wensberoep 1
+                {t('wensberoepen.step1.title')}
               </h1>
               <p className="text-xl text-gray-600">
-                Wat zou jij wel een poosje, of zelfs altijd, willen doen?
+                {t('wensberoepen.step1.subtitle')}
               </p>
             </div>
 
             {/* Job Title Input */}
             <div className="mb-8">
               <Label htmlFor="jobTitle" className="text-blue-900 font-medium text-lg mb-3 block text-left">
-                Naam van het beroep
+                {t('wensberoepen.step1.job_title_label')}
               </Label>
               <Input 
                 id="jobTitle" 
-                placeholder="Vul hier de naam van je wensberoep in..." 
+                placeholder={t('wensberoepen.step1.job_title_placeholder')}
                 value={jobTitle} 
                 onChange={(e) => handleJobTitleChange(e.target.value)} 
                 onBlur={handleJobTitleBlur} 
@@ -166,7 +168,7 @@ const WensberoepenStep1 = () => {
                   </Label>
                   <Textarea 
                     id={`question${index + 1}`} 
-                    placeholder="Beschrijf hier je antwoord..." 
+                    placeholder={t('wensberoepen.step1.answer_placeholder')}
                     value={answers[`question${index + 1}` as keyof typeof answers]} 
                     onChange={(e) => handleInputChange(`question${index + 1}`, e.target.value)} 
                     onBlur={(e) => handleInputBlur(`question${index + 1}`, e.target.value)} 
@@ -183,7 +185,7 @@ const WensberoepenStep1 = () => {
                 variant="outline" 
                 className="border-blue-900 text-blue-900 hover:bg-blue-50"
               >
-                Terug naar intro
+                {t('wensberoepen.step1.back_button')}
               </Button>
               <Button 
                 onClick={handleNext} 
@@ -194,7 +196,7 @@ const WensberoepenStep1 = () => {
                 }`} 
                 disabled={!step1Complete}
               >
-                Volgende wensberoep
+                {t('wensberoepen.step1.next_button')}
               </Button>
             </div>
           </CardContent>

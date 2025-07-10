@@ -3,9 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { useExistingZoekprofiel } from "@/hooks/useExistingZoekprofiel";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const ZoekprofielIntro = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { hasExistingZoekprofiel, loading } = useExistingZoekprofiel();
 
   if (loading) {
@@ -34,23 +36,23 @@ const ZoekprofielIntro = () => {
           <CardContent className="p-12">
             {/* Main Title */}
             <h1 className="text-4xl font-bold text-blue-900 mb-8 text-center">
-              Zoekprofiel opstellen
+              {t('zoekprofiel.intro.title')}
             </h1>
 
             {/* Instructions Section */}
             <div className="space-y-8">
               <div>
                 <h2 className="text-2xl font-semibold text-blue-900 mb-4">
-                  Wat is een zoekprofiel?
+                  {t('zoekprofiel.intro.what_is_title')}
                 </h2>
                 <p className="text-lg text-gray-700 leading-relaxed mb-4">
-                  Een zoekprofiel is jouw persoonlijke document waarin staat wat voor soort werk je zoekt. Het helpt je om gericht te solliciteren en laat werkgevers zien wat jij te bieden hebt.
+                  {t('zoekprofiel.intro.description')}
                 </p>
                 <p className="text-lg text-gray-700 leading-relaxed mb-4">
-                  Op basis van je antwoorden maken we een professioneel zoekprofiel dat je kunt gebruiken bij je sollicitaties of delen met recruiters.
+                  {t('zoekprofiel.intro.description_details')}
                 </p>
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  Het invullen duurt ongeveer 10 minuten.
+                  {t('zoekprofiel.intro.duration')}
                 </p>
               </div>
 
@@ -59,10 +61,10 @@ const ZoekprofielIntro = () => {
                 <div className="text-center pt-8">
                   <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
                     <h3 className="text-xl font-semibold text-blue-900 mb-2">
-                      Zoekprofiel al aangemaakt
+                      {t('zoekprofiel.intro.already_created_title')}
                     </h3>
                     <p className="text-blue-700 mb-4">
-                      Je hebt al een zoekprofiel aangemaakt. Je kunt het downloaden of bekijken op de download pagina.
+                      {t('zoekprofiel.intro.already_created_description')}
                     </p>
                   </div>
                   <div className="space-y-4">
@@ -70,14 +72,14 @@ const ZoekprofielIntro = () => {
                       onClick={() => navigate('/zoekprofiel-download')} 
                       className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold text-lg px-12 py-4 rounded-lg mr-4"
                     >
-                      Naar zoekprofiel download
+                      {t('zoekprofiel.intro.download_button')}
                     </Button>
                     <Button 
                       onClick={() => navigate('/home')} 
                       variant="outline"
                       className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold text-lg px-12 py-4 rounded-lg"
                     >
-                      Terug naar dashboard
+                      {t('zoekprofiel.intro.back_button')}
                     </Button>
                   </div>
                 </div>
@@ -87,7 +89,7 @@ const ZoekprofielIntro = () => {
                     onClick={() => navigate('/zoekprofiel-antwoorden')} 
                     className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold text-lg px-12 py-4 rounded-lg"
                   >
-                    Start zoekprofiel
+                    {t('zoekprofiel.intro.start_button')}
                   </Button>
                 </div>
               )}

@@ -2,9 +2,11 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const EnthousiasmeIntro = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
@@ -28,33 +30,43 @@ const EnthousiasmeIntro = () => {
           <CardContent className="p-12">
             {/* Main Title */}
             <h1 className="text-4xl font-bold text-blue-900 mb-8 text-center">
-              Wat brengt je tot leven?
+              {t('enthousiasme.intro.title')}
             </h1>
+
+            {/* Subtitle */}
+            <p className="text-xl text-gray-600 mb-8 text-center">
+              {t('enthousiasme.intro.subtitle')}
+            </p>
 
             {/* Instructions Section */}
             <div className="space-y-8">
               <div>
+                <p className="text-lg text-gray-700 leading-relaxed mb-4">
+                  {t('enthousiasme.intro.description')}
+                </p>
+                
                 <h2 className="text-2xl font-semibold text-blue-900 mb-4">
-                  Instructie enthousiasmescan
+                  {t('enthousiasme.intro.how_it_works_title')}
                 </h2>
-                <p className="text-lg text-gray-700 leading-relaxed mb-4">
-                  In dit deel willen we weten waar jij enthousiast van wordt. We vragen je terug te kijken naar vroeger, naar je eerste baan en naar wat je nu aanspreekt.
-                </p>
-                <p className="text-lg text-gray-700 leading-relaxed mb-4">
-                  Beantwoord elke vraag met 10-20 woorden, meer mag ook. Sommige vragen lijken op elkaar. Beantwoord ze toch allemaal zo precies mogelijk.
-                </p>
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  Je krijgt in totaal negen vragen.
+                  {t('enthousiasme.intro.how_it_works_description')}
                 </p>
               </div>
 
-              {/* Start Button */}
-              <div className="text-center pt-8">
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row justify-center gap-4 pt-8">
                 <Button 
                   onClick={() => navigate('/enthousiasme-step-1')} 
                   className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold text-lg px-12 py-4 rounded-lg"
                 >
-                  Start met enthousiasmescan
+                  {t('enthousiasme.intro.start_button')}
+                </Button>
+                <Button 
+                  onClick={() => navigate('/home')} 
+                  variant="outline" 
+                  className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold text-lg px-12 py-4 rounded-lg"
+                >
+                  {t('enthousiasme.intro.back_button')}
                 </Button>
               </div>
             </div>

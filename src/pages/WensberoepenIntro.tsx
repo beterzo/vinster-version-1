@@ -1,14 +1,25 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "@/hooks/useTranslation";
+
 const WensberoepenIntro = () => {
   const navigate = useNavigate();
-  return <div className="min-h-screen bg-gray-50 font-sans">
+  const { t } = useTranslation();
+
+  return (
+    <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
           <div className="flex items-center">
-            <img alt="Vinster Logo" onClick={() => navigate('/home')} src="/lovable-uploads/156369dd-8a1e-4584-a996-14af3efed639.png" className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" />
+            <img 
+              alt="Vinster Logo" 
+              onClick={() => navigate('/home')} 
+              src="/lovable-uploads/156369dd-8a1e-4584-a996-14af3efed639.png" 
+              className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+            />
           </div>
         </div>
       </div>
@@ -19,34 +30,41 @@ const WensberoepenIntro = () => {
           <CardContent className="p-12">
             {/* Main Title */}
             <h1 className="text-4xl font-bold text-blue-900 mb-8 text-center">
-              Nu een heel ander onderwerp. Hier heb je je fantasie voor nodig.
+              {t('wensberoepen.intro.title')}
             </h1>
 
             {/* Instructions Section */}
             <div className="space-y-8">
               <div>
                 <h2 className="text-2xl font-semibold text-blue-900 mb-4">
-                  Instructie wensberoepen
+                  {t('wensberoepen.intro.instruction_title')}
                 </h2>
                 <p className="text-lg text-gray-700 leading-relaxed mb-4">
-                  Zet je fantasie aan het werk en bedenk drie beroepen die je wel (een poosje) zou willen doen. Denk zo vrij mogelijk. Er zijn nu even geen beperkingen. Hieronder vul je dadelijk één voor één je wensberoepen in. Beantwoord de vragen alsof je dat beroep al uitoefent. Je hoeft niet na te denken over hoe het precies gaat in dat werk, beschrijf alleen wat jou erin aanspreekt.
+                  {t('wensberoepen.intro.instruction_description')}
                 </p>
-                <p className="text-lg text-gray-700 leading-relaxed mb-4">Beantwoord elke vraag met 10-20 woorden, meer mag ook.  Sommige vragen lijken op elkaar. Beantwoord ze toch allemaal zo precies mogelijk.</p>
+                <p className="text-lg text-gray-700 leading-relaxed mb-4">
+                  {t('wensberoepen.intro.instruction_details')}
+                </p>
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  Je krijgt in totaal acht vragen per beroep.
+                  {t('wensberoepen.intro.instruction_questions')}
                 </p>
               </div>
 
               {/* Start Button */}
               <div className="text-center pt-8">
-                <Button onClick={() => navigate('/wensberoepen-step-1')} className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold text-lg px-12 py-4 rounded-lg">
-                  Start met wensberoepen
+                <Button 
+                  onClick={() => navigate('/wensberoepen-step-1')} 
+                  className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold text-lg px-12 py-4 rounded-lg"
+                >
+                  {t('wensberoepen.intro.start_button')}
                 </Button>
               </div>
             </div>
           </CardContent>
         </Card>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default WensberoepenIntro;

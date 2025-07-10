@@ -7,9 +7,11 @@ import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 import { useExtraInformatieResponses } from "@/hooks/useExtraInformatieResponses";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const ExtraInformatieVragen = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { toast } = useToast();
   const { responses, saveResponses, loading } = useExtraInformatieResponses();
   
@@ -86,23 +88,23 @@ const ExtraInformatieVragen = () => {
   const questions = [
     {
       field: "opleidingsniveau",
-      question: "Wat is je hoogste opleidingsniveau?",
-      placeholder: "Bijvoorbeeld: HBO, WO, MBO niveau 4, etc."
+      question: t('profiel_voltooien.extra_informatie.question1'),
+      placeholder: t('profiel_voltooien.extra_informatie.placeholder1')
     },
     {
       field: "beroepsopleiding", 
-      question: "Welke beroepsopleiding heb je gevolgd?",
-      placeholder: "Bijvoorbeeld: Bedrijfskunde, Psychologie, Technische Informatica, etc."
+      question: t('profiel_voltooien.extra_informatie.question2'),
+      placeholder: t('profiel_voltooien.extra_informatie.placeholder2')
     },
     {
       field: "sector_voorkeur",
-      question: "In welke sector(en) zou je graag willen werken?",
-      placeholder: "Bijvoorbeeld: ICT, Zorg, Onderwijs, Marketing, etc."
+      question: t('profiel_voltooien.extra_informatie.question3'),
+      placeholder: t('profiel_voltooien.extra_informatie.placeholder3')
     },
     {
       field: "fysieke_beperkingen",
-      question: "Zijn er fysieke beperkingen waar we rekening mee dienen te houden?",
-      placeholder: "Bijvoorbeeld: Geen zware fysieke arbeid, beeldschermwerk beperken, etc. (optioneel)"
+      question: t('profiel_voltooien.extra_informatie.question4'),
+      placeholder: t('profiel_voltooien.extra_informatie.placeholder4')
     }
   ];
 
@@ -137,10 +139,10 @@ const ExtraInformatieVragen = () => {
             {/* Title */}
             <div className="text-center mb-12">
               <h1 className="text-3xl font-bold text-blue-900 mb-2">
-                Extra informatie
+                {t('profiel_voltooien.extra_informatie.title')}
               </h1>
               <p className="text-xl text-gray-600">
-                Laatste vragen over je achtergrond
+                {t('profiel_voltooien.extra_informatie.subtitle')}
               </p>
             </div>
 
@@ -170,7 +172,7 @@ const ExtraInformatieVragen = () => {
                 variant="outline"
                 className="border-blue-900 text-blue-900 hover:bg-blue-50"
               >
-                Terug naar profiel intro
+                {t('profiel_voltooien.extra_informatie.back_button')}
               </Button>
               <Button 
                 onClick={handleComplete}
@@ -181,7 +183,7 @@ const ExtraInformatieVragen = () => {
                 }`}
                 disabled={!allFieldsFilled}
               >
-                Naar prioriteiten
+                {t('profiel_voltooien.extra_informatie.next_button')}
               </Button>
             </div>
           </CardContent>

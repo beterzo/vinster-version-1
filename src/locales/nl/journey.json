@@ -1,49 +1,103 @@
 
 {
   "enthousiasme": {
-    "step3": {
-      "title": "Je beste werkervaring",
-      "saving": "Bezig met opslaan...",
-      "question1": "Aan welke periode denk je met heel veel plezier terug? Wat maakte die tijd zo leuk? Wat deed je?",
-      "question2": "Kun je nog een leuke periode of project noemen? Wat deed je toen vooral?",
-      "question3": "Wanneer kom jij fluitend thuis? Wat heb je op zo'n dag gedaan en meegemaakt?",
-      "placeholder1": "Deel hier je verhaal over een geweldige werkperiode...",
-      "placeholder2": "Vertel hier over nog een leuke ervaring...",
-      "placeholder3": "Beschrijf hier zo'n perfecte werkdag...",
-      "previous": "Vorige",
-      "finish": "Afronden"
-    }
-  },
-  "zoekprofiel": {
     "intro": {
-      "title": "Je bent er bijna!",
-      "description": "Dit is de laatste stap in Vinster. Je hebt onderzoek gedaan en je gaat nu je zoekprofiel opstellen. Een zoekprofiel is een duidelijk overzicht van de baan die jij zoekt.",
-      "benefits": {
-        "targeted_search": "Gericht zoeken",
-        "targeted_search_desc": "Vind passende vacatures sneller",
-        "better_conversations": "Betere gesprekken",
-        "better_conversations_desc": "Voer gerichte gesprekken met je netwerk",
-        "visibility": "Zichtbaar maken",
-        "visibility_desc": "Laat anderen weten waar je naar zoekt"
-      },
-      "start_button": "Start met je zoekprofiel",
+      "title": "Enthousiasme scan",
+      "subtitle": "Ontdek wat jou energie geeft in je werk",
+      "description": "De enthousiasme scan helpt je om te ontdekken wat jou echt energie geeft in je werk. Door terug te kijken op momenten van plezier en enthousiasme, krijg je inzicht in wat belangrijk voor je is.",
+      "how_it_works_title": "Hoe werkt het?",
+      "how_it_works_description": "Je beantwoordt vragen over drie verschillende periodes: je kindertijd, je eerste baan en je beste werkervaringen. Dit duurt ongeveer 15 minuten.",
+      "start_button": "Start enthousiasme scan",
       "back_button": "Terug naar dashboard"
+    },
+    "step1": {
+      "title": "Enthousiasme scan - Stap 1",
+      "subtitle": "Vragen over je kindertijd",
+      "question1": "Waar was je als kind het liefst mee bezig?",
+      "question2": "Waar hield je je als kind het liefst op?",
+      "question3": "Wat interesseerde je als kind? Waar was je nieuwsgierig naar?",
+      "placeholder": "Beschrijf hier je antwoord...",
+      "back_button": "Terug naar intro",
+      "next_button": "Volgende stap"
+    },
+    "step2": {
+      "title": "Enthousiasme scan - Stap 2",
+      "subtitle": "Vragen over je eerste baan",
+      "question1": "Wat waren de leukste taken in je eerste baan?",
+      "question2": "Welke werkomstandigheden vond je fijn in je eerste baan?",
+      "question3": "Welke onderwerpen spraken je aan in je eerste baan?",
+      "placeholder": "Beschrijf hier je antwoord...",
+      "previous_button": "Vorige stap",
+      "next_button": "Volgende stap"
+    },
+    "step3": {
+      "title": "Enthousiasme scan - Stap 3",
+      "subtitle": "Vragen over plezierige werkervaringen",
+      "saving": "Bezig met opslaan...",
+      "question1": "Beschrijf de meest plezierige werkperiode in je loopbaan. Wat maakte het zo leuk?",
+      "question2": "Denk aan het leukste project waar je aan hebt gewerkt. Wat was je rol daarin?",
+      "question3": "Beschrijf een dag waarop je fluitend thuiskwam van je werk. Wat was er die dag zo bijzonder?",
+      "placeholder": "Beschrijf hier je antwoord...",
+      "previous_button": "Vorige stap",
+      "finish_button": "Enthousiasmescan voltooien"
     }
-  },
-  "profiel_voltooien": {
-    "title": "Twee laatste stappen om jouw loopbaanrapport te genereren",
-    "description": "Je gaat eerst wat aanvullende informatie invullen over jezelf. Daarna ga je aangeven wat voor jou het allerbelangrijkste is uit je eerdere antwoorden.",
-    "step1_title": "Extra informatie",
-    "step2_title": "Prioriteiten stellen",
-    "back_button": "Terug naar dashboard",
-    "start_button": "Loopbaanrapport aanmaken"
   },
   "wensberoepen": {
+    "intro": {
+      "title": "Nu een heel ander onderwerp. Hier heb je je fantasie voor nodig.",
+      "instruction_title": "Instructie wensberoepen",
+      "instruction_description": "Zet je fantasie aan het werk en bedenk drie beroepen die je wel (een poosje) zou willen doen. Denk zo vrij mogelijk. Er zijn nu even geen beperkingen. Hieronder vul je dadelijk één voor één je wensberoepen in. Beantwoord de vragen alsof je dat beroep al uitoefent. Je hoeft niet na te denken over hoe het precies gaat in dat werk, beschrijf alleen wat jou erin aanspreekt.",
+      "instruction_details": "Beantwoord elke vraag met 10-20 woorden, meer mag ook. Sommige vragen lijken op elkaar. Beantwoord ze toch allemaal zo precies mogelijk.",
+      "instruction_questions": "Je krijgt in totaal acht vragen per beroep.",
+      "start_button": "Start met wensberoepen"
+    },
+    "step1": {
+      "title": "Wensberoep 1",
+      "subtitle": "Wat zou jij wel een poosje, of zelfs altijd, willen doen?",
+      "job_title_label": "Naam van het beroep",
+      "job_title_placeholder": "Vul hier de naam van je wensberoep in...",
+      "question1": "Wat doe je in een werkweek? Antwoord in werkwoorden en activiteiten.",
+      "question2": "Waar doe je je werk? Beschrijf de omgeving, het gebouw, de ruimte ....",
+      "question3": "Werk je meer samen of meer alleen? Met wat voor mensen heb je contact?",
+      "question4": "Wat heb je gedaan op een dag dat je fluitend thuiskomt?",
+      "question5": "Wat is je doel met dit werk?",
+      "question6": "Welke onderdelen uit je werk zijn het leukst?",
+      "question7": "Wat is voor jou belangrijk in dit werk?",
+      "question8": "Waar gaat het vooral over in jouw werk? Waar moet je veel van weten?",
+      "answer_placeholder": "Beschrijf hier je antwoord...",
+      "back_button": "Terug naar intro",
+      "next_button": "Volgende wensberoep"
+    },
+    "step2": {
+      "title": "Wensberoep 2",
+      "subtitle": "Wat zou jij wel een poosje, of zelfs altijd, willen doen?",
+      "job_title_label": "Naam van het beroep",
+      "job_title_placeholder": "Vul hier de naam van je wensberoep in...",
+      "question1": "Wat doe je in een werkweek? Antwoord in werkwoorden en activiteiten.",
+      "question2": "Waar doe je je werk? Beschrijf de omgeving, het gebouw, de ruimte ....",
+      "question3": "Werk je meer samen of meer alleen? Met wat voor mensen heb je contact?",
+      "question4": "Wat heb je gedaan op een dag dat je fluitend thuiskomt?",
+      "question5": "Wat is je doel met dit werk?",
+      "question6": "Welke onderdelen uit je werk zijn het leukst?",
+      "question7": "Wat is voor jou belangrijk in dit werk?",
+      "question8": "Waar gaat het vooral over in jouw werk? Waar moet je veel van weten?",
+      "answer_placeholder": "Beschrijf hier je antwoord...",
+      "previous_button": "Vorige wensberoep",
+      "next_button": "Volgende wensberoep"
+    },
     "step3": {
       "title": "Wensberoep 3",
       "subtitle": "Wat zou jij wel een poosje, of zelfs altijd, willen doen?",
       "job_title_label": "Naam van het beroep",
       "job_title_placeholder": "Vul hier de naam van je wensberoep in...",
+      "question1": "Wat doe je in een werkweek? Antwoord in werkwoorden en activiteiten.",
+      "question2": "Waar doe je je werk? Beschrijf de omgeving, het gebouw, de ruimte ....",
+      "question3": "Werk je meer samen of meer alleen? Met wat voor mensen heb je contact?",
+      "question4": "Wat heb je gedaan op een dag dat je fluitend thuiskomt?",
+      "question5": "Wat is je doel met dit werk?",
+      "question6": "Welke onderdelen uit je werk zijn het leukst?",
+      "question7": "Wat is voor jou belangrijk in dit werk?",
+      "question8": "Waar gaat het vooral over in jouw werk? Waar moet je veel van weten?",
       "answer_placeholder": "Beschrijf hier je antwoord...",
       "previous_button": "Vorige wensberoep",
       "finish_button": "Afronden",
@@ -53,19 +107,140 @@
     "voltooi": {
       "title": "Gefeliciteerd! 🎉",
       "subtitle": "Je hebt succesvol de vragen over je wensberoepen afgerond",
-      "what_happened_title": "Wat er nu is gebeurd:",
-      "what_happened_description": "Er zijn nu kernwoorden samengesteld om te bepalen wat jij belangrijk vindt in je werk",
-      "next_step_title": "Volgende stap: Loopbaanrapport aanmaken",
-      "next_step_description": "Om jouw persoonlijke loopbaanrapport te genereren, hebben we nog wat aanvullende informatie van je nodig:",
-      "priorities_title": "Prioriteiten",
-      "priorities_description": "De kernwoorden worden onderverdeeld in 3 onderdelen: activiteiten, interesses en werkomstandigheden. Het is nu aan jou om de kernwoorden te benadrukken die je het belangrijkst vindt.",
+      "what_happened_title": "Wat is er gebeurd?",
+      "what_happened_description": "Er zijn nu kernwoorden samengesteld om te bepalen wat jij belangrijk vindt in je werk. Om jouw persoonlijke loopbaanrapport te genereren hebben we nog wat aanvullende informatie van je nodig.",
+      "next_step_title": "Volgende stap: persoonsprofiel",
+      "next_step_description": "Vul je persoonsprofiel aan met wat extra informatie over je achtergrond en voorkeuren, en geef aan wat je belangrijk vindt in je werk.",
+      "priorities_title": "Prioriteiten bepalen",
+      "priorities_description": "Wat vind je belangrijk in je werk?",
       "extra_info_title": "Extra informatie",
-      "extra_info_description": "Aanvullende vragen over je achtergrond. Denk aan informatie zoals je opleiding en opleidingsniveau, maar ook of er een specifieke sector is waarin je wilt zoeken.",
-      "report_title": "Rapport",
-      "report_description": "Ontvang jouw persoonlijke loopbaanadviezen. Nadat we alle informatie van je hebben ontvangen, krijg je een compleet persoonlijk loopbaanrapport waarmee je verder kunt!",
-      "create_report_button": "Loopbaanrapport aanmaken",
+      "extra_info_description": "Je achtergrond en voorkeuren",
+      "report_title": "Rapport genereren",
+      "report_description": "Je persoonlijke loopbaanrapport",
+      "create_report_button": "Persoonsprofiel voltooien",
       "to_dashboard_button": "Naar dashboard",
-      "tip_text": "💡 Je kunt jouw loopbaanrapport altijd later aanmaken via het dashboard"
+      "tip_text": "Tip: Het invullen van je persoonsprofiel duurt ongeveer 5-10 minuten."
     }
+  },
+  "profiel_voltooien": {
+    "intro": {
+      "title": "Profiel voltooien",
+      "last_step_title": "Laatste stap",
+      "description": "We hebben bijna alle informatie die we nodig hebben voor jouw persoonlijke carrièreadvies. Voor de laatste stap vragen we je nog een paar korte vragen over je achtergrond en voorkeuren.",
+      "description_details": "Dit helpt ons om je advies nog specifieker en praktischer te maken.",
+      "start_button": "Profiel voltooien"
+    },
+    "extra_informatie": {
+      "title": "Extra informatie",
+      "subtitle": "Laatste vragen over je achtergrond",
+      "question1": "Wat is je hoogste opleidingsniveau?",
+      "question2": "Welke beroepsopleiding heb je gevolgd?",
+      "question3": "In welke sector(en) zou je graag willen werken?",
+      "question4": "Zijn er fysieke beperkingen waar we rekening mee dienen te houden?",
+      "placeholder1": "Bijvoorbeeld: HBO, WO, MBO niveau 4, etc.",
+      "placeholder2": "Bijvoorbeeld: Bedrijfskunde, Psychologie, Technische Informatica, etc.",
+      "placeholder3": "Bijvoorbeeld: ICT, Zorg, Onderwijs, Marketing, etc.",
+      "placeholder4": "Bijvoorbeeld: Geen zware fysieke arbeid, beeldschermwerk beperken, etc. (optioneel)",
+      "back_button": "Terug naar profiel intro",
+      "next_button": "Naar prioriteiten"
+    },
+    "prioriteiten": {
+      "activiteiten": {
+        "title": "Prioriteiten - activiteiten",
+        "subtitle": "Selecteer minimaal 5 activiteiten die je leuk vindt om te doen",
+        "selected_count": "Geselecteerd: {count} van minimaal 5",
+        "missing_keywords": "Er zijn nog geen persoonlijke activiteiten gegenereerd. Vul eerst je enthousiasme scan en wensberoepen in.",
+        "extra_text_label": "Mis je nog activiteiten? Voeg ze hier toe (optioneel)",
+        "extra_text_placeholder": "Bijvoorbeeld: Fotograferen, Programmeren, Tuinieren...",
+        "next_button": "Volgende: Werkomstandigheden"
+      },
+      "werkomstandigheden": {
+        "title": "Prioriteiten - werkomstandigheden",
+        "subtitle": "Selecteer minimaal 5 werkomstandigheden die belangrijk voor je zijn",
+        "selected_count": "Geselecteerd: {count} van minimaal 5",
+        "missing_keywords": "Er zijn nog geen persoonlijke werkomstandigheden gegenereerd. Vul eerst je enthousiasme scan en wensberoepen in.",
+        "extra_text_label": "Mis je nog werkomstandigheden? Voeg ze hier toe (optioneel)",
+        "extra_text_placeholder": "Bijvoorbeeld: Hond mee naar kantoor, Goede koffie, Ergonomische werkplek...",
+        "previous_button": "Vorige: Activiteiten",
+        "next_button": "Volgende: Interesses"
+      },
+      "interesses": {
+        "title": "Prioriteiten - interesses",
+        "subtitle": "Selecteer minimaal 5 interesses die je aantrekken",
+        "selected_count": "Geselecteerd: {count} van minimaal 5",
+        "missing_keywords": "Er zijn nog geen persoonlijke interesses gegenereerd. Vul eerst je enthousiasme scan en wensberoepen in.",
+        "extra_text_label": "Mis je nog interesses? Voeg ze hier toe (optioneel)",
+        "extra_text_placeholder": "Bijvoorbeeld: Duurzaamheid, Technologie, Kunst...",
+        "previous_button": "Vorige: Werkomstandigheden",
+        "finish_button": "Loopbaanrapport genereren"
+      }
+    }
+  },
+  "zoekprofiel": {
+    "intro": {
+      "title": "Zoekprofiel opstellen",
+      "what_is_title": "Wat is een zoekprofiel?",
+      "description": "Een zoekprofiel is jouw persoonlijke document waarin staat wat voor soort werk je zoekt. Het helpt je om gericht te solliciteren en laat werkgevers zien wat jij te bieden hebt.",
+      "description_details": "Op basis van je antwoorden maken we een professioneel zoekprofiel dat je kunt gebruiken bij je sollicitaties of delen met recruiters.",
+      "duration": "Het invullen duurt ongeveer 10 minuten.",
+      "already_created_title": "Zoekprofiel al aangemaakt",
+      "already_created_description": "Je hebt al een zoekprofiel aangemaakt. Je kunt het downloaden of bekijken op de download pagina.",
+      "start_button": "Start zoekprofiel",
+      "download_button": "Naar zoekprofiel download",
+      "back_button": "Terug naar dashboard"
+    },
+    "antwoorden": {
+      "title": "Zoekprofiel vragen",
+      "subtitle": "Beantwoord de vragen om je zoekprofiel op te stellen",
+      "question1": "Ik zoek een functie als...",
+      "question2": "Mijn kerntaken zijn...",
+      "question3": "Ik wil graag werken bij...",
+      "question4": "In de sector...",
+      "question5": "In de regio...",
+      "question6": "Arbeidsvoorwaarden die belangrijk voor mij zijn...",
+      "placeholder": "Beschrijf hier je antwoord...",
+      "back_button": "Terug naar intro",
+      "generate_button": "Zoekprofiel genereren"
+    },
+    "download": {
+      "title": "Zoekprofiel downloaden",
+      "description": "Je zoekprofiel is klaar! Je kunt het nu downloaden en gebruiken bij je sollicitaties.",
+      "download_button": "Download zoekprofiel PDF",
+      "back_button": "Terug naar dashboard",
+      "regenerate_button": "Nieuw zoekprofiel maken"
+    }
+  },
+  "rapport": {
+    "download": {
+      "title": "Loopbaanrapport downloaden",
+      "description": "Je persoonlijke loopbaanrapport is klaar! Dit rapport bevat alle inzichten en aanbevelingen op basis van je antwoorden.",
+      "download_button": "Download loopbaanrapport PDF",
+      "research_plan_button": "Bekijk onderzoeksplan",
+      "back_button": "Terug naar dashboard"
+    }
+  },
+  "onderzoeksplan": {
+    "title": "Onderzoeksplan",
+    "subtitle": "Dit is jouw stappenplan om te bepalen hoe je volgende functie eruit moet komen te zien.",
+    "tip": "💡 Dit onderzoeksplan staat ook onderaan jouw loopbaanrapport, dus daar kun je hem altijd terugvinden.",
+    "steps_title": "Dit is jouw stappenplan:",
+    "step1": "Vraag AI (of Google) naar een uitgebreide functiebeschrijving van de functies uit je loopbaanrapport. Vraag AI ook naar vergelijkbare functies. Welk werk lijkt erop? Wat spreekt je aan in de antwoorden die je krijgt?",
+    "step2": "Kijk of je vacatures kunt vinden die een beeld geven van de inhoud van deze functie en van de organisaties die deze functies hebben.",
+    "step3": "Zoek op LinkedIn naar mensen die dit werk doen. Wat is hun achtergrond?",
+    "step4": "Is er een beroepsvereniging? Wat lees je op de website over ontwikkelingen in de sector en het beroep?",
+    "step5": "Heeft het beroep een vakblad? Zo ja, vraag er één of meerdere aan en lees ze. Wat valt je op? Word je enthousiast van de onderwerpen?",
+    "step6": "Zoek organisaties waar mensen met dit beroep werken.",
+    "step7": "Welke opleiding heb je eventueel nodig voor dit werk? Vraag het AI of Google.",
+    "step8": "Schrijf alle vragen op die bij je opkomen tijdens het onderzoek. Die kun je gaan stellen aan mensen die al werkzaam zijn in deze richting.",
+    "step9": "Maak een lijstje met mensen die je zou willen spreken over dit werk en benader hen. Je vindt die mensen via LinkedIn en/of via je persoonlijke netwerk.",
+    "step10": "Verzamel genoeg informatie om een keuze te maken. Neem de tijd en praat er met anderen over.",
+    "after_research_title": "Na je onderzoek:",
+    "after_research_description": "Als je genoeg aan de weet bent gekomen kies dan de functie die het allerbest bij je past en vul het zoekprofiel op de website in. Vinster zal jouw tekst omzetten naar een paar zinnen die je kunt gebruiken om anderen te laten weten wat je zoekt.",
+    "after_research_action": "Je kunt nu gericht gaan solliciteren! Zoek vacatures, laat jouw netwerk weten wat je wilt en deel op LinkedIn welke functie je zoekt.",
+    "final_message": "We wensen jou veel werkplezier in je volgende functie!",
+    "time_notice_title": "⏰ Neem hier de tijd voor dit onderzoek",
+    "time_notice_description": "Dit onderzoek is cruciaal voor het vinden van je ideale functie. Neem de tijd om elke stap zorgvuldig uit te voeren.",
+    "time_notice_details": "Hoe beter je dit onderzoek doet, hoe beter je straks je zoekprofiel kunt invullen en hoe gerichter je kunt solliciteren.",
+    "back_button": "Terug naar dashboard"
   }
 }
