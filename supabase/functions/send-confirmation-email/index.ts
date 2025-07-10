@@ -1,3 +1,4 @@
+
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "npm:resend@2.0.0";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.50.0";
@@ -411,8 +412,15 @@ const handler = async (req: Request): Promise<Response> => {
     let actionUrl: string;
 
     if (eventType === "signup") {
-      actionUrl = `https://aqajxxevifmhdjlvqhkz.supabase.co/auth/v1/verify?token=${payload.email_data.token_hash}&type=signup&redirect_to=${encodeURIComponent(payload.email_data.redirect_to)}`;
+      // For signup, modify the redirect_to URL to include the language parameter
+      const baseRedirectUrl = payload.email_data.redirect_to || 'https://vinster.ai/email-confirmed';
+      const redirectUrl = new URL(baseRedirectUrl);
+      redirectUrl.searchParams.set('lang', userLanguage);
+      
+      actionUrl = `https://aqajxxevifmhdjlvqhkz.supabase.co/auth/v1/verify?token=${payload.email_data.token_hash}&type=signup&redirect_to=${encodeURIComponent(redirectUrl.toString())}`;
       emailHtml = createSignupEmailHtml(firstName, actionUrl, userLanguage);
+      
+      console.log("📧 Created signup URL with language parameter:", redirectUrl.toString());
     } else {
       // For recovery, create a direct link to reset-password page with token parameters
       const directResetUrl = `https://vinster.ai/reset-password?token_hash=${payload.email_data.token_hash}&type=recovery&lang=${userLanguage}`;
@@ -478,7 +486,7 @@ const handler = async (req: Request): Promise<Response> => {
       eventType: eventType,
       duration: `${duration}ms`,
       finalActionUrl: actionUrl,
-      approach: eventType === 'recovery' ? 'direct-reset-url' : 'supabase-verify-url'
+      approach: eventType === 'recovery' ? 'direct-reset-url' : 'supabase-verify-url-with-lang'
     }), {
       status: 200,
       headers: { "Content-Type": "application/json", ...corsHeaders },

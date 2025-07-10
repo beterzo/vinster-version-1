@@ -1,9 +1,24 @@
-import { useNavigate } from "react-router-dom";
+
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const EmailConfirmedPage = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const { t } = useTranslation();
+  const { setLanguage } = useLanguage();
+
+  useEffect(() => {
+    // Check for language parameter in URL and set it
+    const langParam = searchParams.get('lang');
+    if (langParam && (langParam === 'nl' || langParam === 'en')) {
+      setLanguage(langParam);
+    }
+  }, [searchParams, setLanguage]);
 
   const handleGoToLogin = () => {
     navigate('/login');
@@ -22,7 +37,7 @@ const EmailConfirmedPage = () => {
         <div className="relative z-10 h-full flex items-end p-12">
           <div className="bg-white bg-opacity-90 rounded-2xl p-8 max-w-md">
             <blockquote className="text-xl font-medium text-blue-900 leading-relaxed">
-              "Welkom! Je account is succesvol geactiveerd."
+              "{t('auth.login.quote')}"
             </blockquote>
           </div>
         </div>
@@ -46,26 +61,26 @@ const EmailConfirmedPage = () => {
             </div>
             
             <h1 className="text-2xl sm:text-3xl font-bold text-blue-900">
-              Email succesvol bevestigd!
+              {t('auth.email_confirmed.title')}
             </h1>
             
             <p className="text-gray-600 leading-relaxed">
-              Gefeliciteerd! Je email adres is succesvol bevestigd en je account is nu geactiveerd.
+              {t('auth.email_confirmed.description')}
             </p>
           </div>
 
           <div className="bg-green-50 border border-green-200 rounded-lg p-6">
             <div className="text-center space-y-3">
-              <h3 className="font-semibold text-green-800">Je kunt nu aan de slag!</h3>
+              <h3 className="font-semibold text-green-800">{t('auth.email_confirmed.subtitle')}</h3>
               <p className="text-sm text-green-700">
-                Je account is klaar voor gebruik. Log in om je loopbaanreis te beginnen.
+                {t('auth.email_confirmed.description')}
               </p>
             </div>
           </div>
 
           <div className="space-y-4">
             <Button onClick={handleGoToLogin} className="w-full h-12 bg-blue-900 hover:bg-blue-800 text-white font-semibold text-base rounded-lg">
-              Ga naar inloggen
+              {t('auth.email_confirmed.continue_to_login')}
             </Button>
             
             <p className="text-center text-sm text-gray-500">
