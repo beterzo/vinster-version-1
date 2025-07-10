@@ -13,7 +13,7 @@
     },
     "what_is_vinster": {
       "title": "What is Vinster?",
-      "description": "Vinster is an AI-driven platform that helps you discover what truly motivates you at work. Through targeted questions and smart analysis, we create a personal profile that gives you clarity about your career direction.",
+      "description": "Vinster is an AI-driven platform that helps you discover what work truly suits you. Through targeted questions and smart analysis, we create a personal profile that gives you clarity about your career direction.",
       "based_on": "Built on proven methods from practice and your unique characteristics, you get:",
       "two_matching_functions": "Two matching functions that fit you perfectly",
       "one_surprising_suggestion": "One surprising suggestion that opens new possibilities",
@@ -33,7 +33,7 @@
     "features": {
       "card1": {
         "title": "What is Vinster?",
-        "description": "Vinster is an AI-driven platform that helps you discover what truly motivates you at work. Through targeted questions and smart analysis, we create a personal profile that gives you clarity about your career direction."
+        "description": "Vinster is an AI-driven platform that helps you discover what work truly suits you. Through targeted questions and smart analysis, we create a personal profile that gives you clarity about your career direction."
       },
       "card2": {
         "title": "What do you get?",
