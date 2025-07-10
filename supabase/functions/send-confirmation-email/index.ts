@@ -312,13 +312,17 @@ const handler = async (req: Request): Promise<Response> => {
       actionUrl = `https://aqajxxevifmhdjlvqhkz.supabase.co/auth/v1/verify?token=${payload.email_data.token_hash}&type=signup&redirect_to=${encodeURIComponent(payload.email_data.redirect_to)}`;
       emailHtml = createSignupEmailHtml(firstName, actionUrl, userLanguage);
     } else {
-      // For recovery, make sure we preserve the redirect URL exactly as provided
-      actionUrl = `https://aqajxxevifmhdjlvqhkz.supabase.co/auth/v1/verify?token=${payload.email_data.token_hash}&type=recovery&redirect_to=${encodeURIComponent(payload.email_data.redirect_to)}`;
+      // For recovery, create a direct link to reset-password page with token parameters
+      // This bypasses the complex Supabase redirect flow and creates a more reliable experience
+      const directResetUrl = `https://vinster.ai/reset-password?token_hash=${payload.email_data.token_hash}&type=recovery&lang=${userLanguage}`;
+      console.log("🔗 DEBUG: Creating direct reset URL:", directResetUrl);
+      
+      actionUrl = directResetUrl;
       emailHtml = createPasswordResetEmailHtml(firstName, actionUrl, userLanguage);
       
       // DEBUG: Log the final action URL for password reset
-      console.log("🔗 DEBUG: Final password reset action URL:", actionUrl);
-      console.log("🔗 DEBUG: Encoded redirect_to:", encodeURIComponent(payload.email_data.redirect_to));
+      console.log("🔗 DEBUG: Final password reset action URL (DIRECT):", actionUrl);
+      console.log("🔗 DEBUG: This URL will go directly to /reset-password with token parameters");
     }
 
     console.log("📤 Sending email via Resend...");
@@ -376,7 +380,8 @@ const handler = async (req: Request): Promise<Response> => {
       language: userLanguage,
       eventType: eventType,
       duration: `${duration}ms`,
-      finalActionUrl: actionUrl
+      finalActionUrl: actionUrl,
+      approach: eventType === 'recovery' ? 'direct-reset-url' : 'supabase-verify-url'
     }), {
       status: 200,
       headers: { "Content-Type": "application/json", ...corsHeaders },

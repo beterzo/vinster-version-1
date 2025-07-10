@@ -48,7 +48,7 @@ const LandingPage = () => {
 
   return (
     <>
-      <TitleManager title={t('landing.title')} />
+      <TitleManager />
       <div className="min-h-screen bg-white">
         <HeroSection />
         <WhatIsVinsterCard />

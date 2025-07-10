@@ -35,6 +35,42 @@ const ResetPasswordPage = () => {
         setLanguage(langParam);
       }
 
+      // Check for direct token access via URL parameters (fallback method)
+      const token = searchParams.get('token');
+      const tokenHash = searchParams.get('token_hash');
+      const type = searchParams.get('type');
+      
+      console.log('🔗 Direct URL token check:', {
+        hasToken: !!token,
+        hasTokenHash: !!tokenHash,
+        type: type,
+        isRecoveryType: type === 'recovery'
+      });
+
+      // If we have a recovery token directly in URL, try to verify it
+      if ((token || tokenHash) && type === 'recovery') {
+        console.log('🔐 Found recovery token in URL, attempting verification');
+        try {
+          const { error } = await supabase.auth.verifyOtp({
+            token_hash: tokenHash || token || '',
+            type: 'recovery'
+          });
+          
+          if (error) {
+            console.error('❌ Direct token verification failed:', error);
+            handleInvalidToken();
+            return;
+          } else {
+            console.log('✅ Direct token verification successful');
+            setHasValidSession(true);
+            setIsVerifying(false);
+            return;
+          }
+        } catch (error) {
+          console.error('❌ Exception during direct token verification:', error);
+        }
+      }
+
       // Check for auth session with more lenient approach
       try {
         const { data: { session }, error } = await supabase.auth.getSession();
