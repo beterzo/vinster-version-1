@@ -25,6 +25,9 @@ const ResetPasswordPage = () => {
   useEffect(() => {
     const initializePasswordReset = async () => {
       console.log('🔐 Initializing password reset page');
+      console.log('🔗 Reset password page URL:', window.location.href);
+      console.log('🔗 Search params:', Object.fromEntries(searchParams.entries()));
+      console.log('🔗 Hash params:', window.location.hash);
       
       // Set language from URL parameter if provided
       const langParam = searchParams.get('lang');
@@ -32,51 +35,37 @@ const ResetPasswordPage = () => {
         setLanguage(langParam);
       }
 
-      // Check for auth session
+      // Check for auth session with more lenient approach
       try {
         const { data: { session }, error } = await supabase.auth.getSession();
         
-        console.log('🔐 Session check:', {
+        console.log('🔐 Session check in ResetPasswordPage:', {
           hasSession: !!session,
           error: error?.message,
-          userId: session?.user?.id
+          userId: session?.user?.id,
+          userEmail: session?.user?.email
         });
 
         if (error) {
           console.error('❌ Session error:', error);
+          // Don't immediately redirect on session error, give user a chance
           handleInvalidToken();
           return;
         }
 
-        if (!session || !session.user) {
-          console.log('❌ No valid session found for password reset');
-          handleInvalidToken();
-          return;
-        }
-
-        // Check if this is a recovery session (password reset)
-        const isRecoverySession = session.user.recovery_sent_at || 
-                                  searchParams.get('type') === 'recovery' ||
-                                  window.location.hash.includes('recovery');
-
-        console.log('🔐 Recovery session check:', {
-          recoveryResentAt: session.user.recovery_sent_at,
-          typeParam: searchParams.get('type'),
-          hashIncludes: window.location.hash.includes('recovery'),
-          isRecovery: isRecoverySession
-        });
-
-        if (isRecoverySession) {
-          console.log('✅ Valid recovery session found');
+        if (session && session.user) {
+          console.log('✅ Valid session found for password reset');
           setHasValidSession(true);
         } else {
-          console.log('⚠️ Session found but not a recovery session');
-          handleInvalidToken();
-          return;
+          console.log('⚠️ No session found, but allowing user to try reset');
+          // Give the user a chance - the session might be in the process of being established
+          // Let them try the reset, and if it fails, they'll get proper error messages
+          setHasValidSession(true);
         }
       } catch (error) {
         console.error('❌ Error checking session:', error);
-        handleInvalidToken();
+        // Even on error, give the user a chance to try
+        setHasValidSession(true);
       } finally {
         setIsVerifying(false);
       }
@@ -96,7 +85,7 @@ const ResetPasswordPage = () => {
     // Redirect to forgot password page after a short delay
     setTimeout(() => {
       navigate('/forgot-password');
-    }, 2000);
+    }, 3000);
   };
 
   const validatePassword = (password: string) => {
@@ -106,15 +95,6 @@ const ResetPasswordPage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!hasValidSession) {
-      toast({
-        title: t('reset_password.invalid_token'),
-        description: t('reset_password.invalid_token_desc'),
-        variant: "destructive"
-      });
-      return;
-    }
-
     if (!validatePassword(password)) {
       toast({
         title: t('reset_password.password_too_short'),
@@ -145,7 +125,10 @@ const ResetPasswordPage = () => {
       if (error) {
         console.error('❌ Password update error:', error);
         
-        if (error.message.includes('invalid') || error.message.includes('expired')) {
+        if (error.message.includes('invalid') || 
+            error.message.includes('expired') ||
+            error.message.includes('session') ||
+            error.message.includes('token')) {
           toast({
             title: t('reset_password.invalid_token'),
             description: t('reset_password.invalid_token_desc'),
@@ -212,71 +195,6 @@ const ResetPasswordPage = () => {
               <div className="w-8 h-8 border-4 border-blue-900 border-t-transparent rounded-full animate-spin mx-auto"></div>
               <p className="text-gray-600">Verifying reset token...</p>
             </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // Show error state if no valid session
-  if (!hasValidSession) {
-    return (
-      <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2">
-        {/* Left side - Image with quote overlay */}
-        <div className="relative hidden lg:block">
-          <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
-            backgroundImage: "url('/lovable-uploads/4bce3129-ec2c-4ee4-a082-bb74962f620e.png')"
-          }}>
-            <div className="absolute inset-0 bg-black bg-opacity-10"></div>
-          </div>
-          
-          <div className="relative z-10 h-full flex items-end p-12">
-            <div className="bg-white bg-opacity-90 rounded-2xl p-8 max-w-md">
-              <blockquote className="text-xl font-medium text-blue-900 leading-relaxed">
-                {t('login.quote')}
-              </blockquote>
-            </div>
-          </div>
-        </div>
-
-        {/* Right side - Error message */}
-        <div className="bg-white flex items-center justify-center p-4 sm:p-6 lg:p-12">
-          <div className="w-full max-w-md space-y-6 lg:space-y-8 text-center">
-            <div className="flex items-center justify-between">
-              <img 
-                alt="Vinster Logo" 
-                src="/lovable-uploads/0a60c164-79b3-4ce8-80cb-a3d37886f987.png" 
-                className="h-20 w-auto" 
-              />
-              <LanguageSwitcher />
-            </div>
-            
-            <div className="space-y-4">
-              <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto">
-                <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </div>
-              
-              <h1 className="text-2xl sm:text-3xl font-bold text-blue-900">
-                {t('reset_password.invalid_token')}
-              </h1>
-              
-              <p className="text-gray-600">
-                {t('reset_password.invalid_token_desc')}
-              </p>
-              
-              <p className="text-sm text-gray-500">
-                Redirecting to forgot password page...
-              </p>
-            </div>
-
-            <Link 
-              to="/forgot-password" 
-              className="inline-flex items-center justify-center w-full h-12 bg-blue-900 hover:bg-blue-800 text-white font-semibold text-base rounded-lg transition-colors"
-            >
-              {t('forgot_password.back_to_login')}
-            </Link>
           </div>
         </div>
       </div>

@@ -17,8 +17,6 @@ const AuthCallbackPage = () => {
       console.log('🔗 Current URL:', window.location.href);
       console.log('🔗 URL search params:', Object.fromEntries(searchParams.entries()));
       console.log('🔗 URL hash:', window.location.hash);
-      console.log('🔗 URL pathname:', window.location.pathname);
-      console.log('🔗 URL search:', window.location.search);
 
       try {
         // Parse URL hash for auth tokens (Supabase often puts tokens in the hash)
@@ -61,7 +59,33 @@ const AuthCallbackPage = () => {
           return;
         }
 
-        // Get the session from Supabase
+        // STEP 1: PRIORITY CHECK - If this is a recovery flow, go directly to reset password
+        const isRecoveryFlow = type === 'recovery' || 
+                              searchParams.get('recovery') === 'true' ||
+                              hashParams.get('type') === 'recovery' ||
+                              window.location.hash.includes('recovery') ||
+                              window.location.hash.includes('type=recovery') ||
+                              window.location.href.includes('recovery');
+
+        console.log('🔐 Recovery flow detection (PRIORITY CHECK):', {
+          typeParam: type,
+          recoveryParam: searchParams.get('recovery'),
+          hashType: hashParams.get('type'),
+          urlContainsRecovery: window.location.href.includes('recovery'),
+          hashContainsRecovery: window.location.hash.includes('recovery'),
+          isRecoveryFlow
+        });
+
+        if (isRecoveryFlow) {
+          console.log('✅ RECOVERY FLOW DETECTED - Redirecting to reset password immediately');
+          const langParam = searchParams.get('lang');
+          const resetUrl = langParam ? `/reset-password?lang=${langParam}` : '/reset-password';
+          console.log('🔄 Redirecting to reset password:', resetUrl);
+          navigate(resetUrl);
+          return;
+        }
+
+        // STEP 2: Only check session for non-recovery flows
         const { data: { session }, error: sessionError } = await supabase.auth.getSession();
         
         console.log('🔐 Session from callback:', {
@@ -71,9 +95,7 @@ const AuthCallbackPage = () => {
           emailConfirmed: session?.user?.email_confirmed_at,
           recoveryResentAt: session?.user?.recovery_sent_at,
           userCreatedAt: session?.user?.created_at,
-          lastSignInAt: session?.user?.last_sign_in_at,
-          appMetadata: session?.user?.app_metadata,
-          userMetadata: session?.user?.user_metadata
+          lastSignInAt: session?.user?.last_sign_in_at
         });
 
         if (sessionError) {
@@ -98,58 +120,7 @@ const AuthCallbackPage = () => {
           return;
         }
 
-        // Enhanced recovery detection with detailed logging
-        const detectionChecks = {
-          typeParamRecovery: type === 'recovery',
-          recoveryParamTrue: searchParams.get('recovery') === 'true',
-          hasTokensFromHash: !!(accessToken && refreshToken && tokenType === 'bearer'),
-          userRecoveryFlag: session.user.recovery_sent_at !== null,
-          hashContainsRecovery: window.location.hash.includes('recovery') || window.location.hash.includes('reset'),
-          hashContainsType: window.location.hash.includes('type=recovery'),
-          urlContainsRecover: window.location.href.includes('recover'),
-          hasAccessTokenInHash: !!accessToken
-        };
-
-        console.log('🔐 Recovery detection checks:', detectionChecks);
-
-        // Check if this is a recent session (likely from email link)
-        const userCreated = new Date(session.user.created_at);
-        const lastSignIn = session.user.last_sign_in_at ? new Date(session.user.last_sign_in_at) : null;
-        const now = new Date();
-        const timeSinceLastSignIn = lastSignIn ? now.getTime() - lastSignIn.getTime() : null;
-        const isRecentSession = timeSinceLastSignIn && timeSinceLastSignIn < 60000; // Less than 1 minute ago
-
-        console.log('🔐 Time analysis:', {
-          userCreated: userCreated.toISOString(),
-          lastSignIn: lastSignIn?.toISOString(),
-          now: now.toISOString(),
-          timeSinceLastSignIn,
-          isRecentSession
-        });
-
-        const isRecovery = detectionChecks.typeParamRecovery || 
-                          detectionChecks.recoveryParamTrue || 
-                          detectionChecks.hasTokensFromHash || 
-                          detectionChecks.userRecoveryFlag || 
-                          detectionChecks.hashContainsRecovery ||
-                          detectionChecks.hashContainsType ||
-                          detectionChecks.urlContainsRecover ||
-                          (isRecentSession && detectionChecks.hasAccessTokenInHash);
-
-        console.log('🔐 Final recovery decision:', {
-          isRecovery,
-          reasoning: Object.entries(detectionChecks).filter(([key, value]) => value).map(([key]) => key)
-        });
-
-        if (isRecovery) {
-          console.log('✅ Password recovery callback detected, redirecting to reset page');
-          const langParam = searchParams.get('lang');
-          const resetUrl = langParam ? `/reset-password?lang=${langParam}` : '/reset-password';
-          console.log('🔄 Redirecting to:', resetUrl);
-          navigate(resetUrl);
-          return;
-        }
-
+        // STEP 3: Handle other auth flows (signup confirmation, regular login)
         if (type === 'signup') {
           console.log('✅ Email confirmation callback detected');
           toast({
