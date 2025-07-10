@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
@@ -34,16 +35,16 @@ const EnthousiasmeIntro = () => {
             <div className="space-y-8">
               <div>
                 <h2 className="text-2xl font-semibold text-blue-900 mb-4">
-                  Instructie enthousiasme
+                  Instructie enthousiasmescan
                 </h2>
                 <p className="text-lg text-gray-700 leading-relaxed mb-4">
-                  In dit deel willen we weten wat je tot leven brengt. Het gaat om enthousiasme, interesse en passie. We vragen je terug te kijken naar vroeger, naar je eerste baan en naar wat je nu aanspreekt.
+                  In dit deel willen we weten waar jij enthousiast van wordt. We vragen je terug te kijken naar vroeger, naar je eerste baan en naar wat je nu aanspreekt.
                 </p>
                 <p className="text-lg text-gray-700 leading-relaxed mb-4">
                   Beantwoord elke vraag met 10-20 woorden, meer mag ook. Sommige vragen lijken op elkaar. Beantwoord ze toch allemaal zo precies mogelijk.
                 </p>
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  Je krijgt in totaal acht vragen.
+                  Je krijgt in totaal negen vragen.
                 </p>
               </div>
 
@@ -53,7 +54,7 @@ const EnthousiasmeIntro = () => {
                   onClick={() => navigate('/enthousiasme-step-1')} 
                   className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold text-lg px-12 py-4 rounded-lg"
                 >
-                  Start met enthousiasme
+                  Start met enthousiasmescan
                 </Button>
               </div>
             </div>
