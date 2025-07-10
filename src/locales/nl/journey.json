@@ -1,4 +1,3 @@
-
 {
   "enthousiasme": {
     "intro": {
@@ -13,9 +12,9 @@
     "step1": {
       "title": "Enthousiasme scan - Stap 1",
       "subtitle": "Vragen over je kindertijd",
-      "question1": "Waar was je als kind het liefst mee bezig?",
-      "question2": "Waar hield je je als kind het liefst op?",
-      "question3": "Wat interesseerde je als kind? Waar was je nieuwsgierig naar?",
+      "question1": "Wat deed je graag? (op school en buiten school)",
+      "question2": "Waar was je veel te vinden? (als je uit school kwam of in het weekend)",
+      "question3": "Wat interesseerde jou? (denk aan schoolvakken, hobby's, onderwerpen op tv of in boeken)",
       "placeholder": "Beschrijf hier je antwoord...",
       "back_button": "Terug naar intro",
       "next_button": "Volgende stap"
