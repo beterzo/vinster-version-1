@@ -29,31 +29,31 @@ import nlContact from './nl/contact.json';
 
 export const translations = {
   en: {
-    ...enNavigation,
-    ...enLanding,
-    ...enAuth,
-    ...enDashboard,
-    ...enJourney,
-    ...enProfessionals,
-    ...enCommon,
-    ...enAbout,
-    ...enForWhom,
-    ...enFaq,
-    ...enExperiences,
-    ...enContact
+    navigation: enNavigation,
+    landing: enLanding,
+    auth: enAuth,
+    dashboard: enDashboard,
+    journey: enJourney,
+    professionals: enProfessionals,
+    common: enCommon,
+    about: enAbout,
+    forWhom: enForWhom,
+    faq: enFaq,
+    experiences: enExperiences,
+    contact: enContact
   },
   nl: {
-    ...nlNavigation,
-    ...nlLanding,
-    ...nlAuth,
-    ...nlDashboard,
-    ...nlJourney,
-    ...nlProfessionals,
-    ...nlCommon,
-    ...nlAbout,
-    ...nlForWhom,
-    ...nlFaq,
-    ...nlExperiences,
-    ...nlContact
+    navigation: nlNavigation,
+    landing: nlLanding,
+    auth: nlAuth,
+    dashboard: nlDashboard,
+    journey: nlJourney,
+    professionals: nlProfessionals,
+    common: nlCommon,
+    about: nlAbout,
+    forWhom: nlForWhom,
+    faq: nlFaq,
+    experiences: nlExperiences,
+    contact: nlContact
   }
 };
