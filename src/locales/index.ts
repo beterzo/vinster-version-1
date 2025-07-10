@@ -42,7 +42,9 @@ export const translations = {
     email_confirmed: enAuth.email_confirmed,
     // Make mobile_menu available at top level
     mobile_menu: enNavigation.mobile_menu,
-    dashboard: enDashboard,
+    // Make dashboard keys available at top level
+    dashboard: enDashboard.dashboard,
+    payment: enDashboard.payment,
     journey: enJourney,
     professionals: enProfessionals.professionals,
     common: enCommon,
@@ -66,7 +68,9 @@ export const translations = {
     email_confirmed: nlAuth.email_confirmed,
     // Make mobile_menu available at top level
     mobile_menu: nlNavigation.mobile_menu,
-    dashboard: nlDashboard,
+    // Make dashboard keys available at top level
+    dashboard: nlDashboard.dashboard,
+    payment: nlDashboard.payment,
     journey: nlJourney,
     professionals: nlProfessionals.professionals,
     common: nlCommon,
