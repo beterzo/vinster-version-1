@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -37,6 +36,10 @@ const ForgotPasswordPage = () => {
       console.log('🔗 DEBUG: Using redirect URL for password reset:', redirectUrl);
       console.log('🔗 DEBUG: Window location origin:', window.location.origin);
       console.log('🔗 DEBUG: Language parameter:', language);
+      console.log('🔗 DEBUG: Full resetPasswordForEmail options:', {
+        email,
+        redirectTo: redirectUrl
+      });
       
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo: redirectUrl
@@ -52,6 +55,7 @@ const ForgotPasswordPage = () => {
       } else {
         console.log('✅ Password reset email sent successfully');
         console.log('🔗 DEBUG: Email should contain redirect to:', redirectUrl);
+        console.log('🔗 DEBUG: Check your email and verify the link contains the correct redirect_to parameter');
         setEmailSent(true);
         toast({
           title: t('forgot_password.email_sent'),
