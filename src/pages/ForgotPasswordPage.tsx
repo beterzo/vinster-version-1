@@ -32,9 +32,11 @@ const ForgotPasswordPage = () => {
     try {
       console.log('🔐 Sending password reset email to:', email);
       
-      // Use the current window location for the redirect URL
+      // Updated redirect URL to include auth/callback with recovery parameters
       const redirectUrl = `${window.location.origin}/auth/callback?type=recovery&lang=${language}&recovery=true`;
-      console.log('🔗 Using redirect URL for password reset:', redirectUrl);
+      console.log('🔗 DEBUG: Using redirect URL for password reset:', redirectUrl);
+      console.log('🔗 DEBUG: Window location origin:', window.location.origin);
+      console.log('🔗 DEBUG: Language parameter:', language);
       
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo: redirectUrl
@@ -49,6 +51,7 @@ const ForgotPasswordPage = () => {
         });
       } else {
         console.log('✅ Password reset email sent successfully');
+        console.log('🔗 DEBUG: Email should contain redirect to:', redirectUrl);
         setEmailSent(true);
         toast({
           title: t('forgot_password.email_sent'),

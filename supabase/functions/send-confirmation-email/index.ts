@@ -230,7 +230,8 @@ const handler = async (req: Request): Promise<Response> => {
       console.log("📧 Received auth event:", {
         email: payload.user?.email,
         eventType: payload.email_data?.email_action_type,
-        userId: payload.user?.id
+        userId: payload.user?.id,
+        redirectTo: payload.email_data?.redirect_to
       });
     } catch (error) {
       console.error("❌ Failed to parse request payload:", error);
@@ -270,6 +271,9 @@ const handler = async (req: Request): Promise<Response> => {
 
     const user = payload.user;
     
+    // DEBUG: Log the redirect URL we received
+    console.log("🔗 DEBUG: Original redirect URL from payload:", payload.email_data.redirect_to);
+    
     // Determine language (priority: database > redirect URL > metadata > default)
     let userLanguage = 'nl';
     
@@ -296,7 +300,8 @@ const handler = async (req: Request): Promise<Response> => {
       language: userLanguage,
       firstName: firstName,
       subject: emailSubject,
-      eventType: eventType
+      eventType: eventType,
+      originalRedirectTo: payload.email_data.redirect_to
     });
 
     // Create the appropriate email content and action URL
@@ -307,8 +312,13 @@ const handler = async (req: Request): Promise<Response> => {
       actionUrl = `https://aqajxxevifmhdjlvqhkz.supabase.co/auth/v1/verify?token=${payload.email_data.token_hash}&type=signup&redirect_to=${encodeURIComponent(payload.email_data.redirect_to)}`;
       emailHtml = createSignupEmailHtml(firstName, actionUrl, userLanguage);
     } else {
+      // For recovery, make sure we preserve the redirect URL exactly as provided
       actionUrl = `https://aqajxxevifmhdjlvqhkz.supabase.co/auth/v1/verify?token=${payload.email_data.token_hash}&type=recovery&redirect_to=${encodeURIComponent(payload.email_data.redirect_to)}`;
       emailHtml = createPasswordResetEmailHtml(firstName, actionUrl, userLanguage);
+      
+      // DEBUG: Log the final action URL for password reset
+      console.log("🔗 DEBUG: Final password reset action URL:", actionUrl);
+      console.log("🔗 DEBUG: Encoded redirect_to:", encodeURIComponent(payload.email_data.redirect_to));
     }
 
     console.log("📤 Sending email via Resend...");
@@ -365,7 +375,8 @@ const handler = async (req: Request): Promise<Response> => {
       emailId: emailResponse.data?.id,
       language: userLanguage,
       eventType: eventType,
-      duration: `${duration}ms`
+      duration: `${duration}ms`,
+      finalActionUrl: actionUrl
     }), {
       status: 200,
       headers: { "Content-Type": "application/json", ...corsHeaders },
