@@ -54,7 +54,7 @@ export const translations = {
     professionals: enProfessionals.professionals,
     common: enCommon,
     about: enAbout.about,
-    forWhom: enForWhom.for_whom,
+    for_whom: enForWhom.for_whom,
     faq: enFaq.faq,
     experiences: enExperiences.experiences,
     contact: enContact.contact
@@ -85,7 +85,7 @@ export const translations = {
     professionals: nlProfessionals.professionals,
     common: nlCommon,
     about: nlAbout.about,
-    forWhom: nlForWhom.for_whom,
+    for_whom: nlForWhom.for_whom,
     faq: nlFaq.faq,
     experiences: nlExperiences.experiences,
     contact: nlContact.contact
