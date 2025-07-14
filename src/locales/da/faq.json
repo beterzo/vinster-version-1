@@ -1,55 +1,51 @@
 {
   "faq": {
     "title": "Ofte stillede spørgsmål",
-    "subtitle": "Alt hvad du vil vide om Vinster",
+    "subtitle": "Svar på de mest almindelige spørgsmål om Vinster",
     "questions": {
       "what_is_vinster": {
         "question": "Hvad er Vinster?",
-        "answer": "Vinster er et videnskabeligt baseret online værktøj til karriererådgivning. Vi hjælper mennesker med at få klarhed over deres professionelle ønsker og mål gennem en struktureret proces af selvrefleksion og vurdering."
+        "answer": "Vinster er et videnskabeligt baseret værktøj til karriererådgivning."
       },
       "how_does_it_work": {
-        "question": "Hvordan virker Vinster?",
-        "answer": "Du gennemgår fire hovedtrin: en entusiasmescanning, beskrivelse af drømmejobs, komplettering af din profil og modtager til sidst en personlig karriererapport med konkrete næste skridt."
+        "question": "Hvordan virker det?",
+        "answer": "Du gennemgår en struktureret proces og får en personlig rapport."
       },
       "how_long_does_it_take": {
-        "question": "Hvor lang tid tager processen?",
-        "answer": "Hele processen tager omkring 60-90 minutter. Du kan gennemføre den i dit eget tempo og pause og fortsætte når som helst."
+        "question": "Hvor lang tid tager det?",
+        "answer": "Processen tager typisk 1-2 timer at gennemføre."
       },
       "what_do_i_get": {
-        "question": "Hvad får jeg til sidst?",
-        "answer": "Du modtager en omfattende personlig karriererapport med indsigt i dine motivationer, anbefalinger til din karriereudvikling og en jobsøgningsprofil du kan bruge til ansøgninger."
+        "question": "Hvad får jeg?",
+        "answer": "Du får en personlig karriererapport og handlingsplan."
       },
-      "is_it_scientific": {
-        "question": "Er Vinster videnskabeligt baseret?",
-        "answer": "Ja, vores tilgang er baseret på velafprøvede metoder fra arbejds- og organisationspsykologi. Vi bruger teknikker som retrospektive interviews og værdiafklaring, der er udbredt inden for karriererådgivning."
-      },
-      "who_is_it_for": {
-        "question": "Hvem er Vinster egnet for?",
-        "answer": "Vinster er egnet for alle der søger klarhed om deres karriere - fra nyuddannede over karriereskiftere til erfarne fagfolk der ønsker at udvikle sig professionelt."
-      },
-      "what_does_it_cost": {
-        "question": "Hvad koster Vinster?",
-        "answer": "Du kan starte gratis og gennemføre de første trin. For din personlige karriererapport kræves en engangsbetaling. De præcise omkostninger ser du før betaling."
-      },
-      "is_data_safe": {
+      "is_it_secure": {
         "question": "Er mine data sikre?",
-        "answer": "Ja, beskyttelse af dine data er meget vigtig for os. Vi bruger moderne sikkerhedsforanstaltninger og deler aldrig dine personlige oplysninger med tredjeparter. Læs vores privatlivspolitik for flere detaljer."
+        "answer": "Ja, vi tager datasikkerhed meget alvorligt."
       },
-      "can_i_use_multiple_times": {
-        "question": "Kan jeg bruge Vinster flere gange?",
-        "answer": "Ja, du kan starte en ny cyklus efter at have afsluttet et forløb. Dette er særligt nyttigt hvis din situation eller prioriteter har ændret sig."
+      "how_much_does_it_cost": {
+        "question": "Hvad koster det?",
+        "answer": "Prisen er €29,95 for den komplette rapport."
       },
-      "what_if_not_satisfied": {
-        "question": "Hvad hvis jeg ikke er tilfreds?",
-        "answer": "Vi står bag kvaliteten af vores service. Hvis du ikke er tilfreds, kontakt os venligst og vi finder en løsning sammen."
+      "can_i_get_refund": {
+        "question": "Kan jeg få pengene tilbage?",
+        "answer": "Ja, vi tilbyder 30 dage pengene tilbage garanti."
       },
-      "how_accurate_are_results": {
-        "question": "Hvor præcise er resultaterne?",
-        "answer": "Kvaliteten af resultaterne afhænger af ærligheden og grundigheden af dine svar. Jo mere tid du tager og jo mere åbent du svarer, des mere præcise bliver anbefalingerne."
+      "how_accurate_is_it": {
+        "question": "Hvor præcis er rapporten?",
+        "answer": "Rapporten er baseret på videnskabelige metoder og din input."
+      },
+      "do_i_need_experience": {
+        "question": "Skal jeg have arbejdserfaring?",
+        "answer": "Nej, Vinster kan bruges uanset erfaring."
+      },
+      "how_do_i_start": {
+        "question": "Hvordan starter jeg?",
+        "answer": "Klik på 'Kom i gang' og opret din konto."
       },
       "can_i_share_results": {
         "question": "Kan jeg dele mine resultater?",
-        "answer": "Ja, du kan dele din karriererapport og jobsøgningsprofil med rekrutteringsfolk, potentielle arbejdsgivere eller karriererådgivere. Dokumenterne er professionelt formateret til dette formål."
+        "answer": "Ja, du kan downloade og dele din rapport."
       }
     }
   }
