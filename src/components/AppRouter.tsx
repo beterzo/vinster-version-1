@@ -6,6 +6,7 @@ import LandingPage from "@/pages/LandingPage";
 import LoginPage from "@/pages/LoginPage";
 import SignupPage from "@/pages/SignupPage";
 import ForgotPasswordPage from "@/pages/ForgotPasswordPage";
+import CheckEmailPasswordResetPage from "@/pages/CheckEmailPasswordResetPage";
 import ResetPasswordPage from "@/pages/ResetPasswordPage";
 import PasswordResetSuccessPage from "@/pages/PasswordResetSuccessPage";
 import EmailVerificationPage from "@/pages/EmailVerificationPage";
@@ -55,6 +56,7 @@ const AppRouter = () => {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+      <Route path="/check-email-password-reset" element={<CheckEmailPasswordResetPage />} />
       <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="/password-reset-success" element={<PasswordResetSuccessPage />} />
       <Route path="/email-verification" element={<EmailVerificationPage />} />

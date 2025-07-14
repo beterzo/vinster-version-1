@@ -1,27 +1,25 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { useAuth } from "@/hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { supabase } from "@/integrations/supabase/client";
+import { MailCheck, RotateCcw } from "lucide-react";
 
-const ForgotPasswordPage = () => {
-  const [email, setEmail] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+const CheckEmailPasswordResetPage = () => {
+  const [isResending, setIsResending] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
   const { t } = useTranslation();
   const { language } = useLanguage();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
+  // Get email from URL params or localStorage
+  const urlParams = new URLSearchParams(window.location.search);
+  const email = urlParams.get('email') || localStorage.getItem('password-reset-email') || '';
+
+  const handleResendEmail = async () => {
     if (!email) {
       toast({
         title: t('auth.email_required'),
@@ -31,20 +29,16 @@ const ForgotPasswordPage = () => {
       return;
     }
 
-    setIsLoading(true);
+    setIsResending(true);
 
     try {
-      // Create redirect URL with language parameter to ensure correct language detection
       const redirectUrl = `https://vinster.ai/password-reset-success?lang=${language}`;
-      console.log('🔗 Sending password reset with redirect URL:', redirectUrl);
-      console.log('🌐 Current language:', language);
-
+      
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo: redirectUrl
       });
 
       if (error) {
-        console.error('❌ Password reset error:', error);
         let errorMessage = t('auth.password_reset_error');
         
         if (error.message.includes('Email not confirmed')) {
@@ -61,25 +55,20 @@ const ForgotPasswordPage = () => {
           variant: "destructive",
         });
       } else {
-        console.log('✅ Password reset email sent successfully');
-        // Store email for the check email page
-        localStorage.setItem('password-reset-email', email);
         toast({
-          title: t('auth.password_reset_sent'),
-          description: t('auth.password_reset_sent_desc'),
+          title: t('auth.check_email.email_resent'),
+          description: t('auth.check_email.email_resent_desc'),
           duration: 6000,
         });
-        navigate(`/check-email-password-reset?email=${encodeURIComponent(email)}`);
       }
     } catch (error: any) {
-      console.error('❌ Password reset exception:', error);
       toast({
         title: t('auth.password_reset_failed'),
         description: t('auth.unexpected_error'),
         variant: "destructive",
       });
     } finally {
-      setIsLoading(false);
+      setIsResending(false);
     }
   };
 
@@ -105,7 +94,7 @@ const ForgotPasswordPage = () => {
         </div>
       </div>
 
-      {/* Right side - Forgot password form */}
+      {/* Right side - Check email content */}
       <div className="bg-white flex items-center justify-center p-4 sm:p-6 lg:p-12">
         <div className="w-full max-w-md space-y-6 lg:space-y-8">
           {/* Header with Logo and Language Switcher */}
@@ -119,60 +108,66 @@ const ForgotPasswordPage = () => {
             <LanguageSwitcher />
           </div>
 
-          {/* Forgot password form title */}
-          <div className="text-center space-y-2">
-            <h1 className="text-2xl sm:text-3xl font-bold text-blue-900">
-              {t('auth.forgot_password_title')}
-            </h1>
-            <p className="text-gray-600">
-              {t('auth.forgot_password_subtitle')}
-            </p>
-          </div>
-
-          <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Check email content */}
+          <div className="text-center space-y-6">
+            <div className="flex justify-center">
+              <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center">
+                <MailCheck className="w-10 h-10 text-blue-600" />
+              </div>
+            </div>
+            
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-blue-900 font-medium text-left block">
-                {t('auth.email')}
-              </Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder={t('auth.email_placeholder')}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900"
-                required
-              />
+              <h1 className="text-2xl sm:text-3xl font-bold text-blue-900">
+                {t('auth.check_email.title')}
+              </h1>
+              <p className="text-gray-600">
+                {t('auth.check_email.subtitle')}
+              </p>
             </div>
 
-            <Button
-              type="submit"
-              className="w-full h-12 bg-blue-900 hover:bg-blue-800 text-white font-semibold text-base rounded-lg"
-              disabled={isLoading}
-            >
-              {isLoading ? t('auth.sending') : t('auth.send_reset_link')}
-            </Button>
+            {email && (
+              <div className="bg-gray-50 rounded-lg p-4">
+                <p className="text-sm text-gray-600">
+                  {t('auth.check_email.sent_to')} <span className="font-medium text-blue-900">{email}</span>
+                </p>
+              </div>
+            )}
 
-            <div className="text-center space-y-4">
+            <div className="space-y-4">
               <p className="text-sm text-gray-600">
-                {t('auth.remember_password')}{" "}
-                <Link to="/login" className="font-semibold text-yellow-500 hover:text-yellow-600">
-                  {t('auth.back_to_login')}
-                </Link>
+                {t('auth.check_email.description')}
               </p>
               
               <p className="text-sm text-gray-600">
-                {t('auth.no_account')}{" "}
-                <Link to="/signup" className="font-semibold text-yellow-500 hover:text-yellow-600">
-                  {t('auth.register_here')}
-                </Link>
+                {t('auth.check_email.spam_notice')}
               </p>
             </div>
-          </form>
+          </div>
+
+          <div className="space-y-4">
+            <Button
+              onClick={handleResendEmail}
+              variant="outline"
+              className="w-full h-12 border-blue-900 text-blue-900 hover:bg-blue-50"
+              disabled={isResending || !email}
+            >
+              <RotateCcw className="w-4 h-4 mr-2" />
+              {isResending ? t('auth.sending') : t('auth.check_email.resend_email')}
+            </Button>
+
+            <div className="text-center">
+              <Link 
+                to="/login" 
+                className="text-sm font-semibold text-yellow-500 hover:text-yellow-600"
+              >
+                {t('auth.back_to_login')}
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default ForgotPasswordPage;
+export default CheckEmailPasswordResetPage;
