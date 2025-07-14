@@ -27,7 +27,7 @@
       "job_suggestions": "Concrete banen die bij je passen",
       "research_plan": "Een onderzoeksplan om verder te verkennen",
       "search_profile": "Een zoekprofiel voor recruiters en netwerken",
-      "start_now": "Start nu",
+      "start_now": "Start nu (€29)",
       "view_sample": "Bekijk voorbeeldrapport"
     },
     "features": {
@@ -60,13 +60,13 @@
       "title": "Hoe het werkt",
       "step1_title": "Enthousiasmescan",
       "step1_desc": "Ontdek wat je echt enthousiast maakt",
-      "step2_title": "Droombanen",
+      "step2_title": "Wensberoepen",
       "step2_desc": "Verken je ideale werksituaties",
       "step3_title": "Prioriteiten stellen",
       "step3_desc": "Bepael wat voor jou het belangrijkst is",
       "step4_title": "Laatste check",
       "step4_desc": "Voltooi je profiel en ontvang je rapport",
-      "start_button": "Begin je traject"
+      "start_button": "Begin je traject (€29)"
     },
     "data_safety": {
       "title": "Privacy gegarandeerd",
