@@ -27,6 +27,34 @@ import nlFaq from './nl/faq.json';
 import nlExperiences from './nl/experiences.json';
 import nlContact from './nl/contact.json';
 
+// German translations
+import deNavigation from './de/navigation.json';
+import deLanding from './de/landing.json';
+import deAuth from './de/auth.json';
+import deDashboard from './de/dashboard.json';
+import deJourney from './de/journey.json';
+import deProfessionals from './de/professionals.json';
+import deCommon from './de/common.json';
+import deAbout from './de/about.json';
+import deForWhom from './de/for-whom.json';
+import deFaq from './de/faq.json';
+import deExperiences from './de/experiences.json';
+import deContact from './de/contact.json';
+
+// Danish translations
+import daNavigation from './da/navigation.json';
+import daLanding from './da/landing.json';
+import daAuth from './da/auth.json';
+import daDashboard from './da/dashboard.json';
+import daJourney from './da/journey.json';
+import daProfessionals from './da/professionals.json';
+import daCommon from './da/common.json';
+import daAbout from './da/about.json';
+import daForWhom from './da/for-whom.json';
+import daFaq from './da/faq.json';
+import daExperiences from './da/experiences.json';
+import daContact from './da/contact.json';
+
 export const translations = {
   en: {
     navigation: enNavigation,
@@ -91,5 +119,69 @@ export const translations = {
     faq: nlFaq.faq,
     experiences: nlExperiences.experiences,
     contact: nlContact.contact
+  },
+  de: {
+    navigation: deNavigation,
+    landing: deLanding.landing,
+    auth: deAuth,
+    // Make auth keys available at top level
+    login: deAuth.login,
+    signup: deAuth.signup,
+    forgot_password: deAuth.forgot_password,
+    reset_password: deAuth.reset_password,
+    password_reset_success: deAuth.password_reset_success,
+    email_verification: deAuth.email_verification,
+    email_confirmed: deAuth.email_confirmed,
+    // Make mobile_menu available at top level
+    mobile_menu: deNavigation.mobile_menu,
+    // Make dashboard keys available at top level
+    dashboard: deDashboard.dashboard,
+    payment: deDashboard.payment,
+    journey: deJourney,
+    // Make journey keys available at top level
+    enthousiasme: deJourney.enthousiasme,
+    zoekprofiel: deJourney.zoekprofiel,
+    profiel_voltooien: deJourney.profiel_voltooien,
+    wensberoepen: deJourney.wensberoepen,
+    onderzoeksplan: deJourney.onderzoeksplan,
+    professionals: deProfessionals.professionals,
+    common: deCommon,
+    about: deAbout.about,
+    for_whom: deForWhom.for_whom,
+    faq: deFaq.faq,
+    experiences: deExperiences.experiences,
+    contact: deContact.contact
+  },
+  da: {
+    navigation: daNavigation,
+    landing: daLanding.landing,
+    auth: daAuth,
+    // Make auth keys available at top level
+    login: daAuth.login,
+    signup: daAuth.signup,
+    forgot_password: daAuth.forgot_password,
+    reset_password: daAuth.reset_password,
+    password_reset_success: daAuth.password_reset_success,
+    email_verification: daAuth.email_verification,
+    email_confirmed: daAuth.email_confirmed,
+    // Make mobile_menu available at top level
+    mobile_menu: daNavigation.mobile_menu,
+    // Make dashboard keys available at top level
+    dashboard: daDashboard.dashboard,
+    payment: daDashboard.payment,
+    journey: daJourney,
+    // Make journey keys available at top level
+    enthousiasme: daJourney.enthousiasme,
+    zoekprofiel: daJourney.zoekprofiel,
+    profiel_voltooien: daJourney.profiel_voltooien,
+    wensberoepen: daJourney.wensberoepen,
+    onderzoeksplan: daJourney.onderzoeksplan,
+    professionals: daProfessionals.professionals,
+    common: daCommon,
+    about: daAbout.about,
+    for_whom: daForWhom.for_whom,
+    faq: daFaq.faq,
+    experiences: daExperiences.experiences,
+    contact: daContact.contact
   }
 };

@@ -1,14 +1,17 @@
 {
-  "home": "Startseite",
-  "about": "Über Vinster",
-  "for_whom": "Für wen ist es",
-  "faq": "Häufig gestellte Fragen",
-  "experiences": "Erfahrungen",
-  "contact": "Kontakt",
-  "professionals": "Zugangscodes für Profis",
-  "login": "Anmelden",
-  "register": "Registrieren",
-  "dashboard": "Dashboard",
-  "logout": "Abmelden",
-  "profile": "Profil"
+  "navigation": {
+    "home": "Startseite",
+    "dashboard": "Dashboard"
+  },
+  "mobile_menu": {
+    "menu": "Menü",
+    "home": "Startseite",
+    "about_vinster": "Über Vinster",
+    "for_whom": "Für wen ist es?",
+    "faq": "Häufig gestellte Fragen",
+    "experiences": "Erfahrungen",
+    "contact": "Kontakt",
+    "access_codes": "Zugangscodes für Profis",
+    "login": "Anmelden"
+  }
 }

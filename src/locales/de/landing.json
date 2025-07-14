@@ -1,89 +1,105 @@
 {
-  "hero": {
-    "title": "Entdecken Sie Ihren idealen Traumjob",
-    "subtitle": "Vinster hilft Ihnen, Klarheit über Ihre Karrierewünsche zu bekommen. Durchlaufen Sie unseren wissenschaftlich fundierten Prozess und erhalten Sie einen persönlichen Karrierebericht mit konkreten nächsten Schritten.",
-    "cta_button": "Starten Sie Ihre Reise",
-    "secondary_cta": "Mehr erfahren"
-  },
-  "features": {
-    "title": "Wie funktioniert Vinster?",
-    "subtitle": "Ein strukturierter Prozess, der Ihnen Klarheit über Ihre Karrierewünsche verschafft",
-    "enthusiasm_scan": {
-      "title": "Begeisterungsscan",
-      "description": "Entdecken Sie, was Sie bei der Arbeit wirklich begeistert, indem Sie auf vergangene Erfahrungen zurückblicken."
+  "landing": {
+    "tagline": "Finden Sie Arbeit, die zu Ihnen passt, mit KI.\nIntelligent, persönlich und überraschend.",
+    "welcome": "Willkommen bei",
+    "description": "Für alle, die denken: \"Was möchte ich eigentlich wirklich mit meiner Arbeit?\"\nOb Sie gerade anfangen, feststecken, etwas Neues suchen oder sich einfach neu orientieren möchten – Vinster gibt Überblick, Halt und Richtung.",
+    "login": "Anmelden",
+    "hero": {
+      "title": "Entdecken Sie Ihre Präferenzen, finden Sie Ihre Laufbahn",
+      "subtitle": "Tauchen Sie tief in sich ein und lassen Sie KI den perfekten Karriere-Match für Sie finden",
+      "cta_button": "Beginnen Sie Ihre Reise",
+      "cta_button_secondary": "Mehr Informationen"
     },
-    "dream_jobs": {
-      "title": "Traumjobs",
-      "description": "Beschreiben Sie drei Jobs, die Sie sich wünschen, und erkunden Sie, was sie für Sie attraktiv macht."
+    "what_is_vinster": {
+      "title": "Was ist Vinster?",
+      "description": "Vinster ist eine KI-gesteuerte Plattform, die Ihnen hilft, Ihre wahren Interessen und Talente zu entdecken. Durch tiefgreifende Fragen und fortschrittliche Algorithmen erstellen wir ein persönliches Profil, das Ihnen bei fundierten Laufbahnentscheidungen hilft.",
+      "based_on": "Basierend auf bewährten Methoden aus der Praxis und Ihren einzigartigen Eigenschaften erhalten Sie:",
+      "two_matching_functions": "Zwei passende Funktionen, die perfekt zu Ihnen passen",
+      "one_surprising_suggestion": "Einen überraschenden Vorschlag, der neue Möglichkeiten eröffnet",
+      "clear_action_plan": "Einen klaren Aktionsplan zur Verwirklichung Ihrer gewünschten Karriere",
+      "no_tests": "Keine langweiligen Tests, sondern echte Fragen, die Sie zum Nachdenken bringen."
     },
-    "profile_completion": {
-      "title": "Profil vervollständigen",
-      "description": "Geben Sie Ihre Prioritäten an und vervollständigen Sie Ihr Profil für eine personalisierte Beratung."
+    "what_do_you_get": {
+      "title": "Was bekommen Sie?",
+      "subtitle": "Ein komplettes Paket zur Gestaltung Ihrer Karriere:",
+      "insight_interests": "Tiefe Einblicke in Ihre Interessen und Motivationen",
+      "job_suggestions": "Konkrete Jobs, die zu Ihnen passen",
+      "research_plan": "Ein Forschungsplan zur weiteren Exploration",
+      "search_profile": "Ein Suchprofil für Personalvermittler und Netzwerke",
+      "start_now": "Jetzt starten €29",
+      "view_sample": "Beispielbericht ansehen"
     },
-    "career_report": {
-      "title": "Karrierebericht",
-      "description": "Erhalten Sie einen umfassenden Bericht mit Einblicken und konkreten nächsten Schritten für Ihre Karriere."
+    "features": {
+      "card1": {
+        "title": "Was ist Vinster?",
+        "description": "Vinster ist eine KI-gesteuerte Plattform, die Ihnen hilft, Ihre wahren Interessen und Talente zu entdecken. Durch tiefgreifende Fragen und fortschrittliche Algorithmen erstellen wir ein persönliches Profil, das Ihnen bei fundierten Laufbahnentscheidungen hilft."
+      },
+      "card2": {
+        "title": "Was bekommen Sie?",
+        "description": "Ein umfassender Persönlichkeitsbericht, ein maßgeschneidertes Suchprofil und konkrete Schritte zur Verwirklichung Ihrer gewünschten Karriere. Alles basiert auf bewährten Methoden aus der Praxis und Ihren einzigartigen Eigenschaften."
+      }
+    },
+    "process": {
+      "title": "Wie es funktioniert",
+      "step1": {
+        "title": "Erkunden Sie Ihre Präferenzen",
+        "description": "Beantworten Sie Fragen über das, was Sie wirklich motiviert"
+      },
+      "step2": {
+        "title": "Entdecken Sie Ihre Wünsche",
+        "description": "Definieren Sie Ihre ideale Arbeitsumgebung und Ziele"
+      },
+      "step3": {
+        "title": "Erhalten Sie Ihren Bericht",
+        "description": "Erhalten Sie einen persönlichen KI-Bericht mit Empfehlungen"
+      }
+    },
+    "process_steps": {
+      "subtitle": "Der Prozess",
+      "title": "Wie es funktioniert",
+      "step1_title": "Begeisterungsscan",
+      "step1_desc": "Entdecken Sie, was Sie wirklich begeistert",
+      "step2_title": "Wunschberufe",
+      "step2_desc": "Erkunden Sie Ihre idealen Arbeitssituationen",
+      "step3_title": "Prioritäten setzen",
+      "step3_desc": "Bestimmen Sie, was für Sie am wichtigsten ist",
+      "step4_title": "Letzter Check",
+      "step4_desc": "Vervollständigen Sie Ihr Profil und erhalten Sie Ihren Bericht",
+      "start_button": "Beginnen Sie Ihre Reise €29"
+    },
+    "data_safety": {
+      "title": "Datenschutz garantiert",
+      "description": "Ihre Daten werden sicher gemäß den strengsten Datenschutzstandards gespeichert. Wir teilen Ihre persönlichen Informationen niemals mit Dritten."
+    },
+    "flexible_journey": {
+      "title": "Flexible Reise",
+      "description": "Beginnen Sie, wo Sie möchten, hören Sie auf, wann Sie möchten. Sie können jederzeit zurückkehren, um Ihr Profil zu ergänzen oder zu aktualisieren."
+    },
+    "safety": {
+      "title": "Sicher und flexibel",
+      "privacy": {
+        "title": "Datenschutz garantiert",
+        "description": "Ihre Daten werden sicher gespeichert"
+      },
+      "flexible": {
+        "title": "Flexible Reise",
+        "description": "Beginnen Sie, wo Sie möchten, hören Sie auf, wann Sie möchten"
+      }
+    },
+    "testimonial": "Dank Vinster habe ich endlich Klarheit über meinen Karriereweg erhalten. Der Bericht war überraschend genau und hat mir geholfen, die richtigen Entscheidungen zu treffen.",
+    "footer": {
+      "navigation_title": "Navigation",
+      "contact_title": "Kontakt",
+      "about_vinster": "Über Vinster",
+      "for_whom": "Für wen ist es?",
+      "faq": "Häufig gestellte Fragen",
+      "contact": "Kontakt",
+      "privacy_policy": "Datenschutzerklärung",
+      "terms_conditions": "Allgemeine Geschäftsbedingungen",
+      "cookie_policy": "Cookie-Richtlinie",
+      "email": "E-Mail",
+      "kvk": "Handelsregisternummer",
+      "copyright": "© 2024 Vinster. Alle Rechte vorbehalten."
     }
-  },
-  "testimonials": {
-    "title": "Was sagen unsere Nutzer?",
-    "subtitle": "Erfahren Sie, wie Vinster anderen bei ihrer Karriereentwicklung geholfen hat",
-    "testimonial1": {
-      "text": "Vinster hat mir geholfen, Klarheit über meine Karrierewünsche zu bekommen. Der Prozess war aufschlussreich und die Ergebnisse sehr hilfreich.",
-      "author": "Sarah M.",
-      "role": "Marketing-Managerin"
-    },
-    "testimonial2": {
-      "text": "Der strukturierte Ansatz von Vinster machte es einfach, meine Leidenschaften und Interessen zu erkunden. Sehr empfehlenswert!",
-      "author": "Thomas K.",
-      "role": "Software-Entwickler"
-    },
-    "testimonial3": {
-      "text": "Dank Vinster habe ich einen neuen Karriereweg entdeckt, an den ich nie gedacht hätte. Die Einsichten waren transformativ.",
-      "author": "Lisa R.",
-      "role": "Projektmanagerin"
-    }
-  },
-  "process": {
-    "title": "Ihr Weg zu Klarheit",
-    "subtitle": "Ein einfacher, schrittweiser Prozess, der Sie zu Ihrem Traumjob führt",
-    "step1": {
-      "title": "Registrieren & Starten",
-      "description": "Erstellen Sie Ihr kostenloses Konto und beginnen Sie Ihre Karrierereise."
-    },
-    "step2": {
-      "title": "Erkunden & Entdecken",
-      "description": "Durchlaufen Sie unsere Assessments, um Ihre Interessen und Motivationen zu erkunden."
-    },
-    "step3": {
-      "title": "Einblicke erhalten",
-      "description": "Erhalten Sie einen personalisierten Karrierebericht mit umsetzbaren Einsichten."
-    },
-    "step4": {
-      "title": "Handeln & Wachsen",
-      "description": "Nutzen Sie Ihre Einsichten, um fundierte Karriereentscheidungen zu treffen."
-    }
-  },
-  "what_you_get": {
-    "title": "Was Sie erhalten",
-    "subtitle": "Ein umfassendes Karrierepaket, das Ihnen bei Ihrem nächsten Schritt hilft",
-    "career_report": {
-      "title": "Persönlicher Karrierebericht",
-      "description": "Ein detaillierter Bericht mit Einsichten in Ihre Karrierepräferenzen und -empfehlungen."
-    },
-    "action_plan": {
-      "title": "Aktionsplan",
-      "description": "Konkrete nächste Schritte, um Ihre Karriereziele zu erreichen."
-    },
-    "ongoing_support": {
-      "title": "Laufende Unterstützung",
-      "description": "Zugang zu Ressourcen und Unterstützung, um Sie auf Ihrem Karriereweg zu begleiten."
-    }
-  },
-  "cta": {
-    "title": "Bereit, Ihren Traumjob zu entdecken?",
-    "subtitle": "Schließen Sie sich Tausenden von Fachkräften an, die Klarheit über ihre Karriere gefunden haben",
-    "button": "Jetzt starten",
-    "guarantee": "Kostenlos zu beginnen, keine Kreditkarte erforderlich"
   }
 }
