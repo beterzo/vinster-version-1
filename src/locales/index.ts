@@ -129,14 +129,14 @@ export const translations = {
     signup: deAuth.signup,
     forgot_password: deAuth.forgot_password,
     reset_password: deAuth.reset_password,
-    password_reset_success: deAuth.password_reset_success,
+    password_reset_success: (deAuth as any).password_reset_success || deAuth.reset_password,
     email_verification: deAuth.email_verification,
-    email_confirmed: deAuth.email_confirmed,
+    email_confirmed: (deAuth as any).email_confirmed || deAuth.email_verification,
     // Make mobile_menu available at top level
     mobile_menu: deNavigation.mobile_menu,
     // Make dashboard keys available at top level
-    dashboard: deDashboard.dashboard,
-    payment: deDashboard.payment,
+    dashboard: deDashboard.dashboard || deDashboard,
+    payment: deDashboard.payment || deDashboard,
     journey: deJourney,
     // Make journey keys available at top level
     enthousiasme: deJourney.enthousiasme,
@@ -144,13 +144,13 @@ export const translations = {
     profiel_voltooien: deJourney.profiel_voltooien,
     wensberoepen: deJourney.wensberoepen,
     onderzoeksplan: deJourney.onderzoeksplan,
-    professionals: deProfessionals.professionals,
+    professionals: deProfessionals.professionals || deProfessionals,
     common: deCommon,
-    about: deAbout.about,
-    for_whom: deForWhom.for_whom,
-    faq: deFaq.faq,
-    experiences: deExperiences.experiences,
-    contact: deContact.contact
+    about: deAbout.about || deAbout,
+    for_whom: deForWhom.for_whom || deForWhom,
+    faq: deFaq.faq || deFaq,
+    experiences: deExperiences.experiences || deExperiences,
+    contact: deContact.contact || deContact
   },
   da: {
     navigation: daNavigation,
@@ -182,6 +182,6 @@ export const translations = {
     for_whom: daForWhom.for_whom,
     faq: daFaq.faq,
     experiences: daExperiences.experiences,
-    contact: daContact.contact
+    "contact": daContact.contact
   }
 };

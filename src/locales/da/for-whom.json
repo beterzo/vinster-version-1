@@ -1,70 +1,87 @@
 {
   "for_whom": {
-    "title": "For hvem?",
-    "subtitle": "Vinster er for dig, der vil have klarhed over din karriere",
+    "title": "For hvem er det?",
+    "subtitle": "Opdag om Vinster er det rigtige for dig",
     "intro": {
-      "description": "Uanset hvor du er i din karriere, kan Vinster hjælpe dig med at få indsigt i dine motivationer og næste skridt."
+      "description": "Vinster er designet til at hjælpe professionelle på alle karrieretrin med at få klarhed over deres næste skridt."
     },
     "target_groups": {
-      "title": "Målgrupper",
+      "title": "Hvem kan have gavn af Vinster?",
       "young_professionals": {
         "title": "Unge fagfolk",
-        "description": "På udkig efter retning i karrieren"
+        "description": "Netop færdiguddannede eller med få års erhvervserfaring, der søger retning i deres karriere."
       },
       "career_changers": {
         "title": "Karriereskiftere",
-        "description": "Ønsker at skifte branche eller rolle"
+        "description": "Professionelle der ønsker at skifte karrierevej eller udforske nye muligheder."
       },
       "experienced_professionals": {
         "title": "Erfarne fagfolk",
-        "description": "Vil optimere deres karriere"
+        "description": "Senior fagfolk der ønsker at revurdere deres karrieremål og næste skridt."
       },
       "returnees": {
-        "title": "Tilbagevending",
-        "description": "Vender tilbage til arbejdsmarkedet"
+        "title": "Tilbagevendende",
+        "description": "Personer der vender tilbage til arbejdsmarkedet efter en pause."
       },
       "students": {
         "title": "Studerende",
-        "description": "Planlægger karrieren efter studiet"
+        "description": "Studerende der forbereder sig på overgangen til arbejslivet."
       },
       "managers": {
         "title": "Ledere",
-        "description": "Udvikling af lederskab"
+        "description": "Ledere der ønsker at udvikle deres ledelsesstil og karriere."
       }
     },
     "situations": {
       "title": "Typiske situationer",
-      "not_sure_what_job": "Jeg ved ikke hvilket job der rigtig passer til mig",
-      "dissatisfied_current_job": "Jeg er utilfreds i mit nuværende job"
+      "feeling_stuck": {
+        "title": "Føler dig fastlåst",
+        "description": "Du er ikke sikker på dit næste karriereskridt."
+      },
+      "seeking_purpose": {
+        "title": "Søger mening",
+        "description": "Du ønsker mere formål og tilfredsstillelse i dit arbejde."
+      },
+      "exploring_options": {
+        "title": "Udforsker muligheder",
+        "description": "Du overvejer forskellige karriereveje og behøver klarhed."
+      },
+      "preparing_change": {
+        "title": "Forbereder forandring",
+        "description": "Du planlægger et karriereskifte og ønsker vejledning."
+      }
     },
     "not_for": {
-      "title": "Ikke for",
-      "need_specific_knowledge": "Har brug for specifik brancheviden",
-      "want_immediate_job_offers": "Søger umiddelbare jobtilbud"
+      "title": "Vinster er måske ikke for dig hvis:",
+      "items": [
+        "Du er helt sikker på din karrierevej og behøver ingen vejledning",
+        "Du søger øjeblikkelige jobmuligheder frem for strategisk karriereplanlægning",
+        "Du ikke er villig til at investere tid i selfrefleksion og analyse"
+      ]
     },
     "benefits": {
-      "title": "Fordele",
+      "title": "Hvad får du ud af det?",
       "clarity": {
         "title": "Klarhed",
-        "description": "Over dine motivationer"
+        "description": "Få klar indsigt i dine karrierepræferencer og motivationer."
       },
       "direction": {
         "title": "Retning",
-        "description": "Konkrete næste skridt"
+        "description": "Modtag konkrete anbefalinger til dit næste karriereskridt."
       },
       "confidence": {
         "title": "Selvtillid",
-        "description": "I karrierevalg"
+        "description": "Træf informerede beslutninger med tillid til din retning."
       },
-      "insights": {
-        "title": "Indsigt",
-        "description": "I dine styrker"
+      "actionable_insights": {
+        "title": "Handlingsrettede indsigter",
+        "description": "Få praktiske råd du kan anvende med det samme."
       }
     },
     "cta": {
       "title": "Klar til at komme i gang?",
-      "description": "Start din karriererejse i dag",
-      "button": "Begynd nu"
+      "description": "Opdag om Vinster kan hjælpe dig med at nå dine karrieremål",
+      "button": "Start din rejse"
     }
   }
 }
