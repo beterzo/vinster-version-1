@@ -1,43 +1,45 @@
 {
-  "title": "Om Vinster",
-  "subtitle": "Din karriere, vores passion",
-  "intro": {
-    "title": "Hvem er vi?",
-    "description": "Vinster er et innovativt karriererådgivningsfirma, der specialiserer sig i at hjælpe mennesker med at få klarhed over deres professionelle ønsker og mål. Vores videnskabeligt baserede tilgang kombinerer velafprøvede psykologiske metoder med moderne teknologi."
-  },
-  "mission": {
-    "title": "Vores mission",
-    "description": "Vi tror på at alle mennesker har ret til en meningsfuld karriere. Vores mission er at støtte mennesker i at opdage deres unikke talenter og passioner og forvandle dem til en karriere der virkelig begejstrer dem."
-  },
-  "approach": {
-    "title": "Vores tilgang",
-    "description": "Vores strukturerede proces guider dig gennem en serie af selvrefleksionsøvelser og vurderinger. Disse hjælper dig med at genkende mønstre i dine interesser, motivationer og værdier.",
-    "features": {
-      "scientific": {
-        "title": "Videnskabeligt baseret",
-        "description": "Baseret på velafprøvede metoder fra arbejds- og organisationspsykologi"
-      },
-      "personalized": {
-        "title": "Personaliseret",
-        "description": "Hver rapport er individuelt tilpasset dine specifikke svar og situation"
-      },
-      "actionable": {
-        "title": "Handlingsrettet",
-        "description": "Konkrete næste skridt og praktiske anbefalinger til din karriereudvikling"
-      },
-      "accessible": {
-        "title": "Tilgængelig",
-        "description": "Tilgængelig online, når det passer dig"
+  "about": {
+    "title": "Om Vinster",
+    "subtitle": "Din karriere, vores passion",
+    "intro": {
+      "title": "Hvem er vi?",
+      "description": "Vinster er et innovativt karriererådgivningsfirma, der specialiserer sig i at hjælpe mennesker med at få klarhed over deres professionelle ønsker og mål. Vores videnskabeligt baserede tilgang kombinerer velafprøvede psykologiske metoder med moderne teknologi."
+    },
+    "mission": {
+      "title": "Vores mission",
+      "description": "Vi tror på at alle mennesker har ret til en meningsfuld karriere. Vores mission er at støtte mennesker i at opdage deres unikke talenter og passioner og forvandle dem til en karriere der virkelig begejstrer dem."
+    },
+    "approach": {
+      "title": "Vores tilgang",
+      "description": "Vores strukturerede proces guider dig gennem en serie af selvrefleksionsøvelser og vurderinger. Disse hjælper dig med at genkende mønstre i dine interesser, motivationer og værdier.",
+      "features": {
+        "scientific": {
+          "title": "Videnskabeligt baseret",
+          "description": "Baseret på velafprøvede metoder fra arbejds- og organisationspsykologi"
+        },
+        "personalized": {
+          "title": "Personaliseret",
+          "description": "Hver rapport er individuelt tilpasset dine specifikke svar og situation"
+        },
+        "actionable": {
+          "title": "Handlingsrettet",
+          "description": "Konkrete næste skridt og praktiske anbefalinger til din karriereudvikling"
+        },
+        "accessible": {
+          "title": "Tilgængelig",
+          "description": "Tilgængelig online, når det passer dig"
+        }
       }
+    },
+    "team": {
+      "title": "Vores team",
+      "description": "Vores team består af erfarne karriererådgivere, psykologer og teknologieksperter, der alle deler en fælles passion: at hjælpe mennesker med at realisere deres professionelle drømme."
+    },
+    "cta": {
+      "title": "Klar til din karriererejse?",
+      "description": "Opdag hvad der virkelig motiverer dig og tag det første skridt mod en mere meningsfuld karriere.",
+      "button": "Start nu"
     }
-  },
-  "team": {
-    "title": "Vores team",
-    "description": "Vores team består af erfarne karriererådgivere, psykologer og teknologieksperter, der alle deler en fælles passion: at hjælpe mennesker med at realisere deres professionelle drømme."
-  },
-  "cta": {
-    "title": "Klar til din karriererejse?",
-    "description": "Opdag hvad der virkelig motiverer dig og tag det første skridt mod en mere meningsfuld karriere.",
-    "button": "Start nu"
   }
 }

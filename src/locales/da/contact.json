@@ -1,64 +1,66 @@
 {
-  "title": "Kontakt",
-  "subtitle": "Har du spørgsmål? Vi hjælper gerne",
-  "intro": {
-    "description": "Kontakt os ved spørgsmål om Vinster, tekniske problemer eller hvis du har feedback. Vi svarer normalt inden for 24 timer."
-  },
-  "contact_info": {
-    "title": "Kontaktoplysninger",
-    "email": {
-      "label": "E-mail",
-      "value": "info@vinster.nl"
+  "contact": {
+    "title": "Kontakt",
+    "subtitle": "Har du spørgsmål? Vi hjælper gerne",
+    "intro": {
+      "description": "Kontakt os ved spørgsmål om Vinster, tekniske problemer eller hvis du har feedback. Vi svarer normalt inden for 24 timer."
     },
-    "company": {
-      "label": "Virksomhed",
-      "value": "Vinster B.V."
+    "contact_info": {
+      "title": "Kontaktoplysninger",
+      "email": {
+        "label": "E-mail",
+        "value": "info@vinster.nl"
+      },
+      "company": {
+        "label": "Virksomhed",
+        "value": "Vinster B.V."
+      },
+      "kvk": {
+        "label": "Handelskammernummer",
+        "value": "12345678"
+      },
+      "address": {
+        "label": "Adresse",
+        "value": "Eksempel Gade 123, 1234 AB Amsterdam, Holland"
+      }
     },
-    "kvk": {
-      "label": "Handelskammernummer",
-      "value": "12345678"
+    "form": {
+      "title": "Send os en besked",
+      "name": {
+        "label": "Fulde navn",
+        "placeholder": "Dit navn"
+      },
+      "email": {
+        "label": "E-mail adresse",
+        "placeholder": "din.email@eksempel.com"
+      },
+      "subject": {
+        "label": "Emne",
+        "placeholder": "Hvad vil du gerne tale om?"
+      },
+      "message": {
+        "label": "Besked",
+        "placeholder": "Beskriv dit spørgsmål eller feedback..."
+      },
+      "submit": "Send besked",
+      "success": "Tak for din besked! Vi vender tilbage til dig snart.",
+      "error": "Der opstod en fejl ved afsendelse af din besked. Prøv igen."
     },
-    "address": {
-      "label": "Adresse",
-      "value": "Eksempel Gade 123, 1234 AB Amsterdam, Holland"
+    "faq_link": {
+      "title": "Ofte stillede spørgsmål",
+      "description": "Tjek vores FAQ sektion - måske finder du allerede et svar på dit spørgsmål der.",
+      "button": "Se FAQ"
+    },
+    "support": {
+      "title": "Har du brug for hjælp?",
+      "description": "Vores supportteam hjælper gerne med:",
+      "items": [
+        "Tekniske problemer",
+        "Spørgsmål om processen",
+        "Problemer med din konto",
+        "Betalingsspørgsmål",
+        "Generelle spørgsmål om Vinster"
+      ]
     }
-  },
-  "form": {
-    "title": "Send os en besked",
-    "name": {
-      "label": "Fulde navn",
-      "placeholder": "Dit navn"
-    },
-    "email": {
-      "label": "E-mail adresse",
-      "placeholder": "din.email@eksempel.com"
-    },
-    "subject": {
-      "label": "Emne",
-      "placeholder": "Hvad vil du gerne tale om?"
-    },
-    "message": {
-      "label": "Besked",
-      "placeholder": "Beskriv dit spørgsmål eller feedback..."
-    },
-    "submit": "Send besked",
-    "success": "Tak for din besked! Vi vender tilbage til dig snart.",
-    "error": "Der opstod en fejl ved afsendelse af din besked. Prøv igen."
-  },
-  "faq_link": {
-    "title": "Ofte stillede spørgsmål",
-    "description": "Tjek vores FAQ sektion - måske finder du allerede et svar på dit spørgsmål der.",
-    "button": "Se FAQ"
-  },
-  "support": {
-    "title": "Har du brug for hjælp?",
-    "description": "Vores supportteam hjælper gerne med:",
-    "items": [
-      "Tekniske problemer",
-      "Spørgsmål om processen",
-      "Problemer med din konto",
-      "Betalingsspørgsmål",
-      "Generelle spørgsmål om Vinster"
-    ]
   }
 }

@@ -1,76 +1,78 @@
 {
-  "title": "Adgangskoder til fagfolk",
-  "subtitle": "Adgang for karriererådgivere og HR-fagfolk",
-  "intro": {
-    "description": "Som karriererådgiver, coach eller HR-fagperson kan du integrere Vinster i dine tjenester. Kontakt os for adgangskoder og partnerskabsmuligheder."
-  },
-  "benefits": {
-    "title": "Fordele for fagfolk",
-    "structured_process": {
-      "title": "Struktureret proces",
-      "description": "En velafprøvet, videnskabeligt baseret tilgang til karriererådgivning"
+  "professionals": {
+    "title": "Adgangskoder til fagfolk",
+    "subtitle": "Adgang for karriererådgivere og HR-fagfolk",
+    "intro": {
+      "description": "Som karriererådgiver, coach eller HR-fagperson kan du integrere Vinster i dine tjenester. Kontakt os for adgangskoder og partnerskabsmuligheder."
     },
-    "detailed_reports": {
-      "title": "Detaljerede rapporter",
-      "description": "Omfattende indsigt i dine klienters motivationer og præferencer"
+    "benefits": {
+      "title": "Fordele for fagfolk",
+      "structured_process": {
+        "title": "Struktureret proces",
+        "description": "En velafprøvet, videnskabeligt baseret tilgang til karriererådgivning"
+      },
+      "detailed_reports": {
+        "title": "Detaljerede rapporter",
+        "description": "Omfattende indsigt i dine klienters motivationer og præferencer"
+      },
+      "time_efficient": {
+        "title": "Tidseffektiv",
+        "description": "Reducer tid på dataindsamling og fokuser på rådgivning"
+      },
+      "professional_output": {
+        "title": "Professionelt output",
+        "description": "Højkvalitetsrapporter og profiler du kan dele med dine klienter"
+      }
     },
-    "time_efficient": {
-      "title": "Tidseffektiv",
-      "description": "Reducer tid på dataindsamling og fokuser på rådgivning"
+    "how_it_works": {
+      "title": "Sådan virker det",
+      "step1": {
+        "title": "1. Anmod om adgang",
+        "description": "Kontakt os for professionel adgang til Vinster"
+      },
+      "step2": {
+        "title": "2. Inviter klienter", 
+        "description": "Brug dine adgangskoder til at invitere klienter til Vinster"
+      },
+      "step3": {
+        "title": "3. Modtag resultater",
+        "description": "Få detaljerede rapporter til brug i dine rådgivningssessioner"
+      }
     },
-    "professional_output": {
-      "title": "Professionelt output",
-      "description": "Højkvalitetsrapporter og profiler du kan dele med dine klienter"
+    "target_groups": {
+      "title": "Egnet for",
+      "career_coaches": "Karrierecoaches",
+      "hr_professionals": "HR-fagfolk",
+      "outplacement_consultants": "Outplacement konsulenter",
+      "recruitment_agencies": "Rekrutteringsbureauer",
+      "educational_institutions": "Uddannelsesinstitutioner",
+      "career_counselors": "Karriererådgivere"
+    },
+    "contact_form": {
+      "title": "Anmod om adgang",
+      "organization": {
+        "label": "Organisation",
+        "placeholder": "Navn på din organisation"
+      },
+      "role": {
+        "label": "Din rolle",
+        "placeholder": "F.eks. Karrierecoach, HR Manager"
+      },
+      "experience": {
+        "label": "Erfaring",
+        "placeholder": "Beskriv kort din erfaring med karriererådgivning"
+      },
+      "use_case": {
+        "label": "Anvendelsestilfælde",
+        "placeholder": "Hvordan planlægger du at bruge Vinster?"
+      },
+      "submit": "Anmod om adgang",
+      "success": "Tak for din interesse! Vi vender tilbage til dig snart.",
+      "error": "Der opstod en fejl ved afsendelse af din anmodning. Prøv igen."
+    },
+    "partnership": {
+      "title": "Partnerskabsmuligheder",
+      "description": "Vi søger altid nye partnerskaber med karriererådgivningsorganisationer. Kontakt os for at diskutere muligheder."
     }
-  },
-  "how_it_works": {
-    "title": "Sådan virker det",
-    "step1": {
-      "title": "1. Anmod om adgang",
-      "description": "Kontakt os for professionel adgang til Vinster"
-    },
-    "step2": {
-      "title": "2. Inviter klienter", 
-      "description": "Brug dine adgangskoder til at invitere klienter til Vinster"
-    },
-    "step3": {
-      "title": "3. Modtag resultater",
-      "description": "Få detaljerede rapporter til brug i dine rådgivningssessioner"
-    }
-  },
-  "target_groups": {
-    "title": "Egnet for",
-    "career_coaches": "Karrierecoaches",
-    "hr_professionals": "HR-fagfolk",
-    "outplacement_consultants": "Outplacement konsulenter",
-    "recruitment_agencies": "Rekrutteringsbureauer",
-    "educational_institutions": "Uddannelsesinstitutioner",
-    "career_counselors": "Karriererådgivere"
-  },
-  "contact_form": {
-    "title": "Anmod om adgang",
-    "organization": {
-      "label": "Organisation",
-      "placeholder": "Navn på din organisation"
-    },
-    "role": {
-      "label": "Din rolle",
-      "placeholder": "F.eks. Karrierecoach, HR Manager"
-    },
-    "experience": {
-      "label": "Erfaring",
-      "placeholder": "Beskriv kort din erfaring med karriererådgivning"
-    },
-    "use_case": {
-      "label": "Anvendelsestilfælde",
-      "placeholder": "Hvordan planlægger du at bruge Vinster?"
-    },
-    "submit": "Anmod om adgang",
-    "success": "Tak for din interesse! Vi vender tilbage til dig snart.",
-    "error": "Der opstod en fejl ved afsendelse af din anmodning. Prøv igen."
-  },
-  "partnership": {
-    "title": "Partnerskabsmuligheder",
-    "description": "Vi søger altid nye partnerskaber med karriererådgivningsorganisationer. Kontakt os for at diskutere muligheder."
   }
 }

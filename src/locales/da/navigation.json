@@ -10,5 +10,9 @@
   "register": "Registrer",
   "dashboard": "Dashboard",
   "logout": "Log ud",
-  "profile": "Profil"
+  "profile": "Profil",
+  "mobile_menu": {
+    "title": "Menu",
+    "close": "Luk menu"
+  }
 }

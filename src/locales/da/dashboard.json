@@ -1,49 +1,65 @@
 {
-  "welcome": {
-    "title": "Velkommen tilbage, {name}!",
-    "subtitle": "Fortsæt din karriererejse"
-  },
-  "progress": {
-    "title": "Dit fremskridt",
-    "completed": "Færdig",
-    "in_progress": "I gang",
-    "not_started": "Ikke startet",
-    "steps": {
-      "enthusiasm_scan": "Entusiasmescanning",
-      "dream_jobs": "Drømmejobs",
-      "profile_completion": "Komplet profil",
-      "career_report": "Karriererapport"
-    }
-  },
-  "next_steps": {
-    "title": "Næste skridt",
-    "continue_button": "Fortsæt",
-    "start_button": "Start"
-  },
-  "important_info": {
-    "title": "Vigtig information",
-    "payment_required": {
-      "title": "Betaling påkrævet",
-      "description": "For at modtage din personlige karriererapport kræves en engangsbetaling.",
-      "button": "Betal nu"
+  "dashboard": {
+    "welcome": {
+      "title": "Velkommen tilbage, {name}!",
+      "subtitle": "Fortsæt din karriererejse"
     },
-    "report_ready": {
-      "title": "Din rapport er klar!",
-      "description": "Din personlige karriererapport er blevet genereret og er klar til download.",
-      "button": "Download rapport"
+    "progress": {
+      "title": "Dit fremskridt",
+      "completed": "Færdig",
+      "in_progress": "I gang",
+      "not_started": "Ikke startet",
+      "steps": {
+        "enthusiasm_scan": "Entusiasmescanning",
+        "dream_jobs": "Drømmejobs",
+        "profile_completion": "Komplet profil",
+        "career_report": "Karriererapport"
+      }
+    },
+    "next_steps": {
+      "title": "Næste skridt",
+      "continue_button": "Fortsæt",
+      "start_button": "Start"
+    },
+    "important_info": {
+      "title": "Vigtig information",
+      "payment_required": {
+        "title": "Betaling påkrævet",
+        "description": "For at modtage din personlige karriererapport kræves en engangsbetaling.",
+        "button": "Betal nu"
+      },
+      "report_ready": {
+        "title": "Din rapport er klar!",
+        "description": "Din personlige karriererapport er blevet genereret og er klar til download.",
+        "button": "Download rapport"
+      }
+    },
+    "what_is_vinster": {
+      "title": "Hvad er Vinster?",
+      "description": "Vinster er et videnskabeligt baseret værktøj der hjælper dig med at få klarhed over dine karriereønsker. Gennem en struktureret proces opdager du dine motivationer og får konkrete næste skridt for din professionelle udvikling."
+    },
+    "what_do_you_get": {
+      "title": "Hvad får du?",
+      "items": {
+        "personal_report": "En personlig karriererapport",
+        "insights": "Indsigt i dine motivationer og interesser",
+        "action_plan": "En konkret handlingsplan",
+        "job_search_profile": "En jobsøgningsprofil til dine ansøgninger"
+      }
     }
   },
-  "what_is_vinster": {
-    "title": "Hvad er Vinster?",
-    "description": "Vinster er et videnskabeligt baseret værktøj der hjælper dig med at få klarhed over dine karriereønsker. Gennem en struktureret proces opdager du dine motivationer og får konkrete næste skridt for din professionelle udvikling."
-  },
-  "what_do_you_get": {
-    "title": "Hvad får du?",
-    "items": {
-      "personal_report": "En personlig karriererapport",
-      "insights": "Indsigt i dine motivationer og interesser",
-      "action_plan": "En konkret handlingsplan",
-      "job_search_profile": "En jobsøgningsprofil til dine ansøgninger"
-    }
+  "payment": {
+    "title": "Fuldfør din betaling",
+    "subtitle": "Få adgang til din personlige karriererapport",
+    "price": "€29,95",
+    "features": {
+      "personal_report": "Personlig karriererapport",
+      "job_search_profile": "Jobsøgningsprofil",
+      "action_plan": "Konkret handlingsplan",
+      "insights": "Dyb indsigt i dine motivationer"
+    },
+    "button": "Betal nu",
+    "secure": "Sikker betaling via Stripe",
+    "guarantee": "30 dage pengene tilbage garanti"
   }
 }

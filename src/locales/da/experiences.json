@@ -1,74 +1,76 @@
 {
-  "title": "Erfaringer",
-  "subtitle": "Hvad vores brugere siger om Vinster",
-  "intro": {
-    "description": "Læs ægte erfaringer fra mennesker der har brugt Vinster til at få klarhed over deres karriere."
-  },
-  "testimonials": [
-    {
-      "name": "Sarah M.",
-      "role": "Marketing Manager",
-      "company": "Tech startup",
-      "text": "Vinster hjalp mig med at forstå hvorfor jeg følte mig uopfyldt i mit tidligere job. Entusiasmescanningen bragte minder tilbage som jeg havde glemt, og karriererapporten gav mig konkrete skridt til mit skifte til marketing.",
-      "rating": 5
+  "experiences": {
+    "title": "Erfaringer",
+    "subtitle": "Hvad vores brugere siger om Vinster",
+    "intro": {
+      "description": "Læs ægte erfaringer fra mennesker der har brugt Vinster til at få klarhed over deres karriere."
     },
-    {
-      "name": "Thomas K.",
-      "role": "Software Udvikler", 
-      "company": "Finansielle tjenester",
-      "text": "Som en karriereskifter var jeg usikker på min karriereretning. Vinster hjalp mig med at indse at mine tekniske færdigheder og kærlighed til problemløsning perfekt passede til softwareudvikling. Nu arbejder jeg i mit drømmejob.",
-      "rating": 5
+    "testimonials": [
+      {
+        "name": "Sarah M.",
+        "role": "Marketing Manager",
+        "company": "Tech startup",
+        "text": "Vinster hjalp mig med at forstå hvorfor jeg følte mig uopfyldt i mit tidligere job. Entusiasmescanningen bragte minder tilbage som jeg havde glemt, og karriererapporten gav mig konkrete skridt til mit skifte til marketing.",
+        "rating": 5
+      },
+      {
+        "name": "Thomas K.",
+        "role": "Software Udvikler", 
+        "company": "Finansielle tjenester",
+        "text": "Som en karriereskifter var jeg usikker på min karriereretning. Vinster hjalp mig med at indse at mine tekniske færdigheder og kærlighed til problemløsning perfekt passede til softwareudvikling. Nu arbejder jeg i mit drømmejob.",
+        "rating": 5
+      },
+      {
+        "name": "Lisa R.",
+        "role": "Projektleder",
+        "company": "Konsulentfirma",
+        "text": "Efter 10 år i samme virksomhed følte jeg mig fastlåst. Vinster åbnede mine øjne for nye muligheder og gav mig tilliden til at springe ud i konsulentarbejde. Indsigterne var transformative.",
+        "rating": 5
+      },
+      {
+        "name": "Michael B.",
+        "role": "Lærer",
+        "company": "Grundskole",
+        "text": "Som nyuddannet var jeg ikke sikker på om undervisning var det rigtige for mig. Vinster bekræftede min passion for uddannelse og mentoring. Nu elsker jeg mit job og ved at jeg er det rigtige sted.",
+        "rating": 4
+      },
+      {
+        "name": "Anna W.",
+        "role": "UX Designer",
+        "company": "Digitalt bureau",
+        "text": "Efter barselsorlov var jeg usikker på min tilbagevenden til arbejdsmarkedet. Vinster hjalp mig med at indse at mine kreative evner og interesse for psykologi var perfekte til UX design.",
+        "rating": 5
+      },
+      {
+        "name": "David L.",
+        "role": "Virksomhedskonsulent",
+        "company": "Freelancer",
+        "text": "Vinster gav mig klarheden til at tage springet til selvstændighed. Processen hjalp mig med at forstå hvad der virkelig motiverer mig, og rapporten fungerede som grundlag for mit forretningskoncept."
+      }
+    ],
+    "stats": {
+      "title": "Vores resultater taler for sig selv",
+      "satisfaction": {
+        "number": "94%",
+        "label": "kundetilfredshed"
+      },
+      "clarity": {
+        "number": "89%",
+        "label": "rapporterer mere klarhed"
+      },
+      "action": {
+        "number": "76%",
+        "label": "tager konkrete skridt"
+      },
+      "recommend": {
+        "number": "92%",
+        "label": "ville anbefale os"
+      }
     },
-    {
-      "name": "Lisa R.",
-      "role": "Projektleder",
-      "company": "Konsulentfirma",
-      "text": "Efter 10 år i samme virksomhed følte jeg mig fastlåst. Vinster åbnede mine øjne for nye muligheder og gav mig tilliden til at springe ud i konsulentarbejde. Indsigterne var transformative.",
-      "rating": 5
-    },
-    {
-      "name": "Michael B.",
-      "role": "Lærer",
-      "company": "Grundskole",
-      "text": "Som nyuddannet var jeg ikke sikker på om undervisning var det rigtige for mig. Vinster bekræftede min passion for uddannelse og mentoring. Nu elsker jeg mit job og ved at jeg er det rigtige sted.",
-      "rating": 4
-    },
-    {
-      "name": "Anna W.",
-      "role": "UX Designer",
-      "company": "Digitalt bureau",
-      "text": "Efter barselsorlov var jeg usikker på min tilbagevenden til arbejdsmarkedet. Vinster hjalp mig med at indse at mine kreative evner og interesse for psykologi var perfekte til UX design.",
-      "rating": 5
-    },
-    {
-      "name": "David L.",
-      "role": "Virksomhedskonsulent",
-      "company": "Freelancer",
-      "text": "Vinster gav mig klarheden til at tage springet til selvstændighed. Processen hjalp mig med at forstå hvad der virkelig motiverer mig, og rapporten fungerede som grundlag for mit forretningskoncept."
+    "cta": {
+      "title": "Bliv vores næste succes",
+      "description": "Tilslut dig tusindvis af mennesker der allerede har fundet klarhed over deres karriere.",
+      "button": "Start nu"
     }
-  ],
-  "stats": {
-    "title": "Vores resultater taler for sig selv",
-    "satisfaction": {
-      "number": "94%",
-      "label": "kundetilfredshed"
-    },
-    "clarity": {
-      "number": "89%",
-      "label": "rapporterer mere klarhed"
-    },
-    "action": {
-      "number": "76%",
-      "label": "tager konkrete skridt"
-    },
-    "recommend": {
-      "number": "92%",
-      "label": "ville anbefale os"
-    }
-  },
-  "cta": {
-    "title": "Bliv vores næste succes",
-    "description": "Tilslut dig tusindvis af mennesker der allerede har fundet klarhed over deres karriere.",
-    "button": "Start nu"
   }
 }
