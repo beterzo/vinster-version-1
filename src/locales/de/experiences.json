@@ -1,0 +1,74 @@
+{
+  "title": "Erfahrungen",
+  "subtitle": "Was unsere Nutzer über Vinster sagen",
+  "intro": {
+    "description": "Lesen Sie echte Erfahrungen von Menschen, die Vinster genutzt haben, um Klarheit über ihre Karriere zu gewinnen."
+  },
+  "testimonials": [
+    {
+      "name": "Sarah M.",
+      "role": "Marketing Managerin",
+      "company": "Technologie-Startup",
+      "text": "Vinster hat mir geholfen zu verstehen, warum ich mich in meinem vorherigen Job unerfüllt gefühlt habe. Der Begeisterungsscan brachte Erinnerungen zurück, die ich vergessen hatte, und der Karrierebericht gab mir konkrete Schritte für meinen Wechsel ins Marketing.",
+      "rating": 5
+    },
+    {
+      "name": "Thomas K.", 
+      "role": "Software Entwickler",
+      "company": "Finanzdienstleistungen",
+      "text": "Als Quereinsteiger war ich unsicher über meine Karriererichtung. Vinster half mir zu erkennen, dass meine technischen Fähigkeiten und meine Liebe zum Problemlösen perfekt zur Softwareentwicklung passen. Jetzt arbeite ich in meinem Traumjob.",
+      "rating": 5
+    },
+    {
+      "name": "Lisa R.",
+      "role": "Projektmanagerin", 
+      "company": "Beratungsunternehmen",
+      "text": "Nach 10 Jahren im selben Unternehmen fühlte ich mich festgefahren. Vinster öffnete meine Augen für neue Möglichkeiten und gab mir das Vertrauen, den Sprung in die Beratung zu wagen. Die Einblicke waren transformativ.",
+      "rating": 5
+    },
+    {
+      "name": "Michael B.",
+      "role": "Lehrer",
+      "company": "Grundschule",
+      "text": "Als Berufseinsteiger war ich mir nicht sicher, ob Lehramt das Richtige für mich ist. Vinster bestätigte meine Leidenschaft für Bildung und Mentoring. Jetzt liebe ich meinen Job und weiß, dass ich am richtigen Ort bin.",
+      "rating": 4
+    },
+    {
+      "name": "Anna W.",
+      "role": "UX Designerin",
+      "company": "Digitalagentur", 
+      "text": "Nach der Elternzeit war ich unsicher über meine Rückkehr ins Berufsleben. Vinster half mir zu erkennen, dass meine kreativen Fähigkeiten und mein Interesse an Psychologie perfekt für UX Design sind.",
+      "rating": 5
+    },
+    {
+      "name": "David L.",
+      "role": "Unternehmensberater",
+      "company": "Freelancer",
+      "text": "Vinster gab mir die Klarheit, den Schritt in die Selbstständigkeit zu wagen. Der Prozess half mir zu verstehen, was mich wirklich motiviert, und der Bericht diente als Grundlage für mein Geschäftskonzept."
+    }
+  ],
+  "stats": {
+    "title": "Unsere Ergebnisse sprechen für sich",
+    "satisfaction": {
+      "number": "94%",
+      "label": "Kundenzufriedenheit"
+    },
+    "clarity": {
+      "number": "89%",
+      "label": "berichten von mehr Klarheit"
+    },
+    "action": {
+      "number": "76%",
+      "label": "unternehmen konkrete Schritte"
+    },
+    "recommend": {
+      "number": "92%",
+      "label": "würden uns weiterempfehlen"
+    }
+  },
+  "cta": {
+    "title": "Werden Sie unser nächster Erfolg",
+    "description": "Schließen Sie sich Tausenden von Menschen an, die bereits Klarheit über ihre Karriere gefunden haben.",
+    "button": "Jetzt starten"
+  }
+}

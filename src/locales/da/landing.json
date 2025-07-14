@@ -1,0 +1,89 @@
+{
+  "hero": {
+    "title": "Opdag dit ideelle drømmejob",
+    "subtitle": "Vinster hjælper dig med at få klarhed over dine karriereønsker. Gennemfør vores videnskabeligt baserede proces og få en personlig karriererapport med konkrete næste skridt.",
+    "cta_button": "Start din rejse",
+    "secondary_cta": "Lær mere"
+  },
+  "features": {
+    "title": "Hvordan virker Vinster?",
+    "subtitle": "En struktureret proces, der giver dig klarhed over dine karriereønsker",
+    "enthusiasm_scan": {
+      "title": "Entusiasmescanning",
+      "description": "Opdag hvad der virkelig begejstrer dig på arbejdet ved at se tilbage på tidligere oplevelser."
+    },
+    "dream_jobs": {
+      "title": "Drømmejobs",
+      "description": "Beskriv tre job du drømmer om og udforsk hvad der gør dem attraktive for dig."
+    },
+    "profile_completion": {
+      "title": "Komplet profil",
+      "description": "Angiv dine prioriteter og kompletér din profil for personlig vejledning."
+    },
+    "career_report": {
+      "title": "Karriererapport",
+      "description": "Få en omfattende rapport med indsigt og konkrete næste skridt for din karriere."
+    }
+  },
+  "testimonials": {
+    "title": "Hvad siger vores brugere?",
+    "subtitle": "Oplev hvordan Vinster har hjulpet andre med deres karriereudvikling",
+    "testimonial1": {
+      "text": "Vinster hjalp mig med at få klarhed over mine karriereønsker. Processen var indsigtsfuld og resultaterne meget hjælpsomme.",
+      "author": "Sarah M.",
+      "role": "Marketing Manager"
+    },
+    "testimonial2": {
+      "text": "Vinsters strukturerede tilgang gjorde det nemt at udforske mine passioner og interesser. Meget anbefalelsesværdig!",
+      "author": "Thomas K.",
+      "role": "Software Udvikler"
+    },
+    "testimonial3": {
+      "text": "Takket være Vinster opdagede jeg en ny karrierevej jeg aldrig havde tænkt på. Indsigterne var transformative.",
+      "author": "Lisa R.",
+      "role": "Projektleder"
+    }
+  },
+  "process": {
+    "title": "Din vej til klarhed",
+    "subtitle": "En simpel, trin-for-trin proces der guider dig til dit drømmejob",
+    "step1": {
+      "title": "Tilmeld & Start",
+      "description": "Opret din gratis konto og begynd din karriererejse."
+    },
+    "step2": {
+      "title": "Udforsk & Opdag",
+      "description": "Gennemfør vores vurderinger for at udforske dine interesser og motivationer."
+    },
+    "step3": {
+      "title": "Få indsigt",
+      "description": "Modtag en personlig karriererapport med handlingsrettede indsigter."
+    },
+    "step4": {
+      "title": "Handle & Vokse",
+      "description": "Brug dine indsigter til at træffe informerede karrierebeslutninger."
+    }
+  },
+  "what_you_get": {
+    "title": "Hvad du får",
+    "subtitle": "En omfattende karrierepakke der hjælper dig med dit næste skridt",
+    "career_report": {
+      "title": "Personlig karriererapport",
+      "description": "En detaljeret rapport med indsigt i dine karrierepræferencer og anbefalinger."
+    },
+    "action_plan": {
+      "title": "Handlingsplan",
+      "description": "Konkrete næste skridt til at nå dine karrieremål."
+    },
+    "ongoing_support": {
+      "title": "Løbende støtte",
+      "description": "Adgang til ressourcer og støtte til at guide dig på din karrierevej."
+    }
+  },
+  "cta": {
+    "title": "Klar til at opdage dit drømmejob?",
+    "subtitle": "Tilslut dig tusindvis af professionelle der har fundet klarhed i deres karriere",
+    "button": "Start nu",
+    "guarantee": "Gratis at begynde, intet kreditkort påkrævet"
+  }
+}

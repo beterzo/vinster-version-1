@@ -1,0 +1,76 @@
+{
+  "title": "Zugangscodes für Profis",
+  "subtitle": "Zugang für Karriereberater und HR-Profis",
+  "intro": {
+    "description": "Als Karriereberater, Coach oder HR-Profi können Sie Vinster in Ihre Dienstleistungen integrieren. Kontaktieren Sie uns für Zugangscodes und Partnerschaftsmöglichkeiten."
+  },
+  "benefits": {
+    "title": "Vorteile für Profis",
+    "structured_process": {
+      "title": "Strukturierter Prozess",
+      "description": "Ein bewährter, wissenschaftlich fundierter Ansatz für Karriereberatung"
+    },
+    "detailed_reports": {
+      "title": "Detaillierte Berichte",
+      "description": "Umfassende Einblicke in die Motivationen und Präferenzen Ihrer Klienten"
+    },
+    "time_efficient": {
+      "title": "Zeiteffizient", 
+      "description": "Reduzieren Sie die Zeit für Datensammlung und konzentrieren Sie sich auf Beratung"
+    },
+    "professional_output": {
+      "title": "Professionelle Ausgabe",
+      "description": "Hochwertige Berichte und Profile, die Sie mit Ihren Klienten teilen können"
+    }
+  },
+  "how_it_works": {
+    "title": "Wie es funktioniert",
+    "step1": {
+      "title": "1. Zugang anfordern",
+      "description": "Kontaktieren Sie uns für einen professionellen Zugang zu Vinster"
+    },
+    "step2": {
+      "title": "2. Klienten einladen",
+      "description": "Verwenden Sie Ihre Zugangscodes, um Klienten zu Vinster einzuladen"
+    },
+    "step3": {
+      "title": "3. Ergebnisse erhalten",
+      "description": "Erhalten Sie detaillierte Berichte zur Verwendung in Ihren Beratungssitzungen"
+    }
+  },
+  "target_groups": {
+    "title": "Geeignet für",
+    "career_coaches": "Karrierecoaches",
+    "hr_professionals": "HR-Profis",
+    "outplacement_consultants": "Outplacement-Berater",
+    "recruitment_agencies": "Personalagenturen",
+    "educational_institutions": "Bildungseinrichtungen",
+    "career_counselors": "Karriereberater"
+  },
+  "contact_form": {
+    "title": "Zugang anfordern",
+    "organization": {
+      "label": "Organisation",
+      "placeholder": "Name Ihrer Organisation"
+    },
+    "role": {
+      "label": "Ihre Rolle",
+      "placeholder": "Z.B. Karrierecoach, HR-Manager"
+    },
+    "experience": {
+      "label": "Erfahrung",
+      "placeholder": "Beschreiben Sie kurz Ihre Erfahrung in der Karriereberatung"
+    },
+    "use_case": {
+      "label": "Anwendungsfall",
+      "placeholder": "Wie planen Sie, Vinster zu nutzen?"
+    },
+    "submit": "Zugang anfordern",
+    "success": "Vielen Dank für Ihr Interesse! Wir werden uns bald bei Ihnen melden.",
+    "error": "Beim Senden Ihrer Anfrage ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+  },
+  "partnership": {
+    "title": "Partnerschaftsmöglichkeiten",
+    "description": "Wir suchen immer nach neuen Partnerschaften mit Karriereberatungsorganisationen. Kontaktieren Sie uns, um Möglichkeiten zu besprechen."
+  }
+}

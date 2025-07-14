@@ -1,0 +1,49 @@
+{
+  "welcome": {
+    "title": "Willkommen zurück, {name}!",
+    "subtitle": "Setzen Sie Ihre Karrierereise fort"
+  },
+  "progress": {
+    "title": "Ihr Fortschritt",
+    "completed": "Abgeschlossen",
+    "in_progress": "In Bearbeitung",
+    "not_started": "Nicht begonnen",
+    "steps": {
+      "enthusiasm_scan": "Begeisterungsscan",
+      "dream_jobs": "Traumjobs",
+      "profile_completion": "Profil vervollständigen",
+      "career_report": "Karrierebericht"
+    }
+  },
+  "next_steps": {
+    "title": "Nächste Schritte",
+    "continue_button": "Fortfahren",
+    "start_button": "Beginnen"
+  },
+  "important_info": {
+    "title": "Wichtige Informationen",
+    "payment_required": {
+      "title": "Zahlung erforderlich",
+      "description": "Um Ihren personalisierten Karrierebericht zu erhalten, ist eine einmalige Zahlung erforderlich.",
+      "button": "Jetzt bezahlen"
+    },
+    "report_ready": {
+      "title": "Ihr Bericht ist bereit!",
+      "description": "Ihr personalisierter Karrierebericht wurde generiert und steht zum Download bereit.",
+      "button": "Bericht herunterladen"
+    }
+  },
+  "what_is_vinster": {
+    "title": "Was ist Vinster?",
+    "description": "Vinster ist ein wissenschaftlich fundiertes Tool, das Ihnen hilft, Klarheit über Ihre Karrierewünsche zu bekommen. Durch einen strukturierten Prozess entdecken Sie Ihre Motivationen und erhalten konkrete nächste Schritte für Ihre berufliche Entwicklung."
+  },
+  "what_do_you_get": {
+    "title": "Was erhalten Sie?",
+    "items": {
+      "personal_report": "Einen personalisierten Karrierebericht",
+      "insights": "Einblicke in Ihre Motivationen und Interessen",
+      "action_plan": "Einen konkreten Aktionsplan",
+      "job_search_profile": "Ein Jobsuchprofil für Ihre Bewerbungen"
+    }
+  }
+}

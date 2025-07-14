@@ -1,0 +1,80 @@
+{
+  "title": "Für wen ist Vinster?",
+  "subtitle": "Entdecken Sie, ob Vinster das Richtige für Sie ist",
+  "intro": {
+    "description": "Vinster ist für alle gedacht, die Klarheit über ihre Karriere suchen. Ob Sie am Anfang Ihrer Laufbahn stehen, einen Karrierewechsel planen oder einfach reflektieren möchten - wir helfen Ihnen dabei."
+  },
+  "target_groups": {
+    "title": "Vinster ist perfekt für:",
+    "young_professionals": {
+      "title": "Berufseinsteiger",
+      "description": "Sie haben gerade Ihr Studium abgeschlossen oder stehen am Anfang Ihrer Karriere und möchten die richtige Richtung einschlagen."
+    },
+    "career_changers": {
+      "title": "Karrierewechsler",
+      "description": "Sie denken über einen Wechsel nach und möchten herausfinden, welche Möglichkeiten zu Ihnen passen."
+    },
+    "experienced_professionals": {
+      "title": "Erfahrene Fachkräfte",
+      "description": "Sie haben bereits Erfahrung, fühlen sich aber unerfüllt und suchen nach neuen Herausforderungen."
+    },
+    "returnees": {
+      "title": "Wiedereinsteiger",
+      "description": "Sie kehren nach einer Pause ins Berufsleben zurück und möchten Ihre nächsten Schritte planen."
+    },
+    "students": {
+      "title": "Studenten",
+      "description": "Sie studieren noch und möchten schon jetzt Klarheit über Ihre berufliche Zukunft gewinnen."
+    },
+    "managers": {
+      "title": "Führungskräfte",
+      "description": "Sie sind in einer Führungsposition und überlegen, wie Sie Ihre Karriere weiterentwickeln können."
+    }
+  },
+  "situations": {
+    "title": "Typische Situationen:",
+    "list": [
+      "\"Ich weiß nicht, welcher Job wirklich zu mir passt\"",
+      "\"Ich bin unzufrieden in meinem aktuellen Job\"",
+      "\"Ich möchte meine Karriere neu ausrichten\"",
+      "\"Ich stehe vor wichtigen Berufsentscheidungen\"",
+      "\"Ich möchte meine Stärken und Interessen besser verstehen\"",
+      "\"Ich suche nach neuen Herausforderungen\"",
+      "\"Ich kehre nach einer Pause ins Berufsleben zurück\"",
+      "\"Ich möchte mich beruflich weiterentwickeln\""
+    ]
+  },
+  "not_for": {
+    "title": "Vinster ist weniger geeignet, wenn Sie:",
+    "list": [
+      "Sehr spezifische Branchenkenntnisse für einen bestimmten Sektor benötigen",
+      "Ausschließlich nach sofortigen Jobangeboten suchen",
+      "Keine Zeit für Selbstreflexion haben",
+      "Bereits völlig zufrieden mit Ihrer aktuellen Situation sind"
+    ]
+  },
+  "benefits": {
+    "title": "Was Sie gewinnen:",
+    "clarity": {
+      "title": "Klarheit",
+      "description": "Verstehen Sie, was Sie wirklich motiviert und begeistert"
+    },
+    "direction": {
+      "title": "Richtung",
+      "description": "Erhalten Sie konkrete nächste Schritte für Ihre Karriere"
+    },
+    "confidence": {
+      "title": "Selbstvertrauen",
+      "description": "Treffen Sie Karriereentscheidungen mit größerer Sicherheit"
+    },
+    "insights": {
+      "title": "Einblicke",
+      "description": "Entdecken Sie Ihre Stärken, Werte und Arbeitsvorlieben"
+    }
+  },
+  "cta": {
+    "title": "Klingt das nach Ihnen?",
+    "description": "Dann ist Vinster genau das Richtige für Sie. Starten Sie noch heute Ihre Reise zu mehr Karriereklarheit.",
+    "button": "Jetzt beginnen"
+  }
+}

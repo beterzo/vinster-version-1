@@ -1,0 +1,262 @@
+{
+  "enthousiasme": {
+    "intro": {
+      "title": "Entusiasmescanning",
+      "subtitle": "Opdag hvad der begejstrer dig på arbejdet",
+      "description": "Entusiasmescanningen hjælper dig med at opdage hvad der virkelig begejstrer dig på arbejdet. Ved at se tilbage på øjeblikke af glæde og entusiasme får du indsigt i hvad der er vigtigt for dig.",
+      "how_it_works_title": "Hvordan virker det?",
+      "how_it_works_description": "Du besvarer spørgsmål om tre forskellige perioder: din skoletid, dit første job og dine bedste arbejdsoplevelser. Dette tager omkring 15 minutter.",
+      "start_button": "Start entusiasmescanning",
+      "back_button": "Tilbage til dashboard"
+    },
+    "step1": {
+      "title": "Entusiasmescanning - Trin 1",
+      "subtitle": "Spørgsmål om din skoletid",
+      "question1": "Hvad kunne du bedst lide at lave i din skoletid?",
+      "question2": "Hvor kunne du bedst lide at tilbringe tid i din skoletid?",
+      "question3": "Hvad interesserede dig i din skoletid? Hvad var du nysgerrig på?",
+      "placeholder": "Beskriv dit svar her...",
+      "back_button": "Tilbage til intro",
+      "next_button": "Næste trin"
+    },
+    "step2": {
+      "title": "Entusiasmescanning - Trin 2",
+      "subtitle": "Spørgsmål om dit første job",
+      "question1": "Hvad var de sjoveste opgaver i dit første job?",
+      "question2": "Hvilke emner/områder fandt du mest interessante i dit første job?",
+      "question3": "Hvilke arbejdsforhold kunne du bedst lide i dit første job?",
+      "placeholder": "Beskriv dit svar her...",
+      "back_button": "Forrige trin",
+      "next_button": "Næste trin"
+    },
+    "step3": {
+      "title": "Entusiasmescanning - Trin 3",
+      "subtitle": "Spørgsmål om dine bedste arbejdsoplevelser",
+      "question1": "Beskriv en behagelig arbejdsperiode og hvad der gjorde den så behagelig.",
+      "question2": "Beskriv et projekt du gerne arbejdede på og hvilken rolle du havde i det.",
+      "question3": "Beskriv en dag hvor du gik hjem fløjtende. Hvad var specielt ved denne dag?",
+      "placeholder": "Beskriv dit svar her...",
+      "back_button": "Forrige trin",
+      "next_button": "Afslut scanning"
+    }
+  },
+  "wensberoepen": {
+    "intro": {
+      "title": "Drømmejobs",
+      "subtitle": "Forestil dig dine ideelle jobs",
+      "description": "I dette trin beskriver du tre jobs du drømmer om. Tænk ikke på begrænsninger - drøm stort! Denne øvelse hjælper dig med at forstå hvad der virkelig motiverer og begejstrer dig.",
+      "how_it_works_title": "Hvordan virker det?",
+      "how_it_works_description": "Du beskriver tre forskellige jobs der interesserer dig. For hvert job besvarer du spørgsmål om dine daglige aktiviteter, arbejdsmiljø og hvad du finder tiltrækkende ved dem. Dette tager omkring 20 minutter.",
+      "start_button": "Beskriv drømmejobs",
+      "back_button": "Tilbage til dashboard"
+    },
+    "step1": {
+      "title": "Drømmejobs - Trin 1",
+      "subtitle": "Dit første drømmejob",
+      "job_title": "Hvilket job forestiller du dig?",
+      "job_title_placeholder": "F.eks. Kreativ direktør, lærer, iværksætter...",
+      "question1": "Hvad ville du lave på en typisk arbejdsdag i dette job?",
+      "question2": "Hvor ville du arbejde og hvordan ville dit arbejdsmiljø se ud?",
+      "question3": "Hvad ville du primært beskæftige dig med i dette job? Hvilken viden og færdigheder ville du bruge?",
+      "placeholder": "Beskriv dit svar her...",
+      "back_button": "Tilbage til intro",
+      "next_button": "Næste job"
+    },
+    "step2": {
+      "title": "Drømmejobs - Trin 2",
+      "subtitle": "Dit andet drømmejob",
+      "job_title": "Hvilket job forestiller du dig?",
+      "job_title_placeholder": "F.eks. Konsulent, designer, forsker...",
+      "question1": "Hvad ville du lave på en typisk arbejdsdag i dette job?",
+      "question2": "Hvor ville du arbejde og hvordan ville dit arbejdsmiljø se ud?",
+      "question3": "Hvad ville du primært beskæftige dig med i dette job? Hvilken viden og færdigheder ville du bruge?",
+      "placeholder": "Beskriv dit svar her...",
+      "back_button": "Forrige job",
+      "next_button": "Næste job"
+    },
+    "step3": {
+      "title": "Drømmejobs - Trin 3",
+      "subtitle": "Dit tredje drømmejob",
+      "job_title": "Hvilket job forestiller du dig?",
+      "job_title_placeholder": "F.eks. Manager, kunstner, terapeut...",
+      "question1": "Hvad ville du lave på en typisk arbejdsdag i dette job?",
+      "question2": "Hvor ville du arbejde og hvordan ville dit arbejdsmiljø se ud?",
+      "question3": "Hvad ville du primært beskæftige dig med i dette job? Hvilken viden og færdigheder ville du bruge?",
+      "placeholder": "Beskriv dit svar her...",
+      "back_button": "Forrige job",
+      "next_button": "Fortsæt"
+    },
+    "vervolgvragen": {
+      "title": "Drømmejobs - Opfølgende spørgsmål",
+      "subtitle": "Flere indsigter om dine drømmejobs",
+      "instruction": "Besvar følgende spørgsmål for hvert job du har beskrevet:",
+      "questions": {
+        "samenwerking": "Hvem ville du samarbejde med og hvilke kontakter ville du have?",
+        "doel": "Hvad ville være målet eller formålet med dit arbejde? Hvad ville du opnå?",
+        "aspecten": "Hvilke aspekter af dette job finder du vigtigst eller mest tiltrækkende?",
+        "onderdelen": "Hvilke dele eller aktiviteter af dette job ville du nyde mest?",
+        "thuiskomen": "Forestil dig du har haft en fantastisk dag i dette job. Hvad ville få dig til at gå hjem fløjtende?"
+      },
+      "placeholder": "Beskriv dit svar her...",
+      "back_button": "Tilbage",
+      "next_button": "Afslut drømmejobs"
+    },
+    "voltooi": {
+      "title": "Drømmejobs afsluttet!",
+      "subtitle": "Godt klaret! Du har beskrevet dine tre drømmejobs.",
+      "description": "Du har taget et vigtigt skridt på vejen til mere klarhed om din karriere. Dine svar giver værdifuld indsigt i hvad der motiverer og begejstrer dig.",
+      "next_steps_title": "Hvad sker der nu?",
+      "next_steps_description": "I næste trin fuldfører du din profil ved at angive dine prioriteter og præferencer. Dette hjælper os med at skabe endnu mere målrettede anbefalinger til dig.",
+      "continue_button": "Fortsæt til profil komplettering",
+      "back_button": "Tilbage til dashboard"
+    }
+  },
+  "profiel_voltooien": {
+    "intro": {
+      "title": "Komplet profil",
+      "subtitle": "Fuldfør din personlige profil",
+      "description": "For at give dig de bedste anbefalinger skal vi lære dig lidt bedre at kende. I dette trin giver du information om din baggrund og præferencer.",
+      "how_it_works_title": "Hvordan virker det?",
+      "how_it_works_description": "Du besvarer spørgsmål om din uddannelsesbaggrund, præferencer og prioriteter. Derefter kan du angive hvad der er vigtigst for dig på arbejdet. Dette tager omkring 15 minutter.",
+      "start_button": "Komplet profil",
+      "back_button": "Tilbage til dashboard"
+    },
+    "extra_informatie": {
+      "title": "Yderligere information",
+      "subtitle": "Fortæl os lidt mere om dig selv",
+      "opleidingsniveau": {
+        "label": "Hvad er dit højeste uddannelsesniveau?",
+        "placeholder": "F.eks. Bachelor, Master, erhvervsuddannelse...",
+        "options": {
+          "vmbo": "Grundskole",
+          "mbo": "Erhvervsuddannelse",
+          "havo": "Gymnasium",
+          "vwo": "Studenter eksamen",
+          "hbo": "Professionsbachelor",
+          "wo": "Universitetsgrad",
+          "anders": "Andet"
+        }
+      },
+      "beroepsopleiding": {
+        "label": "Har du en specifik faglig uddannelse eller specialisering?",
+        "placeholder": "F.eks. Marketing, IT, sundhedssektor, uddannelse..."
+      },
+      "sector_voorkeur": {
+        "label": "Hvilken sektor vil du helst arbejde i?",
+        "placeholder": "F.eks. Sundhedssektor, teknologi, uddannelse, nonprofit..."
+      },
+      "fysieke_beperkingen": {
+        "label": "Har du fysiske begrænsninger vi skal tage hensyn til i anbefalingerne? (valgfrit)",
+        "placeholder": "F.eks. Mobilitetsbegrænsninger, allergier..."
+      },
+      "back_button": "Tilbage",
+      "next_button": "Fortsæt til prioriteter"
+    },
+    "prioriteiten": {
+      "title": "Dine prioriteter",
+      "subtitle": "Hvad er vigtigst for dig på arbejdet?",
+      "description": "Vælg fra hver kategori de aspekter der er vigtigst for dig. Du kan vælge flere muligheder per kategori.",
+      "activiteiten": {
+        "title": "Aktiviteter",
+        "subtitle": "Hvilken type aktiviteter kan du godt lide at lave på arbejdet?"
+      },
+      "werkomstandigheden": {
+        "title": "Arbejdsforhold",
+        "subtitle": "Hvilke arbejdsforhold er vigtige for dig?"
+      },
+      "interesses": {
+        "title": "Interesser",
+        "subtitle": "Hvilke emner og områder interesserer dig?"
+      },
+      "extra_text_label": "Vil du tilføje noget mere?",
+      "extra_text_placeholder": "Beskriv andre vigtige aspekter...",
+      "back_button": "Tilbage",
+      "next_button": "Afslut profil"
+    }
+  },
+  "zoekprofiel": {
+    "intro": {
+      "title": "Opret søgeprofil",
+      "subtitle": "Opret din personlige jobsøgningsprofil",
+      "description": "Baseret på alt hvad du har udfyldt indtil nu, opretter vi nu en søgeprofil. Denne kan du bruge til ansøgninger og dele med rekrutteringsfolk og arbejdsgivere.",
+      "how_it_works_title": "Hvordan virker det?",
+      "how_it_works_description": "Du angiver dine konkrete jobsøgningskriterier. Vi genererer derefter en professionel søgeprofil som du kan downloade og bruge.",
+      "start_button": "Opret søgeprofil",
+      "back_button": "Tilbage til dashboard"
+    },
+    "vragen": {
+      "title": "Søgeprofil - Dine kriterier",
+      "subtitle": "Angiv dine specifikke jobsøgningskriterier",
+      "functie_als": {
+        "label": "Hvad vil du gerne arbejde som?",
+        "placeholder": "F.eks. Marketing Manager, Software Developer, konsulent..."
+      },
+      "sector": {
+        "label": "I hvilken sektor?",
+        "placeholder": "F.eks. Teknologi, sundhedssektor, uddannelse, finansiel sektor..."
+      },
+      "organisatie_bij": {
+        "label": "Hvilken type organisation vil du gerne arbejde for?",
+        "placeholder": "F.eks. Startup, stor virksomhed, nonprofit, konsulentfirma..."
+      },
+      "kerntaken": {
+        "label": "Hvad skal dine hovedopgaver være?",
+        "placeholder": "Beskriv de vigtigste opgaver og ansvarsområder..."
+      },
+      "gewenste_regio": {
+        "label": "I hvilken region vil du gerne arbejde?",
+        "placeholder": "F.eks. København, remote, Danmark, Europa..."
+      },
+      "arbeidsvoorwaarden": {
+        "label": "Hvad er dine vigtigste arbejdsvilkår?",
+        "placeholder": "F.eks. Løn, arbejdstider, hjemmearbejde, udviklingsmuligheder..."
+      },
+      "back_button": "Tilbage",
+      "next_button": "Generer søgeprofil"
+    },
+    "download": {
+      "title": "Din søgeprofil er klar!",
+      "subtitle": "Din personlige jobsøgningsprofil er blevet oprettet",
+      "description": "Din søgeprofil er klar til download. Du kan bruge den til ansøgninger og dele den med rekrutteringsfolk og potentielle arbejdsgivere.",
+      "download_button": "Download søgeprofil",
+      "continue_button": "Fortsæt til karriererapport",
+      "back_button": "Tilbage til dashboard"
+    }
+  },
+  "rapport": {
+    "download": {
+      "title": "Din karriererapport er klar!",
+      "subtitle": "Din personlige karriererapport er blevet genereret",
+      "description": "Din omfattende karriererapport med indsigter og anbefalinger er klar til download. Denne rapport indeholder en analyse af dine svar og konkrete næste skridt for din karriereudvikling.",
+      "download_button": "Download karriererapport",
+      "back_button": "Tilbage til dashboard",
+      "loading_message": "Din rapport bliver genereret, vent venligst...",
+      "error_message": "Fejl ved generering af rapport. Prøv igen."
+    }
+  },
+  "onderzoeksplan": {
+    "title": "Din forskningsplan",
+    "subtitle": "En trin-for-trin plan for din jobsøgning",
+    "description": "Baseret på dine svar har vi oprettet en personlig forskningsplan til dig. Denne hjælper dig med strategisk at gribe dine næste karriereskridt an.",
+    "steps": {
+      "step1": {
+        "title": "1. Reflektion og selvkendskab",
+        "description": "Fordyb din forståelse af dine motivationer og interesser"
+      },
+      "step2": {
+        "title": "2. Arbejdsmarkedsforskning",
+        "description": "Udforsk arbejdsmarkedet og identificer muligheder"
+      },
+      "step3": {
+        "title": "3. Netværk og kontakter",
+        "description": "Byg og vedligehold dit professionelle netværk"
+      },
+      "step4": {
+        "title": "4. Ansøgninger og samtaler",
+        "description": "Forbered dig på ansøgningsprocessen"
+      }
+    },
+    "download_button": "Download fuld plan",
+    "back_button": "Tilbage til dashboard"
+  }
+}

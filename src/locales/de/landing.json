@@ -1,0 +1,89 @@
+{
+  "hero": {
+    "title": "Entdecken Sie Ihren idealen Traumjob",
+    "subtitle": "Vinster hilft Ihnen, Klarheit über Ihre Karrierewünsche zu bekommen. Durchlaufen Sie unseren wissenschaftlich fundierten Prozess und erhalten Sie einen persönlichen Karrierebericht mit konkreten nächsten Schritten.",
+    "cta_button": "Starten Sie Ihre Reise",
+    "secondary_cta": "Mehr erfahren"
+  },
+  "features": {
+    "title": "Wie funktioniert Vinster?",
+    "subtitle": "Ein strukturierter Prozess, der Ihnen Klarheit über Ihre Karrierewünsche verschafft",
+    "enthusiasm_scan": {
+      "title": "Begeisterungsscan",
+      "description": "Entdecken Sie, was Sie bei der Arbeit wirklich begeistert, indem Sie auf vergangene Erfahrungen zurückblicken."
+    },
+    "dream_jobs": {
+      "title": "Traumjobs",
+      "description": "Beschreiben Sie drei Jobs, die Sie sich wünschen, und erkunden Sie, was sie für Sie attraktiv macht."
+    },
+    "profile_completion": {
+      "title": "Profil vervollständigen",
+      "description": "Geben Sie Ihre Prioritäten an und vervollständigen Sie Ihr Profil für eine personalisierte Beratung."
+    },
+    "career_report": {
+      "title": "Karrierebericht",
+      "description": "Erhalten Sie einen umfassenden Bericht mit Einblicken und konkreten nächsten Schritten für Ihre Karriere."
+    }
+  },
+  "testimonials": {
+    "title": "Was sagen unsere Nutzer?",
+    "subtitle": "Erfahren Sie, wie Vinster anderen bei ihrer Karriereentwicklung geholfen hat",
+    "testimonial1": {
+      "text": "Vinster hat mir geholfen, Klarheit über meine Karrierewünsche zu bekommen. Der Prozess war aufschlussreich und die Ergebnisse sehr hilfreich.",
+      "author": "Sarah M.",
+      "role": "Marketing-Managerin"
+    },
+    "testimonial2": {
+      "text": "Der strukturierte Ansatz von Vinster machte es einfach, meine Leidenschaften und Interessen zu erkunden. Sehr empfehlenswert!",
+      "author": "Thomas K.",
+      "role": "Software-Entwickler"
+    },
+    "testimonial3": {
+      "text": "Dank Vinster habe ich einen neuen Karriereweg entdeckt, an den ich nie gedacht hätte. Die Einsichten waren transformativ.",
+      "author": "Lisa R.",
+      "role": "Projektmanagerin"
+    }
+  },
+  "process": {
+    "title": "Ihr Weg zu Klarheit",
+    "subtitle": "Ein einfacher, schrittweiser Prozess, der Sie zu Ihrem Traumjob führt",
+    "step1": {
+      "title": "Registrieren & Starten",
+      "description": "Erstellen Sie Ihr kostenloses Konto und beginnen Sie Ihre Karrierereise."
+    },
+    "step2": {
+      "title": "Erkunden & Entdecken",
+      "description": "Durchlaufen Sie unsere Assessments, um Ihre Interessen und Motivationen zu erkunden."
+    },
+    "step3": {
+      "title": "Einblicke erhalten",
+      "description": "Erhalten Sie einen personalisierten Karrierebericht mit umsetzbaren Einsichten."
+    },
+    "step4": {
+      "title": "Handeln & Wachsen",
+      "description": "Nutzen Sie Ihre Einsichten, um fundierte Karriereentscheidungen zu treffen."
+    }
+  },
+  "what_you_get": {
+    "title": "Was Sie erhalten",
+    "subtitle": "Ein umfassendes Karrierepaket, das Ihnen bei Ihrem nächsten Schritt hilft",
+    "career_report": {
+      "title": "Persönlicher Karrierebericht",
+      "description": "Ein detaillierter Bericht mit Einsichten in Ihre Karrierepräferenzen und -empfehlungen."
+    },
+    "action_plan": {
+      "title": "Aktionsplan",
+      "description": "Konkrete nächste Schritte, um Ihre Karriereziele zu erreichen."
+    },
+    "ongoing_support": {
+      "title": "Laufende Unterstützung",
+      "description": "Zugang zu Ressourcen und Unterstützung, um Sie auf Ihrem Karriereweg zu begleiten."
+    }
+  },
+  "cta": {
+    "title": "Bereit, Ihren Traumjob zu entdecken?",
+    "subtitle": "Schließen Sie sich Tausenden von Fachkräften an, die Klarheit über ihre Karriere gefunden haben",
+    "button": "Jetzt starten",
+    "guarantee": "Kostenlos zu beginnen, keine Kreditkarte erforderlich"
+  }
+}

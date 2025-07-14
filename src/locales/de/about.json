@@ -1,0 +1,43 @@
+{
+  "title": "Über Vinster",
+  "subtitle": "Ihre Karriere, unsere Leidenschaft",
+  "intro": {
+    "title": "Wer sind wir?",
+    "description": "Vinster ist ein innovatives Karriereberatungsunternehmen, das sich darauf spezialisiert hat, Menschen dabei zu helfen, Klarheit über ihre beruflichen Wünsche und Ziele zu gewinnen. Unser wissenschaftlich fundierter Ansatz kombiniert bewährte psychologische Methoden mit moderner Technologie."
+  },
+  "mission": {
+    "title": "Unsere Mission",
+    "description": "Wir glauben, dass jeder Mensch das Recht auf eine erfüllende Karriere hat. Unsere Mission ist es, Menschen dabei zu unterstützen, ihre einzigartigen Talente und Leidenschaften zu entdecken und diese in eine Karriere umzuwandeln, die sie wirklich begeistert."
+  },
+  "approach": {
+    "title": "Unser Ansatz",
+    "description": "Unser strukturierter Prozess führt Sie durch eine Serie von Selbstreflexionsübungen und Assessments. Diese helfen Ihnen dabei, Muster in Ihren Interessen, Motivationen und Werten zu erkennen.",
+    "features": {
+      "scientific": {
+        "title": "Wissenschaftlich fundiert",
+        "description": "Basiert auf bewährten Methoden der Arbeits- und Organisationspsychologie"
+      },
+      "personalized": {
+        "title": "Personalisiert",
+        "description": "Jeder Bericht ist individuell auf Ihre spezifischen Antworten und Situation zugeschnitten"
+      },
+      "actionable": {
+        "title": "Umsetzbar",
+        "description": "Konkrete nächste Schritte und praktische Empfehlungen für Ihre Karriereentwicklung"
+      },
+      "accessible": {
+        "title": "Zugänglich",
+        "description": "Online verfügbar, wann immer es für Sie passt"
+      }
+    }
+  },
+  "team": {
+    "title": "Unser Team",
+    "description": "Unser Team besteht aus erfahrenen Karriereberatern, Psychologen und Technologie-Experten, die alle eine gemeinsame Leidenschaft teilen: Menschen dabei zu helfen, ihre beruflichen Träume zu verwirklichen."
+  },
+  "cta": {
+    "title": "Bereit für Ihre Karrierereise?",
+    "description": "Entdecken Sie, was Sie wirklich motiviert und nehmen Sie den ersten Schritt zu einer erfüllenderen Karriere.",
+    "button": "Jetzt starten"
+  }
+}
