@@ -135,8 +135,8 @@ export const translations = {
     // Make mobile_menu available at top level
     mobile_menu: deNavigation.mobile_menu,
     // Make dashboard keys available at top level
-    dashboard: deDashboard.dashboard || deDashboard,
-    payment: deDashboard.payment || deDashboard,
+    dashboard: (deDashboard as any).dashboard || deDashboard,
+    payment: (deDashboard as any).payment || deDashboard,
     journey: deJourney,
     // Make journey keys available at top level
     enthousiasme: deJourney.enthousiasme,
@@ -144,13 +144,13 @@ export const translations = {
     profiel_voltooien: deJourney.profiel_voltooien,
     wensberoepen: deJourney.wensberoepen,
     onderzoeksplan: deJourney.onderzoeksplan,
-    professionals: deProfessionals.professionals || deProfessionals,
+    professionals: (deProfessionals as any).professionals || deProfessionals,
     common: deCommon,
-    about: deAbout.about || deAbout,
-    for_whom: deForWhom.for_whom || deForWhom,
-    faq: deFaq.faq || deFaq,
-    experiences: deExperiences.experiences || deExperiences,
-    contact: deContact.contact || deContact
+    about: (deAbout as any).about || deAbout,
+    for_whom: (deForWhom as any).for_whom || deForWhom,
+    faq: (deFaq as any).faq || deFaq,
+    experiences: (deExperiences as any).experiences || deExperiences,
+    contact: (deContact as any).contact || deContact
   },
   da: {
     navigation: daNavigation,
