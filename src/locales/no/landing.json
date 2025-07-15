@@ -1,56 +1,166 @@
 {
-  "hero": {
-    "title": "Oppdag din ideelle karriere med en personlig loopbanerapport",
-    "subtitle": "Få innsikt i dine styrker, interesser og drømmeyrker gjennom vår vitenskapelige metode",
-    "cta_button": "Start din karrierereise",
-    "trust_text": "Allerede valgt av 1000+ profesjonelle"
-  },
-  "features": {
-    "title": "Hvorfor velge Vinster?",
-    "subtitle": "Vår unike tilnærming gir deg dype innsikter i din karriere",
-    "feature1": {
-      "title": "Personlig og vitenskapelig",
-      "description": "Basert på årelang forskning og erfaring fra karriereveiledning"
+  "landing": {
+    "tagline": "Finn arbeid som passer deg, med AI.\nSmart, personlig og overraskende.",
+    "welcome": "Velkommen til",
+    "description": "For alle som tenker: \"Hva vil jeg egentlig med arbeidet mitt?\"\nOm du nettopp har startet, står fast, søker noe nytt eller bare vil reorientere deg – Vinster gir oversikt, støtte og retning.",
+    "login": "Logg inn",
+    "hero": {
+      "title": "Oppdag dine preferanser, finn din karriere",
+      "subtitle": "Dykk dypt ned i deg selv og la AI finne den perfekte karrierematchen for deg",
+      "cta_button": "Start din reise",
+      "cta_button_secondary": "Mer informasjon"
     },
-    "feature2": {
-      "title": "Handlingsrettet",
-      "description": "Få konkrete råd og neste steg for din karriereutvikling"
+    "what_is_vinster": {
+      "title": "Hva er Vinster?",
+      "description": "Vinster er en AI-drevet plattform som hjelper deg å oppdage dine sanne interesser og talenter. Gjennom dyptgående spørsmål og avanserte algoritmer skaper vi en personlig profil som hjelper deg å ta velinformerte karrierevalg.",
+      "based_on": "Bygget på dokumenterte metoder fra praksis og dine unike egenskaper får du:",
+      "two_matching_functions": "To matchende funksjoner som passer perfekt for deg",
+      "one_surprising_suggestion": "Ett overraskende forslag som åpner nye muligheter",
+      "clear_action_plan": "En klar handlingsplan for å realisere din ønskede karriere",
+      "no_tests": "Ingen kjedelige tester, men ekte spørsmål som får deg til å tenke."
     },
-    "feature3": {
-      "title": "Omfattende analyse",
-      "description": "Dype innsikter i dine styrker, interesser og arbeidsønsker"
+    "what_do_you_get": {
+      "title": "Hva får du?",
+      "subtitle": "En komplett pakke for å forme din karriere:",
+      "insight_interests": "Dyp innsikt i dine interesser og motivasjoner",
+      "job_suggestions": "Konkrete jobber som passer deg",
+      "research_plan": "En forskningsplan for videre utforskning",
+      "search_profile": "En søkeprofil for rekrutterere og nettverk",
+      "start_now": "Start nå 297 kr",
+      "view_sample": "Se eksempelrapport"
+    },
+    "features": {
+      "card1": {
+        "title": "Hva er Vinster?",
+        "description": "Vinster er en AI-drevet plattform som hjelper deg å oppdage dine sanne interesser og talenter. Gjennom dyptgående spørsmål og avanserte algoritmer skaper vi en personlig profil som hjelper deg å ta velinformerte karrierevalg."
+      },
+      "card2": {
+        "title": "Hva får du?",
+        "description": "En omfattende personlighetsrapport, en skreddersydd søkeprofil, og konkrete steg for å realisere din ønskede karriere. Alt bygget på dokumenterte metoder fra praksis og dine unike egenskaper."
+      }
+    },
+    "process": {
+      "title": "Hvordan det fungerer",
+      "step1": {
+        "title": "Utforsk dine preferanser",
+        "description": "Svar på spørsmål om hva som virkelig motiverer deg"
+      },
+      "step2": {
+        "title": "Oppdag dine ønsker",
+        "description": "Definer ditt ideelle arbeidsmiljø og mål"
+      },
+      "step3": {
+        "title": "Få din rapport",
+        "description": "Motta en personlig AI-rapport med anbefalinger"
+      }
+    },
+    "process_steps": {
+      "subtitle": "Prosessen",
+      "title": "Hvordan det fungerer",
+      "step1_title": "Entusiasmeskanning",
+      "step1_desc": "Oppdag hva som virkelig gjør deg entusiastisk",
+      "step2_title": "Drømmeyrker",
+      "step2_desc": "Utforsk dine ideelle arbeidssituasjoner",
+      "step3_title": "Sette prioriteter",
+      "step3_desc": "Bestem hva som er viktigst for deg",
+      "step4_title": "Siste sjekk",
+      "step4_desc": "Fullfør profilen din og motta din rapport",
+      "start_button": "Start din reise 297 kr"
+    },
+    "data_safety": {
+      "title": "Personvern garantert",
+      "description": "Dine data oppbevares sikkert i henhold til de strengeste personvernstandardene. Vi deler aldri din personlige informasjon med tredjeparter."
+    },
+    "flexible_journey": {
+      "title": "Fleksibel reise",
+      "description": "Start hvor du vil, stopp når du vil. Du kan alltid komme tilbake for å fylle ut eller oppdatere profilen din."
+    },
+    "safety": {
+      "title": "Sikkert og fleksibelt",
+      "privacy": {
+        "title": "Personvern garantert",
+        "description": "Dine data oppbevares sikkert"
+      },
+      "flexible": {
+        "title": "Fleksibel reise",
+        "description": "Start hvor du vil, stopp når du vil"
+      }
+    },
+    "testimonial": "Takket være Vinster har jeg endelig fått klarhet om min karrierevei. Rapporten var overraskende nøyaktig og har hjulpet meg å ta de riktige valgene.",
+    "footer": {
+      "navigation_title": "Navigasjon",
+      "contact_title": "Kontakt",
+      "about_vinster": "Om Vinster",
+      "for_whom": "For hvem er det?",
+      "faq": "Vanlige spørsmål",
+      "contact": "Kontakt",
+      "privacy_policy": "Personvernerklæring",
+      "terms_conditions": "Vilkår og betingelser",
+      "cookie_policy": "Informasjonskapselpolicy",
+      "email": "E-post",
+      "kvk": "Org.nr",
+      "copyright": "© 2024 Vinster. Alle rettigheter forbeholdt."
     }
   },
-  "testimonials": {
-    "title": "Hva brukerne våre sier",
-    "testimonial1": {
-      "text": "Vinster hjalp meg å oppdage karrieremuligheter jeg aldri hadde tenkt på før!",
-      "author": "Sarah J."
+  "cookies": {
+    "banner": {
+      "message": "Vi bruker informasjonskapsler for å forbedre din opplevelse og optimalisere nettsiden vår. Du kan tilpasse dine preferanser nedenfor.",
+      "accept": "Godta alle",
+      "customize": "Tilpass preferanser"
     },
-    "testimonial2": {
-      "text": "Den detaljerte rapporten ga meg klare retningslinjer for min karriere.",
-      "author": "Thomas L."
+    "categories": {
+      "necessary": {
+        "title": "Nødvendige informasjonskapsler",
+        "description": "Disse informasjonskapslene er essensielle for at nettsiden skal fungere."
+      },
+      "statistics": {
+        "title": "Statistikk informasjonskapsler",
+        "description": "Disse informasjonskapslene hjelper oss å forstå hvordan besøkende bruker nettsiden."
+      },
+      "marketing": {
+        "title": "Markedsføring informasjonskapsler",
+        "description": "Disse informasjonskapslene brukes til annonser og markedsføringsformål."
+      }
     },
-    "testimonial3": {
-      "text": "Endelig forstår jeg hva som virkelig motiverer meg på jobben.",
-      "author": "Emma K."
+    "policy": {
+      "title": "Informasjonskapselpolicy",
+      "what_are_cookies": {
+        "title": "Hva er informasjonskapsler?",
+        "description": "Informasjonskapsler er små tekstfiler som lagres på enheten din når du besøker nettsiden vår. De hjelper oss å få nettsiden til å fungere og forbedre din opplevelse."
+      },
+      "which_cookies": {
+        "title": "Hvilke informasjonskapsler bruker vi?"
+      },
+      "necessary": {
+        "description": "Disse informasjonskapslene er essensielle for at nettsiden vår skal fungere:",
+        "session": "Sesjonsinformasjonskapsler for innlogging og navigering",
+        "auth": "Autentiseringsinformasjonskapsler for tilgang til kontoen din",
+        "preferences": "Preferanseinformasjonskapsler for språk og innstillinger"
+      },
+      "statistics": {
+        "description": "Disse informasjonskapslene hjelper oss å forbedre nettsiden vår:",
+        "analytics": "Google Analytics for nettsidesstatistikk",
+        "usage": "Bruksdata for optimalisering"
+      },
+      "marketing": {
+        "description": "Disse informasjonskapslene brukes til markedsføring:",
+        "tracking": "Sporingspikslene for annonser",
+        "remarketing": "Remarkedsføringsinformasjonskapsler for målrettede annonser"
+      },
+      "retention": {
+        "title": "Hvor lenge oppbevarer vi informasjonskapsler?",
+        "description": "Sesjonsinformasjonskapsler slettes når du lukker nettleseren din. Permanente informasjonskapsler oppbevares i maksimalt 2 år, med mindre du sletter dem tidligere."
+      },
+      "manage": {
+        "title": "Hvordan kan du tilpasse dine preferanser?",
+        "description": "Du kan alltid tilpasse dine informasjonskapselpreferanser via innstillingene på denne nettsiden.",
+        "browser": "Du kan også administrere informasjonskapsler via nettleserinnstillingene dine. Vær oppmerksom på at deaktivering av visse informasjonskapsler kan påvirke funksjonaliteten til nettsiden."
+      },
+      "contact": {
+        "title": "Kontakt",
+        "description": "Har du spørsmål om vår informasjonskapselpolicy? Ta kontakt med oss:"
+      },
+      "last_updated": "Sist oppdatert"
     }
-  },
-  "footer": {
-    "about": "Om Vinster",
-    "for_whom": "For hvem er det?",
-    "faq": "Vanlige spørsmål",
-    "experiences": "Erfaringer",
-    "contact": "Kontakt",
-    "professionals": "Tilgangskoder for fagfolk",
-    "privacy": "Personvernerklæring",
-    "terms": "Vilkår og betingelser",
-    "cookies": "Informasjonskapsler",
-    "copyright": "© 2024 Vinster. Alle rettigheter forbeholdt."
-  },
-  "welcome_vinster": "Velkommen til Vinster",
-  "navigation": {
-    "home": "Hjem",
-    "dashboard": "Dashboard"
   }
 }

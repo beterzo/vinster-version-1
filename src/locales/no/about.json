@@ -1,47 +1,37 @@
 {
-  "hero": {
-    "title": "Oppdagelsen av din ideelle karriere",
-    "subtitle": "Lær hvordan Vinster kan hjelpe deg med å finne din drømmekarriere"
-  },
-  "heidi_story": {
-    "title": "Heidis historie",
-    "intro": "Hei, jeg er Heidi, grunnleggeren av Vinster. Min lidenskap for karriereveiledning begynte med min egen reise av selvoppdagelse.",
-    "background": "Etter å ha jobbet i mange år som karriererådgiver, innså jeg at mange mennesker sliter med å finne sin sanne kalling i arbeidslivet. Jeg ønsket å skape noe som kunne gi dype, personlige innsikter basert på vitenskapelige metoder.",
-    "mission": "Vinster er mitt svar på dette behovet - et verktøy som kombinerer årelang erfaring med karriereveiledning og vitenskapelig forskning for å hjelpe deg med å oppdage din ideelle karriere."
-  },
-  "method": {
-    "title": "Vår metode",
-    "description": "Vinster bruker en omfattende tilnærming som kombinerer flere elementer:",
-    "step1": {
-      "title": "Entusiasme-analyse",
-      "description": "Vi undersøker hva som virkelig engasjerer og motiverer deg"
+  "about": {
+    "page_title": "Om Vinster",
+    "back_to_home": "Tilbake til hjem",
+    "start_button": "Start",
+    "introduction": {
+      "greeting": "Hei, jeg er",
+      "name": "Heidi Jansen",
+      "title": "– karriererådgiver, opplærer, og skaperen av metoden som ligger til grunn for Vinster.",
+      "description": "I over 25 år har jeg hjulpet mennesker og fagfolk innen karriereområdet å finne retning i arbeid. For det ønsker jeg alle: arbeid som gjør deg glad."
     },
-    "step2": {
-      "title": "Prioriteringer",
-      "description": "Vi identifiserer dine viktigste arbeidsforhold og interesser"
+    "experience": {
+      "title": "Min erfaring innen karriereveiledning",
+      "description": "I mitt arbeid som karriererådgiver har jeg merket at det kan være ganske vanskelig å vite nøyaktig hvor du vil med arbeidet ditt. Du vil eller må gjøre noe annet, du føler at det er mer mulig, men vet ikke nøyaktig hva eller hvordan. Det er så mange alternativer, så mange tanker – at det er vanskelig å få klarhet. Og det er nøyaktig der Vinster hjelper: oversikt, innsikt og utsikt."
     },
-    "step3": {
-      "title": "Drømmeyrker",
-      "description": "Vi hjelper deg med å utforske og definere dine ideelle karrierer"
+    "method": {
+      "title": "Karrieretrakt-metoden",
+      "description": "Vinster er basert på Karrieretrakten, en praktisk og gjennomtenkt metode som jeg har veiledet tusenvis av mennesker med og som jeg gjennom årene har gitt videre til utallige karrierefagfolk – i inn- og utland. Metoden fungerer, fordi den forbinder det personlige med realiteten i arbeidsmarkedet."
     },
-    "step4": {
-      "title": "Handlingsplan",
-      "description": "Vi gir deg en klar vei fremover med konkrete steg"
-    }
-  },
-  "why_choose": {
-    "title": "Hvorfor velge Vinster?",
-    "reason1": {
-      "title": "Personlig tilnærming",
-      "description": "Hver rapport er skreddersydd for din unike situasjon og mål"
+    "platform": {
+      "title": "Vinster: online karriereveiledning",
+      "description": "Med Vinster bringer jeg denne tilnærmingen nå online – støttet av AI, men alltid menneskeorientert. Du svarer på en rekke spørsmål, hvoretter Vinster gjenkjenner nøkkelord i dine svar. Basert på det får du forslag til passende funksjoner og ideer for ditt neste steg. Ingen urealistiske drømmer, men inspirerende og oppnåelige muligheter."
     },
-    "reason2": {
-      "title": "Vitenskapelig fundament",
-      "description": "Vår metode er basert på solid karriereforskning og psykologi"
+    "mission": {
+      "title": "Min misjon",
+      "description": "Min misjon? Bidra til godt arbeid for alle. For godt arbeid er arbeid som passer til hvem du er, som gir deg energi, og hvor du kan bety noe. Og det starter med klarhet. Det er det Vinster er til for.",
+      "quote": "\"Jeg ønsker deg arbeid som gjør deg glad!\"",
+      "signature": "- Heidi Jansen"
     },
-    "reason3": {
-      "title": "Handlingsrettet",
-      "description": "Vi gir deg ikke bare innsikter, men også konkrete steg å ta"
-    }
+    "cta": {
+      "title": "Klar til å begynne?",
+      "subtitle": "På vei mot en bedre karriere"
+    },
+    "experience_badge": "25+ års erfaring",
+    "experience_subtitle": "Karriererådgiver"
   }
 }
