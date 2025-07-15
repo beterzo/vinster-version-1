@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -10,14 +10,23 @@ import { MailCheck, RotateCcw } from "lucide-react";
 
 const CheckEmailPasswordResetPage = () => {
   const [isResending, setIsResending] = useState(false);
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { toast } = useToast();
   const { t } = useTranslation();
-  const { language } = useLanguage();
+  const { language, setLanguage } = useLanguage();
 
   // Get email from URL params or localStorage
   const urlParams = new URLSearchParams(window.location.search);
   const email = urlParams.get('email') || localStorage.getItem('password-reset-email') || '';
+
+  useEffect(() => {
+    // Set language from URL parameter if provided
+    const langParam = searchParams.get('lang');
+    if (langParam && (langParam === 'nl' || langParam === 'en' || langParam === 'de' || langParam === 'no')) {
+      setLanguage(langParam);
+    }
+  }, [searchParams, setLanguage]);
 
   const handleResendEmail = async () => {
     if (!email) {

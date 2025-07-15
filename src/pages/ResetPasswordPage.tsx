@@ -31,7 +31,7 @@ const ResetPasswordPage = () => {
       
       // Set language from URL parameter if provided
       const langParam = searchParams.get('lang');
-      if (langParam && (langParam === 'nl' || langParam === 'en')) {
+      if (langParam && (langParam === 'nl' || langParam === 'en' || langParam === 'de' || langParam === 'no')) {
         setLanguage(langParam);
       }
 
