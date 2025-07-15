@@ -1,54 +1,45 @@
+
 {
-  "title": "Häufig gestellte Fragen",
-  "subtitle": "Alles was Sie über Vinster wissen möchten",
-  "questions": {
-    "what_is_vinster": {
-      "question": "Was ist Vinster?",
-      "answer": "Vinster ist ein wissenschaftlich fundiertes Online-Tool für Karriereberatung. Wir helfen Menschen dabei, Klarheit über ihre beruflichen Wünsche und Ziele zu gewinnen durch einen strukturierten Prozess von Selbstreflexion und Assessment."
-    },
-    "how_does_it_work": {
-      "question": "Wie funktioniert Vinster?",
-      "answer": "Sie durchlaufen vier Hauptschritte: einen Begeisterungsscan, die Beschreibung von Traumjobs, die Vervollständigung Ihres Profils und erhalten schließlich einen personalisierten Karrierebericht mit konkreten nächsten Schritten."
-    },
-    "how_long_does_it_take": {
-      "question": "Wie lange dauert der Prozess?",
-      "answer": "Der gesamte Prozess dauert etwa 60-90 Minuten. Sie können ihn in Ihrem eigenen Tempo durchlaufen und jederzeit pausieren und später fortfahren."
-    },
-    "what_do_i_get": {
-      "question": "Was erhalte ich am Ende?",
-      "answer": "Sie erhalten einen umfassenden personalisierten Karrierebericht mit Einblicken in Ihre Motivationen, Empfehlungen für Ihre Karriereentwicklung und ein Jobsuchprofil das Sie bei Bewerbungen verwenden können."
-    },
-    "is_it_scientific": {
-      "question": "Ist Vinster wissenschaftlich fundiert?",
-      "answer": "Ja, unser Ansatz basiert auf bewährten Methoden aus der Arbeits- und Organisationspsychologie. Wir verwenden Techniken wie retrospektive Interviews und Werteklärung, die in der Karriereberatung weit verbreitet sind."
-    },
-    "who_is_it_for": {
-      "question": "Für wen ist Vinster geeignet?",
-      "answer": "Vinster ist für jeden geeignet, der Klarheit über seine Karriere sucht - von Berufseinsteigern über Karrierewechsler bis hin zu erfahrenen Fachkräften, die sich beruflich weiterentwickeln möchten."
-    },
-    "what_does_it_cost": {
-      "question": "Was kostet Vinster?",
-      "answer": "Sie können kostenlos beginnen und die ersten Schritte durchlaufen. Für Ihren personalisierten Karrierebericht ist eine einmalige Zahlung erforderlich. Die genauen Kosten sehen Sie vor der Bezahlung."
-    },
-    "is_data_safe": {
-      "question": "Sind meine Daten sicher?",
-      "answer": "Ja, der Schutz Ihrer Daten ist uns sehr wichtig. Wir verwenden moderne Sicherheitsmaßnahmen und geben Ihre persönlichen Informationen niemals an Dritte weiter. Lesen Sie unsere Datenschutzerklärung für weitere Details."
-    },
-    "can_i_use_multiple_times": {
-      "question": "Kann ich Vinster mehrmals verwenden?",
-      "answer": "Ja, Sie können nach Abschluss eines Durchlaufs einen neuen Zyklus starten. Dies ist besonders nützlich wenn sich Ihre Situation oder Ihre Prioritäten geändert haben."
-    },
-    "what_if_not_satisfied": {
-      "question": "Was ist, wenn ich nicht zufrieden bin?",
-      "answer": "Wir stehen hinter der Qualität unseres Services. Wenn Sie nicht zufrieden sind, kontaktieren Sie uns bitte und wir finden gemeinsam eine Lösung."
-    },
-    "how_accurate_are_results": {
-      "question": "Wie genau sind die Ergebnisse?",
-      "answer": "Die Qualität der Ergebnisse hängt von der Ehrlichkeit und Ausführlichkeit Ihrer Antworten ab. Je mehr Zeit Sie sich nehmen und je offener Sie antworten, desto präziser werden die Empfehlungen."
-    },
-    "can_i_share_results": {
-      "question": "Kann ich meine Ergebnisse teilen?",
-      "answer": "Ja, Sie können Ihren Karrierebericht und Ihr Jobsuchprofil mit Personalberatern, potenziellen Arbeitgebern oder Karriereberatern teilen. Die Dokumente sind professionell formatiert für diesen Zweck."
-    }
+  "faq": {
+    "page_title": "Häufig gestellte Fragen",
+    "back_to_home": "Zurück zur Startseite",
+    "questions": [
+      {
+        "question": "Was ist Vinster genau?",
+        "answer": "Vinster ist ein intelligentes digitales Karriere-Tool, das Ihnen dabei hilft, Klarheit darüber zu bekommen, was Sie wollen, was zu Ihnen passt und in welche Richtung Sie gehen können. Sie beantworten einige gezielte Fragen und erhalten dann einen persönlichen Bericht mit konkreten Berufsvorschlägen und nächsten Schritten."
+      },
+      {
+        "question": "Für wen ist Vinster gedacht?",
+        "answer": "Für alle, die Karriereentscheidungen treffen möchten, die passen. High Potentials, Karriere-Entwickler, Richtung-Suchende, Neuorientierer, Laufbahnberater und Eltern/Betreuer, die helfen möchten."
+      },
+      {
+        "question": "Wie lange dauert der Prozess?",
+        "answer": "Die meisten Menschen schließen alles innerhalb einer Stunde ab. Wir empfehlen jedoch, sich zwischen den Schritten Zeit zum Nachdenken zu nehmen. Ihr Fortschritt wird automatisch gespeichert."
+      },
+      {
+        "question": "Was ist im Bericht enthalten?",
+        "answer": "Ihr Bericht enthält eine Zusammenfassung Ihrer Präferenzen, eine Liste geeigneter Funktionen (von denen eine überraschend ist) und ein konkretes Suchprofil, mit dem Sie direkt Stellenausschreibungen filtern oder zu einem Coach oder nächsten Schritt übergehen können."
+      },
+      {
+        "question": "Muss ich etwas installieren?",
+        "answer": "Nein. Alles funktioniert online, einfach in Ihrem Browser. Sie müssen nichts herunterladen oder installieren."
+      },
+      {
+        "question": "Kann ich zwischendurch aufhören und später weitermachen?",
+        "answer": "Ja, Ihr Fortschritt wird automatisch gespeichert. Sie können jederzeit pausieren und später dort weitermachen, wo Sie aufgehört haben."
+      },
+      {
+        "question": "Was passiert mit meinen Daten?",
+        "answer": "Ihre Daten werden sicher gespeichert und nur zur Erstellung Ihres Berichts verwendet. Wir verkaufen nichts und halten uns an die DSGVO (Datenschutzgesetzgebung). Lesen Sie mehr in unserer [Datenschutzerklärung]."
+      },
+      {
+        "question": "Kann ich das auch mit meinem Coach oder Elternteil machen?",
+        "answer": "Auf jeden Fall. Viele Menschen durchlaufen diesen Prozess gemeinsam. Der Bericht hilft dabei, das Gespräch zu beginnen, ohne es allein herausfinden zu müssen."
+      },
+      {
+        "question": "Was kostet es?",
+        "answer": "Einmalig €29. Kein Abonnement, kein Kleingedrucktes. Sie erhalten sofortigen Zugang zum vollständigen Prozess und Ihrem persönlichen Bericht."
+      }
+    ]
   }
 }
