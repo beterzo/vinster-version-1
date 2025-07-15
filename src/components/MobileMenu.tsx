@@ -21,42 +21,12 @@ const MobileMenu = () => {
   const getMenuItems = () => {
     const baseItems = [
       { title: t('mobile_menu.home'), path: "/" },
-      { 
-        title: t('mobile_menu.about_vinster'), 
-        path: language === 'en' ? "/about-vinster" : 
-              language === 'de' ? "/uber-vinster" : 
-              "/over-vinster" 
-      },
-      { 
-        title: t('mobile_menu.for_whom'), 
-        path: language === 'en' ? "/who-is-it-for" : 
-              language === 'de' ? "/fur-wen-ist-es" : 
-              "/voor-wie-is-het" 
-      },
-      { 
-        title: t('mobile_menu.faq'), 
-        path: language === 'en' ? "/frequently-asked-questions" : 
-              language === 'de' ? "/haufig-gestellte-fragen" : 
-              "/veelgestelde-vragen" 
-      },
-      { 
-        title: t('mobile_menu.experiences'), 
-        path: language === 'en' ? "/experiences" : 
-              language === 'de' ? "/erfahrungen" : 
-              "/ervaringen" 
-      },
-      { 
-        title: t('mobile_menu.contact'), 
-        path: language === 'en' ? "/contact-us" : 
-              language === 'de' ? "/kontakt" : 
-              "/contact" 
-      },
-      { 
-        title: t('mobile_menu.access_codes'), 
-        path: language === 'en' ? "/access-codes-professionals" : 
-              language === 'de' ? "/zugangscodes-profis" : 
-              "/toegangscodes-professionals" 
-      },
+      { title: t('mobile_menu.about_vinster'), path: language === 'en' ? "/about-vinster" : "/over-vinster" },
+      { title: t('mobile_menu.for_whom'), path: language === 'en' ? "/who-is-it-for" : "/voor-wie-is-het" },
+      { title: t('mobile_menu.faq'), path: language === 'en' ? "/frequently-asked-questions" : "/veelgestelde-vragen" },
+      { title: t('mobile_menu.experiences'), path: language === 'en' ? "/experiences" : "/ervaringen" },
+      { title: t('mobile_menu.contact'), path: language === 'en' ? "/contact-us" : "/contact" },
+      { title: t('mobile_menu.access_codes'), path: language === 'en' ? "/access-codes-professionals" : "/toegangscodes-professionals" },
     ];
     
     return baseItems;

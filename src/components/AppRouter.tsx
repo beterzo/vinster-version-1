@@ -1,4 +1,3 @@
-
 import { Routes, Route } from "react-router-dom";
 import NotFound from "@/pages/NotFound";
 
@@ -83,14 +82,6 @@ const AppRouter = () => {
       <Route path="/experiences" element={<Ervaringen />} />
       <Route path="/contact-us" element={<Contact />} />
       <Route path="/access-codes-professionals" element={<ToegangscodesProfessionals />} />
-      
-      {/* German Routes */}
-      <Route path="/uber-vinster" element={<OverVinster />} />
-      <Route path="/fur-wen-ist-es" element={<VoorWieIsHet />} />
-      <Route path="/haufig-gestellte-fragen" element={<VeelgesteldeVragen />} />
-      <Route path="/erfahrungen" element={<Ervaringen />} />
-      <Route path="/kontakt" element={<Contact />} />
-      <Route path="/zugangscodes-profis" element={<ToegangscodesProfessionals />} />
       
       {/* Legacy redirect from old de-mens-achter-vinster to new over-vinster */}
       <Route path="/de-mens-achter-vinster" element={<Navigate to="/over-vinster" replace />} />
