@@ -1,10 +1,12 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Mail, CheckCircle, ArrowRight, RefreshCw } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const EmailVerificationPage = () => {
   const [email, setEmail] = useState("");
@@ -12,12 +14,23 @@ const EmailVerificationPage = () => {
   const { resendConfirmation } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const { t } = useTranslation();
+  const { setLanguage } = useLanguage();
+
+  useEffect(() => {
+    // Check for language parameter in URL and set it
+    const langParam = searchParams.get('lang');
+    if (langParam && (langParam === 'nl' || langParam === 'en' || langParam === 'de' || langParam === 'no')) {
+      setLanguage(langParam);
+    }
+  }, [searchParams, setLanguage]);
 
   const handleResendEmail = async () => {
     if (!email) {
       toast({
-        title: "Email vereist",
-        description: "Voer je email adres in om de verificatie email opnieuw te versturen.",
+        title: t('auth.email_verification.email_required') || "Email vereist",
+        description: t('auth.email_verification.email_required_desc') || "Voer je email adres in om de verificatie email opnieuw te versturen.",
         variant: "destructive",
       });
       return;
@@ -29,14 +42,14 @@ const EmailVerificationPage = () => {
 
     if (error) {
       toast({
-        title: "Fout bij versturen email",
-        description: error.message || "Er is een fout opgetreden bij het versturen van de verificatie email.",
+        title: t('auth.email_verification.resend_error') || "Fout bij versturen email",
+        description: error.message || t('auth.email_verification.resend_error_desc') || "Er is een fout opgetreden bij het versturen van de verificatie email.",
         variant: "destructive",
       });
     } else {
       toast({
-        title: "Email verstuurd!",
-        description: "We hebben een nieuwe verificatie email naar je gestuurd.",
+        title: t('auth.email_verification.email_sent') || "Email verstuurd!",
+        description: t('auth.email_verification.verification_email_resent') || "We hebben een nieuwe verificatie email naar je gestuurd.",
       });
     }
 
@@ -63,7 +76,7 @@ const EmailVerificationPage = () => {
         <div className="relative z-10 h-full flex items-end p-12">
           <div className="bg-white bg-opacity-90 rounded-2xl p-8 max-w-md">
             <blockquote className="text-xl font-medium text-blue-900 leading-relaxed">
-              "Bijna klaar! Controleer je email om je account te activeren."
+              "{t('auth.login.quote')}"
             </blockquote>
           </div>
         </div>
@@ -78,11 +91,11 @@ const EmailVerificationPage = () => {
             </div>
             
             <h1 className="text-2xl sm:text-3xl font-bold text-vinster-blue">
-              Controleer je email
+              {t('auth.email_verification.title')}
             </h1>
             
             <p className="text-gray-600">
-              We hebben een verificatie link naar je email gestuurd. Klik op de link in de email om je account te activeren.
+              {t('auth.email_verification.description')}
             </p>
           </div>
 
@@ -90,8 +103,8 @@ const EmailVerificationPage = () => {
             <div className="flex items-start space-x-3">
               <CheckCircle className="w-5 h-5 text-blue-600 mt-0.5" />
               <div className="text-sm text-blue-800">
-                <p className="font-medium">Email niet ontvangen?</p>
-                <p>Controleer je spam folder of kies een van de opties hieronder.</p>
+                <p className="font-medium">{t('auth.email_verification.not_received')}</p>
+                <p>{t('auth.email_verification.spam_notice') || 'Controleer je spam folder of kies een van de opties hieronder.'}</p>
               </div>
             </div>
           </div>
@@ -102,18 +115,18 @@ const EmailVerificationPage = () => {
             <div className="border border-gray-200 rounded-lg p-6 space-y-4">
               <div className="flex items-center space-x-3">
                 <RefreshCw className="w-5 h-5 text-blue-600" />
-                <h3 className="font-semibold text-vinster-blue">Nieuwe verificatie email versturen</h3>
+                <h3 className="font-semibold text-vinster-blue">{t('auth.email_verification.resend_title') || 'Nieuwe verificatie email versturen'}</h3>
               </div>
               
               <div className="space-y-3">
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                    Email adres
+                    {t('auth.email_verification.email') || t('auth.signup.email')}
                   </label>
                   <input
                     id="email"
                     type="email"
-                    placeholder="je@email.com"
+                    placeholder={t('auth.email_verification.email_placeholder') || t('auth.signup.email_placeholder')}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -125,7 +138,7 @@ const EmailVerificationPage = () => {
                   disabled={isLoading}
                   className="w-full bg-blue-900 hover:bg-blue-800 text-white"
                 >
-                  {isLoading ? "Versturen..." : "Verstuur nieuwe email"}
+                  {isLoading ? t('auth.email_verification.sending') || "Versturen..." : t('auth.email_verification.resend_email')}
                 </Button>
               </div>
             </div>
@@ -134,11 +147,11 @@ const EmailVerificationPage = () => {
             <div className="border border-gray-200 rounded-lg p-6 space-y-4">
               <div className="flex items-center space-x-3">
                 <ArrowRight className="w-5 h-5" style={{ color: '#E4C05B' }} />
-                <h3 className="font-semibold text-vinster-blue">Al geverifieerd?</h3>
+                <h3 className="font-semibold text-vinster-blue">{t('auth.email_verification.already_verified') || 'Al geverifieerd?'}</h3>
               </div>
               
               <p className="text-sm text-gray-600 mb-4">
-                Als je account al geverifieerd is, kun je direct inloggen.
+                {t('auth.email_verification.already_verified_desc') || 'Als je account al geverifieerd is, kun je direct inloggen.'}
               </p>
               
               <Button 
@@ -150,7 +163,7 @@ const EmailVerificationPage = () => {
                   color: '#E4C05B'
                 }}
               >
-                Ga naar inloggen
+                {t('auth.email_verification.back_to_login')}
               </Button>
             </div>
           </div>
@@ -160,7 +173,7 @@ const EmailVerificationPage = () => {
               to="/" 
               className="text-sm text-blue-600 hover:text-blue-800 underline"
             >
-              Terug naar startpagina
+              {t('auth.email_verification.back_to_home') || 'Terug naar startpagina'}
             </Link>
           </div>
         </div>
