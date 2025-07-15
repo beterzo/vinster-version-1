@@ -1,57 +1,26 @@
 {
   "for_whom": {
-    "page_title": "Hvem er det for?",
-    "back_to_home": "Tilbage til forsiden",
-    "start_button": "Start nu",
-    "hero": {
-      "title": "Hvem er Vinster for?",
-      "subtitle": "Vinster hjælper mennesker i alle livsfaser med at finde deres ideelle karrierevej"
-    },
-    "target_groups": [
-      {
-        "title": "Studerende og nye kandidater",
-        "description": "Er du ved at afslutte din uddannelse og usikker på hvilken retning du skal tage? Vinster hjælper dig med at identificere karriereveje der matcher dine interesser og ambitioner."
+    "page_title": "Hvem er Vinster for?",
+    "back_to_home": "Tilbage til forsiden", 
+    "start_button": "Start med Vinster",
+    "intro": "Vinster er til alle, der søger retning i deres karriere. Uanset om du lige er startet, sidder fast eller hjælper en anden med at træffe valg — dette forløb hjælper dig med at træffe valg, der virkelig passer til dig.",
+    "target_groups": {
+      "next_step": {
+        "title": "For dig der er klar til næste skridt",
+        "description": "Du vil udvikle dig, men ved ikke hvor hen. Eller du har hundrede idéer, men ingen retning. Vinster hjælper dig med at opdage, hvad der giver dig energi, hvilket arbejde der passer til dig, og hvad dit næste skridt kan være. Uden endeløse tests eller vage råd. Bare klart, konkret og visuelt håndgribeligt."
       },
-      {
-        "title": "Karriereskiftere",
-        "description": "Føler du dig fastlåst i dit nuværende job eller ønsker du en forandring? Vinster guider dig gennem processen med at opdage nye muligheder der passer bedre til dig."
+      "stuck": {
+        "title": "For arbejdende der sidder fast",
+        "description": "Du mærker, at dit arbejde ikke længere passer. Du mangler retning, energi eller følelsen af at arbejde hen imod noget. Dette forløb giver dig indsigt i, hvad du ønsker, hvad der er vigtigt for dig, og hvilken funktion eller omgivelse der passer bedre til dig."
       },
-      {
-        "title": "Jobsøgende",
-        "description": "Leder du efter et nyt job men er usikker på hvad du egentlig søger? Vinster hjælper dig med at definere dine ideelle jobkriterier og finde passende muligheder."
+      "coaches": {
+        "title": "For karriererådgivere og coaches",
+        "description": "Vinster understøtter dit vejledningsforløb med smart teknologi. Lad dine klienter lave forarbejde hjemme og brug resultatet som udgangspunkt for fordybelse og handling."
       },
-      {
-        "title": "Professionelle i tvivl",
-        "description": "Har du et job men føler ikke at det giver dig mening eller udfordringer? Vinster kan hjælpe dig med at forstå hvad der mangler og hvordan du kan finde det."
-      },
-      {
-        "title": "Tilbagevender til arbejdsmarkedet",
-        "description": "Har du været væk fra arbejdsmarkedet og ved ikke hvor du skal starte? Vinster hjælper dig med at identificere dine styrker og finde relevante muligheder."
+      "parents": {
+        "title": "For forældre/omsorgspersoner der vil hjælpe med at vælge",
+        "description": "Du vil hjælpe dit barn, men ved ikke helt hvordan. Vinster gør det nemt at komme i dialog sammen. Værktøjet gør ønsker, præferencer og retninger synlige — så I får overblik over passende muligheder."
       }
-    ],
-    "scenarios": {
-      "title": "Genkender du dig selv?",
-      "list": [
-        "\"Jeg ved ikke hvad jeg vil arbejde med\"",
-        "\"Mit job giver mig ikke mening længere\"",
-        "\"Jeg er træt af at søge jobs jeg ikke rigtig ønsker\"",
-        "\"Jeg vil gerne skifte karriere men ved ikke hvad til\"",
-        "\"Jeg har mange interesser men ved ikke hvordan jeg kan bruge dem professionelt\"",
-        "\"Jeg føler mig fastlåst i min nuværende situation\""
-      ]
-    },
-    "not_for": {
-      "title": "Vinster er måske ikke for dig hvis:",
-      "list": [
-        "Du allerede er helt sikker på din karrierevej",
-        "Du leder efter hurtige svar uden at investere tid i refleksion",
-        "Du ikke er klar til at udforske nye muligheder",
-        "Du forventer garantier for jobsucces"
-      ]
-    },
-    "cta": {
-      "title": "Lyder det som dig?",
-      "description": "Uanset hvor du er i dit arbejdsliv, kan Vinster hjælpe dig med at få klarhed over dine næste skridt."
     }
   }
 }

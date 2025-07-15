@@ -1,7 +1,55 @@
 {
   "professionals": {
     "page_title": "For professionelle",
+    "page_description": "Som professionel, coach eller rådgiver kan du købe adgangskoder til dine klienter. Udfyld nedenstående formular.",
     "back_to_home": "Tilbage til forsiden",
+    "order_section": {
+      "title": "Bestil adgangskoder",
+      "email_label": "E-mailadresse *",
+      "email_placeholder": "dig@email.dk",
+      "quantity_label": "Antal adgangskoder *",
+      "quantity_placeholder": "Vælg antal",
+      "quantity_options": {
+        "5": "5 adgangskoder",
+        "10": "10 adgangskoder",
+        "25": "25 adgangskoder",
+        "50": "50 adgangskoder",
+        "100": "100 adgangskoder"
+      },
+      "pricing_info": {
+        "title": "Prisinformation",
+        "price_per_code": "€29 per adgangskode",
+        "contact_note": "Efter din forespørgsel kontakter vi dig vedrørende betaling og levering"
+      },
+      "submit_button": "Anmod om adgangskoder",
+      "submitting": "Sender..."
+    },
+    "what_you_get": {
+      "title": "Hvad får du?",
+      "feature1": "Adgangskoder som du direkte kan dele med dine klienter",
+      "feature2": "Fuld adgang til hele Vinster-processen per kode",
+      "feature3": "Enkel administration af brugte og ubrugte koder",
+      "feature4": "Personlig vejledning ved levering"
+    },
+    "how_it_works": {
+      "title": "Hvordan virker det?",
+      "step1": "Udfyld formularen med din email og ønskede antal",
+      "step2": "Vi kontakter dig inden for 24 timer",
+      "step3": "Betaling via sikkert betalingslink",
+      "step4": "Modtag adgangskoderne direkte efter betaling",
+      "step5": "Del koderne med dine klienter",
+      "contact_info": "Spørgsmål? Kontakt os via"
+    },
+    "toasts": {
+      "fill_all_fields": "Udfyld alle felter",
+      "fill_all_fields_desc": "E-mailadresse og antal rabatkoder er påkrævet.",
+      "request_sent": "Forespørgsel sendt!",
+      "redirecting": "Du bliver omdirigeret til betalingssiden...",
+      "contact_note": "Bemærk",
+      "contact_note_desc": "Vi kontakter dig så hurtigt som muligt vedrørende betalingen.",
+      "send_error": "Fejl ved afsendelse",
+      "send_error_desc": "Noget gik galt. Prøv igen senere."
+    },
     "hero": {
       "title": "Vinster for professionelle",
       "subtitle": "Hjælp dine klienter med at finde deres ideelle karrierevej"
