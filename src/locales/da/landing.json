@@ -34,23 +34,18 @@
       "start_now": "Start nu €29",
       "view_sample": "Se eksempelrapport"
     },
-    "process": {
+    "process_steps": {
+      "subtitle": "Processen",
       "title": "Sådan fungerer det",
-      "subtitle": "En simpel 3-trins proces",
-      "steps": [
-        {
-          "title": "Reflekter",
-          "description": "Besvar spørgsmål om dine interesser, værdier og drømme"
-        },
-        {
-          "title": "Analyser",
-          "description": "Vores AI analyserer dine svar og identificerer mønstre"
-        },
-        {
-          "title": "Opdag",
-          "description": "Modtag din personlige karriererapport og handlingsplan"
-        }
-      ]
+      "step1_title": "Entusiasmescan",
+      "step1_desc": "Opdag hvad der virkelig gør dig entusiastisk",
+      "step2_title": "Ønskede job",
+      "step2_desc": "Udforsk dine ideelle arbejdssituationer",
+      "step3_title": "Sæt prioriteter",
+      "step3_desc": "Bestem hvad der er vigtigst for dig",
+      "step4_title": "Sidste tjek",
+      "step4_desc": "Fuldfør din profil og modtag din rapport",
+      "start_button": "Start din rejse €29"
     },
     "testimonials": {
       "title": "Hvad siger vores brugere?",
@@ -82,6 +77,21 @@
         "Videnskabeligt baseret",
         "Øjeblikkelige resultater"
       ]
+    },
+    "testimonial": "Takket være Vinster har jeg endelig fået klarhed over min karrierevej. Rapporten var overraskende præcis og har hjulpet mig med at træffe de rigtige valg.",
+    "footer": {
+      "navigation_title": "Navigation",
+      "contact_title": "Kontakt",
+      "about_vinster": "Om Vinster",
+      "for_whom": "Hvem er det for?",
+      "faq": "Ofte stillede spørgsmål",
+      "contact": "Kontakt",
+      "privacy_policy": "Privatlivspolitik",
+      "terms_conditions": "Almindelige vilkår",
+      "cookie_policy": "Cookiepolitik",
+      "email": "E-mail",
+      "kvk": "CVR-nummer",
+      "copyright": "© 2024 Vinster. Alle rettigheder forbeholdes."
     },
     "navigation": {
       "home": "Hjem",
