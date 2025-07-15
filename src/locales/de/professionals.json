@@ -1,76 +1,55 @@
+
 {
-  "title": "Zugangscodes für Profis",
-  "subtitle": "Zugang für Karriereberater und HR-Profis",
-  "intro": {
-    "description": "Als Karriereberater, Coach oder HR-Profi können Sie Vinster in Ihre Dienstleistungen integrieren. Kontaktieren Sie uns für Zugangscodes und Partnerschaftsmöglichkeiten."
-  },
-  "benefits": {
-    "title": "Vorteile für Profis",
-    "structured_process": {
-      "title": "Strukturierter Prozess",
-      "description": "Ein bewährter, wissenschaftlich fundierter Ansatz für Karriereberatung"
+  "professionals": {
+    "page_title": "Zugangscodes für Profis",
+    "page_description": "Als Karriereberater, Coach oder HR-Profi können Sie Zugangscodes für Ihre Kunden erwerben. Füllen Sie dazu das untenstehende Formular aus.",
+    "back_to_home": "Zurück zur Startseite",
+    "order_section": {
+      "title": "Zugangscodes bestellen",
+      "email_label": "E-Mail-Adresse *",
+      "email_placeholder": "ihre@email.de",
+      "quantity_label": "Anzahl Zugangscodes *",
+      "quantity_placeholder": "Anzahl auswählen",
+      "quantity_options": {
+        "5": "5 Zugangscodes",
+        "10": "10 Zugangscodes",
+        "25": "25 Zugangscodes",
+        "50": "50 Zugangscodes",
+        "100": "100 Zugangscodes"
+      },
+      "pricing_info": {
+        "title": "Preisinformationen",
+        "price_per_code": "€29 pro Zugangscode",
+        "contact_note": "Nach Ihrer Anfrage nehmen wir Kontakt für Zahlung und Lieferung auf"
+      },
+      "submit_button": "Zugangscodes anfragen",
+      "submitting": "Wird gesendet..."
     },
-    "detailed_reports": {
-      "title": "Detaillierte Berichte",
-      "description": "Umfassende Einblicke in die Motivationen und Präferenzen Ihrer Klienten"
+    "what_you_get": {
+      "title": "Was erhalten Sie?",
+      "feature1": "Zugangscodes die Sie direkt mit Ihren Kunden teilen können",
+      "feature2": "Vollzugang zum gesamten Vinster Prozess pro Code",
+      "feature3": "Einfache Verwaltung von genutzten und ungenutzten Codes",
+      "feature4": "Persönliche Begleitung bei der Lieferung"
     },
-    "time_efficient": {
-      "title": "Zeiteffizient", 
-      "description": "Reduzieren Sie die Zeit für Datensammlung und konzentrieren Sie sich auf Beratung"
+    "how_it_works": {
+      "title": "Wie funktioniert es?",
+      "step1": "Füllen Sie das Formular mit Ihrer E-Mail und gewünschter Anzahl aus",
+      "step2": "Wir nehmen innerhalb von 24 Stunden Kontakt mit Ihnen auf",
+      "step3": "Zahlung über sicheren Zahlungslink",
+      "step4": "Erhalten Sie die Zugangscodes direkt nach der Zahlung",
+      "step5": "Teilen Sie die Codes mit Ihren Kunden",
+      "contact_info": "Fragen? Kontaktieren Sie uns unter"
     },
-    "professional_output": {
-      "title": "Professionelle Ausgabe",
-      "description": "Hochwertige Berichte und Profile, die Sie mit Ihren Klienten teilen können"
+    "toasts": {
+      "fill_all_fields": "Alle Felder ausfüllen",
+      "fill_all_fields_desc": "E-Mail-Adresse und Anzahl der Zugangscodes sind erforderlich.",
+      "request_sent": "Anfrage gesendet!",
+      "redirecting": "Sie werden zur Zahlungsseite weitergeleitet...",
+      "contact_note": "Beachten Sie",
+      "contact_note_desc": "Wir nehmen so schnell wie möglich Kontakt mit Ihnen auf für die Zahlung.",
+      "send_error": "Fehler beim Senden",
+      "send_error_desc": "Etwas ist schiefgelaufen. Versuchen Sie es später erneut."
     }
-  },
-  "how_it_works": {
-    "title": "Wie es funktioniert",
-    "step1": {
-      "title": "1. Zugang anfordern",
-      "description": "Kontaktieren Sie uns für einen professionellen Zugang zu Vinster"
-    },
-    "step2": {
-      "title": "2. Klienten einladen",
-      "description": "Verwenden Sie Ihre Zugangscodes, um Klienten zu Vinster einzuladen"
-    },
-    "step3": {
-      "title": "3. Ergebnisse erhalten",
-      "description": "Erhalten Sie detaillierte Berichte zur Verwendung in Ihren Beratungssitzungen"
-    }
-  },
-  "target_groups": {
-    "title": "Geeignet für",
-    "career_coaches": "Karrierecoaches",
-    "hr_professionals": "HR-Profis",
-    "outplacement_consultants": "Outplacement-Berater",
-    "recruitment_agencies": "Personalagenturen",
-    "educational_institutions": "Bildungseinrichtungen",
-    "career_counselors": "Karriereberater"
-  },
-  "contact_form": {
-    "title": "Zugang anfordern",
-    "organization": {
-      "label": "Organisation",
-      "placeholder": "Name Ihrer Organisation"
-    },
-    "role": {
-      "label": "Ihre Rolle",
-      "placeholder": "Z.B. Karrierecoach, HR-Manager"
-    },
-    "experience": {
-      "label": "Erfahrung",
-      "placeholder": "Beschreiben Sie kurz Ihre Erfahrung in der Karriereberatung"
-    },
-    "use_case": {
-      "label": "Anwendungsfall",
-      "placeholder": "Wie planen Sie, Vinster zu nutzen?"
-    },
-    "submit": "Zugang anfordern",
-    "success": "Vielen Dank für Ihr Interesse! Wir werden uns bald bei Ihnen melden.",
-    "error": "Beim Senden Ihrer Anfrage ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
-  },
-  "partnership": {
-    "title": "Partnerschaftsmöglichkeiten",
-    "description": "Wir suchen immer nach neuen Partnerschaften mit Karriereberatungsorganisationen. Kontaktieren Sie uns, um Möglichkeiten zu besprechen."
   }
 }
