@@ -154,7 +154,7 @@ const getLanguageFromRedirect = (redirectUrl: string): string | null => {
   return null;
 };
 
-// Enhanced language detection with priority order
+// Optimized language detection with minimal database calls
 const detectUserLanguage = async (
   eventType: string, 
   userId: string, 
@@ -170,49 +170,32 @@ const detectUserLanguage = async (
   let detectedLanguage = 'nl'; // Default fallback
   let detectionMethod = 'default-fallback';
 
+  // Priority 1: User metadata (available for both signup and recovery)
+  if (userMetadata?.language) {
+    detectedLanguage = userMetadata.language;
+    detectionMethod = 'user-metadata';
+    console.log(`✅ Language from user metadata: ${detectedLanguage}`);
+    return detectedLanguage;
+  }
+
+  // Priority 2: Redirect URL (fast, no database call)
+  const urlLanguage = getLanguageFromRedirect(redirectUrl);
+  if (urlLanguage) {
+    detectedLanguage = urlLanguage;
+    detectionMethod = 'redirect-url';
+    console.log(`✅ Language from redirect URL: ${detectedLanguage}`);
+    return detectedLanguage;
+  }
+
+  // Priority 3: Database lookup only if absolutely necessary (for signup only)
   if (eventType === 'signup') {
-    console.log("📧 SIGNUP: Trying language detection methods...");
-    
-    // For signup: priority is user_metadata > database > redirect URL
-    if (userMetadata?.language) {
-      detectedLanguage = userMetadata.language;
-      detectionMethod = 'user-metadata';
-      console.log(`✅ Language from user metadata: ${detectedLanguage}`);
-    } else {
-      const dbLanguage = await getUserLanguageById(userId);
-      if (dbLanguage) {
-        detectedLanguage = dbLanguage;
-        detectionMethod = 'database-by-id';
-      } else {
-        const urlLanguage = getLanguageFromRedirect(redirectUrl);
-        if (urlLanguage) {
-          detectedLanguage = urlLanguage;
-          detectionMethod = 'redirect-url';
-        }
-      }
-    }
-  } else if (eventType === 'recovery') {
-    console.log("🔑 PASSWORD RESET: Trying language detection methods...");
-    
-    // For password reset: priority is redirect URL > database lookup by email > user metadata > default
-    const urlLanguage = getLanguageFromRedirect(redirectUrl);
-    if (urlLanguage) {
-      detectedLanguage = urlLanguage;
-      detectionMethod = 'redirect-url';
-      console.log(`✅ Language from redirect URL: ${detectedLanguage}`);
-    } else {
-      console.log("🔍 No language in URL, trying database lookup by email...");
-      const dbLanguage = await getUserLanguageByEmail(email);
-      if (dbLanguage) {
-        detectedLanguage = dbLanguage;
-        detectionMethod = 'database-by-email';
-      } else {
-        console.log("🔍 No language from database, trying user metadata...");
-        if (userMetadata?.language) {
-          detectedLanguage = userMetadata.language;
-          detectionMethod = 'user-metadata';
-        }
-      }
+    console.log("📧 SIGNUP: Trying database lookup as last resort...");
+    const dbLanguage = await getUserLanguageById(userId);
+    if (dbLanguage) {
+      detectedLanguage = dbLanguage;
+      detectionMethod = 'database-by-id';
+      console.log(`✅ Language from database: ${detectedLanguage}`);
+      return detectedLanguage;
     }
   }
 
