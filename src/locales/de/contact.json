@@ -1,64 +1,36 @@
+
 {
-  "title": "Kontakt",
-  "subtitle": "Haben Sie Fragen? Wir helfen gerne weiter",
-  "intro": {
-    "description": "Kontaktieren Sie uns bei Fragen zu Vinster, technischen Problemen oder wenn Sie Feedback haben. Wir antworten normalerweise innerhalb von 24 Stunden."
-  },
-  "contact_info": {
-    "title": "Kontaktinformationen",
-    "email": {
-      "label": "E-Mail",
-      "value": "info@vinster.nl"
+  "contact": {
+    "back_to_home": "Zurück zur Startseite",
+    "hero": {
+      "title": "Kontakt",
+      "description": "Haben Sie Fragen? Wir helfen gerne weiter. Kontaktieren Sie uns bei Fragen zu Vinster, technischen Problemen oder wenn Sie Feedback haben."
     },
-    "company": {
-      "label": "Unternehmen",
-      "value": "Vinster B.V."
+    "form": {
+      "title": "Senden Sie uns eine Nachricht",
+      "name_label": "Vollständiger Name",
+      "name_placeholder": "Ihr Name",
+      "email_label": "E-Mail-Adresse",
+      "email_placeholder": "ihre.email@beispiel.com",
+      "message_label": "Nachricht",
+      "message_placeholder": "Beschreiben Sie Ihre Frage oder Ihr Feedback...",
+      "submit_button": "Nachricht senden",
+      "submitting": "Wird gesendet..."
     },
-    "kvk": {
-      "label": "Handelskammernummer",
-      "value": "12345678"
+    "info": {
+      "title": "Kontaktinformationen",
+      "email_title": "E-Mail",
+      "business_title": "Geschäftsinformationen",
+      "kvk_number": "KvK-Nummer: 12345678",
+      "response_time": "Wir antworten normalerweise innerhalb von 24 Stunden."
     },
-    "address": {
-      "label": "Adresse",
-      "value": "Musterstraße 123, 1234 AB Amsterdam, Niederlande"
+    "toasts": {
+      "fill_all_fields": "Alle Felder ausfüllen",
+      "fill_all_fields_desc": "Bitte füllen Sie alle Felder aus",
+      "message_sent": "Nachricht gesendet!",
+      "message_sent_desc": "Vielen Dank für Ihre Nachricht! Wir werden uns bald bei Ihnen melden.",
+      "send_error": "Fehler beim Senden",
+      "send_error_desc": "Beim Senden Ihrer Nachricht ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
     }
-  },
-  "form": {
-    "title": "Senden Sie uns eine Nachricht",
-    "name": {
-      "label": "Vollständiger Name",
-      "placeholder": "Ihr Name"
-    },
-    "email": {
-      "label": "E-Mail-Adresse", 
-      "placeholder": "ihre.email@beispiel.com"
-    },
-    "subject": {
-      "label": "Betreff",
-      "placeholder": "Worüber möchten Sie sprechen?"
-    },
-    "message": {
-      "label": "Nachricht",
-      "placeholder": "Beschreiben Sie Ihre Frage oder Ihr Feedback..."
-    },
-    "submit": "Nachricht senden",
-    "success": "Vielen Dank für Ihre Nachricht! Wir werden uns bald bei Ihnen melden.",
-    "error": "Beim Senden Ihrer Nachricht ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
-  },
-  "faq_link": {
-    "title": "Häufig gestellte Fragen",
-    "description": "Schauen Sie in unsere FAQ-Sektion - vielleicht finden Sie dort bereits eine Antwort auf Ihre Frage.",
-    "button": "FAQ anzeigen"
-  },
-  "support": {
-    "title": "Benötigen Sie Hilfe?",
-    "description": "Unser Support-Team hilft Ihnen gerne bei:",
-    "items": [
-      "Technischen Problemen",
-      "Fragen zum Prozess",
-      "Problemen mit Ihrem Konto",
-      "Fragen zur Bezahlung", 
-      "Allgemeine Fragen zu Vinster"
-    ]
   }
 }

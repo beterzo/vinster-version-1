@@ -1,43 +1,38 @@
+
 {
-  "title": "Über Vinster",
-  "subtitle": "Ihre Karriere, unsere Leidenschaft",
-  "intro": {
-    "title": "Wer sind wir?",
-    "description": "Vinster ist ein innovatives Karriereberatungsunternehmen, das sich darauf spezialisiert hat, Menschen dabei zu helfen, Klarheit über ihre beruflichen Wünsche und Ziele zu gewinnen. Unser wissenschaftlich fundierter Ansatz kombiniert bewährte psychologische Methoden mit moderner Technologie."
-  },
-  "mission": {
-    "title": "Unsere Mission",
-    "description": "Wir glauben, dass jeder Mensch das Recht auf eine erfüllende Karriere hat. Unsere Mission ist es, Menschen dabei zu unterstützen, ihre einzigartigen Talente und Leidenschaften zu entdecken und diese in eine Karriere umzuwandeln, die sie wirklich begeistert."
-  },
-  "approach": {
-    "title": "Unser Ansatz",
-    "description": "Unser strukturierter Prozess führt Sie durch eine Serie von Selbstreflexionsübungen und Assessments. Diese helfen Ihnen dabei, Muster in Ihren Interessen, Motivationen und Werten zu erkennen.",
-    "features": {
-      "scientific": {
-        "title": "Wissenschaftlich fundiert",
-        "description": "Basiert auf bewährten Methoden der Arbeits- und Organisationspsychologie"
-      },
-      "personalized": {
-        "title": "Personalisiert",
-        "description": "Jeder Bericht ist individuell auf Ihre spezifischen Antworten und Situation zugeschnitten"
-      },
-      "actionable": {
-        "title": "Umsetzbar",
-        "description": "Konkrete nächste Schritte und praktische Empfehlungen für Ihre Karriereentwicklung"
-      },
-      "accessible": {
-        "title": "Zugänglich",
-        "description": "Online verfügbar, wann immer es für Sie passt"
-      }
+  "about": {
+    "page_title": "Über Vinster",
+    "back_to_home": "Zurück zur Startseite",
+    "start_button": "Jetzt starten",
+    "experience_badge": "15+ Jahre Erfahrung",
+    "experience_subtitle": "Karriereberatung",
+    "introduction": {
+      "greeting": "Hallo! Ich bin",
+      "name": "Heidi Jansen",
+      "title": "und die Gründerin von Vinster.",
+      "description": "Nach über 15 Jahren Erfahrung in der Karriereberatung habe ich Vinster entwickelt, um Menschen dabei zu helfen, Klarheit über ihre beruflichen Wünsche und Ziele zu gewinnen."
+    },
+    "experience": {
+      "title": "Meine Erfahrung",
+      "description": "Ich habe über 15 Jahre Erfahrung als Karriereberaterin und habe Hunderten von Menschen geholfen, ihre ideale Karriererichtung zu finden. Meine Leidenschaft liegt darin, Menschen dabei zu unterstützen, ihre einzigartigen Talente zu entdecken und diese in eine erfüllende Karriere umzuwandeln."
+    },
+    "method": {
+      "title": "Die Loopbaantrechter-Methode",
+      "description": "Vinster basiert auf meiner bewährten 'Loopbaantrechter'-Methode (Karrieretrichter). Diese strukturierte Herangehensweise führt Sie durch eine Serie von Selbstreflexionsübungen, die Ihnen helfen, Muster in Ihren Interessen, Motivationen und Werten zu erkennen. Es ist ein wissenschaftlich fundierter Ansatz, der Psychologie mit moderner Technologie kombiniert."
+    },
+    "platform": {
+      "title": "Über die Vinster-Plattform",
+      "description": "Vinster macht meine bewährte Karriereberatungsmethode für jeden zugänglich. Die Online-Plattform führt Sie durch den gleichen strukturierten Prozess, den ich in meiner persönlichen Beratung verwende, aber dann in einem benutzerfreundlichen digitalen Format. Sie erhalten am Ende einen personalisierten Karrierebericht mit konkreten nächsten Schritten."
+    },
+    "mission": {
+      "title": "Meine Mission",
+      "description": "Ich glaube fest daran, dass jeder Mensch das Recht auf eine erfüllende Karriere hat. Meine Mission mit Vinster ist es, hochwertige Karriereberatung für jeden zugänglich und erschwinglich zu machen.",
+      "quote": "\"Eine erfüllende Karriere ist kein Luxus, sondern ein Grundrecht für jeden Menschen.\"",
+      "signature": "- Heidi Jansen, Gründerin von Vinster"
+    },
+    "cta": {
+      "title": "Bereit, Ihre Karrierereise zu beginnen?",
+      "subtitle": "Entdecken Sie, was Sie wirklich motiviert und nehmen Sie den ersten Schritt zu einer erfüllenderen Karriere."
     }
-  },
-  "team": {
-    "title": "Unser Team",
-    "description": "Unser Team besteht aus erfahrenen Karriereberatern, Psychologen und Technologie-Experten, die alle eine gemeinsame Leidenschaft teilen: Menschen dabei zu helfen, ihre beruflichen Träume zu verwirklichen."
-  },
-  "cta": {
-    "title": "Bereit für Ihre Karrierereise?",
-    "description": "Entdecken Sie, was Sie wirklich motiviert und nehmen Sie den ersten Schritt zu einer erfüllenderen Karriere.",
-    "button": "Jetzt starten"
   }
 }
