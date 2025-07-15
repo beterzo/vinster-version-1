@@ -1,52 +1,54 @@
 {
-  "hero": {
-    "title": "Tilgangskoder for fagfolk",
-    "subtitle": "Bestill tilgangskoder for dine klienter og utvid din rådgivningstjeneste"
-  },
-  "page_description": "Som karriererådgiver, coach eller HR-profesjonell kan du bruke Vinster som et kraftig verktøy for å hjelpe dine klienter med dype karriereinnsikter.",
-  "benefits": {
-    "title": "Fordeler for fagfolk",
-    "benefit1": {
-      "title": "Profesjonelt verktøy",
-      "description": "Bruk Vinster som en del av din profesjonelle tjeneste"
+  "professionals": {
+    "page_title": "Tilgangskoder for fagfolk",
+    "page_description": "Som karriererådgiver, coach eller HR-profesjonell kan du bruke Vinster som et kraftige verktøy for å hjelpe dine klienter med dype karriereinnsikter.",
+    "back_to_home": "Tilbake til hjem",
+    "order_section": {
+      "title": "Bestill tilgangskoder",
+      "email_label": "E-postadresse *",
+      "email_placeholder": "din@epost.no",
+      "quantity_label": "Antall tilgangskoder *",
+      "quantity_placeholder": "Velg antall",
+      "quantity_options": {
+        "5": "5 tilgangskoder",
+        "10": "10 tilgangskoder",
+        "25": "25 tilgangskoder",
+        "50": "50 tilgangskoder",
+        "100": "100 tilgangskoder"
+      },
+      "pricing_info": {
+        "title": "Prisinformasjon",
+        "price_per_code": "€29 per tilgangskode",
+        "contact_note": "Etter forespørselen din tar vi kontakt for betaling og levering"
+      },
+      "submit_button": "Be om tilgangskoder",
+      "submitting": "Sender..."
     },
-    "benefit2": {
-      "title": "Detaljerte rapporter",
-      "description": "Få omfattende innsikter om dine klienters karrieremuligheter"
+    "what_you_get": {
+      "title": "Hva får du?",
+      "feature1": "Tilgangskoder som du kan dele direkte med dine klienter",
+      "feature2": "Full tilgang til hele Vinster-prosessen per kode",
+      "feature3": "Enkel administrasjon av brukte og ubrukte koder",
+      "feature4": "Personlig veiledning ved levering"
     },
-    "benefit3": {
-      "title": "Effektiv prosess",
-      "description": "Spar tid og gi bedre resultater for dine klienter"
+    "how_it_works": {
+      "title": "Hvordan fungerer det?",
+      "step1": "Fyll ut skjemaet med e-post og ønsket antall",
+      "step2": "Vi tar kontakt innen 24 timer",
+      "step3": "Betaling via sikker betalingslenke",
+      "step4": "Motta tilgangskodene direkte etter betaling",
+      "step5": "Del kodene med dine klienter",
+      "contact_info": "Spørsmål? Ta kontakt via"
+    },
+    "toasts": {
+      "fill_all_fields": "Fyll ut alle felt",
+      "fill_all_fields_desc": "E-postadresse og antall koder er påkrevd.",
+      "request_sent": "Forespørsel sendt!",
+      "redirecting": "Du blir omdirigert til betalingssiden...",
+      "contact_note": "Merk",
+      "contact_note_desc": "Vi tar kontakt så snart som mulig for betaling.",
+      "send_error": "Feil ved sending",
+      "send_error_desc": "Noe gikk galt. Prøv igjen senere."
     }
-  },
-  "order_section": {
-    "title": "Bestill tilgangskoder",
-    "description": "Bestill tilgangskoder for dine klienter og start med å gi dem bedre karriereveiledning.",
-    "form": {
-      "name": "Navn",
-      "email": "E-post",
-      "organization": "Organisasjon",
-      "quantity": "Antall koder",
-      "message": "Melding",
-      "submit": "Send bestilling"
-    }
-  },
-  "what_you_get": {
-    "title": "Hva får du?",
-    "item1": "Tilgangskoder for dine klienter",
-    "item2": "Detaljerte karriererapporter",
-    "item3": "Profesjonell støtte",
-    "item4": "Fleksible pakker"
-  },
-  "how_it_works": {
-    "title": "Hvordan fungerer det?",
-    "step1": "Bestill tilgangskoder",
-    "step2": "Gi kodene til dine klienter",
-    "step3": "Klientene fullfører karriereanalysen",
-    "step4": "Bruk rapportene i din veiledning"
-  },
-  "toasts": {
-    "success": "Takk for din bestilling! Vi kontakter deg snart.",
-    "error": "Noe gikk galt. Prøv igjen senere."
   }
 }

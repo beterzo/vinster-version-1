@@ -1,31 +1,36 @@
 {
-  "hero": {
-    "title": "Kontakt oss",
-    "subtitle": "Har du spørsmål eller trenger du hjelp? Vi er her for deg!"
-  },
-  "form": {
-    "title": "Send oss en melding",
-    "name": "Navn",
-    "email": "E-post",
-    "message": "Melding",
-    "submit": "Send melding"
-  },
-  "contact_info": {
-    "title": "Kontaktinformasjon",
-    "email": "E-post",
-    "phone": "Telefon",
-    "address": "Adresse"
-  },
-  "company_info": {
-    "title": "Bedriftsinformasjon",
-    "company_name": "Vinster AS",
-    "vat_number": "Org.nr: 123456789",
-    "address": "Storgata 1, 0101 Oslo, Norge",
-    "email": "post@vinster.no",
-    "phone": "+47 123 45 678"
-  },
-  "toasts": {
-    "success": "Takk for din melding! Vi kommer tilbake til deg snart.",
-    "error": "Noe gikk galt. Prøv igjen senere."
+  "contact": {
+    "page_title": "Kontakt oss",
+    "back_to_home": "Tilbake til hjem",
+    "hero": {
+      "title": "Kontakt oss",
+      "description": "Har du spørsmål om Vinster eller trenger mer informasjon? Vi hjelper deg gjerne! Send oss en melding så tar vi kontakt så snart som mulig."
+    },
+    "form": {
+      "title": "Send oss en melding",
+      "name_label": "Navn *",
+      "name_placeholder": "Ditt navn",
+      "email_label": "E-postadresse *",
+      "email_placeholder": "din@epost.no",
+      "message_label": "Spørsmål *",
+      "message_placeholder": "Still spørsmålet ditt her...",
+      "submit_button": "Send melding",
+      "submitting": "Sender..."
+    },
+    "info": {
+      "title": "Kontaktinformasjon",
+      "email_title": "E-post",
+      "business_title": "Bedriftsinformasjon",
+      "org_number": "Org.nr. 123456789",
+      "response_time": "Vi prøver å svare innen 24 timer på meldingen din. For spørsmål kan du også sende oss en e-post."
+    },
+    "toasts": {
+      "fill_all_fields": "Fyll ut alle felt",
+      "fill_all_fields_desc": "Navn, e-postadresse og spørsmål er påkrevd.",
+      "message_sent": "Melding sendt!",
+      "message_sent_desc": "Vi tar kontakt så snart som mulig.",
+      "send_error": "Feil ved sending",
+      "send_error_desc": "Noe gikk galt. Prøv igjen senere."
+    }
   }
 }
