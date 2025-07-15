@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         .single();
 
       if (!error && profile?.language) {
-        setLanguage(profile.language as 'nl' | 'en');
+        setLanguage(profile.language as 'nl' | 'en' | 'de' | 'no');
         console.log('🌐 Language set from profile:', profile.language);
       }
     } catch (error) {

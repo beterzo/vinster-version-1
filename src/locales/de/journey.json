@@ -42,221 +42,203 @@
   },
   "wensberoepen": {
     "intro": {
-      "title": "Traumjobs",
-      "subtitle": "Stellen Sie sich Ihre idealen Jobs vor",
-      "description": "In diesem Schritt beschreiben Sie drei Jobs, die Sie sich wünschen. Denken Sie nicht an Einschränkungen - träumen Sie groß! Diese Übung hilft Ihnen zu verstehen, was Sie wirklich motiviert und begeistert.",
-      "how_it_works_title": "Wie funktioniert es?",
-      "how_it_works_description": "Sie beschreiben drei verschiedene Jobs, die Sie interessieren. Für jeden Job beantworten Sie Fragen über Ihre täglichen Aktivitäten, Arbeitsumgebung und was Sie daran anziehend finden. Das dauert etwa 20 Minuten.",
-      "start_button": "Traumjobs beschreiben",
-      "back_button": "Zurück zum Dashboard"
+      "title": "Jetzt ein ganz anderes Thema. Hier brauchen Sie Ihre Fantasie.",
+      "instruction_title": "Anleitung Traumjobs",
+      "instruction_description": "Setzen Sie Ihre Fantasie ein und denken Sie sich drei Jobs aus, die Sie gerne (eine Zeit lang) machen würden. Denken Sie so frei wie möglich. Es gibt jetzt keine Beschränkungen. Unten füllen Sie nacheinander Ihre Traumjobs aus. Beantworten Sie die Fragen so, als würden Sie diesen Job bereits ausüben. Sie müssen nicht darüber nachdenken, wie es genau in diesem Job funktioniert, beschreiben Sie nur, was Sie daran anspricht.",
+      "instruction_details": "Beantworten Sie jede Frage mit 10-20 Wörtern, mehr ist auch möglich. Einige Fragen ähneln sich. Beantworten Sie sie dennoch alle so genau wie möglich.",
+      "instruction_questions": "Sie erhalten insgesamt acht Fragen pro Job.",
+      "start_button": "Mit Traumjobs beginnen"
     },
     "step1": {
-      "title": "Traumjobs - Schritt 1",
-      "subtitle": "Ihr erster Traumjob",
-      "job_title": "Welchen Job stellen Sie sich vor?",
-      "job_title_placeholder": "Z.B. Kreativdirektor, Lehrer, Unternehmer...",
-      "question1": "Was würden Sie an einem typischen Arbeitstag in diesem Job tun?",
-      "question2": "Wo würden Sie arbeiten und wie würde Ihre Arbeitsumgebung aussehen?",
-      "question3": "Womit würden Sie sich in diesem Job hauptsächlich beschäftigen? Welches Wissen und welche Fähigkeiten würden Sie einsetzen?",
-      "placeholder": "Beschreiben Sie hier Ihre Antwort...",
+      "title": "Traumjob 1",
+      "subtitle": "Was würden Sie gerne eine Zeit lang, oder sogar immer, machen?",
+      "job_title_label": "Name des Jobs",
+      "job_title_placeholder": "Geben Sie hier den Namen Ihres Traumjobs ein...",
+      "question1": "Was machen Sie in einer Arbeitswoche? Antworten Sie mit Verben und Aktivitäten.",
+      "question2": "Wo machen Sie Ihre Arbeit? Beschreiben Sie die Umgebung, das Gebäude, den Raum....",
+      "question3": "Arbeiten Sie mehr zusammen oder mehr allein? Mit welchen Menschen haben Sie Kontakt?",
+      "question4": "Was haben Sie an einem Tag gemacht, an dem Sie pfeifend nach Hause kommen?",
+      "question5": "Was ist Ihr Ziel mit dieser Arbeit?",
+      "question6": "Welche Teile Ihrer Arbeit sind am schönsten?",
+      "question7": "Was ist für Sie wichtig in dieser Arbeit?",
+      "question8": "Worum geht es hauptsächlich in Ihrer Arbeit? Worüber müssen Sie viel wissen?",
+      "answer_placeholder": "Beschreiben Sie hier Ihre Antwort...",
       "back_button": "Zurück zur Einführung",
-      "next_button": "Nächster Job"
+      "next_button": "Nächster Traumjob"
     },
     "step2": {
-      "title": "Traumjobs - Schritt 2",
-      "subtitle": "Ihr zweiter Traumjob",
-      "job_title": "Welchen Job stellen Sie sich vor?",
-      "job_title_placeholder": "Z.B. Berater, Designer, Forscher...",
-      "question1": "Was würden Sie an einem typischen Arbeitstag in diesem Job tun?",
-      "question2": "Wo würden Sie arbeiten und wie würde Ihre Arbeitsumgebung aussehen?",
-      "question3": "Womit würden Sie sich in diesem Job hauptsächlich beschäftigen? Welches Wissen und welche Fähigkeiten würden Sie einsetzen?",
-      "placeholder": "Beschreiben Sie hier Ihre Antwort...",
-      "back_button": "Vorheriger Job",
-      "next_button": "Nächster Job"
+      "title": "Traumjob 2",
+      "subtitle": "Was würden Sie gerne eine Zeit lang, oder sogar immer, machen?",
+      "job_title_label": "Name des Jobs",
+      "job_title_placeholder": "Geben Sie hier den Namen Ihres Traumjobs ein...",
+      "question1": "Was machen Sie in einer Arbeitswoche? Antworten Sie mit Verben und Aktivitäten.",
+      "question2": "Wo machen Sie Ihre Arbeit? Beschreiben Sie die Umgebung, das Gebäude, den Raum....",
+      "question3": "Arbeiten Sie mehr zusammen oder mehr allein? Mit welchen Menschen haben Sie Kontakt?",
+      "question4": "Was haben Sie an einem Tag gemacht, an dem Sie pfeifend nach Hause kommen?",
+      "question5": "Was ist Ihr Ziel mit dieser Arbeit?",
+      "question6": "Welche Teile Ihrer Arbeit sind am schönsten?",
+      "question7": "Was ist für Sie wichtig in dieser Arbeit?",
+      "question8": "Worum geht es hauptsächlich in Ihrer Arbeit? Worüber müssen Sie viel wissen?",
+      "answer_placeholder": "Beschreiben Sie hier Ihre Antwort...",
+      "previous_button": "Vorheriger Traumjob",
+      "next_button": "Nächster Traumjob"
     },
     "step3": {
-      "title": "Traumjobs - Schritt 3",
-      "subtitle": "Ihr dritter Traumjob",
-      "job_title": "Welchen Job stellen Sie sich vor?",
-      "job_title_placeholder": "Z.B. Manager, Künstler, Therapeut...",
-      "question1": "Was würden Sie an einem typischen Arbeitstag in diesem Job tun?",
-      "question2": "Wo würden Sie arbeiten und wie würde Ihre Arbeitsumgebung aussehen?",
-      "question3": "Womit würden Sie sich in diesem Job hauptsächlich beschäftigen? Welches Wissen und welche Fähigkeiten würden Sie einsetzen?",
-      "placeholder": "Beschreiben Sie hier Ihre Antwort...",
-      "back_button": "Vorheriger Job",
-      "next_button": "Fortfahren"
-    },
-    "vervolgvragen": {
-      "title": "Traumjobs - Vertiefende Fragen",
-      "subtitle": "Weitere Erkenntnisse über Ihre Traumjobs",
-      "instruction": "Beantworten Sie für jeden Job, den Sie beschrieben haben, die folgenden Fragen:",
-      "questions": {
-        "samenwerking": "Mit wem würden Sie zusammenarbeiten und welche Kontakte würden Sie haben?",
-        "doel": "Was wäre das Ziel oder der Zweck Ihrer Arbeit? Was würden Sie erreichen wollen?",
-        "aspecten": "Welche Aspekte dieses Jobs finden Sie am wichtigsten oder attraktivsten?",
-        "onderdelen": "Welche Teile oder Aktivitäten dieses Jobs würden Ihnen am meisten Spaß machen?",
-        "thuiskomen": "Stellen Sie sich vor, Sie haben einen großartigen Tag in diesem Job. Was würde Sie pfeifend nach Hause gehen lassen?"
-      },
-      "placeholder": "Beschreiben Sie hier Ihre Antwort...",
-      "back_button": "Zurück",
-      "next_button": "Traumjobs abschließen"
+      "title": "Traumjob 3",
+      "subtitle": "Was würden Sie gerne eine Zeit lang, oder sogar immer, machen?",
+      "job_title_label": "Name des Jobs",
+      "job_title_placeholder": "Geben Sie hier den Namen Ihres Traumjobs ein...",
+      "question1": "Was machen Sie in einer Arbeitswoche? Antworten Sie mit Verben und Aktivitäten.",
+      "question2": "Wo machen Sie Ihre Arbeit? Beschreiben Sie die Umgebung, das Gebäude, den Raum....",
+      "question3": "Arbeiten Sie mehr zusammen oder mehr allein? Mit welchen Menschen haben Sie Kontakt?",
+      "question4": "Was haben Sie an einem Tag gemacht, an dem Sie pfeifend nach Hause kommen?",
+      "question5": "Was ist Ihr Ziel mit dieser Arbeit?",
+      "question6": "Welche Teile Ihrer Arbeit sind am schönsten?",
+      "question7": "Was ist für Sie wichtig in dieser Arbeit?",
+      "question8": "Worum geht es hauptsächlich in Ihrer Arbeit? Worüber müssen Sie viel wissen?",
+      "answer_placeholder": "Beschreiben Sie hier Ihre Antwort...",
+      "previous_button": "Vorheriger Traumjob",
+      "finish_button": "Abschließen",
+      "finishing": "Wird abgeschlossen...",
+      "sending_data": "Daten werden gesendet..."
     },
     "voltooi": {
-      "title": "Traumjobs abgeschlossen!",
-      "subtitle": "Gut gemacht! Sie haben Ihre drei Traumjobs beschrieben.",
-      "description": "Sie haben einen wichtigen Schritt auf Ihrem Weg zu mehr Klarheit über Ihre Karriere gemacht. Ihre Antworten geben wertvolle Einblicke in das, was Sie motiviert und begeistert.",
-      "next_steps_title": "Was kommt als Nächstes?",
-      "next_steps_description": "Im nächsten Schritt vervollständigen Sie Ihr Profil, indem Sie Ihre Prioritäten und Präferenzen angeben. Dies hilft uns, noch gezieltere Empfehlungen für Sie zu erstellen.",
-      "continue_button": "Weiter zum Profil vervollständigen",
-      "back_button": "Zurück zum Dashboard"
+      "title": "Herzlichen Glückwunsch! 🎉",
+      "subtitle": "Sie haben erfolgreich die Fragen zu Ihren Traumjobs abgeschlossen",
+      "what_happened_title": "Was ist passiert?",
+      "what_happened_description": "Es wurden nun Schlüsselwörter zusammengestellt, um zu bestimmen, was Ihnen bei der Arbeit wichtig ist. Um Ihren persönlichen Karrierebericht zu generieren, benötigen wir noch einige zusätzliche Informationen von Ihnen.",
+      "next_step_title": "Nächster Schritt: Personenprofil",
+      "next_step_description": "Ergänzen Sie Ihr Personenprofil mit einigen zusätzlichen Informationen über Ihren Hintergrund und Ihre Vorlieben, und geben Sie an, was Ihnen bei der Arbeit wichtig ist.",
+      "priorities_title": "Prioritäten bestimmen",
+      "priorities_description": "Was finden Sie bei der Arbeit wichtig?",
+      "extra_info_title": "Zusätzliche Informationen",
+      "extra_info_description": "Ihr Hintergrund und Ihre Vorlieben",
+      "report_title": "Bericht generieren",
+      "report_description": "Ihr persönlicher Karrierebericht",
+      "create_report_button": "Personenprofil vervollständigen",
+      "to_dashboard_button": "Zum Dashboard",
+      "tip_text": "Tipp: Das Ausfüllen Ihres Personenprofils dauert etwa 5-10 Minuten."
     }
   },
   "profiel_voltooien": {
     "intro": {
       "title": "Profil vervollständigen",
-      "subtitle": "Vervollständigen Sie Ihr persönliches Profil",
-      "description": "Um Ihnen die besten Empfehlungen geben zu können, müssen wir Sie etwas besser kennenlernen. In diesem Schritt geben Sie Informationen über Ihren Hintergrund und Ihre Präferenzen an.",
-      "how_it_works_title": "Wie funktioniert es?",
-      "how_it_works_description": "Sie beantworten Fragen zu Ihrem Bildungshintergrund, Ihren Präferenzen und Ihren Prioritäten. Anschließend können Sie angeben, was Ihnen bei der Arbeit am wichtigsten ist. Das dauert etwa 15 Minuten.",
-      "start_button": "Profil vervollständigen",
-      "back_button": "Zurück zum Dashboard"
+      "last_step_title": "Letzter Schritt",
+      "description": "Wir haben fast alle Informationen, die wir für Ihre persönliche Karriereberatung benötigen. Für den letzten Schritt stellen wir Ihnen noch ein paar kurze Fragen zu Ihrem Hintergrund und Ihren Vorlieben.",
+      "description_details": "Dies hilft uns, Ihre Beratung noch spezifischer und praktischer zu gestalten.",
+      "start_button": "Profil vervollständigen"
     },
     "extra_informatie": {
       "title": "Zusätzliche Informationen",
-      "subtitle": "Erzählen Sie uns etwas mehr über sich",
-      "opleidingsniveau": {
-        "label": "Was ist Ihr höchster Bildungsabschluss?",
-        "placeholder": "Z.B. Bachelor, Master, Berufsschule...",
-        "options": {
-          "vmbo": "VMBO",
-          "mbo": "MBO",
-          "havo": "HAVO",
-          "vwo": "VWO",
-          "hbo": "HBO",
-          "wo": "WO (Universität)",
-          "anders": "Sonstiges"
-        }
-      },
-      "beroepsopleiding": {
-        "label": "Haben Sie eine spezifische Berufsausbildung oder Spezialisierung?",
-        "placeholder": "Z.B. Marketing, IT, Gesundheitswesen, Bildung..."
-      },
-      "sector_voorkeur": {
-        "label": "In welchem Sektor möchten Sie am liebsten arbeiten?",
-        "placeholder": "Z.B. Gesundheitswesen, Technologie, Bildung, Non-Profit..."
-      },
-      "fysieke_beperkingen": {
-        "label": "Haben Sie körperliche Einschränkungen, die wir bei den Empfehlungen berücksichtigen sollten? (optional)",
-        "placeholder": "Z.B. Mobilitätseinschränkungen, Allergeien..."
-      },
-      "back_button": "Zurück",
-      "next_button": "Weiter zu Prioritäten"
+      "subtitle": "Letzte Fragen zu Ihrem Hintergrund",
+      "question1": "Was ist Ihr höchster Bildungsabschluss?",
+      "question2": "Welche Berufsausbildung haben Sie absolviert?",
+      "question3": "In welchem Sektor/welchen Sektoren möchten Sie gerne arbeiten?",
+      "question4": "Gibt es körperliche Einschränkungen, die wir berücksichtigen sollten?",
+      "placeholder1": "Zum Beispiel: FH, Uni, Berufsschule Stufe 4, etc.",
+      "placeholder2": "Zum Beispiel: Betriebswirtschaft, Psychologie, Technische Informatik, etc.",
+      "placeholder3": "Zum Beispiel: IT, Gesundheitswesen, Bildung, Marketing, etc.",
+      "placeholder4": "Zum Beispiel: Keine schwere körperliche Arbeit, Bildschirmarbeit begrenzen, etc. (optional)",
+      "back_button": "Zurück zur Profil-Einführung",
+      "next_button": "Zu Prioritäten"
     },
     "prioriteiten": {
-      "title": "Ihre Prioritäten",
-      "subtitle": "Was ist Ihnen bei der Arbeit am wichtigsten?",
-      "description": "Wählen Sie aus jeder Kategorie die Aspekte aus, die Ihnen am wichtigsten sind. Sie können mehrere Optionen pro Kategorie auswählen.",
       "activiteiten": {
-        "title": "Aktivitäten",
-        "subtitle": "Welche Art von Aktivitäten machen Sie gerne bei der Arbeit?"
+        "title": "Prioritäten - Aktivitäten",
+        "subtitle": "Wählen Sie mindestens 5 Aktivitäten aus, die Sie gerne machen",
+        "selected_count": "Ausgewählt: {count} von mindestens 5",
+        "missing_keywords": "Es wurden noch keine persönlichen Aktivitäten generiert. Füllen Sie zuerst Ihren Begeisterungsscan und Traumjobs aus.",
+        "extra_text_label": "Vermissen Sie noch Aktivitäten? Fügen Sie sie hier hinzu (optional)",
+        "extra_text_placeholder": "Zum Beispiel: Fotografieren, Programmieren, Gärtnern...",
+        "next_button": "Weiter: Arbeitsbedingungen"
       },
       "werkomstandigheden": {
-        "title": "Arbeitsbedingungen",
-        "subtitle": "Welche Arbeitsbedingungen sind Ihnen wichtig?"
+        "title": "Prioritäten - Arbeitsbedingungen",
+        "subtitle": "Wählen Sie mindestens 5 Arbeitsbedingungen aus, die Ihnen wichtig sind",
+        "selected_count": "Ausgewählt: {count} von mindestens 5",
+        "missing_keywords": "Es wurden noch keine persönlichen Arbeitsbedingungen generiert. Füllen Sie zuerst Ihren Begeisterungsscan und Traumjobs aus.",
+        "extra_text_label": "Vermissen Sie noch Arbeitsbedingungen? Fügen Sie sie hier hinzu (optional)",
+        "extra_text_placeholder": "Zum Beispiel: Hund mit ins Büro, Guter Kaffee, Ergonomischer Arbeitsplatz...",
+        "previous_button": "Vorherige: Aktivitäten",
+        "next_button": "Weiter: Interessen"
       },
       "interesses": {
-        "title": "Interessen",
-        "subtitle": "Welche Themen und Bereiche interessieren Sie?"
-      },
-      "extra_text_label": "Möchten Sie noch etwas hinzufügen?",
-      "extra_text_placeholder": "Beschreiben Sie weitere wichtige Aspekte...",
-      "back_button": "Zurück",
-      "next_button": "Profil abschließen"
+        "title": "Prioritäten - Interessen",
+        "subtitle": "Wählen Sie mindestens 5 Interessen aus, die Sie ansprechen",
+        "selected_count": "Ausgewählt: {count} von mindestens 5",
+        "missing_keywords": "Es wurden noch keine persönlichen Interessen generiert. Füllen Sie zuerst Ihren Begeisterungsscan und Traumjobs aus.",
+        "extra_text_label": "Vermissen Sie noch Interessen? Fügen Sie sie hier hinzu (optional)",
+        "extra_text_placeholder": "Zum Beispiel: Nachhaltigkeit, Technologie, Kunst...",
+        "previous_button": "Vorherige: Arbeitsbedingungen",
+        "finish_button": "Karrierebericht generieren"
+      }
     }
   },
   "zoekprofiel": {
     "intro": {
       "title": "Suchprofil erstellen",
-      "subtitle": "Erstellen Sie Ihr persönliches Jobsuchprofil",
-      "description": "Basierend auf allem, was Sie bisher ausgefüllt haben, erstellen wir jetzt ein Suchprofil. Dieses können Sie bei Bewerbungen verwenden und mit Personalberatern und Arbeitgebern teilen.",
-      "how_it_works_title": "Wie funktioniert es?",
-      "how_it_works_description": "Sie geben Ihre konkreten Jobsuchkriterien an. Wir generieren dann ein professionelles Suchprofil, das Sie herunterladen und verwenden können.",
-      "start_button": "Suchprofiel erstellen",
+      "what_is_title": "Was ist ein Suchprofil?",
+      "description": "Ein Suchprofil ist Ihr persönliches Dokument, in dem steht, welche Art von Arbeit Sie suchen. Es hilft Ihnen, gezielt zu bewerben und zeigt Arbeitgebern, was Sie zu bieten haben.",
+      "description_details": "Basierend auf Ihren Antworten erstellen wir ein professionelles Suchprofil, das Sie bei Ihren Bewerbungen verwenden oder mit Personalberatern teilen können.",
+      "duration": "Das Ausfüllen dauert etwa 10 Minuten.",
+      "already_created_title": "Suchprofil bereits erstellt",
+      "already_created_description": "Sie haben bereits ein Suchprofil erstellt. Sie können es auf der Download-Seite herunterladen oder ansehen.",
+      "start_button": "Suchprofil starten",
+      "download_button": "Zu Suchprofil-Download",
       "back_button": "Zurück zum Dashboard"
     },
-    "vragen": {
-      "title": "Suchprofil - Ihre Kriterien",
-      "subtitle": "Geben Sie Ihre spezifischen Jobsuchkriterien an",
-      "functie_als": {
-        "label": "Als was möchten Sie arbeiten?",
-        "placeholder": "Z.B. Marketing Manager, Software Developer, Berater..."
-      },
-      "sector": {
-        "label": "In welchem Sektor?",
-        "placeholder": "Z.B. Technologie, Gesundheitswesen, Bildung, Finanzwesen..."
-      },
-      "organisatie_bij": {
-        "label": "Bei welcher Art von Organisation möchten Sie arbeiten?",
-        "placeholder": "Z.B. Startup, Großunternehmen, Non-Profit, Beratung..."
-      },
-      "kerntaken": {
-        "label": "Was sollen Ihre Hauptaufgaben sein?",
-        "placeholder": "Beschreiben Sie die wichtigsten Aufgaben und Verantwortlichkeiten..."
-      },
-      "gewenste_regio": {
-        "label": "In welcher Region möchten Sie arbeiten?",
-        "placeholder": "Z.B. Amsterdam, remote, Deutschland, Europa..."
-      },
-      "arbeidsvoorwaarden": {
-        "label": "Was sind Ihre wichtigsten Arbeitsbedingungen?",
-        "placeholder": "Z.B. Gehalt, Arbeitszeiten, Home Office, Entwicklungsmöglichkeiten..."
-      },
-      "back_button": "Zurück",
-      "next_button": "Suchprofil generieren"
+    "antwoorden": {
+      "title": "Suchprofil-Fragen",
+      "subtitle": "Beantworten Sie die Fragen, um Ihr Suchprofil zu erstellen",
+      "question1": "Ich suche eine Stelle als...",
+      "question2": "Meine Hauptaufgaben sind...",
+      "question3": "Ich möchte gerne arbeiten bei...",
+      "question4": "Im Sektor...",
+      "question5": "In der Region...",
+      "question6": "Arbeitsbedingungen, die mir wichtig sind...",
+      "placeholder": "Beschreiben Sie hier Ihre Antwort...",
+      "back_button": "Zurück zur Einführung",
+      "generate_button": "Suchprofil generieren"
     },
     "download": {
-      "title": "Ihr Suchprofil ist bereit!",
-      "subtitle": "Ihr persönliches Jobsuchprofil wurde erstellt",
-      "description": "Ihr Suchprofil ist bereit zum Download. Sie können es bei Bewerbungen verwenden und mit Personalberatern und potenziellen Arbeitgebern teilen.",
-      "download_button": "Suchprofil herunterladen",
-      "continue_button": "Weiter zum Karrierebericht",
-      "back_button": "Zurück zum Dashboard"
+      "title": "Suchprofil herunterladen",
+      "description": "Ihr Suchprofil ist fertig! Sie können es jetzt herunterladen und bei Ihren Bewerbungen verwenden.",
+      "download_button": "Suchprofil PDF herunterladen",
+      "back_button": "Zurück zum Dashboard",
+      "regenerate_button": "Neues Suchprofil erstellen"
     }
   },
   "rapport": {
     "download": {
-      "title": "Ihr Karrierebericht ist bereit!",
-      "subtitle": "Ihr persönlicher Karrierebericht wurde generiert",
-      "description": "Ihr umfassender Karrierebericht mit Einblicken und Empfehlungen ist bereit zum Download. Dieser Bericht enthält eine Analyse Ihrer Antworten und konkrete nächste Schritte für Ihre Karriereentwicklung.",
-      "download_button": "Karrierebericht herunterladen",
-      "back_button": "Zurück zum Dashboard",
-      "loading_message": "Ihr Bericht wird generiert, bitte warten...",
-      "error_message": "Fehler beim Generieren des Berichts. Bitte versuchen Sie es erneut."
+      "title": "Karrierebericht herunterladen",
+      "description": "Ihr persönlicher Karrierebericht ist fertig! Dieser Bericht enthält alle Erkenntnisse und Empfehlungen basierend auf Ihren Antworten.",
+      "download_button": "Karrierebericht PDF herunterladen",
+      "research_plan_button": "Forschungsplan ansehen",
+      "back_button": "Zurück zum Dashboard"
     }
   },
   "onderzoeksplan": {
-    "title": "Ihr Forschungsplan",
-    "subtitle": "Ein Schritt-für-Schritt-Plan für Ihre Jobsuche",
-    "description": "Basierend auf Ihren Antworten haben wir einen personalisierten Forschungsplan für Sie erstellt. Dieser hilft Ihnen dabei, Ihre nächsten Karriereschritte strategisch anzugehen.",
-    "steps": {
-      "step1": {
-        "title": "1. Reflection und Selbstkenntnis",
-        "description": "Vertiefen Sie Ihr Verständnis für Ihre Motivationen und Interessen"
-      },
-      "step2": {
-        "title": "2. Arbeitsmarktforschung", 
-        "description": "Erkunden Sie den Arbeitsmarkt und identifizieren Sie Möglichkeiten"
-      },
-      "step3": {
-        "title": "3. Netzwerken und Kontakte knüpfen",
-        "description": "Bauen Sie Ihr berufliches Netzwerk auf und pflegen Sie es"
-      },
-      "step4": {
-        "title": "4. Bewerbungen und Gespräche",
-        "description": "Bereiten Sie sich auf den Bewerbungsprozess vor"
-      }
-    },
-    "download_button": "Vollständigen Plan herunterladen",
+    "title": "Forschungsplan",
+    "subtitle": "Dies ist Ihr Schritt-für-Schritt-Plan, um zu bestimmen, wie Ihre nächste Stelle aussehen sollte.",
+    "tip": "💡 Dieser Forschungsplan steht auch am Ende Ihres Karriereberichts, dort können Sie ihn immer wiederfinden.",
+    "steps_title": "Dies ist Ihr Schritt-für-Schritt-Plan:",
+    "step1": "Fragen Sie KI (oder Google) nach einer ausführlichen Stellenbeschreibung der Funktionen aus Ihrem Karrierebericht. Fragen Sie KI auch nach ähnlichen Funktionen. Welche Arbeit ist ähnlich? Was spricht Sie in den Antworten an, die Sie erhalten?",
+    "step2": "Schauen Sie, ob Sie Stellenausschreibungen finden können, die ein Bild vom Inhalt dieser Funktion und von den Organisationen geben, die diese Funktionen haben.",
+    "step3": "Suchen Sie auf LinkedIn nach Personen, die diese Arbeit machen. Was ist ihr Hintergrund?",
+    "step4": "Gibt es einen Berufsverband? Was lesen Sie auf der Website über Entwicklungen im Sektor und im Beruf?",
+    "step5": "Hat der Beruf ein Fachmagazin? Wenn ja, fordern Sie eines oder mehrere an und lesen Sie sie. Was fällt Ihnen auf? Werden Sie von den Themen begeistert?",
+    "step6": "Suchen Sie Organisationen, in denen Menschen mit diesem Beruf arbeiten.",
+    "step7": "Welche Ausbildung benötigen Sie eventuell für diese Arbeit? Fragen Sie KI oder Google.",
+    "step8": "Schreiben Sie alle Fragen auf, die bei Ihnen während der Recherche aufkommen. Diese können Sie Menschen stellen, die bereits in dieser Richtung tätig sind.",
+    "step9": "Erstellen Sie eine Liste von Personen, mit denen Sie über diese Arbeit sprechen möchten, und nehmen Sie Kontakt zu ihnen auf. Sie finden diese Personen über LinkedIn und/oder über Ihr persönliches Netzwerk.",
+    "step10": "Sammeln Sie genügend Informationen, um eine Entscheidung zu treffen. Nehmen Sie sich Zeit und sprechen Sie mit anderen darüber.",
+    "after_research_title": "Nach Ihrer Recherche:",
+    "after_research_description": "Wenn Sie genug herausgefunden haben, wählen Sie die Funktion, die am besten zu Ihnen passt, und füllen Sie das Suchprofil auf der Website aus. Vinster wird Ihren Text in ein paar Sätze umwandeln, die Sie verwenden können, um anderen mitzuteilen, was Sie suchen.",
+    "after_research_action": "Sie können nun gezielt bewerben! Suchen Sie Stellenausschreibungen, lassen Sie Ihr Netzwerk wissen, was Sie wollen, und teilen Sie auf LinkedIn mit, welche Funktion Sie suchen.",
+    "final_message": "Wir wünschen Ihnen viel Arbeitsfreude in Ihrer nächsten Stelle!",
+    "time_notice_title": "⏰ Nehmen Sie sich Zeit für diese Recherche",
+    "time_notice_description": "Diese Recherche ist entscheidend für das Finden Ihrer idealen Stelle. Nehmen Sie sich die Zeit, jeden Schritt sorgfältig auszuführen.",
+    "time_notice_details": "Je besser Sie diese Recherche machen, desto besser können Sie später Ihr Suchprofil ausfüllen und desto gezielter können Sie sich bewerben.",
     "back_button": "Zurück zum Dashboard"
   }
 }

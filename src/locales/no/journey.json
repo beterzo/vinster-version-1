@@ -1,118 +1,245 @@
 {
-  "enthusiasm": {
+  "enthousiasme": {
     "intro": {
-      "title": "Entusiasme-analyse",
-      "subtitle": "Oppdag hva som virkelig engasjerer deg",
-      "description": "I denne delen vil vi utforske hva som har gitt deg energi og glede gjennom livet ditt.",
-      "start": "Start entusiasme-analyse"
+      "title": "Entusiasme-skanning",
+      "subtitle": "Oppdag hva som gir deg energi på jobben",
+      "description": "Entusiasme-skanningen hjelper deg med å oppdage hva som virkelig gir deg energi på jobben. Ved å se tilbake på øyeblikk av glede og entusiasme får du innsikt i hva som er viktig for deg.",
+      "how_it_works_title": "Hvordan fungerer det?",
+      "how_it_works_description": "Du besvarer spørsmål om tre forskjellige perioder: din skolegang, din første jobb og dine beste arbeidsopplevelser. Dette tar omtrent 15 minutter.",
+      "start_button": "Start entusiasme-skanning",
+      "back_button": "Tilbake til dashboard"
     },
     "step1": {
-      "title": "Barndomsminne",
-      "subtitle": "Tenk tilbake på barndommen din",
-      "questions": {
-        "activities": "Hvilke aktiviteter likte du best som barn?",
-        "interests": "Hva var du mest interessert i?",
-        "places": "Hvor trivdes du best?"
-      }
+      "title": "Entusiasme-skanning - Steg 1",
+      "subtitle": "Spørsmål om din skolegang",
+      "question1": "Hva likte du å gjøre? (på skolen og utenfor skolen)",
+      "question2": "Hvor var du ofte å finne? (når du kom hjem fra skolen eller i helgene)",
+      "question3": "Hva interesserte deg? (tenk på skolefag, hobbyer, emner på TV eller i bøker)",
+      "placeholder": "Beskriv svaret ditt her...",
+      "back_button": "Tilbake til intro",
+      "next_button": "Neste steg"
     },
     "step2": {
-      "title": "Første jobb",
-      "subtitle": "Tenk på din første jobb eller arbeidserfaring",
-      "questions": {
-        "tasks": "Hvilke oppgaver likte du best?",
-        "topics": "Hvilke emner interesserte deg mest?",
-        "environment": "Hvilke arbeidsforhold passet deg best?"
-      }
+      "title": "Entusiasme-skanning - Steg 2",
+      "subtitle": "Spørsmål om din første jobb",
+      "question1": "Hva var de hyggeligste oppgavene i din første jobb? (dette kan også være en deltidsjobb)",
+      "question2": "Hvilke arbeidsforhold likte du i din første jobb?",
+      "question3": "Hvilke emner appellerte til deg i din første jobb?",
+      "placeholder": "Beskriv svaret ditt her...",
+      "previous_button": "Forrige steg",
+      "next_button": "Neste steg"
     },
     "step3": {
-      "title": "Suksesshistorie",
-      "subtitle": "Tenk på en periode hvor du var spesielt motivert",
-      "questions": {
-        "period": "Beskriv en arbeidsperiode du likte godt",
-        "project": "Fortell om et prosjekt du var glad i",
-        "perfect_day": "Beskriv en perfekt arbeidsdag"
-      }
+      "title": "Entusiasme-skanning - Steg 3",
+      "subtitle": "Spørsmål om hyggelige arbeidsopplevelser",
+      "saving": "Lagrer...",
+      "question1": "Beskriv den hyggeligste arbeidsperioden i din karriere. Hva gjorde den så hyggelig?",
+      "question2": "Tenk på det hyggeligste prosjektet du har jobbet med. Hva var din rolle i det?",
+      "question3": "Beskriv en dag da du kom hjem plystende fra jobben. Hva var så spesielt den dagen?",
+      "placeholder": "Beskriv svaret ditt her...",
+      "previous_button": "Forrige steg",
+      "finish_button": "Fullfør entusiasme-skanning"
     }
   },
-  "priorities": {
+  "wensberoepen": {
     "intro": {
-      "title": "Prioriteringer",
-      "subtitle": "Hva er viktigst for deg i arbeidslivet?",
-      "description": "Nå skal vi kartlegge dine prioriteringer innen aktiviteter, interesser og arbeidsforhold.",
-      "start": "Start prioritering"
-    },
-    "activities": {
-      "title": "Aktiviteter",
-      "subtitle": "Velg aktiviteter du liker best",
-      "instruction": "Velg opptil 10 aktiviteter som engasjerer deg mest"
-    },
-    "interests": {
-      "title": "Interesser",
-      "subtitle": "Velg interesser som motiverer deg",
-      "instruction": "Velg opptil 10 interesser som motiverer deg mest"
-    },
-    "work_conditions": {
-      "title": "Arbeidsforhold",
-      "subtitle": "Velg arbeidsforhold som passer deg",
-      "instruction": "Velg opptil 10 arbeidsforhold som passer deg best"
-    }
-  },
-  "dream_jobs": {
-    "intro": {
-      "title": "Drømmeyrker",
-      "subtitle": "Utforsk dine ideelle karrierer",
-      "description": "Nå skal vi dykke dypere inn i dine drømmeyrker og hva som gjør dem attraktive for deg.",
-      "start": "Start drømmeyrker"
+      "title": "Nå et helt annet emne. Her trenger du fantasien din.",
+      "instruction_title": "Instruksjon drømmejobber",
+      "instruction_description": "Sett fantasien i sving og tenk ut tre jobber du gjerne vil gjøre (en stund). Tenk så fritt som mulig. Det er ingen begrensninger nå. Nedenfor fyller du ut drømmejobbene dine én for én. Besvar spørsmålene som om du allerede utfører den jobben. Du trenger ikke å tenke på hvordan det fungerer i den jobben, beskriv bare hva som appellerer til deg.",
+      "instruction_details": "Besvar hvert spørsmål med 10-20 ord, mer er også greit. Noen spørsmål ligner på hverandre. Besvar dem alle så nøyaktig som mulig likevel.",
+      "instruction_questions": "Du får totalt åtte spørsmål per jobb.",
+      "start_button": "Start med drømmejobber"
     },
     "step1": {
-      "title": "Første drømmeyrke",
-      "subtitle": "Beskriv ditt første drømmeyrke",
-      "questions": {
-        "title": "Hva er tittelen på dette yrket?",
-        "activities": "Hvilke aktiviteter ville du gjort i en typisk uke?",
-        "goals": "Hva ville være målet med arbeidet ditt?",
-        "knowledge": "Hvilken kunnskap ville du fokusere på?",
-        "collaboration": "Hvordan ville du samarbeide med andre?",
-        "environment": "Hvor ville du jobbe?",
-        "aspects": "Hva ville være viktigst for deg i dette yrket?",
-        "perfect_day": "Beskriv en perfekt arbeidsdag i dette yrket"
-      }
+      "title": "Drømmejobb 1",
+      "subtitle": "Hva vil du gjerne gjøre en stund, eller til og med alltid?",
+      "job_title_label": "Navn på jobben",
+      "job_title_placeholder": "Skriv inn navnet på drømmejobben din her...",
+      "question1": "Hva gjør du i en arbeidsuke? Svar med verb og aktiviteter.",
+      "question2": "Hvor gjør du jobben din? Beskriv miljøet, bygningen, rommet....",
+      "question3": "Jobber du mer sammen eller mer alene? Hvilke mennesker har du kontakt med?",
+      "question4": "Hva har du gjort på en dag da du kommer hjem plystende?",
+      "question5": "Hva er målet ditt med denne jobben?",
+      "question6": "Hvilke deler av jobben din er hyggeligst?",
+      "question7": "Hva er viktig for deg i denne jobben?",
+      "question8": "Hva handler jobben din hovedsakelig om? Hva må du vite mye om?",
+      "answer_placeholder": "Beskriv svaret ditt her...",
+      "back_button": "Tilbake til intro",
+      "next_button": "Neste drømmejobb"
     },
     "step2": {
-      "title": "Andre drømmeyrke",
-      "subtitle": "Beskriv ditt andre drømmeyrke"
+      "title": "Drømmejobb 2",
+      "subtitle": "Hva vil du gjerne gjøre en stund, eller til og med alltid?",
+      "job_title_label": "Navn på jobben",
+      "job_title_placeholder": "Skriv inn navnet på drømmejobben din her...",
+      "question1": "Hva gjør du i en arbeidsuke? Svar med verb og aktiviteter.",
+      "question2": "Hvor gjør du jobben din? Beskriv miljøet, bygningen, rommet....",
+      "question3": "Jobber du mer sammen eller mer alene? Hvilke mennesker har du kontakt med?",
+      "question4": "Hva har du gjort på en dag da du kommer hjem plystende?",
+      "question5": "Hva er målet ditt med denne jobben?",
+      "question6": "Hvilke deler av jobben din er hyggeligst?",
+      "question7": "Hva er viktig for deg i denne jobben?",
+      "question8": "Hva handler jobben din hovedsakelig om? Hva må du vite mye om?",
+      "answer_placeholder": "Beskriv svaret ditt her...",
+      "previous_button": "Forrige drømmejobb",
+      "next_button": "Neste drømmejobb"
     },
     "step3": {
-      "title": "Tredje drømmeyrke",
-      "subtitle": "Beskriv ditt tredje drømmeyrke"
-    }
-  },
-  "search_profile": {
-    "intro": {
-      "title": "Jobbprofil",
-      "subtitle": "Lag din personlige jobbprofil",
-      "description": "Basert på din analyse vil vi nå lage en personlig jobbprofil som du kan bruke i jobbsøking.",
-      "start": "Start jobbprofil"
+      "title": "Drømmejobb 3",
+      "subtitle": "Hva vil du gjerne gjøre en stund, eller til og med alltid?",
+      "job_title_label": "Navn på jobben",
+      "job_title_placeholder": "Skriv inn navnet på drømmejobben din her...",
+      "question1": "Hva gjør du i en arbeidsuke? Svar med verb og aktiviteter.",
+      "question2": "Hvor gjør du jobben din? Beskriv miljøet, bygningen, rommet....",
+      "question3": "Jobber du mer sammen eller mer alene? Hvilke mennesker har du kontakt med?",
+      "question4": "Hva har du gjort på en dag da du kommer hjem plystende?",
+      "question5": "Hva er målet ditt med denne jobben?",
+      "question6": "Hvilke deler av jobben din er hyggeligst?",
+      "question7": "Hva er viktig for deg i denne jobben?",
+      "question8": "Hva handler jobben din hovedsakelig om? Hva må du vite mye om?",
+      "answer_placeholder": "Beskriv svaret ditt her...",
+      "previous_button": "Forrige drømmejobb",
+      "finish_button": "Avslutt",
+      "finishing": "Avslutter...",
+      "sending_data": "Sender data..."
     },
-    "questions": {
-      "function": "Hvilken funksjon søker du?",
-      "tasks": "Hvilke hovedoppgaver vil du ha?",
-      "sector": "Hvilken sektor interesserer deg?",
-      "organization": "Hvilken type organisasjon vil du jobbe for?",
-      "region": "Hvilken region foretrekker du?",
-      "conditions": "Hvilke arbeidsforhold er viktige for deg?"
+    "voltooi": {
+      "title": "Gratulerer! 🎉",
+      "subtitle": "Du har fullført spørsmålene om drømmejobbene dine",
+      "what_happened_title": "Hva har skjedd?",
+      "what_happened_description": "Det er nå satt sammen nøkkelord for å bestemme hva du synes er viktig på jobben. For å generere din personlige karriererapport trenger vi litt mer informasjon fra deg.",
+      "next_step_title": "Neste steg: personprofil",
+      "next_step_description": "Fyll ut personprofilen din med litt ekstra informasjon om din bakgrunn og preferanser, og angi hva du synes er viktig på jobben.",
+      "priorities_title": "Bestem prioriteringer",
+      "priorities_description": "Hva synes du er viktig på jobben?",
+      "extra_info_title": "Ekstra informasjon",
+      "extra_info_description": "Din bakgrunn og preferanser",
+      "report_title": "Generer rapport",
+      "report_description": "Din personlige karriererapport",
+      "create_report_button": "Fullfør personprofil",
+      "to_dashboard_button": "Til dashboard",
+      "tip_text": "Tips: Å fylle ut personprofilen din tar omtrent 5-10 minutter."
     }
   },
-  "navigation": {
-    "previous": "Forrige",
-    "next": "Neste",
-    "complete": "Fullfør",
-    "save": "Lagre",
-    "continue": "Fortsett"
+  "profiel_voltooien": {
+    "intro": {
+      "title": "Fullfør profil",
+      "last_step_title": "Siste steg",
+      "description": "Vi har nesten all informasjonen vi trenger for dine personlige karriereråd. For det siste steget spør vi deg noen korte spørsmål om din bakgrunn og preferanser.",
+      "description_details": "Dette hjelper oss å gjøre rådene dine enda mer spesifikke og praktiske.",
+      "start_button": "Fullfør profil"
+    },
+    "extra_informatie": {
+      "title": "Ekstra informasjon",
+      "subtitle": "Siste spørsmål om din bakgrunn",
+      "question1": "Hva er ditt høyeste utdanningsnivå?",
+      "question2": "Hvilken yrkesutdanning har du fullført?",
+      "question3": "I hvilken sektor(er) vil du gjerne jobbe?",
+      "question4": "Er det fysiske begrensninger vi bør ta hensyn til?",
+      "placeholder1": "For eksempel: Høyskole, Universitet, Fagskole nivå 4, etc.",
+      "placeholder2": "For eksempel: Bedriftsøkonomi, Psykologi, Teknisk informatikk, etc.",
+      "placeholder3": "For eksempel: IT, Helse, Utdanning, Markedsføring, etc.",
+      "placeholder4": "For eksempel: Ikke tungt fysisk arbeid, begrense skjermarbeid, etc. (valgfritt)",
+      "back_button": "Tilbake til profil intro",
+      "next_button": "Til prioriteringer"
+    },
+    "prioriteiten": {
+      "activiteiten": {
+        "title": "Prioriteringer - aktiviteter",
+        "subtitle": "Velg minst 5 aktiviteter du liker å gjøre",
+        "selected_count": "Valgt: {count} av minst 5",
+        "missing_keywords": "Det er ikke generert personlige aktiviteter ennå. Fyll ut entusiasme-skanningen og drømmejobbene først.",
+        "extra_text_label": "Savner du aktiviteter? Legg dem til her (valgfritt)",
+        "extra_text_placeholder": "For eksempel: Fotografering, Programmering, Hagearbeid...",
+        "next_button": "Neste: Arbeidsforhold"
+      },
+      "werkomstandigheden": {
+        "title": "Prioriteringer - arbeidsforhold",
+        "subtitle": "Velg minst 5 arbeidsforhold som er viktige for deg",
+        "selected_count": "Valgt: {count} av minst 5",
+        "missing_keywords": "Det er ikke generert personlige arbeidsforhold ennå. Fyll ut entusiasme-skanningen og drømmejobbene først.",
+        "extra_text_label": "Savner du arbeidsforhold? Legg dem til her (valgfritt)",
+        "extra_text_placeholder": "For eksempel: Hund med på kontoret, God kaffe, Ergonomisk arbeidsplass...",
+        "previous_button": "Forrige: Aktiviteter",
+        "next_button": "Neste: Interesser"
+      },
+      "interesses": {
+        "title": "Prioriteringer - interesser",
+        "subtitle": "Velg minst 5 interesser som appellerer til deg",
+        "selected_count": "Valgt: {count} av minst 5",
+        "missing_keywords": "Det er ikke generert personlige interesser ennå. Fyll ut entusiasme-skanningen og drømmejobbene først.",
+        "extra_text_label": "Savner du interesser? Legg dem til her (valgfritt)",
+        "extra_text_placeholder": "For eksempel: Bærekraft, Teknologi, Kunst...",
+        "previous_button": "Forrige: Arbeidsforhold",
+        "finish_button": "Generer karriererapport"
+      }
+    }
   },
-  "validation": {
-    "required": "Dette feltet er påkrevd",
-    "min_length": "Minimum lengde er {min} tegn",
-    "max_length": "Maksimum lengde er {max} tegn"
+  "zoekprofiel": {
+    "intro": {
+      "title": "Lage søkeprofil",
+      "what_is_title": "Hva er en søkeprofil?",
+      "description": "En søkeprofil er ditt personlige dokument som beskriver hvilken type jobb du leter etter. Det hjelper deg å søke målrettet og viser arbeidsgivere hva du har å tilby.",
+      "description_details": "Basert på svarene dine lager vi en profesjonell søkeprofil som du kan bruke i jobbsøknader eller dele med rekrutterere.",
+      "duration": "Utfyllingen tar omtrent 10 minutter.",
+      "already_created_title": "Søkeprofil allerede opprettet",
+      "already_created_description": "Du har allerede opprettet en søkeprofil. Du kan laste den ned eller se den på nedlastingssiden.",
+      "start_button": "Start søkeprofil",
+      "download_button": "Til søkeprofil-nedlasting",
+      "back_button": "Tilbake til dashboard"
+    },
+    "antwoorden": {
+      "title": "Søkeprofil-spørsmål",
+      "subtitle": "Besvar spørsmålene for å lage søkeprofilen din",
+      "question1": "Jeg søker en stilling som...",
+      "question2": "Mine kjerneoppgaver er...",
+      "question3": "Jeg vil gjerne jobbe ved...",
+      "question4": "I sektoren...",
+      "question5": "I regionen...",
+      "question6": "Arbeidsforhold som er viktige for meg...",
+      "placeholder": "Beskriv svaret ditt her...",
+      "back_button": "Tilbake til intro",
+      "generate_button": "Generer søkeprofil"
+    },
+    "download": {
+      "title": "Last ned søkeprofil",
+      "description": "Søkeprofilen din er klar! Du kan nå laste den ned og bruke den i jobbsøknadene dine.",
+      "download_button": "Last ned søkeprofil PDF",
+      "back_button": "Tilbake til dashboard",
+      "regenerate_button": "Lag ny søkeprofil"
+    }
+  },
+  "rapport": {
+    "download": {
+      "title": "Last ned karriererapport",
+      "description": "Din personlige karriererapport er klar! Denne rapporten inneholder alle innsikter og anbefalinger basert på svarene dine.",
+      "download_button": "Last ned karriererapport PDF",
+      "research_plan_button": "Se forskningsplan",
+      "back_button": "Tilbake til dashboard"
+    }
+  },
+  "onderzoeksplan": {
+    "title": "Forskningsplan",
+    "subtitle": "Dette er din steg-for-steg plan for å bestemme hvordan din neste stilling skal se ut.",
+    "tip": "💡 Denne forskningsplanen står også nederst i karriererapporten din, så der kan du alltid finne den igjen.",
+    "steps_title": "Dette er din steg-for-steg plan:",
+    "step1": "Spør AI (eller Google) om en detaljert stillingsbeskrivelse av funksjonene fra karriererapporten din. Spør AI også om lignende funksjoner. Hvilket arbeid ligner? Hva appellerer til deg i svarene du får?",
+    "step2": "Se om du kan finne stillingsannonser som gir et bilde av innholdet i denne funksjonen og av organisasjonene som har disse funksjonene.",
+    "step3": "Søk på LinkedIn etter personer som gjør denne jobben. Hva er deres bakgrunn?",
+    "step4": "Finnes det en yrkesforening? Hva leser du på nettsiden om utviklinger i sektoren og yrket?",
+    "step5": "Har yrket et fagblad? Hvis ja, be om ett eller flere og les dem. Hva legger du merke til? Blir du entusiastisk av temaene?",
+    "step6": "Søk organisasjoner der personer med dette yrket jobber.",
+    "step7": "Hvilken utdanning trenger du eventuelt for denne jobben? Spør AI eller Google.",
+    "step8": "Skriv ned alle spørsmål som dukker opp under forskningen. Disse kan du stille til personer som allerede jobber i denne retningen.",
+    "step9": "Lag en liste over personer du vil snakke med om denne jobben og ta kontakt med dem. Du finner disse personene via LinkedIn og/eller gjennom ditt personlige nettverk.",
+    "step10": "Samle nok informasjon til å ta en beslutning. Ta deg tid og snakk med andre om det.",
+    "after_research_title": "Etter forskningen din:",
+    "after_research_description": "Når du har funnet ut nok, velg funksjonen som passer deg best og fyll ut søkeprofilen på nettsiden. Vinster vil konvertere teksten din til noen setninger du kan bruke for å la andre vite hva du leter etter.",
+    "after_research_action": "Du kan nå søke målrettet! Søk stillingsannonser, la nettverket ditt vite hva du vil og del på LinkedIn hvilken funksjon du søker.",
+    "final_message": "Vi ønsker deg mye arbeidsglede i din neste stilling!",
+    "time_notice_title": "⏰ Ta deg tid til denne forskningen",
+    "time_notice_description": "Denne forskningen er avgjørende for å finne din ideelle stilling. Ta deg tid til å utføre hvert steg nøye.",
+    "time_notice_details": "Jo bedre du gjør denne forskningen, jo bedre kan du senere fylle ut søkeprofilen din og jo mer målrettet kan du søke.",
+    "back_button": "Tilbake til dashboard"
   }
 }

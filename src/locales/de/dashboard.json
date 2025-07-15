@@ -1,49 +1,59 @@
 {
-  "welcome": {
-    "title": "Willkommen zurück, {name}!",
-    "subtitle": "Setzen Sie Ihre Karrierereise fort"
-  },
-  "progress": {
-    "title": "Ihr Fortschritt",
-    "completed": "Abgeschlossen",
-    "in_progress": "In Bearbeitung",
-    "not_started": "Nicht begonnen",
-    "steps": {
-      "enthusiasm_scan": "Begeisterungsscan",
-      "dream_jobs": "Traumjobs",
-      "profile_completion": "Profil vervollständigen",
-      "career_report": "Karrierebericht"
-    }
-  },
-  "next_steps": {
-    "title": "Nächste Schritte",
-    "continue_button": "Fortfahren",
-    "start_button": "Beginnen"
-  },
-  "important_info": {
-    "title": "Wichtige Informationen",
-    "payment_required": {
-      "title": "Zahlung erforderlich",
-      "description": "Um Ihren personalisierten Karrierebericht zu erhalten, ist eine einmalige Zahlung erforderlich.",
-      "button": "Jetzt bezahlen"
+  "payment": {
+    "welcome": "Willkommen bei Vinster, {name}!",
+    "subtitle": "Sie sind nur noch einen Schritt davon entfernt, Ihre passende Karriere zu entdecken!",
+    "start_career": "Starten Sie Ihre Karriereentwicklung",
+    "description": "Mit Vinster werden Sie entdecken, was Ihr bester nächster Karriereschritt ist. Die Methode hinter Vinster basiert auf jahrelanger Erfahrung in der Karriereforschung und hat bereits Tausenden von Menschen geholfen.",
+    "get_started": "Starten Sie noch heute mit dem Begeisterungsscan und entdecken Sie, was Sie wirklich bei der Arbeit antreibt. Das komplette Programm dauert etwa 45 Minuten und gibt Ihnen sofortigen Einblick in Ihr persönliches Karriereprofil.",
+    "features": {
+      "full_scan": "Vollständiger Begeisterungsscan",
+      "full_scan_desc": "Entdecken Sie, wann Sie in Ihrem Element sind",
+      "dream_jobs": "Traumjobanalyse",
+      "dream_jobs_desc": "Erkunden Sie verschiedene Möglichkeiten, die zu Ihnen passen",
+      "personal_report": "Persönlicher Bericht",
+      "personal_report_desc": "Mit drei Funktionen, die zu Ihnen passen",
+      "search_profile": "Suchprofil",
+      "search_profile_desc": "Ihre ideale Funktion in einem kraftvollen Satz zusammengefasst"
     },
-    "report_ready": {
-      "title": "Ihr Bericht ist bereit!",
-      "description": "Ihr personalisierter Karrierebericht wurde generiert und steht zum Download bereit.",
-      "button": "Bericht herunterladen"
+    "pricing": {
+      "title": "Vollzugriff",
+      "subtitle": "Einmalige Zahlung für Ihren persönlichen Karrierebericht",
+      "price": "€29",
+      "price_desc": "Einmalig, kein Abonnement",
+      "feature1": "Vollständiger Begeisterungsscan",
+      "feature2": "Traumjobanalyse",
+      "feature3": "Persönlicher Bericht (PDF)",
+      "feature4": "Suchprofil-Generator",
+      "start_button": "Jetzt für €29 starten",
+      "processing": "Verarbeitung...",
+      "payment_methods": "Sicher bezahlen mit iDEAL, Kreditkarte oder PayPal"
+    },
+    "data_safety": {
+      "title": "100% Sicher & DSGVO-konform",
+      "description": "Ihre Daten sind vollständig sicher und DSGVO-konform. Wir verwenden KI-Modelle, um Ihre persönlichen Einblicke zu generieren, aber Ihre Daten werden niemals von diesen Modellen gespeichert. Alles bleibt privat und vertraulich bei Ihnen."
     }
   },
-  "what_is_vinster": {
-    "title": "Was ist Vinster?",
-    "description": "Vinster ist ein wissenschaftlich fundiertes Tool, das Ihnen hilft, Klarheit über Ihre Karrierewünsche zu bekommen. Durch einen strukturierten Prozess entdecken Sie Ihre Motivationen und erhalten konkrete nächste Schritte für Ihre berufliche Entwicklung."
-  },
-  "what_do_you_get": {
-    "title": "Was erhalten Sie?",
-    "items": {
-      "personal_report": "Einen personalisierten Karrierebericht",
-      "insights": "Einblicke in Ihre Motivationen und Interessen",
-      "action_plan": "Einen konkreten Aktionsplan",
-      "job_search_profile": "Ein Jobsuchprofil für Ihre Bewerbungen"
-    }
+  "dashboard": {
+    "welcome": "Willkommen {name}!",
+    "description": "Dies ist Ihr persönliches Dashboard. Hier sehen Sie den Fortschritt Ihrer Karriereforschung und können dort weitermachen, wo Sie aufgehört haben.",
+    "intro_paragraph1": "Hier startet Ihre Karrierereise! Wir beginnen mit dem Begeisterungsscan, dem ersten Schritt, um zu entdecken, was Sie gerne tun und wie Sie gerne arbeiten. In diesem Scan suchen wir nach Momenten, in denen Sie in Ihrem Element sind.",
+    "intro_paragraph2": "Indem wir Fragen zu Ihrer Kindheit, Schulzeit und Arbeitserfahrungen stellen, kartieren wir Ihr persönliches Muster von Vorlieben und Interessen.",
+    "intro_paragraph3": "Ihre Begeisterung ist ein wichtiger Indikator für das, was Sie wirklich mögen. Wenn Sie etwas tun, das Sie begeistert, entstehen Energie und Zufriedenheit. Danach suchen wir.",
+    "continue_button": "Fortfahren",
+    "important_info": {
+      "title": "Wichtig zu wissen",
+      "point1": "• Es gibt keine richtigen oder falschen Antworten - seien Sie ehrlich darüber, was Sie wirklich mögen",
+      "point2": "• Denken Sie an konkrete Situationen und Erfahrungen aus Ihrem Leben",
+      "point3": "• Sie können sich so viel Zeit nehmen, wie Sie möchten - es gibt keinen Zeitdruck bei diesem Prozess",
+      "point4": "• Es ist sogar gut, die Antworten einen Tag setzen zu lassen, bevor Sie weitermachen",
+      "point5": "• Sie können Ihre Antworten während des Prozesses jederzeit anpassen",
+      "point6": "• Ihr Fortschritt wird automatisch gespeichert",
+      "point7": "• Alle Informationen werden vertraulich behandelt"
+    },
+    "progress_title": "Ihr Fortschritt",
+    "logout": "Abmelden",
+    "logout_success": "Erfolgreich abgemeldet",
+    "logout_success_desc": "Auf Wiedersehen!",
+    "logout_error": "Fehler beim Abmelden"
   }
 }
