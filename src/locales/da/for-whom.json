@@ -1,0 +1,57 @@
+{
+  "for_whom": {
+    "page_title": "Hvem er det for?",
+    "back_to_home": "Tilbage til forsiden",
+    "start_button": "Start nu",
+    "hero": {
+      "title": "Hvem er Vinster for?",
+      "subtitle": "Vinster hjælper mennesker i alle livsfaser med at finde deres ideelle karrierevej"
+    },
+    "target_groups": [
+      {
+        "title": "Studerende og nye kandidater",
+        "description": "Er du ved at afslutte din uddannelse og usikker på hvilken retning du skal tage? Vinster hjælper dig med at identificere karriereveje der matcher dine interesser og ambitioner."
+      },
+      {
+        "title": "Karriereskiftere",
+        "description": "Føler du dig fastlåst i dit nuværende job eller ønsker du en forandring? Vinster guider dig gennem processen med at opdage nye muligheder der passer bedre til dig."
+      },
+      {
+        "title": "Jobsøgende",
+        "description": "Leder du efter et nyt job men er usikker på hvad du egentlig søger? Vinster hjælper dig med at definere dine ideelle jobkriterier og finde passende muligheder."
+      },
+      {
+        "title": "Professionelle i tvivl",
+        "description": "Har du et job men føler ikke at det giver dig mening eller udfordringer? Vinster kan hjælpe dig med at forstå hvad der mangler og hvordan du kan finde det."
+      },
+      {
+        "title": "Tilbagevender til arbejdsmarkedet",
+        "description": "Har du været væk fra arbejdsmarkedet og ved ikke hvor du skal starte? Vinster hjælper dig med at identificere dine styrker og finde relevante muligheder."
+      }
+    ],
+    "scenarios": {
+      "title": "Genkender du dig selv?",
+      "list": [
+        "\"Jeg ved ikke hvad jeg vil arbejde med\"",
+        "\"Mit job giver mig ikke mening længere\"",
+        "\"Jeg er træt af at søge jobs jeg ikke rigtig ønsker\"",
+        "\"Jeg vil gerne skifte karriere men ved ikke hvad til\"",
+        "\"Jeg har mange interesser men ved ikke hvordan jeg kan bruge dem professionelt\"",
+        "\"Jeg føler mig fastlåst i min nuværende situation\""
+      ]
+    },
+    "not_for": {
+      "title": "Vinster er måske ikke for dig hvis:",
+      "list": [
+        "Du allerede er helt sikker på din karrierevej",
+        "Du leder efter hurtige svar uden at investere tid i refleksion",
+        "Du ikke er klar til at udforske nye muligheder",
+        "Du forventer garantier for jobsucces"
+      ]
+    },
+    "cta": {
+      "title": "Lyder det som dig?",
+      "description": "Uanset hvor du er i dit arbejdsliv, kan Vinster hjælpe dig med at få klarhed over dine næste skridt."
+    }
+  }
+}

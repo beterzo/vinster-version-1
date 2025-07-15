@@ -1,0 +1,32 @@
+{
+  "contact": {
+    "page_title": "Kontakt os",
+    "back_to_home": "Tilbage til forsiden",
+    "title": "Kontakt os",
+    "subtitle": "Har du spørgsmål eller brug for hjælp? Vi er her for at hjælpe!",
+    "form": {
+      "name": "Navn",
+      "name_placeholder": "Dit fulde navn",
+      "email": "E-mail",
+      "email_placeholder": "Din e-mail adresse",
+      "subject": "Emne",
+      "subject_placeholder": "Hvad drejer det sig om?",
+      "message": "Besked",
+      "message_placeholder": "Skriv din besked her...",
+      "send_button": "Send besked",
+      "sending": "Sender...",
+      "success": "Tak for din besked! Vi vender tilbage til dig snarest.",
+      "error": "Der opstod en fejl ved afsendelse af din besked. Prøv igen."
+    },
+    "info": {
+      "title": "Andre måder at kontakte os på",
+      "email": "E-mail os direkte",
+      "response_time": "Vi svarer typisk inden for 24 timer"
+    },
+    "faq_link": {
+      "title": "Søger du svar?",
+      "description": "Tjek vores FAQ-side for hurtige svar på almindelige spørgsmål.",
+      "button": "Se FAQ"
+    }
+  }
+}

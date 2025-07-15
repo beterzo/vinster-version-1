@@ -1,0 +1,56 @@
+{
+  "faq": {
+    "page_title": "Ofte stillede spørgsmål",
+    "back_to_home": "Tilbage til forsiden",
+    "start_button": "Start nu",
+    "title": "Ofte stillede spørgsmål",
+    "subtitle": "Find svar på de mest almindelige spørgsmål om Vinster",
+    "questions": [
+      {
+        "question": "Hvad er Vinster præcist?",
+        "answer": "Vinster er et innovativt platform der kombinerer personlig refleksion med AI-analyse for at hjælpe dig med at opdage dit ideelle job. I modsætning til traditionelle karrieretests fokuserer vi på dybdegående selvudorskning gennem målrettede spørgsmål."
+      },
+      {
+        "question": "Hvor lang tid tager det at gennemføre processen?",
+        "answer": "Den komplette Vinster-rejse tager typisk 45-90 minutter at gennemføre, afhængigt af hvor grundigt du vil gå ind i spørgsmålene. Du kan tage pauser og vende tilbage når som helst."
+      },
+      {
+        "question": "Hvordan adskiller Vinster sig fra andre karrieretests?",
+        "answer": "Vinster er ikke en test med rigtige eller forkerte svar. I stedet guider vi dig gennem en refleksionsproces der hjælper dig med at opdage dine egne indsigter. Vores AI analyserer derefter dine personlige svar for at give skræddersyede anbefalinger."
+      },
+      {
+        "question": "Hvad hvis jeg ikke er tilfreds med mine resultater?",
+        "answer": "Dine resultater er baseret på dine egne svar og refleksioner, så de afspejler din nuværende situation og tanker. Hvis dine prioriteter ændrer sig, kan du altid vende tilbage og opdatere dine svar for at få nye anbefalinger."
+      },
+      {
+        "question": "Er mine data sikre?",
+        "answer": "Ja, vi tager datasikkerhed meget seriøst. Alle dine svar og personlige oplysninger er krypteret og bliver kun brugt til at generere dine personlige anbefalinger. Vi sælger eller deler aldrig dine data med tredjeparter."
+      },
+      {
+        "question": "Kan jeg bruge Vinster hvis jeg allerede har et job?",
+        "answer": "Absolut! Mange af vores brugere har allerede jobs men ønsker klarhed over deres næste karriereskridt, vil udforske nye muligheder, eller blot vil forstå bedre hvad der giver dem mening i arbejdet."
+      },
+      {
+        "question": "Hvad hvis jeg har meget brede interesser?",
+        "answer": "Det er helt normalt at have mange forskellige interesser! Vinster hjælper dig med at identificere fælles temaer og mønstre på tværs af dine interesser og vise hvordan de kan kombineres i konkrete karriereveje."
+      },
+      {
+        "question": "Får jeg konkrete jobforslag?",
+        "answer": "Ja, baseret på din analyse får du specifikke jobtitler og karriereveje der matcher dine unikke egenskaber. Du får også en søgeprofil der kan hjælpe dig i din jobsøgning."
+      },
+      {
+        "question": "Hvad koster det?",
+        "answer": "Du kan starte processen gratis, og du betaler kun hvis du ønsker adgang til din komplette karriererapport og personlige anbefalinger. Prisen er €19,99 for livslang adgang til dine resultater."
+      },
+      {
+        "question": "Kan jeg dele mine resultater med andre?",
+        "answer": "Du får en downloadbar rapport som du kan dele med karriererådgivere, venner eller familie hvis du ønsker feedback på dine resultater."
+      }
+    ],
+    "still_questions": {
+      "title": "Har du stadig spørgsmål?",
+      "description": "Kontakt os gerne hvis du ikke kan finde svaret på dit spørgsmål.",
+      "contact_button": "Kontakt os"
+    }
+  }
+}

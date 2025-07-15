@@ -1,0 +1,51 @@
+{
+  "about": {
+    "page_title": "Om Vinster",
+    "back_to_home": "Tilbage til forsiden",
+    "start_button": "Start nu",
+    "hero": {
+      "title": "Om Vinster",
+      "subtitle": "Opdage dit ideelle job gennem personlig refleksion og videnskab"
+    },
+    "mission": {
+      "title": "Vores mission",
+      "description": "Hos Vinster tror vi på, at alle fortjener at finde meningsfuldt arbejde der matcher deres unikke evner og passioner. Vores platform kombinerer personlig refleksion med AI-drevet analyse for at hjælpe dig med at opdage din ideelle karrierevej."
+    },
+    "how_it_works": {
+      "title": "Sådan fungerer det",
+      "description": "Vores tilgang er baseret på anerkendte karriereudviklingsmetoder og psykologi:",
+      "steps": [
+        {
+          "title": "Selvrefleksion",
+          "description": "Gennem målrettede spørgsmål hjælper vi dig med at udforske dine interesser, værdier og motivationer"
+        },
+        {
+          "title": "Mønstergenkendelse",
+          "description": "Vores AI analyserer dine svar og identificerer mønstre der peger mod passende karriereveje"
+        },
+        {
+          "title": "Personlige anbefalinger",
+          "description": "Baseret på analysen giver vi dig konkrete jobforslag og en handlingsplan"
+        }
+      ]
+    },
+    "benefits": {
+      "title": "Fordele ved Vinster",
+      "list": [
+        "100% personlig tilgang baseret på dine unikke egenskaber",
+        "Videnskabeligt funderet metode",
+        "Konkrete, handlingsorienterede resultater",
+        "Ingen generiske karrieretests - kun personlig indsigt",
+        "Livslang adgang til dine resultater"
+      ]
+    },
+    "team": {
+      "title": "Bag Vinster",
+      "description": "Vinster er skabt af et team af karriererådgivere, psykologer og teknologieksperter der alle deler passionen for at hjælpe mennesker med at finde deres vej i arbejdslivet."
+    },
+    "cta": {
+      "title": "Klar til at opdage dit ideelle job?",
+      "description": "Start din personlige karriererejse i dag og opdag hvilke muligheder der venter på dig."
+    }
+  }
+}

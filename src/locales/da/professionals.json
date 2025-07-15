@@ -1,0 +1,72 @@
+{
+  "professionals": {
+    "page_title": "For professionelle",
+    "back_to_home": "Tilbage til forsiden",
+    "hero": {
+      "title": "Vinster for professionelle",
+      "subtitle": "Hjælp dine klienter med at finde deres ideelle karrierevej"
+    },
+    "benefits": {
+      "title": "Fordele for professionelle",
+      "subtitle": "Hvorfor karriererådgivere vælger Vinster",
+      "list": [
+        {
+          "title": "Struktureret tilgang",
+          "description": "Vinster giver en systematisk metode til karriereudforskning som supplerer din rådgivning perfekt"
+        },
+        {
+          "title": "Dybdegående indsigter",
+          "description": "Få detaljerede rapporter om dine klienters motivationer, værdier og ideelle arbejdsforhold"
+        },
+        {
+          "title": "Tidsbesparelse",
+          "description": "Lad klienter forberede sig hjemmefra så I kan fokusere på handlingsplaner og opfølgning"
+        },
+        {
+          "title": "Konkrete resultater",
+          "description": "Få specifikke jobforslag og karriereveje at arbejde videre med i jeres samtaler"
+        }
+      ]
+    },
+    "how_to_use": {
+      "title": "Sådan bruger du Vinster",
+      "steps": [
+        {
+          "title": "Send adgangskode",
+          "description": "Giv dine klienter en adgangskode så de kan få gratis adgang til deres rapport"
+        },
+        {
+          "title": "Klient udfører analyse",
+          "description": "Klienten gennemfører Vinster-processen hjemmefra i sit eget tempo"
+        },
+        {
+          "title": "Gennemgå resultater",
+          "description": "Brug rapporten som udgangspunkt for jeres rådgivningssamtaler"
+        },
+        {
+          "title": "Handlingsplan",
+          "description": "Skab konkrete næste skridt baseret på indsigterne fra Vinster"
+        }
+      ]
+    },
+    "access_codes": {
+      "title": "Administrer adgangskoder",
+      "subtitle": "Giv dine klienter gratis adgang til Vinster",
+      "generate_button": "Generér ny adgangskode",
+      "code_list_title": "Dine adgangskoder",
+      "status": {
+        "active": "Aktiv",
+        "used": "Brugt",
+        "expired": "Udløbet"
+      },
+      "created": "Oprettet",
+      "used_by": "Brugt af",
+      "expires": "Udløber"
+    },
+    "contact": {
+      "title": "Interesseret i at bruge Vinster professionelt?",
+      "description": "Kontakt os for at lære mere om hvordan Vinster kan berige din rådgivningspraksis.",
+      "button": "Kontakt os"
+    }
+  }
+}

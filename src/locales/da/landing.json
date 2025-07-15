@@ -1,0 +1,110 @@
+{
+  "hero": {
+    "title": "Opdag dit ideelle job med",
+    "vinster": "Vinster",
+    "subtitle": "En personlig rejse til professionel klarhed og meningsfuldt arbejde",
+    "cta_button": "Start din rejse",
+    "stats": {
+      "satisfied_users": "Tilfredse brugere",
+      "career_paths": "Karriereveje",
+      "success_rate": "Succesrate"
+    }
+  },
+  "what_is_vinster": {
+    "title": "Hvad er Vinster?",
+    "subtitle": "Din personlige karriererådgiver",
+    "description": "Vinster er et innovativt platform der hjælper dig med at opdage dit ideelle job gennem personlig refleksion og AI-drevet indsigt.",
+    "features": [
+      {
+        "title": "Personlig tilgang",
+        "description": "Hver rejse er unik og tilpasset dine personlige ønsker og drømme"
+      },
+      {
+        "title": "Videnskabeligt baseret",
+        "description": "Baseret på anerkendte karriereudviklingsmetoder og psykologi"
+      },
+      {
+        "title": "Praktiske resultater",
+        "description": "Få konkrete jobtitler og karriereveje der passer til dig"
+      }
+    ]
+  },
+  "what_you_get": {
+    "title": "Hvad får du?",
+    "subtitle": "En komplet karriereplan",
+    "features": [
+      {
+        "title": "Personlig karriererapport",
+        "description": "En detaljeret analyse af dine styrker, interesser og ideelle arbejdsmiljø"
+      },
+      {
+        "title": "Konkrete jobtitler",
+        "description": "Specifikke jobroller der matcher dine unikke egenskaber"
+      },
+      {
+        "title": "Søgeprofil",
+        "description": "En komplet profil til at hjælpe dig med at søge det rigtige job"
+      }
+    ]
+  },
+  "process": {
+    "title": "Sådan fungerer det",
+    "subtitle": "En simpel 3-trins proces",
+    "steps": [
+      {
+        "title": "Reflekter",
+        "description": "Besvar spørgsmål om dine interesser, værdier og drømme"
+      },
+      {
+        "title": "Analyser",
+        "description": "Vores AI analyserer dine svar og identificerer mønstre"
+      },
+      {
+        "title": "Opdag",
+        "description": "Modtag din personlige karriererapport og handlingsplan"
+      }
+    ]
+  },
+  "testimonials": {
+    "title": "Hvad siger vores brugere?",
+    "subtitle": "Ægte historier fra mennesker der fandt deres vej",
+    "testimonials": [
+      {
+        "quote": "Vinster hjalp mig med at forstå hvad jeg virkelig ønsker i mit arbejdsliv. Nu har jeg endelig et job jeg elsker!",
+        "author": "Sarah K.",
+        "role": "Marketing specialist"
+      },
+      {
+        "quote": "Efter flere år med tvivl om min karriere, gav Vinster mig endelig retningen jeg søgte.",
+        "author": "Michael B.",
+        "role": "Projektleder"
+      },
+      {
+        "quote": "De job-forslag jeg fik var overraskende præcise. Det føltes som om nogen virkelig havde lyttet til mig.",
+        "author": "Emma L.",
+        "role": "UX Designer"
+      }
+    ]
+  },
+  "cta": {
+    "title": "Klar til at opdage dit ideelle job?",
+    "subtitle": "Start din personlige karriererejse i dag",
+    "button": "Kom i gang gratis",
+    "features": [
+      "100% personlig tilgang",
+      "Videnskabeligt baseret",
+      "Øjeblikkelige resultater"
+    ]
+  },
+  "navigation": {
+    "home": "Hjem",
+    "about": "Om Vinster",
+    "for_whom": "Hvem er det for?",
+    "faq": "FAQ",
+    "experiences": "Erfaringer",
+    "contact": "Kontakt",
+    "professionals": "For professionelle",
+    "login": "Log ind",
+    "signup": "Tilmeld dig"
+  }
+}
