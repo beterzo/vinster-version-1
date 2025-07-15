@@ -15,7 +15,7 @@ const EmailConfirmedPage = () => {
   useEffect(() => {
     // Check for language parameter in URL and set it
     const langParam = searchParams.get('lang');
-    if (langParam && (langParam === 'nl' || langParam === 'en')) {
+    if (langParam && (langParam === 'nl' || langParam === 'en' || langParam === 'de' || langParam === 'no')) {
       setLanguage(langParam);
     }
   }, [searchParams, setLanguage]);
@@ -84,7 +84,7 @@ const EmailConfirmedPage = () => {
             </Button>
             
             <p className="text-center text-sm text-gray-500">
-              Op weg naar een betere loopbaan
+              {t('common.tagline')}
             </p>
           </div>
         </div>
