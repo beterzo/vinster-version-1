@@ -1,0 +1,52 @@
+{
+  "hero": {
+    "title": "Tilgangskoder for fagfolk",
+    "subtitle": "Bestill tilgangskoder for dine klienter og utvid din rådgivningstjeneste"
+  },
+  "page_description": "Som karriererådgiver, coach eller HR-profesjonell kan du bruke Vinster som et kraftig verktøy for å hjelpe dine klienter med dype karriereinnsikter.",
+  "benefits": {
+    "title": "Fordeler for fagfolk",
+    "benefit1": {
+      "title": "Profesjonelt verktøy",
+      "description": "Bruk Vinster som en del av din profesjonelle tjeneste"
+    },
+    "benefit2": {
+      "title": "Detaljerte rapporter",
+      "description": "Få omfattende innsikter om dine klienters karrieremuligheter"
+    },
+    "benefit3": {
+      "title": "Effektiv prosess",
+      "description": "Spar tid og gi bedre resultater for dine klienter"
+    }
+  },
+  "order_section": {
+    "title": "Bestill tilgangskoder",
+    "description": "Bestill tilgangskoder for dine klienter og start med å gi dem bedre karriereveiledning.",
+    "form": {
+      "name": "Navn",
+      "email": "E-post",
+      "organization": "Organisasjon",
+      "quantity": "Antall koder",
+      "message": "Melding",
+      "submit": "Send bestilling"
+    }
+  },
+  "what_you_get": {
+    "title": "Hva får du?",
+    "item1": "Tilgangskoder for dine klienter",
+    "item2": "Detaljerte karriererapporter",
+    "item3": "Profesjonell støtte",
+    "item4": "Fleksible pakker"
+  },
+  "how_it_works": {
+    "title": "Hvordan fungerer det?",
+    "step1": "Bestill tilgangskoder",
+    "step2": "Gi kodene til dine klienter",
+    "step3": "Klientene fullfører karriereanalysen",
+    "step4": "Bruk rapportene i din veiledning"
+  },
+  "toasts": {
+    "success": "Takk for din bestilling! Vi kontakter deg snart.",
+    "error": "Noe gikk galt. Prøv igjen senere."
+  }
+}

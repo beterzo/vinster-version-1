@@ -1,0 +1,32 @@
+{
+  "hero": {
+    "title": "Vanlige spørsmål",
+    "subtitle": "Finn svar på de mest stilte spørsmålene om Vinster"
+  },
+  "faq_items": [
+    {
+      "question": "Hva er Vinster?",
+      "answer": "Vinster er en omfattende karriereanalysetjeneste som hjelper deg med å oppdage din ideelle karriere gjennom vitenskapelige metoder og personlig innsikt."
+    },
+    {
+      "question": "Hvor lang tid tar det å fullføre analysen?",
+      "answer": "Den komplette analysen tar vanligvis 30-45 minutter å fullføre. Du kan gjøre det i ditt eget tempo og ta pauser når du trenger det."
+    },
+    {
+      "question": "Hva får jeg i rapporten?",
+      "answer": "Du får en detaljert rapport som inkluderer dine styrker, interesser, drømmeyrker og en personlig handlingsplan for din karriereutvikling."
+    },
+    {
+      "question": "Er mine data trygge?",
+      "answer": "Ja, vi tar datasikkerhet svært alvorlig. All din informasjon er kryptert og behandles i henhold til GDPR-forskriftene."
+    },
+    {
+      "question": "Kan jeg bruke Vinster flere ganger?",
+      "answer": "Ja, du kan oppdatere din analyse når som helst når dine interesser eller situasjon endrer seg."
+    },
+    {
+      "question": "Hvor mye koster det?",
+      "answer": "Vinster koster 297 kr for en komplett karriereanalyse og rapport. Dette er en engangssum uten skjulte kostnader."
+    }
+  ]
+}

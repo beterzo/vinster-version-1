@@ -1,0 +1,17 @@
+{
+  "navigation": {
+    "home": "Hjem",
+    "dashboard": "Dashboard"
+  },
+  "mobile_menu": {
+    "menu": "Meny",
+    "home": "Hjem",
+    "about_vinster": "Om Vinster",
+    "for_whom": "For hvem er det?",
+    "faq": "Vanlige spørsmål",
+    "experiences": "Erfaringer",
+    "contact": "Kontakt",
+    "access_codes": "Tilgangskoder for fagfolk",
+    "login": "Logg inn"
+  }
+}

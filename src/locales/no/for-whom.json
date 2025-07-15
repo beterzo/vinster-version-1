@@ -1,0 +1,39 @@
+{
+  "hero": {
+    "title": "For hvem er Vinster?",
+    "subtitle": "Vinster er designet for alle som ønsker å ta kontroll over sin karriere"
+  },
+  "target_groups": {
+    "next_step": {
+      "title": "Vet du ikke hva det neste steget skal være?",
+      "description": "Føler du deg fast i din nåværende karriere? Vinster hjelper deg med å oppdage nye muligheter og finne en retning som virkelig passer for deg."
+    },
+    "stuck": {
+      "title": "Føler du deg fast i din nåværende jobb?",
+      "description": "Mange mennesker opplever at de har 'falt inn' i en jobb som ikke passer dem. Vinster hjelper deg med å identifisere hva som virkelig engasjerer deg og hvordan du kan bevege deg mot en mer tilfredsstillende karriere."
+    },
+    "coaches": {
+      "title": "Karriererådgivere og coacher",
+      "description": "Som profesjonell kan du bruke Vinster som et verktøy for å gi dine klienter dype innsikter i deres karrieremuligheter. Våre detaljerte rapporter gir deg et solid grunnlag for veiledning."
+    },
+    "parents": {
+      "title": "Foreldre som vil støtte sine barn",
+      "description": "Hjelp din tenåring eller unge voksen med å oppdage deres styrker og interesser. Vinster kan være et verdifullt verktøy for å guide dem mot utdanning og karrierevalg som passer dem."
+    }
+  },
+  "benefits": {
+    "title": "Fordeler for deg",
+    "benefit1": {
+      "title": "Klarhet i karrierevalg",
+      "description": "Få en klar forståelse av hva som virkelig motiverer deg"
+    },
+    "benefit2": {
+      "title": "Selvtillit i beslutninger",
+      "description": "Ta karrierebeslutninger basert på solid selvinnsikt"
+    },
+    "benefit3": {
+      "title": "Redusert stress",
+      "description": "Finn en karriere som passer din personlighet og livsstil"
+    }
+  }
+}

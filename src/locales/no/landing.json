@@ -1,0 +1,56 @@
+{
+  "hero": {
+    "title": "Oppdag din ideelle karriere med en personlig loopbanerapport",
+    "subtitle": "Få innsikt i dine styrker, interesser og drømmeyrker gjennom vår vitenskapelige metode",
+    "cta_button": "Start din karrierereise",
+    "trust_text": "Allerede valgt av 1000+ profesjonelle"
+  },
+  "features": {
+    "title": "Hvorfor velge Vinster?",
+    "subtitle": "Vår unike tilnærming gir deg dype innsikter i din karriere",
+    "feature1": {
+      "title": "Personlig og vitenskapelig",
+      "description": "Basert på årelang forskning og erfaring fra karriereveiledning"
+    },
+    "feature2": {
+      "title": "Handlingsrettet",
+      "description": "Få konkrete råd og neste steg for din karriereutvikling"
+    },
+    "feature3": {
+      "title": "Omfattende analyse",
+      "description": "Dype innsikter i dine styrker, interesser og arbeidsønsker"
+    }
+  },
+  "testimonials": {
+    "title": "Hva brukerne våre sier",
+    "testimonial1": {
+      "text": "Vinster hjalp meg å oppdage karrieremuligheter jeg aldri hadde tenkt på før!",
+      "author": "Sarah J."
+    },
+    "testimonial2": {
+      "text": "Den detaljerte rapporten ga meg klare retningslinjer for min karriere.",
+      "author": "Thomas L."
+    },
+    "testimonial3": {
+      "text": "Endelig forstår jeg hva som virkelig motiverer meg på jobben.",
+      "author": "Emma K."
+    }
+  },
+  "footer": {
+    "about": "Om Vinster",
+    "for_whom": "For hvem er det?",
+    "faq": "Vanlige spørsmål",
+    "experiences": "Erfaringer",
+    "contact": "Kontakt",
+    "professionals": "Tilgangskoder for fagfolk",
+    "privacy": "Personvernerklæring",
+    "terms": "Vilkår og betingelser",
+    "cookies": "Informasjonskapsler",
+    "copyright": "© 2024 Vinster. Alle rettigheter forbeholdt."
+  },
+  "welcome_vinster": "Velkommen til Vinster",
+  "navigation": {
+    "home": "Hjem",
+    "dashboard": "Dashboard"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "welcome": {
+    "title": "Velkommen til Vinster",
+    "subtitle": "Din personlige karrierereise starter her",
+    "description": "Fullfør din karriereanalyse for å få personlige innsikter og en detaljert rapport om din ideelle karriere."
+  },
+  "progress": {
+    "title": "Din fremgang",
+    "subtitle": "Se hvor langt du har kommet i din karriereanalyse",
+    "steps": {
+      "enthusiasm": "Entusiasme-analyse",
+      "priorities": "Prioriteringer",
+      "dream_jobs": "Drømmeyrker",
+      "search_profile": "Jobbprofil",
+      "report": "Rapport"
+    }
+  },
+  "next_steps": {
+    "title": "Neste steg",
+    "continue_analysis": "Fortsett analyse",
+    "view_report": "Se rapport",
+    "download_report": "Last ned rapport"
+  },
+  "profile": {
+    "title": "Profil",
+    "edit": "Rediger profil",
+    "logout": "Logg ut"
+  },
+  "help": {
+    "title": "Trenger du hjelp?",
+    "contact": "Kontakt oss",
+    "faq": "Vanlige spørsmål"
+  },
+  "payment": {
+    "title": "Betaling påkrevd",
+    "subtitle": "For å få tilgang til din komplette karriererapport, må du fullføre betalingen",
+    "price": "297 kr",
+    "description": "Engangssum for komplett karriereanalyse og rapport",
+    "pay_now": "Betal nå",
+    "features": [
+      "Komplett karriereanalyse",
+      "Personlig rapport",
+      "Handlingsplan",
+      "Livstidsgaranti"
+    ]
+  }
+}

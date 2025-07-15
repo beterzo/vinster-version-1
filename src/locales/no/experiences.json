@@ -1,0 +1,51 @@
+{
+  "hero": {
+    "title": "Erfaringer fra våre brukere",
+    "subtitle": "Se hvordan Vinster har hjulpet andre med å finne sin drømmekarriere"
+  },
+  "experiences": [
+    {
+      "name": "Anna S.",
+      "age": "28 år",
+      "profession": "Markedsføringsspesialist",
+      "story": "Jeg hadde jobbet i markedsføring i 5 år, men følte meg aldri helt tilfreds. Vinster hjalp meg å oppdage at jeg trives best i kreative miljøer med tett samarbeid. Nå jobber jeg som kreativ direktør i et mindre byrå og har aldri vært lykkeligere på jobben.",
+      "highlight": "Oppdaget min kreative side og fant mitt drømmejobb"
+    },
+    {
+      "name": "Lars M.",
+      "age": "35 år",
+      "profession": "IT-konsulent",
+      "story": "Etter 10 år i IT begynte jeg å lure på om dette virkelig var noe for meg. Vinster-analysen viste at jeg trives best med å løse komplekse problemer og hjelpe andre. Jeg byttet til en rolle som teknisk arkitekt hvor jeg både får bruke mine tekniske ferdigheter og veilede teamet.",
+      "highlight": "Fant en bedre balanse mellom teknisk arbeid og ledelse"
+    },
+    {
+      "name": "Emma K.",
+      "age": "24 år",
+      "profession": "Nyutdannet",
+      "story": "Som nyutdannet hadde jeg ingen anelse om hvilken retning jeg skulle ta. Vinster ga meg klarhet i mine styrker og interesser. Jeg oppdaget at jeg er en naturlig problemløser som trives i strukturerte miljøer. Nå har jeg fått drømmejobben som forretningsanalytiker.",
+      "highlight": "Fant min karriereretning rett etter utdanning"
+    },
+    {
+      "name": "Thomas L.",
+      "age": "42 år",
+      "profession": "Mellomledelse",
+      "story": "Midt i karrieren følte jeg meg fast. Vinster hjalp meg å forstå at jeg er en naturlig mentor og leder. Rapporten ga meg mot til å søke en lederrolle, og nå er jeg avdelingsleder med fokus på teamutvikling - noe jeg brenner for.",
+      "highlight": "Gjorde en vellykket karriereendring til ledelse"
+    }
+  ],
+  "stats": {
+    "title": "Resultater fra våre brukere",
+    "stat1": {
+      "number": "87%",
+      "description": "oppgir økt klarhet i karrierevalg"
+    },
+    "stat2": {
+      "number": "73%",
+      "description": "har gjort positive karriereendringer"
+    },
+    "stat3": {
+      "number": "92%",
+      "description": "vil anbefale Vinster til andre"
+    }
+  }
+}

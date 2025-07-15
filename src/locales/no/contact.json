@@ -1,0 +1,31 @@
+{
+  "hero": {
+    "title": "Kontakt oss",
+    "subtitle": "Har du spørsmål eller trenger du hjelp? Vi er her for deg!"
+  },
+  "form": {
+    "title": "Send oss en melding",
+    "name": "Navn",
+    "email": "E-post",
+    "message": "Melding",
+    "submit": "Send melding"
+  },
+  "contact_info": {
+    "title": "Kontaktinformasjon",
+    "email": "E-post",
+    "phone": "Telefon",
+    "address": "Adresse"
+  },
+  "company_info": {
+    "title": "Bedriftsinformasjon",
+    "company_name": "Vinster AS",
+    "vat_number": "Org.nr: 123456789",
+    "address": "Storgata 1, 0101 Oslo, Norge",
+    "email": "post@vinster.no",
+    "phone": "+47 123 45 678"
+  },
+  "toasts": {
+    "success": "Takk for din melding! Vi kommer tilbake til deg snart.",
+    "error": "Noe gikk galt. Prøv igjen senere."
+  }
+}

@@ -55,6 +55,20 @@ import daFaq from './da/faq.json';
 import daExperiences from './da/experiences.json';
 import daContact from './da/contact.json';
 
+// Norwegian translations
+import noNavigation from './no/navigation.json';
+import noLanding from './no/landing.json';
+import noAuth from './no/auth.json';
+import noDashboard from './no/dashboard.json';
+import noJourney from './no/journey.json';
+import noProfessionals from './no/professionals.json';
+import noCommon from './no/common.json';
+import noAbout from './no/about.json';
+import noForWhom from './no/for-whom.json';
+import noFaq from './no/faq.json';
+import noExperiences from './no/experiences.json';
+import noContact from './no/contact.json';
+
 export const translations = {
   en: {
     navigation: enNavigation,
@@ -184,5 +198,38 @@ export const translations = {
     faq: (daFaq as any).faq || daFaq,
     experiences: (daExperiences as any).experiences || daExperiences,
     contact: (daContact as any).contact || daContact
+  },
+
+  no: {
+    navigation: noNavigation,
+    landing: (noLanding as any).landing || noLanding,
+    auth: noAuth,
+    // Make auth keys available at top level
+    login: noAuth.login,
+    signup: noAuth.signup,
+    forgot_password: noAuth.forgot_password,
+    reset_password: noAuth.reset_password,
+    password_reset_success: (noAuth as any).password_reset_success || noAuth.reset_password,
+    email_verification: (noAuth as any).email_verification || noAuth.forgot_password,
+    email_confirmed: (noAuth as any).email_confirmed || noAuth.forgot_password,
+    // Make mobile_menu available at top level
+    mobile_menu: noNavigation.mobile_menu,
+    // Make dashboard keys available at top level
+    dashboard: (noDashboard as any).dashboard || noDashboard,
+    payment: (noDashboard as any).payment || noDashboard,
+    journey: noJourney,
+    // Make journey keys available at top level
+    enthousiasme: (noJourney as any).enthousiasme || noJourney,
+    zoekprofiel: (noJourney as any).zoekprofiel || noJourney,
+    profiel_voltooien: (noJourney as any).profiel_voltooien || noJourney,
+    wensberoepen: (noJourney as any).wensberoepen || noJourney,
+    onderzoeksplan: (noJourney as any).onderzoeksplan || noJourney,
+    professionals: (noProfessionals as any).professionals || noProfessionals,
+    common: noCommon,
+    about: (noAbout as any).about || noAbout,
+    for_whom: (noForWhom as any).for_whom || noForWhom,
+    faq: (noFaq as any).faq || noFaq,
+    experiences: (noExperiences as any).experiences || noExperiences,
+    contact: (noContact as any).contact || noContact
   }
 };

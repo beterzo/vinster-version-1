@@ -1,0 +1,47 @@
+{
+  "hero": {
+    "title": "Oppdagelsen av din ideelle karriere",
+    "subtitle": "Lær hvordan Vinster kan hjelpe deg med å finne din drømmekarriere"
+  },
+  "heidi_story": {
+    "title": "Heidis historie",
+    "intro": "Hei, jeg er Heidi, grunnleggeren av Vinster. Min lidenskap for karriereveiledning begynte med min egen reise av selvoppdagelse.",
+    "background": "Etter å ha jobbet i mange år som karriererådgiver, innså jeg at mange mennesker sliter med å finne sin sanne kalling i arbeidslivet. Jeg ønsket å skape noe som kunne gi dype, personlige innsikter basert på vitenskapelige metoder.",
+    "mission": "Vinster er mitt svar på dette behovet - et verktøy som kombinerer årelang erfaring med karriereveiledning og vitenskapelig forskning for å hjelpe deg med å oppdage din ideelle karriere."
+  },
+  "method": {
+    "title": "Vår metode",
+    "description": "Vinster bruker en omfattende tilnærming som kombinerer flere elementer:",
+    "step1": {
+      "title": "Entusiasme-analyse",
+      "description": "Vi undersøker hva som virkelig engasjerer og motiverer deg"
+    },
+    "step2": {
+      "title": "Prioriteringer",
+      "description": "Vi identifiserer dine viktigste arbeidsforhold og interesser"
+    },
+    "step3": {
+      "title": "Drømmeyrker",
+      "description": "Vi hjelper deg med å utforske og definere dine ideelle karrierer"
+    },
+    "step4": {
+      "title": "Handlingsplan",
+      "description": "Vi gir deg en klar vei fremover med konkrete steg"
+    }
+  },
+  "why_choose": {
+    "title": "Hvorfor velge Vinster?",
+    "reason1": {
+      "title": "Personlig tilnærming",
+      "description": "Hver rapport er skreddersydd for din unike situasjon og mål"
+    },
+    "reason2": {
+      "title": "Vitenskapelig fundament",
+      "description": "Vår metode er basert på solid karriereforskning og psykologi"
+    },
+    "reason3": {
+      "title": "Handlingsrettet",
+      "description": "Vi gir deg ikke bare innsikter, men også konkrete steg å ta"
+    }
+  }
+}

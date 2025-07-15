@@ -1,0 +1,118 @@
+{
+  "enthusiasm": {
+    "intro": {
+      "title": "Entusiasme-analyse",
+      "subtitle": "Oppdag hva som virkelig engasjerer deg",
+      "description": "I denne delen vil vi utforske hva som har gitt deg energi og glede gjennom livet ditt.",
+      "start": "Start entusiasme-analyse"
+    },
+    "step1": {
+      "title": "Barndomsminne",
+      "subtitle": "Tenk tilbake på barndommen din",
+      "questions": {
+        "activities": "Hvilke aktiviteter likte du best som barn?",
+        "interests": "Hva var du mest interessert i?",
+        "places": "Hvor trivdes du best?"
+      }
+    },
+    "step2": {
+      "title": "Første jobb",
+      "subtitle": "Tenk på din første jobb eller arbeidserfaring",
+      "questions": {
+        "tasks": "Hvilke oppgaver likte du best?",
+        "topics": "Hvilke emner interesserte deg mest?",
+        "environment": "Hvilke arbeidsforhold passet deg best?"
+      }
+    },
+    "step3": {
+      "title": "Suksesshistorie",
+      "subtitle": "Tenk på en periode hvor du var spesielt motivert",
+      "questions": {
+        "period": "Beskriv en arbeidsperiode du likte godt",
+        "project": "Fortell om et prosjekt du var glad i",
+        "perfect_day": "Beskriv en perfekt arbeidsdag"
+      }
+    }
+  },
+  "priorities": {
+    "intro": {
+      "title": "Prioriteringer",
+      "subtitle": "Hva er viktigst for deg i arbeidslivet?",
+      "description": "Nå skal vi kartlegge dine prioriteringer innen aktiviteter, interesser og arbeidsforhold.",
+      "start": "Start prioritering"
+    },
+    "activities": {
+      "title": "Aktiviteter",
+      "subtitle": "Velg aktiviteter du liker best",
+      "instruction": "Velg opptil 10 aktiviteter som engasjerer deg mest"
+    },
+    "interests": {
+      "title": "Interesser",
+      "subtitle": "Velg interesser som motiverer deg",
+      "instruction": "Velg opptil 10 interesser som motiverer deg mest"
+    },
+    "work_conditions": {
+      "title": "Arbeidsforhold",
+      "subtitle": "Velg arbeidsforhold som passer deg",
+      "instruction": "Velg opptil 10 arbeidsforhold som passer deg best"
+    }
+  },
+  "dream_jobs": {
+    "intro": {
+      "title": "Drømmeyrker",
+      "subtitle": "Utforsk dine ideelle karrierer",
+      "description": "Nå skal vi dykke dypere inn i dine drømmeyrker og hva som gjør dem attraktive for deg.",
+      "start": "Start drømmeyrker"
+    },
+    "step1": {
+      "title": "Første drømmeyrke",
+      "subtitle": "Beskriv ditt første drømmeyrke",
+      "questions": {
+        "title": "Hva er tittelen på dette yrket?",
+        "activities": "Hvilke aktiviteter ville du gjort i en typisk uke?",
+        "goals": "Hva ville være målet med arbeidet ditt?",
+        "knowledge": "Hvilken kunnskap ville du fokusere på?",
+        "collaboration": "Hvordan ville du samarbeide med andre?",
+        "environment": "Hvor ville du jobbe?",
+        "aspects": "Hva ville være viktigst for deg i dette yrket?",
+        "perfect_day": "Beskriv en perfekt arbeidsdag i dette yrket"
+      }
+    },
+    "step2": {
+      "title": "Andre drømmeyrke",
+      "subtitle": "Beskriv ditt andre drømmeyrke"
+    },
+    "step3": {
+      "title": "Tredje drømmeyrke",
+      "subtitle": "Beskriv ditt tredje drømmeyrke"
+    }
+  },
+  "search_profile": {
+    "intro": {
+      "title": "Jobbprofil",
+      "subtitle": "Lag din personlige jobbprofil",
+      "description": "Basert på din analyse vil vi nå lage en personlig jobbprofil som du kan bruke i jobbsøking.",
+      "start": "Start jobbprofil"
+    },
+    "questions": {
+      "function": "Hvilken funksjon søker du?",
+      "tasks": "Hvilke hovedoppgaver vil du ha?",
+      "sector": "Hvilken sektor interesserer deg?",
+      "organization": "Hvilken type organisasjon vil du jobbe for?",
+      "region": "Hvilken region foretrekker du?",
+      "conditions": "Hvilke arbeidsforhold er viktige for deg?"
+    }
+  },
+  "navigation": {
+    "previous": "Forrige",
+    "next": "Neste",
+    "complete": "Fullfør",
+    "save": "Lagre",
+    "continue": "Fortsett"
+  },
+  "validation": {
+    "required": "Dette feltet er påkrevd",
+    "min_length": "Minimum lengde er {min} tegn",
+    "max_length": "Maksimum lengde er {max} tegn"
+  }
+}
