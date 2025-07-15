@@ -1,4 +1,3 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
 import { translations } from '@/locales';
 
@@ -22,6 +21,18 @@ export const useTranslation = () => {
     }
 
     console.log(`Translation result for ${key}:`, value);
+    
+    // Add safety check to ensure we don't return objects that could be rendered as React children
+    if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+      console.warn(`Warning: Translation key ${key} returned an object:`, value);
+      // If it's an object with a 'title' or 'description', return that string instead
+      if (value.title) return value.title;
+      if (value.description) return value.description;
+      if (value.text) return value.text;
+      // Otherwise return the key to avoid rendering errors
+      return key;
+    }
+    
     return value;
   };
 
