@@ -30,11 +30,15 @@ interface AuthEventPayload {
 const emailSubjects = {
   signup: {
     nl: "Bevestig je account bij Vinster",
-    en: "Confirm your Vinster account"
+    en: "Confirm your Vinster account",
+    de: "Bestätigen Sie Ihr Vinster-Konto",
+    no: "Bekreft din Vinster-konto"
   },
   recovery: {
     nl: "Reset je Vinster wachtwoord",
-    en: "Reset your Vinster password"
+    en: "Reset your Vinster password",
+    de: "Vinster-Passwort zurücksetzen",
+    no: "Tilbakestill ditt Vinster-passord"
   }
 };
 
@@ -140,7 +144,7 @@ const getLanguageFromRedirect = (redirectUrl: string): string | null => {
   try {
     const url = new URL(redirectUrl);
     const langParam = url.searchParams.get('lang');
-    if (langParam && (langParam === 'nl' || langParam === 'en')) {
+    if (langParam && (langParam === 'nl' || langParam === 'en' || langParam === 'de' || langParam === 'no')) {
       console.log(`✅ Language from redirect URL: ${langParam}`);
       return langParam;
     }
@@ -218,14 +222,49 @@ const detectUserLanguage = async (
 
 // Signup email template
 const createSignupEmailHtml = (firstName: string, verificationUrl: string, language: string) => {
-  const isNl = language === 'nl';
+  const texts = {
+    nl: {
+      tagline: 'Jouw venster op de toekomst',
+      title: 'Bevestig je email adres',
+      message: `Hoi ${firstName}, bedankt voor je aanmelding! Klik op de knop hieronder om je account te activeren.`,
+      button: 'Activeer mijn account',
+      footer: 'Als je dit account niet hebt aangemaakt, kun je deze email negeren.',
+      regards: 'Met vriendelijke groet,'
+    },
+    en: {
+      tagline: 'Your window to the future',
+      title: 'Confirm your email address',
+      message: `Hi ${firstName}, thanks for signing up! Click the button below to activate your account.`,
+      button: 'Activate my account',
+      footer: "If you didn't create this account, you can safely ignore this email.",
+      regards: 'Best regards,'
+    },
+    de: {
+      tagline: 'Ihr Fenster zur Zukunft',
+      title: 'Bestätigen Sie Ihre E-Mail-Adresse',
+      message: `Hallo ${firstName}, vielen Dank für Ihre Anmeldung! Klicken Sie auf die Schaltfläche unten, um Ihr Konto zu aktivieren.`,
+      button: 'Mein Konto aktivieren',
+      footer: 'Falls Sie dieses Konto nicht erstellt haben, können Sie diese E-Mail ignorieren.',
+      regards: 'Mit freundlichen Grüßen,'
+    },
+    no: {
+      tagline: 'Ditt vindu til fremtiden',
+      title: 'Bekreft e-postadressen din',
+      message: `Hei ${firstName}, takk for at du registrerte deg! Klikk på knappen nedenfor for å aktivere kontoen din.`,
+      button: 'Aktiver kontoen min',
+      footer: 'Hvis du ikke opprettet denne kontoen, kan du trygt ignorere denne e-posten.',
+      regards: 'Vennlig hilsen,'
+    }
+  };
+  
+  const t = texts[language as keyof typeof texts] || texts.nl;
   
   return `
     <!DOCTYPE html>
     <html>
     <head>
       <meta charset="utf-8">
-      <title>${isNl ? 'Bevestig je Vinster account' : 'Confirm your Vinster account'}</title>
+      <title>${emailSubjects.signup[language as keyof typeof emailSubjects.signup] || emailSubjects.signup.nl}</title>
       <style>
         body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 20px; background: #f8f9fa; }
         .container { max-width: 600px; margin: 0 auto; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
@@ -242,18 +281,18 @@ const createSignupEmailHtml = (firstName: string, verificationUrl: string, langu
       <div class="container">
         <div class="header">
           <div class="logo">Vinster</div>
-          <div>${isNl ? 'Jouw venster op de toekomst' : 'Your window to the future'}</div>
+          <div>${t.tagline}</div>
         </div>
         <div class="content">
-          <h1 class="title">${isNl ? 'Bevestig je email adres' : 'Confirm your email address'}</h1>
-          <p class="message">${isNl ? `Hoi ${firstName}, bedankt voor je aanmelding! Klik op de knop hieronder om je account te activeren.` : `Hi ${firstName}, thanks for signing up! Click the button below to activate your account.`}</p>
+          <h1 class="title">${t.title}</h1>
+          <p class="message">${t.message}</p>
           <a href="${verificationUrl}" class="button">
-            ${isNl ? 'Activeer mijn account' : 'Activate my account'}
+            ${t.button}
           </a>
         </div>
         <div class="footer">
-          <p>${isNl ? 'Als je dit account niet hebt aangemaakt, kun je deze email negeren.' : "If you didn't create this account, you can safely ignore this email."}</p>
-          <p>${isNl ? 'Met vriendelijke groet,' : 'Best regards,'}<br><strong>Team Vinster</strong></p>
+          <p>${t.footer}</p>
+          <p>${t.regards}<br><strong>Team Vinster</strong></p>
         </div>
       </div>
     </body>
@@ -263,14 +302,57 @@ const createSignupEmailHtml = (firstName: string, verificationUrl: string, langu
 
 // Password reset email template
 const createPasswordResetEmailHtml = (firstName: string, resetUrl: string, language: string) => {
-  const isNl = language === 'nl';
+  const texts = {
+    nl: {
+      tagline: 'Jouw venster op de toekomst',
+      title: 'Reset je wachtwoord',
+      message: `Hoi ${firstName}, je hebt een wachtwoord reset aangevraagd. Klik op de knop hieronder om een nieuw wachtwoord in te stellen.`,
+      button: 'Nieuw wachtwoord instellen',
+      securityTitle: 'Veiligheidsmelding:',
+      securityMessage: 'Deze link is 60 minuten geldig en kan maar één keer gebruikt worden.',
+      footer: 'Als je geen wachtwoord reset hebt aangevraagd, kun je deze email negeren.',
+      regards: 'Met vriendelijke groet,'
+    },
+    en: {
+      tagline: 'Your window to the future',
+      title: 'Reset your password',
+      message: `Hi ${firstName}, you requested a password reset. Click the button below to set a new password.`,
+      button: 'Set new password',
+      securityTitle: 'Security notice:',
+      securityMessage: 'This link is valid for 60 minutes and can only be used once.',
+      footer: "If you didn't request a password reset, you can safely ignore this email.",
+      regards: 'Best regards,'
+    },
+    de: {
+      tagline: 'Ihr Fenster zur Zukunft',
+      title: 'Passwort zurücksetzen',
+      message: `Hallo ${firstName}, Sie haben ein Zurücksetzen des Passworts angefordert. Klicken Sie auf die Schaltfläche unten, um ein neues Passwort zu setzen.`,
+      button: 'Neues Passwort setzen',
+      securityTitle: 'Sicherheitshinweis:',
+      securityMessage: 'Dieser Link ist 60 Minuten gültig und kann nur einmal verwendet werden.',
+      footer: 'Falls Sie kein Zurücksetzen des Passworts angefordert haben, können Sie diese E-Mail ignorieren.',
+      regards: 'Mit freundlichen Grüßen,'
+    },
+    no: {
+      tagline: 'Ditt vindu til fremtiden',
+      title: 'Tilbakestill passordet ditt',
+      message: `Hei ${firstName}, du har bedt om tilbakestilling av passord. Klikk på knappen nedenfor for å sette et nytt passord.`,
+      button: 'Sett nytt passord',
+      securityTitle: 'Sikkerhetsmelding:',
+      securityMessage: 'Denne lenken er gyldig i 60 minutter og kan kun brukes én gang.',
+      footer: 'Hvis du ikke ba om tilbakestilling av passord, kan du trygt ignorere denne e-posten.',
+      regards: 'Vennlig hilsen,'
+    }
+  };
+  
+  const t = texts[language as keyof typeof texts] || texts.nl;
   
   return `
     <!DOCTYPE html>
     <html>
     <head>
       <meta charset="utf-8">
-      <title>${isNl ? 'Reset je Vinster wachtwoord' : 'Reset your Vinster password'}</title>
+      <title>${emailSubjects.recovery[language as keyof typeof emailSubjects.recovery] || emailSubjects.recovery.nl}</title>
       <style>
         body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 20px; background: #f8f9fa; }
         .container { max-width: 600px; margin: 0 auto; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
@@ -288,22 +370,22 @@ const createPasswordResetEmailHtml = (firstName: string, resetUrl: string, langu
       <div class="container">
         <div class="header">
           <div class="logo">Vinster</div>
-          <div>${isNl ? 'Jouw venster op de toekomst' : 'Your window to the future'}</div>
+          <div>${t.tagline}</div>
         </div>
         <div class="content">
-          <h1 class="title">${isNl ? 'Reset je wachtwoord' : 'Reset your password'}</h1>
-          <p class="message">${isNl ? `Hoi ${firstName}, je hebt een wachtwoord reset aangevraagd. Klik op de knop hieronder om een nieuw wachtwoord in te stellen.` : `Hi ${firstName}, you requested a password reset. Click the button below to set a new password.`}</p>
+          <h1 class="title">${t.title}</h1>
+          <p class="message">${t.message}</p>
           <a href="${resetUrl}" class="button">
-            ${isNl ? 'Nieuw wachtwoord instellen' : 'Set new password'}
+            ${t.button}
           </a>
           <div class="security-notice">
-            <p style="margin: 0; font-size: 14px;"><strong>${isNl ? 'Veiligheidsmelding:' : 'Security notice:'}</strong></p>
-            <p style="margin: 5px 0 0 0; font-size: 14px;">${isNl ? 'Deze link is 60 minuten geldig en kan maar één keer gebruikt worden.' : 'This link is valid for 60 minutes and can only be used once.'}</p>
+            <p style="margin: 0; font-size: 14px;"><strong>${t.securityTitle}</strong></p>
+            <p style="margin: 5px 0 0 0; font-size: 14px;">${t.securityMessage}</p>
           </div>
         </div>
         <div class="footer">
-          <p>${isNl ? 'Als je geen wachtwoord reset hebt aangevraagd, kun je deze email negeren.' : "If you didn't request a password reset, you can safely ignore this email."}</p>
-          <p>${isNl ? 'Met vriendelijke groet,' : 'Best regards,'}<br><strong>Team Vinster</strong></p>
+          <p>${t.footer}</p>
+          <p>${t.regards}<br><strong>Team Vinster</strong></p>
         </div>
       </div>
     </body>
