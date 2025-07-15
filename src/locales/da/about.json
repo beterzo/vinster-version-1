@@ -3,13 +3,35 @@
     "page_title": "Om Vinster",
     "back_to_home": "Tilbage til forsiden",
     "start_button": "Start nu",
+    "experience_badge": "25+ års erfaring",
+    "experience_subtitle": "Karriererådgiver",
+    "introduction": {
+      "greeting": "Hej, jeg er",
+      "name": "Heidi Jansen",
+      "title": "– karriererådgiver, træner, og ophavsmanden til metoden der ligger til grund for Vinster.",
+      "description": "I mere end 25 år har jeg hjulpet mennesker og professionelle i karrierebranchen med at finde retning i arbejdet. For det er det, jeg ønsker for alle: arbejde der gør dig glad."
+    },
+    "experience": {
+      "title": "Min erfaring med karrierevejledning",
+      "description": "I mit arbejde som karriererådgiver har jeg bemærket, at det kan være ret vanskeligt at vide præcis, hvor du vil hen med dit arbejde. Du vil eller skal gøre noget andet, du mærker at der er flere muligheder, men ved ikke præcis hvad eller hvordan. Der er så mange muligheder, så mange tanker – at det er svært at få klarhed. Og det er præcis der Vinster hjælper: overblik, indsigt og udsigt."
+    },
+    "method": {
+      "title": "Karrieretragtmetoden",
+      "description": "Vinster er baseret på Karrieretragten, en praktisk og gennemtænkt metode, som jeg har vejledt tusindvis af mennesker med og som jeg gennem årene har videregivet til talrige karriereprofessionelle – både hjemme og ude. Metoden virker, fordi den forbinder det personlige med arbejdsmarkedets virkelighed."
+    },
+    "platform": {
+      "title": "Vinster: online karrierevejledning",
+      "description": "Med Vinster bringer jeg nu denne tilgang online – understøttet af AI, men altid menneskecentreret. Du besvarer en række spørgsmål, hvorefter Vinster genkender nøgleord i dine svar. Baseret på det får du forslag til passende funktioner og ideer til dit næste skridt. Ingen urealistiske drømme, men inspirerende og opnåelige muligheder."
+    },
     "hero": {
       "title": "Om Vinster",
       "subtitle": "Opdage dit ideelle job gennem personlig refleksion og videnskab"
     },
     "mission": {
-      "title": "Vores mission",
-      "description": "Hos Vinster tror vi på, at alle fortjener at finde meningsfuldt arbejde der matcher deres unikke evner og passioner. Vores platform kombinerer personlig refleksion med AI-drevet analyse for at hjælpe dig med at opdage din ideelle karrierevej."
+      "title": "Min mission",
+      "description": "Min mission? Bidrage til godt arbejde for alle. For godt arbejde er arbejde der passer til hvem du er, hvor du får energi af, og hvor du kan gøre en forskel. Og det starter med klarhed. Det er hvad Vinster er til for.",
+      "quote": "\"Jeg ønsker dig arbejde der gør dig glad!\"",
+      "signature": "- Heidi Jansen"
     },
     "how_it_works": {
       "title": "Sådan fungerer det",
@@ -45,6 +67,7 @@
     },
     "cta": {
       "title": "Klar til at opdage dit ideelle job?",
+      "subtitle": "På vej mod en bedre karriere",
       "description": "Start din personlige karriererejse i dag og opdag hvilke muligheder der venter på dig."
     }
   }
