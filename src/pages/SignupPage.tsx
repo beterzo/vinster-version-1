@@ -178,6 +178,8 @@ const SignupPage = () => {
                 <SelectContent>
                   <SelectItem value="nl">Nederlands</SelectItem>
                   <SelectItem value="en">English</SelectItem>
+                  <SelectItem value="de">Deutsch</SelectItem>
+                  <SelectItem value="no">Norsk</SelectItem>
                 </SelectContent>
               </Select>
             </div>
