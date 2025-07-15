@@ -1,5 +1,10 @@
 {
-  "hero": {
+  "landing": {
+    "tagline": "Find arbejde der passer til dig, med AI.\nSmart, personligt og overraskende.",
+    "welcome": "Velkommen til",
+    "description": "For alle der tænker: \"Hvad vil jeg egentlig med mit arbejde?\"\nUanset om du lige er startet, er gået i stå, søger noget nyt eller bare vil genorientere dig – Vinster giver overblik, støtte og retning.",
+    "login": "Log ind",
+    "hero": {
     "title": "Opdag dit ideelle job med",
     "vinster": "Vinster",
     "subtitle": "En personlig rejse til professionel klarhed og meningsfuldt arbejde",
@@ -10,43 +15,25 @@
       "success_rate": "Succesrate"
     }
   },
-  "what_is_vinster": {
-    "title": "Hvad er Vinster?",
-    "subtitle": "Din personlige karriererådgiver",
-    "description": "Vinster er et innovativt platform der hjælper dig med at opdage dit ideelle job gennem personlig refleksion og AI-drevet indsigt.",
-    "features": [
-      {
-        "title": "Personlig tilgang",
-        "description": "Hver rejse er unik og tilpasset dine personlige ønsker og drømme"
-      },
-      {
-        "title": "Videnskabeligt baseret",
-        "description": "Baseret på anerkendte karriereudviklingsmetoder og psykologi"
-      },
-      {
-        "title": "Praktiske resultater",
-        "description": "Få konkrete jobtitler og karriereveje der passer til dig"
-      }
-    ]
-  },
-  "what_you_get": {
-    "title": "Hvad får du?",
-    "subtitle": "En komplet karriereplan",
-    "features": [
-      {
-        "title": "Personlig karriererapport",
-        "description": "En detaljeret analyse af dine styrker, interesser og ideelle arbejdsmiljø"
-      },
-      {
-        "title": "Konkrete jobtitler",
-        "description": "Specifikke jobroller der matcher dine unikke egenskaber"
-      },
-      {
-        "title": "Søgeprofil",
-        "description": "En komplet profil til at hjælpe dig med at søge det rigtige job"
-      }
-    ]
-  },
+    "what_is_vinster": {
+      "title": "Hvad er Vinster?",
+      "description": "Vinster er et AI-drevet platform der hjælper dig med at opdage dine sande interesser og talenter. Gennem dybdegående spørgsmål og avancerede algoritmer skaber vi en personlig profil der hjælper dig med at træffe velfunderede karrierevalg.",
+      "based_on": "Bygget på dokumenterede metoder fra praksis og dine unikke egenskaber får du:",
+      "two_matching_functions": "To matchende funktioner der passer perfekt til dig",
+      "one_surprising_suggestion": "Et overraskende forslag der åbner nye muligheder",
+      "clear_action_plan": "En klar handlingsplan til at realisere din ønskede karriere",
+      "no_tests": "Ingen kedelige tests, men ægte spørgsmål der får dig til at tænke."
+    },
+    "what_do_you_get": {
+      "title": "Hvad får du?",
+      "subtitle": "En komplet pakke til at forme din karriere:",
+      "insight_interests": "Dyb indsigt i dine interesser og motivationer",
+      "job_suggestions": "Konkrete job der passer til dig",
+      "research_plan": "En forskningsplan til videre udforskning",
+      "search_profile": "En søgeprofil for rekrutterere og netværk",
+      "start_now": "Start nu €29",
+      "view_sample": "Se eksempelrapport"
+    },
   "process": {
     "title": "Sådan fungerer det",
     "subtitle": "En simpel 3-trins proces",
