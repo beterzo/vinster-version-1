@@ -1,7 +1,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-export type Language = 'nl' | 'en' | 'de' | 'da' | 'no';
+export type Language = 'nl' | 'en' | 'de' | 'no';
 
 interface LanguageContextType {
   language: Language;
@@ -29,7 +29,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     // Load saved language from localStorage
     const savedLanguage = localStorage.getItem('vinster-language') as Language;
     console.log('Saved language from localStorage:', savedLanguage);
-    if (savedLanguage && ['nl', 'en', 'de', 'da', 'no'].includes(savedLanguage)) {
+    if (savedLanguage && ['nl', 'en', 'de', 'no'].includes(savedLanguage)) {
       setLanguageState(savedLanguage);
     } else {
       // Detect browser language
@@ -39,8 +39,6 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
         setLanguageState('en');
       } else if (browserLang.startsWith('de')) {
         setLanguageState('de');
-      } else if (browserLang.startsWith('da')) {
-        setLanguageState('da');
       } else if (browserLang.startsWith('no') || browserLang.startsWith('nb') || browserLang.startsWith('nn')) {
         setLanguageState('no');
       } else {

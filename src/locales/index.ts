@@ -41,19 +41,6 @@ import deFaq from './de/faq.json';
 import deExperiences from './de/experiences.json';
 import deContact from './de/contact.json';
 
-// Danish translations
-import daNavigation from './da/navigation.json';
-import daLanding from './da/landing.json';
-import daAuth from './da/auth.json';
-import daDashboard from './da/dashboard.json';
-import daJourney from './da/journey.json';
-import daProfessionals from './da/professionals.json';
-import daCommon from './da/common.json';
-import daAbout from './da/about.json';
-import daForWhom from './da/for-whom.json';
-import daFaq from './da/faq.json';
-import daExperiences from './da/experiences.json';
-import daContact from './da/contact.json';
 
 // Norwegian translations
 import noNavigation from './no/navigation.json';
@@ -167,38 +154,6 @@ export const translations = {
     contact: (deContact as any).contact || deContact
   },
 
-  da: {
-    navigation: daNavigation,
-    landing: (daLanding as any).landing || daLanding,
-    auth: daAuth,
-    // Make auth keys available at top level
-    login: daAuth.login,
-    signup: daAuth.signup,
-    forgot_password: daAuth.forgot_password,
-    reset_password: daAuth.reset_password,
-    password_reset_success: (daAuth as any).password_reset_success || daAuth.reset_password,
-    email_verification: (daAuth as any).email_verification || daAuth.forgot_password,
-    email_confirmed: (daAuth as any).email_confirmed || daAuth.forgot_password,
-    // Make mobile_menu available at top level
-    mobile_menu: daNavigation.mobile_menu,
-    // Make dashboard keys available at top level
-    dashboard: (daDashboard as any).dashboard || daDashboard,
-    payment: (daDashboard as any).payment || daDashboard,
-    journey: daJourney,
-    // Make journey keys available at top level
-    enthousiasme: (daJourney as any).enthousiasme || daJourney,
-    zoekprofiel: (daJourney as any).zoekprofiel || daJourney,
-    profiel_voltooien: (daJourney as any).profiel_voltooien || daJourney,
-    wensberoepen: (daJourney as any).wensberoepen || daJourney,
-    onderzoeksplan: (daJourney as any).onderzoeksplan || daJourney,
-    professionals: (daProfessionals as any).professionals || daProfessionals,
-    common: daCommon,
-    about: (daAbout as any).about || daAbout,
-    for_whom: (daForWhom as any).for_whom || daForWhom,
-    faq: (daFaq as any).faq || daFaq,
-    experiences: (daExperiences as any).experiences || daExperiences,
-    contact: (daContact as any).contact || daContact
-  },
 
   no: {
     navigation: noNavigation,

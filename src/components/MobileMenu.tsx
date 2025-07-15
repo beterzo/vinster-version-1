@@ -37,14 +37,14 @@ const MobileMenu = () => {
         { title: t('mobile_menu.contact'), path: '/kontakt' },
         { title: t('mobile_menu.access_codes'), path: '/zugangscodes-fachkrafte' },
       ];
-    } else if (language === 'da') {
+    } else if (language === 'no') {
       return [
         { title: t('mobile_menu.about_vinster'), path: '/om-vinster' },
         { title: t('mobile_menu.for_whom'), path: '/hvem-er-det-for' },
-        { title: t('mobile_menu.faq'), path: '/ofte-stillede-spoergsmaal' },
+        { title: t('mobile_menu.faq'), path: '/ofte-stilte-sporsmal' },
         { title: t('mobile_menu.experiences'), path: '/erfaringer' },
         { title: t('mobile_menu.contact'), path: '/kontakt' },
-        { title: t('mobile_menu.access_codes'), path: '/adgangskoder-professionelle' },
+        { title: t('mobile_menu.access_codes'), path: '/tilgangskoder-fagfolk' },
       ];
     } else {
       // Dutch (default)

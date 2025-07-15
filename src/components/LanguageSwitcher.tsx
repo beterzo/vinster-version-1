@@ -19,7 +19,6 @@ const LanguageSwitcher = () => {
     { code: 'nl' as Language, label: 'Nederlands', flag: '🇳🇱' },
     { code: 'en' as Language, label: 'English', flag: '🇬🇧' },
     { code: 'de' as Language, label: 'Deutsch', flag: '🇩🇪' },
-    { code: 'da' as Language, label: 'Dansk', flag: '🇩🇰' },
     { code: 'no' as Language, label: 'Norsk', flag: '🇳🇴' },
   ];
 

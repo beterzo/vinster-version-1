@@ -91,13 +91,13 @@ const AppRouter = () => {
       <Route path="/kontakt" element={<Contact />} />
       <Route path="/zugangscodes-fachkrafte" element={<ToegangscodesProfessionals />} />
 
-      {/* Danish routes */}
+      {/* Norwegian routes */}
       <Route path="/om-vinster" element={<OverVinster />} />
       <Route path="/hvem-er-det-for" element={<VoorWieIsHet />} />
-      <Route path="/ofte-stillede-spoergsmaal" element={<VeelgesteldeVragen />} />
+      <Route path="/ofte-stilte-sporsmal" element={<VeelgesteldeVragen />} />
       <Route path="/erfaringer" element={<Ervaringen />} />
       <Route path="/kontakt" element={<Contact />} />
-      <Route path="/adgangskoder-professionelle" element={<ToegangscodesProfessionals />} />
+      <Route path="/tilgangskoder-fagfolk" element={<ToegangscodesProfessionals />} />
       
       {/* Legacy redirect from old de-mens-achter-vinster to new over-vinster */}
       <Route path="/de-mens-achter-vinster" element={<Navigate to="/over-vinster" replace />} />
