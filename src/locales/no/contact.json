@@ -1,3 +1,4 @@
+
 {
   "contact": {
     "page_title": "Kontakt oss",
@@ -21,7 +22,7 @@
       "title": "Kontaktinformasjon",
       "email_title": "E-post",
       "business_title": "Bedriftsinformasjon",
-      "kvk_number": "KvK nr. 04050762",
+      "kvk_number": "Org.nr. 04050762",
       "response_time": "Vi prøver å svare innen 24 timer på meldingen din. For spørsmål kan du også sende oss en e-post."
     },
     "toasts": {
