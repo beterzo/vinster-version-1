@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface EditEnthousiasmeDialogProps {
   open: boolean;
@@ -17,6 +18,7 @@ interface EditEnthousiasmeDialogProps {
 const EditEnthousiasmeDialog = ({ open, onOpenChange, data, onSave }: EditEnthousiasmeDialogProps) => {
   const { user } = useAuth();
   const { toast } = useToast();
+  const { t } = useTranslation();
   const [saving, setSaving] = useState(false);
   const [formData, setFormData] = useState({
     kindertijd_activiteiten: '',
@@ -71,8 +73,8 @@ const EditEnthousiasmeDialog = ({ open, onOpenChange, data, onSave }: EditEnthou
     } catch (error) {
       console.error('Error saving enthousiasme data:', error);
       toast({
-        title: "Fout bij opslaan",
-        description: "Er is een fout opgetreden bij het opslaan.",
+        title: t('common.toast.save_error'),
+        description: t('common.toast.save_error_description'),
         variant: "destructive",
       });
     } finally {

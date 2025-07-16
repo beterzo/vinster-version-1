@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
+import { useTranslation } from '@/hooks/useTranslation';
 
 export interface EnthousiasmeResponses {
   kindertijd_activiteiten?: string;
@@ -19,6 +20,7 @@ export interface EnthousiasmeResponses {
 export const useEnthousiasmeResponses = () => {
   const { user } = useAuth();
   const { toast } = useToast();
+  const { t } = useTranslation();
   const [responses, setResponses] = useState<EnthousiasmeResponses>({});
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -85,8 +87,8 @@ export const useEnthousiasmeResponses = () => {
       if (error) {
         console.error('Error saving response:', error);
         toast({
-          title: "Fout bij opslaan",
-          description: "Er ging iets mis bij het opslaan van je antwoord.",
+          title: t('common.toast.save_error'),
+          description: t('common.toast.save_error_description'),
           variant: "destructive",
         });
         return;
@@ -102,8 +104,8 @@ export const useEnthousiasmeResponses = () => {
     } catch (error) {
       console.error('Error saving response:', error);
       toast({
-        title: "Fout bij opslaan", 
-        description: "Er ging iets mis bij het opslaan van je antwoord.",
+        title: t('common.toast.save_error'), 
+        description: t('common.toast.save_error_description'),
         variant: "destructive",
       });
     } finally {

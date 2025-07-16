@@ -18,5 +18,23 @@
   "profile_complete": "Fullfør profil",
   "logout": "Logg ut",
   "start_enthusiasm_scan": "Start entusiasme-skanning",
-  "start_dream_jobs": "Start drømmeyrker"
+  "start_dream_jobs": "Start drømmeyrker",
+  "toast": {
+    "save_error": "Feil ved lagring",
+    "save_error_description": "Det oppstod en feil under lagring av dataene dine.",
+    "save_success": "Vellykket lagret",
+    "save_success_description": "Dataene dine ble lagret.",
+    "load_error": "Feil ved lasting",
+    "load_error_description": "Det oppstod en feil under lasting av dataene.",
+    "generate_error": "Feil ved generering",
+    "generate_error_description": "Det oppstod en feil under genereringen.",
+    "send_error": "Feil ved sending",
+    "send_error_description": "Det oppstod en feil under sendingen.",
+    "generic_error": "Feil",
+    "generic_error_description": "En uventet feil oppstod.",
+    "try_again": "Prøv igjen.",
+    "contact_support": "Kontakt support hvis dette problemet vedvarer.",
+    "already_exists": "Søkeprofil allerede opprettet",
+    "already_exists_description": "Du har allerede opprettet en søkeprofil. Du blir omdirigert til nedlastingssiden."
+  }
 }

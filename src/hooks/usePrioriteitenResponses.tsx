@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from './useAuth';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from './use-toast';
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface PrioriteitenData {
   selected_activiteiten_keywords?: string[];
@@ -21,6 +22,7 @@ interface AIKeywords {
 export const usePrioriteitenResponses = () => {
   const { user } = useAuth();
   const { toast } = useToast();
+  const { t } = useTranslation();
   const [responses, setResponses] = useState<PrioriteitenData>({});
   const [aiKeywords, setAiKeywords] = useState<AIKeywords>({});
   const [loading, setLoading] = useState(false);
@@ -200,16 +202,16 @@ export const usePrioriteitenResponses = () => {
       setResponses(prev => ({ ...prev, ...data }));
       
       toast({
-        title: "Prioriteiten opgeslagen",
-        description: "Jouw prioriteiten zijn succesvol opgeslagen.",
+        title: t('common.toast.save_success'),
+        description: t('common.toast.save_success_description'),
       });
 
       return true;
     } catch (error) {
       console.error('Error saving prioriteiten responses:', error);
       toast({
-        title: "Fout bij opslaan",
-        description: "Er is een fout opgetreden bij het opslaan van je prioriteiten.",
+        title: t('common.toast.save_error'),
+        description: t('common.toast.save_error_description'),
         variant: "destructive",
       });
       return false;

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from './useAuth';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from './use-toast';
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface RapportData {
   id: string;
@@ -19,6 +20,7 @@ interface RapportData {
 export const useRapportData = () => {
   const { user } = useAuth();
   const { toast } = useToast();
+  const { t } = useTranslation();
   const [data, setData] = useState<RapportData | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -53,8 +55,8 @@ export const useRapportData = () => {
     } catch (error) {
       console.error('Error loading rapport data:', error);
       toast({
-        title: "Fout bij laden",
-        description: "Er is een fout opgetreden bij het laden van je rapport gegevens.",
+        title: t('common.toast.load_error'),
+        description: t('common.toast.load_error_description'),
         variant: "destructive",
       });
     } finally {

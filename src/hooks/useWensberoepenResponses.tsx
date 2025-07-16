@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "./useAuth";
 import { useToast } from "./use-toast";
+import { useTranslation } from "@/hooks/useTranslation";
 import type { Tables } from "@/integrations/supabase/types";
 
 type WensberoepenResponse = Tables<"wensberoepen_responses">;
@@ -10,6 +11,7 @@ type WensberoepenResponse = Tables<"wensberoepen_responses">;
 export const useWensberoepenResponses = () => {
   const { user } = useAuth();
   const { toast } = useToast();
+  const { t } = useTranslation();
   const [responses, setResponses] = useState<WensberoepenResponse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
@@ -42,8 +44,8 @@ export const useWensberoepenResponses = () => {
       if (error) {
         console.error("Error loading wensberoepen responses:", error);
         toast({
-          title: "Fout bij laden",
-          description: "Er ging iets mis bij het laden van je antwoorden.",
+          title: t('common.toast.load_error'),
+          description: t('common.toast.load_error_description'),
           variant: "destructive",
         });
         return;
@@ -85,8 +87,8 @@ export const useWensberoepenResponses = () => {
       if (error) {
         console.error("Error saving wensberoepen response:", error);
         toast({
-          title: "Fout bij opslaan",
-          description: "Er ging iets mis bij het opslaan van je antwoord.",
+          title: t('common.toast.save_error'),
+          description: t('common.toast.save_error_description'),
           variant: "destructive",
         });
         return;
@@ -97,8 +99,8 @@ export const useWensberoepenResponses = () => {
     } catch (error) {
       console.error("Error saving wensberoepen response:", error);
       toast({
-        title: "Fout bij opslaan",
-        description: "Er ging iets mis bij het opslaan van je antwoord.",
+        title: t('common.toast.save_error'),
+        description: t('common.toast.save_error_description'),
         variant: "destructive",
       });
     } finally {

@@ -78,8 +78,8 @@ const ExtraInformatieVragen = () => {
       console.error("Error saving extra informatie:", error);
       
       toast({
-        title: "Fout bij opslaan",
-        description: "Er ging iets mis bij het opslaan van je gegevens. Probeer het opnieuw.",
+        title: t('common.toast.save_error'),
+        description: t('common.toast.save_error_description'),
         variant: "destructive",
       });
     }

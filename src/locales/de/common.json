@@ -59,5 +59,23 @@
   "profile_complete": "Profil vervollständigen",
   "logout": "Abmelden",
   "start_enthusiasm_scan": "Begeisterungsscan starten",
-  "start_dream_jobs": "Wunschberufe starten"
+  "start_dream_jobs": "Wunschberufe starten",
+  "toast": {
+    "save_error": "Fehler beim Speichern",
+    "save_error_description": "Beim Speichern Ihrer Daten ist ein Fehler aufgetreten.",
+    "save_success": "Erfolgreich gespeichert",
+    "save_success_description": "Ihre Daten wurden erfolgreich gespeichert.",
+    "load_error": "Fehler beim Laden",
+    "load_error_description": "Beim Laden der Daten ist ein Fehler aufgetreten.",
+    "generate_error": "Fehler beim Generieren",
+    "generate_error_description": "Beim Generieren ist ein Fehler aufgetreten.",
+    "send_error": "Fehler beim Senden",
+    "send_error_description": "Beim Senden ist ein Fehler aufgetreten.",
+    "generic_error": "Fehler",
+    "generic_error_description": "Ein unerwarteter Fehler ist aufgetreten.",
+    "try_again": "Versuchen Sie es erneut.",
+    "contact_support": "Wenden Sie sich an den Support, wenn dieses Problem weiterhin besteht.",
+    "already_exists": "Suchprofil bereits erstellt",
+    "already_exists_description": "Sie haben bereits ein Suchprofil erstellt. Sie werden zur Download-Seite weitergeleitet."
+  }
 }

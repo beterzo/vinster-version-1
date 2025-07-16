@@ -6,5 +6,23 @@
   "error": "Error",
   "redirecting": "You will be redirected automatically...",
   "tagline": "On the way to a better career",
-  "back": "Back to home"
+  "back": "Back to home",
+  "toast": {
+    "save_error": "Save error",
+    "save_error_description": "Something went wrong while saving your data.",
+    "save_success": "Successfully saved",
+    "save_success_description": "Your data has been saved successfully.",
+    "load_error": "Load error",
+    "load_error_description": "Something went wrong while loading the data.",
+    "generate_error": "Generation error",
+    "generate_error_description": "Something went wrong during generation.",
+    "send_error": "Send error",
+    "send_error_description": "Something went wrong while sending.",
+    "generic_error": "Error",
+    "generic_error_description": "An unexpected error occurred.",
+    "try_again": "Please try again.",
+    "contact_support": "Contact support if this problem persists.",
+    "already_exists": "Search profile already created",
+    "already_exists_description": "You have already created a search profile. You will be redirected to the download page."
+  }
 }

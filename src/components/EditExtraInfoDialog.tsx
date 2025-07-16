@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface EditExtraInfoDialogProps {
   open: boolean;
@@ -18,6 +19,7 @@ interface EditExtraInfoDialogProps {
 const EditExtraInfoDialog = ({ open, onOpenChange, data, onSave }: EditExtraInfoDialogProps) => {
   const { user } = useAuth();
   const { toast } = useToast();
+  const { t } = useTranslation();
   const [saving, setSaving] = useState(false);
   const [formData, setFormData] = useState({
     opleidingsniveau: '',
@@ -62,8 +64,8 @@ const EditExtraInfoDialog = ({ open, onOpenChange, data, onSave }: EditExtraInfo
     } catch (error) {
       console.error('Error saving extra info data:', error);
       toast({
-        title: "Fout bij opslaan",
-        description: "Er is een fout opgetreden bij het opslaan.",
+        title: t('common.toast.save_error'),
+        description: t('common.toast.save_error_description'),
         variant: "destructive",
       });
     } finally {

@@ -40,8 +40,8 @@ const ZoekprofielAntwoorden = () => {
     if (!zoekprofielLoading && hasExistingZoekprofiel) {
       console.log('🚫 User already has a zoekprofiel, redirecting to download page');
       toast({
-        title: "Zoekprofiel al aangemaakt",
-        description: "Je hebt al een zoekprofiel aangemaakt. Je wordt doorgestuurd naar de download pagina.",
+        title: t('common.toast.already_exists'),
+        description: t('common.toast.already_exists_description'),
         variant: "default",
       });
       navigate('/zoekprofiel-download');
@@ -86,8 +86,8 @@ const ZoekprofielAntwoorden = () => {
     // Double-check for existing zoekprofiel before submitting
     if (hasExistingZoekprofiel) {
       toast({
-        title: "Zoekprofiel al aangemaakt",
-        description: "Je hebt al een zoekprofiel aangemaakt. Je wordt doorgestuurd naar de download pagina.",
+        title: t('common.toast.already_exists'),
+        description: t('common.toast.already_exists_description'),
         variant: "default",
       });
       navigate('/zoekprofiel-download');
@@ -104,8 +104,8 @@ const ZoekprofielAntwoorden = () => {
     } catch (error) {
       console.error("Error saving answers:", error);
       toast({
-        title: "Fout bij opslaan",
-        description: "Er is een fout opgetreden bij het opslaan van je antwoorden.",
+        title: t('common.toast.save_error'),
+        description: t('common.toast.save_error_description'),
         variant: "destructive"
       });
     }

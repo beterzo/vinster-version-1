@@ -6,5 +6,23 @@
   "error": "Fout",
   "redirecting": "Je wordt automatisch doorgestuurd...",
   "tagline": "Op weg naar een betere loopbaan",
-  "back": "Terug naar home"
+  "back": "Terug naar home",
+  "toast": {
+    "save_error": "Fout bij opslaan",
+    "save_error_description": "Er ging iets mis bij het opslaan van je gegevens.",
+    "save_success": "Succesvol opgeslagen",
+    "save_success_description": "Je gegevens zijn succesvol opgeslagen.",
+    "load_error": "Fout bij laden",
+    "load_error_description": "Er ging iets mis bij het laden van de gegevens.",
+    "generate_error": "Fout bij genereren",
+    "generate_error_description": "Er ging iets mis bij het genereren.",
+    "send_error": "Fout bij verzenden",
+    "send_error_description": "Er ging iets mis bij het verzenden.",
+    "generic_error": "Fout",
+    "generic_error_description": "Er is een onverwachte fout opgetreden.",
+    "try_again": "Probeer het opnieuw.",
+    "contact_support": "Neem contact op met support als dit probleem aanhoudt.",
+    "already_exists": "Zoekprofiel al aangemaakt",
+    "already_exists_description": "Je hebt al een zoekprofiel aangemaakt. Je wordt doorgestuurd naar de download pagina."
+  }
 }

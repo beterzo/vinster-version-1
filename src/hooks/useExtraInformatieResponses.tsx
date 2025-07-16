@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from './useAuth';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from './use-toast';
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface ExtraInformatieData {
   opleidingsniveau: string;
@@ -14,6 +15,7 @@ interface ExtraInformatieData {
 export const useExtraInformatieResponses = () => {
   const { user } = useAuth();
   const { toast } = useToast();
+  const { t } = useTranslation();
   const [responses, setResponses] = useState<ExtraInformatieData>({
     opleidingsniveau: '',
     beroepsopleiding: '',
@@ -62,8 +64,8 @@ export const useExtraInformatieResponses = () => {
     } catch (error) {
       console.error('Error loading extra informatie responses:', error);
       toast({
-        title: "Fout bij laden",
-        description: "Er is een fout opgetreden bij het laden van je gegevens.",
+        title: t('common.toast.load_error'),
+        description: t('common.toast.load_error_description'),
         variant: "destructive",
       });
     } finally {
@@ -101,8 +103,8 @@ export const useExtraInformatieResponses = () => {
     } catch (error) {
       console.error('Error saving extra informatie responses:', error);
       toast({
-        title: "Fout bij opslaan",
-        description: "Er is een fout opgetreden bij het opslaan van je gegevens.",
+        title: t('common.toast.save_error'),
+        description: t('common.toast.save_error_description'),
         variant: "destructive",
       });
       return false;
