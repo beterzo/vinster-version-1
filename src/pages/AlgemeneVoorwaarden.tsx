@@ -2,9 +2,11 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import Footer from "@/components/Footer";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const AlgemeneVoorwaarden = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
@@ -25,7 +27,7 @@ const AlgemeneVoorwaarden = () => {
               variant="outline" 
               className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold"
             >
-              Terug naar Home
+              {t('terms.back_to_home')}
             </Button>
           </div>
         </div>
@@ -35,7 +37,7 @@ const AlgemeneVoorwaarden = () => {
       <div className="max-w-4xl mx-auto px-6 py-12">
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-12">
           <h1 className="text-3xl md:text-4xl font-bold text-blue-900 mb-8">
-            Algemene voorwaarden
+            {t('terms.title')}
           </h1>
           
           <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed space-y-6">

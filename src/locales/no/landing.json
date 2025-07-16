@@ -162,5 +162,190 @@
       },
       "last_updated": "Sist oppdatert"
     }
+  },
+  "privacy": {
+    "title": "Personvernerklæring",
+    "last_updated": "Sist oppdatert: 23. juni 2025",
+    "back_to_home": "Tilbake til hjemme",
+    "sections": {
+      "who_we_are": {
+        "title": "1. Hvem er vi?",
+        "content": "Vinster er en tjeneste fra De Loopbaanopleiding, basert i Nederland. Vi er ansvarlige for behandlingen av dine personopplysninger som beskrevet i denne personvernerklæringen.",
+        "contact": "E-post: info@deloopbaanopleiding.nl<br />Telefon: +31 6 22 23 85 95<br />Handelsregister: 04050762"
+      },
+      "data_collected": {
+        "title": "2. Hvilke data samler vi inn?",
+        "intro": "Vi samler inn følgende personopplysninger:",
+        "items": [
+          "For- og etternavn",
+          "E-postadresse",
+          "Svar på spørsmål i karrierevurderingen",
+          "Tekniske data som IP-adresse og nettleserinformasjon",
+          "Betalingsdata (behandlet av vår betalingspartner)"
+        ]
+      },
+      "data_usage": {
+        "title": "3. Hvordan bruker vi dine data?",
+        "intro": "Vi bruker dine personopplysninger til:",
+        "items": [
+          "Å levere vår karrieretjeneste og generere din personlige rapport",
+          "Kommunikasjon om din konto og våre tjenester",
+          "Forbedring av vår nettside og tjenester",
+          "Oppfylle juridiske forpliktelser"
+        ]
+      },
+      "legal_basis": {
+        "title": "4. Juridisk grunnlag for behandling",
+        "intro": "Vi behandler dine personopplysninger basert på:",
+        "items": [
+          "Oppfyllelse av avtalen mellom deg og oss",
+          "Ditt samtykke",
+          "Legitim interesse for forbedring av våre tjenester",
+          "Juridisk forpliktelse"
+        ]
+      },
+      "data_sharing": {
+        "title": "5. Deling av data",
+        "intro": "Vi deler ikke dine personopplysninger med tredjeparter, unntatt:",
+        "items": [
+          "Med våre tekniske tjenesteleverandører (under strenge databehandleravtaler)",
+          "Når det er juridisk påkrevd",
+          "Med ditt uttrykkelige samtykke"
+        ]
+      },
+      "retention": {
+        "title": "6. Lagringsperiode",
+        "content": "Vi oppbevarer ikke dine personopplysninger lenger enn nødvendig. Kontodata oppbevares så lenge kontoen din er aktiv. Etter sletting av kontoen din blir data permanent slettet innen 30 dager."
+      },
+      "user_rights": {
+        "title": "7. Dine rettigheter",
+        "intro": "Du har følgende rettigheter angående dine personopplysninger:",
+        "items": [
+          "Rett til innsyn",
+          "Rett til korrigering",
+          "Rett til sletting",
+          "Rett til begrensning av behandling",
+          "Rett til dataportabilitet",
+          "Rett til motsigelse"
+        ],
+        "contact": "For å utøve disse rettighetene kan du kontakte oss på info@deloopbaanopleiding.nl"
+      },
+      "security": {
+        "title": "8. Sikkerhet",
+        "content": "Vi tar passende tekniske og organisatoriske tiltak for å beskytte dine personopplysninger mot tap, misbruk, uautorisert tilgang, offentliggjøring, endring eller ødeleggelse."
+      },
+      "cookies": {
+        "title": "9. Informasjonskapsler",
+        "content": "Vi bruker funksjonelle informasjonskapsler som er nødvendige for funksjonaliteten til nettstedet vårt. Disse informasjonskapslene lagrer ikke personlig informasjon."
+      },
+      "changes": {
+        "title": "10. Endringer",
+        "content": "Vi kan endre denne personvernerklæringen fra tid til annen. Den nyeste versjonen er alltid tilgjengelig på nettstedet vårt."
+      },
+      "contact": {
+        "title": "11. Kontakt",
+        "content": "For spørsmål om denne personvernerklæringen eller behandlingen av dine personopplysninger kan du kontakte oss:",
+        "details": "E-post: info@deloopbaanopleiding.nl<br />Telefon: +31 6 22 23 85 95"
+      }
+    }
+  },
+  "terms": {
+    "title": "Generelle vilkår",
+    "last_updated": "Sist oppdatert: 23. juni 2025",
+    "back_to_home": "Tilbake til hjemme",
+    "sections": {
+      "definitions": {
+        "title": "1. Definisjoner",
+        "items": [
+          "<strong>Vinster:</strong> tjenesten tilbudt av De Loopbaanopleiding",
+          "<strong>Bruker:</strong> enhver fysisk person som bruker Vinster",
+          "<strong>Tjeneste:</strong> online karriereverktøyet og tilhørende tjenester",
+          "<strong>Konto:</strong> brukerens personlige profil"
+        ]
+      },
+      "applicability": {
+        "title": "2. Anvendelighet",
+        "content": "Disse generelle vilkårene gjelder for alle avtaler mellom De Loopbaanopleiding og brukere av Vinster. Ved å bruke tjenesten vår godtar du disse vilkårene."
+      },
+      "account": {
+        "title": "3. Konto og tilgang",
+        "items": [
+          "Du er ansvarlig for å holde påloggingsinformasjonen din sikker",
+          "Du er ansvarlig for alle aktiviteter under kontoen din",
+          "Du kan bare opprette én konto per person",
+          "Det er ikke tillatt å dele kontoen din med tredjeparter",
+          "Vi forbeholder oss retten til å suspendere kontoer ved misbruk"
+        ]
+      },
+      "usage": {
+        "title": "4. Bruk av tjenesten",
+        "intro": "Når du bruker Vinster godtar du at du:",
+        "items": [
+          "Gir sannferdig informasjon",
+          "Bruker tjenesten kun til personlige, ikke-kommersielle formål",
+          "Ikke skader våre systemer eller tredjeparters systemer",
+          "Ikke bryter opphavsrettigheter",
+          "Overholder alle gjeldende lover og forskrifter"
+        ]
+      },
+      "payment": {
+        "title": "5. Betaling og priser",
+        "items": [
+          "Kostnaden for Vinster er €29 for engangs tilgang",
+          "Betaling skjer på forhånd via vår sikre betalingspartner",
+          "Priser er inkludert MVA der det gjelder",
+          "Etter vellykket betaling får du umiddelbar tilgang til hele tjenesten",
+          "Vi forbeholder oss retten til å justere priser"
+        ]
+      },
+      "cancellation": {
+        "title": "6. Angrerett",
+        "content": "Siden Vinster er en digital tjeneste som er fullt tilgjengelig umiddelbart etter kjøp, utløper angreretten din når du har fått tilgang til din personlige rapport. Dette er i samsvar med artikkel 6:230p avsnitt 1 i den nederlandske sivillovboken."
+      },
+      "intellectual_property": {
+        "title": "7. Immaterielle rettigheter",
+        "items": [
+          "Alle rettigheter til Vinster tilhører De Loopbaanopleiding",
+          "Det er ikke tillatt å kopiere eller distribuere vårt innhold",
+          "Din personlige rapport er din eiendom som bruker",
+          "Du kan dele rapporten din, men ikke utnytte den kommersielt"
+        ]
+      },
+      "availability": {
+        "title": "8. Tilgjengelighet og vedlikehold",
+        "items": [
+          "Vi streber etter 99% tilgjengelighet av tjenesten vår",
+          "Vedlikehold utføres utenfor kontortid der det er mulig",
+          "Vi er ikke ansvarlige for midlertidig utilgjengelighet",
+          "Ved langvarige avbrudd informerer vi brukerne aktivt"
+        ]
+      },
+      "liability": {
+        "title": "9. Ansvar",
+        "content": "Vårt ansvar er begrenset til beløpet du har betalt for tjenesten. Vi er ikke ansvarlige for indirekte skader, følgeskader eller tapte inntekter. Vinster er et verktøy for å støtte karrierevalg; de endelige beslutningene forblir ditt eget ansvar."
+      },
+      "termination": {
+        "title": "10. Oppsigelse",
+        "items": [
+          "Du kan slette kontoen din når som helst",
+          "Vi kan si opp kontoer ved brudd på disse vilkårene",
+          "Ved oppsigelse utløper tilgangen til tjenesten",
+          "Dataene dine vil bli slettet innen 30 dager etter oppsigelse"
+        ]
+      },
+      "changes": {
+        "title": "11. Endringer",
+        "content": "Vi forbeholder oss retten til å endre disse vilkårene. Endringer vil bli kunngjort minst 30 dager i forveien via e-post. Fortsatt bruk etter ikrafttredelsesdatoen utgjør aksept av de nye vilkårene."
+      },
+      "law": {
+        "title": "12. Gjeldende lov og tvister",
+        "content": "Nederlandsk lov gjelder for disse vilkårene. Tvister vil bli forelagt den kompetente domstolen i Nederland. Vi streber etter å løse tvister i minnelighet."
+      },
+      "contact": {
+        "title": "13. Kontakt",
+        "content": "For spørsmål om disse generelle vilkårene kan du kontakte oss:",
+        "details": "E-post: team@vinster.ai<br />Telefon: +31 6 22 23 85 95<br />Handelsregister: 04050762"
+      }
+    }
   }
 }

@@ -163,5 +163,190 @@
       },
       "last_updated": "Laatst bijgewerkt"
     }
+  },
+  "privacy": {
+    "title": "Privacy verklaring",
+    "last_updated": "Laatst bijgewerkt: 23 juni 2025",
+    "back_to_home": "Terug naar Home",
+    "sections": {
+      "who_we_are": {
+        "title": "1. Wie zijn wij?",
+        "content": "Vinster is een service van De Loopbaanopleiding, gevestigd in Nederland. Wij zijn verantwoordelijk voor de verwerking van uw persoonsgegevens zoals beschreven in deze privacyverklaring.",
+        "contact": "Email: info@deloopbaanopleiding.nl<br />Telefoon: +31 6 22 23 85 95<br />KvK nr: 04050762"
+      },
+      "data_collected": {
+        "title": "2. Welke gegevens verzamelen wij?",
+        "intro": "Wij verzamelen de volgende persoonsgegevens:",
+        "items": [
+          "Voor- en achternaam",
+          "E-mailadres", 
+          "Antwoorden op vragen in de loopbaanscans",
+          "Technische gegevens zoals IP-adres en browserinformatie",
+          "Betalingsgegevens (verwerkt door onze betalingspartner)"
+        ]
+      },
+      "data_usage": {
+        "title": "3. Waarvoor gebruiken wij uw gegevens?",
+        "intro": "Wij gebruiken uw persoonsgegevens voor:",
+        "items": [
+          "Het leveren van onze loopbaanservice en het genereren van uw persoonlijke rapport",
+          "Communicatie over uw account en onze services",
+          "Verbetering van onze website en services",
+          "Voldoen aan wettelijke verplichtingen"
+        ]
+      },
+      "legal_basis": {
+        "title": "4. Rechtsgrond voor verwerking",
+        "intro": "Wij verwerken uw persoonsgegevens op basis van:",
+        "items": [
+          "Uitvoering van de overeenkomst tussen u en ons",
+          "Uw toestemming",
+          "Gerechtvaardigd belang voor verbetering van onze services",
+          "Wettelijke verplichting"
+        ]
+      },
+      "data_sharing": {
+        "title": "5. Delen van gegevens",
+        "intro": "Wij delen uw persoonsgegevens niet met derden, behalve:",
+        "items": [
+          "Met onze technische serviceproviders (onder strikte verwerkingsovereenkomsten)",
+          "Wanneer dit wettelijk verplicht is",
+          "Met uw expliciete toestemming"
+        ]
+      },
+      "retention": {
+        "title": "6. Bewaartermijn",
+        "content": "Wij bewaren uw persoonsgegevens niet langer dan noodzakelijk. Accountgegevens worden bewaard zolang uw account actief is. Na verwijdering van uw account worden gegevens binnen 30 dagen permanent verwijderd."
+      },
+      "user_rights": {
+        "title": "7. Uw rechten",
+        "intro": "U heeft de volgende rechten betreffende uw persoonsgegevens:",
+        "items": [
+          "Recht op inzage",
+          "Recht op rectificatie", 
+          "Recht op verwijdering",
+          "Recht op beperking van verwerking",
+          "Recht op gegevensoverdraagbaarheid",
+          "Recht van bezwaar"
+        ],
+        "contact": "Om deze rechten uit te oefenen kunt u contact met ons opnemen via info@deloopbaanopleiding.nl"
+      },
+      "security": {
+        "title": "8. Beveiliging",
+        "content": "Wij nemen passende technische en organisatorische maatregelen om uw persoonsgegevens te beschermen tegen verlies, misbruik, ongeautoriseerde toegang, openbaarmaking, wijziging of vernietiging."
+      },
+      "cookies": {
+        "title": "9. Cookies",
+        "content": "Wij gebruiken functionele cookies die noodzakelijk zijn voor het functioneren van onze website. Deze cookies slaan geen persoonlijke informatie op."
+      },
+      "changes": {
+        "title": "10. Wijzigingen",
+        "content": "Wij kunnen deze privacyverklaring van tijd tot tijd wijzigen. De meest recente versie is altijd beschikbaar op onze website."
+      },
+      "contact": {
+        "title": "11. Contact",
+        "content": "Voor vragen over deze privacyverklaring of over de verwerking van uw persoonsgegevens kunt u contact met ons opnemen:",
+        "details": "Email: info@deloopbaanopleiding.nl<br />Telefoon: +31 6 22 23 85 95"
+      }
+    }
+  },
+  "terms": {
+    "title": "Algemene voorwaarden",
+    "last_updated": "Laatst bijgewerkt: 23 juni 2025",
+    "back_to_home": "Terug naar Home",
+    "sections": {
+      "definitions": {
+        "title": "1. Definities",
+        "items": [
+          "<strong>Vinster:</strong> de service aangeboden door De Loopbaanopleiding",
+          "<strong>Gebruiker:</strong> iedere natuurlijke persoon die gebruik maakt van Vinster",
+          "<strong>Service:</strong> de online loopbaantool en bijbehorende diensten",
+          "<strong>Account:</strong> het persoonlijke profiel van de gebruiker"
+        ]
+      },
+      "applicability": {
+        "title": "2. Toepasselijkheid",
+        "content": "Deze algemene voorwaarden zijn van toepassing op alle overeenkomsten tussen De Loopbaanopleiding en gebruikers van Vinster. Door gebruik te maken van onze service gaat u akkoord met deze voorwaarden."
+      },
+      "account": {
+        "title": "3. Account en toegang",
+        "items": [
+          "U bent verantwoordelijk voor het veilig houden van uw inloggegevens",
+          "U bent verantwoordelijk voor alle activiteiten onder uw account",
+          "U mag slechts één account aanmaken per persoon",
+          "Het is niet toegestaan om uw account te delen met derden",
+          "Wij behouden ons het recht voor om accounts op te schorten bij misbruik"
+        ]
+      },
+      "usage": {
+        "title": "4. Gebruik van de service",
+        "intro": "Bij het gebruik van Vinster gaat u ermee akkoord dat u:",
+        "items": [
+          "Waarheidsgetrouwe informatie verstrekt",
+          "De service alleen voor persoonlijke, niet-commerciële doeleinden gebruikt",
+          "Geen schade toebrengt aan onze systemen of die van derden",
+          "Geen inbreuk maakt op intellectuele eigendomsrechten",
+          "Zich houdt aan alle toepasselijke wet- en regelgeving"
+        ]
+      },
+      "payment": {
+        "title": "5. Betaling en prijzen",
+        "items": [
+          "De kosten voor Vinster bedragen €29 voor eenmalige toegang",
+          "Betaling gebeurt vooraf via onze beveiligde betalingspartner",
+          "Prijzen zijn inclusief BTW waar van toepassing",
+          "Na succesvolle betaling krijgt u direct toegang tot de volledige service",
+          "Wij behouden ons het recht voor om prijzen aan te passen"
+        ]
+      },
+      "cancellation": {
+        "title": "6. Herroepingsrecht",
+        "content": "Omdat Vinster een digitale service betreft die direct na aankoop volledig beschikbaar is, vervalt uw herroepingsrecht zodra u toegang heeft gekregen tot uw persoonlijke rapport. Dit is in overeenstemming met artikel 6:230p lid 1 van het Burgerlijk Wetboek."
+      },
+      "intellectual_property": {
+        "title": "7. Intellectueel eigendom",
+        "items": [
+          "Alle rechten op Vinster berusten bij De Loopbaanopleiding",
+          "Het is niet toegestaan om onze content te kopiëren of te distribueren",
+          "Uw persoonlijke rapport is eigendom van u als gebruiker",
+          "U mag uw rapport delen, maar niet commercieel exploiteren"
+        ]
+      },
+      "availability": {
+        "title": "8. Beschikbaarheid en onderhoud",
+        "items": [
+          "Wij streven naar 99% beschikbaarheid van onze service",
+          "Onderhoud wordt waar mogelijk buiten kantooruren uitgevoerd",
+          "Wij zijn niet aansprakelijk voor tijdelijke onbeschikbaarheid",
+          "Bij langdurige storing informeren wij gebruikers actief"
+        ]
+      },
+      "liability": {
+        "title": "9. Aansprakelijkheid",
+        "content": "Onze aansprakelijkheid is beperkt tot het bedrag dat u heeft betaald voor de service. Wij zijn niet aansprakelijk voor indirecte schade, gevolgschade of gederfde winst. Vinster is een hulpmiddel ter ondersteuning van loopbaankeuzes; de uiteindelijke beslissingen blijven uw eigen verantwoordelijkheid."
+      },
+      "termination": {
+        "title": "10. Opzegging",
+        "items": [
+          "U kunt uw account op elk moment verwijderen",
+          "Wij kunnen accounts opzeggen bij schending van deze voorwaarden",
+          "Bij opzegging vervalt de toegang tot de service",
+          "Uw gegevens worden binnen 30 dagen na opzegging verwijderd"
+        ]
+      },
+      "changes": {
+        "title": "11. Wijzigingen",
+        "content": "Wij behouden ons het recht voor om deze voorwaarden te wijzigen. Wijzigingen worden ten minste 30 dagen van tevoren aangekondigd via e-mail. Voortgezet gebruik na de ingangsdatum geldt als acceptatie van de nieuwe voorwaarden."
+      },
+      "law": {
+        "title": "12. Toepasselijk recht en geschillen",
+        "content": "Op deze voorwaarden is Nederlands recht van toepassing. Geschillen worden voorgelegd aan de bevoegde rechter in Nederland. Wij streven ernaar om geschillen in der minne op te lossen."
+      },
+      "contact": {
+        "title": "13. Contact",
+        "content": "Voor vragen over deze algemene voorwaarden kunt u contact met ons opnemen:",
+        "details": "Email: team@vinster.ai<br />Telefoon: +31 6 22 23 85 95<br />KvK nr: 04050762"
+      }
+    }
   }
 }

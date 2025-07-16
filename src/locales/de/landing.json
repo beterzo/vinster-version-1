@@ -155,6 +155,196 @@
         "title": "Wie können Sie Cookies verwalten?",
         "description": "Sie können Ihre Cookie-Präferenzen jederzeit über die Schaltfläche 'Cookie-Einstellungen' unten auf dieser Seite ändern.",
         "browser": "Sie können Cookies auch über Ihre Browser-Einstellungen verwalten. Bitte beachten Sie, dass das Deaktivieren bestimmter Cookies die Funktionalität der Website beeinträchtigen kann."
+      },
+      "contact": {
+        "title": "Kontakt",
+        "description": "Bei Fragen zu dieser Cookie-Richtlinie können Sie uns kontaktieren:"
+      },
+      "last_updated": "Zuletzt aktualisiert"
+    }
+  },
+  "privacy": {
+    "title": "Datenschutzerklärung",
+    "last_updated": "Zuletzt aktualisiert: 23. Juni 2025",
+    "back_to_home": "Zurück zur Startseite",
+    "sections": {
+      "who_we_are": {
+        "title": "1. Wer sind wir?",
+        "content": "Vinster ist ein Service von De Loopbaanopleiding mit Sitz in den Niederlanden. Wir sind verantwortlich für die Verarbeitung Ihrer personenbezogenen Daten, wie in dieser Datenschutzerklärung beschrieben.",
+        "contact": "E-Mail: info@deloopbaanopleiding.nl<br />Telefon: +31 6 22 23 85 95<br />Handelskammer: 04050762"
+      },
+      "data_collected": {
+        "title": "2. Welche Daten sammeln wir?",
+        "intro": "Wir sammeln die folgenden personenbezogenen Daten:",
+        "items": [
+          "Vor- und Nachname",
+          "E-Mail-Adresse",
+          "Antworten auf Fragen in der Laufbahnbeurteilung",
+          "Technische Daten wie IP-Adresse und Browser-Informationen",
+          "Zahlungsdaten (verarbeitet von unserem Zahlungspartner)"
+        ]
+      },
+      "data_usage": {
+        "title": "3. Wie verwenden wir Ihre Daten?",
+        "intro": "Wir verwenden Ihre personenbezogenen Daten für:",
+        "items": [
+          "Die Bereitstellung unseres Laufbahn-Services und die Erstellung Ihres persönlichen Berichts",
+          "Kommunikation über Ihr Konto und unsere Services",
+          "Verbesserung unserer Website und Services",
+          "Erfüllung gesetzlicher Verpflichtungen"
+        ]
+      },
+      "legal_basis": {
+        "title": "4. Rechtsgrundlage für die Verarbeitung",
+        "intro": "Wir verarbeiten Ihre personenbezogenen Daten auf Grundlage von:",
+        "items": [
+          "Erfüllung des Vertrags zwischen Ihnen und uns",
+          "Ihre Einwilligung",
+          "Berechtigtes Interesse zur Verbesserung unserer Services",
+          "Gesetzliche Verpflichtung"
+        ]
+      },
+      "data_sharing": {
+        "title": "5. Datenweitergabe",
+        "intro": "Wir geben Ihre personenbezogenen Daten nicht an Dritte weiter, außer:",
+        "items": [
+          "An unsere technischen Dienstleister (unter strengen Auftragsverarbeitungsverträgen)",
+          "Wenn dies gesetzlich vorgeschrieben ist",
+          "Mit Ihrer ausdrücklichen Einwilligung"
+        ]
+      },
+      "retention": {
+        "title": "6. Aufbewahrungsdauer",
+        "content": "Wir bewahren Ihre personenbezogenen Daten nicht länger auf als nötig. Kontodaten werden solange aufbewahrt, wie Ihr Konto aktiv ist. Nach der Löschung Ihres Kontos werden die Daten innerhalb von 30 Tagen dauerhaft gelöscht."
+      },
+      "user_rights": {
+        "title": "7. Ihre Rechte",
+        "intro": "Sie haben folgende Rechte bezüglich Ihrer personenbezogenen Daten:",
+        "items": [
+          "Recht auf Auskunft",
+          "Recht auf Berichtigung",
+          "Recht auf Löschung",
+          "Recht auf Einschränkung der Verarbeitung",
+          "Recht auf Datenübertragbarkeit",
+          "Widerspruchsrecht"
+        ],
+        "contact": "Um diese Rechte auszuüben, können Sie uns unter info@deloopbaanopleiding.nl kontaktieren"
+      },
+      "security": {
+        "title": "8. Sicherheit",
+        "content": "Wir treffen angemessene technische und organisatorische Maßnahmen, um Ihre personenbezogenen Daten vor Verlust, Missbrauch, unbefugtem Zugang, Offenlegung, Änderung oder Zerstörung zu schützen."
+      },
+      "cookies": {
+        "title": "9. Cookies",
+        "content": "Wir verwenden funktionale Cookies, die für das Funktionieren unserer Website notwendig sind. Diese Cookies speichern keine persönlichen Informationen."
+      },
+      "changes": {
+        "title": "10. Änderungen",
+        "content": "Wir können diese Datenschutzerklärung von Zeit zu Zeit ändern. Die aktuellste Version ist immer auf unserer Website verfügbar."
+      },
+      "contact": {
+        "title": "11. Kontakt",
+        "content": "Bei Fragen zu dieser Datenschutzerklärung oder zur Verarbeitung Ihrer personenbezogenen Daten können Sie uns kontaktieren:",
+        "details": "E-Mail: info@deloopbaanopleiding.nl<br />Telefon: +31 6 22 23 85 95"
+      }
+    }
+  },
+  "terms": {
+    "title": "Allgemeine Geschäftsbedingungen",
+    "last_updated": "Zuletzt aktualisiert: 23. Juni 2025",
+    "back_to_home": "Zurück zur Startseite",
+    "sections": {
+      "definitions": {
+        "title": "1. Definitionen",
+        "items": [
+          "<strong>Vinster:</strong> der von De Loopbaanopleiding angebotene Service",
+          "<strong>Nutzer:</strong> jede natürliche Person, die Vinster nutzt",
+          "<strong>Service:</strong> das Online-Laufbahn-Tool und die dazugehörigen Dienstleistungen",
+          "<strong>Konto:</strong> das persönliche Profil des Nutzers"
+        ]
+      },
+      "applicability": {
+        "title": "2. Anwendbarkeit",
+        "content": "Diese Allgemeinen Geschäftsbedingungen gelten für alle Vereinbarungen zwischen De Loopbaanopleiding und Nutzern von Vinster. Durch die Nutzung unseres Services stimmen Sie diesen Bedingungen zu."
+      },
+      "account": {
+        "title": "3. Konto und Zugang",
+        "items": [
+          "Sie sind verantwortlich für die sichere Aufbewahrung Ihrer Anmeldedaten",
+          "Sie sind verantwortlich für alle Aktivitäten unter Ihrem Konto",
+          "Sie dürfen nur ein Konto pro Person erstellen",
+          "Es ist nicht erlaubt, Ihr Konto mit Dritten zu teilen",
+          "Wir behalten uns das Recht vor, Konten bei Missbrauch zu sperren"
+        ]
+      },
+      "usage": {
+        "title": "4. Nutzung des Services",
+        "intro": "Bei der Nutzung von Vinster stimmen Sie zu, dass Sie:",
+        "items": [
+          "Wahrheitsgemäße Informationen bereitstellen",
+          "Den Service nur für persönliche, nicht-kommerzielle Zwecke nutzen",
+          "Keine Schäden an unseren Systemen oder denen Dritter verursachen",
+          "Keine Urheberrechte verletzen",
+          "Alle geltenden Gesetze und Vorschriften einhalten"
+        ]
+      },
+      "payment": {
+        "title": "5. Zahlung und Preise",
+        "items": [
+          "Die Kosten für Vinster betragen €29 für einmaligen Zugang",
+          "Die Zahlung erfolgt im Voraus über unseren sicheren Zahlungspartner",
+          "Preise verstehen sich inklusive MwSt., soweit anwendbar",
+          "Nach erfolgreicher Zahlung erhalten Sie sofort Zugang zum vollständigen Service",
+          "Wir behalten uns das Recht vor, Preise anzupassen"
+        ]
+      },
+      "cancellation": {
+        "title": "6. Widerrufsrecht",
+        "content": "Da Vinster ein digitaler Service ist, der sofort nach dem Kauf vollständig verfügbar ist, erlischt Ihr Widerrufsrecht, sobald Sie Zugang zu Ihrem persönlichen Bericht erhalten haben. Dies entspricht Artikel 6:230p Absatz 1 des niederländischen Bürgerlichen Gesetzbuchs."
+      },
+      "intellectual_property": {
+        "title": "7. Geistiges Eigentum",
+        "items": [
+          "Alle Rechte an Vinster liegen bei De Loopbaanopleiding",
+          "Es ist nicht erlaubt, unsere Inhalte zu kopieren oder zu verbreiten",
+          "Ihr persönlicher Bericht ist Ihr Eigentum als Nutzer",
+          "Sie dürfen Ihren Bericht teilen, aber nicht kommerziell verwerten"
+        ]
+      },
+      "availability": {
+        "title": "8. Verfügbarkeit und Wartung",
+        "items": [
+          "Wir streben eine 99%ige Verfügbarkeit unseres Services an",
+          "Wartungsarbeiten werden nach Möglichkeit außerhalb der Geschäftszeiten durchgeführt",
+          "Wir haften nicht für vorübergehende Nichtverfügbarkeit",
+          "Bei länger andauernden Störungen informieren wir Nutzer aktiv"
+        ]
+      },
+      "liability": {
+        "title": "9. Haftung",
+        "content": "Unsere Haftung ist auf den Betrag begrenzt, den Sie für den Service bezahlt haben. Wir haften nicht für indirekte Schäden, Folgeschäden oder entgangene Gewinne. Vinster ist ein Hilfsmittel zur Unterstützung von Laufbahnentscheidungen; die endgültigen Entscheidungen bleiben Ihre eigene Verantwortung."
+      },
+      "termination": {
+        "title": "10. Kündigung",
+        "items": [
+          "Sie können Ihr Konto jederzeit löschen",
+          "Wir können Konten bei Verletzung dieser Bedingungen kündigen",
+          "Bei Kündigung erlischt der Zugang zum Service",
+          "Ihre Daten werden innerhalb von 30 Tagen nach Kündigung gelöscht"
+        ]
+      },
+      "changes": {
+        "title": "11. Änderungen",
+        "content": "Wir behalten uns das Recht vor, diese Bedingungen zu ändern. Änderungen werden mindestens 30 Tage im Voraus per E-Mail angekündigt. Die weitere Nutzung nach dem Inkrafttreten gilt als Zustimmung zu den neuen Bedingungen."
+      },
+      "law": {
+        "title": "12. Anwendbares Recht und Streitigkeiten",
+        "content": "Für diese Bedingungen gilt niederländisches Recht. Streitigkeiten werden dem zuständigen Gericht in den Niederlanden vorgelegt. Wir bemühen uns, Streitigkeiten gütlich zu lösen."
+      },
+      "contact": {
+        "title": "13. Kontakt",
+        "content": "Bei Fragen zu diesen Allgemeinen Geschäftsbedingungen können Sie uns kontaktieren:",
+        "details": "E-Mail: team@vinster.ai<br />Telefon: +31 6 22 23 85 95<br />Handelskammer: 04050762"
       }
     }
   }

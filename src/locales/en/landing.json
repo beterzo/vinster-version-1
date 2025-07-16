@@ -163,5 +163,190 @@
       },
       "last_updated": "Last updated"
     }
+  },
+  "privacy": {
+    "title": "Privacy Statement",
+    "last_updated": "Last updated: June 23, 2025",
+    "back_to_home": "Back to Home",
+    "sections": {
+      "who_we_are": {
+        "title": "1. Who are we?",
+        "content": "Vinster is a service of De Loopbaanopleiding, based in the Netherlands. We are responsible for processing your personal data as described in this privacy statement.",
+        "contact": "Email: info@deloopbaanopleiding.nl<br />Phone: +31 6 22 23 85 95<br />Chamber of Commerce: 04050762"
+      },
+      "data_collected": {
+        "title": "2. What data do we collect?",
+        "intro": "We collect the following personal data:",
+        "items": [
+          "First and last name",
+          "Email address",
+          "Answers to career assessment questions",
+          "Technical data such as IP address and browser information",
+          "Payment data (processed by our payment partner)"
+        ]
+      },
+      "data_usage": {
+        "title": "3. How do we use your data?",
+        "intro": "We use your personal data for:",
+        "items": [
+          "Providing our career service and generating your personal report",
+          "Communication about your account and our services",
+          "Improving our website and services",
+          "Complying with legal obligations"
+        ]
+      },
+      "legal_basis": {
+        "title": "4. Legal basis for processing",
+        "intro": "We process your personal data based on:",
+        "items": [
+          "Performance of the agreement between you and us",
+          "Your consent",
+          "Legitimate interest for improving our services",
+          "Legal obligation"
+        ]
+      },
+      "data_sharing": {
+        "title": "5. Data sharing",
+        "intro": "We do not share your personal data with third parties, except:",
+        "items": [
+          "With our technical service providers (under strict processing agreements)",
+          "When legally required",
+          "With your explicit consent"
+        ]
+      },
+      "retention": {
+        "title": "6. Retention period",
+        "content": "We do not keep your personal data longer than necessary. Account data is retained as long as your account is active. After deleting your account, data is permanently deleted within 30 days."
+      },
+      "user_rights": {
+        "title": "7. Your rights",
+        "intro": "You have the following rights regarding your personal data:",
+        "items": [
+          "Right of access",
+          "Right to rectification",
+          "Right to erasure",
+          "Right to restriction of processing",
+          "Right to data portability",
+          "Right to object"
+        ],
+        "contact": "To exercise these rights, you can contact us at info@deloopbaanopleiding.nl"
+      },
+      "security": {
+        "title": "8. Security",
+        "content": "We take appropriate technical and organizational measures to protect your personal data against loss, misuse, unauthorized access, disclosure, alteration or destruction."
+      },
+      "cookies": {
+        "title": "9. Cookies",
+        "content": "We use functional cookies that are necessary for the functioning of our website. These cookies do not store personal information."
+      },
+      "changes": {
+        "title": "10. Changes",
+        "content": "We may change this privacy statement from time to time. The most recent version is always available on our website."
+      },
+      "contact": {
+        "title": "11. Contact",
+        "content": "For questions about this privacy statement or the processing of your personal data, you can contact us:",
+        "details": "Email: info@deloopbaanopleiding.nl<br />Phone: +31 6 22 23 85 95"
+      }
+    }
+  },
+  "terms": {
+    "title": "Terms and Conditions",
+    "last_updated": "Last updated: June 23, 2025",
+    "back_to_home": "Back to Home",
+    "sections": {
+      "definitions": {
+        "title": "1. Definitions",
+        "items": [
+          "<strong>Vinster:</strong> the service offered by De Loopbaanopleiding",
+          "<strong>User:</strong> any natural person using Vinster",
+          "<strong>Service:</strong> the online career tool and associated services",
+          "<strong>Account:</strong> the user's personal profile"
+        ]
+      },
+      "applicability": {
+        "title": "2. Applicability",
+        "content": "These terms and conditions apply to all agreements between De Loopbaanopleiding and users of Vinster. By using our service, you agree to these terms."
+      },
+      "account": {
+        "title": "3. Account and access",
+        "items": [
+          "You are responsible for keeping your login credentials secure",
+          "You are responsible for all activities under your account",
+          "You may only create one account per person",
+          "It is not allowed to share your account with third parties",
+          "We reserve the right to suspend accounts in case of abuse"
+        ]
+      },
+      "usage": {
+        "title": "4. Use of the service",
+        "intro": "When using Vinster, you agree that you:",
+        "items": [
+          "Provide truthful information",
+          "Use the service only for personal, non-commercial purposes",
+          "Do not harm our systems or those of third parties",
+          "Do not infringe intellectual property rights",
+          "Comply with all applicable laws and regulations"
+        ]
+      },
+      "payment": {
+        "title": "5. Payment and prices",
+        "items": [
+          "The cost for Vinster is €29 for one-time access",
+          "Payment is made in advance via our secure payment partner",
+          "Prices include VAT where applicable",
+          "After successful payment, you get immediate access to the full service",
+          "We reserve the right to adjust prices"
+        ]
+      },
+      "cancellation": {
+        "title": "6. Right of withdrawal",
+        "content": "Since Vinster is a digital service that is fully available immediately after purchase, your right of withdrawal expires once you have gained access to your personal report. This is in accordance with Article 6:230p paragraph 1 of the Dutch Civil Code."
+      },
+      "intellectual_property": {
+        "title": "7. Intellectual property",
+        "items": [
+          "All rights to Vinster belong to De Loopbaanopleiding",
+          "It is not allowed to copy or distribute our content",
+          "Your personal report is your property as a user",
+          "You may share your report, but not exploit it commercially"
+        ]
+      },
+      "availability": {
+        "title": "8. Availability and maintenance",
+        "items": [
+          "We strive for 99% availability of our service",
+          "Maintenance is performed outside office hours where possible",
+          "We are not liable for temporary unavailability",
+          "In case of prolonged outages, we actively inform users"
+        ]
+      },
+      "liability": {
+        "title": "9. Liability",
+        "content": "Our liability is limited to the amount you paid for the service. We are not liable for indirect damage, consequential damage or lost profits. Vinster is a tool to support career choices; the final decisions remain your own responsibility."
+      },
+      "termination": {
+        "title": "10. Termination",
+        "items": [
+          "You can delete your account at any time",
+          "We can terminate accounts for violation of these terms",
+          "Upon termination, access to the service expires",
+          "Your data will be deleted within 30 days after termination"
+        ]
+      },
+      "changes": {
+        "title": "11. Changes",
+        "content": "We reserve the right to change these terms. Changes will be announced at least 30 days in advance via email. Continued use after the effective date constitutes acceptance of the new terms."
+      },
+      "law": {
+        "title": "12. Applicable law and disputes",
+        "content": "Dutch law applies to these terms. Disputes will be submitted to the competent court in the Netherlands. We strive to resolve disputes amicably."
+      },
+      "contact": {
+        "title": "13. Contact",
+        "content": "For questions about these terms and conditions, you can contact us:",
+        "details": "Email: team@vinster.ai<br />Phone: +31 6 22 23 85 95<br />Chamber of Commerce: 04050762"
+      }
+    }
   }
 }
