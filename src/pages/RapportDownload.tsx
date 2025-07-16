@@ -109,7 +109,7 @@ const RapportDownload = () => {
       console.error('Download error:', error);
       toast({
         title: t('journey.rapport.download.download_failed'),
-        description: t('journey.rapport.download.download_error').replace('{error}', error instanceof Error ? error.message : 'Onbekende fout'),
+        description: t('journey.rapport.download.download_error').replace('{error}', error instanceof Error ? error.message : t('auth.unknown_error')),
         variant: "destructive"
       });
     } finally {
