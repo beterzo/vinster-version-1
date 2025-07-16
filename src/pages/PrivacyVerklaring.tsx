@@ -38,7 +38,7 @@ const PrivacyVerklaring = () => {
               <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('privacy.sections.who_we_are.title')}</h2>
               <p>{t('privacy.sections.who_we_are.content')}</p>
               <p dangerouslySetInnerHTML={{
-              __html: `<strong>Contactgegevens:</strong><br />${t('privacy.sections.who_we_are.contact')}`
+              __html: `<strong>${t('privacy.sections.who_we_are.contact_label')}</strong><br />${t('privacy.sections.who_we_are.contact')}`
             }} />
             </section>
 

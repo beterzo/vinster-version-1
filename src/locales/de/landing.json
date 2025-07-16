@@ -171,7 +171,8 @@
       "who_we_are": {
         "title": "1. Wer sind wir?",
         "content": "Vinster ist ein Service von De Loopbaanopleiding mit Sitz in den Niederlanden. Wir sind verantwortlich für die Verarbeitung Ihrer personenbezogenen Daten, wie in dieser Datenschutzerklärung beschrieben.",
-        "contact": "E-Mail: info@deloopbaanopleiding.nl<br />Telefon: +31 6 22 23 85 95<br />Handelskammer: 04050762"
+        "contact": "E-Mail: team@vinster.ai<br />Handelskammer: 04050762",
+        "contact_label": "Kontaktdaten:"
       },
       "data_collected": {
         "title": "2. Welche Daten sammeln wir?",
@@ -228,7 +229,7 @@
           "Recht auf Datenübertragbarkeit",
           "Widerspruchsrecht"
         ],
-        "contact": "Um diese Rechte auszuüben, können Sie uns unter info@deloopbaanopleiding.nl kontaktieren"
+        "contact": "Um diese Rechte auszuüben, können Sie uns unter team@vinster.ai kontaktieren"
       },
       "security": {
         "title": "8. Sicherheit",
@@ -245,7 +246,7 @@
       "contact": {
         "title": "11. Kontakt",
         "content": "Bei Fragen zu dieser Datenschutzerklärung oder zur Verarbeitung Ihrer personenbezogenen Daten können Sie uns kontaktieren:",
-        "details": "E-Mail: info@deloopbaanopleiding.nl<br />Telefon: +31 6 22 23 85 95"
+        "details": "E-Mail: team@vinster.ai"
       }
     }
   },

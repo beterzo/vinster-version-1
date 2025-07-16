@@ -171,7 +171,8 @@
       "who_we_are": {
         "title": "1. Hvem er vi?",
         "content": "Vinster er en tjeneste fra De Loopbaanopleiding, basert i Nederland. Vi er ansvarlige for behandlingen av dine personopplysninger som beskrevet i denne personvernerklæringen.",
-        "contact": "E-post: info@deloopbaanopleiding.nl<br />Telefon: +31 6 22 23 85 95<br />Handelsregister: 04050762"
+        "contact": "E-post: team@vinster.ai<br />Handelsregister: 04050762",
+        "contact_label": "Kontaktdetaljer:"
       },
       "data_collected": {
         "title": "2. Hvilke data samler vi inn?",
@@ -228,7 +229,7 @@
           "Rett til dataportabilitet",
           "Rett til motsigelse"
         ],
-        "contact": "For å utøve disse rettighetene kan du kontakte oss på info@deloopbaanopleiding.nl"
+        "contact": "For å utøve disse rettighetene kan du kontakte oss på team@vinster.ai"
       },
       "security": {
         "title": "8. Sikkerhet",
@@ -245,7 +246,7 @@
       "contact": {
         "title": "11. Kontakt",
         "content": "For spørsmål om denne personvernerklæringen eller behandlingen av dine personopplysninger kan du kontakte oss:",
-        "details": "E-post: info@deloopbaanopleiding.nl<br />Telefon: +31 6 22 23 85 95"
+        "details": "E-post: team@vinster.ai"
       }
     }
   },
