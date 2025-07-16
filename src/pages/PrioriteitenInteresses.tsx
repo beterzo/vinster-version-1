@@ -11,11 +11,13 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useExistingReport } from "@/hooks/useExistingReport";
+import { useTranslation } from "@/hooks/useTranslation";
 import { cleanKeywords } from "@/utils/keywordUtils";
 
 const PrioriteitenInteresses = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { t } = useTranslation();
   const { toast } = useToast();
   const {
     responses,
@@ -51,8 +53,8 @@ const PrioriteitenInteresses = () => {
     if (!reportLoading && hasExistingReport) {
       console.log('🚫 User already has a report, redirecting to download page');
       toast({
-        title: "Rapport al gegenereerd",
-        description: "Je hebt al een loopbaanrapport. Je wordt doorgestuurd naar de download pagina.",
+        title: t('common.toast.report_already_generated'),
+        description: t('common.toast.report_already_generated_description'),
         variant: "default",
       });
       navigate('/rapport-download');
@@ -87,8 +89,8 @@ const PrioriteitenInteresses = () => {
   const handleComplete = async () => {
     if (!canProceed) {
       toast({
-        title: "Selecteer minimaal 5 interesses",
-        description: "Je moet minimaal 5 interesses selecteren voordat je kunt afronden.",
+        title: t('common.toast.select_minimum_keywords'),
+        description: t('common.toast.select_minimum_keywords_description').replace('items', 'interesses'),
         variant: "destructive",
       });
       return;
@@ -96,8 +98,8 @@ const PrioriteitenInteresses = () => {
 
     if (!user) {
       toast({
-        title: "Fout",
-        description: "Geen gebruiker gevonden.",
+        title: t('common.toast.no_user_found'),
+        description: t('common.toast.no_user_found_description'),
         variant: "destructive",
       });
       return;
@@ -106,8 +108,8 @@ const PrioriteitenInteresses = () => {
     // Double-check for existing report before creating new one
     if (hasExistingReport) {
       toast({
-        title: "Rapport al gegenereerd",
-        description: "Je hebt al een loopbaanrapport gegenereerd. Je wordt doorgestuurd naar de download pagina.",
+        title: t('common.toast.report_already_exists'),
+        description: t('common.toast.report_already_exists_description'),
         variant: "default",
       });
       navigate('/rapport-download');
@@ -147,8 +149,8 @@ const PrioriteitenInteresses = () => {
       
       if (!webhookData) {
         toast({
-          title: "Fout",
-          description: "Kan geen gebruikersgegevens vinden voor het verzenden van data.",
+          title: t('common.toast.no_user_data'),
+          description: t('common.toast.no_user_data_description'),
           variant: "destructive",
         });
         return;
@@ -159,8 +161,8 @@ const PrioriteitenInteresses = () => {
       console.log("Profile completed and Make.com webhook sent - PDF generation started!");
       
       toast({
-        title: "Profiel afgerond!",
-        description: "Je rapport wordt nu automatisch gegenereerd. Je wordt doorgestuurd naar de rapport pagina.",
+        title: t('common.toast.profile_completed'),
+        description: t('common.toast.profile_completed_description'),
         variant: "default",
       });
       
@@ -170,8 +172,8 @@ const PrioriteitenInteresses = () => {
       console.error("Error completing profile:", error);
       
       toast({
-        title: "Fout bij afronden",
-        description: "Er ging iets mis bij het afronden van je profiel. Probeer het opnieuw.",
+        title: t('common.toast.completion_error'),
+        description: t('common.toast.completion_error_description'),
         variant: "destructive",
       });
     } finally {

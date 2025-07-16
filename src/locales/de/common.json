@@ -88,6 +88,24 @@
     "status_error": "Fehler beim Laden des Status",
     "pdf_generating": "PDF wird generiert...",
     "pdf_ready": "PDF ist bereit",
-    "pdf_error": "Fehler bei der PDF-Generierung"
+    "pdf_error": "Fehler bei der PDF-Generierung",
+    "report_already_generated": "Bericht bereits erstellt",
+    "report_already_generated_description": "Sie haben bereits einen Karrierebericht. Sie werden zur Download-Seite weitergeleitet.",
+    "report_already_exists": "Bericht bereits erstellt",
+    "report_already_exists_description": "Sie haben bereits einen Karrierebericht erstellt. Sie werden zur Download-Seite weitergeleitet.",
+    "extra_info_saved": "Zusätzliche Informationen gespeichert!",
+    "extra_info_saved_description": "Jetzt können Sie Ihre Prioritäten festlegen.",
+    "fill_all_fields": "Alle Felder ausfüllen",
+    "fill_all_fields_description": "Füllen Sie alle Fragen aus, bevor Sie fortfahren.",
+    "select_minimum_keywords": "Mindestens 5 Elemente auswählen",
+    "select_minimum_keywords_description": "Sie müssen mindestens 5 Elemente auswählen, bevor Sie abschließen können.",
+    "no_user_found": "Fehler",
+    "no_user_found_description": "Kein Benutzer gefunden.",
+    "profile_completed": "Profil abgeschlossen!",
+    "profile_completed_description": "Ihr Bericht wird jetzt automatisch generiert. Sie werden zur Berichtsseite weitergeleitet.",
+    "completion_error": "Fehler beim Abschließen",
+    "completion_error_description": "Beim Abschließen Ihres Profils ist ein Fehler aufgetreten. Versuchen Sie es erneut.",
+    "no_user_data": "Fehler",
+    "no_user_data_description": "Kann keine Benutzerdaten zum Senden der Daten finden."
   }
 }

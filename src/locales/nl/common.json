@@ -35,6 +35,24 @@
     "status_error": "Fout bij het laden van status",
     "pdf_generating": "PDF wordt gegenereerd...",
     "pdf_ready": "PDF is klaar",
-    "pdf_error": "Fout bij PDF generatie"
+    "pdf_error": "Fout bij PDF generatie",
+    "report_already_generated": "Rapport al gegenereerd",
+    "report_already_generated_description": "Je hebt al een loopbaanrapport. Je wordt doorgestuurd naar de download pagina.",
+    "report_already_exists": "Rapport al gegenereerd",
+    "report_already_exists_description": "Je hebt al een loopbaanrapport gegenereerd. Je wordt doorgestuurd naar de download pagina.",
+    "extra_info_saved": "Extra informatie opgeslagen!",
+    "extra_info_saved_description": "Nu kun je je prioriteiten bepalen.",
+    "fill_all_fields": "Vul alle velden in",
+    "fill_all_fields_description": "Vul alle vragen in voordat je verder gaat.",
+    "select_minimum_keywords": "Selecteer minimaal 5 items",
+    "select_minimum_keywords_description": "Je moet minimaal 5 items selecteren voordat je kunt afronden.",
+    "no_user_found": "Fout",
+    "no_user_found_description": "Geen gebruiker gevonden.",
+    "profile_completed": "Profiel afgerond!",
+    "profile_completed_description": "Je rapport wordt nu automatisch gegenereerd. Je wordt doorgestuurd naar de rapport pagina.",
+    "completion_error": "Fout bij afronden",
+    "completion_error_description": "Er ging iets mis bij het afronden van je profiel. Probeer het opnieuw.",
+    "no_user_data": "Fout",
+    "no_user_data_description": "Kan geen gebruikersgegevens vinden voor het verzenden van data."
   }
 }

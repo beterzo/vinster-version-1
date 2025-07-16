@@ -47,6 +47,24 @@
     "status_error": "Feil ved lasting av status",
     "pdf_generating": "PDF genereres...",
     "pdf_ready": "PDF er klar",
-    "pdf_error": "Feil ved PDF-generering"
+    "pdf_error": "Feil ved PDF-generering",
+    "report_already_generated": "Rapport allerede generert",
+    "report_already_generated_description": "Du har allerede en karriererapport. Du blir videresendt til nedlastingssiden.",
+    "report_already_exists": "Rapport allerede generert",
+    "report_already_exists_description": "Du har allerede generert en karriererapport. Du blir videresendt til nedlastingssiden.",
+    "extra_info_saved": "Ekstra informasjon lagret!",
+    "extra_info_saved_description": "Nå kan du sette dine prioriteringer.",
+    "fill_all_fields": "Fyll ut alle felt",
+    "fill_all_fields_description": "Fyll ut alle spørsmålene før du fortsetter.",
+    "select_minimum_keywords": "Velg minst 5 elementer",
+    "select_minimum_keywords_description": "Du må velge minst 5 elementer før du kan fullføre.",
+    "no_user_found": "Feil",
+    "no_user_found_description": "Ingen bruker funnet.",
+    "profile_completed": "Profil fullført!",
+    "profile_completed_description": "Rapporten din genereres nå automatisk. Du blir videresendt til rapportsiden.",
+    "completion_error": "Feil ved fullføring",
+    "completion_error_description": "Noe gikk galt ved fullføring av profilen din. Prøv igjen.",
+    "no_user_data": "Feil",
+    "no_user_data_description": "Kan ikke finne brukerdata for sending av data."
   }
 }

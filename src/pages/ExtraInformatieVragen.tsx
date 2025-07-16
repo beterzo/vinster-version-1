@@ -5,9 +5,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "@/hooks/useTranslation";
 import { useExtraInformatieResponses } from "@/hooks/useExtraInformatieResponses";
 import { useToast } from "@/hooks/use-toast";
-import { useTranslation } from "@/hooks/useTranslation";
 
 const ExtraInformatieVragen = () => {
   const navigate = useNavigate();
@@ -56,8 +56,8 @@ const ExtraInformatieVragen = () => {
   const handleComplete = async () => {
     if (!allFieldsFilled) {
       toast({
-        title: "Vul alle velden in",
-        description: "Vul alle vragen in voordat je verder gaat.",
+        title: t('common.toast.fill_all_fields'),
+        description: t('common.toast.fill_all_fields_description'),
         variant: "destructive",
       });
       return;
@@ -67,8 +67,8 @@ const ExtraInformatieVragen = () => {
       await saveResponses(answers);
       
       toast({
-        title: "Extra informatie opgeslagen!",
-        description: "Nu kun je je prioriteiten bepalen.",
+        title: t('common.toast.extra_info_saved'),
+        description: t('common.toast.extra_info_saved_description'),
         variant: "default",
       });
       

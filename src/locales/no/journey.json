@@ -265,6 +265,36 @@
       "regenerate_button": "Lag ny søkeprofil"
     }
   },
+  "rapport": {
+    "download": {
+      "title": "Last ned karriererapport",
+      "description": "Din personlige karriererapport er klar! Denne rapporten inneholder alle innsikter og anbefalinger basert på svarene dine.",
+      "download_button": "Last ned karriererapport PDF",
+      "research_plan_button": "Se forskningsplan",
+      "back_button": "Tilbake til dashboard",
+      "loading_data": "Laster rapportdata...",
+      "generating_title": "Rapporten din genereres...",
+      "generating_description": "Vi jobber hardt med din personlige karriererapport. Dette kan ta noen minutter.",
+      "generating_status": "Rapporten din genereres... Dette kan ta 2-5 minutter.",
+      "generating_tip": "💡 **Tips:** La denne siden være åpen. Du får automatisk beskjed når rapporten din er klar!",
+      "error_title": "Noe gikk galt",
+      "error_description": "Det oppstod en feil ved generering av rapporten din. Prøv igjen eller kontakt support.",
+      "error_technical": "En teknisk feil oppstod. Kontakt support hvis dette problemet vedvarer.",
+      "pending_title": "Rapport forberedes...",
+      "pending_description": "Profilen din er fullført og rapporten din genereres automatisk.",
+      "refresh_status": "Oppdater status",
+      "check_status": "Sjekk status",
+      "refresh_page": "Oppdater side",
+      "downloading": "Laster ned...",
+      "download_failed": "Nedlasting mislyktes",
+      "download_error": "Noe gikk galt ved nedlasting: {error}",
+      "view_browser": "Se i nettleser",
+      "save_tip": "💡 **Tips:** Ta godt vare på rapporten din. Den inneholder verdifulle innsikter for karrieren din!",
+      "next_step_title": "Klar for neste steg?",
+      "next_step_description": "Følg forskningsplanen vår for å finne den perfekte stillingen for deg selv.",
+      "generating_fallback": "Rapporten din genereres fortsatt. Dette kan ta noen minutter."
+    }
+  },
   "restart_explanation": {
     "title": "Start reisen på nytt",
     "subtitle": "Vil du gå gjennom Vinster-reisen igjen? Her er hvordan det fungerer.",
