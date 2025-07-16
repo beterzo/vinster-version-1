@@ -101,5 +101,61 @@
       "kvk": "Handelsregisternummer",
       "copyright": "© 2024 Vinster. Alle Rechte vorbehalten."
     }
+  },
+  "cookies": {
+    "banner": {
+      "message": "Wir verwenden Cookies, um Ihre Erfahrung zu verbessern und unsere Website zu optimieren. Sie können Ihre Präferenzen unten anpassen.",
+      "accept": "Alle akzeptieren",
+      "customize": "Präferenzen anpassen"
+    },
+    "categories": {
+      "necessary": {
+        "title": "Notwendige Cookies",
+        "description": "Diese Cookies sind für das ordnungsgemäße Funktionieren der Website unerlässlich."
+      },
+      "statistics": {
+        "title": "Statistik-Cookies",
+        "description": "Diese Cookies helfen uns zu verstehen, wie Besucher unsere Website nutzen."
+      },
+      "marketing": {
+        "title": "Marketing-Cookies",
+        "description": "Diese Cookies werden für Werbung und Marketing verwendet."
+      }
+    },
+    "policy": {
+      "title": "Cookie-Richtlinie",
+      "what_are_cookies": {
+        "title": "Was sind Cookies?",
+        "description": "Cookies sind kleine Textdateien, die auf Ihrem Gerät gespeichert werden, wenn Sie unsere Website besuchen. Sie helfen uns, die Website zum Laufen zu bringen und Ihre Erfahrung zu verbessern."
+      },
+      "which_cookies": {
+        "title": "Welche Cookies verwenden wir?",
+        "necessary": {
+          "description": "Diese Cookies sind für unsere Website unerlässlich:",
+          "session": "Sitzungs-Cookies für Anmeldung und Navigation",
+          "auth": "Authentifizierungs-Cookies für Kontozugang",
+          "preferences": "Präferenz-Cookies für Sprache und Einstellungen"
+        },
+        "statistics": {
+          "description": "Diese Cookies helfen uns, unsere Website zu verbessern:",
+          "analytics": "Analytik-Cookies für Website-Nutzung",
+          "performance": "Leistungs-Cookies für Website-Geschwindigkeit"
+        },
+        "marketing": {
+          "description": "Diese Cookies werden für Marketing verwendet:",
+          "advertising": "Werbe-Cookies für personalisierte Anzeigen",
+          "remarketing": "Remarketing-Cookies für zielgerichtete Anzeigen"
+        }
+      },
+      "retention": {
+        "title": "Wie lange bewahren wir Cookies auf?",
+        "description": "Sitzungs-Cookies werden gelöscht, wenn Sie Ihren Browser schließen. Dauerhafte Cookies werden maximal 2 Jahre aufbewahrt, es sei denn, Sie löschen sie früher."
+      },
+      "manage": {
+        "title": "Wie können Sie Cookies verwalten?",
+        "description": "Sie können Ihre Cookie-Präferenzen jederzeit über die Schaltfläche 'Cookie-Einstellungen' unten auf dieser Seite ändern.",
+        "browser": "Sie können Cookies auch über Ihre Browser-Einstellungen verwalten. Bitte beachten Sie, dass das Deaktivieren bestimmter Cookies die Funktionalität der Website beeinträchtigen kann."
+      }
+    }
   }
 }
