@@ -10,16 +10,16 @@ const OnderzoeksplanPagina = () => {
   const { t } = useTranslation();
 
   const steps = [
-    t('onderzoeksplan.step1'),
-    t('onderzoeksplan.step2'),
-    t('onderzoeksplan.step3'),
-    t('onderzoeksplan.step4'),
-    t('onderzoeksplan.step5'),
-    t('onderzoeksplan.step6'),
-    t('onderzoeksplan.step7'),
-    t('onderzoeksplan.step8'),
-    t('onderzoeksplan.step9'),
-    t('onderzoeksplan.step10')
+    t('journey.onderzoeksplan.step1'),
+    t('journey.onderzoeksplan.step2'),
+    t('journey.onderzoeksplan.step3'),
+    t('journey.onderzoeksplan.step4'),
+    t('journey.onderzoeksplan.step5'),
+    t('journey.onderzoeksplan.step6'),
+    t('journey.onderzoeksplan.step7'),
+    t('journey.onderzoeksplan.step8'),
+    t('journey.onderzoeksplan.step9'),
+    t('journey.onderzoeksplan.step10')
   ];
 
   return (
@@ -42,14 +42,14 @@ const OnderzoeksplanPagina = () => {
       <div className="max-w-[1440px] mx-auto px-6 py-12">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-blue-900 mb-4">
-            {t('onderzoeksplan.title')}
+            {t('journey.onderzoeksplan.title')}
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-6">
-            {t('onderzoeksplan.subtitle')}
+            {t('journey.onderzoeksplan.subtitle')}
           </p>
           <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 max-w-3xl mx-auto">
             <p className="text-yellow-800 font-medium">
-              {t('onderzoeksplan.tip')}
+              {t('journey.onderzoeksplan.tip')}
             </p>
           </div>
         </div>
@@ -57,7 +57,7 @@ const OnderzoeksplanPagina = () => {
         <Card className="rounded-3xl shadow-xl mb-8">
           <CardContent className="p-12">
             <h2 className="text-2xl font-bold text-blue-900 mb-8 text-center">
-              {t('onderzoeksplan.steps_title')}
+              {t('journey.onderzoeksplan.steps_title')}
             </h2>
             
             {/* Steps */}
@@ -81,29 +81,29 @@ const OnderzoeksplanPagina = () => {
             {/* Final Instructions */}
             <div className="bg-green-50 border border-green-200 rounded-lg p-6 mb-8">
               <h3 className="text-lg font-semibold text-green-800 mb-3">
-                {t('onderzoeksplan.after_research_title')}
+                {t('journey.onderzoeksplan.after_research_title')}
               </h3>
               <p className="text-green-700 mb-4">
-                {t('onderzoeksplan.after_research_description')}
+                {t('journey.onderzoeksplan.after_research_description')}
               </p>
               <p className="text-green-700 mb-4">
-                {t('onderzoeksplan.after_research_action')}
+                {t('journey.onderzoeksplan.after_research_action')}
               </p>
               <p className="text-green-700 font-semibold">
-                {t('onderzoeksplan.final_message')}
+                {t('journey.onderzoeksplan.final_message')}
               </p>
             </div>
 
             {/* Important Notice */}
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
               <h3 className="text-lg font-semibold text-blue-800 mb-3">
-                {t('onderzoeksplan.time_notice_title')}
+                {t('journey.onderzoeksplan.time_notice_title')}
               </h3>
               <p className="text-blue-700 mb-3">
-                {t('onderzoeksplan.time_notice_description')}
+                {t('journey.onderzoeksplan.time_notice_description')}
               </p>
               <p className="text-blue-700">
-                {t('onderzoeksplan.time_notice_details')}
+                {t('journey.onderzoeksplan.time_notice_details')}
               </p>
             </div>
 
@@ -115,7 +115,7 @@ const OnderzoeksplanPagina = () => {
                 className="bg-blue-900 hover:bg-blue-800 text-white font-semibold px-8 py-4 rounded-lg flex items-center gap-2 mx-auto"
               >
                 <Home className="w-5 h-5" />
-                {t('onderzoeksplan.back_button')}
+                {t('journey.onderzoeksplan.back_button')}
               </Button>
             </div>
           </CardContent>
