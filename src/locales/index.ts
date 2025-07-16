@@ -87,7 +87,11 @@ export const translations = {
     for_whom: enForWhom.for_whom,
     faq: enFaq.faq,
     experiences: enExperiences.experiences,
-    contact: enContact.contact
+    contact: enContact.contact,
+    // Make privacy, terms and cookies keys available at top level
+    privacy: enLanding.privacy,
+    terms: enLanding.terms,
+    cookies: enLanding.cookies
   },
   nl: {
     navigation: nlNavigation,
@@ -119,7 +123,11 @@ export const translations = {
     for_whom: nlForWhom.for_whom,
     faq: nlFaq.faq,
     experiences: nlExperiences.experiences,
-    contact: nlContact.contact
+    contact: nlContact.contact,
+    // Make privacy, terms and cookies keys available at top level
+    privacy: nlLanding.privacy,
+    terms: nlLanding.terms,
+    cookies: nlLanding.cookies
   },
   de: {
     navigation: deNavigation,
@@ -151,7 +159,11 @@ export const translations = {
     for_whom: (deForWhom as any).for_whom || deForWhom,
     faq: (deFaq as any).faq || deFaq,
     experiences: (deExperiences as any).experiences || deExperiences,
-    contact: (deContact as any).contact || deContact
+    contact: (deContact as any).contact || deContact,
+    // Make privacy, terms and cookies keys available at top level
+    privacy: (deLanding as any).privacy || deLanding,
+    terms: (deLanding as any).terms || deLanding,
+    cookies: (deLanding as any).cookies || deLanding
   },
 
 
@@ -185,6 +197,10 @@ export const translations = {
     for_whom: (noForWhom as any).for_whom || noForWhom,
     faq: (noFaq as any).faq || noFaq,
     experiences: (noExperiences as any).experiences || noExperiences,
-    contact: (noContact as any).contact || noContact
+    contact: (noContact as any).contact || noContact,
+    // Make privacy, terms and cookies keys available at top level
+    privacy: (noLanding as any).privacy || noLanding,
+    terms: (noLanding as any).terms || noLanding,
+    cookies: (noLanding as any).cookies || noLanding
   }
 };
