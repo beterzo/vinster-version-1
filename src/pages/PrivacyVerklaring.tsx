@@ -42,130 +42,90 @@ const PrivacyVerklaring = () => {
           
           <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed space-y-6">
             <p className="text-sm text-gray-500 mb-8">
-              Laatst bijgewerkt: 23 juni 2025
+              {t('privacy.last_updated')}
             </p>
 
             <section>
-              <h2 className="text-2xl font-semibold text-blue-900 mb-4">1. Wie zijn wij?</h2>
-              <p>
-                Vinster is een service van De Loopbaanopleiding, gevestigd in Nederland. 
-                Wij zijn verantwoordelijk voor de verwerking van uw persoonsgegevens zoals beschreven in deze privacyverklaring.
-              </p>
-              <p>
-                <strong>Contactgegevens:</strong><br />
-                Email: info@deloopbaanopleiding.nl<br />
-                Telefoon: +31 6 22 23 85 95<br />
-                KvK nr: 04050762
-              </p>
+              <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('privacy.sections.who_we_are.title')}</h2>
+              <p>{t('privacy.sections.who_we_are.content')}</p>
+              <p dangerouslySetInnerHTML={{ __html: `<strong>Contactgegevens:</strong><br />${t('privacy.sections.who_we_are.contact')}` }} />
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-blue-900 mb-4">2. Welke gegevens verzamelen wij?</h2>
-              <p>Wij verzamelen de volgende persoonsgegevens:</p>
+              <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('privacy.sections.data_collected.title')}</h2>
+              <p>{t('privacy.sections.data_collected.intro')}</p>
               <ul className="list-disc ml-6 space-y-2">
-                <li>Voor- en achternaam</li>
-                <li>E-mailadres</li>
-                <li>Antwoorden op vragen in de loopbaanscans</li>
-                <li>Technische gegevens zoals IP-adres en browserinformatie</li>
-                <li>Betalingsgegevens (verwerkt door onze betalingspartner)</li>
+                {t('privacy.sections.data_collected.items').map((item: string, index: number) => (
+                  <li key={index}>{item}</li>
+                ))}
               </ul>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-blue-900 mb-4">3. Waarvoor gebruiken wij uw gegevens?</h2>
-              <p>Wij gebruiken uw persoonsgegevens voor:</p>
+              <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('privacy.sections.data_usage.title')}</h2>
+              <p>{t('privacy.sections.data_usage.intro')}</p>
               <ul className="list-disc ml-6 space-y-2">
-                <li>Het leveren van onze loopbaanservice en het genereren van uw persoonlijke rapport</li>
-                <li>Communicatie over uw account en onze services</li>
-                <li>Verbetering van onze website en services</li>
-                <li>Voldoen aan wettelijke verplichtingen</li>
+                {t('privacy.sections.data_usage.items').map((item: string, index: number) => (
+                  <li key={index}>{item}</li>
+                ))}
               </ul>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-blue-900 mb-4">4. Rechtsgrond voor verwerking</h2>
-              <p>
-                Wij verwerken uw persoonsgegevens op basis van:
-              </p>
+              <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('privacy.sections.legal_basis.title')}</h2>
+              <p>{t('privacy.sections.legal_basis.intro')}</p>
               <ul className="list-disc ml-6 space-y-2">
-                <li>Uitvoering van de overeenkomst tussen u en ons</li>
-                <li>Uw toestemming</li>
-                <li>Gerechtvaardigd belang voor verbetering van onze services</li>
-                <li>Wettelijke verplichting</li>
+                {t('privacy.sections.legal_basis.items').map((item: string, index: number) => (
+                  <li key={index}>{item}</li>
+                ))}
               </ul>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-blue-900 mb-4">5. Delen van gegevens</h2>
-              <p>
-                Wij delen uw persoonsgegevens niet met derden, behalve:
-              </p>
+              <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('privacy.sections.data_sharing.title')}</h2>
+              <p>{t('privacy.sections.data_sharing.intro')}</p>
               <ul className="list-disc ml-6 space-y-2">
-                <li>Met onze technische serviceproviders (onder strikte verwerkingsovereenkomsten)</li>
-                <li>Wanneer dit wettelijk verplicht is</li>
-                <li>Met uw expliciete toestemming</li>
+                {t('privacy.sections.data_sharing.items').map((item: string, index: number) => (
+                  <li key={index}>{item}</li>
+                ))}
               </ul>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-blue-900 mb-4">6. Bewaartermijn</h2>
-              <p>
-                Wij bewaren uw persoonsgegevens niet langer dan noodzakelijk. 
-                Accountgegevens worden bewaard zolang uw account actief is. 
-                Na verwijdering van uw account worden gegevens binnen 30 dagen permanent verwijderd.
-              </p>
+              <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('privacy.sections.retention.title')}</h2>
+              <p>{t('privacy.sections.retention.content')}</p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-blue-900 mb-4">7. Uw rechten</h2>
-              <p>U heeft de volgende rechten betreffende uw persoonsgegevens:</p>
+              <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('privacy.sections.user_rights.title')}</h2>
+              <p>{t('privacy.sections.user_rights.intro')}</p>
               <ul className="list-disc ml-6 space-y-2">
-                <li>Recht op inzage</li>
-                <li>Recht op rectificatie</li>
-                <li>Recht op verwijdering</li>
-                <li>Recht op beperking van verwerking</li>
-                <li>Recht op gegevensoverdraagbaarheid</li>
-                <li>Recht van bezwaar</li>
+                {t('privacy.sections.user_rights.items').map((item: string, index: number) => (
+                  <li key={index}>{item}</li>
+                ))}
               </ul>
-              <p className="mt-4">
-                Om deze rechten uit te oefenen kunt u contact met ons opnemen via info@deloopbaanopleiding.nl
-              </p>
+              <p className="mt-4">{t('privacy.sections.user_rights.contact')}</p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-blue-900 mb-4">8. Beveiliging</h2>
-              <p>
-                Wij nemen passende technische en organisatorische maatregelen om uw persoonsgegevens 
-                te beschermen tegen verlies, misbruik, ongeautoriseerde toegang, openbaarmaking, wijziging of vernietiging.
-              </p>
+              <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('privacy.sections.security.title')}</h2>
+              <p>{t('privacy.sections.security.content')}</p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-blue-900 mb-4">9. Cookies</h2>
-              <p>
-                Wij gebruiken functionele cookies die noodzakelijk zijn voor het functioneren van onze website. 
-                Deze cookies slaan geen persoonlijke informatie op.
-              </p>
+              <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('privacy.sections.cookies.title')}</h2>
+              <p>{t('privacy.sections.cookies.content')}</p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-blue-900 mb-4">10. Wijzigingen</h2>
-              <p>
-                Wij kunnen deze privacyverklaring van tijd tot tijd wijzigen. 
-                De meest recente versie is altijd beschikbaar op onze website.
-              </p>
+              <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('privacy.sections.changes.title')}</h2>
+              <p>{t('privacy.sections.changes.content')}</p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-blue-900 mb-4">11. Contact</h2>
-              <p>
-                Voor vragen over deze privacyverklaring of over de verwerking van uw persoonsgegevens 
-                kunt u contact met ons opnemen:
-              </p>
-              <p>
-                Email: info@deloopbaanopleiding.nl<br />
-                Telefoon: +31 6 22 23 85 95
-              </p>
+              <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('privacy.sections.contact.title')}</h2>
+              <p>{t('privacy.sections.contact.content')}</p>
+              <p dangerouslySetInnerHTML={{ __html: t('privacy.sections.contact.details') }} />
             </section>
           </div>
         </div>

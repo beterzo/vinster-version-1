@@ -42,139 +42,102 @@ const AlgemeneVoorwaarden = () => {
           
           <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed space-y-6">
             <p className="text-sm text-gray-500 mb-8">
-              Laatst bijgewerkt: 23 juni 2025
+              {t('terms.last_updated')}
             </p>
 
             <section>
-              <h2 className="text-2xl font-semibold text-blue-900 mb-4">1. Definities</h2>
+              <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('terms.sections.definitions.title')}</h2>
               <ul className="list-disc ml-6 space-y-2">
-                <li><strong>Vinster:</strong> de service aangeboden door De Loopbaanopleiding</li>
-                <li><strong>Gebruiker:</strong> iedere natuurlijke persoon die gebruik maakt van Vinster</li>
-                <li><strong>Service:</strong> de online loopbaantool en bijbehorende diensten</li>
-                <li><strong>Account:</strong> het persoonlijke profiel van de gebruiker</li>
+                {t('terms.sections.definitions.items').map((item: string, index: number) => (
+                  <li key={index} dangerouslySetInnerHTML={{ __html: item }} />
+                ))}
               </ul>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-blue-900 mb-4">2. Toepasselijkheid</h2>
-              <p>
-                Deze algemene voorwaarden zijn van toepassing op alle overeenkomsten tussen 
-                De Loopbaanopleiding en gebruikers van Vinster. Door gebruik te maken van onze service 
-                gaat u akkoord met deze voorwaarden.
-              </p>
+              <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('terms.sections.applicability.title')}</h2>
+              <p>{t('terms.sections.applicability.content')}</p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-blue-900 mb-4">3. Account en toegang</h2>
+              <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('terms.sections.account.title')}</h2>
               <ul className="list-disc ml-6 space-y-2">
-                <li>U bent verantwoordelijk voor het veilig houden van uw inloggegevens</li>
-                <li>U bent verantwoordelijk voor alle activiteiten onder uw account</li>
-                <li>U mag slechts één account aanmaken per persoon</li>
-                <li>Het is niet toegestaan om uw account te delen met derden</li>
-                <li>Wij behouden ons het recht voor om accounts op te schorten bij misbruik</li>
+                {t('terms.sections.account.items').map((item: string, index: number) => (
+                  <li key={index}>{item}</li>
+                ))}
               </ul>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-blue-900 mb-4">4. Gebruik van de service</h2>
-              <p>Bij het gebruik van Vinster gaat u ermee akkoord dat u:</p>
+              <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('terms.sections.usage.title')}</h2>
+              <p>{t('terms.sections.usage.intro')}</p>
               <ul className="list-disc ml-6 space-y-2">
-                <li>Waarheidsgetrouwe informatie verstrekt</li>
-                <li>De service alleen voor persoonlijke, niet-commerciële doeleinden gebruikt</li>
-                <li>Geen schade toebrengt aan onze systemen of die van derden</li>
-                <li>Geen inbreuk maakt op intellectuele eigendomsrechten</li>
-                <li>Zich houdt aan alle toepasselijke wet- en regelgeving</li>
+                {t('terms.sections.usage.items').map((item: string, index: number) => (
+                  <li key={index}>{item}</li>
+                ))}
               </ul>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-blue-900 mb-4">5. Betaling en prijzen</h2>
+              <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('terms.sections.payment.title')}</h2>
               <ul className="list-disc ml-6 space-y-2">
-                <li>De kosten voor Vinster bedragen €29 voor eenmalige toegang</li>
-                <li>Betaling gebeurt vooraf via onze beveiligde betalingspartner</li>
-                <li>Prijzen zijn inclusief BTW waar van toepassing</li>
-                <li>Na succesvolle betaling krijgt u direct toegang tot de volledige service</li>
-                <li>Wij behouden ons het recht voor om prijzen aan te passen</li>
+                {t('terms.sections.payment.items').map((item: string, index: number) => (
+                  <li key={index}>{item}</li>
+                ))}
               </ul>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-blue-900 mb-4">6. Herroepingsrecht</h2>
-              <p>
-                Omdat Vinster een digitale service betreft die direct na aankoop volledig beschikbaar is, 
-                vervalt uw herroepingsrecht zodra u toegang heeft gekregen tot uw persoonlijke rapport. 
-                Dit is in overeenstemming met artikel 6:230p lid 1 van het Burgerlijk Wetboek.
-              </p>
+              <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('terms.sections.cancellation.title')}</h2>
+              <p>{t('terms.sections.cancellation.content')}</p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-blue-900 mb-4">7. Intellectueel eigendom</h2>
+              <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('terms.sections.intellectual_property.title')}</h2>
               <ul className="list-disc ml-6 space-y-2">
-                <li>Alle rechten op Vinster berusten bij De Loopbaanopleiding</li>
-                <li>Het is niet toegestaan om onze content te kopiëren of te distribueren</li>
-                <li>Uw persoonlijke rapport is eigendom van u als gebruiker</li>
-                <li>U mag uw rapport delen, maar niet commercieel exploiteren</li>
+                {t('terms.sections.intellectual_property.items').map((item: string, index: number) => (
+                  <li key={index}>{item}</li>
+                ))}
               </ul>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-blue-900 mb-4">8. Beschikbaarheid en onderhoud</h2>
+              <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('terms.sections.availability.title')}</h2>
               <ul className="list-disc ml-6 space-y-2">
-                <li>Wij streven naar 99% beschikbaarheid van onze service</li>
-                <li>Onderhoud wordt waar mogelijk buiten kantooruren uitgevoerd</li>
-                <li>Wij zijn niet aansprakelijk voor tijdelijke onbeschikbaarheid</li>
-                <li>Bij langdurige storing informeren wij gebruikers actief</li>
+                {t('terms.sections.availability.items').map((item: string, index: number) => (
+                  <li key={index}>{item}</li>
+                ))}
               </ul>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-blue-900 mb-4">9. Aansprakelijkheid</h2>
-              <p>
-                Onze aansprakelijkheid is beperkt tot het bedrag dat u heeft betaald voor de service. 
-                Wij zijn niet aansprakelijk voor indirecte schade, gevolgschade of gederfde winst. 
-                Vinster is een hulpmiddel ter ondersteuning van loopbaankeuzes; 
-                de uiteindelijke beslissingen blijven uw eigen verantwoordelijkheid.
-              </p>
+              <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('terms.sections.liability.title')}</h2>
+              <p>{t('terms.sections.liability.content')}</p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-blue-900 mb-4">10. Opzegging</h2>
+              <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('terms.sections.termination.title')}</h2>
               <ul className="list-disc ml-6 space-y-2">
-                <li>U kunt uw account op elk moment verwijderen</li>
-                <li>Wij kunnen accounts opzeggen bij schending van deze voorwaarden</li>
-                <li>Bij opzegging vervalt de toegang tot de service</li>
-                <li>Uw gegevens worden binnen 30 dagen na opzegging verwijderd</li>
+                {t('terms.sections.termination.items').map((item: string, index: number) => (
+                  <li key={index}>{item}</li>
+                ))}
               </ul>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-blue-900 mb-4">11. Wijzigingen</h2>
-              <p>
-                Wij behouden ons het recht voor om deze voorwaarden te wijzigen. 
-                Wijzigingen worden ten minste 30 dagen van tevoren aangekondigd via e-mail. 
-                Voortgezet gebruik na de ingangsdatum geldt als acceptatie van de nieuwe voorwaarden.
-              </p>
+              <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('terms.sections.changes.title')}</h2>
+              <p>{t('terms.sections.changes.content')}</p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-blue-900 mb-4">12. Toepasselijk recht en geschillen</h2>
-              <p>
-                Op deze voorwaarden is Nederlands recht van toepassing. 
-                Geschillen worden voorgelegd aan de bevoegde rechter in Nederland. 
-                Wij streven ernaar om geschillen in der minne op te lossen.
-              </p>
+              <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('terms.sections.law.title')}</h2>
+              <p>{t('terms.sections.law.content')}</p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-blue-900 mb-4">13. Contact</h2>
-              <p>
-                Voor vragen over deze algemene voorwaarden kunt u contact met ons opnemen:
-              </p>
-              <p>
-                Email: team@vinster.ai<br />
-                Telefoon: +31 6 22 23 85 95<br />
-                KvK nr: 04050762
-              </p>
+              <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('terms.sections.contact.title')}</h2>
+              <p>{t('terms.sections.contact.content')}</p>
+              <p dangerouslySetInnerHTML={{ __html: t('terms.sections.contact.details') }} />
             </section>
           </div>
         </div>
