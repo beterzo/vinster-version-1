@@ -30,10 +30,14 @@ export const useExistingReport = () => {
           return;
         }
 
-        if (data) {
-          console.log('✅ Found existing report:', data);
+        if (data && data.pdf_file_path && data.report_status === 'completed') {
+          console.log('✅ Found existing completed report:', data);
           setHasExistingReport(true);
           setExistingReport(data);
+        } else if (data) {
+          console.log('📝 Found incomplete report (no PDF or not completed):', data);
+          setHasExistingReport(false);
+          setExistingReport(null);
         } else {
           console.log('📝 No existing report found');
           setHasExistingReport(false);
