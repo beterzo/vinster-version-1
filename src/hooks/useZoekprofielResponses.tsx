@@ -68,7 +68,7 @@ export const useZoekprofielResponses = () => {
       };
       
       setLocalState(initialState);
-      calculateProgress(initialState);
+      await calculateProgress(initialState);
     } catch (error) {
       console.error('❌ Failed to load zoekprofiel antwoorden:', error);
       toast({
@@ -81,7 +81,7 @@ export const useZoekprofielResponses = () => {
     }
   };
 
-  const calculateProgress = useCallback((data: Partial<ZoekprofielResponse>) => {
+  const calculateProgress = useCallback(async (data: Partial<ZoekprofielResponse>) => {
     const fields = [
       data.functie_als,
       data.kerntaken,
@@ -93,12 +93,33 @@ export const useZoekprofielResponses = () => {
 
     // Check if field has meaningful content (not just empty or whitespace)
     const filledFields = fields.filter(field => field && typeof field === 'string' && field.trim().length > 0).length;
-    const progressPercentage = Math.round((filledFields / fields.length) * 100);
+    const baseProgressPercentage = Math.round((filledFields / fields.length) * 100);
+    
+    // Check if user has a completed zoekprofiel PDF
+    let hasCompletedZoekprofiel = false;
+    if (user?.id) {
+      try {
+        const { data: zoekprofielData } = await supabase
+          .from('user_zoekprofielen')
+          .select('pdf_status, pdf_url')
+          .eq('user_id', user.id)
+          .maybeSingle();
+        
+        hasCompletedZoekprofiel = zoekprofielData && zoekprofielData.pdf_status === 'completed' && !!zoekprofielData.pdf_url;
+      } catch (error) {
+        console.error('Error checking zoekprofiel status:', error);
+      }
+    }
+    
+    // If zoekprofiel is completed, always show 100%
+    const progressPercentage = hasCompletedZoekprofiel ? 100 : baseProgressPercentage;
     
     console.log('📊 Progress calculation:', {
       filledFields,
       totalFields: fields.length,
-      progressPercentage,
+      baseProgressPercentage,
+      hasCompletedZoekprofiel,
+      finalProgressPercentage: progressPercentage,
       fields: fields.map((field, index) => ({
         index,
         value: field,
@@ -111,7 +132,7 @@ export const useZoekprofielResponses = () => {
     setIsCompleted(completed);
     
     console.log('✅ Progress updated:', { progressPercentage, isCompleted: completed });
-  }, []);
+  }, [user?.id]);
 
   const debouncedSave = useCallback(async (field: string, value: string) => {
     if (!user?.id) return;
@@ -166,7 +187,7 @@ export const useZoekprofielResponses = () => {
     }
   }, [user?.id, responses, toast]);
 
-  const saveResponse = useCallback((field: string, value: string) => {
+  const saveResponse = useCallback(async (field: string, value: string) => {
     console.log(`🔄 Updating local state for ${field}:`, value);
     
     // Immediately update local state for optimistic UI updates
