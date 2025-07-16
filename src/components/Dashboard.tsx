@@ -55,7 +55,7 @@ const Dashboard = () => {
       case "enthousiasme":
         // Als enthousiasmescan voltooid is, ga naar stap 1 om te bekijken, anders naar intro
         if (progress.enthousiasme === 'completed') {
-          navigate("/enthousiasme-step1");
+          navigate("/enthousiasme-step-1");
         } else {
           navigate("/enthousiasme-intro");
         }
@@ -63,7 +63,7 @@ const Dashboard = () => {
       case "wensberoepen":
         // Als wensberoepen voltooid is, ga naar stap 1 om te bekijken, anders naar intro
         if (progress.wensberoepen === 'completed') {
-          navigate("/wensberoepen-step1");
+          navigate("/wensberoepen-step-1");
         } else {
           navigate("/wensberoepen-intro");
         }
