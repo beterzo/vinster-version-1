@@ -139,11 +139,11 @@
         "statistics": {
           "description": "Diese Cookies helfen uns, unsere Website zu verbessern:",
           "analytics": "Analytik-Cookies für Website-Nutzung",
-          "performance": "Leistungs-Cookies für Website-Geschwindigkeit"
+          "usage": "Nutzungsdaten für Optimierung"
         },
         "marketing": {
           "description": "Diese Cookies werden für Marketing verwendet:",
-          "advertising": "Werbe-Cookies für personalisierte Anzeigen",
+          "tracking": "Tracking-Cookies für Werbung",
           "remarketing": "Remarketing-Cookies für zielgerichtete Anzeigen"
         }
       },

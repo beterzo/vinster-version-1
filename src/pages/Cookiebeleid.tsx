@@ -136,8 +136,7 @@ const Cookiebeleid = () => {
                   {t('cookies.policy.contact.description')}
                 </p>
                 <p className="text-gray-700 mt-2">
-                  <strong>Email:</strong> team@vinster.ai<br />
-                  <strong>Telefoon:</strong> +31 6 22 23 85 95
+                  <strong>Email:</strong> team@vinster.ai
                 </p>
               </section>
 
