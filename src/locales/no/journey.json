@@ -318,5 +318,33 @@
     "time_notice_description": "Denne forskningen er avgjørende for å finne din ideelle stilling. Ta deg tid til å utføre hvert steg nøye.",
     "time_notice_details": "Jo bedre du gjør denne forskningen, jo bedre kan du senere fylle ut søkeprofilen din og jo mer målrettet kan du søke.",
     "back_button": "Tilbake til dashboard"
+  },
+  "download": {
+    "title": "Last ned søkeprofilen din",
+    "description": "Søkeprofilen din inneholder et sammendrag av din ideelle jobb basert på svarene dine.",
+    "generating_title": "Søkeprofil forberedes...",
+    "generating_description": "Søkeprofilen din genereres automatisk basert på dataene du har fylt inn.",
+    "preparing_title": "Søkeprofil forberedes...",
+    "preparing_description": "Søkeprofilen din genereres automatisk basert på dataene du har fylt inn.",
+    "error_title": "En feil har oppstått",
+    "error_description": "Noe gikk galt ved generering av søkeprofilen din. Prøv igjen.",
+    "download_button": "Last ned PDF",
+    "view_browser_button": "Vis i nettleser",
+    "refresh_button": "Oppdater side",
+    "status_refresh_button": "Oppdater status",
+    "status_check_button": "Sjekk status",
+    "back_button": "Tilbake til dashbordet",
+    "dashboard_title": "Tilbake til dashbordet ditt",
+    "dashboard_description": "Se din fullstendige profil og andre rapporter i dashbordet ditt.",
+    "dashboard_button": "Gå til dashboard",
+    "loading_data": "Laster søkeprofil data...",
+    "downloading": "Laster ned...",
+    "generating_progress": "Søkeprofilen din genereres... Dette kan ta 2-5 minutter.",
+    "generating_wait": "Søkeprofilen din genereres fortsatt. Dette kan ta noen minutter.",
+    "tip_applications": "Bruk søkeprofilen din ved jobbsøknader og del den med rekrutterere!",
+    "tip_wait": "La denne siden være åpen. Du får automatisk beskjed når søkeprofilen din er klar!",
+    "error_technical": "En teknisk feil har oppstått. Kontakt support hvis dette problemet vedvarer.",
+    "download_failed": "Nedlasting mislyktes",
+    "download_failed_description": "Noe gikk galt ved nedlasting av søkeprofilen din."
   }
 }

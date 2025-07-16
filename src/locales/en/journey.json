@@ -319,5 +319,33 @@
     "time_notice_description": "This research is crucial for finding your ideal job. Take the time to carefully execute each step.",
     "time_notice_details": "The better you do this research, the better you can fill in your search profile later and the more targeted you can apply for jobs.",
     "back_button": "Back to dashboard"
+  },
+  "download": {
+    "title": "Download your search profile",
+    "description": "Your search profile contains a summary of your ideal job based on your answers.",
+    "generating_title": "Search profile is being prepared...",
+    "generating_description": "Your search profile is being automatically generated based on your entered data.",
+    "preparing_title": "Search profile is being prepared...",
+    "preparing_description": "Your search profile is being automatically generated based on your entered data.",
+    "error_title": "An error has occurred",
+    "error_description": "Something went wrong while generating your search profile. Please try again.",
+    "download_button": "Download PDF",
+    "view_browser_button": "View in browser",
+    "refresh_button": "Refresh page",
+    "status_refresh_button": "Refresh status",
+    "status_check_button": "Check status",
+    "back_button": "Back to dashboard",
+    "dashboard_title": "Back to your dashboard",
+    "dashboard_description": "View your complete profile and other reports in your dashboard.",
+    "dashboard_button": "Go to dashboard",
+    "loading_data": "Loading search profile data...",
+    "downloading": "Downloading...",
+    "generating_progress": "Your search profile is being generated... This may take 2-5 minutes.",
+    "generating_wait": "Your search profile is still being generated. This may take a few minutes.",
+    "tip_applications": "Use your search profile for job applications and share it with recruiters!",
+    "tip_wait": "Keep this page open. You'll automatically receive a notification when your search profile is ready!",
+    "error_technical": "A technical error has occurred. Please contact support if this problem persists.",
+    "download_failed": "Download failed",
+    "download_failed_description": "Something went wrong while downloading your search profile."
   }
 }

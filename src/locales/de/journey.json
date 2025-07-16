@@ -320,5 +320,33 @@
     "time_notice_description": "Diese Recherche ist entscheidend für das Finden Ihrer idealen Stelle. Nehmen Sie sich die Zeit, jeden Schritt sorgfältig auszuführen.",
     "time_notice_details": "Je besser Sie diese Recherche machen, desto besser können Sie später Ihr Suchprofil ausfüllen und desto gezielter können Sie sich bewerben.",
     "back_button": "Zurück zum Dashboard"
+  },
+  "download": {
+    "title": "Laden Sie Ihr Suchprofil herunter",
+    "description": "Ihr Suchprofil enthält eine Zusammenfassung Ihres idealen Jobs basierend auf Ihren Antworten.",
+    "generating_title": "Suchprofil wird vorbereitet...",
+    "generating_description": "Ihr Suchprofil wird automatisch basierend auf Ihren eingegebenen Daten generiert.",
+    "preparing_title": "Suchprofil wird vorbereitet...",
+    "preparing_description": "Ihr Suchprofil wird automatisch basierend auf Ihren eingegebenen Daten generiert.",
+    "error_title": "Ein Fehler ist aufgetreten",
+    "error_description": "Beim Generieren Ihres Suchprofils ist etwas schiefgegangen. Versuchen Sie es erneut.",
+    "download_button": "PDF herunterladen",
+    "view_browser_button": "Im Browser anzeigen",
+    "refresh_button": "Seite aktualisieren",
+    "status_refresh_button": "Status aktualisieren",
+    "status_check_button": "Status prüfen",
+    "back_button": "Zurück zum Dashboard",
+    "dashboard_title": "Zurück zu Ihrem Dashboard",
+    "dashboard_description": "Sehen Sie Ihr vollständiges Profil und andere Berichte in Ihrem Dashboard.",
+    "dashboard_button": "Zum Dashboard gehen",
+    "loading_data": "Suchprofil-Daten werden geladen...",
+    "downloading": "Wird heruntergeladen...",
+    "generating_progress": "Ihr Suchprofil wird generiert... Dies kann 2-5 Minuten dauern.",
+    "generating_wait": "Ihr Suchprofil wird noch generiert. Dies kann einige Minuten dauern.",
+    "tip_applications": "Verwenden Sie Ihr Suchprofil bei Bewerbungen und teilen Sie es mit Recruitern!",
+    "tip_wait": "Lassen Sie diese Seite geöffnet. Sie erhalten automatisch eine Benachrichtigung, sobald Ihr Suchprofil fertig ist!",
+    "error_technical": "Ein technischer Fehler ist aufgetreten. Wenden Sie sich an den Support, wenn dieses Problem weiterhin besteht.",
+    "download_failed": "Download fehlgeschlagen",
+    "download_failed_description": "Beim Herunterladen Ihres Suchprofils ist etwas schiefgegangen."
   }
 }
