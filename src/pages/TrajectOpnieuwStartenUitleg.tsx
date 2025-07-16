@@ -38,12 +38,21 @@ const TrajectOpnieuwStartenUitleg = () => {
         return;
       }
 
-      // Redirect to Make webhook with user data
+      // Get user profile data for webhook
+      const { data: profileData } = await supabase
+        .from('profiles')
+        .select('first_name, last_name, language')
+        .eq('id', user.id)
+        .single();
+
+      // Redirect to Make webhook with extended user data
       const webhookUrl = 'https://hook.eu2.make.com/';
       const params = new URLSearchParams({
+        firstName: profileData?.first_name || user.user_metadata?.first_name || '',
+        lastName: profileData?.last_name || user.user_metadata?.last_name || '',
         email: user.email || '',
-        user_id: user.id,
-        first_name: user.user_metadata?.first_name || user.email?.split('@')[0] || ''
+        userId: user.id,
+        language: profileData?.language || language || 'nl'
       });
 
       window.location.href = `${webhookUrl}?${params}`;
@@ -60,106 +69,130 @@ const TrajectOpnieuwStartenUitleg = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-secondary/5">
-      <div className="container mx-auto px-4 py-8">
-        <div className="max-w-2xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-primary/10 via-background to-accent/5">
+      <div className="container mx-auto px-4 py-12">
+        <div className="max-w-3xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-8">
-            <div className="flex justify-center mb-4">
+          <div className="text-center mb-12">
+            <div className="flex justify-center mb-6">
               <img
                 src="/vinster-logo.png"
                 alt="Vinster"
-                className="h-12 cursor-pointer"
-                onClick={() => navigate('/')}
+                className="h-16 cursor-pointer hover:scale-105 transition-transform duration-200"
+                onClick={() => navigate('/home')}
               />
             </div>
-            <h1 className="text-3xl font-bold text-foreground mb-2">
-              {t('journey.restart_explanation.title')}
-            </h1>
-            <p className="text-muted-foreground">
-              {t('journey.restart_explanation.subtitle')}
-            </p>
+            <div className="space-y-4">
+              <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+                {t('journey.restart_explanation.title')}
+              </h1>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                {t('journey.restart_explanation.subtitle')}
+              </p>
+            </div>
           </div>
 
-          {/* Warning Card */}
-          <Card className="mb-6 border-orange-200 bg-orange-50/50">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-orange-800">
-                <AlertTriangle className="h-5 w-5" />
-                {t('journey.restart_explanation.warning_card.title')}
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="text-orange-700">
-              <p className="mb-2">
-                {t('journey.restart_explanation.warning_card.description')}
-              </p>
-              <ul className="list-disc list-inside space-y-1 text-sm">
-                {t('journey.restart_explanation.warning_card.points').map((point: string, index: number) => (
-                  <li key={index}>
-                    {point.includes('€29') || point.includes('333 kroner') 
-                      ? point.replace(/€29|333 kroner/, t('journey.restart_explanation.price'))
-                      : point
-                    }
-                  </li>
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
-
-          {/* Process Steps */}
-          <Card className="mb-6">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <RefreshCw className="h-5 w-5" />
-                {t('journey.restart_explanation.process_card.title')}
-              </CardTitle>
-              <CardDescription>
-                {t('journey.restart_explanation.process_card.description')}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {t('journey.restart_explanation.process_card.steps').map((step: any, index: number) => (
-                  <div key={index} className="flex gap-3">
-                    <div className="flex-shrink-0 w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-sm font-bold">
-                      {index + 1}
-                    </div>
-                    <div>
-                      <h4 className="font-medium flex items-center gap-2">
-                        {index === 0 && <CreditCard className="h-4 w-4" />}
-                        {index === 1 && <FileX className="h-4 w-4" />}
-                        {index === 2 && <RefreshCw className="h-4 w-4" />}
-                        {step.title}
-                      </h4>
-                      <p className="text-sm text-muted-foreground">
-                        {step.description.includes('€29') || step.description.includes('333 kroner')
-                          ? step.description.replace(/€29|333 kroner/, t('journey.restart_explanation.price'))
-                          : step.description
-                        }
-                      </p>
-                    </div>
+          {/* Main Content Grid */}
+          <div className="space-y-8">
+            {/* Warning Card */}
+            <Card className="border-orange-200/60 bg-gradient-to-r from-orange-50/80 to-orange-100/40 shadow-lg hover:shadow-xl transition-all duration-300">
+              <CardHeader className="pb-4">
+                <CardTitle className="flex items-center gap-3 text-orange-800">
+                  <div className="p-2 rounded-full bg-orange-100">
+                    <AlertTriangle className="h-6 w-6" />
                   </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+                  <span className="text-xl">
+                    {t('journey.restart_explanation.warning_card.title')}
+                  </span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="text-orange-700">
+                <p className="mb-4 text-base leading-relaxed">
+                  {t('journey.restart_explanation.warning_card.description')}
+                </p>
+                <ul className="space-y-3">
+                  {t('journey.restart_explanation.warning_card.points').map((point: string, index: number) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <div className="w-2 h-2 rounded-full bg-orange-400 mt-2 flex-shrink-0" />
+                      <span>
+                        {point.includes('€29') || point.includes('333 kroner') 
+                          ? point.replace(/€29|333 kroner/, t('journey.restart_explanation.price'))
+                          : point
+                        }
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
 
-          {/* Action Buttons */}
-          <div className="flex gap-4 justify-center">
-            <Button
-              variant="outline"
-              onClick={() => navigate('/home')}
-              disabled={isLoading}
-            >
-              {t('journey.restart_explanation.buttons.back')}
-            </Button>
-            <Button
-              onClick={handleStartReset}
-              disabled={isLoading}
-              className="bg-primary hover:bg-primary/90"
-            >
-              {isLoading ? t('journey.restart_explanation.buttons.loading') : t('journey.restart_explanation.buttons.confirm')}
-            </Button>
+            {/* Process Steps */}
+            <Card className="shadow-lg hover:shadow-xl transition-all duration-300 border-primary/20">
+              <CardHeader className="pb-6">
+                <CardTitle className="flex items-center gap-3 text-2xl">
+                  <div className="p-2 rounded-full bg-primary/10">
+                    <RefreshCw className="h-6 w-6 text-primary" />
+                  </div>
+                  {t('journey.restart_explanation.process_card.title')}
+                </CardTitle>
+                <CardDescription className="text-base text-muted-foreground">
+                  {t('journey.restart_explanation.process_card.description')}
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-6">
+                  {t('journey.restart_explanation.process_card.steps').map((step: any, index: number) => (
+                    <div key={index} className="flex gap-4 group">
+                      <div className="flex-shrink-0">
+                        <div className="w-10 h-10 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground rounded-full flex items-center justify-center text-lg font-bold shadow-md">
+                          {index + 1}
+                        </div>
+                      </div>
+                      <div className="flex-1 space-y-2">
+                        <h4 className="font-semibold text-lg flex items-center gap-3 group-hover:text-primary transition-colors">
+                          {index === 0 && <CreditCard className="h-5 w-5" />}
+                          {index === 1 && <FileX className="h-5 w-5" />}
+                          {index === 2 && <RefreshCw className="h-5 w-5" />}
+                          {step.title}
+                        </h4>
+                        <p className="text-muted-foreground leading-relaxed">
+                          {step.description.includes('€29') || step.description.includes('333 kroner')
+                            ? step.description.replace(/€29|333 kroner/, t('journey.restart_explanation.price'))
+                            : step.description
+                          }
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
+              <Button
+                variant="outline"
+                onClick={() => navigate('/home')}
+                disabled={isLoading}
+                className="min-w-[200px] h-12 text-base border-2 hover:bg-muted/50 transition-all duration-200"
+              >
+                {t('journey.restart_explanation.buttons.back')}
+              </Button>
+              <Button
+                onClick={handleStartReset}
+                disabled={isLoading}
+                className="min-w-[240px] h-12 text-base bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-[1.02]"
+              >
+                {isLoading ? (
+                  <div className="flex items-center gap-2">
+                    <RefreshCw className="h-4 w-4 animate-spin" />
+                    {t('journey.restart_explanation.buttons.loading')}
+                  </div>
+                ) : (
+                  t('journey.restart_explanation.buttons.confirm')
+                )}
+              </Button>
+            </div>
           </div>
         </div>
       </div>
