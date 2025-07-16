@@ -263,7 +263,9 @@
       "dashboard_description": "View your complete profile and other reports in your dashboard.",
       "dashboard_button": "Go to dashboard",
       "back_button": "Back to dashboard",
-      "regenerate_button": "Create new search profile"
+      "regenerate_button": "Create new search profile",
+      "generating_wait": "Your search profile is still being generated. This may take a few minutes.",
+      "refresh_button": "Refresh page"
     }
   },
   "rapport": {

@@ -262,7 +262,9 @@
       "dashboard_description": "Bekijk je volledige profiel en andere rapporten in je dashboard.",
       "dashboard_button": "Ga naar dashboard",
       "back_button": "Terug naar dashboard",
-      "regenerate_button": "Nieuw zoekprofiel maken"
+      "regenerate_button": "Nieuw zoekprofiel maken",
+      "generating_wait": "Je zoekprofiel wordt nog gegenereerd. Dit kan enkele minuten duren.",
+      "refresh_button": "Pagina verversen"
     }
   },
   "rapport": {
