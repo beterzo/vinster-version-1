@@ -129,23 +129,23 @@
         "description": "Cookies sind kleine Textdateien, die auf Ihrem Gerät gespeichert werden, wenn Sie unsere Website besuchen. Sie helfen uns, die Website zum Laufen zu bringen und Ihre Erfahrung zu verbessern."
       },
       "which_cookies": {
-        "title": "Welche Cookies verwenden wir?",
-        "necessary": {
-          "description": "Diese Cookies sind für unsere Website unerlässlich:",
-          "session": "Sitzungs-Cookies für Anmeldung und Navigation",
-          "auth": "Authentifizierungs-Cookies für Kontozugang",
-          "preferences": "Präferenz-Cookies für Sprache und Einstellungen"
-        },
-        "statistics": {
-          "description": "Diese Cookies helfen uns, unsere Website zu verbessern:",
-          "analytics": "Analytik-Cookies für Website-Nutzung",
-          "usage": "Nutzungsdaten für Optimierung"
-        },
-        "marketing": {
-          "description": "Diese Cookies werden für Marketing verwendet:",
-          "tracking": "Tracking-Cookies für Werbung",
-          "remarketing": "Remarketing-Cookies für zielgerichtete Anzeigen"
-        }
+        "title": "Welche Cookies verwenden wir?"
+      },
+      "necessary": {
+        "description": "Diese Cookies sind für unsere Website unerlässlich:",
+        "session": "Sitzungs-Cookies für Anmeldung und Navigation",
+        "auth": "Authentifizierungs-Cookies für Kontozugang",
+        "preferences": "Präferenz-Cookies für Sprache und Einstellungen"
+      },
+      "statistics": {
+        "description": "Diese Cookies helfen uns, unsere Website zu verbessern:",
+        "analytics": "Analytik-Cookies für Website-Nutzung",
+        "usage": "Nutzungsdaten für Optimierung"
+      },
+      "marketing": {
+        "description": "Diese Cookies werden für Marketing verwendet:",
+        "tracking": "Tracking-Cookies für Werbung",
+        "remarketing": "Remarketing-Cookies für zielgerichtete Anzeigen"
       },
       "retention": {
         "title": "Wie lange bewahren wir Cookies auf?",
