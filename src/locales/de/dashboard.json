@@ -54,6 +54,11 @@
     "logout": "Abmelden",
     "logout_success": "Erfolgreich abgemeldet",
     "logout_success_desc": "Auf Wiedersehen!",
-    "logout_error": "Fehler beim Abmelden"
+    "logout_error": "Fehler beim Abmelden",
+    "restart_journey": {
+      "title": "Möchten Sie die Reise noch einmal machen?",
+      "subtitle": "Neu starten mit frischen Erkenntnissen",
+      "button": "Reise neu starten"
+    }
   }
 }

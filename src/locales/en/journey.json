@@ -264,5 +264,6 @@
       "dashboard_button": "Go to dashboard",
       "back_button": "Back to dashboard",
       "regenerate_button": "Create new search profile"
-    },
+    }
+  }
 }

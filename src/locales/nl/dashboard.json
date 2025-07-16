@@ -55,6 +55,11 @@
     "logout": "Uitloggen",
     "logout_success": "Succesvol uitgelogd",
     "logout_success_desc": "Tot ziens!",
-    "logout_error": "Fout bij uitloggen"
+    "logout_error": "Fout bij uitloggen",
+    "restart_journey": {
+      "title": "Wil je het traject nog een keer doen?",
+      "subtitle": "Start opnieuw met verse inzichten",
+      "button": "Traject opnieuw starten"
+    }
   }
 }

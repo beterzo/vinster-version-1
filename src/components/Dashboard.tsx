@@ -114,16 +114,43 @@ const Dashboard = () => {
             <div className="text-center flex-1 flex flex-col justify-between">
               <img 
                 alt="Loopbaanonderzoek" 
-                className="w-full h-auto rounded-xl mb-6 flex-1 object-cover" 
+                className="w-full h-auto rounded-xl mb-6 object-cover" 
+                style={{ height: '300px' }}
                 src="/lovable-uploads/ee361013-bfc6-485f-b46f-ed87a3cd6c73.jpg" 
               />
               
-              <Button 
-                onClick={() => navigate(getNextStep())} 
-                className="bg-yellow-400 hover:bg-yellow-500 text-vinster-blue font-bold rounded-xl px-8 py-4 text-lg w-full mt-auto"
-              >
-                {t('dashboard.continue_button')}
-              </Button>
+              <div className="space-y-4">
+                <Button 
+                  onClick={() => navigate(getNextStep())} 
+                  className="bg-yellow-400 hover:bg-yellow-500 text-vinster-blue font-bold rounded-xl px-8 py-4 text-lg w-full"
+                >
+                  {t('dashboard.continue_button')}
+                </Button>
+                
+                {/* Restart Journey Button - only show if user has downloaded zoekprofiel */}
+                {hasExistingZoekprofiel && (
+                  <Card className="p-4 border-2 border-dashed border-primary/30 bg-primary/5">
+                    <div className="text-center space-y-3">
+                      <div>
+                        <h3 className="text-sm font-semibold text-foreground mb-1">
+                          {t('dashboard.restart_journey.title')}
+                        </h3>
+                        <p className="text-xs text-muted-foreground">
+                          {t('dashboard.restart_journey.subtitle')}
+                        </p>
+                      </div>
+                      <Button 
+                        onClick={() => navigate('/traject-opnieuw-starten')}
+                        variant="outline"
+                        size="sm"
+                        className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                      >
+                        {t('dashboard.restart_journey.button')}
+                      </Button>
+                    </div>
+                  </Card>
+                )}
+              </div>
             </div>
           </Card>
 
@@ -160,30 +187,6 @@ const Dashboard = () => {
               hasUserReport={hasUserReport} 
               onStepClick={handleStepClick}
             />
-            
-            {/* Restart Journey Button - only show if user has downloaded zoekprofiel */}
-            {hasExistingZoekprofiel && (
-              <Card className="mt-4 p-4 border-2 border-dashed border-primary/30 bg-primary/5">
-                <div className="text-center space-y-3">
-                  <div>
-                    <h3 className="text-sm font-semibold text-foreground mb-1">
-                      Wil je het traject nog een keer doen?
-                    </h3>
-                    <p className="text-xs text-muted-foreground">
-                      Start opnieuw met verse inzichten
-                    </p>
-                  </div>
-                  <Button 
-                    onClick={() => navigate('/traject-opnieuw-starten')}
-                    variant="outline"
-                    size="sm"
-                    className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-                  >
-                    Traject opnieuw starten
-                  </Button>
-                </div>
-              </Card>
-            )}
           </Card>
         </div>
       </div>

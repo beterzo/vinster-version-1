@@ -54,6 +54,11 @@
     "logout": "Logg ut",
     "logout_success": "Vellykket utlogging",
     "logout_success_desc": "Ha det!",
-    "logout_error": "Feil ved utlogging"
+    "logout_error": "Feil ved utlogging",
+    "restart_journey": {
+      "title": "Vil du gjøre reisen igjen?",
+      "subtitle": "Start på nytt med nye innsikter",
+      "button": "Start reisen på nytt"
+    }
   }
 }

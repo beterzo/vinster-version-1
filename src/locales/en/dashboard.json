@@ -55,6 +55,11 @@
     "logout": "Logout",
     "logout_success": "Successfully logged out",
     "logout_success_desc": "See you later!",
-    "logout_error": "Error logging out"
+    "logout_error": "Error logging out",
+    "restart_journey": {
+      "title": "Want to do the journey again?",
+      "subtitle": "Start over with fresh insights",
+      "button": "Restart journey"
+    }
   }
 }
