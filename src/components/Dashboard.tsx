@@ -48,27 +48,42 @@ const Dashboard = () => {
     return "/profiel-voltooien-intro";
   };
 
-  const handleStepClick = (stepTitle: string) => {
-    console.log("Step clicked:", stepTitle);
+  const handleStepClick = (stepId: string) => {
+    console.log("Step clicked:", stepId);
     
-    switch (stepTitle) {
-      case "Enthousiasmescan":
-        navigate("/enthousiasme-intro");
+    switch (stepId) {
+      case "enthousiasme":
+        // Als enthousiasmescan voltooid is, ga naar stap 1 om te bekijken, anders naar intro
+        if (progress.enthousiasme === 'completed') {
+          navigate("/enthousiasme-step1");
+        } else {
+          navigate("/enthousiasme-intro");
+        }
         break;
-      case "Wensberoepen":
-        navigate("/wensberoepen-intro");
+      case "wensberoepen":
+        // Als wensberoepen voltooid is, ga naar stap 1 om te bekijken, anders naar intro
+        if (progress.wensberoepen === 'completed') {
+          navigate("/wensberoepen-step1");
+        } else {
+          navigate("/wensberoepen-intro");
+        }
         break;
-      case "Persoonsprofiel":
-        navigate("/profiel-voltooien-intro");
+      case "persoonsprofiel":
+        // Als profiel voltooid is, ga naar extra informatie, anders naar intro
+        if (progress.prioriteiten === 'completed' && progress.extraInformatie === 'completed') {
+          navigate("/extra-informatie-vragen");
+        } else {
+          navigate("/profiel-voltooien-intro");
+        }
         break;
-      case "Loopbaanrapport":
+      case "loopbaanrapport":
         navigate("/rapport-download");
         break;
-      case "Zoekprofiel":
+      case "zoekprofiel":
         navigate("/zoekprofiel-intro");
         break;
       default:
-        console.log("Unknown step:", stepTitle);
+        console.log("Unknown step:", stepId);
     }
   };
 

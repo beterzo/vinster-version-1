@@ -13,7 +13,7 @@ interface ProgressStepsGridProps {
   extraInformatieProgress?: number;
   extraInformatieCompleted?: boolean;
   hasUserReport?: boolean;
-  onStepClick?: (stepTitle: string) => void;
+  onStepClick?: (stepId: string) => void;
 }
 
 const ProgressStepsGrid = ({
@@ -45,6 +45,7 @@ const ProgressStepsGrid = ({
   const progressSteps = [
     {
       step: 1,
+      id: "enthousiasme",
       title: t('common.enthousiasmescan'),
       description: "Ontdek wat je echt drijft en motiveert",
       actionButton: "Start scan",
@@ -52,6 +53,7 @@ const ProgressStepsGrid = ({
     },
     {
       step: 2,
+      id: "wensberoepen",
       title: t('common.wensberoepen'),
       description: "Verken verschillende carrièremogelijkheden",
       actionButton: "Bekijk beroepen",
@@ -59,6 +61,7 @@ const ProgressStepsGrid = ({
     },
     {
       step: 3,
+      id: "persoonsprofiel",
       title: t('common.persoonsprofiel'),
       description: "Bouw je persoonlijke profiel op",
       actionButton: "Voltooien",
@@ -66,6 +69,7 @@ const ProgressStepsGrid = ({
     },
     {
       step: 4,
+      id: "loopbaanrapport",
       title: t('common.loopbaanrapport'),
       description: "Ontvang je persoonlijke aanbevelingen",
       actionButton: "Bekijk rapport",
@@ -73,6 +77,7 @@ const ProgressStepsGrid = ({
     },
     {
       step: 5,
+      id: "zoekprofiel",
       title: t('common.zoekprofiel'),
       description: "Download je zoekprofiel",
       actionButton: "Download",
@@ -88,9 +93,9 @@ const ProgressStepsGrid = ({
     { progress: zoekprofielCompleted ? 100 : zoekprofielProgress, isCompleted: zoekprofielCompleted }
   ];
 
-  const handleStepClick = (stepTitle: string) => {
-    console.log("ProgressStepsGrid - step clicked:", stepTitle);
-    onStepClick(stepTitle);
+  const handleStepClick = (stepId: string) => {
+    console.log("ProgressStepsGrid - step clicked:", stepId);
+    onStepClick(stepId);
   };
 
   return (
@@ -106,7 +111,7 @@ const ProgressStepsGrid = ({
               isCompleted={isCompleted}
               isCurrent={isCurrent}
               progress={progress}
-              onClick={() => handleStepClick(step.title)}
+              onClick={() => handleStepClick(step.id)}
             />
           </div>
         );
