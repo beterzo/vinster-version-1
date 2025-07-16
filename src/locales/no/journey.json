@@ -199,7 +199,39 @@
       "question6": "Arbeidsforhold som er viktige for meg...",
       "placeholder": "Beskriv svaret ditt her...",
       "back_button": "Tilbake til intro",
-      "generate_button": "Generer søkeprofil"
+      "generate_button": "Generer søkeprofil",
+      "examples": {
+        "functie_als": [
+          "Markedssjef ved en tech startup",
+          "Lærer på en barneskole i Oslo",
+          "Regnskapsfører ved et mellomstort regnskapsfirma"
+        ],
+        "kerntaken": [
+          "Utvikle strategi, lede team, opprettholde kundekontakt",
+          "Undervise, veilede foreldre, organisere prosjekter",
+          "Økonomisk administrasjon, skattemeldinger, rådgivning"
+        ],
+        "organisatie_bij": [
+          "Et innovativt selskap med unge kolleger og uformell atmosfære",
+          "En skole med engasjerte foreldre og motiverte elever",
+          "Et anerkjent kontor med profesjonell uttrykk"
+        ],
+        "sector": [
+          "Teknologi og programvareutvikling",
+          "Utdanning og barnevern",
+          "Finansielle tjenester"
+        ],
+        "gewenste_regio": [
+          "Oslo og omegn, maks 45 min reise",
+          "Bergen sentrum, helst på sykkeltavstand",
+          "Trondheim Syd, godt tilgjengelig med kollektivtransport"
+        ],
+        "arbeidsvoorwaarden": [
+          "400.000-500.000 kr brutto, 32-36 timer, hjemmekontor mulig",
+          "350.000-420.000 kr brutto, 40 timer, god pensjonsordning",
+          "450.000-600.000 kr brutto, fleksible arbeidstider, karrieremuligheter"
+        ]
+      }
     },
     "download": {
       "title": "Last ned søkeprofil",

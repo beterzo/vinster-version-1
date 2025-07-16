@@ -126,66 +126,42 @@ const ZoekprofielAntwoorden = () => {
       label: t('journey.zoekprofiel.antwoorden.question1'),
       placeholder: t('journey.zoekprofiel.antwoorden.placeholder'),
       value: formData.functie_als,
-      examples: [
-        "Marketing manager bij een tech startup",
-        "Leraar op een basisschool in Amsterdam",
-        "Accountant bij een middelgroot accountantskantoor"
-      ]
+      examples: t('journey.zoekprofiel.antwoorden.examples.functie_als')
     },
     {
       id: "kerntaken",
       label: t('journey.zoekprofiel.antwoorden.question2'),
       placeholder: t('journey.zoekprofiel.antwoorden.placeholder'),
       value: formData.kerntaken,
-      examples: [
-        "Strategie ontwikkelen, teams aansturen, klantcontact onderhouden",
-        "Lesgeven, ouders begeleiden, projecten organiseren",
-        "Financiële administratie, belastingaangiftes, advisering"
-      ]
+      examples: t('journey.zoekprofiel.antwoorden.examples.kerntaken')
     },
     {
       id: "organisatie_bij",
       label: t('journey.zoekprofiel.antwoorden.question3'),
       placeholder: t('journey.zoekprofiel.antwoorden.placeholder'),
       value: formData.organisatie_bij,
-      examples: [
-        "Een innovatief bedrijf met jonge collega's en informele sfeer",
-        "Een school met betrokken ouders en gemotiveerde leerlingen",
-        "Een gerenommeerd kantoor met professionele uitstraling"
-      ]
+      examples: t('journey.zoekprofiel.antwoorden.examples.organisatie_bij')
     },
     {
       id: "sector",
       label: t('journey.zoekprofiel.antwoorden.question4'),
       placeholder: t('journey.zoekprofiel.antwoorden.placeholder'),
       value: formData.sector,
-      examples: [
-        "Technologie en software ontwikkeling",
-        "Onderwijs en jeugdzorg",
-        "Financiële dienstverlening"
-      ]
+      examples: t('journey.zoekprofiel.antwoorden.examples.sector')
     },
     {
       id: "gewenste_regio",
       label: t('journey.zoekprofiel.antwoorden.question5'),
       placeholder: t('journey.zoekprofiel.antwoorden.placeholder'),
       value: formData.gewenste_regio,
-      examples: [
-        "Amsterdam en omgeving, max 45 min reizen",
-        "Utrecht centrum, liefst op fietsafstand",
-        "Rotterdam Zuid, goed bereikbaar met OV"
-      ]
+      examples: t('journey.zoekprofiel.antwoorden.examples.gewenste_regio')
     },
     {
       id: "arbeidsvoorwaarden",
       label: t('journey.zoekprofiel.antwoorden.question6'),
       placeholder: t('journey.zoekprofiel.antwoorden.placeholder'),
       value: formData.arbeidsvoorwaarden,
-      examples: [
-        "€4000-5000 bruto, 32-36 uur, thuiswerken mogelijk",
-        "€3500-4200 bruto, 40 uur, goede pensioenregeling",
-        "€4500-6000 bruto, flexibele werktijden, doorgroeimogelijkheden"
-      ]
+      examples: t('journey.zoekprofiel.antwoorden.examples.arbeidsvoorwaarden')
     }
   ];
 

@@ -200,7 +200,39 @@
       "question6": "Working conditions that are important to me...",
       "placeholder": "Describe your answer here...",
       "back_button": "Back to intro",
-      "generate_button": "Generate search profile"
+      "generate_button": "Generate search profile",
+      "examples": {
+        "functie_als": [
+          "Marketing manager at a tech startup",
+          "Teacher at a primary school in London",
+          "Accountant at a medium-sized accounting firm"
+        ],
+        "kerntaken": [
+          "Develop strategy, lead teams, maintain client contact",
+          "Teaching, guiding parents, organizing projects",
+          "Financial administration, tax returns, advisory"
+        ],
+        "organisatie_bij": [
+          "An innovative company with young colleagues and informal atmosphere",
+          "A school with engaged parents and motivated students",
+          "A renowned firm with professional appearance"
+        ],
+        "sector": [
+          "Technology and software development",
+          "Education and youth care",
+          "Financial services"
+        ],
+        "gewenste_regio": [
+          "London and surroundings, max 45 min travel",
+          "Manchester city center, preferably cycling distance",
+          "Birmingham South, well accessible by public transport"
+        ],
+        "arbeidsvoorwaarden": [
+          "£35,000-45,000 gross, 32-36 hours, remote work possible",
+          "£30,000-38,000 gross, 40 hours, good pension scheme",
+          "£40,000-55,000 gross, flexible hours, career opportunities"
+        ]
+      }
     },
     "download": {
       "title": "Download search profile",

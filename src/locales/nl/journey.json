@@ -199,7 +199,39 @@
       "question6": "Arbeidsvoorwaarden die belangrijk voor mij zijn...",
       "placeholder": "Beschrijf hier je antwoord...",
       "back_button": "Terug naar intro",
-      "generate_button": "Zoekprofiel genereren"
+      "generate_button": "Zoekprofiel genereren",
+      "examples": {
+        "functie_als": [
+          "Marketing manager bij een tech startup",
+          "Leraar op een basisschool in Amsterdam",
+          "Accountant bij een middelgroot accountantskantoor"
+        ],
+        "kerntaken": [
+          "Strategie ontwikkelen, teams aansturen, klantcontact onderhouden",
+          "Lesgeven, ouders begeleiden, projecten organiseren",
+          "Financiële administratie, belastingaangiftes, advisering"
+        ],
+        "organisatie_bij": [
+          "Een innovatief bedrijf met jonge collega's en informele sfeer",
+          "Een school met betrokken ouders en gemotiveerde leerlingen",
+          "Een gerenommeerd kantoor met professionele uitstraling"
+        ],
+        "sector": [
+          "Technologie en software ontwikkeling",
+          "Onderwijs en jeugdzorg",
+          "Financiële dienstverlening"
+        ],
+        "gewenste_regio": [
+          "Amsterdam en omgeving, max 45 min reizen",
+          "Utrecht centrum, liefst op fietsafstand",
+          "Rotterdam Zuid, goed bereikbaar met OV"
+        ],
+        "arbeidsvoorwaarden": [
+          "€4000-5000 bruto, 32-36 uur, thuiswerken mogelijk",
+          "€3500-4200 bruto, 40 uur, goede pensioenregeling",
+          "€4500-6000 bruto, flexibele werktijden, doorgroeimogelijkheden"
+        ]
+      }
     },
     "download": {
       "title": "Zoekprofiel downloaden",

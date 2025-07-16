@@ -201,7 +201,39 @@
       "question6": "Arbeitsbedingungen, die mir wichtig sind...",
       "placeholder": "Beschreiben Sie hier Ihre Antwort...",
       "back_button": "Zurück zur Einführung",
-      "generate_button": "Suchprofil generieren"
+      "generate_button": "Suchprofil generieren",
+      "examples": {
+        "functie_als": [
+          "Marketing Manager bei einem Tech-Startup",
+          "Lehrer an einer Grundschule in Berlin",
+          "Buchhalter bei einer mittelständischen Steuerberatung"
+        ],
+        "kerntaken": [
+          "Strategien entwickeln, Teams führen, Kundenkontakt pflegen",
+          "Unterrichten, Eltern beraten, Projekte organisieren",
+          "Finanzbuchhaltung, Steuererklärungen, Beratung"
+        ],
+        "organisatie_bij": [
+          "Ein innovatives Unternehmen mit jungen Kollegen und informeller Atmosphäre",
+          "Eine Schule mit engagierten Eltern und motivierten Schülern",
+          "Eine renommierte Kanzlei mit professioneller Ausstrahlung"
+        ],
+        "sector": [
+          "Technologie und Softwareentwicklung",
+          "Bildung und Jugendhilfe",
+          "Finanzdienstleistungen"
+        ],
+        "gewenste_regio": [
+          "Berlin und Umgebung, max. 45 Min. Fahrtzeit",
+          "München Zentrum, am liebsten mit dem Fahrrad erreichbar",
+          "Hamburg Nord, gut mit öffentlichen Verkehrsmitteln erreichbar"
+        ],
+        "arbeidsvoorwaarden": [
+          "€4000-5000 brutto, 32-36 Std., Homeoffice möglich",
+          "€3500-4200 brutto, 40 Std., gute Rentenregelung",
+          "€4500-6000 brutto, flexible Arbeitszeiten, Aufstiegsmöglichkeiten"
+        ]
+      }
     },
     "download": {
       "title": "Suchprofil herunterladen",

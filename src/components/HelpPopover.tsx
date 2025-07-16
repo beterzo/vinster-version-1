@@ -7,6 +7,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "@/hooks/useTranslation";
 
 interface HelpPopoverProps {
   examples: string[];
@@ -14,6 +15,8 @@ interface HelpPopoverProps {
 }
 
 export const HelpPopover: React.FC<HelpPopoverProps> = ({ examples, title }) => {
+  const { t } = useTranslation();
+  
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -29,7 +32,7 @@ export const HelpPopover: React.FC<HelpPopoverProps> = ({ examples, title }) => 
       <PopoverContent className="w-80 p-4 bg-white border border-gray-200 shadow-lg rounded-lg">
         <div className="space-y-3">
           <h4 className="font-semibold text-blue-900 text-sm">
-            Voorbeelden voor "{title}"
+            {t('common.examples_for')} "{title}"
           </h4>
           <div className="space-y-2">
             {examples.map((example, index) => (
