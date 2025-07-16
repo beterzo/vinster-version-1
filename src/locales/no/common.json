@@ -64,7 +64,11 @@
     "profile_completed_description": "Rapporten din genereres nå automatisk. Du blir videresendt til rapportsiden.",
     "completion_error": "Feil ved fullføring",
     "completion_error_description": "Noe gikk galt ved fullføring av profilen din. Prøv igjen.",
-    "no_user_data": "Feil",
-    "no_user_data_description": "Kan ikke finne brukerdata for sending av data."
+    "no_user_data": "Kan ikke finne brukerdata for sending av data.",
+    "wensberoepen_incomplete": "Drømmejobb-skanning ikke fullført",
+    "wensberoepen_incomplete_description": "Fyll ut alle drømmejobb-feltene før du fullfører skanningen.",
+    "wensberoepen_completed": "Drømmejobb-skanningen din er fullført og dataene er sendt.",
+    "profile_completing": "Profil fullføres og rapport genereres...",
+    "completing": "Fullfører..."
   }
 }

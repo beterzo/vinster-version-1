@@ -182,12 +182,12 @@ const PrioriteitenInteresses = () => {
   };
 
   if (loading || reportLoading) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Laden...</div>;
+    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">{t('common.loading')}</div>;
   }
 
   // Don't show the page if user already has a report
   if (hasExistingReport) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Je wordt doorgestuurd...</div>;
+    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">{t('common.redirecting')}</div>;
   }
 
   // Use AI-generated keywords or fallback to empty array
@@ -217,18 +217,18 @@ const PrioriteitenInteresses = () => {
             {/* Title */}
             <div className="text-center mb-12">
               <h1 className="text-3xl font-bold text-blue-900 mb-2">
-                Prioriteiten - interesses
+                {t('profiel_voltooien.prioriteiten.interesses.title')}
               </h1>
               <p className="text-xl text-gray-600">
-                Selecteer minimaal 5 onderwerpen die je interesseren
+                {t('profiel_voltooien.prioriteiten.interesses.subtitle')}
               </p>
               <p className="text-sm text-gray-500 mt-2">
-                Geselecteerd: {selectedKeywords.length} van minimaal 5
+                {t('profiel_voltooien.prioriteiten.interesses.selected_count').replace('{count}', selectedKeywords.length.toString())}
               </p>
               {isSubmitting && (
                 <div className="mt-4 p-3 bg-blue-50 rounded-lg">
                   <p className="text-sm text-blue-700">
-                    📤 Profiel wordt afgerond en rapport gegenereerd...
+                    📤 {t('common.toast.profile_completing')}
                   </p>
                 </div>
               )}
@@ -255,8 +255,7 @@ const PrioriteitenInteresses = () => {
             ) : (
               <div className="text-center mb-8 p-8 bg-gray-100 rounded-lg">
                 <p className="text-gray-600">
-                  Er zijn nog geen persoonlijke interesses gegenereerd. 
-                  Vul eerst je enthousiasme scan en wensberoepen in.
+                  {t('profiel_voltooien.prioriteiten.interesses.missing_keywords')}
                 </p>
               </div>
             )}
@@ -264,11 +263,11 @@ const PrioriteitenInteresses = () => {
             {/* Extra Text Field */}
             <div className="mb-8">
               <Label htmlFor="extraText" className="text-blue-900 font-medium text-lg mb-3 block text-left">
-                Mis je nog onderwerpen? Voeg ze hier toe (optioneel)
+                {t('profiel_voltooien.prioriteiten.interesses.extra_text_label')}
               </Label>
               <Textarea 
                 id="extraText" 
-                placeholder="Bijvoorbeeld: Blockchain, Dierenrechten, Voeding..." 
+                placeholder={t('profiel_voltooien.prioriteiten.interesses.extra_text_placeholder')} 
                 value={extraText} 
                 onChange={e => handleExtraTextChange(e.target.value)} 
                 onBlur={handleExtraTextBlur} 
@@ -285,7 +284,7 @@ const PrioriteitenInteresses = () => {
                 className="border-blue-900 text-blue-900 hover:bg-blue-50"
                 disabled={isSubmitting}
               >
-                Vorige: Werkomstandigheden
+                {t('profiel_voltooien.prioriteiten.interesses.previous_button')}
               </Button>
               <Button 
                 onClick={handleComplete} 
@@ -296,7 +295,7 @@ const PrioriteitenInteresses = () => {
                 }`} 
                 disabled={!canProceed || isSubmitting}
               >
-                {isSubmitting ? "Afronden..." : "Afronden"}
+                {isSubmitting ? t('common.completing') : t('profiel_voltooien.prioriteiten.interesses.finish_button')}
               </Button>
             </div>
           </CardContent>

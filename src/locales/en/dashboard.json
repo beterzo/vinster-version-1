@@ -60,6 +60,28 @@
       "title": "Want to do the journey again?",
       "subtitle": "Start over with fresh insights",
       "button": "Restart journey"
+    },
+    "steps": {
+      "enthousiasme": {
+        "description": "Discover what truly drives and motivates you",
+        "action": "Start scan"
+      },
+      "wensberoepen": {
+        "description": "Explore different career opportunities",
+        "action": "View careers"
+      },
+      "persoonsprofiel": {
+        "description": "Build your personal profile",
+        "action": "Complete"
+      },
+      "loopbaanrapport": {
+        "description": "Receive your personal recommendations",
+        "action": "View report"
+      },
+      "zoekprofiel": {
+        "description": "Download your search profile",
+        "action": "Download"
+      }
     }
   }
 }

@@ -60,6 +60,28 @@
       "title": "Wil je het traject nog een keer doen?",
       "subtitle": "Start opnieuw met verse inzichten",
       "button": "Traject opnieuw starten"
+    },
+    "steps": {
+      "enthousiasme": {
+        "description": "Ontdek wat je echt drijft en motiveert",
+        "action": "Start scan"
+      },
+      "wensberoepen": {
+        "description": "Verken verschillende carrièremogelijkheden",
+        "action": "Bekijk beroepen"
+      },
+      "persoonsprofiel": {
+        "description": "Bouw je persoonlijke profiel op",
+        "action": "Voltooien"
+      },
+      "loopbaanrapport": {
+        "description": "Ontvang je persoonlijke aanbevelingen",
+        "action": "Bekijk rapport"
+      },
+      "zoekprofiel": {
+        "description": "Download je zoekprofiel",
+        "action": "Download"
+      }
     }
   }
 }

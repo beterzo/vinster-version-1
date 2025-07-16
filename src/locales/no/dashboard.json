@@ -59,6 +59,28 @@
       "title": "Vil du gjøre reisen igjen?",
       "subtitle": "Start på nytt med nye innsikter",
       "button": "Start reisen på nytt"
+    },
+    "steps": {
+      "enthousiasme": {
+        "description": "Oppdag hva som virkelig driver og motiverer deg",
+        "action": "Start skanning"
+      },
+      "wensberoepen": {
+        "description": "Utforsk forskjellige karrieremuligheter",
+        "action": "Se yrker"
+      },
+      "persoonsprofiel": {
+        "description": "Bygg din personlige profil",
+        "action": "Fullfør"
+      },
+      "loopbaanrapport": {
+        "description": "Motta dine personlige anbefalinger",
+        "action": "Se rapport"
+      },
+      "zoekprofiel": {
+        "description": "Last ned søkeprofilen din",
+        "action": "Last ned"
+      }
     }
   }
 }

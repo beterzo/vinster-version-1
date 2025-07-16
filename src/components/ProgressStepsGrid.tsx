@@ -47,40 +47,40 @@ const ProgressStepsGrid = ({
       step: 1,
       id: "enthousiasme",
       title: t('common.enthousiasmescan'),
-      description: "Ontdek wat je echt drijft en motiveert",
-      actionButton: "Start scan",
+      description: t('dashboard.steps.enthousiasme.description'),
+      actionButton: t('dashboard.steps.enthousiasme.action'),
       icon: "heart"
     },
     {
       step: 2,
       id: "wensberoepen",
       title: t('common.wensberoepen'),
-      description: "Verken verschillende carrièremogelijkheden",
-      actionButton: "Bekijk beroepen",
+      description: t('dashboard.steps.wensberoepen.description'),
+      actionButton: t('dashboard.steps.wensberoepen.action'),
       icon: "briefcase"
     },
     {
       step: 3,
       id: "persoonsprofiel",
       title: t('common.persoonsprofiel'),
-      description: "Bouw je persoonlijke profiel op",
-      actionButton: "Voltooien",
+      description: t('dashboard.steps.persoonsprofiel.description'),
+      actionButton: t('dashboard.steps.persoonsprofiel.action'),
       icon: "user"
     },
     {
       step: 4,
       id: "loopbaanrapport",
       title: t('common.loopbaanrapport'),
-      description: "Ontvang je persoonlijke aanbevelingen",
-      actionButton: "Bekijk rapport",
+      description: t('dashboard.steps.loopbaanrapport.description'),
+      actionButton: t('dashboard.steps.loopbaanrapport.action'),
       icon: "file-text"
     },
     {
       step: 5,
       id: "zoekprofiel",
       title: t('common.zoekprofiel'),
-      description: "Download je zoekprofiel",
-      actionButton: "Download",
+      description: t('dashboard.steps.zoekprofiel.description'),
+      actionButton: t('dashboard.steps.zoekprofiel.action'),
       icon: "search"
     }
   ];

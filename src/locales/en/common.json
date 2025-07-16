@@ -52,7 +52,11 @@
     "profile_completed_description": "Your report is now being automatically generated. You will be redirected to the report page.",
     "completion_error": "Error completing",
     "completion_error_description": "Something went wrong while completing your profile. Please try again.",
-    "no_user_data": "Error",
-    "no_user_data_description": "Cannot find user data for sending data."
+    "no_user_data": "Cannot find user data for sending data.",
+    "wensberoepen_incomplete": "Dream jobs scan not complete",
+    "wensberoepen_incomplete_description": "Fill in all dream job fields before completing the scan.",
+    "wensberoepen_completed": "Your dream jobs scan has been successfully completed and the data has been sent.",
+    "profile_completing": "Profile being completed and report generated...",
+    "completing": "Completing..."
   }
 }

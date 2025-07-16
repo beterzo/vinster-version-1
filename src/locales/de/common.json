@@ -105,7 +105,11 @@
     "profile_completed_description": "Ihr Bericht wird jetzt automatisch generiert. Sie werden zur Berichtsseite weitergeleitet.",
     "completion_error": "Fehler beim Abschließen",
     "completion_error_description": "Beim Abschließen Ihres Profils ist ein Fehler aufgetreten. Versuchen Sie es erneut.",
-    "no_user_data": "Fehler",
-    "no_user_data_description": "Kann keine Benutzerdaten zum Senden der Daten finden."
+    "no_user_data": "Kann keine Benutzerdaten zum Senden der Daten finden.",
+    "wensberoepen_incomplete": "Traumjob-Scan nicht vollständig",
+    "wensberoepen_incomplete_description": "Füllen Sie alle Traumjob-Felder aus, bevor Sie den Scan abschließen.",
+    "wensberoepen_completed": "Ihr Traumjob-Scan wurde erfolgreich abgeschlossen und die Daten wurden gesendet.",
+    "profile_completing": "Profil wird abgeschlossen und Bericht generiert...",
+    "completing": "Abschließen..."
   }
 }

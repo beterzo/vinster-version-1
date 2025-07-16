@@ -59,6 +59,28 @@
       "title": "Möchten Sie die Reise noch einmal machen?",
       "subtitle": "Neu starten mit frischen Erkenntnissen",
       "button": "Reise neu starten"
+    },
+    "steps": {
+      "enthousiasme": {
+        "description": "Entdecken Sie, was Sie wirklich antreibt und motiviert",
+        "action": "Scan starten"
+      },
+      "wensberoepen": {
+        "description": "Verschiedene Karrieremöglichkeiten erkunden",
+        "action": "Berufe ansehen"
+      },
+      "persoonsprofiel": {
+        "description": "Bauen Sie Ihr persönliches Profil auf",
+        "action": "Vervollständigen"
+      },
+      "loopbaanrapport": {
+        "description": "Erhalten Sie Ihre persönlichen Empfehlungen",
+        "action": "Bericht ansehen"
+      },
+      "zoekprofiel": {
+        "description": "Laden Sie Ihr Suchprofil herunter",
+        "action": "Herunterladen"
+      }
     }
   }
 }

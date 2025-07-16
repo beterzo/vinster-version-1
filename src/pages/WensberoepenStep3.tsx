@@ -142,8 +142,8 @@ const WensberoepenStep3 = () => {
   const handleComplete = async () => {
     if (!isAllWensberoepenComplete()) {
       toast({
-        title: "Wensberoepen scan niet compleet",
-        description: "Vul alle wensberoepen velden in voordat je de scan afrondt.",
+        title: t('common.toast.wensberoepen_incomplete'),
+        description: t('common.toast.wensberoepen_incomplete_description'),
         variant: "destructive",
       });
       return;
@@ -156,8 +156,8 @@ const WensberoepenStep3 = () => {
       const webhookData = collectWebhookData();
       if (!webhookData) {
         toast({
-          title: "Fout",
-          description: "Kan geen gebruikersgegevens vinden voor het verzenden van data.",
+          title: t('common.error'),
+          description: t('common.toast.no_user_data'),
           variant: "destructive",
         });
         return;
@@ -168,8 +168,8 @@ const WensberoepenStep3 = () => {
       
       console.log("Wensberoepen scan completed and data sent to webhook!");
       toast({
-        title: "Gelukt!",
-        description: "Je wensberoepen scan is succesvol afgerond en de gegevens zijn verzonden.",
+        title: t('common.success'),
+        description: t('common.toast.wensberoepen_completed'),
         variant: "default",
       });
       
@@ -177,8 +177,8 @@ const WensberoepenStep3 = () => {
     } catch (error) {
       console.error("Error completing wensberoepen scan:", error);
       toast({
-        title: "Fout bij afronden",
-        description: "Er ging iets mis bij het afronden van je scan. Probeer het opnieuw.",
+        title: t('common.toast.completion_error'),
+        description: t('common.toast.completion_error_description'),
         variant: "destructive",
       });
     } finally {
@@ -187,14 +187,14 @@ const WensberoepenStep3 = () => {
   };
 
   const questions = [
-    "Wat doe je in een werkweek? Antwoord in werkwoorden en activiteiten.",
-    "Waar doe je je werk? Beschrijf de omgeving, het gebouw, de ruimte ....",
-    "Werk je meer samen of meer alleen? Met wat voor mensen heb je contact?",
-    "Wat heb je gedaan op een dag dat je fluitend thuiskomt?",
-    "Wat is je doel met dit werk?",
-    "Welke onderdelen uit je werk zijn het leukst?",
-    "Wat is voor jou belangrijk in dit werk?",
-    "Waar gaat het vooral over in jouw werk? Waar moet je veel van weten?"
+    t('journey.wensberoepen.step3.question1'),
+    t('journey.wensberoepen.step3.question2'),
+    t('journey.wensberoepen.step3.question3'),
+    t('journey.wensberoepen.step3.question4'),
+    t('journey.wensberoepen.step3.question5'),
+    t('journey.wensberoepen.step3.question6'),
+    t('journey.wensberoepen.step3.question7'),
+    t('journey.wensberoepen.step3.question8')
   ];
 
   if (isLoading) {

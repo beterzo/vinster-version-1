@@ -52,7 +52,11 @@
     "profile_completed_description": "Je rapport wordt nu automatisch gegenereerd. Je wordt doorgestuurd naar de rapport pagina.",
     "completion_error": "Fout bij afronden",
     "completion_error_description": "Er ging iets mis bij het afronden van je profiel. Probeer het opnieuw.",
-    "no_user_data": "Fout",
-    "no_user_data_description": "Kan geen gebruikersgegevens vinden voor het verzenden van data."
+    "no_user_data": "Kan geen gebruikersgegevens vinden voor het verzenden van data.",
+    "wensberoepen_incomplete": "Wensberoepen scan niet compleet",
+    "wensberoepen_incomplete_description": "Vul alle wensberoepen velden in voordat je de scan afrondt.",
+    "wensberoepen_completed": "Je wensberoepen scan is succesvol afgerond en de gegevens zijn verzonden.",
+    "profile_completing": "Profiel wordt afgerond en rapport gegenereerd...",
+    "completing": "Afronden..."
   }
 }
