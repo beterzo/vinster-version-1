@@ -36,6 +36,8 @@
     "try_again": "Prøv igjen.",
     "contact_support": "Kontakt support hvis dette problemet vedvarer.",
     "already_exists": "Søkeprofil allerede opprettet",
-    "already_exists_description": "Du har allerede opprettet en søkeprofil. Du blir omdirigert til nedlastingssiden."
+    "already_exists_description": "Du har allerede opprettet en søkeprofil. Du blir omdirigert til nedlastingssiden.",
+    "answers_saved": "Svar lagret",
+    "answers_saved_description": "Søkeprofilsvarene dine er lagret."
   }
 }

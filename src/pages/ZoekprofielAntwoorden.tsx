@@ -96,8 +96,8 @@ const ZoekprofielAntwoorden = () => {
 
     try {
       toast({
-        title: "Antwoorden opgeslagen",
-        description: "Je zoekprofiel antwoorden zijn succesvol opgeslagen."
+        title: t('common.toast.answers_saved'),
+        description: t('common.toast.answers_saved_description')
       });
       scrollToTop();
       navigate("/zoekprofiel-download");

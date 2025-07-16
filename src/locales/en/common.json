@@ -24,6 +24,8 @@
     "try_again": "Please try again.",
     "contact_support": "Contact support if this problem persists.",
     "already_exists": "Search profile already created",
-    "already_exists_description": "You have already created a search profile. You will be redirected to the download page."
+    "already_exists_description": "You have already created a search profile. You will be redirected to the download page.",
+    "answers_saved": "Answers saved",
+    "answers_saved_description": "Your search profile answers have been saved successfully."
   }
 }

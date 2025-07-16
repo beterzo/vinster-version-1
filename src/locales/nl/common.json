@@ -24,6 +24,8 @@
     "try_again": "Probeer het opnieuw.",
     "contact_support": "Neem contact op met support als dit probleem aanhoudt.",
     "already_exists": "Zoekprofiel al aangemaakt",
-    "already_exists_description": "Je hebt al een zoekprofiel aangemaakt. Je wordt doorgestuurd naar de download pagina."
+    "already_exists_description": "Je hebt al een zoekprofiel aangemaakt. Je wordt doorgestuurd naar de download pagina.",
+    "answers_saved": "Antwoorden opgeslagen",
+    "answers_saved_description": "Je zoekprofiel antwoorden zijn succesvol opgeslagen."
   }
 }

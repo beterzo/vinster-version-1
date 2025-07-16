@@ -77,6 +77,8 @@
     "try_again": "Versuchen Sie es erneut.",
     "contact_support": "Wenden Sie sich an den Support, wenn dieses Problem weiterhin besteht.",
     "already_exists": "Suchprofil bereits erstellt",
-    "already_exists_description": "Sie haben bereits ein Suchprofil erstellt. Sie werden zur Download-Seite weitergeleitet."
+    "already_exists_description": "Sie haben bereits ein Suchprofil erstellt. Sie werden zur Download-Seite weitergeleitet.",
+    "answers_saved": "Antworten gespeichert",
+    "answers_saved_description": "Ihre Suchprofil-Antworten wurden erfolgreich gespeichert."
   }
 }

@@ -115,18 +115,18 @@ const ZoekprofielDownload = () => {
         };
       case 'generating':
         return {
-          title: "Je zoekprofiel wordt gegenereerd...",
-          description: "We werken hard aan je persoonlijke zoekprofiel. Dit kan enkele minuten duren."
+          title: t('journey.zoekprofiel.download.generating_title'),
+          description: t('journey.zoekprofiel.download.generating_description')
         };
       case 'failed':
         return {
-          title: "Er ging iets mis",
-          description: "Er is een fout opgetreden bij het genereren van je zoekprofiel. Probeer het opnieuw of neem contact op met support."
+          title: t('journey.zoekprofiel.download.error_title'),
+          description: t('journey.zoekprofiel.download.error_description')
         };
       default:
         return {
-          title: "Zoekprofiel wordt voorbereid...",
-          description: "Je zoekprofiel wordt automatisch gegenereerd op basis van je ingevulde gegevens."
+          title: t('journey.zoekprofiel.download.preparing_title'),
+          description: t('journey.zoekprofiel.download.preparing_description')
         };
     }
   };
