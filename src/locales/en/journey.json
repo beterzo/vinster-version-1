@@ -265,7 +265,9 @@
       "back_button": "Back to dashboard",
       "regenerate_button": "Create new search profile",
       "generating_wait": "Your search profile is still being generated. This may take a few minutes.",
-      "refresh_button": "Refresh page"
+      "refresh_button": "Refresh page",
+      "tip_applications": "Use your search profile in job applications and share it with recruiters!",
+      "dashboard_title": "Back to your dashboard"
     }
   },
   "rapport": {

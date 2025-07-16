@@ -264,7 +264,9 @@
       "back_button": "Terug naar dashboard",
       "regenerate_button": "Nieuw zoekprofiel maken",
       "generating_wait": "Je zoekprofiel wordt nog gegenereerd. Dit kan enkele minuten duren.",
-      "refresh_button": "Pagina verversen"
+      "refresh_button": "Pagina verversen",
+      "tip_applications": "Gebruik je zoekprofiel bij sollicitaties en deel het met recruiters!",
+      "dashboard_title": "Terug naar je dashboard"
     }
   },
   "rapport": {
