@@ -15,7 +15,7 @@ const ZoekprofielAntwoorden = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { user } = useAuth();
-  const { responses, saveResponse, loading } = useZoekprofielAntwoorden();
+  const { responses, saveResponse, submitToWebhook, loading } = useZoekprofielAntwoorden();
   const { hasExistingZoekprofiel, loading: zoekprofielLoading } = useExistingZoekprofiel();
   const { t } = useTranslation();
 
@@ -95,14 +95,25 @@ const ZoekprofielAntwoorden = () => {
     }
 
     try {
-      toast({
-        title: t('common.toast.answers_saved'),
-        description: t('common.toast.answers_saved_description')
-      });
-      scrollToTop();
-      navigate("/zoekprofiel-download");
+      // Submit to webhook to trigger PDF generation
+      const success = await submitToWebhook();
+      
+      if (success) {
+        toast({
+          title: t('common.toast.answers_saved'),
+          description: t('common.toast.answers_saved_description')
+        });
+        scrollToTop();
+        navigate("/zoekprofiel-download");
+      } else {
+        toast({
+          title: t('common.toast.save_error'),
+          description: "Er is een fout opgetreden bij het starten van de zoekprofiel generatie.",
+          variant: "destructive"
+        });
+      }
     } catch (error) {
-      console.error("Error saving answers:", error);
+      console.error("Error submitting to webhook:", error);
       toast({
         title: t('common.toast.save_error'),
         description: t('common.toast.save_error_description'),
