@@ -64,7 +64,7 @@ const PrioriteitenActiviteiten = () => {
   };
 
   if (loading) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Laden...</div>;
+    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">{t('common.loading')}</div>;
   }
 
   // Use AI-generated keywords or fallback to empty array

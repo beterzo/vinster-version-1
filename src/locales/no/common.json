@@ -20,6 +20,8 @@
   "logout": "Logg ut",
   "start_enthusiasm_scan": "Start entusiasme-skanning",
   "start_dream_jobs": "Start drømmeyrker",
+  "loading": "Laster...",
+  "redirecting": "Omdirigerer...",
   "toast": {
     "save_error": "Feil ved lagring",
     "save_error_description": "Det oppstod en feil under lagring av dataene dine.",

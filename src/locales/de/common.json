@@ -61,6 +61,8 @@
   "logout": "Abmelden",
   "start_enthusiasm_scan": "Begeisterungsscan starten",
   "start_dream_jobs": "Wunschberufe starten",
+  "loading": "Laden...",
+  "redirecting": "Weiterleiten...",
   "toast": {
     "save_error": "Fehler beim Speichern",
     "save_error_description": "Beim Speichern Ihrer Daten ist ein Fehler aufgetreten.",

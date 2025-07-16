@@ -123,12 +123,12 @@ const ZoekprofielAntwoorden = () => {
   };
 
   if (loading || zoekprofielLoading) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Laden...</div>;
+    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">{t('common.loading')}</div>;
   }
 
   // Don't show the form if user already has a zoekprofiel
   if (hasExistingZoekprofiel) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Je wordt doorgestuurd...</div>;
+    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">{t('common.redirecting')}</div>;
   }
 
   const questions = [
