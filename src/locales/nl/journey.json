@@ -318,5 +318,47 @@
     "time_notice_description": "Dit onderzoek is cruciaal voor het vinden van je ideale functie. Neem de tijd om elke stap zorgvuldig uit te voeren.",
     "time_notice_details": "Hoe beter je dit onderzoek doet, hoe beter je straks je zoekprofiel kunt invullen en hoe gerichter je kunt solliciteren.",
     "back_button": "Terug naar dashboard"
+  },
+  "restart_explanation": {
+    "title": "Traject opnieuw starten",
+    "subtitle": "Wil je het Vinster traject nog een keer doorlopen? Hier lees je hoe dat werkt.",
+    "price": "€29",
+    "warning_card": {
+      "title": "Belangrijk om te weten",
+      "description": "Wanneer je het traject opnieuw start, gebeurt het volgende:",
+      "points": [
+        "Al je huidige antwoorden worden permanent gewist",
+        "Je huidige rapport wordt verwijderd",
+        "Je zoekprofiel wordt verwijderd",
+        "Je betaalt opnieuw €29 voor een nieuw traject",
+        "Je begint volledig opnieuw bij de eerste stap"
+      ]
+    },
+    "process_card": {
+      "title": "Hoe werkt het proces?",
+      "description": "Het reset proces gebeurt in deze stappen:",
+      "steps": [
+        {
+          "title": "Betaling",
+          "description": "Je wordt doorgestuurd naar de betaalpagina om €29 te betalen voor het nieuwe traject."
+        },
+        {
+          "title": "Data wissen",
+          "description": "Na succesvolle betaling worden al je oude antwoorden automatisch gewist."
+        },
+        {
+          "title": "Opnieuw beginnen",
+          "description": "Je kunt het traject opnieuw starten vanaf het begin met verse inzichten."
+        }
+      ]
+    },
+    "buttons": {
+      "back": "Terug naar dashboard",
+      "confirm": "Ja, ik wil opnieuw starten",
+      "loading": "Bezig..."
+    },
+    "errors": {
+      "general": "Er ging iets mis bij het starten van het reset proces."
+    }
   }
 }

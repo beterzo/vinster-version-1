@@ -265,5 +265,47 @@
       "back_button": "Back to dashboard",
       "regenerate_button": "Create new search profile"
     }
+  },
+  "restart_explanation": {
+    "title": "Restart journey",
+    "subtitle": "Do you want to go through the Vinster journey again? Here's how it works.",
+    "price": "€29",
+    "warning_card": {
+      "title": "Important to know",
+      "description": "When you restart the journey, the following happens:",
+      "points": [
+        "All your current answers will be permanently deleted",
+        "Your current report will be removed",
+        "Your search profile will be removed",
+        "You will pay €29 again for a new journey",
+        "You will start completely fresh from the first step"
+      ]
+    },
+    "process_card": {
+      "title": "How does the process work?",
+      "description": "The reset process happens in these steps:",
+      "steps": [
+        {
+          "title": "Payment",
+          "description": "You will be redirected to the payment page to pay €29 for the new journey."
+        },
+        {
+          "title": "Delete data",
+          "description": "After successful payment, all your old answers will be automatically deleted."
+        },
+        {
+          "title": "Start fresh",
+          "description": "You can restart the journey from the beginning with fresh insights."
+        }
+      ]
+    },
+    "buttons": {
+      "back": "Back to dashboard",
+      "confirm": "Yes, I want to start over",
+      "loading": "Processing..."
+    },
+    "errors": {
+      "general": "Something went wrong while starting the reset process."
+    }
   }
 }

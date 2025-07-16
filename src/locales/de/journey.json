@@ -266,5 +266,47 @@
       "back_button": "Zurück zum Dashboard",
       "regenerate_button": "Neues Suchprofiel erstellen"
     }
+  },
+  "restart_explanation": {
+    "title": "Laufbahn neu starten",
+    "subtitle": "Möchten Sie die Vinster-Laufbahn noch einmal durchlaufen? Hier lesen Sie, wie das funktioniert.",
+    "price": "€29",
+    "warning_card": {
+      "title": "Wichtig zu wissen",
+      "description": "Wenn Sie die Laufbahn neu starten, passiert folgendes:",
+      "points": [
+        "All Ihre aktuellen Antworten werden dauerhaft gelöscht",
+        "Ihr aktueller Bericht wird entfernt",
+        "Ihr Suchprofil wird entfernt",
+        "Sie zahlen erneut €29 für eine neue Laufbahn",
+        "Sie beginnen vollständig neu beim ersten Schritt"
+      ]
+    },
+    "process_card": {
+      "title": "Wie funktioniert der Prozess?",
+      "description": "Der Reset-Prozess erfolgt in diesen Schritten:",
+      "steps": [
+        {
+          "title": "Zahlung",
+          "description": "Sie werden zur Zahlungsseite weitergeleitet, um €29 für die neue Laufbahn zu bezahlen."
+        },
+        {
+          "title": "Daten löschen",
+          "description": "Nach erfolgreicher Zahlung werden alle Ihre alten Antworten automatisch gelöscht."
+        },
+        {
+          "title": "Neu beginnen",
+          "description": "Sie können die Laufbahn von Anfang an mit frischen Erkenntnissen neu starten."
+        }
+      ]
+    },
+    "buttons": {
+      "back": "Zurück zum Dashboard",
+      "confirm": "Ja, ich möchte neu starten",
+      "loading": "Verarbeitung läuft..."
+    },
+    "errors": {
+      "general": "Beim Starten des Reset-Prozesses ist ein Fehler aufgetreten."
+    }
   }
 }

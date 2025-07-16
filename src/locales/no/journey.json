@@ -264,5 +264,47 @@
       "back_button": "Tilbake til dashboard",
       "regenerate_button": "Lag ny søkeprofil"
     }
+  },
+  "restart_explanation": {
+    "title": "Start reisen på nytt",
+    "subtitle": "Vil du gå gjennom Vinster-reisen igjen? Her er hvordan det fungerer.",
+    "price": "333 kroner",
+    "warning_card": {
+      "title": "Viktig å vite",
+      "description": "Når du starter reisen på nytt, skjer følgende:",
+      "points": [
+        "Alle dine nåværende svar vil bli permanent slettet",
+        "Din nåværende rapport vil bli fjernet",
+        "Søkeprofilen din vil bli fjernet",
+        "Du betaler 333 kroner igjen for en ny reise",
+        "Du starter helt på nytt fra det første steget"
+      ]
+    },
+    "process_card": {
+      "title": "Hvordan fungerer prosessen?",
+      "description": "Tilbakestillingsprosessen skjer i disse stegene:",
+      "steps": [
+        {
+          "title": "Betaling",
+          "description": "Du blir videresendt til betalingssiden for å betale 333 kroner for den nye reisen."
+        },
+        {
+          "title": "Slette data",
+          "description": "Etter vellykket betaling blir alle dine gamle svar automatisk slettet."
+        },
+        {
+          "title": "Start på nytt",
+          "description": "Du kan starte reisen på nytt fra begynnelsen med nye innsikter."
+        }
+      ]
+    },
+    "buttons": {
+      "back": "Tilbake til dashboard",
+      "confirm": "Ja, jeg vil starte på nytt",
+      "loading": "Behandler..."
+    },
+    "errors": {
+      "general": "Noe gikk galt ved oppstart av tilbakestillingsprosessen."
+    }
   }
 }

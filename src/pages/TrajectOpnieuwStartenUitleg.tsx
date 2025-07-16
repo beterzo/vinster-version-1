@@ -11,7 +11,7 @@ import { toast } from '@/hooks/use-toast';
 const TrajectOpnieuwStartenUitleg = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleStartReset = async () => {
@@ -32,7 +32,7 @@ const TrajectOpnieuwStartenUitleg = () => {
         console.error('Error creating journey reset:', error);
         toast({
           title: t('common.error'),
-          description: 'Er ging iets mis bij het starten van het reset proces.',
+          description: t('journey.restart_explanation.errors.general'),
           variant: 'destructive'
         });
         return;
@@ -51,7 +51,7 @@ const TrajectOpnieuwStartenUitleg = () => {
       console.error('Error starting reset process:', error);
       toast({
         title: t('common.error'),
-        description: 'Er ging iets mis bij het starten van het reset proces.',
+        description: t('journey.restart_explanation.errors.general'),
         variant: 'destructive'
       });
     } finally {
@@ -74,10 +74,10 @@ const TrajectOpnieuwStartenUitleg = () => {
               />
             </div>
             <h1 className="text-3xl font-bold text-foreground mb-2">
-              Traject opnieuw starten
+              {t('journey.restart_explanation.title')}
             </h1>
             <p className="text-muted-foreground">
-              Wil je het Vinster traject nog een keer doorlopen? Hier lees je hoe dat werkt.
+              {t('journey.restart_explanation.subtitle')}
             </p>
           </div>
 
@@ -86,19 +86,22 @@ const TrajectOpnieuwStartenUitleg = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-orange-800">
                 <AlertTriangle className="h-5 w-5" />
-                Belangrijk om te weten
+                {t('journey.restart_explanation.warning_card.title')}
               </CardTitle>
             </CardHeader>
             <CardContent className="text-orange-700">
               <p className="mb-2">
-                Wanneer je het traject opnieuw start, gebeurt het volgende:
+                {t('journey.restart_explanation.warning_card.description')}
               </p>
               <ul className="list-disc list-inside space-y-1 text-sm">
-                <li>Al je huidige antwoorden worden permanent gewist</li>
-                <li>Je huidige rapport wordt verwijderd</li>
-                <li>Je zoekprofiel wordt verwijderd</li>
-                <li>Je betaalt opnieuw €29 voor een nieuw traject</li>
-                <li>Je begint volledig opnieuw bij de eerste stap</li>
+                {t('journey.restart_explanation.warning_card.points').map((point: string, index: number) => (
+                  <li key={index}>
+                    {point.includes('€29') || point.includes('333 kroner') 
+                      ? point.replace(/€29|333 kroner/, t('journey.restart_explanation.price'))
+                      : point
+                    }
+                  </li>
+                ))}
               </ul>
             </CardContent>
           </Card>
@@ -108,58 +111,35 @@ const TrajectOpnieuwStartenUitleg = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <RefreshCw className="h-5 w-5" />
-                Hoe werkt het proces?
+                {t('journey.restart_explanation.process_card.title')}
               </CardTitle>
               <CardDescription>
-                Het reset proces gebeurt in deze stappen:
+                {t('journey.restart_explanation.process_card.description')}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <div className="flex gap-3">
-                  <div className="flex-shrink-0 w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-sm font-bold">
-                    1
+                {t('journey.restart_explanation.process_card.steps').map((step: any, index: number) => (
+                  <div key={index} className="flex gap-3">
+                    <div className="flex-shrink-0 w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-sm font-bold">
+                      {index + 1}
+                    </div>
+                    <div>
+                      <h4 className="font-medium flex items-center gap-2">
+                        {index === 0 && <CreditCard className="h-4 w-4" />}
+                        {index === 1 && <FileX className="h-4 w-4" />}
+                        {index === 2 && <RefreshCw className="h-4 w-4" />}
+                        {step.title}
+                      </h4>
+                      <p className="text-sm text-muted-foreground">
+                        {step.description.includes('€29') || step.description.includes('333 kroner')
+                          ? step.description.replace(/€29|333 kroner/, t('journey.restart_explanation.price'))
+                          : step.description
+                        }
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-medium flex items-center gap-2">
-                      <CreditCard className="h-4 w-4" />
-                      Betaling
-                    </h4>
-                    <p className="text-sm text-muted-foreground">
-                      Je wordt doorgestuurd naar de betaalpagina om €29 te betalen voor het nieuwe traject.
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex gap-3">
-                  <div className="flex-shrink-0 w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-sm font-bold">
-                    2
-                  </div>
-                  <div>
-                    <h4 className="font-medium flex items-center gap-2">
-                      <FileX className="h-4 w-4" />
-                      Data wissen
-                    </h4>
-                    <p className="text-sm text-muted-foreground">
-                      Na succesvolle betaling worden al je oude antwoorden automatisch gewist.
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex gap-3">
-                  <div className="flex-shrink-0 w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-sm font-bold">
-                    3
-                  </div>
-                  <div>
-                    <h4 className="font-medium flex items-center gap-2">
-                      <RefreshCw className="h-4 w-4" />
-                      Opnieuw beginnen
-                    </h4>
-                    <p className="text-sm text-muted-foreground">
-                      Je kunt het traject opnieuw starten vanaf het begin met verse inzichten.
-                    </p>
-                  </div>
-                </div>
+                ))}
               </div>
             </CardContent>
           </Card>
@@ -171,14 +151,14 @@ const TrajectOpnieuwStartenUitleg = () => {
               onClick={() => navigate('/')}
               disabled={isLoading}
             >
-              Terug naar dashboard
+              {t('journey.restart_explanation.buttons.back')}
             </Button>
             <Button
               onClick={handleStartReset}
               disabled={isLoading}
               className="bg-primary hover:bg-primary/90"
             >
-              {isLoading ? 'Bezig...' : 'Ja, ik wil opnieuw starten'}
+              {isLoading ? t('journey.restart_explanation.buttons.loading') : t('journey.restart_explanation.buttons.confirm')}
             </Button>
           </div>
         </div>
