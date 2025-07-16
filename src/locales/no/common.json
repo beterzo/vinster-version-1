@@ -38,6 +38,15 @@
     "already_exists": "Søkeprofil allerede opprettet",
     "already_exists_description": "Du har allerede opprettet en søkeprofil. Du blir omdirigert til nedlastingssiden.",
     "answers_saved": "Svar lagret",
-    "answers_saved_description": "Søkeprofilsvarene dine er lagret."
+    "answers_saved_description": "Søkeprofilsvarene dine er lagret.",
+    "download_started": "Nedlasting startet",
+    "download_started_description": "Nedlastingen av søkeprofilen din har startet.",
+    "download_failed": "Nedlasting mislyktes",
+    "download_failed_description": "Noe gikk galt ved nedlasting av søkeprofilen din.",
+    "status_loading": "Laster status...",
+    "status_error": "Feil ved lasting av status",
+    "pdf_generating": "PDF genereres...",
+    "pdf_ready": "PDF er klar",
+    "pdf_error": "Feil ved PDF-generering"
   }
 }

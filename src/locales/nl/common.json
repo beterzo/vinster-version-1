@@ -26,6 +26,15 @@
     "already_exists": "Zoekprofiel al aangemaakt",
     "already_exists_description": "Je hebt al een zoekprofiel aangemaakt. Je wordt doorgestuurd naar de download pagina.",
     "answers_saved": "Antwoorden opgeslagen",
-    "answers_saved_description": "Je zoekprofiel antwoorden zijn succesvol opgeslagen."
+    "answers_saved_description": "Je zoekprofiel antwoorden zijn succesvol opgeslagen.",
+    "download_started": "Download gestart",
+    "download_started_description": "Het downloaden van je zoekprofiel is gestart.",
+    "download_failed": "Download mislukt",
+    "download_failed_description": "Er ging iets mis bij het downloaden van je zoekprofiel.",
+    "status_loading": "Status laden...",
+    "status_error": "Fout bij het laden van status",
+    "pdf_generating": "PDF wordt gegenereerd...",
+    "pdf_ready": "PDF is klaar",
+    "pdf_error": "Fout bij PDF generatie"
   }
 }

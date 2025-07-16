@@ -79,6 +79,15 @@
     "already_exists": "Suchprofil bereits erstellt",
     "already_exists_description": "Sie haben bereits ein Suchprofil erstellt. Sie werden zur Download-Seite weitergeleitet.",
     "answers_saved": "Antworten gespeichert",
-    "answers_saved_description": "Ihre Suchprofil-Antworten wurden erfolgreich gespeichert."
+    "answers_saved_description": "Ihre Suchprofil-Antworten wurden erfolgreich gespeichert.",
+    "download_started": "Download gestartet",
+    "download_started_description": "Das Herunterladen Ihres Suchprofils wurde gestartet.",
+    "download_failed": "Download fehlgeschlagen",
+    "download_failed_description": "Beim Herunterladen Ihres Suchprofils ist ein Fehler aufgetreten.",
+    "status_loading": "Status wird geladen...",
+    "status_error": "Fehler beim Laden des Status",
+    "pdf_generating": "PDF wird generiert...",
+    "pdf_ready": "PDF ist bereit",
+    "pdf_error": "Fehler bei der PDF-Generierung"
   }
 }

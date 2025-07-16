@@ -26,6 +26,15 @@
     "already_exists": "Search profile already created",
     "already_exists_description": "You have already created a search profile. You will be redirected to the download page.",
     "answers_saved": "Answers saved",
-    "answers_saved_description": "Your search profile answers have been saved successfully."
+    "answers_saved_description": "Your search profile answers have been saved successfully.",
+    "download_started": "Download started",
+    "download_started_description": "Your search profile download has started.",
+    "download_failed": "Download failed",
+    "download_failed_description": "Something went wrong while downloading your search profile.",
+    "status_loading": "Loading status...",
+    "status_error": "Error loading status",
+    "pdf_generating": "PDF is being generated...",
+    "pdf_ready": "PDF is ready",
+    "pdf_error": "Error generating PDF"
   }
 }

@@ -16,6 +16,7 @@ export interface ZoekprofielPdf {
 
 export const useZoekprofielPdf = () => {
   const { user } = useAuth();
+  const { t } = useTranslation();
   const { toast } = useToast();
   const { language } = useTranslation();
   const [pdfData, setPdfData] = useState<ZoekprofielPdf | null>(null);
@@ -53,8 +54,8 @@ export const useZoekprofielPdf = () => {
     } catch (error) {
       console.error('❌ Failed to load zoekprofiel PDF data:', error);
       toast({
-        title: "Fout bij laden",
-        description: "Kon je zoekprofiel PDF gegevens niet laden.",
+        title: t('common.toast.load_error'),
+        description: t('common.toast.load_error_description'),
         variant: "destructive"
       });
     } finally {
@@ -95,8 +96,8 @@ export const useZoekprofielPdf = () => {
             // Show success message when PDF is completed
             if (newData.pdf_status === 'completed' && newData.pdf_url) {
               toast({
-                title: "PDF gereed!",
-                description: "Je zoekprofiel PDF is succesvol gegenereerd en kan nu gedownload worden.",
+                title: t('common.toast.pdf_ready'),
+                description: t('journey.download.generating_progress'),
               });
               
               // Stop active polling when completed
@@ -193,8 +194,8 @@ export const useZoekprofielPdf = () => {
     if (!pdfData?.pdf_url) {
       console.warn('⚠️ No PDF URL available for download');
       toast({
-        title: "Geen PDF beschikbaar",
-        description: "Er is nog geen PDF gegenereerd voor je zoekprofiel.",
+        title: t('journey.download.error_title'),
+        description: t('journey.download.error_description'),
         variant: "destructive"
       });
       return;
@@ -229,8 +230,8 @@ export const useZoekprofielPdf = () => {
       
       console.log('✅ Direct download successful');
       toast({
-        title: "Download gestart",
-        description: "Je zoekprofiel PDF wordt gedownload.",
+        title: t('common.toast.download_started'),
+        description: t('common.toast.download_started_description'),
       });
 
     } catch (directDownloadError) {
@@ -252,8 +253,8 @@ export const useZoekprofielPdf = () => {
         
         console.log('✅ Fallback download triggered');
         toast({
-          title: "Download geopend",
-          description: "Je zoekprofiel PDF wordt geopend in een nieuw tabblad.",
+          title: t('common.toast.download_started'),
+          description: t('journey.download.view_browser_button'),
         });
 
       } catch (fallbackError) {
@@ -263,8 +264,8 @@ export const useZoekprofielPdf = () => {
         });
         
         toast({
-          title: "Download mislukt",
-          description: "Er is een probleem opgetreden bij het downloaden. Probeer het later opnieuw.",
+          title: t('common.toast.download_failed'),
+          description: t('common.toast.download_failed_description'),
           variant: "destructive"
         });
       }
@@ -299,8 +300,8 @@ export const useZoekprofielPdf = () => {
     } catch (error) {
       console.error('❌ Error initializing PDF generation:', error);
       toast({
-        title: "Fout bij initialiseren",
-        description: "Kon PDF generatie niet starten.",
+        title: t('common.toast.generate_error'),
+        description: t('common.toast.generate_error_description'),
         variant: "destructive"
       });
     }
