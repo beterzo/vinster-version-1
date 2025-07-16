@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { useAuth } from './useAuth';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from './use-toast';
+import { useTranslation } from '@/hooks/useTranslation';
 import { useMakeWebhookData } from './useMakeWebhookData';
 import { sendMakeWebhook } from '@/services/webhookService';
 
 export const useRapportGeneration = () => {
   const { user } = useAuth();
   const { toast } = useToast();
+  const { t } = useTranslation();
   const { collectMakeWebhookData } = useMakeWebhookData();
   const [generating, setGenerating] = useState(false);
   const [userReport, setUserReport] = useState<any>(null);
@@ -85,8 +87,8 @@ export const useRapportGeneration = () => {
           
         console.error('Error sending Make.com webhook:', webhookError);
         toast({
-          title: "Fout bij genereren",
-          description: "Er is een fout opgetreden bij het starten van de PDF generatie.",
+          title: t('common.toast.generate_error'),
+          description: t('common.toast.generate_error_description'),
           variant: "destructive",
         });
         return false;
@@ -101,8 +103,8 @@ export const useRapportGeneration = () => {
     } catch (error) {
       console.error('Error generating loopbaanrapport:', error);
       toast({
-        title: "Fout bij genereren",
-        description: "Er is een fout opgetreden bij het genereren van je loopbaanrapport.",
+        title: t('common.toast.generate_error'),
+        description: t('common.toast.generate_error_description'),
         variant: "destructive",
       });
       return false;
