@@ -55,9 +55,11 @@ const PrivacyVerklaring = () => {
               <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('privacy.sections.data_collected.title')}</h2>
               <p>{t('privacy.sections.data_collected.intro')}</p>
               <ul className="list-disc ml-6 space-y-2">
-                {t('privacy.sections.data_collected.items').map((item: string, index: number) => (
-                  <li key={index}>{item}</li>
-                ))}
+                {Array.isArray(t('privacy.sections.data_collected.items')) ? 
+                  t('privacy.sections.data_collected.items').map((item: string, index: number) => (
+                    <li key={index}>{item}</li>
+                  )) : null
+                }
               </ul>
             </section>
 
@@ -65,9 +67,11 @@ const PrivacyVerklaring = () => {
               <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('privacy.sections.data_usage.title')}</h2>
               <p>{t('privacy.sections.data_usage.intro')}</p>
               <ul className="list-disc ml-6 space-y-2">
-                {t('privacy.sections.data_usage.items').map((item: string, index: number) => (
-                  <li key={index}>{item}</li>
-                ))}
+                {Array.isArray(t('privacy.sections.data_usage.items')) ? 
+                  t('privacy.sections.data_usage.items').map((item: string, index: number) => (
+                    <li key={index}>{item}</li>
+                  )) : null
+                }
               </ul>
             </section>
 
@@ -75,9 +79,11 @@ const PrivacyVerklaring = () => {
               <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('privacy.sections.legal_basis.title')}</h2>
               <p>{t('privacy.sections.legal_basis.intro')}</p>
               <ul className="list-disc ml-6 space-y-2">
-                {t('privacy.sections.legal_basis.items').map((item: string, index: number) => (
-                  <li key={index}>{item}</li>
-                ))}
+                {Array.isArray(t('privacy.sections.legal_basis.items')) ? 
+                  t('privacy.sections.legal_basis.items').map((item: string, index: number) => (
+                    <li key={index}>{item}</li>
+                  )) : null
+                }
               </ul>
             </section>
 
@@ -85,9 +91,11 @@ const PrivacyVerklaring = () => {
               <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('privacy.sections.data_sharing.title')}</h2>
               <p>{t('privacy.sections.data_sharing.intro')}</p>
               <ul className="list-disc ml-6 space-y-2">
-                {t('privacy.sections.data_sharing.items').map((item: string, index: number) => (
-                  <li key={index}>{item}</li>
-                ))}
+                {Array.isArray(t('privacy.sections.data_sharing.items')) ? 
+                  t('privacy.sections.data_sharing.items').map((item: string, index: number) => (
+                    <li key={index}>{item}</li>
+                  )) : null
+                }
               </ul>
             </section>
 
@@ -100,9 +108,11 @@ const PrivacyVerklaring = () => {
               <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('privacy.sections.user_rights.title')}</h2>
               <p>{t('privacy.sections.user_rights.intro')}</p>
               <ul className="list-disc ml-6 space-y-2">
-                {t('privacy.sections.user_rights.items').map((item: string, index: number) => (
-                  <li key={index}>{item}</li>
-                ))}
+                {Array.isArray(t('privacy.sections.user_rights.items')) ? 
+                  t('privacy.sections.user_rights.items').map((item: string, index: number) => (
+                    <li key={index}>{item}</li>
+                  )) : null
+                }
               </ul>
               <p className="mt-4">{t('privacy.sections.user_rights.contact')}</p>
             </section>

@@ -48,9 +48,11 @@ const AlgemeneVoorwaarden = () => {
             <section>
               <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('terms.sections.definitions.title')}</h2>
               <ul className="list-disc ml-6 space-y-2">
-                {t('terms.sections.definitions.items').map((item: string, index: number) => (
-                  <li key={index} dangerouslySetInnerHTML={{ __html: item }} />
-                ))}
+                {Array.isArray(t('terms.sections.definitions.items')) ? 
+                  t('terms.sections.definitions.items').map((item: string, index: number) => (
+                    <li key={index} dangerouslySetInnerHTML={{ __html: item }} />
+                  )) : null
+                }
               </ul>
             </section>
 
@@ -62,9 +64,11 @@ const AlgemeneVoorwaarden = () => {
             <section>
               <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('terms.sections.account.title')}</h2>
               <ul className="list-disc ml-6 space-y-2">
-                {t('terms.sections.account.items').map((item: string, index: number) => (
-                  <li key={index}>{item}</li>
-                ))}
+                {Array.isArray(t('terms.sections.account.items')) ? 
+                  t('terms.sections.account.items').map((item: string, index: number) => (
+                    <li key={index}>{item}</li>
+                  )) : null
+                }
               </ul>
             </section>
 
@@ -72,18 +76,22 @@ const AlgemeneVoorwaarden = () => {
               <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('terms.sections.usage.title')}</h2>
               <p>{t('terms.sections.usage.intro')}</p>
               <ul className="list-disc ml-6 space-y-2">
-                {t('terms.sections.usage.items').map((item: string, index: number) => (
-                  <li key={index}>{item}</li>
-                ))}
+                {Array.isArray(t('terms.sections.usage.items')) ? 
+                  t('terms.sections.usage.items').map((item: string, index: number) => (
+                    <li key={index}>{item}</li>
+                  )) : null
+                }
               </ul>
             </section>
 
             <section>
               <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('terms.sections.payment.title')}</h2>
               <ul className="list-disc ml-6 space-y-2">
-                {t('terms.sections.payment.items').map((item: string, index: number) => (
-                  <li key={index}>{item}</li>
-                ))}
+                {Array.isArray(t('terms.sections.payment.items')) ? 
+                  t('terms.sections.payment.items').map((item: string, index: number) => (
+                    <li key={index}>{item}</li>
+                  )) : null
+                }
               </ul>
             </section>
 
@@ -95,18 +103,22 @@ const AlgemeneVoorwaarden = () => {
             <section>
               <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('terms.sections.intellectual_property.title')}</h2>
               <ul className="list-disc ml-6 space-y-2">
-                {t('terms.sections.intellectual_property.items').map((item: string, index: number) => (
-                  <li key={index}>{item}</li>
-                ))}
+                {Array.isArray(t('terms.sections.intellectual_property.items')) ? 
+                  t('terms.sections.intellectual_property.items').map((item: string, index: number) => (
+                    <li key={index}>{item}</li>
+                  )) : null
+                }
               </ul>
             </section>
 
             <section>
               <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('terms.sections.availability.title')}</h2>
               <ul className="list-disc ml-6 space-y-2">
-                {t('terms.sections.availability.items').map((item: string, index: number) => (
-                  <li key={index}>{item}</li>
-                ))}
+                {Array.isArray(t('terms.sections.availability.items')) ? 
+                  t('terms.sections.availability.items').map((item: string, index: number) => (
+                    <li key={index}>{item}</li>
+                  )) : null
+                }
               </ul>
             </section>
 
@@ -118,9 +130,11 @@ const AlgemeneVoorwaarden = () => {
             <section>
               <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('terms.sections.termination.title')}</h2>
               <ul className="list-disc ml-6 space-y-2">
-                {t('terms.sections.termination.items').map((item: string, index: number) => (
-                  <li key={index}>{item}</li>
-                ))}
+                {Array.isArray(t('terms.sections.termination.items')) ? 
+                  t('terms.sections.termination.items').map((item: string, index: number) => (
+                    <li key={index}>{item}</li>
+                  )) : null
+                }
               </ul>
             </section>
 
