@@ -20,15 +20,17 @@ const TrajectOpnieuwStartenUitleg = () => {
     setIsLoading(true);
     try {
       // Create a journey reset record
-      const { error } = await supabase
+      const { data: resetData, error } = await supabase
         .from('journey_resets')
         .insert({
           user_id: user.id,
           webhook_processed: false,
           reset_completed: false
-        });
+        })
+        .select()
+        .single();
 
-      if (error) {
+      if (error || !resetData) {
         console.error('Error creating journey reset:', error);
         toast({
           title: t('common.error'),
@@ -52,7 +54,8 @@ const TrajectOpnieuwStartenUitleg = () => {
         lastName: profileData?.last_name || user.user_metadata?.last_name || '',
         email: user.email || '',
         userId: user.id,
-        language: profileData?.language || language || 'nl'
+        language: profileData?.language || language || 'nl',
+        journeyResetId: resetData.id
       };
 
       console.log('Sending webhook data for second journey:', webhookData);
