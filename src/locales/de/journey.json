@@ -27,6 +27,7 @@
       "question3": "Welche Arbeitsbedingungen gefielen Ihnen in Ihrem ersten Job am besten?",
       "placeholder": "Beschreiben Sie hier Ihre Antwort...",
       "back_button": "Vorheriger Schritt",
+      "previous_button": "Vorheriger Schritt",
       "next_button": "Nächster Schritt"
     },
     "step3": {
@@ -37,7 +38,9 @@
       "question3": "Beschreiben Sie einen Tag, an dem Sie pfeifend nach Hause gingen. Was war an diesem Tag besonders?",
       "placeholder": "Beschreiben Sie hier Ihre Antwort...",
       "back_button": "Vorheriger Schritt",
-      "next_button": "Scan abschließen"
+      "previous_button": "Vorheriger Schritt",
+      "next_button": "Scan abschließen",
+      "finish_button": "Begeisterungsscan abschließen"
     }
   },
   "wensberoepen": {
