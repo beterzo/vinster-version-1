@@ -6,11 +6,13 @@ import { FileText, Download, ExternalLink, CheckCircle, AlertCircle, Clock, Arro
 import { useZoekprofielPdf } from "@/hooks/useZoekprofielPdf";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from "@/hooks/useTranslation";
 const ZoekprofielDownload = () => {
   const navigate = useNavigate();
   const {
     toast
   } = useToast();
+  const { t } = useTranslation();
   const {
     pdfData,
     loading,
@@ -40,8 +42,8 @@ const ZoekprofielDownload = () => {
         if (newData.pdf_status === 'completed') {
           loadPdfData();
           toast({
-            title: "Zoekprofiel klaar!",
-            description: "Je zoekprofiel PDF is succesvol gegenereerd en kan nu gedownload worden."
+            title: t('journey.zoekprofiel.download.title'),
+            description: t('journey.zoekprofiel.download.description')
           });
         }
       }
@@ -108,8 +110,8 @@ const ZoekprofielDownload = () => {
     switch (pdfData?.pdf_status) {
       case 'completed':
         return {
-          title: "Je zoekprofiel is klaar!",
-          description: "Je persoonlijke zoekprofiel is succesvol gegenereerd en klaar om te gebruiken bij sollicitaties."
+          title: t('journey.zoekprofiel.download.title'),
+          description: t('journey.zoekprofiel.download.description')
         };
       case 'generating':
         return {
@@ -169,7 +171,7 @@ const ZoekprofielDownload = () => {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button onClick={handleDownload} disabled={isDownloading || downloading} size="lg" className="bg-blue-900 hover:bg-blue-800 text-white font-semibold px-8 py-4 rounded-lg flex items-center gap-2">
                     <Download className="w-5 h-5" />
-                    {isDownloading || downloading ? "Downloaden..." : "Download zoekprofiel"}
+                    {isDownloading || downloading ? "Downloaden..." : t('journey.zoekprofiel.download.download_button')}
                   </Button>
                   
                   <Button onClick={handleOpenInNewTab} variant="outline" size="lg" className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold px-8 py-4 rounded-lg flex items-center gap-2">
@@ -236,7 +238,7 @@ const ZoekprofielDownload = () => {
 
             <div className="mt-12 pt-8 border-t border-gray-200">
               <Button onClick={() => navigate('/home')} variant="outline" className="border-blue-900 text-blue-900 hover:bg-blue-50">
-                Terug naar dashboard
+                {t('journey.zoekprofiel.download.back_button')}
               </Button>
             </div>
           </CardContent>

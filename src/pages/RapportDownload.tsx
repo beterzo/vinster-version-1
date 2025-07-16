@@ -6,11 +6,13 @@ import { FileText, Download, ExternalLink, CheckCircle, AlertCircle, Clock, Arro
 import { useRapportData } from "@/hooks/useRapportData";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from "@/hooks/useTranslation";
 const RapportDownload = () => {
   const navigate = useNavigate();
   const {
     toast
   } = useToast();
+  const { t } = useTranslation();
   const {
     data: reportData,
     loading,
@@ -100,8 +102,8 @@ const RapportDownload = () => {
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
       toast({
-        title: "Download gestart",
-        description: "Je rapport wordt gedownload."
+        title: t('journey.rapport.download.download_button'),
+        description: t('journey.rapport.download.description')
       });
     } catch (error) {
       console.error('Download error:', error);
@@ -139,8 +141,8 @@ const RapportDownload = () => {
     switch (reportStatus) {
       case 'completed':
         return {
-          title: "Je rapport is klaar!",
-          description: "Je persoonlijke carrièrerapport is succesvol gegenereerd en klaar om te bekijken."
+          title: t('journey.rapport.download.title'),
+          description: t('journey.rapport.download.description')
         };
       case 'generating':
         return {
@@ -200,7 +202,7 @@ const RapportDownload = () => {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button onClick={handleDownload} disabled={isDownloading} size="lg" className="bg-blue-900 hover:bg-blue-800 text-white font-semibold px-8 py-4 rounded-lg flex items-center gap-2">
                     <Download className="w-5 h-5" />
-                    {isDownloading ? "Downloaden..." : "Download rapport"}
+                    {isDownloading ? "Downloaden..." : t('journey.rapport.download.download_button')}
                   </Button>
                   
                   <Button onClick={handleOpenInNewTab} variant="outline" size="lg" className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold px-8 py-4 rounded-lg flex items-center gap-2">
@@ -224,7 +226,7 @@ const RapportDownload = () => {
                     Volg ons onderzoeksplan om de perfecte functie voor jezelf te vinden.
                   </p>
                   <Button onClick={handleNextStep} size="lg" className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold px-8 py-4 rounded-lg flex items-center gap-2 mx-auto">
-                    Bekijk onderzoeksplan
+                    {t('journey.rapport.download.research_plan_button')}
                     <ArrowRight className="w-5 h-5" />
                   </Button>
                 </div>
@@ -267,7 +269,7 @@ const RapportDownload = () => {
 
             <div className="mt-12 pt-8 border-t border-gray-200">
               <Button onClick={() => navigate('/home')} variant="outline" className="border-blue-900 text-blue-900 hover:bg-blue-50">
-                Terug naar dashboard
+                {t('journey.rapport.download.back_button')}
               </Button>
             </div>
           </CardContent>

@@ -1,6 +1,7 @@
 
 import ProgressStep from "./ProgressStep";
 import { useZoekprofielResponses } from "@/hooks/useZoekprofielResponses";
+import { useTranslation } from "@/hooks/useTranslation";
 
 interface ProgressStepsGridProps {
   enthousiasmeProgress?: number;
@@ -28,6 +29,7 @@ const ProgressStepsGrid = ({
   onStepClick = () => {}
 }: ProgressStepsGridProps) => {
   const { progress: zoekprofielProgress, isCompleted: zoekprofielCompleted } = useZoekprofielResponses();
+  const { t } = useTranslation();
 
   // Calculate page-based progress for "Profiel voltooien"
   const combinedProgress = () => {
@@ -43,35 +45,35 @@ const ProgressStepsGrid = ({
   const progressSteps = [
     {
       step: 1,
-      title: "Enthousiasmescan",
+      title: t('common.enthousiasmescan'),
       description: "Ontdek wat je echt drijft en motiveert",
       actionButton: "Start scan",
       icon: "heart"
     },
     {
       step: 2,
-      title: "Wensberoepen",
+      title: t('common.wensberoepen'),
       description: "Verken verschillende carrièremogelijkheden",
       actionButton: "Bekijk beroepen",
       icon: "briefcase"
     },
     {
       step: 3,
-      title: "Persoonsprofiel",
+      title: t('common.persoonsprofiel'),
       description: "Bouw je persoonlijke profiel op",
       actionButton: "Voltooien",
       icon: "user"
     },
     {
       step: 4,
-      title: "Loopbaanrapport",
+      title: t('common.loopbaanrapport'),
       description: "Ontvang je persoonlijke aanbevelingen",
       actionButton: "Bekijk rapport",
       icon: "file-text"
     },
     {
       step: 5,
-      title: "Zoekprofiel",
+      title: t('common.zoekprofiel'),
       description: "Download je zoekprofiel",
       actionButton: "Download",
       icon: "search"

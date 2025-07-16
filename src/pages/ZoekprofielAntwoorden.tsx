@@ -9,6 +9,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useZoekprofielAntwoorden } from "@/hooks/useZoekprofielAntwoorden";
 import { useExistingZoekprofiel } from "@/hooks/useExistingZoekprofiel";
 import { HelpPopover } from "@/components/HelpPopover";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const ZoekprofielAntwoorden = () => {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ const ZoekprofielAntwoorden = () => {
   const { user } = useAuth();
   const { responses, saveResponse, loading } = useZoekprofielAntwoorden();
   const { hasExistingZoekprofiel, loading: zoekprofielLoading } = useExistingZoekprofiel();
+  const { t } = useTranslation();
 
   const [formData, setFormData] = useState({
     functie_als: "",
@@ -121,8 +123,8 @@ const ZoekprofielAntwoorden = () => {
   const questions = [
     {
       id: "functie_als",
-      label: "Ik ga voor een functie als...",
-      placeholder: "Beschrijf hier je antwoord...",
+      label: t('journey.zoekprofiel.antwoorden.question1'),
+      placeholder: t('journey.zoekprofiel.antwoorden.placeholder'),
       value: formData.functie_als,
       examples: [
         "Marketing manager bij een tech startup",
@@ -132,8 +134,8 @@ const ZoekprofielAntwoorden = () => {
     },
     {
       id: "kerntaken",
-      label: "Met de volgende kerntaken...",
-      placeholder: "Beschrijf hier je antwoord...",
+      label: t('journey.zoekprofiel.antwoorden.question2'),
+      placeholder: t('journey.zoekprofiel.antwoorden.placeholder'),
       value: formData.kerntaken,
       examples: [
         "Strategie ontwikkelen, teams aansturen, klantcontact onderhouden",
@@ -143,8 +145,8 @@ const ZoekprofielAntwoorden = () => {
     },
     {
       id: "organisatie_bij",
-      label: "Bij de volgende soort organisatie...",
-      placeholder: "Beschrijf hier je antwoord...",
+      label: t('journey.zoekprofiel.antwoorden.question3'),
+      placeholder: t('journey.zoekprofiel.antwoorden.placeholder'),
       value: formData.organisatie_bij,
       examples: [
         "Een innovatief bedrijf met jonge collega's en informele sfeer",
@@ -154,8 +156,8 @@ const ZoekprofielAntwoorden = () => {
     },
     {
       id: "sector",
-      label: "In deze sector...",
-      placeholder: "Beschrijf hier je antwoord...",
+      label: t('journey.zoekprofiel.antwoorden.question4'),
+      placeholder: t('journey.zoekprofiel.antwoorden.placeholder'),
       value: formData.sector,
       examples: [
         "Technologie en software ontwikkeling",
@@ -165,8 +167,8 @@ const ZoekprofielAntwoorden = () => {
     },
     {
       id: "gewenste_regio",
-      label: "In deze regio...",
-      placeholder: "Beschrijf hier je antwoord...",
+      label: t('journey.zoekprofiel.antwoorden.question5'),
+      placeholder: t('journey.zoekprofiel.antwoorden.placeholder'),
       value: formData.gewenste_regio,
       examples: [
         "Amsterdam en omgeving, max 45 min reizen",
@@ -176,8 +178,8 @@ const ZoekprofielAntwoorden = () => {
     },
     {
       id: "arbeidsvoorwaarden",
-      label: "Met deze arbeidsvoorwaarden...",
-      placeholder: "Beschrijf hier je antwoord...",
+      label: t('journey.zoekprofiel.antwoorden.question6'),
+      placeholder: t('journey.zoekprofiel.antwoorden.placeholder'),
       value: formData.arbeidsvoorwaarden,
       examples: [
         "€4000-5000 bruto, 32-36 uur, thuiswerken mogelijk",
@@ -212,10 +214,10 @@ const ZoekprofielAntwoorden = () => {
             {/* Title */}
             <div className="text-center mb-12">
               <h1 className="text-3xl font-bold text-blue-900 mb-2">
-                Zoekprofiel antwoorden
+                {t('journey.zoekprofiel.antwoorden.title')}
               </h1>
               <p className="text-xl text-gray-600">
-                Vul onderstaande velden in om je persoonlijke zoekprofiel te maken
+                {t('journey.zoekprofiel.antwoorden.subtitle')}
               </p>
             </div>
 
@@ -253,7 +255,7 @@ const ZoekprofielAntwoorden = () => {
                   variant="outline"
                   className="border-blue-900 text-blue-900 hover:bg-blue-50"
                 >
-                  Terug naar Dashboard
+                  {t('journey.zoekprofiel.antwoorden.back_button')}
                 </Button>
                 <Button 
                   type="submit"
@@ -264,7 +266,7 @@ const ZoekprofielAntwoorden = () => {
                       : "bg-gray-300 text-gray-500 cursor-not-allowed"
                   }`}
                 >
-                  {loading ? "Bezig met opslaan..." : "Zoekprofiel afronden"}
+                  {loading ? "Bezig met opslaan..." : t('journey.zoekprofiel.antwoorden.generate_button')}
                 </Button>
               </div>
             </form>

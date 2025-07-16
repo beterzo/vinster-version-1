@@ -4,5 +4,18 @@
   "success": "Vellykket!",
   "error": "Feil",
   "redirecting": "Du blir automatisk omdirigert...",
-  "tagline": "På vei til en bedre karriere"
+  "tagline": "På vei til en bedre karriere",
+  "enthousiasmescan": "Entusiasme-skanning",
+  "wensberoepen": "Drømmeyrker",
+  "persoonsprofiel": "Personlig profil",
+  "loopbaanrapport": "Karriererapport",
+  "zoekprofiel": "Søkeprofil",
+  "menu": "Meny",
+  "navigate_description": "Naviger gjennom de forskjellige delene av nettstedet.",
+  "dashboard": "Dashbord",
+  "payment_page": "Betalingsside",
+  "profile_complete": "Fullfør profil",
+  "logout": "Logg ut",
+  "start_enthusiasm_scan": "Start entusiasme-skanning",
+  "start_dream_jobs": "Start drømmeyrker"
 }
