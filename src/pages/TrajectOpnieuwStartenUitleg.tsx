@@ -45,17 +45,69 @@ const TrajectOpnieuwStartenUitleg = () => {
         .eq('id', user.id)
         .single();
 
-      // Redirect to Make webhook with extended user data
+      // Send webhook data for second journey payment
       const webhookUrl = 'https://hook.eu2.make.com/awyjkik7t2we4k6efpq8t844dyl3h11e';
-      const params = new URLSearchParams({
+      const webhookData = {
         firstName: profileData?.first_name || user.user_metadata?.first_name || '',
         lastName: profileData?.last_name || user.user_metadata?.last_name || '',
         email: user.email || '',
         userId: user.id,
         language: profileData?.language || language || 'nl'
+      };
+
+      console.log('Sending webhook data for second journey:', webhookData);
+      
+      const response = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(webhookData)
       });
 
-      window.location.href = `${webhookUrl}?${params}`;
+      console.log('Webhook response status:', response.status);
+      
+      if (response.ok) {
+        console.log('Webhook successfully sent');
+        let responseData;
+        try {
+          responseData = await response.json();
+          console.log('Webhook response data:', responseData);
+        } catch (parseError) {
+          console.error('Failed to parse response as JSON:', parseError);
+          throw new Error('Invalid JSON response from webhook');
+        }
+
+        if (responseData && responseData.checkout_url) {
+          console.log('Opening checkout URL in new tab:', responseData.checkout_url);
+          const newWindow = window.open(responseData.checkout_url, '_blank');
+          if (newWindow) {
+            toast({
+              title: t('common.success'),
+              description: t('journey.restart_explanation.checkout_opened'),
+            });
+          } else {
+            console.log('Popup blocked, using direct redirect');
+            window.location.href = responseData.checkout_url;
+          }
+        } else {
+          console.error('No checkout_url in response:', responseData);
+          toast({
+            title: t('common.error'),
+            description: t('journey.restart_explanation.errors.no_checkout_url'),
+            variant: 'destructive'
+          });
+        }
+      } else {
+        console.error('Webhook failed:', response.status, response.statusText);
+        const errorText = await response.text();
+        console.error('Error response body:', errorText);
+        toast({
+          title: t('common.error'),
+          description: t('journey.restart_explanation.errors.webhook_failed'),
+          variant: 'destructive'
+        });
+      }
     } catch (error) {
       console.error('Error starting reset process:', error);
       toast({
