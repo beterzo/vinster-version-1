@@ -264,7 +264,9 @@
       "dashboard_description": "Sehen Sie Ihr vollständiges Profil und andere Berichte in Ihrem Dashboard.",
       "dashboard_button": "Zum Dashboard",
       "back_button": "Zurück zum Dashboard",
-      "regenerate_button": "Neues Suchprofiel erstellen"
+      "regenerate_button": "Neues Suchprofiel erstellen",
+      "generating_wait": "Ihr Suchprofil wird noch erstellt. Dies kann einige Minuten dauern.",
+      "refresh_button": "Seite aktualisieren"
     }
   },
   "rapport": {
