@@ -108,8 +108,8 @@ const RapportDownload = () => {
     } catch (error) {
       console.error('Download error:', error);
       toast({
-        title: "Download mislukt",
-        description: `Er ging iets mis bij het downloaden: ${error instanceof Error ? error.message : 'Onbekende fout'}`,
+        title: t('journey.rapport.download.download_failed'),
+        description: t('journey.rapport.download.download_error').replace('{error}', error instanceof Error ? error.message : 'Onbekende fout'),
         variant: "destructive"
       });
     } finally {
@@ -146,18 +146,18 @@ const RapportDownload = () => {
         };
       case 'generating':
         return {
-          title: "Je rapport wordt gegenereerd...",
-          description: "We werken hard aan je persoonlijke carrièrerapport. Dit kan enkele minuten duren."
+          title: t('journey.rapport.download.generating_title'),
+          description: t('journey.rapport.download.generating_description')
         };
       case 'failed':
         return {
-          title: "Er ging iets mis",
-          description: "Er is een fout opgetreden bij het genereren van je rapport. Probeer het opnieuw of neem contact op met support."
+          title: t('journey.rapport.download.error_title'),
+          description: t('journey.rapport.download.error_description')
         };
       default:
         return {
-          title: "Rapport wordt voorbereid...",
-          description: "Je profiel is voltooid en je rapport wordt automatisch gegenereerd."
+          title: t('journey.rapport.download.pending_title'),
+          description: t('journey.rapport.download.pending_description')
         };
     }
   };
@@ -165,7 +165,7 @@ const RapportDownload = () => {
     return <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-900 mx-auto mb-4"></div>
-          <p className="text-gray-700">Rapport gegevens laden...</p>
+          <p className="text-gray-700">{t('journey.rapport.download.loading_data')}</p>
         </div>
       </div>;
   }
@@ -202,28 +202,28 @@ const RapportDownload = () => {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button onClick={handleDownload} disabled={isDownloading} size="lg" className="bg-blue-900 hover:bg-blue-800 text-white font-semibold px-8 py-4 rounded-lg flex items-center gap-2">
                     <Download className="w-5 h-5" />
-                    {isDownloading ? "Downloaden..." : t('journey.rapport.download.download_button')}
+                    {isDownloading ? t('journey.rapport.download.downloading') : t('journey.rapport.download.download_button')}
                   </Button>
                   
                   <Button onClick={handleOpenInNewTab} variant="outline" size="lg" className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold px-8 py-4 rounded-lg flex items-center gap-2">
                     <ExternalLink className="w-5 h-5" />
-                    Bekijk in browser
+                    {t('journey.rapport.download.view_browser')}
                   </Button>
                 </div>
                 
                 <div className="mt-8 p-4 bg-blue-50 rounded-lg">
                   <p className="text-sm text-blue-700 mb-4">
-                    💡 <strong>Tip:</strong> Bewaar je rapport goed. Het bevat waardevolle inzichten voor je carrière!
+                    {t('journey.rapport.download.save_tip')}
                   </p>
                 </div>
 
                 {/* Next Step Button */}
                 <div className="mt-8 pt-6 border-t border-gray-200">
                   <h3 className="text-lg font-semibold text-blue-900 mb-4">
-                    Klaar voor de volgende stap?
+                    {t('journey.rapport.download.next_step_title')}
                   </h3>
                   <p className="text-gray-600 mb-6">
-                    Volg ons onderzoeksplan om de perfecte functie voor jezelf te vinden.
+                    {t('journey.rapport.download.next_step_description')}
                   </p>
                   <Button onClick={handleNextStep} size="lg" className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold px-8 py-4 rounded-lg flex items-center gap-2 mx-auto">
                     {t('journey.rapport.download.research_plan_button')}
@@ -235,35 +235,35 @@ const RapportDownload = () => {
             {(reportStatus === 'generating' || reportStatus === 'pending') && <div className="text-center">
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-900 mx-auto mb-4"></div>
                 <p className="text-gray-600 mb-4">
-                  Je rapport wordt gegenereerd... Dit kan 2-5 minuten duren.
+                  {t('journey.rapport.download.generating_status')}
                 </p>
                 <div className="bg-blue-50 p-4 rounded-lg mb-4">
                   <p className="text-sm text-blue-700">
-                    💡 <strong>Tip:</strong> Laat deze pagina open. Je krijgt automatisch een melding zodra je rapport klaar is!
+                    {t('journey.rapport.download.generating_tip')}
                   </p>
                 </div>
                 <Button onClick={refreshData} variant="outline" className="border-blue-900 text-blue-900 hover:bg-blue-50">
-                  Status vernieuwen
+                  {t('journey.rapport.download.refresh_status')}
                 </Button>
               </div>}
 
             {reportStatus === 'failed' && <div className="text-center">
                 <div className="bg-red-50 p-4 rounded-lg mb-4">
                   <p className="text-sm text-red-700">
-                    Er is een technische fout opgetreden. Neem contact op met support als dit probleem aanhoudt.
+                    {t('journey.rapport.download.error_technical')}
                   </p>
                 </div>
                 <Button onClick={refreshData} variant="outline" size="lg" className="border-red-600 text-red-600 hover:bg-red-50 font-semibold px-8 py-4 rounded-lg">
-                  Status controleren
+                  {t('journey.rapport.download.check_status')}
                 </Button>
               </div>}
 
             {reportStatus !== 'completed' && reportStatus !== 'generating' && reportStatus !== 'pending' && reportStatus !== 'failed' && !pdfUrl && <div className="text-center">
                 <p className="text-gray-600 mb-4">
-                  Je rapport wordt nog gegenereerd. Dit kan enkele minuten duren.
+                  {t('journey.rapport.download.generating_fallback')}
                 </p>
                 <Button onClick={() => window.location.reload()} variant="outline" className="border-blue-900 text-blue-900 hover:bg-blue-50">
-                  Pagina verversen
+                  {t('journey.rapport.download.refresh_page')}
                 </Button>
               </div>}
 
