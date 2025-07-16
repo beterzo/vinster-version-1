@@ -103,6 +103,33 @@ export type Database = {
         }
         Relationships: []
       }
+      journey_resets: {
+        Row: {
+          created_at: string
+          id: string
+          reset_completed: boolean
+          updated_at: string
+          user_id: string
+          webhook_processed: boolean
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          reset_completed?: boolean
+          updated_at?: string
+          user_id: string
+          webhook_processed?: boolean
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          reset_completed?: boolean
+          updated_at?: string
+          user_id?: string
+          webhook_processed?: boolean
+        }
+        Relationships: []
+      }
       prioriteiten_responses: {
         Row: {
           created_at: string

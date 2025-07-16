@@ -22,6 +22,7 @@ import PrivacyVerklaring from "@/pages/PrivacyVerklaring";
 import AlgemeneVoorwaarden from "@/pages/AlgemeneVoorwaarden";
 import Cookiebeleid from "@/pages/Cookiebeleid";
 import ToegangscodesProfessionals from "@/pages/ToegangscodesProfessionals";
+import TrajectOpnieuwStartenUitleg from "@/pages/TrajectOpnieuwStartenUitleg";
 
 // Protected route imports
 import ProtectedRoute from "@/components/ProtectedRoute";
@@ -288,6 +289,15 @@ const AppRouter = () => {
         element={
           <ProtectedRoute>
             <ZoekprofielDownload />
+          </ProtectedRoute>
+        }
+      />
+      
+      <Route
+        path="/traject-opnieuw-starten"
+        element={
+          <ProtectedRoute>
+            <TrajectOpnieuwStartenUitleg />
           </ProtectedRoute>
         }
       />

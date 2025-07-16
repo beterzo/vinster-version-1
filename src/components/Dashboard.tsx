@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useDashboard } from "@/hooks/useDashboard";
 import { useRapportData } from "@/hooks/useRapportData";
+import { useExistingZoekprofiel } from "@/hooks/useExistingZoekprofiel";
 import DashboardHeader from "./DashboardHeader";
 import ProgressStepsGrid from "./ProgressStepsGrid";
 import { Button } from "@/components/ui/button";
@@ -15,6 +16,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { data: reportData, loading: reportLoading } = useRapportData();
+  const { hasExistingZoekprofiel } = useExistingZoekprofiel();
   const {
     progress,
     canStartEnthousiasme,
@@ -143,6 +145,30 @@ const Dashboard = () => {
               hasUserReport={hasUserReport} 
               onStepClick={handleStepClick}
             />
+            
+            {/* Restart Journey Button - only show if user has downloaded zoekprofiel */}
+            {hasExistingZoekprofiel && (
+              <Card className="mt-4 p-4 border-2 border-dashed border-primary/30 bg-primary/5">
+                <div className="text-center space-y-3">
+                  <div>
+                    <h3 className="text-sm font-semibold text-foreground mb-1">
+                      Wil je het traject nog een keer doen?
+                    </h3>
+                    <p className="text-xs text-muted-foreground">
+                      Start opnieuw met verse inzichten
+                    </p>
+                  </div>
+                  <Button 
+                    onClick={() => navigate('/traject-opnieuw-starten')}
+                    variant="outline"
+                    size="sm"
+                    className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                  >
+                    Traject opnieuw starten
+                  </Button>
+                </div>
+              </Card>
+            )}
           </Card>
         </div>
       </div>
