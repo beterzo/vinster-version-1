@@ -297,6 +297,30 @@
       "generating_fallback": "Ihr Bericht wird noch erstellt. Dies kann einige Minuten dauern."
     }
   },
+  "onderzoeksplan": {
+    "title": "Forschungsplan",
+    "subtitle": "Dies ist Ihr Schritt-für-Schritt-Plan, um zu bestimmen, wie Ihr nächster Job aussehen soll.",
+    "tip": "💡 Dieser Forschungsplan steht auch am Ende Ihres Karriereberichts, sodass Sie ihn dort immer wiederfinden können.",
+    "steps_title": "Dies ist Ihr Schritt-für-Schritt-Plan:",
+    "step1": "Fragen Sie AI (oder Google) nach einer ausführlichen Stellenbeschreibung der Positionen aus Ihrem Karrierebericht. Fragen Sie AI auch nach ähnlichen Positionen. Welche Arbeit ist ähnlich? Was spricht Sie in den Antworten an, die Sie erhalten?",
+    "step2": "Schauen Sie, ob Sie Stellenausschreibungen finden können, die ein Bild vom Inhalt dieser Position und von den Organisationen vermitteln, die diese Positionen haben.",
+    "step3": "Suchen Sie auf LinkedIn nach Menschen, die diese Arbeit machen. Welchen Hintergrund haben sie?",
+    "step4": "Gibt es einen Berufsverband? Was lesen Sie auf der Website über Entwicklungen in der Branche und dem Beruf?",
+    "step5": "Hat der Beruf eine Fachzeitschrift? Wenn ja, fordern Sie eine oder mehrere an und lesen Sie sie. Was fällt Ihnen auf? Werden Sie von den Themen begeistert?",
+    "step6": "Suchen Sie Organisationen, in denen Menschen mit diesem Beruf arbeiten.",
+    "step7": "Welche Ausbildung benötigen Sie möglicherweise für diese Arbeit? Fragen Sie AI oder Google.",
+    "step8": "Schreiben Sie alle Fragen auf, die während der Recherche aufkommen. Diese können Sie Menschen stellen, die bereits in dieser Richtung arbeiten.",
+    "step9": "Erstellen Sie eine Liste von Menschen, mit denen Sie über diese Arbeit sprechen möchten, und kontaktieren Sie sie. Sie finden diese Menschen über LinkedIn und/oder über Ihr persönliches Netzwerk.",
+    "step10": "Sammeln Sie genügend Informationen, um eine Entscheidung zu treffen. Nehmen Sie sich Zeit und sprechen Sie mit anderen darüber.",
+    "after_research_title": "Nach Ihrer Recherche:",
+    "after_research_description": "Wenn Sie genug herausgefunden haben, wählen Sie die Position, die am besten zu Ihnen passt, und füllen Sie das Suchprofil auf der Website aus. Vinster wird Ihren Text in ein paar Sätze umwandeln, die Sie verwenden können, um anderen zu zeigen, was Sie suchen.",
+    "after_research_action": "Sie können jetzt gezielt Bewerbungen schreiben! Suchen Sie nach Stellenausschreibungen, lassen Sie Ihr Netzwerk wissen, was Sie wollen, und teilen Sie auf LinkedIn mit, welche Position Sie suchen.",
+    "final_message": "Wir wünschen Ihnen viel Arbeitsfreude in Ihrer nächsten Position!",
+    "time_notice_title": "⏰ Nehmen Sie sich Zeit für diese Recherche",
+    "time_notice_description": "Diese Recherche ist entscheidend für das Finden Ihrer idealen Position. Nehmen Sie sich die Zeit, jeden Schritt sorgfältig auszuführen.",
+    "time_notice_details": "Je besser Sie diese Recherche machen, desto besser können Sie später Ihr Suchprofil ausfüllen und desto gezielter können Sie sich bewerben.",
+    "back_button": "Zurück zum Dashboard"
+  },
   "restart_explanation": {
     "title": "Laufbahn neu starten",
     "subtitle": "Möchten Sie die Vinster-Laufbahn noch einmal durchlaufen? Hier lesen Sie, wie das funktioniert.",
