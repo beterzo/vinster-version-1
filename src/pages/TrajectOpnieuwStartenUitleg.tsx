@@ -46,7 +46,7 @@ const TrajectOpnieuwStartenUitleg = () => {
         .single();
 
       // Redirect to Make webhook with extended user data
-      const webhookUrl = 'https://hook.eu2.make.com/';
+      const webhookUrl = 'https://hook.eu2.make.com/awyjkik7t2we4k6efpq8t844dyl3h11e';
       const params = new URLSearchParams({
         firstName: profileData?.first_name || user.user_metadata?.first_name || '',
         lastName: profileData?.last_name || user.user_metadata?.last_name || '',
