@@ -148,7 +148,7 @@ const TrajectOpnieuwStartenUitleg = () => {
           <div className="flex gap-4 justify-center">
             <Button
               variant="outline"
-              onClick={() => navigate('/')}
+              onClick={() => navigate('/home')}
               disabled={isLoading}
             >
               {t('journey.restart_explanation.buttons.back')}
