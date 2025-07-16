@@ -111,13 +111,14 @@ const Dashboard = () => {
 
           {/* Right Column - Image and Button - spans both rows */}
           <Card className="lg:row-span-2 p-6 border-0 rounded-3xl bg-white flex flex-col">
-            <div className="text-center flex-1 flex flex-col justify-between">
-              <img 
-                alt="Loopbaanonderzoek" 
-                className="w-full h-auto rounded-xl mb-6 object-cover" 
-                style={{ height: '300px' }}
-                src="/lovable-uploads/ee361013-bfc6-485f-b46f-ed87a3cd6c73.jpg" 
-              />
+            <div className="text-center flex-1 flex flex-col">
+              <div className="flex-1 mb-6">
+                <img 
+                  alt="Loopbaanonderzoek" 
+                  className="w-full h-full rounded-xl object-cover" 
+                  src="/lovable-uploads/ee361013-bfc6-485f-b46f-ed87a3cd6c73.jpg" 
+                />
+              </div>
               
               <div className="space-y-4">
                 <Button 
