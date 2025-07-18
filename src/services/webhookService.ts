@@ -14,9 +14,9 @@ export interface MakeWebhookData {
   ai_lievelings_activiteiten: string;
   ai_werkomstandigheden: string;
   ai_interesses: string;
-  selected_activiteiten_keywords: string[];
-  selected_werkomstandigheden_keywords: string[];
-  selected_interesses_keywords: string[];
+  selected_activiteiten_keywords: string;
+  selected_werkomstandigheden_keywords: string;
+  selected_interesses_keywords: string;
   extra_activiteiten_tekst: string;
   extra_werkomstandigheden_tekst: string;
   extra_interesses_tekst: string;

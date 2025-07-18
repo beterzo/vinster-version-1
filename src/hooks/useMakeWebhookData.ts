@@ -64,10 +64,10 @@ export const useMakeWebhookData = () => {
       ai_werkomstandigheden: profileData?.ai_werkomstandigheden || "",
       ai_interesses: profileData?.ai_interesses || "",
       
-      // User-selected keywords from prioriteiten
-      selected_activiteiten_keywords: prioriteitenResponses?.selected_activiteiten_keywords || [],
-      selected_werkomstandigheden_keywords: prioriteitenResponses?.selected_werkomstandigheden_keywords || [],
-      selected_interesses_keywords: prioriteitenResponses?.selected_interesses_keywords || [],
+      // User-selected keywords from prioriteiten (converted to JSON strings)
+      selected_activiteiten_keywords: JSON.stringify(prioriteitenResponses?.selected_activiteiten_keywords || []),
+      selected_werkomstandigheden_keywords: JSON.stringify(prioriteitenResponses?.selected_werkomstandigheden_keywords || []),
+      selected_interesses_keywords: JSON.stringify(prioriteitenResponses?.selected_interesses_keywords || []),
       
       // Extra text from prioriteiten
       extra_activiteiten_tekst: prioriteitenResponses?.extra_activiteiten_tekst || "",
