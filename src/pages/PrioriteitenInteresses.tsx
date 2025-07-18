@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -26,7 +27,7 @@ const PrioriteitenInteresses = () => {
     saveResponses,
     loading
   } = usePrioriteitenResponses();
-  const { collectMakeWebhookData } = useMakeWebhookData();
+  const { collectMakeWebhookDataFromDB } = useMakeWebhookData();
   const { hasExistingReport, existingReport, loading: reportLoading } = useExistingReport();
   
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
@@ -119,13 +120,14 @@ const PrioriteitenInteresses = () => {
     try {
       setIsSubmitting(true);
       
-      // Save current responses
+      console.log('💾 Saving final responses before webhook...');
+      // Save current responses and wait for completion
       await saveResponses({ 
         selected_interesses_keywords: selectedKeywords,
         extra_interesses_tekst: extraText 
       });
       
-      console.log('Creating user report entry for user:', user.id);
+      console.log('✅ Responses saved, creating user report entry...');
       const { error: reportError } = await supabase
         .from('user_reports')
         .upsert({
@@ -143,9 +145,10 @@ const PrioriteitenInteresses = () => {
         throw reportError;
       }
 
-      console.log('Report entry created successfully with generating status');
+      console.log('✅ Report entry created, collecting webhook data from database...');
       
-      const webhookData = collectMakeWebhookData();
+      // Use the new database-driven function to get fresh data
+      const webhookData = await collectMakeWebhookDataFromDB();
       
       if (!webhookData) {
         toast({
@@ -156,9 +159,15 @@ const PrioriteitenInteresses = () => {
         return;
       }
 
+      console.log('🚀 Sending webhook with fresh data:', {
+        selected_interesses_count: JSON.parse(webhookData.selected_interesses_keywords).length,
+        selected_activiteiten_count: JSON.parse(webhookData.selected_activiteiten_keywords).length,
+        selected_werkomstandigheden_count: JSON.parse(webhookData.selected_werkomstandigheden_keywords).length
+      });
+
       await sendMakeWebhook(webhookData);
       
-      console.log("Profile completed and Make.com webhook sent - PDF generation started!");
+      console.log("✅ Profile completed and Make.com webhook sent - PDF generation started!");
       
       toast({
         title: t('common.toast.profile_completed'),
@@ -169,7 +178,7 @@ const PrioriteitenInteresses = () => {
       scrollToTop();
       navigate('/rapport-download');
     } catch (error) {
-      console.error("Error completing profile:", error);
+      console.error("❌ Error completing profile:", error);
       
       toast({
         title: t('common.toast.completion_error'),
