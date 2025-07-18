@@ -1,4 +1,3 @@
-
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
@@ -10,15 +9,22 @@ const EmailConfirmedPage = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { t } = useTranslation();
-  const { setLanguage } = useLanguage();
+  const { language, setLanguage } = useLanguage();
 
   useEffect(() => {
-    // Check for language parameter in URL and set it
+    // First check for saved language in localStorage
+    const savedLanguage = localStorage.getItem('vinster-language');
+    
+    // Then check for language parameter in URL
     const langParam = searchParams.get('lang');
+    
     if (langParam && (langParam === 'nl' || langParam === 'en' || langParam === 'de' || langParam === 'no')) {
       setLanguage(langParam);
+    } else if (!savedLanguage && language) {
+      // If no URL param and no saved language, use current context language
+      setLanguage(language);
     }
-  }, [searchParams, setLanguage]);
+  }, [searchParams, setLanguage, language]);
 
   const handleGoToLogin = () => {
     navigate('/login');

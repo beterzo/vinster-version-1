@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,6 +7,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useNavigate, Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const SignupPage = () => {
@@ -23,6 +23,7 @@ const SignupPage = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { t } = useTranslation();
+  const { language } = useLanguage();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -80,7 +81,8 @@ const SignupPage = () => {
           description: t('signup.verification_email_sent'),
           duration: 6000
         });
-        navigate("/email-verification");
+        // Pass the current language as a parameter
+        navigate(`/email-verification?lang=${language}`);
       }
     } catch (error: any) {
       console.error('Signup error:', error);
