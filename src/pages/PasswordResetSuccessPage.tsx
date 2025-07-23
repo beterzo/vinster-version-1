@@ -19,7 +19,7 @@ const PasswordResetSuccessPage = () => {
         <div className="relative z-10 h-full flex items-end p-12">
           <div className="bg-white bg-opacity-90 rounded-2xl p-8 max-w-md">
             <blockquote className="text-xl font-medium text-blue-900 leading-relaxed">
-              {t('login.quote')}
+              {t('auth.login.quote')}
             </blockquote>
           </div>
         </div>
@@ -46,15 +46,15 @@ const PasswordResetSuccessPage = () => {
             </div>
             
             <h1 className="text-2xl sm:text-3xl font-bold text-blue-900">
-              {t('password_reset_success.title')}
+              {t('auth.password_reset_success.title')}
             </h1>
             
             <p className="text-lg text-gray-600">
-              {t('password_reset_success.subtitle')}
+              {t('auth.password_reset_success.subtitle')}
             </p>
             
             <p className="text-gray-600">
-              {t('password_reset_success.description')}
+              {t('auth.password_reset_success.description')}
             </p>
           </div>
 
@@ -62,7 +62,7 @@ const PasswordResetSuccessPage = () => {
             to="/login" 
             className="inline-flex items-center justify-center w-full h-12 bg-blue-900 hover:bg-blue-800 text-white font-semibold text-base rounded-lg transition-colors"
           >
-            {t('password_reset_success.continue_to_login')}
+            {t('auth.password_reset_success.continue_to_login')}
           </Link>
         </div>
       </div>

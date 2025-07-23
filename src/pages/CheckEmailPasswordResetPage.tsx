@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
@@ -97,7 +98,7 @@ const CheckEmailPasswordResetPage = () => {
         <div className="relative z-10 h-full flex items-end p-12">
           <div className="bg-white bg-opacity-90 rounded-2xl p-8 max-w-md">
             <blockquote className="text-xl font-medium text-blue-900 leading-relaxed">
-              {t('auth.forgot_password_quote')}
+              {t('auth.login.quote')}
             </blockquote>
           </div>
         </div>
