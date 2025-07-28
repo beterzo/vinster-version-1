@@ -2,12 +2,15 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-import { CheckCircle, ArrowRight, User, Target, Heart } from "lucide-react";
+import { CheckCircle, ArrowRight, User, Target, Heart, Send } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
+import { testWebhook } from "@/utils/testWebhook";
+import { useToast } from "@/hooks/use-toast";
 
 const WensberoepenVoltooiPagina = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { toast } = useToast();
 
   const handleProfielVoltooien = () => {
     navigate("/profiel-voltooien-intro");
@@ -15,6 +18,29 @@ const WensberoepenVoltooiPagina = () => {
 
   const handleNaarDashboard = () => {
     navigate("/home");
+  };
+
+  const handleTestWebhook = async () => {
+    toast({
+      title: "Webhook test",
+      description: "Versturen van test data naar webhook...",
+    });
+
+    const result = await testWebhook();
+    
+    if (result.success) {
+      toast({
+        title: "✅ Webhook test succesvol!",
+        description: "Test data is succesvol verzonden naar de webhook.",
+        variant: "default",
+      });
+    } else {
+      toast({
+        title: "❌ Webhook test gefaald",
+        description: `Error: ${result.error}`,
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -113,6 +139,20 @@ const WensberoepenVoltooiPagina = () => {
                 className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold px-8 py-3 text-lg"
               >
                 {t('wensberoepen.voltooi.to_dashboard_button')}
+              </Button>
+            </div>
+
+            {/* Test Webhook Button (voor debugging) */}
+            <div className="mt-6 p-4 bg-gray-100 rounded-lg">
+              <p className="text-sm text-gray-600 mb-3">🔧 Debug: Test de webhook verbinding</p>
+              <Button 
+                onClick={handleTestWebhook} 
+                variant="outline" 
+                className="border-gray-400 text-gray-700 hover:bg-gray-50"
+                size="sm"
+              >
+                <Send className="mr-2 h-4 w-4" />
+                Test Webhook
               </Button>
             </div>
 
