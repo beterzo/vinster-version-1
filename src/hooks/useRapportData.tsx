@@ -4,6 +4,7 @@ import { useAuth } from './useAuth';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from './use-toast';
 import { useTranslation } from '@/hooks/useTranslation';
+import { useJourneyReset } from '@/contexts/JourneyResetContext';
 
 interface RapportData {
   id: string;
@@ -21,6 +22,7 @@ export const useRapportData = () => {
   const { user } = useAuth();
   const { toast } = useToast();
   const { t } = useTranslation();
+  const { registerRefreshCallback, unregisterRefreshCallback } = useJourneyReset();
   const [data, setData] = useState<RapportData | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -29,6 +31,21 @@ export const useRapportData = () => {
       loadRapportData();
     }
   }, [user]);
+
+  // Register for journey reset refresh
+  useEffect(() => {
+    const refreshCallback = () => {
+      console.log('🔄 Refreshing rapport data after journey reset');
+      setData(null);
+      setLoading(true);
+      if (user) {
+        loadRapportData();
+      }
+    };
+
+    registerRefreshCallback(refreshCallback);
+    return () => unregisterRefreshCallback(refreshCallback);
+  }, [user, registerRefreshCallback, unregisterRefreshCallback]);
 
   const loadRapportData = async () => {
     if (!user) return;

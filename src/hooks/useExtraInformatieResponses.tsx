@@ -4,6 +4,7 @@ import { useAuth } from './useAuth';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from './use-toast';
 import { useTranslation } from '@/hooks/useTranslation';
+import { useJourneyReset } from '@/contexts/JourneyResetContext';
 
 interface ExtraInformatieData {
   opleidingsniveau: string;
@@ -16,6 +17,7 @@ export const useExtraInformatieResponses = () => {
   const { user } = useAuth();
   const { toast } = useToast();
   const { t } = useTranslation();
+  const { registerRefreshCallback, unregisterRefreshCallback } = useJourneyReset();
   const [responses, setResponses] = useState<ExtraInformatieData>({
     opleidingsniveau: '',
     beroepsopleiding: '',
@@ -30,6 +32,26 @@ export const useExtraInformatieResponses = () => {
       loadResponses();
     }
   }, [user]);
+
+  // Register for journey reset refresh
+  useEffect(() => {
+    const refreshCallback = () => {
+      console.log('🔄 Refreshing extra informatie responses after journey reset');
+      setResponses({
+        opleidingsniveau: '',
+        beroepsopleiding: '',
+        fysieke_beperkingen: '',
+        sector_voorkeur: ''
+      });
+      setLoading(true);
+      if (user) {
+        loadResponses();
+      }
+    };
+
+    registerRefreshCallback(refreshCallback);
+    return () => unregisterRefreshCallback(refreshCallback);
+  }, [user, registerRefreshCallback, unregisterRefreshCallback]);
 
   const loadResponses = async () => {
     if (!user) return;
@@ -129,6 +151,7 @@ export const useExtraInformatieResponses = () => {
     saving,
     saveResponses,
     isCompleted: isCompleted(),
-    progress: getProgress()
+    progress: getProgress(),
+    loadResponses // Export for manual refresh
   };
 };

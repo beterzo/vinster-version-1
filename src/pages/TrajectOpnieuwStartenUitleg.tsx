@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { AlertTriangle, RefreshCw, CreditCard, FileX } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { useTranslation } from '@/hooks/useTranslation';
+import { useJourneyReset } from '@/contexts/JourneyResetContext';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/hooks/use-toast';
 
@@ -12,6 +13,7 @@ const TrajectOpnieuwStartenUitleg = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { t, language } = useTranslation();
+  const { refreshAllData } = useJourneyReset();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleStartReset = async () => {
@@ -89,6 +91,20 @@ const TrajectOpnieuwStartenUitleg = () => {
               title: t('common.success'),
               description: t('journey.restart_explanation.checkout_opened'),
             });
+            
+            // Listen for when the user comes back from payment
+            const checkPaymentStatus = () => {
+              // Refresh all data hooks to ensure fresh state
+              refreshAllData();
+              
+              // Navigate to home after a short delay
+              setTimeout(() => {
+                navigate('/home');
+              }, 500);
+            };
+            
+            // Check when the user returns focus to this window
+            window.addEventListener('focus', checkPaymentStatus, { once: true });
           } else {
             console.log('Popup blocked, using direct redirect');
             window.location.href = responseData.checkout_url;

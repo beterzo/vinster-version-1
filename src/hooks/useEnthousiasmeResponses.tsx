@@ -4,6 +4,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
 import { useTranslation } from '@/hooks/useTranslation';
+import { useJourneyReset } from '@/contexts/JourneyResetContext';
 
 export interface EnthousiasmeResponses {
   kindertijd_activiteiten?: string;
@@ -21,6 +22,7 @@ export const useEnthousiasmeResponses = () => {
   const { user } = useAuth();
   const { toast } = useToast();
   const { t } = useTranslation();
+  const { registerRefreshCallback, unregisterRefreshCallback } = useJourneyReset();
   const [responses, setResponses] = useState<EnthousiasmeResponses>({});
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -31,6 +33,21 @@ export const useEnthousiasmeResponses = () => {
       loadResponses();
     }
   }, [user]);
+
+  // Register for journey reset refresh
+  useEffect(() => {
+    const refreshCallback = () => {
+      console.log('🔄 Refreshing enthousiasme responses after journey reset');
+      setResponses({});
+      setLoading(true);
+      if (user) {
+        loadResponses();
+      }
+    };
+
+    registerRefreshCallback(refreshCallback);
+    return () => unregisterRefreshCallback(refreshCallback);
+  }, [user, registerRefreshCallback, unregisterRefreshCallback]);
 
   const loadResponses = async () => {
     if (!user) return;
@@ -118,6 +135,7 @@ export const useEnthousiasmeResponses = () => {
     loading,
     saving,
     saveResponse,
+    loadResponses, // Export loadResponses for manual refresh
     updateLocalResponse: (field: keyof EnthousiasmeResponses, value: string) => {
       setResponses(prev => ({
         ...prev,

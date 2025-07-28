@@ -3,6 +3,7 @@ import { useAuth } from './useAuth';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from './use-toast';
 import { useTranslation } from '@/hooks/useTranslation';
+import { useJourneyReset } from '@/contexts/JourneyResetContext';
 
 interface PrioriteitenData {
   selected_activiteiten_keywords?: string[];
@@ -23,6 +24,7 @@ export const usePrioriteitenResponses = () => {
   const { user } = useAuth();
   const { toast } = useToast();
   const { t } = useTranslation();
+  const { registerRefreshCallback, unregisterRefreshCallback } = useJourneyReset();
   const [responses, setResponses] = useState<PrioriteitenData>({});
   const [aiKeywords, setAiKeywords] = useState<AIKeywords>({});
   const [loading, setLoading] = useState(false);
@@ -33,6 +35,22 @@ export const usePrioriteitenResponses = () => {
       loadAiKeywords();
     }
   }, [user]);
+
+  // Register for journey reset refresh
+  useEffect(() => {
+    const refreshCallback = () => {
+      console.log('🔄 Refreshing prioriteiten responses after journey reset');
+      setResponses({});
+      setAiKeywords({});
+      if (user) {
+        loadResponses();
+        loadAiKeywords();
+      }
+    };
+
+    registerRefreshCallback(refreshCallback);
+    return () => unregisterRefreshCallback(refreshCallback);
+  }, [user, registerRefreshCallback, unregisterRefreshCallback]);
 
   const loadResponses = async () => {
     if (!user) return;
@@ -264,6 +282,8 @@ export const usePrioriteitenResponses = () => {
     saveKeywordSelection,
     hasMinimumKeywords,
     isCompleted: isCompleted(),
-    progress: getProgress()
+    progress: getProgress(),
+    loadResponses, // Export for manual refresh
+    loadAiKeywords // Export for manual refresh
   };
 };

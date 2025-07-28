@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import { JourneyResetProvider } from "@/contexts/JourneyResetContext";
 import TitleManager from "@/components/TitleManager";
 import AppRouter from "@/components/AppRouter";
 import CookieBanner from "@/components/CookieBanner";
@@ -21,12 +22,14 @@ const App = () => {
         <Sonner />
         <BrowserRouter>
           <LanguageProvider>
-            <AuthProvider>
-              <TitleManager />
-              <AppRouter />
-              <CookieBanner />
-              <CookieSettings />
-            </AuthProvider>
+            <JourneyResetProvider>
+              <AuthProvider>
+                <TitleManager />
+                <AppRouter />
+                <CookieBanner />
+                <CookieSettings />
+              </AuthProvider>
+            </JourneyResetProvider>
           </LanguageProvider>
         </BrowserRouter>
       </TooltipProvider>

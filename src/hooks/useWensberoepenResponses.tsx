@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "./useAuth";
 import { useToast } from "./use-toast";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useJourneyReset } from '@/contexts/JourneyResetContext';
 import type { Tables } from "@/integrations/supabase/types";
 
 type WensberoepenResponse = Tables<"wensberoepen_responses">;
@@ -12,6 +13,7 @@ export const useWensberoepenResponses = () => {
   const { user } = useAuth();
   const { toast } = useToast();
   const { t } = useTranslation();
+  const { registerRefreshCallback, unregisterRefreshCallback } = useJourneyReset();
   const [responses, setResponses] = useState<WensberoepenResponse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
@@ -27,6 +29,21 @@ export const useWensberoepenResponses = () => {
       loadResponses();
     }
   }, [user?.id]); // Only depend on user.id to prevent unnecessary re-loads
+
+  // Register for journey reset refresh
+  useEffect(() => {
+    const refreshCallback = () => {
+      console.log('🔄 Refreshing wensberoepen responses after journey reset');
+      setResponses(null);
+      setIsLoading(true);
+      if (user) {
+        loadResponses();
+      }
+    };
+
+    registerRefreshCallback(refreshCallback);
+    return () => unregisterRefreshCallback(refreshCallback);
+  }, [user, registerRefreshCallback, unregisterRefreshCallback]);
 
   const loadResponses = async () => {
     if (!user) return;
@@ -114,6 +131,6 @@ export const useWensberoepenResponses = () => {
     isSaving,
     saveResponse,
     getFieldValue,
-    loadResponses,
+    loadResponses, // Already exported for manual refresh
   };
 };
