@@ -152,16 +152,35 @@ const WensberoepenStep3 = () => {
     try {
       setIsSubmitting(true);
       
+      // First save current step 3 data to ensure everything is persisted
+      await Promise.all([
+        saveResponse("wensberoep_3_titel", jobTitle),
+        ...Object.entries(answers).map(([key, value]) => {
+          const fieldMap: Record<string, keyof WensberoepenResponse> = {
+            question1: "wensberoep_3_werkweek_activiteiten",
+            question2: "wensberoep_3_werklocatie_omgeving",
+            question3: "wensberoep_3_samenwerking_contacten",
+            question4: "wensberoep_3_fluitend_thuiskomen_dag",
+            question5: "wensberoep_3_werk_doel",
+            question6: "wensberoep_3_leukste_onderdelen",
+            question7: "wensberoep_3_belangrijke_aspecten",
+            question8: "wensberoep_3_kennis_focus"
+          };
+          const dbField = fieldMap[key];
+          return dbField ? saveResponse(dbField, value) : Promise.resolve();
+        })
+      ]);
+      
+      // Wait a moment for the data to be saved
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
       // Collect all data for webhook (now includes language)
       const webhookData = collectWebhookData();
       if (!webhookData) {
-        toast({
-          title: t('common.error'),
-          description: t('common.toast.no_user_data'),
-          variant: "destructive",
-        });
-        return;
+        throw new Error("Could not collect webhook data - no user data available");
       }
+      
+      console.log("Sending webhook data:", webhookData);
       
       // Send data to webhook
       await sendWebhookData(webhookData);
@@ -173,12 +192,18 @@ const WensberoepenStep3 = () => {
         variant: "default",
       });
       
+      // Navigate to completion page
       navigate('/wensberoepen-voltooi');
+      
     } catch (error) {
       console.error("Error completing wensberoepen scan:", error);
+      
+      // More specific error message based on the error
+      const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
+      
       toast({
         title: t('common.toast.completion_error'),
-        description: t('common.toast.completion_error_description'),
+        description: `${t('common.toast.completion_error_description')} (${errorMessage})`,
         variant: "destructive",
       });
     } finally {
