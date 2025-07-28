@@ -2,19 +2,12 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-import { CheckCircle, ArrowRight, User, Target, Heart, Send, Zap } from "lucide-react";
+import { CheckCircle, ArrowRight, User, Target, Heart, Send } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
-import { useWebhookData } from "@/hooks/useWebhookData";
-import { sendWebhookDirectly } from "@/utils/testWebhook";
-import { useToast } from "@/hooks/use-toast";
-import { useState } from "react";
 
 const WensberoepenVoltooiPagina = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { collectWebhookData } = useWebhookData();
-  const { toast } = useToast();
-  const [isTestingWebhook, setIsTestingWebhook] = useState(false);
 
   const handleProfielVoltooien = () => {
     navigate("/profiel-voltooien-intro");
@@ -22,44 +15,6 @@ const WensberoepenVoltooiPagina = () => {
 
   const handleNaarDashboard = () => {
     navigate("/");
-  };
-
-  const handleTestWebhook = async () => {
-    setIsTestingWebhook(true);
-    try {
-      const webhookData = collectWebhookData();
-      if (!webhookData) {
-        toast({
-          title: "Error",
-          description: "No data available to send to webhook",
-          variant: "destructive",
-        });
-        return;
-      }
-
-      const result = await sendWebhookDirectly(webhookData);
-      if (result.success) {
-        toast({
-          title: "Success!",
-          description: "Test webhook sent successfully",
-        });
-      } else {
-        toast({
-          title: "Error",
-          description: "Failed to send test webhook",
-          variant: "destructive",
-        });
-      }
-    } catch (error) {
-      console.error("Test webhook error:", error);
-      toast({
-        title: "Error",
-        description: "Failed to send test webhook",
-        variant: "destructive",
-      });
-    } finally {
-      setIsTestingWebhook(false);
-    }
   };
 
   return (
@@ -158,15 +113,6 @@ const WensberoepenVoltooiPagina = () => {
                 className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold px-8 py-3 text-lg"
               >
                 {t('wensberoepen.voltooi.to_dashboard_button')}
-              </Button>
-              <Button 
-                onClick={handleTestWebhook}
-                disabled={isTestingWebhook}
-                variant="outline" 
-                className="border-green-500 text-green-600 hover:bg-green-50 font-semibold px-8 py-3 text-lg"
-              >
-                {isTestingWebhook ? "Sending..." : "Test Webhook"}
-                <Zap className="ml-2 h-5 w-5" />
               </Button>
             </div>
 
