@@ -22,7 +22,8 @@
         "contact_note": "Etter forespørselen din tar vi kontakt for betaling og levering"
       },
       "submit_button": "Be om tilgangskoder",
-      "submitting": "Sender..."
+      "submitting": "Sender...",
+      "bulk_order_note": "Trenger du mer enn 100 tilgangskoder? Kontakt oss på team@vinster.ai"
     },
     "what_you_get": {
       "title": "Hva får du?",

@@ -23,7 +23,8 @@
         "contact_note": "After your request, we will contact you for payment and delivery"
       },
       "submit_button": "Request access codes",
-      "submitting": "Submitting..."
+      "submitting": "Submitting...",
+      "bulk_order_note": "Need more than 100 access codes? Contact us at team@vinster.ai"
     },
     "what_you_get": {
       "title": "What do you get?",

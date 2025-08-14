@@ -23,7 +23,8 @@
         "contact_note": "Na uw aanvraag nemen we contact op voor betaling en levering"
       },
       "submit_button": "Toegangscodes aanvragen",
-      "submitting": "Bezig met verzenden..."
+      "submitting": "Bezig met verzenden...",
+      "bulk_order_note": "Meer dan 100 toegangscodes nodig? Neem contact met ons op via team@vinster.ai"
     },
     "what_you_get": {
       "title": "Wat krijg je?",

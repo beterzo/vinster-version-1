@@ -23,7 +23,8 @@
         "contact_note": "Nach Ihrer Anfrage nehmen wir Kontakt für Zahlung und Lieferung auf"
       },
       "submit_button": "Zugangscodes anfragen",
-      "submitting": "Wird gesendet..."
+      "submitting": "Wird gesendet...",
+      "bulk_order_note": "Mehr als 100 Zugangscodes benötigt? Kontaktieren Sie uns unter team@vinster.ai"
     },
     "what_you_get": {
       "title": "Was erhalten Sie?",

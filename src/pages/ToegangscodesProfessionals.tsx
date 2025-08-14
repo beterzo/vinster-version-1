@@ -187,6 +187,12 @@ const ToegangscodesProfessionals = () => {
               <Button type="submit" className="w-full h-12 bg-blue-900 hover:bg-blue-800 text-white font-semibold" disabled={isLoading}>
                 {isLoading ? t('professionals.order_section.submitting') : t('professionals.order_section.submit_button')}
               </Button>
+              
+              <div className="mt-4 text-center">
+                <p className="text-sm text-gray-600">
+                  {t('professionals.order_section.bulk_order_note')}
+                </p>
+              </div>
             </form>
           </div>
 
