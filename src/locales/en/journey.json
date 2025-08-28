@@ -136,7 +136,7 @@
       "question1": "What is your highest level of education?",
       "question2": "What professional training have you completed?",
       "question3": "In which sector(s) would you like to work?",
-      "question4": "Are there any physical limitations we should take into account?",
+      "question4": "Are there any (physical) limitations we should take into account?",
       "placeholder1": "For example: Bachelor's, Master's, Vocational level 4, etc.",
       "placeholder2": "For example: Business Administration, Psychology, Technical Computer Science, etc.",
       "placeholder3": "For example: IT, Healthcare, Education, Marketing, etc.",
