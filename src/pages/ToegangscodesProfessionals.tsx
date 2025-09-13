@@ -184,8 +184,7 @@ const ToegangscodesProfessionals = () => {
                   {t('professionals.order_section.pricing_info.title')}
                 </h3>
                 <p className="text-sm text-gray-700">
-                  {t('professionals.order_section.pricing_info.price_per_code')}<br />
-                  {t('professionals.order_section.pricing_info.contact_note')}
+                  {t('professionals.order_section.pricing_info.price_per_code')}
                 </p>
               </div>
 
@@ -196,12 +195,6 @@ const ToegangscodesProfessionals = () => {
               >
                 {isLoading ? t('professionals.order_section.submitting') : t('professionals.order_section.submit_button')}
               </Button>
-              
-              <div className="mt-4 text-center">
-                <p className="text-sm text-gray-600">
-                  {t('professionals.order_section.bulk_order_note')}
-                </p>
-              </div>
             </form>
           </div>
 
@@ -225,20 +218,6 @@ const ToegangscodesProfessionals = () => {
                   <div className="w-2 h-2 bg-blue-900 rounded-full mt-2"></div>
                   <p className="text-gray-700">
                     <strong>{t('professionals.what_you_get.feature2').split(' ')[0]} {t('professionals.what_you_get.feature2').split(' ')[1]}</strong> {t('professionals.what_you_get.feature2').split(' ').slice(2).join(' ')}
-                  </p>
-                </div>
-                
-                <div className="flex items-start space-x-3">
-                  <div className="w-2 h-2 bg-blue-900 rounded-full mt-2"></div>
-                  <p className="text-gray-700">
-                    <strong>{t('professionals.what_you_get.feature3').split(' ')[0]} {t('professionals.what_you_get.feature3').split(' ')[1]}</strong> {t('professionals.what_you_get.feature3').split(' ').slice(2).join(' ')}
-                  </p>
-                </div>
-                
-                <div className="flex items-start space-x-3">
-                  <div className="w-2 h-2 bg-blue-900 rounded-full mt-2"></div>
-                  <p className="text-gray-700">
-                    <strong>{t('professionals.what_you_get.feature4').split(' ')[0]} {t('professionals.what_you_get.feature4').split(' ')[1]}</strong> {t('professionals.what_you_get.feature4').split(' ').slice(2).join(' ')}
                   </p>
                 </div>
               </div>
@@ -284,15 +263,6 @@ const ToegangscodesProfessionals = () => {
                   </div>
                   <p className="text-gray-700">
                     {t('professionals.how_it_works.step4')}
-                  </p>
-                </div>
-                
-                <div className="flex items-start space-x-3">
-                  <div className="w-6 h-6 bg-blue-900 text-white rounded-full flex items-center justify-center text-sm font-bold">
-                    5
-                  </div>
-                  <p className="text-gray-700">
-                    {t('professionals.how_it_works.step5')}
                   </p>
                 </div>
               </div>

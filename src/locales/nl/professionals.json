@@ -19,27 +19,22 @@
       },
       "pricing_info": {
         "title": "Prijsinformatie",
-        "price_per_code": "€29 per toegangscode",
-        "contact_note": "Na uw aanvraag nemen we contact op voor betaling en levering"
+        "price_per_code": "€29 per toegangscode"
       },
       "submit_button": "Toegangscodes aanvragen",
-      "submitting": "Bezig met verzenden...",
-      "bulk_order_note": "Meer dan 100 toegangscodes nodig? Neem contact met ons op via team@vinster.ai"
+      "submitting": "Bezig met verzenden..."
     },
     "what_you_get": {
       "title": "Wat krijg je?",
       "feature1": "Toegangscodes die je direct kunt delen met je cliënten",
-      "feature2": "Volledige toegang tot het hele Vinster proces per code",
-      "feature3": "Eenvoudig beheer van gebruikte en ongebruikte codes",
-      "feature4": "Persoonlijke begeleiding bij de levering"
+      "feature2": "Volledige toegang tot het hele Vinster proces per code"
     },
     "how_it_works": {
       "title": "Hoe werkt het?",
       "step1": "Vul het formulier in met je email en gewenste aantal",
-      "step2": "We nemen binnen 24 uur contact met je op",
-      "step3": "Betaling via beveiligde betaallink",
-      "step4": "Ontvang de toegangscodes direct na betaling",
-      "step5": "Deel de codes met je cliënten",
+      "step2": "Betaling via beveiligde betaallink",
+      "step3": "Ontvang de toegangscodes direct na betaling",
+      "step4": "Deel de codes met je cliënten",
       "contact_info": "Vragen? Neem contact op via"
     },
     "organization_form": {

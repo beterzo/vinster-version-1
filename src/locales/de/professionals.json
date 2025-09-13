@@ -19,27 +19,22 @@
       },
       "pricing_info": {
         "title": "Preisinformationen",
-        "price_per_code": "€29 pro Zugangscode",
-        "contact_note": "Nach Ihrer Anfrage nehmen wir Kontakt für Zahlung und Lieferung auf"
+        "price_per_code": "€29 pro Zugangscode"
       },
       "submit_button": "Zugangscodes anfragen",
-      "submitting": "Wird gesendet...",
-      "bulk_order_note": "Mehr als 100 Zugangscodes benötigt? Kontaktieren Sie uns unter team@vinster.ai"
+      "submitting": "Wird gesendet..."
     },
     "what_you_get": {
       "title": "Was erhalten Sie?",
       "feature1": "Zugangscodes die Sie direkt mit Ihren Kunden teilen können",
-      "feature2": "Vollzugang zum gesamten Vinster Prozess pro Code",
-      "feature3": "Einfache Verwaltung von genutzten und ungenutzten Codes",
-      "feature4": "Persönliche Begleitung bei der Lieferung"
+      "feature2": "Vollzugang zum gesamten Vinster Prozess pro Code"
     },
     "how_it_works": {
       "title": "Wie funktioniert es?",
       "step1": "Füllen Sie das Formular mit Ihrer E-Mail und gewünschter Anzahl aus",
-      "step2": "Wir nehmen innerhalb von 24 Stunden Kontakt mit Ihnen auf",
-      "step3": "Zahlung über sicheren Zahlungslink",
-      "step4": "Erhalten Sie die Zugangscodes direkt nach der Zahlung",
-      "step5": "Teilen Sie die Codes mit Ihren Kunden",
+      "step2": "Zahlung über sicheren Zahlungslink",
+      "step3": "Erhalten Sie die Zugangscodes direkt nach der Zahlung",
+      "step4": "Teilen Sie die Codes mit Ihren Kunden",
       "contact_info": "Fragen? Kontaktieren Sie uns unter"
     },
     "organization_form": {

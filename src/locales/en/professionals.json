@@ -19,27 +19,22 @@
       },
       "pricing_info": {
         "title": "Pricing information",
-        "price_per_code": "€29 per access code",
-        "contact_note": "After your request, we will contact you for payment and delivery"
+        "price_per_code": "€29 per access code"
       },
       "submit_button": "Request access codes",
-      "submitting": "Submitting...",
-      "bulk_order_note": "Need more than 100 access codes? Contact us at team@vinster.ai"
+      "submitting": "Submitting..."
     },
     "what_you_get": {
       "title": "What do you get?",
       "feature1": "Access codes that you can share directly with your clients",
-      "feature2": "Full access to the entire Vinster process per code",
-      "feature3": "Easy management of used and unused codes",
-      "feature4": "Personal guidance during delivery"
+      "feature2": "Full access to the entire Vinster process per code"
     },
     "how_it_works": {
       "title": "How does it work?",
       "step1": "Fill out the form with your email and desired quantity",
-      "step2": "We will contact you within 24 hours",
-      "step3": "Payment via secure payment link",
-      "step4": "Receive the access codes immediately after payment",
-      "step5": "Share the codes with your clients",
+      "step2": "Payment via secure payment link",
+      "step3": "Receive the access codes immediately after payment",
+      "step4": "Share the codes with your clients",
       "contact_info": "Questions? Contact us via"
     },
     "organization_form": {

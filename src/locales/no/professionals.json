@@ -18,27 +18,22 @@
       },
       "pricing_info": {
         "title": "Prisinformasjon",
-        "price_per_code": "333 kr per tilgangskode",
-        "contact_note": "Etter forespørselen din tar vi kontakt for betaling og levering"
+        "price_per_code": "333 kr per tilgangskode"
       },
       "submit_button": "Be om tilgangskoder",
-      "submitting": "Sender...",
-      "bulk_order_note": "Trenger du mer enn 100 tilgangskoder? Kontakt oss på team@vinster.ai"
+      "submitting": "Sender..."
     },
     "what_you_get": {
       "title": "Hva får du?",
       "feature1": "Tilgangskoder som du kan dele direkte med dine klienter",
-      "feature2": "Full tilgang til hele Vinster-prosessen per kode",
-      "feature3": "Enkel administrasjon av brukte og ubrukte koder",
-      "feature4": "Personlig veiledning ved levering"
+      "feature2": "Full tilgang til hele Vinster-prosessen per kode"
     },
     "how_it_works": {
       "title": "Hvordan fungerer det?",
       "step1": "Fyll ut skjemaet med e-post og ønsket antall",
-      "step2": "Vi tar kontakt innen 24 timer",
-      "step3": "Betaling via sikker betalingslenke",
-      "step4": "Motta tilgangskodene direkte etter betaling",
-      "step5": "Del kodene med dine klienter",
+      "step2": "Betaling via sikker betalingslenke",
+      "step3": "Motta tilgangskodene direkte etter betaling",
+      "step4": "Del kodene med dine klienter",
       "contact_info": "Spørsmål? Ta kontakt via"
     },
     "organization_form": {
