@@ -148,8 +148,7 @@ const OrganizationForm = () => {
           </h3>
           <Button 
             onClick={() => setShowSuccess(false)}
-            style={{ backgroundColor: '#027BFF' }}
-            className="hover:opacity-90 transition-opacity"
+            className="bg-blue-900 hover:bg-blue-800 text-white"
           >
             Nieuw formulier invullen
           </Button>
