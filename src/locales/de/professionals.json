@@ -43,6 +43,8 @@
       "description": "Füllen Sie das untenstehende Formular aus. Wir senden dann eine Rechnung an Ihre Organisation. Sobald die Rechnung bezahlt ist, erhalten Sie die Zugangscodes direkt per E-Mail.",
       "email_label": "E-Mail-Adresse für Rechnung *",
       "email_placeholder": "rechnung@organisation.de",
+      "quantity_label": "Anzahl Zugangscodes *",
+      "quantity_placeholder": "Zum Beispiel: 10",
       "organization_label": "Name und Adresse der Organisation *",
       "organization_placeholder": "Zum Beispiel: UMCG, Hanzeplein 1, 9700 RB Groningen",
       "contact_label": "Name der Kontaktperson *",
@@ -57,6 +59,8 @@
       "validation": {
         "email_required": "E-Mail-Adresse ist erforderlich",
         "email_invalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+        "quantity_required": "Anzahl Zugangscodes ist erforderlich",
+        "quantity_invalid": "Bitte geben Sie eine gültige Anzahl ein (mindestens 1)",
         "organization_required": "Organisationsangaben sind erforderlich",
         "contact_required": "Name der Kontaktperson ist erforderlich",
         "cost_center_required": "Kostenstelle und/oder Einkaufsnummer ist erforderlich"

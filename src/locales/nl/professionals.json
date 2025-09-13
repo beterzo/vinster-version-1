@@ -43,6 +43,8 @@
       "description": "Vul dan het onderstaande formulier in. Wij sturen dan een factuur naar jouw organisatie. Zodra de factuur betaald is, ontvang je de toegangscodes direct in je mail.",
       "email_label": "E-mailadres voor factuur *",
       "email_placeholder": "factuur@organisatie.nl",
+      "quantity_label": "Aantal toegangscodes *",
+      "quantity_placeholder": "Bijvoorbeeld: 10",
       "organization_label": "Naam en adres organisatie *",
       "organization_placeholder": "Bijvoorbeeld: UMCG, Hanzeplein 1, 9700 RB Groningen",
       "contact_label": "Naam contactpersoon *",
@@ -57,6 +59,8 @@
       "validation": {
         "email_required": "E-mailadres is verplicht",
         "email_invalid": "Voer een geldig e-mailadres in",
+        "quantity_required": "Aantal toegangscodes is verplicht",
+        "quantity_invalid": "Voer een geldig aantal in (minimaal 1)",
         "organization_required": "Organisatiegegevens zijn verplicht",
         "contact_required": "Naam contactpersoon is verplicht",
         "cost_center_required": "Kostenplaats en/of inkoopnummer is verplicht"

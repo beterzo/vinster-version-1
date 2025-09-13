@@ -8,6 +8,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 
 interface OrganizationFormData {
   email: string;
+  quantity: string;
   organization: string;
   contactPerson: string;
   costCenter: string;
@@ -21,6 +22,7 @@ const OrganizationForm = () => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [formData, setFormData] = useState<OrganizationFormData>({
     email: "",
+    quantity: "",
     organization: "",
     contactPerson: "",
     costCenter: "",
@@ -41,6 +43,12 @@ const OrganizationForm = () => {
       newErrors.email = t('professionals.organization_form.validation.email_required');
     } else if (!validateEmail(formData.email)) {
       newErrors.email = t('professionals.organization_form.validation.email_invalid');
+    }
+
+    if (!formData.quantity) {
+      newErrors.quantity = t('professionals.organization_form.validation.quantity_required');
+    } else if (isNaN(Number(formData.quantity)) || Number(formData.quantity) < 1) {
+      newErrors.quantity = t('professionals.organization_form.validation.quantity_invalid');
     }
 
     if (!formData.organization) {
@@ -92,6 +100,7 @@ const OrganizationForm = () => {
         },
         body: JSON.stringify({
           email: formData.email,
+          quantity: parseInt(formData.quantity),
           organisatie: formData.organization,
           contactpersoon: formData.contactPerson,
           kostenplaats: formData.costCenter,
@@ -104,6 +113,7 @@ const OrganizationForm = () => {
         setShowSuccess(true);
         setFormData({
           email: "",
+          quantity: "",
           organization: "",
           contactPerson: "",
           costCenter: "",
@@ -179,6 +189,25 @@ const OrganizationForm = () => {
             />
             {errors.email && (
               <p className="text-red-500 text-sm">{errors.email}</p>
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="quantity" className="text-sm font-medium" style={{ color: '#232D4B' }}>
+              {t('professionals.organization_form.quantity_label')}
+            </Label>
+            <Input
+              id="quantity"
+              name="quantity"
+              type="number"
+              placeholder={t('professionals.organization_form.quantity_placeholder')}
+              value={formData.quantity}
+              onChange={handleInputChange}
+              className={`h-12 px-4 border-gray-300 focus:border-blue-600 focus:ring-blue-600 ${errors.quantity ? 'border-red-500' : ''}`}
+              min="1"
+            />
+            {errors.quantity && (
+              <p className="text-red-500 text-sm">{errors.quantity}</p>
             )}
           </div>
 

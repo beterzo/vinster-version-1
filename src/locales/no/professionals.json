@@ -42,6 +42,8 @@
       "description": "Fyll ut skjemaet nedenfor. Vi sender da en faktura til din organisasjon. Når fakturaen er betalt, får du tilgangskodene direkte på e-post.",
       "email_label": "E-postadresse for faktura *",
       "email_placeholder": "faktura@organisasjon.no",
+      "quantity_label": "Antall tilgangskoder *",
+      "quantity_placeholder": "For eksempel: 10",
       "organization_label": "Organisasjonsnavn og adresse *",
       "organization_placeholder": "For eksempel: UMCG, Hanzeplein 1, 9700 RB Groningen",
       "contact_label": "Navn på kontaktperson *",
@@ -56,6 +58,8 @@
       "validation": {
         "email_required": "E-postadresse er påkrevd",
         "email_invalid": "Vennligst oppgi en gyldig e-postadresse",
+        "quantity_required": "Antall tilgangskoder er påkrevd",
+        "quantity_invalid": "Vennligst oppgi et gyldig antall (minimum 1)",
         "organization_required": "Organisasjonsdetaljer er påkrevd",
         "contact_required": "Navn på kontaktperson er påkrevd",
         "cost_center_required": "Kostnadssted og/eller innkjøpsnummer er påkrevd"
