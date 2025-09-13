@@ -44,7 +44,7 @@
       "email_label": "E-Mail-Adresse für Rechnung *",
       "email_placeholder": "rechnung@organisation.de",
       "quantity_label": "Anzahl Zugangscodes *",
-      "quantity_placeholder": "Zum Beispiel: 10",
+      "quantity_placeholder": "Zum Beispiel: 100",
       "organization_label": "Name und Adresse der Organisation *",
       "organization_placeholder": "Zum Beispiel: UMCG, Hanzeplein 1, 9700 RB Groningen",
       "contact_label": "Name der Kontaktperson *",

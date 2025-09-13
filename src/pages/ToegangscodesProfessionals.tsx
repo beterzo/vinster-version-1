@@ -139,7 +139,7 @@ const ToegangscodesProfessionals = () => {
       <div className="max-w-4xl mx-auto px-6 py-12">
         <div className="grid md:grid-cols-2 gap-8 mb-12">
           {/* Order Form - Links */}
-          <div className="bg-white rounded-xl shadow-lg p-8 h-fit">
+          <div className="bg-white rounded-xl shadow-lg p-8 flex flex-col h-full">
             <h2 className="text-2xl font-semibold mb-6" style={{ color: '#232D4B' }}>
               {t('professionals.order_section.title')}
             </h2>
@@ -198,83 +198,57 @@ const ToegangscodesProfessionals = () => {
             </form>
           </div>
 
-          {/* Information Section - Rechts */}
-          <div className="space-y-8">
-            {/* What You Get */}
-            <div className="bg-white rounded-xl shadow-lg p-8">
-              <h2 className="text-2xl font-semibold mb-6" style={{ color: '#232D4B' }}>
-                {t('professionals.what_you_get.title')}
-              </h2>
+          {/* How It Works - Rechts */}
+          <div className="bg-white rounded-xl shadow-lg p-8 flex flex-col h-full">
+            <h2 className="text-2xl font-semibold mb-6" style={{ color: '#232D4B' }}>
+              {t('professionals.how_it_works.title')}
+            </h2>
+            
+            <div className="space-y-4 flex-grow">
+              <div className="flex items-start space-x-3">
+                <div className="w-6 h-6 bg-blue-900 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                  1
+                </div>
+                <p className="text-gray-700">
+                  {t('professionals.how_it_works.step1')}
+                </p>
+              </div>
               
-              <div className="space-y-4">
-                <div className="flex items-start space-x-3">
-                  <div className="w-2 h-2 bg-blue-900 rounded-full mt-2"></div>
-                  <p className="text-gray-700">
-                    <strong>{t('professionals.what_you_get.feature1').split(' ')[0]}</strong> {t('professionals.what_you_get.feature1').split(' ').slice(1).join(' ')}
-                  </p>
+              <div className="flex items-start space-x-3">
+                <div className="w-6 h-6 bg-blue-900 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                  2
                 </div>
-                
-                <div className="flex items-start space-x-3">
-                  <div className="w-2 h-2 bg-blue-900 rounded-full mt-2"></div>
-                  <p className="text-gray-700">
-                    <strong>{t('professionals.what_you_get.feature2').split(' ')[0]} {t('professionals.what_you_get.feature2').split(' ')[1]}</strong> {t('professionals.what_you_get.feature2').split(' ').slice(2).join(' ')}
-                  </p>
+                <p className="text-gray-700">
+                  {t('professionals.how_it_works.step2')}
+                </p>
+              </div>
+              
+              <div className="flex items-start space-x-3">
+                <div className="w-6 h-6 bg-blue-900 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                  3
                 </div>
+                <p className="text-gray-700">
+                  {t('professionals.how_it_works.step3')}
+                </p>
+              </div>
+              
+              <div className="flex items-start space-x-3">
+                <div className="w-6 h-6 bg-blue-900 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                  4
+                </div>
+                <p className="text-gray-700">
+                  {t('professionals.how_it_works.step4')}
+                </p>
               </div>
             </div>
 
-            {/* How It Works */}
-            <div className="bg-white rounded-xl shadow-lg p-8">
-              <h2 className="text-2xl font-semibold mb-6" style={{ color: '#232D4B' }}>
-                {t('professionals.how_it_works.title')}
-              </h2>
-              
-              <div className="space-y-4">
-                <div className="flex items-start space-x-3">
-                  <div className="w-6 h-6 bg-blue-900 text-white rounded-full flex items-center justify-center text-sm font-bold">
-                    1
-                  </div>
-                  <p className="text-gray-700">
-                    {t('professionals.how_it_works.step1')}
-                  </p>
-                </div>
-                
-                <div className="flex items-start space-x-3">
-                  <div className="w-6 h-6 bg-blue-900 text-white rounded-full flex items-center justify-center text-sm font-bold">
-                    2
-                  </div>
-                  <p className="text-gray-700">
-                    {t('professionals.how_it_works.step2')}
-                  </p>
-                </div>
-                
-                <div className="flex items-start space-x-3">
-                  <div className="w-6 h-6 bg-blue-900 text-white rounded-full flex items-center justify-center text-sm font-bold">
-                    3
-                  </div>
-                  <p className="text-gray-700">
-                    {t('professionals.how_it_works.step3')}
-                  </p>
-                </div>
-                
-                <div className="flex items-start space-x-3">
-                  <div className="w-6 h-6 bg-blue-900 text-white rounded-full flex items-center justify-center text-sm font-bold">
-                    4
-                  </div>
-                  <p className="text-gray-700">
-                    {t('professionals.how_it_works.step4')}
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-6 text-center">
-                <p className="text-sm text-gray-600">
-                  {t('professionals.how_it_works.contact_info')}<br />
-                  <a href="mailto:team@vinster.ai" className="text-blue-600 hover:underline">
-                    team@vinster.ai
-                  </a>
-                </p>
-              </div>
+            <div className="mt-6 text-center">
+              <p className="text-sm text-gray-600">
+                {t('professionals.how_it_works.contact_info')}<br />
+                <a href="mailto:team@vinster.ai" className="text-blue-600 hover:underline">
+                  team@vinster.ai
+                </a>
+              </p>
             </div>
           </div>
         </div>

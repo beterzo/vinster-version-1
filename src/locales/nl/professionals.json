@@ -44,7 +44,7 @@
       "email_label": "E-mailadres voor factuur *",
       "email_placeholder": "factuur@organisatie.nl",
       "quantity_label": "Aantal toegangscodes *",
-      "quantity_placeholder": "Bijvoorbeeld: 10",
+      "quantity_placeholder": "Bijvoorbeeld: 100",
       "organization_label": "Naam en adres organisatie *",
       "organization_placeholder": "Bijvoorbeeld: UMCG, Hanzeplein 1, 9700 RB Groningen",
       "contact_label": "Naam contactpersoon *",

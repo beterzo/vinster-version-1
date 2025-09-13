@@ -44,7 +44,7 @@
       "email_label": "Email address for invoice *",
       "email_placeholder": "invoice@organization.com",
       "quantity_label": "Number of access codes *",
-      "quantity_placeholder": "For example: 10",
+      "quantity_placeholder": "For example: 100",
       "organization_label": "Organization name and address *",
       "organization_placeholder": "For example: UMCG, Hanzeplein 1, 9700 RB Groningen",
       "contact_label": "Contact person name *",

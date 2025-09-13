@@ -43,7 +43,7 @@
       "email_label": "E-postadresse for faktura *",
       "email_placeholder": "faktura@organisasjon.no",
       "quantity_label": "Antall tilgangskoder *",
-      "quantity_placeholder": "For eksempel: 10",
+      "quantity_placeholder": "For eksempel: 100",
       "organization_label": "Organisasjonsnavn og adresse *",
       "organization_placeholder": "For eksempel: UMCG, Hanzeplein 1, 9700 RB Groningen",
       "contact_label": "Navn på kontaktperson *",
