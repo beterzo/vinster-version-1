@@ -41,6 +41,31 @@
       "step5": "Del kodene med dine klienter",
       "contact_info": "Spørsmål? Ta kontakt via"
     },
+    "organization_form": {
+      "title": "For organisasjoner",
+      "introduction": "Er du karriererådgiver eller mobilitetsrådgiver i en større organisasjon?",
+      "description": "Fyll ut skjemaet nedenfor. Vi sender da en faktura til din organisasjon. Når fakturaen er betalt, får du tilgangskodene direkte på e-post.",
+      "email_label": "E-postadresse for faktura *",
+      "email_placeholder": "faktura@organisasjon.no",
+      "organization_label": "Organisasjonsnavn og adresse *",
+      "organization_placeholder": "For eksempel: UMCG, Hanzeplein 1, 9700 RB Groningen",
+      "contact_label": "Navn på kontaktperson *",
+      "contact_placeholder": "For- og etternavn",
+      "cost_center_label": "Kostnadssted og/eller innkjøpsnummer *",
+      "cost_center_placeholder": "For eksempel: KS-2024-001 eller INN-HR-2024",
+      "comments_label": "Andre kommentarer eller relevant informasjon",
+      "comments_placeholder": "Eventuell tilleggsinformasjon...",
+      "submit_button": "Send forespørsel",
+      "submitting": "Sender...",
+      "success_message": "Takk for forespørselen! Du vil snart motta en e-post fra team@vinster.ai med mer informasjon.",
+      "validation": {
+        "email_required": "E-postadresse er påkrevd",
+        "email_invalid": "Vennligst oppgi en gyldig e-postadresse",
+        "organization_required": "Organisasjonsdetaljer er påkrevd",
+        "contact_required": "Navn på kontaktperson er påkrevd",
+        "cost_center_required": "Kostnadssted og/eller innkjøpsnummer er påkrevd"
+      }
+    },
     "toasts": {
       "fill_all_fields": "Fyll ut alle felt",
       "fill_all_fields_desc": "E-postadresse og antall koder er påkrevd.",

@@ -42,6 +42,31 @@
       "step5": "Deel de codes met je cliënten",
       "contact_info": "Vragen? Neem contact op via"
     },
+    "organization_form": {
+      "title": "Voor organisaties",
+      "introduction": "Ben je loopbaancoach of mobiliteitsadviseur bij een grotere organisatie?",
+      "description": "Vul dan het onderstaande formulier in. Wij sturen dan een factuur naar jouw organisatie. Zodra de factuur betaald is, ontvang je de toegangscodes direct in je mail.",
+      "email_label": "E-mailadres voor factuur *",
+      "email_placeholder": "factuur@organisatie.nl",
+      "organization_label": "Naam en adres organisatie *",
+      "organization_placeholder": "Bijvoorbeeld: UMCG, Hanzeplein 1, 9700 RB Groningen",
+      "contact_label": "Naam contactpersoon *",
+      "contact_placeholder": "Voor- en achternaam",
+      "cost_center_label": "Kostenplaats en/of inkoopnummer *",
+      "cost_center_placeholder": "Bijvoorbeeld: KP-2024-001 of INK-HR-2024",
+      "comments_label": "Andere opmerkingen of relevante gegevens",
+      "comments_placeholder": "Eventuele aanvullende informatie...",
+      "submit_button": "Aanvraag indienen",
+      "submitting": "Wordt verzonden...",
+      "success_message": "Bedankt voor je aanvraag! Je ontvangt binnenkort een mail van team@vinster.ai met meer informatie.",
+      "validation": {
+        "email_required": "E-mailadres is verplicht",
+        "email_invalid": "Voer een geldig e-mailadres in",
+        "organization_required": "Organisatiegegevens zijn verplicht",
+        "contact_required": "Naam contactpersoon is verplicht",
+        "cost_center_required": "Kostenplaats en/of inkoopnummer is verplicht"
+      }
+    },
     "toasts": {
       "fill_all_fields": "Vul alle velden in",
       "fill_all_fields_desc": "E-mailadres en aantal kortingscodes zijn verplicht.",

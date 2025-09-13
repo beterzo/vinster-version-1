@@ -8,6 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "@/hooks/useTranslation";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import Footer from "@/components/Footer";
+import OrganizationForm from "@/components/OrganizationForm";
 const ToegangscodesProfessionals = () => {
   const navigate = useNavigate();
   const {
@@ -129,6 +130,11 @@ const ToegangscodesProfessionals = () => {
             </p>
           </div>
         </div>
+      </div>
+
+      {/* Organization Form Section */}
+      <div className="max-w-6xl mx-auto px-6 py-8">
+        <OrganizationForm />
       </div>
 
       {/* Main Content */}

@@ -42,6 +42,31 @@
       "step5": "Share the codes with your clients",
       "contact_info": "Questions? Contact us via"
     },
+    "organization_form": {
+      "title": "For organizations",
+      "introduction": "Are you a career coach or mobility advisor at a larger organization?",
+      "description": "Fill out the form below. We will send an invoice to your organization. Once the invoice is paid, you will receive the access codes directly in your email.",
+      "email_label": "Email address for invoice *",
+      "email_placeholder": "invoice@organization.com",
+      "organization_label": "Organization name and address *",
+      "organization_placeholder": "For example: UMCG, Hanzeplein 1, 9700 RB Groningen",
+      "contact_label": "Contact person name *",
+      "contact_placeholder": "First and last name",
+      "cost_center_label": "Cost center and/or purchase number *",
+      "cost_center_placeholder": "For example: CC-2024-001 or PUR-HR-2024",
+      "comments_label": "Other comments or relevant information",
+      "comments_placeholder": "Any additional information...",
+      "submit_button": "Submit request",
+      "submitting": "Submitting...",
+      "success_message": "Thank you for your request! You will receive an email from team@vinster.ai with more information soon.",
+      "validation": {
+        "email_required": "Email address is required",
+        "email_invalid": "Please enter a valid email address",
+        "organization_required": "Organization details are required",
+        "contact_required": "Contact person name is required",
+        "cost_center_required": "Cost center and/or purchase number is required"
+      }
+    },
     "toasts": {
       "fill_all_fields": "Fill in all fields",
       "fill_all_fields_desc": "Email address and number of access codes are required.",

@@ -42,6 +42,31 @@
       "step5": "Teilen Sie die Codes mit Ihren Kunden",
       "contact_info": "Fragen? Kontaktieren Sie uns unter"
     },
+    "organization_form": {
+      "title": "Für Organisationen",
+      "introduction": "Sind Sie Karriereberater oder Mobilitätsberater in einer größeren Organisation?",
+      "description": "Füllen Sie das untenstehende Formular aus. Wir senden dann eine Rechnung an Ihre Organisation. Sobald die Rechnung bezahlt ist, erhalten Sie die Zugangscodes direkt per E-Mail.",
+      "email_label": "E-Mail-Adresse für Rechnung *",
+      "email_placeholder": "rechnung@organisation.de",
+      "organization_label": "Name und Adresse der Organisation *",
+      "organization_placeholder": "Zum Beispiel: UMCG, Hanzeplein 1, 9700 RB Groningen",
+      "contact_label": "Name der Kontaktperson *",
+      "contact_placeholder": "Vor- und Nachname",
+      "cost_center_label": "Kostenstelle und/oder Einkaufsnummer *",
+      "cost_center_placeholder": "Zum Beispiel: KS-2024-001 oder EIN-HR-2024",
+      "comments_label": "Andere Bemerkungen oder relevante Informationen",
+      "comments_placeholder": "Zusätzliche Informationen...",
+      "submit_button": "Anfrage einreichen",
+      "submitting": "Wird gesendet...",
+      "success_message": "Vielen Dank für Ihre Anfrage! Sie erhalten bald eine E-Mail von team@vinster.ai mit weiteren Informationen.",
+      "validation": {
+        "email_required": "E-Mail-Adresse ist erforderlich",
+        "email_invalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+        "organization_required": "Organisationsangaben sind erforderlich",
+        "contact_required": "Name der Kontaktperson ist erforderlich",
+        "cost_center_required": "Kostenstelle und/oder Einkaufsnummer ist erforderlich"
+      }
+    },
     "toasts": {
       "fill_all_fields": "Alle Felder ausfüllen",
       "fill_all_fields_desc": "E-Mail-Adresse und Anzahl der Zugangscodes sind erforderlich.",
