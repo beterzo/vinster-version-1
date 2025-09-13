@@ -63,7 +63,9 @@
         "quantity_invalid": "Please enter a valid number (minimum 1)",
         "organization_required": "Organization details are required",
         "contact_required": "Contact person name is required",
-        "cost_center_required": "Cost center and/or purchase number is required"
+        "cost_center_required": "Cost center and/or purchase number is required",
+        "delivery_email_required": "Email address for receiving access codes is required",
+        "delivery_email_invalid": "Please enter a valid email address"
       }
     },
     "toasts": {

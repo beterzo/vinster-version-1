@@ -12,6 +12,7 @@ interface OrganizationFormData {
   organization: string;
   contactPerson: string;
   costCenter: string;
+  deliveryEmail: string;
   comments: string;
 }
 
@@ -26,6 +27,7 @@ const OrganizationForm = () => {
     organization: "",
     contactPerson: "",
     costCenter: "",
+    deliveryEmail: "",
     comments: ""
   });
   
@@ -61,6 +63,12 @@ const OrganizationForm = () => {
 
     if (!formData.costCenter) {
       newErrors.costCenter = t('professionals.organization_form.validation.cost_center_required');
+    }
+
+    if (!formData.deliveryEmail) {
+      newErrors.deliveryEmail = t('professionals.organization_form.validation.delivery_email_required');
+    } else if (!validateEmail(formData.deliveryEmail)) {
+      newErrors.deliveryEmail = t('professionals.organization_form.validation.delivery_email_invalid');
     }
 
     setErrors(newErrors);
@@ -104,6 +112,7 @@ const OrganizationForm = () => {
           organisatie: formData.organization,
           contactpersoon: formData.contactPerson,
           kostenplaats: formData.costCenter,
+          leveringsemail: formData.deliveryEmail,
           opmerkingen: formData.comments,
           timestamp: new Date().toISOString()
         })
@@ -117,6 +126,7 @@ const OrganizationForm = () => {
           organization: "",
           contactPerson: "",
           costCenter: "",
+          deliveryEmail: "",
           comments: ""
         });
         setErrors({});
@@ -260,6 +270,24 @@ const OrganizationForm = () => {
             />
             {errors.costCenter && (
               <p className="text-red-500 text-sm">{errors.costCenter}</p>
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="deliveryEmail" className="text-sm font-medium" style={{ color: '#232D4B' }}>
+              {t('professionals.organization_form.delivery_email_label')}
+            </Label>
+            <Input
+              id="deliveryEmail"
+              name="deliveryEmail"
+              type="email"
+              placeholder={t('professionals.organization_form.delivery_email_placeholder')}
+              value={formData.deliveryEmail}
+              onChange={handleInputChange}
+              className={`h-12 px-4 border-gray-300 focus:border-blue-600 focus:ring-blue-600 ${errors.deliveryEmail ? 'border-red-500' : ''}`}
+            />
+            {errors.deliveryEmail && (
+              <p className="text-red-500 text-sm">{errors.deliveryEmail}</p>
             )}
           </div>
 

@@ -63,7 +63,9 @@
         "quantity_invalid": "Voer een geldig aantal in (minimaal 1)",
         "organization_required": "Organisatiegegevens zijn verplicht",
         "contact_required": "Naam contactpersoon is verplicht",
-        "cost_center_required": "Kostenplaats en/of inkoopnummer is verplicht"
+        "cost_center_required": "Kostenplaats en/of inkoopnummer is verplicht",
+        "delivery_email_required": "E-mailadres voor ontvangst toegangscodes is verplicht",
+        "delivery_email_invalid": "Voer een geldig e-mailadres in"
       }
     },
     "toasts": {

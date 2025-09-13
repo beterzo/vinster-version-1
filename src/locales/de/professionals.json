@@ -51,6 +51,8 @@
       "contact_placeholder": "Vor- und Nachname",
       "cost_center_label": "Kostenstelle und/oder Einkaufsnummer *",
       "cost_center_placeholder": "Zum Beispiel: KS-2024-001 oder EIN-HR-2024",
+      "delivery_email_label": "An welche E-Mail-Adresse möchten Sie die Zugangscodes erhalten? *",
+      "delivery_email_placeholder": "codes@organisation.de",
       "comments_label": "Andere Bemerkungen oder relevante Informationen",
       "comments_placeholder": "Zusätzliche Informationen...",
       "submit_button": "Anfrage einreichen",
@@ -63,7 +65,9 @@
         "quantity_invalid": "Bitte geben Sie eine gültige Anzahl ein (mindestens 1)",
         "organization_required": "Organisationsangaben sind erforderlich",
         "contact_required": "Name der Kontaktperson ist erforderlich",
-        "cost_center_required": "Kostenstelle und/oder Einkaufsnummer ist erforderlich"
+        "cost_center_required": "Kostenstelle und/oder Einkaufsnummer ist erforderlich",
+        "delivery_email_required": "E-Mail-Adresse für den Empfang der Zugangscodes ist erforderlich",
+        "delivery_email_invalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein"
       }
     },
     "toasts": {
