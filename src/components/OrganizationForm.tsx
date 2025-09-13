@@ -125,8 +125,8 @@ const OrganizationForm = () => {
   };
 
   if (showSuccess) {
-    return (
-      <div className="max-w-2xl mx-auto mb-12">
+  return (
+    <div className="w-full">
         <div className="bg-white rounded-lg shadow-lg p-8 text-center" style={{ borderRadius: '8px' }}>
           <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -149,7 +149,7 @@ const OrganizationForm = () => {
   }
 
   return (
-    <div className="max-w-2xl mx-auto mb-12">
+    <div className="w-full">
       <div className="bg-white rounded-lg shadow-lg p-8" style={{ borderRadius: '8px' }}>
         <h2 className="text-2xl font-semibold mb-2" style={{ color: '#232D4B' }}>
           {t('professionals.organization_form.title')}
@@ -251,8 +251,7 @@ const OrganizationForm = () => {
 
           <Button
             type="submit"
-            className="w-full h-12 text-white font-semibold transition-all duration-200 hover:shadow-lg"
-            style={{ backgroundColor: '#027BFF' }}
+            className="w-full h-12 bg-blue-900 hover:bg-blue-800 text-white font-semibold"
             disabled={isLoading}
           >
             {isLoading ? t('professionals.organization_form.submitting') : t('professionals.organization_form.submit_button')}

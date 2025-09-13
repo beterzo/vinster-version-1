@@ -132,11 +132,6 @@ const ToegangscodesProfessionals = () => {
         </div>
       </div>
 
-      {/* Organization Form Section */}
-      <div className="max-w-6xl mx-auto px-6 py-8">
-        <OrganizationForm />
-      </div>
-
       {/* Main Content */}
       <div className="max-w-4xl mx-auto px-6 py-12">
         <div className="grid md:grid-cols-2 gap-8">
@@ -305,9 +300,14 @@ const ToegangscodesProfessionals = () => {
                     team@vinster.ai
                   </a>
                 </p>
-              </div>
-            </div>
           </div>
+        </div>
+
+        {/* Organization Form Section */}
+        <div className="mt-12">
+          <OrganizationForm />
+        </div>
+      </div>
         </div>
       </div>
 
