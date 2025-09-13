@@ -51,6 +51,8 @@
       "contact_placeholder": "Voor- en achternaam",
       "cost_center_label": "Kostenplaats en/of inkoopnummer *",
       "cost_center_placeholder": "Bijvoorbeeld: KP-2024-001 of INK-HR-2024",
+      "delivery_email_label": "Op welk e-mailadres wil je de toegangscodes ontvangen? *",
+      "delivery_email_placeholder": "codes@organisatie.nl",
       "comments_label": "Andere opmerkingen of relevante gegevens",
       "comments_placeholder": "Eventuele aanvullende informatie...",
       "submit_button": "Aanvraag indienen",

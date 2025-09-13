@@ -51,6 +51,8 @@
       "contact_placeholder": "First and last name",
       "cost_center_label": "Cost center and/or purchase number *",
       "cost_center_placeholder": "For example: CC-2024-001 or PUR-HR-2024",
+      "delivery_email_label": "To which email address do you want to receive the access codes? *",
+      "delivery_email_placeholder": "codes@organization.com",
       "comments_label": "Other comments or relevant information",
       "comments_placeholder": "Any additional information...",
       "submit_button": "Submit request",
