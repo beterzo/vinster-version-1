@@ -68,10 +68,9 @@ const ToegangscodesProfessionals = () => {
 
         // Check if webhook returned a checkout URL
         if (responseData && responseData.checkout_url) {
-          // Open payment page in new tab
-          window.open(responseData.checkout_url, '_blank');
+          // Redirect to payment page (Safari compatible)
+          window.location.href = responseData.checkout_url;
         } else {
-          console.log('No checkout_url in webhook response:', responseData);
           toast({
             title: t('professionals.toasts.contact_note'),
             description: t('professionals.toasts.contact_note_desc')
