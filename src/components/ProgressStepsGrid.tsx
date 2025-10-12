@@ -1,6 +1,7 @@
 
 import ProgressStep from "./ProgressStep";
 import { useZoekprofielResponses } from "@/hooks/useZoekprofielResponses";
+import { useStepAccess } from "@/hooks/useStepAccess";
 import { useTranslation } from "@/hooks/useTranslation";
 
 interface ProgressStepsGridProps {
@@ -30,6 +31,7 @@ const ProgressStepsGrid = ({
 }: ProgressStepsGridProps) => {
   const { progress: zoekprofielProgress, isCompleted: zoekprofielCompleted } = useZoekprofielResponses();
   const { t } = useTranslation();
+  const stepAccess = useStepAccess();
 
   // Calculate page-based progress for "Profiel voltooien"
   const combinedProgress = () => {
@@ -98,11 +100,18 @@ const ProgressStepsGrid = ({
     onStepClick(stepId);
   };
 
+  const getStepLockStatus = (stepId: string) => {
+    const canAccess = stepAccess.canAccessStep(stepId);
+    const blockedReason = canAccess ? undefined : stepAccess.getBlockedReason(stepId);
+    return { isLocked: !canAccess, lockedReason: blockedReason };
+  };
+
   return (
     <div className="space-y-1">
       {progressSteps.map((step, index) => {
         const { progress, isCompleted } = stepProgress[index];
         const isCurrent = !isCompleted && (index === 0 || stepProgress[index - 1]?.isCompleted);
+        const lockStatus = getStepLockStatus(step.id);
         
         return (
           <div key={index}>
@@ -111,6 +120,8 @@ const ProgressStepsGrid = ({
               isCompleted={isCompleted}
               isCurrent={isCurrent}
               progress={progress}
+              isLocked={lockStatus.isLocked}
+              lockedReason={lockStatus.lockedReason}
               onClick={() => handleStepClick(step.id)}
             />
           </div>

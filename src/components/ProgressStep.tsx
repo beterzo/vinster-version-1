@@ -1,7 +1,13 @@
 
 import React from 'react';
-import { Heart, Briefcase, User, FileText, Search } from 'lucide-react';
+import { Heart, Briefcase, User, FileText, Search, Lock } from 'lucide-react';
 import { Progress } from "@/components/ui/progress";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface ProgressStepProps {
   step: {
@@ -14,6 +20,8 @@ interface ProgressStepProps {
   isCompleted: boolean;
   isCurrent: boolean;
   progress?: number;
+  isLocked?: boolean;
+  lockedReason?: string;
   onClick: () => void;
 }
 
@@ -38,16 +46,32 @@ const getStepIcon = (iconName: string, isCompleted: boolean) => {
   }
 };
 
-const ProgressStep = ({ step, isCompleted, isCurrent, progress = 0, onClick }: ProgressStepProps) => {
-  return (
+const ProgressStep = ({ 
+  step, 
+  isCompleted, 
+  isCurrent, 
+  progress = 0, 
+  isLocked = false,
+  lockedReason,
+  onClick 
+}: ProgressStepProps) => {
+  const stepContent = (
     <div 
-      className="p-4 cursor-pointer bg-white hover:bg-gray-50 transition-all duration-200 rounded-xl border border-gray-200 shadow-sm hover:shadow-md mb-3"
-      onClick={onClick}
+      className={`p-4 transition-all duration-200 rounded-xl border border-gray-200 shadow-sm mb-3 ${
+        isLocked 
+          ? 'bg-gray-100 opacity-60 cursor-not-allowed' 
+          : 'bg-white hover:bg-gray-50 cursor-pointer hover:shadow-md'
+      }`}
+      onClick={isLocked ? undefined : onClick}
     >
       <div className="flex items-center gap-4">
         {/* Icon */}
-        <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-gray-100">
-          {step.icon ? (
+        <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+          isLocked ? 'bg-gray-200' : 'bg-gray-100'
+        }`}>
+          {isLocked ? (
+            <Lock className="w-4 h-4 text-gray-400" />
+          ) : step.icon ? (
             getStepIcon(step.icon, isCompleted)
           ) : (
             <span className="text-sm font-medium text-gray-500">
@@ -58,7 +82,9 @@ const ProgressStep = ({ step, isCompleted, isCurrent, progress = 0, onClick }: P
         
         {/* Content */}
         <div className="flex-1 min-w-0">
-          <h3 className="text-sm font-semibold text-gray-900 truncate mb-2">
+          <h3 className={`text-sm font-semibold truncate mb-2 ${
+            isLocked ? 'text-gray-400' : 'text-gray-900'
+          }`}>
             {step.title}
           </h3>
           
@@ -73,6 +99,23 @@ const ProgressStep = ({ step, isCompleted, isCurrent, progress = 0, onClick }: P
       </div>
     </div>
   );
+
+  if (isLocked && lockedReason) {
+    return (
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            {stepContent}
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>{lockedReason}</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    );
+  }
+
+  return stepContent;
 };
 
 export default ProgressStep;

@@ -55,6 +55,13 @@
     "logout_success": "Erfolgreich abgemeldet",
     "logout_success_desc": "Auf Wiedersehen!",
     "logout_error": "Fehler beim Abmelden",
+    "step_blocked": {
+      "title": "Schritt gesperrt",
+      "enthousiasme_required": "Sie müssen zuerst den Begeisterungsscan abschließen, bevor Sie fortfahren können",
+      "wensberoepen_required": "Sie müssen zuerst den Wunschberufsscan abschließen, bevor Sie fortfahren können",
+      "persoonsprofiel_required": "Sie müssen zuerst Ihr persönliches Profil vervollständigen, bevor Sie fortfahren können",
+      "rapport_required": "Sie müssen zuerst Ihren Karrierebericht erstellen lassen, bevor Sie fortfahren können"
+    },
     "restart_journey": {
       "title": "Möchten Sie die Reise noch einmal machen?",
       "subtitle": "Neu starten mit frischen Erkenntnissen",

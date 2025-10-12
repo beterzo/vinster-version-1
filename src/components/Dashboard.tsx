@@ -5,18 +5,22 @@ import { useAuth } from "@/hooks/useAuth";
 import { useDashboard } from "@/hooks/useDashboard";
 import { useRapportData } from "@/hooks/useRapportData";
 import { useExistingZoekprofiel } from "@/hooks/useExistingZoekprofiel";
+import { useStepAccess } from "@/hooks/useStepAccess";
 import DashboardHeader from "./DashboardHeader";
 import ProgressStepsGrid from "./ProgressStepsGrid";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useToast } from "@/hooks/use-toast";
 
 const Dashboard = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { toast } = useToast();
   const { data: reportData, loading: reportLoading } = useRapportData();
   const { hasExistingZoekprofiel } = useExistingZoekprofiel();
+  const stepAccess = useStepAccess();
   const {
     progress,
     canStartEnthousiasme,
@@ -50,6 +54,16 @@ const Dashboard = () => {
 
   const handleStepClick = (stepId: string) => {
     console.log("Step clicked:", stepId);
+    
+    // Check if user has access to this step
+    if (!stepAccess.canAccessStep(stepId)) {
+      toast({
+        title: t('dashboard.step_blocked.title'),
+        description: stepAccess.getBlockedReason(stepId),
+        variant: "destructive"
+      });
+      return;
+    }
     
     switch (stepId) {
       case "enthousiasme":

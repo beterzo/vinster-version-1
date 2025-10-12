@@ -55,6 +55,13 @@
     "logout_success": "Vellykket utlogging",
     "logout_success_desc": "Ha det!",
     "logout_error": "Feil ved utlogging",
+    "step_blocked": {
+      "title": "Trinn låst",
+      "enthousiasme_required": "Du må først fullføre entusiasme-skanningen før du kan fortsette",
+      "wensberoepen_required": "Du må først fullføre ønsket yrker-skanningen før du kan fortsette",
+      "persoonsprofiel_required": "Du må først fullføre din personlige profil før du kan fortsette",
+      "rapport_required": "Du må først generere karriererapporten din før du kan fortsette"
+    },
     "restart_journey": {
       "title": "Vil du gjøre reisen igjen?",
       "subtitle": "Start på nytt med nye innsikter",

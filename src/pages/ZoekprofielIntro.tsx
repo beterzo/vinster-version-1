@@ -4,10 +4,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { useExistingZoekprofiel } from "@/hooks/useExistingZoekprofiel";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useStepAccess } from "@/hooks/useStepAccess";
+import ConditionalRoute from "@/components/ConditionalRoute";
 
 const ZoekprofielIntro = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const stepAccess = useStepAccess();
   const { hasExistingZoekprofiel, loading } = useExistingZoekprofiel();
 
   if (loading) {
@@ -15,6 +18,10 @@ const ZoekprofielIntro = () => {
   }
 
   return (
+    <ConditionalRoute 
+      canAccess={stepAccess.zoekprofiel.canAccess}
+      blockedReason={stepAccess.zoekprofiel.blockedReason}
+    >
     <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header */}
       <div className="bg-white shadow-sm">
@@ -98,6 +105,7 @@ const ZoekprofielIntro = () => {
         </Card>
       </div>
     </div>
+    </ConditionalRoute>
   );
 };
 

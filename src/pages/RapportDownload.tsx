@@ -7,12 +7,15 @@ import { useRapportData } from "@/hooks/useRapportData";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useStepAccess } from "@/hooks/useStepAccess";
+import ConditionalRoute from "@/components/ConditionalRoute";
 const RapportDownload = () => {
   const navigate = useNavigate();
   const {
     toast
   } = useToast();
   const { t } = useTranslation();
+  const stepAccess = useStepAccess();
   const {
     data: reportData,
     loading,
@@ -170,7 +173,12 @@ const RapportDownload = () => {
       </div>;
   }
   const status = getStatusMessage();
-  return <div className="min-h-screen bg-gray-50 font-sans">
+  return (
+    <ConditionalRoute 
+      canAccess={stepAccess.rapport.canAccess}
+      blockedReason={stepAccess.rapport.blockedReason}
+    >
+    <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
@@ -275,6 +283,8 @@ const RapportDownload = () => {
           </CardContent>
         </Card>
       </div>
-    </div>;
+    </div>
+    </ConditionalRoute>
+  );
 };
 export default RapportDownload;

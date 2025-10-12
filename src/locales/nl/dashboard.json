@@ -56,6 +56,13 @@
     "logout_success": "Succesvol uitgelogd",
     "logout_success_desc": "Tot ziens!",
     "logout_error": "Fout bij uitloggen",
+    "step_blocked": {
+      "title": "Stap vergrendeld",
+      "enthousiasme_required": "Je moet eerst de enthousiasmescan voltooien voordat je verder kunt gaan",
+      "wensberoepen_required": "Je moet eerst de wensberoepen scan voltooien voordat je verder kunt gaan",
+      "persoonsprofiel_required": "Je moet eerst je persoonsprofiel voltooien voordat je verder kunt gaan",
+      "rapport_required": "Je moet eerst je loopbaanrapport laten genereren voordat je verder kunt gaan"
+    },
     "restart_journey": {
       "title": "Wil je het traject nog een keer doen?",
       "subtitle": "Start opnieuw met verse inzichten",

@@ -3,12 +3,19 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useStepAccess } from "@/hooks/useStepAccess";
+import ConditionalRoute from "@/components/ConditionalRoute";
 
 const ProfielVoltooienIntro = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const stepAccess = useStepAccess();
 
   return (
+    <ConditionalRoute 
+      canAccess={stepAccess.persoonsprofiel.canAccess}
+      blockedReason={stepAccess.persoonsprofiel.blockedReason}
+    >
     <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header */}
       <div className="bg-white shadow-sm">
@@ -61,6 +68,7 @@ const ProfielVoltooienIntro = () => {
         </Card>
       </div>
     </div>
+    </ConditionalRoute>
   );
 };
 

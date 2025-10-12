@@ -3,12 +3,19 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useStepAccess } from "@/hooks/useStepAccess";
+import ConditionalRoute from "@/components/ConditionalRoute";
 
 const WensberoepenIntro = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const stepAccess = useStepAccess();
 
   return (
+    <ConditionalRoute 
+      canAccess={stepAccess.wensberoepen.canAccess}
+      blockedReason={stepAccess.wensberoepen.blockedReason}
+    >
     <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header */}
       <div className="bg-white shadow-sm">
@@ -64,6 +71,7 @@ const WensberoepenIntro = () => {
         </Card>
       </div>
     </div>
+    </ConditionalRoute>
   );
 };
 
