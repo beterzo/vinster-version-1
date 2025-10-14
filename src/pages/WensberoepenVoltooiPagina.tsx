@@ -14,7 +14,7 @@ const WensberoepenVoltooiPagina = () => {
   };
 
   const handleNaarDashboard = () => {
-    navigate("/");
+    navigate("/home");
   };
 
   return (
@@ -25,7 +25,7 @@ const WensberoepenVoltooiPagina = () => {
           <div className="flex items-center">
             <img 
               alt="Vinster Logo" 
-              onClick={() => navigate('/')} 
+              onClick={() => navigate('/home')} 
               src="/lovable-uploads/5d3316ef-25de-476e-a36d-e2739fec8439.png" 
               className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
             />
