@@ -20,6 +20,7 @@ const ZoekprofielIntro = () => {
   return (
     <ConditionalRoute 
       canAccess={stepAccess.zoekprofiel.canAccess}
+      isLoading={stepAccess.isLoading}
       blockedReason={stepAccess.zoekprofiel.blockedReason}
     >
     <div className="min-h-screen bg-gray-50 font-sans">

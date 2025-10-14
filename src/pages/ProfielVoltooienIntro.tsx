@@ -14,6 +14,7 @@ const ProfielVoltooienIntro = () => {
   return (
     <ConditionalRoute 
       canAccess={stepAccess.persoonsprofiel.canAccess}
+      isLoading={stepAccess.isLoading}
       blockedReason={stepAccess.persoonsprofiel.blockedReason}
     >
     <div className="min-h-screen bg-gray-50 font-sans">

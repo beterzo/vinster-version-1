@@ -8,16 +8,27 @@ import { useTranslation } from './useTranslation';
 
 export const useStepAccess = () => {
   const { t } = useTranslation();
-  const { responses: enthousiasmeResponses } = useEnthousiasmeResponses();
-  const { isWensberoepenComplete } = useWensberoepenValidation();
-  const { isCompleted: prioriteitenCompleted } = usePrioriteitenResponses();
-  const { isCompleted: extraInformatieCompleted } = useExtraInformatieResponses();
-  const { data: reportData } = useRapportData();
+  const { responses: enthousiasmeResponses, loading: enthousiasmeLoading } = useEnthousiasmeResponses();
+  const { isWensberoepenComplete, isLoading: wensberoepenLoading } = useWensberoepenValidation();
+  const { isCompleted: prioriteitenCompleted, loading: prioriteitenLoading } = usePrioriteitenResponses();
+  const { isCompleted: extraInformatieCompleted, loading: extraInformatieLoading } = useExtraInformatieResponses();
+  const { data: reportData, loading: reportLoading } = useRapportData();
 
   const stepAccess = useMemo(() => {
     // Check if enthousiasme is completed (at least one field filled in any of the 3 pages)
-    const enthousiasmeCompleted = enthousiasmeResponses && 
-      Object.values(enthousiasmeResponses).some(value => value && String(value).trim() !== '');
+    const enthousiasmeCompleted = !enthousiasmeLoading && 
+      enthousiasmeResponses && 
+      Object.values(enthousiasmeResponses).some(value => 
+        value && String(value).trim() !== '' && String(value).trim().length > 0
+      );
+
+    console.log('🔐 Step Access Check:', {
+      enthousiasmeCompleted,
+      enthousiasmeLoading,
+      enthousiasmeResponsesCount: Object.keys(enthousiasmeResponses || {}).length,
+      isWensberoepenComplete,
+      wensberoepenLoading
+    });
 
     // Check if persoonsprofiel is completed (both extra info and prioriteiten)
     const persoonsprofielCompleted = prioriteitenCompleted && extraInformatieCompleted;
@@ -51,7 +62,9 @@ export const useStepAccess = () => {
         blockedReason: t('dashboard.step_blocked.rapport_required')
       }
     };
-  }, [enthousiasmeResponses, isWensberoepenComplete, prioriteitenCompleted, extraInformatieCompleted, reportData, t]);
+  }, [enthousiasmeResponses, enthousiasmeLoading, isWensberoepenComplete, wensberoepenLoading, prioriteitenCompleted, extraInformatieCompleted, reportData, t]);
+
+  const isLoading = enthousiasmeLoading || wensberoepenLoading || prioriteitenLoading || extraInformatieLoading || reportLoading;
 
   const canAccessStep = (stepId: string): boolean => {
     const step = stepAccess[stepId as keyof typeof stepAccess];
@@ -68,6 +81,7 @@ export const useStepAccess = () => {
 
   return {
     ...stepAccess,
+    isLoading,
     canAccessStep,
     getBlockedReason
   };

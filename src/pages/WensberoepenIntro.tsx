@@ -14,6 +14,7 @@ const WensberoepenIntro = () => {
   return (
     <ConditionalRoute 
       canAccess={stepAccess.wensberoepen.canAccess}
+      isLoading={stepAccess.isLoading}
       blockedReason={stepAccess.wensberoepen.blockedReason}
     >
     <div className="min-h-screen bg-gray-50 font-sans">

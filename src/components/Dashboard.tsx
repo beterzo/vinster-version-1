@@ -55,6 +55,16 @@ const Dashboard = () => {
   const handleStepClick = (stepId: string) => {
     console.log("Step clicked:", stepId);
     
+    // Check if still loading
+    if (stepAccess.isLoading) {
+      toast({
+        title: t('common.loading'),
+        description: 'Even geduld, gegevens worden geladen...',
+        variant: 'default'
+      });
+      return;
+    }
+    
     // Check if user has access to this step
     if (!stepAccess.canAccessStep(stepId)) {
       toast({
