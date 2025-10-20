@@ -10,6 +10,8 @@
       "quantity_label": "Antall tilgangskoder *",
       "quantity_placeholder": "Velg antall",
       "quantity_options": {
+        "1": "1 tilgangskode",
+        "2": "2 tilgangskoder",
         "5": "5 tilgangskoder",
         "10": "10 tilgangskoder",
         "25": "25 tilgangskoder",

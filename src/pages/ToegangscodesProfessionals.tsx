@@ -169,6 +169,8 @@ const ToegangscodesProfessionals = () => {
                     <SelectValue placeholder={t('professionals.order_section.quantity_placeholder')} />
                   </SelectTrigger>
                   <SelectContent>
+                    <SelectItem value="1">{t('professionals.order_section.quantity_options.1')}</SelectItem>
+                    <SelectItem value="2">{t('professionals.order_section.quantity_options.2')}</SelectItem>
                     <SelectItem value="5">{t('professionals.order_section.quantity_options.5')}</SelectItem>
                     <SelectItem value="10">{t('professionals.order_section.quantity_options.10')}</SelectItem>
                     <SelectItem value="25">{t('professionals.order_section.quantity_options.25')}</SelectItem>

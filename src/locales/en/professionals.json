@@ -11,6 +11,8 @@
       "quantity_label": "Number of access codes *",
       "quantity_placeholder": "Select quantity",
       "quantity_options": {
+        "1": "1 access code",
+        "2": "2 access codes",
         "5": "5 access codes",
         "10": "10 access codes",
         "25": "25 access codes",

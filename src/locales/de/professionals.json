@@ -11,6 +11,8 @@
       "quantity_label": "Anzahl Zugangscodes *",
       "quantity_placeholder": "Anzahl auswählen",
       "quantity_options": {
+        "1": "1 Zugangscode",
+        "2": "2 Zugangscodes",
         "5": "5 Zugangscodes",
         "10": "10 Zugangscodes",
         "25": "25 Zugangscodes",

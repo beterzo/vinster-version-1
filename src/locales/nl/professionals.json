@@ -11,6 +11,8 @@
       "quantity_label": "Aantal toegangscodes *",
       "quantity_placeholder": "Selecteer aantal",
       "quantity_options": {
+        "1": "1 toegangscode",
+        "2": "2 toegangscodes",
         "5": "5 toegangscodes",
         "10": "10 toegangscodes",
         "25": "25 toegangscodes",
