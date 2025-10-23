@@ -107,14 +107,14 @@ const OrganizationForm = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          email: formData.email,
-          quantity: parseInt(formData.quantity),
-          organisatie: formData.organization,
-          contactpersoon: formData.contactPerson,
-          kostenplaats: formData.costCenter,
-          leveringsemail: formData.deliveryEmail,
-          opmerkingen: formData.comments,
-          timestamp: new Date().toISOString()
+          "Contactgegevens - Factuur e-mailadres": formData.email,
+          "Bestelling - Aantal toegangscodes": parseInt(formData.quantity),
+          "Organisatiegegevens - Naam organisatie": formData.organization,
+          "Organisatiegegevens - Contactpersoon": formData.contactPerson,
+          "Facturatie - Kostenplaats": formData.costCenter,
+          "Levering - E-mailadres voor toegangscodes": formData.deliveryEmail,
+          "Extra informatie - Opmerkingen": formData.comments || "Geen opmerkingen",
+          "Metadata - Tijdstip aanvraag": new Date().toISOString()
         })
       });
 
