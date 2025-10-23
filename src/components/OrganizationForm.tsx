@@ -7,12 +7,12 @@ import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "@/hooks/useTranslation";
 
 interface OrganizationFormData {
+  name: string;
   email: string;
-  quantity: string;
   organization: string;
-  contactPerson: string;
+  quantity: string;
+  address: string;
   costCenter: string;
-  deliveryEmail: string;
   comments: string;
 }
 
@@ -22,12 +22,12 @@ const OrganizationForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [formData, setFormData] = useState<OrganizationFormData>({
+    name: "",
     email: "",
-    quantity: "",
     organization: "",
-    contactPerson: "",
+    quantity: "",
+    address: "",
     costCenter: "",
-    deliveryEmail: "",
     comments: ""
   });
   
@@ -41,10 +41,18 @@ const OrganizationForm = () => {
   const validateForm = () => {
     const newErrors: Partial<OrganizationFormData> = {};
 
+    if (!formData.name) {
+      newErrors.name = t('professionals.organization_form.validation.name_required');
+    }
+
     if (!formData.email) {
       newErrors.email = t('professionals.organization_form.validation.email_required');
     } else if (!validateEmail(formData.email)) {
       newErrors.email = t('professionals.organization_form.validation.email_invalid');
+    }
+
+    if (!formData.organization) {
+      newErrors.organization = t('professionals.organization_form.validation.organization_required');
     }
 
     if (!formData.quantity) {
@@ -53,22 +61,12 @@ const OrganizationForm = () => {
       newErrors.quantity = t('professionals.organization_form.validation.quantity_invalid');
     }
 
-    if (!formData.organization) {
-      newErrors.organization = t('professionals.organization_form.validation.organization_required');
-    }
-
-    if (!formData.contactPerson) {
-      newErrors.contactPerson = t('professionals.organization_form.validation.contact_required');
+    if (!formData.address) {
+      newErrors.address = t('professionals.organization_form.validation.address_required');
     }
 
     if (!formData.costCenter) {
       newErrors.costCenter = t('professionals.organization_form.validation.cost_center_required');
-    }
-
-    if (!formData.deliveryEmail) {
-      newErrors.deliveryEmail = t('professionals.organization_form.validation.delivery_email_required');
-    } else if (!validateEmail(formData.deliveryEmail)) {
-      newErrors.deliveryEmail = t('professionals.organization_form.validation.delivery_email_invalid');
     }
 
     setErrors(newErrors);
@@ -107,12 +105,12 @@ const OrganizationForm = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          "Contactgegevens - Factuur e-mailadres": formData.email,
+          "Aanvrager - Naam": formData.name,
+          "Aanvrager - E-mailadres": formData.email,
+          "Organisatie - Naam": formData.organization,
           "Bestelling - Aantal toegangscodes": parseInt(formData.quantity),
-          "Organisatiegegevens - Naam organisatie": formData.organization,
-          "Organisatiegegevens - Contactpersoon": formData.contactPerson,
-          "Facturatie - Kostenplaats": formData.costCenter,
-          "Levering - E-mailadres voor toegangscodes": formData.deliveryEmail,
+          "Organisatie - Adres": formData.address,
+          "Facturatie - Kostenplaats of inkoopnummer": formData.costCenter,
           "Extra informatie - Opmerkingen": formData.comments || "Geen opmerkingen",
           "Metadata - Tijdstip aanvraag": new Date().toISOString()
         })
@@ -120,15 +118,15 @@ const OrganizationForm = () => {
 
       if (response.ok) {
         setShowSuccess(true);
-        setFormData({
-          email: "",
-          quantity: "",
-          organization: "",
-          contactPerson: "",
-          costCenter: "",
-          deliveryEmail: "",
-          comments: ""
-        });
+      setFormData({
+        name: "",
+        email: "",
+        organization: "",
+        quantity: "",
+        address: "",
+        costCenter: "",
+        comments: ""
+      });
         setErrors({});
       } else {
         throw new Error('Failed to send request');
@@ -184,6 +182,24 @@ const OrganizationForm = () => {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
+            <Label htmlFor="name" className="text-sm font-medium" style={{ color: '#232D4B' }}>
+              {t('professionals.organization_form.name_label')}
+            </Label>
+            <Input
+              id="name"
+              name="name"
+              type="text"
+              placeholder={t('professionals.organization_form.name_placeholder')}
+              value={formData.name}
+              onChange={handleInputChange}
+              className={`h-12 px-4 border-gray-300 focus:border-blue-600 focus:ring-blue-600 ${errors.name ? 'border-red-500' : ''}`}
+            />
+            {errors.name && (
+              <p className="text-red-500 text-sm">{errors.name}</p>
+            )}
+          </div>
+
+          <div className="space-y-2">
             <Label htmlFor="email" className="text-sm font-medium" style={{ color: '#232D4B' }}>
               {t('professionals.organization_form.email_label')}
             </Label>
@@ -198,6 +214,24 @@ const OrganizationForm = () => {
             />
             {errors.email && (
               <p className="text-red-500 text-sm">{errors.email}</p>
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="organization" className="text-sm font-medium" style={{ color: '#232D4B' }}>
+              {t('professionals.organization_form.organization_label')}
+            </Label>
+            <Input
+              id="organization"
+              name="organization"
+              type="text"
+              placeholder={t('professionals.organization_form.organization_placeholder')}
+              value={formData.organization}
+              onChange={handleInputChange}
+              className={`h-12 px-4 border-gray-300 focus:border-blue-600 focus:ring-blue-600 ${errors.organization ? 'border-red-500' : ''}`}
+            />
+            {errors.organization && (
+              <p className="text-red-500 text-sm">{errors.organization}</p>
             )}
           </div>
 
@@ -221,37 +255,19 @@ const OrganizationForm = () => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="organization" className="text-sm font-medium" style={{ color: '#232D4B' }}>
-              {t('professionals.organization_form.organization_label')}
+            <Label htmlFor="address" className="text-sm font-medium" style={{ color: '#232D4B' }}>
+              {t('professionals.organization_form.address_label')}
             </Label>
             <Textarea
-              id="organization"
-              name="organization"
-              placeholder={t('professionals.organization_form.organization_placeholder')}
-              value={formData.organization}
+              id="address"
+              name="address"
+              placeholder={t('professionals.organization_form.address_placeholder')}
+              value={formData.address}
               onChange={handleInputChange}
-              className={`min-h-[100px] px-4 py-3 border-gray-300 focus:border-blue-600 focus:ring-blue-600 ${errors.organization ? 'border-red-500' : ''}`}
+              className={`min-h-[100px] px-4 py-3 border-gray-300 focus:border-blue-600 focus:ring-blue-600 ${errors.address ? 'border-red-500' : ''}`}
             />
-            {errors.organization && (
-              <p className="text-red-500 text-sm">{errors.organization}</p>
-            )}
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="contactPerson" className="text-sm font-medium" style={{ color: '#232D4B' }}>
-              {t('professionals.organization_form.contact_label')}
-            </Label>
-            <Input
-              id="contactPerson"
-              name="contactPerson"
-              type="text"
-              placeholder={t('professionals.organization_form.contact_placeholder')}
-              value={formData.contactPerson}
-              onChange={handleInputChange}
-              className={`h-12 px-4 border-gray-300 focus:border-blue-600 focus:ring-blue-600 ${errors.contactPerson ? 'border-red-500' : ''}`}
-            />
-            {errors.contactPerson && (
-              <p className="text-red-500 text-sm">{errors.contactPerson}</p>
+            {errors.address && (
+              <p className="text-red-500 text-sm">{errors.address}</p>
             )}
           </div>
 
@@ -270,24 +286,6 @@ const OrganizationForm = () => {
             />
             {errors.costCenter && (
               <p className="text-red-500 text-sm">{errors.costCenter}</p>
-            )}
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="deliveryEmail" className="text-sm font-medium" style={{ color: '#232D4B' }}>
-              {t('professionals.organization_form.delivery_email_label')}
-            </Label>
-            <Input
-              id="deliveryEmail"
-              name="deliveryEmail"
-              type="email"
-              placeholder={t('professionals.organization_form.delivery_email_placeholder')}
-              value={formData.deliveryEmail}
-              onChange={handleInputChange}
-              className={`h-12 px-4 border-gray-300 focus:border-blue-600 focus:ring-blue-600 ${errors.deliveryEmail ? 'border-red-500' : ''}`}
-            />
-            {errors.deliveryEmail && (
-              <p className="text-red-500 text-sm">{errors.deliveryEmail}</p>
             )}
           </div>
 
