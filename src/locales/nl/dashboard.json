@@ -27,7 +27,8 @@
       "feature4": "Zoekprofiel generator",
       "start_button": "Start nu voor €29",
       "processing": "Verwerken...",
-      "payment_methods": "Veilig betalen met iDEAL, creditcard of PayPal"
+      "payment_methods": "Veilig betalen met iDEAL, creditcard of PayPal",
+      "access_code_button": "Ik heb een toegangscode"
     },
     "data_safety": {
       "title": "100% Veilig & GDPR-compliant",

@@ -27,7 +27,8 @@
       "feature4": "Search profile generator",
       "start_button": "Start now for €29",
       "processing": "Processing...",
-      "payment_methods": "Pay securely with iDEAL, credit card or PayPal"
+      "payment_methods": "Pay securely with iDEAL, credit card or PayPal",
+      "access_code_button": "I have an access code"
     },
     "data_safety": {
       "title": "100% Safe & GDPR-compliant",

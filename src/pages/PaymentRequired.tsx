@@ -66,7 +66,8 @@ const PaymentRequired = () => {
         lastName: user.user_metadata?.last_name || '',
         email: user.email || '',
         userId: user.id,
-        language: language
+        language: language,
+        hasAccessCode: false
       };
       console.log('Sending webhook data:', webhookData);
       const response = await fetch('https://hook.eu2.make.com/byf77ioiyyzqrsri73hmsri7hjhjyoup', {
@@ -142,6 +143,101 @@ const PaymentRequired = () => {
       setIsLoading(false);
     }
   };
+
+  const handleAccessCodePayment = async () => {
+    if (!user) {
+      toast({
+        title: "Fout",
+        description: "Gebruikersgegevens niet beschikbaar",
+        variant: "destructive"
+      });
+      return;
+    }
+    setIsLoading(true);
+    try {
+      const webhookData = {
+        firstName: user.user_metadata?.first_name || '',
+        lastName: user.user_metadata?.last_name || '',
+        email: user.email || '',
+        userId: user.id,
+        language: language,
+        hasAccessCode: true
+      };
+      console.log('Sending webhook data with access code:', webhookData);
+      const response = await fetch('https://hook.eu2.make.com/byf77ioiyyzqrsri73hmsri7hjhjyoup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(webhookData)
+      });
+      console.log('Webhook response status:', response.status);
+      if (response.ok) {
+        console.log('Webhook successfully sent with access code');
+        const contentType = response.headers.get('content-type');
+        console.log('Response content-type:', contentType);
+        let responseData;
+        try {
+          responseData = await response.json();
+          console.log('Webhook response data:', responseData);
+        } catch (parseError) {
+          console.error('Failed to parse response as JSON:', parseError);
+          const textResponse = await response.text();
+          console.log('Response as text:', textResponse);
+          throw new Error('Invalid JSON response from webhook');
+        }
+        if (responseData && responseData.checkout_url) {
+          console.log('Opening checkout URL in new tab:', responseData.checkout_url);
+          const newWindow = window.open(responseData.checkout_url, '_blank');
+          if (newWindow) {
+            toast({
+              title: "Succes",
+              description: "Betaalpagina wordt geopend in een nieuw tabblad. Na betaling word je automatisch doorgeleid."
+            });
+
+            // Start checking payment status periodically after opening checkout
+            const checkInterval = setInterval(async () => {
+              await refreshPaymentStatus();
+            }, 5000); // Check every 5 seconds
+
+            // Clean up interval after 10 minutes
+            setTimeout(() => {
+              clearInterval(checkInterval);
+            }, 600000);
+          } else {
+            console.log('Popup blocked, using direct redirect');
+            window.location.href = responseData.checkout_url;
+          }
+        } else {
+          console.error('No checkout_url in response:', responseData);
+          toast({
+            title: "Fout",
+            description: "Geen betaallink ontvangen. Probeer het opnieuw.",
+            variant: "destructive"
+          });
+        }
+      } else {
+        console.error('Webhook failed:', response.status, response.statusText);
+        const errorText = await response.text();
+        console.error('Error response body:', errorText);
+        toast({
+          title: "Fout",
+          description: "Er is een fout opgetreden bij het verwerken van je aanvraag. Probeer het opnieuw.",
+          variant: "destructive"
+        });
+      }
+    } catch (error) {
+      console.error('Error sending webhook:', error);
+      toast({
+        title: "Fout",
+        description: "Er is een fout opgetreden bij het verwerken van je aanvraag. Probeer het opnieuw.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const firstName = user?.user_metadata?.first_name || 'daar';
   return <div className="min-h-screen bg-gray-50 font-sans">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-8">
@@ -233,6 +329,10 @@ const PaymentRequired = () => {
 
               <Button onClick={handlePayment} disabled={isLoading} className="w-full bg-yellow-400 hover:bg-yellow-500 text-vinster-blue font-bold py-3 lg:py-4 text-base lg:text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200" size="lg">
                 {isLoading ? t('payment.pricing.processing') : t('payment.pricing.start_button')}
+              </Button>
+
+              <Button onClick={handleAccessCodePayment} disabled={isLoading} variant="outline" className="w-full bg-white hover:bg-gray-50 text-vinster-blue font-bold py-3 lg:py-4 text-base lg:text-lg rounded-2xl border-2 border-vinster-blue shadow-lg hover:shadow-xl transition-all duration-200 mt-3" size="lg">
+                {isLoading ? t('payment.pricing.processing') : t('payment.pricing.access_code_button')}
               </Button>
 
               <p className="text-xs text-gray-500 text-center mt-4">

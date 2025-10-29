@@ -26,7 +26,8 @@
       "feature4": "Suchprofil-Generator",
       "start_button": "Jetzt für €29 starten",
       "processing": "Verarbeitung...",
-      "payment_methods": "Sicher bezahlen mit iDEAL, Kreditkarte oder PayPal"
+      "payment_methods": "Sicher bezahlen mit iDEAL, Kreditkarte oder PayPal",
+      "access_code_button": "Ich habe einen Zugangscode"
     },
     "data_safety": {
       "title": "100% Sicher & DSGVO-konform",

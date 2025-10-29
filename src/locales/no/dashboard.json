@@ -26,7 +26,8 @@
       "feature4": "Søkeprofil-generator",
       "start_button": "Start nå for 333 kr",
       "processing": "Behandler...",
-      "payment_methods": "Sikker betaling med Vipps, kredittkort eller PayPal"
+      "payment_methods": "Sikker betaling med Vipps, kredittkort eller PayPal",
+      "access_code_button": "Jeg har en tilgangskode"
     },
     "data_safety": {
       "title": "100% Sikkert & GDPR-kompatibelt",
