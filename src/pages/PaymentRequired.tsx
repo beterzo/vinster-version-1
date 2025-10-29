@@ -193,7 +193,22 @@ const PaymentRequired = () => {
       console.log('Access code webhook response status:', response.status);
 
       if (response.ok) {
-        console.log('Access code successfully sent');
+        const responseData = await response.json();
+        
+        if (responseData.success === false) {
+          console.log('Access code is invalid');
+          
+          toast({
+            title: t('payment.access_code.validation_title'),
+            description: t('payment.access_code.invalid_code'),
+            variant: "destructive"
+          });
+          
+          setAccessCode('');
+          return;
+        }
+        
+        console.log('Access code successfully validated');
         
         toast({
           title: t('payment.access_code.success_title'),

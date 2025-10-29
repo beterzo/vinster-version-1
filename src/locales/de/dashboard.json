@@ -44,7 +44,8 @@
       "error_desc": "Beim Senden Ihres Codes ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
       "user_error": "Benutzerdaten nicht verfügbar",
       "validation_title": "Ungültiger Code",
-      "validation_empty": "Bitte geben Sie einen gültigen Zugangscode ein"
+      "validation_empty": "Bitte geben Sie einen gültigen Zugangscode ein",
+      "invalid_code": "Dieser Zugangscode ist ungültig oder existiert nicht. Bitte überprüfen Sie Ihren Code und versuchen Sie es erneut."
     }
   },
   "dashboard": {

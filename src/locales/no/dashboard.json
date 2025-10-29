@@ -44,7 +44,8 @@
       "error_desc": "Noe gikk galt ved sending av koden din. Vennligst prøv igjen.",
       "user_error": "Brukerdata ikke tilgjengelig",
       "validation_title": "Ugyldig kode",
-      "validation_empty": "Vennligst oppgi en gyldig tilgangskode"
+      "validation_empty": "Vennligst oppgi en gyldig tilgangskode",
+      "invalid_code": "Denne tilgangskoden er ugyldig eller eksisterer ikke. Vennligst sjekk koden din og prøv igjen."
     }
   },
   "dashboard": {

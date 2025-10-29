@@ -45,7 +45,8 @@
       "error_desc": "Something went wrong while submitting your code. Please try again.",
       "user_error": "User data not available",
       "validation_title": "Invalid code",
-      "validation_empty": "Please enter a valid access code"
+      "validation_empty": "Please enter a valid access code",
+      "invalid_code": "This access code is invalid or does not exist. Please check your code and try again."
     }
   },
   "dashboard": {

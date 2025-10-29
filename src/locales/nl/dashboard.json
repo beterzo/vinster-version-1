@@ -45,7 +45,8 @@
       "error_desc": "Er is iets misgegaan bij het verzenden van je code. Probeer het opnieuw.",
       "user_error": "Gebruikersgegevens niet beschikbaar",
       "validation_title": "Ongeldige code",
-      "validation_empty": "Voer een geldige toegangscode in"
+      "validation_empty": "Voer een geldige toegangscode in",
+      "invalid_code": "Deze toegangscode is ongeldig of bestaat niet. Controleer je code en probeer het opnieuw."
     }
   },
   "dashboard": {
