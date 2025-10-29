@@ -27,26 +27,11 @@
       "feature4": "Zoekprofiel generator",
       "start_button": "Start nu voor €29",
       "processing": "Verwerken...",
-      "payment_methods": "Veilig betalen met iDEAL, creditcard of PayPal",
-      "access_code_button": "Ik heb een toegangscode"
+      "payment_methods": "Veilig betalen met iDEAL, creditcard of PayPal"
     },
     "data_safety": {
       "title": "100% Veilig & GDPR-compliant",
       "description": "Jouw gegevens zijn volledig veilig en GDPR-compliant. We gebruiken AI-modellen om je persoonlijke inzichten te genereren, maar jouw gegevens worden nooit opgeslagen door deze modellen. Alles blijft privé en vertrouwelijk bij jou."
-    },
-    "access_code": {
-      "label": "Voer je toegangscode in",
-      "placeholder": "Bijvoorbeeld: VINSTER2025",
-      "submit_button": "Toegangscode verzenden",
-      "submitting": "Bezig met verzenden...",
-      "success_title": "Code verzonden!",
-      "success_desc": "Je toegangscode wordt verwerkt. We controleren de code en activeren je account.",
-      "error_title": "Fout",
-      "error_desc": "Er is iets misgegaan bij het verzenden van je code. Probeer het opnieuw.",
-      "user_error": "Gebruikersgegevens niet beschikbaar",
-      "validation_title": "Ongeldige code",
-      "validation_empty": "Voer een geldige toegangscode in",
-      "invalid_code": "Deze toegangscode is ongeldig of bestaat niet. Controleer je code en probeer het opnieuw."
     }
   },
   "dashboard": {
