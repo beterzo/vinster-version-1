@@ -31,6 +31,18 @@
     "data_safety": {
       "title": "100% Sicher & DSGVO-konform",
       "description": "Ihre Daten sind vollständig sicher und DSGVO-konform. Wir verwenden KI-Modelle, um Ihre persönlichen Einblicke zu generieren, aber Ihre Daten werden niemals von diesen Modellen gespeichert. Alles bleibt privat und vertraulich bei Ihnen."
+    },
+    "access_code": {
+      "label": "Haben Sie einen Zugangscode?",
+      "placeholder": "Geben Sie Ihren Code ein",
+      "button": "Zugangscode anwenden",
+      "validating": "Überprüfung...",
+      "invalid_title": "Ungültiger Zugangscode",
+      "invalid_desc": "Dieser Code ist nicht gültig oder bietet keinen vollständigen Rabatt",
+      "success_title": "Zugangscode akzeptiert!",
+      "success_desc": "Sie werden zu Vinster weitergeleitet...",
+      "error_title": "Fehler",
+      "error_desc": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
     }
   },
   "dashboard": {

@@ -32,6 +32,18 @@
     "data_safety": {
       "title": "100% Veilig & GDPR-compliant",
       "description": "Jouw gegevens zijn volledig veilig en GDPR-compliant. We gebruiken AI-modellen om je persoonlijke inzichten te genereren, maar jouw gegevens worden nooit opgeslagen door deze modellen. Alles blijft privé en vertrouwelijk bij jou."
+    },
+    "access_code": {
+      "label": "Heb je een toegangscode?",
+      "placeholder": "Vul je code in",
+      "button": "Toegangscode toepassen",
+      "validating": "Controleren...",
+      "invalid_title": "Ongeldige toegangscode",
+      "invalid_desc": "Deze code is niet geldig of geeft geen volledige korting",
+      "success_title": "Toegangscode geaccepteerd!",
+      "success_desc": "Je wordt doorgestuurd naar Vinster...",
+      "error_title": "Fout",
+      "error_desc": "Er is een fout opgetreden. Probeer het opnieuw."
     }
   },
   "dashboard": {

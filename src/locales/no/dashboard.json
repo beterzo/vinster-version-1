@@ -31,6 +31,18 @@
     "data_safety": {
       "title": "100% Sikkert & GDPR-kompatibelt",
       "description": "Dine data er fullstendig sikre og GDPR-kompatible. Vi bruker AI-modeller for å generere dine personlige innsikter, men dine data lagres aldri av disse modellene. Alt forblir privat og konfidensielt hos deg."
+    },
+    "access_code": {
+      "label": "Har du en tilgangskode?",
+      "placeholder": "Skriv inn koden din",
+      "button": "Bruk tilgangskode",
+      "validating": "Validerer...",
+      "invalid_title": "Ugyldig tilgangskode",
+      "invalid_desc": "Denne koden er ikke gyldig eller gir ikke full rabatt",
+      "success_title": "Tilgangskode godtatt!",
+      "success_desc": "Du blir sendt videre til Vinster...",
+      "error_title": "Feil",
+      "error_desc": "En feil oppstod. Vennligst prøv igjen."
     }
   },
   "dashboard": {

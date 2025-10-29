@@ -32,6 +32,18 @@
     "data_safety": {
       "title": "100% Safe & GDPR-compliant",
       "description": "Your data is completely safe and GDPR-compliant. We use AI models to generate your personal insights, but your data is never stored by these models. Everything remains private and confidential with you."
+    },
+    "access_code": {
+      "label": "Do you have an access code?",
+      "placeholder": "Enter your code",
+      "button": "Apply access code",
+      "validating": "Validating...",
+      "invalid_title": "Invalid access code",
+      "invalid_desc": "This code is not valid or does not provide full discount",
+      "success_title": "Access code accepted!",
+      "success_desc": "You are being redirected to Vinster...",
+      "error_title": "Error",
+      "error_desc": "An error occurred. Please try again."
     }
   },
   "dashboard": {

@@ -8,6 +8,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/hooks/useTranslation";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 const PaymentRequired = () => {
   const {
     user
@@ -21,6 +23,9 @@ const PaymentRequired = () => {
   } = usePaymentStatus();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [accessCode, setAccessCode] = useState('');
+  const [isValidatingCode, setIsValidatingCode] = useState(false);
+  const [showAccessCodeInput, setShowAccessCodeInput] = useState(true);
   const {
     t,
     language
@@ -142,6 +147,66 @@ const PaymentRequired = () => {
       setIsLoading(false);
     }
   };
+
+  const handleSubmitAccessCode = async () => {
+    if (!user || !accessCode.trim()) return;
+    
+    setIsValidatingCode(true);
+    try {
+      const response = await fetch('https://hook.eu2.make.com/jw6af19g8fbvtbpe42ussanvp8sur37j', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          accessCode: accessCode.trim(),
+          userId: user.id,
+          email: user.email,
+          firstName: user.user_metadata?.first_name || '',
+          lastName: user.user_metadata?.last_name || '',
+          language: language
+        })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        
+        if (data.success === false) {
+          toast({
+            title: t('payment.access_code.invalid_title'),
+            description: data.message || t('payment.access_code.invalid_desc'),
+            variant: "destructive"
+          });
+          setAccessCode('');
+        } else {
+          toast({
+            title: t('payment.access_code.success_title'),
+            description: t('payment.access_code.success_desc')
+          });
+          setShowAccessCodeInput(false);
+          
+          const checkInterval = setInterval(async () => {
+            await refreshPaymentStatus();
+          }, 2000);
+          setTimeout(() => clearInterval(checkInterval), 60000);
+        }
+      } else {
+        toast({
+          title: t('payment.access_code.error_title'),
+          description: t('payment.access_code.error_desc'),
+          variant: "destructive"
+        });
+      }
+    } catch (error) {
+      console.error('Error validating access code:', error);
+      toast({
+        title: t('payment.access_code.error_title'),
+        description: t('payment.access_code.error_desc'),
+        variant: "destructive"
+      });
+    } finally {
+      setIsValidatingCode(false);
+    }
+  };
+
   const firstName = user?.user_metadata?.first_name || 'daar';
   return <div className="min-h-screen bg-gray-50 font-sans">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-8">
@@ -238,6 +303,47 @@ const PaymentRequired = () => {
               <p className="text-xs text-gray-500 text-center mt-4">
                 {t('payment.pricing.payment_methods')}
               </p>
+
+              {showAccessCodeInput && (
+                <>
+                  <div className="relative my-6">
+                    <div className="absolute inset-0 flex items-center">
+                      <span className="w-full border-t border-gray-300" />
+                    </div>
+                    <div className="relative flex justify-center text-xs uppercase">
+                      <span className="bg-white px-2 text-gray-500">OF</span>
+                    </div>
+                  </div>
+
+                  <div className="space-y-3">
+                    <Label htmlFor="accessCode" className="text-sm font-medium text-vinster-blue">
+                      {t('payment.access_code.label')}
+                    </Label>
+                    <Input
+                      id="accessCode"
+                      type="text"
+                      placeholder={t('payment.access_code.placeholder')}
+                      value={accessCode}
+                      onChange={(e) => setAccessCode(e.target.value)}
+                      disabled={isValidatingCode}
+                      className="w-full"
+                      onKeyPress={(e) => {
+                        if (e.key === 'Enter' && accessCode.trim()) {
+                          handleSubmitAccessCode();
+                        }
+                      }}
+                    />
+                    <Button
+                      onClick={handleSubmitAccessCode}
+                      disabled={isValidatingCode || !accessCode.trim()}
+                      className="w-full bg-vinster-blue hover:bg-vinster-blue/90 text-white font-semibold py-2 rounded-lg transition-all duration-200"
+                      size="sm"
+                    >
+                      {isValidatingCode ? t('payment.access_code.validating') : t('payment.access_code.button')}
+                    </Button>
+                  </div>
+                </>
+              )}
             </Card>
           </div>
         </div>
