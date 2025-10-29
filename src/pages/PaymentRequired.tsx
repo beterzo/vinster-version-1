@@ -361,10 +361,10 @@ const PaymentRequired = () => {
                   <Button
                     onClick={handleSubmitAccessCode}
                     disabled={isSubmittingCode || !accessCode.trim()}
-                    className={`w-full mt-3 font-bold py-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-200 ${
+                    className={`w-full mt-3 font-bold py-3 rounded-xl shadow-md transition-all duration-200 ${
                       accessCode.trim() 
-                        ? 'bg-vinster-blue hover:bg-blue-700 text-white' 
-                        : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                        ? 'bg-vinster-blue hover:bg-blue-700 text-white hover:shadow-lg disabled:opacity-50' 
+                        : 'bg-gray-300 text-gray-500 cursor-not-allowed hover:bg-gray-300'
                     }`}
                   >
                     {isSubmittingCode ? t('payment.access_code.submitting') : t('payment.access_code.submit_button')}
