@@ -333,9 +333,10 @@ const PaymentRequired = () => {
                       disabled={isValidatingCode || !accessCode.trim()}
                       className={`w-full font-semibold py-2 rounded-lg transition-all duration-200 ${
                         accessCode.trim() && !isValidatingCode
-                          ? 'bg-vinster-blue hover:bg-vinster-blue/90 text-white'
+                          ? 'text-white hover:opacity-90'
                           : 'bg-gray-200 text-gray-400 cursor-not-allowed'
                       }`}
+                      style={accessCode.trim() && !isValidatingCode ? { backgroundColor: '#1D3662' } : undefined}
                       size="sm"
                     >
                       {isValidatingCode ? t('payment.access_code.validating') : t('payment.access_code.button')}
