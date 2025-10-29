@@ -32,6 +32,19 @@
     "data_safety": {
       "title": "100% Sicher & DSGVO-konform",
       "description": "Ihre Daten sind vollständig sicher und DSGVO-konform. Wir verwenden KI-Modelle, um Ihre persönlichen Einblicke zu generieren, aber Ihre Daten werden niemals von diesen Modellen gespeichert. Alles bleibt privat und vertraulich bei Ihnen."
+    },
+    "access_code": {
+      "label": "Geben Sie Ihren Zugangscode ein",
+      "placeholder": "Zum Beispiel: VINSTER2025",
+      "submit_button": "Zugangscode senden",
+      "submitting": "Wird gesendet...",
+      "success_title": "Code gesendet!",
+      "success_desc": "Ihr Zugangscode wird verarbeitet. Wir überprüfen den Code und aktivieren Ihr Konto.",
+      "error_title": "Fehler",
+      "error_desc": "Beim Senden Ihres Codes ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
+      "user_error": "Benutzerdaten nicht verfügbar",
+      "validation_title": "Ungültiger Code",
+      "validation_empty": "Bitte geben Sie einen gültigen Zugangscode ein"
     }
   },
   "dashboard": {

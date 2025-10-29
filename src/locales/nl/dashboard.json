@@ -33,6 +33,19 @@
     "data_safety": {
       "title": "100% Veilig & GDPR-compliant",
       "description": "Jouw gegevens zijn volledig veilig en GDPR-compliant. We gebruiken AI-modellen om je persoonlijke inzichten te genereren, maar jouw gegevens worden nooit opgeslagen door deze modellen. Alles blijft privé en vertrouwelijk bij jou."
+    },
+    "access_code": {
+      "label": "Voer je toegangscode in",
+      "placeholder": "Bijvoorbeeld: VINSTER2025",
+      "submit_button": "Toegangscode verzenden",
+      "submitting": "Bezig met verzenden...",
+      "success_title": "Code verzonden!",
+      "success_desc": "Je toegangscode wordt verwerkt. We controleren de code en activeren je account.",
+      "error_title": "Fout",
+      "error_desc": "Er is iets misgegaan bij het verzenden van je code. Probeer het opnieuw.",
+      "user_error": "Gebruikersgegevens niet beschikbaar",
+      "validation_title": "Ongeldige code",
+      "validation_empty": "Voer een geldige toegangscode in"
     }
   },
   "dashboard": {

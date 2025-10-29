@@ -33,6 +33,19 @@
     "data_safety": {
       "title": "100% Safe & GDPR-compliant",
       "description": "Your data is completely safe and GDPR-compliant. We use AI models to generate your personal insights, but your data is never stored by these models. Everything remains private and confidential with you."
+    },
+    "access_code": {
+      "label": "Enter your access code",
+      "placeholder": "For example: VINSTER2025",
+      "submit_button": "Submit access code",
+      "submitting": "Submitting...",
+      "success_title": "Code submitted!",
+      "success_desc": "Your access code is being processed. We are verifying the code and activating your account.",
+      "error_title": "Error",
+      "error_desc": "Something went wrong while submitting your code. Please try again.",
+      "user_error": "User data not available",
+      "validation_title": "Invalid code",
+      "validation_empty": "Please enter a valid access code"
     }
   },
   "dashboard": {

@@ -32,6 +32,19 @@
     "data_safety": {
       "title": "100% Sikkert & GDPR-kompatibelt",
       "description": "Dine data er fullstendig sikre og GDPR-kompatible. Vi bruker AI-modeller for å generere dine personlige innsikter, men dine data lagres aldri av disse modellene. Alt forblir privat og konfidensielt hos deg."
+    },
+    "access_code": {
+      "label": "Skriv inn tilgangskoden din",
+      "placeholder": "For eksempel: VINSTER2025",
+      "submit_button": "Send tilgangskode",
+      "submitting": "Sender...",
+      "success_title": "Kode sendt!",
+      "success_desc": "Tilgangskoden din behandles. Vi verifiserer koden og aktiverer kontoen din.",
+      "error_title": "Feil",
+      "error_desc": "Noe gikk galt ved sending av koden din. Vennligst prøv igjen.",
+      "user_error": "Brukerdata ikke tilgjengelig",
+      "validation_title": "Ugyldig kode",
+      "validation_empty": "Vennligst oppgi en gyldig tilgangskode"
     }
   },
   "dashboard": {

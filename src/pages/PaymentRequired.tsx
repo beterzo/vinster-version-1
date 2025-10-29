@@ -8,6 +8,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/hooks/useTranslation";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { useLanguage } from "@/contexts/LanguageContext";
+
 const PaymentRequired = () => {
   const {
     user
@@ -21,10 +23,13 @@ const PaymentRequired = () => {
   } = usePaymentStatus();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [showAccessCodeInput, setShowAccessCodeInput] = useState(false);
+  const [accessCode, setAccessCode] = useState('');
+  const [isSubmittingCode, setIsSubmittingCode] = useState(false);
   const {
-    t,
-    language
+    t
   } = useTranslation();
+  const { language } = useLanguage();
 
   // Redirect if user has already paid
   useEffect(() => {
@@ -144,16 +149,28 @@ const PaymentRequired = () => {
     }
   };
 
-  const handleAccessCodePayment = async () => {
-    if (!user) {
+  const handleSubmitAccessCode = async () => {
+    const trimmedCode = accessCode.trim();
+    if (!trimmedCode) {
       toast({
-        title: "Fout",
-        description: "Gebruikersgegevens niet beschikbaar",
+        title: t('payment.access_code.validation_title'),
+        description: t('payment.access_code.validation_empty'),
         variant: "destructive"
       });
       return;
     }
-    setIsLoading(true);
+
+    if (!user) {
+      toast({
+        title: t('payment.access_code.error_title'),
+        description: t('payment.access_code.user_error'),
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setIsSubmittingCode(true);
+    
     try {
       const webhookData = {
         firstName: user.user_metadata?.first_name || '',
@@ -161,80 +178,59 @@ const PaymentRequired = () => {
         email: user.email || '',
         userId: user.id,
         language: language,
-        hasAccessCode: true
+        accessCode: trimmedCode
       };
-      console.log('Sending webhook data with access code:', webhookData);
-      const response = await fetch('https://hook.eu2.make.com/byf77ioiyyzqrsri73hmsri7hjhjyoup', {
+
+      console.log('Sending access code to webhook:', webhookData);
+
+      const response = await fetch('https://hook.eu2.make.com/jw6af19g8fbvtbpe42ussanvp8sur37j', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(webhookData)
       });
-      console.log('Webhook response status:', response.status);
+
+      console.log('Access code webhook response status:', response.status);
+
       if (response.ok) {
-        console.log('Webhook successfully sent with access code');
-        const contentType = response.headers.get('content-type');
-        console.log('Response content-type:', contentType);
-        let responseData;
-        try {
-          responseData = await response.json();
-          console.log('Webhook response data:', responseData);
-        } catch (parseError) {
-          console.error('Failed to parse response as JSON:', parseError);
-          const textResponse = await response.text();
-          console.log('Response as text:', textResponse);
-          throw new Error('Invalid JSON response from webhook');
-        }
-        if (responseData && responseData.checkout_url) {
-          console.log('Opening checkout URL in new tab:', responseData.checkout_url);
-          const newWindow = window.open(responseData.checkout_url, '_blank');
-          if (newWindow) {
-            toast({
-              title: "Succes",
-              description: "Betaalpagina wordt geopend in een nieuw tabblad. Na betaling word je automatisch doorgeleid."
-            });
-
-            // Start checking payment status periodically after opening checkout
-            const checkInterval = setInterval(async () => {
-              await refreshPaymentStatus();
-            }, 5000); // Check every 5 seconds
-
-            // Clean up interval after 10 minutes
-            setTimeout(() => {
-              clearInterval(checkInterval);
-            }, 600000);
-          } else {
-            console.log('Popup blocked, using direct redirect');
-            window.location.href = responseData.checkout_url;
-          }
-        } else {
-          console.error('No checkout_url in response:', responseData);
-          toast({
-            title: "Fout",
-            description: "Geen betaallink ontvangen. Probeer het opnieuw.",
-            variant: "destructive"
-          });
-        }
-      } else {
-        console.error('Webhook failed:', response.status, response.statusText);
-        const errorText = await response.text();
-        console.error('Error response body:', errorText);
+        console.log('Access code successfully sent');
+        
         toast({
-          title: "Fout",
-          description: "Er is een fout opgetreden bij het verwerken van je aanvraag. Probeer het opnieuw.",
+          title: t('payment.access_code.success_title'),
+          description: t('payment.access_code.success_desc')
+        });
+
+        setAccessCode('');
+        setShowAccessCodeInput(false);
+        
+        const checkInterval = setInterval(async () => {
+          await refreshPaymentStatus();
+        }, 5000);
+
+        setTimeout(() => {
+          clearInterval(checkInterval);
+        }, 600000);
+
+      } else {
+        const errorText = await response.text();
+        console.error('Access code webhook failed:', response.status, errorText);
+        
+        toast({
+          title: t('payment.access_code.error_title'),
+          description: t('payment.access_code.error_desc'),
           variant: "destructive"
         });
       }
     } catch (error) {
-      console.error('Error sending webhook:', error);
+      console.error('Error sending access code:', error);
       toast({
-        title: "Fout",
-        description: "Er is een fout opgetreden bij het verwerken van je aanvraag. Probeer het opnieuw.",
+        title: t('payment.access_code.error_title'),
+        description: t('payment.access_code.error_desc'),
         variant: "destructive"
       });
     } finally {
-      setIsLoading(false);
+      setIsSubmittingCode(false);
     }
   };
 
@@ -331,9 +327,47 @@ const PaymentRequired = () => {
                 {isLoading ? t('payment.pricing.processing') : t('payment.pricing.start_button')}
               </Button>
 
-              <Button onClick={handleAccessCodePayment} disabled={isLoading} variant="outline" className="w-full bg-white hover:bg-gray-50 text-vinster-blue font-bold py-3 lg:py-4 text-base lg:text-lg rounded-2xl border-2 border-vinster-blue shadow-lg hover:shadow-xl transition-all duration-200 mt-3" size="lg">
-                {isLoading ? t('payment.pricing.processing') : t('payment.pricing.access_code_button')}
+              <Button 
+                onClick={() => setShowAccessCodeInput(!showAccessCodeInput)} 
+                disabled={isLoading || isSubmittingCode}
+                variant="outline"
+                className="w-full bg-white hover:bg-gray-50 text-vinster-blue font-bold py-3 lg:py-4 text-base lg:text-lg rounded-2xl border-2 border-vinster-blue shadow-lg hover:shadow-xl transition-all duration-200 mt-3" 
+                size="lg"
+              >
+                {t('payment.pricing.access_code_button')}
               </Button>
+
+              {showAccessCodeInput && (
+                <div className="mt-4 p-4 bg-gray-50 rounded-2xl border border-gray-200">
+                  <label 
+                    htmlFor="access-code-input" 
+                    className="block text-sm font-semibold text-vinster-blue mb-2"
+                  >
+                    {t('payment.access_code.label')}
+                  </label>
+                  <input
+                    id="access-code-input"
+                    type="text"
+                    value={accessCode}
+                    onChange={(e) => setAccessCode(e.target.value)}
+                    placeholder={t('payment.access_code.placeholder')}
+                    disabled={isSubmittingCode}
+                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-vinster-blue transition-colors text-base"
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' && !isSubmittingCode) {
+                        handleSubmitAccessCode();
+                      }
+                    }}
+                  />
+                  <Button
+                    onClick={handleSubmitAccessCode}
+                    disabled={isSubmittingCode || !accessCode.trim()}
+                    className="w-full mt-3 bg-vinster-blue hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-200"
+                  >
+                    {isSubmittingCode ? t('payment.access_code.submitting') : t('payment.access_code.submit_button')}
+                  </Button>
+                </div>
+              )}
 
               <p className="text-xs text-gray-500 text-center mt-4">
                 {t('payment.pricing.payment_methods')}
