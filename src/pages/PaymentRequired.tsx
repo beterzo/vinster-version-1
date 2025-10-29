@@ -307,12 +307,7 @@ const PaymentRequired = () => {
               {showAccessCodeInput && (
                 <>
                   <div className="relative my-6">
-                    <div className="absolute inset-0 flex items-center">
-                      <span className="w-full border-t border-gray-300" />
-                    </div>
-                    <div className="relative flex justify-center text-xs uppercase">
-                      <span className="bg-white px-2 text-gray-500">OF</span>
-                    </div>
+                    <div className="w-full border-t border-gray-300" />
                   </div>
 
                   <div className="space-y-3">
@@ -336,7 +331,11 @@ const PaymentRequired = () => {
                     <Button
                       onClick={handleSubmitAccessCode}
                       disabled={isValidatingCode || !accessCode.trim()}
-                      className="w-full bg-vinster-blue hover:bg-vinster-blue/90 text-white font-semibold py-2 rounded-lg transition-all duration-200"
+                      className={`w-full font-semibold py-2 rounded-lg transition-all duration-200 ${
+                        accessCode.trim() && !isValidatingCode
+                          ? 'bg-vinster-blue hover:bg-vinster-blue/90 text-white'
+                          : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                      }`}
                       size="sm"
                     >
                       {isValidatingCode ? t('payment.access_code.validating') : t('payment.access_code.button')}
