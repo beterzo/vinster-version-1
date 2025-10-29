@@ -71,8 +71,7 @@ const PaymentRequired = () => {
         lastName: user.user_metadata?.last_name || '',
         email: user.email || '',
         userId: user.id,
-        language: language,
-        hasAccessCode: false
+        language: language
       };
       console.log('Sending webhook data:', webhookData);
       const response = await fetch('https://hook.eu2.make.com/byf77ioiyyzqrsri73hmsri7hjhjyoup', {
@@ -362,7 +361,11 @@ const PaymentRequired = () => {
                   <Button
                     onClick={handleSubmitAccessCode}
                     disabled={isSubmittingCode || !accessCode.trim()}
-                    className="w-full mt-3 bg-vinster-blue hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-200"
+                    className={`w-full mt-3 font-bold py-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-200 ${
+                      accessCode.trim() 
+                        ? 'bg-vinster-blue hover:bg-blue-700 text-white' 
+                        : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                    }`}
                   >
                     {isSubmittingCode ? t('payment.access_code.submitting') : t('payment.access_code.submit_button')}
                   </Button>
