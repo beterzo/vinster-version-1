@@ -5,6 +5,7 @@ import { usePrioriteitenResponses } from './usePrioriteitenResponses';
 import { useExtraInformatieResponses } from './useExtraInformatieResponses';
 import { useRapportData } from './useRapportData';
 import { useTranslation } from './useTranslation';
+import { useReportGenerationLimit } from './useReportGenerationLimit';
 
 export const useStepAccess = () => {
   const { t } = useTranslation();
@@ -13,6 +14,7 @@ export const useStepAccess = () => {
   const { isCompleted: prioriteitenCompleted, loading: prioriteitenLoading } = usePrioriteitenResponses();
   const { isCompleted: extraInformatieCompleted, loading: extraInformatieLoading } = useExtraInformatieResponses();
   const { data: reportData, loading: reportLoading } = useRapportData();
+  const { hasCompletedReport, canGenerateNewReport, loading: reportLimitLoading } = useReportGenerationLimit();
 
   const stepAccess = useMemo(() => {
     // Check if enthousiasme is completed (at least one field filled in any of the 3 pages)
@@ -36,44 +38,68 @@ export const useStepAccess = () => {
     // Check if rapport is completed
     const rapportCompleted = reportData?.report_status === 'completed';
 
-    return {
+    // Check if user is blocked from editing due to completed report
+    const isBlockedByCompletedReport = hasCompletedReport && !canGenerateNewReport;
+
+    const stepAccessData = {
       enthousiasme: {
-        canAccess: true,
-        isCompleted: enthousiasmeCompleted
+        canAccess: !isBlockedByCompletedReport,
+        isCompleted: enthousiasmeCompleted,
+        blockedReason: isBlockedByCompletedReport ? t('dashboard.report_limit.blocked_reason') : undefined
       },
       wensberoepen: {
-        canAccess: enthousiasmeCompleted,
+        canAccess: enthousiasmeCompleted && !isBlockedByCompletedReport,
         isCompleted: isWensberoepenComplete,
-        blockedReason: t('dashboard.step_blocked.enthousiasme_required')
+        blockedReason: isBlockedByCompletedReport 
+          ? t('dashboard.report_limit.blocked_reason')
+          : t('dashboard.step_blocked.enthousiasme_required')
       },
       persoonsprofiel: {
-        canAccess: isWensberoepenComplete,
+        canAccess: isWensberoepenComplete && !isBlockedByCompletedReport,
         isCompleted: persoonsprofielCompleted,
-        blockedReason: t('dashboard.step_blocked.wensberoepen_required')
+        blockedReason: isBlockedByCompletedReport
+          ? t('dashboard.report_limit.blocked_reason')
+          : t('dashboard.step_blocked.wensberoepen_required')
       },
       rapport: {
-        canAccess: persoonsprofielCompleted,
+        canAccess: persoonsprofielCompleted && !isBlockedByCompletedReport,
         isCompleted: rapportCompleted,
-        blockedReason: t('dashboard.step_blocked.persoonsprofiel_required')
+        blockedReason: isBlockedByCompletedReport
+          ? t('dashboard.report_limit.blocked_reason')
+          : t('dashboard.step_blocked.persoonsprofiel_required')
       },
       zoekprofiel: {
         canAccess: rapportCompleted,
-        isCompleted: false, // We don't track zoekprofiel completion for blocking
+        isCompleted: false,
         blockedReason: t('dashboard.step_blocked.rapport_required')
       }
     };
-  }, [enthousiasmeResponses, enthousiasmeLoading, isWensberoepenComplete, wensberoepenLoading, prioriteitenCompleted, extraInformatieCompleted, reportData, t]);
 
-  const isLoading = enthousiasmeLoading || wensberoepenLoading || prioriteitenLoading || extraInformatieLoading || reportLoading;
+    return {
+      ...stepAccessData,
+      // Export additional info for dashboard
+      isBlockedByCompletedReport,
+      hasCompletedReport,
+      canGenerateNewReport
+    };
+  }, [enthousiasmeResponses, enthousiasmeLoading, isWensberoepenComplete, wensberoepenLoading, prioriteitenCompleted, extraInformatieCompleted, reportData, hasCompletedReport, canGenerateNewReport, t]);
+
+  const isLoading = enthousiasmeLoading || wensberoepenLoading || prioriteitenLoading || extraInformatieLoading || reportLoading || reportLimitLoading;
 
   const canAccessStep = (stepId: string): boolean => {
+    if (stepId === 'isBlockedByCompletedReport' || stepId === 'hasCompletedReport' || stepId === 'canGenerateNewReport') {
+      return false;
+    }
     const step = stepAccess[stepId as keyof typeof stepAccess];
-    return step ? step.canAccess : false;
+    return step && typeof step === 'object' && 'canAccess' in step ? step.canAccess : false;
   };
 
   const getBlockedReason = (stepId: string): string => {
+    if (stepId === 'isBlockedByCompletedReport' || stepId === 'hasCompletedReport' || stepId === 'canGenerateNewReport') {
+      return t('dashboard.step_blocked.title');
+    }
     const step = stepAccess[stepId as keyof typeof stepAccess];
-    if (step && 'blockedReason' in step) {
+    if (step && typeof step === 'object' && 'blockedReason' in step) {
       return step.blockedReason || t('dashboard.step_blocked.title');
     }
     return t('dashboard.step_blocked.title');

@@ -100,6 +100,20 @@
         "description": "Laden Sie Ihr Suchprofil herunter",
         "action": "Herunterladen"
       }
+    },
+    "step_blocked": {
+      "title": "Schritt gesperrt",
+      "enthousiasme_required": "Sie müssen zuerst den Begeisterungsscan abschließen",
+      "wensberoepen_required": "Sie müssen zuerst Ihre Wunschberufe vervollständigen",
+      "persoonsprofiel_required": "Sie müssen zuerst Ihr persönliches Profil vervollständigen",
+      "rapport_required": "Sie müssen zuerst Ihren Bericht abschließen, um fortzufahren"
+    },
+    "report_limit": {
+      "banner_title": "🎉 Ihre Vinster-Reise ist abgeschlossen!",
+      "banner_description": "Sie haben bereits einen Bericht generiert. Laden Sie Ihre Ergebnisse herunter oder starten Sie eine neue Reise.",
+      "restart_cta": "Neu beginnen",
+      "blocked_reason": "Sie haben bereits einen Bericht generiert. Um neu zu beginnen, müssen Sie eine zweite Journey kaufen.",
+      "view_only_notice": "Sie sehen Ihre zuvor eingegebenen Antworten. Um diese zu ändern, müssen Sie eine neue Reise starten."
     }
   }
 }

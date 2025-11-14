@@ -101,6 +101,20 @@
         "description": "Download je zoekprofiel",
         "action": "Download"
       }
+    },
+    "step_blocked": {
+      "title": "Stap vergrendeld",
+      "enthousiasme_required": "Je moet eerst de enthousiasmescan voltooien",
+      "wensberoepen_required": "Je moet eerst je wensberoepen voltooien",
+      "persoonsprofiel_required": "Je moet eerst je persoonsprofiel voltooien",
+      "rapport_required": "Je moet eerst je rapport voltooien om verder te gaan"
+    },
+    "report_limit": {
+      "banner_title": "🎉 Je Vinster traject is voltooid!",
+      "banner_description": "Je hebt al een rapport gegenereerd. Download je resultaten of start een nieuw traject.",
+      "restart_cta": "Opnieuw beginnen",
+      "blocked_reason": "Je hebt al een rapport gegenereerd. Om opnieuw te beginnen, moet je een tweede journey kopen.",
+      "view_only_notice": "Je bekijkt je eerder ingevulde antwoorden. Om deze te wijzigen, moet je een nieuw traject starten."
     }
   }
 }

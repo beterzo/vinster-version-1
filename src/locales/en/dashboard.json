@@ -101,6 +101,20 @@
         "description": "Download your search profile",
         "action": "Download"
       }
+    },
+    "step_blocked": {
+      "title": "Step Locked",
+      "enthousiasme_required": "You must first complete the enthusiasm scan",
+      "wensberoepen_required": "You must first complete your desired professions",
+      "persoonsprofiel_required": "You must first complete your personal profile",
+      "rapport_required": "You must first complete your report to continue"
+    },
+    "report_limit": {
+      "banner_title": "🎉 Your Vinster journey is completed!",
+      "banner_description": "You have already generated a report. Download your results or start a new journey.",
+      "restart_cta": "Start over",
+      "blocked_reason": "You have already generated a report. To start over, you need to purchase a second journey.",
+      "view_only_notice": "You are viewing your previously entered answers. To modify them, you need to start a new journey."
     }
   }
 }

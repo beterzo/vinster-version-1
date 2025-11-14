@@ -100,6 +100,20 @@
         "description": "Last ned søkeprofilen din",
         "action": "Last ned"
       }
+    },
+    "step_blocked": {
+      "title": "Trinn låst",
+      "enthousiasme_required": "Du må først fullføre entusiasme-skanningen",
+      "wensberoepen_required": "Du må først fullføre dine ønskede yrker",
+      "persoonsprofiel_required": "Du må først fullføre din personlige profil",
+      "rapport_required": "Du må først fullføre rapporten din for å fortsette"
+    },
+    "report_limit": {
+      "banner_title": "🎉 Din Vinster-reise er fullført!",
+      "banner_description": "Du har allerede generert en rapport. Last ned resultatene dine eller start en ny reise.",
+      "restart_cta": "Start på nytt",
+      "blocked_reason": "Du har allerede generert en rapport. For å starte på nytt må du kjøpe en ny reise.",
+      "view_only_notice": "Du ser på dine tidligere innsendte svar. For å endre dem må du starte en ny reise."
     }
   }
 }

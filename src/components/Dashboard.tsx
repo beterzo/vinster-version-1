@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useToast } from "@/hooks/use-toast";
+import { Lock, Download, FileText, PartyPopper } from "lucide-react";
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -115,6 +116,57 @@ const Dashboard = () => {
     <div className="min-h-screen bg-gray-50 font-sans">
       <div className="max-w-[1440px] mx-auto px-6 py-8">
         <DashboardHeader />
+
+        {/* Journey Completed Banner */}
+        {stepAccess.isBlockedByCompletedReport && (
+          <Card className="mt-8 border-primary/20 bg-primary/5">
+            <div className="p-6">
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0">
+                  <PartyPopper className="w-8 h-8 text-primary" />
+                </div>
+                <div className="flex-1">
+                  <h2 className="text-xl font-semibold text-foreground mb-2">
+                    {t('dashboard.report_limit.banner_title')}
+                  </h2>
+                  <p className="text-muted-foreground mb-4">
+                    {t('dashboard.report_limit.banner_description')}
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    {hasUserReport && (
+                      <Button
+                        onClick={() => navigate('/rapport-download')}
+                        variant="default"
+                        className="gap-2"
+                      >
+                        <Download className="w-4 h-4" />
+                        Download rapport
+                      </Button>
+                    )}
+                    {hasExistingZoekprofiel && (
+                      <Button
+                        onClick={() => navigate('/zoekprofiel-antwoorden')}
+                        variant="outline"
+                        className="gap-2"
+                      >
+                        <FileText className="w-4 h-4" />
+                        Download zoekprofiel
+                      </Button>
+                    )}
+                    <Button
+                      onClick={() => navigate('/traject-opnieuw-starten')}
+                      variant="secondary"
+                      className="gap-2"
+                    >
+                      <Lock className="w-4 h-4" />
+                      {t('dashboard.report_limit.restart_cta')}
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Card>
+        )}
 
         <div className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-2 gap-8 mt-8">
           {/* Welcome Section - spans first 2 columns on top row */}
