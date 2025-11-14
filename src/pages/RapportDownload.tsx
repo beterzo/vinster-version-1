@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-import { FileText, Download, ExternalLink, CheckCircle, AlertCircle, Clock, ArrowRight } from "lucide-react";
+import { FileText, Download, ExternalLink, CheckCircle, AlertCircle, Clock, ArrowRight, Lock } from "lucide-react";
 import { useRapportData } from "@/hooks/useRapportData";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useStepAccess } from "@/hooks/useStepAccess";
 import ConditionalRoute from "@/components/ConditionalRoute";
+import { useReportGenerationLimit } from "@/hooks/useReportGenerationLimit";
 const RapportDownload = () => {
   const navigate = useNavigate();
   const {
@@ -16,6 +17,7 @@ const RapportDownload = () => {
   } = useToast();
   const { t } = useTranslation();
   const stepAccess = useStepAccess();
+  const { hasCompletedReport, canGenerateNewReport } = useReportGenerationLimit();
   const {
     data: reportData,
     loading,
@@ -239,6 +241,28 @@ const RapportDownload = () => {
                     <ArrowRight className="w-5 h-5" />
                   </Button>
                 </div>
+
+                {/* Restart Journey Section */}
+                {hasCompletedReport && !canGenerateNewReport && (
+                  <div className="mt-8 p-6 border border-primary/20 bg-primary/5 rounded-lg">
+                    <div className="flex items-start gap-4">
+                      <Lock className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+                      <div className="flex-1">
+                        <h3 className="font-semibold text-foreground mb-2">
+                          {t('dashboard.report_limit.view_only_notice')}
+                        </h3>
+                        <Button
+                          onClick={() => navigate('/traject-opnieuw-starten')}
+                          variant="outline"
+                          className="mt-3 gap-2"
+                        >
+                          <Lock className="w-4 h-4" />
+                          {t('dashboard.report_limit.restart_cta')}
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>}
 
             {(reportStatus === 'generating' || reportStatus === 'pending') && <div className="text-center">
