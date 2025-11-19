@@ -1,7 +1,10 @@
 
 import React from 'react';
-import { Heart, Briefcase, User, FileText, Search, Lock } from 'lucide-react';
+import { Heart, Briefcase, User, FileText, Search, Lock, Eye, ChevronRight } from 'lucide-react';
 import { Progress } from "@/components/ui/progress";
+import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "@/hooks/useTranslation";
 import {
   Tooltip,
   TooltipContent,
@@ -23,6 +26,9 @@ interface ProgressStepProps {
   isLocked?: boolean;
   lockedReason?: string;
   onClick: () => void;
+  editPath?: string;
+  viewPath?: string;
+  hasCompletedReport?: boolean;
 }
 
 const getStepIcon = (iconName: string, isCompleted: boolean) => {
@@ -53,8 +59,13 @@ const ProgressStep = ({
   progress = 0, 
   isLocked = false,
   lockedReason,
-  onClick 
+  onClick,
+  editPath,
+  viewPath,
+  hasCompletedReport = false
 }: ProgressStepProps) => {
+  const navigate = useNavigate();
+  const { t } = useTranslation();
   const stepContent = (
     <div 
       className={`p-4 transition-all duration-200 rounded-xl border border-gray-200 shadow-sm mb-3 ${
@@ -95,6 +106,32 @@ const ProgressStep = ({
               className="h-2" 
             />
           </div>
+        </div>
+        
+        {/* Action button/icon */}
+        <div className="ml-auto flex-shrink-0">
+          {isCompleted && hasCompletedReport && viewPath ? (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={(e) => {
+                e.stopPropagation();
+                navigate(viewPath);
+              }}
+              className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
+            >
+              <Eye className="h-4 w-4 mr-1" />
+              <span className="text-xs">{t('common.button.view_answers')}</span>
+            </Button>
+          ) : isLocked ? (
+            <div className="flex items-center gap-2 text-gray-400">
+              <Lock className="w-4 h-4" />
+            </div>
+          ) : (
+            <div className="flex items-center text-blue-600">
+              <ChevronRight className="h-5 w-5" />
+            </div>
+          )}
         </div>
       </div>
     </div>

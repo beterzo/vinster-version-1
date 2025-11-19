@@ -8,10 +8,16 @@ import { useNavigate } from "react-router-dom";
 import { usePrioriteitenResponses } from "@/hooks/usePrioriteitenResponses";
 import { cleanKeywords } from "@/utils/keywordUtils";
 import { useTranslation } from "@/hooks/useTranslation";
+import { Info } from "lucide-react";
 
-const PrioriteitenActiviteiten = () => {
+interface StepProps {
+  mode?: 'edit' | 'view';
+}
+
+const PrioriteitenActiviteiten = ({ mode = 'edit' }: StepProps) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const isViewMode = mode === 'view';
   const {
     responses,
     aiKeywords,
@@ -89,6 +95,24 @@ const PrioriteitenActiviteiten = () => {
 
       {/* Main Content */}
       <div className="max-w-[1440px] mx-auto px-6 py-12">
+        {isViewMode && (
+          <div className="mb-6">
+            <div className="bg-blue-50 border-2 border-blue-400 rounded-xl p-4">
+              <div className="flex items-start gap-3">
+                <Info className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-blue-900 font-medium">
+                    {t('common.view_only_mode.title')}
+                  </p>
+                  <p className="text-blue-700 text-sm mt-1">
+                    {t('common.view_only_mode.description')}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+        
         <Card className="rounded-3xl shadow-xl">
           <CardContent className="p-12">
             {/* Title */}
@@ -110,11 +134,14 @@ const PrioriteitenActiviteiten = () => {
                 {availableKeywords.map(keyword => (
                   <button
                     key={keyword}
-                    onClick={() => handleKeywordToggle(keyword)}
+                    onClick={() => !isViewMode && handleKeywordToggle(keyword)}
+                    disabled={isViewMode}
                     className={`p-3 rounded-lg border-2 transition-all duration-200 text-sm font-medium ${
                       selectedKeywords.includes(keyword)
                         ? "bg-blue-900 text-white border-blue-900 shadow-md"
-                        : "bg-white text-blue-900 border-gray-300 hover:border-blue-900 hover:bg-blue-50"
+                        : isViewMode
+                          ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
+                          : "bg-white text-blue-900 border-gray-300 hover:border-blue-900 hover:bg-blue-50"
                     }`}
                   >
                     {keyword}
@@ -136,11 +163,14 @@ const PrioriteitenActiviteiten = () => {
               </Label>
               <Textarea 
                 id="extraText" 
-                placeholder={t('profiel_voltooien.prioriteiten.activiteiten.extra_text_placeholder')}
+                placeholder={isViewMode ? "" : t('profiel_voltooien.prioriteiten.activiteiten.extra_text_placeholder')}
                 value={extraText} 
-                onChange={e => handleExtraTextChange(e.target.value)} 
-                onBlur={handleExtraTextBlur} 
-                className="min-h-[80px] border-gray-300 focus:border-blue-900 focus:ring-blue-900" 
+                onChange={e => handleExtraTextChange(e.target.value)}
+                onBlur={!isViewMode ? handleExtraTextBlur : undefined}
+                disabled={isViewMode}
+                className={`min-h-[80px] border-gray-300 focus:border-blue-900 focus:ring-blue-900 ${
+                  isViewMode ? 'bg-gray-100 cursor-not-allowed text-gray-700' : ''
+                }`}
               />
             </div>
 

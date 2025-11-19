@@ -51,7 +51,9 @@ const ProgressStepsGrid = ({
       title: t('common.enthousiasmescan'),
       description: t('dashboard.steps.enthousiasme.description'),
       actionButton: t('dashboard.steps.enthousiasme.action'),
-      icon: "heart"
+      icon: "heart",
+      editPath: "/enthousiasme-intro",
+      viewPath: "/enthousiasme-step-1"
     },
     {
       step: 2,
@@ -59,7 +61,9 @@ const ProgressStepsGrid = ({
       title: t('common.wensberoepen'),
       description: t('dashboard.steps.wensberoepen.description'),
       actionButton: t('dashboard.steps.wensberoepen.action'),
-      icon: "briefcase"
+      icon: "briefcase",
+      editPath: "/wensberoepen-intro",
+      viewPath: "/wensberoepen-step-1"
     },
     {
       step: 3,
@@ -67,7 +71,9 @@ const ProgressStepsGrid = ({
       title: t('common.persoonsprofiel'),
       description: t('dashboard.steps.persoonsprofiel.description'),
       actionButton: t('dashboard.steps.persoonsprofiel.action'),
-      icon: "user"
+      icon: "user",
+      editPath: "/profiel-voltooien-intro",
+      viewPath: "/prioriteiten-activiteiten"
     },
     {
       step: 4,
@@ -123,6 +129,9 @@ const ProgressStepsGrid = ({
               isLocked={lockStatus.isLocked}
               lockedReason={lockStatus.lockedReason}
               onClick={() => handleStepClick(step.id)}
+              editPath={step.editPath}
+              viewPath={step.viewPath}
+              hasCompletedReport={stepAccess.hasCompletedReport}
             />
           </div>
         );
