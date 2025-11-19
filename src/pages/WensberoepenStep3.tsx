@@ -13,16 +13,22 @@ import { sendWebhookData } from "@/services/webhookService";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "@/hooks/useTranslation";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { Info } from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
 
 type WensberoepenResponse = Tables<"wensberoepen_responses">;
 
-const WensberoepenStep3 = () => {
+interface StepProps {
+  mode?: 'edit' | 'view';
+}
+
+const WensberoepenStep3 = ({ mode = 'edit' }: StepProps) => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { t } = useTranslation();
   const { responses, saveResponse, isLoading } = useWensberoepenResponses();
   const { collectWebhookData } = useWebhookData();
+  const isViewMode = mode === 'view';
   
   const [jobTitle, setJobTitle] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -247,6 +253,24 @@ const WensberoepenStep3 = () => {
 
       {/* Main Content */}
       <div className="max-w-[1440px] mx-auto px-6 py-12">
+        {isViewMode && (
+          <div className="mb-6">
+            <div className="bg-blue-50 border-2 border-blue-400 rounded-xl p-4">
+              <div className="flex items-start gap-3">
+                <Info className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-blue-900 font-medium">
+                    {t('common.view_only_mode.title')}
+                  </p>
+                  <p className="text-blue-700 text-sm mt-1">
+                    {t('common.view_only_mode.description')}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+        
         <WensberoepenProgress currentStep={3} totalSteps={3} />
         
         <Card className="rounded-3xl shadow-xl">
@@ -275,11 +299,14 @@ const WensberoepenStep3 = () => {
               </Label>
               <Input 
                 id="jobTitle" 
-                placeholder={t('wensberoepen.step3.job_title_placeholder')} 
+                placeholder={isViewMode ? "" : t('wensberoepen.step3.job_title_placeholder')} 
                 value={jobTitle} 
                 onChange={(e) => handleJobTitleChange(e.target.value)} 
-                onBlur={handleJobTitleBlur} 
-                className="text-lg border-gray-300 focus:border-blue-900 focus:ring-blue-900" 
+                onBlur={!isViewMode ? handleJobTitleBlur : undefined}
+                disabled={isViewMode}
+                className={`text-lg border-gray-300 focus:border-blue-900 focus:ring-blue-900 ${
+                  isViewMode ? 'bg-gray-100 cursor-not-allowed text-gray-700' : ''
+                }`}
               />
             </div>
 
@@ -292,11 +319,14 @@ const WensberoepenStep3 = () => {
                   </Label>
                   <Textarea 
                     id={`question${index + 1}`} 
-                    placeholder={t('wensberoepen.step3.answer_placeholder')} 
-                    value={answers[`question${index + 1}` as keyof typeof answers]} 
+                    placeholder={isViewMode ? "" : t('wensberoepen.step3.answer_placeholder')} 
+                    value={answers[`question${index + 1}` as keyof typeof answers]}
                     onChange={(e) => handleInputChange(`question${index + 1}`, e.target.value)} 
-                    onBlur={(e) => handleInputBlur(`question${index + 1}`, e.target.value)} 
-                    className="min-h-[80px] border-gray-300 focus:border-blue-900 focus:ring-blue-900" 
+                    onBlur={(e) => !isViewMode && handleInputBlur(`question${index + 1}`, e.target.value)}
+                    disabled={isViewMode}
+                    className={`min-h-[80px] border-gray-300 focus:border-blue-900 focus:ring-blue-900 ${
+                      isViewMode ? 'bg-gray-100 cursor-not-allowed text-gray-700' : ''
+                    }`}
                   />
                 </div>
               ))}

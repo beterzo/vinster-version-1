@@ -1,5 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import NotFound from "@/pages/NotFound";
+import { useStepAccess } from "@/hooks/useStepAccess";
+import ConditionalRoute from "@/components/ConditionalRoute";
+import React from "react";
 
 // Public route imports
 import LandingPage from "@/pages/LandingPage";
@@ -49,6 +52,32 @@ import PrioriteitenInteresses from "@/pages/PrioriteitenInteresses";
 import PrioriteitenWerkomstandigheden from "@/pages/PrioriteitenWerkomstandigheden";
 import RapportGenererenConfirmatie from "@/pages/RapportGenererenConfirmatie";
 import { Navigate } from "react-router-dom";
+
+const ConditionalRouteWithAccess = ({ 
+  stepId, 
+  children 
+}: { 
+  stepId: string; 
+  children: React.ReactNode;
+}) => {
+  const stepAccess = useStepAccess();
+  const step = stepAccess[stepId as keyof typeof stepAccess];
+  
+  if (typeof step === 'object' && 'canAccess' in step && 'canEdit' in step) {
+    return (
+      <ConditionalRoute
+        canAccess={step.canAccess}
+        canEdit={step.canEdit}
+        isLoading={stepAccess.isLoading}
+        blockedReason={step.blockedReason}
+      >
+        {children}
+      </ConditionalRoute>
+    );
+  }
+  
+  return <>{children}</>;
+};
 
 const AppRouter = () => {
   return (

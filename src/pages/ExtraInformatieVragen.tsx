@@ -8,12 +8,18 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useExtraInformatieResponses } from "@/hooks/useExtraInformatieResponses";
 import { useToast } from "@/hooks/use-toast";
+import { Info } from "lucide-react";
 
-const ExtraInformatieVragen = () => {
+interface StepProps {
+  mode?: 'edit' | 'view';
+}
+
+const ExtraInformatieVragen = ({ mode = 'edit' }: StepProps) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { toast } = useToast();
   const { responses, saveResponses, loading } = useExtraInformatieResponses();
+  const isViewMode = mode === 'view';
   
   const [answers, setAnswers] = useState({
     opleidingsniveau: "",
@@ -134,6 +140,24 @@ const ExtraInformatieVragen = () => {
 
       {/* Main Content */}
       <div className="max-w-[1440px] mx-auto px-6 py-12">
+        {isViewMode && (
+          <div className="mb-6">
+            <div className="bg-blue-50 border-2 border-blue-400 rounded-xl p-4">
+              <div className="flex items-start gap-3">
+                <Info className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-blue-900 font-medium">
+                    {t('common.view_only_mode.title')}
+                  </p>
+                  <p className="text-blue-700 text-sm mt-1">
+                    {t('common.view_only_mode.description')}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+        
         <Card className="rounded-3xl shadow-xl">
           <CardContent className="p-12">
             {/* Title */}
@@ -155,11 +179,14 @@ const ExtraInformatieVragen = () => {
                   </Label>
                   <Textarea
                     id={item.field}
-                    placeholder={item.placeholder}
+                    placeholder={isViewMode ? "" : item.placeholder}
                     value={answers[item.field as keyof typeof answers]}
                     onChange={(e) => handleInputChange(item.field, e.target.value)}
-                    onBlur={(e) => handleInputBlur(item.field, e.target.value)}
-                    className="min-h-[80px] border-gray-300 focus:border-blue-900 focus:ring-blue-900"
+                    onBlur={(e) => !isViewMode && handleInputBlur(item.field, e.target.value)}
+                    disabled={isViewMode}
+                    className={`min-h-[80px] border-gray-300 focus:border-blue-900 focus:ring-blue-900 ${
+                      isViewMode ? 'bg-gray-100 cursor-not-allowed text-gray-700' : ''
+                    }`}
                   />
                 </div>
               ))}

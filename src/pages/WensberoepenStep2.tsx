@@ -9,14 +9,20 @@ import { useNavigate } from "react-router-dom";
 import WensberoepenProgress from "@/components/WensberoepenProgress";
 import { useWensberoepenResponses } from "@/hooks/useWensberoepenResponses";
 import { useTranslation } from "@/hooks/useTranslation";
+import { Info } from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
 
 type WensberoepenResponse = Tables<"wensberoepen_responses">;
 
-const WensberoepenStep2 = () => {
+interface StepProps {
+  mode?: 'edit' | 'view';
+}
+
+const WensberoepenStep2 = ({ mode = 'edit' }: StepProps) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { responses, saveResponse, isLoading } = useWensberoepenResponses();
+  const isViewMode = mode === 'view';
   
   const [jobTitle, setJobTitle] = useState("");
   const [answers, setAnswers] = useState({
@@ -128,6 +134,24 @@ const WensberoepenStep2 = () => {
       </div>
 
       <div className="max-w-[1440px] mx-auto px-6 py-12">
+        {isViewMode && (
+          <div className="mb-6">
+            <div className="bg-blue-50 border-2 border-blue-400 rounded-xl p-4">
+              <div className="flex items-start gap-3">
+                <Info className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-blue-900 font-medium">
+                    {t('common.view_only_mode.title')}
+                  </p>
+                  <p className="text-blue-700 text-sm mt-1">
+                    {t('common.view_only_mode.description')}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+        
         <WensberoepenProgress currentStep={2} totalSteps={3} />
         
         <Card className="rounded-3xl shadow-xl">
@@ -147,11 +171,14 @@ const WensberoepenStep2 = () => {
               </Label>
               <Input 
                 id="jobTitle" 
-                placeholder={t('wensberoepen.step2.job_title_placeholder')}
+                placeholder={isViewMode ? "" : t('wensberoepen.step2.job_title_placeholder')}
                 value={jobTitle} 
                 onChange={(e) => handleJobTitleChange(e.target.value)} 
-                onBlur={handleJobTitleBlur} 
-                className="text-lg border-gray-300 focus:border-blue-900 focus:ring-blue-900" 
+                onBlur={!isViewMode ? handleJobTitleBlur : undefined}
+                disabled={isViewMode}
+                className={`text-lg border-gray-300 focus:border-blue-900 focus:ring-blue-900 ${
+                  isViewMode ? 'bg-gray-100 cursor-not-allowed text-gray-700' : ''
+                }`}
               />
             </div>
 
@@ -163,11 +190,14 @@ const WensberoepenStep2 = () => {
                   </Label>
                   <Textarea 
                     id={`question${index + 1}`} 
-                    placeholder={t('wensberoepen.step2.answer_placeholder')}
+                    placeholder={isViewMode ? "" : t('wensberoepen.step2.answer_placeholder')}
                     value={answers[`question${index + 1}` as keyof typeof answers]} 
                     onChange={(e) => handleInputChange(`question${index + 1}`, e.target.value)} 
-                    onBlur={(e) => handleInputBlur(`question${index + 1}`, e.target.value)} 
-                    className="min-h-[80px] border-gray-300 focus:border-blue-900 focus:ring-blue-900" 
+                    onBlur={(e) => !isViewMode && handleInputBlur(`question${index + 1}`, e.target.value)}
+                    disabled={isViewMode}
+                    className={`min-h-[80px] border-gray-300 focus:border-blue-900 focus:ring-blue-900 ${
+                      isViewMode ? 'bg-gray-100 cursor-not-allowed text-gray-700' : ''
+                    }`}
                   />
                 </div>
               ))}
@@ -184,13 +214,13 @@ const WensberoepenStep2 = () => {
               <Button 
                 onClick={handleNext} 
                 className={`font-semibold px-8 ${
-                  step2Complete 
+                  isViewMode || step2Complete 
                     ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 
                     : "bg-gray-300 text-gray-500 cursor-not-allowed"
                 }`} 
-                disabled={!step2Complete}
+                disabled={!isViewMode && !step2Complete}
               >
-                {t('wensberoepen.step2.next_button')}
+                {isViewMode ? t('common.button.next') : t('wensberoepen.step2.next_button')}
               </Button>
             </div>
           </CardContent>
