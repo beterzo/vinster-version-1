@@ -204,13 +204,13 @@ const ExtraInformatieVragen = ({ mode = 'edit' }: StepProps) => {
               <Button 
                 onClick={handleComplete}
                 className={`font-semibold px-8 ${
-                  allFieldsFilled
+                  isViewMode || allFieldsFilled
                     ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 
                     : "bg-gray-300 text-gray-500 cursor-not-allowed"
                 }`}
-                disabled={!allFieldsFilled}
+                disabled={!isViewMode && !allFieldsFilled}
               >
-                {t('profiel_voltooien.extra_informatie.next_button')}
+                {isViewMode ? t('common.button.next') : t('profiel_voltooien.extra_informatie.next_button')}
               </Button>
             </div>
           </CardContent>
