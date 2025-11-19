@@ -155,14 +155,16 @@ const Dashboard = () => {
                         {t('dashboard.report_limit.button_download_report')}
                       </Button>
                     )}
-                    <Button
-                      onClick={() => navigate('/zoekprofiel-antwoorden')}
-                      variant="outline"
-                      className="border-2 border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold gap-2"
-                    >
-                      <FileText className="w-4 h-4" />
-                      {t('dashboard.report_limit.button_download_zoekprofiel')}
-                    </Button>
+            {hasExistingZoekprofiel && (
+              <Button
+                onClick={() => navigate('/zoekprofiel-antwoorden')}
+                variant="outline"
+                className="border-2 border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold gap-2"
+              >
+                <FileText className="w-4 h-4" />
+                {t('dashboard.report_limit.button_download_zoekprofiel')}
+              </Button>
+            )}
                     <Button
                       onClick={() => navigate('/traject-opnieuw-starten')}
                       variant="outline"
