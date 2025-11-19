@@ -109,9 +109,13 @@
       "rapport_required": "Du må først fullføre rapporten din for å fortsette"
     },
     "report_limit": {
-      "banner_title": "🎉 Din Vinster-reise er fullført!",
-      "banner_description": "Du har allerede generert en rapport. Last ned resultatene dine eller start en ny reise.",
+      "banner_title_report_only": "Rapporten din er generert",
+      "banner_description_report_only": "Last ned resultatene dine og kom i gang med søkeprofilen din.",
+      "banner_title": "Din Vinster-reise er fullført",
+      "banner_description": "Last ned resultatene dine eller start en ny reise",
       "restart_cta": "Start på nytt",
+      "button_download_report": "Last ned rapport",
+      "button_download_zoekprofiel": "Last ned søkeprofil",
       "blocked_reason": "Du har allerede generert en rapport. For å starte på nytt må du kjøpe en ny reise.",
       "view_only_notice": "Du ser på dine tidligere innsendte svar. For å endre dem må du starte en ny reise."
     }

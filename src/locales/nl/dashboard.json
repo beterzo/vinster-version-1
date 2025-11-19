@@ -110,9 +110,13 @@
       "rapport_required": "Je moet eerst je rapport voltooien om verder te gaan"
     },
     "report_limit": {
-      "banner_title": "🎉 Je Vinster traject is voltooid!",
-      "banner_description": "Je hebt al een rapport gegenereerd. Download je resultaten of start een nieuw traject.",
+      "banner_title_report_only": "Je rapport is gegenereerd",
+      "banner_description_report_only": "Download je resultaten en ga aan de slag met je zoekprofiel.",
+      "banner_title": "Je Vinster traject is voltooid",
+      "banner_description": "Download je resultaten of start een nieuw traject",
       "restart_cta": "Opnieuw beginnen",
+      "button_download_report": "Download rapport",
+      "button_download_zoekprofiel": "Download zoekprofiel",
       "blocked_reason": "Je hebt al een rapport gegenereerd. Om opnieuw te beginnen, moet je een tweede journey kopen.",
       "view_only_notice": "Je bekijkt je eerder ingevulde antwoorden. Om deze te wijzigen, moet je een nieuw traject starten."
     }

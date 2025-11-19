@@ -109,9 +109,13 @@
       "rapport_required": "Sie müssen zuerst Ihren Bericht abschließen, um fortzufahren"
     },
     "report_limit": {
-      "banner_title": "🎉 Ihre Vinster-Reise ist abgeschlossen!",
-      "banner_description": "Sie haben bereits einen Bericht generiert. Laden Sie Ihre Ergebnisse herunter oder starten Sie eine neue Reise.",
+      "banner_title_report_only": "Ihr Bericht wurde erstellt",
+      "banner_description_report_only": "Laden Sie Ihre Ergebnisse herunter und beginnen Sie mit Ihrem Suchprofil.",
+      "banner_title": "Ihre Vinster-Reise ist abgeschlossen",
+      "banner_description": "Laden Sie Ihre Ergebnisse herunter oder starten Sie eine neue Reise",
       "restart_cta": "Neu beginnen",
+      "button_download_report": "Bericht herunterladen",
+      "button_download_zoekprofiel": "Suchprofil herunterladen",
       "blocked_reason": "Sie haben bereits einen Bericht generiert. Um neu zu beginnen, müssen Sie eine zweite Journey kaufen.",
       "view_only_notice": "Sie sehen Ihre zuvor eingegebenen Antworten. Um diese zu ändern, müssen Sie eine neue Reise starten."
     }
