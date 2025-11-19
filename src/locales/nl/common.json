@@ -66,6 +66,22 @@
     "profile_completing": "Profiel wordt afgerond en rapport gegenereerd...",
     "completing": "Afronden..."
   },
+  "view_only_mode": {
+    "title": "Je bekijkt je eerder ingevulde antwoorden",
+    "description": "Om deze antwoorden te wijzigen, moet je een nieuw traject starten. Dit kun je doen via de 'Traject opnieuw starten' knop op je dashboard."
+  },
+  "button": {
+    "view_answers": "Bekijk je antwoorden",
+    "start": "Start",
+    "previous": "Vorige",
+    "next": "Volgende",
+    "save": "Opslaan",
+    "save_and_next": "Opslaan en volgende",
+    "back_to_overview": "Terug naar overzicht"
+  },
+  "placeholder": {
+    "describe_answer": "Beschrijf je antwoord..."
+  },
   "rapport_confirmatie": {
     "title": "Bevestig je rapport generatie",
     "subtitle": "Je staat op het punt je loopbaanrapport te genereren",

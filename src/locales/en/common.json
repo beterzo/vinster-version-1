@@ -66,6 +66,22 @@
     "profile_completing": "Profile being completed and report generated...",
     "completing": "Completing..."
   },
+  "view_only_mode": {
+    "title": "You are viewing your previously entered answers",
+    "description": "To modify these answers, you need to start a new journey. You can do this via the 'Restart journey' button on your dashboard."
+  },
+  "button": {
+    "view_answers": "View your answers",
+    "start": "Start",
+    "previous": "Previous",
+    "next": "Next",
+    "save": "Save",
+    "save_and_next": "Save and next",
+    "back_to_overview": "Back to overview"
+  },
+  "placeholder": {
+    "describe_answer": "Describe your answer..."
+  },
   "rapport_confirmatie": {
     "title": "Confirm your report generation",
     "subtitle": "You are about to generate your career report",

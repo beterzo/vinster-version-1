@@ -1,9 +1,11 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
 
 interface ConditionalRouteProps {
   canAccess: boolean;
+  canEdit?: boolean;
+  mode?: 'edit' | 'view';
   isLoading?: boolean;
   blockedReason?: string;
   redirectTo?: string;
@@ -12,6 +14,8 @@ interface ConditionalRouteProps {
 
 const ConditionalRoute = ({ 
   canAccess, 
+  canEdit = true,
+  mode,
   isLoading = false,
   blockedReason, 
   redirectTo = '/home', 
@@ -19,6 +23,8 @@ const ConditionalRoute = ({
 }: ConditionalRouteProps) => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  
+  const actualMode = mode || (canEdit ? 'edit' : 'view');
 
   useEffect(() => {
     // Only check access after loading is complete
@@ -48,7 +54,17 @@ const ConditionalRoute = ({
     return null;
   }
 
-  return <>{children}</>;
+  // Clone children and pass mode prop
+  return (
+    <>
+      {React.Children.map(children, child => {
+        if (React.isValidElement(child)) {
+          return React.cloneElement(child, { mode: actualMode } as any);
+        }
+        return child;
+      })}
+    </>
+  );
 };
 
 export default ConditionalRoute;

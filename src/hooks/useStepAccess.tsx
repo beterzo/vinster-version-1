@@ -43,26 +43,30 @@ export const useStepAccess = () => {
 
     const stepAccessData = {
       enthousiasme: {
-        canAccess: !isBlockedByCompletedReport,
+        canAccess: true, // Always allow access for read-only viewing
+        canEdit: !isBlockedByCompletedReport, // Only edit if not blocked
         isCompleted: enthousiasmeCompleted,
         blockedReason: isBlockedByCompletedReport ? t('dashboard.report_limit.blocked_reason') : undefined
       },
       wensberoepen: {
-        canAccess: enthousiasmeCompleted && !isBlockedByCompletedReport,
+        canAccess: enthousiasmeCompleted, // Must have enthousiasme completed
+        canEdit: enthousiasmeCompleted && !isBlockedByCompletedReport,
         isCompleted: isWensberoepenComplete,
         blockedReason: isBlockedByCompletedReport 
           ? t('dashboard.report_limit.blocked_reason')
           : t('dashboard.step_blocked.enthousiasme_required')
       },
       persoonsprofiel: {
-        canAccess: isWensberoepenComplete && !isBlockedByCompletedReport,
+        canAccess: isWensberoepenComplete,
+        canEdit: isWensberoepenComplete && !isBlockedByCompletedReport,
         isCompleted: persoonsprofielCompleted,
         blockedReason: isBlockedByCompletedReport
           ? t('dashboard.report_limit.blocked_reason')
           : t('dashboard.step_blocked.wensberoepen_required')
       },
       rapport: {
-        canAccess: persoonsprofielCompleted && !isBlockedByCompletedReport,
+        canAccess: persoonsprofielCompleted,
+        canEdit: persoonsprofielCompleted && !isBlockedByCompletedReport,
         isCompleted: rapportCompleted,
         blockedReason: isBlockedByCompletedReport
           ? t('dashboard.report_limit.blocked_reason')
@@ -70,9 +74,19 @@ export const useStepAccess = () => {
       },
       zoekprofiel: {
         canAccess: rapportCompleted,
+        canEdit: rapportCompleted,
         isCompleted: false,
         blockedReason: t('dashboard.step_blocked.rapport_required')
       }
+    };
+
+    // Helper function to get step mode
+    const getStepMode = (stepId: string): 'edit' | 'view' => {
+      const step = stepAccessData[stepId as keyof typeof stepAccessData];
+      if (step && 'canEdit' in step) {
+        return step.canEdit ? 'edit' : 'view';
+      }
+      return 'edit';
     };
 
     return {
@@ -80,7 +94,8 @@ export const useStepAccess = () => {
       // Export additional info for dashboard
       isBlockedByCompletedReport,
       hasCompletedReport,
-      canGenerateNewReport
+      canGenerateNewReport,
+      getStepMode
     };
   }, [enthousiasmeResponses, enthousiasmeLoading, isWensberoepenComplete, wensberoepenLoading, prioriteitenCompleted, extraInformatieCompleted, reportData, hasCompletedReport, canGenerateNewReport, t]);
 
