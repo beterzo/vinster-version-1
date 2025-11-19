@@ -72,5 +72,21 @@
     "wensberoepen_completed": "Drømmejobb-skanningen din er fullført og dataene er sendt.",
     "profile_completing": "Profil fullføres og rapport genereres...",
     "completing": "Fullfører..."
+  },
+  "rapport_confirmatie": {
+    "title": "Bekreft rapportgenereringen din",
+    "subtitle": "Du er i ferd med å generere karriererapporten din",
+    "warning_title": "⚠️ Advarsel: Dette er endelig",
+    "warning_text": "Når du genererer rapporten din, kan du ikke lenger endre svarene dine. Du kan alltid se dem. For å starte på nytt med nye svar, må du kjøpe en andre reise.",
+    "summary_title": "Hva du har fullført:",
+    "summary_enthousiasme": "Entusiasme-skanning",
+    "summary_wensberoepen": "Drømmejobber",
+    "summary_prioriteiten": "Personlig profil (prioriteringer og tilleggsinformasjon)",
+    "completed": "Fullført ✓",
+    "info_text": "Karriererapporten din vil bli generert basert på all denne informasjonen. Vennligst bekreft at du har svart på alle spørsmålene til din tilfredshet.",
+    "confirm_button": "Ja, generer rapporten min",
+    "back_button": "Tilbake til oversikten",
+    "generating": "Rapporten genereres...",
+    "please_wait": "Dette kan ta litt tid. Du blir automatisk videresendt når rapporten er klar."
   }
 }

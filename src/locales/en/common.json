@@ -65,5 +65,21 @@
     "wensberoepen_completed": "Your dream jobs scan has been successfully completed and the data has been sent.",
     "profile_completing": "Profile being completed and report generated...",
     "completing": "Completing..."
+  },
+  "rapport_confirmatie": {
+    "title": "Confirm your report generation",
+    "subtitle": "You are about to generate your career report",
+    "warning_title": "⚠️ Warning: This is final",
+    "warning_text": "Once you generate your report, you can no longer modify your answers. You can always view them. To start over with new answers, you need to purchase a second journey.",
+    "summary_title": "What you have completed:",
+    "summary_enthousiasme": "Enthusiasm scan",
+    "summary_wensberoepen": "Dream jobs",
+    "summary_prioriteiten": "Personal profile (priorities & additional info)",
+    "completed": "Completed ✓",
+    "info_text": "Your career report will be generated based on all this information. Please verify that you have answered all questions to your satisfaction.",
+    "confirm_button": "Yes, generate my report",
+    "back_button": "Back to overview",
+    "generating": "Report is being generated...",
+    "please_wait": "This may take a moment. You will be redirected automatically once your report is ready."
   }
 }

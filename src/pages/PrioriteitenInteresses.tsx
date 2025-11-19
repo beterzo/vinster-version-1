@@ -106,7 +106,7 @@ const PrioriteitenInteresses = () => {
       return;
     }
 
-    // Double-check for existing report before creating new one
+    // Double-check for existing report before proceeding
     if (hasExistingReport) {
       toast({
         title: t('common.toast.report_already_exists'),
@@ -117,72 +117,28 @@ const PrioriteitenInteresses = () => {
       return;
     }
 
+    setIsSubmitting(true);
+    
     try {
-      setIsSubmitting(true);
-      
-      console.log('💾 Saving final responses before webhook...');
-      // Save current responses and wait for completion
-      await saveResponses({ 
+      console.log("💾 Saving interesses responses");
+      await saveResponses({
         selected_interesses_keywords: selectedKeywords,
-        extra_interesses_tekst: extraText 
-      });
-      
-      console.log('✅ Responses saved, creating user report entry...');
-      const { error: reportError } = await supabase
-        .from('user_reports')
-        .upsert({
-          user_id: user.id,
-          report_data: { profile_completed: true },
-          report_status: 'generating',
-          generated_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        }, {
-          onConflict: 'user_id'
-        });
-
-      if (reportError) {
-        console.error('Error creating report entry:', reportError);
-        throw reportError;
-      }
-
-      console.log('✅ Report entry created, collecting webhook data from database...');
-      
-      // Use the new database-driven function to get fresh data
-      const webhookData = await collectMakeWebhookDataFromDB();
-      
-      if (!webhookData) {
-        toast({
-          title: t('common.toast.no_user_data'),
-          description: t('common.toast.no_user_data_description'),
-          variant: "destructive",
-        });
-        return;
-      }
-
-      console.log('🚀 Sending webhook with fresh data:', {
-        selected_interesses_count: JSON.parse(webhookData.selected_interesses_keywords).length,
-        selected_activiteiten_count: JSON.parse(webhookData.selected_activiteiten_keywords).length,
-        selected_werkomstandigheden_count: JSON.parse(webhookData.selected_werkomstandigheden_keywords).length
+        extra_interesses_tekst: extraText
       });
 
-      await sendMakeWebhook(webhookData);
-      
-      console.log("✅ Profile completed and Make.com webhook sent - PDF generation started!");
-      
       toast({
-        title: t('common.toast.profile_completed'),
-        description: t('common.toast.profile_completed_description'),
-        variant: "default",
+        title: t('common.toast.answers_saved'),
+        description: "Je antwoorden zijn opgeslagen. Bevestig je rapportgeneratie in de volgende stap.",
       });
+
+      // Navigate to confirmation page instead of generating report
+      navigate('/rapport-genereren-confirmatie');
       
-      scrollToTop();
-      navigate('/rapport-download');
     } catch (error) {
-      console.error("❌ Error completing profile:", error);
-      
+      console.error('❌ Error saving responses:', error);
       toast({
-        title: t('common.toast.completion_error'),
-        description: t('common.toast.completion_error_description'),
+        title: t('common.toast.save_error'),
+        description: t('common.toast.save_error_description'),
         variant: "destructive",
       });
     } finally {

@@ -102,7 +102,17 @@ const Dashboard = () => {
         }
         break;
       case "loopbaanrapport":
-        navigate("/rapport-download");
+        // Check of alle voorgaande stappen compleet zijn
+        if (stepAccess.persoonsprofiel.isCompleted && !hasUserReport) {
+          // Als persoonsprofiel compleet is maar nog geen rapport, ga naar confirmatie pagina
+          navigate("/rapport-genereren-confirmatie");
+        } else if (!stepAccess.persoonsprofiel.isCompleted) {
+          // Als persoonsprofiel niet compleet is, ga naar intro
+          navigate("/profiel-voltooien-intro");
+        } else {
+          // Als rapport al bestaat, ga naar download pagina
+          navigate("/rapport-download");
+        }
         break;
       case "zoekprofiel":
         navigate("/zoekprofiel-intro");
