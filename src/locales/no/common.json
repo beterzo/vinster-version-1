@@ -73,6 +73,22 @@
     "profile_completing": "Profil fullføres og rapport genereres...",
     "completing": "Fullfører..."
   },
+  "view_only_mode": {
+    "title": "Du ser på dine tidligere svar",
+    "description": "For å endre disse svarene må du starte en ny reise. Du kan gjøre dette via 'Start reisen på nytt'-knappen på dashbordet ditt."
+  },
+  "button": {
+    "view_answers": "Se svarene dine",
+    "start": "Start",
+    "previous": "Forrige",
+    "next": "Neste",
+    "save": "Lagre",
+    "save_and_next": "Lagre og neste",
+    "back_to_overview": "Tilbake til oversikten"
+  },
+  "placeholder": {
+    "describe_answer": "Beskriv svaret ditt..."
+  },
   "rapport_confirmatie": {
     "title": "Bekreft rapportgenereringen din",
     "subtitle": "Du er i ferd med å generere karriererapporten din",

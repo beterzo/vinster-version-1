@@ -114,6 +114,22 @@
     "profile_completing": "Profil wird vervollständigt und Bericht wird erstellt...",
     "completing": "Abschließen..."
   },
+  "view_only_mode": {
+    "title": "Sie sehen Ihre zuvor eingegebenen Antworten",
+    "description": "Um diese Antworten zu ändern, müssen Sie eine neue Reise starten. Dies können Sie über die Schaltfläche 'Reise neu starten' in Ihrem Dashboard tun."
+  },
+  "button": {
+    "view_answers": "Ihre Antworten anzeigen",
+    "start": "Start",
+    "previous": "Zurück",
+    "next": "Weiter",
+    "save": "Speichern",
+    "save_and_next": "Speichern und weiter",
+    "back_to_overview": "Zurück zur Übersicht"
+  },
+  "placeholder": {
+    "describe_answer": "Beschreiben Sie Ihre Antwort..."
+  },
   "rapport_confirmatie": {
     "title": "Bestätigen Sie die Berichterstellung",
     "subtitle": "Sie sind dabei, Ihren Karrierebericht zu erstellen",
