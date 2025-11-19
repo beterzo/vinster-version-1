@@ -111,7 +111,23 @@
     "wensberoepen_incomplete": "Traumjob-Scan nicht vollständig",
     "wensberoepen_incomplete_description": "Füllen Sie alle Traumjob-Felder aus, bevor Sie den Scan abschließen.",
     "wensberoepen_completed": "Ihr Traumjob-Scan wurde erfolgreich abgeschlossen und die Daten wurden gesendet.",
-    "profile_completing": "Profil wird abgeschlossen und Bericht generiert...",
+    "profile_completing": "Profil wird vervollständigt und Bericht wird erstellt...",
     "completing": "Abschließen..."
+  },
+  "rapport_confirmatie": {
+    "title": "Bestätigen Sie die Berichterstellung",
+    "subtitle": "Sie sind dabei, Ihren Karrierebericht zu erstellen",
+    "warning_title": "⚠️ Achtung: Dies ist endgültig",
+    "warning_text": "Sobald Sie Ihren Bericht erstellen, können Sie Ihre Antworten nicht mehr ändern. Sie können sie jedoch jederzeit einsehen. Um mit neuen Antworten neu zu beginnen, müssen Sie eine zweite Journey erwerben.",
+    "summary_title": "Was Sie ausgefüllt haben:",
+    "summary_enthousiasme": "Begeisterungsscan",
+    "summary_wensberoepen": "Wunschberufe",
+    "summary_prioriteiten": "Persönliches Profil (Prioritäten & zusätzliche Informationen)",
+    "completed": "Abgeschlossen ✓",
+    "info_text": "Ihr Karrierebericht wird auf Grundlage all dieser Informationen erstellt. Bitte überprüfen Sie, ob Sie alle Fragen zu Ihrer Zufriedenheit beantwortet haben.",
+    "confirm_button": "Ja, meinen Bericht erstellen",
+    "back_button": "Zurück zur Übersicht",
+    "generating": "Bericht wird erstellt...",
+    "please_wait": "Dies kann einen Moment dauern. Sie werden automatisch weitergeleitet, sobald Ihr Bericht fertig ist."
   }
 }

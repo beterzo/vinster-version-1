@@ -47,6 +47,7 @@ import ExtraInformatieVragen from "@/pages/ExtraInformatieVragen";
 import PrioriteitenActiviteiten from "@/pages/PrioriteitenActiviteiten";
 import PrioriteitenInteresses from "@/pages/PrioriteitenInteresses";
 import PrioriteitenWerkomstandigheden from "@/pages/PrioriteitenWerkomstandigheden";
+import RapportGenererenConfirmatie from "@/pages/RapportGenererenConfirmatie";
 import { Navigate } from "react-router-dom";
 
 const AppRouter = () => {
@@ -118,6 +119,24 @@ const AppRouter = () => {
         element={
           <ProtectedRoute>
             <Home />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/rapport-genereren-confirmatie"
+        element={
+          <ProtectedRoute>
+            <RapportGenererenConfirmatie />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/rapport-download"
+        element={
+          <ProtectedRoute>
+            <RapportDownload />
           </ProtectedRoute>
         }
       />

@@ -65,5 +65,21 @@
     "wensberoepen_completed": "Je wensberoepen scan is succesvol afgerond en de gegevens zijn verzonden.",
     "profile_completing": "Profiel wordt afgerond en rapport gegenereerd...",
     "completing": "Afronden..."
+  },
+  "rapport_confirmatie": {
+    "title": "Bevestig je rapport generatie",
+    "subtitle": "Je staat op het punt je loopbaanrapport te genereren",
+    "warning_title": "⚠️ Let op: Dit is definitief",
+    "warning_text": "Zodra je je rapport genereert, kun je je antwoorden niet meer aanpassen. Je kunt ze wel altijd bekijken. Om opnieuw te beginnen met nieuwe antwoorden, moet je een tweede traject aanschaffen.",
+    "summary_title": "Wat je hebt ingevuld:",
+    "summary_enthousiasme": "Enthousiasmescan",
+    "summary_wensberoepen": "Wensberoepen",
+    "summary_prioriteiten": "Persoonsprofiel (prioriteiten & extra info)",
+    "completed": "Voltooid ✓",
+    "info_text": "Je loopbaanrapport wordt gegenereerd op basis van al deze gegevens. Controleer goed of je alle vragen naar tevredenheid hebt beantwoord.",
+    "confirm_button": "Ja, genereer mijn rapport",
+    "back_button": "Terug naar overzicht",
+    "generating": "Rapport wordt gegenereerd...",
+    "please_wait": "Dit kan even duren. Je wordt automatisch doorgestuurd zodra je rapport klaar is."
   }
 }
