@@ -136,11 +136,11 @@
       "subtitle": "Letzte Fragen zu Ihrem Hintergrund",
       "question1": "Was ist Ihr höchster Bildungsabschluss?",
       "question2": "Welche Berufsausbildung haben Sie absolviert?",
-      "question3": "In welchem Sektor/welchen Sektoren möchten Sie gerne arbeiten?",
+      "question3": "In welchen Organisation(en) und/oder Sektoren würden Sie gerne arbeiten?",
       "question4": "Gibt es (körperliche) Einschränkungen, die wir berücksichtigen sollten?",
       "placeholder1": "Zum Beispiel: FH, Uni, Berufsschule Stufe 4, etc.",
       "placeholder2": "Zum Beispiel: Betriebswirtschaft, Psychologie, Technische Informatik, etc.",
-      "placeholder3": "Zum Beispiel: IT, Gesundheitswesen, Bildung, Marketing, etc.",
+      "placeholder3": "Zum Beispiel: IT, Gesundheitswesen, Regierung, große Konzerne, kleine Start-ups, etc.",
       "placeholder4": "Zum Beispiel: Keine schwere körperliche Arbeit, Bildschirmarbeit begrenzen, etc. (optional)",
       "back_button": "Zurück zur Profil-Einführung",
       "next_button": "Zu Prioritäten"

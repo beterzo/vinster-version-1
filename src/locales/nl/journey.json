@@ -134,11 +134,11 @@
       "subtitle": "Laatste vragen over je achtergrond",
       "question1": "Wat is je hoogste opleidingsniveau?",
       "question2": "Welke beroepsopleiding heb je gevolgd?",
-      "question3": "In welke sector(en) zou je graag willen werken?",
+      "question3": "In welke organisatie(s) en/of sectoren zou je graag willen werken?",
       "question4": "Zijn er (fysieke) beperkingen waar we rekening mee dienen te houden?",
       "placeholder1": "Bijvoorbeeld: HBO, WO, MBO niveau 4, etc.",
       "placeholder2": "Bijvoorbeeld: Bedrijfskunde, Psychologie, Technische Informatica, etc.",
-      "placeholder3": "Bijvoorbeeld: ICT, Zorg, Onderwijs, Marketing, etc.",
+      "placeholder3": "Bijvoorbeeld: ICT, Zorg, overheid, grote multinationals, kleine start-ups, etc.",
       "placeholder4": "Bijvoorbeeld: Geen zware fysieke arbeid, beeldschermwerk beperken, etc. (optioneel)",
       "back_button": "Terug naar profiel intro",
       "next_button": "Naar prioriteiten"
