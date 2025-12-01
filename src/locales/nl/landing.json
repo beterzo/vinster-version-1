@@ -1,9 +1,9 @@
 
 {
   "landing": {
-    "tagline": "Vind werk dat bij je past, met AI.\nSlim, persoonlijk en verrassend.",
+    "tagline": "Weet je niet welk werk bij je past?\nVind het met AI-gedreven loopbaanadvies.",
     "welcome": "Welkom bij",
-    "description": "Voor iedereen die denkt: \"Wat wil ik eigenlijk écht met mijn werk?\"\nOf je nu net begint, vastloopt, iets nieuws zoekt of gewoon even wilt heroriënteren – Vinster geeft overzicht, houvast en richting.",
+    "description": "Weten wat je wilt begint hier. Of je nu vastloopt, heroriënteert of gewoon even wilt checken – Vinster helpt je ontdekken welk werk bij je past met de beproefde Loopbaantrechter methode.",
     "login": "Inloggen",
     "hero": {
       "title": "Ontdek je voorkeuren, vind je loopbaan",
@@ -13,7 +13,7 @@
     },
     "what_is_vinster": {
       "title": "Wat is Vinster?",
-      "description": "Vinster is een AI-gedreven platform dat je helpt te ontdekken welk werk bij je past. Door middel van diepgaande vragen en geavanceerde algoritmes creëren we een persoonlijk profiel dat je helpt bij het maken van weloverwogen loopbaankeuzes.",
+      "description": "Vinster is een AI-gedreven online loopbaanadvies platform, gebaseerd op de Loopbaantrechter methode van Heidi Jansen. Door middel van slimme vragen ontdek je welk werk bij je past – persoonlijk, concreet en verrassend.",
       "based_on": "Gebouwd op bewezen methodes uit de praktijk en jouw unieke eigenschappen krijg je:",
       "two_matching_functions": "Twee matchende functies die perfect bij je passen",
       "one_surprising_suggestion": "Eén verrassend voorstel dat nieuwe mogelijkheden opent",
@@ -33,11 +33,11 @@
     "features": {
       "card1": {
         "title": "Wat is Vinster?",
-        "description": "Vinster is een AI-gedreven platform dat je helpt je ware interesses en talenten te ontdekken. Door middel van diepgaande vragen en geavanceerde algoritmes creëren we een persoonlijk profiel dat je helpt bij het maken van weloverwogen loopbaankeuzes."
+        "description": "Vinster is AI-gedreven online loopbaanadvies, gebaseerd op de Loopbaantrechter methode van Heidi Jansen. Door middel van slimme vragen en geavanceerde AI ontdek je welk werk bij je past – persoonlijk, concreet en verrassend."
       },
       "card2": {
         "title": "Wat krijg je?",
-        "description": "Een uitgebreid persoonlijkheidsrapport, een op maat gemaakt zoekprofiel, en concrete stappen om je gewenste carrière te realiseren. Alles gebouwd op bewezen methodes uit de praktijk en jouw unieke eigenschappen."
+        "description": "Een uitgebreid persoonlijkheidsrapport, een op maat gemaakt zoekprofiel, en concrete stappen om je gewenste carrière te realiseren. Alles gebouwd op de bewezen Loopbaantrechter methode en jouw unieke eigenschappen."
       }
     },
     "process": {
