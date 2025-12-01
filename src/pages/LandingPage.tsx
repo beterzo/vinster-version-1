@@ -7,7 +7,7 @@ import TestimonialSection from "@/components/TestimonialSection";
 import FeatureCards from "@/components/FeatureCards";
 import Footer from "@/components/Footer";
 import { useTranslation } from "@/hooks/useTranslation";
-import TitleManager from "@/components/TitleManager";
+import SEOHead from "@/components/SEOHead";
 import CookieBanner from "@/components/CookieBanner";
 
 const LandingPage = () => {
@@ -46,7 +46,7 @@ const LandingPage = () => {
 
   return (
     <>
-      <TitleManager />
+      <SEOHead />
       <div className="min-h-screen bg-white">
         <HeroSection />
         <FeatureCards />

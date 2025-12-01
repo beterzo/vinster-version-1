@@ -5,12 +5,16 @@
     "back_to_home": "Terug naar Home",
     "questions": [
       {
-        "question": "Wat is Vinster precies?",
-        "answer": "Vinster is een slimme digitale loopbaantool die je helpt om helder te krijgen wat je wil, wat bij je past en welke richting je op kunt. Je beantwoordt een paar gerichte vragen en krijgt daarna een persoonlijk rapport met concrete beroepssuggesties en vervolgstappen."
+        "question": "Wat is Vinster en de Loopbaantrechter?",
+        "answer": "Vinster is online loopbaanadvies gebaseerd op de Loopbaantrechter methode van Heidi Jansen. Het helpt je ontdekken welk werk bij je past door slimme AI-analyse van jouw voorkeuren. Je krijgt concrete beroepssuggesties en een persoonlijk actieplan."
+      },
+      {
+        "question": "Hoe werkt AI in loopbaanadvies?",
+        "answer": "Vinster combineert de bewezen Loopbaantrechter methode met moderne AI. De AI herkent patronen in jouw antwoorden en matcht deze met passende functies. Zo krijg je persoonlijk advies dat écht bij je past – slimmer en sneller dan traditionele loopbaantesten."
       },
       {
         "question": "Voor wie is Vinster bedoeld?",
-        "answer": "Voor iedereen die loopbaankeuzes wil maken die passen. High potentials, doorgroeiers, richting zoekers, heroriënteerders, loopbaancoaches en ouders/verzorgers die willen helpen."
+        "answer": "Voor iedereen die zich afvraagt: welk werk past bij mij? Of je wil weten wat je wilt, richting zoekt, vastloopt of heroriënteert – Vinster helpt je werk vinden dat bij je past. Ook ideaal voor loopbaancoaches en ouders/verzorgers die willen helpen."
       },
       {
         "question": "Hoe lang duurt het traject?",
@@ -22,7 +26,7 @@
       },
       {
         "question": "Moet ik iets installeren?",
-        "answer": "Nee. Alles werkt online, gewoon in je browser. Je hoeft niks te downloaden of te installeren."
+        "answer": "Nee. Alles werkt online, gewoon in je browser. Je hoeft niks te downloaden of te installeren. Dat maakt online loopbaanadvies zo toegankelijk."
       },
       {
         "question": "Kan ik tussendoor stoppen en later verdergaan?",

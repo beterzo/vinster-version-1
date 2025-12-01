@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { JourneyResetProvider } from "@/contexts/JourneyResetContext";
-import TitleManager from "@/components/TitleManager";
+import SEOHead from "@/components/SEOHead";
 import AppRouter from "@/components/AppRouter";
 import CookieBanner from "@/components/CookieBanner";
 import CookieSettings from "@/components/CookieSettings";
@@ -24,7 +24,7 @@ const App = () => {
           <LanguageProvider>
             <JourneyResetProvider>
               <AuthProvider>
-                <TitleManager />
+                <SEOHead />
                 <AppRouter />
                 <CookieBanner />
                 <CookieSettings />
