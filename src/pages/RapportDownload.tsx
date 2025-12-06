@@ -196,7 +196,7 @@ const RapportDownload = () => {
         <Card className="rounded-3xl shadow-xl">
           <CardContent className="p-12 text-center">
             <div className="mb-8">
-              <div className="mx-auto mb-6">
+              <div className="mx-auto mb-6 flex justify-center">
                 {reportStatus === 'completed' ? (
                   <img 
                     src="/lovable-uploads/dab4ec5f-9a13-4472-9793-48c879bdc26e.png" 
