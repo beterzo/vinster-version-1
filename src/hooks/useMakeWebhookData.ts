@@ -92,6 +92,18 @@ export const useMakeWebhookData = () => {
         throw extraInfoError;
       }
 
+      // Fetch wensberoepen responses
+      const { data: wensberoepenData, error: wensberoepenError } = await supabase
+        .from('wensberoepen_responses')
+        .select('*')
+        .eq('user_id', user.id)
+        .maybeSingle();
+
+      if (wensberoepenError) {
+        console.error('Error fetching wensberoepen data:', wensberoepenError);
+        throw wensberoepenError;
+      }
+
       const webhookData: MakeWebhookData = {
         user_id: user.id,
         first_name: profileData?.first_name || "",
@@ -119,13 +131,48 @@ export const useMakeWebhookData = () => {
         beroepsopleiding: extraInfoData?.beroepsopleiding || "",
         fysieke_beperkingen: extraInfoData?.fysieke_beperkingen || "",
         sector_voorkeur: extraInfoData?.sector_voorkeur || "",
+
+        // Wensberoep 1
+        wensberoep_1_titel: wensberoepenData?.wensberoep_1_titel || "",
+        wensberoep_1_werkweek_activiteiten: wensberoepenData?.wensberoep_1_werkweek_activiteiten || "",
+        wensberoep_1_werklocatie_omgeving: wensberoepenData?.wensberoep_1_werklocatie_omgeving || "",
+        wensberoep_1_samenwerking_contacten: wensberoepenData?.wensberoep_1_samenwerking_contacten || "",
+        wensberoep_1_fluitend_thuiskomen: wensberoepenData?.wensberoep_1_fluitend_thuiskomen_dag || "",
+        wensberoep_1_werk_doel: wensberoepenData?.wensberoep_1_werk_doel || "",
+        wensberoep_1_leukste_onderdelen: wensberoepenData?.wensberoep_1_leukste_onderdelen || "",
+        wensberoep_1_belangrijke_aspecten: wensberoepenData?.wensberoep_1_belangrijke_aspecten || "",
+        wensberoep_1_kennis_focus: wensberoepenData?.wensberoep_1_kennis_focus || "",
+
+        // Wensberoep 2
+        wensberoep_2_titel: wensberoepenData?.wensberoep_2_titel || "",
+        wensberoep_2_werkweek_activiteiten: wensberoepenData?.wensberoep_2_werkweek_activiteiten || "",
+        wensberoep_2_werklocatie_omgeving: wensberoepenData?.wensberoep_2_werklocatie_omgeving || "",
+        wensberoep_2_samenwerking_contacten: wensberoepenData?.wensberoep_2_samenwerking_contacten || "",
+        wensberoep_2_fluitend_thuiskomen: wensberoepenData?.wensberoep_2_fluitend_thuiskomen_dag || "",
+        wensberoep_2_werk_doel: wensberoepenData?.wensberoep_2_werk_doel || "",
+        wensberoep_2_leukste_onderdelen: wensberoepenData?.wensberoep_2_leukste_onderdelen || "",
+        wensberoep_2_belangrijke_aspecten: wensberoepenData?.wensberoep_2_belangrijke_aspecten || "",
+        wensberoep_2_kennis_focus: wensberoepenData?.wensberoep_2_kennis_focus || "",
+
+        // Wensberoep 3
+        wensberoep_3_titel: wensberoepenData?.wensberoep_3_titel || "",
+        wensberoep_3_werkweek_activiteiten: wensberoepenData?.wensberoep_3_werkweek_activiteiten || "",
+        wensberoep_3_werklocatie_omgeving: wensberoepenData?.wensberoep_3_werklocatie_omgeving || "",
+        wensberoep_3_samenwerking_contacten: wensberoepenData?.wensberoep_3_samenwerking_contacten || "",
+        wensberoep_3_fluitend_thuiskomen: wensberoepenData?.wensberoep_3_fluitend_thuiskomen_dag || "",
+        wensberoep_3_werk_doel: wensberoepenData?.wensberoep_3_werk_doel || "",
+        wensberoep_3_leukste_onderdelen: wensberoepenData?.wensberoep_3_leukste_onderdelen || "",
+        wensberoep_3_belangrijke_aspecten: wensberoepenData?.wensberoep_3_belangrijke_aspecten || "",
+        wensberoep_3_kennis_focus: wensberoepenData?.wensberoep_3_kennis_focus || "",
       };
 
       console.log('✅ Fresh webhook data collected from database:', {
         selected_activiteiten_count: prioriteitenData?.selected_activiteiten_keywords?.length || 0,
         selected_werkomstandigheden_count: prioriteitenData?.selected_werkomstandigheden_keywords?.length || 0,
         selected_interesses_count: prioriteitenData?.selected_interesses_keywords?.length || 0,
-        selected_interesses_keywords: prioriteitenData?.selected_interesses_keywords
+        wensberoep_1_titel: wensberoepenData?.wensberoep_1_titel,
+        wensberoep_2_titel: wensberoepenData?.wensberoep_2_titel,
+        wensberoep_3_titel: wensberoepenData?.wensberoep_3_titel
       });
 
       return webhookData;
@@ -170,6 +217,39 @@ export const useMakeWebhookData = () => {
       beroepsopleiding: extraInformatieResponses?.beroepsopleiding || "",
       fysieke_beperkingen: extraInformatieResponses?.fysieke_beperkingen || "",
       sector_voorkeur: extraInformatieResponses?.sector_voorkeur || "",
+
+      // Wensberoep 1
+      wensberoep_1_titel: wensberoepenResponses?.wensberoep_1_titel || "",
+      wensberoep_1_werkweek_activiteiten: wensberoepenResponses?.wensberoep_1_werkweek_activiteiten || "",
+      wensberoep_1_werklocatie_omgeving: wensberoepenResponses?.wensberoep_1_werklocatie_omgeving || "",
+      wensberoep_1_samenwerking_contacten: wensberoepenResponses?.wensberoep_1_samenwerking_contacten || "",
+      wensberoep_1_fluitend_thuiskomen: wensberoepenResponses?.wensberoep_1_fluitend_thuiskomen_dag || "",
+      wensberoep_1_werk_doel: wensberoepenResponses?.wensberoep_1_werk_doel || "",
+      wensberoep_1_leukste_onderdelen: wensberoepenResponses?.wensberoep_1_leukste_onderdelen || "",
+      wensberoep_1_belangrijke_aspecten: wensberoepenResponses?.wensberoep_1_belangrijke_aspecten || "",
+      wensberoep_1_kennis_focus: wensberoepenResponses?.wensberoep_1_kennis_focus || "",
+
+      // Wensberoep 2
+      wensberoep_2_titel: wensberoepenResponses?.wensberoep_2_titel || "",
+      wensberoep_2_werkweek_activiteiten: wensberoepenResponses?.wensberoep_2_werkweek_activiteiten || "",
+      wensberoep_2_werklocatie_omgeving: wensberoepenResponses?.wensberoep_2_werklocatie_omgeving || "",
+      wensberoep_2_samenwerking_contacten: wensberoepenResponses?.wensberoep_2_samenwerking_contacten || "",
+      wensberoep_2_fluitend_thuiskomen: wensberoepenResponses?.wensberoep_2_fluitend_thuiskomen_dag || "",
+      wensberoep_2_werk_doel: wensberoepenResponses?.wensberoep_2_werk_doel || "",
+      wensberoep_2_leukste_onderdelen: wensberoepenResponses?.wensberoep_2_leukste_onderdelen || "",
+      wensberoep_2_belangrijke_aspecten: wensberoepenResponses?.wensberoep_2_belangrijke_aspecten || "",
+      wensberoep_2_kennis_focus: wensberoepenResponses?.wensberoep_2_kennis_focus || "",
+
+      // Wensberoep 3
+      wensberoep_3_titel: wensberoepenResponses?.wensberoep_3_titel || "",
+      wensberoep_3_werkweek_activiteiten: wensberoepenResponses?.wensberoep_3_werkweek_activiteiten || "",
+      wensberoep_3_werklocatie_omgeving: wensberoepenResponses?.wensberoep_3_werklocatie_omgeving || "",
+      wensberoep_3_samenwerking_contacten: wensberoepenResponses?.wensberoep_3_samenwerking_contacten || "",
+      wensberoep_3_fluitend_thuiskomen: wensberoepenResponses?.wensberoep_3_fluitend_thuiskomen_dag || "",
+      wensberoep_3_werk_doel: wensberoepenResponses?.wensberoep_3_werk_doel || "",
+      wensberoep_3_leukste_onderdelen: wensberoepenResponses?.wensberoep_3_leukste_onderdelen || "",
+      wensberoep_3_belangrijke_aspecten: wensberoepenResponses?.wensberoep_3_belangrijke_aspecten || "",
+      wensberoep_3_kennis_focus: wensberoepenResponses?.wensberoep_3_kennis_focus || "",
     };
 
     return data;
