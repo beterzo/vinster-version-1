@@ -103,13 +103,9 @@ const Dashboard = () => {
         }
         break;
       case "loopbaanrapport":
-        // Als rapport al bestaat, start direct de download
-        if (hasUserReport && reportData?.pdf_file_path) {
-          const { data } = supabase.storage
-            .from('user-reports')
-            .getPublicUrl(reportData.pdf_file_path);
-          
-          window.open(data.publicUrl, '_blank');
+        // Als rapport al bestaat, ga naar de download pagina
+        if (hasUserReport) {
+          navigate("/rapport-download");
         } else if (stepAccess.persoonsprofiel.isCompleted && !hasUserReport) {
           // Als persoonsprofiel compleet is maar nog geen rapport, ga naar confirmatie pagina
           navigate("/rapport-genereren-confirmatie");
