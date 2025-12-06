@@ -15,9 +15,14 @@ const RapportDownload = () => {
   const {
     toast
   } = useToast();
-  const { t } = useTranslation();
+  const {
+    t
+  } = useTranslation();
   const stepAccess = useStepAccess();
-  const { hasCompletedReport, canGenerateNewReport } = useReportGenerationLimit();
+  const {
+    hasCompletedReport,
+    canGenerateNewReport
+  } = useReportGenerationLimit();
   const {
     data: reportData,
     loading,
@@ -175,12 +180,7 @@ const RapportDownload = () => {
       </div>;
   }
   const status = getStatusMessage();
-  return (
-    <ConditionalRoute 
-      canAccess={stepAccess.rapport.canAccess}
-      isLoading={stepAccess.isLoading}
-      blockedReason={stepAccess.rapport.blockedReason}
-    >
+  return <ConditionalRoute canAccess={stepAccess.rapport.canAccess} isLoading={stepAccess.isLoading} blockedReason={stepAccess.rapport.blockedReason}>
     <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header */}
       <div className="bg-white shadow-sm">
@@ -197,17 +197,9 @@ const RapportDownload = () => {
           <CardContent className="p-12 text-center">
             <div className="mb-8">
               <div className="mx-auto mb-6 flex justify-center">
-                {reportStatus === 'completed' ? (
-                  <img 
-                    src="/lovable-uploads/dab4ec5f-9a13-4472-9793-48c879bdc26e.png" 
-                    alt="Vinster" 
-                    className="w-24 h-24 object-contain" 
-                  />
-                ) : (
-                  <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center">
+                {reportStatus === 'completed' ? <img src="/lovable-uploads/dab4ec5f-9a13-4472-9793-48c879bdc26e.png" alt="Vinster" className="w-24 h-24 object-contain" /> : <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center">
                     {getStatusIcon()}
-                  </div>
-                )}
+                  </div>}
               </div>
               
               <h1 className="text-4xl font-bold text-blue-900 mb-4">
@@ -232,11 +224,7 @@ const RapportDownload = () => {
                   </Button>
                 </div>
                 
-                <div className="mt-8 p-4 bg-blue-50 rounded-lg">
-                  <p className="text-sm text-blue-700 mb-4">
-                    {t('journey.rapport.download.save_tip')}
-                  </p>
-                </div>
+                
 
                 {/* Next Step Button */}
                 <div className="mt-8 pt-6 border-t border-gray-200">
@@ -253,26 +241,20 @@ const RapportDownload = () => {
                 </div>
 
                 {/* Restart Journey Section */}
-                {hasCompletedReport && !canGenerateNewReport && (
-                  <div className="mt-8 p-6 border border-primary/20 bg-primary/5 rounded-lg">
+                {hasCompletedReport && !canGenerateNewReport && <div className="mt-8 p-6 border border-primary/20 bg-primary/5 rounded-lg">
                     <div className="flex items-start gap-4">
                       <Lock className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
                       <div className="flex-1">
                         <h3 className="font-semibold text-foreground mb-2">
                           {t('dashboard.report_limit.view_only_notice')}
                         </h3>
-                        <Button
-                          onClick={() => navigate('/traject-opnieuw-starten')}
-                          variant="outline"
-                          className="mt-3 gap-2"
-                        >
+                        <Button onClick={() => navigate('/traject-opnieuw-starten')} variant="outline" className="mt-3 gap-2">
                           <Lock className="w-4 h-4" />
                           {t('dashboard.report_limit.restart_cta')}
                         </Button>
                       </div>
                     </div>
-                  </div>
-                )}
+                  </div>}
               </div>}
 
             {(reportStatus === 'generating' || reportStatus === 'pending') && <div className="text-center">
@@ -319,7 +301,6 @@ const RapportDownload = () => {
         </Card>
       </div>
     </div>
-    </ConditionalRoute>
-  );
+    </ConditionalRoute>;
 };
 export default RapportDownload;
