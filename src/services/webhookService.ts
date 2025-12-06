@@ -24,6 +24,36 @@ export interface MakeWebhookData {
   beroepsopleiding: string;
   fysieke_beperkingen: string;
   sector_voorkeur: string;
+  // Wensberoep 1
+  wensberoep_1_titel: string;
+  wensberoep_1_werkweek_activiteiten: string;
+  wensberoep_1_werklocatie_omgeving: string;
+  wensberoep_1_samenwerking_contacten: string;
+  wensberoep_1_fluitend_thuiskomen: string;
+  wensberoep_1_werk_doel: string;
+  wensberoep_1_leukste_onderdelen: string;
+  wensberoep_1_belangrijke_aspecten: string;
+  wensberoep_1_kennis_focus: string;
+  // Wensberoep 2
+  wensberoep_2_titel: string;
+  wensberoep_2_werkweek_activiteiten: string;
+  wensberoep_2_werklocatie_omgeving: string;
+  wensberoep_2_samenwerking_contacten: string;
+  wensberoep_2_fluitend_thuiskomen: string;
+  wensberoep_2_werk_doel: string;
+  wensberoep_2_leukste_onderdelen: string;
+  wensberoep_2_belangrijke_aspecten: string;
+  wensberoep_2_kennis_focus: string;
+  // Wensberoep 3
+  wensberoep_3_titel: string;
+  wensberoep_3_werkweek_activiteiten: string;
+  wensberoep_3_werklocatie_omgeving: string;
+  wensberoep_3_samenwerking_contacten: string;
+  wensberoep_3_fluitend_thuiskomen: string;
+  wensberoep_3_werk_doel: string;
+  wensberoep_3_leukste_onderdelen: string;
+  wensberoep_3_belangrijke_aspecten: string;
+  wensberoep_3_kennis_focus: string;
 }
 
 export const sendWebhookData = async (data: WebhookData): Promise<void> => {
