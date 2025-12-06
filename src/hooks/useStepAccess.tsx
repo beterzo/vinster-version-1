@@ -105,7 +105,20 @@ export const useStepAccess = () => {
     if (stepId === 'isBlockedByCompletedReport' || stepId === 'hasCompletedReport' || stepId === 'canGenerateNewReport') {
       return false;
     }
-    const step = stepAccess[stepId as keyof typeof stepAccess];
+    
+    // Map loopbaanrapport naar rapport
+    let mappedId = stepId;
+    if (stepId === 'loopbaanrapport') {
+      mappedId = 'rapport';
+    }
+    
+    const step = stepAccess[mappedId as keyof typeof stepAccess];
+    
+    // Als rapport is voltooid, altijd toegang geven (voor download)
+    if (mappedId === 'rapport' && reportData?.report_status === 'completed') {
+      return true;
+    }
+    
     return step && typeof step === 'object' && 'canAccess' in step ? step.canAccess : false;
   };
 

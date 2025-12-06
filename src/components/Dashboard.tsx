@@ -13,6 +13,7 @@ import { Card } from "@/components/ui/card";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useToast } from "@/hooks/use-toast";
 import { Lock, Download, FileText } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -102,16 +103,19 @@ const Dashboard = () => {
         }
         break;
       case "loopbaanrapport":
-        // Check of alle voorgaande stappen compleet zijn
-        if (stepAccess.persoonsprofiel.isCompleted && !hasUserReport) {
+        // Als rapport al bestaat, start direct de download
+        if (hasUserReport && reportData?.pdf_file_path) {
+          const { data } = supabase.storage
+            .from('user-reports')
+            .getPublicUrl(reportData.pdf_file_path);
+          
+          window.open(data.publicUrl, '_blank');
+        } else if (stepAccess.persoonsprofiel.isCompleted && !hasUserReport) {
           // Als persoonsprofiel compleet is maar nog geen rapport, ga naar confirmatie pagina
           navigate("/rapport-genereren-confirmatie");
         } else if (!stepAccess.persoonsprofiel.isCompleted) {
           // Als persoonsprofiel niet compleet is, ga naar intro
           navigate("/profiel-voltooien-intro");
-        } else {
-          // Als rapport al bestaat, ga naar download pagina
-          navigate("/rapport-download");
         }
         break;
       case "zoekprofiel":
