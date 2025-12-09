@@ -78,9 +78,9 @@ const MobileMenu = () => {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <rect x="0" y="0" width="48" height="8" rx="4" fill="#0476B9" />
-            <rect x="0" y="16" width="48" height="8" rx="4" fill="#0476B9" />
-            <rect x="0" y="32" width="48" height="8" rx="4" fill="#0476B9" />
+            <rect x="0" y="0" width="48" height="8" rx="4" fill="white" />
+            <rect x="0" y="16" width="48" height="8" rx="4" fill="white" />
+            <rect x="0" y="32" width="48" height="8" rx="4" fill="white" />
           </svg>
         </button>
       </DrawerTrigger>
