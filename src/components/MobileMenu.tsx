@@ -70,9 +70,9 @@ const MobileMenu = () => {
         <Button
           variant="ghost"
           size="lg"
-          className="hover:bg-white hover:bg-opacity-10 transition-all duration-200 h-24 w-24"
+          className="hover:bg-white hover:bg-opacity-10 transition-all duration-200 h-28 w-28"
         >
-          <Menu className="h-20 w-20" strokeWidth={4} color="#0476B9" />
+          <Menu className="h-24 w-24" strokeWidth={6} color="#0476B9" />
         </Button>
       </DrawerTrigger>
       <DrawerContent className="bg-white">
