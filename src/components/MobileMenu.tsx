@@ -72,15 +72,15 @@ const MobileMenu = () => {
           aria-label="Open menu"
         >
           <svg 
-            width="48" 
-            height="40" 
-            viewBox="0 0 48 40" 
+            width="32" 
+            height="26" 
+            viewBox="0 0 32 26" 
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <rect x="0" y="0" width="48" height="8" rx="4" fill="white" />
-            <rect x="0" y="16" width="48" height="8" rx="4" fill="white" />
-            <rect x="0" y="32" width="48" height="8" rx="4" fill="white" />
+            <rect x="0" y="0" width="32" height="6" rx="3" fill="white" />
+            <rect x="0" y="10" width="32" height="6" rx="3" fill="white" />
+            <rect x="0" y="20" width="32" height="6" rx="3" fill="white" />
           </svg>
         </button>
       </DrawerTrigger>
