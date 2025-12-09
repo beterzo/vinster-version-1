@@ -9,7 +9,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Menu, X } from "lucide-react";
+import { X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/hooks/useTranslation";
 
@@ -67,13 +67,22 @@ const MobileMenu = () => {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button
-          variant="ghost"
-          size="lg"
-          className="hover:bg-white hover:bg-opacity-10 transition-all duration-200 h-28 w-28"
+        <button
+          className="p-2 hover:opacity-80 transition-opacity focus:outline-none"
+          aria-label="Open menu"
         >
-          <Menu className="h-24 w-24" strokeWidth={6} color="#0476B9" />
-        </Button>
+          <svg 
+            width="48" 
+            height="40" 
+            viewBox="0 0 48 40" 
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect x="0" y="0" width="48" height="8" rx="4" fill="#0476B9" />
+            <rect x="0" y="16" width="48" height="8" rx="4" fill="#0476B9" />
+            <rect x="0" y="32" width="48" height="8" rx="4" fill="#0476B9" />
+          </svg>
+        </button>
       </DrawerTrigger>
       <DrawerContent className="bg-white">
         <DrawerHeader className="flex items-center justify-between px-6">
