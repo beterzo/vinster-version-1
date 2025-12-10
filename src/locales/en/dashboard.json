@@ -136,41 +136,48 @@
     },
     "round_dashboard": {
       "back_to_dashboard": "Back to dashboard",
-      "not_found": "Round not found",
+      "round_not_found": "Round not found",
+      "round_title": "Round",
       "started": "Started",
-      "journey_title": "Your Vinster journey",
-      "journey_subtitle": "Complete all steps to receive your personal career report",
-      "step": "Step",
       "status_completed": "Completed",
+      "status_in_progress": "In progress",
+      "your_journey": "Your Vinster journey",
+      "complete_steps_subtitle": "Complete all steps to receive your personal career report",
+      "step": "Step",
       "status_active": "In progress",
       "status_locked": "Locked",
       "view_answers": "View answers",
       "continue": "Continue",
       "locked": "Locked",
       "progress": "Progress",
-      "complete_previous": "Complete the previous step first",
-      "view_details": "View details",
-      "steps": {
-        "enthousiasme": {
-          "title": "Enthusiasm scan",
-          "description": "Discover what truly drives and motivates you at work"
-        },
-        "wensberoepen": {
-          "title": "Dream jobs",
-          "description": "Explore different career opportunities that suit you"
-        },
-        "persoonsprofiel": {
-          "title": "Personal profile",
-          "description": "Build your personal profile with preferences and priorities"
-        },
-        "loopbaanrapport": {
-          "title": "Career report",
-          "description": "Receive your personal recommendations and insights"
-        },
-        "zoekprofiel": {
-          "title": "Search profile",
-          "description": "Download your search profile for your job applications"
-        }
+      "complete_previous_step": "Complete the previous step first",
+      "step_enthousiasme_title": "Enthusiasm scan",
+      "step_enthousiasme_description": "Discover what truly drives and motivates you at work",
+      "step_wensberoepen_title": "Dream jobs",
+      "step_wensberoepen_description": "Explore different career opportunities that suit you",
+      "step_persoonsprofiel_title": "Personal profile",
+      "step_persoonsprofiel_description": "Build your personal profile with preferences and priorities",
+      "tabs": {
+        "loopbaanrapport": "Career report",
+        "zoekprofiel": "Search profile"
+      },
+      "content": {
+        "locked_title": "Almost there",
+        "locked_message": "Complete the previous steps to generate your career report",
+        "rapport_ready": "Your career report is ready!",
+        "rapport_ready_description": "View your personal career report with recommendations and insights",
+        "rapport_generate": "You can now generate your report!",
+        "rapport_generate_description": "You have completed all steps. Generate your personal career report now",
+        "generate_button": "Generate my report",
+        "view_button": "View report",
+        "download_button": "Download PDF",
+        "zoekprofiel_locked_title": "Almost there",
+        "zoekprofiel_locked": "Generate your career report first to create your search profile",
+        "zoekprofiel_ready": "Your search profile is ready!",
+        "zoekprofiel_ready_description": "View and download your search profile for your job applications",
+        "zoekprofiel_start": "Start your search profile",
+        "zoekprofiel_start_description": "Create your search profile to find your ideal job",
+        "start_zoekprofiel_button": "Start search profile"
       }
     }
   }
