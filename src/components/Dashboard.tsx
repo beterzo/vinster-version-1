@@ -213,7 +213,7 @@ const Dashboard = () => {
           </Card>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-2 gap-8 mt-8">
           {/* Welcome Section - spans first 2 columns */}
           <Card className="lg:col-span-2 p-8 border-0 rounded-3xl" style={{ backgroundColor: '#E6F0F6' }}>
             <h1 className="text-3xl font-bold text-vinster-blue mb-4">
@@ -230,8 +230,8 @@ const Dashboard = () => {
             </div>
           </Card>
 
-          {/* Right Column - Image and Start Button */}
-          <Card className="p-6 border-0 rounded-3xl bg-white flex flex-col">
+          {/* Right Column - Image and Start Button - spans both rows */}
+          <Card className="lg:row-span-2 p-6 border-0 rounded-3xl bg-white flex flex-col">
             <div className="text-center flex-1 flex flex-col">
               <div className="flex-1 mb-6">
                 <img 
