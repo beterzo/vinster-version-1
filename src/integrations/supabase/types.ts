@@ -27,6 +27,7 @@ export type Database = {
           kindertijd_plekken: string | null
           leuk_project_en_rol: string | null
           plezierige_werkperiode_beschrijving: string | null
+          round_id: string | null
           updated_at: string
           user_id: string
         }
@@ -42,6 +43,7 @@ export type Database = {
           kindertijd_plekken?: string | null
           leuk_project_en_rol?: string | null
           plezierige_werkperiode_beschrijving?: string | null
+          round_id?: string | null
           updated_at?: string
           user_id: string
         }
@@ -57,10 +59,18 @@ export type Database = {
           kindertijd_plekken?: string | null
           leuk_project_en_rol?: string | null
           plezierige_werkperiode_beschrijving?: string | null
+          round_id?: string | null
           updated_at?: string
           user_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "enthousiasme_responses_round_id_fkey"
+            columns: ["round_id"]
+            isOneToOne: false
+            referencedRelation: "user_rounds"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "enthousiasme_responses_user_id_fkey"
             columns: ["user_id"]
@@ -77,6 +87,7 @@ export type Database = {
           fysieke_beperkingen: string | null
           id: string
           opleidingsniveau: string | null
+          round_id: string | null
           sector_voorkeur: string | null
           updated_at: string
           user_id: string
@@ -87,6 +98,7 @@ export type Database = {
           fysieke_beperkingen?: string | null
           id?: string
           opleidingsniveau?: string | null
+          round_id?: string | null
           sector_voorkeur?: string | null
           updated_at?: string
           user_id: string
@@ -97,11 +109,20 @@ export type Database = {
           fysieke_beperkingen?: string | null
           id?: string
           opleidingsniveau?: string | null
+          round_id?: string | null
           sector_voorkeur?: string | null
           updated_at?: string
           user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "extra_informatie_responses_round_id_fkey"
+            columns: ["round_id"]
+            isOneToOne: false
+            referencedRelation: "user_rounds"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       journey_resets: {
         Row: {
@@ -137,6 +158,7 @@ export type Database = {
           extra_interesses_tekst: string | null
           extra_werkomstandigheden_tekst: string | null
           id: string
+          round_id: string | null
           selected_activiteiten_keywords: string[] | null
           selected_interesses_keywords: string[] | null
           selected_werkomstandigheden_keywords: string[] | null
@@ -149,6 +171,7 @@ export type Database = {
           extra_interesses_tekst?: string | null
           extra_werkomstandigheden_tekst?: string | null
           id?: string
+          round_id?: string | null
           selected_activiteiten_keywords?: string[] | null
           selected_interesses_keywords?: string[] | null
           selected_werkomstandigheden_keywords?: string[] | null
@@ -161,13 +184,22 @@ export type Database = {
           extra_interesses_tekst?: string | null
           extra_werkomstandigheden_tekst?: string | null
           id?: string
+          round_id?: string | null
           selected_activiteiten_keywords?: string[] | null
           selected_interesses_keywords?: string[] | null
           selected_werkomstandigheden_keywords?: string[] | null
           updated_at?: string
           user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "prioriteiten_responses_round_id_fkey"
+            columns: ["round_id"]
+            isOneToOne: false
+            referencedRelation: "user_rounds"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       profiles: {
         Row: {
@@ -215,8 +247,10 @@ export type Database = {
           id: string
           pdf_file_path: string | null
           pdf_generated_at: string | null
+          report_content: Json | null
           report_data: Json | null
           report_status: string
+          round_id: string | null
           updated_at: string
           user_id: string
         }
@@ -226,8 +260,10 @@ export type Database = {
           id?: string
           pdf_file_path?: string | null
           pdf_generated_at?: string | null
+          report_content?: Json | null
           report_data?: Json | null
           report_status?: string
+          round_id?: string | null
           updated_at?: string
           user_id: string
         }
@@ -237,8 +273,51 @@ export type Database = {
           id?: string
           pdf_file_path?: string | null
           pdf_generated_at?: string | null
+          report_content?: Json | null
           report_data?: Json | null
           report_status?: string
+          round_id?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_reports_round_id_fkey"
+            columns: ["round_id"]
+            isOneToOne: false
+            referencedRelation: "user_rounds"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_rounds: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          id: string
+          round_number: number
+          started_at: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          round_number?: number
+          started_at?: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          round_number?: number
+          started_at?: string
+          status?: string
           updated_at?: string
           user_id?: string
         }
@@ -278,6 +357,7 @@ export type Database = {
         Row: {
           created_at: string
           id: string
+          round_id: string | null
           updated_at: string
           user_id: string
           wensberoep_1_belangrijke_aspecten: string | null
@@ -311,6 +391,7 @@ export type Database = {
         Insert: {
           created_at?: string
           id?: string
+          round_id?: string | null
           updated_at?: string
           user_id: string
           wensberoep_1_belangrijke_aspecten?: string | null
@@ -344,6 +425,7 @@ export type Database = {
         Update: {
           created_at?: string
           id?: string
+          round_id?: string | null
           updated_at?: string
           user_id?: string
           wensberoep_1_belangrijke_aspecten?: string | null
@@ -374,7 +456,15 @@ export type Database = {
           wensberoep_3_werklocatie_omgeving?: string | null
           wensberoep_3_werkweek_activiteiten?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "wensberoepen_responses_round_id_fkey"
+            columns: ["round_id"]
+            isOneToOne: false
+            referencedRelation: "user_rounds"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       zoekprofiel_antwoorden: {
         Row: {
@@ -385,6 +475,7 @@ export type Database = {
           id: string
           kerntaken: string | null
           organisatie_bij: string | null
+          round_id: string | null
           sector: string | null
           updated_at: string
           user_id: string
@@ -397,6 +488,7 @@ export type Database = {
           id?: string
           kerntaken?: string | null
           organisatie_bij?: string | null
+          round_id?: string | null
           sector?: string | null
           updated_at?: string
           user_id: string
@@ -409,11 +501,20 @@ export type Database = {
           id?: string
           kerntaken?: string | null
           organisatie_bij?: string | null
+          round_id?: string | null
           sector?: string | null
           updated_at?: string
           user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "zoekprofiel_antwoorden_round_id_fkey"
+            columns: ["round_id"]
+            isOneToOne: false
+            referencedRelation: "user_rounds"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {

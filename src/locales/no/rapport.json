@@ -1,0 +1,41 @@
+{
+  "back_to_dashboard": "Tilbake til dashbord",
+  "print": "Skriv ut rapport",
+  "voorblad": {
+    "title": "Karriererapport",
+    "subtitle": "Finn arbeid som passer deg",
+    "naam": "Navn",
+    "start_datum": "Startdato",
+    "eind_datum": "Sluttdato",
+    "ronde": "Runde"
+  },
+  "ideale_functie": {
+    "title": "Ditt ideelle jobbinnhold",
+    "activiteiten": "Hva du liker å gjøre",
+    "werkomgeving": "Ditt ideelle arbeidsmiljø",
+    "interessegebieden": "Dine interesseområder"
+  },
+  "beroepen": {
+    "title": "Mulige yrker",
+    "passend": "Passende",
+    "verrassend": "Overraskende"
+  },
+  "onderzoeksplan": {
+    "title": "Forskningsplan",
+    "intro": "Hva nå? Karriererapporten din er klar! Nå kan du begynne å undersøke, fordi du vil vite mer før du tar et endelig valg. Velg to (eller flere) yrker fra analysen av svarene dine som du vil undersøke nærmere.",
+    "stappenplan": "Dette er handlingsplanen din:",
+    "stap1": "Spør AI (eller Google) om en detaljert stillingsbeskrivelse av stillingene fra karriererapporten din. Spør også AI om lignende stillinger. Hvilket arbeid ligner? Hva appellerer til deg i svarene du får?",
+    "stap2": "Se om du kan finne stillingsannonser som gir deg et bilde av innholdet i denne stillingen og organisasjonene som har disse stillingene.",
+    "stap3": "Søk på LinkedIn etter folk som gjør dette arbeidet. Hva er bakgrunnen deres?",
+    "stap4": "Finnes det en yrkesorganisasjon? Hva leser du på nettsiden om utviklingen i sektoren og yrket?",
+    "stap5": "Har yrket et fagtidsskrift? Hvis ja, be om ett eller flere og les dem. Hva legger du merke til? Blir du begeistret av temaene?",
+    "vervolg": "Fortsettelse av handlingsplanen:",
+    "stap6": "Finn organisasjoner der folk med dette yrket jobber.",
+    "stap7": "Hvilken utdanning trenger du eventuelt for dette arbeidet? Spør AI eller Google.",
+    "stap8": "Skriv ned alle spørsmålene som dukker opp under undersøkelsen. Du kan stille disse til folk som allerede jobber i dette feltet.",
+    "stap9": "Lag en liste over folk du vil snakke med om dette arbeidet og ta kontakt med dem. Du finner disse menneskene via LinkedIn og/eller ditt personlige nettverk.",
+    "stap10": "Samle nok informasjon til å ta et valg. Ta deg tid og diskuter det med andre.",
+    "stap11": "Når du har lært nok, velg stillingen som passer deg best og fyll ut søkeprofilen på nettsiden. Vinster vil konvertere teksten din til noen setninger du kan bruke for å la andre vite hva du leter etter. Du kan nå søke målrettet!",
+    "afsluiting": "Vi ønsker deg mye arbeidsglede i din neste stilling!"
+  }
+}

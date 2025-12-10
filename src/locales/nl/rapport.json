@@ -1,0 +1,41 @@
+{
+  "back_to_dashboard": "Terug naar dashboard",
+  "print": "Print rapport",
+  "voorblad": {
+    "title": "Loopbaanrapport",
+    "subtitle": "Vind werk dat bij je past",
+    "naam": "Naam",
+    "start_datum": "Startdatum",
+    "eind_datum": "Einddatum",
+    "ronde": "Ronde"
+  },
+  "ideale_functie": {
+    "title": "Jouw ideale functie-inhoud",
+    "activiteiten": "Wat je graag doet",
+    "werkomgeving": "Jouw ideale werkomgeving",
+    "interessegebieden": "Jouw interessegebieden"
+  },
+  "beroepen": {
+    "title": "Mogelijke beroepen",
+    "passend": "Passend",
+    "verrassend": "Verrassend"
+  },
+  "onderzoeksplan": {
+    "title": "Onderzoeksplan",
+    "intro": "En nu? Jouw loopbaanrapport is klaar! Nu kun je op onderzoek uit, want je wilt eerst nog wat meer weten voor je een definitieve keuze kunt maken. Kies uit de beroepen die uit de analyse van jouw antwoorden komen er twee (of meer) die je nader wilt onderzoeken.",
+    "stappenplan": "Dit is jouw stappenplan:",
+    "stap1": "Vraag AI (of Google) naar een uitgebreide functiebeschrijving van de functies uit je loopbaanrapport. Vraag AI ook naar vergelijkbare functies. Welk werk lijkt erop? Wat spreekt je aan in de antwoorden die je krijgt?",
+    "stap2": "Kijk of je vacatures kunt vinden die een beeld geven van de inhoud van deze functie en van de organisaties die deze functies hebben.",
+    "stap3": "Zoek op LinkedIn naar mensen die dit werk doen. Wat is hun achtergrond?",
+    "stap4": "Is er een beroepsvereniging? Wat lees je op de website over ontwikkelingen in de sector en het beroep?",
+    "stap5": "Heeft het beroep een vakblad? Zo ja, vraag er één of meerdere aan en lees ze. Wat valt je op? Word je enthousiast van de onderwerpen?",
+    "vervolg": "Vervolg stappenplan:",
+    "stap6": "Zoek organisaties waar mensen met dit beroep werken.",
+    "stap7": "Welke opleiding heb je eventueel nodig voor dit werk? Vraag het AI of Google.",
+    "stap8": "Schrijf alle vragen op die bij je opkomen tijdens het onderzoek. Die kun je gaan stellen aan mensen die al werkzaam zijn in deze richting.",
+    "stap9": "Maak een lijstje met mensen die je zou willen spreken over dit werk en benader hen. Je vindt die mensen via LinkedIn en/of via je persoonlijke netwerk.",
+    "stap10": "Verzamel genoeg informatie om een keuze te maken. Neem de tijd en praat er met anderen over.",
+    "stap11": "Als je genoeg aan de weet bent gekomen kies dan de functie die het allerbest bij je past en vul het zoekprofiel op de website in. Vinster zal jouw tekst omzetten naar een paar zinnen die je kunt gebruiken om anderen te laten weten wat je zoekt. Je kunt nu gericht gaan solliciteren!",
+    "afsluiting": "We wensen jou veel werkplezier in je volgende functie!"
+  }
+}
