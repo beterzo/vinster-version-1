@@ -69,10 +69,10 @@
     "logout_error": "Feil ved utlogging",
     "step_blocked": {
       "title": "Trinn låst",
-      "enthousiasme_required": "Du må først fullføre entusiasme-skanningen før du kan fortsette",
-      "wensberoepen_required": "Du må først fullføre ønsket yrker-skanningen før du kan fortsette",
-      "persoonsprofiel_required": "Du må først fullføre din personlige profil før du kan fortsette",
-      "rapport_required": "Du må først generere karriererapporten din før du kan fortsette"
+      "enthousiasme_required": "Du må først fullføre entusiasme-skanningen",
+      "wensberoepen_required": "Du må først fullføre dine ønskede yrker",
+      "persoonsprofiel_required": "Du må først fullføre din personlige profil",
+      "rapport_required": "Du må først fullføre rapporten din for å fortsette"
     },
     "restart_journey": {
       "title": "Vil du gjøre reisen igjen?",
@@ -80,33 +80,11 @@
       "button": "Start reisen på nytt"
     },
     "steps": {
-      "enthousiasme": {
-        "description": "Oppdag hva som virkelig driver og motiverer deg",
-        "action": "Start skanning"
-      },
-      "wensberoepen": {
-        "description": "Utforsk forskjellige karrieremuligheter",
-        "action": "Se yrker"
-      },
-      "persoonsprofiel": {
-        "description": "Bygg din personlige profil",
-        "action": "Fullfør"
-      },
-      "loopbaanrapport": {
-        "description": "Motta dine personlige anbefalinger",
-        "action": "Se rapport"
-      },
-      "zoekprofiel": {
-        "description": "Last ned søkeprofilen din",
-        "action": "Last ned"
-      }
-    },
-    "step_blocked": {
-      "title": "Trinn låst",
-      "enthousiasme_required": "Du må først fullføre entusiasme-skanningen",
-      "wensberoepen_required": "Du må først fullføre dine ønskede yrker",
-      "persoonsprofiel_required": "Du må først fullføre din personlige profil",
-      "rapport_required": "Du må først fullføre rapporten din for å fortsette"
+      "enthousiasme": { "description": "Oppdag hva som virkelig driver og motiverer deg", "action": "Start skanning" },
+      "wensberoepen": { "description": "Utforsk forskjellige karrieremuligheter", "action": "Se yrker" },
+      "persoonsprofiel": { "description": "Bygg din personlige profil", "action": "Fullfør" },
+      "loopbaanrapport": { "description": "Motta dine personlige anbefalinger", "action": "Se rapport" },
+      "zoekprofiel": { "description": "Last ned søkeprofilen din", "action": "Last ned" }
     },
     "report_limit": {
       "banner_title_report_only": "Rapporten din er generert",
@@ -140,6 +118,30 @@
       "status_completed": "Fullført",
       "status_in_progress": "Pågår",
       "resume": "Gjenoppta"
+    },
+    "round_dashboard": {
+      "back_to_dashboard": "Tilbake til dashbord",
+      "not_found": "Runde ikke funnet",
+      "started": "Startet",
+      "journey_title": "Din Vinster-reise",
+      "journey_subtitle": "Fullfør alle trinn for å motta din personlige karriererapport",
+      "step": "Trinn",
+      "status_completed": "Fullført",
+      "status_active": "Pågår",
+      "status_locked": "Låst",
+      "view_answers": "Se svar",
+      "continue": "Fortsett",
+      "locked": "Låst",
+      "progress": "Fremgang",
+      "complete_previous": "Fullfør forrige trinn først",
+      "view_details": "Se detaljer",
+      "steps": {
+        "enthousiasme": { "title": "Entusiasme-skanning", "description": "Oppdag hva som driver deg på jobb" },
+        "wensberoepen": { "title": "Drømmeyrker", "description": "Utforsk karrieremuligheter som passer deg" },
+        "persoonsprofiel": { "title": "Personlig profil", "description": "Bygg profilen din med preferanser" },
+        "loopbaanrapport": { "title": "Karriererapport", "description": "Motta dine personlige anbefalinger" },
+        "zoekprofiel": { "title": "Søkeprofil", "description": "Last ned søkeprofilen din" }
+      }
     }
   }
 }

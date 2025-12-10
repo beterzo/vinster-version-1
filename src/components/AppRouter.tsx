@@ -52,6 +52,7 @@ import PrioriteitenInteresses from "@/pages/PrioriteitenInteresses";
 import PrioriteitenWerkomstandigheden from "@/pages/PrioriteitenWerkomstandigheden";
 import RapportGenererenConfirmatie from "@/pages/RapportGenererenConfirmatie";
 import RapportBekijken from "@/pages/RapportBekijken";
+import RondeDashboard from "@/pages/RondeDashboard";
 import { Navigate } from "react-router-dom";
 
 const ConditionalRouteWithAccess = ({ 
@@ -176,6 +177,15 @@ const AppRouter = () => {
         element={
           <ProtectedRoute>
             <RapportBekijken />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/ronde/:roundId"
+        element={
+          <ProtectedRoute>
+            <RondeDashboard />
           </ProtectedRoute>
         }
       />
