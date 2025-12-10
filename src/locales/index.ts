@@ -12,6 +12,7 @@ import enForWhom from './en/for-whom.json';
 import enFaq from './en/faq.json';
 import enExperiences from './en/experiences.json';
 import enContact from './en/contact.json';
+import enRapport from './en/rapport.json';
 
 // Dutch translations
 import nlNavigation from './nl/navigation.json';
@@ -26,6 +27,7 @@ import nlForWhom from './nl/for-whom.json';
 import nlFaq from './nl/faq.json';
 import nlExperiences from './nl/experiences.json';
 import nlContact from './nl/contact.json';
+import nlRapport from './nl/rapport.json';
 
 // German translations
 import deNavigation from './de/navigation.json';
@@ -40,6 +42,7 @@ import deForWhom from './de/for-whom.json';
 import deFaq from './de/faq.json';
 import deExperiences from './de/experiences.json';
 import deContact from './de/contact.json';
+import deRapport from './de/rapport.json';
 
 
 // Norwegian translations
@@ -55,6 +58,7 @@ import noForWhom from './no/for-whom.json';
 import noFaq from './no/faq.json';
 import noExperiences from './no/experiences.json';
 import noContact from './no/contact.json';
+import noRapport from './no/rapport.json';
 
 export const translations = {
   en: {
@@ -88,6 +92,7 @@ export const translations = {
     faq: enFaq.faq,
     experiences: enExperiences.experiences,
     contact: enContact.contact,
+    rapport: enRapport,
     // Make privacy, terms and cookies keys available at top level
     privacy: enLanding.privacy,
     terms: enLanding.terms,
@@ -124,6 +129,7 @@ export const translations = {
     faq: nlFaq.faq,
     experiences: nlExperiences.experiences,
     contact: nlContact.contact,
+    rapport: nlRapport,
     // Make privacy, terms and cookies keys available at top level
     privacy: nlLanding.privacy,
     terms: nlLanding.terms,
@@ -160,6 +166,7 @@ export const translations = {
     faq: (deFaq as any).faq || deFaq,
     experiences: (deExperiences as any).experiences || deExperiences,
     contact: (deContact as any).contact || deContact,
+    rapport: deRapport,
     // Make privacy, terms and cookies keys available at top level
     privacy: (deLanding as any).privacy || deLanding,
     terms: (deLanding as any).terms || deLanding,
@@ -198,6 +205,7 @@ export const translations = {
     faq: (noFaq as any).faq || noFaq,
     experiences: (noExperiences as any).experiences || noExperiences,
     contact: (noContact as any).contact || noContact,
+    rapport: noRapport,
     // Make privacy, terms and cookies keys available at top level
     privacy: (noLanding as any).privacy || noLanding,
     terms: (noLanding as any).terms || noLanding,

@@ -8,9 +8,8 @@ import { useStepAccess } from "@/hooks/useStepAccess";
 import { useExistingReport } from "@/hooks/useExistingReport";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useToast } from "@/hooks/use-toast";
+import { useUserRounds } from "@/hooks/useUserRounds";
 import { supabase } from "@/integrations/supabase/client";
-import { useMakeWebhookData } from "@/hooks/useMakeWebhookData";
-import { sendMakeWebhook } from "@/services/webhookService";
 
 const RapportGenererenConfirmatie = () => {
   const navigate = useNavigate();
@@ -19,7 +18,7 @@ const RapportGenererenConfirmatie = () => {
   const { toast } = useToast();
   const stepAccess = useStepAccess();
   const { hasExistingReport, loading: reportLoading } = useExistingReport();
-  const { collectMakeWebhookData } = useMakeWebhookData();
+  const { currentRound, refreshRounds } = useUserRounds();
   const [isGenerating, setIsGenerating] = useState(false);
 
   // Check if user has access to this page
@@ -37,16 +36,16 @@ const RapportGenererenConfirmatie = () => {
     }
   }, [stepAccess.isLoading, stepAccess.persoonsprofiel.isCompleted, navigate, toast, t]);
 
-  // Redirect if report already exists
+  // Redirect if report already exists for current round
   useEffect(() => {
-    if (!reportLoading && hasExistingReport) {
+    if (!reportLoading && hasExistingReport && currentRound?.status === 'completed') {
       toast({
         title: t('common.toast.report_already_generated'),
         description: t('common.toast.report_already_generated_description'),
       });
       navigate('/rapport-download');
     }
-  }, [reportLoading, hasExistingReport, navigate, toast, t]);
+  }, [reportLoading, hasExistingReport, currentRound, navigate, toast, t]);
 
   const handleGenerateReport = async () => {
     if (!user) {
@@ -58,68 +57,59 @@ const RapportGenererenConfirmatie = () => {
       return;
     }
 
+    if (!currentRound) {
+      toast({
+        title: t('common.toast.generic_error'),
+        description: "Geen actieve ronde gevonden.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsGenerating(true);
 
     try {
-      console.log('🚀 Starting report generation for user:', user.id);
+      console.log('🚀 Starting AI report generation for user:', user.id, 'round:', currentRound.id);
 
-      // 1. Create report record in database
-      const { data: reportData, error: reportError } = await supabase
-        .from('user_reports')
-        .upsert({
-          user_id: user.id,
-          report_data: {},
-          report_status: 'generating',
-          generated_at: new Date().toISOString(),
+      // 1. Call the edge function to generate the report
+      const { data, error } = await supabase.functions.invoke('generate-career-report', {
+        body: { roundId: currentRound.id }
+      });
+
+      if (error) {
+        console.error('❌ Error calling edge function:', error);
+        throw error;
+      }
+
+      console.log('✅ Report generated successfully:', data);
+
+      // 2. Update round status to completed
+      const { error: roundError } = await supabase
+        .from('user_rounds')
+        .update({ 
+          status: 'completed', 
+          completed_at: new Date().toISOString(),
           updated_at: new Date().toISOString()
-        }, {
-          onConflict: 'user_id'
         })
-        .select()
-        .single();
+        .eq('id', currentRound.id);
 
-      if (reportError) {
-        console.error('❌ Error creating report record:', reportError);
-        throw reportError;
+      if (roundError) {
+        console.error('❌ Error updating round status:', roundError);
       }
 
-      console.log('✅ Report record created:', reportData);
-
-      // 2. Collect webhook data
-      const webhookData = collectMakeWebhookData();
-      if (!webhookData) {
-        console.error('❌ No webhook data available');
-        throw new Error('No webhook data available');
-      }
-
-      console.log('📦 Webhook data collected, sending to Make.com...');
-
-      // 3. Send webhook to Make.com
-      await sendMakeWebhook(webhookData);
-      
-      console.log('✅ Webhook sent successfully');
+      // 3. Refresh rounds data
+      await refreshRounds();
 
       toast({
         title: t('common.rapport_confirmatie.generating'),
         description: t('common.rapport_confirmatie.please_wait'),
       });
 
-      // 4. Navigate to download page
-      navigate('/rapport-download');
+      // 4. Navigate to the report viewer
+      navigate(`/rapport-bekijken/${currentRound.id}`);
 
     } catch (error) {
       console.error('❌ Error generating report:', error);
-
-      // Update report status to failed
-      if (user) {
-        await supabase
-          .from('user_reports')
-          .update({
-            report_status: 'failed',
-            updated_at: new Date().toISOString()
-          })
-          .eq('user_id', user.id);
-      }
 
       toast({
         title: t('common.toast.generate_error'),
