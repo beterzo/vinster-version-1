@@ -213,7 +213,7 @@ const Dashboard = () => {
           </Card>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-2 gap-8 mt-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
           {/* Welcome Section - spans first 2 columns */}
           <Card className="lg:col-span-2 p-8 border-0 rounded-3xl" style={{ backgroundColor: '#E6F0F6' }}>
             <h1 className="text-3xl font-bold text-vinster-blue mb-4">
@@ -230,8 +230,8 @@ const Dashboard = () => {
             </div>
           </Card>
 
-          {/* Right Column - Image and Start Button - spans both rows */}
-          <Card className="lg:row-span-2 p-6 border-0 rounded-3xl bg-white flex flex-col">
+          {/* Right Column - Image and Start Button */}
+          <Card className="p-6 border-0 rounded-3xl bg-white flex flex-col lg:row-span-2">
             <div className="text-center flex-1 flex flex-col">
               <div className="flex-1 mb-6">
                 <img 
@@ -265,24 +265,22 @@ const Dashboard = () => {
             </div>
           </Card>
 
-          {/* Important Info - spans 2 columns */}
-          <Card className="lg:col-span-2 p-6 border-0 rounded-3xl text-white" style={{
+          {/* Important Info - spans 2 columns, compact */}
+          <Card className="lg:col-span-2 p-5 border-0 rounded-3xl text-white" style={{
             backgroundColor: '#78BFE3'
           }}>
-            <div>
-              <h3 className="font-bold text-xl mb-3">
-                {t('dashboard.important_info.title')}
-              </h3>
-              <ul className="text-sm leading-relaxed grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
-                <li>{t('dashboard.important_info.point1')}</li>
-                <li>{t('dashboard.important_info.point2')}</li>
-                <li>{t('dashboard.important_info.point3')}</li>
-                <li>{t('dashboard.important_info.point4')}</li>
-                <li>{t('dashboard.important_info.point5')}</li>
-                <li>{t('dashboard.important_info.point6')}</li>
-                <li>{t('dashboard.important_info.point7')}</li>
-              </ul>
-            </div>
+            <h3 className="font-bold text-xl mb-2">
+              {t('dashboard.important_info.title')}
+            </h3>
+            <ul className="text-sm leading-snug grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
+              <li>{t('dashboard.important_info.point1')}</li>
+              <li>{t('dashboard.important_info.point2')}</li>
+              <li>{t('dashboard.important_info.point3')}</li>
+              <li>{t('dashboard.important_info.point4')}</li>
+              <li>{t('dashboard.important_info.point5')}</li>
+              <li>{t('dashboard.important_info.point6')}</li>
+              <li>{t('dashboard.important_info.point7')}</li>
+            </ul>
           </Card>
         </div>
 
