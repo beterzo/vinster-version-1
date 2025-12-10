@@ -6,14 +6,15 @@ import { useDashboard } from "@/hooks/useDashboard";
 import { useRapportData } from "@/hooks/useRapportData";
 import { useExistingZoekprofiel } from "@/hooks/useExistingZoekprofiel";
 import { useStepAccess } from "@/hooks/useStepAccess";
+import { useUserRounds } from "@/hooks/useUserRounds";
 import DashboardHeader from "./DashboardHeader";
 import ProgressStepsGrid from "./ProgressStepsGrid";
+import RoundsOverview from "./RoundsOverview";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useToast } from "@/hooks/use-toast";
 import { Lock, Download, FileText } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -23,11 +24,26 @@ const Dashboard = () => {
   const { data: reportData, loading: reportLoading } = useRapportData();
   const { hasExistingZoekprofiel } = useExistingZoekprofiel();
   const stepAccess = useStepAccess();
+  const { rounds, currentRound, startNewRound, loading: roundsLoading } = useUserRounds();
   const {
     progress,
     canStartEnthousiasme,
     canStartWensberoepen
   } = useDashboard();
+
+  // Get completed rounds
+  const completedRounds = rounds.filter(r => r.status === 'completed');
+
+  const handleViewReport = (roundId: string) => {
+    navigate(`/rapport-bekijken/${roundId}`);
+  };
+
+  const handleStartNewRound = async () => {
+    const newRound = await startNewRound();
+    if (newRound) {
+      navigate('/enthousiasme-intro');
+    }
+  };
 
   useEffect(() => {
     if (!user) {
@@ -278,6 +294,16 @@ const Dashboard = () => {
             />
           </Card>
         </div>
+
+        {/* Rounds Overview Section - Only show if user has completed rounds */}
+        {completedRounds.length > 0 && (
+          <div className="mt-8">
+            <RoundsOverview 
+              onViewReport={handleViewReport}
+              onStartNewRound={handleStartNewRound}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

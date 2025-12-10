@@ -118,6 +118,17 @@
       "button_download_zoekprofiel": "Suchprofil herunterladen",
       "blocked_reason": "Sie haben bereits einen Bericht generiert. Um neu zu beginnen, müssen Sie eine zweite Journey kaufen.",
       "view_only_notice": "Sie sehen Ihre zuvor eingegebenen Antworten. Um diese zu ändern, müssen Sie eine neue Reise starten."
+    },
+    "rounds": {
+      "title": "Ihre Runden",
+      "subtitle": "Sehen Sie Ihre vorherigen Berichte oder starten Sie eine neue Runde",
+      "start_new": "Neue Runde starten",
+      "no_rounds": "Sie haben noch keine abgeschlossenen Runden",
+      "start_first": "Starten Sie Ihre erste Runde, um zu beginnen",
+      "round_label": "Runde",
+      "view_report": "Bericht ansehen",
+      "remaining": "Sie können noch {count} Runde(n) starten",
+      "max_reached": "Sie haben das Maximum von 10 Runden erreicht"
     }
   }
 }

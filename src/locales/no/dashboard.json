@@ -118,6 +118,17 @@
       "button_download_zoekprofiel": "Last ned søkeprofil",
       "blocked_reason": "Du har allerede generert en rapport. For å starte på nytt må du kjøpe en ny reise.",
       "view_only_notice": "Du ser på dine tidligere innsendte svar. For å endre dem må du starte en ny reise."
+    },
+    "rounds": {
+      "title": "Dine runder",
+      "subtitle": "Se dine tidligere rapporter eller start en ny runde",
+      "start_new": "Start ny runde",
+      "no_rounds": "Du har ingen fullførte runder ennå",
+      "start_first": "Start din første runde for å begynne",
+      "round_label": "Runde",
+      "view_report": "Se rapport",
+      "remaining": "Du kan starte {count} runde(r) til",
+      "max_reached": "Du har nådd maksimalt 10 runder"
     }
   }
 }

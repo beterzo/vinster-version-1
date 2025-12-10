@@ -51,6 +51,7 @@ import PrioriteitenActiviteiten from "@/pages/PrioriteitenActiviteiten";
 import PrioriteitenInteresses from "@/pages/PrioriteitenInteresses";
 import PrioriteitenWerkomstandigheden from "@/pages/PrioriteitenWerkomstandigheden";
 import RapportGenererenConfirmatie from "@/pages/RapportGenererenConfirmatie";
+import RapportBekijken from "@/pages/RapportBekijken";
 import { Navigate } from "react-router-dom";
 
 const ConditionalRouteWithAccess = ({ 
@@ -166,6 +167,15 @@ const AppRouter = () => {
         element={
           <ProtectedRoute>
             <RapportDownload />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/rapport-bekijken/:roundId"
+        element={
+          <ProtectedRoute>
+            <RapportBekijken />
           </ProtectedRoute>
         }
       />
