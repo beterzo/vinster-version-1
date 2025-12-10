@@ -120,16 +120,20 @@
       "blocked_reason": "Je hebt al een rapport gegenereerd. Om opnieuw te beginnen, moet je een tweede journey kopen.",
       "view_only_notice": "Je bekijkt je eerder ingevulde antwoorden. Om deze te wijzigen, moet je een nieuw traject starten."
     },
-    "rounds": {
-      "title": "Jouw rondes",
-      "subtitle": "Bekijk je eerdere rapporten of start een nieuwe ronde",
-      "start_new": "Start nieuwe ronde",
-      "no_rounds": "Je hebt nog geen afgeronde rondes",
-      "start_first": "Start je eerste ronde om te beginnen",
-      "round_label": "Ronde",
-      "view_report": "Bekijk rapport",
-      "remaining": "Je kunt nog {count} ronde(s) starten",
-      "max_reached": "Je hebt het maximum van 10 rondes bereikt"
-    }
+  "rounds": {
+    "title": "Jouw rondes",
+    "subtitle": "Bekijk je eerdere rapporten of start een nieuwe ronde",
+    "start_new": "Start nieuwe ronde",
+    "no_rounds": "Je hebt nog geen afgeronde rondes",
+    "start_first": "Start je eerste ronde om te beginnen",
+    "round_label": "Ronde",
+    "view_report": "Bekijk rapport",
+    "remaining": "Je kunt nog {count} ronde(s) starten",
+    "max_reached": "Je hebt het maximum van 10 rondes bereikt",
+    "round_in_progress": "Voltooi eerst je huidige ronde",
+    "progress_subtitle": "Voltooi alle stappen om je rapport te genereren",
+    "reports_title": "Jouw rapporten",
+    "reports_subtitle": "Bekijk je eerder gegenereerde loopbaanrapporten"
+  }
   }
 }

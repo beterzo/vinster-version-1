@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useToast } from "@/hooks/use-toast";
-import { Lock, Download, FileText } from "lucide-react";
+import { Lock, Download, FileText, Play } from "lucide-react";
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -211,6 +211,23 @@ const Dashboard = () => {
               <p>{t('dashboard.intro_paragraph2')}</p>
               <p>{t('dashboard.intro_paragraph3')}</p>
             </div>
+
+            {/* Start nieuwe ronde knop */}
+            <div className="mt-6 pt-4 border-t border-gray-300">
+              <Button 
+                onClick={handleStartNewRound}
+                disabled={roundsLoading || (currentRound?.status === 'in_progress')}
+                className="bg-vinster-blue hover:bg-vinster-blue/90 gap-2"
+              >
+                <Play className="w-4 h-4" />
+                {t('dashboard.rounds.start_new')}
+              </Button>
+              {currentRound?.status === 'in_progress' && (
+                <p className="text-sm text-gray-500 mt-2">
+                  {t('dashboard.rounds.round_in_progress')}
+                </p>
+              )}
+            </div>
           </Card>
 
           {/* Right Column - Image and Button - spans both rows */}
@@ -280,27 +297,31 @@ const Dashboard = () => {
           </Card>
 
           {/* Middle Column - Process Steps */}
-          <Card className="p-6 border-0 rounded-3xl bg-white">
-            <h3 className="font-bold text-lg text-vinster-blue mb-4">
-              {t('dashboard.progress_title')}
-            </h3>
-            <ProgressStepsGrid 
-              enthousiasmeCompleted={progress.enthousiasme === 'completed'} 
-              wensberoepenCompleted={progress.wensberoepen === 'completed'} 
-              prioriteitenCompleted={progress.prioriteiten === 'completed'} 
-              extraInformatieCompleted={progress.extraInformatie === 'completed'} 
-              hasUserReport={hasUserReport} 
-              onStepClick={handleStepClick}
-            />
-          </Card>
+          {currentRound?.status === 'in_progress' && (
+            <Card className="p-6 border-0 rounded-3xl bg-white">
+              <h3 className="font-bold text-lg text-vinster-blue mb-1">
+                {t('dashboard.progress_title')} - {t('dashboard.rounds.round_label')} {currentRound.round_number}
+              </h3>
+              <p className="text-sm text-gray-500 mb-4">
+                {t('dashboard.rounds.progress_subtitle')}
+              </p>
+              <ProgressStepsGrid 
+                enthousiasmeCompleted={progress.enthousiasme === 'completed'} 
+                wensberoepenCompleted={progress.wensberoepen === 'completed'} 
+                prioriteitenCompleted={progress.prioriteiten === 'completed'} 
+                extraInformatieCompleted={progress.extraInformatie === 'completed'} 
+                hasUserReport={hasUserReport} 
+                onStepClick={handleStepClick}
+              />
+            </Card>
+          )}
         </div>
 
-        {/* Rounds Overview Section - Only show if user has completed rounds */}
+        {/* Jouw Rapporten Section - Only show if user has completed rounds */}
         {completedRounds.length > 0 && (
           <div className="mt-8">
             <RoundsOverview 
               onViewReport={handleViewReport}
-              onStartNewRound={handleStartNewRound}
             />
           </div>
         )}
