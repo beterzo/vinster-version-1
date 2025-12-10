@@ -166,7 +166,34 @@
         "zoekprofiel_ready_description": "Se og last ned søkeprofilen din for jobbsøknadene dine",
         "zoekprofiel_start": "Start søkeprofilen din",
         "zoekprofiel_start_description": "Opprett søkeprofilen din for å finne drømmejobben",
-        "start_zoekprofiel_button": "Start søkeprofil"
+        "start_zoekprofiel_button": "Start søkeprofil",
+        "zoekprofiel_generating": "Søkeprofilen din blir opprettet...",
+        "zoekprofiel_generating_desc": "Dette tar noen sekunder"
+      },
+      "actions": {
+        "view_answers_title": "Se mine svar",
+        "view_answers_subtitle": "Alle spørsmål og svar etter kategori",
+        "print_button": "Skriv ut rapport",
+        "back_to_dashboard": "Tilbake til dashbord",
+        "start_new_game": "Start nytt spill",
+        "dream_job": "Drømmeyrke",
+        "selected_activities": "Valgte aktiviteter",
+        "selected_conditions": "Valgte arbeidsforhold",
+        "selected_interests": "Valgte interesser",
+        "extra_info": "Ekstra informasjon",
+        "education_level": "Utdanningsnivå",
+        "sector_preference": "Sektorpreferanse",
+        "questions": {
+          "childhood_activities": "Hva likte du å gjøre som barn?",
+          "childhood_interests": "Hva var du interessert i som barn?",
+          "childhood_places": "Hvor likte du å gå som barn?",
+          "first_job_tasks": "Hva var favorittoppgavene dine i din første jobb?",
+          "first_job_topics": "Hvilke emner syntes du var interessante?",
+          "first_job_conditions": "Hvilke arbeidsforhold likte du?",
+          "pleasant_period": "Beskriv en hyggelig arbeidsperiode",
+          "nice_project": "Beskriv et fint prosjekt og din rolle",
+          "whistling_home": "Når kom du fløytende hjem?"
+        }
       }
     }
   }
