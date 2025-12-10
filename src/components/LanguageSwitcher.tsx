@@ -1,6 +1,4 @@
-
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import { 
   DropdownMenu,
@@ -8,12 +6,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Globe, ChevronDown } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import type { Language } from '@/contexts/LanguageContext';
 
 const LanguageSwitcher = () => {
   const { language, setLanguage } = useLanguage();
-  const { user } = useAuth();
 
   const languages = [
     { code: 'nl' as Language, label: 'Nederlands', flag: '🇳🇱' },
@@ -28,14 +25,12 @@ const LanguageSwitcher = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          variant="outline"
+          variant="ghost"
           size="sm"
-          className="flex items-center gap-2 text-sm border-gray-300 text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+          className="flex items-center gap-1 px-2 py-1 text-lg hover:bg-white/20"
         >
-          <Globe className="w-4 h-4" />
-          <span className="hidden sm:inline">{currentLanguage?.flag}</span>
-          {currentLanguage?.code.toUpperCase()}
-          <ChevronDown className="w-3 h-3" />
+          <span className="text-xl">{currentLanguage?.flag}</span>
+          <ChevronDown className="w-3 h-3 text-white" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
