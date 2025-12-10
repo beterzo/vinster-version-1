@@ -1,4 +1,3 @@
-
 {
   "payment": {
     "welcome": "Welkom bij Vinster, {name}!",
@@ -102,13 +101,6 @@
         "action": "Download"
       }
     },
-    "step_blocked": {
-      "title": "Stap vergrendeld",
-      "enthousiasme_required": "Je moet eerst de enthousiasmescan voltooien",
-      "wensberoepen_required": "Je moet eerst je wensberoepen voltooien",
-      "persoonsprofiel_required": "Je moet eerst je persoonsprofiel voltooien",
-      "rapport_required": "Je moet eerst je rapport voltooien om verder te gaan"
-    },
     "report_limit": {
       "banner_title_report_only": "Je rapport is gegenereerd",
       "banner_description_report_only": "Download je resultaten en ga aan de slag met je zoekprofiel.",
@@ -120,27 +112,66 @@
       "blocked_reason": "Je hebt al een rapport gegenereerd. Om opnieuw te beginnen, moet je een tweede journey kopen.",
       "view_only_notice": "Je bekijkt je eerder ingevulde antwoorden. Om deze te wijzigen, moet je een nieuw traject starten."
     },
-  "rounds": {
-    "title": "Jouw rondes",
-    "subtitle": "Bekijk je eerdere rapporten of start een nieuwe ronde",
-    "start_new": "Start nieuwe ronde",
-    "no_rounds": "Je hebt nog geen afgeronde rondes",
-    "start_first": "Start je eerste ronde om te beginnen",
-    "round_label": "Ronde",
-    "view_report": "Bekijk rapport",
-    "remaining": "Je kunt nog {count} ronde(s) starten",
-    "max_reached": "Je hebt het maximum van 10 rondes bereikt",
-    "round_in_progress": "Voltooi eerst je huidige ronde",
-    "progress_subtitle": "Voltooi alle stappen om je rapport te genereren",
-    "reports_title": "Jouw rapporten",
-    "reports_subtitle": "Bekijk je eerder gegenereerde loopbaanrapporten",
-    "dialog_title": "Ronde nog niet afgerond",
-    "dialog_description": "Je hebt nog een ronde open staan. Rond eerst je huidige ronde af voordat je een nieuwe start.",
-    "game_rounds_title": "Jouw spelrondes",
-    "game_rounds_subtitle": "Hier kun je spelrondes inzien of hervatten.",
-    "status_completed": "Afgerond",
-    "status_in_progress": "In uitvoering",
-    "resume": "Hervatten"
-  }
+    "rounds": {
+      "title": "Jouw rondes",
+      "subtitle": "Bekijk je eerdere rapporten of start een nieuwe ronde",
+      "start_new": "Start nieuwe ronde",
+      "no_rounds": "Je hebt nog geen afgeronde rondes",
+      "start_first": "Start je eerste ronde om te beginnen",
+      "round_label": "Ronde",
+      "view_report": "Bekijk rapport",
+      "remaining": "Je kunt nog {count} ronde(s) starten",
+      "max_reached": "Je hebt het maximum van 10 rondes bereikt",
+      "round_in_progress": "Voltooi eerst je huidige ronde",
+      "progress_subtitle": "Voltooi alle stappen om je rapport te genereren",
+      "reports_title": "Jouw rapporten",
+      "reports_subtitle": "Bekijk je eerder gegenereerde loopbaanrapporten",
+      "dialog_title": "Ronde nog niet afgerond",
+      "dialog_description": "Je hebt nog een ronde open staan. Rond eerst je huidige ronde af voordat je een nieuwe start.",
+      "game_rounds_title": "Jouw spelrondes",
+      "game_rounds_subtitle": "Hier kun je spelrondes inzien of hervatten.",
+      "status_completed": "Afgerond",
+      "status_in_progress": "In uitvoering",
+      "resume": "Hervatten"
+    },
+    "round_dashboard": {
+      "back_to_dashboard": "Terug naar dashboard",
+      "not_found": "Ronde niet gevonden",
+      "started": "Gestart",
+      "journey_title": "Jouw Vinster reis",
+      "journey_subtitle": "Voltooi alle stappen om je persoonlijke loopbaanrapport te ontvangen",
+      "step": "Stap",
+      "status_completed": "Voltooid",
+      "status_active": "Bezig",
+      "status_locked": "Vergrendeld",
+      "view_answers": "Bekijk antwoorden",
+      "continue": "Verder",
+      "locked": "Vergrendeld",
+      "progress": "Voortgang",
+      "complete_previous": "Voltooi eerst de vorige stap",
+      "view_details": "Bekijk details",
+      "steps": {
+        "enthousiasme": {
+          "title": "Enthousiasmescan",
+          "description": "Ontdek wat je echt drijft en motiveert in je werk"
+        },
+        "wensberoepen": {
+          "title": "Wensberoepen",
+          "description": "Verken verschillende carrièremogelijkheden die bij jou passen"
+        },
+        "persoonsprofiel": {
+          "title": "Persoonsprofiel",
+          "description": "Bouw je persoonlijke profiel op met voorkeuren en prioriteiten"
+        },
+        "loopbaanrapport": {
+          "title": "Loopbaanrapport",
+          "description": "Ontvang je persoonlijke aanbevelingen en inzichten"
+        },
+        "zoekprofiel": {
+          "title": "Zoekprofiel",
+          "description": "Download je zoekprofiel voor je sollicitaties"
+        }
+      }
+    }
   }
 }

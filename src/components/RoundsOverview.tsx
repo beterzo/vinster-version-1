@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Calendar, CheckCircle, Clock, FileText, Play, Loader2 } from "lucide-react";
+import { Calendar, CheckCircle, Clock, Loader2 } from "lucide-react";
 import { useUserRounds, UserRound, RoundReport } from "@/hooks/useUserRounds";
 import { useTranslation } from "@/hooks/useTranslation";
 
@@ -12,6 +12,7 @@ interface RoundsOverviewProps {
 
 const RoundsOverview = ({ onViewReport, onResumeRound }: RoundsOverviewProps) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const { 
     rounds, 
     loading, 
@@ -82,7 +83,8 @@ const RoundsOverview = ({ onViewReport, onResumeRound }: RoundsOverviewProps) =>
         {allRounds.map((round) => (
           <div
             key={round.id}
-            className="flex items-center justify-between p-4 bg-white rounded-xl border border-gray-100 hover:shadow-md transition-shadow"
+            onClick={() => navigate(`/ronde/${round.id}`)}
+            className="flex items-center justify-between p-4 bg-white rounded-xl border border-gray-100 hover:shadow-md transition-all cursor-pointer hover:border-vinster-blue/30"
           >
             <div className="flex items-center gap-4">
               <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
@@ -120,26 +122,9 @@ const RoundsOverview = ({ onViewReport, onResumeRound }: RoundsOverviewProps) =>
               </div>
             </div>
 
-            {round.status === 'completed' ? (
-              <Button
-                onClick={() => onViewReport(round.id, round.round_number)}
-                variant="outline"
-                size="sm"
-                className="gap-2 border-vinster-blue text-vinster-blue hover:bg-vinster-blue hover:text-white"
-              >
-                <FileText className="w-4 h-4" />
-                {t('dashboard.rounds.view_report')}
-              </Button>
-            ) : (
-              <Button
-                onClick={onResumeRound}
-                size="sm"
-                className="gap-2 bg-vinster-blue hover:bg-vinster-blue/90 text-white"
-              >
-                <Play className="w-4 h-4" />
-                {t('dashboard.rounds.resume')}
-              </Button>
-            )}
+            <span className="text-vinster-blue text-sm font-medium">
+              {t('dashboard.round_dashboard.view_details')} →
+            </span>
           </div>
         ))}
       </div>

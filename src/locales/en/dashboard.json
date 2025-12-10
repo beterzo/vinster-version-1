@@ -1,4 +1,3 @@
-
 {
   "payment": {
     "welcome": "Welcome to Vinster, {name}!",
@@ -102,13 +101,6 @@
         "action": "Download"
       }
     },
-    "step_blocked": {
-      "title": "Step Locked",
-      "enthousiasme_required": "You must first complete the enthusiasm scan",
-      "wensberoepen_required": "You must first complete your desired professions",
-      "persoonsprofiel_required": "You must first complete your personal profile",
-      "rapport_required": "You must first complete your report to continue"
-    },
     "report_limit": {
       "banner_title_report_only": "Your report has been generated",
       "banner_description_report_only": "Download your results and get started with your search profile.",
@@ -120,27 +112,66 @@
       "blocked_reason": "You have already generated a report. To start over, you need to purchase a second journey.",
       "view_only_notice": "You are viewing your previously entered answers. To modify them, you need to start a new journey."
     },
-  "rounds": {
-    "title": "Your rounds",
-    "subtitle": "View your previous reports or start a new round",
-    "start_new": "Start new round",
-    "no_rounds": "You don't have any completed rounds yet",
-    "start_first": "Start your first round to begin",
-    "round_label": "Round",
-    "view_report": "View report",
-    "remaining": "You can start {count} more round(s)",
-    "max_reached": "You have reached the maximum of 10 rounds",
-    "round_in_progress": "Complete your current round first",
-    "progress_subtitle": "Complete all steps to generate your report",
-    "reports_title": "Your reports",
-    "reports_subtitle": "View your previously generated career reports",
-    "dialog_title": "Round not yet completed",
-    "dialog_description": "You still have an open round. Complete your current round before starting a new one.",
-    "game_rounds_title": "Your game rounds",
-    "game_rounds_subtitle": "Here you can view or resume your game rounds.",
-    "status_completed": "Completed",
-    "status_in_progress": "In progress",
-    "resume": "Resume"
-  }
+    "rounds": {
+      "title": "Your rounds",
+      "subtitle": "View your previous reports or start a new round",
+      "start_new": "Start new round",
+      "no_rounds": "You don't have any completed rounds yet",
+      "start_first": "Start your first round to begin",
+      "round_label": "Round",
+      "view_report": "View report",
+      "remaining": "You can start {count} more round(s)",
+      "max_reached": "You have reached the maximum of 10 rounds",
+      "round_in_progress": "Complete your current round first",
+      "progress_subtitle": "Complete all steps to generate your report",
+      "reports_title": "Your reports",
+      "reports_subtitle": "View your previously generated career reports",
+      "dialog_title": "Round not yet completed",
+      "dialog_description": "You still have an open round. Complete your current round before starting a new one.",
+      "game_rounds_title": "Your game rounds",
+      "game_rounds_subtitle": "Here you can view or resume your game rounds.",
+      "status_completed": "Completed",
+      "status_in_progress": "In progress",
+      "resume": "Resume"
+    },
+    "round_dashboard": {
+      "back_to_dashboard": "Back to dashboard",
+      "not_found": "Round not found",
+      "started": "Started",
+      "journey_title": "Your Vinster journey",
+      "journey_subtitle": "Complete all steps to receive your personal career report",
+      "step": "Step",
+      "status_completed": "Completed",
+      "status_active": "In progress",
+      "status_locked": "Locked",
+      "view_answers": "View answers",
+      "continue": "Continue",
+      "locked": "Locked",
+      "progress": "Progress",
+      "complete_previous": "Complete the previous step first",
+      "view_details": "View details",
+      "steps": {
+        "enthousiasme": {
+          "title": "Enthusiasm scan",
+          "description": "Discover what truly drives and motivates you at work"
+        },
+        "wensberoepen": {
+          "title": "Dream jobs",
+          "description": "Explore different career opportunities that suit you"
+        },
+        "persoonsprofiel": {
+          "title": "Personal profile",
+          "description": "Build your personal profile with preferences and priorities"
+        },
+        "loopbaanrapport": {
+          "title": "Career report",
+          "description": "Receive your personal recommendations and insights"
+        },
+        "zoekprofiel": {
+          "title": "Search profile",
+          "description": "Download your search profile for your job applications"
+        }
+      }
+    }
   }
 }

@@ -69,10 +69,10 @@
     "logout_error": "Fehler beim Abmelden",
     "step_blocked": {
       "title": "Schritt gesperrt",
-      "enthousiasme_required": "Sie müssen zuerst den Begeisterungsscan abschließen, bevor Sie fortfahren können",
-      "wensberoepen_required": "Sie müssen zuerst den Wunschberufsscan abschließen, bevor Sie fortfahren können",
-      "persoonsprofiel_required": "Sie müssen zuerst Ihr persönliches Profil vervollständigen, bevor Sie fortfahren können",
-      "rapport_required": "Sie müssen zuerst Ihren Karrierebericht erstellen lassen, bevor Sie fortfahren können"
+      "enthousiasme_required": "Sie müssen zuerst den Begeisterungsscan abschließen",
+      "wensberoepen_required": "Sie müssen zuerst Ihre Wunschberufe vervollständigen",
+      "persoonsprofiel_required": "Sie müssen zuerst Ihr persönliches Profil vervollständigen",
+      "rapport_required": "Sie müssen zuerst Ihren Bericht abschließen, um fortzufahren"
     },
     "restart_journey": {
       "title": "Möchten Sie die Reise noch einmal machen?",
@@ -100,13 +100,6 @@
         "description": "Laden Sie Ihr Suchprofil herunter",
         "action": "Herunterladen"
       }
-    },
-    "step_blocked": {
-      "title": "Schritt gesperrt",
-      "enthousiasme_required": "Sie müssen zuerst den Begeisterungsscan abschließen",
-      "wensberoepen_required": "Sie müssen zuerst Ihre Wunschberufe vervollständigen",
-      "persoonsprofiel_required": "Sie müssen zuerst Ihr persönliches Profil vervollständigen",
-      "rapport_required": "Sie müssen zuerst Ihren Bericht abschließen, um fortzufahren"
     },
     "report_limit": {
       "banner_title_report_only": "Ihr Bericht wurde erstellt",
@@ -140,6 +133,30 @@
       "status_completed": "Abgeschlossen",
       "status_in_progress": "In Bearbeitung",
       "resume": "Fortsetzen"
+    },
+    "round_dashboard": {
+      "back_to_dashboard": "Zurück zum Dashboard",
+      "not_found": "Runde nicht gefunden",
+      "started": "Gestartet",
+      "journey_title": "Ihre Vinster-Reise",
+      "journey_subtitle": "Schließen Sie alle Schritte ab, um Ihren persönlichen Karrierebericht zu erhalten",
+      "step": "Schritt",
+      "status_completed": "Abgeschlossen",
+      "status_active": "In Bearbeitung",
+      "status_locked": "Gesperrt",
+      "view_answers": "Antworten ansehen",
+      "continue": "Fortfahren",
+      "locked": "Gesperrt",
+      "progress": "Fortschritt",
+      "complete_previous": "Schließen Sie zuerst den vorherigen Schritt ab",
+      "view_details": "Details ansehen",
+      "steps": {
+        "enthousiasme": { "title": "Begeisterungsscan", "description": "Entdecken Sie, was Sie bei der Arbeit antreibt" },
+        "wensberoepen": { "title": "Wunschberufe", "description": "Erkunden Sie Karrieremöglichkeiten, die zu Ihnen passen" },
+        "persoonsprofiel": { "title": "Persönliches Profil", "description": "Erstellen Sie Ihr Profil mit Präferenzen" },
+        "loopbaanrapport": { "title": "Karrierebericht", "description": "Erhalten Sie Ihre persönlichen Empfehlungen" },
+        "zoekprofiel": { "title": "Suchprofil", "description": "Laden Sie Ihr Suchprofil herunter" }
+      }
     }
   }
 }
