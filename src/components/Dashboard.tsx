@@ -1,5 +1,5 @@
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useDashboard } from "@/hooks/useDashboard";
@@ -15,6 +15,15 @@ import { Card } from "@/components/ui/card";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useToast } from "@/hooks/use-toast";
 import { Lock, Download, FileText, Play } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -38,7 +47,15 @@ const Dashboard = () => {
     navigate(`/rapport-bekijken/${roundId}`);
   };
 
+  const [showRoundInProgressDialog, setShowRoundInProgressDialog] = useState(false);
+
   const handleStartNewRound = async () => {
+    // Check if a round is in progress
+    if (currentRound?.status === 'in_progress') {
+      setShowRoundInProgressDialog(true);
+      return;
+    }
+    
     const newRound = await startNewRound();
     if (newRound) {
       navigate('/enthousiasme-intro');
@@ -216,17 +233,26 @@ const Dashboard = () => {
             <div className="mt-6 pt-4 border-t border-gray-300">
               <Button 
                 onClick={handleStartNewRound}
-                disabled={roundsLoading || (currentRound?.status === 'in_progress')}
-                className="bg-white text-vinster-blue border-2 border-gray-300 hover:bg-vinster-blue hover:text-white hover:border-vinster-blue rounded-full px-8 py-3 font-semibold transition-all duration-200 gap-2"
+                disabled={roundsLoading}
+                className="bg-white border-2 border-gray-300 hover:text-white rounded-full px-8 py-3 font-semibold transition-all duration-200 gap-2"
+                style={{ 
+                  color: '#232D4B',
+                  ['--hover-bg' as any]: '#232D4B'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#232D4B';
+                  e.currentTarget.style.borderColor = '#232D4B';
+                  e.currentTarget.style.color = 'white';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'white';
+                  e.currentTarget.style.borderColor = '#d1d5db';
+                  e.currentTarget.style.color = '#232D4B';
+                }}
               >
                 <Play className="w-4 h-4" />
                 {t('dashboard.rounds.start_new')}
               </Button>
-              {currentRound?.status === 'in_progress' && (
-                <p className="text-sm text-gray-500 mt-2">
-                  {t('dashboard.rounds.round_in_progress')}
-                </p>
-              )}
             </div>
           </Card>
 
@@ -326,6 +352,23 @@ const Dashboard = () => {
           </div>
         )}
       </div>
+
+      {/* Dialog for round in progress */}
+      <AlertDialog open={showRoundInProgressDialog} onOpenChange={setShowRoundInProgressDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>{t('dashboard.rounds.dialog_title')}</AlertDialogTitle>
+            <AlertDialogDescription>
+              {t('dashboard.rounds.dialog_description')}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction onClick={() => setShowRoundInProgressDialog(false)}>
+              {t('common.ok')}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };

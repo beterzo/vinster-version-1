@@ -104,5 +104,6 @@
     "back_button": "Tilbake til oversikten",
     "generating": "Rapporten genereres...",
     "please_wait": "Dette kan ta litt tid. Du blir automatisk videresendt når rapporten er klar."
-  }
+  },
+  "ok": "OK"
 }

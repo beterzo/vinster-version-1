@@ -133,7 +133,9 @@
     "round_in_progress": "Complete your current round first",
     "progress_subtitle": "Complete all steps to generate your report",
     "reports_title": "Your reports",
-    "reports_subtitle": "View your previously generated career reports"
+    "reports_subtitle": "View your previously generated career reports",
+    "dialog_title": "Round not yet completed",
+    "dialog_description": "You still have an open round. Complete your current round before starting a new one."
   }
   }
 }

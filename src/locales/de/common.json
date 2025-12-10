@@ -145,5 +145,6 @@
     "back_button": "Zurück zur Übersicht",
     "generating": "Bericht wird erstellt...",
     "please_wait": "Dies kann einen Moment dauern. Sie werden automatisch weitergeleitet, sobald Ihr Bericht fertig ist."
-  }
+  },
+  "ok": "OK"
 }

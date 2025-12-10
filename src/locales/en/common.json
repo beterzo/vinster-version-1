@@ -97,5 +97,6 @@
     "back_button": "Back to overview",
     "generating": "Report is being generated...",
     "please_wait": "This may take a moment. You will be redirected automatically once your report is ready."
-  }
+  },
+  "ok": "OK"
 }
