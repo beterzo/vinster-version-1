@@ -217,7 +217,7 @@ const Dashboard = () => {
               <Button 
                 onClick={handleStartNewRound}
                 disabled={roundsLoading || (currentRound?.status === 'in_progress')}
-                className="bg-vinster-blue hover:bg-vinster-blue/90 gap-2"
+                className="bg-white text-vinster-blue border-2 border-gray-300 hover:bg-vinster-blue hover:text-white hover:border-vinster-blue rounded-full px-8 py-3 font-semibold transition-all duration-200 gap-2"
               >
                 <Play className="w-4 h-4" />
                 {t('dashboard.rounds.start_new')}
