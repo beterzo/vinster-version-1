@@ -134,7 +134,12 @@
       "reports_title": "Ihre Berichte",
       "reports_subtitle": "Sehen Sie Ihre zuvor erstellten Karriereberichte",
       "dialog_title": "Runde noch nicht abgeschlossen",
-      "dialog_description": "Sie haben noch eine offene Runde. Schließen Sie zuerst Ihre aktuelle Runde ab, bevor Sie eine neue starten."
+      "dialog_description": "Sie haben noch eine offene Runde. Schließen Sie zuerst Ihre aktuelle Runde ab, bevor Sie eine neue starten.",
+      "game_rounds_title": "Ihre Spielrunden",
+      "game_rounds_subtitle": "Hier können Sie Spielrunden einsehen oder fortsetzen.",
+      "status_completed": "Abgeschlossen",
+      "status_in_progress": "In Bearbeitung",
+      "resume": "Fortsetzen"
     }
   }
 }

@@ -135,7 +135,12 @@
     "reports_title": "Jouw rapporten",
     "reports_subtitle": "Bekijk je eerder gegenereerde loopbaanrapporten",
     "dialog_title": "Ronde nog niet afgerond",
-    "dialog_description": "Je hebt nog een ronde open staan. Rond eerst je huidige ronde af voordat je een nieuwe start."
+    "dialog_description": "Je hebt nog een ronde open staan. Rond eerst je huidige ronde af voordat je een nieuwe start.",
+    "game_rounds_title": "Jouw spelrondes",
+    "game_rounds_subtitle": "Hier kun je spelrondes inzien of hervatten.",
+    "status_completed": "Afgerond",
+    "status_in_progress": "In uitvoering",
+    "resume": "Hervatten"
   }
   }
 }

@@ -135,7 +135,12 @@
     "reports_title": "Your reports",
     "reports_subtitle": "View your previously generated career reports",
     "dialog_title": "Round not yet completed",
-    "dialog_description": "You still have an open round. Complete your current round before starting a new one."
+    "dialog_description": "You still have an open round. Complete your current round before starting a new one.",
+    "game_rounds_title": "Your game rounds",
+    "game_rounds_subtitle": "Here you can view or resume your game rounds.",
+    "status_completed": "Completed",
+    "status_in_progress": "In progress",
+    "resume": "Resume"
   }
   }
 }
