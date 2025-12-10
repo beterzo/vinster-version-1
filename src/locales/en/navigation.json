@@ -7,12 +7,12 @@
   "mobile_menu": {
     "menu": "Menu",
     "home": "Home",
-    "about_vinster": "About Vinster",
-    "for_whom": "For whom is it?",
-    "faq": "Frequently asked questions",
+    "about_vinster": "About",
+    "for_whom": "For whom",
+    "faq": "FAQ",
     "experiences": "Experiences",
     "contact": "Contact",
-    "access_codes": "Access codes for professionals",
+    "access_codes": "Access codes",
     "login": "Login"
   }
 }

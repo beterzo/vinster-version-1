@@ -34,7 +34,7 @@ const HeroSection = () => {
           </div>
           
           {/* Right side - Desktop Nav, Language Switcher, Login Button, Mobile Menu */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4 mt-6">
             {/* Desktop navigation - hidden on mobile */}
             <DesktopNavigation />
             

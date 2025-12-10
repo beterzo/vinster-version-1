@@ -12,7 +12,6 @@ const DesktopNavigation = () => {
         { title: t('mobile_menu.for_whom'), path: '/who-is-it-for' },
         { title: t('mobile_menu.faq'), path: '/frequently-asked-questions' },
         { title: t('mobile_menu.experiences'), path: '/experiences' },
-        { title: t('mobile_menu.contact'), path: '/contact-us' },
         { title: t('mobile_menu.access_codes'), path: '/access-codes-professionals' },
       ];
     } else if (language === 'de') {
@@ -21,7 +20,6 @@ const DesktopNavigation = () => {
         { title: t('mobile_menu.for_whom'), path: '/fur-wen-ist-es' },
         { title: t('mobile_menu.faq'), path: '/haufig-gestellte-fragen' },
         { title: t('mobile_menu.experiences'), path: '/erfahrungen' },
-        { title: t('mobile_menu.contact'), path: '/kontakt' },
         { title: t('mobile_menu.access_codes'), path: '/zugangscodes-fachkrafte' },
       ];
     } else if (language === 'no') {
@@ -30,7 +28,6 @@ const DesktopNavigation = () => {
         { title: t('mobile_menu.for_whom'), path: '/hvem-er-det-for' },
         { title: t('mobile_menu.faq'), path: '/ofte-stilte-sporsmal' },
         { title: t('mobile_menu.experiences'), path: '/erfaringer' },
-        { title: t('mobile_menu.contact'), path: '/kontakt' },
         { title: t('mobile_menu.access_codes'), path: '/tilgangskoder-fagfolk' },
       ];
     } else {
@@ -40,7 +37,6 @@ const DesktopNavigation = () => {
         { title: t('mobile_menu.for_whom'), path: '/voor-wie-is-het' },
         { title: t('mobile_menu.faq'), path: '/veelgestelde-vragen' },
         { title: t('mobile_menu.experiences'), path: '/ervaringen' },
-        { title: t('mobile_menu.contact'), path: '/contact' },
         { title: t('mobile_menu.access_codes'), path: '/toegangscodes-professionals' },
       ];
     }
@@ -52,7 +48,7 @@ const DesktopNavigation = () => {
         <button
           key={item.path}
           onClick={() => navigate(item.path)}
-          className="text-white text-sm font-medium hover:text-yellow-300 transition-colors whitespace-nowrap"
+          className="text-white text-base font-medium hover:text-yellow-300 transition-colors whitespace-nowrap"
         >
           {item.title}
         </button>

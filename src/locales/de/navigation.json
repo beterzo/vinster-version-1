@@ -6,12 +6,12 @@
   "mobile_menu": {
     "menu": "Menü",
     "home": "Startseite",
-    "about_vinster": "Über Vinster",
-    "for_whom": "Für wen ist es?",
-    "faq": "Häufig gestellte Fragen",
+    "about_vinster": "Über",
+    "for_whom": "Für wen",
+    "faq": "FAQ",
     "experiences": "Erfahrungen",
     "contact": "Kontakt",
-    "access_codes": "Zugangscodes für Profis",
+    "access_codes": "Zugangscodes",
     "login": "Anmelden"
   }
 }
