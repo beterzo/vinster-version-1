@@ -7,12 +7,12 @@
   "mobile_menu": {
     "menu": "Menu",
     "home": "Home",
-    "about_vinster": "Over Vinster",
-    "for_whom": "Voor wie is het?",
-    "faq": "Veelgestelde vragen",
+    "about_vinster": "Over",
+    "for_whom": "Voor wie",
+    "faq": "FAQ",
     "experiences": "Ervaringen",
     "contact": "Contact",
-    "access_codes": "Toegangscodes voor professionals",
+    "access_codes": "Toegangscodes",
     "login": "Inloggen"
   }
 }

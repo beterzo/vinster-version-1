@@ -6,12 +6,12 @@
   "mobile_menu": {
     "menu": "Meny",
     "home": "Hjem",
-    "about_vinster": "Om Vinster",
-    "for_whom": "For hvem er det?",
-    "faq": "Vanlige spørsmål",
+    "about_vinster": "Om",
+    "for_whom": "For hvem",
+    "faq": "FAQ",
     "experiences": "Erfaringer",
     "contact": "Kontakt",
-    "access_codes": "Tilgangskoder for fagfolk",
+    "access_codes": "Tilgangskoder",
     "login": "Logg inn"
   }
 }
