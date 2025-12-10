@@ -42,14 +42,14 @@ const StepCard = ({
     switch (status) {
       case 'completed':
         return (
-          <span className="flex items-center gap-1 text-xs px-2 py-1 rounded-full bg-green-100 text-green-700 font-medium">
+          <span className="flex items-center gap-1 text-xs px-2 py-1 rounded-full font-medium" style={{ backgroundColor: '#E8F4FD', color: '#232D4B' }}>
             <CheckCircle className="w-3 h-3" />
             {t('dashboard.round_dashboard.status_completed')}
           </span>
         );
       case 'active':
         return (
-          <span className="flex items-center gap-1 text-xs px-2 py-1 rounded-full bg-orange-100 text-orange-700 font-medium">
+          <span className="flex items-center gap-1 text-xs px-2 py-1 rounded-full font-medium" style={{ backgroundColor: '#FEF3C7', color: '#92400E' }}>
             <Play className="w-3 h-3" />
             {t('dashboard.round_dashboard.status_active')}
           </span>
@@ -104,22 +104,26 @@ const StepCard = ({
   };
 
   const cardStyles = {
-    completed: 'bg-white border-2 border-green-200 shadow-md hover:shadow-lg',
+    completed: 'bg-white border-2 shadow-md hover:shadow-lg',
     active: 'bg-white border-2 border-vinster-blue shadow-lg hover:shadow-xl ring-2 ring-vinster-blue/20',
     locked: 'bg-gray-50 border border-gray-200 opacity-75',
   };
 
   const iconStyles = {
-    completed: 'bg-green-100 text-green-600',
+    completed: 'text-vinster-blue',
     active: 'bg-vinster-blue/10 text-vinster-blue',
     locked: 'bg-gray-100 text-gray-400',
   };
+
+  const getCompletedBorderStyle = () => status === 'completed' ? { borderColor: '#232D4B' } : {};
+  const getCompletedIconBgStyle = () => status === 'completed' ? { backgroundColor: '#E8F4FD' } : {};
 
   return (
     <Card
       className={`p-6 rounded-2xl transition-all duration-300 ${cardStyles[status]} ${
         status !== 'locked' ? 'cursor-pointer' : ''
       }`}
+      style={getCompletedBorderStyle()}
       onClick={status !== 'locked' ? onClick : undefined}
     >
       {/* Header with step number and status */}
@@ -131,7 +135,10 @@ const StepCard = ({
       </div>
 
       {/* Icon */}
-      <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-4 ${iconStyles[status]}`}>
+      <div 
+        className={`w-14 h-14 rounded-xl flex items-center justify-center mb-4 ${iconStyles[status]}`}
+        style={getCompletedIconBgStyle()}
+      >
         <Icon className="w-7 h-7" />
       </div>
 

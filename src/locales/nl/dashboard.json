@@ -136,41 +136,48 @@
     },
     "round_dashboard": {
       "back_to_dashboard": "Terug naar dashboard",
-      "not_found": "Ronde niet gevonden",
+      "round_not_found": "Ronde niet gevonden",
+      "round_title": "Ronde",
       "started": "Gestart",
-      "journey_title": "Jouw Vinster reis",
-      "journey_subtitle": "Voltooi alle stappen om je persoonlijke loopbaanrapport te ontvangen",
-      "step": "Stap",
       "status_completed": "Voltooid",
+      "status_in_progress": "In uitvoering",
+      "your_journey": "Jouw Vinster reis",
+      "complete_steps_subtitle": "Voltooi alle stappen om je persoonlijke loopbaanrapport te ontvangen",
+      "step": "Stap",
       "status_active": "Bezig",
       "status_locked": "Vergrendeld",
       "view_answers": "Bekijk antwoorden",
       "continue": "Verder",
       "locked": "Vergrendeld",
       "progress": "Voortgang",
-      "complete_previous": "Voltooi eerst de vorige stap",
-      "view_details": "Bekijk details",
-      "steps": {
-        "enthousiasme": {
-          "title": "Enthousiasmescan",
-          "description": "Ontdek wat je echt drijft en motiveert in je werk"
-        },
-        "wensberoepen": {
-          "title": "Wensberoepen",
-          "description": "Verken verschillende carrièremogelijkheden die bij jou passen"
-        },
-        "persoonsprofiel": {
-          "title": "Persoonsprofiel",
-          "description": "Bouw je persoonlijke profiel op met voorkeuren en prioriteiten"
-        },
-        "loopbaanrapport": {
-          "title": "Loopbaanrapport",
-          "description": "Ontvang je persoonlijke aanbevelingen en inzichten"
-        },
-        "zoekprofiel": {
-          "title": "Zoekprofiel",
-          "description": "Download je zoekprofiel voor je sollicitaties"
-        }
+      "complete_previous_step": "Voltooi eerst de vorige stap",
+      "step_enthousiasme_title": "Enthousiasmescan",
+      "step_enthousiasme_description": "Ontdek wat je echt drijft en motiveert in je werk",
+      "step_wensberoepen_title": "Wensberoepen",
+      "step_wensberoepen_description": "Verken verschillende carrièremogelijkheden die bij jou passen",
+      "step_persoonsprofiel_title": "Persoonsprofiel",
+      "step_persoonsprofiel_description": "Bouw je persoonlijke profiel op met voorkeuren en prioriteiten",
+      "tabs": {
+        "loopbaanrapport": "Loopbaanrapport",
+        "zoekprofiel": "Zoekprofiel"
+      },
+      "content": {
+        "locked_title": "Nog even geduld",
+        "locked_message": "Voltooi de voorgaande stappen om je loopbaanrapport te kunnen genereren",
+        "rapport_ready": "Je loopbaanrapport is klaar!",
+        "rapport_ready_description": "Bekijk je persoonlijke loopbaanrapport met aanbevelingen en inzichten",
+        "rapport_generate": "Je kunt nu je rapport genereren!",
+        "rapport_generate_description": "Je hebt alle stappen voltooid. Genereer nu je persoonlijke loopbaanrapport",
+        "generate_button": "Genereer mijn rapport",
+        "view_button": "Bekijk rapport",
+        "download_button": "Download PDF",
+        "zoekprofiel_locked_title": "Nog even geduld",
+        "zoekprofiel_locked": "Genereer eerst je loopbaanrapport om je zoekprofiel te kunnen maken",
+        "zoekprofiel_ready": "Je zoekprofiel is klaar!",
+        "zoekprofiel_ready_description": "Bekijk en download je zoekprofiel voor je sollicitaties",
+        "zoekprofiel_start": "Start met je zoekprofiel",
+        "zoekprofiel_start_description": "Maak je zoekprofiel aan om je ideale baan te vinden",
+        "start_zoekprofiel_button": "Start zoekprofiel"
       }
     }
   }
