@@ -128,7 +128,11 @@
       "round_label": "Runde",
       "view_report": "Se rapport",
       "remaining": "Du kan starte {count} runde(r) til",
-      "max_reached": "Du har nådd maksimalt 10 runder"
+      "max_reached": "Du har nådd maksimalt 10 runder",
+      "round_in_progress": "Fullfør din nåværende runde først",
+      "progress_subtitle": "Fullfør alle trinn for å generere rapporten din",
+      "reports_title": "Dine rapporter",
+      "reports_subtitle": "Se dine tidligere genererte karriererapporter"
     }
   }
 }
