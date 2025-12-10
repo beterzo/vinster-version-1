@@ -1,0 +1,41 @@
+{
+  "back_to_dashboard": "Zurück zum Dashboard",
+  "print": "Bericht drucken",
+  "voorblad": {
+    "title": "Karrierebericht",
+    "subtitle": "Finden Sie Arbeit, die zu Ihnen passt",
+    "naam": "Name",
+    "start_datum": "Startdatum",
+    "eind_datum": "Enddatum",
+    "ronde": "Runde"
+  },
+  "ideale_functie": {
+    "title": "Ihr idealer Jobinhalt",
+    "activiteiten": "Was Sie gerne tun",
+    "werkomgeving": "Ihre ideale Arbeitsumgebung",
+    "interessegebieden": "Ihre Interessengebiete"
+  },
+  "beroepen": {
+    "title": "Mögliche Berufe",
+    "passend": "Passend",
+    "verrassend": "Überraschend"
+  },
+  "onderzoeksplan": {
+    "title": "Forschungsplan",
+    "intro": "Und nun? Ihr Karrierebericht ist fertig! Jetzt können Sie recherchieren, denn Sie möchten noch mehr erfahren, bevor Sie eine endgültige Entscheidung treffen. Wählen Sie aus den Berufen, die aus der Analyse Ihrer Antworten hervorgehen, zwei (oder mehr) aus, die Sie näher untersuchen möchten.",
+    "stappenplan": "Dies ist Ihr Aktionsplan:",
+    "stap1": "Fragen Sie AI (oder Google) nach einer ausführlichen Stellenbeschreibung der Positionen aus Ihrem Karrierebericht. Fragen Sie AI auch nach ähnlichen Positionen. Welche Arbeit ist ähnlich? Was spricht Sie in den Antworten an?",
+    "stap2": "Schauen Sie, ob Sie Stellenanzeigen finden können, die Ihnen ein Bild vom Inhalt dieser Position und von den Organisationen geben, die diese Positionen haben.",
+    "stap3": "Suchen Sie auf LinkedIn nach Menschen, die diese Arbeit machen. Was ist ihr Hintergrund?",
+    "stap4": "Gibt es einen Berufsverband? Was lesen Sie auf der Website über Entwicklungen in der Branche und dem Beruf?",
+    "stap5": "Hat der Beruf eine Fachzeitschrift? Wenn ja, fordern Sie eine oder mehrere an und lesen Sie sie. Was fällt Ihnen auf? Werden Sie von den Themen begeistert?",
+    "vervolg": "Fortgesetzter Aktionsplan:",
+    "stap6": "Finden Sie Organisationen, in denen Menschen mit diesem Beruf arbeiten.",
+    "stap7": "Welche Ausbildung benötigen Sie möglicherweise für diese Arbeit? Fragen Sie AI oder Google.",
+    "stap8": "Schreiben Sie alle Fragen auf, die Ihnen während Ihrer Recherche einfallen. Diese können Sie Menschen stellen, die bereits in diesem Bereich arbeiten.",
+    "stap9": "Erstellen Sie eine Liste von Menschen, mit denen Sie über diese Arbeit sprechen möchten, und kontaktieren Sie sie. Sie finden diese Menschen über LinkedIn und/oder Ihr persönliches Netzwerk.",
+    "stap10": "Sammeln Sie genug Informationen, um eine Entscheidung zu treffen. Nehmen Sie sich Zeit und sprechen Sie mit anderen darüber.",
+    "stap11": "Sobald Sie genug erfahren haben, wählen Sie die Position, die am besten zu Ihnen passt, und füllen Sie das Suchprofil auf der Website aus. Vinster wird Ihren Text in ein paar Sätze umwandeln, die Sie verwenden können, um anderen mitzuteilen, was Sie suchen. Sie können jetzt gezielt bewerben!",
+    "afsluiting": "Wir wünschen Ihnen viel Arbeitszufriedenheit in Ihrer nächsten Position!"
+  }
+}

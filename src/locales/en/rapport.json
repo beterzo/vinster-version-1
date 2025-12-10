@@ -1,0 +1,41 @@
+{
+  "back_to_dashboard": "Back to dashboard",
+  "print": "Print report",
+  "voorblad": {
+    "title": "Career Report",
+    "subtitle": "Find work that suits you",
+    "naam": "Name",
+    "start_datum": "Start date",
+    "eind_datum": "End date",
+    "ronde": "Round"
+  },
+  "ideale_functie": {
+    "title": "Your ideal job content",
+    "activiteiten": "What you like to do",
+    "werkomgeving": "Your ideal work environment",
+    "interessegebieden": "Your areas of interest"
+  },
+  "beroepen": {
+    "title": "Possible careers",
+    "passend": "Matching",
+    "verrassend": "Surprising"
+  },
+  "onderzoeksplan": {
+    "title": "Research Plan",
+    "intro": "What's next? Your career report is ready! Now you can start researching, because you want to know more before making a final choice. Choose two (or more) careers from the analysis of your answers that you want to investigate further.",
+    "stappenplan": "This is your action plan:",
+    "stap1": "Ask AI (or Google) for a detailed job description of the positions from your career report. Also ask AI about similar positions. What work is similar? What appeals to you in the answers you get?",
+    "stap2": "See if you can find job postings that give you an idea of the content of this position and the organizations that have these positions.",
+    "stap3": "Search LinkedIn for people who do this work. What is their background?",
+    "stap4": "Is there a professional association? What do you read on the website about developments in the sector and the profession?",
+    "stap5": "Does the profession have a trade journal? If so, request one or more and read them. What stands out? Do you get excited about the topics?",
+    "vervolg": "Continued action plan:",
+    "stap6": "Find organizations where people with this profession work.",
+    "stap7": "What education might you need for this work? Ask AI or Google.",
+    "stap8": "Write down all the questions that come to mind during your research. You can ask these to people who already work in this field.",
+    "stap9": "Make a list of people you would like to talk to about this work and approach them. You can find these people through LinkedIn and/or your personal network.",
+    "stap10": "Gather enough information to make a choice. Take your time and discuss it with others.",
+    "stap11": "Once you've learned enough, choose the position that suits you best and fill in the search profile on the website. Vinster will convert your text into a few sentences you can use to let others know what you're looking for. You can now start applying!",
+    "afsluiting": "We wish you lots of job satisfaction in your next position!"
+  }
+}
