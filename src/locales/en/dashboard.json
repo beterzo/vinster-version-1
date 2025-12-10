@@ -181,7 +181,34 @@
         "zoekprofiel_ready_description": "View and download your search profile for your job applications",
         "zoekprofiel_start": "Start your search profile",
         "zoekprofiel_start_description": "Create your search profile to find your ideal job",
-        "start_zoekprofiel_button": "Start search profile"
+        "start_zoekprofiel_button": "Start search profile",
+        "zoekprofiel_generating": "Creating your search profile...",
+        "zoekprofiel_generating_desc": "This takes a few seconds"
+      },
+      "actions": {
+        "view_answers_title": "View my answers",
+        "view_answers_subtitle": "All questions and answers by category",
+        "print_button": "Print report",
+        "back_to_dashboard": "Back to dashboard",
+        "start_new_game": "Start new game",
+        "dream_job": "Dream job",
+        "selected_activities": "Selected activities",
+        "selected_conditions": "Selected work conditions",
+        "selected_interests": "Selected interests",
+        "extra_info": "Extra information",
+        "education_level": "Education level",
+        "sector_preference": "Sector preference",
+        "questions": {
+          "childhood_activities": "What did you like to do as a child?",
+          "childhood_interests": "What were you interested in as a child?",
+          "childhood_places": "Where did you like to go as a child?",
+          "first_job_tasks": "What were your favorite tasks in your first job?",
+          "first_job_topics": "Which topics did you find interesting?",
+          "first_job_conditions": "Which work conditions did you enjoy?",
+          "pleasant_period": "Describe a pleasant work period",
+          "nice_project": "Describe a nice project and your role",
+          "whistling_home": "When did you come home whistling?"
+        }
       }
     }
   }

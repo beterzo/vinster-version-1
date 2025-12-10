@@ -181,7 +181,34 @@
         "zoekprofiel_ready_description": "Sehen und laden Sie Ihr Suchprofil für Ihre Bewerbungen herunter",
         "zoekprofiel_start": "Starten Sie Ihr Suchprofil",
         "zoekprofiel_start_description": "Erstellen Sie Ihr Suchprofil, um Ihren idealen Job zu finden",
-        "start_zoekprofiel_button": "Suchprofil starten"
+        "start_zoekprofiel_button": "Suchprofil starten",
+        "zoekprofiel_generating": "Ihr Suchprofil wird erstellt...",
+        "zoekprofiel_generating_desc": "Dies dauert einige Sekunden"
+      },
+      "actions": {
+        "view_answers_title": "Meine Antworten ansehen",
+        "view_answers_subtitle": "Alle Fragen und Antworten nach Kategorie",
+        "print_button": "Bericht drucken",
+        "back_to_dashboard": "Zurück zum Dashboard",
+        "start_new_game": "Neues Spiel starten",
+        "dream_job": "Wunschberuf",
+        "selected_activities": "Ausgewählte Aktivitäten",
+        "selected_conditions": "Ausgewählte Arbeitsbedingungen",
+        "selected_interests": "Ausgewählte Interessen",
+        "extra_info": "Zusätzliche Informationen",
+        "education_level": "Bildungsniveau",
+        "sector_preference": "Sektorpräferenz",
+        "questions": {
+          "childhood_activities": "Was haben Sie als Kind gerne gemacht?",
+          "childhood_interests": "Wofür haben Sie sich als Kind interessiert?",
+          "childhood_places": "Wo sind Sie als Kind gerne hingegangen?",
+          "first_job_tasks": "Was waren Ihre Lieblingsaufgaben in Ihrem ersten Job?",
+          "first_job_topics": "Welche Themen fanden Sie interessant?",
+          "first_job_conditions": "Welche Arbeitsbedingungen mochten Sie?",
+          "pleasant_period": "Beschreiben Sie eine angenehme Arbeitszeit",
+          "nice_project": "Beschreiben Sie ein schönes Projekt und Ihre Rolle",
+          "whistling_home": "Wann kamen Sie pfeifend nach Hause?"
+        }
       }
     }
   }

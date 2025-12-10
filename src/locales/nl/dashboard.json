@@ -181,7 +181,34 @@
         "zoekprofiel_ready_description": "Bekijk en download je zoekprofiel voor je sollicitaties",
         "zoekprofiel_start": "Start met je zoekprofiel",
         "zoekprofiel_start_description": "Maak je zoekprofiel aan om je ideale baan te vinden",
-        "start_zoekprofiel_button": "Start zoekprofiel"
+        "start_zoekprofiel_button": "Start zoekprofiel",
+        "zoekprofiel_generating": "Je zoekprofiel wordt aangemaakt...",
+        "zoekprofiel_generating_desc": "Dit duurt een paar seconden"
+      },
+      "actions": {
+        "view_answers_title": "Bekijk mijn antwoorden",
+        "view_answers_subtitle": "Alle vragen en antwoorden per categorie",
+        "print_button": "Print rapport",
+        "back_to_dashboard": "Terug naar dashboard",
+        "start_new_game": "Nieuw spel starten",
+        "dream_job": "Wensberoep",
+        "selected_activities": "Geselecteerde activiteiten",
+        "selected_conditions": "Geselecteerde werkomstandigheden",
+        "selected_interests": "Geselecteerde interesses",
+        "extra_info": "Extra informatie",
+        "education_level": "Opleidingsniveau",
+        "sector_preference": "Sector voorkeur",
+        "questions": {
+          "childhood_activities": "Wat deed je graag als kind?",
+          "childhood_interests": "Waar was je als kind geïnteresseerd in?",
+          "childhood_places": "Waar kwam je graag als kind?",
+          "first_job_tasks": "Wat waren je leukste taken in je eerste baan?",
+          "first_job_topics": "Welke onderwerpen vond je interessant?",
+          "first_job_conditions": "Welke werkomstandigheden vond je fijn?",
+          "pleasant_period": "Beschrijf een plezierige werkperiode",
+          "nice_project": "Beschrijf een leuk project en jouw rol",
+          "whistling_home": "Wanneer kwam je fluitend thuis?"
+        }
       }
     }
   }
