@@ -151,36 +151,36 @@ const RondeDashboard = () => {
   const steps = [
     {
       stepId: 'enthousiasme',
-      title: t('dashboard.round_dashboard.steps.enthousiasme.title'),
-      description: t('dashboard.round_dashboard.steps.enthousiasme.description'),
+      title: t('dashboard.round_dashboard.step_enthousiasme_title'),
+      description: t('dashboard.round_dashboard.step_enthousiasme_description'),
       status: enthousiasmeStatus,
       progress: enthousiasmeProgress,
     },
     {
       stepId: 'wensberoepen',
-      title: t('dashboard.round_dashboard.steps.wensberoepen.title'),
-      description: t('dashboard.round_dashboard.steps.wensberoepen.description'),
+      title: t('dashboard.round_dashboard.step_wensberoepen_title'),
+      description: t('dashboard.round_dashboard.step_wensberoepen_description'),
       status: wensberoepenStatus,
       progress: wensberoepenProgress,
     },
     {
       stepId: 'persoonsprofiel',
-      title: t('dashboard.round_dashboard.steps.persoonsprofiel.title'),
-      description: t('dashboard.round_dashboard.steps.persoonsprofiel.description'),
+      title: t('dashboard.round_dashboard.step_persoonsprofiel_title'),
+      description: t('dashboard.round_dashboard.step_persoonsprofiel_description'),
       status: persoonsprofielStatus,
       progress: persoonsprofielProgress,
     },
     {
       stepId: 'loopbaanrapport',
-      title: t('dashboard.round_dashboard.steps.loopbaanrapport.title'),
-      description: t('dashboard.round_dashboard.steps.loopbaanrapport.description'),
+      title: t('dashboard.round_dashboard.step_loopbaanrapport_title'),
+      description: t('dashboard.round_dashboard.step_loopbaanrapport_description'),
       status: rapportStatus,
       progress: rapportProgress,
     },
     {
       stepId: 'zoekprofiel',
-      title: t('dashboard.round_dashboard.steps.zoekprofiel.title'),
-      description: t('dashboard.round_dashboard.steps.zoekprofiel.description'),
+      title: t('dashboard.round_dashboard.step_zoekprofiel_title'),
+      description: t('dashboard.round_dashboard.step_zoekprofiel_description'),
       status: zoekprofielStatus,
       progress: zoekprofielProgress,
     },
@@ -200,7 +200,7 @@ const RondeDashboard = () => {
         </Button>
 
         {/* Round Header */}
-        <Card className="p-6 mb-8 border-0 rounded-3xl bg-gradient-to-r from-vinster-blue to-vinster-blue/80">
+        <Card className="p-6 mb-8 border-0 rounded-3xl bg-gradient-to-r from-[#232D4B] to-[#3B4A6B]">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="w-14 h-14 rounded-full bg-white/20 flex items-center justify-center">
@@ -218,8 +218,8 @@ const RondeDashboard = () => {
             </div>
             <span className={`px-4 py-2 rounded-full text-sm font-medium ${
               round.status === 'completed' 
-                ? 'bg-green-100 text-green-700' 
-                : 'bg-orange-100 text-orange-700'
+                ? 'bg-[#E8F4FD] text-[#232D4B]' 
+                : 'bg-[#FEF3C7] text-[#92400E]'
             }`}>
               {round.status === 'completed' 
                 ? t('dashboard.rounds.status_completed')
@@ -232,10 +232,10 @@ const RondeDashboard = () => {
         {/* Journey Title */}
         <div className="text-center mb-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-2">
-            {t('dashboard.round_dashboard.journey_title')}
+            {t('dashboard.round_dashboard.your_journey')}
           </h2>
           <p className="text-gray-600">
-            {t('dashboard.round_dashboard.journey_subtitle')}
+            {t('dashboard.round_dashboard.complete_steps_subtitle')}
           </p>
         </div>
 

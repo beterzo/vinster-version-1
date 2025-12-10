@@ -157,6 +157,10 @@
       "step_wensberoepen_description": "Erkunden Sie verschiedene Karrieremöglichkeiten, die zu Ihnen passen",
       "step_persoonsprofiel_title": "Persönliches Profil",
       "step_persoonsprofiel_description": "Erstellen Sie Ihr persönliches Profil mit Präferenzen und Prioritäten",
+      "step_loopbaanrapport_title": "Karrierebericht",
+      "step_loopbaanrapport_description": "Erhalten Sie Ihre persönlichen Karriereempfehlungen",
+      "step_zoekprofiel_title": "Suchprofil",
+      "step_zoekprofiel_description": "Laden Sie Ihr Suchprofil für Bewerbungen herunter",
       "tabs": {
         "loopbaanrapport": "Karrierebericht",
         "zoekprofiel": "Suchprofil"
