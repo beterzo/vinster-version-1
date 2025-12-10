@@ -1,43 +1,56 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { useIsMobile } from "@/hooks/use-mobile";
 import { useTranslation } from "@/hooks/useTranslation";
 import LanguageSwitcher from "./LanguageSwitcher";
 import MobileMenu from "./MobileMenu";
+import DesktopNavigation from "./DesktopNavigation";
+
 const HeroSection = () => {
   const navigate = useNavigate();
-  const isMobile = useIsMobile();
-  const {
-    t
-  } = useTranslation();
-  return <div className="relative overflow-hidden">
+  const { t } = useTranslation();
+  
+  return (
+    <div className="relative overflow-hidden">
       {/* Background Image */}
-      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
-      backgroundImage: "url('/lovable-uploads/b67ce5d1-c717-4a77-b5ad-550d88a42378.png')"
-    }}>
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
+        style={{ backgroundImage: "url('/lovable-uploads/b67ce5d1-c717-4a77-b5ad-550d88a42378.png')" }}
+      >
         {/* Overlay for better text readability - made lighter */}
         <div className="absolute inset-0 bg-black bg-opacity-20"></div>
       </div>
       
       <div className="relative z-10 max-w-[1440px] mx-auto px-6">
-        {/* Header with Logo (left) and Menu + LanguageSwitcher + Button (right) */}
+        {/* Header with Logo (left) and Desktop Nav + LanguageSwitcher + Button (right) */}
         <div className="py-6 flex items-center justify-between">
-          {/* Left side - Logo only, made bigger and moved more to the left */}
+          {/* Left side - Logo */}
           <div className="flex items-center pt-1 -ml-4">
-            <img alt="Vinster Logo" onClick={() => navigate('/')} src="/lovable-uploads/35bcd379-05ae-4af8-abe6-ffeebd2ea3ac.png" className="h-40 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200 " />
+            <img 
+              alt="Vinster Logo" 
+              onClick={() => navigate('/')} 
+              src="/lovable-uploads/35bcd379-05ae-4af8-abe6-ffeebd2ea3ac.png" 
+              className="h-40 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
+            />
           </div>
           
-          {/* Right side - Mobile Menu, Language Switcher and Login Button aligned */}
+          {/* Right side - Desktop Nav, Language Switcher, Login Button, Mobile Menu */}
           <div className="flex items-center space-x-4">
-            <div className="flex items-center">
-              <MobileMenu />
-            </div>
+            {/* Desktop navigation - hidden on mobile */}
+            <DesktopNavigation />
+            
             {/* Language Switcher - visible on all screen sizes */}
             <LanguageSwitcher />
-            {/* Hide login button on mobile */}
-            <Button onClick={() => navigate('/login')} className="hidden md:block bg-white hover:bg-gray-100 text-blue-900 font-semibold px-6 py-3 rounded-full border border-gray-200 shadow-sm transition-all duration-200 h-12">
+            
+            {/* Login button - hidden on mobile */}
+            <Button 
+              onClick={() => navigate('/login')} 
+              className="hidden md:block bg-white hover:bg-gray-100 text-blue-900 font-semibold px-6 py-3 rounded-full border border-gray-200 shadow-sm transition-all duration-200 h-12"
+            >
               {t('landing.login')}
             </Button>
+            
+            {/* Mobile Menu - only visible on mobile */}
+            <MobileMenu />
           </div>
         </div>
         
@@ -50,9 +63,7 @@ const HeroSection = () => {
             </div>
             
             <h1 className="text-4xl font-bold text-white leading-tight">
-              {t('landing.welcome')} <span style={{
-              color: '#FFCD3E'
-            }}>Vinster</span>
+              {t('landing.welcome')} <span style={{ color: '#FFCD3E' }}>Vinster</span>
             </h1>
             
             <p className="text-xl text-white leading-relaxed">
@@ -61,6 +72,8 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default HeroSection;

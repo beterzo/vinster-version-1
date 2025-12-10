@@ -65,58 +65,60 @@ const MobileMenu = () => {
   };
 
   return (
-    <Drawer open={open} onOpenChange={setOpen}>
-      <DrawerTrigger asChild>
-        <button
-          className="p-2 hover:opacity-80 transition-opacity focus:outline-none"
-          aria-label="Open menu"
-        >
-          <svg 
-            width="32" 
-            height="26" 
-            viewBox="0 0 32 26" 
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+    <div className="md:hidden">
+      <Drawer open={open} onOpenChange={setOpen}>
+        <DrawerTrigger asChild>
+          <button
+            className="p-2 hover:opacity-80 transition-opacity focus:outline-none"
+            aria-label="Open menu"
           >
-            <rect x="0" y="0" width="32" height="6" rx="3" fill="white" />
-            <rect x="0" y="10" width="32" height="6" rx="3" fill="white" />
-            <rect x="0" y="20" width="32" height="6" rx="3" fill="white" />
-          </svg>
-        </button>
-      </DrawerTrigger>
-      <DrawerContent className="bg-white">
-        <DrawerHeader className="flex items-center justify-between px-6">
-          <DrawerTitle className="text-xl font-bold text-vinster-blue">
-            {t('mobile_menu.menu')}
-          </DrawerTitle>
-          <DrawerClose asChild>
-            <Button variant="ghost" size="icon">
-              <X className="h-5 w-5" />
-            </Button>
-          </DrawerClose>
-        </DrawerHeader>
-        <div className="px-6 pb-8">
-          <nav className="space-y-4">
-            {getMenuItems().map((item) => (
+            <svg 
+              width="32" 
+              height="26" 
+              viewBox="0 0 32 26" 
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect x="0" y="0" width="32" height="6" rx="3" fill="white" />
+              <rect x="0" y="10" width="32" height="6" rx="3" fill="white" />
+              <rect x="0" y="20" width="32" height="6" rx="3" fill="white" />
+            </svg>
+          </button>
+        </DrawerTrigger>
+        <DrawerContent className="bg-white">
+          <DrawerHeader className="flex items-center justify-between px-6">
+            <DrawerTitle className="text-xl font-bold text-vinster-blue">
+              {t('mobile_menu.menu')}
+            </DrawerTitle>
+            <DrawerClose asChild>
+              <Button variant="ghost" size="icon">
+                <X className="h-5 w-5" />
+              </Button>
+            </DrawerClose>
+          </DrawerHeader>
+          <div className="px-6 pb-8">
+            <nav className="space-y-4">
+              {getMenuItems().map((item) => (
+                <button
+                  key={item.path}
+                  onClick={() => handleNavigation(item.path)}
+                  className="block w-full text-left py-3 px-0 text-lg font-medium text-gray-700 hover:bg-gray-50 hover:text-vinster-blue rounded-lg transition-colors duration-200"
+                >
+                  {item.title}
+                </button>
+              ))}
+              {/* Login button with the same styling as other menu items */}
               <button
-                key={item.path}
-                onClick={() => handleNavigation(item.path)}
+                onClick={() => handleNavigation('/login')}
                 className="block w-full text-left py-3 px-0 text-lg font-medium text-gray-700 hover:bg-gray-50 hover:text-vinster-blue rounded-lg transition-colors duration-200"
               >
-                {item.title}
+                {t('mobile_menu.login')}
               </button>
-            ))}
-            {/* Login button with the same styling as other menu items */}
-            <button
-              onClick={() => handleNavigation('/login')}
-              className="block w-full text-left py-3 px-0 text-lg font-medium text-gray-700 hover:bg-gray-50 hover:text-vinster-blue rounded-lg transition-colors duration-200"
-            >
-              {t('mobile_menu.login')}
-            </button>
-          </nav>
-        </div>
-      </DrawerContent>
-    </Drawer>
+            </nav>
+          </div>
+        </DrawerContent>
+      </Drawer>
+    </div>
   );
 };
 
