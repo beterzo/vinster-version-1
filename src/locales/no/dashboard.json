@@ -132,7 +132,9 @@
       "round_in_progress": "Fullfør din nåværende runde først",
       "progress_subtitle": "Fullfør alle trinn for å generere rapporten din",
       "reports_title": "Dine rapporter",
-      "reports_subtitle": "Se dine tidligere genererte karriererapporter"
+      "reports_subtitle": "Se dine tidligere genererte karriererapporter",
+      "dialog_title": "Runde ikke fullført ennå",
+      "dialog_description": "Du har fortsatt en åpen runde. Fullfør din nåværende runde før du starter en ny."
     }
   }
 }

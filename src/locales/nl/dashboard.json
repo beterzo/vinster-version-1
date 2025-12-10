@@ -133,7 +133,9 @@
     "round_in_progress": "Voltooi eerst je huidige ronde",
     "progress_subtitle": "Voltooi alle stappen om je rapport te genereren",
     "reports_title": "Jouw rapporten",
-    "reports_subtitle": "Bekijk je eerder gegenereerde loopbaanrapporten"
+    "reports_subtitle": "Bekijk je eerder gegenereerde loopbaanrapporten",
+    "dialog_title": "Ronde nog niet afgerond",
+    "dialog_description": "Je hebt nog een ronde open staan. Rond eerst je huidige ronde af voordat je een nieuwe start."
   }
   }
 }
