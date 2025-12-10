@@ -48,7 +48,7 @@ const DesktopNavigation = () => {
         <button
           key={item.path}
           onClick={() => navigate(item.path)}
-          className="text-white text-base font-medium hover:text-yellow-300 transition-colors whitespace-nowrap"
+          className="text-white text-[1.3rem] font-medium hover:text-yellow-300 transition-colors whitespace-nowrap"
         >
           {item.title}
         </button>
