@@ -213,8 +213,8 @@ const Dashboard = () => {
           </Card>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-2 gap-8 mt-8">
-          {/* Welcome Section - spans first 2 columns on top row */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
+          {/* Welcome Section - spans first 2 columns */}
           <Card className="lg:col-span-2 p-8 border-0 rounded-3xl" style={{ backgroundColor: '#E6F0F6' }}>
             <h1 className="text-3xl font-bold text-vinster-blue mb-4">
               {t('dashboard.welcome').replace('{name}', firstName)}
@@ -228,16 +228,25 @@ const Dashboard = () => {
               <p>{t('dashboard.intro_paragraph2')}</p>
               <p>{t('dashboard.intro_paragraph3')}</p>
             </div>
+          </Card>
 
-            {/* Start nieuwe ronde knop */}
-            <div className="mt-6 pt-4 border-t border-gray-300">
+          {/* Right Column - Image and Start Button */}
+          <Card className="p-6 border-0 rounded-3xl bg-white flex flex-col">
+            <div className="text-center flex-1 flex flex-col">
+              <div className="flex-1 mb-6">
+                <img 
+                  alt="Loopbaanonderzoek" 
+                  className="w-full h-full rounded-xl object-cover" 
+                  src="/lovable-uploads/ee361013-bfc6-485f-b46f-ed87a3cd6c73.jpg" 
+                />
+              </div>
+              
               <Button 
                 onClick={handleStartNewRound}
                 disabled={roundsLoading}
-                className="bg-white border-2 border-gray-300 hover:text-white rounded-full px-8 py-3 font-semibold transition-all duration-200 gap-2"
+                className="bg-white border-2 border-gray-300 hover:text-white rounded-full px-8 py-4 font-semibold transition-all duration-200 gap-2 w-full"
                 style={{ 
-                  color: '#232D4B',
-                  ['--hover-bg' as any]: '#232D4B'
+                  color: '#232D4B'
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = '#232D4B';
@@ -256,61 +265,15 @@ const Dashboard = () => {
             </div>
           </Card>
 
-          {/* Right Column - Image and Button - spans both rows */}
-          <Card className="lg:row-span-2 p-6 border-0 rounded-3xl bg-white flex flex-col">
-            <div className="text-center flex-1 flex flex-col">
-              <div className="flex-1 mb-6">
-                <img 
-                  alt="Loopbaanonderzoek" 
-                  className="w-full h-full rounded-xl object-cover" 
-                  src="/lovable-uploads/ee361013-bfc6-485f-b46f-ed87a3cd6c73.jpg" 
-                />
-              </div>
-              
-              <div className="space-y-4">
-                <Button 
-                  onClick={() => navigate(getNextStep())} 
-                  className="bg-yellow-400 hover:bg-yellow-500 text-vinster-blue font-bold rounded-xl px-8 py-4 text-lg w-full"
-                >
-                  {t('dashboard.continue_button')}
-                </Button>
-                
-                {/* Restart Journey Button - only show if user has downloaded zoekprofiel */}
-                {hasExistingZoekprofiel && (
-                  <Card className="p-4 border-2 border-dashed border-primary/30 bg-primary/5">
-                    <div className="text-center space-y-3">
-                      <div>
-                        <h3 className="text-sm font-semibold text-foreground mb-1">
-                          {t('dashboard.restart_journey.title')}
-                        </h3>
-                        <p className="text-xs text-muted-foreground">
-                          {t('dashboard.restart_journey.subtitle')}
-                        </p>
-                      </div>
-                      <Button 
-                        onClick={() => navigate('/traject-opnieuw-starten')}
-                        variant="outline"
-                        size="sm"
-                        className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-                      >
-                        {t('dashboard.restart_journey.button')}
-                      </Button>
-                    </div>
-                  </Card>
-                )}
-              </div>
-            </div>
-          </Card>
-
-          {/* Left Column - Important Info */}
-          <Card className="p-6 border-0 rounded-3xl text-white" style={{
+          {/* Important Info - spans 2 columns */}
+          <Card className="lg:col-span-2 p-6 border-0 rounded-3xl text-white" style={{
             backgroundColor: '#78BFE3'
           }}>
             <div>
               <h3 className="font-bold text-xl mb-3">
                 {t('dashboard.important_info.title')}
               </h3>
-              <ul className="text-sm leading-relaxed space-y-5">
+              <ul className="text-sm leading-relaxed grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
                 <li>{t('dashboard.important_info.point1')}</li>
                 <li>{t('dashboard.important_info.point2')}</li>
                 <li>{t('dashboard.important_info.point3')}</li>
@@ -321,33 +284,14 @@ const Dashboard = () => {
               </ul>
             </div>
           </Card>
-
-          {/* Middle Column - Process Steps */}
-          {currentRound?.status === 'in_progress' && (
-            <Card className="p-6 border-0 rounded-3xl bg-white">
-              <h3 className="font-bold text-lg text-vinster-blue mb-1">
-                {t('dashboard.progress_title')} - {t('dashboard.rounds.round_label')} {currentRound.round_number}
-              </h3>
-              <p className="text-sm text-gray-500 mb-4">
-                {t('dashboard.rounds.progress_subtitle')}
-              </p>
-              <ProgressStepsGrid 
-                enthousiasmeCompleted={progress.enthousiasme === 'completed'} 
-                wensberoepenCompleted={progress.wensberoepen === 'completed'} 
-                prioriteitenCompleted={progress.prioriteiten === 'completed'} 
-                extraInformatieCompleted={progress.extraInformatie === 'completed'} 
-                hasUserReport={hasUserReport} 
-                onStepClick={handleStepClick}
-              />
-            </Card>
-          )}
         </div>
 
-        {/* Jouw Rapporten Section - Only show if user has completed rounds */}
-        {completedRounds.length > 0 && (
+        {/* Jouw Spelrondes Section - Always show if there are any rounds */}
+        {rounds.length > 0 && (
           <div className="mt-8">
             <RoundsOverview 
               onViewReport={handleViewReport}
+              onResumeRound={() => navigate('/enthousiasme-intro')}
             />
           </div>
         )}

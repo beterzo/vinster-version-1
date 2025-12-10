@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Calendar, CheckCircle, FileText, Loader2 } from "lucide-react";
+import { Calendar, CheckCircle, Clock, FileText, Play, Loader2 } from "lucide-react";
 import { useUserRounds, UserRound, RoundReport } from "@/hooks/useUserRounds";
 import { useTranslation } from "@/hooks/useTranslation";
 
 interface RoundsOverviewProps {
   onViewReport: (roundId: string, roundNumber: number) => void;
+  onResumeRound: () => void;
 }
 
-const RoundsOverview = ({ onViewReport }: RoundsOverviewProps) => {
+const RoundsOverview = ({ onViewReport, onResumeRound }: RoundsOverviewProps) => {
   const { t } = useTranslation();
   const { 
     rounds, 
@@ -45,7 +46,7 @@ const RoundsOverview = ({ onViewReport }: RoundsOverviewProps) => {
 
   if (loading || loadingReports) {
     return (
-      <Card className="p-6 border-0 rounded-3xl bg-white">
+      <Card className="p-6 border-0 rounded-3xl" style={{ backgroundColor: '#E6F0F6' }}>
         <div className="flex items-center justify-center py-8">
           <Loader2 className="w-6 h-6 animate-spin text-vinster-blue" />
         </div>
@@ -53,49 +54,92 @@ const RoundsOverview = ({ onViewReport }: RoundsOverviewProps) => {
     );
   }
 
-  const completedRounds = roundsWithReports.filter(r => r.status === 'completed');
-
-  if (completedRounds.length === 0) {
+  if (rounds.length === 0) {
     return null;
   }
 
+  // Combine completed rounds with reports and in-progress rounds
+  const allRounds = rounds.map(round => {
+    const roundWithReport = roundsWithReports.find(r => r.id === round.id);
+    return roundWithReport || round;
+  });
+
   return (
-    <Card className="p-6 border-0 rounded-3xl bg-white">
-      <div className="mb-6">
-        <h2 className="text-xl font-bold text-vinster-blue">{t('dashboard.rounds.reports_title')}</h2>
-        <p className="text-gray-600 text-sm">{t('dashboard.rounds.reports_subtitle')}</p>
+    <Card className="p-6 border-0 rounded-3xl" style={{ backgroundColor: '#E6F0F6' }}>
+      <div className="flex items-start justify-between mb-6">
+        <div>
+          <h2 className="text-xl font-bold text-vinster-blue">{t('dashboard.rounds.game_rounds_title')}</h2>
+          <p className="text-gray-600 text-sm">{t('dashboard.rounds.game_rounds_subtitle')}</p>
+        </div>
+        <img 
+          src="/lovable-uploads/ee361013-bfc6-485f-b46f-ed87a3cd6c73.jpg" 
+          alt="Spelrondes" 
+          className="w-16 h-16 rounded-lg object-cover hidden md:block"
+        />
       </div>
 
-      <div className="space-y-4">
-        {completedRounds.map((round) => (
+      <div className="space-y-3">
+        {allRounds.map((round) => (
           <div
             key={round.id}
-            className="flex items-center justify-between p-4 bg-gray-50 rounded-xl border border-gray-100 hover:border-vinster-blue/30 transition-colors"
+            className="flex items-center justify-between p-4 bg-white rounded-xl border border-gray-100 hover:shadow-md transition-shadow"
           >
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                <CheckCircle className="w-6 h-6 text-green-600" />
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                round.status === 'completed' 
+                  ? 'bg-green-100' 
+                  : 'bg-orange-100'
+              }`}>
+                {round.status === 'completed' ? (
+                  <CheckCircle className="w-5 h-5 text-green-600" />
+                ) : (
+                  <Clock className="w-5 h-5 text-orange-600" />
+                )}
               </div>
               
               <div>
-                <h3 className="font-semibold text-gray-900">
-                  {t('dashboard.rounds.round_label')} {round.round_number}
-                </h3>
-                <div className="flex items-center gap-2 text-sm text-gray-500">
-                  <Calendar className="w-4 h-4" />
+                <div className="flex items-center gap-2">
+                  <span className="font-semibold text-gray-900">
+                    {t('dashboard.rounds.round_label')} {round.round_number}
+                  </span>
+                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
+                    round.status === 'completed'
+                      ? 'bg-green-100 text-green-700'
+                      : 'bg-orange-100 text-orange-700'
+                  }`}>
+                    {round.status === 'completed' 
+                      ? t('dashboard.rounds.status_completed')
+                      : t('dashboard.rounds.status_in_progress')
+                    }
+                  </span>
+                </div>
+                <div className="flex items-center gap-1 text-sm text-gray-500">
+                  <Calendar className="w-3 h-3" />
                   {round.completed_at ? formatDate(round.completed_at) : formatDate(round.created_at)}
                 </div>
               </div>
             </div>
 
-            <Button
-              onClick={() => onViewReport(round.id, round.round_number)}
-              variant="outline"
-              className="gap-2 border-vinster-blue text-vinster-blue hover:bg-vinster-blue hover:text-white"
-            >
-              <FileText className="w-4 h-4" />
-              {t('dashboard.rounds.view_report')}
-            </Button>
+            {round.status === 'completed' ? (
+              <Button
+                onClick={() => onViewReport(round.id, round.round_number)}
+                variant="outline"
+                size="sm"
+                className="gap-2 border-vinster-blue text-vinster-blue hover:bg-vinster-blue hover:text-white"
+              >
+                <FileText className="w-4 h-4" />
+                {t('dashboard.rounds.view_report')}
+              </Button>
+            ) : (
+              <Button
+                onClick={onResumeRound}
+                size="sm"
+                className="gap-2 bg-vinster-blue hover:bg-vinster-blue/90 text-white"
+              >
+                <Play className="w-4 h-4" />
+                {t('dashboard.rounds.resume')}
+              </Button>
+            )}
           </div>
         ))}
       </div>

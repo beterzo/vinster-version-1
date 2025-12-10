@@ -134,7 +134,12 @@
       "reports_title": "Dine rapporter",
       "reports_subtitle": "Se dine tidligere genererte karriererapporter",
       "dialog_title": "Runde ikke fullført ennå",
-      "dialog_description": "Du har fortsatt en åpen runde. Fullfør din nåværende runde før du starter en ny."
+      "dialog_description": "Du har fortsatt en åpen runde. Fullfør din nåværende runde før du starter en ny.",
+      "game_rounds_title": "Dine spillrunder",
+      "game_rounds_subtitle": "Her kan du se eller gjenoppta spillrunder.",
+      "status_completed": "Fullført",
+      "status_in_progress": "Pågår",
+      "resume": "Gjenoppta"
     }
   }
 }
