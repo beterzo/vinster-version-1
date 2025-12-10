@@ -157,6 +157,10 @@
       "step_wensberoepen_description": "Explore different career opportunities that suit you",
       "step_persoonsprofiel_title": "Personal profile",
       "step_persoonsprofiel_description": "Build your personal profile with preferences and priorities",
+      "step_loopbaanrapport_title": "Career report",
+      "step_loopbaanrapport_description": "Receive your personal career recommendations",
+      "step_zoekprofiel_title": "Search profile",
+      "step_zoekprofiel_description": "Download your search profile for job applications",
       "tabs": {
         "loopbaanrapport": "Career report",
         "zoekprofiel": "Search profile"

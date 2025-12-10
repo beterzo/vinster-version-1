@@ -142,6 +142,10 @@
       "step_wensberoepen_description": "Utforsk ulike karrieremuligheter som passer deg",
       "step_persoonsprofiel_title": "Personlig profil",
       "step_persoonsprofiel_description": "Bygg din personlige profil med preferanser og prioriteringer",
+      "step_loopbaanrapport_title": "Karriererapport",
+      "step_loopbaanrapport_description": "Motta dine personlige karriereanbefalinger",
+      "step_zoekprofiel_title": "Søkeprofil",
+      "step_zoekprofiel_description": "Last ned søkeprofilen din for jobbsøknader",
       "tabs": {
         "loopbaanrapport": "Karriererapport",
         "zoekprofiel": "Søkeprofil"

@@ -157,6 +157,10 @@
       "step_wensberoepen_description": "Verken verschillende carrièremogelijkheden die bij jou passen",
       "step_persoonsprofiel_title": "Persoonsprofiel",
       "step_persoonsprofiel_description": "Bouw je persoonlijke profiel op met voorkeuren en prioriteiten",
+      "step_loopbaanrapport_title": "Loopbaanrapport",
+      "step_loopbaanrapport_description": "Ontvang je persoonlijke loopbaan aanbevelingen",
+      "step_zoekprofiel_title": "Zoekprofiel",
+      "step_zoekprofiel_description": "Download je zoekprofiel voor sollicitaties",
       "tabs": {
         "loopbaanrapport": "Loopbaanrapport",
         "zoekprofiel": "Zoekprofiel"
