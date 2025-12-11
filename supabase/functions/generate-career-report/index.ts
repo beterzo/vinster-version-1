@@ -371,17 +371,20 @@ Geef alleen het JSON object terug, zonder extra tekst of markdown formatting.`;
 
     console.log('📝 Report content generated:', JSON.stringify(reportContent).substring(0, 200) + '...');
 
-    // Save report to database
+    // Save report to database using upsert (insert if not exists, update if exists)
     const { error: updateError } = await supabase
       .from('user_reports')
-      .update({
+      .upsert({
+        user_id: user_id,
+        round_id: round_id,
         report_content: reportContent,
         report_status: 'completed',
         generated_at: new Date().toISOString(),
+        created_at: new Date().toISOString(),
         updated_at: new Date().toISOString()
-      })
-      .eq('round_id', round_id)
-      .eq('user_id', user_id);
+      }, {
+        onConflict: 'round_id'
+      });
 
     if (updateError) {
       console.error('Error updating report:', updateError);
