@@ -10,15 +10,26 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { useToast } from "@/hooks/use-toast";
 import { useUserRounds } from "@/hooks/useUserRounds";
 import { supabase } from "@/integrations/supabase/client";
-
 const RapportGenererenConfirmatie = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
-  const { t } = useTranslation();
-  const { toast } = useToast();
+  const {
+    user
+  } = useAuth();
+  const {
+    t
+  } = useTranslation();
+  const {
+    toast
+  } = useToast();
   const stepAccess = useStepAccess();
-  const { hasExistingReport, loading: reportLoading } = useExistingReport();
-  const { currentRound, refreshRounds } = useUserRounds();
+  const {
+    hasExistingReport,
+    loading: reportLoading
+  } = useExistingReport();
+  const {
+    currentRound,
+    refreshRounds
+  } = useUserRounds();
   const [isGenerating, setIsGenerating] = useState(false);
 
   // Check if user has access to this page
@@ -29,7 +40,7 @@ const RapportGenererenConfirmatie = () => {
         toast({
           title: t('common.toast.generic_error'),
           description: "Je moet eerst alle voorgaande stappen voltooien.",
-          variant: "destructive",
+          variant: "destructive"
         });
         navigate('/home');
       }
@@ -41,86 +52,79 @@ const RapportGenererenConfirmatie = () => {
     if (!reportLoading && hasExistingReport && currentRound?.status === 'completed') {
       toast({
         title: t('common.toast.report_already_generated'),
-        description: t('common.toast.report_already_generated_description'),
+        description: t('common.toast.report_already_generated_description')
       });
       navigate('/rapport-download');
     }
   }, [reportLoading, hasExistingReport, currentRound, navigate, toast, t]);
-
   const handleGenerateReport = async () => {
     if (!user) {
       toast({
         title: t('common.toast.no_user_found'),
         description: t('common.toast.no_user_found_description'),
-        variant: "destructive",
+        variant: "destructive"
       });
       return;
     }
-
     if (!currentRound) {
       toast({
         title: t('common.toast.generic_error'),
         description: "Geen actieve ronde gevonden.",
-        variant: "destructive",
+        variant: "destructive"
       });
       return;
     }
-
     setIsGenerating(true);
-
     try {
       console.log('🚀 Starting AI report generation for user:', user.id, 'round:', currentRound.id);
 
       // 1. Call the edge function to generate the report
-      const { data, error } = await supabase.functions.invoke('generate-career-report', {
-        body: { roundId: currentRound.id }
+      const {
+        data,
+        error
+      } = await supabase.functions.invoke('generate-career-report', {
+        body: {
+          roundId: currentRound.id
+        }
       });
-
       if (error) {
         console.error('❌ Error calling edge function:', error);
         throw error;
       }
-
       console.log('✅ Report generated successfully:', data);
 
       // 2. Update round status to completed
-      const { error: roundError } = await supabase
-        .from('user_rounds')
-        .update({ 
-          status: 'completed', 
-          completed_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        })
-        .eq('id', currentRound.id);
-
+      const {
+        error: roundError
+      } = await supabase.from('user_rounds').update({
+        status: 'completed',
+        completed_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      }).eq('id', currentRound.id);
       if (roundError) {
         console.error('❌ Error updating round status:', roundError);
       }
 
       // 3. Refresh rounds data
       await refreshRounds();
-
       toast({
         title: t('common.rapport_confirmatie.generating'),
-        description: t('common.rapport_confirmatie.please_wait'),
+        description: t('common.rapport_confirmatie.please_wait')
       });
 
       // 4. Navigate to the report viewer
       navigate(`/rapport-bekijken/${currentRound.id}`);
-
     } catch (error) {
       console.error('❌ Error generating report:', error);
-
       toast({
         title: t('common.toast.generate_error'),
         description: t('common.toast.generate_error_description'),
-        variant: "destructive",
+        variant: "destructive"
       });
     } finally {
       setIsGenerating(false);
     }
   };
-
   const handleBack = () => {
     if (currentRound) {
       navigate(`/ronde/${currentRound.id}`);
@@ -128,27 +132,18 @@ const RapportGenererenConfirmatie = () => {
       navigate('/home');
     }
   };
-
   if (stepAccess.isLoading || reportLoading) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="text-xl text-blue-900">{t('common.loading')}</div>
         </div>
-      </div>
-    );
+      </div>;
   }
-
-  return (
-    <div className="min-h-screen bg-gray-50 font-sans">
+  return <div className="min-h-screen bg-gray-50 font-sans">
       <div className="max-w-4xl mx-auto px-6 py-12">
         {/* Logo Header */}
         <div className="mb-12 text-center">
-          <img 
-            src="/lovable-uploads/e35e2329-dbcb-46a6-a616-711bf30bfe4f.png" 
-            alt="Vinster Logo" 
-            className="h-20 mx-auto"
-          />
+          <img src="/lovable-uploads/e35e2329-dbcb-46a6-a616-711bf30bfe4f.png" alt="Vinster Logo" className="h-20 mx-auto" />
         </div>
 
         {/* Main Card */}
@@ -163,19 +158,7 @@ const RapportGenererenConfirmatie = () => {
             </p>
 
             {/* Warning Box */}
-            <div className="mb-8 border-2 border-orange-400 bg-orange-50 rounded-xl p-6">
-              <div className="flex items-start gap-4">
-                <AlertCircle className="w-8 h-8 text-orange-500 flex-shrink-0 mt-1" />
-                <div>
-                  <h2 className="text-xl font-bold text-orange-900 mb-2">
-                    {t('common.rapport_confirmatie.warning_title')}
-                  </h2>
-                  <p className="text-orange-800 leading-relaxed">
-                    {t('common.rapport_confirmatie.warning_text')}
-                  </p>
-                </div>
-              </div>
-            </div>
+            
 
             {/* Summary Section */}
             <div className="mb-8">
@@ -213,37 +196,20 @@ const RapportGenererenConfirmatie = () => {
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={handleBack}
-                disabled={isGenerating}
-                className="text-lg px-8 py-6"
-              >
+              <Button variant="outline" size="lg" onClick={handleBack} disabled={isGenerating} className="text-lg px-8 py-6">
                 <ArrowLeft className="w-5 h-5 mr-2" />
                 {t('common.rapport_confirmatie.back_button')}
               </Button>
-              <Button
-                size="lg"
-                onClick={handleGenerateReport}
-                disabled={isGenerating}
-                className="text-lg px-8 py-6 bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-bold"
-              >
-                {isGenerating ? (
-                  <>
+              <Button size="lg" onClick={handleGenerateReport} disabled={isGenerating} className="text-lg px-8 py-6 bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-bold">
+                {isGenerating ? <>
                     <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-900 mr-2"></div>
                     {t('common.rapport_confirmatie.generating')}
-                  </>
-                ) : (
-                  t('common.rapport_confirmatie.confirm_button')
-                )}
+                  </> : t('common.rapport_confirmatie.confirm_button')}
               </Button>
             </div>
           </CardContent>
         </Card>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default RapportGenererenConfirmatie;
