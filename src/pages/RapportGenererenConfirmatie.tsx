@@ -84,7 +84,9 @@ const RapportGenererenConfirmatie = () => {
         error
       } = await supabase.functions.invoke('generate-career-report', {
         body: {
-          roundId: currentRound.id
+          user_id: user.id,
+          round_id: currentRound.id,
+          language: user.user_metadata?.language || 'nl'
         }
       });
       if (error) {
