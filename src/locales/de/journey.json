@@ -120,6 +120,7 @@
       "report_description": "Ihr persönlicher Karrierebericht",
       "create_report_button": "Personenprofil vervollständigen",
       "to_dashboard_button": "Zum Dashboard",
+      "back_to_overview_button": "Zurück zur Übersicht",
       "tip_text": "Tipp: Das Ausfüllen Ihres Personenprofils dauert etwa 5-10 Minuten."
     }
   },
