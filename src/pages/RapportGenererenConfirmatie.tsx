@@ -122,7 +122,11 @@ const RapportGenererenConfirmatie = () => {
   };
 
   const handleBack = () => {
-    navigate('/home');
+    if (currentRound) {
+      navigate(`/ronde/${currentRound.id}`);
+    } else {
+      navigate('/home');
+    }
   };
 
   if (stepAccess.isLoading || reportLoading) {
