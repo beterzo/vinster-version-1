@@ -119,6 +119,7 @@
       "report_description": "Your personal career report",
       "create_report_button": "Complete personal profile",
       "to_dashboard_button": "To dashboard",
+      "back_to_overview_button": "Back to overview",
       "tip_text": "Tip: Completing your personal profile takes about 5-10 minutes."
     }
   },

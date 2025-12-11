@@ -118,6 +118,7 @@
       "report_description": "Din personlige karriererapport",
       "create_report_button": "Fullfør personprofil",
       "to_dashboard_button": "Til dashboard",
+      "back_to_overview_button": "Tilbake til oversikt",
       "tip_text": "Tips: Å fylle ut personprofilen din tar omtrent 5-10 minutter."
     }
   },

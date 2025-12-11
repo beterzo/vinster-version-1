@@ -15,6 +15,8 @@ import { useTranslation } from "@/hooks/useTranslation";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { Info } from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
 
 type WensberoepenResponse = Tables<"wensberoepen_responses">;
 
@@ -26,6 +28,7 @@ const WensberoepenStep3 = ({ mode = 'edit' }: StepProps) => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { t } = useTranslation();
+  const { user } = useAuth();
   const { responses, saveResponse, isLoading } = useWensberoepenResponses();
   const { collectWebhookData } = useWebhookData();
   const isViewMode = mode === 'view';
@@ -180,18 +183,33 @@ const WensberoepenStep3 = ({ mode = 'edit' }: StepProps) => {
       // Wait a moment for the data to be saved
       await new Promise(resolve => setTimeout(resolve, 500));
       
-      // Collect all data for webhook (now includes language)
-      const webhookData = collectWebhookData();
-      if (!webhookData) {
-        throw new Error("Could not collect webhook data - no user data available");
+      // Check if AI keywords already exist for this user
+      let keywordsExist = false;
+      if (user) {
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('ai_lievelings_activiteiten')
+          .eq('id', user.id)
+          .maybeSingle();
+        
+        keywordsExist = !!profile?.ai_lievelings_activiteiten;
+        console.log("Keywords already exist:", keywordsExist);
       }
       
-      console.log("Sending webhook data:", webhookData);
+      // Only call webhook if no keywords exist yet
+      if (!keywordsExist) {
+        const webhookData = collectWebhookData();
+        if (!webhookData) {
+          throw new Error("Could not collect webhook data - no user data available");
+        }
+        
+        console.log("Sending webhook data:", webhookData);
+        await sendWebhookData(webhookData);
+        console.log("Wensberoepen scan completed and data sent to webhook!");
+      } else {
+        console.log("Skipping webhook call - keywords already exist");
+      }
       
-      // Send data to webhook
-      await sendWebhookData(webhookData);
-      
-      console.log("Wensberoepen scan completed and data sent to webhook!");
       toast({
         title: t('common.success'),
         description: t('common.toast.wensberoepen_completed'),

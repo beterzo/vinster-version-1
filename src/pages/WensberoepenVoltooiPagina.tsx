@@ -4,17 +4,23 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { CheckCircle, ArrowRight, User, Target, Heart, Send } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useUserRounds } from "@/hooks/useUserRounds";
 
 const WensberoepenVoltooiPagina = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { currentRound } = useUserRounds();
 
   const handleProfielVoltooien = () => {
     navigate("/profiel-voltooien-intro");
   };
 
-  const handleNaarDashboard = () => {
-    navigate("/home");
+  const handleTerugNaarOverzicht = () => {
+    if (currentRound) {
+      navigate(`/ronde/${currentRound.id}`);
+    } else {
+      navigate("/home");
+    }
   };
 
   return (
@@ -108,11 +114,11 @@ const WensberoepenVoltooiPagina = () => {
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button 
-                onClick={handleNaarDashboard} 
+                onClick={handleTerugNaarOverzicht} 
                 variant="outline" 
                 className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold px-8 py-3 text-lg"
               >
-                {t('wensberoepen.voltooi.to_dashboard_button')}
+                {t('wensberoepen.voltooi.back_to_overview_button')}
               </Button>
             </div>
 
