@@ -76,7 +76,7 @@ export const translations = {
     // Make mobile_menu available at top level
     mobile_menu: enNavigation.mobile_menu,
     // Make dashboard keys available at top level
-    dashboard: enDashboard.dashboard,
+    dashboard: { ...enDashboard.dashboard, journey: (enDashboard as any).journey },
     payment: enDashboard.payment,
     journey: enJourney,
     // Make journey keys available at top level
@@ -113,7 +113,7 @@ export const translations = {
     // Make mobile_menu available at top level
     mobile_menu: nlNavigation.mobile_menu,
     // Make dashboard keys available at top level
-    dashboard: nlDashboard.dashboard,
+    dashboard: { ...nlDashboard.dashboard, journey: (nlDashboard as any).journey },
     payment: nlDashboard.payment,
     journey: nlJourney,
     // Make journey keys available at top level
@@ -150,7 +150,7 @@ export const translations = {
     // Make mobile_menu available at top level
     mobile_menu: deNavigation.mobile_menu,
     // Make dashboard keys available at top level
-    dashboard: (deDashboard as any).dashboard || deDashboard,
+    dashboard: { ...((deDashboard as any).dashboard || deDashboard), journey: (deDashboard as any).journey },
     payment: (deDashboard as any).payment || deDashboard,
     journey: deJourney,
     // Make journey keys available at top level
@@ -189,7 +189,7 @@ export const translations = {
     // Make mobile_menu available at top level
     mobile_menu: noNavigation.mobile_menu,
     // Make dashboard keys available at top level
-    dashboard: (noDashboard as any).dashboard || noDashboard,
+    dashboard: { ...((noDashboard as any).dashboard || noDashboard), journey: (noDashboard as any).journey },
     payment: (noDashboard as any).payment || noDashboard,
     journey: noJourney,
     // Make journey keys available at top level
