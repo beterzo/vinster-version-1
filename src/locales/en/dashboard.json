@@ -212,5 +212,15 @@
         }
       }
     }
+  },
+  "journey": {
+    "step_enthousiasme": "Enthusiasm",
+    "step_wensberoepen": "Dream Jobs",
+    "step_persoonsprofiel": "Profile",
+    "step_controle": "Review",
+    "step_loopbaanrapport": "Report",
+    "step_zoekprofiel": "Search Profile",
+    "finish_button": "Finish"
   }
+}
 }
