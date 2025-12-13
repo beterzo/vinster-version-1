@@ -371,24 +371,45 @@ Geef alleen het JSON object terug, zonder extra tekst of markdown formatting.`;
 
     console.log('📝 Report content generated:', JSON.stringify(reportContent).substring(0, 200) + '...');
 
-    // Save report to database using upsert (insert if not exists, update if exists)
-    const { error: updateError } = await supabase
+    // Save report to database - check if exists first, then insert or update
+    const { data: existingReport } = await supabase
       .from('user_reports')
-      .upsert({
-        user_id: user_id,
-        round_id: round_id,
-        report_content: reportContent,
-        report_status: 'completed',
-        generated_at: new Date().toISOString(),
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString()
-      }, {
-        onConflict: 'round_id'
-      });
+      .select('id')
+      .eq('round_id', round_id)
+      .maybeSingle();
 
-    if (updateError) {
-      console.error('Error updating report:', updateError);
-      throw updateError;
+    let saveError;
+    if (existingReport) {
+      // Update existing report
+      const { error } = await supabase
+        .from('user_reports')
+        .update({
+          report_content: reportContent,
+          report_status: 'completed',
+          generated_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        })
+        .eq('id', existingReport.id);
+      saveError = error;
+    } else {
+      // Insert new report
+      const { error } = await supabase
+        .from('user_reports')
+        .insert({
+          user_id: user_id,
+          round_id: round_id,
+          report_content: reportContent,
+          report_status: 'completed',
+          generated_at: new Date().toISOString(),
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        });
+      saveError = error;
+    }
+
+    if (saveError) {
+      console.error('Error saving report:', saveError);
+      throw saveError;
     }
 
     // Update round status to completed
