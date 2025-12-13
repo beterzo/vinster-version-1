@@ -311,27 +311,45 @@
   },
   "onderzoeksplan": {
     "title": "Onderzoeksplan",
-    "subtitle": "Dit is jouw stappenplan om te bepalen hoe je volgende functie eruit moet komen te zien.",
-    "tip": "💡 Dit onderzoeksplan staat ook onderaan jouw loopbaanrapport, dus daar kun je hem altijd terugvinden.",
-    "steps_title": "Dit is jouw stappenplan:",
-    "step1": "Vraag AI (of Google) naar een uitgebreide functiebeschrijving van de functies uit je loopbaanrapport. Vraag AI ook naar vergelijkbare functies. Welk werk lijkt erop? Wat spreekt je aan in de antwoorden die je krijgt?",
-    "step2": "Kijk of je vacatures kunt vinden die een beeld geven van de inhoud van deze functie en van de organisaties die deze functies hebben.",
-    "step3": "Zoek op LinkedIn naar mensen die dit werk doen. Wat is hun achtergrond?",
-    "step4": "Is er een beroepsvereniging? Wat lees je op de website over ontwikkelingen in de sector en het beroep?",
-    "step5": "Heeft het beroep een vakblad? Zo ja, vraag er één of meerdere aan en lees ze. Wat valt je op? Word je enthousiast van de onderwerpen?",
-    "step6": "Zoek organisaties waar mensen met dit beroep werken.",
-    "step7": "Welke opleiding heb je eventueel nodig voor dit werk? Vraag het AI of Google.",
-    "step8": "Schrijf alle vragen op die bij je opkomen tijdens het onderzoek. Die kun je gaan stellen aan mensen die al werkzaam zijn in deze richting.",
-    "step9": "Maak een lijstje met mensen die je zou willen spreken over dit werk en benader hen. Je vindt die mensen via LinkedIn en/of via je persoonlijke netwerk.",
-    "step10": "Verzamel genoeg informatie om een keuze te maken. Neem de tijd en praat er met anderen over.",
-    "after_research_title": "Na je onderzoek:",
-    "after_research_description": "Als je genoeg aan de weet bent gekomen kies dan de functie die het allerbest bij je past en vul het zoekprofiel op de website in. Vinster zal jouw tekst omzetten naar een paar zinnen die je kunt gebruiken om anderen te laten weten wat je zoekt.",
-    "after_research_action": "Je kunt nu gericht gaan solliciteren! Zoek vacatures, laat jouw netwerk weten wat je wilt en deel op LinkedIn welke functie je zoekt.",
-    "final_message": "We wensen jou veel werkplezier in je volgende functie!",
-    "time_notice_title": "⏰ Neem hier de tijd voor dit onderzoek",
-    "time_notice_description": "Dit onderzoek is cruciaal voor het vinden van je ideale functie. Neem de tijd om elke stap zorgvuldig uit te voeren.",
-    "time_notice_details": "Hoe beter je dit onderzoek doet, hoe beter je straks je zoekprofiel kunt invullen en hoe gerichter je kunt solliciteren.",
-    "back_button": "Terug naar dashboard"
+    "next_button": "Volgende",
+    "previous_button": "Vorige",
+    "to_zoekprofiel_button": "Naar zoekprofiel",
+    "page1": {
+      "title": "En nu?",
+      "intro": "Jouw loopbaanrapport is klaar! Nu kun je op onderzoek uit, want je wilt eerst nog wat meer weten voor je een definitieve keuze kunt maken.",
+      "instruction": "Kies uit de beroepen die uit de analyse van jouw antwoorden komen er twee (of meer) die je nader wilt onderzoeken."
+    },
+    "page2": {
+      "title": "Dit is jouw stappenplan:",
+      "step1": "Vraag AI (of Google) naar een uitgebreide functiebeschrijving van de functies uit je loopbaanrapport. Vraag AI ook naar vergelijkbare functies. Welk werk lijkt erop? Wat spreekt je aan in de antwoorden die je krijgt?",
+      "step2": "Kijk of je vacatures kunt vinden die een beeld geven van de inhoud van deze functie en van de organisaties die deze functies hebben.",
+      "step3": "Zoek op LinkedIn naar mensen die dit werk doen. Wat is hun achtergrond?",
+      "step4": "Is er een beroepsvereniging? Wat lees je op de website over ontwikkelingen in de sector en het beroep?",
+      "step5": "Heeft het beroep een vakblad? Zo ja, vraag er één of meerdere aan en lees ze. Wat valt je op? Word je enthousiast van de onderwerpen?"
+    },
+    "page3": {
+      "title": "Vervolg stappenplan:",
+      "step6": "Zoek organisaties waar mensen met dit beroep werken.",
+      "step7": "Welke opleiding heb je eventueel nodig voor dit werk? Vraag het AI of Google.",
+      "step8": "Schrijf alle vragen op die bij je opkomen tijdens het onderzoek. Die kun je gaan stellen aan mensen die al werkzaam zijn in deze richting.",
+      "step9": "Maak een lijstje met mensen die je zou willen spreken over dit werk en benader hen. Je vindt die mensen via LinkedIn en/of via je persoonlijke netwerk.",
+      "step10": "Verzamel genoeg informatie om een keuze te maken. Neem de tijd en praat er met anderen over.",
+      "closing_text": "Als je genoeg aan de weet bent gekomen kies dan de functie die het allerbest bij je past en vul het zoekprofiel op de website in. Vinster zal jouw tekst omzetten naar een paar zinnen die je kunt gebruiken om anderen te laten weten wat je zoekt. Je kunt nu gericht gaan solliciteren! Zoek vacatures, laat jouw netwerk weten wat je wilt en deel op LinkedIn welke functie je zoekt. We wensen jou veel werkplezier in je volgende functie!"
+    }
+  },
+  "zoekprofiel_inline": {
+    "complete": {
+      "title": "Je zoekprofiel is klaar!",
+      "description": "Je zoekprofiel bevat een samenvatting van je ideale baan. Gebruik het bij je sollicitaties en deel het met je netwerk.",
+      "download_button": "Download zoekprofiel",
+      "next_steps": "Je kunt nu gericht gaan solliciteren! Zoek vacatures, laat jouw netwerk weten wat je wilt en deel op LinkedIn welke functie je zoekt.",
+      "to_dashboard": "Naar dashboard"
+    },
+    "antwoorden": {
+      "submitting": "Bezig met versturen...",
+      "submit_success": "Zoekprofiel succesvol verzonden!",
+      "submit_error": "Er ging iets mis bij het versturen van je zoekprofiel."
+    }
   },
   "restart_explanation": {
     "title": "Traject opnieuw starten",

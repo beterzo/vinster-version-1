@@ -303,27 +303,45 @@
   },
   "onderzoeksplan": {
     "title": "Research Plan",
-    "subtitle": "This is your step-by-step plan to determine what your next position should look like.",
-    "tip": "💡 This research plan is also at the bottom of your career report, so you can always find it there.",
-    "steps_title": "This is your step-by-step plan:",
-    "step1": "Ask AI (or Google) for a detailed job description of the roles from your career report. Also ask AI for similar roles. What work is comparable? What appeals to you in the answers you get?",
-    "step2": "Look for job postings that give you an idea of the content of this role and the organizations that have these positions.",
-    "step3": "Search LinkedIn for people who do this work. What is their background?",
-    "step4": "Is there a professional association? What do you read on the website about developments in the sector and the profession?",
-    "step5": "Does the profession have a trade publication? If so, request one or more and read them. What do you notice? Do the topics excite you?",
-    "step6": "Look for organizations where people with this profession work.",
-    "step7": "What education might you need for this work? Ask AI or Google.",
-    "step8": "Write down all the questions that come up during your research. You can ask these to people who already work in this direction.",
-    "step9": "Make a list of people you would like to talk to about this work and approach them. You can find these people through LinkedIn and/or your personal network.",
-    "step10": "Gather enough information to make a choice. Take your time and talk to others about it.",
-    "after_research_title": "After your research:",
-    "after_research_description": "Once you have found out enough, choose the position that fits you best and fill in the search profile on the website. Vinster will convert your text into a few sentences that you can use to let others know what you are looking for.",
-    "after_research_action": "You can now apply in a targeted way! Search for vacancies, let your network know what you want and share on LinkedIn which position you are looking for.",
-    "final_message": "We wish you much work satisfaction in your next position!",
-    "time_notice_title": "⏰ Take time for this research",
-    "time_notice_description": "This research is crucial for finding your ideal position. Take the time to carefully execute each step.",
-    "time_notice_details": "The better you do this research, the better you can fill in your search profile later and the more targeted you can apply.",
-    "back_button": "Back to dashboard"
+    "next_button": "Next",
+    "previous_button": "Previous",
+    "to_zoekprofiel_button": "To search profile",
+    "page1": {
+      "title": "What's next?",
+      "intro": "Your career report is ready! Now you can start your research, because you want to know more before making a definitive choice.",
+      "instruction": "Choose two (or more) professions from the analysis of your answers that you want to investigate further."
+    },
+    "page2": {
+      "title": "This is your step-by-step plan:",
+      "step1": "Ask AI (or Google) for a detailed job description of the roles from your career report. Also ask AI for similar roles. What work is comparable? What appeals to you in the answers you get?",
+      "step2": "Look for job postings that give you an idea of the content of this role and the organizations that have these positions.",
+      "step3": "Search LinkedIn for people who do this work. What is their background?",
+      "step4": "Is there a professional association? What do you read on the website about developments in the sector and the profession?",
+      "step5": "Does the profession have a trade publication? If so, request one or more and read them. What do you notice? Do the topics excite you?"
+    },
+    "page3": {
+      "title": "Continued step-by-step plan:",
+      "step6": "Look for organizations where people with this profession work.",
+      "step7": "What education might you need for this work? Ask AI or Google.",
+      "step8": "Write down all the questions that come up during your research. You can ask these to people who already work in this direction.",
+      "step9": "Make a list of people you would like to talk to about this work and approach them. You can find these people through LinkedIn and/or your personal network.",
+      "step10": "Gather enough information to make a choice. Take your time and talk to others about it.",
+      "closing_text": "Once you have found out enough, choose the position that fits you best and fill in the search profile on the website. Vinster will convert your text into a few sentences that you can use to let others know what you are looking for. You can now apply in a targeted way! Search for vacancies, let your network know what you want and share on LinkedIn which position you are looking for. We wish you much work satisfaction in your next position!"
+    }
+  },
+  "zoekprofiel_inline": {
+    "complete": {
+      "title": "Your search profile is ready!",
+      "description": "Your search profile contains a summary of your ideal job. Use it in your applications and share it with your network.",
+      "download_button": "Download search profile",
+      "next_steps": "You can now apply in a targeted way! Search for vacancies, let your network know what you want and share on LinkedIn which position you are looking for.",
+      "to_dashboard": "To dashboard"
+    },
+    "antwoorden": {
+      "submitting": "Submitting...",
+      "submit_success": "Search profile successfully submitted!",
+      "submit_error": "Something went wrong while submitting your search profile."
+    }
   },
   "restart_explanation": {
     "title": "Restart journey",
