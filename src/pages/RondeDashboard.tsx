@@ -7,7 +7,6 @@ import JourneyStepNavigator from "@/components/JourneyStepNavigator";
 import EnthousiasmeInline from "@/components/journey/EnthousiasmeInline";
 import WensberoepenInline from "@/components/journey/WensberoepenInline";
 import PersoonsprofielInline from "@/components/journey/PersoonsprofielInline";
-import ControleInline from "@/components/journey/ControleInline";
 import RapportInline from "@/components/journey/RapportInline";
 import OnderzoeksplanInline from "@/components/journey/OnderzoeksplanInline";
 import ZoekprofielInline from "@/components/journey/ZoekprofielInline";
@@ -78,7 +77,6 @@ const RondeDashboard = () => {
     if (wensberoepenComplete) completed.push('wensberoepen');
     if (persoonsprofielComplete) completed.push('persoonsprofiel');
     if (reportExists) {
-      completed.push('controle');
       completed.push('loopbaanrapport');
     }
     return completed;
@@ -89,7 +87,14 @@ const RondeDashboard = () => {
   const handleStepClick = (step: JourneyStep) => {
     setSlideDirection(JOURNEY_STEPS.findIndex(s => s.id === step) > JOURNEY_STEPS.findIndex(s => s.id === currentStep) ? 'left' : 'right');
     setCurrentStep(step);
-    setCurrentSubStep('intro');
+    
+    // For loopbaanrapport, check if report exists to determine subStep
+    if (step === 'loopbaanrapport') {
+      setCurrentSubStep(reportExists ? 'complete' : 'confirm');
+    } else {
+      const stepConfig = JOURNEY_STEPS.find(s => s.id === step);
+      setCurrentSubStep(stepConfig?.subSteps[0] || 'intro');
+    }
   };
 
   const getCurrentStepConfig = () => JOURNEY_STEPS.find(s => s.id === currentStep);
@@ -172,11 +177,14 @@ const RondeDashboard = () => {
         {currentStep === 'persoonsprofiel' && (
           <PersoonsprofielInline subStep={currentSubStep} onNext={handleNext} onPrevious={handlePrevious} />
         )}
-        {currentStep === 'controle' && roundId && (
-          <ControleInline roundId={roundId} onNext={handleNext} onPrevious={handlePrevious} onReportGenerated={() => setReportExists(true)} />
-        )}
         {currentStep === 'loopbaanrapport' && roundId && (
-          <RapportInline roundId={roundId} onNext={handleNext} />
+          <RapportInline 
+            roundId={roundId} 
+            subStep={currentSubStep as 'confirm' | 'complete'}
+            onNext={handleNext} 
+            onPrevious={handlePrevious}
+            onReportGenerated={() => setReportExists(true)}
+          />
         )}
         {currentStep === 'onderzoeksplan' && (
           <OnderzoeksplanInline 
