@@ -28,9 +28,42 @@ const RapportGenererenConfirmatie = () => {
   } = useExistingReport();
   const {
     currentRound,
+    rounds,
     refreshRounds
   } = useUserRounds();
   const [isGenerating, setIsGenerating] = useState(false);
+
+  // Find the most recent round that needs a report (either in_progress or completed without report)
+  const [activeRound, setActiveRound] = useState<typeof currentRound>(null);
+  
+  useEffect(() => {
+    const findActiveRound = async () => {
+      // First try the current in-progress round
+      if (currentRound) {
+        setActiveRound(currentRound);
+        return;
+      }
+      
+      // If no in-progress round, check for the most recent completed round without a report
+      const mostRecentRound = rounds[0]; // rounds are ordered by round_number desc
+      if (mostRecentRound && mostRecentRound.status === 'completed') {
+        // Check if this round has a report
+        const { data: report } = await supabase
+          .from('user_reports')
+          .select('id')
+          .eq('round_id', mostRecentRound.id)
+          .eq('report_status', 'completed')
+          .maybeSingle();
+        
+        if (!report) {
+          // Round is completed but no report - allow regeneration
+          setActiveRound(mostRecentRound);
+        }
+      }
+    };
+    
+    findActiveRound();
+  }, [currentRound, rounds]);
 
   // Check if user has access to this page
   useEffect(() => {
@@ -49,14 +82,28 @@ const RapportGenererenConfirmatie = () => {
 
   // Redirect if report already exists for current round
   useEffect(() => {
-    if (!reportLoading && hasExistingReport && currentRound?.status === 'completed') {
-      toast({
-        title: t('common.toast.report_already_generated'),
-        description: t('common.toast.report_already_generated_description')
-      });
-      navigate('/rapport-download');
+    if (!reportLoading && hasExistingReport && activeRound?.status === 'completed') {
+      // Check if this specific round has a completed report
+      const checkReport = async () => {
+        if (!activeRound) return;
+        const { data: report } = await supabase
+          .from('user_reports')
+          .select('id')
+          .eq('round_id', activeRound.id)
+          .eq('report_status', 'completed')
+          .maybeSingle();
+        
+        if (report) {
+          toast({
+            title: t('common.toast.report_already_generated'),
+            description: t('common.toast.report_already_generated_description')
+          });
+          navigate('/rapport-download');
+        }
+      };
+      checkReport();
     }
-  }, [reportLoading, hasExistingReport, currentRound, navigate, toast, t]);
+  }, [reportLoading, hasExistingReport, activeRound, navigate, toast, t]);
   const handleGenerateReport = async () => {
     if (!user) {
       toast({
@@ -66,7 +113,7 @@ const RapportGenererenConfirmatie = () => {
       });
       return;
     }
-    if (!currentRound) {
+    if (!activeRound) {
       toast({
         title: t('common.toast.generic_error'),
         description: "Geen actieve ronde gevonden.",
@@ -76,7 +123,7 @@ const RapportGenererenConfirmatie = () => {
     }
     setIsGenerating(true);
     try {
-      console.log('🚀 Starting AI report generation for user:', user.id, 'round:', currentRound.id);
+      console.log('🚀 Starting AI report generation for user:', user.id, 'round:', activeRound.id);
 
       // 1. Call the edge function to generate the report
       const {
@@ -85,7 +132,7 @@ const RapportGenererenConfirmatie = () => {
       } = await supabase.functions.invoke('generate-career-report', {
         body: {
           user_id: user.id,
-          round_id: currentRound.id,
+          round_id: activeRound.id,
           language: user.user_metadata?.language || 'nl'
         }
       });
@@ -95,16 +142,18 @@ const RapportGenererenConfirmatie = () => {
       }
       console.log('✅ Report generated successfully:', data);
 
-      // 2. Update round status to completed
-      const {
-        error: roundError
-      } = await supabase.from('user_rounds').update({
-        status: 'completed',
-        completed_at: new Date().toISOString(),
-        updated_at: new Date().toISOString()
-      }).eq('id', currentRound.id);
-      if (roundError) {
-        console.error('❌ Error updating round status:', roundError);
+      // 2. Update round status to completed (if not already)
+      if (activeRound.status !== 'completed') {
+        const {
+          error: roundError
+        } = await supabase.from('user_rounds').update({
+          status: 'completed',
+          completed_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        }).eq('id', activeRound.id);
+        if (roundError) {
+          console.error('❌ Error updating round status:', roundError);
+        }
       }
 
       // 3. Refresh rounds data
@@ -115,7 +164,7 @@ const RapportGenererenConfirmatie = () => {
       });
 
       // 4. Navigate to the report viewer
-      navigate(`/rapport-bekijken/${currentRound.id}`);
+      navigate(`/rapport-bekijken/${activeRound.id}`);
     } catch (error) {
       console.error('❌ Error generating report:', error);
       toast({
@@ -128,7 +177,9 @@ const RapportGenererenConfirmatie = () => {
     }
   };
   const handleBack = () => {
-    if (currentRound) {
+    if (activeRound) {
+      navigate(`/ronde/${activeRound.id}`);
+    } else if (currentRound) {
       navigate(`/ronde/${currentRound.id}`);
     } else {
       navigate('/home');
