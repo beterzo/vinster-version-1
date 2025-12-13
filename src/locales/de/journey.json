@@ -306,8 +306,8 @@
     "previous_button": "Zurück",
     "to_zoekprofiel_button": "Zum Suchprofil",
     "page1": {
-      "title": "Forschungsplan",
-      "intro": "Und jetzt? Ihr Karrierebericht ist fertig! Jetzt können Sie mit Ihrer Recherche beginnen, denn Sie möchten erst noch mehr wissen, bevor Sie eine endgültige Entscheidung treffen.",
+      "title": "Und jetzt?",
+      "intro": "Ihr Karrierebericht ist fertig! Jetzt können Sie mit Ihrer Recherche beginnen, denn Sie möchten erst noch mehr wissen, bevor Sie eine endgültige Entscheidung treffen.",
       "instruction": "Wählen Sie aus den Berufen, die aus der Analyse Ihrer Antworten hervorgehen, zwei (oder mehr) aus, die Sie näher untersuchen möchten."
     },
     "page2": {

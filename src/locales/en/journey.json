@@ -307,8 +307,8 @@
     "previous_button": "Previous",
     "to_zoekprofiel_button": "To search profile",
     "page1": {
-      "title": "Research Plan",
-      "intro": "What's next? Your career report is ready! Now you can start your research, because you want to know more before making a definitive choice.",
+      "title": "What's next?",
+      "intro": "Your career report is ready! Now you can start your research, because you want to know more before making a definitive choice.",
       "instruction": "Choose two (or more) professions from the analysis of your answers that you want to investigate further."
     },
     "page2": {

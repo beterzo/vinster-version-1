@@ -302,8 +302,8 @@
     "previous_button": "Forrige",
     "to_zoekprofiel_button": "Til søkeprofil",
     "page1": {
-      "title": "Forskningsplan",
-      "intro": "Hva nå? Karriererapporten din er klar! Nå kan du starte din forskning, fordi du vil vite mer før du tar en endelig beslutning.",
+      "title": "Hva nå?",
+      "intro": "Karriererapporten din er klar! Nå kan du starte din forskning, fordi du vil vite mer før du tar en endelig beslutning.",
       "instruction": "Velg to (eller flere) yrker fra analysen av svarene dine som du vil undersøke nærmere."
     },
     "page2": {

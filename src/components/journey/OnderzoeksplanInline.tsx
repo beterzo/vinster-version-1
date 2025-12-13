@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowLeft, ArrowRight, Search } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
 interface OnderzoeksplanInlineProps {
@@ -133,8 +133,8 @@ const OnderzoeksplanInline = ({ subStep, onNext, onPrevious }: OnderzoeksplanInl
               onClick={onNext}
               className="bg-[#F5C518] hover:bg-yellow-500 text-[#232D4B] font-semibold px-8"
             >
-              <Search className="w-4 h-4 mr-2" />
               {t('journey.onderzoeksplan.to_zoekprofiel_button')}
+              <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </div>
         </div>
