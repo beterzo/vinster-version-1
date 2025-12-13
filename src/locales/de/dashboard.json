@@ -132,7 +132,8 @@
       "game_rounds_subtitle": "Hier können Sie Spielrunden einsehen oder fortsetzen.",
       "status_completed": "Abgeschlossen",
       "status_in_progress": "In Bearbeitung",
-      "resume": "Fortsetzen"
+      "resume": "Fortsetzen",
+      "view_round": "Runde ansehen"
     },
     "round_dashboard": {
       "back_to_dashboard": "Zurück zum Dashboard",

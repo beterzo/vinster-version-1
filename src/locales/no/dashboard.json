@@ -117,7 +117,8 @@
       "game_rounds_subtitle": "Her kan du se eller gjenoppta spillrunder.",
       "status_completed": "Fullført",
       "status_in_progress": "Pågår",
-      "resume": "Gjenoppta"
+      "resume": "Gjenoppta",
+      "view_round": "Se runde"
     },
     "round_dashboard": {
       "back_to_dashboard": "Tilbake til dashbord",

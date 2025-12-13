@@ -122,9 +122,11 @@ const RoundsOverview = ({ onViewReport, onResumeRound }: RoundsOverviewProps) =>
               </div>
             </div>
 
-            <span className="text-vinster-blue text-sm font-medium">
-              {t('dashboard.round_dashboard.view_details')} →
-            </span>
+            <button 
+              className="bg-white border-2 border-gray-300 hover:bg-[#232D4B] hover:text-white hover:border-[#232D4B] rounded-full px-6 py-2 font-semibold transition-all duration-200 text-[#232D4B] text-sm"
+            >
+              {t('dashboard.rounds.view_round')}
+            </button>
           </div>
         ))}
       </div>
