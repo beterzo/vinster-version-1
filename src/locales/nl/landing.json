@@ -14,17 +14,17 @@
     "what_is_vinster": {
       "title": "Wat is Vinster?",
       "description": "Vinster is een AI-gedreven online loopbaanadvies platform, gebaseerd op de Loopbaantrechter methode van Heidi Jansen. Door middel van slimme vragen ontdek je welk werk bij je past – persoonlijk, concreet en verrassend.",
-      "based_on": "Gebouwd op bewezen methodes uit de praktijk en jouw unieke eigenschappen krijg je:",
-      "two_matching_functions": "Twee matchende functies die perfect bij je passen",
-      "one_surprising_suggestion": "Eén verrassend voorstel dat nieuwe mogelijkheden opent",
-      "clear_action_plan": "Een helder actieplan om je gewenste carrière te realiseren",
-      "no_tests": "Geen saaie testen, maar echte vragen die je aan het denken zetten."
+      "based_on": "Gebouwd op bewezen methodes uit de praktijk en jouw unieke antwoorden krijg je:",
+      "two_matching_functions": "Twee functies die bij je passen",
+      "one_surprising_suggestion": "Een verrassend voorstel",
+      "clear_action_plan": "Een helder actieplan om je gewenste loopbaan te realiseren",
+      "no_tests": "Geen saaie testen, maar vragen die je aan het denken zetten."
     },
     "what_do_you_get": {
       "title": "Wat krijg je?",
-      "subtitle": "Een compleet pakket om jouw carrière vorm te geven:",
-      "insight_interests": "Diepgaand inzicht in jouw interesses en wat je echt motiveert",
-      "job_suggestions": "Concrete beroepsuggesties die perfect bij jou passen",
+      "subtitle": "Een compleet pakket om jouw loopbaan vorm te geven:",
+      "insight_interests": "Overzicht van wat je graag doet, in welke omgeving jij floreert en wat jou interesseert",
+      "job_suggestions": "Concrete beroepsuggesties die bij jou passen",
       "research_plan": "Een persoonlijk onderzoeksplan om jouw mogelijkheden verder te verkennen",
       "search_profile": "Een professioneel zoekprofiel om te delen met recruiters en netwerken",
       "start_now": "Start nu €29",
@@ -87,7 +87,7 @@
         "description": "Begin waar je wilt, stop wanneer je wilt"
       }
     },
-    "testimonial": "Dankzij Vinster heb ik eindelijk duidelijkheid gekregen over mijn carrièrepad. Het rapport was verrassend accuraat en heeft me geholpen de juiste keuzes te maken.",
+    "testimonial": "Dankzij Vinster heb ik eindelijk duidelijkheid gekregen over mijn loopbaan. Het rapport was verrassend accuraat en heeft me geholpen de juiste keuzes te maken.",
     "footer": {
       "navigation_title": "Navigatie",
       "contact_title": "Contact",
