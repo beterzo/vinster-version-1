@@ -58,9 +58,6 @@ const OverVinster = () => {
             
             {/* Introduction Text */}
             <div className="order-1 md:order-2">
-              <h1 className="text-4xl md:text-5xl font-bold text-blue-900 mb-6">
-                {t('about.page_title')}
-              </h1>
               <div className="space-y-6">
                 <p className="text-xl text-gray-700 leading-relaxed">
                   {t('about.introduction.greeting')} <strong className="text-blue-900">{t('about.introduction.name')}</strong> {t('about.introduction.title')}
