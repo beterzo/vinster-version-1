@@ -1,19 +1,27 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Loader2, Printer } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Loader2, Printer, CheckCircle } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useAuth } from "@/hooks/useAuth";
+import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
 interface RapportInlineProps {
   roundId: string;
+  subStep: 'confirm' | 'complete';
   onNext: () => void;
+  onPrevious: () => void;
+  onReportGenerated: () => void;
 }
 
-const RapportInline = ({ roundId, onNext }: RapportInlineProps) => {
+const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated }: RapportInlineProps) => {
   const { t } = useTranslation();
+  const { user } = useAuth();
+  const { toast } = useToast();
   const [reportContent, setReportContent] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [isGenerating, setIsGenerating] = useState(false);
 
   useEffect(() => {
     const loadReport = async () => {
@@ -33,6 +41,80 @@ const RapportInline = ({ roundId, onNext }: RapportInlineProps) => {
     loadReport();
   }, [roundId]);
 
+  const handleGenerateReport = async () => {
+    if (!user) {
+      toast({
+        title: t('common.toast.no_user_found'),
+        description: t('common.toast.no_user_found_description'),
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setIsGenerating(true);
+    try {
+      console.log('🚀 Starting AI report generation for user:', user.id, 'round:', roundId);
+
+      const { data, error } = await supabase.functions.invoke('generate-career-report', {
+        body: {
+          user_id: user.id,
+          round_id: roundId,
+          language: user.user_metadata?.language || 'nl'
+        }
+      });
+
+      if (error) {
+        console.error('❌ Error calling edge function:', error);
+        throw error;
+      }
+
+      console.log('✅ Report generated successfully:', data);
+
+      // Update round status to completed
+      const { error: roundError } = await supabase
+        .from('user_rounds')
+        .update({
+          status: 'completed',
+          completed_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        })
+        .eq('id', roundId);
+
+      if (roundError) {
+        console.error('❌ Error updating round status:', roundError);
+      }
+
+      // Reload report content
+      const { data: report } = await supabase
+        .from('user_reports')
+        .select('report_content')
+        .eq('round_id', roundId)
+        .eq('report_status', 'completed')
+        .maybeSingle();
+
+      if (report?.report_content) {
+        setReportContent(report.report_content);
+      }
+
+      toast({
+        title: t('common.rapport_confirmatie.generating'),
+        description: t('common.rapport_confirmatie.please_wait')
+      });
+
+      onReportGenerated();
+      onNext();
+    } catch (error) {
+      console.error('❌ Error generating report:', error);
+      toast({
+        title: t('common.toast.generate_error'),
+        description: t('common.toast.generate_error_description'),
+        variant: "destructive"
+      });
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
   const handlePrint = () => {
     window.print();
   };
@@ -45,6 +127,82 @@ const RapportInline = ({ roundId, onNext }: RapportInlineProps) => {
     );
   }
 
+  // Confirm subStep - show confirmation screen
+  if (subStep === 'confirm') {
+    return (
+      <Card className="rounded-3xl shadow-xl border-0">
+        <CardContent className="p-12">
+          <h1 className="text-4xl font-bold text-[#232D4B] mb-4 text-center">
+            {t('common.rapport_confirmatie.title')}
+          </h1>
+          <p className="text-lg text-gray-700 mb-8 text-center">
+            {t('common.rapport_confirmatie.subtitle')}
+          </p>
+
+          <div className="mb-8">
+            <h3 className="text-2xl font-bold text-[#232D4B] mb-4">
+              {t('common.rapport_confirmatie.summary_title')}
+            </h3>
+            <div className="space-y-3">
+              <div className="flex items-center gap-3 text-gray-700">
+                <CheckCircle className="w-6 h-6 text-[#232D4B] flex-shrink-0" />
+                <span className="text-lg">
+                  <strong>{t('common.rapport_confirmatie.summary_enthousiasme')}</strong>: {t('common.rapport_confirmatie.completed')}
+                </span>
+              </div>
+              <div className="flex items-center gap-3 text-gray-700">
+                <CheckCircle className="w-6 h-6 text-[#232D4B] flex-shrink-0" />
+                <span className="text-lg">
+                  <strong>{t('common.rapport_confirmatie.summary_wensberoepen')}</strong>: {t('common.rapport_confirmatie.completed')}
+                </span>
+              </div>
+              <div className="flex items-center gap-3 text-gray-700">
+                <CheckCircle className="w-6 h-6 text-[#232D4B] flex-shrink-0" />
+                <span className="text-lg">
+                  <strong>{t('common.rapport_confirmatie.summary_prioriteiten')}</strong>: {t('common.rapport_confirmatie.completed')}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div className="mb-8 p-6 bg-blue-50 rounded-xl">
+            <p className="text-gray-700 leading-relaxed">
+              {t('common.rapport_confirmatie.info_text')}
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              variant="outline" 
+              size="lg" 
+              onClick={onPrevious} 
+              disabled={isGenerating} 
+              className="text-lg px-8 py-6 border-[#232D4B] text-[#232D4B]"
+            >
+              {t('common.button.previous')}
+            </Button>
+            <Button 
+              size="lg" 
+              onClick={handleGenerateReport} 
+              disabled={isGenerating} 
+              className="text-lg px-8 py-6 bg-[#F5C518] hover:bg-yellow-500 text-[#232D4B] font-bold"
+            >
+              {isGenerating ? (
+                <>
+                  <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                  {t('common.rapport_confirmatie.generating')}
+                </>
+              ) : (
+                t('common.rapport_confirmatie.confirm_button')
+              )}
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  // Complete subStep - show the report
   if (!reportContent) {
     return (
       <Card className="rounded-3xl shadow-xl border-0 p-12 text-center">
