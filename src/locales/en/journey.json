@@ -1,5 +1,50 @@
 
 {
+  "welkom": {
+    "title": "Welcome to Vinster",
+    "intro": "Vinster helps you discover what kind of work suits you. In the following steps, you'll map out your preferences and interests. Based on that, you'll receive concrete job suggestions and a plan to explore further.",
+    "steps_overview_title": "What you'll do",
+    "steps": {
+      "step1": {
+        "title": "Enthusiasm Scan",
+        "description": "You answer questions about your youth, first job, and best work experiences. This helps us discover what gives you energy.",
+        "time": "~15 min"
+      },
+      "step2": {
+        "title": "Desired Jobs",
+        "description": "You think of 3 jobs that appeal to you and describe what you would do, where you work, and what your goal is.",
+        "time": "~20 min"
+      },
+      "step3": {
+        "title": "Personal Profile",
+        "description": "You fill in extra information about your background and select what's important to you in work.",
+        "time": "~10 min"
+      },
+      "step4": {
+        "title": "Career Report",
+        "description": "Vinster generates a report with your preferences and three jobs that suit you.",
+        "time": ""
+      },
+      "step5": {
+        "title": "Research Plan",
+        "description": "A step-by-step plan to further explore the suggested jobs.",
+        "time": ""
+      },
+      "step6": {
+        "title": "Search Profile",
+        "description": "You fill in what you're looking for and get a professional summary for applications and networking.",
+        "time": "~5 min"
+      }
+    },
+    "total_time": "The entire process takes about 45-60 minutes. You can pause and continue later – your progress is saved automatically.",
+    "tips_title": "Good to know",
+    "tips": {
+      "tip1": "There are no right or wrong answers",
+      "tip2": "Take your time and think of concrete situations from your life",
+      "tip3": "You can adjust your answers as long as you haven't generated the report yet"
+    },
+    "start_button": "Start"
+  },
   "enthousiasme": {
     "intro": {
       "title": "Enthusiasm scan",

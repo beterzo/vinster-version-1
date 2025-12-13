@@ -7,6 +7,7 @@ export type JourneyStep =
   | 'zoekprofiel';
 
 export type SubStep = 
+  | 'welkom'
   | 'intro'
   | 'step1'
   | 'step2'
@@ -31,7 +32,7 @@ export const JOURNEY_STEPS: JourneyStepConfig[] = [
   { 
     id: 'enthousiasme', 
     labelKey: 'dashboard.journey.step_enthousiasme',
-    subSteps: ['intro', 'step1', 'step2', 'step3']
+    subSteps: ['welkom', 'intro', 'step1', 'step2', 'step3']
   },
   { 
     id: 'wensberoepen', 
