@@ -210,17 +210,12 @@ ${languageInstructions[language as keyof typeof languageInstructions] || languag
 
 ## INSTRUCTIES
 
-Genereer een loopbaanrapport met de volgende structuur. Geef je antwoord als een JSON object.
+Genereer drie mogelijke beroepen voor deze persoon. Geef je antwoord als een JSON object.
 
-1. **Jouw ideale functie-inhoud**: 
-   - Stel een lijst samen van 15-25 kernwoorden voor "activiteiten" (wat deze persoon graag doet)
-   - Stel een lijst samen van 15-25 kernwoorden voor "werkomgeving" (hoe deze persoon graag werkt)
-   - Stel een lijst samen van 10-20 kernwoorden voor "interessegebieden" (waar deze persoon interesse in heeft)
-
-2. **Drie mogelijke beroepen**:
-   - Twee "passende" beroepen die goed aansluiten bij het profiel
-   - Eén "verrassend" beroep dat misschien onverwacht is maar ook goed zou kunnen passen
-   - Voor elk beroep: geef een concrete functietitel en een beschrijving van 2-3 zinnen waarom dit beroep past
+**Drie mogelijke beroepen**:
+- Twee "passende" beroepen die goed aansluiten bij het profiel
+- Eén "verrassend" beroep dat misschien onverwacht is maar ook goed zou kunnen passen
+- Voor elk beroep: geef een concrete functietitel en een beschrijving van 2-3 zinnen waarom dit beroep past
 
 Baseer de beroepen op alle verzamelde informatie, met speciale aandacht voor:
 - De door de gebruiker geselecteerde prioriteiten (deze zijn extra belangrijk)
@@ -251,31 +246,10 @@ Geef alleen het JSON object terug, zonder extra tekst of markdown formatting.`;
             type: "function",
             function: {
               name: "generate_career_report",
-              description: "Genereer een gestructureerd loopbaanrapport",
+              description: "Genereer drie passende beroepen voor het loopbaanrapport",
               parameters: {
                 type: "object",
                 properties: {
-                  ideale_functie: {
-                    type: "object",
-                    properties: {
-                      activiteiten: {
-                        type: "array",
-                        items: { type: "string" },
-                        description: "15-25 kernwoorden voor favoriete activiteiten"
-                      },
-                      werkomgeving: {
-                        type: "array",
-                        items: { type: "string" },
-                        description: "15-25 kernwoorden voor ideale werkomgeving"
-                      },
-                      interessegebieden: {
-                        type: "array",
-                        items: { type: "string" },
-                        description: "10-20 kernwoorden voor interessegebieden"
-                      }
-                    },
-                    required: ["activiteiten", "werkomgeving", "interessegebieden"]
-                  },
                   beroepen: {
                     type: "object",
                     properties: {
@@ -307,7 +281,7 @@ Geef alleen het JSON object terug, zonder extra tekst of markdown formatting.`;
                     required: ["passend_1", "passend_2", "verrassend"]
                   }
                 },
-                required: ["ideale_functie", "beroepen"]
+                required: ["beroepen"]
               }
             }
           }
@@ -332,42 +306,43 @@ Geef alleen het JSON object terug, zonder extra tekst of markdown formatting.`;
     const aiResponse = await response.json();
     console.log('✅ AI response received');
 
-    // Extract the tool call result
-    let reportContent: ReportContent;
+    // Extract the tool call result - only beroepen from AI
+    let aiBeroepen;
     
     const toolCall = aiResponse.choices?.[0]?.message?.tool_calls?.[0];
     if (toolCall?.function?.arguments) {
       const aiContent = JSON.parse(toolCall.function.arguments);
-      
-      reportContent = {
-        voorblad: {
-          naam: `${profileData?.first_name || ''} ${profileData?.last_name || ''}`.trim(),
-          start_datum: roundData?.started_at ? new Date(roundData.started_at).toLocaleDateString('nl-NL') : new Date().toLocaleDateString('nl-NL'),
-          eind_datum: new Date().toLocaleDateString('nl-NL')
-        },
-        ideale_functie: aiContent.ideale_functie,
-        beroepen: aiContent.beroepen
-      };
+      aiBeroepen = aiContent.beroepen;
     } else {
       // Fallback: try to parse from message content
       const messageContent = aiResponse.choices?.[0]?.message?.content;
       if (messageContent) {
         const cleanedContent = messageContent.replace(/```json\n?|\n?```/g, '').trim();
         const parsed = JSON.parse(cleanedContent);
-        
-        reportContent = {
-          voorblad: {
-            naam: `${profileData?.first_name || ''} ${profileData?.last_name || ''}`.trim(),
-            start_datum: roundData?.started_at ? new Date(roundData.started_at).toLocaleDateString('nl-NL') : new Date().toLocaleDateString('nl-NL'),
-            eind_datum: new Date().toLocaleDateString('nl-NL')
-          },
-          ideale_functie: parsed.ideale_functie,
-          beroepen: parsed.beroepen
-        };
+        aiBeroepen = parsed.beroepen;
       } else {
         throw new Error('No valid response from AI');
       }
     }
+
+    // Use user-selected keywords for ideale_functie (not AI-generated)
+    const selectedActiviteiten = prioriteitenData?.selected_activiteiten_keywords || [];
+    const selectedWerkomstandigheden = prioriteitenData?.selected_werkomstandigheden_keywords || [];
+    const selectedInteresses = prioriteitenData?.selected_interesses_keywords || [];
+
+    const reportContent: ReportContent = {
+      voorblad: {
+        naam: `${profileData?.first_name || ''} ${profileData?.last_name || ''}`.trim(),
+        start_datum: roundData?.started_at ? new Date(roundData.started_at).toLocaleDateString('nl-NL') : new Date().toLocaleDateString('nl-NL'),
+        eind_datum: new Date().toLocaleDateString('nl-NL')
+      },
+      ideale_functie: {
+        activiteiten: selectedActiviteiten,
+        werkomgeving: selectedWerkomstandigheden,
+        interessegebieden: selectedInteresses
+      },
+      beroepen: aiBeroepen
+    };
 
     console.log('📝 Report content generated:', JSON.stringify(reportContent).substring(0, 200) + '...');
 
