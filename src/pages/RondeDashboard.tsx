@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { ArrowLeft, Calendar, Loader2 } from "lucide-react";
+import { ArrowLeft, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import JourneyStepNavigator from "@/components/JourneyStepNavigator";
@@ -138,11 +138,6 @@ const RondeDashboard = () => {
     }
   };
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('nl-NL', {
-      day: 'numeric', month: 'long', year: 'numeric'
-    });
-  };
 
   if (isLoading) {
     return (
@@ -207,31 +202,13 @@ const RondeDashboard = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      <div className="container mx-auto px-4 py-8 max-w-6xl">
-        <Button variant="ghost" onClick={() => navigate('/home')} className="mb-6 text-gray-600 hover:text-gray-900">
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          {t('dashboard.round_dashboard.back_to_dashboard')}
-        </Button>
-
-        <Card className="p-6 mb-6 border-0 rounded-3xl bg-gradient-to-r from-[#232D4B] to-[#3B4A6B]">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-full bg-white/20 flex items-center justify-center">
-                <img src="/lovable-uploads/vinster-new-logo.png" alt="Vinster" className="w-8 h-8 object-contain brightness-0 invert" />
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold text-white">{t('dashboard.rounds.round_label')} {round.round_number}</h1>
-                <div className="flex items-center gap-2 text-white/80">
-                  <Calendar className="w-4 h-4" />
-                  <span>{t('dashboard.round_dashboard.started')}: {formatDate(round.created_at)}</span>
-                </div>
-              </div>
-            </div>
-            <span className={`px-4 py-2 rounded-full text-sm font-medium ${round.status === 'completed' ? 'bg-[#E8F4FD] text-[#232D4B]' : 'bg-[#FEF3C7] text-[#92400E]'}`}>
-              {round.status === 'completed' ? t('dashboard.rounds.status_completed') : t('dashboard.rounds.status_in_progress')}
-            </span>
-          </div>
-        </Card>
+      <div className="container mx-auto px-4 py-6 max-w-6xl">
+        <div className="flex items-center justify-between mb-6">
+          <Button variant="ghost" onClick={() => navigate('/home')} className="text-gray-600 hover:text-gray-900">
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            {t('dashboard.round_dashboard.back_to_dashboard')}
+          </Button>
+        </div>
 
         <Card className="p-4 mb-6 border-0 rounded-2xl bg-white shadow-md">
           <JourneyStepNavigator currentStep={currentStep} completedSteps={completedSteps} onStepClick={handleStepClick} />
