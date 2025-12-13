@@ -64,28 +64,20 @@ const WelkomInline = ({ onNext }: WelkomInlineProps) => {
   return (
     <Card className="rounded-3xl shadow-xl border-0">
       <CardContent className="p-8 md:p-12">
-        {/* Header */}
+        {/* Header with logo and title */}
         <div className="text-center mb-10">
-          <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-[#F5C518] flex items-center justify-center">
-            <img 
-              src="/lovable-uploads/vinster-new-logo.png" 
-              alt="Vinster" 
-              className="w-10 h-10 object-contain"
-            />
-          </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-[#232D4B] mb-4">
-            {t('welkom.title')}
+          <img 
+            src="/lovable-uploads/vinster-new-logo.png" 
+            alt="Vinster" 
+            className="w-16 h-16 mx-auto mb-6 object-contain"
+          />
+          <h1 className="text-2xl md:text-3xl font-bold text-[#232D4B]">
+            {t('welkom.steps_overview_title')}
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            {t('welkom.intro')}
-          </p>
         </div>
 
         {/* Steps overview */}
         <div className="mb-10">
-          <h2 className="text-xl font-semibold text-[#232D4B] mb-6 text-center">
-            {t('welkom.steps_overview_title')}
-          </h2>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {steps.map((step) => (
               <div 
