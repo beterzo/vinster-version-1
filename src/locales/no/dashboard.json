@@ -197,5 +197,14 @@
         }
       }
     }
+  },
+  "journey": {
+    "step_enthousiasme": "Entusiasme-skanning",
+    "step_wensberoepen": "Drømmeyrker",
+    "step_persoonsprofiel": "Personlig profil",
+    "step_controle": "Kontroll",
+    "step_loopbaanrapport": "Karriererapport",
+    "step_zoekprofiel": "Søkeprofil",
+    "finish": "Fullfør"
   }
 }

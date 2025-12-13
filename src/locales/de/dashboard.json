@@ -209,8 +209,17 @@
           "pleasant_period": "Beschreiben Sie eine angenehme Arbeitszeit",
           "nice_project": "Beschreiben Sie ein schönes Projekt und Ihre Rolle",
           "whistling_home": "Wann kamen Sie pfeifend nach Hause?"
-        }
       }
     }
+  },
+  "journey": {
+    "step_enthousiasme": "Begeisterungsscan",
+    "step_wensberoepen": "Wunschberufe",
+    "step_persoonsprofiel": "Persönliches Profil",
+    "step_controle": "Kontrolle",
+    "step_loopbaanrapport": "Karrierebericht",
+    "step_zoekprofiel": "Suchprofil",
+    "finish": "Abschließen"
   }
+}
 }
