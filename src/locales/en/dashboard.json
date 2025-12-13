@@ -132,7 +132,8 @@
       "game_rounds_subtitle": "Here you can view or resume your game rounds.",
       "status_completed": "Completed",
       "status_in_progress": "In progress",
-      "resume": "Resume"
+      "resume": "Resume",
+      "view_round": "View round"
     },
     "round_dashboard": {
       "back_to_dashboard": "Back to dashboard",

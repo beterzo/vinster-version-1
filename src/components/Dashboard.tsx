@@ -160,58 +160,6 @@ const Dashboard = () => {
       <div className="max-w-[1440px] mx-auto px-6 py-8">
         <DashboardHeader />
 
-        {/* Journey Completed Banner */}
-        {stepAccess.isBlockedByCompletedReport && (
-          <Card className="mt-8 border-2 border-blue-400 bg-blue-50 rounded-xl">
-            <div className="p-6">
-              <div className="flex items-start gap-4">
-                <div className="flex-1">
-                  <h2 className="text-xl font-semibold text-blue-900 mb-2">
-                    {hasExistingZoekprofiel 
-                      ? t('dashboard.report_limit.banner_title')
-                      : t('dashboard.report_limit.banner_title_report_only')
-                    }
-                  </h2>
-                  <p className="text-blue-700 mb-4">
-                    {hasExistingZoekprofiel
-                      ? t('dashboard.report_limit.banner_description')
-                      : t('dashboard.report_limit.banner_description_report_only')
-                    }
-                  </p>
-                  <div className="flex flex-wrap gap-3">
-                    {hasUserReport && (
-                      <Button
-                        onClick={() => navigate('/rapport-download')}
-                        className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold gap-2"
-                      >
-                        <Download className="w-4 h-4" />
-                        {t('dashboard.report_limit.button_download_report')}
-                      </Button>
-                    )}
-            {hasExistingZoekprofiel && (
-              <Button
-                onClick={() => navigate('/zoekprofiel-antwoorden')}
-                variant="outline"
-                className="border-2 border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold gap-2"
-              >
-                <FileText className="w-4 h-4" />
-                {t('dashboard.report_limit.button_download_zoekprofiel')}
-              </Button>
-            )}
-                    <Button
-                      onClick={() => navigate('/traject-opnieuw-starten')}
-                      variant="outline"
-                      className="border-2 border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold gap-2"
-                    >
-                      <Lock className="w-4 h-4" />
-                      {t('dashboard.report_limit.restart_cta')}
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Card>
-        )}
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
           {/* Welcome Section - spans first 2 columns */}
