@@ -212,5 +212,15 @@
         }
       }
     }
+  },
+  "journey": {
+    "step_enthousiasme": "Enthousiasme",
+    "step_wensberoepen": "Wensberoepen",
+    "step_persoonsprofiel": "Profiel",
+    "step_controle": "Controle",
+    "step_loopbaanrapport": "Rapport",
+    "step_zoekprofiel": "Zoekprofiel",
+    "finish_button": "Afronden"
   }
+}
 }
