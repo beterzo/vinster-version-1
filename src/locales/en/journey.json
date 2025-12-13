@@ -333,13 +333,18 @@
       "title": "Your search profile is ready!",
       "description": "Your search profile contains a summary of your ideal job. Use it in your applications and share it with your network.",
       "download_button": "Download search profile",
+      "print_button": "Print search profile",
       "next_steps": "You can now apply in a targeted way! Search for vacancies, let your network know what you want and share on LinkedIn which position you are looking for.",
-      "to_dashboard": "To dashboard"
+      "to_dashboard": "To dashboard",
+      "generating": "Your search profile is being generated..."
+    },
+    "viewer": {
+      "title": "My Search Profile"
     },
     "antwoorden": {
-      "submitting": "Submitting...",
-      "submit_success": "Search profile successfully submitted!",
-      "submit_error": "Something went wrong while submitting your search profile."
+      "submitting": "Generating...",
+      "submit_success": "Search profile successfully generated!",
+      "submit_error": "Something went wrong while generating your search profile."
     }
   },
   "restart_explanation": {

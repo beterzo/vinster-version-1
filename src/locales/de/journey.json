@@ -332,13 +332,18 @@
       "title": "Ihr Suchprofil ist fertig!",
       "description": "Ihr Suchprofil enthält eine Zusammenfassung Ihres idealen Jobs. Verwenden Sie es bei Ihren Bewerbungen und teilen Sie es mit Ihrem Netzwerk.",
       "download_button": "Suchprofil herunterladen",
+      "print_button": "Suchprofil drucken",
       "next_steps": "Sie können jetzt gezielt Bewerbungen schreiben! Suchen Sie nach Stellenausschreibungen, lassen Sie Ihr Netzwerk wissen, was Sie wollen, und teilen Sie auf LinkedIn mit, welche Position Sie suchen.",
-      "to_dashboard": "Zum Dashboard"
+      "to_dashboard": "Zum Dashboard",
+      "generating": "Ihr Suchprofil wird generiert..."
+    },
+    "viewer": {
+      "title": "Mein Suchprofil"
     },
     "antwoorden": {
-      "submitting": "Wird versendet...",
-      "submit_success": "Suchprofil erfolgreich gesendet!",
-      "submit_error": "Beim Versenden Ihres Suchprofils ist ein Fehler aufgetreten."
+      "submitting": "Wird generiert...",
+      "submit_success": "Suchprofil erfolgreich generiert!",
+      "submit_error": "Beim Generieren Ihres Suchprofils ist ein Fehler aufgetreten."
     }
   },
   "restart_explanation": {

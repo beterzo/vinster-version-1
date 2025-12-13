@@ -212,13 +212,13 @@ export const useZoekprofielResponses = () => {
     }, 1000);
   }, [calculateProgress, debouncedSave]);
 
-  const submitToWebhook = async (submissionLanguage?: string) => {
+  const submitToWebhook = async (submissionLanguage?: string, roundId?: string) => {
     const languageToUse = submissionLanguage || language || 'nl';
     
     // Use local state for submission to ensure we have the latest values
     const dataToSubmit = { ...responses, ...localState };
     
-    console.log('🚀 Submitting data to webhook:', dataToSubmit);
+    console.log('🚀 Submitting data to generate-zoekprofiel edge function:', dataToSubmit);
     
     if (!dataToSubmit.functie_als || !dataToSubmit.kerntaken || !dataToSubmit.organisatie_bij || 
         !dataToSubmit.sector || !dataToSubmit.gewenste_regio || !dataToSubmit.arbeidsvoorwaarden) {
@@ -231,68 +231,34 @@ export const useZoekprofielResponses = () => {
     }
 
     try {
-      console.log('🚀 Submitting zoekprofiel to webhook...');
+      console.log('🚀 Calling generate-zoekprofiel edge function...');
       
-      const response = await fetch('https://hook.eu2.make.com/y47oalww255yswggp44jy2ty8518j2ok', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
+      const { data, error } = await supabase.functions.invoke('generate-zoekprofiel', {
+        body: { 
           user_id: user?.id,
-          email: user?.email || "",
-          first_name: user?.user_metadata?.first_name || "",
-          last_name: user?.user_metadata?.last_name || "",
-          language: languageToUse,
-          functie_als: dataToSubmit.functie_als,
-          kerntaken: dataToSubmit.kerntaken,
-          organisatie_bij: dataToSubmit.organisatie_bij,
-          sector: dataToSubmit.sector,
-          gewenste_regio: dataToSubmit.gewenste_regio,
-          arbeidsvoorwaarden: dataToSubmit.arbeidsvoorwaarden,
-          timestamp: new Date().toISOString()
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      console.log('✅ Successfully submitted to webhook');
-      
-      // Initialize PDF generation status immediately after webhook submission
-      try {
-        console.log('🚀 Initializing PDF generation status after webhook submission...');
-        
-        const { error: initError } = await supabase
-          .from('user_zoekprofielen')
-          .upsert({
-            user_id: user?.id,
-            pdf_status: 'generating'
-          }, {
-            onConflict: 'user_id'
-          });
-
-        if (initError) {
-          console.error('❌ Error initializing PDF generation:', initError);
-        } else {
-          console.log('✅ PDF generation status initialized');
+          round_id: roundId,
+          language: languageToUse 
         }
-      } catch (initError) {
-        console.error('❌ Failed to initialize PDF generation:', initError);
+      });
+
+      if (error) {
+        console.error('❌ Edge function error:', error);
+        throw error;
       }
 
+      console.log('✅ Successfully generated zoekprofiel:', data);
+
       toast({
-        title: "Zoekprofiel verzonden",
-        description: "Je zoekprofiel is succesvol verwerkt!",
+        title: "Zoekprofiel gegenereerd",
+        description: "Je zoekprofiel is succesvol aangemaakt!",
       });
       
-      return true;
+      return data;
     } catch (error) {
-      console.error('❌ Error submitting to webhook:', error);
+      console.error('❌ Error generating zoekprofiel:', error);
       toast({
-        title: "Fout bij verzenden",
-        description: "Er ging iets mis bij het verwerken van je zoekprofiel.",
+        title: "Fout bij genereren",
+        description: "Er ging iets mis bij het genereren van je zoekprofiel.",
         variant: "destructive"
       });
       return false;
