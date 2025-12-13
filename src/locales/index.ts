@@ -80,6 +80,7 @@ export const translations = {
     payment: enDashboard.payment,
     journey: enJourney,
     // Make journey keys available at top level
+    welkom: enJourney.welkom,
     enthousiasme: enJourney.enthousiasme,
     zoekprofiel: enJourney.zoekprofiel,
     profiel_voltooien: enJourney.profiel_voltooien,
@@ -117,6 +118,7 @@ export const translations = {
     payment: nlDashboard.payment,
     journey: nlJourney,
     // Make journey keys available at top level
+    welkom: nlJourney.welkom,
     enthousiasme: nlJourney.enthousiasme,
     zoekprofiel: nlJourney.zoekprofiel,
     profiel_voltooien: nlJourney.profiel_voltooien,
@@ -154,6 +156,7 @@ export const translations = {
     payment: (deDashboard as any).payment || deDashboard,
     journey: deJourney,
     // Make journey keys available at top level
+    welkom: (deJourney as any).welkom,
     enthousiasme: deJourney.enthousiasme,
     zoekprofiel: deJourney.zoekprofiel,
     profiel_voltooien: deJourney.profiel_voltooien,
@@ -193,6 +196,7 @@ export const translations = {
     payment: (noDashboard as any).payment || noDashboard,
     journey: noJourney,
     // Make journey keys available at top level
+    welkom: (noJourney as any).welkom,
     enthousiasme: (noJourney as any).enthousiasme || noJourney,
     zoekprofiel: (noJourney as any).zoekprofiel || noJourney,
     profiel_voltooien: (noJourney as any).profiel_voltooien || noJourney,
