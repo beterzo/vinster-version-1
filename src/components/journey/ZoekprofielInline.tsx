@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Search, Loader2, ArrowLeft, ArrowRight, FileText, Download } from "lucide-react";
+import { Search, Loader2, ArrowLeft, ArrowRight, FileText, Printer } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useTranslation } from "@/hooks/useTranslation";
@@ -9,12 +9,23 @@ import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { useZoekprofielResponses } from "@/hooks/useZoekprofielResponses";
 import { toast } from "sonner";
+import ZoekprofielViewer from "@/components/ZoekprofielViewer";
 
 interface ZoekprofielInlineProps {
   roundId: string;
   subStep: 'intro' | 'step1' | 'complete';
   onNext: () => void;
   onPrevious: () => void;
+}
+
+interface ZoekprofielContent {
+  functie_zin: string;
+  kerntaken_zin: string;
+  sector_zin: string;
+  organisatie_zin: string;
+  regio_zin: string;
+  voorwaarden_zin: string;
+  samenvatting: string;
 }
 
 const ZoekprofielInline = ({ roundId, subStep, onNext, onPrevious }: ZoekprofielInlineProps) => {
@@ -24,12 +35,25 @@ const ZoekprofielInline = ({ roundId, subStep, onNext, onPrevious }: Zoekprofiel
   const [zoekprofielExists, setZoekprofielExists] = useState(false);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
-  const [zoekprofielData, setZoekprofielData] = useState<any>(null);
+  const [zoekprofielContent, setZoekprofielContent] = useState<ZoekprofielContent | null>(null);
+  const [userName, setUserName] = useState<string>('');
 
   useEffect(() => {
     const checkZoekprofiel = async () => {
       if (!user) return;
       
+      // Fetch user name
+      const { data: profileData } = await supabase
+        .from('profiles')
+        .select('first_name, last_name')
+        .eq('id', user.id)
+        .maybeSingle();
+      
+      if (profileData) {
+        setUserName(`${profileData.first_name} ${profileData.last_name}`);
+      }
+
+      // Check for existing zoekprofiel with content
       const { data } = await supabase
         .from('user_zoekprofielen')
         .select('*')
@@ -37,8 +61,10 @@ const ZoekprofielInline = ({ roundId, subStep, onNext, onPrevious }: Zoekprofiel
         .eq('pdf_status', 'completed')
         .maybeSingle();
       
-      setZoekprofielExists(!!data);
-      setZoekprofielData(data);
+      if (data?.zoekprofiel_content) {
+        setZoekprofielExists(true);
+        setZoekprofielContent(data.zoekprofiel_content as unknown as ZoekprofielContent);
+      }
       setLoading(false);
     };
 
@@ -48,9 +74,15 @@ const ZoekprofielInline = ({ roundId, subStep, onNext, onPrevious }: Zoekprofiel
   const handleSubmit = async () => {
     setSubmitting(true);
     try {
-      await submitToWebhook(language);
-      toast.success(t('journey.zoekprofiel.antwoorden.submit_success'));
-      onNext();
+      const result = await submitToWebhook(language, roundId);
+      if (result && result.zoekprofiel_content) {
+        setZoekprofielContent(result.zoekprofiel_content);
+        setZoekprofielExists(true);
+        toast.success(t('journey.zoekprofiel.antwoorden.submit_success'));
+        onNext();
+      } else if (result === false) {
+        // Error already handled in hook
+      }
     } catch (error) {
       console.error('Error submitting zoekprofiel:', error);
       toast.error(t('journey.zoekprofiel.antwoorden.submit_error'));
@@ -59,9 +91,8 @@ const ZoekprofielInline = ({ roundId, subStep, onNext, onPrevious }: Zoekprofiel
     }
   };
 
-  const handleDownload = async () => {
-    if (!zoekprofielData?.pdf_url) return;
-    window.open(zoekprofielData.pdf_url, '_blank');
+  const handlePrint = () => {
+    window.print();
   };
 
   if (loading || responsesLoading) {
@@ -185,7 +216,44 @@ const ZoekprofielInline = ({ roundId, subStep, onNext, onPrevious }: Zoekprofiel
     );
   }
 
-  // Complete page - show zoekprofiel result
+  // Complete page - show zoekprofiel result with viewer
+  if (zoekprofielContent) {
+    return (
+      <div className="space-y-6">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-2xl font-bold text-[#232D4B]">
+            {t('journey.zoekprofiel.complete.title')}
+          </h2>
+          <div className="flex gap-3">
+            <Button 
+              onClick={handlePrint}
+              variant="outline"
+              className="font-semibold"
+            >
+              <Printer className="w-4 h-4 mr-2" />
+              {t('journey.zoekprofiel.complete.print_button')}
+            </Button>
+          </div>
+        </div>
+
+        <ZoekprofielViewer content={zoekprofielContent} userName={userName} />
+
+        <div className="bg-[#E8F4FD] rounded-2xl p-6 text-center">
+          <p className="text-[#232D4B] mb-4">
+            {t('journey.zoekprofiel.complete.next_steps')}
+          </p>
+          <Button 
+            onClick={() => window.location.href = '/home'}
+            className="bg-[#F5C518] hover:bg-yellow-500 text-[#232D4B] font-semibold px-8"
+          >
+            {t('journey.zoekprofiel.complete.to_dashboard')}
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  // Fallback if no content yet
   return (
     <Card className="rounded-3xl shadow-xl border-0">
       <CardContent className="p-8 md:p-12 text-center">
@@ -196,35 +264,9 @@ const ZoekprofielInline = ({ roundId, subStep, onNext, onPrevious }: Zoekprofiel
           {t('journey.zoekprofiel.complete.title')}
         </h1>
         <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-          {t('journey.zoekprofiel.complete.description')}
+          {t('journey.zoekprofiel.complete.generating')}
         </p>
-
-        {zoekprofielExists && zoekprofielData?.pdf_url && (
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <Button 
-              onClick={handleDownload}
-              className="bg-[#232D4B] hover:bg-[#1a2238] text-white font-semibold px-8"
-            >
-              <Download className="w-4 h-4 mr-2" />
-              {t('journey.zoekprofiel.complete.download_button')}
-            </Button>
-          </div>
-        )}
-
-        <div className="bg-[#E8F4FD] rounded-2xl p-6 max-w-2xl mx-auto">
-          <p className="text-[#232D4B]">
-            {t('journey.zoekprofiel.complete.next_steps')}
-          </p>
-        </div>
-
-        <div className="mt-8">
-          <Button 
-            onClick={() => window.location.href = '/home'}
-            className="bg-[#F5C518] hover:bg-yellow-500 text-[#232D4B] font-semibold px-8"
-          >
-            {t('journey.zoekprofiel.complete.to_dashboard')}
-          </Button>
-        </div>
+        <Loader2 className="w-8 h-8 animate-spin text-[#232D4B] mx-auto" />
       </CardContent>
     </Card>
   );

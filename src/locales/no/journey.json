@@ -328,13 +328,18 @@
       "title": "Søkeprofilen din er klar!",
       "description": "Søkeprofilen din inneholder et sammendrag av din ideelle jobb. Bruk den i søknadene dine og del den med nettverket ditt.",
       "download_button": "Last ned søkeprofil",
+      "print_button": "Skriv ut søkeprofil",
       "next_steps": "Du kan nå søke målrettet! Søk etter stillinger, la nettverket ditt vite hva du vil og del på LinkedIn hvilken stilling du leter etter.",
-      "to_dashboard": "Til dashboard"
+      "to_dashboard": "Til dashboard",
+      "generating": "Søkeprofilen din genereres..."
+    },
+    "viewer": {
+      "title": "Min søkeprofil"
     },
     "antwoorden": {
-      "submitting": "Sender...",
-      "submit_success": "Søkeprofil sendt inn!",
-      "submit_error": "Noe gikk galt ved innsending av søkeprofilen din."
+      "submitting": "Genererer...",
+      "submit_success": "Søkeprofil generert!",
+      "submit_error": "Noe gikk galt ved generering av søkeprofilen din."
     }
   },
   "restart_explanation": {

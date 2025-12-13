@@ -341,13 +341,18 @@
       "title": "Je zoekprofiel is klaar!",
       "description": "Je zoekprofiel bevat een samenvatting van je ideale baan. Gebruik het bij je sollicitaties en deel het met je netwerk.",
       "download_button": "Download zoekprofiel",
+      "print_button": "Print zoekprofiel",
       "next_steps": "Je kunt nu gericht gaan solliciteren! Zoek vacatures, laat jouw netwerk weten wat je wilt en deel op LinkedIn welke functie je zoekt.",
-      "to_dashboard": "Naar dashboard"
+      "to_dashboard": "Naar dashboard",
+      "generating": "Je zoekprofiel wordt gegenereerd..."
+    },
+    "viewer": {
+      "title": "Mijn Zoekprofiel"
     },
     "antwoorden": {
-      "submitting": "Bezig met versturen...",
-      "submit_success": "Zoekprofiel succesvol verzonden!",
-      "submit_error": "Er ging iets mis bij het versturen van je zoekprofiel."
+      "submitting": "Bezig met genereren...",
+      "submit_success": "Zoekprofiel succesvol gegenereerd!",
+      "submit_error": "Er ging iets mis bij het genereren van je zoekprofiel."
     }
   },
   "restart_explanation": {

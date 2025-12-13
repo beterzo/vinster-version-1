@@ -332,6 +332,7 @@ export type Database = {
           pdf_url: string | null
           updated_at: string
           user_id: string
+          zoekprofiel_content: Json | null
         }
         Insert: {
           created_at?: string
@@ -341,6 +342,7 @@ export type Database = {
           pdf_url?: string | null
           updated_at?: string
           user_id: string
+          zoekprofiel_content?: Json | null
         }
         Update: {
           created_at?: string
@@ -350,6 +352,7 @@ export type Database = {
           pdf_url?: string | null
           updated_at?: string
           user_id?: string
+          zoekprofiel_content?: Json | null
         }
         Relationships: []
       }
