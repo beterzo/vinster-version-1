@@ -12,12 +12,12 @@ const seoConfigs: Record<string, Record<string, SEOConfig>> = {
   nl: {
     "/": {
       title: "Vinster | Werk dat bij je past vinden met AI loopbaanadvies",
-      description: "Ontdek welk werk bij je past met de Loopbaantrechter methode van Heidi Jansen. Online loopbaanadvies met AI - persoonlijk, slim en effectief.",
+      description: "Ontdek welk werk bij je past met de Loopbaantrechtermetode van Heidi Jansen. Online loopbaanadvies met AI - persoonlijk, slim en effectief.",
       keywords: "loopbaantrechter, de loopbaantrechter, heidi jansen, online loopbaanadvies, ai loopbaanadvies, werk dat bij je past, welk werk past bij mij, weten wat je wilt"
     },
     "/over-vinster": {
       title: "De Loopbaantrechter van Heidi Jansen | Vinster",
-      description: "Ontmoet Heidi Jansen, bedenker van de Loopbaantrechter methode. 25+ jaar ervaring in online loopbaanadvies en loopbaanbegeleiding.",
+      description: "Ontmoet Heidi Jansen, bedenker van de Loopbaantrechtermetode. 25+ jaar ervaring in online loopbaanadvies en loopbaanbegeleiding.",
       keywords: "heidi jansen, loopbaantrechter, de loopbaantrechter, online loopbaanadvies, loopbaanadviseur, loopbaanbegeleiding"
     },
     "/voor-wie-is-het": {
@@ -27,12 +27,12 @@ const seoConfigs: Record<string, Record<string, SEOConfig>> = {
     },
     "/veelgestelde-vragen": {
       title: "Veelgestelde vragen over AI loopbaanadvies | Vinster",
-      description: "Alles over Vinster en de Loopbaantrechter methode. Hoe werkt AI in loopbaanadvies? Lees de antwoorden op veelgestelde vragen.",
+      description: "Alles over Vinster en de Loopbaantrechtermetode. Hoe werkt AI in loopbaanadvies? Lees de antwoorden op veelgestelde vragen.",
       keywords: "ai loopbaanadvies, loopbaantrechter, online loopbaanadvies, vinster, heidi jansen, veelgestelde vragen"
     },
     "/contact": {
       title: "Contact | Vinster",
-      description: "Neem contact op met het Vinster team voor vragen over online loopbaanadvies met de Loopbaantrechter methode.",
+      description: "Neem contact op met het Vinster team voor vragen over online loopbaanadvies met de Loopbaantrechtermetode.",
       keywords: "contact vinster, online loopbaanadvies, loopbaantrechter"
     }
   },

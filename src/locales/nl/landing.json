@@ -3,7 +3,7 @@
   "landing": {
     "tagline": "Weet je niet welk werk bij je past?\nVind het met AI-gedreven loopbaanadvies.",
     "welcome": "Welkom bij",
-    "description": "Weten wat je wilt begint hier. Of je nu vastloopt, heroriënteert of gewoon even wilt checken – Vinster helpt je ontdekken welk werk bij je past met de beproefde Loopbaantrechter methode.",
+    "description": "Weten wat je wilt begint hier. Of je nu vastloopt, heroriënteert of gewoon even wilt checken – Vinster helpt je ontdekken welk werk bij je past met de beproefde Loopbaantrechtermetode.",
     "login": "Inloggen",
     "hero": {
       "title": "Ontdek je voorkeuren, vind je loopbaan",
@@ -13,7 +13,7 @@
     },
     "what_is_vinster": {
       "title": "Wat is Vinster?",
-      "description": "Vinster is een AI-gedreven online loopbaanadvies platform, gebaseerd op de Loopbaantrechter methode van Heidi Jansen. Door middel van slimme vragen ontdek je welk werk bij je past – persoonlijk, concreet en verrassend.",
+      "description": "Vinster is een AI-gedreven online loopbaanadvies platform, gebaseerd op de Loopbaantrechtermetode van Heidi Jansen. Door middel van slimme vragen ontdek je welk werk bij je past – persoonlijk, concreet en verrassend.",
       "based_on": "Gebouwd op bewezen methodes uit de praktijk en jouw unieke antwoorden krijg je:",
       "two_matching_functions": "Twee functies die bij je passen",
       "one_surprising_suggestion": "Een verrassend voorstel",
@@ -33,11 +33,11 @@
     "features": {
       "card1": {
         "title": "Wat is Vinster?",
-        "description": "Vinster is AI-gedreven online loopbaanadvies, gebaseerd op de Loopbaantrechter methode van Heidi Jansen. Door middel van slimme vragen en geavanceerde AI ontdek je welk werk bij je past – persoonlijk, concreet en verrassend."
+        "description": "Vinster is AI-gedreven online loopbaanadvies, gebaseerd op de Loopbaantrechtermetode van Heidi Jansen. Door middel van slimme vragen en geavanceerde AI ontdek je welk werk bij je past – persoonlijk, concreet en verrassend."
       },
       "card2": {
         "title": "Wat krijg je?",
-        "description": "Een uitgebreid persoonlijkheidsrapport, een op maat gemaakt zoekprofiel, en concrete stappen om je gewenste carrière te realiseren. Alles gebouwd op de bewezen Loopbaantrechter methode en jouw unieke eigenschappen."
+        "description": "Een uitgebreid persoonlijkheidsrapport, een op maat gemaakt zoekprofiel, en concrete stappen om je gewenste carrière te realiseren. Alles gebouwd op de bewezen Loopbaantrechtermetode en jouw unieke eigenschappen."
       }
     },
     "process": {
