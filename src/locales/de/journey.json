@@ -1,4 +1,49 @@
 {
+  "welkom": {
+    "title": "Willkommen bei Vinster",
+    "intro": "Vinster hilft dir herauszufinden, welche Arbeit zu dir passt. In den folgenden Schritten erfasst du deine Vorlieben und Interessen. Auf dieser Grundlage erhältst du konkrete Berufsvorschläge und einen Plan zur weiteren Erkundung.",
+    "steps_overview_title": "Das wirst du tun",
+    "steps": {
+      "step1": {
+        "title": "Begeisterungsscan",
+        "description": "Du beantwortest Fragen über deine Jugend, deinen ersten Job und deine besten Arbeitserfahrungen. So entdecken wir, was dir Energie gibt.",
+        "time": "~15 Min"
+      },
+      "step2": {
+        "title": "Wunschberufe",
+        "description": "Du denkst dir 3 Berufe aus, die dich ansprechen, und beschreibst, was du tun würdest, wo du arbeitest und was dein Ziel ist.",
+        "time": "~20 Min"
+      },
+      "step3": {
+        "title": "Persönliches Profil",
+        "description": "Du gibst zusätzliche Informationen über deinen Hintergrund ein und wählst aus, was dir bei der Arbeit wichtig ist.",
+        "time": "~10 Min"
+      },
+      "step4": {
+        "title": "Karrierebericht",
+        "description": "Vinster erstellt einen Bericht mit deinen Vorlieben und drei Berufen, die zu dir passen.",
+        "time": ""
+      },
+      "step5": {
+        "title": "Forschungsplan",
+        "description": "Ein Schritt-für-Schritt-Plan, um die vorgeschlagenen Berufe weiter zu erkunden.",
+        "time": ""
+      },
+      "step6": {
+        "title": "Suchprofil",
+        "description": "Du gibst ein, wonach du suchst, und erhältst eine professionelle Zusammenfassung für Bewerbungen und Networking.",
+        "time": "~5 Min"
+      }
+    },
+    "total_time": "Der gesamte Prozess dauert etwa 45-60 Minuten. Du kannst jederzeit pausieren und später weitermachen – dein Fortschritt wird automatisch gespeichert.",
+    "tips_title": "Gut zu wissen",
+    "tips": {
+      "tip1": "Es gibt keine richtigen oder falschen Antworten",
+      "tip2": "Nimm dir Zeit und denke an konkrete Situationen aus deinem Leben",
+      "tip3": "Du kannst deine Antworten anpassen, solange du den Bericht noch nicht generiert hast"
+    },
+    "start_button": "Start"
+  },
   "enthousiasme": {
     "intro": {
       "title": "Begeisterungsscan",

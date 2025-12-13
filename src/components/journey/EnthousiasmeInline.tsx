@@ -7,6 +7,7 @@ import EnthousiasmeProgress from "@/components/EnthousiasmeProgress";
 import { useEnthousiasmeResponses } from "@/hooks/useEnthousiasmeResponses";
 import { useTranslation } from "@/hooks/useTranslation";
 import { SubStep } from "@/types/journey";
+import WelkomInline from "./WelkomInline";
 
 interface EnthousiasmeInlineProps {
   subStep: SubStep;
@@ -62,6 +63,11 @@ const EnthousiasmeInline = ({ subStep, onNext, onPrevious }: EnthousiasmeInlineP
 
   if (loading) {
     return <div className="flex items-center justify-center p-12">{t('common.loading')}</div>;
+  }
+
+  // Welcome page
+  if (subStep === 'welkom') {
+    return <WelkomInline onNext={onNext} />;
   }
 
   // Intro page

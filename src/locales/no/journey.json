@@ -1,4 +1,49 @@
 {
+  "welkom": {
+    "title": "Velkommen til Vinster",
+    "intro": "Vinster hjelper deg med å finne ut hva slags arbeid som passer for deg. I de følgende stegene kartlegger du dine preferanser og interesser. Basert på dette får du konkrete jobbforslag og en plan for videre utforskning.",
+    "steps_overview_title": "Dette skal du gjøre",
+    "steps": {
+      "step1": {
+        "title": "Entusiasme-skanning",
+        "description": "Du svarer på spørsmål om ungdommen din, din første jobb og dine beste arbeidsopplevelser. Slik oppdager vi hva som gir deg energi.",
+        "time": "~15 min"
+      },
+      "step2": {
+        "title": "Ønskejobber",
+        "description": "Du tenker ut 3 jobber som appellerer til deg og beskriver hva du ville gjøre, hvor du jobber og hva målet ditt er.",
+        "time": "~20 min"
+      },
+      "step3": {
+        "title": "Personlig profil",
+        "description": "Du fyller inn ekstra informasjon om bakgrunnen din og velger hva som er viktig for deg i arbeid.",
+        "time": "~10 min"
+      },
+      "step4": {
+        "title": "Karriererapport",
+        "description": "Vinster genererer en rapport med dine preferanser og tre jobber som passer for deg.",
+        "time": ""
+      },
+      "step5": {
+        "title": "Forskningsplan",
+        "description": "En trinnvis plan for å utforske de foreslåtte jobbene videre.",
+        "time": ""
+      },
+      "step6": {
+        "title": "Søkeprofil",
+        "description": "Du fyller inn hva du leter etter og får et profesjonelt sammendrag for søknader og nettverksbygging.",
+        "time": "~5 min"
+      }
+    },
+    "total_time": "Hele prosessen tar omtrent 45-60 minutter. Du kan pause og fortsette senere – fremgangen din lagres automatisk.",
+    "tips_title": "Godt å vite",
+    "tips": {
+      "tip1": "Det finnes ingen rette eller gale svar",
+      "tip2": "Ta deg tid og tenk på konkrete situasjoner fra livet ditt",
+      "tip3": "Du kan justere svarene dine så lenge du ikke har generert rapporten ennå"
+    },
+    "start_button": "Start"
+  },
   "enthousiasme": {
     "intro": {
       "title": "Entusiasme-skanning",

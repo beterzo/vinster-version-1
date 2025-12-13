@@ -31,7 +31,7 @@ const RondeDashboard = () => {
   
   const [round, setRound] = useState<any>(null);
   const [currentStep, setCurrentStep] = useState<JourneyStep>('enthousiasme');
-  const [currentSubStep, setCurrentSubStep] = useState<SubStep>('intro');
+  const [currentSubStep, setCurrentSubStep] = useState<SubStep>('welkom');
   const [slideDirection, setSlideDirection] = useState<'left' | 'right'>('left');
   const [reportExists, setReportExists] = useState(false);
 

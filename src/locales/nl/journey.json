@@ -1,4 +1,49 @@
 {
+  "welkom": {
+    "title": "Welkom bij Vinster",
+    "intro": "Vinster helpt je ontdekken welk werk bij je past. In de komende stappen breng je jouw voorkeuren en interesses in kaart. Op basis daarvan krijg je concrete beroepssuggesties en een plan om verder te onderzoeken.",
+    "steps_overview_title": "Dit ga je doen",
+    "steps": {
+      "step1": {
+        "title": "Enthousiasme Scan",
+        "description": "Je beantwoordt vragen over je jeugd, eerste baan en beste werkervaringen. Zo ontdekken we wat jou energie geeft.",
+        "time": "~15 min"
+      },
+      "step2": {
+        "title": "Wensberoepen",
+        "description": "Je bedenkt 3 beroepen die je aanspreken en beschrijft wat je daarin zou doen, waar je werkt en wat je doel is.",
+        "time": "~20 min"
+      },
+      "step3": {
+        "title": "Persoonsprofiel",
+        "description": "Je vult extra informatie in over je achtergrond en selecteert wat voor jou belangrijk is in werk.",
+        "time": "~10 min"
+      },
+      "step4": {
+        "title": "Loopbaanrapport",
+        "description": "Vinster genereert een rapport met jouw voorkeuren en drie functies die bij je passen.",
+        "time": ""
+      },
+      "step5": {
+        "title": "Onderzoeksplan",
+        "description": "Een stappenplan om de voorgestelde functies verder te onderzoeken.",
+        "time": ""
+      },
+      "step6": {
+        "title": "Zoekprofiel",
+        "description": "Je vult in wat je zoekt en krijgt een professionele samenvatting voor sollicitaties en netwerken.",
+        "time": "~5 min"
+      }
+    },
+    "total_time": "Het hele traject duurt ongeveer 45-60 minuten. Je kunt tussendoor stoppen en later verdergaan – je voortgang wordt automatisch opgeslagen.",
+    "tips_title": "Goed om te weten",
+    "tips": {
+      "tip1": "Er zijn geen goede of foute antwoorden",
+      "tip2": "Neem de tijd en denk aan concrete situaties uit jouw leven",
+      "tip3": "Je kunt je antwoorden aanpassen zolang je het rapport nog niet hebt gegenereerd"
+    },
+    "start_button": "Start"
+  },
   "enthousiasme": {
     "intro": {
       "title": "Enthousiasme scan",
