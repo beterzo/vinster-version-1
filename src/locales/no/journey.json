@@ -296,6 +296,48 @@
       "generating_fallback": "Rapporten din genereres fortsatt. Dette kan ta noen minutter."
     }
   },
+  "onderzoeksplan": {
+    "title": "Forskningsplan",
+    "next_button": "Neste",
+    "previous_button": "Forrige",
+    "to_zoekprofiel_button": "Til søkeprofil",
+    "page1": {
+      "title": "Hva nå?",
+      "intro": "Karriererapporten din er klar! Nå kan du starte din forskning, fordi du vil vite mer før du tar en endelig beslutning.",
+      "instruction": "Velg to (eller flere) yrker fra analysen av svarene dine som du vil undersøke nærmere."
+    },
+    "page2": {
+      "title": "Dette er din steg-for-steg-plan:",
+      "step1": "Spør AI (eller Google) om en detaljert stillingsbeskrivelse for rollene fra karriererapporten din. Spør AI også om lignende roller. Hva arbeid er sammenlignbart? Hva appellerer til deg i svarene du får?",
+      "step2": "Se etter stillingsannonser som gir deg en idé om innholdet i denne rollen og organisasjonene som har disse stillingene.",
+      "step3": "Søk på LinkedIn etter folk som gjør dette arbeidet. Hva er deres bakgrunn?",
+      "step4": "Finnes det en yrkesforening? Hva leser du på nettstedet om utviklingen i sektoren og yrket?",
+      "step5": "Har yrket et fagtidsskrift? I så fall, be om ett eller flere og les dem. Hva legger du merke til? Blir du begeistret av emnene?"
+    },
+    "page3": {
+      "title": "Fortsettelse steg-for-steg-plan:",
+      "step6": "Se etter organisasjoner hvor folk med dette yrket jobber.",
+      "step7": "Hvilken utdanning trenger du muligens for dette arbeidet? Spør AI eller Google.",
+      "step8": "Skriv ned alle spørsmål som dukker opp under forskningen din. Du kan stille disse til folk som allerede jobber i denne retningen.",
+      "step9": "Lag en liste over folk du gjerne vil snakke med om dette arbeidet og ta kontakt med dem. Du kan finne disse folkene gjennom LinkedIn og/eller ditt personlige nettverk.",
+      "step10": "Samle nok informasjon til å ta et valg. Ta deg tid og snakk med andre om det.",
+      "closing_text": "Når du har funnet ut nok, velg stillingen som passer deg best og fyll ut søkeprofilen på nettstedet. Vinster vil konvertere teksten din til noen setninger som du kan bruke til å fortelle andre hva du leter etter. Du kan nå søke målrettet! Søk etter stillinger, la nettverket ditt vite hva du vil og del på LinkedIn hvilken stilling du leter etter. Vi ønsker deg mye arbeidsglede i din neste stilling!"
+    }
+  },
+  "zoekprofiel_inline": {
+    "complete": {
+      "title": "Søkeprofilen din er klar!",
+      "description": "Søkeprofilen din inneholder et sammendrag av din ideelle jobb. Bruk den i søknadene dine og del den med nettverket ditt.",
+      "download_button": "Last ned søkeprofil",
+      "next_steps": "Du kan nå søke målrettet! Søk etter stillinger, la nettverket ditt vite hva du vil og del på LinkedIn hvilken stilling du leter etter.",
+      "to_dashboard": "Til dashboard"
+    },
+    "antwoorden": {
+      "submitting": "Sender...",
+      "submit_success": "Søkeprofil sendt inn!",
+      "submit_error": "Noe gikk galt ved innsending av søkeprofilen din."
+    }
+  },
   "restart_explanation": {
     "title": "Start reisen på nytt",
     "subtitle": "Vil du gå gjennom Vinster-reisen igjen? Her er hvordan det fungerer.",

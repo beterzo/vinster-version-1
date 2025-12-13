@@ -9,6 +9,7 @@ import WensberoepenInline from "@/components/journey/WensberoepenInline";
 import PersoonsprofielInline from "@/components/journey/PersoonsprofielInline";
 import ControleInline from "@/components/journey/ControleInline";
 import RapportInline from "@/components/journey/RapportInline";
+import OnderzoeksplanInline from "@/components/journey/OnderzoeksplanInline";
 import ZoekprofielInline from "@/components/journey/ZoekprofielInline";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useUserRounds } from "@/hooks/useUserRounds";
@@ -177,8 +178,20 @@ const RondeDashboard = () => {
         {currentStep === 'loopbaanrapport' && roundId && (
           <RapportInline roundId={roundId} onNext={handleNext} />
         )}
+        {currentStep === 'onderzoeksplan' && (
+          <OnderzoeksplanInline 
+            subStep={currentSubStep as 'page1' | 'page2' | 'page3'} 
+            onNext={handleNext} 
+            onPrevious={handlePrevious} 
+          />
+        )}
         {currentStep === 'zoekprofiel' && roundId && (
-          <ZoekprofielInline roundId={roundId} subStep={currentSubStep === 'complete' ? 'complete' : 'intro'} onComplete={() => navigate('/home')} />
+          <ZoekprofielInline 
+            roundId={roundId} 
+            subStep={currentSubStep === 'complete' ? 'complete' : currentSubStep === 'step1' ? 'step1' : 'intro'} 
+            onNext={handleNext}
+            onPrevious={handlePrevious}
+          />
         )}
       </div>
     );

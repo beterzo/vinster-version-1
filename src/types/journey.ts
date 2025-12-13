@@ -4,6 +4,7 @@ export type JourneyStep =
   | 'persoonsprofiel'
   | 'controle'
   | 'loopbaanrapport'
+  | 'onderzoeksplan'
   | 'zoekprofiel';
 
 export type SubStep = 
@@ -15,7 +16,10 @@ export type SubStep =
   | 'activiteiten'
   | 'werkomstandigheden'
   | 'interesses'
-  | 'complete';
+  | 'complete'
+  | 'page1'
+  | 'page2'
+  | 'page3';
 
 export interface JourneyStepConfig {
   id: JourneyStep;
@@ -50,8 +54,13 @@ export const JOURNEY_STEPS: JourneyStepConfig[] = [
     subSteps: ['complete']
   },
   { 
+    id: 'onderzoeksplan', 
+    labelKey: 'dashboard.journey.step_onderzoeksplan',
+    subSteps: ['page1', 'page2', 'page3']
+  },
+  { 
     id: 'zoekprofiel', 
     labelKey: 'dashboard.journey.step_zoekprofiel',
-    subSteps: ['intro', 'complete']
+    subSteps: ['intro', 'step1', 'complete']
   }
 ];
