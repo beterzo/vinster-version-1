@@ -26,32 +26,32 @@ export interface JourneyStepConfig {
 export const JOURNEY_STEPS: JourneyStepConfig[] = [
   { 
     id: 'enthousiasme', 
-    labelKey: 'journey.step_enthousiasme',
+    labelKey: 'dashboard.journey.step_enthousiasme',
     subSteps: ['intro', 'step1', 'step2', 'step3']
   },
   { 
     id: 'wensberoepen', 
-    labelKey: 'journey.step_wensberoepen',
+    labelKey: 'dashboard.journey.step_wensberoepen',
     subSteps: ['intro', 'step1', 'step2', 'step3']
   },
   { 
     id: 'persoonsprofiel', 
-    labelKey: 'journey.step_persoonsprofiel',
+    labelKey: 'dashboard.journey.step_persoonsprofiel',
     subSteps: ['intro', 'extra_info', 'activiteiten', 'werkomstandigheden', 'interesses']
   },
   { 
     id: 'controle', 
-    labelKey: 'journey.step_controle',
+    labelKey: 'dashboard.journey.step_controle',
     subSteps: ['complete']
   },
   { 
     id: 'loopbaanrapport', 
-    labelKey: 'journey.step_loopbaanrapport',
+    labelKey: 'dashboard.journey.step_loopbaanrapport',
     subSteps: ['complete']
   },
   { 
     id: 'zoekprofiel', 
-    labelKey: 'journey.step_zoekprofiel',
+    labelKey: 'dashboard.journey.step_zoekprofiel',
     subSteps: ['intro', 'complete']
   }
 ];
