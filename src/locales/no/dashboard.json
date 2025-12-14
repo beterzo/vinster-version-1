@@ -196,6 +196,28 @@
           "whistling_home": "Når kom du fløytende hjem?"
         }
       }
+    },
+    "en_nu_verder": {
+      "title": "Hva nå?",
+      "subtitle": "Oppdag flere muligheter for å utvikle karrieren din videre.",
+      "coach": {
+        "title": "Snakk med en karriereveileder",
+        "subtitle": "Diskuter rapporten din med en profesjonell for ekstra innsikt.",
+        "popup_text": "Har resultatet av spillet fått deg til å tenke og vil du gjerne snakke med en karriereveileder? Her finner du karriereprofesjonelle som kan hjelpe deg videre i karrieren.",
+        "button": "Finn en profesjonell"
+      },
+      "online_game": {
+        "title": "Spill karrierespillet",
+        "subtitle": "Spill karrierespillet online for å oppdage mer om hvem du er og hva du vil med arbeidet ditt",
+        "popup_text": "Karrierespillet er et smart og morsomt nettbasert verktøy som hjelper deg med å tenke over deg selv og arbeidet ditt. Du får tretti spørsmål å svare på. Etter å ha fylt ut svarene får du en klar rapport som viser hvem du er og hva du vil. Dette kan du bruke til å ta valg, diskutere med en coach, eller forberede deg til jobbintervjuer eller nettverkssamtaler.",
+        "button": "Spill karrierespillet"
+      },
+      "physical_game": {
+        "title": "Det fysiske spillet",
+        "subtitle": "Spill karrierespillet med ekte kort og andre.",
+        "popup_text": "Vil du spille dette spillet med andre og ekte kort? Det kan du! Karrierespillet er også tilgjengelig som kortspill. Det har (fortsatt) et annet design. Det inneholder færre spørsmål og også gruppespørsmål, noe som gjør det morsommere å spille med en gruppe.",
+        "button": "Du kan bestille det her"
+      }
     }
   },
   "journey": {

@@ -211,6 +211,28 @@
           "whistling_home": "When did you come home whistling?"
         }
       }
+    },
+    "en_nu_verder": {
+      "title": "What's next?",
+      "subtitle": "Discover more opportunities to develop your career further.",
+      "coach": {
+        "title": "Talk to a career coach",
+        "subtitle": "Discuss your report with a professional for extra insights.",
+        "popup_text": "Has the outcome of the game made you think and would you like to talk to a career coach? Here you can find career professionals who can help you further in your career.",
+        "button": "Find a professional"
+      },
+      "online_game": {
+        "title": "Play the Career Game",
+        "subtitle": "Play the Career Game online to discover more about who you are and what you want with your work",
+        "popup_text": "The Career Game is a smart and cheerful online tool that helps you think about yourself and your work. You get thirty questions to answer. After completing the answers, you receive a clear report showing who you are and what you want. You can use this to make choices, discuss with a coach, or prepare for job interviews or networking conversations.",
+        "button": "Play the Career Game"
+      },
+      "physical_game": {
+        "title": "The physical game",
+        "subtitle": "Play the Career Game with real cards and others.",
+        "popup_text": "Want to play this game with others and real cards? You can! The Career Game is also available as a card game. It has a (still) different design. It contains fewer questions and also includes group questions, making playing with a group more fun.",
+        "button": "You can order it here"
+      }
     }
   },
   "journey": {

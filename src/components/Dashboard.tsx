@@ -10,6 +10,7 @@ import { useUserRounds } from "@/hooks/useUserRounds";
 import DashboardHeader from "./DashboardHeader";
 import ProgressStepsGrid from "./ProgressStepsGrid";
 import RoundsOverview from "./RoundsOverview";
+import EnNuVerderSection from "./EnNuVerderSection";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useTranslation } from "@/hooks/useTranslation";
@@ -241,6 +242,11 @@ const Dashboard = () => {
             />
           </div>
         )}
+
+        {/* En nu verder? Section */}
+        <div className="mt-8">
+          <EnNuVerderSection />
+        </div>
       </div>
 
       {/* Dialog for round in progress */}
