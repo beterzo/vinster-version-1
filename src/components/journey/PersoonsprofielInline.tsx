@@ -10,12 +10,13 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { SubStep } from "@/types/journey";
 
 interface PersoonsprofielInlineProps {
+  roundId: string;
   subStep: SubStep;
   onNext: () => void;
   onPrevious: () => void;
 }
 
-const PersoonsprofielInline = ({ subStep, onNext, onPrevious }: PersoonsprofielInlineProps) => {
+const PersoonsprofielInline = ({ roundId, subStep, onNext, onPrevious }: PersoonsprofielInlineProps) => {
   const { t } = useTranslation();
   const {
     responses: prioriteitenResponses,
@@ -23,13 +24,13 @@ const PersoonsprofielInline = ({ subStep, onNext, onPrevious }: PersoonsprofielI
     saveKeywordSelection,
     saveResponses: savePrioriteitenResponses,
     loading: prioriteitenLoading
-  } = usePrioriteitenResponses();
+  } = usePrioriteitenResponses(roundId);
   
   const {
     responses: extraInfoResponses,
     saveResponses: saveExtraInfoResponses,
     loading: extraInfoLoading
-  } = useExtraInformatieResponses();
+  } = useExtraInformatieResponses(roundId);
 
   const [extraInfoAnswers, setExtraInfoAnswers] = useState({
     opleidingsniveau: "",

@@ -2,8 +2,8 @@
 import { useWensberoepenResponses } from "./useWensberoepenResponses";
 import { useMemo } from "react";
 
-export const useWensberoepenValidation = () => {
-  const { responses: wensberoepenResponses, isLoading: wensberoepenLoading } = useWensberoepenResponses();
+export const useWensberoepenValidation = (roundId?: string) => {
+  const { responses: wensberoepenResponses, isLoading: wensberoepenLoading } = useWensberoepenResponses(roundId);
 
   const validationResults = useMemo(() => {
     if (wensberoepenLoading) {
