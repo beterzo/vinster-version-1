@@ -82,15 +82,17 @@ export const usePrioriteitenResponses = (roundId?: string) => {
   };
 
   const loadAiKeywords = async () => {
-    if (!user) return;
+    if (!user || !roundId) return;
 
     try {
-      console.log('Loading AI keywords for user:', user.id);
+      console.log('Loading AI keywords for user:', user.id, 'round:', roundId);
       
+      // Load AI keywords from prioriteiten_responses (per round)
       const { data, error } = await supabase
-        .from('profiles')
-        .select('ai_lievelings_activiteiten, ai_werkomstandigheden, ai_interesses')
-        .eq('id', user.id)
+        .from('prioriteiten_responses')
+        .select('ai_activiteiten_keywords, ai_werkomstandigheden_keywords, ai_interesses_keywords')
+        .eq('user_id', user.id)
+        .eq('round_id', roundId)
         .maybeSingle();
 
       if (error) {
@@ -99,37 +101,26 @@ export const usePrioriteitenResponses = (roundId?: string) => {
       }
 
       if (data) {
-        console.log('Loaded AI keywords:', data);
+        console.log('Loaded AI keywords from prioriteiten_responses:', data);
         
         const keywords: AIKeywords = {};
         
-        if (data.ai_lievelings_activiteiten) {
-          try {
-            keywords.activiteiten = JSON.parse(data.ai_lievelings_activiteiten);
-          } catch (e) {
-            console.error('Error parsing activiteiten keywords:', e);
-          }
+        // AI keywords are stored as JSONB arrays directly
+        if (data.ai_activiteiten_keywords) {
+          keywords.activiteiten = data.ai_activiteiten_keywords as string[];
         }
         
-        if (data.ai_werkomstandigheden) {
-          try {
-            keywords.werkomstandigheden = JSON.parse(data.ai_werkomstandigheden);
-          } catch (e) {
-            console.error('Error parsing werkomstandigheden keywords:', e);
-          }
+        if (data.ai_werkomstandigheden_keywords) {
+          keywords.werkomstandigheden = data.ai_werkomstandigheden_keywords as string[];
         }
         
-        if (data.ai_interesses) {
-          try {
-            keywords.interesses = JSON.parse(data.ai_interesses);
-          } catch (e) {
-            console.error('Error parsing interesses keywords:', e);
-          }
+        if (data.ai_interesses_keywords) {
+          keywords.interesses = data.ai_interesses_keywords as string[];
         }
         
         setAiKeywords(keywords);
       } else {
-        console.log('No AI keywords found for user');
+        console.log('No AI keywords found for this round');
       }
     } catch (error) {
       console.error('Error loading AI keywords:', error);
@@ -277,6 +268,56 @@ export const usePrioriteitenResponses = (roundId?: string) => {
     return Math.round((completedPages / pages.length) * 100);
   };
 
+  // Generate AI keywords by calling the Edge Function
+  const generateAiKeywords = async (language: string = 'nl') => {
+    if (!user || !roundId) return false;
+
+    try {
+      console.log('Generating AI keywords for round:', roundId, 'language:', language);
+      
+      const { data, error } = await supabase.functions.invoke('generate-profile-keywords', {
+        body: { user_id: user.id, round_id: roundId, language }
+      });
+
+      if (error) {
+        console.error('Error generating AI keywords:', error);
+        toast({
+          title: t('common.toast.error'),
+          description: error.message,
+          variant: "destructive",
+        });
+        return false;
+      }
+
+      console.log('AI keywords generated:', data);
+      
+      if (data?.keywords) {
+        setAiKeywords({
+          activiteiten: data.keywords.activiteiten || [],
+          werkomstandigheden: data.keywords.werkomgeving || [],
+          interesses: data.keywords.interesses || []
+        });
+      }
+
+      return true;
+    } catch (error) {
+      console.error('Error generating AI keywords:', error);
+      toast({
+        title: t('common.toast.error'),
+        description: t('common.toast.save_error_description'),
+        variant: "destructive",
+      });
+      return false;
+    }
+  };
+
+  // Check if AI keywords exist for this round
+  const hasAiKeywords = () => {
+    return (aiKeywords.activiteiten?.length || 0) > 0 || 
+           (aiKeywords.werkomstandigheden?.length || 0) > 0 || 
+           (aiKeywords.interesses?.length || 0) > 0;
+  };
+
   return {
     responses,
     aiKeywords,
@@ -287,6 +328,8 @@ export const usePrioriteitenResponses = (roundId?: string) => {
     isCompleted: isCompleted(),
     progress: getProgress(),
     loadResponses,
-    loadAiKeywords
+    loadAiKeywords,
+    generateAiKeywords,
+    hasAiKeywords
   };
 };

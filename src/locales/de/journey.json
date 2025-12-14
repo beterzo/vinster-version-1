@@ -175,7 +175,8 @@
       "last_step_title": "Letzter Schritt",
       "description": "Wir haben fast alle Informationen, die wir für Ihre persönliche Karriereberatung benötigen. Für den letzten Schritt stellen wir Ihnen noch ein paar kurze Fragen zu Ihrem Hintergrund und Ihren Vorlieben.",
       "description_details": "Dies hilft uns, Ihre Beratung noch spezifischer und praktischer zu gestalten.",
-      "start_button": "Profil vervollständigen"
+      "start_button": "Profil vervollständigen",
+      "generating_keywords": "Schlüsselwörter werden generiert..."
     },
     "extra_informatie": {
       "title": "Zusätzliche Informationen",

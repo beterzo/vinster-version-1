@@ -173,7 +173,8 @@
       "last_step_title": "Laatste stap",
       "description": "We hebben bijna alle informatie die we nodig hebben voor jouw persoonlijke loopbaanadvies. Voor de laatste stap vragen we je nog een paar korte vragen over je achtergrond en voorkeuren.",
       "description_details": "Dit helpt ons om je advies nog specifieker en praktischer te maken.",
-      "start_button": "Profiel voltooien"
+      "start_button": "Profiel voltooien",
+      "generating_keywords": "Kernwoorden genereren..."
     },
     "extra_informatie": {
       "title": "Extra informatie",

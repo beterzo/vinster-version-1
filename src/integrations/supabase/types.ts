@@ -153,6 +153,9 @@ export type Database = {
       }
       prioriteiten_responses: {
         Row: {
+          ai_activiteiten_keywords: Json | null
+          ai_interesses_keywords: Json | null
+          ai_werkomstandigheden_keywords: Json | null
           created_at: string
           extra_activiteiten_tekst: string | null
           extra_interesses_tekst: string | null
@@ -166,6 +169,9 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          ai_activiteiten_keywords?: Json | null
+          ai_interesses_keywords?: Json | null
+          ai_werkomstandigheden_keywords?: Json | null
           created_at?: string
           extra_activiteiten_tekst?: string | null
           extra_interesses_tekst?: string | null
@@ -179,6 +185,9 @@ export type Database = {
           user_id: string
         }
         Update: {
+          ai_activiteiten_keywords?: Json | null
+          ai_interesses_keywords?: Json | null
+          ai_werkomstandigheden_keywords?: Json | null
           created_at?: string
           extra_activiteiten_tekst?: string | null
           extra_interesses_tekst?: string | null

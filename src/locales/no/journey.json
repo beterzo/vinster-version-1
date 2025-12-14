@@ -173,7 +173,8 @@
       "last_step_title": "Siste steg",
       "description": "Vi har nesten all informasjonen vi trenger for dine personlige karriereråd. For det siste steget spør vi deg noen korte spørsmål om din bakgrunn og preferanser.",
       "description_details": "Dette hjelper oss å gjøre rådene dine enda mer spesifikke og praktiske.",
-      "start_button": "Fullfør profil"
+      "start_button": "Fullfør profil",
+      "generating_keywords": "Genererer nøkkelord..."
     },
     "extra_informatie": {
       "title": "Ekstra informasjon",

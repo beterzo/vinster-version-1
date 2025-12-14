@@ -3,8 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Loader2 } from "lucide-react";
 import { usePrioriteitenResponses } from "@/hooks/usePrioriteitenResponses";
 import { useExtraInformatieResponses } from "@/hooks/useExtraInformatieResponses";
+import { useAuth } from "@/hooks/useAuth";
 import { cleanKeywords } from "@/utils/keywordUtils";
 import { useTranslation } from "@/hooks/useTranslation";
 import { SubStep } from "@/types/journey";
@@ -18,12 +20,15 @@ interface PersoonsprofielInlineProps {
 
 const PersoonsprofielInline = ({ roundId, subStep, onNext, onPrevious }: PersoonsprofielInlineProps) => {
   const { t } = useTranslation();
+  const { user } = useAuth();
   const {
     responses: prioriteitenResponses,
     aiKeywords,
     saveKeywordSelection,
     saveResponses: savePrioriteitenResponses,
-    loading: prioriteitenLoading
+    loading: prioriteitenLoading,
+    generateAiKeywords,
+    hasAiKeywords
   } = usePrioriteitenResponses(roundId);
   
   const {
@@ -31,6 +36,8 @@ const PersoonsprofielInline = ({ roundId, subStep, onNext, onPrevious }: Persoon
     saveResponses: saveExtraInfoResponses,
     loading: extraInfoLoading
   } = useExtraInformatieResponses(roundId);
+
+  const [generatingKeywords, setGeneratingKeywords] = useState(false);
 
   const [extraInfoAnswers, setExtraInfoAnswers] = useState({
     opleidingsniveau: "",
@@ -78,8 +85,19 @@ const PersoonsprofielInline = ({ roundId, subStep, onNext, onPrevious }: Persoon
     return <div className="flex items-center justify-center p-12">{t('common.loading')}</div>;
   }
 
-  // Intro page
+  // Intro page - generate keywords when clicking start
   if (subStep === 'intro') {
+    const handleStartClick = async () => {
+      // Check if keywords already exist for this round
+      if (!hasAiKeywords()) {
+        setGeneratingKeywords(true);
+        const language = user?.user_metadata?.language || 'nl';
+        await generateAiKeywords(language);
+        setGeneratingKeywords(false);
+      }
+      onNext();
+    };
+
     return (
       <Card className="rounded-3xl shadow-xl border-0">
         <CardContent className="p-12">
@@ -99,10 +117,18 @@ const PersoonsprofielInline = ({ roundId, subStep, onNext, onPrevious }: Persoon
           </div>
           <div className="flex justify-center pt-8">
             <Button 
-              onClick={onNext}
+              onClick={handleStartClick}
+              disabled={generatingKeywords}
               className="bg-[#F5C518] hover:bg-yellow-500 text-[#232D4B] font-semibold text-lg px-12 py-4 rounded-lg"
             >
-              {t('profiel_voltooien.intro.start_button')}
+              {generatingKeywords ? (
+                <>
+                  <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                  {t('profiel_voltooien.intro.generating_keywords')}
+                </>
+              ) : (
+                t('profiel_voltooien.intro.start_button')
+              )}
             </Button>
           </div>
         </CardContent>

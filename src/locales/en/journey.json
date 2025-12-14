@@ -174,7 +174,8 @@
       "last_step_title": "Final step",
       "description": "We have almost all the information we need for your personal career advice. For the final step, we ask you a few short questions about your background and preferences.",
       "description_details": "This helps us make your advice even more specific and practical.",
-      "start_button": "Complete profile"
+      "start_button": "Complete profile",
+      "generating_keywords": "Generating keywords..."
     },
     "extra_informatie": {
       "title": "Additional information",
