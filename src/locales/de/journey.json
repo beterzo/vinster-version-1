@@ -433,5 +433,14 @@
     "errors": {
       "general": "Beim Starten des Reset-Prozesses ist ein Fehler aufgetreten."
     }
+  },
+  "overview": {
+    "title": "Dein Fortschritt",
+    "completed_count": "{{count}} von 6 Schritten abgeschlossen",
+    "step_completed": "Abgeschlossen",
+    "step_current": "Als nächstes",
+    "step_locked": "Noch nicht verfügbar",
+    "continue_button": "Weiter mit {{step}}",
+    "all_done_button": "Ergebnisse ansehen"
   }
 }

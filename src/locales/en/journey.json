@@ -434,5 +434,14 @@
     "errors": {
       "general": "Something went wrong while starting the reset process."
     }
+  },
+  "overview": {
+    "title": "Your Progress",
+    "completed_count": "{{count}} of 6 steps completed",
+    "step_completed": "Completed",
+    "step_current": "Up next",
+    "step_locked": "Not yet available",
+    "continue_button": "Continue with {{step}}",
+    "all_done_button": "View your results"
   }
 }
