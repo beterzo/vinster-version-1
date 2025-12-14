@@ -10,14 +10,15 @@ import { SubStep } from "@/types/journey";
 import WelkomInline from "./WelkomInline";
 
 interface EnthousiasmeInlineProps {
+  roundId: string;
   subStep: SubStep;
   onNext: () => void;
   onPrevious: () => void;
 }
 
-const EnthousiasmeInline = ({ subStep, onNext, onPrevious }: EnthousiasmeInlineProps) => {
+const EnthousiasmeInline = ({ roundId, subStep, onNext, onPrevious }: EnthousiasmeInlineProps) => {
   const { t } = useTranslation();
-  const { responses, saveResponse, loading } = useEnthousiasmeResponses();
+  const { responses, saveResponse, loading } = useEnthousiasmeResponses(roundId);
 
   const [step1Answers, setStep1Answers] = useState({
     kindertijd_activiteiten: "",

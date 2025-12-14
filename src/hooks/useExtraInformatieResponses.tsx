@@ -13,7 +13,7 @@ interface ExtraInformatieData {
   sector_voorkeur: string;
 }
 
-export const useExtraInformatieResponses = () => {
+export const useExtraInformatieResponses = (roundId?: string) => {
   const { user } = useAuth();
   const { toast } = useToast();
   const { t } = useTranslation();
@@ -28,10 +28,12 @@ export const useExtraInformatieResponses = () => {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    if (user) {
+    if (user && roundId) {
       loadResponses();
+    } else if (!roundId) {
+      setLoading(false);
     }
-  }, [user]);
+  }, [user, roundId]);
 
   // Register for journey reset refresh
   useEffect(() => {
@@ -44,27 +46,26 @@ export const useExtraInformatieResponses = () => {
         sector_voorkeur: ''
       });
       setLoading(true);
-      if (user) {
+      if (user && roundId) {
         loadResponses();
       }
     };
 
     registerRefreshCallback(refreshCallback);
     return () => unregisterRefreshCallback(refreshCallback);
-  }, [user, registerRefreshCallback, unregisterRefreshCallback]);
+  }, [user, roundId, registerRefreshCallback, unregisterRefreshCallback]);
 
   const loadResponses = async () => {
-    if (!user) return;
+    if (!user || !roundId) return;
 
     try {
-      console.log('Loading extra informatie responses for user:', user.id);
+      console.log('Loading extra informatie responses for user:', user.id, 'round:', roundId);
       
       const { data, error } = await supabase
         .from('extra_informatie_responses')
         .select('*')
         .eq('user_id', user.id)
-        .order('updated_at', { ascending: false })
-        .limit(1)
+        .eq('round_id', roundId)
         .maybeSingle();
 
       if (error) {
@@ -96,7 +97,7 @@ export const useExtraInformatieResponses = () => {
   };
 
   const saveResponses = async (data: ExtraInformatieData) => {
-    if (!user) return false;
+    if (!user || !roundId) return false;
 
     setSaving(true);
     try {
@@ -106,10 +107,11 @@ export const useExtraInformatieResponses = () => {
         .from('extra_informatie_responses')
         .upsert({
           user_id: user.id,
+          round_id: roundId,
           ...data,
           updated_at: new Date().toISOString()
         }, {
-          onConflict: 'user_id'
+          onConflict: 'user_id,round_id'
         });
 
       if (error) {
@@ -118,8 +120,6 @@ export const useExtraInformatieResponses = () => {
       }
 
       setResponses(data);
-      
-      // Removed automatic success toast notification
       
       return true;
     } catch (error) {
@@ -152,6 +152,6 @@ export const useExtraInformatieResponses = () => {
     saveResponses,
     isCompleted: isCompleted(),
     progress: getProgress(),
-    loadResponses // Export for manual refresh
+    loadResponses
   };
 };

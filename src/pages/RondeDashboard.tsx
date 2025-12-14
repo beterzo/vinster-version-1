@@ -24,10 +24,12 @@ const RondeDashboard = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { rounds, loading: roundsLoading } = useUserRounds();
-  const { responses: enthousiasmeResponses, loading: enthousiasmeLoading } = useEnthousiasmeResponses();
-  const { isWensberoepenComplete, isLoading: wensberoepenLoading } = useWensberoepenValidation();
-  const { responses: prioriteitenResponses, loading: prioriteitenLoading } = usePrioriteitenResponses();
-  const { responses: extraInfoResponses, loading: extraInfoLoading } = useExtraInformatieResponses();
+  
+  // Pass roundId to all response hooks
+  const { responses: enthousiasmeResponses, loading: enthousiasmeLoading } = useEnthousiasmeResponses(roundId);
+  const { isWensberoepenComplete, isLoading: wensberoepenLoading } = useWensberoepenValidation(roundId);
+  const { responses: prioriteitenResponses, loading: prioriteitenLoading } = usePrioriteitenResponses(roundId);
+  const { responses: extraInfoResponses, loading: extraInfoLoading } = useExtraInformatieResponses(roundId);
   
   const [round, setRound] = useState<any>(null);
   const [currentStep, setCurrentStep] = useState<JourneyStep>('enthousiasme');
@@ -163,14 +165,14 @@ const RondeDashboard = () => {
 
     return (
       <div key={`${currentStep}-${currentSubStep}`} className={animationClass}>
-        {currentStep === 'enthousiasme' && (
-          <EnthousiasmeInline subStep={currentSubStep} onNext={handleNext} onPrevious={handlePrevious} />
+        {currentStep === 'enthousiasme' && roundId && (
+          <EnthousiasmeInline roundId={roundId} subStep={currentSubStep} onNext={handleNext} onPrevious={handlePrevious} />
         )}
-        {currentStep === 'wensberoepen' && (
-          <WensberoepenInline subStep={currentSubStep} onNext={handleNext} onPrevious={handlePrevious} />
+        {currentStep === 'wensberoepen' && roundId && (
+          <WensberoepenInline roundId={roundId} subStep={currentSubStep} onNext={handleNext} onPrevious={handlePrevious} />
         )}
-        {currentStep === 'persoonsprofiel' && (
-          <PersoonsprofielInline subStep={currentSubStep} onNext={handleNext} onPrevious={handlePrevious} />
+        {currentStep === 'persoonsprofiel' && roundId && (
+          <PersoonsprofielInline roundId={roundId} subStep={currentSubStep} onNext={handleNext} onPrevious={handlePrevious} />
         )}
         {currentStep === 'loopbaanrapport' && roundId && (
           <RapportInline 

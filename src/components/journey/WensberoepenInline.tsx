@@ -13,14 +13,15 @@ import type { Tables } from "@/integrations/supabase/types";
 type WensberoepenResponse = Tables<"wensberoepen_responses">;
 
 interface WensberoepenInlineProps {
+  roundId: string;
   subStep: SubStep;
   onNext: () => void;
   onPrevious: () => void;
 }
 
-const WensberoepenInline = ({ subStep, onNext, onPrevious }: WensberoepenInlineProps) => {
+const WensberoepenInline = ({ roundId, subStep, onNext, onPrevious }: WensberoepenInlineProps) => {
   const { t } = useTranslation();
-  const { responses, saveResponse, isLoading } = useWensberoepenResponses();
+  const { responses, saveResponse, isLoading } = useWensberoepenResponses(roundId);
 
   const [jobTitles, setJobTitles] = useState(["", "", ""]);
   const [allAnswers, setAllAnswers] = useState<Record<string, Record<string, string>>>({

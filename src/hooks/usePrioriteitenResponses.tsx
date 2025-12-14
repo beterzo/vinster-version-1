@@ -20,7 +20,7 @@ interface AIKeywords {
   interesses?: string[];
 }
 
-export const usePrioriteitenResponses = () => {
+export const usePrioriteitenResponses = (roundId?: string) => {
   const { user } = useAuth();
   const { toast } = useToast();
   const { t } = useTranslation();
@@ -30,11 +30,11 @@ export const usePrioriteitenResponses = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (user) {
+    if (user && roundId) {
       loadResponses();
       loadAiKeywords();
     }
-  }, [user]);
+  }, [user, roundId]);
 
   // Register for journey reset refresh
   useEffect(() => {
@@ -42,7 +42,7 @@ export const usePrioriteitenResponses = () => {
       console.log('🔄 Refreshing prioriteiten responses after journey reset');
       setResponses({});
       setAiKeywords({});
-      if (user) {
+      if (user && roundId) {
         loadResponses();
         loadAiKeywords();
       }
@@ -50,18 +50,19 @@ export const usePrioriteitenResponses = () => {
 
     registerRefreshCallback(refreshCallback);
     return () => unregisterRefreshCallback(refreshCallback);
-  }, [user, registerRefreshCallback, unregisterRefreshCallback]);
+  }, [user, roundId, registerRefreshCallback, unregisterRefreshCallback]);
 
   const loadResponses = async () => {
-    if (!user) return;
+    if (!user || !roundId) return;
 
     try {
-      console.log('Loading prioriteiten responses for user:', user.id);
+      console.log('Loading prioriteiten responses for user:', user.id, 'round:', roundId);
       
       const { data, error } = await supabase
         .from('prioriteiten_responses')
         .select('*')
         .eq('user_id', user.id)
+        .eq('round_id', roundId)
         .maybeSingle();
 
       if (error) {
@@ -143,13 +144,13 @@ export const usePrioriteitenResponses = () => {
       interesses: 'selected_interesses_keywords'
     };
     
-    const keywords = responses[fieldMap[category]] || [];
+    const keywords = responses[fieldMap[category] as keyof PrioriteitenData] as string[] || [];
     return keywords.length >= 3;
   };
 
   // Direct save function for keyword selections - saves immediately to Supabase
   const saveKeywordSelection = async (category: 'activiteiten' | 'werkomstandigheden' | 'interesses', keywords: string[]) => {
-    if (!user) return false;
+    if (!user || !roundId) return false;
 
     try {
       console.log(`Saving ${category} keywords:`, keywords);
@@ -162,6 +163,7 @@ export const usePrioriteitenResponses = () => {
 
       const updateData = {
         user_id: user.id,
+        round_id: roundId,
         ...responses,
         [fieldMap[category]]: keywords,
         updated_at: new Date().toISOString()
@@ -170,7 +172,7 @@ export const usePrioriteitenResponses = () => {
       const { error } = await supabase
         .from('prioriteiten_responses')
         .upsert(updateData, {
-          onConflict: 'user_id'
+          onConflict: 'user_id,round_id'
         });
 
       if (error) {
@@ -193,7 +195,7 @@ export const usePrioriteitenResponses = () => {
 
   // Save other responses (extra text fields)
   const saveResponses = async (data: Partial<PrioriteitenData>) => {
-    if (!user) return false;
+    if (!user || !roundId) return false;
 
     setLoading(true);
     try {
@@ -201,6 +203,7 @@ export const usePrioriteitenResponses = () => {
 
       const updateData = {
         user_id: user.id,
+        round_id: roundId,
         ...responses,
         ...data,
         updated_at: new Date().toISOString()
@@ -209,7 +212,7 @@ export const usePrioriteitenResponses = () => {
       const { error } = await supabase
         .from('prioriteiten_responses')
         .upsert(updateData, {
-          onConflict: 'user_id'
+          onConflict: 'user_id,round_id'
         });
 
       if (error) {
@@ -283,7 +286,7 @@ export const usePrioriteitenResponses = () => {
     hasMinimumKeywords,
     isCompleted: isCompleted(),
     progress: getProgress(),
-    loadResponses, // Export for manual refresh
-    loadAiKeywords // Export for manual refresh
+    loadResponses,
+    loadAiKeywords
   };
 };

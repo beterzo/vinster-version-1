@@ -9,7 +9,7 @@ import type { Tables } from "@/integrations/supabase/types";
 
 type WensberoepenResponse = Tables<"wensberoepen_responses">;
 
-export const useWensberoepenResponses = () => {
+export const useWensberoepenResponses = (roundId?: string) => {
   const { user } = useAuth();
   const { toast } = useToast();
   const { t } = useTranslation();
@@ -25,10 +25,12 @@ export const useWensberoepenResponses = () => {
 
   // Load existing responses on mount
   useEffect(() => {
-    if (user) {
+    if (user && roundId) {
       loadResponses();
+    } else if (!roundId) {
+      setIsLoading(false);
     }
-  }, [user?.id]); // Only depend on user.id to prevent unnecessary re-loads
+  }, [user?.id, roundId]);
 
   // Register for journey reset refresh
   useEffect(() => {
@@ -36,26 +38,27 @@ export const useWensberoepenResponses = () => {
       console.log('🔄 Refreshing wensberoepen responses after journey reset');
       setResponses(null);
       setIsLoading(true);
-      if (user) {
+      if (user && roundId) {
         loadResponses();
       }
     };
 
     registerRefreshCallback(refreshCallback);
     return () => unregisterRefreshCallback(refreshCallback);
-  }, [user, registerRefreshCallback, unregisterRefreshCallback]);
+  }, [user, roundId, registerRefreshCallback, unregisterRefreshCallback]);
 
   const loadResponses = async () => {
-    if (!user) return;
+    if (!user || !roundId) return;
 
     try {
       setIsLoading(true);
-      console.log("Loading wensberoepen responses for user:", user.id);
+      console.log("Loading wensberoepen responses for user:", user.id, "round:", roundId);
       
       const { data, error } = await supabase
         .from("wensberoepen_responses")
         .select("*")
         .eq("user_id", user.id)
+        .eq("round_id", roundId)
         .maybeSingle();
 
       if (error) {
@@ -78,8 +81,8 @@ export const useWensberoepenResponses = () => {
   };
 
   const saveResponse = async (field: keyof WensberoepenResponse, value: string) => {
-    if (!user) {
-      console.error("No user found for saving response");
+    if (!user || !roundId) {
+      console.error("No user or roundId found for saving response");
       return;
     }
 
@@ -90,12 +93,13 @@ export const useWensberoepenResponses = () => {
       const updateData = {
         [field]: value,
         user_id: user.id,
+        round_id: roundId,
       };
 
       const { data, error } = await supabase
         .from("wensberoepen_responses")
         .upsert(updateData, { 
-          onConflict: "user_id",
+          onConflict: "user_id,round_id",
           ignoreDuplicates: false 
         })
         .select()
@@ -131,6 +135,6 @@ export const useWensberoepenResponses = () => {
     isSaving,
     saveResponse,
     getFieldValue,
-    loadResponses, // Already exported for manual refresh
+    loadResponses,
   };
 };

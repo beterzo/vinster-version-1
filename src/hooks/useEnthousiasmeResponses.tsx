@@ -18,7 +18,7 @@ export interface EnthousiasmeResponses {
   fluitend_thuiskomen_dag?: string;
 }
 
-export const useEnthousiasmeResponses = () => {
+export const useEnthousiasmeResponses = (roundId?: string) => {
   const { user } = useAuth();
   const { toast } = useToast();
   const { t } = useTranslation();
@@ -29,10 +29,12 @@ export const useEnthousiasmeResponses = () => {
 
   // Load existing responses
   useEffect(() => {
-    if (user) {
+    if (user && roundId) {
       loadResponses();
+    } else if (!roundId) {
+      setLoading(false);
     }
-  }, [user]);
+  }, [user, roundId]);
 
   // Register for journey reset refresh
   useEffect(() => {
@@ -40,23 +42,24 @@ export const useEnthousiasmeResponses = () => {
       console.log('🔄 Refreshing enthousiasme responses after journey reset');
       setResponses({});
       setLoading(true);
-      if (user) {
+      if (user && roundId) {
         loadResponses();
       }
     };
 
     registerRefreshCallback(refreshCallback);
     return () => unregisterRefreshCallback(refreshCallback);
-  }, [user, registerRefreshCallback, unregisterRefreshCallback]);
+  }, [user, roundId, registerRefreshCallback, unregisterRefreshCallback]);
 
   const loadResponses = async () => {
-    if (!user) return;
+    if (!user || !roundId) return;
 
     try {
       const { data, error } = await supabase
         .from('enthousiasme_responses')
         .select('*')
         .eq('user_id', user.id)
+        .eq('round_id', roundId)
         .maybeSingle();
 
       if (error) {
@@ -85,20 +88,21 @@ export const useEnthousiasmeResponses = () => {
   };
 
   const saveResponse = async (field: keyof EnthousiasmeResponses, value: string) => {
-    if (!user) return;
+    if (!user || !roundId) return;
 
     setSaving(true);
     
     try {
       const updateData = {
         user_id: user.id,
+        round_id: roundId,
         [field]: value,
       };
 
       const { error } = await supabase
         .from('enthousiasme_responses')
         .upsert(updateData, {
-          onConflict: 'user_id'
+          onConflict: 'user_id,round_id'
         });
 
       if (error) {
@@ -135,7 +139,7 @@ export const useEnthousiasmeResponses = () => {
     loading,
     saving,
     saveResponse,
-    loadResponses, // Export loadResponses for manual refresh
+    loadResponses,
     updateLocalResponse: (field: keyof EnthousiasmeResponses, value: string) => {
       setResponses(prev => ({
         ...prev,

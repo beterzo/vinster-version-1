@@ -7,6 +7,7 @@ import { useTranslation } from '@/hooks/useTranslation';
 export interface ZoekprofielAntwoord {
   id: string;
   user_id: string;
+  round_id?: string;
   functie_als: string;
   kerntaken: string;
   organisatie_bij: string;
@@ -17,7 +18,7 @@ export interface ZoekprofielAntwoord {
   updated_at: string;
 }
 
-export const useZoekprofielAntwoorden = () => {
+export const useZoekprofielAntwoorden = (roundId?: string) => {
   const { user } = useAuth();
   const { toast } = useToast();
   const { language } = useTranslation();
@@ -32,18 +33,19 @@ export const useZoekprofielAntwoorden = () => {
   const activeSaves = useRef<Set<string>>(new Set());
 
   const loadResponses = async () => {
-    if (!user?.id) {
+    if (!user?.id || !roundId) {
       setLoading(false);
       return;
     }
 
     try {
-      console.log('🔍 Loading zoekprofiel antwoorden for user:', user.id);
+      console.log('🔍 Loading zoekprofiel antwoorden for user:', user.id, 'round:', roundId);
       
       const { data, error } = await supabase
         .from('zoekprofiel_antwoorden')
         .select('*')
         .eq('user_id', user.id)
+        .eq('round_id', roundId)
         .maybeSingle();
 
       if (error && error.code !== 'PGRST116') {
@@ -78,7 +80,7 @@ export const useZoekprofielAntwoorden = () => {
   };
 
   const debouncedSave = useCallback(async (field: string, value: string) => {
-    if (!user?.id) return;
+    if (!user?.id || !roundId) return;
 
     // Prevent multiple saves for the same field
     if (activeSaves.current.has(field)) {
@@ -95,9 +97,10 @@ export const useZoekprofielAntwoorden = () => {
         .from('zoekprofiel_antwoorden')
         .upsert({
           user_id: user.id,
+          round_id: roundId,
           [field]: value
         }, {
-          onConflict: 'user_id'
+          onConflict: 'user_id,round_id'
         })
         .select()
         .single();
@@ -132,7 +135,7 @@ export const useZoekprofielAntwoorden = () => {
     } finally {
       activeSaves.current.delete(field);
     }
-  }, [user?.id, responses, toast]);
+  }, [user?.id, roundId, responses, toast]);
 
   const saveResponse = useCallback((field: string, value: string) => {
     // Immediately update local state for optimistic UI updates
@@ -226,8 +229,12 @@ export const useZoekprofielAntwoorden = () => {
   }, []);
 
   useEffect(() => {
-    loadResponses();
-  }, [user?.id]);
+    if (roundId) {
+      loadResponses();
+    } else {
+      setLoading(false);
+    }
+  }, [user?.id, roundId]);
 
   // Use useMemo to prevent unnecessary re-renders of currentData
   const currentData = useMemo(() => {
