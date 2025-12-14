@@ -84,7 +84,7 @@ const EnNuVerderSection = () => {
       {/* Dialogs */}
       {cards.map((card, index) => (
         <Dialog key={index} open={openDialog === index} onOpenChange={(open) => setOpenDialog(open ? index : null)}>
-          <DialogContent className="sm:max-w-md">
+          <DialogContent className="sm:max-w-lg p-8">
             {/* Teal accent line */}
             <div className="absolute top-4 left-6 w-16 h-1 rounded-full" style={{ backgroundColor: '#14B8A6' }} />
             
@@ -96,25 +96,35 @@ const EnNuVerderSection = () => {
             </div>
 
             <DialogHeader className="pt-6">
-              <DialogTitle className="text-xl font-bold text-vinster-blue">
+              <DialogTitle className="text-2xl font-bold text-vinster-blue">
                 {t(`dashboard.${card.titleKey}`)}
               </DialogTitle>
             </DialogHeader>
             
-            <p className="text-gray-600 leading-relaxed py-4">
+            <p className="text-lg text-gray-600 leading-relaxed py-4">
               {t(`dashboard.${card.popupTextKey}`)}
             </p>
 
-            <Button
-              asChild
-              variant="outline"
-              className="w-full rounded-full border-2 border-gray-300 hover:border-vinster-blue hover:bg-vinster-blue hover:text-white transition-all duration-200"
+            <a 
+              href={card.link} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex items-center justify-center gap-2 bg-white border-2 border-gray-300 rounded-full px-8 py-4 font-semibold transition-all duration-200 w-full"
+              style={{ color: '#232D4B' }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#232D4B';
+                e.currentTarget.style.borderColor = '#232D4B';
+                e.currentTarget.style.color = 'white';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'white';
+                e.currentTarget.style.borderColor = '#d1d5db';
+                e.currentTarget.style.color = '#232D4B';
+              }}
             >
-              <a href={card.link} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
-                {t(`dashboard.${card.buttonKey}`)}
-                <ExternalLink className="w-4 h-4" />
-              </a>
-            </Button>
+              {t(`dashboard.${card.buttonKey}`)}
+              <ExternalLink className="w-4 h-4" />
+            </a>
           </DialogContent>
         </Dialog>
       ))}
