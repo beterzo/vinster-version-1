@@ -19,6 +19,7 @@ import { Lock, Download, FileText, Play } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
+  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
@@ -51,12 +52,17 @@ const Dashboard = () => {
   const [showRoundInProgressDialog, setShowRoundInProgressDialog] = useState(false);
 
   const handleStartNewRound = async () => {
-    // Check if a round is in progress
+    // Check if a round is in progress - show confirmation dialog
     if (currentRound?.status === 'in_progress') {
       setShowRoundInProgressDialog(true);
       return;
     }
     
+    await proceedWithNewRound();
+  };
+
+  const proceedWithNewRound = async () => {
+    setShowRoundInProgressDialog(false);
     const newRound = await startNewRound();
     if (newRound) {
       navigate('/enthousiasme-intro');
@@ -249,18 +255,19 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Dialog for round in progress */}
+      {/* Dialog for round in progress - confirmation */}
       <AlertDialog open={showRoundInProgressDialog} onOpenChange={setShowRoundInProgressDialog}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>{t('dashboard.rounds.dialog_title')}</AlertDialogTitle>
+            <AlertDialogTitle>{t('dashboard.rounds.confirm_new_title')}</AlertDialogTitle>
             <AlertDialogDescription>
-              {t('dashboard.rounds.dialog_description')}
+              {t('dashboard.rounds.confirm_new_description')}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogAction onClick={() => setShowRoundInProgressDialog(false)}>
-              {t('common.ok')}
+            <AlertDialogCancel>{t('common.cancel')}</AlertDialogCancel>
+            <AlertDialogAction onClick={proceedWithNewRound}>
+              {t('dashboard.rounds.confirm_new_button')}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
