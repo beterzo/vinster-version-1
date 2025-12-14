@@ -211,6 +211,28 @@
           "whistling_home": "Wanneer kwam je fluitend thuis?"
         }
       }
+    },
+    "en_nu_verder": {
+      "title": "En nu verder?",
+      "subtitle": "Ontdek meer mogelijkheden om je loopbaan verder te ontwikkelen.",
+      "coach": {
+        "title": "Praten met een loopbaancoach",
+        "subtitle": "Bespreek je rapport met een professional voor extra inzichten.",
+        "popup_text": "Heeft de uitkomst van het spel je aan het denken gezet en zou je wel eens met een loopbaancoach willen praten? Hier vind je loopbaanprofessionals die jou verder kunnen helpen in je loopbaan.",
+        "button": "Vind een professional"
+      },
+      "online_game": {
+        "title": "Loopbaanspel spelen",
+        "subtitle": "Speel het Loopbaanspel online om meer te ontdeken over wie je bent en wat je wilt met je werk",
+        "popup_text": "Het Loopbaanspel is een slimme en vrolijke online tool die je helpt nadenken over jezelf en je werk. Je krijgt dertig vragen in beeld waar jij antwoord op geeft. Na het invullen van de antwoorden krijg je een helder verslag dat laat zien wie jij bent en wat je wilt. Dit kun je gebruiken om keuzes te maken, te bespreken met een coach, of je voor te bereiden op sollicitatie- of netwerkgesprekken.",
+        "button": "Speel het Loopbaanspel"
+      },
+      "physical_game": {
+        "title": "Het fysieke spel",
+        "subtitle": "Speel het Loopbaanspel met echte kaartjes en anderen.",
+        "popup_text": "Wil je dit spel met anderen en echte kaartjes spelen? Dat kan! Het Loopbaanspel is ook als kaartspel te koop. Het heeft (nog) een andere vormgeving. Er zitten minder vragen in en er zitten ook groepsvragen in, waardoor het spelen met een groep leuker wordt.",
+        "button": "Je kunt het hier bestellen"
+      }
     }
   },
   "journey": {

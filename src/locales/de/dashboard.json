@@ -210,6 +210,28 @@
           "nice_project": "Beschreiben Sie ein schönes Projekt und Ihre Rolle",
           "whistling_home": "Wann kamen Sie pfeifend nach Hause?"
       }
+    },
+    "en_nu_verder": {
+      "title": "Und jetzt?",
+      "subtitle": "Entdecken Sie weitere Möglichkeiten, Ihre Karriere weiterzuentwickeln.",
+      "coach": {
+        "title": "Mit einem Karrierecoach sprechen",
+        "subtitle": "Besprechen Sie Ihren Bericht mit einem Fachmann für zusätzliche Einblicke.",
+        "popup_text": "Hat das Ergebnis des Spiels Sie zum Nachdenken gebracht und möchten Sie gerne mit einem Karrierecoach sprechen? Hier finden Sie Karriereprofis, die Ihnen bei Ihrer Karriere weiterhelfen können.",
+        "button": "Finden Sie einen Profi"
+      },
+      "online_game": {
+        "title": "Das Karrierespiel spielen",
+        "subtitle": "Spielen Sie das Karrierespiel online, um mehr darüber zu erfahren, wer Sie sind und was Sie mit Ihrer Arbeit wollen",
+        "popup_text": "Das Karrierespiel ist ein intelligentes und fröhliches Online-Tool, das Ihnen hilft, über sich selbst und Ihre Arbeit nachzudenken. Sie erhalten dreißig Fragen zu beantworten. Nach dem Ausfüllen der Antworten erhalten Sie einen klaren Bericht, der zeigt, wer Sie sind und was Sie wollen. Dies können Sie nutzen, um Entscheidungen zu treffen, mit einem Coach zu besprechen oder sich auf Vorstellungs- oder Netzwerkgespräche vorzubereiten.",
+        "button": "Spielen Sie das Karrierespiel"
+      },
+      "physical_game": {
+        "title": "Das physische Spiel",
+        "subtitle": "Spielen Sie das Karrierespiel mit echten Karten und anderen.",
+        "popup_text": "Möchten Sie dieses Spiel mit anderen und echten Karten spielen? Das geht! Das Karrierespiel ist auch als Kartenspiel erhältlich. Es hat (noch) ein anderes Design. Es enthält weniger Fragen und auch Gruppenfragen, wodurch das Spielen mit einer Gruppe mehr Spaß macht.",
+        "button": "Sie können es hier bestellen"
+      }
     }
   },
   "journey": {
