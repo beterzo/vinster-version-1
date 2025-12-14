@@ -20,7 +20,8 @@ export type SubStep =
   | 'confirm'
   | 'page1'
   | 'page2'
-  | 'page3';
+  | 'page3'
+  | 'overview';
 
 export interface JourneyStepConfig {
   id: JourneyStep;

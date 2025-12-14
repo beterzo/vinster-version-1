@@ -4,6 +4,7 @@ import { ArrowLeft, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import JourneyStepNavigator from "@/components/JourneyStepNavigator";
+import JourneyOverview from "@/components/journey/JourneyOverview";
 import EnthousiasmeInline from "@/components/journey/EnthousiasmeInline";
 import WensberoepenInline from "@/components/journey/WensberoepenInline";
 import PersoonsprofielInline from "@/components/journey/PersoonsprofielInline";
@@ -111,12 +112,19 @@ const RondeDashboard = () => {
       setSlideDirection('left');
       setCurrentSubStep(stepConfig.subSteps[currentSubIndex + 1]);
     } else {
-      const stepIndex = JOURNEY_STEPS.findIndex(s => s.id === currentStep);
-      if (stepIndex < JOURNEY_STEPS.length - 1) {
-        setSlideDirection('left');
-        setCurrentStep(JOURNEY_STEPS[stepIndex + 1].id);
-        setCurrentSubStep(JOURNEY_STEPS[stepIndex + 1].subSteps[0]);
-      }
+      // End of current step's substeps - show overview
+      setSlideDirection('left');
+      setCurrentSubStep('overview');
+    }
+  };
+
+  const handleContinueFromOverview = () => {
+    // Find the next incomplete step
+    const nextStep = JOURNEY_STEPS.find(step => !completedSteps.includes(step.id));
+    if (nextStep) {
+      setSlideDirection('left');
+      setCurrentStep(nextStep.id);
+      setCurrentSubStep(nextStep.subSteps[0]);
     }
   };
 
@@ -162,6 +170,18 @@ const RondeDashboard = () => {
 
   const renderContent = () => {
     const animationClass = slideDirection === 'left' ? 'animate-slide-in-right' : 'animate-slide-in-left';
+
+    // Show overview when substep is 'overview'
+    if (currentSubStep === 'overview') {
+      return (
+        <div key={`overview-${currentStep}`} className={animationClass}>
+          <JourneyOverview 
+            completedSteps={completedSteps} 
+            onContinue={handleContinueFromOverview} 
+          />
+        </div>
+      );
+    }
 
     return (
       <div key={`${currentStep}-${currentSubStep}`} className={animationClass}>

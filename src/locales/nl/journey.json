@@ -442,5 +442,14 @@
     "errors": {
       "general": "Er ging iets mis bij het starten van het reset proces."
     }
+  },
+  "overview": {
+    "title": "Je voortgang",
+    "completed_count": "{{count}} van 6 stappen voltooid",
+    "step_completed": "Voltooid",
+    "step_current": "Nu aan de beurt",
+    "step_locked": "Nog niet beschikbaar",
+    "continue_button": "Ga verder met {{step}}",
+    "all_done_button": "Bekijk je resultaten"
   }
 }
