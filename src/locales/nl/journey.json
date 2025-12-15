@@ -42,7 +42,14 @@
       "tip2": "Neem de tijd en denk aan concrete situaties uit jouw leven",
       "tip3": "Je kunt je antwoorden aanpassen zolang je het rapport nog niet hebt gegenereerd"
     },
-    "start_button": "Start"
+    "start_button": "Start",
+    "progress_title": "Jouw voortgang",
+    "completed_count": "{{count}} van 6 stappen voltooid",
+    "step_completed": "Voltooid",
+    "step_current": "Aan de beurt",
+    "step_locked": "Vergrendeld",
+    "continue_button": "Ga verder met {{step}}",
+    "view_button": "Bekijk"
   },
   "enthousiasme": {
     "intro": {

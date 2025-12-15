@@ -42,7 +42,14 @@
       "tip2": "Nimm dir Zeit und denke an konkrete Situationen aus deinem Leben",
       "tip3": "Du kannst deine Antworten anpassen, solange du den Bericht noch nicht generiert hast"
     },
-    "start_button": "Start"
+    "start_button": "Start",
+    "progress_title": "Dein Fortschritt",
+    "completed_count": "{{count}} von 6 Schritten abgeschlossen",
+    "step_completed": "Abgeschlossen",
+    "step_current": "Als nächstes",
+    "step_locked": "Gesperrt",
+    "continue_button": "Weiter mit {{step}}",
+    "view_button": "Ansehen"
   },
   "enthousiasme": {
     "intro": {
