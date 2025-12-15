@@ -210,7 +210,7 @@ const WensberoepenInline = ({ roundId, subStep, onNext, onPrevious, onNavigateTo
         <CardContent className="p-12">
           <div className="text-center mb-12">
             <h1 className="text-3xl font-bold text-[#232D4B] mb-2">
-              {t('wensberoepen.step1.title')} {stepNum}
+              {t(`wensberoepen.step${stepNum}.title`)}
             </h1>
             <p className="text-xl text-gray-600">
               {t('wensberoepen.step1.subtitle')}
