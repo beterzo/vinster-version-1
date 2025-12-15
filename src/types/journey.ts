@@ -12,6 +12,7 @@ export type SubStep =
   | 'step1'
   | 'step2'
   | 'step3'
+  | 'confirm_keywords'
   | 'extra_info'
   | 'activiteiten'
   | 'werkomstandigheden'

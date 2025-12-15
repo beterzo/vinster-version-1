@@ -449,5 +449,13 @@
     "step_locked": "Noch nicht verfügbar",
     "continue_button": "Weiter mit {{step}}",
     "all_done_button": "Ergebnisse ansehen"
+  },
+  "keywords_confirm": {
+    "title": "Bereit, deine Schlüsselwörter zu generieren?",
+    "description": "Basierend auf deinen Antworten aus dem Begeisterungs-Scan und den Wunschberufen erstellen wir nun eine Liste mit Schlüsselwörtern. Diese verwendest du, um dein persönliches Profil zu erstellen.",
+    "warning": "Hinweis: Sobald deine Schlüsselwörter generiert sind, kannst du deine Interview-Antworten nicht mehr ändern.",
+    "adjust_button": "Antworten anpassen",
+    "confirm_button": "Schlüsselwörter generieren",
+    "generating": "Generieren..."
   }
 }
