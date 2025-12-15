@@ -91,87 +91,109 @@ const WelkomInline = ({ onNext, completedSteps = [], onStepClick }: WelkomInline
 
   const progressPercentage = (completedSteps.length / 6) * 100;
 
-  // Progress mode - show voortgang
-  if (hasProgress) {
-    return (
-      <Card className="rounded-3xl shadow-xl border-0">
-        <CardContent className="p-8 md:p-12">
-          {/* Header with progress title */}
-          <div className="text-center mb-8">
-            <img 
-              src="/lovable-uploads/vinster-new-logo.png" 
-              alt="Vinster" 
-              className="w-16 h-16 mx-auto mb-6 object-contain"
-            />
-            <h1 className="text-2xl md:text-3xl font-bold text-[#232D4B] mb-4">
-              {t('welkom.progress_title')}
-            </h1>
+  return (
+    <Card className="rounded-3xl shadow-xl border-0">
+      <CardContent className="p-8 md:p-12">
+        {/* Header with logo and title */}
+        <div className="text-center mb-8">
+          <img 
+            src="/lovable-uploads/vinster-new-logo.png" 
+            alt="Vinster" 
+            className="w-16 h-16 mx-auto mb-6 object-contain"
+          />
+          <h1 className="text-2xl md:text-3xl font-bold text-[#232D4B] mb-4">
+            {hasProgress ? t('welkom.progress_title') : t('welkom.steps_overview_title')}
+          </h1>
+          
+          {/* Progress bar - only show if there is progress */}
+          {hasProgress && (
             <div className="max-w-md mx-auto">
               <Progress value={progressPercentage} className="h-3 mb-2" />
               <p className="text-gray-600">
                 {t('welkom.completed_count').replace('{{count}}', String(completedSteps.length))}
               </p>
             </div>
-          </div>
+          )}
+        </div>
 
-          {/* Steps with status */}
-          <div className="mb-10">
-            <div className="space-y-3">
-              {steps.map((step) => {
-                const status = getStepStatus(step.id);
-                const isCompleted = status === 'completed';
-                const isCurrent = status === 'current';
-                const isLocked = status === 'locked';
+        {/* Steps overview - unified grid layout */}
+        <div className="mb-10">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {steps.map((step) => {
+              const status = getStepStatus(step.id);
+              const isCompleted = status === 'completed';
+              const isCurrent = status === 'current';
+              const isLocked = status === 'locked';
 
-                return (
-                  <div 
-                    key={step.number}
-                    className={`rounded-xl p-4 border transition-all ${
+              return (
+                <div 
+                  key={step.number}
+                  className={`rounded-xl p-5 border transition-colors ${
+                    isCompleted 
+                      ? 'bg-blue-50 border-blue-200' 
+                      : isCurrent 
+                        ? 'bg-yellow-50 border-yellow-300' 
+                        : 'bg-gray-50 border-gray-100 hover:border-[#232D4B]/20'
+                  }`}
+                >
+                  <div className="flex items-start gap-4">
+                    {/* Number/Status icon */}
+                    <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-semibold ${
                       isCompleted 
-                        ? 'bg-blue-50 border-blue-200' 
+                        ? 'bg-[#232D4B] text-white' 
                         : isCurrent 
-                          ? 'bg-yellow-50 border-yellow-300' 
-                          : 'bg-gray-50 border-gray-200'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-4">
-                        <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${
-                          isCompleted 
-                            ? 'bg-[#232D4B] text-white' 
-                            : isCurrent 
-                              ? 'bg-yellow-400 text-[#232D4B]' 
-                              : 'bg-gray-300 text-gray-500'
-                        }`}>
-                          {isCompleted ? (
-                            <CheckCircle2 className="w-5 h-5" />
-                          ) : isLocked ? (
-                            <Lock className="w-4 h-4" />
-                          ) : (
-                            <span className="font-semibold">{step.number}</span>
-                          )}
-                        </div>
-                        <div>
-                          <h3 className={`font-semibold ${isLocked ? 'text-gray-400' : 'text-[#232D4B]'}`}>
-                            {step.title}
-                          </h3>
-                          <p className={`text-sm ${isLocked ? 'text-gray-400' : 'text-gray-600'}`}>
-                            {isCompleted 
-                              ? t('welkom.step_completed')
-                              : isCurrent 
-                                ? t('welkom.step_current')
-                                : t('welkom.step_locked')
-                            }
-                          </p>
-                        </div>
+                          ? 'bg-yellow-400 text-[#232D4B]' 
+                          : 'bg-[#232D4B] text-white'
+                    }`}>
+                      {isCompleted ? (
+                        <CheckCircle2 className="w-5 h-5" />
+                      ) : isLocked ? (
+                        <Lock className="w-4 h-4" />
+                      ) : (
+                        <span>{step.number}</span>
+                      )}
+                    </div>
+
+                    <div className="flex-1 min-w-0">
+                      {/* Title + icon + status badge */}
+                      <div className="flex items-center gap-2 mb-1 flex-wrap">
+                        <step.icon className={`w-4 h-4 ${isLocked ? 'text-gray-400' : 'text-[#232D4B]'}`} />
+                        <h3 className={`font-semibold text-sm ${isLocked ? 'text-gray-400' : 'text-[#232D4B]'}`}>
+                          {step.title}
+                        </h3>
+                        {/* Status badges */}
+                        {isCompleted && (
+                          <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">
+                            {t('welkom.step_completed')}
+                          </span>
+                        )}
+                        {isCurrent && (
+                          <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full">
+                            {t('welkom.step_current')}
+                          </span>
+                        )}
                       </div>
                       
+                      {/* Description (always visible) */}
+                      <p className={`text-sm mb-2 ${isLocked ? 'text-gray-400' : 'text-gray-600'}`}>
+                        {step.description}
+                      </p>
+                      
+                      {/* Time indicator */}
+                      {step.time && (
+                        <div className={`flex items-center gap-1 text-xs ${isLocked ? 'text-gray-400' : 'text-gray-500'}`}>
+                          <Clock className="w-3 h-3" />
+                          <span>{step.time}</span>
+                        </div>
+                      )}
+                      
+                      {/* View button for completed steps */}
                       {isCompleted && onStepClick && (
                         <Button 
                           variant="outline" 
                           size="sm"
                           onClick={() => onStepClick(step.id)}
-                          className="text-[#232D4B] border-[#232D4B]/30 hover:bg-[#232D4B] hover:text-white"
+                          className="mt-3 text-[#232D4B] border-[#232D4B]/30 hover:bg-[#232D4B] hover:text-white"
                         >
                           <Eye className="w-4 h-4 mr-1" />
                           {t('welkom.view_button')}
@@ -179,86 +201,23 @@ const WelkomInline = ({ onNext, completedSteps = [], onStepClick }: WelkomInline
                       )}
                     </div>
                   </div>
-                );
-              })}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Total time - only show if no progress yet */}
+        {!hasProgress && (
+          <div className="bg-[#E8F4FD] rounded-xl p-5 mb-10">
+            <div className="flex items-center gap-3">
+              <Clock className="w-6 h-6 text-[#232D4B]" />
+              <p className="text-[#232D4B] font-medium">
+                {t('welkom.total_time')}
+              </p>
             </div>
           </div>
-
-          {/* Continue button */}
-          <div className="flex justify-center">
-            <Button 
-              onClick={onNext}
-              className="bg-[#F5C518] hover:bg-yellow-500 text-[#232D4B] font-semibold text-lg px-12 py-6 rounded-xl"
-            >
-              {t('welkom.continue_button').replace('{{step}}', getNextStepLabel())}
-              <ChevronRight className="w-5 h-5 ml-2" />
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-    );
-  }
-
-  // Initial mode - no progress yet
-  return (
-    <Card className="rounded-3xl shadow-xl border-0">
-      <CardContent className="p-8 md:p-12">
-        {/* Header with logo and title */}
-        <div className="text-center mb-10">
-          <img 
-            src="/lovable-uploads/vinster-new-logo.png" 
-            alt="Vinster" 
-            className="w-16 h-16 mx-auto mb-6 object-contain"
-          />
-          <h1 className="text-2xl md:text-3xl font-bold text-[#232D4B]">
-            {t('welkom.steps_overview_title')}
-          </h1>
-        </div>
-
-        {/* Steps overview */}
-        <div className="mb-10">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {steps.map((step) => (
-              <div 
-                key={step.number}
-                className="bg-gray-50 rounded-xl p-5 border border-gray-100 hover:border-[#232D4B]/20 transition-colors"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#232D4B] text-white flex items-center justify-center font-semibold">
-                    {step.number}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <step.icon className="w-4 h-4 text-[#232D4B]" />
-                      <h3 className="font-semibold text-[#232D4B] text-sm">
-                        {step.title}
-                      </h3>
-                    </div>
-                    <p className="text-gray-600 text-sm mb-2">
-                      {step.description}
-                    </p>
-                    {step.time && (
-                      <div className="flex items-center gap-1 text-xs text-gray-500">
-                        <Clock className="w-3 h-3" />
-                        <span>{step.time}</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Total time */}
-        <div className="bg-[#E8F4FD] rounded-xl p-5 mb-10">
-          <div className="flex items-center gap-3">
-            <Clock className="w-6 h-6 text-[#232D4B]" />
-            <p className="text-[#232D4B] font-medium">
-              {t('welkom.total_time')}
-            </p>
-          </div>
-        </div>
+        )}
 
         {/* Tips */}
         <div className="mb-10">
@@ -275,13 +234,17 @@ const WelkomInline = ({ onNext, completedSteps = [], onStepClick }: WelkomInline
           </ul>
         </div>
 
-        {/* Start button */}
+        {/* Start/Continue button */}
         <div className="flex justify-center">
           <Button 
             onClick={onNext}
             className="bg-[#F5C518] hover:bg-yellow-500 text-[#232D4B] font-semibold text-lg px-12 py-6 rounded-xl"
           >
-            {t('welkom.start_button')}
+            {hasProgress 
+              ? t('welkom.continue_button').replace('{{step}}', getNextStepLabel())
+              : t('welkom.start_button')
+            }
+            {hasProgress && <ChevronRight className="w-5 h-5 ml-2" />}
           </Button>
         </div>
       </CardContent>
