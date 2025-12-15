@@ -128,6 +128,16 @@ const RondeDashboard = () => {
     }
   };
 
+  // Specifieke functie voor navigatie vanuit welkom scherm naar volgende incomplete stap
+  const handleContinueFromWelkom = () => {
+    const nextIncompleteStep = JOURNEY_STEPS.find(step => !completedSteps.includes(step.id));
+    if (nextIncompleteStep) {
+      setSlideDirection('left');
+      setCurrentStep(nextIncompleteStep.id);
+      setCurrentSubStep(nextIncompleteStep.subSteps[0]);
+    }
+  };
+
   const handlePrevious = () => {
     const stepConfig = getCurrentStepConfig();
     if (!stepConfig) return;
@@ -194,6 +204,7 @@ const RondeDashboard = () => {
             onPrevious={handlePrevious}
             completedSteps={completedSteps}
             onStepClick={handleStepClick}
+            onContinueFromWelkom={handleContinueFromWelkom}
           />
         )}
         {currentStep === 'wensberoepen' && roundId && (
