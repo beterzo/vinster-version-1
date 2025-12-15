@@ -44,10 +44,10 @@ const OverVinster = () => {
             {/* Photo */}
             <div className="order-2 md:order-1">
               <div className="relative">
-                <img 
+              <img 
                   alt="Heidi Jansen - Oprichter van Vinster" 
-                  className="w-full max-w-md mx-auto rounded-2xl shadow-lg object-cover aspect-[3/4]" 
-                  src="/lovable-uploads/790a1059-98fe-415f-bc29-f36d00c53e4c.jpg" 
+                  className="w-full max-w-lg mx-auto rounded-2xl shadow-lg object-cover aspect-[4/5]" 
+                  src="/lovable-uploads/heidi-les-presentatie.jpg" 
                 />
                 <div className="absolute -bottom-4 -right-4 bg-blue-900 text-white p-4 rounded-xl shadow-lg">
                   <p className="text-sm font-semibold">{t('about.experience_badge')}</p>
