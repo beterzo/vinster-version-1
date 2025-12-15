@@ -16,9 +16,18 @@ interface EnthousiasmeInlineProps {
   onPrevious: () => void;
   completedSteps?: JourneyStep[];
   onStepClick?: (step: JourneyStep) => void;
+  onContinueFromWelkom?: () => void;
 }
 
-const EnthousiasmeInline = ({ roundId, subStep, onNext, onPrevious, completedSteps = [], onStepClick }: EnthousiasmeInlineProps) => {
+const EnthousiasmeInline = ({ 
+  roundId, 
+  subStep, 
+  onNext, 
+  onPrevious, 
+  completedSteps = [], 
+  onStepClick,
+  onContinueFromWelkom
+}: EnthousiasmeInlineProps) => {
   const { t } = useTranslation();
   const { responses, saveResponse, loading } = useEnthousiasmeResponses(roundId);
 
@@ -68,9 +77,9 @@ const EnthousiasmeInline = ({ roundId, subStep, onNext, onPrevious, completedSte
     return <div className="flex items-center justify-center p-12">{t('common.loading')}</div>;
   }
 
-  // Welcome page
+  // Welcome page - use onContinueFromWelkom for proper navigation to next incomplete step
   if (subStep === 'welkom') {
-    return <WelkomInline onNext={onNext} completedSteps={completedSteps} onStepClick={onStepClick} />;
+    return <WelkomInline onNext={onContinueFromWelkom || onNext} completedSteps={completedSteps} onStepClick={onStepClick} />;
   }
 
   // Intro page
