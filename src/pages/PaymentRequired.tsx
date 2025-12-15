@@ -210,7 +210,7 @@ const PaymentRequired = () => {
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-8">
         {/* Header with logo and language switcher */}
         <div className="flex justify-between items-center mb-8">
-          <img alt="Vinster Logo" className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" onClick={() => navigate('/')} src="/lovable-uploads/77b209e1-9056-49f8-96af-96495c9cfc8c.png" />
+          <img alt="Vinster Logo" className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" onClick={() => navigate('/')} src="/lovable-uploads/vinster-logo-2.png" />
           <LanguageSwitcher />
         </div>
 
