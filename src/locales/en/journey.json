@@ -43,7 +43,14 @@
       "tip2": "Take your time and think of concrete situations from your life",
       "tip3": "You can adjust your answers as long as you haven't generated the report yet"
     },
-    "start_button": "Start"
+    "start_button": "Start",
+    "progress_title": "Your progress",
+    "completed_count": "{{count}} of 6 steps completed",
+    "step_completed": "Completed",
+    "step_current": "Up next",
+    "step_locked": "Locked",
+    "continue_button": "Continue with {{step}}",
+    "view_button": "View"
   },
   "enthousiasme": {
     "intro": {

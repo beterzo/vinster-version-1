@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import EnthousiasmeProgress from "@/components/EnthousiasmeProgress";
 import { useEnthousiasmeResponses } from "@/hooks/useEnthousiasmeResponses";
 import { useTranslation } from "@/hooks/useTranslation";
-import { SubStep } from "@/types/journey";
+import { SubStep, JourneyStep } from "@/types/journey";
 import WelkomInline from "./WelkomInline";
 
 interface EnthousiasmeInlineProps {
@@ -14,9 +14,11 @@ interface EnthousiasmeInlineProps {
   subStep: SubStep;
   onNext: () => void;
   onPrevious: () => void;
+  completedSteps?: JourneyStep[];
+  onStepClick?: (step: JourneyStep) => void;
 }
 
-const EnthousiasmeInline = ({ roundId, subStep, onNext, onPrevious }: EnthousiasmeInlineProps) => {
+const EnthousiasmeInline = ({ roundId, subStep, onNext, onPrevious, completedSteps = [], onStepClick }: EnthousiasmeInlineProps) => {
   const { t } = useTranslation();
   const { responses, saveResponse, loading } = useEnthousiasmeResponses(roundId);
 
@@ -68,7 +70,7 @@ const EnthousiasmeInline = ({ roundId, subStep, onNext, onPrevious }: Enthousias
 
   // Welcome page
   if (subStep === 'welkom') {
-    return <WelkomInline onNext={onNext} />;
+    return <WelkomInline onNext={onNext} completedSteps={completedSteps} onStepClick={onStepClick} />;
   }
 
   // Intro page

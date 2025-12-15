@@ -4,7 +4,7 @@ import { ArrowLeft, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import JourneyStepNavigator from "@/components/JourneyStepNavigator";
-import JourneyOverview from "@/components/journey/JourneyOverview";
+import WelkomInline from "@/components/journey/WelkomInline";
 import EnthousiasmeInline from "@/components/journey/EnthousiasmeInline";
 import WensberoepenInline from "@/components/journey/WensberoepenInline";
 import PersoonsprofielInline from "@/components/journey/PersoonsprofielInline";
@@ -171,13 +171,14 @@ const RondeDashboard = () => {
   const renderContent = () => {
     const animationClass = slideDirection === 'left' ? 'animate-slide-in-right' : 'animate-slide-in-left';
 
-    // Show overview when substep is 'overview'
+    // Show WelkomInline with progress when substep is 'overview'
     if (currentSubStep === 'overview') {
       return (
         <div key={`overview-${currentStep}`} className={animationClass}>
-          <JourneyOverview 
-            completedSteps={completedSteps} 
-            onContinue={handleContinueFromOverview} 
+          <WelkomInline 
+            onNext={handleContinueFromOverview}
+            completedSteps={completedSteps}
+            onStepClick={handleStepClick}
           />
         </div>
       );
@@ -186,7 +187,14 @@ const RondeDashboard = () => {
     return (
       <div key={`${currentStep}-${currentSubStep}`} className={animationClass}>
         {currentStep === 'enthousiasme' && roundId && (
-          <EnthousiasmeInline roundId={roundId} subStep={currentSubStep} onNext={handleNext} onPrevious={handlePrevious} />
+          <EnthousiasmeInline 
+            roundId={roundId} 
+            subStep={currentSubStep} 
+            onNext={handleNext} 
+            onPrevious={handlePrevious}
+            completedSteps={completedSteps}
+            onStepClick={handleStepClick}
+          />
         )}
         {currentStep === 'wensberoepen' && roundId && (
           <WensberoepenInline roundId={roundId} subStep={currentSubStep} onNext={handleNext} onPrevious={handlePrevious} />
