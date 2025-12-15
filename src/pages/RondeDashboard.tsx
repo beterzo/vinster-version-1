@@ -208,7 +208,17 @@ const RondeDashboard = () => {
           />
         )}
         {currentStep === 'wensberoepen' && roundId && (
-          <WensberoepenInline roundId={roundId} subStep={currentSubStep} onNext={handleNext} onPrevious={handlePrevious} />
+          <WensberoepenInline 
+            roundId={roundId} 
+            subStep={currentSubStep} 
+            onNext={handleNext} 
+            onPrevious={handlePrevious}
+            onNavigateToPersoonsprofiel={() => {
+              setSlideDirection('left');
+              setCurrentStep('persoonsprofiel');
+              setCurrentSubStep('extra_info');
+            }}
+          />
         )}
         {currentStep === 'persoonsprofiel' && roundId && (
           <PersoonsprofielInline roundId={roundId} subStep={currentSubStep} onNext={handleNext} onPrevious={handlePrevious} />

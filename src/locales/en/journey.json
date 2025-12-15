@@ -450,5 +450,13 @@
     "step_locked": "Not yet available",
     "continue_button": "Continue with {{step}}",
     "all_done_button": "View your results"
+  },
+  "keywords_confirm": {
+    "title": "Ready to generate your keywords?",
+    "description": "Based on your answers from the Enthusiasm Scan and Desired Jobs, we'll now create a list of keywords. You'll use these to build your personal profile.",
+    "warning": "Note: once your keywords are generated, you can no longer adjust your interview answers.",
+    "adjust_button": "Adjust answers",
+    "confirm_button": "Generate keywords",
+    "generating": "Generating..."
   }
 }

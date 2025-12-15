@@ -445,5 +445,13 @@
     "step_locked": "Ikke tilgjengelig ennå",
     "continue_button": "Fortsett med {{step}}",
     "all_done_button": "Se resultatene dine"
+  },
+  "keywords_confirm": {
+    "title": "Klar til å generere nøkkelordene dine?",
+    "description": "Basert på svarene dine fra Entusiasme-skanningen og Ønskeyrker lager vi nå en liste med nøkkelord. Disse bruker du til å bygge din personlige profil.",
+    "warning": "Merk: når nøkkelordene er generert, kan du ikke lenger endre intervjusvarene dine.",
+    "adjust_button": "Juster svar",
+    "confirm_button": "Generer nøkkelord",
+    "generating": "Genererer..."
   }
 }
