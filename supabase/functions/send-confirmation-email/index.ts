@@ -635,7 +635,13 @@ const handler = async (req: Request): Promise<Response> => {
       
       console.log("🔐 Verifying webhook signature...");
       
-      const wh = new Webhook(hookSecret);
+      // Extract the base64 part after "v1," prefix (Supabase stores as "v1,whsec_xxx")
+      const secretParts = hookSecret.split(',');
+      const webhookSecret = secretParts.length > 1 ? secretParts[1] : hookSecret;
+      
+      console.log("🔑 Using webhook secret format:", secretParts.length > 1 ? "v1,whsec_xxx (extracted)" : "direct");
+      
+      const wh = new Webhook(webhookSecret);
       payload = wh.verify(rawPayload, headers) as AuthEventPayload;
       
       console.log("✅ Webhook signature verified successfully");
