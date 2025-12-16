@@ -27,7 +27,7 @@ const RondeDashboard = () => {
   const { rounds, loading: roundsLoading } = useUserRounds();
   
   // Pass roundId to all response hooks
-  const { responses: enthousiasmeResponses, loading: enthousiasmeLoading } = useEnthousiasmeResponses(roundId);
+  const { responses: enthousiasmeResponses, loading: enthousiasmeLoading, loadResponses: reloadEnthousiasme } = useEnthousiasmeResponses(roundId);
   const { isWensberoepenComplete, isLoading: wensberoepenLoading } = useWensberoepenValidation(roundId);
   const { responses: prioriteitenResponses, loading: prioriteitenLoading } = usePrioriteitenResponses(roundId);
   const { responses: extraInfoResponses, loading: extraInfoLoading } = useExtraInformatieResponses(roundId);
@@ -138,7 +138,7 @@ const RondeDashboard = () => {
 
   const getCurrentStepConfig = () => JOURNEY_STEPS.find(s => s.id === currentStep);
 
-  const handleNext = () => {
+  const handleNext = async () => {
     const stepConfig = getCurrentStepConfig();
     if (!stepConfig) return;
 
@@ -148,7 +148,10 @@ const RondeDashboard = () => {
       setSlideDirection('left');
       setCurrentSubStep(stepConfig.subSteps[currentSubIndex + 1]);
     } else {
-      // End of current step's substeps - show overview
+      // End of current step's substeps - refresh data first, then show overview
+      if (currentStep === 'enthousiasme') {
+        await reloadEnthousiasme();
+      }
       setSlideDirection('left');
       setCurrentSubStep('overview');
     }
