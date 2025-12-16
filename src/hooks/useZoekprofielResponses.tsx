@@ -18,7 +18,7 @@ export interface ZoekprofielResponse {
   updated_at: string;
 }
 
-export const useZoekprofielResponses = () => {
+export const useZoekprofielResponses = (roundId?: string) => {
   const { user } = useAuth();
   const { toast } = useToast();
   const { language } = useTranslation();
@@ -35,18 +35,19 @@ export const useZoekprofielResponses = () => {
   const activeSaves = useRef<Set<string>>(new Set());
 
   const loadResponses = async () => {
-    if (!user?.id) {
+    if (!user?.id || !roundId) {
       setLoading(false);
       return;
     }
 
     try {
-      console.log('🔍 Loading zoekprofiel antwoorden for user:', user.id);
+      console.log('🔍 Loading zoekprofiel antwoorden for user:', user.id, 'round:', roundId);
       
       const { data, error } = await supabase
         .from('zoekprofiel_antwoorden')
         .select('*')
         .eq('user_id', user.id)
+        .eq('round_id', roundId)
         .maybeSingle();
 
       if (error && error.code !== 'PGRST116') {
@@ -135,7 +136,7 @@ export const useZoekprofielResponses = () => {
   }, [user?.id]);
 
   const debouncedSave = useCallback(async (field: string, value: string) => {
-    if (!user?.id) return;
+    if (!user?.id || !roundId) return;
 
     // Prevent multiple saves for the same field
     if (activeSaves.current.has(field)) {
@@ -145,16 +146,17 @@ export const useZoekprofielResponses = () => {
     activeSaves.current.add(field);
 
     try {
-      console.log(`💾 Saving zoekprofiel ${field}:`, value);
+      console.log(`💾 Saving zoekprofiel ${field}:`, value, 'for round:', roundId);
 
       // Use upsert logic to handle both insert and update cases
       const { data, error } = await supabase
         .from('zoekprofiel_antwoorden')
         .upsert({
           user_id: user.id,
+          round_id: roundId,
           [field]: value
         }, {
-          onConflict: 'user_id'
+          onConflict: 'user_id,round_id'
         })
         .select()
         .single();
@@ -185,7 +187,7 @@ export const useZoekprofielResponses = () => {
     } finally {
       activeSaves.current.delete(field);
     }
-  }, [user?.id, responses, toast]);
+  }, [user?.id, roundId, responses, toast]);
 
   const saveResponse = useCallback(async (field: string, value: string) => {
     console.log(`🔄 Updating local state for ${field}:`, value);
@@ -212,8 +214,48 @@ export const useZoekprofielResponses = () => {
     }, 1000);
   }, [calculateProgress, debouncedSave]);
 
-  const submitToWebhook = async (submissionLanguage?: string, roundId?: string) => {
+  // Flush all pending saves immediately
+  const flushPendingSaves = useCallback(async () => {
+    // Clear all debounce timeouts
+    Object.keys(debounceTimeouts.current).forEach(field => {
+      clearTimeout(debounceTimeouts.current[field]);
+      delete debounceTimeouts.current[field];
+    });
+
+    if (!user?.id || !roundId) return;
+
+    // Save all local state immediately
+    const dataToSave = { ...localState };
+    
+    const saveData = {
+      user_id: user.id,
+      round_id: roundId,
+      functie_als: dataToSave.functie_als || null,
+      kerntaken: dataToSave.kerntaken || null,
+      organisatie_bij: dataToSave.organisatie_bij || null,
+      sector: dataToSave.sector || null,
+      gewenste_regio: dataToSave.gewenste_regio || null,
+      arbeidsvoorwaarden: dataToSave.arbeidsvoorwaarden || null
+    };
+
+    console.log('💾 Flushing all pending saves:', saveData);
+
+    try {
+      const { error } = await supabase
+        .from('zoekprofiel_antwoorden')
+        .upsert(saveData, { onConflict: 'user_id,round_id' });
+
+      if (error) throw error;
+      console.log('✅ Successfully flushed all pending saves');
+    } catch (error) {
+      console.error('❌ Error flushing saves:', error);
+      throw error;
+    }
+  }, [user?.id, roundId, localState]);
+
+  const submitToWebhook = async (submissionLanguage?: string, submissionRoundId?: string) => {
     const languageToUse = submissionLanguage || language || 'nl';
+    const roundIdToUse = submissionRoundId || roundId;
     
     // Use local state for submission to ensure we have the latest values
     const dataToSubmit = { ...responses, ...localState };
@@ -231,12 +273,15 @@ export const useZoekprofielResponses = () => {
     }
 
     try {
+      // First flush all pending saves to ensure data is in database
+      await flushPendingSaves();
+      
       console.log('🚀 Calling generate-zoekprofiel edge function...');
       
       const { data, error } = await supabase.functions.invoke('generate-zoekprofiel', {
         body: { 
           user_id: user?.id,
-          round_id: roundId,
+          round_id: roundIdToUse,
           language: languageToUse 
         }
       });
@@ -276,7 +321,7 @@ export const useZoekprofielResponses = () => {
 
   useEffect(() => {
     loadResponses();
-  }, [user?.id]);
+  }, [user?.id, roundId]);
 
   // Use useMemo to prevent unnecessary re-renders of currentData
   const currentData = useMemo(() => {
