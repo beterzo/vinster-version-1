@@ -15,6 +15,166 @@ interface RapportInlineProps {
   onReportGenerated: () => void;
 }
 
+// Print-only cover page component
+const PrintCoverPage = ({ userName, startDate }: { userName: string; startDate: string }) => (
+  <div className="print-page bg-[#232D4B] relative overflow-hidden" style={{ width: '210mm', height: '297mm', pageBreakAfter: 'always' }}>
+    {/* Main content */}
+    <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-16">
+      <h1 className="text-5xl font-bold text-white mb-4 leading-tight">
+        Vind werk dat<br />bij je past
+      </h1>
+      <p className="text-[#F5C518] text-xl mb-16">www.vinster.ai</p>
+      
+      <div className="text-white text-lg space-y-2">
+        <p className="font-semibold">{userName}</p>
+        <p className="text-gray-300">{startDate}</p>
+      </div>
+    </div>
+
+    {/* Decorative squares - bottom left */}
+    <div className="absolute bottom-12 left-12 flex gap-2">
+      <div className="w-8 h-8 bg-[#78BFE3]"></div>
+      <div className="w-8 h-8 bg-[#F5C518]"></div>
+      <div className="w-8 h-8 bg-[#78BFE3]"></div>
+    </div>
+    <div className="absolute bottom-20 left-12 flex gap-2">
+      <div className="w-8 h-8 bg-[#F5C518]"></div>
+      <div className="w-8 h-8 bg-[#232D4B] border-2 border-[#78BFE3]"></div>
+    </div>
+
+    {/* Vinster logo - bottom right */}
+    <img 
+      src="/images/vinster-logo-print.png" 
+      alt="Vinster" 
+      className="absolute bottom-12 right-12 h-12 object-contain"
+    />
+  </div>
+);
+
+// Print-only ideale functie page
+const PrintIdealeFunctiePage = ({ reportContent, t }: { reportContent: any; t: (key: string) => string }) => (
+  <div className="print-page bg-white relative" style={{ width: '210mm', height: '297mm', pageBreakAfter: 'always' }}>
+    {/* Dark blue border */}
+    <div className="absolute inset-4 border-[6px] border-[#232D4B]">
+      {/* Content area */}
+      <div className="p-8">
+        {/* Title with yellow underline */}
+        <div className="mb-8">
+          <h2 className="text-3xl font-bold text-[#232D4B] mb-2">Jouw ideale functie-inhoud</h2>
+          <div className="w-48 h-1 bg-[#F5C518]"></div>
+        </div>
+
+        {/* Three sections */}
+        <div className="space-y-8">
+          {/* Activiteiten */}
+          <div>
+            <h3 className="text-xl font-semibold text-[#78BFE3] mb-3">Wat je graag doet</h3>
+            <p className="text-gray-800 leading-relaxed">
+              {reportContent.ideale_functie?.activiteiten?.join(', ')}
+            </p>
+          </div>
+
+          {/* Werkomgeving */}
+          <div>
+            <h3 className="text-xl font-semibold text-[#78BFE3] mb-3">Jouw ideale werkomgeving</h3>
+            <p className="text-gray-800 leading-relaxed">
+              {reportContent.ideale_functie?.werkomgeving?.join(', ')}
+            </p>
+          </div>
+
+          {/* Interessegebieden */}
+          <div>
+            <h3 className="text-xl font-semibold text-[#78BFE3] mb-3">Jouw interessegebieden</h3>
+            <p className="text-gray-800 leading-relaxed">
+              {reportContent.ideale_functie?.interessegebieden?.join(', ')}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Decorative sidebar - right */}
+      <div className="absolute right-0 top-1/4 flex flex-col gap-1">
+        <div className="w-3 h-12 bg-[#F5C518]"></div>
+        <div className="w-3 h-12 bg-[#78BFE3]"></div>
+        <div className="w-3 h-12 bg-[#232D4B]"></div>
+      </div>
+
+      {/* Page number */}
+      <div className="absolute bottom-4 right-8 text-sm text-gray-500">
+        Pagina 1 van 2
+      </div>
+    </div>
+  </div>
+);
+
+// Print-only beroepen page
+const PrintBeroepenPage = ({ reportContent, t }: { reportContent: any; t: (key: string) => string }) => (
+  <div className="print-page bg-white relative" style={{ width: '210mm', height: '297mm' }}>
+    {/* Dark blue border */}
+    <div className="absolute inset-4 border-[6px] border-[#232D4B]">
+      {/* Content area */}
+      <div className="p-8">
+        {/* Title with yellow underline */}
+        <div className="mb-8">
+          <h2 className="text-3xl font-bold text-[#232D4B] mb-2">Mogelijke beroepen</h2>
+          <div className="w-48 h-1 bg-[#F5C518]"></div>
+        </div>
+
+        {/* Three professions */}
+        <div className="space-y-6">
+          {/* Beroep 1 */}
+          {reportContent.beroepen?.passend_1 && (
+            <div>
+              <h3 className="text-xl font-semibold text-[#78BFE3] mb-2">
+                {reportContent.beroepen.passend_1.titel}
+              </h3>
+              <p className="text-gray-800 leading-relaxed">
+                {reportContent.beroepen.passend_1.beschrijving}
+              </p>
+            </div>
+          )}
+
+          {/* Beroep 2 */}
+          {reportContent.beroepen?.passend_2 && (
+            <div>
+              <h3 className="text-xl font-semibold text-[#78BFE3] mb-2">
+                {reportContent.beroepen.passend_2.titel}
+              </h3>
+              <p className="text-gray-800 leading-relaxed">
+                {reportContent.beroepen.passend_2.beschrijving}
+              </p>
+            </div>
+          )}
+
+          {/* Beroep 3 (verrassend) */}
+          {reportContent.beroepen?.verrassend && (
+            <div>
+              <h3 className="text-xl font-semibold text-[#78BFE3] mb-2">
+                {reportContent.beroepen.verrassend.titel}
+              </h3>
+              <p className="text-gray-800 leading-relaxed">
+                {reportContent.beroepen.verrassend.beschrijving}
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Decorative sidebar - right */}
+      <div className="absolute right-0 top-1/4 flex flex-col gap-1">
+        <div className="w-3 h-12 bg-[#F5C518]"></div>
+        <div className="w-3 h-12 bg-[#78BFE3]"></div>
+        <div className="w-3 h-12 bg-[#232D4B]"></div>
+      </div>
+
+      {/* Page number */}
+      <div className="absolute bottom-4 right-8 text-sm text-gray-500">
+        Pagina 2 van 2
+      </div>
+    </div>
+  </div>
+);
+
 const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated }: RapportInlineProps) => {
   const { t } = useTranslation();
   const { user } = useAuth();
@@ -22,9 +182,12 @@ const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated
   const [reportContent, setReportContent] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [userName, setUserName] = useState('');
+  const [startDate, setStartDate] = useState('');
 
   useEffect(() => {
     const loadReport = async () => {
+      // Load report content
       const { data: report } = await supabase
         .from('user_reports')
         .select('report_content')
@@ -35,11 +198,41 @@ const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated
       if (report?.report_content) {
         setReportContent(report.report_content);
       }
+
+      // Load user profile for name
+      if (user) {
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('first_name, last_name')
+          .eq('id', user.id)
+          .maybeSingle();
+
+        if (profile) {
+          setUserName(`${profile.first_name} ${profile.last_name}`);
+        }
+      }
+
+      // Load round start date
+      const { data: round } = await supabase
+        .from('user_rounds')
+        .select('started_at')
+        .eq('id', roundId)
+        .maybeSingle();
+
+      if (round?.started_at) {
+        const date = new Date(round.started_at);
+        setStartDate(date.toLocaleDateString('nl-NL', { 
+          day: 'numeric', 
+          month: 'long', 
+          year: 'numeric' 
+        }));
+      }
+
       setLoading(false);
     };
 
     loadReport();
-  }, [roundId]);
+  }, [roundId, user]);
 
   const handleGenerateReport = async () => {
     if (!user) {
@@ -207,115 +400,144 @@ const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated
   }
 
   return (
-    <div className="space-y-8">
-      {/* Ideale functie sectie - verticaal gestapeld */}
-      <Card className="rounded-2xl p-6 border border-gray-200">
-        <h3 className="text-2xl font-bold text-[#232D4B] mb-6">{t('rapport.ideale_functie.title')}</h3>
-        <div className="space-y-6">
-          {/* Activiteiten */}
-          <div className="p-4 rounded-xl bg-[#FEF3C7] border-l-4 border-[#F5C518]">
-            <h4 className="font-semibold text-[#232D4B] mb-3 flex items-center gap-2">
-              <span className="w-6 h-6 bg-[#F5C518] rounded-full flex items-center justify-center text-[#232D4B] text-xs font-bold">1</span>
-              {t('rapport.ideale_functie.activiteiten')}
-            </h4>
-            <div className="flex flex-wrap gap-2">
-              {reportContent.ideale_functie?.activiteiten?.map((item: string, i: number) => (
-                <span key={i} className="px-3 py-1 bg-white rounded-full text-sm text-[#232D4B] border border-[#F5C518]">
-                  {item}
-                </span>
-              ))}
+    <>
+      {/* Screen content - hidden when printing */}
+      <div className="space-y-8 print:hidden">
+        {/* Ideale functie sectie - verticaal gestapeld */}
+        <Card className="rounded-2xl p-6 border border-gray-200">
+          <h3 className="text-2xl font-bold text-[#232D4B] mb-6">{t('rapport.ideale_functie.title')}</h3>
+          <div className="space-y-6">
+            {/* Activiteiten */}
+            <div className="p-4 rounded-xl bg-[#FEF3C7] border-l-4 border-[#F5C518]">
+              <h4 className="font-semibold text-[#232D4B] mb-3 flex items-center gap-2">
+                <span className="w-6 h-6 bg-[#F5C518] rounded-full flex items-center justify-center text-[#232D4B] text-xs font-bold">1</span>
+                {t('rapport.ideale_functie.activiteiten')}
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                {reportContent.ideale_functie?.activiteiten?.map((item: string, i: number) => (
+                  <span key={i} className="px-3 py-1 bg-white rounded-full text-sm text-[#232D4B] border border-[#F5C518]">
+                    {item}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
 
-          {/* Werkomgeving */}
-          <div className="p-4 rounded-xl bg-[#E8F4FD] border-l-4 border-[#78BFE3]">
-            <h4 className="font-semibold text-[#232D4B] mb-3 flex items-center gap-2">
-              <span className="w-6 h-6 bg-[#78BFE3] rounded-full flex items-center justify-center text-white text-xs font-bold">2</span>
-              {t('rapport.ideale_functie.werkomgeving')}
-            </h4>
-            <div className="flex flex-wrap gap-2">
-              {reportContent.ideale_functie?.werkomgeving?.map((item: string, i: number) => (
-                <span key={i} className="px-3 py-1 bg-white rounded-full text-sm text-[#232D4B] border border-[#78BFE3]">
-                  {item}
-                </span>
-              ))}
+            {/* Werkomgeving */}
+            <div className="p-4 rounded-xl bg-[#E8F4FD] border-l-4 border-[#78BFE3]">
+              <h4 className="font-semibold text-[#232D4B] mb-3 flex items-center gap-2">
+                <span className="w-6 h-6 bg-[#78BFE3] rounded-full flex items-center justify-center text-white text-xs font-bold">2</span>
+                {t('rapport.ideale_functie.werkomgeving')}
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                {reportContent.ideale_functie?.werkomgeving?.map((item: string, i: number) => (
+                  <span key={i} className="px-3 py-1 bg-white rounded-full text-sm text-[#232D4B] border border-[#78BFE3]">
+                    {item}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
 
-          {/* Interessegebieden */}
-          <div className="p-4 rounded-xl bg-[#E8F4FD] border-l-4 border-[#232D4B]">
-            <h4 className="font-semibold text-[#232D4B] mb-3 flex items-center gap-2">
-              <span className="w-6 h-6 bg-[#232D4B] rounded-full flex items-center justify-center text-white text-xs font-bold">3</span>
-              {t('rapport.ideale_functie.interessegebieden')}
-            </h4>
-            <div className="flex flex-wrap gap-2">
-              {reportContent.ideale_functie?.interessegebieden?.map((item: string, i: number) => (
-                <span key={i} className="px-3 py-1 bg-white rounded-full text-sm text-[#232D4B] border border-[#232D4B]">
-                  {item}
-                </span>
-              ))}
+            {/* Interessegebieden */}
+            <div className="p-4 rounded-xl bg-[#E8F4FD] border-l-4 border-[#232D4B]">
+              <h4 className="font-semibold text-[#232D4B] mb-3 flex items-center gap-2">
+                <span className="w-6 h-6 bg-[#232D4B] rounded-full flex items-center justify-center text-white text-xs font-bold">3</span>
+                {t('rapport.ideale_functie.interessegebieden')}
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                {reportContent.ideale_functie?.interessegebieden?.map((item: string, i: number) => (
+                  <span key={i} className="px-3 py-1 bg-white rounded-full text-sm text-[#232D4B] border border-[#232D4B]">
+                    {item}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
+        </Card>
+
+        {/* Beroepen sectie */}
+        <Card className="rounded-2xl p-6 border border-gray-200">
+          <h3 className="text-2xl font-bold text-[#232D4B] mb-6">{t('rapport.beroepen.title')}</h3>
+          <div className="space-y-4">
+            {/* Passend 1 - Donkerblauw */}
+            {reportContent.beroepen?.passend_1 && (
+              <div className="border-l-4 p-4 rounded-r-xl bg-[#E8F4FD]" style={{ borderColor: '#232D4B' }}>
+                <span className="px-3 py-1 rounded-full text-xs font-medium text-white mb-2 inline-block bg-[#232D4B]">
+                  {t('rapport.beroepen.passend')}
+                </span>
+                <h4 className="text-xl font-bold text-gray-900 mb-2">{reportContent.beroepen.passend_1.titel}</h4>
+                <p className="text-gray-700">{reportContent.beroepen.passend_1.beschrijving}</p>
+              </div>
+            )}
+            
+            {/* Passend 2 - Donkerblauw */}
+            {reportContent.beroepen?.passend_2 && (
+              <div className="border-l-4 p-4 rounded-r-xl bg-[#E8F4FD]" style={{ borderColor: '#232D4B' }}>
+                <span className="px-3 py-1 rounded-full text-xs font-medium text-white mb-2 inline-block bg-[#232D4B]">
+                  {t('rapport.beroepen.passend')}
+                </span>
+                <h4 className="text-xl font-bold text-gray-900 mb-2">{reportContent.beroepen.passend_2.titel}</h4>
+                <p className="text-gray-700">{reportContent.beroepen.passend_2.beschrijving}</p>
+              </div>
+            )}
+            
+            {/* Verrassend - Lichtblauw */}
+            {reportContent.beroepen?.verrassend && (
+              <div className="border-l-4 p-4 rounded-r-xl bg-[#E8F4FD]" style={{ borderColor: '#78BFE3' }}>
+                <span className="px-3 py-1 rounded-full text-xs font-medium text-white mb-2 inline-block bg-[#78BFE3]">
+                  {t('rapport.beroepen.verrassend')}
+                </span>
+                <h4 className="text-xl font-bold text-gray-900 mb-2">{reportContent.beroepen.verrassend.titel}</h4>
+                <p className="text-gray-700">{reportContent.beroepen.verrassend.beschrijving}</p>
+              </div>
+            )}
+          </div>
+        </Card>
+
+        {/* Action buttons */}
+        <div className="flex justify-between items-center">
+          <Button
+            onClick={handlePrint}
+            variant="outline"
+            className="border-[#232D4B] text-[#232D4B] hover:bg-blue-50"
+          >
+            <Printer className="w-4 h-4 mr-2" />
+            {t('dashboard.round_dashboard.actions.print_button')}
+          </Button>
+          <Button 
+            onClick={onNext}
+            className="bg-[#F5C518] hover:bg-yellow-500 text-[#232D4B] font-semibold px-8"
+          >
+            {t('common.button.next')}
+          </Button>
         </div>
-      </Card>
-
-      {/* Beroepen sectie */}
-      <Card className="rounded-2xl p-6 border border-gray-200">
-        <h3 className="text-2xl font-bold text-[#232D4B] mb-6">{t('rapport.beroepen.title')}</h3>
-        <div className="space-y-4">
-          {/* Passend 1 - Donkerblauw */}
-          {reportContent.beroepen?.passend_1 && (
-            <div className="border-l-4 p-4 rounded-r-xl bg-[#E8F4FD]" style={{ borderColor: '#232D4B' }}>
-              <span className="px-3 py-1 rounded-full text-xs font-medium text-white mb-2 inline-block bg-[#232D4B]">
-                {t('rapport.beroepen.passend')}
-              </span>
-              <h4 className="text-xl font-bold text-gray-900 mb-2">{reportContent.beroepen.passend_1.titel}</h4>
-              <p className="text-gray-700">{reportContent.beroepen.passend_1.beschrijving}</p>
-            </div>
-          )}
-          
-          {/* Passend 2 - Donkerblauw */}
-          {reportContent.beroepen?.passend_2 && (
-            <div className="border-l-4 p-4 rounded-r-xl bg-[#E8F4FD]" style={{ borderColor: '#232D4B' }}>
-              <span className="px-3 py-1 rounded-full text-xs font-medium text-white mb-2 inline-block bg-[#232D4B]">
-                {t('rapport.beroepen.passend')}
-              </span>
-              <h4 className="text-xl font-bold text-gray-900 mb-2">{reportContent.beroepen.passend_2.titel}</h4>
-              <p className="text-gray-700">{reportContent.beroepen.passend_2.beschrijving}</p>
-            </div>
-          )}
-          
-          {/* Verrassend - Lichtblauw */}
-          {reportContent.beroepen?.verrassend && (
-            <div className="border-l-4 p-4 rounded-r-xl bg-[#E8F4FD]" style={{ borderColor: '#78BFE3' }}>
-              <span className="px-3 py-1 rounded-full text-xs font-medium text-white mb-2 inline-block bg-[#78BFE3]">
-                {t('rapport.beroepen.verrassend')}
-              </span>
-              <h4 className="text-xl font-bold text-gray-900 mb-2">{reportContent.beroepen.verrassend.titel}</h4>
-              <p className="text-gray-700">{reportContent.beroepen.verrassend.beschrijving}</p>
-            </div>
-          )}
-        </div>
-      </Card>
-
-      {/* Action buttons */}
-      <div className="flex justify-between items-center">
-        <Button
-          onClick={handlePrint}
-          variant="outline"
-          className="border-[#232D4B] text-[#232D4B] hover:bg-blue-50"
-        >
-          <Printer className="w-4 h-4 mr-2" />
-          {t('dashboard.round_dashboard.actions.print_button')}
-        </Button>
-        <Button 
-          onClick={onNext}
-          className="bg-[#F5C518] hover:bg-yellow-500 text-[#232D4B] font-semibold px-8"
-        >
-          {t('common.button.next')}
-        </Button>
       </div>
-    </div>
+
+      {/* Print-only content - hidden on screen, visible when printing */}
+      <div className="hidden print:block">
+        <style>
+          {`
+            @media print {
+              @page {
+                size: A4;
+                margin: 0;
+              }
+              body {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+              }
+              .print-page {
+                width: 210mm !important;
+                height: 297mm !important;
+                overflow: hidden !important;
+              }
+            }
+          `}
+        </style>
+        <PrintCoverPage userName={userName} startDate={startDate} />
+        <PrintIdealeFunctiePage reportContent={reportContent} t={t} />
+        <PrintBeroepenPage reportContent={reportContent} t={t} />
+      </div>
+    </>
   );
 };
 
