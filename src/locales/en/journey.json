@@ -179,8 +179,11 @@
     "intro": {
       "title": "Complete profile",
       "last_step_title": "Final step",
-      "description": "We have almost all the information we need for your personal career advice. For the final step, we ask you a few short questions about your background and preferences.",
-      "description_details": "This helps us make your advice even more specific and practical.",
+      "description": "We have almost all the information we need for your personal career advice. For the final step, we ask you a few short questions about your background and preferences and get more specific about who you are.",
+      "warning_title": "Please note",
+      "warning_text": "You can still make adjustments to the first interviews, but once you click complete profile, the keywords will be generated and are fixed for this round.",
+      "keywords_explanation": "Based on your completed enthusiasm scan and dream jobs, keywords will now be generated to gain more insight into what you enjoy, what your ideal work environment is, and what interests you.",
+      "description_details": "This helps us make your advice even more specific.",
       "start_button": "Complete profile",
       "generating_keywords": "Generating keywords..."
     },

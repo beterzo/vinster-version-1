@@ -178,8 +178,11 @@
     "intro": {
       "title": "Profiel voltooien",
       "last_step_title": "Laatste stap",
-      "description": "We hebben bijna alle informatie die we nodig hebben voor jouw persoonlijke loopbaanadvies. Voor de laatste stap vragen we je nog een paar korte vragen over je achtergrond en voorkeuren.",
-      "description_details": "Dit helpt ons om je advies nog specifieker en praktischer te maken.",
+      "description": "We hebben bijna alle informatie die we nodig hebben voor jouw persoonlijke loopbaanadvies. Voor de laatste stap vragen we je nog een paar korte vragen over je achtergrond en voorkeuren en gaan we nog wat specifieker in op wie jij bent.",
+      "warning_title": "Let op",
+      "warning_text": "Nu kun je nog aanpassingen doen aan de eerste interviews maar zodra je op profiel voltooien klikt worden de kernwoorden gegenereerd en staan die voor deze ronde vast.",
+      "keywords_explanation": "Op basis van jouw ingevulde enthousiasme scan en wensberoepen worden nu kernwoorden gegenereerd om nog meer inzicht te krijgen in wat je leuk vindt, wat jouw ideale werkomgeving is en wat je interesseert.",
+      "description_details": "Dit helpt ons om je advies nog specifieker te maken.",
       "start_button": "Profiel voltooien",
       "generating_keywords": "Kernwoorden genereren..."
     },

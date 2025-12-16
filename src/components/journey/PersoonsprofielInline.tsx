@@ -104,13 +104,26 @@ const PersoonsprofielInline = ({ roundId, subStep, onNext, onPrevious }: Persoon
           <h1 className="text-4xl font-bold text-[#232D4B] mb-8 text-center">
             {t('profiel_voltooien.intro.title')}
           </h1>
-          <div className="space-y-8">
-            <h2 className="text-2xl font-semibold text-[#232D4B] mb-4">
+          <div className="space-y-6">
+            <h2 className="text-2xl font-semibold text-[#232D4B]">
               {t('profiel_voltooien.intro.last_step_title')}
             </h2>
             <p className="text-lg text-gray-700 leading-relaxed">
               {t('profiel_voltooien.intro.description')}
             </p>
+
+            {/* Warning box */}
+            <div className="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-lg">
+              <p className="text-gray-700">
+                <span className="font-bold text-[#232D4B]">{t('profiel_voltooien.intro.warning_title')}: </span>
+                {t('profiel_voltooien.intro.warning_text')}
+              </p>
+            </div>
+
+            <p className="text-lg text-gray-700 leading-relaxed">
+              {t('profiel_voltooien.intro.keywords_explanation')}
+            </p>
+
             <p className="text-lg text-gray-700 leading-relaxed">
               {t('profiel_voltooien.intro.description_details')}
             </p>

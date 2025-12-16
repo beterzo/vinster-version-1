@@ -180,8 +180,11 @@
     "intro": {
       "title": "Profil vervollständigen",
       "last_step_title": "Letzter Schritt",
-      "description": "Wir haben fast alle Informationen, die wir für Ihre persönliche Karriereberatung benötigen. Für den letzten Schritt stellen wir Ihnen noch ein paar kurze Fragen zu Ihrem Hintergrund und Ihren Vorlieben.",
-      "description_details": "Dies hilft uns, Ihre Beratung noch spezifischer und praktischer zu gestalten.",
+      "description": "Wir haben fast alle Informationen, die wir für Ihre persönliche Karriereberatung benötigen. Für den letzten Schritt stellen wir Ihnen noch ein paar kurze Fragen zu Ihrem Hintergrund und Ihren Vorlieben und werden noch spezifischer darauf eingehen, wer Sie sind.",
+      "warning_title": "Achtung",
+      "warning_text": "Sie können jetzt noch Anpassungen an den ersten Interviews vornehmen, aber sobald Sie auf Profil vervollständigen klicken, werden die Schlüsselwörter generiert und stehen für diese Runde fest.",
+      "keywords_explanation": "Basierend auf Ihrem ausgefüllten Begeisterungsscan und Wunschberufen werden jetzt Schlüsselwörter generiert, um mehr Einblick in das zu bekommen, was Ihnen gefällt, was Ihre ideale Arbeitsumgebung ist und was Sie interessiert.",
+      "description_details": "Dies hilft uns, Ihre Beratung noch spezifischer zu gestalten.",
       "start_button": "Profil vervollständigen",
       "generating_keywords": "Schlüsselwörter werden generiert..."
     },
