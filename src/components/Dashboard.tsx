@@ -234,7 +234,6 @@ const Dashboard = () => {
               <li>{t('dashboard.important_info.point4')}</li>
               <li>{t('dashboard.important_info.point5')}</li>
               <li>{t('dashboard.important_info.point6')}</li>
-              <li>{t('dashboard.important_info.point7')}</li>
             </ul>
           </Card>
         </div>
