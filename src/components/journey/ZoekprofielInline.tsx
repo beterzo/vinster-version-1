@@ -31,7 +31,7 @@ interface ZoekprofielContent {
 const ZoekprofielInline = ({ roundId, subStep, onNext, onPrevious }: ZoekprofielInlineProps) => {
   const { t, language } = useTranslation();
   const { user } = useAuth();
-  const { responses, saveResponse, submitToWebhook, loading: responsesLoading } = useZoekprofielResponses();
+  const { responses, saveResponse, submitToWebhook, loading: responsesLoading } = useZoekprofielResponses(roundId);
   const [zoekprofielExists, setZoekprofielExists] = useState(false);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
