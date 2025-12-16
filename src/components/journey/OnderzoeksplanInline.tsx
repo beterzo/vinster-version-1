@@ -7,9 +7,10 @@ interface OnderzoeksplanInlineProps {
   subStep: 'page1' | 'page2' | 'page3';
   onNext: () => void;
   onPrevious: () => void;
+  onComplete?: () => void;
 }
 
-const OnderzoeksplanInline = ({ subStep, onNext, onPrevious }: OnderzoeksplanInlineProps) => {
+const OnderzoeksplanInline = ({ subStep, onNext, onPrevious, onComplete }: OnderzoeksplanInlineProps) => {
   const { t } = useTranslation();
 
   if (subStep === 'page1') {
@@ -130,7 +131,10 @@ const OnderzoeksplanInline = ({ subStep, onNext, onPrevious }: OnderzoeksplanInl
               {t('journey.onderzoeksplan.previous_button')}
             </Button>
             <Button 
-              onClick={onNext}
+              onClick={() => {
+                onComplete?.();
+                onNext();
+              }}
               className="bg-[#F5C518] hover:bg-yellow-500 text-[#232D4B] font-semibold px-8"
             >
               {t('journey.onderzoeksplan.to_zoekprofiel_button')}

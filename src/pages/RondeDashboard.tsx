@@ -37,6 +37,7 @@ const RondeDashboard = () => {
   const [currentSubStep, setCurrentSubStep] = useState<SubStep>('welkom');
   const [slideDirection, setSlideDirection] = useState<'left' | 'right'>('left');
   const [reportExists, setReportExists] = useState(false);
+  const [onderzoeksplanComplete, setOnderzoeksplanComplete] = useState(false);
 
   useEffect(() => {
     if (!roundsLoading && rounds.length > 0 && roundId) {
@@ -81,6 +82,9 @@ const RondeDashboard = () => {
     if (persoonsprofielComplete) completed.push('persoonsprofiel');
     if (reportExists) {
       completed.push('loopbaanrapport');
+    }
+    if (onderzoeksplanComplete) {
+      completed.push('onderzoeksplan');
     }
     return completed;
   };
@@ -263,7 +267,8 @@ const RondeDashboard = () => {
           <OnderzoeksplanInline 
             subStep={currentSubStep as 'page1' | 'page2' | 'page3'} 
             onNext={handleNext} 
-            onPrevious={handlePrevious} 
+            onPrevious={handlePrevious}
+            onComplete={() => setOnderzoeksplanComplete(true)}
           />
         )}
         {currentStep === 'zoekprofiel' && roundId && (
