@@ -90,21 +90,18 @@ const ZoekprofielViewer = ({ content, userName }: ZoekprofielViewerProps) => {
               -webkit-print-color-adjust: exact !important;
             }
 
-            /* Remove non-root portals/toasters from the print layout */
-            body > *:not(#root) {
-              display: none !important;
+            /* Verberg alles visueel */
+            body * {
+              visibility: hidden !important;
             }
 
-            /* Remove everything from the React tree except the zoekprofiel page */
-            #root *:not(.zoekprofiel-print-container):not(.zoekprofiel-print-container *) {
-              display: none !important;
-            }
-
+            /* Toon print container en alle children */
             .zoekprofiel-print-container,
             .zoekprofiel-print-container * {
               visibility: visible !important;
             }
 
+            /* Position fixed haalt element uit document flow */
             .zoekprofiel-print-container {
               position: fixed !important;
               left: 0 !important;
@@ -115,6 +112,13 @@ const ZoekprofielViewer = ({ content, userName }: ZoekprofielViewerProps) => {
               padding: 0 !important;
               margin: 0 !important;
               background: white !important;
+              overflow: hidden !important;
+              z-index: 999999 !important;
+            }
+
+            /* Voorkom dat verborgen content ruimte inneemt */
+            #root {
+              height: 0 !important;
               overflow: hidden !important;
             }
           }
