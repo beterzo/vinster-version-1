@@ -124,7 +124,7 @@ const WelkomInline = ({ onNext, completedSteps = [], onStepClick }: WelkomInline
               return (
                 <div 
                   key={step.number}
-                  className={`rounded-xl p-5 border transition-colors ${
+                  className={`rounded-xl p-5 border transition-colors flex flex-col h-full ${
                     isCompleted 
                       ? 'bg-blue-50 border-blue-200' 
                       : isCurrent 
@@ -132,7 +132,7 @@ const WelkomInline = ({ onNext, completedSteps = [], onStepClick }: WelkomInline
                         : 'bg-gray-50 border-gray-100 hover:border-[#232D4B]/20'
                   }`}
                 >
-                  <div className="flex items-start gap-4">
+                  <div className="flex items-start gap-4 flex-1">
                     {/* Number/Status icon */}
                     <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-semibold ${
                       isCompleted 
@@ -150,7 +150,7 @@ const WelkomInline = ({ onNext, completedSteps = [], onStepClick }: WelkomInline
                       )}
                     </div>
 
-                    <div className="flex-1 min-w-0">
+                    <div className="flex-1 min-w-0 flex flex-col">
                       {/* Title + icon + status badge */}
                       <div className="flex items-center gap-2 mb-1 flex-wrap">
                         <step.icon className={`w-4 h-4 ${isLocked ? 'text-gray-400' : 'text-[#232D4B]'}`} />
@@ -182,21 +182,23 @@ const WelkomInline = ({ onNext, completedSteps = [], onStepClick }: WelkomInline
                           <span>{step.time}</span>
                         </div>
                       )}
-                      
-                      {/* View button for completed steps */}
-                      {isCompleted && onStepClick && (
-                        <Button 
-                          variant="outline" 
-                          size="sm"
-                          onClick={() => onStepClick(step.id)}
-                          className="mt-3 text-[#232D4B] border-[#232D4B]/30 hover:bg-[#232D4B] hover:text-white"
-                        >
-                          <Eye className="w-4 h-4 mr-1" />
-                          {t('welkom.view_button')}
-                        </Button>
-                      )}
                     </div>
                   </div>
+                  
+                  {/* View button for completed steps - always at bottom */}
+                  {isCompleted && onStepClick && (
+                    <div className="mt-auto pt-3 pl-14">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => onStepClick(step.id)}
+                        className="text-[#232D4B] border-[#232D4B]/30 hover:bg-[#232D4B] hover:text-white"
+                      >
+                        <Eye className="w-4 h-4 mr-1" />
+                        {t('welkom.view_button')}
+                      </Button>
+                    </div>
+                  )}
                 </div>
               );
             })}
