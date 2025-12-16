@@ -55,12 +55,11 @@
     "important_info": {
       "title": "Belangrijk om te weten",
       "point1": "• Er zijn geen goede of foute antwoorden - wees eerlijk over wat jij echt leuk vindt",
-      "point2": "• Denk aan concrete situaties en ervaringen uit jouw leven",
-      "point3": "• Je kunt zoveel tijd nemen als je wilt - er zit geen tijdsdruk op dit traject",
-      "point4": "• Het is juist goed om de antwoorden een dag te laten bezinken voordat je verdergaat",
-      "point5": "• Je kunt je antwoorden altijd aanpassen tijdens het traject",
-      "point6": "• Je voortgang wordt automatisch opgeslagen",
-      "point7": "• Alle informatie wordt vertrouwelijk behandeld"
+      "point2": "• Je kunt maximaal tien keer door het traject",
+      "point3": "• Alle informatie wordt vertrouwelijk behandeld",
+      "point4": "• Denk aan concrete situaties en ervaringen uit jouw leven",
+      "point5": "• Het is juist goed om de antwoorden en gedachten te laten bezinken voordat je verdergaat",
+      "point6": "• Alle voortgang wordt automatisch opgeslagen"
     },
     "progress_title": "Jouw voortgang",
     "logout": "Uitloggen",
