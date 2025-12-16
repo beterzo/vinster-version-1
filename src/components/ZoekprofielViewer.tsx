@@ -117,7 +117,7 @@ const ZoekprofielViewer = ({ content, userName }: ZoekprofielViewerProps) => {
             <img 
               src="/images/vinster-logo-white.png" 
               alt="Vinster Logo" 
-              className="h-10 md:h-12 print:h-14"
+              className="h-16 md:h-20 print:h-24"
             />
           </div>
         </div>
