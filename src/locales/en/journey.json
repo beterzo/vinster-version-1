@@ -289,7 +289,20 @@
           "£30,000-38,000 gross, 40 hours, good pension scheme",
           "£40,000-55,000 gross, flexible hours, career opportunities"
         ]
-      }
+      },
+      "submit_success": "Your search profile was successfully generated!",
+      "submit_error": "Something went wrong while generating your search profile.",
+      "submitting": "Generating..."
+    },
+    "complete": {
+      "title": "Your search profile",
+      "print_button": "Print",
+      "next_steps": "Congratulations! Your Vinster journey is complete. Use your search profile for job applications and share it with recruiters.",
+      "to_dashboard": "Back to dashboard",
+      "generating": "Your search profile is being generated..."
+    },
+    "viewer": {
+      "title": "Your search profile"
     },
     "download": {
       "title": "Download your search profile",
