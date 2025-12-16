@@ -87,14 +87,41 @@ const RondeDashboard = () => {
 
   const completedSteps = getCompletedSteps();
 
+  // Bepaal de juiste substep voor het bekijken van voltooide stappen (skip intro/welkom)
+  const getViewSubStepForCompletedStep = (step: JourneyStep): SubStep => {
+    switch (step) {
+      case 'enthousiasme':
+        return 'step1';  // Direct naar eerste vraag-pagina
+      case 'wensberoepen':
+        return 'step1';  // Direct naar wensberoep 1
+      case 'persoonsprofiel':
+        return 'extra_info';  // Direct naar inhoud
+      case 'loopbaanrapport':
+        return 'complete';  // Naar het rapport
+      case 'onderzoeksplan':
+        return 'page1';  // Naar eerste pagina
+      case 'zoekprofiel':
+        return 'step1';  // Direct naar vragen
+      default:
+        return 'step1';
+    }
+  };
+
   const handleStepClick = (step: JourneyStep) => {
     setSlideDirection(JOURNEY_STEPS.findIndex(s => s.id === step) > JOURNEY_STEPS.findIndex(s => s.id === currentStep) ? 'left' : 'right');
     setCurrentStep(step);
     
-    // For loopbaanrapport, check if report exists to determine subStep
-    if (step === 'loopbaanrapport') {
+    // Check of de stap voltooid is
+    const isStepCompleted = completedSteps.includes(step);
+    
+    if (isStepCompleted) {
+      // Voltooide stap: direct naar inhoud (skip intro/welkom)
+      setCurrentSubStep(getViewSubStepForCompletedStep(step));
+    } else if (step === 'loopbaanrapport') {
+      // Loopbaanrapport: check report status
       setCurrentSubStep(reportExists ? 'complete' : 'confirm');
     } else {
+      // Niet voltooide stap: naar eerste substep (intro/welkom)
       const stepConfig = JOURNEY_STEPS.find(s => s.id === step);
       setCurrentSubStep(stepConfig?.subSteps[0] || 'intro');
     }
