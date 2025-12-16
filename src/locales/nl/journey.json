@@ -288,7 +288,20 @@
           "€3500-4200 bruto, 40 uur, goede pensioenregeling",
           "€4500-6000 bruto, flexibele werktijden, doorgroeimogelijkheden"
         ]
-      }
+      },
+      "submit_success": "Je zoekprofiel is succesvol gegenereerd!",
+      "submit_error": "Er ging iets mis bij het genereren van je zoekprofiel.",
+      "submitting": "Bezig met genereren..."
+    },
+    "complete": {
+      "title": "Je zoekprofiel",
+      "print_button": "Afdrukken",
+      "next_steps": "Gefeliciteerd! Je Vinster traject is voltooid. Gebruik je zoekprofiel bij sollicitaties en deel het met recruiters.",
+      "to_dashboard": "Terug naar dashboard",
+      "generating": "Je zoekprofiel wordt gegenereerd..."
+    },
+    "viewer": {
+      "title": "Jouw zoekprofiel"
     },
       "download": {
         "title": "Zoekprofiel downloaden",

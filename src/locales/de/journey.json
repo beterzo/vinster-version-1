@@ -290,7 +290,20 @@
           "€3500-4200 brutto, 40 Std., gute Rentenregelung",
           "€4500-6000 brutto, flexible Arbeitszeiten, Aufstiegsmöglichkeiten"
         ]
-      }
+      },
+      "submit_success": "Ihr Suchprofil wurde erfolgreich erstellt!",
+      "submit_error": "Bei der Erstellung Ihres Suchprofils ist ein Fehler aufgetreten.",
+      "submitting": "Wird generiert..."
+    },
+    "complete": {
+      "title": "Ihr Suchprofil",
+      "print_button": "Drucken",
+      "next_steps": "Herzlichen Glückwunsch! Ihre Vinster-Reise ist abgeschlossen. Nutzen Sie Ihr Suchprofil für Bewerbungen und teilen Sie es mit Recruitern.",
+      "to_dashboard": "Zurück zum Dashboard",
+      "generating": "Ihr Suchprofil wird erstellt..."
+    },
+    "viewer": {
+      "title": "Ihr Suchprofil"
     },
     "download": {
       "title": "Laden Sie Ihr Suchprofil herunter",

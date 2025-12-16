@@ -288,7 +288,20 @@
           "350.000-420.000 kr brutto, 40 timer, god pensjonsordning",
           "450.000-600.000 kr brutto, fleksible arbeidstider, karrieremuligheter"
         ]
-      }
+      },
+      "submit_success": "Søkeprofilen din ble generert!",
+      "submit_error": "Noe gikk galt ved generering av søkeprofilen din.",
+      "submitting": "Genererer..."
+    },
+    "complete": {
+      "title": "Din søkeprofil",
+      "print_button": "Skriv ut",
+      "next_steps": "Gratulerer! Vinster-reisen din er fullført. Bruk søkeprofilen din i jobbsøknader og del den med rekrutterere.",
+      "to_dashboard": "Tilbake til dashboard",
+      "generating": "Søkeprofilen din blir generert..."
+    },
+    "viewer": {
+      "title": "Din søkeprofil"
     },
     "download": {
       "title": "Last ned søkeprofilen din",
