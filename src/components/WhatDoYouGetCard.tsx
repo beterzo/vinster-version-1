@@ -15,7 +15,7 @@ const WhatDoYouGetCard = () => {
 
   const handleViewSampleReport = () => {
     // Language-specific PDF URLs
-    const dutchPdfUrl = 'https://beterzo.github.io/vinster-version-1/public/Nederlands%20Voorbeeld%20rapport%20.pdf';
+    const dutchPdfUrl = '/Voorbeeldrapport_Vinster_V2.pdf';
     const englishPdfUrl = 'https://beterzo.github.io/vinster-version-1/public/Voorbeeld%20loopbaanrapport%20engels.pdf';
     const germanPdfUrl = 'https://beterzo.github.io/vinster-version-1/public/Voorbeeld%20loopbaanrapport%20Duits.pdf';
     const norwegianPdfUrl = 'https://beterzo.github.io/vinster-version-1/public/Voorbeeld%20loopbaanrapport%20Noors.pdf';
