@@ -3,7 +3,7 @@ import { useWensberoepenResponses } from "./useWensberoepenResponses";
 import { useMemo } from "react";
 
 export const useWensberoepenValidation = (roundId?: string) => {
-  const { responses: wensberoepenResponses, isLoading: wensberoepenLoading } = useWensberoepenResponses(roundId);
+  const { responses: wensberoepenResponses, isLoading: wensberoepenLoading, loadResponses } = useWensberoepenResponses(roundId);
 
   const validationResults = useMemo(() => {
     if (wensberoepenLoading) {
@@ -53,9 +53,10 @@ export const useWensberoepenValidation = (roundId?: string) => {
       isLoading: false,
       isWensberoepenComplete,
       missingFields,
-      missingWensberoepenCount: isWensberoepenComplete ? 0 : 1
+      missingWensberoepenCount: isWensberoepenComplete ? 0 : 1,
+      reloadWensberoepen: loadResponses
     };
-  }, [wensberoepenResponses, wensberoepenLoading]);
+  }, [wensberoepenResponses, wensberoepenLoading, loadResponses]);
 
   return validationResults;
 };

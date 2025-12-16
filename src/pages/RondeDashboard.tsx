@@ -28,7 +28,7 @@ const RondeDashboard = () => {
   
   // Pass roundId to all response hooks
   const { responses: enthousiasmeResponses, loading: enthousiasmeLoading, loadResponses: reloadEnthousiasme } = useEnthousiasmeResponses(roundId);
-  const { isWensberoepenComplete, isLoading: wensberoepenLoading } = useWensberoepenValidation(roundId);
+  const { isWensberoepenComplete, isLoading: wensberoepenLoading, reloadWensberoepen } = useWensberoepenValidation(roundId);
   const { responses: prioriteitenResponses, loading: prioriteitenLoading, loadResponses: reloadPrioriteiten } = usePrioriteitenResponses(roundId);
   const { responses: extraInfoResponses, loading: extraInfoLoading, loadResponses: reloadExtraInfo } = useExtraInformatieResponses(roundId);
   
@@ -151,6 +151,8 @@ const RondeDashboard = () => {
       // End of current step's substeps - refresh data first, then show overview
       if (currentStep === 'enthousiasme') {
         await reloadEnthousiasme();
+      } else if (currentStep === 'wensberoepen') {
+        await reloadWensberoepen();
       } else if (currentStep === 'persoonsprofiel') {
         await reloadPrioriteiten();
         await reloadExtraInfo();
