@@ -19,34 +19,34 @@ interface RapportInlineProps {
 const PrintCoverPage = ({ userName, startDate }: { userName: string; startDate: string }) => (
   <div className="print-page bg-[#232D4B] relative overflow-hidden" style={{ width: '210mm', height: '297mm', pageBreakAfter: 'always' }}>
     {/* Main content */}
-    <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-16">
-      <h1 className="text-5xl font-bold text-white mb-4 leading-tight">
+    <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-20">
+      <h1 className="text-7xl font-bold text-white mb-6 leading-tight">
         Vind werk dat<br />bij je past
       </h1>
-      <p className="text-[#F5C518] text-xl mb-16">www.vinster.ai</p>
+      <p className="text-[#F5C518] text-3xl mb-24">www.vinster.ai</p>
       
-      <div className="text-white text-lg space-y-2">
-        <p className="font-semibold">{userName}</p>
-        <p className="text-gray-300">{startDate}</p>
+      <div className="text-white space-y-3">
+        <p className="text-3xl font-bold">{userName}</p>
+        <p className="text-2xl text-gray-300">{startDate}</p>
       </div>
     </div>
 
     {/* Decorative squares - bottom left */}
-    <div className="absolute bottom-12 left-12 flex gap-2">
-      <div className="w-8 h-8 bg-[#78BFE3]"></div>
-      <div className="w-8 h-8 bg-[#F5C518]"></div>
-      <div className="w-8 h-8 bg-[#78BFE3]"></div>
+    <div className="absolute bottom-16 left-16 flex gap-3">
+      <div className="w-10 h-10 bg-[#78BFE3]"></div>
+      <div className="w-10 h-10 bg-[#F5C518]"></div>
+      <div className="w-10 h-10 bg-[#78BFE3]"></div>
     </div>
-    <div className="absolute bottom-20 left-12 flex gap-2">
-      <div className="w-8 h-8 bg-[#F5C518]"></div>
-      <div className="w-8 h-8 bg-[#232D4B] border-2 border-[#78BFE3]"></div>
+    <div className="absolute bottom-28 left-16 flex gap-3">
+      <div className="w-10 h-10 bg-[#F5C518]"></div>
+      <div className="w-10 h-10 bg-[#232D4B] border-2 border-[#78BFE3]"></div>
     </div>
 
     {/* Vinster logo - bottom right */}
     <img 
       src="/images/vinster-logo-print.png" 
       alt="Vinster" 
-      className="absolute bottom-12 right-12 h-12 object-contain"
+      className="absolute bottom-16 right-16 h-16 object-contain"
     />
   </div>
 );
@@ -57,35 +57,35 @@ const PrintIdealeFunctiePage = ({ reportContent, t }: { reportContent: any; t: (
     {/* Dark blue border */}
     <div className="absolute inset-4 border-[6px] border-[#232D4B]">
       {/* Content area */}
-      <div className="p-8">
+      <div className="p-12">
         {/* Title with yellow underline */}
-        <div className="mb-8">
-          <h2 className="text-3xl font-bold text-[#232D4B] mb-2">Jouw ideale functie-inhoud</h2>
-          <div className="w-48 h-1 bg-[#F5C518]"></div>
+        <div className="mb-12">
+          <h2 className="text-4xl font-bold text-[#232D4B] mb-3">Jouw ideale functie-inhoud</h2>
+          <div className="w-64 h-1.5 bg-[#F5C518]"></div>
         </div>
 
         {/* Three sections */}
-        <div className="space-y-8">
+        <div className="space-y-10">
           {/* Activiteiten */}
           <div>
-            <h3 className="text-xl font-semibold text-[#78BFE3] mb-3">Wat je graag doet</h3>
-            <p className="text-gray-800 leading-relaxed">
+            <h3 className="text-2xl font-semibold text-[#78BFE3] mb-4">Wat je graag doet</h3>
+            <p className="text-lg text-gray-800 leading-relaxed">
               {reportContent.ideale_functie?.activiteiten?.join(', ')}
             </p>
           </div>
 
           {/* Werkomgeving */}
           <div>
-            <h3 className="text-xl font-semibold text-[#78BFE3] mb-3">Jouw ideale werkomgeving</h3>
-            <p className="text-gray-800 leading-relaxed">
+            <h3 className="text-2xl font-semibold text-[#78BFE3] mb-4">Jouw ideale werkomgeving</h3>
+            <p className="text-lg text-gray-800 leading-relaxed">
               {reportContent.ideale_functie?.werkomgeving?.join(', ')}
             </p>
           </div>
 
           {/* Interessegebieden */}
           <div>
-            <h3 className="text-xl font-semibold text-[#78BFE3] mb-3">Jouw interessegebieden</h3>
-            <p className="text-gray-800 leading-relaxed">
+            <h3 className="text-2xl font-semibold text-[#78BFE3] mb-4">Jouw interessegebieden</h3>
+            <p className="text-lg text-gray-800 leading-relaxed">
               {reportContent.ideale_functie?.interessegebieden?.join(', ')}
             </p>
           </div>
@@ -93,14 +93,14 @@ const PrintIdealeFunctiePage = ({ reportContent, t }: { reportContent: any; t: (
       </div>
 
       {/* Decorative sidebar - right */}
-      <div className="absolute right-0 top-1/4 flex flex-col gap-1">
-        <div className="w-3 h-12 bg-[#F5C518]"></div>
-        <div className="w-3 h-12 bg-[#78BFE3]"></div>
-        <div className="w-3 h-12 bg-[#232D4B]"></div>
+      <div className="absolute right-0 top-1/4 flex flex-col gap-2">
+        <div className="w-4 h-16 bg-[#F5C518]"></div>
+        <div className="w-4 h-16 bg-[#78BFE3]"></div>
+        <div className="w-4 h-16 bg-[#232D4B]"></div>
       </div>
 
       {/* Page number */}
-      <div className="absolute bottom-4 right-8 text-sm text-gray-500">
+      <div className="absolute bottom-6 right-10 text-base text-gray-500">
         Pagina 1 van 2
       </div>
     </div>
@@ -113,22 +113,22 @@ const PrintBeroepenPage = ({ reportContent, t }: { reportContent: any; t: (key: 
     {/* Dark blue border */}
     <div className="absolute inset-4 border-[6px] border-[#232D4B]">
       {/* Content area */}
-      <div className="p-8">
+      <div className="p-12">
         {/* Title with yellow underline */}
-        <div className="mb-8">
-          <h2 className="text-3xl font-bold text-[#232D4B] mb-2">Mogelijke beroepen</h2>
-          <div className="w-48 h-1 bg-[#F5C518]"></div>
+        <div className="mb-12">
+          <h2 className="text-4xl font-bold text-[#232D4B] mb-3">Mogelijke beroepen</h2>
+          <div className="w-64 h-1.5 bg-[#F5C518]"></div>
         </div>
 
         {/* Three professions */}
-        <div className="space-y-6">
+        <div className="space-y-8">
           {/* Beroep 1 */}
           {reportContent.beroepen?.passend_1 && (
             <div>
-              <h3 className="text-xl font-semibold text-[#78BFE3] mb-2">
+              <h3 className="text-2xl font-semibold text-[#78BFE3] mb-3">
                 {reportContent.beroepen.passend_1.titel}
               </h3>
-              <p className="text-gray-800 leading-relaxed">
+              <p className="text-lg text-gray-800 leading-relaxed">
                 {reportContent.beroepen.passend_1.beschrijving}
               </p>
             </div>
@@ -137,10 +137,10 @@ const PrintBeroepenPage = ({ reportContent, t }: { reportContent: any; t: (key: 
           {/* Beroep 2 */}
           {reportContent.beroepen?.passend_2 && (
             <div>
-              <h3 className="text-xl font-semibold text-[#78BFE3] mb-2">
+              <h3 className="text-2xl font-semibold text-[#78BFE3] mb-3">
                 {reportContent.beroepen.passend_2.titel}
               </h3>
-              <p className="text-gray-800 leading-relaxed">
+              <p className="text-lg text-gray-800 leading-relaxed">
                 {reportContent.beroepen.passend_2.beschrijving}
               </p>
             </div>
@@ -149,10 +149,10 @@ const PrintBeroepenPage = ({ reportContent, t }: { reportContent: any; t: (key: 
           {/* Beroep 3 (verrassend) */}
           {reportContent.beroepen?.verrassend && (
             <div>
-              <h3 className="text-xl font-semibold text-[#78BFE3] mb-2">
+              <h3 className="text-2xl font-semibold text-[#78BFE3] mb-3">
                 {reportContent.beroepen.verrassend.titel}
               </h3>
-              <p className="text-gray-800 leading-relaxed">
+              <p className="text-lg text-gray-800 leading-relaxed">
                 {reportContent.beroepen.verrassend.beschrijving}
               </p>
             </div>
@@ -161,14 +161,14 @@ const PrintBeroepenPage = ({ reportContent, t }: { reportContent: any; t: (key: 
       </div>
 
       {/* Decorative sidebar - right */}
-      <div className="absolute right-0 top-1/4 flex flex-col gap-1">
-        <div className="w-3 h-12 bg-[#F5C518]"></div>
-        <div className="w-3 h-12 bg-[#78BFE3]"></div>
-        <div className="w-3 h-12 bg-[#232D4B]"></div>
+      <div className="absolute right-0 top-1/4 flex flex-col gap-2">
+        <div className="w-4 h-16 bg-[#F5C518]"></div>
+        <div className="w-4 h-16 bg-[#78BFE3]"></div>
+        <div className="w-4 h-16 bg-[#232D4B]"></div>
       </div>
 
       {/* Page number */}
-      <div className="absolute bottom-4 right-8 text-sm text-gray-500">
+      <div className="absolute bottom-6 right-10 text-base text-gray-500">
         Pagina 2 van 2
       </div>
     </div>
@@ -513,26 +513,7 @@ const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated
       </div>
 
       {/* Print-only content - hidden on screen, visible when printing */}
-      <div className="hidden print:block">
-        <style>
-          {`
-            @media print {
-              @page {
-                size: A4;
-                margin: 0;
-              }
-              body {
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-              }
-              .print-page {
-                width: 210mm !important;
-                height: 297mm !important;
-                overflow: hidden !important;
-              }
-            }
-          `}
-        </style>
+      <div className="hidden print:block print-root">
         <PrintCoverPage userName={userName} startDate={startDate} />
         <PrintIdealeFunctiePage reportContent={reportContent} t={t} />
         <PrintBeroepenPage reportContent={reportContent} t={t} />
