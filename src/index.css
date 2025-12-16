@@ -106,34 +106,6 @@
 
 /* Global print styles - hide everything except print content */
 @media print {
-  /* Hide all UI elements */
-  body > * {
-    display: none !important;
-  }
-  
-  /* Show only print-root content */
-  body > #root .print-root {
-    display: block !important;
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: auto !important;
-    z-index: 99999 !important;
-    background: white !important;
-  }
-  
-  /* Make root visible but hide its normal content */
-  body > #root {
-    display: block !important;
-  }
-  
-  /* Hide everything inside root except print-root */
-  body > #root > *:not(.print-root),
-  body > #root * .print\\:hidden {
-    display: none !important;
-  }
-  
   /* A4 page settings */
   @page {
     size: A4;
@@ -144,5 +116,38 @@
   * {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
+  }
+  
+  /* Hide everything by default */
+  body * {
+    visibility: hidden;
+  }
+  
+  /* Show print-root and its children */
+  .print-root,
+  .print-root * {
+    visibility: visible !important;
+  }
+  
+  /* Position print-root at top of page */
+  .print-root {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+  }
+  
+  /* Each print page takes full A4 */
+  .print-page {
+    width: 210mm !important;
+    height: 297mm !important;
+    overflow: hidden !important;
+    page-break-after: always !important;
+    page-break-inside: avoid !important;
+  }
+  
+  /* Last page no break after */
+  .print-page:last-child {
+    page-break-after: auto !important;
   }
 }
