@@ -13,27 +13,23 @@ const ImportantInfoCard = () => {
         </li>
         <li className="flex items-start gap-3">
           <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+          <span>Je kunt maximaal tien keer door het traject</span>
+        </li>
+        <li className="flex items-start gap-3">
+          <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+          <span>Alle informatie wordt vertrouwelijk behandeld</span>
+        </li>
+        <li className="flex items-start gap-3">
+          <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
           <span>Denk aan concrete situaties en ervaringen uit jouw leven</span>
         </li>
         <li className="flex items-start gap-3">
           <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
-          <span>Neem de tijd om rustig na te denken tussen de stappen door</span>
+          <span>Het is juist goed om de antwoorden en gedachten te laten bezinken voordat je verdergaat</span>
         </li>
         <li className="flex items-start gap-3">
           <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
-          <span>Laat je antwoorden een dag bezinken voordat je verdergaat naar de volgende stap</span>
-        </li>
-        <li className="flex items-start gap-3">
-          <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
-          <span>Je kunt je antwoorden altijd aanpassen tijdens het traject</span>
-        </li>
-        <li className="flex items-start gap-3">
-          <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
-          <span>Je voortgang wordt automatisch opgeslagen</span>
-        </li>
-        <li className="flex items-start gap-3">
-          <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
-          <span>Na het invullen van beide interviews wordt automatisch een persoonlijk rapport gegenereerd</span>
+          <span>Alle voortgang wordt automatisch opgeslagen</span>
         </li>
       </ul>
     </Card>;
