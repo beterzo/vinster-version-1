@@ -76,6 +76,11 @@ const RondeDashboard = () => {
     extraInfoResponses?.opleidingsniveau;
 
   const getCompletedSteps = (): JourneyStep[] => {
+    // Als de ronde is afgerond, zijn ALLE stappen voltooid
+    if (round?.status === 'completed') {
+      return JOURNEY_STEPS.map(step => step.id);
+    }
+    
     const completed: JourneyStep[] = [];
     if (enthousiasmeComplete) completed.push('enthousiasme');
     if (wensberoepenComplete) completed.push('wensberoepen');
