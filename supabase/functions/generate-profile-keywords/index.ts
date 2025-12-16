@@ -10,7 +10,7 @@ const corsHeaders = {
 const getPrompts = (language: string, enthousiasmeData: any, wensberoepenData: any) => {
   const prompts: Record<string, { system: string; user: string }> = {
     nl: {
-      system: `Je bent een loopbaanprofessional gespecialiseerd in het analyseren van open antwoorden van kandidaten. Je doel is om 40 kernwoorden of korte zinnen te genereren op basis van reflectieve antwoorden op vragen over werkervaring, voorkeuren en interesses.
+      system: `Je bent een loopbaanprofessional gespecialiseerd in het analyseren van open antwoorden van kandidaten. Je doel is om 48 kernwoorden of korte zinnen te genereren (exact 16 per categorie) op basis van reflectieve antwoorden op vragen over werkervaring, voorkeuren en interesses.
 
 De output moet een JSON-object zijn, met drie aparte arrays:
 
@@ -21,7 +21,7 @@ De output moet een JSON-object zijn, met drie aparte arrays:
 Gebruik uitsluitend informatie uit de antwoorden van de deelnemer. Formuleer alles in de stijl van de deelnemer. Je mag ook korte zinnen gebruiken als dat beter past dan één woord.
 
 ⚠️ De output moet geldig JSON zijn. Geen toelichting, geen extra uitleg, alleen het JSON-object.`,
-      user: `Je ontvangt nu een volledig ingevulde antwoordenlijst van een gebruiker. Gebruik deze input om op basis van de methodiek van de loopbaantrechter 40 kernwoorden of korte zinnen te genereren, verdeeld over drie categorieën:
+      user: `Je ontvangt nu een volledig ingevulde antwoordenlijst van een gebruiker. Gebruik deze input om op basis van de methodiek van de loopbaantrechter 48 kernwoorden of korte zinnen te genereren (exact 16 per categorie), verdeeld over drie categorieën:
 • activiteiten (wat iemand graag doet)
 • werkomgeving (de sfeer, structuur en context waarin iemand graag werkt)
 • interesses (onderwerpen waar iemand door gefascineerd is of energie van krijgt)
@@ -32,7 +32,7 @@ De output moet in JSON-format zijn, met drie duidelijke keys:
   "werkomgeving": [],
   "interesses": []
 }
-Laat elke lijst ongeveer 10 tot 15 items bevatten. Je mag zelfstandige naamwoorden, werkwoorden of korte zinnen gebruiken. Kwalitatieve bijvoeglijke naamwoorden zijn ook toegestaan als die iets toevoegen aan het karakter of de stijl van de persoon.
+Laat elke lijst exact 16 items bevatten. Dit is belangrijk: niet meer, niet minder dan 16 items per categorie. Je mag zelfstandige naamwoorden, werkwoorden of korte zinnen gebruiken. Kwalitatieve bijvoeglijke naamwoorden zijn ook toegestaan als die iets toevoegen aan het karakter of de stijl van de persoon.
 
 Input – Antwoorden gebruiker:
 
@@ -99,7 +99,7 @@ Wensberoep 3 – ${wensberoepenData?.wensberoep_3_titel || 'Niet ingevuld'}
 8: ${wensberoepenData?.wensberoep_3_kennis_focus || 'Niet ingevuld'}`
     },
     en: {
-      system: `You are a career professional specialized in analyzing open-ended responses from candidates. Your goal is to generate 40 English keywords or short phrases based on reflective answers to questions about work experience, preferences, and interests.
+      system: `You are a career professional specialized in analyzing open-ended responses from candidates. Your goal is to generate 48 English keywords or short phrases (exactly 16 per category) based on reflective answers to questions about work experience, preferences, and interests.
 
 The output must be a JSON object, with three separate arrays:
 • "activiteiten": things someone enjoys doing, phrased as verbs or short sentences.
@@ -109,7 +109,7 @@ The output must be a JSON object, with three separate arrays:
 Use only information from the participant's answers. Formulate everything in the participant's own style. You may also use short sentences if that fits better than a single word.
 
 ⚠️ The output must be valid JSON. No explanation, no additional text, only the JSON object.`,
-      user: `You are now receiving a fully completed list of answers from a user. Use this input to generate 40 keywords or short phrases based on the method of the career funnel, divided into three categories:
+      user: `You are now receiving a fully completed list of answers from a user. Use this input to generate 48 keywords or short phrases (exactly 16 per category) based on the method of the career funnel, divided into three categories:
 • activities (what someone enjoys doing)
 • work environment (the atmosphere, structure, and context in which someone prefers to work)
 • interests (topics that fascinate or energize someone)
@@ -120,7 +120,7 @@ The output must be in JSON format, with three clear keys:
   "werkomgeving": [],
   "interesses": []
 }
-Each list should contain approximately 10 to 15 items. You may use nouns, verbs, or short phrases. Descriptive adjectives are also allowed if they add something to the character or style of the person.
+Each list must contain exactly 16 items. This is important: not more, not less than 16 items per category. You may use nouns, verbs, or short phrases. Descriptive adjectives are also allowed if they add something to the character or style of the person.
 
 Input – User answers:
 
@@ -187,7 +187,7 @@ Dream job 3 – ${wensberoepenData?.wensberoep_3_titel || 'Not filled in'}
 8: ${wensberoepenData?.wensberoep_3_kennis_focus || 'Not filled in'}`
     },
     de: {
-      system: `Du bist ein Karriere-Profi, spezialisiert auf die Analyse von offenen Antworten von Kandidaten. Dein Ziel ist es, basierend auf reflektierten Antworten zu Fragen über Berufserfahrungen, Vorlieben und Interessen, 40 Schlüsselwörter oder kurze Sätze zu generieren.
+      system: `Du bist ein Karriere-Profi, spezialisiert auf die Analyse von offenen Antworten von Kandidaten. Dein Ziel ist es, basierend auf reflektierten Antworten zu Fragen über Berufserfahrungen, Vorlieben und Interessen, 48 Schlüsselwörter oder kurze Sätze zu generieren (genau 16 pro Kategorie).
 
 Die Ausgabe muss ein JSON-Objekt sein, mit drei separaten Arrays:
 • "activiteiten": Dinge, die jemand gerne tut, formuliert als Verben oder kurze Sätze.
@@ -197,7 +197,7 @@ Die Ausgabe muss ein JSON-Objekt sein, mit drei separaten Arrays:
 Verwende ausschließlich Informationen aus den Antworten des Teilnehmers. Formuliere alles im Stil des Teilnehmers. Du darfst auch kurze Sätze verwenden, wenn diese besser passen als ein einzelnes Wort.
 
 ⚠️ Die Ausgabe muss gültiges JSON sein. Keine Erläuterungen, keine zusätzlichen Erklärungen, nur das JSON-Objekt.`,
-      user: `Du erhältst nun eine vollständig ausgefüllte Antwortliste von einer Nutzerin oder einem Nutzer. Verwende diese Eingaben, um auf Grundlage der Methodik des Berufstrichters 40 Schlüsselwörter oder kurze Aussagen zu generieren, aufgeteilt in drei Kategorien:
+      user: `Du erhältst nun eine vollständig ausgefüllte Antwortliste von einer Nutzerin oder einem Nutzer. Verwende diese Eingaben, um auf Grundlage der Methodik des Berufstrichters 48 Schlüsselwörter oder kurze Aussagen zu generieren (genau 16 pro Kategorie), aufgeteilt in drei Kategorien:
 • Aktivitäten (was jemand gerne tut)
 • Arbeitsumgebung (die Atmosphäre, Struktur und der Kontext, in dem jemand gerne arbeitet)
 • Interessen (Themen, die jemanden faszinieren oder ihm/ihr Energie geben)
@@ -208,7 +208,7 @@ Das Ergebnis muss im JSON-Format sein, mit drei klaren Schlüsseln:
   "werkomgeving": [],
   "interesses": []
 }
-Jede Liste sollte ungefähr 10 bis 15 Einträge enthalten. Du kannst Substantive, Verben oder kurze Aussagen verwenden. Qualitative Adjektive sind ebenfalls erlaubt, wenn sie etwas über den Charakter oder Stil der Person aussagen.
+Jede Liste muss genau 16 Einträge enthalten. Dies ist wichtig: nicht mehr, nicht weniger als 16 Einträge pro Kategorie. Du kannst Substantive, Verben oder kurze Aussagen verwenden. Qualitative Adjektive sind ebenfalls erlaubt, wenn sie etwas über den Charakter oder Stil der Person aussagen.
 
 Eingabe – Antworten der Nutzerin/des Nutzers:
 
@@ -275,7 +275,7 @@ Wunschberuf 3 – ${wensberoepenData?.wensberoep_3_titel || 'Nicht ausgefüllt'}
 8: ${wensberoepenData?.wensberoep_3_kennis_focus || 'Nicht ausgefüllt'}`
     },
     no: {
-      system: `Du er en karriereekspert, spesialisert på å analysere åpne svar fra kandidater. Målet ditt er å generere 40 nøkkelord eller korte setninger basert på reflekterende svar på spørsmål om arbeidserfaring, preferanser og interesser.
+      system: `Du er en karriereekspert, spesialisert på å analysere åpne svar fra kandidater. Målet ditt er å generere 48 nøkkelord eller korte setninger (nøyaktig 16 per kategori) basert på reflekterende svar på spørsmål om arbeidserfaring, preferanser og interesser.
 
 Output må være et JSON-objekt med tre separate arrays:
 • "activiteiten": ting en person liker å gjøre, formulert som verb eller korte setninger.
@@ -285,7 +285,7 @@ Output må være et JSON-objekt med tre separate arrays:
 Bruk utelukkende informasjon fra svarene til deltakeren. Formuler alt i deltakerens egen stil. Du kan også bruke korte setninger hvis det passer bedre enn enkeltord.
 
 ⚠️ Output må være gyldig JSON. Ingen forklaringer, ingen ekstra tekst, kun JSON-objektet.`,
-      user: `Du mottar nå en fullstendig utfylt svarliste fra en bruker. Bruk denne inputen til å generere 40 nøkkelord eller korte fraser basert på metoden til karrieretrakten, fordelt på tre kategorier:
+      user: `Du mottar nå en fullstendig utfylt svarliste fra en bruker. Bruk denne inputen til å generere 48 nøkkelord eller korte fraser (nøyaktig 16 per kategori) basert på metoden til karrieretrakten, fordelt på tre kategorier:
 • aktiviteter (hva personen liker å gjøre)
 • arbeidsmiljø (stemningen, strukturen og konteksten personen trives i)
 • interesser (temaer personen er fascinert av eller får energi av)
@@ -296,7 +296,7 @@ Output skal være i JSON-format, med tre tydelige keys:
   "werkomgeving": [],
   "interesses": []
 }
-Hver liste skal inneholde omtrent 10 til 15 elementer. Du kan bruke substantiv, verb eller korte fraser. Kvalitative adjektiver er også tillatt dersom de tilfører noe til personens stil eller karakter.
+Hver liste må inneholde nøyaktig 16 elementer. Dette er viktig: ikke mer, ikke mindre enn 16 elementer per kategori. Du kan bruke substantiv, verb eller korte fraser. Kvalitative adjektiver er også tillatt dersom de tilfører noe til personens stil eller karakter.
 
 Input – Brukerens svar:
 
