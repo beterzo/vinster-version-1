@@ -7,7 +7,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 
 interface RoundsOverviewProps {
   onViewReport: (roundId: string, roundNumber: number) => void;
-  onResumeRound: () => void;
+  onResumeRound: (roundId: string) => void;
 }
 
 const RoundsOverview = ({ onViewReport, onResumeRound }: RoundsOverviewProps) => {

@@ -65,7 +65,7 @@ const Dashboard = () => {
     setShowRoundInProgressDialog(false);
     const newRound = await startNewRound();
     if (newRound) {
-      navigate('/enthousiasme-intro');
+      navigate(`/ronde/${newRound.id}`);
     }
   };
 
@@ -244,7 +244,7 @@ const Dashboard = () => {
           <div className="mt-8">
             <RoundsOverview 
               onViewReport={handleViewReport}
-              onResumeRound={() => navigate('/enthousiasme-intro')}
+              onResumeRound={(roundId) => navigate(`/ronde/${roundId}`)}
             />
           </div>
         )}
