@@ -170,7 +170,11 @@ const RondeDashboard = () => {
     if (nextIncompleteStep) {
       setSlideDirection('left');
       setCurrentStep(nextIncompleteStep.id);
-      setCurrentSubStep(nextIncompleteStep.subSteps[0]);
+      // Skip 'welkom' substep - go to 'intro' (the second substep)
+      const targetSubStep = nextIncompleteStep.subSteps[0] === 'welkom' 
+        ? nextIncompleteStep.subSteps[1] 
+        : nextIncompleteStep.subSteps[0];
+      setCurrentSubStep(targetSubStep);
     }
   };
 
