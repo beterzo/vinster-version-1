@@ -86,12 +86,12 @@ const EnNuVerderSection = () => {
         <Dialog key={index} open={openDialog === index} onOpenChange={(open) => setOpenDialog(open ? index : null)}>
           <DialogContent className="sm:max-w-lg p-8">
             {/* Teal accent line */}
-            <div className="absolute top-4 left-6 w-16 h-1 rounded-full" style={{ backgroundColor: '#14B8A6' }} />
+            <div className="absolute top-4 left-6 w-16 h-1 rounded-full" style={{ backgroundColor: '#5DBFB3' }} />
             
             {/* Decorative elements */}
             <div className="absolute top-4 right-12 flex flex-col gap-1">
-              <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: '#FCD34D' }} />
-              <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: '#14B8A6' }} />
+              <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: '#E5B84F' }} />
+              <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: '#5DBFB3' }} />
               <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: '#232D4B' }} />
             </div>
 
