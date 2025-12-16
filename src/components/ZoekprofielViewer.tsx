@@ -70,59 +70,92 @@ const ZoekprofielViewer = ({ content, userName }: ZoekprofielViewerProps) => {
   ];
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-      {/* Header */}
-      <div className="bg-[#232D4B] text-white p-6 md:p-8">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl md:text-3xl font-bold">
-              {t('journey.zoekprofiel.viewer.title')}
-            </h1>
-            {userName && (
-              <p className="text-white/80 mt-1">{userName}</p>
-            )}
+    <>
+      <style>
+        {`
+          @media print {
+            @page {
+              size: A4;
+              margin: 0;
+            }
+            body {
+              print-color-adjust: exact !important;
+              -webkit-print-color-adjust: exact !important;
+            }
+            body * {
+              visibility: hidden;
+            }
+            .zoekprofiel-print-container,
+            .zoekprofiel-print-container * {
+              visibility: visible !important;
+            }
+            .zoekprofiel-print-container {
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 210mm;
+              min-height: 297mm;
+              padding: 0;
+              margin: 0;
+              background: white !important;
+            }
+          }
+        `}
+      </style>
+      <div className="bg-white rounded-2xl shadow-lg overflow-hidden zoekprofiel-print-container print:rounded-none print:shadow-none">
+        {/* Header */}
+        <div className="bg-[#232D4B] text-white p-6 md:p-8 print:p-8">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl md:text-3xl font-bold print:text-3xl">
+                {t('journey.zoekprofiel.viewer.title')}
+              </h1>
+              {userName && (
+                <p className="text-white/80 mt-1 print:text-lg">{userName}</p>
+              )}
+            </div>
+            <img 
+              src="/images/vinster-logo-white.png" 
+              alt="Vinster Logo" 
+              className="h-10 md:h-12 print:h-14"
+            />
           </div>
-          <img 
-            src="/images/vinster-logo-white.png" 
-            alt="Vinster Logo" 
-            className="h-10 md:h-12"
-          />
         </div>
-      </div>
 
-      {/* Profile Items */}
-      <div className="p-6 md:p-8 space-y-6">
-        {items.map((item, index) => (
-          <div key={index} className="border-l-4 border-[#F5C518] pl-4">
-            <h3 className="text-sm font-semibold text-[#232D4B]/60 uppercase tracking-wide mb-1">
-              {item.heading}
+        {/* Profile Items */}
+        <div className="p-6 md:p-8 space-y-6 print:p-8 print:space-y-5">
+          {items.map((item, index) => (
+            <div key={index} className="border-l-4 border-[#F5C518] pl-4 print:pl-5">
+              <h3 className="text-sm font-semibold text-[#232D4B]/60 uppercase tracking-wide mb-1 print:text-base">
+                {item.heading}
+              </h3>
+              <p className="text-lg text-[#232D4B] font-medium print:text-xl">
+                {item.value}
+              </p>
+            </div>
+          ))}
+
+          {/* Summary */}
+          <div className="mt-8 pt-6 border-t border-gray-200 print:mt-6 print:pt-5">
+            <h3 className="text-sm font-semibold text-[#232D4B]/60 uppercase tracking-wide mb-3 print:text-base">
+              {currentHeadings.samenvatting}
             </h3>
-            <p className="text-lg text-[#232D4B] font-medium">
-              {item.value}
-            </p>
-          </div>
-        ))}
-
-        {/* Summary */}
-        <div className="mt-8 pt-6 border-t border-gray-200">
-          <h3 className="text-sm font-semibold text-[#232D4B]/60 uppercase tracking-wide mb-3">
-            {currentHeadings.samenvatting}
-          </h3>
-          <div className="bg-[#E8F4FD] rounded-xl p-4 md:p-6">
-            <p className="text-[#232D4B] leading-relaxed">
-              {content.samenvatting}
-            </p>
+            <div className="bg-[#E8F4FD] rounded-xl p-4 md:p-6 print:p-6">
+              <p className="text-[#232D4B] leading-relaxed print:text-lg print:leading-relaxed">
+                {content.samenvatting}
+              </p>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Footer */}
-      <div className="bg-[#F5C518] p-4 text-center">
-        <p className="text-[#232D4B] text-sm font-medium">
-          vinster.ai
-        </p>
+        {/* Footer */}
+        <div className="bg-[#F5C518] p-4 text-center print:p-5">
+          <p className="text-[#232D4B] text-sm font-medium print:text-base">
+            vinster.ai
+          </p>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
