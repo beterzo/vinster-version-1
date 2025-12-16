@@ -78,6 +78,17 @@ const ZoekprofielInline = ({ roundId, subStep, onNext, onPrevious }: Zoekprofiel
       if (result && result.zoekprofiel_content) {
         setZoekprofielContent(result.zoekprofiel_content);
         setZoekprofielExists(true);
+        
+        // Mark round as completed after zoekprofiel is generated
+        await supabase
+          .from('user_rounds')
+          .update({
+            status: 'completed',
+            completed_at: new Date().toISOString(),
+            updated_at: new Date().toISOString()
+          })
+          .eq('id', roundId);
+        
         toast.success(t('journey.zoekprofiel.antwoorden.submit_success'));
         onNext();
       } else if (result === false) {
