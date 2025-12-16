@@ -2,35 +2,15 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const WhatDoYouGetCard = () => {
   const navigate = useNavigate();
-  const { t, language } = useTranslation();
+  const { t } = useTranslation();
 
   const handleStartClick = () => {
     navigate('/signup');
-  };
-
-  const handleViewSampleReport = () => {
-    // Language-specific PDF URLs
-    const dutchPdfUrl = '/Voorbeeldrapport_Vinster_V2.pdf';
-    const englishPdfUrl = 'https://beterzo.github.io/vinster-version-1/public/Voorbeeld%20loopbaanrapport%20engels.pdf';
-    const germanPdfUrl = 'https://beterzo.github.io/vinster-version-1/public/Voorbeeld%20loopbaanrapport%20Duits.pdf';
-    const norwegianPdfUrl = 'https://beterzo.github.io/vinster-version-1/public/Voorbeeld%20loopbaanrapport%20Noors.pdf';
-    
-    // Select URL based on current language, fallback to Dutch
-    let pdfUrl = dutchPdfUrl;
-    if (language === 'en') {
-      pdfUrl = englishPdfUrl;
-    } else if (language === 'de') {
-      pdfUrl = germanPdfUrl;
-    } else if (language === 'no') {
-      pdfUrl = norwegianPdfUrl;
-    }
-    
-    window.open(pdfUrl, '_blank');
   };
 
   // Get translation strings with safety checks
@@ -93,10 +73,12 @@ const WhatDoYouGetCard = () => {
           {startNow}
         </Button>
         <Button 
-          onClick={handleViewSampleReport}
+          asChild
           className="border-2 border-white hover:bg-white hover:bg-opacity-10 font-bold px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 w-full bg-transparent text-white"
         >
-          {viewSample}
+          <Link to="/voorbeeldrapport" target="_blank">
+            {viewSample}
+          </Link>
         </Button>
       </div>
     </Card>
