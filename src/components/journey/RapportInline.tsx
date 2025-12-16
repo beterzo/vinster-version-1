@@ -9,7 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 
 interface RapportInlineProps {
   roundId: string;
-  subStep: 'intro' | 'confirm' | 'complete';
+  subStep: 'confirm' | 'complete';
   onNext: () => void;
   onPrevious: () => void;
   onReportGenerated: () => void;
@@ -127,8 +127,8 @@ const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated
     );
   }
 
-  // Intro subStep - show introduction screen
-  if (subStep === 'intro') {
+  // Confirm subStep - show confirmation screen with warning
+  if (subStep === 'confirm') {
     return (
       <Card className="rounded-3xl shadow-xl border-0">
         <CardContent className="p-12">
@@ -171,73 +171,7 @@ const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated
               variant="outline" 
               size="lg" 
               onClick={onPrevious} 
-              className="text-lg px-8 py-6 border-[#232D4B] text-[#232D4B]"
-            >
-              {t('common.button.previous')}
-            </Button>
-            <Button 
-              size="lg" 
-              onClick={onNext} 
-              className="text-lg px-8 py-6 bg-[#F5C518] hover:bg-yellow-500 text-[#232D4B] font-bold"
-            >
-              {t('journey.loopbaanrapport.intro.continue_button')}
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-    );
-  }
-
-  // Confirm subStep - show confirmation screen
-  if (subStep === 'confirm') {
-    return (
-      <Card className="rounded-3xl shadow-xl border-0">
-        <CardContent className="p-12">
-          <h1 className="text-4xl font-bold text-[#232D4B] mb-4 text-center">
-            {t('common.rapport_confirmatie.title')}
-          </h1>
-          <p className="text-lg text-gray-700 mb-8 text-center">
-            {t('common.rapport_confirmatie.subtitle')}
-          </p>
-
-          <div className="mb-8">
-            <h3 className="text-2xl font-bold text-[#232D4B] mb-4">
-              {t('common.rapport_confirmatie.summary_title')}
-            </h3>
-            <div className="space-y-3">
-              <div className="flex items-center gap-3 text-gray-700">
-                <CheckCircle className="w-6 h-6 text-[#232D4B] flex-shrink-0" />
-                <span className="text-lg">
-                  <strong>{t('common.rapport_confirmatie.summary_enthousiasme')}</strong>: {t('common.rapport_confirmatie.completed')}
-                </span>
-              </div>
-              <div className="flex items-center gap-3 text-gray-700">
-                <CheckCircle className="w-6 h-6 text-[#232D4B] flex-shrink-0" />
-                <span className="text-lg">
-                  <strong>{t('common.rapport_confirmatie.summary_wensberoepen')}</strong>: {t('common.rapport_confirmatie.completed')}
-                </span>
-              </div>
-              <div className="flex items-center gap-3 text-gray-700">
-                <CheckCircle className="w-6 h-6 text-[#232D4B] flex-shrink-0" />
-                <span className="text-lg">
-                  <strong>{t('common.rapport_confirmatie.summary_prioriteiten')}</strong>: {t('common.rapport_confirmatie.completed')}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div className="mb-8 p-6 bg-blue-50 rounded-xl">
-            <p className="text-gray-700 leading-relaxed">
-              {t('common.rapport_confirmatie.info_text')}
-            </p>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              variant="outline" 
-              size="lg" 
-              onClick={onPrevious} 
-              disabled={isGenerating} 
+              disabled={isGenerating}
               className="text-lg px-8 py-6 border-[#232D4B] text-[#232D4B]"
             >
               {t('common.button.previous')}
