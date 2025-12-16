@@ -49,7 +49,7 @@
     "step_completed": "Completed",
     "step_current": "Up next",
     "step_locked": "Locked",
-    "continue_button": "Continue with {{step}}",
+    "continue_button": "Continue",
     "view_button": "View"
   },
   "enthousiasme": {
@@ -451,7 +451,7 @@
     "step_completed": "Completed",
     "step_current": "Up next",
     "step_locked": "Not yet available",
-    "continue_button": "Continue with {{step}}",
+    "continue_button": "Continue",
     "all_done_button": "View your results"
   },
   "keywords_confirm": {

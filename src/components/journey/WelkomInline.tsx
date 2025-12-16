@@ -84,10 +84,6 @@ const WelkomInline = ({ onNext, completedSteps = [], onStepClick }: WelkomInline
     return 'locked';
   };
 
-  const getNextStepLabel = (): string => {
-    const nextStep = steps.find(step => !completedSteps.includes(step.id));
-    return nextStep?.title || '';
-  };
 
   const progressPercentage = (completedSteps.length / 6) * 100;
 
@@ -241,7 +237,7 @@ const WelkomInline = ({ onNext, completedSteps = [], onStepClick }: WelkomInline
             className="bg-[#F5C518] hover:bg-yellow-500 text-[#232D4B] font-semibold text-lg px-12 py-6 rounded-xl"
           >
             {hasProgress 
-              ? t('welkom.continue_button').replace('{{step}}', getNextStepLabel())
+              ? t('welkom.continue_button')
               : t('welkom.start_button')
             }
             {hasProgress && <ChevronRight className="w-5 h-5 ml-2" />}
