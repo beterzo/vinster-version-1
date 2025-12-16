@@ -263,20 +263,6 @@ const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated
 
       console.log('✅ Report generated successfully:', data);
 
-      // Update round status to completed
-      const { error: roundError } = await supabase
-        .from('user_rounds')
-        .update({
-          status: 'completed',
-          completed_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        })
-        .eq('id', roundId);
-
-      if (roundError) {
-        console.error('❌ Error updating round status:', roundError);
-      }
-
       // Reload report content
       const { data: report } = await supabase
         .from('user_reports')
