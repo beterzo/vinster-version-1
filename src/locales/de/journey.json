@@ -48,7 +48,7 @@
     "step_completed": "Abgeschlossen",
     "step_current": "Als nächstes",
     "step_locked": "Gesperrt",
-    "continue_button": "Weiter mit {{step}}",
+    "continue_button": "Weiter",
     "view_button": "Ansehen"
   },
   "enthousiasme": {
@@ -450,7 +450,7 @@
     "step_completed": "Abgeschlossen",
     "step_current": "Als nächstes",
     "step_locked": "Noch nicht verfügbar",
-    "continue_button": "Weiter mit {{step}}",
+    "continue_button": "Weiter",
     "all_done_button": "Ergebnisse ansehen"
   },
   "keywords_confirm": {

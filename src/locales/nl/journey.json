@@ -48,7 +48,7 @@
     "step_completed": "Voltooid",
     "step_current": "Aan de beurt",
     "step_locked": "Vergrendeld",
-    "continue_button": "Ga verder met {{step}}",
+    "continue_button": "Ga verder",
     "view_button": "Bekijk"
   },
   "enthousiasme": {
@@ -459,7 +459,7 @@
     "step_completed": "Voltooid",
     "step_current": "Nu aan de beurt",
     "step_locked": "Nog niet beschikbaar",
-    "continue_button": "Ga verder met {{step}}",
+    "continue_button": "Ga verder",
     "all_done_button": "Bekijk je resultaten"
   },
   "keywords_confirm": {
