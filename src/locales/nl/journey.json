@@ -5,7 +5,7 @@
     "steps_overview_title": "Dit ga je doen",
     "steps": {
       "step1": {
-        "title": "Enthousiasme Scan",
+        "title": "Enthousiasmescan",
         "description": "Je beantwoordt vragen over je jeugd, eerste baan en beste werkervaringen. Zo ontdekken we wat jou energie geeft.",
         "time": "~15 min"
       },
@@ -53,16 +53,16 @@
   },
   "enthousiasme": {
     "intro": {
-      "title": "Enthousiasme scan",
+      "title": "Enthousiasmescan",
       "subtitle": "Ontdek wat jou energie geeft in je werk",
-      "description": "De enthousiasme scan helpt je om te ontdekken wat jou echt energie geeft in je werk. Door terug te kijken op momenten van plezier en enthousiasme, krijg je inzicht in wat belangrijk voor je is.",
+      "description": "De enthousiasmescan helpt je om te ontdekken wat jou echt energie geeft in je werk. Door terug te kijken op momenten van plezier en enthousiasme, krijg je inzicht in wat belangrijk voor je is.",
       "how_it_works_title": "Hoe werkt het?",
       "how_it_works_description": "Je beantwoordt vragen over drie verschillende periodes: je middelbareschooltijd, je eerste baan en je beste werkervaringen. Dit duurt ongeveer 15 minuten.",
-      "start_button": "Start enthousiasme scan",
+      "start_button": "Start enthousiasmescan",
       "back_button": "Terug naar dashboard"
     },
     "step1": {
-      "title": "Enthousiasme scan - Stap 1",
+      "title": "Enthousiasmescan - Stap 1",
       "subtitle": "Vragen over je middelbareschooltijd",
       "question1": "Wat deed je graag? (op school en buiten school)",
       "question2": "Waar was je veel te vinden? (als je uit school kwam of in het weekend)",
@@ -72,7 +72,7 @@
       "next_button": "Volgende stap"
     },
     "step2": {
-      "title": "Enthousiasme scan - Stap 2",
+      "title": "Enthousiasmescan - Stap 2",
       "subtitle": "Vragen over je eerste baan",
       "question1": "Wat waren de leukste taken in je eerste baan? (dit mag ook een bijbaantje zijn)",
       "question2": "Welke werkomstandigheden vond je fijn in je eerste baan?",
@@ -82,7 +82,7 @@
       "next_button": "Volgende stap"
     },
     "step3": {
-      "title": "Enthousiasme scan - Stap 3",
+      "title": "Enthousiasmescan - Stap 3",
       "subtitle": "Vragen over plezierige werkervaringen",
       "saving": "Bezig met opslaan...",
       "question1": "Beschrijf de meest plezierige werkperiode in je loopbaan. Wat maakte het zo leuk?",
@@ -181,7 +181,7 @@
       "description": "We hebben bijna alle informatie die we nodig hebben voor jouw persoonlijke loopbaanadvies. Voor de laatste stap vragen we je nog een paar korte vragen over je achtergrond en voorkeuren en gaan we nog wat specifieker in op wie jij bent.",
       "warning_title": "Let op",
       "warning_text": "Nu kun je nog aanpassingen doen aan de eerste interviews maar zodra je op profiel voltooien klikt worden de kernwoorden gegenereerd en staan die voor deze ronde vast.",
-      "keywords_explanation": "Op basis van jouw ingevulde enthousiasme scan en wensberoepen worden nu kernwoorden gegenereerd om nog meer inzicht te krijgen in wat je leuk vindt, wat jouw ideale werkomgeving is en wat je interesseert.",
+      "keywords_explanation": "Op basis van jouw ingevulde enthousiasmescan en wensberoepen worden nu kernwoorden gegenereerd om nog meer inzicht te krijgen in wat je leuk vindt, wat jouw ideale werkomgeving is en wat je interesseert.",
       "description_details": "Dit helpt ons om je advies nog specifieker te maken.",
       "start_button": "Begin met jouw profiel",
       "generating_keywords": "Kernwoorden genereren..."
@@ -205,7 +205,7 @@
         "title": "Prioriteiten - activiteiten",
         "subtitle": "Selecteer minimaal 5 activiteiten die je leuk vindt om te doen",
         "selected_count": "Geselecteerd: {count} van minimaal 5",
-        "missing_keywords": "Er zijn nog geen persoonlijke activiteiten gegenereerd. Vul eerst je enthousiasme scan en wensberoepen in.",
+        "missing_keywords": "Er zijn nog geen persoonlijke activiteiten gegenereerd. Vul eerst je enthousiasmescan en wensberoepen in.",
         "extra_text_label": "Mis je nog activiteiten? Voeg ze hier toe (optioneel)",
         "extra_text_placeholder": "Bijvoorbeeld: Fotograferen, Programmeren, Tuinieren...",
         "next_button": "Volgende: Werkomstandigheden"
@@ -214,7 +214,7 @@
         "title": "Prioriteiten - werkomstandigheden",
         "subtitle": "Selecteer minimaal 5 werkomstandigheden die belangrijk voor je zijn",
         "selected_count": "Geselecteerd: {count} van minimaal 5",
-        "missing_keywords": "Er zijn nog geen persoonlijke werkomstandigheden gegenereerd. Vul eerst je enthousiasme scan en wensberoepen in.",
+        "missing_keywords": "Er zijn nog geen persoonlijke werkomstandigheden gegenereerd. Vul eerst je enthousiasmescan en wensberoepen in.",
         "extra_text_label": "Mis je nog werkomstandigheden? Voeg ze hier toe (optioneel)",
         "extra_text_placeholder": "Bijvoorbeeld: Hond mee naar kantoor, Goede koffie, Ergonomische werkplek...",
         "previous_button": "Vorige: Activiteiten",
@@ -224,7 +224,7 @@
         "title": "Prioriteiten - interesses",
         "subtitle": "Selecteer minimaal 5 interesses die je aantrekken",
         "selected_count": "Geselecteerd: {count} van minimaal 5",
-        "missing_keywords": "Er zijn nog geen persoonlijke interesses gegenereerd. Vul eerst je enthousiasme scan en wensberoepen in.",
+        "missing_keywords": "Er zijn nog geen persoonlijke interesses gegenereerd. Vul eerst je enthousiasmescan en wensberoepen in.",
         "extra_text_label": "Mis je nog interesses? Voeg ze hier toe (optioneel)",
         "extra_text_placeholder": "Bijvoorbeeld: Duurzaamheid, Technologie, Kunst...",
         "previous_button": "Vorige: Werkomstandigheden",
@@ -352,7 +352,7 @@
     "intro": {
       "title": "Je loopbaanrapport",
       "subtitle": "Bijna klaar om je persoonlijke rapport te genereren",
-      "description": "Op basis van alles wat je hebt ingevuld in de enthousiasme scan, wensberoepen en je persoonsprofiel, genereert Vinster nu een persoonlijk loopbaanrapport.",
+      "description": "Op basis van alles wat je hebt ingevuld in de enthousiasmescan, wensberoepen en je persoonsprofiel, genereert Vinster nu een persoonlijk loopbaanrapport.",
       "what_you_get_title": "Wat je krijgt",
       "what_you_get_item1": "Een overzicht van activiteiten, werkomstandigheden en interesses die bij jou passen",
       "what_you_get_item2": "Drie concrete beroepssuggesties: twee passend en één verrassend alternatief",
@@ -490,7 +490,7 @@
   },
   "keywords_confirm": {
     "title": "Klaar om je kernwoorden te genereren?",
-    "description": "Op basis van je antwoorden uit de Enthousiasme Scan en Wensberoepen maken we nu een lijst met kernwoorden. Hiermee kun je straks je persoonsprofiel samenstellen.",
+    "description": "Op basis van je antwoorden uit de Enthousiasmescan en Wensberoepen maken we nu een lijst met kernwoorden. Hiermee kun je straks je persoonsprofiel samenstellen.",
     "warning": "Let op: zodra je kernwoorden zijn gegenereerd, kun je je antwoorden uit de interviews niet meer aanpassen.",
     "adjust_button": "Antwoorden aanpassen",
     "confirm_button": "Kernwoorden genereren",
