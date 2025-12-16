@@ -94,54 +94,55 @@ const ZoekprofielViewer = ({ content, userName }: ZoekprofielViewerProps) => {
               left: 0;
               top: 0;
               width: 210mm;
-              min-height: 297mm;
+              height: 297mm;
               padding: 0;
               margin: 0;
               background: white !important;
+              overflow: hidden;
             }
           }
         `}
       </style>
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden zoekprofiel-print-container print:rounded-none print:shadow-none">
         {/* Header */}
-        <div className="bg-[#232D4B] text-white p-6 md:p-8 print:p-8">
+        <div className="bg-[#232D4B] text-white p-6 md:p-8 print:p-10">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl md:text-3xl font-bold print:text-3xl">
+              <h1 className="text-2xl md:text-3xl font-bold print:text-4xl">
                 {t('journey.zoekprofiel.viewer.title')}
               </h1>
               {userName && (
-                <p className="text-white/80 mt-1 print:text-lg">{userName}</p>
+                <p className="text-white/80 mt-1 print:text-xl">{userName}</p>
               )}
             </div>
             <img 
               src="/images/vinster-logo-white.png" 
               alt="Vinster Logo" 
-              className="h-16 md:h-20 print:h-24"
+              className="h-16 md:h-20 print:h-28"
             />
           </div>
         </div>
 
         {/* Profile Items */}
-        <div className="p-6 md:p-8 space-y-6 print:p-8 print:space-y-5">
+        <div className="p-6 md:p-8 space-y-6 print:p-10 print:space-y-6">
           {items.map((item, index) => (
-            <div key={index} className="border-l-4 border-[#F5C518] pl-4 print:pl-5">
-              <h3 className="text-sm font-semibold text-[#232D4B]/60 uppercase tracking-wide mb-1 print:text-base">
+            <div key={index} className="border-l-4 border-[#F5C518] pl-4 print:pl-6">
+              <h3 className="text-sm font-semibold text-[#232D4B]/60 uppercase tracking-wide mb-1 print:text-lg">
                 {item.heading}
               </h3>
-              <p className="text-lg text-[#232D4B] font-medium print:text-xl">
+              <p className="text-lg text-[#232D4B] font-medium print:text-2xl">
                 {item.value}
               </p>
             </div>
           ))}
 
           {/* Summary */}
-          <div className="mt-8 pt-6 border-t border-gray-200 print:mt-6 print:pt-5">
-            <h3 className="text-sm font-semibold text-[#232D4B]/60 uppercase tracking-wide mb-3 print:text-base">
+          <div className="mt-8 pt-6 border-t border-gray-200 print:mt-4 print:pt-4">
+            <h3 className="text-sm font-semibold text-[#232D4B]/60 uppercase tracking-wide mb-3 print:text-lg">
               {currentHeadings.samenvatting}
             </h3>
             <div className="bg-[#E8F4FD] rounded-xl p-4 md:p-6 print:p-6">
-              <p className="text-[#232D4B] leading-relaxed print:text-lg print:leading-relaxed">
+              <p className="text-[#232D4B] leading-relaxed print:text-xl print:leading-relaxed">
                 {content.samenvatting}
               </p>
             </div>
@@ -149,8 +150,8 @@ const ZoekprofielViewer = ({ content, userName }: ZoekprofielViewerProps) => {
         </div>
 
         {/* Footer */}
-        <div className="bg-[#F5C518] p-4 text-center print:p-5">
-          <p className="text-[#232D4B] text-sm font-medium print:text-base">
+        <div className="bg-[#F5C518] p-4 text-center print:p-8">
+          <p className="text-[#232D4B] text-sm font-medium print:text-2xl print:font-bold">
             vinster.ai
           </p>
         </div>
