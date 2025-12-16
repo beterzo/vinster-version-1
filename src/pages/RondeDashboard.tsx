@@ -256,11 +256,6 @@ const RondeDashboard = () => {
             subStep={currentSubStep} 
             onNext={handleNext} 
             onPrevious={handlePrevious}
-            onNavigateToPersoonsprofiel={() => {
-              setSlideDirection('left');
-              setCurrentStep('persoonsprofiel');
-              setCurrentSubStep('extra_info');
-            }}
           />
         )}
         {currentStep === 'persoonsprofiel' && roundId && (

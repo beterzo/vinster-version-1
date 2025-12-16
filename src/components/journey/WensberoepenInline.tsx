@@ -6,11 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import WensberoepenProgress from "@/components/WensberoepenProgress";
 import { useWensberoepenResponses } from "@/hooks/useWensberoepenResponses";
-import { usePrioriteitenResponses } from "@/hooks/usePrioriteitenResponses";
-import { useAuth } from "@/hooks/useAuth";
 import { useTranslation } from "@/hooks/useTranslation";
 import { SubStep } from "@/types/journey";
-import KeywordsConfirmDialog from "./KeywordsConfirmDialog";
 import type { Tables } from "@/integrations/supabase/types";
 
 type WensberoepenResponse = Tables<"wensberoepen_responses">;
@@ -20,16 +17,11 @@ interface WensberoepenInlineProps {
   subStep: SubStep;
   onNext: () => void;
   onPrevious: () => void;
-  onNavigateToPersoonsprofiel: () => void;
 }
 
-const WensberoepenInline = ({ roundId, subStep, onNext, onPrevious, onNavigateToPersoonsprofiel }: WensberoepenInlineProps) => {
+const WensberoepenInline = ({ roundId, subStep, onNext, onPrevious }: WensberoepenInlineProps) => {
   const { t } = useTranslation();
-  const { user } = useAuth();
   const { responses, saveResponse, isLoading } = useWensberoepenResponses(roundId);
-  const { generateAiKeywords, hasAiKeywords } = usePrioriteitenResponses(roundId);
-  
-  const [showKeywordsDialog, setShowKeywordsDialog] = useState(false);
 
   const [jobTitles, setJobTitles] = useState(["", "", ""]);
   const [allAnswers, setAllAnswers] = useState<Record<string, Record<string, string>>>({
@@ -119,28 +111,6 @@ const WensberoepenInline = ({ roundId, subStep, onNext, onPrevious, onNavigateTo
     if (dbField) {
       saveResponse(dbField, value);
     }
-  };
-
-  // Handler for step3 completion - open keywords dialog
-  const handleStep3Complete = () => {
-    setShowKeywordsDialog(true);
-  };
-
-  // Handler for generating keywords and navigating to persoonsprofiel
-  const handleGenerateKeywords = async () => {
-    // Check if keywords already exist for this round
-    if (!hasAiKeywords()) {
-      const language = user?.user_metadata?.language || 'nl';
-      await generateAiKeywords(language);
-    }
-    setShowKeywordsDialog(false);
-    onNavigateToPersoonsprofiel();
-  };
-
-  // Handler for adjusting answers - go back to welkom/overview
-  const handleAdjustAnswers = () => {
-    setShowKeywordsDialog(false);
-    onPrevious();
   };
 
   if (isLoading) {
@@ -270,7 +240,7 @@ const WensberoepenInline = ({ roundId, subStep, onNext, onPrevious, onNavigateTo
               {t('common.button.previous')}
             </Button>
             <Button 
-              onClick={stepNum === 3 ? handleStep3Complete : onNext} 
+              onClick={onNext} 
               className={`font-semibold px-8 ${
                 allFieldsFilled 
                   ? "bg-[#F5C518] hover:bg-yellow-500 text-[#232D4B]" 
@@ -283,13 +253,6 @@ const WensberoepenInline = ({ roundId, subStep, onNext, onPrevious, onNavigateTo
           </div>
         </CardContent>
       </Card>
-
-      <KeywordsConfirmDialog
-        open={showKeywordsDialog}
-        onOpenChange={setShowKeywordsDialog}
-        onConfirm={handleGenerateKeywords}
-        onAdjust={handleAdjustAnswers}
-      />
     </div>
   );
 };
