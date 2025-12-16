@@ -51,8 +51,8 @@ const JourneyStepNavigator = ({
                 disabled={!isAccessible}
                 className={`
                   flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200
-                  ${isCurrent 
-                    ? 'bg-[#FEF3C7] text-[#92400E] border-2 border-[#92400E] shadow-md' 
+                ${isCurrent 
+                    ? 'bg-[#FEF9E6] text-[#232D4B] border-2 border-[#F5C518] shadow-md' 
                     : status === 'completed'
                       ? 'bg-[#E8F4FD] text-[#232D4B] border-2 border-[#232D4B]'
                       : status === 'locked'
@@ -67,7 +67,7 @@ const JourneyStepNavigator = ({
                   ${status === 'completed' 
                     ? 'bg-[#232D4B] text-white' 
                     : isCurrent
-                      ? 'bg-[#92400E] text-white'
+                      ? 'bg-[#F5C518] text-[#232D4B]'
                       : 'bg-gray-300 text-gray-600'
                   }
                 `}>
