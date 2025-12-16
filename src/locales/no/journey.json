@@ -322,6 +322,19 @@
       "regenerate_button": "Lag ny søkeprofil"
     }
   },
+  "loopbaanrapport": {
+    "intro": {
+      "title": "Din karriererapport",
+      "subtitle": "Nesten klar til å generere din personlige rapport",
+      "description": "Basert på alt du har fylt ut i entusiasme-skanningen, drømmejobbene og din personlige profil, vil Vinster nå generere en personlig karriererapport.",
+      "what_you_get_title": "Hva du får",
+      "what_you_get_item1": "En oversikt over aktiviteter, arbeidsforhold og interesser som passer deg",
+      "what_you_get_item2": "Tre konkrete jobbforslag: to passende og ett overraskende alternativ",
+      "warning_title": "Merk",
+      "warning_text": "Du kan fortsatt gå tilbake for å justere svarene dine i de forrige stegene. Når du genererer rapporten, er svarene dine fastlåste for denne runden.",
+      "continue_button": "Fortsett til bekreftelse"
+    }
+  },
   "rapport": {
     "download": {
       "title": "Last ned karriererapport",

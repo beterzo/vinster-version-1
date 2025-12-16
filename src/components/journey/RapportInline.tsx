@@ -9,7 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 
 interface RapportInlineProps {
   roundId: string;
-  subStep: 'confirm' | 'complete';
+  subStep: 'intro' | 'confirm' | 'complete';
   onNext: () => void;
   onPrevious: () => void;
   onReportGenerated: () => void;
@@ -124,6 +124,67 @@ const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated
       <div className="flex items-center justify-center p-12">
         <Loader2 className="w-8 h-8 animate-spin text-[#232D4B]" />
       </div>
+    );
+  }
+
+  // Intro subStep - show introduction screen
+  if (subStep === 'intro') {
+    return (
+      <Card className="rounded-3xl shadow-xl border-0">
+        <CardContent className="p-12">
+          <h1 className="text-4xl font-bold text-[#232D4B] mb-4 text-center">
+            {t('journey.loopbaanrapport.intro.title')}
+          </h1>
+          <p className="text-lg text-gray-700 mb-8 text-center">
+            {t('journey.loopbaanrapport.intro.subtitle')}
+          </p>
+
+          <div className="mb-8">
+            <p className="text-gray-700 leading-relaxed mb-6">
+              {t('journey.loopbaanrapport.intro.description')}
+            </p>
+            
+            <h3 className="text-xl font-bold text-[#232D4B] mb-4">
+              {t('journey.loopbaanrapport.intro.what_you_get_title')}
+            </h3>
+            <div className="space-y-3 mb-6">
+              <div className="flex items-start gap-3 text-gray-700">
+                <CheckCircle className="w-5 h-5 text-[#232D4B] flex-shrink-0 mt-0.5" />
+                <span>{t('journey.loopbaanrapport.intro.what_you_get_item1')}</span>
+              </div>
+              <div className="flex items-start gap-3 text-gray-700">
+                <CheckCircle className="w-5 h-5 text-[#232D4B] flex-shrink-0 mt-0.5" />
+                <span>{t('journey.loopbaanrapport.intro.what_you_get_item2')}</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="mb-8 p-6 bg-[#FEF3C7] rounded-xl border border-[#F5C518]">
+            <p className="text-gray-800">
+              <span className="font-bold text-[#232D4B]">{t('journey.loopbaanrapport.intro.warning_title')}: </span>
+              {t('journey.loopbaanrapport.intro.warning_text')}
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              variant="outline" 
+              size="lg" 
+              onClick={onPrevious} 
+              className="text-lg px-8 py-6 border-[#232D4B] text-[#232D4B]"
+            >
+              {t('common.button.previous')}
+            </Button>
+            <Button 
+              size="lg" 
+              onClick={onNext} 
+              className="text-lg px-8 py-6 bg-[#F5C518] hover:bg-yellow-500 text-[#232D4B] font-bold"
+            >
+              {t('journey.loopbaanrapport.intro.continue_button')}
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
     );
   }
 
