@@ -231,7 +231,7 @@ const ZoekprofielInline = ({ roundId, subStep, onNext, onPrevious }: Zoekprofiel
   if (zoekprofielContent) {
     return (
       <div className="space-y-6">
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex justify-between items-center mb-4 print:hidden">
           <h2 className="text-2xl font-bold text-[#232D4B]">
             {t('journey.zoekprofiel.complete.title')}
           </h2>
@@ -249,7 +249,7 @@ const ZoekprofielInline = ({ roundId, subStep, onNext, onPrevious }: Zoekprofiel
 
         <ZoekprofielViewer content={zoekprofielContent} userName={userName} />
 
-        <div className="bg-[#E8F4FD] rounded-2xl p-6 text-center">
+        <div className="bg-[#E8F4FD] rounded-2xl p-6 text-center print:hidden">
           <p className="text-[#232D4B] mb-4">
             {t('journey.zoekprofiel.complete.next_steps')}
           </p>
