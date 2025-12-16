@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "npm:resend@2.0.0";
+import { Webhook } from "https://esm.sh/standardwebhooks@1.0.0";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.50.0";
 
 const corsHeaders = {
@@ -611,10 +612,33 @@ const handler = async (req: Request): Promise<Response> => {
     console.log("✅ RESEND_API_KEY found, initializing Resend client");
     const resend = new Resend(resendApiKey);
 
-    // Parse and validate payload
+    // Parse and validate payload using Standard Webhooks verification
     let payload: AuthEventPayload;
     try {
-      payload = await req.json();
+      const hookSecret = Deno.env.get('SEND_EMAIL_HOOK_SECRET');
+      
+      if (!hookSecret) {
+        console.error("❌ SEND_EMAIL_HOOK_SECRET not configured");
+        return new Response(JSON.stringify({ 
+          error: {
+            http_code: 500,
+            message: "Webhook secret not configured" 
+          }
+        }), {
+          status: 500,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        });
+      }
+
+      const rawPayload = await req.text();
+      const headers = Object.fromEntries(req.headers);
+      
+      console.log("🔐 Verifying webhook signature...");
+      
+      const wh = new Webhook(hookSecret);
+      payload = wh.verify(rawPayload, headers) as AuthEventPayload;
+      
+      console.log("✅ Webhook signature verified successfully");
       console.log("📧 Received auth event:", {
         email: payload.user?.email,
         eventType: payload.email_data?.email_action_type,
@@ -622,13 +646,15 @@ const handler = async (req: Request): Promise<Response> => {
         redirectTo: payload.email_data?.redirect_to,
         userMetadata: payload.user?.user_metadata
       });
-    } catch (error) {
-      console.error("❌ Failed to parse request payload:", error);
+    } catch (error: any) {
+      console.error("❌ Webhook verification failed:", error);
       return new Response(JSON.stringify({ 
-        success: false, 
-        error: "Invalid request payload" 
+        error: {
+          http_code: 401,
+          message: "Webhook verification failed: " + error.message
+        }
       }), {
-        status: 400,
+        status: 401,
         headers: { "Content-Type": "application/json", ...corsHeaders },
       });
     }
