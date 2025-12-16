@@ -78,41 +78,44 @@ const ZoekprofielViewer = ({ content, userName }: ZoekprofielViewerProps) => {
               size: A4;
               margin: 0;
             }
-            @page :first {
-              size: A4;
-              margin: 0;
-            }
-            @page :left, @page :right {
-              size: A4;
-              margin: 0;
-            }
-            html, body {
+
+            html,
+            body {
               height: 297mm !important;
               max-height: 297mm !important;
               overflow: hidden !important;
+              margin: 0 !important;
+              padding: 0 !important;
               print-color-adjust: exact !important;
               -webkit-print-color-adjust: exact !important;
             }
-            body * {
-              visibility: hidden;
+
+            /* Remove non-root portals/toasters from the print layout */
+            body > *:not(#root) {
+              display: none !important;
             }
+
+            /* Remove everything from the React tree except the zoekprofiel page */
+            #root *:not(.zoekprofiel-print-container):not(.zoekprofiel-print-container *) {
+              display: none !important;
+            }
+
             .zoekprofiel-print-container,
             .zoekprofiel-print-container * {
               visibility: visible !important;
             }
+
             .zoekprofiel-print-container {
-              position: absolute;
-              left: 0;
-              top: 0;
-              width: 210mm;
-              height: 297mm;
-              max-height: 297mm;
-              padding: 0;
-              margin: 0;
+              position: fixed !important;
+              left: 0 !important;
+              top: 0 !important;
+              width: 210mm !important;
+              height: 297mm !important;
+              max-height: 297mm !important;
+              padding: 0 !important;
+              margin: 0 !important;
               background: white !important;
-              overflow: hidden;
-              page-break-after: avoid;
-              break-after: avoid;
+              overflow: hidden !important;
             }
           }
         `}
