@@ -335,6 +335,19 @@
         "status_refresh_button": "Status vernieuwen"
       }
   },
+  "loopbaanrapport": {
+    "intro": {
+      "title": "Je loopbaanrapport",
+      "subtitle": "Bijna klaar om je persoonlijke rapport te genereren",
+      "description": "Op basis van alles wat je hebt ingevuld in de enthousiasme scan, wensberoepen en je persoonsprofiel, genereert Vinster nu een persoonlijk loopbaanrapport.",
+      "what_you_get_title": "Wat je krijgt",
+      "what_you_get_item1": "Een overzicht van activiteiten, werkomstandigheden en interesses die bij jou passen",
+      "what_you_get_item2": "Drie concrete beroepssuggesties: twee passend en één verrassend alternatief",
+      "warning_title": "Let op",
+      "warning_text": "Je kunt nu nog terug om je antwoorden in de vorige stappen aan te passen. Zodra je het rapport genereert, staan je antwoorden vast voor deze ronde.",
+      "continue_button": "Doorgaan naar bevestiging"
+    }
+  },
   "rapport": {
     "download": {
       "title": "Loopbaanrapport downloaden",

@@ -326,6 +326,19 @@
       "refresh_button": "Seite aktualisieren"
     }
   },
+  "loopbaanrapport": {
+    "intro": {
+      "title": "Ihr Karrierebericht",
+      "subtitle": "Fast bereit, Ihren persönlichen Bericht zu generieren",
+      "description": "Basierend auf allem, was Sie im Begeisterungsscan, bei den Wunschberufen und in Ihrem Persönlichkeitsprofil ausgefüllt haben, erstellt Vinster nun einen persönlichen Karrierebericht.",
+      "what_you_get_title": "Was Sie bekommen",
+      "what_you_get_item1": "Eine Übersicht über Aktivitäten, Arbeitsbedingungen und Interessen, die zu Ihnen passen",
+      "what_you_get_item2": "Drei konkrete Berufsvorschläge: zwei passende und eine überraschende Alternative",
+      "warning_title": "Achtung",
+      "warning_text": "Sie können jetzt noch zurückgehen, um Ihre Antworten in den vorherigen Schritten anzupassen. Sobald Sie den Bericht generieren, sind Ihre Antworten für diese Runde festgelegt.",
+      "continue_button": "Weiter zur Bestätigung"
+    }
+  },
   "rapport": {
     "download": {
       "title": "Laufbahnbericht herunterladen",
