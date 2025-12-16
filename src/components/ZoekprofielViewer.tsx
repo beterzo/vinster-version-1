@@ -78,7 +78,18 @@ const ZoekprofielViewer = ({ content, userName }: ZoekprofielViewerProps) => {
               size: A4;
               margin: 0;
             }
-            body {
+            @page :first {
+              size: A4;
+              margin: 0;
+            }
+            @page :left, @page :right {
+              size: A4;
+              margin: 0;
+            }
+            html, body {
+              height: 297mm !important;
+              max-height: 297mm !important;
+              overflow: hidden !important;
               print-color-adjust: exact !important;
               -webkit-print-color-adjust: exact !important;
             }
@@ -95,10 +106,13 @@ const ZoekprofielViewer = ({ content, userName }: ZoekprofielViewerProps) => {
               top: 0;
               width: 210mm;
               height: 297mm;
+              max-height: 297mm;
               padding: 0;
               margin: 0;
               background: white !important;
               overflow: hidden;
+              page-break-after: avoid;
+              break-after: avoid;
             }
           }
         `}
