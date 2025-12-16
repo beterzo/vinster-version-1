@@ -49,7 +49,7 @@ export const JOURNEY_STEPS: JourneyStepConfig[] = [
   { 
     id: 'loopbaanrapport', 
     labelKey: 'dashboard.journey.step_loopbaanrapport',
-    subSteps: ['intro', 'confirm', 'complete']
+    subSteps: ['confirm', 'complete']
   },
   { 
     id: 'onderzoeksplan', 
