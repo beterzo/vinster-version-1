@@ -14,7 +14,7 @@ const VoorbeeldrapportPagina = () => {
       case 'no':
         return '/Voorbeeld loopbaanrapport Noors.pdf';
       default:
-        return '/Voorbeeldrapport_Vinster_V2.pdf';
+        return '/Loopbaanrapport_V3.pdf';
     }
   };
 
