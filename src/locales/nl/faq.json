@@ -34,7 +34,8 @@
       },
       {
         "question": "Wat gebeurt er met mijn gegevens?",
-        "answer": "Je gegevens worden veilig opgeslagen en alleen gebruikt om jouw rapport te genereren. We verkopen niks door en houden ons aan de AVG (privacywetgeving). Lees meer in onze [privacyverklaring]."
+        "answer": "Je gegevens worden veilig opgeslagen en alleen gebruikt om jouw rapport te genereren. We verkopen niks door en houden ons aan de AVG (privacywetgeving). Lees meer in onze {{privacyverklaring}}.",
+        "privacyverklaring_text": "privacyverklaring"
       },
       {
         "question": "Kan ik dit ook doen met mijn coach of ouder?",
