@@ -76,7 +76,7 @@ const WhatDoYouGetCard = () => {
           asChild
           className="border-2 border-white hover:bg-white hover:bg-opacity-10 font-bold px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 w-full bg-transparent text-white"
         >
-          <Link to="/voorbeeldrapport" target="_blank">
+          <Link to="/voorbeeldrapport">
             {viewSample}
           </Link>
         </Button>

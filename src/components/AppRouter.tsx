@@ -26,7 +26,6 @@ import AlgemeneVoorwaarden from "@/pages/AlgemeneVoorwaarden";
 import Cookiebeleid from "@/pages/Cookiebeleid";
 import ToegangscodesProfessionals from "@/pages/ToegangscodesProfessionals";
 import TrajectOpnieuwStartenUitleg from "@/pages/TrajectOpnieuwStartenUitleg";
-import VoorbeeldrapportPagina from "@/pages/VoorbeeldrapportPagina";
 import VoorbeeldrapportGenerator from "@/pages/VoorbeeldrapportGenerator";
 
 // Protected route imports
@@ -134,9 +133,8 @@ const AppRouter = () => {
       <Route path="/kontakt" element={<Contact />} />
       <Route path="/tilgangskoder-fagfolk" element={<ToegangscodesProfessionals />} />
       
-      {/* Voorbeeldrapport page with custom title and favicon */}
-      <Route path="/voorbeeldrapport" element={<VoorbeeldrapportPagina />} />
-      <Route path="/voorbeeldrapport-generator" element={<VoorbeeldrapportGenerator />} />
+      {/* Voorbeeldrapport page */}
+      <Route path="/voorbeeldrapport" element={<VoorbeeldrapportGenerator />} />
       
       {/* Legacy redirect from old de-mens-achter-vinster to new over-vinster */}
       <Route path="/de-mens-achter-vinster" element={<Navigate to="/over-vinster" replace />} />
