@@ -17,13 +17,14 @@
     },
     "pricing": {
       "title": "Vollzugriff",
-      "subtitle": "Einmalige Zahlung für Ihren persönlichen Karrierebericht",
+      "subtitle": "Einmalige Zahlung für bis zu 10 persönliche Karriereberichte",
       "price": "€29",
       "price_desc": "Einmalig, kein Abonnement",
       "feature1": "Vollständiger Begeisterungsscan",
       "feature2": "Traumjobanalyse",
       "feature3": "Persönlicher Bericht (PDF)",
       "feature4": "Suchprofil-Generator",
+      "feature5": "Die Reise bis zu 10 Mal durchlaufen",
       "start_button": "Jetzt für €29 starten",
       "processing": "Verarbeitung...",
       "payment_methods": "Sicher bezahlen mit iDEAL, Kreditkarte oder PayPal"

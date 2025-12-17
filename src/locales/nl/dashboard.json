@@ -17,13 +17,14 @@
     },
     "pricing": {
       "title": "Volledige toegang",
-      "subtitle": "Eenmalige betaling voor jouw persoonlijke loopbaanrapport",
+      "subtitle": "Eenmalige betaling voor tot 10 persoonlijke loopbaanrapporten",
       "price": "€29",
       "price_desc": "Eenmalig, geen abonnement",
       "feature1": "Volledige enthousiasmescan",
       "feature2": "Wensberoepenanalyse",
       "feature3": "Persoonlijk rapport (PDF)",
       "feature4": "Zoekprofiel generator",
+      "feature5": "Tot 10 keer het traject doorlopen",
       "start_button": "Start nu voor €29",
       "processing": "Verwerken...",
       "payment_methods": "Veilig betalen met iDEAL, creditcard of PayPal"
