@@ -17,13 +17,14 @@
     },
     "pricing": {
       "title": "Full tilgang",
-      "subtitle": "Engangsbetalning for din personlige karriererapport",
+      "subtitle": "Engangsbetaling for opptil 10 personlige karriererapporter",
       "price": "333 kr",
       "price_desc": "Engangsbeløp, ikke abonnement",
       "feature1": "Komplett entusiasme-skanning",
       "feature2": "Drømmeyrke-analyse",
       "feature3": "Personlig rapport (PDF)",
       "feature4": "Søkeprofil-generator",
+      "feature5": "Gjennomfør reisen opptil 10 ganger",
       "start_button": "Start nå for 333 kr",
       "processing": "Behandler...",
       "payment_methods": "Sikker betaling med Vipps, kredittkort eller PayPal"

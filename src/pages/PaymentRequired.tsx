@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { CheckCircle, Star, Shield, Zap } from "lucide-react";
+import { CheckCircle, Star, Shield, Zap, RefreshCw } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { usePaymentStatus } from "@/hooks/usePaymentStatus";
@@ -291,6 +291,10 @@ const PaymentRequired = () => {
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
                   <span className="text-sm">{t('payment.pricing.feature4')}</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <RefreshCw className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-sm font-medium">{t('payment.pricing.feature5')}</span>
                 </div>
               </div>
 
