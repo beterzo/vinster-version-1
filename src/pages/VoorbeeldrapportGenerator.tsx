@@ -451,7 +451,7 @@ const VoorbeeldrapportGenerator = () => {
         <div className="max-w-[900px] mx-auto px-6 py-4 flex items-center justify-between">
           <Button
             variant="outline"
-            onClick={() => navigate(-1)}
+            onClick={() => navigate('/')}
             className="gap-2"
           >
             <ArrowLeft className="w-4 h-4" />
