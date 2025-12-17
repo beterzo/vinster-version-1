@@ -32,13 +32,6 @@ const cards: CardData[] = [
     popupTextKey: "en_nu_verder.online_game.popup_text",
     buttonKey: "en_nu_verder.online_game.button",
     link: "https://loopbaanspel.nl/"
-  },
-  {
-    titleKey: "en_nu_verder.physical_game.title",
-    subtitleKey: "en_nu_verder.physical_game.subtitle",
-    popupTextKey: "en_nu_verder.physical_game.popup_text",
-    buttonKey: "en_nu_verder.physical_game.button",
-    link: "https://www.thema.nl/spel-loopbaanspel/"
   }
 ];
 
@@ -57,7 +50,7 @@ const EnNuVerderSection = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
         {cards.map((card, index) => (
           <Card
             key={index}
