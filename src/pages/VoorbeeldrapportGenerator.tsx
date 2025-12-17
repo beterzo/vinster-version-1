@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Printer } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useLanguage, Language as AppLanguage } from "@/contexts/LanguageContext";
 
-type Language = "en" | "de" | "no";
+type Language = "nl" | "en" | "de" | "no";
 
 interface ReportContent {
   voorblad: {
@@ -32,6 +33,79 @@ interface ReportContent {
 }
 
 const sampleReports: Record<Language, ReportContent> = {
+  nl: {
+    voorblad: {
+      naam: "Lisa de Vries",
+      datum: "15 januari 2025",
+    },
+    ideale_functie: {
+      activiteiten: [
+        "mensen coachen",
+        "presentaties geven",
+        "teksten schrijven",
+        "evenementen organiseren",
+        "netwerken",
+        "problemen oplossen",
+        "creatief denken",
+        "teams leiden",
+        "collega's begeleiden",
+        "strategisch plannen",
+        "workshops faciliteren",
+        "relaties opbouwen",
+        "data analyseren",
+        "strategieën ontwikkelen",
+        "anderen inspireren"
+      ],
+      werkomgeving: [
+        "een flexibele werkplek",
+        "een dynamisch team",
+        "een internationale omgeving",
+        "een modern kantoor",
+        "thuiswerkmogelijkheden",
+        "samenwerkende cultuur",
+        "een innovatief bedrijf",
+        "diverse collega's",
+        "open communicatie",
+        "groeimogelijkheden",
+        "werk-privébalans",
+        "ondersteunend management",
+        "creatieve vrijheid",
+        "zinvolle projecten",
+        "continu leren"
+      ],
+      interessegebieden: [
+        "persoonlijke ontwikkeling",
+        "communicatie",
+        "leiderschap",
+        "innovatie",
+        "psychologie",
+        "onderwijs",
+        "bedrijfsstrategie",
+        "technologie",
+        "duurzaamheid",
+        "gezondheid en welzijn",
+        "maatschappelijke impact",
+        "ondernemerschap",
+        "cultuur en kunst",
+        "toekomstige trends",
+        "menselijk gedrag"
+      ]
+    },
+    beroepen: {
+      beroep_1: {
+        titel: "Loopbaanadviseur",
+        beschrijving: "Als loopbaanadviseur begeleid je mensen bij het vinden van werk dat bij hen past. Je coachingsvaardigheden en passie voor persoonlijke ontwikkeling maken deze rol ideaal. Je faciliteert gesprekken, analyseert talenten en helpt mensen hun loopbaanpad te ontdekken."
+      },
+      beroep_2: {
+        titel: "Communicatieadviseur",
+        beschrijving: "Je talent voor schrijven, presenteren en relaties opbouwen maakt je perfect voor een rol als communicatieadviseur. Je ontwikkelt overtuigende boodschappen, beheert interne en externe communicatie en leidt strategische initiatieven die mensen verbinden met de missie van je organisatie."
+      },
+      beroep_3: {
+        titel: "Community Manager",
+        beschrijving: "Een verrassende maar passende keuze! Je netwerkvaardigheden, organisatietalent en oprechte interesse in mensen zouden floreren in community management. Je bouwt betrokken gemeenschappen, bevordert betekenisvolle connecties en creëert ruimtes waar mensen samen groeien."
+      }
+    }
+  },
   en: {
     voorblad: {
       naam: "Sarah Johnson",
@@ -254,12 +328,23 @@ const sampleReports: Record<Language, ReportContent> = {
 };
 
 const languageLabels: Record<Language, string> = {
+  nl: "Nederlands",
   en: "English",
   de: "Deutsch",
   no: "Norsk"
 };
 
 const translations = {
+  nl: {
+    mainTitle: "Vind werk\ndat bij je past",
+    website: "www.vinster.ai",
+    idealJobTitle: "Jouw ideale functie-inhoud",
+    activitiesSubtitle: "Wat je graag doet",
+    environmentSubtitle: "Jouw ideale werkomgeving",
+    interestsSubtitle: "Jouw interessegebieden",
+    careersTitle: "Mogelijke beroepen",
+    pageOf: "Pagina"
+  },
   en: {
     mainTitle: "Find work\nthat fits you",
     website: "www.vinster.ai",
@@ -318,14 +403,40 @@ const PageSidebar = () => (
 
 const VoorbeeldrapportGenerator = () => {
   const navigate = useNavigate();
-  const [selectedLanguage, setSelectedLanguage] = useState<Language>("en");
+  const { language: appLanguage } = useLanguage();
+  
+  // Map app language to report language (all languages are supported)
+  const getInitialLanguage = (): Language => {
+    if (['nl', 'en', 'de', 'no'].includes(appLanguage)) {
+      return appLanguage as Language;
+    }
+    return 'nl';
+  };
+  
+  const [selectedLanguage, setSelectedLanguage] = useState<Language>(getInitialLanguage());
   
   const reportContent = sampleReports[selectedLanguage];
   const t = translations[selectedLanguage];
 
-  const handlePrint = () => {
-    window.print();
-  };
+  // Set custom title and favicon
+  useEffect(() => {
+    const originalTitle = document.title;
+    const originalFavicon = document.querySelector('link[rel="icon"]') as HTMLLinkElement;
+    const originalHref = originalFavicon?.href;
+    
+    document.title = "Voorbeeldrapport";
+    
+    if (originalFavicon) {
+      originalFavicon.href = "/images/voorbeeldrapport-favicon.png";
+    }
+    
+    return () => {
+      document.title = originalTitle;
+      if (originalFavicon && originalHref) {
+        originalFavicon.href = originalHref;
+      }
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -341,44 +452,21 @@ const VoorbeeldrapportGenerator = () => {
             Terug
           </Button>
           
-          <div className="flex items-center gap-4">
-            <div className="flex gap-2">
-              {(Object.keys(sampleReports) as Language[]).map((lang) => (
-                <Button
-                  key={lang}
-                  variant={selectedLanguage === lang ? "default" : "outline"}
-                  onClick={() => setSelectedLanguage(lang)}
-                  className={selectedLanguage === lang ? "bg-[#232D4B]" : ""}
-                >
-                  {languageLabels[lang]}
-                </Button>
-              ))}
-            </div>
-            
-            <Button
-              onClick={handlePrint}
-              className="gap-2 bg-[#232D4B] hover:bg-[#232D4B]/90"
-            >
-              <Printer className="w-4 h-4" />
-              Print / Save as PDF
-            </Button>
+          <div className="flex gap-2">
+            {(Object.keys(sampleReports) as Language[]).map((lang) => (
+              <Button
+                key={lang}
+                variant={selectedLanguage === lang ? "default" : "outline"}
+                onClick={() => setSelectedLanguage(lang)}
+                className={selectedLanguage === lang ? "bg-[#232D4B]" : ""}
+              >
+                {languageLabels[lang]}
+              </Button>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* Instructions - Hidden in print */}
-      <div className="print:hidden max-w-[900px] mx-auto px-6 py-4">
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-          <h3 className="font-semibold text-[#232D4B] mb-2">Instructies:</h3>
-          <ol className="list-decimal list-inside text-sm text-gray-700 space-y-1">
-            <li>Selecteer een taal (English, Deutsch, of Norsk)</li>
-            <li>Klik op "Print / Save as PDF"</li>
-            <li>In het print dialoog, kies "Save as PDF" als bestemming</li>
-            <li>Sla het bestand op met de naam: Voorbeeld loopbaanrapport [taal].pdf</li>
-            <li>Upload de PDF naar de public folder</li>
-          </ol>
-        </div>
-      </div>
 
       {/* Report Content */}
       <div className="max-w-[900px] mx-auto py-8 print:p-0 print:max-w-none space-y-6 print:space-y-0">
