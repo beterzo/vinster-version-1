@@ -392,14 +392,20 @@ const CoverSquares = () => (
   </div>
 );
 
-// Decorative sidebar for content pages (3 vertical bars)
-const PageSidebar = () => (
-  <div className="absolute right-0 top-0 bottom-0 w-5 flex">
-    <div className="w-1/3 bg-[#F5D54B]"></div>
-    <div className="w-1/3 bg-[#78BFE3]"></div>
-    <div className="w-1/3 bg-[#232D4B]"></div>
-  </div>
-);
+// Decorative square for content sections
+const SectionSquare = ({ color }: { color: 'yellow' | 'blue' | 'darkblue' }) => {
+  const colorMap = {
+    yellow: '#F5D54B',
+    blue: '#78BFE3',
+    darkblue: '#232D4B'
+  };
+  return (
+    <div 
+      className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4"
+      style={{ backgroundColor: colorMap[color] }}
+    />
+  );
+};
 
 const VoorbeeldrapportGenerator = () => {
   const navigate = useNavigate();
@@ -509,9 +515,7 @@ const VoorbeeldrapportGenerator = () => {
 
         {/* Page 2: Ideal job content */}
         <div className="bg-white aspect-[210/297] relative overflow-hidden shadow-lg print:shadow-none print:page-break-after-always">
-          <PageSidebar />
-          
-          <div className="p-12 pr-16 h-full flex flex-col">
+          <div className="p-12 pr-12 h-full flex flex-col">
             {/* Title with yellow underline */}
             <div className="mb-10">
               <h2 className="text-5xl md:text-6xl font-bold text-[#232D4B] mb-3">
@@ -522,33 +526,36 @@ const VoorbeeldrapportGenerator = () => {
             
             <div className="space-y-10 flex-1">
               {/* Activities section */}
-              <div>
+              <div className="relative pr-8">
                 <h3 className="text-2xl md:text-3xl font-semibold text-[#78BFE3] mb-3 italic">
                   {t.activitiesSubtitle}
                 </h3>
                 <p className="text-gray-700 leading-relaxed text-lg md:text-xl">
                   {reportContent.ideale_functie.activiteiten.join(', ')}
                 </p>
+                <SectionSquare color="yellow" />
               </div>
 
               {/* Work environment section */}
-              <div>
+              <div className="relative pr-8">
                 <h3 className="text-2xl md:text-3xl font-semibold text-[#78BFE3] mb-3 italic">
                   {t.environmentSubtitle}
                 </h3>
                 <p className="text-gray-700 leading-relaxed text-lg md:text-xl">
                   {reportContent.ideale_functie.werkomgeving.join(', ')}
                 </p>
+                <SectionSquare color="blue" />
               </div>
 
               {/* Interests section */}
-              <div>
+              <div className="relative pr-8">
                 <h3 className="text-2xl md:text-3xl font-semibold text-[#78BFE3] mb-3 italic">
                   {t.interestsSubtitle}
                 </h3>
                 <p className="text-gray-700 leading-relaxed text-lg md:text-xl">
                   {reportContent.ideale_functie.interessegebieden.join(', ')}
                 </p>
+                <SectionSquare color="darkblue" />
               </div>
             </div>
             
@@ -561,9 +568,7 @@ const VoorbeeldrapportGenerator = () => {
 
         {/* Page 3: Career suggestions */}
         <div className="bg-white aspect-[210/297] relative overflow-hidden shadow-lg print:shadow-none">
-          <PageSidebar />
-          
-          <div className="p-12 pr-16 h-full flex flex-col">
+          <div className="p-12 pr-12 h-full flex flex-col">
             {/* Title with yellow underline */}
             <div className="mb-10">
               <h2 className="text-5xl md:text-6xl font-bold text-[#232D4B] mb-3">
@@ -574,33 +579,36 @@ const VoorbeeldrapportGenerator = () => {
             
             <div className="space-y-10 flex-1">
               {/* Career 1 */}
-              <div>
+              <div className="relative pr-8">
                 <h3 className="text-2xl md:text-3xl font-semibold text-[#78BFE3] mb-3">
                   {reportContent.beroepen.beroep_1.titel}
                 </h3>
                 <p className="text-gray-600 leading-relaxed text-lg md:text-xl">
                   {reportContent.beroepen.beroep_1.beschrijving}
                 </p>
+                <SectionSquare color="yellow" />
               </div>
 
               {/* Career 2 */}
-              <div>
+              <div className="relative pr-8">
                 <h3 className="text-2xl md:text-3xl font-semibold text-[#78BFE3] mb-3">
                   {reportContent.beroepen.beroep_2.titel}
                 </h3>
                 <p className="text-gray-600 leading-relaxed text-lg md:text-xl">
                   {reportContent.beroepen.beroep_2.beschrijving}
                 </p>
+                <SectionSquare color="blue" />
               </div>
 
               {/* Career 3 */}
-              <div>
+              <div className="relative pr-8">
                 <h3 className="text-2xl md:text-3xl font-semibold text-[#78BFE3] mb-3">
                   {reportContent.beroepen.beroep_3.titel}
                 </h3>
                 <p className="text-gray-600 leading-relaxed text-lg md:text-xl">
                   {reportContent.beroepen.beroep_3.beschrijving}
                 </p>
+                <SectionSquare color="darkblue" />
               </div>
             </div>
             
