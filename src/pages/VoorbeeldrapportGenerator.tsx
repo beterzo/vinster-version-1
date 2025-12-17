@@ -414,7 +414,7 @@ const VoorbeeldrapportGenerator = () => {
             <img 
               src="/images/vinster-logo.png" 
               alt="Vinster" 
-              className="h-10"
+              className="h-24"
             />
           </div>
         </div>
@@ -426,39 +426,39 @@ const VoorbeeldrapportGenerator = () => {
           <div className="p-12 pr-16 h-full flex flex-col">
             {/* Title with yellow underline */}
             <div className="mb-10">
-              <h2 className="text-4xl font-bold text-[#232D4B] mb-3">
+              <h2 className="text-5xl md:text-6xl font-bold text-[#232D4B] mb-3">
                 {t.idealJobTitle}
               </h2>
-              <div className="w-48 h-1.5 bg-[#F5D54B]"></div>
+              <div className="w-64 h-1.5 bg-[#F5D54B]"></div>
             </div>
             
-            <div className="space-y-8 flex-1">
+            <div className="space-y-10 flex-1">
               {/* Activities section */}
               <div>
-                <h3 className="text-2xl font-semibold text-[#78BFE3] mb-3 italic">
+                <h3 className="text-2xl md:text-3xl font-semibold text-[#78BFE3] mb-3 italic">
                   {t.activitiesSubtitle}
                 </h3>
-                <p className="text-gray-700 leading-relaxed text-lg">
+                <p className="text-gray-700 leading-relaxed text-lg md:text-xl">
                   {reportContent.ideale_functie.activiteiten.join(', ')}
                 </p>
               </div>
 
               {/* Work environment section */}
               <div>
-                <h3 className="text-2xl font-semibold text-[#78BFE3] mb-3 italic">
+                <h3 className="text-2xl md:text-3xl font-semibold text-[#78BFE3] mb-3 italic">
                   {t.environmentSubtitle}
                 </h3>
-                <p className="text-gray-700 leading-relaxed text-lg">
+                <p className="text-gray-700 leading-relaxed text-lg md:text-xl">
                   {reportContent.ideale_functie.werkomgeving.join(', ')}
                 </p>
               </div>
 
               {/* Interests section */}
               <div>
-                <h3 className="text-2xl font-semibold text-[#78BFE3] mb-3 italic">
+                <h3 className="text-2xl md:text-3xl font-semibold text-[#78BFE3] mb-3 italic">
                   {t.interestsSubtitle}
                 </h3>
-                <p className="text-gray-700 leading-relaxed text-lg">
+                <p className="text-gray-700 leading-relaxed text-lg md:text-xl">
                   {reportContent.ideale_functie.interessegebieden.join(', ')}
                 </p>
               </div>
@@ -478,39 +478,39 @@ const VoorbeeldrapportGenerator = () => {
           <div className="p-12 pr-16 h-full flex flex-col">
             {/* Title with yellow underline */}
             <div className="mb-10">
-              <h2 className="text-4xl font-bold text-[#232D4B] mb-3">
+              <h2 className="text-5xl md:text-6xl font-bold text-[#232D4B] mb-3">
                 {t.careersTitle}
               </h2>
-              <div className="w-48 h-1.5 bg-[#F5D54B]"></div>
+              <div className="w-64 h-1.5 bg-[#F5D54B]"></div>
             </div>
             
-            <div className="space-y-8 flex-1">
+            <div className="space-y-10 flex-1">
               {/* Career 1 */}
               <div>
-                <h3 className="text-2xl font-semibold text-[#78BFE3] mb-3">
+                <h3 className="text-2xl md:text-3xl font-semibold text-[#78BFE3] mb-3">
                   {reportContent.beroepen.beroep_1.titel}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-gray-600 leading-relaxed text-lg md:text-xl">
                   {reportContent.beroepen.beroep_1.beschrijving}
                 </p>
               </div>
 
               {/* Career 2 */}
               <div>
-                <h3 className="text-2xl font-semibold text-[#78BFE3] mb-3">
+                <h3 className="text-2xl md:text-3xl font-semibold text-[#78BFE3] mb-3">
                   {reportContent.beroepen.beroep_2.titel}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-gray-600 leading-relaxed text-lg md:text-xl">
                   {reportContent.beroepen.beroep_2.beschrijving}
                 </p>
               </div>
 
               {/* Career 3 */}
               <div>
-                <h3 className="text-2xl font-semibold text-[#78BFE3] mb-3">
+                <h3 className="text-2xl md:text-3xl font-semibold text-[#78BFE3] mb-3">
                   {reportContent.beroepen.beroep_3.titel}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-gray-600 leading-relaxed text-lg md:text-xl">
                   {reportContent.beroepen.beroep_3.beschrijving}
                 </p>
               </div>
