@@ -96,17 +96,19 @@ export const useZoekprofielResponses = (roundId?: string) => {
     const filledFields = fields.filter(field => field && typeof field === 'string' && field.trim().length > 0).length;
     const baseProgressPercentage = Math.round((filledFields / fields.length) * 100);
     
-    // Check if user has a completed zoekprofiel PDF
+    // Check if user has a completed zoekprofiel for this specific round
     let hasCompletedZoekprofiel = false;
-    if (user?.id) {
+    if (user?.id && roundId) {
       try {
         const { data: zoekprofielData } = await supabase
           .from('user_zoekprofielen')
-          .select('pdf_status, pdf_url')
+          .select('pdf_status, zoekprofiel_content')
           .eq('user_id', user.id)
+          .eq('round_id', roundId)
           .maybeSingle();
         
-        hasCompletedZoekprofiel = zoekprofielData && zoekprofielData.pdf_status === 'completed' && !!zoekprofielData.pdf_url;
+        // Zoekprofiel is only complete if there's actual generated content
+        hasCompletedZoekprofiel = zoekprofielData && !!zoekprofielData.zoekprofiel_content;
       } catch (error) {
         console.error('Error checking zoekprofiel status:', error);
       }
@@ -133,7 +135,7 @@ export const useZoekprofielResponses = (roundId?: string) => {
     setIsCompleted(completed);
     
     console.log('✅ Progress updated:', { progressPercentage, isCompleted: completed });
-  }, [user?.id]);
+  }, [user?.id, roundId]);
 
   const debouncedSave = useCallback(async (field: string, value: string) => {
     if (!user?.id || !roundId) return;

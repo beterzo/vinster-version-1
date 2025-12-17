@@ -339,6 +339,7 @@ export type Database = {
           pdf_generated_at: string | null
           pdf_status: string
           pdf_url: string | null
+          round_id: string | null
           updated_at: string
           user_id: string
           zoekprofiel_content: Json | null
@@ -349,6 +350,7 @@ export type Database = {
           pdf_generated_at?: string | null
           pdf_status?: string
           pdf_url?: string | null
+          round_id?: string | null
           updated_at?: string
           user_id: string
           zoekprofiel_content?: Json | null
@@ -359,11 +361,20 @@ export type Database = {
           pdf_generated_at?: string | null
           pdf_status?: string
           pdf_url?: string | null
+          round_id?: string | null
           updated_at?: string
           user_id?: string
           zoekprofiel_content?: Json | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "user_zoekprofielen_round_id_fkey"
+            columns: ["round_id"]
+            isOneToOne: false
+            referencedRelation: "user_rounds"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       wensberoepen_responses: {
         Row: {
