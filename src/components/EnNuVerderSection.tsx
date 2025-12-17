@@ -78,13 +78,13 @@ const EnNuVerderSection = () => {
       {cards.map((card, index) => (
         <Dialog key={index} open={openDialog === index} onOpenChange={(open) => setOpenDialog(open ? index : null)}>
           <DialogContent className="sm:max-w-lg p-8">
-            {/* Teal accent line */}
-            <div className="absolute top-4 left-6 w-16 h-1 rounded-full" style={{ backgroundColor: '#5DBFB3' }} />
+            {/* Blue accent line - Vinster blue */}
+            <div className="absolute top-4 left-6 w-16 h-1 rounded-full" style={{ backgroundColor: '#4B8FD3' }} />
             
-            {/* Decorative elements */}
+            {/* Decorative elements - Vinster colors */}
             <div className="absolute top-4 right-12 flex flex-col gap-1">
               <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: '#E5B84F' }} />
-              <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: '#5DBFB3' }} />
+              <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: '#4B8FD3' }} />
               <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: '#232D4B' }} />
             </div>
 
