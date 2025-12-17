@@ -150,4 +150,20 @@
   .print-page:last-child {
     page-break-after: auto !important;
   }
+  
+  /* Ensure text overflow protection works in print */
+  .line-clamp-4,
+  .line-clamp-6 {
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+  
+  .line-clamp-4 {
+    -webkit-line-clamp: 4 !important;
+  }
+  
+  .line-clamp-6 {
+    -webkit-line-clamp: 6 !important;
+  }
 }

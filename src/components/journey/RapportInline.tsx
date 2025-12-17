@@ -15,19 +15,19 @@ interface RapportInlineProps {
   onReportGenerated: () => void;
 }
 
-// Print-only cover page component
+// Print-only cover page component - White background, dark blue text
 const PrintCoverPage = ({ userName, startDate }: { userName: string; startDate: string }) => (
-  <div className="print-page bg-[#232D4B] relative overflow-hidden" style={{ width: '210mm', height: '297mm', pageBreakAfter: 'always' }}>
+  <div className="print-page bg-white relative overflow-hidden" style={{ width: '210mm', height: '297mm', pageBreakAfter: 'always' }}>
     {/* Main content */}
     <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-20">
-      <h1 className="text-7xl font-bold text-white mb-6 leading-tight">
+      <h1 className="text-7xl font-bold text-[#232D4B] mb-6 leading-tight">
         Vind werk dat<br />bij je past
       </h1>
       <p className="text-[#F5C518] text-3xl mb-24">www.vinster.ai</p>
       
-      <div className="text-white space-y-3">
-        <p className="text-3xl font-bold">{userName}</p>
-        <p className="text-2xl text-gray-300">{startDate}</p>
+      <div className="space-y-3">
+        <p className="text-3xl font-bold text-[#232D4B]">{userName}</p>
+        <p className="text-2xl text-gray-500">{startDate}</p>
       </div>
     </div>
 
@@ -39,7 +39,7 @@ const PrintCoverPage = ({ userName, startDate }: { userName: string; startDate: 
     </div>
     <div className="absolute bottom-28 left-16 flex gap-3">
       <div className="w-10 h-10 bg-[#F5C518]"></div>
-      <div className="w-10 h-10 bg-[#232D4B] border-2 border-[#78BFE3]"></div>
+      <div className="w-10 h-10 bg-white border-2 border-[#78BFE3]"></div>
     </div>
 
     {/* Vinster logo - bottom right */}
@@ -51,124 +51,118 @@ const PrintCoverPage = ({ userName, startDate }: { userName: string; startDate: 
   </div>
 );
 
-// Print-only ideale functie page
+// Print-only ideale functie page - No border, decorative sidebar only
 const PrintIdealeFunctiePage = ({ reportContent, t }: { reportContent: any; t: (key: string) => string }) => (
   <div className="print-page bg-white relative" style={{ width: '210mm', height: '297mm', pageBreakAfter: 'always' }}>
-    {/* Dark blue border */}
-    <div className="absolute inset-4 border-[6px] border-[#232D4B]">
-      {/* Content area */}
-      <div className="p-16">
-        {/* Title with yellow underline */}
-        <div className="mb-16">
-          <h2 className="text-5xl font-bold text-[#232D4B] mb-4">Jouw ideale functie-inhoud</h2>
-          <div className="w-80 h-2 bg-[#F5C518]"></div>
+    {/* Content area - no border */}
+    <div className="p-16 h-full relative">
+      {/* Title with yellow underline */}
+      <div className="mb-14">
+        <h2 className="text-5xl font-bold text-[#232D4B] mb-4">Jouw ideale functie-inhoud</h2>
+        <div className="w-80 h-2 bg-[#F5C518]"></div>
+      </div>
+
+      {/* Three sections with overflow protection */}
+      <div className="space-y-10">
+        {/* Activiteiten */}
+        <div>
+          <h3 className="text-3xl font-semibold text-[#78BFE3] mb-4">Wat je graag doet</h3>
+          <p className="text-xl text-gray-800 leading-relaxed line-clamp-6 overflow-hidden break-words">
+            {reportContent.ideale_functie?.activiteiten?.join(', ')}
+          </p>
         </div>
 
-        {/* Three sections */}
-        <div className="space-y-12">
-          {/* Activiteiten */}
-          <div>
-            <h3 className="text-3xl font-semibold text-[#78BFE3] mb-5">Wat je graag doet</h3>
-            <p className="text-xl text-gray-800 leading-relaxed">
-              {reportContent.ideale_functie?.activiteiten?.join(', ')}
-            </p>
-          </div>
+        {/* Werkomgeving */}
+        <div>
+          <h3 className="text-3xl font-semibold text-[#78BFE3] mb-4">Jouw ideale werkomgeving</h3>
+          <p className="text-xl text-gray-800 leading-relaxed line-clamp-6 overflow-hidden break-words">
+            {reportContent.ideale_functie?.werkomgeving?.join(', ')}
+          </p>
+        </div>
 
-          {/* Werkomgeving */}
-          <div>
-            <h3 className="text-3xl font-semibold text-[#78BFE3] mb-5">Jouw ideale werkomgeving</h3>
-            <p className="text-xl text-gray-800 leading-relaxed">
-              {reportContent.ideale_functie?.werkomgeving?.join(', ')}
-            </p>
-          </div>
-
-          {/* Interessegebieden */}
-          <div>
-            <h3 className="text-3xl font-semibold text-[#78BFE3] mb-5">Jouw interessegebieden</h3>
-            <p className="text-xl text-gray-800 leading-relaxed">
-              {reportContent.ideale_functie?.interessegebieden?.join(', ')}
-            </p>
-          </div>
+        {/* Interessegebieden */}
+        <div>
+          <h3 className="text-3xl font-semibold text-[#78BFE3] mb-4">Jouw interessegebieden</h3>
+          <p className="text-xl text-gray-800 leading-relaxed line-clamp-6 overflow-hidden break-words">
+            {reportContent.ideale_functie?.interessegebieden?.join(', ')}
+          </p>
         </div>
       </div>
 
-      {/* Decorative sidebar - right */}
-      <div className="absolute right-0 top-1/4 flex flex-col gap-2">
-        <div className="w-4 h-16 bg-[#F5C518]"></div>
-        <div className="w-4 h-16 bg-[#78BFE3]"></div>
-        <div className="w-4 h-16 bg-[#232D4B]"></div>
+      {/* Decorative sidebar - right edge of page */}
+      <div className="absolute right-0 top-1/3 flex flex-col gap-3">
+        <div className="w-5 h-20 bg-[#F5C518]"></div>
+        <div className="w-5 h-20 bg-[#78BFE3]"></div>
+        <div className="w-5 h-20 bg-[#232D4B]"></div>
       </div>
 
       {/* Page number */}
-      <div className="absolute bottom-6 right-10 text-base text-gray-500">
+      <div className="absolute bottom-8 right-8 text-base text-gray-400">
         Pagina 1 van 2
       </div>
     </div>
   </div>
 );
 
-// Print-only beroepen page
+// Print-only beroepen page - No border, decorative sidebar only
 const PrintBeroepenPage = ({ reportContent, t }: { reportContent: any; t: (key: string) => string }) => (
   <div className="print-page bg-white relative" style={{ width: '210mm', height: '297mm' }}>
-    {/* Dark blue border */}
-    <div className="absolute inset-4 border-[6px] border-[#232D4B]">
-      {/* Content area */}
-      <div className="p-16">
-        {/* Title with yellow underline */}
-        <div className="mb-14">
-          <h2 className="text-5xl font-bold text-[#232D4B] mb-4">Mogelijke beroepen</h2>
-          <div className="w-80 h-2 bg-[#F5C518]"></div>
-        </div>
-
-        {/* Three professions */}
-        <div className="space-y-10">
-          {/* Beroep 1 */}
-          {reportContent.beroepen?.passend_1 && (
-            <div>
-              <h3 className="text-3xl font-semibold text-[#78BFE3] mb-4">
-                {reportContent.beroepen.passend_1.titel}
-              </h3>
-              <p className="text-xl text-gray-800 leading-relaxed">
-                {reportContent.beroepen.passend_1.beschrijving}
-              </p>
-            </div>
-          )}
-
-          {/* Beroep 2 */}
-          {reportContent.beroepen?.passend_2 && (
-            <div>
-              <h3 className="text-3xl font-semibold text-[#78BFE3] mb-4">
-                {reportContent.beroepen.passend_2.titel}
-              </h3>
-              <p className="text-xl text-gray-800 leading-relaxed">
-                {reportContent.beroepen.passend_2.beschrijving}
-              </p>
-            </div>
-          )}
-
-          {/* Beroep 3 (verrassend) */}
-          {reportContent.beroepen?.verrassend && (
-            <div>
-              <h3 className="text-3xl font-semibold text-[#78BFE3] mb-4">
-                {reportContent.beroepen.verrassend.titel}
-              </h3>
-              <p className="text-xl text-gray-800 leading-relaxed">
-                {reportContent.beroepen.verrassend.beschrijving}
-              </p>
-            </div>
-          )}
-        </div>
+    {/* Content area - no border */}
+    <div className="p-16 h-full relative">
+      {/* Title with yellow underline */}
+      <div className="mb-12">
+        <h2 className="text-5xl font-bold text-[#232D4B] mb-4">Mogelijke beroepen</h2>
+        <div className="w-80 h-2 bg-[#F5C518]"></div>
       </div>
 
-      {/* Decorative sidebar - right */}
-      <div className="absolute right-0 top-1/4 flex flex-col gap-2">
-        <div className="w-4 h-16 bg-[#F5C518]"></div>
-        <div className="w-4 h-16 bg-[#78BFE3]"></div>
-        <div className="w-4 h-16 bg-[#232D4B]"></div>
+      {/* Three professions with overflow protection */}
+      <div className="space-y-8">
+        {/* Beroep 1 */}
+        {reportContent.beroepen?.passend_1 && (
+          <div>
+            <h3 className="text-3xl font-semibold text-[#78BFE3] mb-3">
+              {reportContent.beroepen.passend_1.titel}
+            </h3>
+            <p className="text-xl text-gray-800 leading-relaxed line-clamp-4 overflow-hidden break-words">
+              {reportContent.beroepen.passend_1.beschrijving}
+            </p>
+          </div>
+        )}
+
+        {/* Beroep 2 */}
+        {reportContent.beroepen?.passend_2 && (
+          <div>
+            <h3 className="text-3xl font-semibold text-[#78BFE3] mb-3">
+              {reportContent.beroepen.passend_2.titel}
+            </h3>
+            <p className="text-xl text-gray-800 leading-relaxed line-clamp-4 overflow-hidden break-words">
+              {reportContent.beroepen.passend_2.beschrijving}
+            </p>
+          </div>
+        )}
+
+        {/* Beroep 3 (verrassend) */}
+        {reportContent.beroepen?.verrassend && (
+          <div>
+            <h3 className="text-3xl font-semibold text-[#78BFE3] mb-3">
+              {reportContent.beroepen.verrassend.titel}
+            </h3>
+            <p className="text-xl text-gray-800 leading-relaxed line-clamp-4 overflow-hidden break-words">
+              {reportContent.beroepen.verrassend.beschrijving}
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* Decorative sidebar - right edge of page */}
+      <div className="absolute right-0 top-1/3 flex flex-col gap-3">
+        <div className="w-5 h-20 bg-[#F5C518]"></div>
+        <div className="w-5 h-20 bg-[#78BFE3]"></div>
+        <div className="w-5 h-20 bg-[#232D4B]"></div>
       </div>
 
       {/* Page number */}
-      <div className="absolute bottom-6 right-10 text-base text-gray-500">
+      <div className="absolute bottom-8 right-8 text-base text-gray-400">
         Pagina 2 van 2
       </div>
     </div>
