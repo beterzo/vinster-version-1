@@ -30,7 +30,8 @@
       },
       {
         "question": "Was passiert mit meinen Daten?",
-        "answer": "Ihre Daten werden sicher gespeichert und nur zur Erstellung Ihres Berichts verwendet. Wir verkaufen nichts und halten uns an die DSGVO (Datenschutzgesetzgebung). Lesen Sie mehr in unserer [Datenschutzerklärung]."
+        "answer": "Ihre Daten werden sicher gespeichert und nur zur Erstellung Ihres Berichts verwendet. Wir verkaufen nichts und halten uns an die DSGVO (Datenschutzgesetzgebung). Lesen Sie mehr in unserer {{privacyverklaring}}.",
+        "privacyverklaring_text": "Datenschutzerklärung"
       },
       {
         "question": "Kann ich das auch mit meinem Coach oder Elternteil machen?",

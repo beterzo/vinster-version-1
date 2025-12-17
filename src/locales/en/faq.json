@@ -30,7 +30,8 @@
       },
       {
         "question": "What happens to my data?",
-        "answer": "Your data is stored securely and only used to generate your report. We don't sell anything and comply with GDPR (privacy legislation). Read more in our [privacy policy]."
+        "answer": "Your data is stored securely and only used to generate your report. We don't sell anything and comply with GDPR (privacy legislation). Read more in our {{privacyverklaring}}.",
+        "privacyverklaring_text": "privacy policy"
       },
       {
         "question": "Can I also do this with my coach or parent?",

@@ -57,7 +57,7 @@ const VeelgesteldeVragen = () => {
         
         <div className="bg-white rounded-xl shadow-lg p-8">
           <div className="space-y-4">
-            {faqItems?.map((item: {question: string, answer: string}, index: number) => (
+            {faqItems?.map((item: {question: string, answer: string, privacyverklaring_text?: string}, index: number) => (
               <Collapsible key={index}>
                 <CollapsibleTrigger 
                   onClick={() => toggleItem(index)} 
@@ -76,7 +76,20 @@ const VeelgesteldeVragen = () => {
                 <CollapsibleContent className="mt-2">
                   <div className="p-4 bg-gray-50 rounded-lg">
                     <p className="text-base leading-relaxed" style={{ color: '#232D4B' }}>
-                      {item.answer}
+                      {item.answer.includes('{{privacyverklaring}}') ? (
+                        <>
+                          {item.answer.split('{{privacyverklaring}}')[0]}
+                          <a 
+                            href="/privacy-verklaring" 
+                            className="text-[#232D4B] underline hover:text-[#3B4A6B] font-medium"
+                          >
+                            {item.privacyverklaring_text || 'privacyverklaring'}
+                          </a>
+                          {item.answer.split('{{privacyverklaring}}')[1]}
+                        </>
+                      ) : (
+                        item.answer
+                      )}
                     </p>
                   </div>
                 </CollapsibleContent>
