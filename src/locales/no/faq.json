@@ -1,32 +1,49 @@
 {
-  "hero": {
-    "title": "Vanlige spørsmål",
-    "subtitle": "Finn svar på de mest stilte spørsmålene om Vinster"
-  },
-  "faq_items": [
-    {
-      "question": "Hva er Vinster?",
-      "answer": "Vinster er en omfattende karriereanalysetjeneste som hjelper deg med å oppdage din ideelle karriere gjennom vitenskapelige metoder og personlig innsikt."
-    },
-    {
-      "question": "Hvor lang tid tar det å fullføre analysen?",
-      "answer": "Den komplette analysen tar vanligvis 30-45 minutter å fullføre. Du kan gjøre det i ditt eget tempo og ta pauser når du trenger det."
-    },
-    {
-      "question": "Hva får jeg i rapporten?",
-      "answer": "Du får en detaljert rapport som inkluderer dine styrker, interesser, drømmeyrker og en personlig handlingsplan for din karriereutvikling."
-    },
-    {
-      "question": "Er mine data trygge?",
-      "answer": "Ja, vi tar datasikkerhet svært alvorlig. All din informasjon er kryptert og behandles i henhold til GDPR-forskriftene."
-    },
-    {
-      "question": "Kan jeg bruke Vinster flere ganger?",
-      "answer": "Ja, du kan oppdatere din analyse når som helst når dine interesser eller situasjon endrer seg."
-    },
-    {
-      "question": "Hvor mye koster det?",
-      "answer": "Vinster koster 333 kr for en komplett karriereanalyse og rapport. Dette er en engangssum uten skjulte kostnader."
-    }
-  ]
+  "faq": {
+    "page_title": "Vanlige spørsmål",
+    "back_to_home": "Tilbake til forsiden",
+    "questions": [
+      {
+        "question": "Hva er Vinster og Karrieretrakten?",
+        "answer": "Vinster er et verktøy som bruker den vitenskapelig utviklede Karrieretrakten for å hjelpe deg med å oppdage jobben som virkelig passer for deg. Gjennom strukturerte spørsmål og AI-analyse får du innsikt i hva du virkelig liker å gjøre, og får konkrete karriereforslag."
+      },
+      {
+        "question": "Hvordan fungerer AI i karriererådgivning?",
+        "answer": "AI analyserer svarene dine for å finne mønstre i det du gjerne gjør og interesserer deg for. Basert på dette genererer AI-en personlige nøkkelord og karriereforslag som passer til profilen din. Det er ingen standardsvar – alt er tilpasset din unike situasjon."
+      },
+      {
+        "question": "Hvem er Vinster for?",
+        "answer": "Vinster er for alle som vil vite hva slags jobb som passer for dem. Enten du er ung og nettopp har begynt med karrierevalgene, eller du har jobbet en stund og ønsker noe nytt – Vinster hjelper deg med å avklare hva du virkelig ønsker."
+      },
+      {
+        "question": "Hvor lang tid tar prosessen?",
+        "answer": "Hele Vinster-prosessen tar ca. 45-60 minutter. Du kan ta pauser og fortsette senere – all fremgang lagres automatisk."
+      },
+      {
+        "question": "Hva inneholder rapporten?",
+        "answer": "Rapporten inneholder dine personlige nøkkelord (hva du liker å gjøre, ideelt arbeidsmiljø og interesser), tre konkrete karriereforslag med forklaringer, og en trinnvis handlingsplan for å utforske disse yrkene videre."
+      },
+      {
+        "question": "Må jeg installere noe?",
+        "answer": "Nei, Vinster fungerer helt i nettleseren din. Du trenger ikke å laste ned eller installere noe. Det fungerer på datamaskin, nettbrett og mobil."
+      },
+      {
+        "question": "Kan jeg stoppe underveis og fortsette senere?",
+        "answer": "Ja, fremgangen din lagres automatisk. Du kan stoppe når som helst og fortsette senere akkurat der du slapp."
+      },
+      {
+        "question": "Hva skjer med mine data?",
+        "answer": "Dataene dine lagres sikkert og brukes kun til å generere rapporten din. Vi selger ingenting videre og følger GDPR (personvernlovgivningen). Les mer i vår {{privacyverklaring}}.",
+        "privacyverklaring_text": "personvernerklæring"
+      },
+      {
+        "question": "Kan jeg gjøre dette sammen med en coach eller forelder?",
+        "answer": "Absolutt! Det kan være verdifullt å gå gjennom spørsmålene med noen som kjenner deg godt. De kan hjelpe deg med å huske situasjoner og erfaringer du kanskje ikke umiddelbart tenker på selv."
+      },
+      {
+        "question": "Hva koster det?",
+        "answer": "Vinster koster 333 kr for en komplett karriereanalyse og rapport. Dette er en engangsbetaling uten skjulte kostnader."
+      }
+    ]
+  }
 }
