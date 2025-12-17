@@ -53,12 +53,12 @@ const ZoekprofielInline = ({ roundId, subStep, onNext, onPrevious }: Zoekprofiel
         setUserName(`${profileData.first_name} ${profileData.last_name}`);
       }
 
-      // Check for existing zoekprofiel with content
+      // Check for existing zoekprofiel with content for this specific round
       const { data } = await supabase
         .from('user_zoekprofielen')
         .select('*')
         .eq('user_id', user.id)
-        .eq('pdf_status', 'completed')
+        .eq('round_id', roundId)
         .maybeSingle();
       
       if (data?.zoekprofiel_content) {

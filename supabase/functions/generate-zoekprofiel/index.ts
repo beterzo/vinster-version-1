@@ -313,17 +313,18 @@ serve(async (req) => {
     const zoekprofielContent = JSON.parse(toolCall.function.arguments);
     console.log('Generated zoekprofiel content:', zoekprofielContent);
 
-    // Store the generated content in user_zoekprofielen
+    // Store the generated content in user_zoekprofielen (round-specific)
     const { error: upsertError } = await supabase
       .from('user_zoekprofielen')
       .upsert({
         user_id,
+        round_id,
         zoekprofiel_content: zoekprofielContent,
         pdf_status: 'completed',
         pdf_generated_at: new Date().toISOString(),
         updated_at: new Date().toISOString()
       }, {
-        onConflict: 'user_id'
+        onConflict: 'user_id,round_id'
       });
 
     if (upsertError) {

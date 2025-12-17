@@ -38,6 +38,7 @@ const RondeDashboard = () => {
   const [slideDirection, setSlideDirection] = useState<'left' | 'right'>('left');
   const [reportExists, setReportExists] = useState(false);
   const [onderzoeksplanComplete, setOnderzoeksplanComplete] = useState(false);
+  const [zoekprofielComplete, setZoekprofielComplete] = useState(false);
 
   useEffect(() => {
     if (!roundsLoading && rounds.length > 0 && roundId) {
@@ -47,17 +48,27 @@ const RondeDashboard = () => {
   }, [rounds, roundsLoading, roundId]);
 
   useEffect(() => {
-    const checkReport = async () => {
+    const checkReportAndZoekprofiel = async () => {
       if (!roundId) return;
-      const { data } = await supabase
+      
+      // Check report
+      const { data: reportData } = await supabase
         .from('user_reports')
         .select('id')
         .eq('round_id', roundId)
         .eq('report_status', 'completed')
         .maybeSingle();
-      setReportExists(!!data);
+      setReportExists(!!reportData);
+      
+      // Check zoekprofiel - only complete if zoekprofiel_content exists for this round
+      const { data: zoekprofielData } = await supabase
+        .from('user_zoekprofielen')
+        .select('zoekprofiel_content')
+        .eq('round_id', roundId)
+        .maybeSingle();
+      setZoekprofielComplete(!!zoekprofielData?.zoekprofiel_content);
     };
-    checkReport();
+    checkReportAndZoekprofiel();
   }, [roundId]);
 
   const isLoading = roundsLoading || enthousiasmeLoading || wensberoepenLoading || prioriteitenLoading || extraInfoLoading;
@@ -76,11 +87,6 @@ const RondeDashboard = () => {
     extraInfoResponses?.opleidingsniveau;
 
   const getCompletedSteps = (): JourneyStep[] => {
-    // Als de ronde is afgerond, zijn ALLE stappen voltooid
-    if (round?.status === 'completed') {
-      return JOURNEY_STEPS.map(step => step.id);
-    }
-    
     const completed: JourneyStep[] = [];
     if (enthousiasmeComplete) completed.push('enthousiasme');
     if (wensberoepenComplete) completed.push('wensberoepen');
@@ -90,6 +96,10 @@ const RondeDashboard = () => {
     }
     if (onderzoeksplanComplete) {
       completed.push('onderzoeksplan');
+    }
+    // Zoekprofiel is only complete when zoekprofiel_content exists for this specific round
+    if (zoekprofielComplete) {
+      completed.push('zoekprofiel');
     }
     return completed;
   };
