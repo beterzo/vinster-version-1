@@ -67,16 +67,9 @@ const RoundsOverview = ({ onViewReport, onResumeRound }: RoundsOverviewProps) =>
 
   return (
     <Card className="p-6 border-0 rounded-3xl" style={{ backgroundColor: '#E6F0F6' }}>
-      <div className="flex items-start justify-between mb-6">
-        <div>
-          <h2 className="text-xl font-bold text-vinster-blue">{t('dashboard.rounds.game_rounds_title')}</h2>
-          <p className="text-gray-600 text-sm">{t('dashboard.rounds.game_rounds_subtitle')}</p>
-        </div>
-        <img 
-          src="/lovable-uploads/ee361013-bfc6-485f-b46f-ed87a3cd6c73.jpg" 
-          alt="Spelrondes" 
-          className="w-16 h-16 rounded-lg object-cover hidden md:block"
-        />
+      <div className="mb-6">
+        <h2 className="text-xl font-bold text-vinster-blue">{t('dashboard.rounds.game_rounds_title')}</h2>
+        <p className="text-gray-600 text-sm">{t('dashboard.rounds.game_rounds_subtitle')}</p>
       </div>
 
       <div className="space-y-3">
