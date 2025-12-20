@@ -19,8 +19,8 @@ const PaymentGate = ({ children, fallbackPath = "/payment-required" }: PaymentGa
     paymentLoading 
   });
 
-  // Still loading auth or payment status
-  if (authLoading || paymentLoading) {
+  // Still loading auth or payment status, or hasPaid is still null (not yet fetched)
+  if (authLoading || paymentLoading || hasPaid === null) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -36,9 +36,9 @@ const PaymentGate = ({ children, fallbackPath = "/payment-required" }: PaymentGa
     return <Navigate to="/login" replace />;
   }
 
-  // User hasn't paid yet
-  if (!hasPaid) {
-    console.log('💸 User has not paid, redirecting to:', fallbackPath);
+  // User hasn't paid yet - explicit check for true
+  if (hasPaid !== true) {
+    console.log('💸 User has not paid (hasPaid:', hasPaid, '), redirecting to:', fallbackPath);
     return <Navigate to={fallbackPath} replace />;
   }
 
