@@ -379,15 +379,15 @@ const translations = {
 
 // Decorative squares for cover page (bottom left)
 const CoverSquares = () => (
-  <div className="absolute left-10 bottom-16">
+  <div className="absolute left-4 md:left-10 bottom-4 md:bottom-16">
     <div className="flex gap-1">
-      <div className="w-14 h-14 bg-[#F5D54B]"></div>
-      <div className="w-14 h-14 border-2 border-[#78BFE3]"></div>
+      <div className="w-8 h-8 md:w-14 md:h-14 bg-[#F5D54B]"></div>
+      <div className="w-8 h-8 md:w-14 md:h-14 border-2 border-[#78BFE3]"></div>
     </div>
     <div className="flex gap-1 mt-1">
-      <div className="w-14 h-14 bg-[#78BFE3]"></div>
-      <div className="w-14 h-14 bg-[#F5D54B]"></div>
-      <div className="w-14 h-14 bg-[#232D4B]"></div>
+      <div className="w-8 h-8 md:w-14 md:h-14 bg-[#78BFE3]"></div>
+      <div className="w-8 h-8 md:w-14 md:h-14 bg-[#F5D54B]"></div>
+      <div className="w-8 h-8 md:w-14 md:h-14 bg-[#232D4B]"></div>
     </div>
   </div>
 );
@@ -478,33 +478,42 @@ const VoorbeeldrapportGenerator = () => {
       <div className="max-w-[900px] mx-auto py-8 print:p-0 print:max-w-none space-y-6 print:space-y-0">
         
         {/* Page 1: Cover page */}
-        <div className="bg-white aspect-[210/297] relative overflow-hidden shadow-lg print:shadow-none print:page-break-after-always">
+        <div className="bg-white min-h-[500px] md:aspect-[210/297] relative overflow-hidden shadow-lg print:shadow-none print:page-break-after-always print:aspect-[210/297] print:min-h-0">
           <CoverSquares />
           
-          <div className="absolute inset-0 flex flex-col justify-center items-center px-16">
+          <div className="relative md:absolute md:inset-0 flex flex-col justify-center items-center px-6 md:px-16 py-12 md:py-0">
             {/* Main title */}
-            <h1 className="text-5xl md:text-6xl font-bold text-[#232D4B] text-center leading-tight whitespace-pre-line mb-4">
+            <h1 className="text-4xl md:text-6xl font-bold text-[#232D4B] text-center leading-tight whitespace-pre-line mb-4">
               {t.mainTitle}
             </h1>
             
             {/* Website URL */}
-            <p className="text-xl text-[#F5D54B] font-medium mb-16">
+            <p className="text-lg md:text-xl text-[#F5D54B] font-medium mb-8 md:mb-16">
               {t.website}
             </p>
             
             {/* User name */}
-            <p className="text-3xl font-semibold text-[#232D4B] mb-2">
+            <p className="text-2xl md:text-3xl font-semibold text-[#232D4B] mb-2">
               {reportContent.voorblad.naam}
             </p>
             
             {/* Date */}
-            <p className="text-lg text-gray-600">
+            <p className="text-base md:text-lg text-gray-600 mb-8 md:mb-0">
               {reportContent.voorblad.datum}
             </p>
+            
+            {/* Vinster logo - shown inline on mobile */}
+            <div className="md:hidden mt-4">
+              <img 
+                src="/images/vinster-logo.png" 
+                alt="Vinster" 
+                className="h-16"
+              />
+            </div>
           </div>
           
-          {/* Vinster logo bottom right */}
-          <div className="absolute right-10 bottom-10">
+          {/* Vinster logo bottom right - only on desktop */}
+          <div className="hidden md:block absolute right-10 bottom-10">
             <img 
               src="/images/vinster-logo.png" 
               alt="Vinster" 
@@ -514,48 +523,48 @@ const VoorbeeldrapportGenerator = () => {
         </div>
 
         {/* Page 2: Ideal job content */}
-        <div className="bg-white aspect-[210/297] relative overflow-hidden shadow-lg print:shadow-none print:page-break-after-always">
-          <div className="p-12 pr-12 h-full flex flex-col">
+        <div className="bg-white md:aspect-[210/297] relative overflow-hidden shadow-lg print:shadow-none print:page-break-after-always print:aspect-[210/297]">
+          <div className="p-6 md:p-12 md:pr-12 h-full flex flex-col">
             {/* Title with yellow underline */}
-            <div className="mb-10">
-              <h2 className="text-5xl md:text-6xl font-bold text-[#232D4B] mb-3">
+            <div className="mb-6 md:mb-10">
+              <h2 className="text-3xl md:text-6xl font-bold text-[#232D4B] mb-3">
                 {t.idealJobTitle}
               </h2>
-              <div className="w-64 h-1.5 bg-[#F5D54B]"></div>
+              <div className="w-48 md:w-64 h-1.5 bg-[#F5D54B]"></div>
             </div>
             
-            <div className="space-y-10 flex-1">
+            <div className="space-y-6 md:space-y-10 flex-1">
               {/* Activities section */}
-              <div className="relative pr-8">
-                <h3 className="text-2xl md:text-3xl font-semibold text-[#78BFE3] mb-3 italic">
+              <div className="relative pr-6 md:pr-8">
+                <h3 className="text-xl md:text-3xl font-semibold text-[#78BFE3] mb-2 md:mb-3 italic">
                   {t.activitiesSubtitle}
                 </h3>
-                <p className="text-gray-700 leading-relaxed text-lg md:text-xl">
+                <p className="text-gray-700 leading-relaxed text-base md:text-xl">
                   {reportContent.ideale_functie.activiteiten.join(', ')}
                 </p>
-                <SectionSquare color="yellow" />
+                <div className="hidden md:block"><SectionSquare color="yellow" /></div>
               </div>
 
               {/* Work environment section */}
-              <div className="relative pr-8">
-                <h3 className="text-2xl md:text-3xl font-semibold text-[#78BFE3] mb-3 italic">
+              <div className="relative pr-6 md:pr-8">
+                <h3 className="text-xl md:text-3xl font-semibold text-[#78BFE3] mb-2 md:mb-3 italic">
                   {t.environmentSubtitle}
                 </h3>
-                <p className="text-gray-700 leading-relaxed text-lg md:text-xl">
+                <p className="text-gray-700 leading-relaxed text-base md:text-xl">
                   {reportContent.ideale_functie.werkomgeving.join(', ')}
                 </p>
-                <SectionSquare color="blue" />
+                <div className="hidden md:block"><SectionSquare color="blue" /></div>
               </div>
 
               {/* Interests section */}
-              <div className="relative pr-8">
-                <h3 className="text-2xl md:text-3xl font-semibold text-[#78BFE3] mb-3 italic">
+              <div className="relative pr-6 md:pr-8">
+                <h3 className="text-xl md:text-3xl font-semibold text-[#78BFE3] mb-2 md:mb-3 italic">
                   {t.interestsSubtitle}
                 </h3>
-                <p className="text-gray-700 leading-relaxed text-lg md:text-xl">
+                <p className="text-gray-700 leading-relaxed text-base md:text-xl">
                   {reportContent.ideale_functie.interessegebieden.join(', ')}
                 </p>
-                <SectionSquare color="darkblue" />
+                <div className="hidden md:block"><SectionSquare color="darkblue" /></div>
               </div>
             </div>
             
@@ -567,48 +576,48 @@ const VoorbeeldrapportGenerator = () => {
         </div>
 
         {/* Page 3: Career suggestions */}
-        <div className="bg-white aspect-[210/297] relative overflow-hidden shadow-lg print:shadow-none">
-          <div className="p-12 pr-12 h-full flex flex-col">
+        <div className="bg-white md:aspect-[210/297] relative overflow-hidden shadow-lg print:shadow-none print:aspect-[210/297]">
+          <div className="p-6 md:p-12 md:pr-12 h-full flex flex-col">
             {/* Title with yellow underline */}
-            <div className="mb-10">
-              <h2 className="text-5xl md:text-6xl font-bold text-[#232D4B] mb-3">
+            <div className="mb-6 md:mb-10">
+              <h2 className="text-3xl md:text-6xl font-bold text-[#232D4B] mb-3">
                 {t.careersTitle}
               </h2>
-              <div className="w-64 h-1.5 bg-[#F5D54B]"></div>
+              <div className="w-48 md:w-64 h-1.5 bg-[#F5D54B]"></div>
             </div>
             
-            <div className="space-y-10 flex-1">
+            <div className="space-y-6 md:space-y-10 flex-1">
               {/* Career 1 */}
-              <div className="relative pr-8">
-                <h3 className="text-2xl md:text-3xl font-semibold text-[#78BFE3] mb-3">
+              <div className="relative pr-6 md:pr-8">
+                <h3 className="text-xl md:text-3xl font-semibold text-[#78BFE3] mb-2 md:mb-3">
                   {reportContent.beroepen.beroep_1.titel}
                 </h3>
-                <p className="text-gray-600 leading-relaxed text-lg md:text-xl">
+                <p className="text-gray-600 leading-relaxed text-base md:text-xl">
                   {reportContent.beroepen.beroep_1.beschrijving}
                 </p>
-                <SectionSquare color="yellow" />
+                <div className="hidden md:block"><SectionSquare color="yellow" /></div>
               </div>
 
               {/* Career 2 */}
-              <div className="relative pr-8">
-                <h3 className="text-2xl md:text-3xl font-semibold text-[#78BFE3] mb-3">
+              <div className="relative pr-6 md:pr-8">
+                <h3 className="text-xl md:text-3xl font-semibold text-[#78BFE3] mb-2 md:mb-3">
                   {reportContent.beroepen.beroep_2.titel}
                 </h3>
-                <p className="text-gray-600 leading-relaxed text-lg md:text-xl">
+                <p className="text-gray-600 leading-relaxed text-base md:text-xl">
                   {reportContent.beroepen.beroep_2.beschrijving}
                 </p>
-                <SectionSquare color="blue" />
+                <div className="hidden md:block"><SectionSquare color="blue" /></div>
               </div>
 
               {/* Career 3 */}
-              <div className="relative pr-8">
-                <h3 className="text-2xl md:text-3xl font-semibold text-[#78BFE3] mb-3">
+              <div className="relative pr-6 md:pr-8">
+                <h3 className="text-xl md:text-3xl font-semibold text-[#78BFE3] mb-2 md:mb-3">
                   {reportContent.beroepen.beroep_3.titel}
                 </h3>
-                <p className="text-gray-600 leading-relaxed text-lg md:text-xl">
+                <p className="text-gray-600 leading-relaxed text-base md:text-xl">
                   {reportContent.beroepen.beroep_3.beschrijving}
                 </p>
-                <SectionSquare color="darkblue" />
+                <div className="hidden md:block"><SectionSquare color="darkblue" /></div>
               </div>
             </div>
             
