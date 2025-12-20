@@ -460,7 +460,7 @@ const createSignupEmailHtml = (firstName: string, verificationUrl: string, langu
           <p>${t.footer}</p>
           <p>${t.regards}<br><strong>Team Vinster</strong></p>
           <div class="company-info">
-            Vinster B.V.<br>
+            Vinster<br>
             KvK: 04050762<br>
             team@vinster.ai
           </div>
@@ -572,7 +572,7 @@ const createPasswordResetEmailHtml = (firstName: string, resetUrl: string, langu
           <p>${t.footer}</p>
           <p>${t.regards}<br><strong>Team Vinster</strong></p>
           <div class="company-info">
-            Vinster B.V.<br>
+            Vinster<br>
             KvK: 04050762<br>
             team@vinster.ai
           </div>
