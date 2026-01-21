@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import Footer from "@/components/Footer";
 import OrganizationForm from "@/components/OrganizationForm";
@@ -14,11 +15,16 @@ const ToegangscodesProfessionals = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { t, language } = useTranslation();
+  const { englishVariant } = useLanguage();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     quantity: ""
   });
+
+  // Determine if US pricing should be shown
+  const isUSPricing = language === 'en' && englishVariant === 'us';
+  const pricePerCode = isUSPricing ? "$34" : "€29";
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -55,7 +61,7 @@ const ToegangscodesProfessionals = () => {
         body: JSON.stringify({
           email: formData.email,
           quantity: parseInt(formData.quantity),
-          language: language,
+          language: isUSPricing ? 'us' : language,
           timestamp: new Date().toISOString()
         })
       });
@@ -185,7 +191,7 @@ const ToegangscodesProfessionals = () => {
                   {t('professionals.order_section.pricing_info.title')}
                 </h3>
                 <p className="text-sm text-gray-700">
-                  {t('professionals.order_section.pricing_info.price_per_code')}
+                  {pricePerCode} {isUSPricing ? "per access code" : t('professionals.order_section.pricing_info.price_per_code').replace('€29', '').trim()}
                 </p>
               </div>
 
