@@ -76,12 +76,14 @@ const PaymentRequired = () => {
     }
     setIsLoading(true);
     try {
+      // Send 'us' as language for US variant, otherwise send the regular language
+      const webhookLanguage = (language === 'en' && englishVariant === 'us') ? 'us' : language;
       const webhookData = {
         firstName: user.user_metadata?.first_name || '',
         lastName: user.user_metadata?.last_name || '',
         email: user.email || '',
         userId: user.id,
-        language: language
+        language: webhookLanguage
       };
       console.log('Sending webhook data:', webhookData);
       const response = await fetch('https://hook.eu2.make.com/byf77ioiyyzqrsri73hmsri7hjhjyoup', {
