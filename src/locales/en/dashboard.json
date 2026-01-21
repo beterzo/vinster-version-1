@@ -18,14 +18,14 @@
     "pricing": {
       "title": "Full access",
       "subtitle": "One-time payment for up to 10 personal career reports",
-      "price": "$34",
+      "price": "€29",
       "price_desc": "One-time, no subscription",
       "feature1": "Full enthusiasm scan",
       "feature2": "Goal job analysis",
       "feature3": "Personal report (PDF)",
       "feature4": "Search profile generator",
       "feature5": "Complete the journey up to 10 times",
-      "start_button": "Start now for $34",
+      "start_button": "Start now for €29",
       "processing": "Processing...",
       "payment_methods": "Pay securely with credit card or PayPal"
     },
