@@ -2,10 +2,13 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 export type Language = 'nl' | 'en' | 'de' | 'no';
+export type EnglishVariant = 'uk' | 'us';
 
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
+  englishVariant: EnglishVariant;
+  setEnglishVariant: (variant: EnglishVariant) => void;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -24,11 +27,20 @@ interface LanguageProviderProps {
 
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
   const [language, setLanguageState] = useState<Language>('nl');
+  const [englishVariant, setEnglishVariantState] = useState<EnglishVariant>('uk');
 
   useEffect(() => {
     // Load saved language from localStorage
     const savedLanguage = localStorage.getItem('vinster-language') as Language;
+    const savedEnglishVariant = localStorage.getItem('vinster-english-variant') as EnglishVariant;
+    
     console.log('Saved language from localStorage:', savedLanguage);
+    console.log('Saved English variant from localStorage:', savedEnglishVariant);
+    
+    if (savedEnglishVariant && ['uk', 'us'].includes(savedEnglishVariant)) {
+      setEnglishVariantState(savedEnglishVariant);
+    }
+    
     if (savedLanguage && ['nl', 'en', 'de', 'no'].includes(savedLanguage)) {
       setLanguageState(savedLanguage);
     } else {
@@ -37,6 +49,11 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       console.log('Browser language:', browserLang);
       if (browserLang.startsWith('en')) {
         setLanguageState('en');
+        // Check if it's US English
+        if (browserLang === 'en-us' || browserLang.includes('us')) {
+          setEnglishVariantState('us');
+          localStorage.setItem('vinster-english-variant', 'us');
+        }
       } else if (browserLang.startsWith('de')) {
         setLanguageState('de');
       } else if (browserLang.startsWith('no') || browserLang.startsWith('nb') || browserLang.startsWith('nn')) {
@@ -55,11 +72,18 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     localStorage.setItem('vinster-language-manual-selection', 'true');
   };
 
-  console.log('Current language in provider:', language);
+  const setEnglishVariant = (variant: EnglishVariant) => {
+    console.log('Setting English variant to:', variant);
+    setEnglishVariantState(variant);
+    localStorage.setItem('vinster-english-variant', variant);
+  };
+
+  console.log('Current language in provider:', language, 'English variant:', englishVariant);
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage }}>
+    <LanguageContext.Provider value={{ language, setLanguage, englishVariant, setEnglishVariant }}>
       {children}
     </LanguageContext.Provider>
   );
 };
+

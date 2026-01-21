@@ -7,6 +7,7 @@ import { usePaymentStatus } from "@/hooks/usePaymentStatus";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -30,6 +31,15 @@ const PaymentRequired = () => {
     t,
     language
   } = useTranslation();
+  const { englishVariant } = useLanguage();
+
+  // US-specific pricing
+  const isUS = language === 'en' && englishVariant === 'us';
+  const price = isUS ? '$34' : t('payment.pricing.price');
+  const startButtonText = isUS ? 'Start now for $34' : t('payment.pricing.start_button');
+  const paymentMethods = isUS 
+    ? 'Pay securely with credit card or PayPal' 
+    : t('payment.pricing.payment_methods');
 
   // Redirect if user has already paid
   useEffect(() => {
@@ -270,7 +280,7 @@ const PaymentRequired = () => {
                 </h3>
                 <p className="text-gray-600 mb-4">{t('payment.pricing.subtitle')}</p>
                 <div className="text-3xl lg:text-4xl font-bold text-vinster-blue mb-1">
-                  {t('payment.pricing.price')}
+                  {price}
                 </div>
                 <p className="text-sm text-gray-500">{t('payment.pricing.price_desc')}</p>
               </div>
@@ -299,11 +309,11 @@ const PaymentRequired = () => {
               </div>
 
               <Button onClick={handlePayment} disabled={isLoading} className="w-full bg-yellow-400 hover:bg-yellow-500 text-vinster-blue font-bold py-3 lg:py-4 text-base lg:text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200" size="lg">
-                {isLoading ? t('payment.pricing.processing') : t('payment.pricing.start_button')}
+                {isLoading ? t('payment.pricing.processing') : startButtonText}
               </Button>
 
               <p className="text-xs text-gray-500 text-center mt-4">
-                {t('payment.pricing.payment_methods')}
+                {paymentMethods}
               </p>
 
               {showAccessCodeInput && (

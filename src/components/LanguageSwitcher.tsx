@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { 
@@ -8,21 +7,10 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { ChevronDown } from 'lucide-react';
-import type { Language } from '@/contexts/LanguageContext';
-
-type EnglishVariant = 'uk' | 'us';
+import type { Language, EnglishVariant } from '@/contexts/LanguageContext';
 
 const LanguageSwitcher = () => {
-  const { language, setLanguage } = useLanguage();
-  const [englishVariant, setEnglishVariant] = useState<EnglishVariant>('uk');
-
-  // Load English variant from localStorage
-  useEffect(() => {
-    const savedVariant = localStorage.getItem('vinster-english-variant') as EnglishVariant;
-    if (savedVariant && ['uk', 'us'].includes(savedVariant)) {
-      setEnglishVariant(savedVariant);
-    }
-  }, []);
+  const { language, setLanguage, englishVariant, setEnglishVariant } = useLanguage();
 
   const languages = [
     { code: 'nl' as Language, label: 'Nederlands', flag: '🇳🇱', variant: null },
@@ -36,7 +24,6 @@ const LanguageSwitcher = () => {
     setLanguage(code);
     if (code === 'en' && variant) {
       setEnglishVariant(variant);
-      localStorage.setItem('vinster-english-variant', variant);
     }
   };
 
