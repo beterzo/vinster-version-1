@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Printer, ArrowLeft } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
+import { formatKeywordsForReport } from "@/utils/keywordUtils";
 
 interface ReportContent {
   voorblad: {
@@ -120,17 +121,17 @@ const RapportViewer = ({ reportContent, onBack }: RapportViewerProps) => {
             <div className="space-y-8">
               {/* Activiteiten */}
               <p className="text-gray-700 leading-relaxed text-lg">
-                {reportContent.ideale_functie.activiteiten.join(', ')}
+                {formatKeywordsForReport(reportContent.ideale_functie.activiteiten)}
               </p>
 
               {/* Werkomgeving */}
               <p className="text-gray-700 leading-relaxed text-lg">
-                {reportContent.ideale_functie.werkomgeving.join(', ')}
+                {formatKeywordsForReport(reportContent.ideale_functie.werkomgeving)}
               </p>
 
               {/* Interessegebieden */}
               <p className="text-gray-700 leading-relaxed text-lg">
-                {reportContent.ideale_functie.interessegebieden.join(', ')}
+                {formatKeywordsForReport(reportContent.ideale_functie.interessegebieden)}
               </p>
             </div>
           </div>

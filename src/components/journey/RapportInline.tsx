@@ -6,6 +6,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { formatKeywordsForReport } from "@/utils/keywordUtils";
 
 interface RapportInlineProps {
   roundId: string;
@@ -68,7 +69,7 @@ const PrintIdealeFunctiePage = ({ reportContent, t }: { reportContent: any; t: (
         <div>
           <h3 className="text-3xl font-semibold text-[#78BFE3] mb-4">Wat je graag doet</h3>
           <p className="text-xl text-gray-800 leading-relaxed line-clamp-6 overflow-hidden break-words">
-            {reportContent.ideale_functie?.activiteiten?.join(', ')}
+            {formatKeywordsForReport(reportContent.ideale_functie?.activiteiten || [])}
           </p>
         </div>
 
@@ -76,7 +77,7 @@ const PrintIdealeFunctiePage = ({ reportContent, t }: { reportContent: any; t: (
         <div>
           <h3 className="text-3xl font-semibold text-[#78BFE3] mb-4">Jouw ideale werkomgeving</h3>
           <p className="text-xl text-gray-800 leading-relaxed line-clamp-6 overflow-hidden break-words">
-            {reportContent.ideale_functie?.werkomgeving?.join(', ')}
+            {formatKeywordsForReport(reportContent.ideale_functie?.werkomgeving || [])}
           </p>
         </div>
 
@@ -84,7 +85,7 @@ const PrintIdealeFunctiePage = ({ reportContent, t }: { reportContent: any; t: (
         <div>
           <h3 className="text-3xl font-semibold text-[#78BFE3] mb-4">Jouw interessegebieden</h3>
           <p className="text-xl text-gray-800 leading-relaxed line-clamp-6 overflow-hidden break-words">
-            {reportContent.ideale_functie?.interessegebieden?.join(', ')}
+            {formatKeywordsForReport(reportContent.ideale_functie?.interessegebieden || [])}
           </p>
         </div>
       </div>
