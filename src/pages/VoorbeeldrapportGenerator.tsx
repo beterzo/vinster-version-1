@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage, Language as AppLanguage } from "@/contexts/LanguageContext";
+import { formatKeywordsForReport } from "@/utils/keywordUtils";
 
 type Language = "nl" | "en" | "de" | "no";
 
@@ -540,7 +541,7 @@ const VoorbeeldrapportGenerator = () => {
                   {t.activitiesSubtitle}
                 </h3>
                 <p className="text-gray-700 leading-relaxed text-base md:text-xl">
-                  {reportContent.ideale_functie.activiteiten.join(', ')}
+                  {formatKeywordsForReport(reportContent.ideale_functie.activiteiten)}
                 </p>
                 <div className="hidden md:block"><SectionSquare color="yellow" /></div>
               </div>
@@ -551,7 +552,7 @@ const VoorbeeldrapportGenerator = () => {
                   {t.environmentSubtitle}
                 </h3>
                 <p className="text-gray-700 leading-relaxed text-base md:text-xl">
-                  {reportContent.ideale_functie.werkomgeving.join(', ')}
+                  {formatKeywordsForReport(reportContent.ideale_functie.werkomgeving)}
                 </p>
                 <div className="hidden md:block"><SectionSquare color="blue" /></div>
               </div>
@@ -562,7 +563,7 @@ const VoorbeeldrapportGenerator = () => {
                   {t.interestsSubtitle}
                 </h3>
                 <p className="text-gray-700 leading-relaxed text-base md:text-xl">
-                  {reportContent.ideale_functie.interessegebieden.join(', ')}
+                  {formatKeywordsForReport(reportContent.ideale_functie.interessegebieden)}
                 </p>
                 <div className="hidden md:block"><SectionSquare color="darkblue" /></div>
               </div>
