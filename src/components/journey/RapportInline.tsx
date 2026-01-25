@@ -124,7 +124,7 @@ const PrintBeroepenPage = ({ reportContent, t }: { reportContent: any; t: (key: 
             <h3 className="text-3xl font-semibold text-[#78BFE3] mb-3">
               {reportContent.beroepen.passend_1.titel}
             </h3>
-            <p className="text-xl text-gray-800 leading-relaxed line-clamp-4 overflow-hidden break-words">
+            <p className="text-lg text-gray-800 leading-relaxed break-words">
               {reportContent.beroepen.passend_1.beschrijving}
             </p>
           </div>
@@ -136,7 +136,7 @@ const PrintBeroepenPage = ({ reportContent, t }: { reportContent: any; t: (key: 
             <h3 className="text-3xl font-semibold text-[#78BFE3] mb-3">
               {reportContent.beroepen.passend_2.titel}
             </h3>
-            <p className="text-xl text-gray-800 leading-relaxed line-clamp-4 overflow-hidden break-words">
+            <p className="text-lg text-gray-800 leading-relaxed break-words">
               {reportContent.beroepen.passend_2.beschrijving}
             </p>
           </div>
@@ -148,7 +148,7 @@ const PrintBeroepenPage = ({ reportContent, t }: { reportContent: any; t: (key: 
             <h3 className="text-3xl font-semibold text-[#78BFE3] mb-3">
               {reportContent.beroepen.verrassend.titel}
             </h3>
-            <p className="text-xl text-gray-800 leading-relaxed line-clamp-4 overflow-hidden break-words">
+            <p className="text-lg text-gray-800 leading-relaxed break-words">
               {reportContent.beroepen.verrassend.beschrijving}
             </p>
           </div>
