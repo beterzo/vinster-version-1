@@ -235,16 +235,20 @@
         "title": "8. Sikkerhet",
         "content": "Vi tar passende tekniske og organisatoriske tiltak for å beskytte dine personopplysninger mot tap, misbruk, uautorisert tilgang, offentliggjøring, endring eller ødeleggelse."
       },
+      "third_party_accounts": {
+        "title": "9. Bruk av kontoer av tredjeparter",
+        "content": "Hver Vinster-konto er ment for individuell bruk av kontoinnehaveren. Hvis du gir tredjeparter tilgang til Vinster via din personlige konto, er du selv ansvarlig for behandlingen og beskyttelsen av de innlagte dataene. Vinster er i slike tilfeller ikke ansvarlig for personvernet og sikkerheten til disse dataene. Vi anbefaler alle som ønsker å bruke Vinster å opprette sin egen konto."
+      },
       "cookies": {
-        "title": "9. Informasjonskapsler",
+        "title": "10. Informasjonskapsler",
         "content": "Vi bruker funksjonelle informasjonskapsler som er nødvendige for funksjonaliteten til nettstedet vårt. Disse informasjonskapslene lagrer ikke personlig informasjon."
       },
       "changes": {
-        "title": "10. Endringer",
+        "title": "11. Endringer",
         "content": "Vi kan endre denne personvernerklæringen fra tid til annen. Den nyeste versjonen er alltid tilgjengelig på nettstedet vårt."
       },
       "contact": {
-        "title": "11. Kontakt",
+        "title": "12. Kontakt",
         "content": "For spørsmål om denne personvernerklæringen eller behandlingen av dine personopplysninger kan du kontakte oss:",
         "details": "E-post: team@vinster.ai"
       }
@@ -275,6 +279,7 @@
           "Du er ansvarlig for alle aktiviteter under kontoen din",
           "Du kan bare opprette én konto per person",
           "Det er ikke tillatt å dele kontoen din med tredjeparter",
+          "Hvis du gir tredjeparter tilgang til Vinster via kontoen din, er du fullt ansvarlig for personvernet og beskyttelsen av alle innlagte data. Vinster aksepterer intet ansvar for dette.",
           "Vi forbeholder oss retten til å suspendere kontoer ved misbruk"
         ]
       },

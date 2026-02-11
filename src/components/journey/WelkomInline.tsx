@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useTranslation } from "@/hooks/useTranslation";
-import { Clock, CheckCircle2, FileText, Search, Lightbulb, User, ClipboardList, MapPin, Lock, ChevronRight, Eye } from "lucide-react";
+import { Clock, CheckCircle2, FileText, Search, Lightbulb, User, ClipboardList, MapPin, Lock, ChevronRight, Eye, Shield } from "lucide-react";
 import { JourneyStep, JOURNEY_STEPS } from "@/types/journey";
 import { Progress } from "@/components/ui/progress";
 
@@ -230,6 +230,12 @@ const WelkomInline = ({ onNext, completedSteps = [], onStepClick }: WelkomInline
               </li>
             ))}
           </ul>
+        </div>
+
+        {/* Account notice */}
+        <div className="bg-gray-50 rounded-xl p-4 mb-10 flex items-start gap-3">
+          <Shield className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
+          <p className="text-sm text-gray-500">{t('welkom.account_notice')}</p>
         </div>
 
         {/* Start/Continue button */}

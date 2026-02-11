@@ -94,6 +94,11 @@ const PrivacyVerklaring = () => {
             </section>
 
             <section>
+              <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('privacy.sections.third_party_accounts.title')}</h2>
+              <p>{t('privacy.sections.third_party_accounts.content')}</p>
+            </section>
+
+            <section>
               <h2 className="text-2xl font-semibold text-blue-900 mb-4">{t('privacy.sections.cookies.title')}</h2>
               <p>{t('privacy.sections.cookies.content')}</p>
             </section>

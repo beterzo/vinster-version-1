@@ -236,16 +236,20 @@
         "title": "8. Security",
         "content": "We take appropriate technical and organizational measures to protect your personal data against loss, misuse, unauthorized access, disclosure, alteration or destruction."
       },
+      "third_party_accounts": {
+        "title": "9. Use of accounts by third parties",
+        "content": "Each Vinster account is intended for individual use by the account holder. If you grant third parties access to Vinster via your personal account, you are responsible for the processing and protection of the data entered. In such cases, Vinster is not responsible for the privacy and security of this data. We advise everyone who wishes to use Vinster to create their own account."
+      },
       "cookies": {
-        "title": "9. Cookies",
+        "title": "10. Cookies",
         "content": "We use functional cookies that are necessary for the functioning of our website. These cookies do not store personal information."
       },
       "changes": {
-        "title": "10. Changes",
+        "title": "11. Changes",
         "content": "We may change this privacy statement from time to time. The most recent version is always available on our website."
       },
       "contact": {
-        "title": "11. Contact",
+        "title": "12. Contact",
         "content": "For questions about this privacy statement or the processing of your personal data, you can contact us:",
         "details": "Email: team@vinster.ai"
       }
@@ -276,6 +280,7 @@
           "You are responsible for all activities under your account",
           "You may only create one account per person",
           "It is not allowed to share your account with third parties",
+          "If you grant third parties access to Vinster via your account, you are fully responsible for the privacy and protection of all data entered. Vinster accepts no liability for this.",
           "We reserve the right to suspend accounts in case of abuse"
         ]
       },

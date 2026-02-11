@@ -43,6 +43,7 @@
       "tip2": "Take your time and think of concrete situations from your life",
       "tip3": "You can adjust your answers as long as you haven't generated the report yet"
     },
+    "account_notice": "This account is intended for personal use. Let others create their own account for the best experience and privacy.",
     "start_button": "Start",
     "progress_title": "Your progress",
     "completed_count": "{{count}} of 6 steps completed",

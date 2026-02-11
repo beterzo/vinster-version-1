@@ -235,16 +235,20 @@
         "title": "8. Sicherheit",
         "content": "Wir treffen angemessene technische und organisatorische Maßnahmen, um Ihre personenbezogenen Daten vor Verlust, Missbrauch, unbefugtem Zugang, Offenlegung, Änderung oder Zerstörung zu schützen."
       },
+      "third_party_accounts": {
+        "title": "9. Nutzung von Konten durch Dritte",
+        "content": "Jedes Vinster-Konto ist für die individuelle Nutzung durch den Kontoinhaber bestimmt. Wenn Sie Dritten über Ihr persönliches Konto Zugang zu Vinster gewähren, sind Sie selbst für die Verarbeitung und den Schutz der eingegebenen Daten verantwortlich. Vinster ist in diesem Fall nicht verantwortlich für den Datenschutz und die Sicherheit dieser Daten. Wir empfehlen jedem, der Vinster nutzen möchte, ein eigenes Konto zu erstellen."
+      },
       "cookies": {
-        "title": "9. Cookies",
+        "title": "10. Cookies",
         "content": "Wir verwenden funktionale Cookies, die für das Funktionieren unserer Website notwendig sind. Diese Cookies speichern keine persönlichen Informationen."
       },
       "changes": {
-        "title": "10. Änderungen",
+        "title": "11. Änderungen",
         "content": "Wir können diese Datenschutzerklärung von Zeit zu Zeit ändern. Die aktuellste Version ist immer auf unserer Website verfügbar."
       },
       "contact": {
-        "title": "11. Kontakt",
+        "title": "12. Kontakt",
         "content": "Bei Fragen zu dieser Datenschutzerklärung oder zur Verarbeitung Ihrer personenbezogenen Daten können Sie uns kontaktieren:",
         "details": "E-Mail: team@vinster.ai"
       }
@@ -275,6 +279,7 @@
           "Sie sind verantwortlich für alle Aktivitäten unter Ihrem Konto",
           "Sie dürfen nur ein Konto pro Person erstellen",
           "Es ist nicht erlaubt, Ihr Konto mit Dritten zu teilen",
+          "Wenn Sie Dritten über Ihr Konto Zugang zu Vinster gewähren, sind Sie vollständig verantwortlich für den Datenschutz und den Schutz aller eingegebenen Daten. Vinster übernimmt hierfür keine Haftung.",
           "Wir behalten uns das Recht vor, Konten bei Missbrauch zu sperren"
         ]
       },
