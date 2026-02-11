@@ -236,16 +236,20 @@
         "title": "8. Beveiliging",
         "content": "Wij nemen passende technische en organisatorische maatregelen om uw persoonsgegevens te beschermen tegen verlies, misbruik, ongeautoriseerde toegang, openbaarmaking, wijziging of vernietiging."
       },
+      "third_party_accounts": {
+        "title": "9. Gebruik van accounts door derden",
+        "content": "Elk Vinster-account is bedoeld voor individueel gebruik door de accounthouder. Wanneer u derden via uw persoonlijke account toegang geeft tot Vinster, bent u zelf verantwoordelijk voor de verwerking en bescherming van de ingevoerde gegevens. Vinster is in dat geval niet verantwoordelijk voor de privacy en veiligheid van deze gegevens. Wij adviseren iedereen die Vinster wil gebruiken om een eigen account aan te maken."
+      },
       "cookies": {
-        "title": "9. Cookies",
+        "title": "10. Cookies",
         "content": "Wij gebruiken functionele cookies die noodzakelijk zijn voor het functioneren van onze website. Deze cookies slaan geen persoonlijke informatie op."
       },
       "changes": {
-        "title": "10. Wijzigingen",
+        "title": "11. Wijzigingen",
         "content": "Wij kunnen deze privacyverklaring van tijd tot tijd wijzigen. De meest recente versie is altijd beschikbaar op onze website."
       },
       "contact": {
-        "title": "11. Contact",
+        "title": "12. Contact",
         "content": "Voor vragen over deze privacyverklaring of over de verwerking van uw persoonsgegevens kunt u contact met ons opnemen:",
         "details": "Email: team@vinster.ai"
       }
@@ -276,6 +280,7 @@
           "U bent verantwoordelijk voor alle activiteiten onder uw account",
           "U mag slechts één account aanmaken per persoon",
           "Het is niet toegestaan om uw account te delen met derden",
+          "Wanneer u derden via uw account toegang geeft tot Vinster, bent u volledig verantwoordelijk voor de privacy en bescherming van alle ingevoerde gegevens. Vinster aanvaardt hiervoor geen aansprakelijkheid.",
           "Wij behouden ons het recht voor om accounts op te schorten bij misbruik"
         ]
       },

@@ -42,6 +42,7 @@
       "tip2": "Ta deg tid og tenk på konkrete situasjoner fra livet ditt",
       "tip3": "Du kan justere svarene dine så lenge du ikke har generert rapporten ennå"
     },
+    "account_notice": "Denne kontoen er ment for personlig bruk. La andre opprette sin egen konto for best opplevelse og personvern.",
     "start_button": "Start",
     "progress_title": "Din fremgang",
     "completed_count": "{{count}} av 6 steg fullført",
