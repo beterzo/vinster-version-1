@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { supabase } from "@/integrations/supabase/client";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import Footer from "@/components/Footer";
 import OrganizationForm from "@/components/OrganizationForm";
@@ -53,42 +54,28 @@ const ToegangscodesProfessionals = () => {
     }
     setIsLoading(true);
     try {
-      const response = await fetch('https://hook.eu2.make.com/t82267kxgdplyqkpejofmt4fi1jnbyy9', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
+      const { data, error } = await supabase.functions.invoke('create-professional-checkout', {
+        body: {
           email: formData.email,
           quantity: parseInt(formData.quantity),
           language: isUSPricing ? 'us' : language,
-          timestamp: new Date().toISOString()
-        })
+        }
       });
-      if (response.ok) {
-        const responseData = await response.json();
+
+      if (error) throw error;
+      if (data?.error) throw new Error(data.error);
+
+      if (data?.url) {
         toast({
           title: t('professionals.toasts.request_sent'),
           description: t('professionals.toasts.redirecting')
         });
-
-        // Check if webhook returned a checkout URL
-        if (responseData && responseData.checkout_url) {
-          // Redirect to payment page (Safari compatible)
-          window.location.href = responseData.checkout_url;
-        } else {
-          toast({
-            title: t('professionals.toasts.contact_note'),
-            description: t('professionals.toasts.contact_note_desc')
-          });
-        }
-        setFormData({
-          email: "",
-          quantity: ""
-        });
+        window.location.href = data.url;
       } else {
-        throw new Error('Failed to send request');
+        throw new Error('No checkout URL received');
       }
+
+      setFormData({ email: "", quantity: "" });
     } catch (error) {
       toast({
         title: t('professionals.toasts.send_error'),
