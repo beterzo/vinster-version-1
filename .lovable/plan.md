@@ -1,96 +1,109 @@
 
 
-# Plan: Betalingsflow migreren van Make.com naar directe Stripe-integratie
+# Plan: Professionals toegangscodes via Stripe met BTW en Vinster-stijl e-mail
 
 ## Samenvatting
 
-De volledige betalingsflow wordt gemigreerd van Make.com webhooks naar directe Stripe-integratie via Supabase Edge Functions. Dit omvat zowel de normale betaling als de toegangscode-validatie.
+Het "snel bestellen" formulier op de professionals-pagina wordt gemigreerd van Make.com naar een directe Stripe-integratie. Na betaling worden automatisch toegangscodes gegenereerd en per e-mail verstuurd in de Vinster huisstijl. BTW wordt inclusief op de factuur getoond.
 
 ---
 
 ## Wat er gebouwd wordt
 
-### 1. Edge Function: `create-checkout-session`
+### 1. Edge Function: `create-professional-checkout`
 
-Nieuw bestand: `supabase/functions/create-checkout-session/index.ts`
+Nieuw bestand: `supabase/functions/create-professional-checkout/index.ts`
 
-Wat het doet:
-- Authenticatie van de ingelogde gebruiker
-- Zoekt of er al een Stripe-klant bestaat met dat e-mailadres
-  - **Wel gevonden**: gebruikt die bestaande klant-ID
-  - **Niet gevonden**: geeft het e-mailadres mee als `customer_email` -- Stripe maakt dan automatisch een nieuw klantrecord aan tijdens het afrekenen
+- Ontvangt `email`, `quantity` en `language` (geen authenticatie nodig)
 - Maakt een Stripe Checkout sessie aan met:
-  - Het juiste product per taal (NL/EN/EN-US/DE/NO)
-  - BTW inclusief in de prijs, zichtbaar op de factuur
-  - `allow_promotion_codes: true` voor kortingscodes
-  - Automatische factuur (`invoice_creation: { enabled: true }`)
-  - `metadata` met `user_id`
-  - `locale` per taal
-- Retourneert de checkout URL
+  - Dezelfde `PRICE_MAP` per taal als bij individuele betaling
+  - `quantity` op basis van het gekozen aantal
+  - `customer_email` met het opgegeven e-mailadres
+  - `invoice_creation: { enabled: true }` met BTW zichtbaar op de factuur
+  - `allow_promotion_codes: true`
+  - `metadata` met `type: "professional_codes"`, `quantity`, `email`, `language`
+  - `success_url` naar `/professional-codes-success?session_id={CHECKOUT_SESSION_ID}`
+  - `cancel_url` naar `/professionals`
+- Zoekt eerst of er al een Stripe-klant bestaat, anders wordt `customer_email` meegegeven
 
-Prijzen per taal:
+### 2. Edge Function: `fulfill-professional-codes`
 
-| Taal | Price ID | Bedrag |
-|------|----------|--------|
-| NL | `price_1Rvvv7BiHXiKCcHU0KcdPOTI` | EUR 29 |
-| EN | `price_1RvvuWBiHXiKCcHURzeouvup` | EUR 29 |
-| EN-US | `price_1SrvTuBiHXiKCcHU1cbMTgk1` | USD 34 |
-| DE | `price_1RvvtyBiHXiKCcHUW0vJIVSL` | EUR 29 |
-| NO | `price_1RvvtKBiHXiKCcHU4ROeMOpf` | NOK 333 |
+Nieuw bestand: `supabase/functions/fulfill-professional-codes/index.ts`
 
-### 2. Edge Function: `verify-payment`
+- Ontvangt `session_id`
+- Controleert betaling bij Stripe (`payment_status === 'paid'`)
+- Leest `quantity`, `email` en `language` uit de sessie-metadata
+- Genereert het gewenste aantal Stripe promotion codes:
+  - Per code: unieke coupon met `percent_off: 100`, `max_redemptions: 1`, `duration: 'once'`
+  - Per coupon: een promotion code met leesbaar formaat (bijv. `VINSTER-A3X7-K9P2`)
+- Verstuurt een e-mail via Resend in de Vinster huisstijl met:
+  - Dezelfde header-stijl als de bestaande bevestigingsmail (gradient header met "Vinster" + tagline)
+  - Overzichtelijke tabel met alle toegangscodes
+  - Instructies hoe de codes te delen met clienten
+  - Footer met bedrijfsgegevens (KvK, team@vinster.ai)
+  - Vertaald in de juiste taal (NL/EN/DE/NO)
 
-Nieuw bestand: `supabase/functions/verify-payment/index.ts`
+### 3. E-mail template (in Vinster stijl)
 
-Wat het doet:
-- Ontvangt `session_id` van de frontend
-- Haalt de checkout sessie op bij Stripe
-- Controleert of `payment_status === 'paid'`
-- Zo ja: zet `has_paid = true` in de `profiles` tabel via service role key
-- Retourneert succes/faal status
+De e-mail volgt exact dezelfde stijl als de bestaande Vinster e-mails:
 
-### 3. Edge Function: `validate-access-code`
+- **Header**: Gradient achtergrond (#232D4B naar #E4C05B) met "Vinster" logo-tekst en tagline
+- **Content**: Witte achtergrond, bedankbericht, duidelijke tabel met codes
+- **Codes tabel**: Elke code in een apart vak met monospace lettertype, makkelijk te kopieren
+- **Instructies**: Korte uitleg hoe clienten de code kunnen gebruiken
+- **Footer**: Groet van Team Vinster, KvK-nummer, contactinfo
 
-Nieuw bestand: `supabase/functions/validate-access-code/index.ts`
+Vertalingen voor alle 4 talen (NL, EN, DE, NO).
 
-Wat het doet:
-- Ontvangt toegangscode en user ID
-- Zoekt de code op als Stripe promotion code
-- Controleert of het een 100% kortingscode is
-- Zo ja: zet `has_paid = true` en deactiveert de promotion code
-- Retourneert succes of foutmelding
+### 4. Nieuwe pagina: `/professional-codes-success`
 
-### 4. Nieuwe pagina: `/payment-success`
-
-Nieuw bestand: `src/pages/PaymentSuccess.tsx`
+Nieuw bestand: `src/pages/ProfessionalCodesSuccess.tsx`
 
 - Leest `session_id` uit de URL
-- Roept `verify-payment` edge function aan
-- Toont een bevestigingsbericht bij succes
-- Redirect automatisch naar `/home`
-- Toont foutmelding als betaling niet voltooid is
+- Roept `fulfill-professional-codes` aan
+- Toont laadstatus tijdens het genereren van codes
+- Bij succes: bevestigingsbericht "Je codes zijn per e-mail verzonden!"
+- Knop om terug te gaan naar de homepage
+- Bij fout: duidelijke foutmelding
 
-### 5. Aanpassen: `PaymentRequired.tsx`
+### 5. Aanpassen: `ToegangscodesProfessionals.tsx`
 
-**Betaalknop**: Make.com webhook wordt vervangen door `supabase.functions.invoke('create-checkout-session')`. Redirect via `window.location.href`.
-
-**Toegangscode**: Make.com webhook wordt vervangen door `supabase.functions.invoke('validate-access-code')`. Bij succes direct `refreshPaymentStatus()` en redirect.
+- Make.com `fetch` call wordt vervangen door `supabase.functions.invoke('create-professional-checkout')`
+- Gebruikt `window.open(url, '_blank')` voor Stripe redirect
 
 ### 6. Route toevoegen in `AppRouter.tsx`
 
-Nieuwe route `/payment-success` als protected route (zonder payment check).
+- Nieuwe publieke route: `/professional-codes-success`
 
 ### 7. Config.toml update
 
-Drie nieuwe edge functions met `verify_jwt = false`.
+Twee nieuwe entries:
+```
+[functions.create-professional-checkout]
+verify_jwt = false
+
+[functions.fulfill-professional-codes]
+verify_jwt = false
+```
 
 ---
 
 ## BTW-afhandeling
 
-De prijzen zijn inclusief BTW. Om de BTW apart op de factuur te tonen, wordt een Stripe Tax Rate met `inclusive: true` aangemaakt of hergebruikt. Hierdoor:
-- Gebruiker betaalt gewoon EUR 29
-- Factuur toont: EUR 23,97 + EUR 5,03 BTW (21%) = EUR 29,00
+Zelfde aanpak als bij de individuele betaling:
+- Prijzen zijn inclusief BTW
+- `invoice_creation: { enabled: true }` zorgt voor automatische factuur
+- BTW wordt apart getoond op de factuur (bijv. 10 x EUR 29 = EUR 290, waarvan EUR 50,33 BTW)
+
+---
+
+## Prijsberekening voorbeelden
+
+| Aantal | Taal | Totaal |
+|--------|------|--------|
+| 5 | NL | 5 x EUR 29 = EUR 145 |
+| 10 | EN-US | 10 x USD 34 = USD 340 |
+| 25 | NO | 25 x NOK 333 = NOK 8.325 |
 
 ---
 
@@ -98,11 +111,10 @@ De prijzen zijn inclusief BTW. Om de BTW apart op de factuur te tonen, wordt een
 
 | Bestand | Actie |
 |---------|-------|
-| `supabase/functions/create-checkout-session/index.ts` | Nieuw |
-| `supabase/functions/verify-payment/index.ts` | Nieuw |
-| `supabase/functions/validate-access-code/index.ts` | Nieuw |
-| `src/pages/PaymentSuccess.tsx` | Nieuw |
-| `src/pages/PaymentRequired.tsx` | Aanpassen |
+| `supabase/functions/create-professional-checkout/index.ts` | Nieuw |
+| `supabase/functions/fulfill-professional-codes/index.ts` | Nieuw |
+| `src/pages/ProfessionalCodesSuccess.tsx` | Nieuw |
+| `src/pages/ToegangscodesProfessionals.tsx` | Aanpassen |
 | `src/components/AppRouter.tsx` | Route toevoegen |
 | `supabase/config.toml` | Functions toevoegen |
 
@@ -110,8 +122,8 @@ De prijzen zijn inclusief BTW. Om de BTW apart op de factuur te tonen, wordt een
 
 ## Geen wijzigingen nodig aan
 
-- Database (`profiles.has_paid` wordt hergebruikt)
-- `usePaymentStatus` hook
-- `PaymentGate` component
-- Secrets (`STRIPE_SECRET_KEY` is al geconfigureerd)
+- Database (codes worden beheerd in Stripe als promotion codes)
+- Bestaande `validate-access-code` (werkt al met Stripe promotion codes)
+- OrganizationForm (blijft via Resend e-mail naar team@vinster.ai)
+- Taalbestanden (toasts en labels zijn al aanwezig en worden hergebruikt)
 
