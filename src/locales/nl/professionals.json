@@ -58,6 +58,7 @@
       "comments_label": "Eventuele opmerkingen",
       "comments_placeholder": "Optionele aanvullende informatie...",
       "submit_button": "Aanvraag indienen",
+      "new_form_button": "Nieuw formulier invullen",
       "submitting": "Wordt verzonden...",
       "success_message": "Bedankt voor je aanvraag! Je ontvangt binnenkort een mail van team@vinster.ai met meer informatie.",
       "validation": {
