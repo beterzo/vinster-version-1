@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "@/hooks/useTranslation";
+import { supabase } from "@/integrations/supabase/client";
 
 interface OrganizationFormData {
   name: string;
@@ -99,24 +100,19 @@ const OrganizationForm = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('https://hook.eu2.make.com/ridk4qt9ezc49c632dhws7h03p1dyre8', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          "Aanvrager - Naam": formData.name,
-          "Aanvrager - E-mailadres": formData.email,
-          "Organisatie - Naam": formData.organization,
-          "Bestelling - Aantal toegangscodes": parseInt(formData.quantity),
-          "Organisatie - Adres": formData.address,
-          "Facturatie - Kostenplaats of inkoopnummer": formData.costCenter,
-          "Extra informatie - Opmerkingen": formData.comments || "Geen opmerkingen",
-          "Metadata - Tijdstip aanvraag": new Date().toISOString()
-        })
+      const { data, error } = await supabase.functions.invoke('send-organization-request', {
+        body: {
+          name: formData.name,
+          email: formData.email,
+          organization: formData.organization,
+          quantity: parseInt(formData.quantity),
+          address: formData.address,
+          costCenter: formData.costCenter,
+          comments: formData.comments || "Geen opmerkingen",
+        }
       });
 
-      if (response.ok) {
+      if (!error) {
         setShowSuccess(true);
       setFormData({
         name: "",
