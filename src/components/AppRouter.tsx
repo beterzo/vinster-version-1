@@ -28,6 +28,7 @@ import ToegangscodesProfessionals from "@/pages/ToegangscodesProfessionals";
 import TrajectOpnieuwStartenUitleg from "@/pages/TrajectOpnieuwStartenUitleg";
 import VoorbeeldrapportGenerator from "@/pages/VoorbeeldrapportGenerator";
 import PaymentSuccess from "@/pages/PaymentSuccess";
+import ProfessionalCodesSuccess from "@/pages/ProfessionalCodesSuccess";
 
 // Protected route imports
 import ProtectedRoute from "@/components/ProtectedRoute";
@@ -134,6 +135,9 @@ const AppRouter = () => {
       <Route path="/kontakt" element={<Contact />} />
       <Route path="/tilgangskoder-fagfolk" element={<ToegangscodesProfessionals />} />
       
+      {/* Professional codes success */}
+      <Route path="/professional-codes-success" element={<ProfessionalCodesSuccess />} />
+
       {/* Voorbeeldrapport page */}
       <Route path="/voorbeeldrapport" element={<VoorbeeldrapportGenerator />} />
       
