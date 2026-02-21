@@ -58,6 +58,7 @@
       "comments_label": "Sonstige Anmerkungen",
       "comments_placeholder": "Optional zusätzliche Informationen...",
       "submit_button": "Anfrage einreichen",
+      "new_form_button": "Neues Formular ausfüllen",
       "submitting": "Wird gesendet...",
       "success_message": "Vielen Dank für Ihre Anfrage! Sie erhalten bald eine E-Mail von team@vinster.ai mit weiteren Informationen.",
       "validation": {

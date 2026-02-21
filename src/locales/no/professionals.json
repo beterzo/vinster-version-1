@@ -57,6 +57,7 @@
       "comments_label": "Eventuelle kommentarer",
       "comments_placeholder": "Valgfri tilleggsinformasjon...",
       "submit_button": "Send forespørsel",
+      "new_form_button": "Fyll ut nytt skjema",
       "submitting": "Sender...",
       "success_message": "Takk for din forespørsel! Du vil snart motta en e-post fra team@vinster.ai med mer informasjon.",
       "validation": {

@@ -154,7 +154,7 @@ const OrganizationForm = () => {
             onClick={() => setShowSuccess(false)}
             className="bg-blue-900 hover:bg-blue-800 text-white"
           >
-            Nieuw formulier invullen
+            {t('professionals.organization_form.new_form_button')}
           </Button>
         </div>
       </div>

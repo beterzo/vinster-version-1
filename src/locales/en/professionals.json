@@ -58,6 +58,7 @@
       "comments_label": "Additional comments",
       "comments_placeholder": "Optional additional information...",
       "submit_button": "Submit request",
+      "new_form_button": "Fill in a new form",
       "submitting": "Submitting...",
       "success_message": "Thank you for your request! You will receive an email from team@vinster.ai shortly with more information.",
       "validation": {
