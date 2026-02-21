@@ -27,6 +27,7 @@ import Cookiebeleid from "@/pages/Cookiebeleid";
 import ToegangscodesProfessionals from "@/pages/ToegangscodesProfessionals";
 import TrajectOpnieuwStartenUitleg from "@/pages/TrajectOpnieuwStartenUitleg";
 import VoorbeeldrapportGenerator from "@/pages/VoorbeeldrapportGenerator";
+import PaymentSuccess from "@/pages/PaymentSuccess";
 
 // Protected route imports
 import ProtectedRoute from "@/components/ProtectedRoute";
@@ -140,6 +141,14 @@ const AppRouter = () => {
       <Route path="/de-mens-achter-vinster" element={<Navigate to="/over-vinster" replace />} />
 
       {/* Protected Routes */}
+      <Route 
+        path="/payment-success" 
+        element={
+          <ProtectedRoute requirePayment={false}>
+            <PaymentSuccess />
+          </ProtectedRoute>
+        } 
+      />
       <Route 
         path="/payment-required" 
         element={

@@ -10,6 +10,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { Input } from "@/components/ui/input";
+import { supabase } from "@/integrations/supabase/client";
 import { Label } from "@/components/ui/label";
 const PaymentRequired = () => {
   const {
@@ -76,83 +77,36 @@ const PaymentRequired = () => {
     }
     setIsLoading(true);
     try {
-      // Send 'us' as language for US variant, otherwise send the regular language
       const webhookLanguage = (language === 'en' && englishVariant === 'us') ? 'us' : language;
-      const webhookData = {
-        firstName: user.user_metadata?.first_name || '',
-        lastName: user.user_metadata?.last_name || '',
-        email: user.email || '',
-        userId: user.id,
-        language: webhookLanguage
-      };
-      console.log('Sending webhook data:', webhookData);
-      const response = await fetch('https://hook.eu2.make.com/byf77ioiyyzqrsri73hmsri7hjhjyoup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(webhookData)
+
+      const { data, error } = await supabase.functions.invoke('create-checkout-session', {
+        body: { language: webhookLanguage }
       });
-      console.log('Webhook response status:', response.status);
-      if (response.ok) {
-        console.log('Webhook successfully sent');
-        const contentType = response.headers.get('content-type');
-        console.log('Response content-type:', contentType);
-        let responseData;
-        try {
-          responseData = await response.json();
-          console.log('Webhook response data:', responseData);
-        } catch (parseError) {
-          console.error('Failed to parse response as JSON:', parseError);
-          const textResponse = await response.text();
-          console.log('Response as text:', textResponse);
-          throw new Error('Invalid JSON response from webhook');
-        }
-        if (responseData && responseData.checkout_url) {
-          console.log('Opening checkout URL in new tab:', responseData.checkout_url);
-          const newWindow = window.open(responseData.checkout_url, '_blank');
-          if (newWindow) {
-            toast({
-              title: "Succes",
-              description: "Betaalpagina wordt geopend in een nieuw tabblad. Na betaling word je automatisch doorgeleid."
-            });
 
-            // Start checking payment status periodically after opening checkout
-            const checkInterval = setInterval(async () => {
-              await refreshPaymentStatus();
-            }, 5000); // Check every 5 seconds
-
-            // Clean up interval after 10 minutes
-            setTimeout(() => {
-              clearInterval(checkInterval);
-            }, 600000);
-          } else {
-            console.log('Popup blocked, using direct redirect');
-            window.location.href = responseData.checkout_url;
-          }
-        } else {
-          console.error('No checkout_url in response:', responseData);
-          toast({
-            title: "Fout",
-            description: "Geen betaallink ontvangen. Probeer het opnieuw.",
-            variant: "destructive"
-          });
-        }
-      } else {
-        console.error('Webhook failed:', response.status, response.statusText);
-        const errorText = await response.text();
-        console.error('Error response body:', errorText);
+      if (error) {
+        console.error('Error creating checkout session:', error);
         toast({
           title: "Fout",
-          description: "Er is een fout opgetreden bij het verwerken van je aanvraag. Probeer het opnieuw.",
+          description: "Er is een fout opgetreden. Probeer het opnieuw.",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      if (data?.url) {
+        window.location.href = data.url;
+      } else {
+        toast({
+          title: "Fout",
+          description: "Geen betaallink ontvangen. Probeer het opnieuw.",
           variant: "destructive"
         });
       }
     } catch (error) {
-      console.error('Error sending webhook:', error);
+      console.error('Error:', error);
       toast({
         title: "Fout",
-        description: "Er is een fout opgetreden bij het verwerken van je aanvraag. Probeer het opnieuw.",
+        description: "Er is een fout opgetreden. Probeer het opnieuw.",
         variant: "destructive"
       });
     } finally {
@@ -166,55 +120,49 @@ const PaymentRequired = () => {
     setIsValidatingCode(true);
     
     try {
-      const response = await fetch('https://hook.eu2.make.com/jw6af19g8fbvtbpe42ussanvp8sur37j', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      const { data, error } = await supabase.functions.invoke('validate-access-code', {
+        body: {
           accessCode: accessCode.trim(),
           userId: user.id,
-          email: user.email,
-          firstName: user.user_metadata?.first_name || '',
-          lastName: user.user_metadata?.last_name || '',
-          language: language
-        })
+        }
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        
-        if (data.success === false) {
-          toast({
-            title: t('payment.access_code.invalid_title'),
-            description: data.message || t('payment.access_code.invalid_desc'),
-            variant: "destructive"
-          });
-          setAccessCode('');
-          setIsValidatingCode(false);
-          return;
-        }
+      if (error) {
+        console.error('Error validating access code:', error);
+        toast({
+          title: t('payment.access_code.invalid_title'),
+          description: t('payment.access_code.invalid_desc'),
+          variant: "destructive"
+        });
+        setIsValidatingCode(false);
+        return;
+      }
+
+      if (data?.success) {
+        toast({
+          title: t('payment.access_code.success_title'),
+          description: t('payment.access_code.success_desc')
+        });
+        await refreshPaymentStatus();
+        navigate('/home');
+      } else {
+        toast({
+          title: t('payment.access_code.invalid_title'),
+          description: data?.message || t('payment.access_code.invalid_desc'),
+          variant: "destructive"
+        });
+        setAccessCode('');
       }
     } catch (error) {
-      // Network error or CORS - but webhook might have succeeded
-      console.log('Network error during access code validation, checking payment status...', error);
-    }
-
-    // Show success message (webhook was sent successfully)
-    toast({
-      title: t('payment.access_code.success_title'),
-      description: t('payment.access_code.success_desc')
-    });
-    setShowAccessCodeInput(false);
-    
-    // Start checking payment status regardless of response
-    // This handles cases where webhook succeeds but response is blocked by CORS
-    const checkInterval = setInterval(async () => {
-      await refreshPaymentStatus();
-    }, 2000);
-    
-    setTimeout(() => {
-      clearInterval(checkInterval);
+      console.error('Error validating access code:', error);
+      toast({
+        title: t('payment.access_code.invalid_title'),
+        description: t('payment.access_code.invalid_desc'),
+        variant: "destructive"
+      });
+    } finally {
       setIsValidatingCode(false);
-    }, 60000);
+    }
   };
 
   const firstName = user?.user_metadata?.first_name || 'daar';
