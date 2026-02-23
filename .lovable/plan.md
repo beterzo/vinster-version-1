@@ -1,129 +1,39 @@
 
 
-# Plan: Professionals toegangscodes via Stripe met BTW en Vinster-stijl e-mail
+# Hero-sectie tekst aanpassen (alle talen)
 
-## Samenvatting
+De tagline, welcome en description in de hero-sectie worden aangepast naar de nieuwe teksten. De structuur blijft hetzelfde (3 vertaalsleutels: `tagline`, `welcome`, `description`).
 
-Het "snel bestellen" formulier op de professionals-pagina wordt gemigreerd van Make.com naar een directe Stripe-integratie. Na betaling worden automatisch toegangscodes gegenereerd en per e-mail verstuurd in de Vinster huisstijl. BTW wordt inclusief op de factuur getoond.
+## Nieuwe teksten per taal
 
----
+### Nederlands (`src/locales/nl/landing.json`)
+- **tagline**: "Wil jij weten welk werk bij je past?"
+- **welcome**: "Welkom bij" (blijft)
+- **description**: "Weten wat je wilt begint hier. Of je nu vastloopt, iets anders wilt, of gewoon even wilt checken.\n\nVinster helpt je ontdekken wat bij je past – door patronen in jouw woorden te vertalen naar passende functies."
 
-## Wat er gebouwd wordt
+### Engels (`src/locales/en/landing.json`)
+- **tagline**: "Want to find out what work suits you?"
+- **welcome**: "Welcome to" (blijft)
+- **description**: "Knowing what you want starts here. Whether you're stuck, looking for a change, or just want to check.\n\nVinster helps you discover what suits you – by translating patterns in your words into matching roles."
 
-### 1. Edge Function: `create-professional-checkout`
+### Duits (`src/locales/de/landing.json`)
+- **tagline**: "Möchten Sie wissen, welche Arbeit zu Ihnen passt?"
+- **welcome**: "Willkommen bei" (blijft)
+- **description**: "Zu wissen, was Sie wollen, beginnt hier. Ob Sie feststecken, etwas anderes suchen oder einfach mal prüfen möchten.\n\nVinster hilft Ihnen zu entdecken, was zu Ihnen passt – indem Muster in Ihren Worten in passende Funktionen übersetzt werden."
 
-Nieuw bestand: `supabase/functions/create-professional-checkout/index.ts`
+### Noors (`src/locales/no/landing.json`)
+- **tagline**: "Vil du vite hvilket arbeid som passer deg?"
+- **welcome**: "Velkommen til" (blijft)
+- **description**: "Å vite hva du vil begynner her. Enten du står fast, vil noe annet, eller bare vil sjekke.\n\nVinster hjelper deg med å oppdage hva som passer deg – ved å oversette mønstre i ordene dine til passende stillinger."
 
-- Ontvangt `email`, `quantity` en `language` (geen authenticatie nodig)
-- Maakt een Stripe Checkout sessie aan met:
-  - Dezelfde `PRICE_MAP` per taal als bij individuele betaling
-  - `quantity` op basis van het gekozen aantal
-  - `customer_email` met het opgegeven e-mailadres
-  - `invoice_creation: { enabled: true }` met BTW zichtbaar op de factuur
-  - `allow_promotion_codes: true`
-  - `metadata` met `type: "professional_codes"`, `quantity`, `email`, `language`
-  - `success_url` naar `/professional-codes-success?session_id={CHECKOUT_SESSION_ID}`
-  - `cancel_url` naar `/professionals`
-- Zoekt eerst of er al een Stripe-klant bestaat, anders wordt `customer_email` meegegeven
+## Bestanden die worden aangepast
 
-### 2. Edge Function: `fulfill-professional-codes`
+| Bestand | Wat |
+|---------|-----|
+| `src/locales/nl/landing.json` | tagline + description |
+| `src/locales/en/landing.json` | tagline + description |
+| `src/locales/de/landing.json` | tagline + description |
+| `src/locales/no/landing.json` | tagline + description |
 
-Nieuw bestand: `supabase/functions/fulfill-professional-codes/index.ts`
-
-- Ontvangt `session_id`
-- Controleert betaling bij Stripe (`payment_status === 'paid'`)
-- Leest `quantity`, `email` en `language` uit de sessie-metadata
-- Genereert het gewenste aantal Stripe promotion codes:
-  - Per code: unieke coupon met `percent_off: 100`, `max_redemptions: 1`, `duration: 'once'`
-  - Per coupon: een promotion code met leesbaar formaat (bijv. `VINSTER-A3X7-K9P2`)
-- Verstuurt een e-mail via Resend in de Vinster huisstijl met:
-  - Dezelfde header-stijl als de bestaande bevestigingsmail (gradient header met "Vinster" + tagline)
-  - Overzichtelijke tabel met alle toegangscodes
-  - Instructies hoe de codes te delen met clienten
-  - Footer met bedrijfsgegevens (KvK, team@vinster.ai)
-  - Vertaald in de juiste taal (NL/EN/DE/NO)
-
-### 3. E-mail template (in Vinster stijl)
-
-De e-mail volgt exact dezelfde stijl als de bestaande Vinster e-mails:
-
-- **Header**: Gradient achtergrond (#232D4B naar #E4C05B) met "Vinster" logo-tekst en tagline
-- **Content**: Witte achtergrond, bedankbericht, duidelijke tabel met codes
-- **Codes tabel**: Elke code in een apart vak met monospace lettertype, makkelijk te kopieren
-- **Instructies**: Korte uitleg hoe clienten de code kunnen gebruiken
-- **Footer**: Groet van Team Vinster, KvK-nummer, contactinfo
-
-Vertalingen voor alle 4 talen (NL, EN, DE, NO).
-
-### 4. Nieuwe pagina: `/professional-codes-success`
-
-Nieuw bestand: `src/pages/ProfessionalCodesSuccess.tsx`
-
-- Leest `session_id` uit de URL
-- Roept `fulfill-professional-codes` aan
-- Toont laadstatus tijdens het genereren van codes
-- Bij succes: bevestigingsbericht "Je codes zijn per e-mail verzonden!"
-- Knop om terug te gaan naar de homepage
-- Bij fout: duidelijke foutmelding
-
-### 5. Aanpassen: `ToegangscodesProfessionals.tsx`
-
-- Make.com `fetch` call wordt vervangen door `supabase.functions.invoke('create-professional-checkout')`
-- Gebruikt `window.open(url, '_blank')` voor Stripe redirect
-
-### 6. Route toevoegen in `AppRouter.tsx`
-
-- Nieuwe publieke route: `/professional-codes-success`
-
-### 7. Config.toml update
-
-Twee nieuwe entries:
-```
-[functions.create-professional-checkout]
-verify_jwt = false
-
-[functions.fulfill-professional-codes]
-verify_jwt = false
-```
-
----
-
-## BTW-afhandeling
-
-Zelfde aanpak als bij de individuele betaling:
-- Prijzen zijn inclusief BTW
-- `invoice_creation: { enabled: true }` zorgt voor automatische factuur
-- BTW wordt apart getoond op de factuur (bijv. 10 x EUR 29 = EUR 290, waarvan EUR 50,33 BTW)
-
----
-
-## Prijsberekening voorbeelden
-
-| Aantal | Taal | Totaal |
-|--------|------|--------|
-| 5 | NL | 5 x EUR 29 = EUR 145 |
-| 10 | EN-US | 10 x USD 34 = USD 340 |
-| 25 | NO | 25 x NOK 333 = NOK 8.325 |
-
----
-
-## Bestanden overzicht
-
-| Bestand | Actie |
-|---------|-------|
-| `supabase/functions/create-professional-checkout/index.ts` | Nieuw |
-| `supabase/functions/fulfill-professional-codes/index.ts` | Nieuw |
-| `src/pages/ProfessionalCodesSuccess.tsx` | Nieuw |
-| `src/pages/ToegangscodesProfessionals.tsx` | Aanpassen |
-| `src/components/AppRouter.tsx` | Route toevoegen |
-| `supabase/config.toml` | Functions toevoegen |
-
----
-
-## Geen wijzigingen nodig aan
-
-- Database (codes worden beheerd in Stripe als promotion codes)
-- Bestaande `validate-access-code` (werkt al met Stripe promotion codes)
-- OrganizationForm (blijft via Resend e-mail naar team@vinster.ai)
-- Taalbestanden (toasts en labels zijn al aanwezig en worden hergebruikt)
+Geen andere bestanden worden gewijzigd.
 
