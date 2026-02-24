@@ -19,7 +19,7 @@ serve(async (req) => {
     // Get all org types
     const { data: orgTypes } = await supabase
       .from('organisation_types')
-      .select('id, name')
+      .select('id, name, parent_type_id')
       .order('name');
 
     // Get all sessions
@@ -38,6 +38,7 @@ serve(async (req) => {
       return {
         org_name: ot.name,
         org_id: ot.id,
+        parent_type_id: ot.parent_type_id || null,
         this_month: thisMonth,
         last_month: lastMonth,
         total: orgSessions.length,

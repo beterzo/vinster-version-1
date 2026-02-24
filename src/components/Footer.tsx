@@ -93,6 +93,12 @@ const Footer = () => {
           <p className="text-gray-500 text-sm">
             {t('landing.footer.copyright')}
           </p>
+          <button
+            onClick={() => navigate('/admin')}
+            className="text-xs text-gray-400 hover:text-blue-900 transition-colors mt-2"
+          >
+            Admin
+          </button>
         </div>
       </div>
     </footer>
