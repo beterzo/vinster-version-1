@@ -14,11 +14,11 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const organisationItems = [
-  { name: "Medisch Centrum", slug: "medisch-centrum" },
-  { name: "ErasmusMC", slug: "erasmus-mc", indent: true },
-  { name: "Universiteit", slug: "universiteit" },
-  { name: "Zorgorganisatie", slug: "zorgorganisatie" },
-  { name: "Hogeschool", slug: "hogeschool" },
+  { name: "Medisch Centrum", slug: "medisch-centrum", available: true },
+  { name: "ErasmusMC", slug: "erasmus-mc", indent: true, available: true },
+  { name: "Universiteit", slug: "universiteit", available: false },
+  { name: "Zorgorganisatie", slug: "zorgorganisatie", available: false },
+  { name: "Hogeschool", slug: "hogeschool", available: false },
 ];
 
 const MobileMenu = () => {
@@ -131,7 +131,7 @@ const MobileMenu = () => {
                       {organisationItems.map((org) => (
                         <button
                           key={org.slug}
-                          onClick={() => handleNavigation(`/organisaties/${org.slug}`)}
+                          onClick={() => handleNavigation(org.available ? `/organisaties/${org.slug}` : `/organisaties/binnenkort`)}
                           className={`block w-full text-left py-2 px-0 text-base font-medium text-gray-600 hover:text-vinster-blue transition-colors ${
                             org.indent ? "pl-4" : ""
                           }`}

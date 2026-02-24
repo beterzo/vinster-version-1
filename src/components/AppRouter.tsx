@@ -31,6 +31,7 @@ import PaymentSuccess from "@/pages/PaymentSuccess";
 import ProfessionalCodesSuccess from "@/pages/ProfessionalCodesSuccess";
 import OrganisatiesOverzicht from "@/pages/OrganisatiesOverzicht";
 import OrganisatieLanding from "@/pages/OrganisatieLanding";
+import OrganisatieBinnenkort from "@/pages/OrganisatieBinnenkort";
 
 // Protected route imports
 import ProtectedRoute from "@/components/ProtectedRoute";
@@ -145,6 +146,7 @@ const AppRouter = () => {
 
       {/* Organisaties routes */}
       <Route path="/organisaties" element={<OrganisatiesOverzicht />} />
+      <Route path="/organisaties/binnenkort" element={<OrganisatieBinnenkort />} />
       <Route path="/organisaties/:slug" element={<OrganisatieLanding />} />
       
       {/* Legacy redirect from old de-mens-achter-vinster to new over-vinster */}

@@ -4,11 +4,11 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { ChevronDown } from "lucide-react";
 
 const organisationItems = [
-  { name: "Medisch Centrum", slug: "medisch-centrum" },
-  { name: "ErasmusMC", slug: "erasmus-mc", indent: true },
-  { name: "Universiteit", slug: "universiteit" },
-  { name: "Zorgorganisatie", slug: "zorgorganisatie" },
-  { name: "Hogeschool", slug: "hogeschool" },
+  { name: "Medisch Centrum", slug: "medisch-centrum", available: true },
+  { name: "ErasmusMC", slug: "erasmus-mc", indent: true, available: true },
+  { name: "Universiteit", slug: "universiteit", available: false },
+  { name: "Zorgorganisatie", slug: "zorgorganisatie", available: false },
+  { name: "Hogeschool", slug: "hogeschool", available: false },
 ];
 
 const DesktopNavigation = () => {
@@ -80,21 +80,23 @@ const DesktopNavigation = () => {
           </button>
 
           {dropdownOpen && (
-            <div className="absolute top-full left-0 mt-1 w-56 rounded-lg border bg-white shadow-lg z-50 py-2">
-              {organisationItems.map((org) => (
-                <button
-                  key={org.slug}
-                  onClick={() => {
-                    navigate(`/organisaties/${org.slug}`);
-                    setDropdownOpen(false);
-                  }}
-                  className={`block w-full text-left px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-vinster-blue transition-colors ${
-                    org.indent ? "pl-8 text-gray-500" : ""
-                  }`}
-                >
-                  {org.indent ? `→ ${org.name}` : org.name}
-                </button>
-              ))}
+            <div className="absolute top-full left-0 pt-2 w-56 z-50">
+              <div className="rounded-lg border bg-white shadow-lg py-2">
+                {organisationItems.map((org) => (
+                  <button
+                    key={org.slug}
+                    onClick={() => {
+                      navigate(org.available ? `/organisaties/${org.slug}` : `/organisaties/binnenkort`);
+                      setDropdownOpen(false);
+                    }}
+                    className={`block w-full text-left px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-vinster-blue transition-colors ${
+                      org.indent ? "pl-8 text-gray-500" : ""
+                    }`}
+                  >
+                    {org.indent ? `→ ${org.name}` : org.name}
+                  </button>
+                ))}
+              </div>
             </div>
           )}
         </div>
