@@ -33,7 +33,9 @@ import OrganisatiesOverzicht from "@/pages/OrganisatiesOverzicht";
 import OrganisatieLanding from "@/pages/OrganisatieLanding";
 import OrganisatieBinnenkort from "@/pages/OrganisatieBinnenkort";
 import OrganisatieIntro from "@/pages/OrganisatieIntro";
-import AdminErasmusMCVacatures from "@/pages/AdminErasmusMCVacatures";
+import AdminPasswordGate from "@/components/AdminPasswordGate";
+import AdminPortal from "@/pages/AdminPortal";
+import AdminVacatures from "@/pages/AdminVacatures";
 import AdminOrganisatieGebruik from "@/pages/AdminOrganisatieGebruik";
 
 // Protected route imports
@@ -154,8 +156,13 @@ const AppRouter = () => {
       <Route path="/organisaties/:slug/intro" element={<ProtectedRoute requirePayment={false}><OrganisatieIntro /></ProtectedRoute>} />
       
       {/* Admin routes */}
-      <Route path="/admin/erasmus-mc/vacatures" element={<AdminErasmusMCVacatures />} />
-      <Route path="/admin/organisaties/gebruik" element={<AdminOrganisatieGebruik />} />
+      <Route path="/admin" element={<AdminPasswordGate><AdminPortal /></AdminPasswordGate>} />
+      <Route path="/admin/gebruik" element={<AdminPasswordGate><AdminOrganisatieGebruik /></AdminPasswordGate>} />
+      <Route path="/admin/vacatures" element={<AdminPasswordGate><AdminVacatures /></AdminPasswordGate>} />
+      
+      {/* Legacy admin redirects */}
+      <Route path="/admin/erasmus-mc/vacatures" element={<Navigate to="/admin/vacatures" replace />} />
+      <Route path="/admin/organisaties/gebruik" element={<Navigate to="/admin/gebruik" replace />} />
       
       {/* Legacy redirect from old de-mens-achter-vinster to new over-vinster */}
       <Route path="/de-mens-achter-vinster" element={<Navigate to="/over-vinster" replace />} />

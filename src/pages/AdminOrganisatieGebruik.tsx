@@ -1,16 +1,17 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ArrowLeft, Download, Plus, Loader2 } from "lucide-react";
+import { ArrowLeft, Download, Plus, Loader2, ChevronDown, ChevronRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
 interface OrgStats {
   org_name: string;
   org_id: string;
+  parent_type_id: string | null;
   this_month: number;
   last_month: number;
   total: number;
@@ -37,6 +38,7 @@ const AdminOrganisatieGebruik = () => {
   const [newCodeOrgId, setNewCodeOrgId] = useState("");
   const [newCodeMaxUses, setNewCodeMaxUses] = useState("");
   const [generating, setGenerating] = useState(false);
+  const [expandedBranches, setExpandedBranches] = useState<Set<string>>(new Set());
 
   const fetchData = async () => {
     try {
@@ -100,6 +102,24 @@ const AdminOrganisatieGebruik = () => {
     URL.revokeObjectURL(url);
   };
 
+  const toggleBranch = (branchId: string) => {
+    setExpandedBranches((prev) => {
+      const next = new Set(prev);
+      if (next.has(branchId)) next.delete(branchId);
+      else next.add(branchId);
+      return next;
+    });
+  };
+
+  // Group stats: branches (parent_type_id === null) and their children
+  const branches = stats.filter((s) => !s.parent_type_id);
+  const childrenMap = new Map<string, OrgStats[]>();
+  stats.filter((s) => s.parent_type_id).forEach((s) => {
+    const arr = childrenMap.get(s.parent_type_id!) || [];
+    arr.push(s);
+    childrenMap.set(s.parent_type_id!, arr);
+  });
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -119,8 +139,8 @@ const AdminOrganisatieGebruik = () => {
               className="h-16 w-auto cursor-pointer hover:opacity-80"
               onClick={() => navigate("/")}
             />
-            <Button onClick={() => navigate("/home")} variant="outline" className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold">
-              <ArrowLeft className="w-4 h-4 mr-2" /> Terug
+            <Button onClick={() => navigate("/admin")} variant="outline" className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold">
+              <ArrowLeft className="w-4 h-4 mr-2" /> Terug naar Admin
             </Button>
           </div>
         </div>
@@ -130,17 +150,17 @@ const AdminOrganisatieGebruik = () => {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-bold text-blue-900 mb-2">Organisatie Gebruik</h1>
-            <p className="text-gray-600">Overzicht van organisatie-sessies en toegangscodes.</p>
+            <p className="text-gray-600">Overzicht van organisatie-sessies per branche en organisatie.</p>
           </div>
           <Button onClick={exportCSV} variant="outline" className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold">
             <Download className="w-4 h-4 mr-2" /> Export CSV
           </Button>
         </div>
 
-        {/* Usage stats */}
+        {/* Usage stats with branch grouping */}
         <Card className="mb-8 rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
           <div className="px-6 py-4 bg-blue-50 border-b border-blue-100">
-            <h2 className="text-lg font-semibold text-blue-900">Gebruik per organisatie</h2>
+            <h2 className="text-lg font-semibold text-blue-900">Gebruik per branche / organisatie</h2>
           </div>
           <table className="min-w-full text-sm">
             <thead>
@@ -152,19 +172,53 @@ const AdminOrganisatieGebruik = () => {
               </tr>
             </thead>
             <tbody>
-              {stats.length === 0 ? (
+              {branches.length === 0 && stats.length === 0 ? (
                 <tr>
                   <td colSpan={4} className="px-6 py-8 text-center text-gray-400">Nog geen data</td>
                 </tr>
               ) : (
-                stats.map((s) => (
-                  <tr key={s.org_id} className="border-b border-gray-50 hover:bg-gray-50">
-                    <td className="px-6 py-3 font-medium text-gray-900">{s.org_name}</td>
-                    <td className="px-6 py-3 text-gray-700">{s.this_month}</td>
-                    <td className="px-6 py-3 text-gray-700">{s.last_month}</td>
-                    <td className="px-6 py-3 font-semibold text-blue-900">{s.total}</td>
-                  </tr>
-                ))
+                branches.map((branch) => {
+                  const kids = childrenMap.get(branch.org_id) || [];
+                  const hasChildren = kids.length > 0;
+                  const isExpanded = expandedBranches.has(branch.org_id);
+
+                  // Branch totals = own + children
+                  const totalThisMonth = branch.this_month + kids.reduce((s, k) => s + k.this_month, 0);
+                  const totalLastMonth = branch.last_month + kids.reduce((s, k) => s + k.last_month, 0);
+                  const totalAll = branch.total + kids.reduce((s, k) => s + k.total, 0);
+
+                  return (
+                    <React.Fragment key={branch.org_id}>
+                      <tr
+                        className={`border-b border-gray-50 hover:bg-gray-50 ${hasChildren ? "cursor-pointer" : ""}`}
+                        onClick={() => hasChildren && toggleBranch(branch.org_id)}
+                      >
+                        <td className="px-6 py-3 font-semibold text-gray-900 flex items-center gap-2">
+                          {hasChildren && (
+                            isExpanded
+                              ? <ChevronDown className="w-4 h-4 text-gray-500" />
+                              : <ChevronRight className="w-4 h-4 text-gray-500" />
+                          )}
+                          {branch.org_name}
+                          {hasChildren && (
+                            <span className="text-xs text-gray-400 ml-1">({kids.length} org{kids.length > 1 ? "s" : ""})</span>
+                          )}
+                        </td>
+                        <td className="px-6 py-3 text-gray-700 font-medium">{totalThisMonth}</td>
+                        <td className="px-6 py-3 text-gray-700 font-medium">{totalLastMonth}</td>
+                        <td className="px-6 py-3 font-bold text-blue-900">{totalAll}</td>
+                      </tr>
+                      {isExpanded && kids.map((child) => (
+                        <tr key={child.org_id} className="border-b border-gray-50 bg-gray-50/50">
+                          <td className="px-6 py-2 pl-14 text-gray-700">{child.org_name}</td>
+                          <td className="px-6 py-2 text-gray-600">{child.this_month}</td>
+                          <td className="px-6 py-2 text-gray-600">{child.last_month}</td>
+                          <td className="px-6 py-2 font-semibold text-blue-800">{child.total}</td>
+                        </tr>
+                      ))}
+                    </React.Fragment>
+                  );
+                })
               )}
             </tbody>
           </table>
