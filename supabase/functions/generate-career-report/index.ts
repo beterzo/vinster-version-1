@@ -100,6 +100,12 @@ interface UserData {
   fysiekeBeperkingen: string;
 }
 
+function formatAnchorList(anchorList: any[]): string {
+  return anchorList.map(cat =>
+    `${cat.category}\n${cat.functions.map((f: string) => `   - ${f}`).join('\n')}`
+  ).join('\n\n');
+}
+
 function getCareerReportPrompts(language: string, data: UserData): { system: string; user: string } {
   const prompts: Record<string, { system: string; user: string }> = {
     nl: {
@@ -909,36 +915,55 @@ serve(async (req) => {
       fysiekeBeperkingen: extraInfoData?.fysieke_beperkingen || 'Geen',
     };
 
-    // Check if this is an ErasmusMC organisation report
+    // === Organisation type detection & anchor list ===
     let isErasmusMC = false;
+    let hasAnchorList = false;
+    let anchorListText = '';
     let erasmusMCVacancies: any[] = [];
 
     if (organisation_type_id) {
+      // Fetch org type with anchor_list and parent_type_id
       const { data: orgType } = await supabase
         .from('organisation_types')
-        .select('slug, is_unique')
+        .select('slug, is_unique, anchor_list, parent_type_id')
         .eq('id', organisation_type_id)
         .single();
 
-      if (orgType?.is_unique && orgType?.slug === 'erasmus-mc') {
-        isErasmusMC = true;
+      // Determine anchor list (own or inherited from parent)
+      let anchorList = orgType?.anchor_list || null;
+
+      if (!anchorList && orgType?.parent_type_id) {
+        const { data: parentType } = await supabase
+          .from('organisation_types')
+          .select('anchor_list')
+          .eq('id', orgType.parent_type_id)
+          .single();
+        anchorList = parentType?.anchor_list || null;
+      }
+
+      if (anchorList) {
+        hasAnchorList = true;
+        anchorListText = formatAnchorList(anchorList as any[]);
+        console.log('📋 Anchor list loaded with', (anchorList as any[]).length, 'categories');
+      }
+
+      isErasmusMC = !!(orgType?.is_unique && orgType?.slug === 'erasmus-mc');
+
+      if (isErasmusMC) {
         console.log('🏥 ErasmusMC mode detected - fetching vacancies...');
 
-        // Get all selected keywords for matching
         const allKeywords = [
           ...(prioriteitenData?.selected_activiteiten_keywords || []),
           ...(prioriteitenData?.selected_werkomstandigheden_keywords || []),
           ...(prioriteitenData?.selected_interesses_keywords || []),
         ].map((k: string) => k.toLowerCase());
 
-        // Fetch all ErasmusMC vacancies
         const { data: vacancies } = await supabase
           .from('organisation_vacancies')
           .select('title, department, description, keywords')
           .eq('organisation_type_id', organisation_type_id);
 
         if (vacancies && vacancies.length > 0) {
-          // Score vacancies by keyword match count
           const scored = vacancies.map(v => {
             const searchText = [
               v.title || '',
@@ -946,12 +971,9 @@ serve(async (req) => {
               v.description || '',
               ...(v.keywords || []),
             ].join(' ').toLowerCase();
-
             const matchCount = allKeywords.filter(kw => searchText.includes(kw)).length;
             return { ...v, matchCount };
           });
-
-          // Sort by relevance and take top 20
           scored.sort((a, b) => b.matchCount - a.matchCount);
           erasmusMCVacancies = scored.slice(0, 20);
           console.log(`✅ Found ${vacancies.length} total vacancies, selected top ${erasmusMCVacancies.length} relevant`);
@@ -959,18 +981,19 @@ serve(async (req) => {
       }
     }
 
-    // Get language-specific prompts (or ErasmusMC-specific prompts)
+    // === Prompt selection: 3 branches ===
     let prompts;
 
-    if (isErasmusMC) {
-      const vacatureList = erasmusMCVacancies.map((v, i) => 
+    if (isErasmusMC && hasAnchorList) {
+      // ErasmusMC: anchor list + vacancy database
+      const vacatureList = erasmusMCVacancies.map((v, i) =>
         `${i + 1}. ${v.title}${v.department ? ` (Afdeling: ${v.department})` : ''}${v.description ? ` — ${v.description}` : ''}`
       ).join('\n');
 
       prompts = {
         system: `Je bent een loopbaancoach gespecialiseerd in interne mobiliteit binnen het Erasmus MC.
-Je ontvangt informatie over een medewerker en een database van interne vacatures.
-Je kiest 3 functies die passen bij de medewerker.
+Je ontvangt informatie over een medewerker, een ankerlijst van functies die binnen een medisch centrum bestaan, en een database van interne vacatures.
+Je kiest uitsluitend functies uit de opgegeven ankerlijst. De vacature-database gebruik je als aanvullende context om concrete functietitels te vinden die aansluiten bij de ankerlijst-categorieën.
 
 Je antwoordt altijd in exact de gevraagde JSON-structuur, zonder toelichting erboven of eronder. Je output wordt automatisch verwerkt in een rapport.
 
@@ -1025,22 +1048,99 @@ Context:
 • Richting: ${userData.beroepsopleiding}
 • Beperkingen: ${userData.fysiekeBeperkingen}
 
-Gebruik de onderstaande ErasmusMC vacatures (afgelopen 5 jaar) als database:
+ANKERLIJST MEDISCH CENTRUM — kies uitsluitend uit onderstaande functies:
+
+${anchorListText}
+
+Gebruik daarnaast de onderstaande ErasmusMC vacatures (afgelopen 5 jaar) als aanvullende context om concrete functietitels te vinden die aansluiten bij de ankerlijst-categorieën:
 ${vacatureList || 'Geen vacatures beschikbaar'}
 
-Kies PRECIES 3 interne functies die passen bij de kernwoorden van de gebruiker.
-
 Regels:
-1. Kies uitsluitend functies die realistisch voorkomen binnen Erasmus MC.
-2. Functie 1 en 2 zijn de meest logische en herkenbare matches op basis van de kernwoorden.
-3. Functie 3 is bewust verrassend — een functie die de medewerker misschien niet verwacht, maar die wél past. Begin de beschrijving met: "En als verrassing..." of "Misschien had je dit niet verwacht, maar..."
-4. Schrijf per functie 2-3 zinnen:
+1. Kies PRECIES 3 functies uit de ankerlijst.
+2. De 3 functies mogen NIET alle drie uit dezelfde categorie komen — zorg voor spreiding over minimaal 2 verschillende categorieën.
+3. Functie 1 en 2 zijn de meest logische en herkenbare matches op basis van de kernwoorden van de gebruiker.
+4. Functie 3 is bewust verrassend — een functie uit een andere categorie dan de gebruiker verwacht, maar die wél past bij de kernwoorden. Begin deze met: "En als verrassing..." of "Misschien had je dit niet verwacht, maar..."
+5. Schrijf per functie 2-3 zinnen:
    - Begin met een verwijzing naar de specifieke kernwoorden van de gebruiker
    - Leg concreet uit hoe deze functie eruitziet binnen Erasmus MC
    - Blijf herkenbaar en motiverend
-5. Stel geen functies voor buiten Erasmus MC context.
-6. De functietitels mogen maximaal uit 3 woorden bestaan.
-7. De beschrijving per functie mag maximaal 40 woorden zijn.`
+6. Stel NOOIT functies voor die niet in de ankerlijst staan.
+7. Gebruik de vacature-database om concrete functietitels te vinden die aansluiten bij de ankerlijst-categorieën.
+8. De functietitels mogen maximaal uit 3 woorden bestaan.
+9. De beschrijving per functie mag maximaal 40 woorden zijn.`
+      };
+    } else if (hasAnchorList) {
+      // Generic Medisch Centrum: anchor list only
+      prompts = {
+        system: `Je bent een loopbaancoach gespecialiseerd in interne mobiliteit binnen een medisch centrum. Je kiest uitsluitend functies uit de opgegeven ankerlijst. Je antwoordt altijd in exact de gevraagde JSON-structuur, zonder toelichting erboven of eronder. Je output wordt automatisch verwerkt in een rapport.
+
+Lever uitsluitend het JSON-object aan zoals opgegeven in de prompt.`,
+        user: `Je genereert een loopbaanrapport voor een medewerker van een medisch centrum.
+
+Hier is informatie over de medewerker:
+• Naam: ${userData.firstName} ${userData.lastName}
+
+Wensberoep 1: ${userData.wensberoep1.titel}
+- Werkweek activiteiten: ${userData.wensberoep1.werkweekActiviteiten}
+- Werklocatie: ${userData.wensberoep1.werklocatieOmgeving}
+- Samenwerking: ${userData.wensberoep1.samenwerkingContacten}
+- Fluitend thuiskomen: ${userData.wensberoep1.fluitendThuiskomen}
+- Doel: ${userData.wensberoep1.werkDoel}
+- Leukste onderdelen: ${userData.wensberoep1.leuksteOnderdelen}
+- Belangrijke aspecten: ${userData.wensberoep1.belangrijkeAspecten}
+- Kennis focus: ${userData.wensberoep1.kennisFocus}
+
+Wensberoep 2: ${userData.wensberoep2.titel}
+- Werkweek activiteiten: ${userData.wensberoep2.werkweekActiviteiten}
+- Werklocatie: ${userData.wensberoep2.werklocatieOmgeving}
+- Samenwerking: ${userData.wensberoep2.samenwerkingContacten}
+- Fluitend thuiskomen: ${userData.wensberoep2.fluitendThuiskomen}
+- Doel: ${userData.wensberoep2.werkDoel}
+- Leukste onderdelen: ${userData.wensberoep2.leuksteOnderdelen}
+- Belangrijke aspecten: ${userData.wensberoep2.belangrijkeAspecten}
+- Kennis focus: ${userData.wensberoep2.kennisFocus}
+
+Wensberoep 3: ${userData.wensberoep3.titel}
+- Werkweek activiteiten: ${userData.wensberoep3.werkweekActiviteiten}
+- Werklocatie: ${userData.wensberoep3.werklocatieOmgeving}
+- Samenwerking: ${userData.wensberoep3.samenwerkingContacten}
+- Fluitend thuiskomen: ${userData.wensberoep3.fluitendThuiskomen}
+- Doel: ${userData.wensberoep3.werkDoel}
+- Leukste onderdelen: ${userData.wensberoep3.leuksteOnderdelen}
+- Belangrijke aspecten: ${userData.wensberoep3.belangrijkeAspecten}
+- Kennis focus: ${userData.wensberoep3.kennisFocus}
+
+Kernwoorden van de medewerker:
+• Lievelings activiteiten: ${userData.selectedActiviteiten}
+• Werkomgeving: ${userData.selectedWerkomstandigheden}
+• Interesses: ${userData.selectedInteresses}
+
+Extra toelichting:
+• Activiteiten: ${userData.extraActiviteiten}
+• Werkomgeving: ${userData.extraWerkomstandigheden}
+• Interesses: ${userData.extraInteresses}
+
+Context:
+• Opleiding: ${userData.opleidingsniveau}
+• Richting: ${userData.beroepsopleiding}
+• Beperkingen: ${userData.fysiekeBeperkingen}
+
+ANKERLIJST MEDISCH CENTRUM — kies uitsluitend uit onderstaande functies:
+
+${anchorListText}
+
+Regels:
+1. Kies PRECIES 3 functies uit de ankerlijst.
+2. De 3 functies mogen NIET alle drie uit dezelfde categorie komen — zorg voor spreiding over minimaal 2 verschillende categorieën.
+3. Functie 1 en 2 zijn de meest logische en herkenbare matches op basis van de kernwoorden van de gebruiker.
+4. Functie 3 is bewust verrassend — een functie uit een andere categorie dan de gebruiker verwacht, maar die wél past bij de kernwoorden. Begin deze met: "En als verrassing..." of "Misschien had je dit niet verwacht, maar..."
+5. Schrijf per functie 2-3 zinnen:
+   - Begin met een verwijzing naar de specifieke kernwoorden van de gebruiker
+   - Leg concreet uit hoe deze functie eruitziet binnen een medisch centrum
+   - Blijf herkenbaar en motiverend
+6. Stel NOOIT functies voor die niet in de ankerlijst staan.
+7. De functietitels mogen maximaal uit 3 woorden bestaan.
+8. De beschrijving per functie mag maximaal 40 woorden zijn.`
       };
     } else {
       prompts = getCareerReportPrompts(language, userData);
