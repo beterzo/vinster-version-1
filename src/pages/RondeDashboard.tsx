@@ -10,6 +10,7 @@ import WensberoepenInline from "@/components/journey/WensberoepenInline";
 import PersoonsprofielInline from "@/components/journey/PersoonsprofielInline";
 import RapportInline from "@/components/journey/RapportInline";
 import OnderzoeksplanInline from "@/components/journey/OnderzoeksplanInline";
+import OrganisatieOnderzoeksplanInline from "@/components/journey/OrganisatieOnderzoeksplanInline";
 import ZoekprofielInline from "@/components/journey/ZoekprofielInline";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useUserRounds } from "@/hooks/useUserRounds";
@@ -296,7 +297,13 @@ const RondeDashboard = () => {
             organisationTypeId={isOrganisationMode ? organisationTypeId : undefined}
           />
         )}
-        {currentStep === 'onderzoeksplan' && (
+        {currentStep === 'onderzoeksplan' && isOrganisationMode && roundId && (
+          <OrganisatieOnderzoeksplanInline 
+            roundId={roundId}
+            onComplete={() => setOnderzoeksplanComplete(true)}
+          />
+        )}
+        {currentStep === 'onderzoeksplan' && !isOrganisationMode && (
           <OnderzoeksplanInline 
             subStep={currentSubStep as 'page1' | 'page2' | 'page3'} 
             onNext={handleNext} 
