@@ -27,7 +27,7 @@ const RondeDashboard = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { rounds, loading: roundsLoading } = useUserRounds();
-  const { isOrganisationMode, organisationTypeId } = useOrganisation();
+  const { isOrganisationMode, organisationTypeId, name: organisationName, accessCodeId: organisationAccessCodeId } = useOrganisation();
   
   // Filter steps: skip zoekprofiel in organisation mode
   const activeSteps = useMemo(() => {
@@ -258,6 +258,9 @@ const RondeDashboard = () => {
             onNext={handleContinueFromOverview}
             completedSteps={completedSteps}
             onStepClick={handleStepClick}
+            isOrganisationMode={isOrganisationMode}
+            organisationName={organisationName}
+            organisationAccessCodeId={organisationAccessCodeId}
           />
         </div>
       );
@@ -274,6 +277,9 @@ const RondeDashboard = () => {
             completedSteps={completedSteps}
             onStepClick={handleStepClick}
             onContinueFromWelkom={handleContinueFromWelkom}
+            isOrganisationMode={isOrganisationMode}
+            organisationName={organisationName}
+            organisationAccessCodeId={organisationAccessCodeId}
           />
         )}
         {currentStep === 'wensberoepen' && roundId && (

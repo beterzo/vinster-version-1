@@ -2,37 +2,51 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Footer from "@/components/Footer";
 import { CheckCircle2, Shield, Sparkles, ArrowRight } from "lucide-react";
-
-const steps = [
-  {
-    number: 1,
-    title: "Enthousiasmescan",
-    description:
-      "Je beantwoordt vragen over drie periodes waarin je energie kreeg van je werk. Wat deed je precies? In welke context? Schrijf zo concreet mogelijk, in je eigen woorden.",
-  },
-  {
-    number: 2,
-    title: "Wensberoepen",
-    description:
-      "Daarna noem je drie wensberoepen waarbij je gaat beschrijven wat je er in aanspreekt. Je mag zo vrij mogelijk schrijven. Deze wensberoepen mogen binnen of buiten jouw eigen organisatie liggen. Jouw antwoorden wordt gebruikt om te bedenken bij welke interne functies jouw wensen passen.",
-  },
-  {
-    number: 3,
-    title: "Resultaat",
-    description:
-      "Vinster leest jouw antwoorden en vertaalt jouw woorden naar passende functierichtingen en concrete functie-ideeën binnen jouw organisatie.",
-  },
-];
-
-const resultItems = [
-  "overzicht wat jij zoekt in werk",
-  "drie mogelijke functierichtingen",
-  "een actieplan om mee verder te gaan",
-];
+import { useOrganisation } from "@/contexts/OrganisationContext";
 
 const OrganisatieIntro = () => {
   const navigate = useNavigate();
   const { slug } = useParams<{ slug: string }>();
+  const { name, accessCodeId } = useOrganisation();
+
+  // Determine labels based on category vs specific org
+  const isCategory = !accessCodeId;
+  const contextLabel = isCategory
+    ? name ? `een ${name.toLowerCase()}` : "jouw organisatie"
+    : name || "jouw organisatie";
+  const brancheLabel = isCategory
+    ? "deze branche"
+    : name || "jouw organisatie";
+  const binnenLabel = isCategory
+    ? `in ${brancheLabel}`
+    : `binnen ${name}`;
+
+  const steps = [
+    {
+      number: 1,
+      title: "Enthousiasmescan",
+      description:
+        "Je beantwoordt vragen over drie periodes waarin je energie kreeg van je werk. Wat deed je precies? In welke context? Schrijf zo concreet mogelijk, in je eigen woorden.",
+    },
+    {
+      number: 2,
+      title: "Wensberoepen",
+      description:
+        `Daarna noem je drie wensberoepen waarbij je gaat beschrijven wat je er in aanspreekt. Je mag zo vrij mogelijk schrijven. Deze wensberoepen mogen binnen of buiten ${contextLabel} liggen. Jouw antwoorden worden gebruikt om te bedenken bij welke functies ${binnenLabel} jouw wensen passen.`,
+    },
+    {
+      number: 3,
+      title: "Resultaat",
+      description:
+        `Vinster leest jouw antwoorden en vertaalt jouw woorden naar passende functierichtingen en concrete functie-ideeën binnen ${contextLabel}.`,
+    },
+  ];
+
+  const resultItems = [
+    "overzicht wat jij zoekt in werk",
+    `drie mogelijke functierichtingen ${binnenLabel}`,
+    "een actieplan om mee verder te gaan",
+  ];
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
@@ -65,7 +79,7 @@ const OrganisatieIntro = () => {
               Welkom bij Vinster
             </h1>
             <p className="text-lg text-gray-700 leading-relaxed">
-              Je gaat onderzoeken welke functies en rollen binnen jouw organisatie bij jou kunnen passen.
+              Je gaat onderzoeken welke functies en rollen binnen {contextLabel} bij jou kunnen passen.
             </p>
           </div>
 
@@ -132,7 +146,7 @@ const OrganisatieIntro = () => {
 
           {/* Verder kijken */}
           <div className="text-sm text-gray-500 leading-relaxed">
-            <span className="font-medium text-gray-600">Verder kijken dan jouw organisatie?</span>{" "}
+            <span className="font-medium text-gray-600">Verder kijken dan {brancheLabel}?</span>{" "}
             Je kunt Vinster ook zelf doen door via{" "}
             <a
               href="/"
@@ -140,7 +154,7 @@ const OrganisatieIntro = () => {
             >
               de algemene knop
             </a>{" "}
-            in te loggen. Je krijgt dan zicht op functies die bij je zouden kunnen passen buiten jouw organisatie. Je betaalt daarvoor €29,-.
+            in te loggen. Je krijgt dan zicht op functies die bij je zouden kunnen passen buiten {brancheLabel}. Je betaalt daarvoor €29,-.
           </div>
 
           {/* CTA */}
