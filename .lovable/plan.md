@@ -1,138 +1,67 @@
 
-
-# Medisch Centrum categoriepagina met vrije start + specifieke organisaties
+# Organisatie-specifiek Onderzoeksplan
 
 ## Wat verandert
 
-De huidige flow is: klik op "Medisch Centrum" in de nav, je komt op `/organisaties/medisch-centrum` waar je een toegangscode moet invullen. Dat wordt nu anders.
+In organisatie-modus wordt het bestaande 3-pagina onderzoeksplan (met 10 stappen + zoekprofiel-verwijzing) vervangen door een eenvoudigere, organisatie-gerichte versie. Deze bevat een lijst gespreksvragen die de medewerker kan bespreken met hun loopbaan- of HR-adviseur.
 
-De nieuwe flow wordt:
-- Klik op **Medisch Centrum** in de nav -> je komt op een **categoriepagina** (`/organisaties/medisch-centrum`)
-- Op die pagina kun je:
-  1. **Direct starten** met een algemeen Medisch Centrum traject (geen code nodig) -- je krijgt dan resultaten met functies specifiek voor medische centra
-  2. **Een specifieke organisatie kiezen** (bijv. ErasmusMC) -- daar heb je wel een toegangscode voor nodig
-
-ErasmusMC blijft als sub-item in de dropdown staan, maar je kunt er ook via de categoriepagina naartoe.
+Daarnaast bevat de pagina:
+- Een "Download als PDF" knop die zowel het rapport (3 functies) als het onderzoeksplan in een printbaar document combineert
+- Een "Opnieuw beginnen" knop om het traject opnieuw te doorlopen
+- Geen "Zoek vacatures" of externe CTA's
 
 ---
 
-## Nieuwe pagina: `/organisaties/medisch-centrum` (categoriepagina)
+## Technische aanpak
 
-De huidige `OrganisatieLanding.tsx` wordt alleen nog gebruikt voor **specifieke organisaties** (is_unique = true, zoals ErasmusMC) die een code vereisen.
+### 1. Nieuw component: `OrganisatieOnderzoeksplanInline.tsx`
 
-Voor **categorietypen** (is_unique = false, zoals "Medisch Centrum") wordt een nieuw paginacomponent gemaakt: `OrganisatieCategorieLanding.tsx`.
+Een apart component specifiek voor organisatie-modus. Dit is schoner dan de bestaande `OnderzoeksplanInline` conditioneel te maken, omdat de content en het gedrag fundamenteel anders zijn (1 pagina i.p.v. 3, geen substep-navigatie, inclusief PDF-functionaliteit).
 
-### Inhoud van de categoriepagina
+**Inhoud (hardcoded Dutch):**
+- Titel: "En nu?"
+- Intro tekst over bespreking met adviseur
+- 13 gespreksvragen als gestylede lijst (genummerde cirkels, zelfde stijl als bestaande stappen)
+- "Download als PDF" knop -- roept `window.print()` aan, net als de bestaande print-logica in `RapportInline`
+- "Opnieuw beginnen" knop -- navigeert terug naar `/home` waar de gebruiker een nieuwe ronde kan starten
 
-**Header**: Vinster logo + "Terug naar home" knop (zelfde stijl als overal)
+**Print-content:**
+Het component moet het rapport-content ophalen uit de database (via `roundId`) en een print-only layout renderen die bevat:
+- Pagina 1: Cover page (hergebruik bestaande `PrintCoverPage` stijl)
+- Pagina 2: Ideale functie-inhoud (hergebruik bestaande `PrintIdealeFunctiePage` stijl)
+- Pagina 3: Mogelijke beroepen/functies (hergebruik bestaande `PrintBeroepenPage` stijl)
+- Pagina 4: Het onderzoeksplan met de 13 vragen
 
-**Sectie 1 - Intro + direct starten**:
-- Titel: "Medisch Centrum" (of dynamisch de naam van het org type)
-- Warm intro-tekst: "Ontdek welke functies binnen een medisch centrum bij jou passen. Vinster helpt je om inzicht te krijgen in jouw mogelijkheden."
-- Primaire CTA-knop: **"Start het traject"** -- deze zet de OrganisationContext op het Medisch Centrum type (zonder accessCodeId) en stuurt de gebruiker naar de organisatie intro-pagina (`/organisaties/medisch-centrum/intro`)
+De print-componenten worden als `hidden print:block` elementen gerenderd, exact zoals in `RapportInline.tsx`.
 
-**Sectie 2 - Specifieke organisatie**:
-- Heading: "Hoor je bij een specifieke organisatie?"
-- Uitleg: "Als je van een specifieke organisatie een toegangscode hebt ontvangen, kun je die hier gebruiken voor een traject op maat."
-- Lijst/kaarten van beschikbare specifieke organisaties onder dit type (query: alle `organisation_types` waar `is_unique = true` en die bij dit categorietype horen)
-- Momenteel is de enige: **ErasmusMC** -- weergegeven als een kaart met naam en een "Vul code in" knop die naar `/organisaties/erasmus-mc` leidt
+### 2. Wijziging in `RondeDashboard.tsx`
 
-### Hoe weten we welke specifieke organisaties bij een categorie horen?
+In organisatie-modus: het onderzoeksplan-step krijgt maar 1 substep (`page1`) in plaats van 3. Wanneer `isOrganisationMode` actief is, render `OrganisatieOnderzoeksplanInline` in plaats van `OnderzoeksplanInline`.
 
-De database heeft nu geen relatie tussen "Medisch Centrum" (categorie) en "ErasmusMC" (specifiek). We moeten dit toevoegen.
+De `activeSteps` filtering die zoekprofiel al uitsluit blijft ongewijzigd. Het onderzoeksplan is nu effectief de laatste stap.
 
-**Optie**: Een `parent_type_id` kolom toevoegen aan `organisation_types` tabel. ErasmusMC krijgt dan `parent_type_id` = de id van "Medisch Centrum". Dit maakt het generiek en schaalbaar.
+### 3. Geen wijzigingen aan bestaande componenten
 
----
-
-## Database wijziging
-
-Voeg een kolom `parent_type_id` toe aan de `organisation_types` tabel:
-- Type: UUID, nullable, foreign key naar `organisation_types.id`
-- Update ErasmusMC record: zet `parent_type_id` = id van "Medisch Centrum"
-
-Dit maakt het mogelijk om op de categoriepagina dynamisch alle specifieke organisaties op te halen die onder dat type vallen.
+- `OnderzoeksplanInline.tsx` -- blijft intact voor reguliere gebruikers
+- `RapportInline.tsx` -- blijft intact, de "volgende" knop stuurt door naar onderzoeksplan
+- `journey.ts` types -- geen wijzigingen nodig
 
 ---
 
-## Navigatie aanpassingen
+## Bestanden
 
-De dropdown items in `DesktopNavigation.tsx` en `MobileMenu.tsx` blijven grotendeels hetzelfde:
-- **Medisch Centrum** -> navigeert naar `/organisaties/medisch-centrum` (de nieuwe categoriepagina)
-- **ErasmusMC** (indent) -> navigeert naar `/organisaties/erasmus-mc` (de code-pagina, onveranderd)
-- Rest blijft greyed out
-
-Geen grote veranderingen nodig in de nav.
+| Bestand | Actie |
+|---------|-------|
+| `src/components/journey/OrganisatieOnderzoeksplanInline.tsx` | **Nieuw** -- organisatie-specifiek onderzoeksplan met PDF download |
+| `src/pages/RondeDashboard.tsx` | **Wijzigen** -- render `OrganisatieOnderzoeksplanInline` in org-modus |
 
 ---
 
-## OrganisationContext aanpassing
+## Design
 
-Momenteel vereist `setOrganisation` altijd een `accessCodeId`. Voor het "vrije" categorie-traject (zonder code) moet dit optioneel worden:
-- Bij direct starten: `setOrganisation({ organisationTypeId: "...", accessCodeId: null, slug: "medisch-centrum", name: "Medisch Centrum" })`
-- Bij ErasmusMC met code: blijft zoals het is
-
-De context accepteert al `null` voor `accessCodeId`, dus hier is geen wijziging nodig.
-
----
-
-## Routing
-
-De bestaande route `/organisaties/:slug` vangt alles op. We moeten in die route (of in een wrapper) detecteren of het slug een **categorie** is (is_unique = false) of een **specifieke organisatie** (is_unique = true) en het juiste component renderen.
-
-**Aanpak**: Maak een nieuw wrapper-component `OrganisatieRouteHandler.tsx` dat:
-1. Het org type ophaalt op basis van slug
-2. Als `is_unique = false` -> render `OrganisatieCategorieLanding`
-3. Als `is_unique = true` -> render `OrganisatieLanding` (bestaande code-pagina)
-
-Of eenvoudiger: pas `OrganisatieLanding.tsx` aan om beide flows te ondersteunen op basis van `is_unique`.
-
-Ik kies voor de eenvoudige aanpak: **uitbreiden van `OrganisatieLanding.tsx`** met een categorie-view wanneer `is_unique = false`.
-
----
-
-## Samenvatting bestanden
-
-### Nieuw
-| Bestand | Doel |
-|---------|------|
-| Geen nieuwe bestanden | Alles past in bestaande structuur |
-
-### Database migratie
-| Wijziging | Doel |
-|-----------|------|
-| Kolom `parent_type_id` (UUID, nullable) toevoegen aan `organisation_types` | Relatie categorie <-> specifieke organisatie |
-| ErasmusMC record updaten met `parent_type_id` = Medisch Centrum id | Link leggen |
-
-### Te wijzigen
-| Bestand | Wijziging |
-|---------|-----------|
-| `src/pages/OrganisatieLanding.tsx` | Splitsen in twee views: categorie-view (is_unique=false) met "Start traject" knop + lijst specifieke organisaties, en code-view (is_unique=true) met toegangscode formulier |
-| `src/integrations/supabase/types.ts` | Regenereren na kolom toevoeging (of handmatig `parent_type_id` toevoegen) |
-
-### Ongewijzigd
-- `DesktopNavigation.tsx` -- nav items blijven hetzelfde
-- `MobileMenu.tsx` -- items blijven hetzelfde
-- `OrganisatieIntro.tsx` -- intro-pagina werkt al generiek
-- `AppRouter.tsx` -- route `/organisaties/:slug` vangt beide flows op
-
----
-
-## Technische details
-
-### OrganisatieLanding.tsx -- categorie-view (is_unique = false)
-
-Wanneer het opgehaalde org type `is_unique = false` heeft:
-
-1. Toon intro + "Start het traject" knop
-2. Query `organisation_types` waar `parent_type_id` = huidig org type id om specifieke organisaties te laden
-3. Toon die als kaarten met een link naar hun eigen landing page
-
-Bij klik op "Start het traject":
-- `setOrganisation({ organisationTypeId: orgType.id, accessCodeId: null, slug, name: orgType.name })`
-- Navigeer naar `/organisaties/${slug}/intro`
-
-### OrganisatieLanding.tsx -- code-view (is_unique = true)
-
-Blijft exact zoals het nu is: toegangscode formulier.
-
+- Gestylede vragenlijst met genummerde cirkels (`w-8 h-8 rounded-full bg-[#232D4B] text-white`)
+- Card met `rounded-3xl shadow-xl border-0` (zelfde als bestaande inline-componenten)
+- "Download als PDF" knop: outline stijl met printer-icoon (`border-[#232D4B] text-[#232D4B]`)
+- "Opnieuw beginnen" knop: gele accent (`bg-[#F5C518] hover:bg-yellow-500 text-[#232D4B]`)
+- Intro tekst in een subtiel blok (`bg-[#E8F4FD] rounded-xl`)
+- Print layout: 4 pagina's A4 met Vinster branding, rapport-inhoud + vragenlijst
