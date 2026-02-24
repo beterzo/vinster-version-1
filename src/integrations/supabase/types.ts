@@ -201,6 +201,7 @@ export type Database = {
           is_active: boolean | null
           is_unique: boolean | null
           name: string
+          parent_type_id: string | null
           slug: string
         }
         Insert: {
@@ -211,6 +212,7 @@ export type Database = {
           is_active?: boolean | null
           is_unique?: boolean | null
           name: string
+          parent_type_id?: string | null
           slug: string
         }
         Update: {
@@ -221,9 +223,18 @@ export type Database = {
           is_active?: boolean | null
           is_unique?: boolean | null
           name?: string
+          parent_type_id?: string | null
           slug?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "organisation_types_parent_type_id_fkey"
+            columns: ["parent_type_id"]
+            isOneToOne: false
+            referencedRelation: "organisation_types"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       organisation_vacancies: {
         Row: {
