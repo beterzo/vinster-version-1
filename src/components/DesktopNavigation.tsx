@@ -81,7 +81,7 @@ const DesktopNavigation = () => {
 
           {dropdownOpen && (
             <div className="absolute top-full left-0 pt-2 w-56 z-50">
-              <div className="rounded-lg border bg-white shadow-lg py-2">
+              <div className="rounded-xl border border-gray-100 bg-white shadow-xl py-1">
                 {organisationItems.map((org) => (
                   <button
                     key={org.slug}
@@ -89,9 +89,11 @@ const DesktopNavigation = () => {
                       navigate(org.available ? `/organisaties/${org.slug}` : `/organisaties/binnenkort`);
                       setDropdownOpen(false);
                     }}
-                    className={`block w-full text-left px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-vinster-blue transition-colors ${
-                      org.indent ? "pl-8 text-gray-500" : ""
-                    }`}
+                    className={`block w-full text-left py-2.5 text-sm font-medium transition-colors ${
+                      org.indent
+                        ? "pl-10 text-gray-500 hover:bg-blue-50 hover:text-blue-900"
+                        : "px-5 text-gray-700 hover:bg-blue-50 hover:text-blue-900"
+                    } ${!org.available ? "opacity-70" : ""}`}
                   >
                     {org.indent ? `→ ${org.name}` : org.name}
                   </button>

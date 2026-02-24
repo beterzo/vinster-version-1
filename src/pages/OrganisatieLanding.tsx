@@ -64,7 +64,6 @@ const OrganisatieLanding = () => {
         return;
       }
 
-      // Store organisation context
       setOrganisation({
         organisationTypeId: data.organisation_type_id,
         accessCodeId: data.access_code_id,
@@ -72,7 +71,6 @@ const OrganisatieLanding = () => {
         name: data.organisation?.name || null,
       });
 
-      // Redirect to signup with org context
       navigate(`/signup?org=${slug}`);
     } catch {
       setError("Er is een fout opgetreden. Probeer het opnieuw.");
@@ -83,31 +81,47 @@ const OrganisatieLanding = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-vinster-blue" />
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <Loader2 className="h-8 w-8 animate-spin text-blue-900" />
       </div>
     );
   }
 
   if (!orgType) {
     return (
-      <div className="min-h-screen flex flex-col bg-background">
-        <header className="bg-vinster-blue py-6">
-          <div className="container mx-auto px-4">
-            <img
-              src="/lovable-uploads/vinster-new-logo.png"
-              alt="Vinster Logo"
-              className="h-10 cursor-pointer"
-              onClick={() => navigate("/")}
-            />
+      <div className="min-h-screen flex flex-col bg-gray-50">
+        <div className="bg-white border-b border-gray-200">
+          <div className="max-w-4xl mx-auto px-6 py-6">
+            <div className="flex items-center justify-between">
+              <img
+                src="/lovable-uploads/4022d2c1-42bd-4652-b17d-48fafea4de1d.png"
+                alt="Vinster Logo"
+                className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200"
+                onClick={() => navigate("/")}
+              />
+              <Button
+                onClick={() => navigate("/")}
+                variant="outline"
+                className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold"
+              >
+                Terug naar home
+              </Button>
+            </div>
           </div>
-        </header>
-        <main className="flex-1 container mx-auto px-4 py-12 text-center">
-          <h1 className="text-2xl font-bold text-vinster-blue mb-4">Organisatie niet gevonden</h1>
-          <p className="text-muted-foreground mb-6">
-            Dit organisatietype bestaat niet of is niet actief.
-          </p>
-          <Button onClick={() => navigate("/organisaties")}>Bekijk alle organisaties</Button>
+        </div>
+        <main className="flex-1 max-w-4xl mx-auto px-6 py-12 w-full text-center">
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-12">
+            <h1 className="text-2xl font-bold text-blue-900 mb-4">Organisatie niet gevonden</h1>
+            <p className="text-gray-700 mb-6">
+              Dit organisatietype bestaat niet of is niet actief.
+            </p>
+            <Button
+              onClick={() => navigate("/organisaties")}
+              className="bg-blue-900 hover:bg-blue-800 text-white font-semibold h-12 px-8"
+            >
+              Bekijk alle organisaties
+            </Button>
+          </div>
         </main>
         <Footer />
       </div>
@@ -117,60 +131,77 @@ const OrganisatieLanding = () => {
   const isErasmusMC = orgType.is_unique && orgType.slug === "erasmus-mc";
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-      <header className={`py-6 ${isErasmusMC ? "bg-[#00205B]" : "bg-vinster-blue"}`}>
-        <div className="container mx-auto px-4 flex items-center justify-between">
-          <img
-            src="/lovable-uploads/vinster-new-logo.png"
-            alt="Vinster Logo"
-            className="h-10 cursor-pointer"
-            onClick={() => navigate("/")}
-          />
-        </div>
-      </header>
-
-      <main className="flex-1 container mx-auto px-4 py-12 max-w-2xl">
-        <h1 className="text-3xl font-bold text-vinster-blue mb-4">{orgType.name}</h1>
-
-        {orgType.intro_text && (
-          <p className="text-muted-foreground mb-8 whitespace-pre-line">{orgType.intro_text}</p>
-        )}
-
-        {!orgType.intro_text && (
-          <p className="text-muted-foreground mb-8">
-            Welkom bij het Vinster loopbaantraject voor medewerkers van {orgType.name}. 
-            Vul hieronder je toegangscode in om te starten.
-          </p>
-        )}
-
-        <div className="rounded-xl border bg-card p-6 shadow-sm">
-          <h2 className="text-xl font-semibold mb-4">Toegangscode invoeren</h2>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <Input
-                type="text"
-                placeholder="Voer je toegangscode in"
-                value={code}
-                onChange={(e) => {
-                  setCode(e.target.value);
-                  setError("");
-                }}
-                className="text-base"
-                maxLength={50}
-              />
-              {error && <p className="text-sm text-red-600 mt-2">{error}</p>}
-            </div>
-            <Button type="submit" disabled={validating} className="w-full">
-              {validating ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Controleren...
-                </>
-              ) : (
-                "Toegang krijgen"
-              )}
+    <div className="min-h-screen flex flex-col bg-gray-50">
+      {/* Header */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="max-w-4xl mx-auto px-6 py-6">
+          <div className="flex items-center justify-between">
+            <img
+              src="/lovable-uploads/4022d2c1-42bd-4652-b17d-48fafea4de1d.png"
+              alt="Vinster Logo"
+              className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200"
+              onClick={() => navigate("/")}
+            />
+            <Button
+              onClick={() => navigate("/")}
+              variant="outline"
+              className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold"
+            >
+              Terug naar home
             </Button>
-          </form>
+          </div>
+        </div>
+      </div>
+
+      <main className="flex-1 max-w-4xl mx-auto px-6 py-12 w-full">
+        <div className={`bg-white rounded-2xl shadow-sm border p-8 md:p-12 ${isErasmusMC ? "border-[#00205B]/20" : "border-gray-100"}`}>
+          <h1 className="text-3xl md:text-4xl font-bold text-blue-900 mb-4">{orgType.name}</h1>
+
+          {orgType.intro_text && (
+            <p className="text-lg text-gray-700 leading-relaxed mb-8 whitespace-pre-line">{orgType.intro_text}</p>
+          )}
+
+          {!orgType.intro_text && (
+            <p className="text-lg text-gray-700 leading-relaxed mb-8">
+              Welkom bij het Vinster loopbaantraject voor medewerkers van {orgType.name}.
+              Vul hieronder je toegangscode in om te starten.
+            </p>
+          )}
+
+          <div className="bg-blue-50 rounded-xl p-6">
+            <h2 className="text-lg font-semibold text-blue-900 mb-1">Jouw toegangscode</h2>
+            <p className="text-sm text-gray-600 mb-4">Vul de code in die je van je organisatie hebt ontvangen.</p>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <Input
+                  type="text"
+                  placeholder="Voer je toegangscode in"
+                  value={code}
+                  onChange={(e) => {
+                    setCode(e.target.value);
+                    setError("");
+                  }}
+                  className="text-base h-12 bg-white"
+                  maxLength={50}
+                />
+                {error && <p className="text-sm text-red-600 mt-2">{error}</p>}
+              </div>
+              <Button
+                type="submit"
+                disabled={validating}
+                className="bg-blue-900 hover:bg-blue-800 text-white font-semibold h-12 w-full"
+              >
+                {validating ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Controleren...
+                  </>
+                ) : (
+                  "Toegang krijgen"
+                )}
+              </Button>
+            </form>
+          </div>
         </div>
       </main>
 
