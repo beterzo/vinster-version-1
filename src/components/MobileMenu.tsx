@@ -127,14 +127,14 @@ const MobileMenu = () => {
                     <ChevronDown className={`h-5 w-5 transition-transform ${orgOpen ? "rotate-180" : ""}`} />
                   </button>
                   {orgOpen && (
-                    <div className="pl-4 space-y-2">
+                    <div className="pl-6 space-y-2">
                       {organisationItems.map((org) => (
                         <button
                           key={org.slug}
                           onClick={() => handleNavigation(org.available ? `/organisaties/${org.slug}` : `/organisaties/binnenkort`)}
-                          className={`block w-full text-left py-2 px-0 text-base font-medium text-gray-600 hover:text-vinster-blue transition-colors ${
-                            org.indent ? "pl-4" : ""
-                          }`}
+                          className={`block w-full text-left py-2 px-0 text-base font-medium transition-colors hover:text-blue-900 ${
+                            org.indent ? "pl-4 text-gray-500" : "text-gray-600"
+                          } ${!org.available ? "opacity-70" : ""}`}
                         >
                           {org.indent ? `→ ${org.name}` : org.name}
                         </button>
