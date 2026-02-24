@@ -71,7 +71,7 @@ const OrganisatieLanding = () => {
         name: data.organisation?.name || null,
       });
 
-      navigate(`/signup?org=${slug}`);
+      navigate(`/organisaties/${slug}/intro`);
     } catch {
       setError("Er is een fout opgetreden. Probeer het opnieuw.");
     } finally {

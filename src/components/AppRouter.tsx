@@ -32,6 +32,7 @@ import ProfessionalCodesSuccess from "@/pages/ProfessionalCodesSuccess";
 import OrganisatiesOverzicht from "@/pages/OrganisatiesOverzicht";
 import OrganisatieLanding from "@/pages/OrganisatieLanding";
 import OrganisatieBinnenkort from "@/pages/OrganisatieBinnenkort";
+import OrganisatieIntro from "@/pages/OrganisatieIntro";
 import AdminErasmusMCVacatures from "@/pages/AdminErasmusMCVacatures";
 import AdminOrganisatieGebruik from "@/pages/AdminOrganisatieGebruik";
 
@@ -150,6 +151,7 @@ const AppRouter = () => {
       <Route path="/organisaties" element={<OrganisatiesOverzicht />} />
       <Route path="/organisaties/binnenkort" element={<OrganisatieBinnenkort />} />
       <Route path="/organisaties/:slug" element={<OrganisatieLanding />} />
+      <Route path="/organisaties/:slug/intro" element={<ProtectedRoute requirePayment={false}><OrganisatieIntro /></ProtectedRoute>} />
       
       {/* Admin routes */}
       <Route path="/admin/erasmus-mc/vacatures" element={<AdminErasmusMCVacatures />} />
