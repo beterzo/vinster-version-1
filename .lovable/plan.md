@@ -1,73 +1,138 @@
 
 
-# Organisatie Welkom/Intro Pagina
+# Medisch Centrum categoriepagina met vrije start + specifieke organisaties
 
-Een nieuwe introductie-pagina voor organisatie-medewerkers, getoond na succesvolle login met toegangscode en voor het starten van de Vinster flow. De pagina is identiek voor alle organisatietypes.
+## Wat verandert
 
----
+De huidige flow is: klik op "Medisch Centrum" in de nav, je komt op `/organisaties/medisch-centrum` waar je een toegangscode moet invullen. Dat wordt nu anders.
 
-## Wat wordt gebouwd
+De nieuwe flow wordt:
+- Klik op **Medisch Centrum** in de nav -> je komt op een **categoriepagina** (`/organisaties/medisch-centrum`)
+- Op die pagina kun je:
+  1. **Direct starten** met een algemeen Medisch Centrum traject (geen code nodig) -- je krijgt dan resultaten met functies specifiek voor medische centra
+  2. **Een specifieke organisatie kiezen** (bijv. ErasmusMC) -- daar heb je wel een toegangscode voor nodig
 
-Een nieuwe pagina op route `/organisaties/:slug/intro` die alle opgegeven content toont in Vinster brand-stijl. De pagina volgt het bestaande visuele patroon van `OrganisatieLanding.tsx` (header met logo, `bg-gray-50` achtergrond, centered container) en de step-card stijl van `WelkomInline.tsx`.
-
----
-
-## Pagina-structuur
-
-### Header
-Hergebruikt het bestaande header-patroon: witte balk met Vinster logo (h-20) en een "Terug" knop.
-
-### Content (binnen witte kaart, `max-w-4xl`, `rounded-2xl`)
-
-1. **Titel**: "Welkom bij Vinster" -- `text-3xl font-bold text-blue-900`
-2. **Subtekst**: De intro-zin -- `text-lg text-gray-700 leading-relaxed`
-3. **"Hoe werkt het?" sectie** met 3 genummerde stap-kaarten:
-   - Elk in een `rounded-xl p-5 border border-gray-100 bg-gray-50` kaart (vergelijkbaar met WelkomInline stap-kaarten)
-   - Genummerde cirkel (`w-10 h-10 rounded-full bg-[#232D4B] text-white`) + titel + beschrijving
-   - Weergegeven in een verticale lijst (niet grid, want de teksten zijn lang)
-4. **"Wat krijg je?" sectie**:
-   - Heading + bullet list met checkmark-iconen (CheckCircle2, zelfde stijl als WelkomInline tips)
-   - Aanvullende paragraaf over het doel
-   - Paragraaf over meerdere keren doorlopen
-5. **"Vertrouwelijk & flexibel" sectie**:
-   - In een subtiel blok (`bg-[#E8F4FD] rounded-xl p-5`) met Shield-icoon, zelfde stijl als WelkomInline account notice
-6. **"Verder kijken?" sectie**:
-   - Korte tekst met een subtiele link naar `/` ("de algemene knop")
-7. **"Start Vinster" knop**:
-   - Primaire CTA: `bg-blue-900 hover:bg-blue-800 text-white font-semibold h-12 px-8`
-   - Navigeert naar `/home` (het reguliere Vinster flow startpunt)
-
-### Footer
-Hergebruikt bestaande Footer component.
+ErasmusMC blijft als sub-item in de dropdown staan, maar je kunt er ook via de categoriepagina naartoe.
 
 ---
 
-## Redirect-logica aanpassing
+## Nieuwe pagina: `/organisaties/medisch-centrum` (categoriepagina)
 
-Na succesvolle login met organisatie-context: de gebruiker moet naar `/organisaties/[slug]/intro` worden gestuurd in plaats van direct naar `/home`. Dit vereist een kleine aanpassing in de login/signup redirect-logica.
+De huidige `OrganisatieLanding.tsx` wordt alleen nog gebruikt voor **specifieke organisaties** (is_unique = true, zoals ErasmusMC) die een code vereisen.
+
+Voor **categorietypen** (is_unique = false, zoals "Medisch Centrum") wordt een nieuw paginacomponent gemaakt: `OrganisatieCategorieLanding.tsx`.
+
+### Inhoud van de categoriepagina
+
+**Header**: Vinster logo + "Terug naar home" knop (zelfde stijl als overal)
+
+**Sectie 1 - Intro + direct starten**:
+- Titel: "Medisch Centrum" (of dynamisch de naam van het org type)
+- Warm intro-tekst: "Ontdek welke functies binnen een medisch centrum bij jou passen. Vinster helpt je om inzicht te krijgen in jouw mogelijkheden."
+- Primaire CTA-knop: **"Start het traject"** -- deze zet de OrganisationContext op het Medisch Centrum type (zonder accessCodeId) en stuurt de gebruiker naar de organisatie intro-pagina (`/organisaties/medisch-centrum/intro`)
+
+**Sectie 2 - Specifieke organisatie**:
+- Heading: "Hoor je bij een specifieke organisatie?"
+- Uitleg: "Als je van een specifieke organisatie een toegangscode hebt ontvangen, kun je die hier gebruiken voor een traject op maat."
+- Lijst/kaarten van beschikbare specifieke organisaties onder dit type (query: alle `organisation_types` waar `is_unique = true` en die bij dit categorietype horen)
+- Momenteel is de enige: **ErasmusMC** -- weergegeven als een kaart met naam en een "Vul code in" knop die naar `/organisaties/erasmus-mc` leidt
+
+### Hoe weten we welke specifieke organisaties bij een categorie horen?
+
+De database heeft nu geen relatie tussen "Medisch Centrum" (categorie) en "ErasmusMC" (specifiek). We moeten dit toevoegen.
+
+**Optie**: Een `parent_type_id` kolom toevoegen aan `organisation_types` tabel. ErasmusMC krijgt dan `parent_type_id` = de id van "Medisch Centrum". Dit maakt het generiek en schaalbaar.
 
 ---
 
-## Bestanden
+## Database wijziging
 
-| Bestand | Actie |
-|---------|-------|
-| `src/pages/OrganisatieIntro.tsx` | **Nieuw** -- de intro-pagina |
-| `src/components/AppRouter.tsx` | **Wijzigen** -- route `/organisaties/:slug/intro` toevoegen (protected) |
-| `src/pages/OrganisatieLanding.tsx` | **Wijzigen** -- na succesvolle code-validatie redirecten naar `/organisaties/[slug]/intro` i.p.v. `/signup` |
+Voeg een kolom `parent_type_id` toe aan de `organisation_types` tabel:
+- Type: UUID, nullable, foreign key naar `organisation_types.id`
+- Update ErasmusMC record: zet `parent_type_id` = id van "Medisch Centrum"
+
+Dit maakt het mogelijk om op de categoriepagina dynamisch alle specifieke organisaties op te halen die onder dat type vallen.
+
+---
+
+## Navigatie aanpassingen
+
+De dropdown items in `DesktopNavigation.tsx` en `MobileMenu.tsx` blijven grotendeels hetzelfde:
+- **Medisch Centrum** -> navigeert naar `/organisaties/medisch-centrum` (de nieuwe categoriepagina)
+- **ErasmusMC** (indent) -> navigeert naar `/organisaties/erasmus-mc` (de code-pagina, onveranderd)
+- Rest blijft greyed out
+
+Geen grote veranderingen nodig in de nav.
+
+---
+
+## OrganisationContext aanpassing
+
+Momenteel vereist `setOrganisation` altijd een `accessCodeId`. Voor het "vrije" categorie-traject (zonder code) moet dit optioneel worden:
+- Bij direct starten: `setOrganisation({ organisationTypeId: "...", accessCodeId: null, slug: "medisch-centrum", name: "Medisch Centrum" })`
+- Bij ErasmusMC met code: blijft zoals het is
+
+De context accepteert al `null` voor `accessCodeId`, dus hier is geen wijziging nodig.
+
+---
+
+## Routing
+
+De bestaande route `/organisaties/:slug` vangt alles op. We moeten in die route (of in een wrapper) detecteren of het slug een **categorie** is (is_unique = false) of een **specifieke organisatie** (is_unique = true) en het juiste component renderen.
+
+**Aanpak**: Maak een nieuw wrapper-component `OrganisatieRouteHandler.tsx` dat:
+1. Het org type ophaalt op basis van slug
+2. Als `is_unique = false` -> render `OrganisatieCategorieLanding`
+3. Als `is_unique = true` -> render `OrganisatieLanding` (bestaande code-pagina)
+
+Of eenvoudiger: pas `OrganisatieLanding.tsx` aan om beide flows te ondersteunen op basis van `is_unique`.
+
+Ik kies voor de eenvoudige aanpak: **uitbreiden van `OrganisatieLanding.tsx`** met een categorie-view wanneer `is_unique = false`.
+
+---
+
+## Samenvatting bestanden
+
+### Nieuw
+| Bestand | Doel |
+|---------|------|
+| Geen nieuwe bestanden | Alles past in bestaande structuur |
+
+### Database migratie
+| Wijziging | Doel |
+|-----------|------|
+| Kolom `parent_type_id` (UUID, nullable) toevoegen aan `organisation_types` | Relatie categorie <-> specifieke organisatie |
+| ErasmusMC record updaten met `parent_type_id` = Medisch Centrum id | Link leggen |
+
+### Te wijzigen
+| Bestand | Wijziging |
+|---------|-----------|
+| `src/pages/OrganisatieLanding.tsx` | Splitsen in twee views: categorie-view (is_unique=false) met "Start traject" knop + lijst specifieke organisaties, en code-view (is_unique=true) met toegangscode formulier |
+| `src/integrations/supabase/types.ts` | Regenereren na kolom toevoeging (of handmatig `parent_type_id` toevoegen) |
+
+### Ongewijzigd
+- `DesktopNavigation.tsx` -- nav items blijven hetzelfde
+- `MobileMenu.tsx` -- items blijven hetzelfde
+- `OrganisatieIntro.tsx` -- intro-pagina werkt al generiek
+- `AppRouter.tsx` -- route `/organisaties/:slug` vangt beide flows op
 
 ---
 
 ## Technische details
 
-### Route
-- Pad: `/organisaties/:slug/intro`
-- Vereist login (ProtectedRoute wrapper) zodat de pagina alleen zichtbaar is na authenticatie
-- De slug parameter wordt gebruikt om context te behouden maar de content is identiek voor alle org types
+### OrganisatieLanding.tsx -- categorie-view (is_unique = false)
 
-### Navigatie na "Start Vinster"
-De knop navigeert naar `/home` waar de reguliere Vinster journey flow begint (RondeDashboard).
+Wanneer het opgehaalde org type `is_unique = false` heeft:
 
-### Alle tekst is hardcoded (Dutch only)
-Geen vertaalsleutels nodig -- de pagina is alleen voor organisatie-gebruik in het Nederlands.
+1. Toon intro + "Start het traject" knop
+2. Query `organisation_types` waar `parent_type_id` = huidig org type id om specifieke organisaties te laden
+3. Toon die als kaarten met een link naar hun eigen landing page
+
+Bij klik op "Start het traject":
+- `setOrganisation({ organisationTypeId: orgType.id, accessCodeId: null, slug, name: orgType.name })`
+- Navigeer naar `/organisaties/${slug}/intro`
+
+### OrganisatieLanding.tsx -- code-view (is_unique = true)
+
+Blijft exact zoals het nu is: toegangscode formulier.
 
