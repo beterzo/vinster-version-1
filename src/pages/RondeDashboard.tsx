@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -17,6 +17,7 @@ import { useEnthousiasmeResponses } from "@/hooks/useEnthousiasmeResponses";
 import { useWensberoepenValidation } from "@/hooks/useWensberoepenValidation";
 import { usePrioriteitenResponses } from "@/hooks/usePrioriteitenResponses";
 import { useExtraInformatieResponses } from "@/hooks/useExtraInformatieResponses";
+import { useOrganisation } from "@/contexts/OrganisationContext";
 import { JourneyStep, SubStep, JOURNEY_STEPS } from "@/types/journey";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -25,6 +26,15 @@ const RondeDashboard = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { rounds, loading: roundsLoading } = useUserRounds();
+  const { isOrganisationMode, organisationTypeId } = useOrganisation();
+  
+  // Filter steps: skip zoekprofiel in organisation mode
+  const activeSteps = useMemo(() => {
+    if (isOrganisationMode) {
+      return JOURNEY_STEPS.filter(s => s.id !== 'zoekprofiel');
+    }
+    return JOURNEY_STEPS;
+  }, [isOrganisationMode]);
   
   // Pass roundId to all response hooks
   const { responses: enthousiasmeResponses, loading: enthousiasmeLoading, loadResponses: reloadEnthousiasme } = useEnthousiasmeResponses(roundId);
@@ -127,7 +137,7 @@ const RondeDashboard = () => {
   };
 
   const handleStepClick = (step: JourneyStep) => {
-    setSlideDirection(JOURNEY_STEPS.findIndex(s => s.id === step) > JOURNEY_STEPS.findIndex(s => s.id === currentStep) ? 'left' : 'right');
+    setSlideDirection(activeSteps.findIndex(s => s.id === step) > activeSteps.findIndex(s => s.id === currentStep) ? 'left' : 'right');
     setCurrentStep(step);
     
     // Check of de stap voltooid is
@@ -141,12 +151,12 @@ const RondeDashboard = () => {
       setCurrentSubStep(reportExists ? 'complete' : 'confirm');
     } else {
       // Niet voltooide stap: naar eerste substep (intro/welkom)
-      const stepConfig = JOURNEY_STEPS.find(s => s.id === step);
+      const stepConfig = activeSteps.find(s => s.id === step);
       setCurrentSubStep(stepConfig?.subSteps[0] || 'intro');
     }
   };
 
-  const getCurrentStepConfig = () => JOURNEY_STEPS.find(s => s.id === currentStep);
+  const getCurrentStepConfig = () => activeSteps.find(s => s.id === currentStep);
 
   const handleNext = async () => {
     const stepConfig = getCurrentStepConfig();
@@ -174,7 +184,7 @@ const RondeDashboard = () => {
 
   const handleContinueFromOverview = () => {
     // Find the next incomplete step
-    const nextStep = JOURNEY_STEPS.find(step => !completedSteps.includes(step.id));
+    const nextStep = activeSteps.find(step => !completedSteps.includes(step.id));
     if (nextStep) {
       setSlideDirection('left');
       setCurrentStep(nextStep.id);
@@ -184,7 +194,7 @@ const RondeDashboard = () => {
 
   // Specifieke functie voor navigatie vanuit welkom scherm naar volgende incomplete stap
   const handleContinueFromWelkom = () => {
-    const nextIncompleteStep = JOURNEY_STEPS.find(step => !completedSteps.includes(step.id));
+    const nextIncompleteStep = activeSteps.find(step => !completedSteps.includes(step.id));
     if (nextIncompleteStep) {
       setSlideDirection('left');
       setCurrentStep(nextIncompleteStep.id);
@@ -206,9 +216,9 @@ const RondeDashboard = () => {
       setSlideDirection('right');
       setCurrentSubStep(stepConfig.subSteps[currentSubIndex - 1]);
     } else {
-      const stepIndex = JOURNEY_STEPS.findIndex(s => s.id === currentStep);
+      const stepIndex = activeSteps.findIndex(s => s.id === currentStep);
       if (stepIndex > 0) {
-        const prevStep = JOURNEY_STEPS[stepIndex - 1];
+        const prevStep = activeSteps[stepIndex - 1];
         setSlideDirection('right');
         setCurrentStep(prevStep.id);
         setCurrentSubStep(prevStep.subSteps[prevStep.subSteps.length - 1]);
@@ -283,6 +293,7 @@ const RondeDashboard = () => {
             onNext={handleNext} 
             onPrevious={handlePrevious}
             onReportGenerated={() => setReportExists(true)}
+            organisationTypeId={isOrganisationMode ? organisationTypeId : undefined}
           />
         )}
         {currentStep === 'onderzoeksplan' && (
@@ -316,7 +327,7 @@ const RondeDashboard = () => {
         </div>
 
         <Card className="p-4 mb-6 border-0 rounded-2xl bg-white shadow-md">
-          <JourneyStepNavigator currentStep={currentStep} completedSteps={completedSteps} onStepClick={handleStepClick} />
+          <JourneyStepNavigator currentStep={currentStep} completedSteps={completedSteps} onStepClick={handleStepClick} steps={activeSteps} />
         </Card>
 
         <div className="overflow-hidden">

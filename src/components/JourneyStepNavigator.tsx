@@ -1,27 +1,29 @@
 import { Check, Lock } from "lucide-react";
-import { JourneyStep, JOURNEY_STEPS } from "@/types/journey";
+import { JourneyStep, JourneyStepConfig, JOURNEY_STEPS } from "@/types/journey";
 import { useTranslation } from "@/hooks/useTranslation";
 
 interface JourneyStepNavigatorProps {
   currentStep: JourneyStep;
   completedSteps: JourneyStep[];
   onStepClick: (step: JourneyStep) => void;
+  steps?: JourneyStepConfig[];
 }
 
 const JourneyStepNavigator = ({ 
   currentStep, 
   completedSteps,
-  onStepClick 
+  onStepClick,
+  steps,
 }: JourneyStepNavigatorProps) => {
   const { t } = useTranslation();
+  const activeSteps = steps || JOURNEY_STEPS;
 
   const isStepAccessible = (step: JourneyStep) => {
-    const stepIndex = JOURNEY_STEPS.findIndex(s => s.id === step);
+    const stepIndex = activeSteps.findIndex(s => s.id === step);
     if (stepIndex === 0) return true;
     
-    // Check if all previous steps are completed
     for (let i = 0; i < stepIndex; i++) {
-      if (!completedSteps.includes(JOURNEY_STEPS[i].id)) {
+      if (!completedSteps.includes(activeSteps[i].id)) {
         return false;
       }
     }
@@ -38,14 +40,13 @@ const JourneyStepNavigator = ({
   return (
     <div className="w-full overflow-x-auto pb-2">
       <div className="flex items-center justify-between min-w-max gap-2 px-4">
-        {JOURNEY_STEPS.map((step, index) => {
+        {activeSteps.map((step, index) => {
           const status = getStepStatus(step.id);
           const isAccessible = isStepAccessible(step.id);
           const isCurrent = step.id === currentStep;
 
           return (
             <div key={step.id} className="flex items-center">
-              {/* Step Button */}
               <button
                 onClick={() => isAccessible && onStepClick(step.id)}
                 disabled={!isAccessible}
@@ -61,7 +62,6 @@ const JourneyStepNavigator = ({
                   }
                 `}
               >
-                {/* Icon */}
                 <span className={`
                   w-5 h-5 rounded-full flex items-center justify-center text-xs
                   ${status === 'completed' 
@@ -80,14 +80,12 @@ const JourneyStepNavigator = ({
                   )}
                 </span>
                 
-                {/* Label */}
                 <span className="whitespace-nowrap">
                   {t(step.labelKey)}
                 </span>
               </button>
 
-              {/* Connector Line */}
-              {index < JOURNEY_STEPS.length - 1 && (
+              {index < activeSteps.length - 1 && (
                 <div className={`
                   w-8 h-0.5 mx-1
                   ${completedSteps.includes(step.id) ? 'bg-[#232D4B]' : 'bg-gray-300'}
