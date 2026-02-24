@@ -17,6 +17,9 @@ interface EnthousiasmeInlineProps {
   completedSteps?: JourneyStep[];
   onStepClick?: (step: JourneyStep) => void;
   onContinueFromWelkom?: () => void;
+  isOrganisationMode?: boolean;
+  organisationName?: string | null;
+  organisationAccessCodeId?: string | null;
 }
 
 const EnthousiasmeInline = ({ 
@@ -26,7 +29,10 @@ const EnthousiasmeInline = ({
   onPrevious, 
   completedSteps = [], 
   onStepClick,
-  onContinueFromWelkom
+  onContinueFromWelkom,
+  isOrganisationMode,
+  organisationName,
+  organisationAccessCodeId,
 }: EnthousiasmeInlineProps) => {
   const { t } = useTranslation();
   const { responses, saveResponse, loading } = useEnthousiasmeResponses(roundId);
@@ -79,7 +85,16 @@ const EnthousiasmeInline = ({
 
   // Welcome page - use onContinueFromWelkom for proper navigation to next incomplete step
   if (subStep === 'welkom') {
-    return <WelkomInline onNext={onContinueFromWelkom || onNext} completedSteps={completedSteps} onStepClick={onStepClick} />;
+    return (
+      <WelkomInline 
+        onNext={onContinueFromWelkom || onNext} 
+        completedSteps={completedSteps} 
+        onStepClick={onStepClick}
+        isOrganisationMode={isOrganisationMode}
+        organisationName={organisationName}
+        organisationAccessCodeId={organisationAccessCodeId}
+      />
+    );
   }
 
   // Intro page

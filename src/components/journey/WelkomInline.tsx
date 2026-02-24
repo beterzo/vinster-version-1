@@ -9,13 +9,39 @@ interface WelkomInlineProps {
   onNext: () => void;
   completedSteps?: JourneyStep[];
   onStepClick?: (step: JourneyStep) => void;
+  isOrganisationMode?: boolean;
+  organisationName?: string | null;
+  organisationAccessCodeId?: string | null;
 }
 
-const WelkomInline = ({ onNext, completedSteps = [], onStepClick }: WelkomInlineProps) => {
+/**
+ * Builds organisation-aware labels for text replacements.
+ */
+function getOrgLabels(isOrganisationMode: boolean, name?: string | null, accessCodeId?: string | null) {
+  if (!isOrganisationMode || !name) {
+    return null;
+  }
+  const isCategory = !accessCodeId;
+  const contextLabel = isCategory ? `een ${name.toLowerCase()}` : name;
+  const brancheLabel = isCategory ? "deze branche" : name;
+  const binnenLabel = isCategory ? `in ${brancheLabel}` : `binnen ${name}`;
+  return { contextLabel, brancheLabel, binnenLabel, isCategory };
+}
+
+const WelkomInline = ({ 
+  onNext, 
+  completedSteps = [], 
+  onStepClick,
+  isOrganisationMode = false,
+  organisationName,
+  organisationAccessCodeId,
+}: WelkomInlineProps) => {
   const { t } = useTranslation();
   const hasProgress = completedSteps.length > 0;
+  const orgLabels = getOrgLabels(isOrganisationMode, organisationName, organisationAccessCodeId);
 
-  const steps = [
+  // Build steps - in org mode, skip zoekprofiel and adapt descriptions
+  const allSteps = [
     {
       id: 'enthousiasme' as JourneyStep,
       number: 1,
@@ -29,7 +55,9 @@ const WelkomInline = ({ onNext, completedSteps = [], onStepClick }: WelkomInline
       number: 2,
       icon: ClipboardList,
       title: t('welkom.steps.step2.title'),
-      description: t('welkom.steps.step2.description'),
+      description: orgLabels
+        ? `Noem drie wensberoepen en beschrijf wat je erin aanspreekt. Deze mogen binnen of buiten ${orgLabels.contextLabel} liggen. Jouw antwoorden worden gebruikt om te bedenken bij welke functies ${orgLabels.binnenLabel} jouw wensen passen.`
+        : t('welkom.steps.step2.description'),
       time: t('welkom.steps.step2.time')
     },
     {
@@ -45,7 +73,9 @@ const WelkomInline = ({ onNext, completedSteps = [], onStepClick }: WelkomInline
       number: 4,
       icon: FileText,
       title: t('welkom.steps.step4.title'),
-      description: t('welkom.steps.step4.description'),
+      description: orgLabels
+        ? `Vinster vertaalt jouw woorden naar passende functierichtingen en concrete functie-ideeën binnen ${orgLabels.contextLabel}.`
+        : t('welkom.steps.step4.description'),
       time: t('welkom.steps.step4.time')
     },
     {
@@ -66,6 +96,13 @@ const WelkomInline = ({ onNext, completedSteps = [], onStepClick }: WelkomInline
     }
   ];
 
+  // Filter steps for org mode (no zoekprofiel)
+  const steps = isOrganisationMode
+    ? allSteps.filter(s => s.id !== 'zoekprofiel').map((s, i) => ({ ...s, number: i + 1 }))
+    : allSteps;
+
+  const totalSteps = steps.length;
+
   const tips = [
     t('welkom.tips.tip1'),
     t('welkom.tips.tip2'),
@@ -78,14 +115,12 @@ const WelkomInline = ({ onNext, completedSteps = [], onStepClick }: WelkomInline
     const stepIndex = JOURNEY_STEPS.findIndex(s => s.id === stepId);
     const completedCount = completedSteps.length;
     
-    // The next step after all completed ones is current
     if (stepIndex === completedCount) return 'current';
     
     return 'locked';
   };
 
-
-  const progressPercentage = (completedSteps.length / 6) * 100;
+  const progressPercentage = (completedSteps.length / totalSteps) * 100;
 
   return (
     <Card className="rounded-3xl shadow-xl border-0">
@@ -112,7 +147,7 @@ const WelkomInline = ({ onNext, completedSteps = [], onStepClick }: WelkomInline
           )}
         </div>
 
-        {/* Steps overview - unified grid layout */}
+        {/* Steps overview */}
         <div className="mb-10">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {steps.map((step) => {
@@ -133,7 +168,6 @@ const WelkomInline = ({ onNext, completedSteps = [], onStepClick }: WelkomInline
                   }`}
                 >
                   <div className="flex items-start gap-4 flex-1">
-                    {/* Number/Status icon */}
                     <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-semibold ${
                       isCompleted 
                         ? 'bg-[#232D4B] text-white' 
@@ -151,13 +185,11 @@ const WelkomInline = ({ onNext, completedSteps = [], onStepClick }: WelkomInline
                     </div>
 
                     <div className="flex-1 min-w-0 flex flex-col">
-                      {/* Title + icon + status badge */}
                       <div className="flex items-center gap-2 mb-1 flex-wrap">
                         <step.icon className={`w-4 h-4 ${isLocked ? 'text-gray-400' : 'text-[#232D4B]'}`} />
                         <h3 className={`font-semibold text-sm ${isLocked ? 'text-gray-400' : 'text-[#232D4B]'}`}>
                           {step.title}
                         </h3>
-                        {/* Status badges */}
                         {isCompleted && (
                           <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">
                             {t('welkom.step_completed')}
@@ -170,12 +202,10 @@ const WelkomInline = ({ onNext, completedSteps = [], onStepClick }: WelkomInline
                         )}
                       </div>
                       
-                      {/* Description (always visible) */}
                       <p className={`text-sm mb-2 ${isLocked ? 'text-gray-400' : 'text-gray-600'}`}>
                         {step.description}
                       </p>
                       
-                      {/* Time indicator */}
                       {step.time && (
                         <div className={`flex items-center gap-1 text-xs ${isLocked ? 'text-gray-400' : 'text-gray-500'}`}>
                           <Clock className="w-3 h-3" />
@@ -185,7 +215,6 @@ const WelkomInline = ({ onNext, completedSteps = [], onStepClick }: WelkomInline
                     </div>
                   </div>
                   
-                  {/* View button for completed steps - always at bottom */}
                   {isCompleted && onStepClick && (
                     <div className="mt-auto pt-3 pl-14">
                       <Button 
@@ -205,7 +234,7 @@ const WelkomInline = ({ onNext, completedSteps = [], onStepClick }: WelkomInline
           </div>
         </div>
 
-        {/* Total time - only show if no progress yet */}
+        {/* Total time */}
         {!hasProgress && (
           <div className="bg-[#E8F4FD] rounded-xl p-5 mb-10">
             <div className="flex items-center gap-3">
