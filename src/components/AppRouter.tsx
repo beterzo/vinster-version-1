@@ -32,6 +32,8 @@ import ProfessionalCodesSuccess from "@/pages/ProfessionalCodesSuccess";
 import OrganisatiesOverzicht from "@/pages/OrganisatiesOverzicht";
 import OrganisatieLanding from "@/pages/OrganisatieLanding";
 import OrganisatieBinnenkort from "@/pages/OrganisatieBinnenkort";
+import AdminErasmusMCVacatures from "@/pages/AdminErasmusMCVacatures";
+import AdminOrganisatieGebruik from "@/pages/AdminOrganisatieGebruik";
 
 // Protected route imports
 import ProtectedRoute from "@/components/ProtectedRoute";
@@ -148,6 +150,10 @@ const AppRouter = () => {
       <Route path="/organisaties" element={<OrganisatiesOverzicht />} />
       <Route path="/organisaties/binnenkort" element={<OrganisatieBinnenkort />} />
       <Route path="/organisaties/:slug" element={<OrganisatieLanding />} />
+      
+      {/* Admin routes */}
+      <Route path="/admin/erasmus-mc/vacatures" element={<AdminErasmusMCVacatures />} />
+      <Route path="/admin/organisaties/gebruik" element={<AdminOrganisatieGebruik />} />
       
       {/* Legacy redirect from old de-mens-achter-vinster to new over-vinster */}
       <Route path="/de-mens-achter-vinster" element={<Navigate to="/over-vinster" replace />} />

@@ -161,7 +161,13 @@ const OrganisatieLanding = () => {
             <p className="text-lg text-gray-700 leading-relaxed mb-8 whitespace-pre-line">{orgType.intro_text}</p>
           )}
 
-          {!orgType.intro_text && (
+          {!orgType.intro_text && isErasmusMC && (
+            <p className="text-lg text-gray-700 leading-relaxed mb-8">
+              Welkom bij Vinster voor ErasmusMC. Ontdek welke functies bij jou passen binnen het Erasmus MC.
+            </p>
+          )}
+
+          {!orgType.intro_text && !isErasmusMC && (
             <p className="text-lg text-gray-700 leading-relaxed mb-8">
               Welkom bij het Vinster loopbaantraject voor medewerkers van {orgType.name}.
               Vul hieronder je toegangscode in om te starten.

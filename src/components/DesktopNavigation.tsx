@@ -2,13 +2,15 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/hooks/useTranslation";
 import { ChevronDown } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 const organisationItems = [
   { name: "Medisch Centrum", slug: "medisch-centrum", available: true },
   { name: "ErasmusMC", slug: "erasmus-mc", indent: true, available: true },
   { name: "Universiteit", slug: "universiteit", available: false },
-  { name: "Zorgorganisatie", slug: "zorgorganisatie", available: false },
+  { name: "Zorg en Welzijn", slug: "zorg-en-welzijn", available: false },
   { name: "Hogeschool", slug: "hogeschool", available: false },
+  { name: "Mbo-instelling", slug: "mbo-instelling", available: false },
 ];
 
 const DesktopNavigation = () => {
@@ -81,24 +83,41 @@ const DesktopNavigation = () => {
 
           {dropdownOpen && (
             <div className="absolute top-full left-0 pt-2 w-56 z-50">
-              <div className="rounded-xl border border-gray-100 bg-white shadow-xl py-1">
-                {organisationItems.map((org) => (
-                  <button
-                    key={org.slug}
-                    onClick={() => {
-                      navigate(org.available ? `/organisaties/${org.slug}` : `/organisaties/binnenkort`);
-                      setDropdownOpen(false);
-                    }}
-                    className={`block w-full text-left py-2.5 text-sm font-medium transition-colors ${
-                      org.indent
-                        ? "pl-10 text-gray-500 hover:bg-blue-50 hover:text-blue-900"
-                        : "px-5 text-gray-700 hover:bg-blue-50 hover:text-blue-900"
-                    } ${!org.available ? "opacity-70" : ""}`}
-                  >
-                    {org.indent ? `→ ${org.name}` : org.name}
-                  </button>
-                ))}
-              </div>
+              <TooltipProvider delayDuration={200}>
+                <div className="rounded-xl border border-gray-100 bg-white shadow-xl py-1">
+                  {organisationItems.map((org) => (
+                    org.available ? (
+                      <button
+                        key={org.slug}
+                        onClick={() => {
+                          navigate(`/organisaties/${org.slug}`);
+                          setDropdownOpen(false);
+                        }}
+                        className={`block w-full text-left py-2.5 text-sm font-medium transition-colors ${
+                          org.indent
+                            ? "pl-10 text-gray-500 hover:bg-blue-50 hover:text-blue-900"
+                            : "px-5 text-gray-700 hover:bg-blue-50 hover:text-blue-900"
+                        }`}
+                      >
+                        {org.indent ? `→ ${org.name}` : org.name}
+                      </button>
+                    ) : (
+                      <Tooltip key={org.slug}>
+                        <TooltipTrigger asChild>
+                          <span
+                            className="block w-full text-left py-2.5 px-5 text-sm font-medium text-gray-400 cursor-default"
+                          >
+                            {org.name}
+                          </span>
+                        </TooltipTrigger>
+                        <TooltipContent side="right">
+                          <p>Binnenkort beschikbaar</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    )
+                  ))}
+                </div>
+              </TooltipProvider>
             </div>
           )}
         </div>

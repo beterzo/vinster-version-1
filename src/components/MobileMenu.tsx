@@ -17,8 +17,9 @@ const organisationItems = [
   { name: "Medisch Centrum", slug: "medisch-centrum", available: true },
   { name: "ErasmusMC", slug: "erasmus-mc", indent: true, available: true },
   { name: "Universiteit", slug: "universiteit", available: false },
-  { name: "Zorgorganisatie", slug: "zorgorganisatie", available: false },
+  { name: "Zorg en Welzijn", slug: "zorg-en-welzijn", available: false },
   { name: "Hogeschool", slug: "hogeschool", available: false },
+  { name: "Mbo-instelling", slug: "mbo-instelling", available: false },
 ];
 
 const MobileMenu = () => {
@@ -131,12 +132,14 @@ const MobileMenu = () => {
                       {organisationItems.map((org) => (
                         <button
                           key={org.slug}
-                          onClick={() => handleNavigation(org.available ? `/organisaties/${org.slug}` : `/organisaties/binnenkort`)}
-                          className={`block w-full text-left py-2 px-0 text-base font-medium transition-colors hover:text-blue-900 ${
+                          onClick={() => org.available && handleNavigation(`/organisaties/${org.slug}`)}
+                          disabled={!org.available}
+                          className={`block w-full text-left py-2 px-0 text-base font-medium transition-colors ${
                             org.indent ? "pl-4 text-gray-500" : "text-gray-600"
-                          } ${!org.available ? "opacity-70" : ""}`}
+                          } ${!org.available ? "opacity-50 cursor-default" : "hover:text-blue-900"}`}
                         >
                           {org.indent ? `→ ${org.name}` : org.name}
+                          {!org.available && <span className="text-xs text-gray-400 ml-2">Binnenkort</span>}
                         </button>
                       ))}
                     </div>

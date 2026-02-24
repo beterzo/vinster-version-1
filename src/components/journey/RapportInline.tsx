@@ -14,6 +14,7 @@ interface RapportInlineProps {
   onNext: () => void;
   onPrevious: () => void;
   onReportGenerated: () => void;
+  organisationTypeId?: string | null;
 }
 
 // Print-only cover page component - White background, dark blue text
@@ -170,7 +171,7 @@ const PrintBeroepenPage = ({ reportContent, t }: { reportContent: any; t: (key: 
   </div>
 );
 
-const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated }: RapportInlineProps) => {
+const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated, organisationTypeId }: RapportInlineProps) => {
   const { t } = useTranslation();
   const { user } = useAuth();
   const { toast } = useToast();
@@ -247,7 +248,8 @@ const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated
         body: {
           user_id: user.id,
           round_id: roundId,
-          language: user.user_metadata?.language || 'nl'
+          language: user.user_metadata?.language || 'nl',
+          ...(organisationTypeId ? { organisation_type_id: organisationTypeId } : {})
         }
       });
 
