@@ -1,50 +1,100 @@
 
 
-# Organisatie-intro en welkompagina dynamisch maken op basis van sector/organisatie
+# Admin Portal met wachtwoord, gebruik per branche, en vacatures per branche/organisatie
 
-## Wat verandert
+## Overzicht
 
-De intro-pagina (`OrganisatieIntro.tsx`) en het in-journey welkomscherm (`WelkomInline.tsx` in `RondeDashboard`) worden context-bewust. Afhankelijk van of de gebruiker in een **categorie** (bijv. "Medisch Centrum") of een **specifieke organisatie** (bijv. "ErasmusMC") zit, worden alle teksten aangepast.
+Er komen 4 grote wijzigingen:
 
-### Logica voor het label
-
-De `OrganisationContext` bevat al:
-- `name`: "Medisch Centrum" of "ErasmusMC"
-- `accessCodeId`: `null` (categorie) of ingevuld (specifieke org)
-
-Op basis hiervan bepalen we het label:
-- **Categorie** (`accessCodeId === null`): gebruik "een medisch centrum" / "deze branche" / de naam in lowercase
-- **Specifieke org** (`accessCodeId !== null`): gebruik de exacte naam, bijv. "ErasmusMC"
+1. **Wachtwoordbeveiliging** voor alle admin-pagina's
+2. **Admin Portal** als centraal startpunt met navigatie
+3. **Footer** krijgt een subtiel "Admin" linkje
+4. **Gebruik-pagina** wordt uitgebreid met branche-niveaus (parent + children)
+5. **Vacatures-pagina** wordt generiek: werkt voor elke branche EN elke specifieke organisatie
 
 ---
 
-## OrganisatieIntro.tsx — Alle tekstwijzigingen
+## 1. AdminPasswordGate component (nieuw)
 
-De pagina krijgt de `useOrganisation()` hook en past alle hardcoded teksten aan:
+**Bestand:** `src/components/AdminPasswordGate.tsx`
 
-| Huidige tekst | Categorie (Medisch Centrum) | Specifieke org (ErasmusMC) |
-|---|---|---|
-| "binnen jouw organisatie bij jou kunnen passen" | "binnen een medisch centrum bij jou kunnen passen" | "binnen ErasmusMC bij jou kunnen passen" |
-| "concrete functie-ideeen binnen jouw organisatie" | "concrete functie-ideeen binnen een medisch centrum" | "concrete functie-ideeen binnen ErasmusMC" |
-| "drie mogelijke functierichtingen" | "drie mogelijke functierichtingen in deze branche" | "drie mogelijke functierichtingen binnen ErasmusMC" |
-| "Verder kijken dan jouw organisatie?" | "Verder kijken dan deze branche?" | "Verder kijken dan ErasmusMC?" |
-| "buiten jouw organisatie" | "buiten deze branche" | "buiten ErasmusMC" |
-| Wensberoepen beschrijving "binnen of buiten jouw eigen organisatie" | "binnen of buiten een medisch centrum" | "binnen of buiten ErasmusMC" |
-| "bij welke interne functies jouw wensen passen" | "bij welke functies in een medisch centrum jouw wensen passen" | "bij welke functies binnen ErasmusMC jouw wensen passen" |
+Een wrapper die om alle admin-routes heen zit:
 
-De stappen-teksten en resultaat-items worden van const naar dynamische variabelen die het label gebruiken.
+- Toont een centered card met Vinster logo en wachtwoord-invoer
+- Wachtwoord: `ErveKnots7751SZ` (opgeslagen als SHA-256 hash in de code)
+- Na correct invoeren: `sessionStorage.setItem('vinster_admin_auth', 'true')`
+- Bij herladen van pagina: checkt sessionStorage, hoeft niet opnieuw in te voeren
+- Bij sluiten browser: sessie verlopen, opnieuw invoeren
+- Vinster-stijl: navy header, afgeronde card, primaire knop
 
-## WelkomInline.tsx — Organisatiemodus
+## 2. Admin Portal pagina (nieuw)
 
-Het welkomscherm in de journey (`RondeDashboard`) toont momenteel de generieke Vinster stappen (6 stappen incl. zoekprofiel). In organisatiemodus moet dit aangepast worden:
+**Bestand:** `src/pages/AdminPortal.tsx`
 
-1. Het component krijgt een optionele prop `organisationName` en `isOrganisationMode`
-2. In organisatiemodus:
-   - Toon alleen de 4 relevante stappen (enthousiasmescan, wensberoepen, persoonsprofiel, rapport) — geen zoekprofiel, onderzoeksplan wordt apart getoond
-   - Pas de stap-beschrijvingen aan om de sector/organisatienaam te bevatten (zelfde logica als hierboven)
-   - Pas de tips aan voor organisatiecontext
+Een hub-pagina met kaarten naar de admin-tools:
 
-De `RondeDashboard.tsx` geeft de organisatie-props door aan `WelkomInline`.
+| Kaart | Beschrijving | Route |
+|-------|-------------|-------|
+| Organisatie Gebruik | Statistieken per branche en organisatie | `/admin/gebruik` |
+| Vacatures Beheren | Vacatures uploaden per branche/organisatie | `/admin/vacatures` |
+
+Design: Vinster header, titel "Admin Portal", subtitel, kaarten met iconen en navigatie-knoppen.
+
+## 3. Footer aanpassing
+
+**Bestand:** `src/components/Footer.tsx`
+
+Onder de copyright-tekst komt een subtiel "Admin" linkje:
+- `text-xs text-gray-400 hover:text-blue-900`
+- Navigeert naar `/admin`
+
+## 4. Gebruik-pagina uitbreiden (hernoemen)
+
+**Bestand:** `src/pages/AdminOrganisatieGebruik.tsx`
+
+De huidige pagina toont al alle organisaties plat. De uitbreiding:
+
+- **Branche-totalen bovenaan**: groepeer stats per parent_type_id. Bijv. "Medisch Centrum" toont het totaal van zichzelf + ErasmusMC
+- **Uitklapbaar**: klik op een branche-rij om de individuele organisaties eronder te zien
+- De edge function `admin-organisation-stats` wordt uitgebreid om ook `parent_type_id` mee te sturen zodat de frontend kan groeperen
+- "Terug" knop gaat naar `/admin` in plaats van `/home`
+
+### Edge function aanpassing: `admin-organisation-stats`
+
+De response krijgt een extra veld per org type: `parent_type_id`, zodat de frontend kan groeperen op branche.
+
+## 5. Vacatures-pagina generiek maken
+
+**Bestand:** `src/pages/AdminVacatures.tsx` (nieuw, vervangt `AdminErasmusMCVacatures.tsx`)
+
+De huidige ErasmusMC-specifieke pagina wordt generiek:
+
+- **Organisatie-selector bovenaan**: dropdown met alle organisatie-types (branches + specifieke orgs), gegroepeerd
+  - Branches (parent_type_id is null): "Medisch Centrum", "Hogeschool", etc.
+  - Specifieke orgs (parent_type_id is not null): "ErasmusMC" (onder Medisch Centrum)
+- Na selectie van een organisatie:
+  - Toon stats (aantal vacatures, laatste import) voor die specifieke org
+  - CSV upload-flow (identiek aan huidige ErasmusMC-pagina)
+  - Column mapping UI
+  - Preview tabel
+  - Vervangen/toevoegen optie
+- "Terug" knop gaat naar `/admin`
+
+Dit gebruikt dezelfde `import-organisation-vacancies` edge function die al generiek werkt (accepteert `organisation_type_id`).
+
+## 6. Routing aanpassingen
+
+**Bestand:** `src/components/AppRouter.tsx`
+
+```text
+/admin                        -> AdminPasswordGate > AdminPortal
+/admin/gebruik                -> AdminPasswordGate > AdminOrganisatieGebruik
+/admin/vacatures              -> AdminPasswordGate > AdminVacatures
+
+# Legacy redirects
+/admin/organisaties/gebruik   -> redirect naar /admin/gebruik
+/admin/erasmus-mc/vacatures   -> redirect naar /admin/vacatures
+```
 
 ---
 
@@ -52,64 +102,65 @@ De `RondeDashboard.tsx` geeft de organisatie-props door aan `WelkomInline`.
 
 | Bestand | Actie |
 |---------|-------|
-| `src/pages/OrganisatieIntro.tsx` | **Wijzigen** — dynamische teksten op basis van `useOrganisation()` context (categorie vs specifieke org) |
-| `src/components/journey/WelkomInline.tsx` | **Wijzigen** — optionele `organisationName` / `isOrganisationMode` props toevoegen, stappen en beschrijvingen aanpassen in org-modus |
-| `src/pages/RondeDashboard.tsx` | **Wijzigen** — organisatie-props doorgeven aan `WelkomInline` |
+| `src/components/AdminPasswordGate.tsx` | **Nieuw** -- wachtwoord-prompt component |
+| `src/pages/AdminPortal.tsx` | **Nieuw** -- admin hub pagina |
+| `src/pages/AdminVacatures.tsx` | **Nieuw** -- generieke vacatures-pagina (vervangt ErasmusMC-specifieke) |
+| `src/components/Footer.tsx` | **Wijzigen** -- "Admin" link toevoegen |
+| `src/components/AppRouter.tsx` | **Wijzigen** -- nieuwe routes, legacy redirects |
+| `src/pages/AdminOrganisatieGebruik.tsx` | **Wijzigen** -- branche-groepering, terug-knop naar /admin |
+| `supabase/functions/admin-organisation-stats/index.ts` | **Wijzigen** -- parent_type_id meesturen in response |
 
 ---
 
 ## Technische details
 
-### OrganisatieIntro.tsx
+### AdminPasswordGate.tsx
 
-Het component gebruikt `useOrganisation()` om `name` en `accessCodeId` op te halen. Op basis daarvan:
+```typescript
+// SHA-256 hash van "ErveKnots7751SZ" wordt vergeleken
+// sessionStorage('vinster_admin_auth') = 'true' na succes
+// Render children alleen als authenticated
+```
+
+### AdminVacatures.tsx
+
+De pagina laadt alle `organisation_types` bij mount en toont een grouped dropdown:
 
 ```text
-const isCategory = !accessCodeId;  // geen code = categorie
-const contextLabel = isCategory
-  ? `een ${name.toLowerCase()}`    // "een medisch centrum"
-  : name;                          // "ErasmusMC"
-const brancheLabel = isCategory
-  ? "deze branche"
-  : name;
+--- Branches ---
+Medisch Centrum
+Hogeschool
+Universiteit
+Zorgorganisatie
+
+--- Specifieke Organisaties ---
+ErasmusMC (Medisch Centrum)
 ```
 
-Alle hardcoded strings in `steps`, `resultItems`, en de body-tekst worden functies die deze labels gebruiken.
+Na selectie wordt `organisation_type_id` gebruikt voor:
+1. Stats ophalen (count + laatste import)
+2. CSV import via bestaande `import-organisation-vacancies` edge function
 
-### WelkomInline.tsx
+### admin-organisation-stats edge function
 
-Nieuwe props:
+Extra veld in de response:
 
 ```typescript
-interface WelkomInlineProps {
-  onNext: () => void;
-  completedSteps?: JourneyStep[];
-  onStepClick?: (step: JourneyStep) => void;
-  isOrganisationMode?: boolean;
-  organisationName?: string | null;
-  organisationAccessCodeId?: string | null;
-}
+stats = orgTypes.map(ot => ({
+  org_name: ot.name,
+  org_id: ot.id,
+  parent_type_id: ot.parent_type_id || null,  // NIEUW
+  this_month: ...,
+  last_month: ...,
+  total: ...,
+}));
 ```
 
-In organisatiemodus:
-- De stappen-array wordt gefilterd: alleen enthousiasme, wensberoepen, persoonsprofiel, loopbaanrapport (+ onderzoeksplan als laatste)
-- De beschrijvingen worden aangepast met het organisatie-label
-- De progress-berekening wordt aangepast op het juiste aantal stappen
+### AdminOrganisatieGebruik.tsx groepering
 
-### RondeDashboard.tsx
+De frontend groepeert op basis van `parent_type_id`:
 
-Geeft de extra props door:
-
-```typescript
-<WelkomInline
-  onNext={handleContinueFromWelkom}
-  completedSteps={completedSteps}
-  onStepClick={handleStepClick}
-  isOrganisationMode={isOrganisationMode}
-  organisationName={name}
-  organisationAccessCodeId={accessCodeId}
-/>
-```
-
-Waarbij `name` en `accessCodeId` uit `useOrganisation()` komen (die al geimporteerd is op regel 21 en 30).
+- Branches (parent_type_id === null): toon als hoofdrij met totaal = eigen sessies + alle children
+- Children (parent_type_id !== null): toon ingesprongen onder hun parent
+- Collapsible rows met een chevron-icoon
 
