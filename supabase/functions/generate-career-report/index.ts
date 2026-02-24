@@ -245,8 +245,7 @@ Opdracht:
 Bedenk drie concrete functies die bij deze persoon passen:
 • Kies uitsluitend bestaande beroepen die in Nederland gangbaar zijn
 • Gebruik bijvoorbeeld beroepentitels zoals opgenomen in NLQF/BIG/ISCO-structuren, of zoals te vinden op websites als werk.nl, nationaleberoepengids.nl of 123test.nl
-• Functie 1 en 2 zijn de meest logische matches — duidelijk herkenbaar en realistisch op basis van de kernwoorden van de gebruiker
-• Functie 3 is bewust verrassend: een functie die de gebruiker niet direct zou verwachten, maar die wél echt past bij de kernwoorden en realistisch is. Begin de uitleg van functie 3 met een signalerende opening zoals "En als verrassing..." of "Misschien had je dit niet verwacht, maar..."
+• Geef twee passende beroepen en één verrassend beroep (dat buiten verwachting ligt, maar goed onderbouwd is)
 • Voeg bij elk beroep een korte uitleg toe van maximaal 40 woorden
 • Schrijf altijd volledige, afgeronde zinnen - geen afgekapte tekst
 • Verwerk actief de gegenereerde kernwoorden in de uitleg
@@ -409,8 +408,7 @@ Generate three concrete job suggestions that fit this person:
 
 • Choose only existing occupations commonly used in Europe
 • Use job titles as found in SOC/O*NET/ESCO frameworks, or as found on websites like onetonline.org, prospects.ac.uk
-• Suggestions 1 and 2 are the most logical matches — clearly recognisable and realistic based on the user's keywords
-• Suggestion 3 is deliberately surprising: a role the user might not immediately expect, but that genuinely fits their keywords and is realistic. Start the explanation for suggestion 3 with a signalling opener such as "And as a surprise..." or "You might not have expected this, but..."
+• Provide two fitting occupations and one surprising (but well-substantiated) option
 • Provide a short explanation per occupation (max 40 words)
 • Always write complete, finished sentences - no truncated text
 • Actively use the generated keywords in the explanation
@@ -565,8 +563,7 @@ Aufgabe:
 Denke dir drei konkrete Berufe aus, die zu dieser Person passen:
 • Wähle ausschließlich bestehende Berufe, die im europäischen Kontext gebräuchlich sind
 • Nutze zum Beispiel Berufstitel, wie sie in Strukturen wie DEQF/BIG/ISCO vorkommen oder auf Websites wie berufenet.arbeitsagentur.de, BERUFENET der Bundesagentur für Arbeit, berufe.tv oder BERUFE-Entdecker der IHK zu finden sind
-• Vorschlag 1 und 2 sind die logischsten Treffer — klar erkennbar und realistisch basierend auf den Schlüsselwörtern des Nutzers
-• Vorschlag 3 ist bewusst überraschend: ein Beruf, den der Nutzer nicht sofort erwarten würde, der aber wirklich zu den Schlüsselwörtern passt und realistisch ist. Beginne die Erklärung von Vorschlag 3 mit einer signalisierenden Einleitung wie „Und zur Überraschung …" oder „Vielleicht hätten Sie das nicht erwartet, aber …"
+• Gib zwei passende Berufe und einen überraschenden Beruf an (unerwartet, aber gut begründet)
 • Füge für jeden Beruf eine kurze Erklärung mit maximal 40 Wörtern hinzu
 • Schreibe immer vollständige, abgeschlossene Sätze - kein abgebrochener Text
 • Verarbeite die generierten Schlüsselwörter aktiv in den Erläuterungen
@@ -730,8 +727,7 @@ Oppgave
 Lag tre konkrete jobbforslag som passer denne personen:
 • Velg kun eksisterende yrker som er vanlige i Norge og Europa
 • Bruk for eksempel yrkestitler som finnes i strukturer som NOKUT, Utdanning.no, NAVs yrkesbeskrivelser eller på nettsider som Finn.no, Arbeidsplassen.no eller utdanning.no
-• Forslag 1 og 2 er de mest logiske treffene — tydelig gjenkjennelige og realistiske basert på brukerens nøkkelord
-• Forslag 3 er bevisst overraskende: et yrke brukeren kanskje ikke umiddelbart ville forvente, men som virkelig passer nøkkelordene og er realistisk. Start forklaringen til forslag 3 med en signaliserende åpning som «Og som en overraskelse …» eller «Du hadde kanskje ikke forventet dette, men …»
+• Gi to passende yrker og ett overraskende (men godt begrunnet) yrke
 • Forklaringen per yrke skal være maks 40 ord
 • Skriv alltid fullstendige, avsluttede setninger - ingen avbrutt tekst
 • Bruk nøkkelordene aktivt i forklaringene
