@@ -7,6 +7,7 @@ import { AuthProvider } from "@/hooks/useAuth";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { CookieProvider } from "@/contexts/CookieContext";
 import { JourneyResetProvider } from "@/contexts/JourneyResetContext";
+import { OrganisationProvider } from "@/contexts/OrganisationContext";
 import SEOHead from "@/components/SEOHead";
 import AppRouter from "@/components/AppRouter";
 import CookieBanner from "@/components/CookieBanner";
@@ -24,12 +25,14 @@ const App = () => {
           <LanguageProvider>
             <CookieProvider>
               <JourneyResetProvider>
-                <AuthProvider>
-                  <SEOHead />
-                  <AppRouter />
-                  <CookieBanner />
-                  <CookieSettings />
-                </AuthProvider>
+                <OrganisationProvider>
+                  <AuthProvider>
+                    <SEOHead />
+                    <AppRouter />
+                    <CookieBanner />
+                    <CookieSettings />
+                  </AuthProvider>
+                </OrganisationProvider>
               </JourneyResetProvider>
             </CookieProvider>
           </LanguageProvider>

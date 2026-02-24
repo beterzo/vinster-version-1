@@ -29,6 +29,8 @@ import TrajectOpnieuwStartenUitleg from "@/pages/TrajectOpnieuwStartenUitleg";
 import VoorbeeldrapportGenerator from "@/pages/VoorbeeldrapportGenerator";
 import PaymentSuccess from "@/pages/PaymentSuccess";
 import ProfessionalCodesSuccess from "@/pages/ProfessionalCodesSuccess";
+import OrganisatiesOverzicht from "@/pages/OrganisatiesOverzicht";
+import OrganisatieLanding from "@/pages/OrganisatieLanding";
 
 // Protected route imports
 import ProtectedRoute from "@/components/ProtectedRoute";
@@ -140,6 +142,10 @@ const AppRouter = () => {
 
       {/* Voorbeeldrapport page */}
       <Route path="/voorbeeldrapport" element={<VoorbeeldrapportGenerator />} />
+
+      {/* Organisaties routes */}
+      <Route path="/organisaties" element={<OrganisatiesOverzicht />} />
+      <Route path="/organisaties/:slug" element={<OrganisatieLanding />} />
       
       {/* Legacy redirect from old de-mens-achter-vinster to new over-vinster */}
       <Route path="/de-mens-achter-vinster" element={<Navigate to="/over-vinster" replace />} />
