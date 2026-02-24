@@ -151,6 +151,124 @@ export type Database = {
         }
         Relationships: []
       }
+      organisation_access_codes: {
+        Row: {
+          code: string
+          created_at: string | null
+          id: string
+          is_active: boolean | null
+          last_used_at: string | null
+          max_uses: number | null
+          organisation_type_id: string | null
+          uses_count: number | null
+        }
+        Insert: {
+          code: string
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          last_used_at?: string | null
+          max_uses?: number | null
+          organisation_type_id?: string | null
+          uses_count?: number | null
+        }
+        Update: {
+          code?: string
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          last_used_at?: string | null
+          max_uses?: number | null
+          organisation_type_id?: string | null
+          uses_count?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "organisation_access_codes_organisation_type_id_fkey"
+            columns: ["organisation_type_id"]
+            isOneToOne: false
+            referencedRelation: "organisation_types"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      organisation_types: {
+        Row: {
+          anchor_list: Json | null
+          created_at: string | null
+          id: string
+          intro_text: string | null
+          is_active: boolean | null
+          is_unique: boolean | null
+          name: string
+          slug: string
+        }
+        Insert: {
+          anchor_list?: Json | null
+          created_at?: string | null
+          id?: string
+          intro_text?: string | null
+          is_active?: boolean | null
+          is_unique?: boolean | null
+          name: string
+          slug: string
+        }
+        Update: {
+          anchor_list?: Json | null
+          created_at?: string | null
+          id?: string
+          intro_text?: string | null
+          is_active?: boolean | null
+          is_unique?: boolean | null
+          name?: string
+          slug?: string
+        }
+        Relationships: []
+      }
+      organisation_vacancies: {
+        Row: {
+          created_at: string | null
+          department: string | null
+          description: string | null
+          id: string
+          keywords: string[] | null
+          organisation_type_id: string | null
+          raw_data: Json | null
+          title: string
+          year: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          department?: string | null
+          description?: string | null
+          id?: string
+          keywords?: string[] | null
+          organisation_type_id?: string | null
+          raw_data?: Json | null
+          title: string
+          year?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          department?: string | null
+          description?: string | null
+          id?: string
+          keywords?: string[] | null
+          organisation_type_id?: string | null
+          raw_data?: Json | null
+          title?: string
+          year?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "organisation_vacancies_organisation_type_id_fkey"
+            columns: ["organisation_type_id"]
+            isOneToOne: false
+            referencedRelation: "organisation_types"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       prioriteiten_responses: {
         Row: {
           ai_activiteiten_keywords: Json | null
@@ -248,6 +366,48 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      user_organisation_sessions: {
+        Row: {
+          access_code_id: string | null
+          completed_at: string | null
+          created_at: string | null
+          id: string
+          organisation_type_id: string | null
+          user_id: string
+        }
+        Insert: {
+          access_code_id?: string | null
+          completed_at?: string | null
+          created_at?: string | null
+          id?: string
+          organisation_type_id?: string | null
+          user_id: string
+        }
+        Update: {
+          access_code_id?: string | null
+          completed_at?: string | null
+          created_at?: string | null
+          id?: string
+          organisation_type_id?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_organisation_sessions_access_code_id_fkey"
+            columns: ["access_code_id"]
+            isOneToOne: false
+            referencedRelation: "organisation_access_codes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_organisation_sessions_organisation_type_id_fkey"
+            columns: ["organisation_type_id"]
+            isOneToOne: false
+            referencedRelation: "organisation_types"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_reports: {
         Row: {

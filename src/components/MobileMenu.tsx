@@ -9,12 +9,21 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { X } from "lucide-react";
+import { X, ChevronDown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/hooks/useTranslation";
 
+const organisationItems = [
+  { name: "Medisch Centrum", slug: "medisch-centrum" },
+  { name: "ErasmusMC", slug: "erasmus-mc", indent: true },
+  { name: "Universiteit", slug: "universiteit" },
+  { name: "Zorgorganisatie", slug: "zorgorganisatie" },
+  { name: "Hogeschool", slug: "hogeschool" },
+];
+
 const MobileMenu = () => {
   const [open, setOpen] = useState(false);
+  const [orgOpen, setOrgOpen] = useState(false);
   const navigate = useNavigate();
   const { t, language } = useTranslation();
 
@@ -47,7 +56,6 @@ const MobileMenu = () => {
         { title: t('mobile_menu.access_codes'), path: '/tilgangskoder-fagfolk' },
       ];
     } else {
-      // Dutch (default)
       return [
         { title: t('mobile_menu.about_vinster'), path: '/over-vinster' },
         { title: t('mobile_menu.for_whom'), path: '/voor-wie-is-het' },
@@ -107,7 +115,36 @@ const MobileMenu = () => {
                   {item.title}
                 </button>
               ))}
-              {/* Login button with the same styling as other menu items */}
+
+              {/* Organisaties - only for Dutch */}
+              {language === 'nl' && (
+                <>
+                  <button
+                    onClick={() => setOrgOpen(!orgOpen)}
+                    className="flex w-full items-center justify-between py-3 px-0 text-lg font-medium text-gray-700 hover:bg-gray-50 hover:text-vinster-blue rounded-lg transition-colors duration-200"
+                  >
+                    Organisaties
+                    <ChevronDown className={`h-5 w-5 transition-transform ${orgOpen ? "rotate-180" : ""}`} />
+                  </button>
+                  {orgOpen && (
+                    <div className="pl-4 space-y-2">
+                      {organisationItems.map((org) => (
+                        <button
+                          key={org.slug}
+                          onClick={() => handleNavigation(`/organisaties/${org.slug}`)}
+                          className={`block w-full text-left py-2 px-0 text-base font-medium text-gray-600 hover:text-vinster-blue transition-colors ${
+                            org.indent ? "pl-4" : ""
+                          }`}
+                        >
+                          {org.indent ? `→ ${org.name}` : org.name}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </>
+              )}
+
+              {/* Login button */}
               <button
                 onClick={() => handleNavigation('/login')}
                 className="block w-full text-left py-3 px-0 text-lg font-medium text-gray-700 hover:bg-gray-50 hover:text-vinster-blue rounded-lg transition-colors duration-200"

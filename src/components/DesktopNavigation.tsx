@@ -1,9 +1,20 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/hooks/useTranslation";
+import { ChevronDown } from "lucide-react";
+
+const organisationItems = [
+  { name: "Medisch Centrum", slug: "medisch-centrum" },
+  { name: "ErasmusMC", slug: "erasmus-mc", indent: true },
+  { name: "Universiteit", slug: "universiteit" },
+  { name: "Zorgorganisatie", slug: "zorgorganisatie" },
+  { name: "Hogeschool", slug: "hogeschool" },
+];
 
 const DesktopNavigation = () => {
   const navigate = useNavigate();
   const { t, language } = useTranslation();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const getMenuItems = () => {
     if (language === 'en') {
@@ -31,7 +42,6 @@ const DesktopNavigation = () => {
         { title: t('mobile_menu.access_codes'), path: '/tilgangskoder-fagfolk' },
       ];
     } else {
-      // Dutch (default)
       return [
         { title: t('mobile_menu.about_vinster'), path: '/over-vinster' },
         { title: t('mobile_menu.for_whom'), path: '/voor-wie-is-het' },
@@ -53,6 +63,42 @@ const DesktopNavigation = () => {
           {item.title}
         </button>
       ))}
+
+      {/* Organisaties dropdown - only visible for Dutch */}
+      {language === 'nl' && (
+        <div
+          className="relative"
+          onMouseEnter={() => setDropdownOpen(true)}
+          onMouseLeave={() => setDropdownOpen(false)}
+        >
+          <button
+            className="text-white text-[1.3rem] font-medium hover:text-yellow-300 transition-colors whitespace-nowrap flex items-center gap-1"
+            onClick={() => setDropdownOpen(!dropdownOpen)}
+          >
+            Organisaties
+            <ChevronDown className={`h-4 w-4 transition-transform ${dropdownOpen ? "rotate-180" : ""}`} />
+          </button>
+
+          {dropdownOpen && (
+            <div className="absolute top-full left-0 mt-1 w-56 rounded-lg border bg-white shadow-lg z-50 py-2">
+              {organisationItems.map((org) => (
+                <button
+                  key={org.slug}
+                  onClick={() => {
+                    navigate(`/organisaties/${org.slug}`);
+                    setDropdownOpen(false);
+                  }}
+                  className={`block w-full text-left px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-vinster-blue transition-colors ${
+                    org.indent ? "pl-8 text-gray-500" : ""
+                  }`}
+                >
+                  {org.indent ? `→ ${org.name}` : org.name}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </nav>
   );
 };
