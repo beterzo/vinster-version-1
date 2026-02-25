@@ -1,63 +1,51 @@
 
 
-## Visuele verbeteringen zoekprofiel output pagina
+## Visuele verbeteringen Onderzoeksplan pagina
 
-Puur styling-wijzigingen in 2 bestanden. Geen data, routing of generatielogica verandert.
+Alleen styling-wijzigingen in 1 bestand: `src/components/journey/OnderzoeksplanInline.tsx`. Geen content, data of routing verandert.
+
+### Huidige situatie
+
+De buttons zijn al navy (`bg-[#1a2e5a]`), dus Section 1 is grotendeels in orde. De verbeteringen zitten in de step list layout en card structuur.
+
+### Wijzigingen in `page2` blok (regels 57-110)
+
+**Section 5 - Card wrapper:**
+Vervang de huidige `Card` + `CardContent` wrapper door een eigen card-div:
+```
+bg-white rounded-xl shadow-[0_2px_16px_rgba(0,0,0,0.08)] p-8 md:px-10 max-w-[720px] mx-auto
+```
+
+**Section 4 - Intro tekst boven de stappen:**
+Voeg onder de titel een intro-paragraaf toe met de bestaande `page1.instruction` tekst (of een variant), gestyled als:
+```
+text-[0.95rem] leading-[1.7] text-[#6b7280] pb-5 border-b-2 border-[#f0f0f0] mb-5
+```
+
+**Section 2 - Stappen lijst:**
+- Elk item: `flex items-start gap-4 py-4 border-b border-[#f0f0f0]` (laatste: geen border)
+- Badge: `w-8 h-8 min-w-[32px] rounded-full bg-[#1a2e5a] text-white text-[0.8rem] font-bold flex items-center justify-center mt-0.5`
+- Tekst: `text-[0.95rem] leading-[1.7] text-[#374151] flex-1`
+
+**Section 3 - Fase-scheiders:**
+Na stap 3 en stap 6: een dunne gele lijn `border-t-2 border-[#F5C518] my-2 opacity-40`
+
+**Section 6 - Navigatieknoppen:**
+Buttons in een flex-row met top-border:
+```
+flex justify-between items-center mt-8 pt-6 border-t border-[#f0f0f0]
+```
+- "Vorige": `bg-transparent text-[#1a2e5a] border-[1.5px] border-[#1a2e5a] rounded-[10px] min-h-[48px] px-7 font-semibold`
+- "Volgende": `bg-[#1a2e5a] hover:bg-[#142347] hover:-translate-y-[1px] text-white rounded-[10px] min-h-[48px] px-7 font-semibold`
+
+### Wijzigingen in `page1` en `page3` blokken
+
+Dezelfde navigatie-layout toepassen (flex-row met border-top, navy primary + outline secondary). De card wrapper ook hier verfijnen naar `rounded-xl shadow-[0_2px_16px_rgba(0,0,0,0.08)]` in plaats van `rounded-3xl shadow-xl`.
 
 ### Bestanden
 
 | Bestand | Wat |
 |---------|-----|
-| `src/components/ZoekprofielViewer.tsx` | Volledige visuele restyling van het zoekprofiel-document |
-| `src/components/journey/ZoekprofielInline.tsx` | Floating titel + print-knop boven viewer verwijderen (verplaatst naar viewer zelf) |
+| `src/components/journey/OnderzoeksplanInline.tsx` | Alle 3 pages: card styling, step list layout, fase-scheiders, intro blok, navigatie layout |
 
----
-
-### 1. ZoekprofielInline.tsx -- "complete" view (regels 231-264)
-
-- **Verwijder** de losse `<h2>` titel en de print-knop boven de viewer (regels 234-248). De titel en print-knop zitten nu in de ZoekprofielViewer header zelf.
-- Voeg een **tweede print-knop** toe onder de viewer, boven het "volgende stappen" blok, zodat de gebruiker altijd een printactie kan vinden.
-
-### 2. ZoekprofielViewer.tsx -- volledige restyling
-
-**Props**: voeg `onPrint?: () => void` prop toe zodat de print-knop in de header kan werken.
-
-**Buitenste wrapper** (Section 6):
-```
-bg-white rounded-xl shadow-[0_4px_32px_rgba(0,0,0,0.1)] overflow-hidden max-w-[800px] mx-auto
-```
-
-**Header** (Section 1):
-- Achtergrond: `bg-[#1a2e5a]` (was `#232D4B`)
-- Padding: `p-8 md:px-10`
-- Rounded: `rounded-t-xl` (via overflow-hidden op wrapper)
-- Links: titel `text-[1.75rem] font-bold text-white` + naam `text-[0.95rem] text-white/70 mt-1`
-- Rechts: Vinster logo + print-knop (wit op donker, `bg-white text-[#1a2e5a] border-2 border-white rounded-[10px] px-5 py-2.5 font-bold text-sm flex items-center gap-2`, hover: `hover:bg-white/15 hover:text-white`)
-
-**Content blokken** (Section 2):
-- Geen padding-wrapper meer; items direct in de card
-- Elk item: `bg-white border-l-4 border-[#F5C518] px-7 py-5 border-b border-b-[#f0f0f0]`
-- Laatste item: `border-b-0`
-- Label: `text-[0.7rem] font-bold tracking-[0.1em] uppercase text-[#9ca3af] mb-1`
-- Waarde: `text-[1.05rem] font-semibold text-[#1a2e5a] leading-[1.6]`
-
-**Samenvatting** (Section 3):
-- Container: `bg-[#fffbeb] border border-[#fde68a] border-l-4 border-l-[#F5C518] rounded-lg p-6 mx-7 my-6`
-- Label: `text-[0.7rem] font-bold tracking-[0.1em] uppercase text-[#92400e] mb-2`
-- Body: `text-[0.95rem] leading-[1.7] text-[#374151]`
-
-**Footer** (Section 5):
-- `bg-[#F5C518] px-10 py-3 flex items-center justify-between rounded-b-xl` (via overflow-hidden)
-- Links: klein donker Vinster logo (`h-6`) + `vinster.ai` tekst `text-[#1a2e5a] text-sm font-semibold`
-- Rechts: generatiedatum `text-[0.75rem] text-[#1a2e5a]/60`
-
-**Print stylesheet** (Section 7):
-- Bestaande print CSS behouden maar uitbreiden:
-  - `print-color-adjust: exact` op header en footer
-  - `box-shadow: none` op wrapper
-  - Buttons verbergen (`print:hidden` class)
-  - Rond corners verwijderen voor print
-
-### Resultaat
-
-Het zoekprofiel voelt als een samenhangende, printbare kaart: donkerblauwe header met titel + print-knop, 6 nette content-rijen met amber linkerborder, een warm samenvatting-blok, en een branded gele footer. Twee print-knoppen (header + onder viewer) zorgen dat de gebruiker altijd kan printen.
+Geen vertalingen nodig -- de intro tekst hergebruikt een bestaande vertaalsleutel.
