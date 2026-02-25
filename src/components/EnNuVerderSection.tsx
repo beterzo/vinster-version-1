@@ -58,11 +58,11 @@ const EnNuVerderSection = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto items-stretch pb-8">
         {cards.map((card, index) => (
           <Card
             key={index}
-            className="p-6 bg-white rounded-2xl cursor-pointer hover:shadow-lg transition-shadow duration-200 border border-gray-100 shadow-[0_2px_16px_rgba(0,0,0,0.06)] flex flex-col"
+            className="p-6 bg-white rounded-xl cursor-pointer hover:shadow-lg transition-shadow duration-200 border border-gray-100 shadow-[0_2px_16px_rgba(0,0,0,0.08)] flex flex-col"
             onClick={() => setOpenDialog(index)}
           >
             <div className="w-12 h-12 rounded-full bg-[#FEF9E6] flex items-center justify-center mb-4">
@@ -75,7 +75,7 @@ const EnNuVerderSection = () => {
               {t(`dashboard.${card.subtitleKey}`)}
             </p>
             <Button
-              className="bg-[#F5C518] hover:bg-[#e0b215] text-[#232D4B] rounded-lg px-4 py-2 text-sm font-medium w-fit gap-1"
+              className="bg-[#232D4B] hover:bg-[#1a2350] text-white rounded-xl h-12 px-4 text-sm font-semibold w-fit gap-1"
               onClick={(e) => { e.stopPropagation(); setOpenDialog(index); }}
             >
               Meer info <ArrowRight className="w-3.5 h-3.5" />
