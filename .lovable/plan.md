@@ -1,39 +1,35 @@
 
 
-## Organisatie-indicator op het loopbaantraject
+## Fix signup timeout-afhandeling en glassmorphism op signup pagina
 
-Een subtiele badge/indicator toevoegen aan de hero-sectie van de RondeDashboard pagina, zodat je altijd kunt zien of je in een normaal Vinster-traject zit of in een organisatie-traject -- en zo ja, welke branche of welk bedrijf.
+### Probleem 1: Signup lijkt niet te werken
 
-### Wat je ziet
+De `send-confirmation-email` edge function heeft soms een cold start die langer dan 5 seconden duurt. Supabase geeft dan een `hook_timeout` error terug, maar het account wordt WEL aangemaakt en de verificatie-email wordt WEL verstuurd. De gebruiker ziet echter een foutmelding.
 
-**Normaal traject:** Geen extra indicator, alles blijft zoals het nu is.
+**Oplossing:** In `src/pages/SignupPage.tsx` de hook_timeout error afhandelen als een succes in plaats van een fout. Als de foutmelding "hook_timeout" of "maximum time" bevat, sturen we de gebruiker gewoon door naar de verificatiepagina (want het account is aangemaakt en de email is verzonden).
 
-**Organisatie-traject (categorie, bijv. "Medisch Centrum"):**
-Een kleine badge onder de titel "Jouw loopbaantraject" met een gebouw-icoon en de branchenaam, bijv.:
-`🏢 Medisch Centrum`
+Betreffende code (regel 54-56): In plaats van een foutmelding te tonen, behandelen we dit als succes en navigeren naar `/email-verification`.
 
-**Organisatie-traject (specifiek bedrijf, bijv. "ErasmusMC"):**
-Badge toont zowel de branche als het bedrijf:
-`🏢 Medisch Centrum — ErasmusMC`
+### Probleem 2: Glassmorphism ontbreekt op signup pagina
 
-De badge krijgt een subtiele stijl (lichtgele achtergrond, donkere tekst) die past bij het bestaande design.
+**Oplossing:** In `src/pages/SignupPage.tsx` regel 110 aanpassen:
 
-### Technisch
+Van:
+```
+bg-white bg-opacity-90 rounded-2xl p-8 max-w-md
+```
 
-**Bestand: `src/pages/RondeDashboard.tsx`**
+Naar (identiek aan login pagina):
+```
+bg-white/15 backdrop-blur-[8px] border border-white/20 rounded-xl p-8 max-w-md
+```
 
-In het hero-blok (regel 292-307), direct onder de huidige `<p>` met "Stap X van Y", wordt een conditoneel blok toegevoegd:
+En de blockquote tekst van `text-blue-900` naar `text-white drop-shadow-sm` (ook identiek aan login pagina).
 
-- Als `isOrganisationMode` true is, toon een `<div>` met:
-  - Een `Building2` icoon (uit lucide-react)
-  - De `organisationName` uit de OrganisationContext
-  - Als er een `accessCodeId` is (= specifiek bedrijf), wordt de naam van het bedrijf getoond; anders alleen de branchenaam
-- Styling: `inline-flex items-center gap-1.5 text-xs font-medium bg-[#FEF9E6] text-[#232D4B] px-3 py-1 rounded-full mt-1.5`
-
-Alle benodigde data (`isOrganisationMode`, `organisationName`, `organisationAccessCodeId`) is al beschikbaar in de component via de `useOrganisation()` hook (regel 30).
+### Bestanden
 
 | Bestand | Wijziging |
 |---------|-----------|
-| `src/pages/RondeDashboard.tsx` | Organisatie-badge toevoegen in hero-sectie (~5 regels) |
+| `src/pages/SignupPage.tsx` | 1) Hook timeout als succes behandelen (regel 54-56), 2) Glassmorphism styling toepassen (regel 110-113) |
 
-Geen nieuwe bestanden, geen database-wijzigingen, geen edge function changes.
+Geen edge function changes nodig. Geen database wijzigingen.
