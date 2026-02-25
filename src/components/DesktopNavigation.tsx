@@ -111,7 +111,7 @@ const DesktopNavigation = () => {
                           </span>
                         </TooltipTrigger>
                         <TooltipContent side="right">
-                          <p>Binnenkort beschikbaar</p>
+                          <p>Neem contact op</p>
                         </TooltipContent>
                       </Tooltip>
                     )

@@ -34,9 +34,9 @@ const OrganisatieBinnenkort = () => {
           <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-blue-50">
             <Clock className="h-10 w-10 text-blue-900" />
           </div>
-          <h1 className="text-3xl font-bold text-blue-900 mb-4">Binnenkort beschikbaar</h1>
+          <h1 className="text-3xl font-bold text-blue-900 mb-4">Neem contact op</h1>
           <p className="text-gray-600 mb-8">
-            We werken hard aan dit organisatietype. Binnenkort kun je hier terecht voor jouw loopbaantraject.
+            Wil je Vinster inzetten voor dit organisatietype? Neem contact met ons op via team@vinster.ai.
           </p>
           <Button
             onClick={() => navigate("/")}
