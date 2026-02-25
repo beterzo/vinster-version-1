@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState, useMemo } from "react";
-import { ArrowLeft, Loader2 } from "lucide-react";
+import { ArrowLeft, Building2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import JourneyStepNavigator from "@/components/JourneyStepNavigator";
 import WelkomInline from "@/components/journey/WelkomInline";
@@ -298,6 +298,12 @@ const RondeDashboard = () => {
               <p className="text-sm text-gray-500 mt-1">
                 Stap {currentStepIndex + 1} van {activeSteps.length} — {currentStepLabel}
               </p>
+              {isOrganisationMode && organisationName && (
+                <div className="inline-flex items-center gap-1.5 text-xs font-medium bg-[#FEF9E6] text-[#232D4B] px-3 py-1 rounded-full mt-1.5">
+                  <Building2 className="w-3.5 h-3.5" />
+                  {organisationName}
+                </div>
+              )}
             </div>
             <div className="flex flex-col items-end gap-1 min-w-[180px]">
               <Progress value={progressPercentage} className="h-2.5 flex-1 w-full" />
