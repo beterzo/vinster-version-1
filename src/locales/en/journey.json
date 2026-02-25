@@ -205,8 +205,8 @@
     "prioriteiten": {
       "activiteiten": {
         "title": "Priorities - activities",
-        "subtitle": "Select at least 8 activities that you enjoy doing",
-        "selected_count": "Selected: {count} of at least 8",
+        "subtitle": "Select at least 5 activities that you enjoy doing",
+        "selected_count": "Selected: {count} of at least 5",
         "missing_keywords": "No personal activities have been generated yet. First complete your enthusiasm scan and dream jobs.",
         "extra_text_label": "Missing any activities? Add them here (optional)",
         "extra_text_placeholder": "For example: Photography, Programming, Gardening...",

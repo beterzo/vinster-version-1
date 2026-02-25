@@ -219,8 +219,7 @@ const PersoonsprofielInline = ({ roundId, subStep, onNext, onPrevious }: Persoon
     setExtraText: (text: string) => void
   ) => {
     const availableKeywords = cleanKeywords(aiKeywords[type] || []);
-    // Activiteiten requires 8, others require 5
-    const minimumRequired = type === 'activiteiten' ? 8 : 5;
+    const minimumRequired = 5;
     const canProceed = selectedKeywords.length >= minimumRequired;
 
     const handleKeywordToggle = (keyword: string) => {

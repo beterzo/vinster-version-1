@@ -75,7 +75,7 @@ const PrioriteitenActiviteiten = ({ mode = 'edit' }: StepProps) => {
 
   // Use AI-generated keywords or fallback to empty array
   const availableKeywords = cleanKeywords(aiKeywords.activiteiten || []);
-  const canProceed = selectedKeywords.length >= 8;
+  const canProceed = selectedKeywords.length >= 5;
 
   return (
     <div className="min-h-screen bg-[#fafaf8] font-sans">
