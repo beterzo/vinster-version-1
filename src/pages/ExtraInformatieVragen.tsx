@@ -142,14 +142,14 @@ const ExtraInformatieVragen = ({ mode = 'edit' }: StepProps) => {
       <div className="max-w-[1440px] mx-auto px-6 py-12">
         {isViewMode && (
           <div className="mb-6">
-            <div className="bg-blue-50 border-2 border-blue-400 rounded-xl p-4">
+            <div className="bg-[#FEF9E6] border-l-4 border-[#F5C518] rounded-r-lg p-4">
               <div className="flex items-start gap-3">
-                <Info className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                <Info className="h-5 w-5 text-[#232D4B] flex-shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-blue-900 font-medium">
+                  <p className="text-[#232D4B] font-medium">
                     {t('common.view_only_mode.title')}
                   </p>
-                  <p className="text-blue-700 text-sm mt-1">
+                  <p className="text-[#232D4B]/70 text-sm mt-1">
                     {t('common.view_only_mode.description')}
                   </p>
                 </div>
@@ -162,10 +162,11 @@ const ExtraInformatieVragen = ({ mode = 'edit' }: StepProps) => {
           <CardContent className="p-12">
             {/* Title */}
             <div className="text-center mb-12">
-              <h1 className="text-3xl font-bold text-[#232D4B] mb-2">
+              <p className="text-xs text-gray-400 mb-2">Stap 3 van 6 – Profiel</p>
+              <h1 className="text-2xl font-bold text-[#232D4B] mb-2">
                 {t('profiel_voltooien.extra_informatie.title')}
               </h1>
-              <p className="text-xl text-gray-600">
+              <p className="text-sm text-gray-500">
                 {t('profiel_voltooien.extra_informatie.subtitle')}
               </p>
             </div>
@@ -174,7 +175,7 @@ const ExtraInformatieVragen = ({ mode = 'edit' }: StepProps) => {
             <div className="space-y-8">
               {questions.map((item, index) => (
                 <div key={index}>
-                  <Label htmlFor={item.field} className="text-[#232D4B] font-semibold text-base mb-3 block text-left border-l-2 border-[#F5C518] pl-3">
+                  <Label htmlFor={item.field} className="text-[#232D4B] font-semibold text-base mb-3 block text-left border-l-4 border-[#F5C518] pl-3">
                     {index + 1}. {item.question}
                   </Label>
                   <Textarea
@@ -184,7 +185,7 @@ const ExtraInformatieVragen = ({ mode = 'edit' }: StepProps) => {
                     onChange={(e) => handleInputChange(item.field, e.target.value)}
                     onBlur={(e) => !isViewMode && handleInputBlur(item.field, e.target.value)}
                     disabled={isViewMode}
-                    className={`min-h-[80px] ${
+                    className={`min-h-[100px] border-[#232D4B] border-2 bg-[#f8f9ff] focus:border-[#232D4B] focus:ring-[#232D4B] ${
                       isViewMode ? 'bg-gray-100 cursor-not-allowed text-gray-700' : ''
                     }`}
                   />
@@ -197,13 +198,13 @@ const ExtraInformatieVragen = ({ mode = 'edit' }: StepProps) => {
               <Button 
                 onClick={handleBackToPriorities}
                 variant="outline"
-                className="border-[#232D4B] text-[#232D4B] hover:bg-gray-50 h-12"
+                className="border-2 border-[#232D4B] text-[#232D4B] hover:bg-gray-50 h-12 rounded-xl"
               >
                 {t('profiel_voltooien.extra_informatie.back_button')}
               </Button>
               <Button 
                 onClick={handleComplete}
-                className={`font-semibold px-8 h-12 ${
+                className={`font-semibold px-8 h-12 rounded-xl ${
                   isViewMode || allFieldsFilled
                     ? "bg-[#232D4B] hover:bg-[#1a2350] text-white" 
                     : "bg-gray-200 text-gray-400 cursor-not-allowed"

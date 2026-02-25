@@ -163,7 +163,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 font-sans">
+    <div className="min-h-screen bg-[#fafaf8] font-sans">
       <div className="max-w-[1440px] mx-auto px-6 py-8">
         <DashboardHeader />
 
