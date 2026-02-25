@@ -51,8 +51,8 @@ const JourneyStepNavigator = ({
 
   return (
     <TooltipProvider delayDuration={200}>
-      <div className="w-full overflow-x-auto">
-        <div className="flex items-center justify-center min-w-max gap-1">
+      <div className="w-full overflow-hidden">
+        <div className="flex items-center justify-center gap-1">
           {activeSteps.map((step, index) => {
             const status = getStepStatus(step.id);
             const isAccessible = isStepAccessible(step.id);
@@ -70,7 +70,7 @@ const JourneyStepNavigator = ({
                     : isCurrent 
                       ? 'bg-white text-[#232D4B] shadow-card-hover border-b-[3px] border-[#F5C518]' 
                       : status === 'locked'
-                        ? 'bg-gray-50 text-gray-400 opacity-50 cursor-not-allowed'
+                        ? 'bg-gray-50 text-[#9ca3af] opacity-50 cursor-not-allowed'
                         : 'bg-white text-[#232D4B] hover:-translate-y-0.5 hover:shadow-card cursor-pointer'
                   }
                 `}
@@ -87,13 +87,13 @@ const JourneyStepNavigator = ({
                   {status === 'completed' ? (
                     <Check className="w-3.5 h-3.5" />
                   ) : status === 'locked' ? (
-                    <Lock className="w-3 h-3" />
+                    <Lock className="w-3.5 h-3.5" />
                   ) : (
                     index + 1
                   )}
                 </span>
                 
-                <span className="whitespace-nowrap">
+                <span className="hidden md:inline md:max-w-[8ch] lg:max-w-none md:truncate whitespace-nowrap">
                   {t(step.labelKey)}
                 </span>
               </button>

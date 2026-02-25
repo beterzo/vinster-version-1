@@ -33,7 +33,7 @@ const StepCard = ({
     switch (status) {
       case 'completed':
         return (
-          <span className="flex items-center gap-1 text-xs px-2 py-1 rounded-full font-medium" style={{ backgroundColor: '#E8F4FD', color: '#232D4B' }}>
+          <span className="flex items-center gap-1 text-xs px-2 py-1 rounded-full font-medium" style={{ backgroundColor: '#16a34a', color: '#ffffff' }}>
             <CheckCircle className="w-3 h-3" />
             {t('dashboard.round_dashboard.status_completed')}
           </span>
@@ -102,7 +102,7 @@ const StepCard = ({
 
   const getCompletedBorderStyle = () => status === 'completed' ? { borderColor: '#232D4B' } : {};
   const getIconBgStyle = () => {
-    if (status === 'completed') return { backgroundColor: '#E8F4FD' };
+    if (status === 'completed') return { backgroundColor: 'rgba(35, 45, 75, 0.1)' };
     if (status === 'active') return { backgroundColor: 'rgba(35, 45, 75, 0.1)' };
     return { backgroundColor: '#F3F4F6' };
   };

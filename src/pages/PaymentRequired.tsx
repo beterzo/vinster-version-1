@@ -166,7 +166,7 @@ const PaymentRequired = () => {
   };
 
   const firstName = user?.user_metadata?.first_name || 'daar';
-  return <div className="min-h-screen bg-gray-50 font-sans">
+  return <div className="min-h-screen bg-[#fafaf8] font-sans">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-8">
         {/* Header with logo and language switcher */}
         <div className="flex justify-between items-center mb-8">
@@ -190,9 +190,7 @@ const PaymentRequired = () => {
           {/* Left column: Content */}
           <div className="space-y-6 lg:space-y-8 flex flex-col">
             {/* Welcome card */}
-            <Card className="p-6 lg:p-8 border-0 rounded-3xl" style={{
-            backgroundColor: '#E6F0F6'
-          }}>
+            <Card className="p-6 lg:p-8 border border-[#e5e7eb] rounded-xl shadow-card">
               <h2 className="text-xl lg:text-2xl font-bold text-vinster-blue mb-4">
                 {t('payment.start_career')}
               </h2>
@@ -258,7 +256,7 @@ const PaymentRequired = () => {
                 </div>
               </div>
 
-              <Button onClick={handlePayment} disabled={isLoading} className="w-full bg-yellow-400 hover:bg-yellow-500 text-vinster-blue font-bold py-3 lg:py-4 text-base lg:text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200" size="lg">
+              <Button onClick={handlePayment} disabled={isLoading} className="w-full bg-[#1a2e5a] hover:bg-[#142347] text-white font-bold py-3 lg:py-4 text-base lg:text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200" size="lg">
                 {isLoading ? t('payment.pricing.processing') : startButtonText}
               </Button>
 
@@ -311,12 +309,10 @@ const PaymentRequired = () => {
         </div>
 
         {/* Data Safety Card - Full width below the main content */}
-        <Card className="p-6 lg:p-8 border-0 rounded-3xl mt-6 lg:mt-8" style={{
-        backgroundColor: '#E6F0F6'
-      }}>
+        <Card className="p-6 lg:p-8 border border-[#e5e7eb] rounded-xl shadow-card mt-6 lg:mt-8">
           <div className="flex items-start space-x-4">
             <div className="flex-shrink-0">
-              <Shield className="w-6 h-6 text-blue-600" />
+              <Shield className="w-6 h-6 text-[#232D4B]" />
             </div>
             <div>
               <h3 className="font-bold text-lg text-vinster-blue mb-3">

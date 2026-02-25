@@ -42,7 +42,7 @@ const OnderzoeksplanInline = ({ subStep, onNext, onPrevious, onComplete }: Onder
               </Button>
               <Button 
                 onClick={onNext}
-                className="bg-[#F5C518] hover:bg-yellow-500 text-[#232D4B] font-semibold px-8 py-3"
+                className="bg-[#1a2e5a] hover:bg-[#142347] text-white font-semibold px-8 py-3"
               >
                 {t('journey.onderzoeksplan.next_button')}
                 <ArrowRight className="w-4 h-4 ml-2" />
@@ -98,7 +98,7 @@ const OnderzoeksplanInline = ({ subStep, onNext, onPrevious, onComplete }: Onder
               </Button>
               <Button 
                 onClick={onNext}
-                className="bg-[#F5C518] hover:bg-yellow-500 text-[#232D4B] font-semibold px-8"
+                className="bg-[#1a2e5a] hover:bg-[#142347] text-white font-semibold px-8"
               >
                 {t('journey.onderzoeksplan.next_button')}
                 <ArrowRight className="w-4 h-4 ml-2" />
@@ -115,7 +115,7 @@ const OnderzoeksplanInline = ({ subStep, onNext, onPrevious, onComplete }: Onder
     <Card className="rounded-3xl shadow-xl border-0">
       <CardContent className="p-8 md:p-12">
         <div className="max-w-3xl mx-auto">
-          <div className="bg-[#E8F4FD] rounded-2xl p-6 mb-8">
+          <div className="bg-[#fffbeb] border-l-4 border-[#F5C518] rounded-2xl p-6 mb-8">
             <p className="text-[#232D4B] leading-relaxed text-lg">
               {t('journey.onderzoeksplan.page3.closing_text')}
             </p>
@@ -135,7 +135,7 @@ const OnderzoeksplanInline = ({ subStep, onNext, onPrevious, onComplete }: Onder
                 onComplete?.();
                 onNext();
               }}
-              className="bg-[#F5C518] hover:bg-yellow-500 text-[#232D4B] font-semibold px-8"
+              className="bg-[#1a2e5a] hover:bg-[#142347] text-white font-semibold px-8"
             >
               {t('journey.onderzoeksplan.to_zoekprofiel_button')}
               <ArrowRight className="w-4 h-4 ml-2" />

@@ -10,7 +10,7 @@ const OverVinster = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#fafaf8]">
       {/* Header with Logo */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-6 py-6">
@@ -28,7 +28,7 @@ const OverVinster = () => {
               <Button 
                 onClick={() => navigate('/')} 
                 variant="outline" 
-                className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold"
+                className="border-[#1a2e5a] text-[#1a2e5a] hover:bg-[rgba(26,46,90,0.05)] font-semibold"
               >
                 {t('about.back_to_home')}
               </Button>

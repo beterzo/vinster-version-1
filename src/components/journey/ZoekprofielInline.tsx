@@ -140,7 +140,7 @@ const ZoekprofielInline = ({ roundId, subStep, onNext, onPrevious }: Zoekprofiel
             </Button>
             <Button 
               onClick={onNext}
-              className="bg-[#F5C518] hover:bg-yellow-500 text-[#232D4B] font-semibold px-8"
+              className="bg-[#1a2e5a] hover:bg-[#142347] text-white font-semibold px-8"
             >
               {t('journey.zoekprofiel.intro.start_button')}
               <ArrowRight className="w-4 h-4 ml-2" />
@@ -206,7 +206,7 @@ const ZoekprofielInline = ({ roundId, subStep, onNext, onPrevious }: Zoekprofiel
               <Button 
                 onClick={handleSubmit}
                 disabled={!allFieldsFilled || submitting}
-                className="bg-[#F5C518] hover:bg-yellow-500 text-[#232D4B] font-semibold px-8 disabled:opacity-50"
+                className="bg-[#1a2e5a] hover:bg-[#142347] text-white font-semibold px-8 disabled:opacity-50"
               >
                 {submitting ? (
                   <>
@@ -249,13 +249,13 @@ const ZoekprofielInline = ({ roundId, subStep, onNext, onPrevious }: Zoekprofiel
 
         <ZoekprofielViewer content={zoekprofielContent} userName={userName} />
 
-        <div className="bg-[#E8F4FD] rounded-2xl p-6 text-center print:hidden">
+        <div className="bg-[#fffbeb] border-l-4 border-[#F5C518] rounded-2xl p-6 text-center print:hidden">
           <p className="text-[#232D4B] mb-4">
             {t('journey.zoekprofiel.complete.next_steps')}
           </p>
           <Button 
             onClick={() => window.location.href = '/home'}
-            className="bg-[#F5C518] hover:bg-yellow-500 text-[#232D4B] font-semibold px-8"
+            className="bg-[#1a2e5a] hover:bg-[#142347] text-white font-semibold px-8"
           >
             {t('journey.zoekprofiel.complete.to_dashboard')}
           </Button>
@@ -268,7 +268,7 @@ const ZoekprofielInline = ({ roundId, subStep, onNext, onPrevious }: Zoekprofiel
   return (
     <Card className="rounded-3xl shadow-xl border-0">
       <CardContent className="p-8 md:p-12 text-center">
-        <div className="w-16 h-16 bg-[#E8F4FD] rounded-full flex items-center justify-center mx-auto mb-6">
+        <div className="w-16 h-16 bg-[rgba(35,45,75,0.1)] rounded-full flex items-center justify-center mx-auto mb-6">
           <FileText className="w-8 h-8 text-[#232D4B]" />
         </div>
         <h1 className="text-3xl font-bold text-[#232D4B] mb-4">

@@ -154,7 +154,7 @@ const AdminVacatures = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#fafaf8]">
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-6xl mx-auto px-6 py-6">
           <div className="flex items-center justify-between">
@@ -164,7 +164,7 @@ const AdminVacatures = () => {
               className="h-16 w-auto cursor-pointer hover:opacity-80"
               onClick={() => navigate("/")}
             />
-            <Button onClick={() => navigate("/admin")} variant="outline" className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold">
+            <Button onClick={() => navigate("/admin")} variant="outline" className="border-[#1a2e5a] text-[#1a2e5a] hover:bg-[rgba(26,46,90,0.05)] font-semibold">
               <ArrowLeft className="w-4 h-4 mr-2" /> Terug naar Admin
             </Button>
           </div>

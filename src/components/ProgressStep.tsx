@@ -100,7 +100,7 @@ const ProgressStep = ({
               {step.title}
             </h3>
             {isCompleted && (
-              <span className="text-xs bg-[#232D4B] text-white px-2 py-0.5 rounded-full font-medium whitespace-nowrap">
+              <span className="text-xs bg-[#16a34a] text-white px-2 py-0.5 rounded-full font-medium whitespace-nowrap">
                 Voltooid
               </span>
             )}

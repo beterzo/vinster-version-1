@@ -131,7 +131,7 @@ const ZoekprofielDownload = () => {
     }
   };
   if (loading) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+    return <div className="min-h-screen bg-[#fafaf8] flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-900 mx-auto mb-4"></div>
           <p className="text-gray-700">{t('journey.zoekprofiel.download.loading_data')}</p>
@@ -139,7 +139,7 @@ const ZoekprofielDownload = () => {
       </div>;
   }
   const status = getStatusMessage();
-  return <div className="min-h-screen bg-gray-50 font-sans">
+  return <div className="min-h-screen bg-[#fafaf8] font-sans">
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">

@@ -62,14 +62,14 @@ const KeywordsConfirmDialog = ({
             variant="outline"
             onClick={onAdjust}
             disabled={isGenerating}
-            className="flex-1 border-[#232D4B] text-[#232D4B] hover:bg-blue-50"
+            className="flex-1 border-[#232D4B] text-[#232D4B] hover:bg-[rgba(26,46,90,0.05)]"
           >
             {t('journey.keywords_confirm.adjust_button')}
           </Button>
           <Button
             onClick={handleConfirm}
             disabled={isGenerating}
-            className="flex-1 bg-[#F5C518] hover:bg-yellow-500 text-[#232D4B] font-semibold"
+            className="flex-1 bg-[#1a2e5a] hover:bg-[#142347] text-white font-semibold"
           >
             {isGenerating ? (
               <>

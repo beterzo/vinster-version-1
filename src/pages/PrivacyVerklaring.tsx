@@ -7,7 +7,7 @@ const PrivacyVerklaring = () => {
   const {
     t
   } = useTranslation();
-  return <div className="min-h-screen bg-gray-50 font-sans">
+  return <div className="min-h-screen bg-[#fafaf8] font-sans">
       {/* Header */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-6 py-6">
@@ -15,7 +15,7 @@ const PrivacyVerklaring = () => {
             <div className="flex items-center">
               <img alt="Vinster Logo" className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" onClick={() => navigate('/')} src="/lovable-uploads/6bdacbe4-acb6-406d-bfd4-f1690d74f0ac.png" />
             </div>
-            <Button onClick={() => navigate('/')} variant="outline" className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold">
+            <Button onClick={() => navigate('/')} variant="outline" className="border-[#1a2e5a] text-[#1a2e5a] hover:bg-[rgba(26,46,90,0.05)] font-semibold">
               {t('privacy.back_to_home')}
             </Button>
           </div>

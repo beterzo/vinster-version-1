@@ -14,7 +14,7 @@ const ZoekprofielIntro = () => {
   const { hasExistingZoekprofiel, loading } = useExistingZoekprofiel();
 
   if (loading) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">{t('common.loading')}</div>;
+    return <div className="min-h-screen bg-[#fafaf8] flex items-center justify-center">{t('common.loading')}</div>;
   }
 
   return (
@@ -23,7 +23,7 @@ const ZoekprofielIntro = () => {
       isLoading={stepAccess.isLoading}
       blockedReason={stepAccess.zoekprofiel.blockedReason}
     >
-    <div className="min-h-screen bg-gray-50 font-sans">
+    <div className="min-h-screen bg-[#fafaf8] font-sans">
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">

@@ -356,7 +356,7 @@ const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated
               size="lg" 
               onClick={handleGenerateReport} 
               disabled={isGenerating} 
-              className="text-lg px-8 py-6 bg-[#F5C518] hover:bg-yellow-500 text-[#232D4B] font-bold"
+              className="text-lg px-8 py-6 bg-[#1a2e5a] hover:bg-[#142347] text-white font-bold"
             >
               {isGenerating ? (
                 <>
@@ -406,14 +406,14 @@ const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated
             </div>
 
             {/* Werkomgeving */}
-            <div className="p-4 rounded-xl bg-[#E8F4FD] border-l-4 border-[#78BFE3]">
+            <div className="p-4 rounded-xl bg-[#fffbeb] border-l-4 border-[#F5C518]">
               <h4 className="font-semibold text-[#232D4B] mb-3 flex items-center gap-2">
-                <span className="w-6 h-6 bg-[#78BFE3] rounded-full flex items-center justify-center text-white text-xs font-bold">2</span>
+                <span className="w-6 h-6 bg-[#232D4B] rounded-full flex items-center justify-center text-white text-xs font-bold">2</span>
                 {t('rapport.ideale_functie.werkomgeving')}
               </h4>
               <div className="flex flex-wrap gap-2">
                 {reportContent.ideale_functie?.werkomgeving?.map((item: string, i: number) => (
-                  <span key={i} className="px-3 py-1 bg-white rounded-full text-sm text-[#232D4B] border border-[#78BFE3]">
+                  <span key={i} className="px-3 py-1 bg-white rounded-full text-sm text-[#232D4B] border border-[#e5e7eb]">
                     {item}
                   </span>
                 ))}
@@ -421,7 +421,7 @@ const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated
             </div>
 
             {/* Interessegebieden */}
-            <div className="p-4 rounded-xl bg-[#E8F4FD] border-l-4 border-[#232D4B]">
+            <div className="p-4 rounded-xl bg-[#fffbeb] border-l-4 border-[#232D4B]">
               <h4 className="font-semibold text-[#232D4B] mb-3 flex items-center gap-2">
                 <span className="w-6 h-6 bg-[#232D4B] rounded-full flex items-center justify-center text-white text-xs font-bold">3</span>
                 {t('rapport.ideale_functie.interessegebieden')}
@@ -443,8 +443,8 @@ const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated
           <div className="space-y-4">
             {/* Passend 1 - Donkerblauw */}
             {reportContent.beroepen?.passend_1 && (
-              <div className="border-l-4 p-4 rounded-r-xl bg-[#E8F4FD]" style={{ borderColor: '#232D4B' }}>
-                <span className="px-3 py-1 rounded-full text-xs font-medium text-white mb-2 inline-block bg-[#232D4B]">
+              <div className="border-l-4 p-4 rounded-r-xl bg-white border border-[#e5e7eb]" style={{ borderLeftColor: '#232D4B' }}>
+                <span className="px-3 py-1 rounded-full text-xs font-medium text-white mb-2 inline-block bg-[#16a34a]">
                   {t('rapport.beroepen.passend')}
                 </span>
                 <h4 className="text-xl font-bold text-gray-900 mb-2">{reportContent.beroepen.passend_1.titel}</h4>
@@ -454,8 +454,8 @@ const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated
             
             {/* Passend 2 - Donkerblauw */}
             {reportContent.beroepen?.passend_2 && (
-              <div className="border-l-4 p-4 rounded-r-xl bg-[#E8F4FD]" style={{ borderColor: '#232D4B' }}>
-                <span className="px-3 py-1 rounded-full text-xs font-medium text-white mb-2 inline-block bg-[#232D4B]">
+              <div className="border-l-4 p-4 rounded-r-xl bg-white border border-[#e5e7eb]" style={{ borderLeftColor: '#232D4B' }}>
+                <span className="px-3 py-1 rounded-full text-xs font-medium text-white mb-2 inline-block bg-[#16a34a]">
                   {t('rapport.beroepen.passend')}
                 </span>
                 <h4 className="text-xl font-bold text-gray-900 mb-2">{reportContent.beroepen.passend_2.titel}</h4>
@@ -465,8 +465,8 @@ const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated
             
             {/* Verrassend - Lichtblauw */}
             {reportContent.beroepen?.verrassend && (
-              <div className="border-l-4 p-4 rounded-r-xl bg-[#E8F4FD]" style={{ borderColor: '#78BFE3' }}>
-                <span className="px-3 py-1 rounded-full text-xs font-medium text-white mb-2 inline-block bg-[#78BFE3]">
+              <div className="border-l-4 p-4 rounded-r-xl bg-white border border-[#e5e7eb]" style={{ borderLeftColor: '#F5C518' }}>
+                <span className="px-3 py-1 rounded-full text-xs font-medium mb-2 inline-block bg-[#F5C518] text-[#1a2e5a]">
                   {t('rapport.beroepen.verrassend')}
                 </span>
                 <h4 className="text-xl font-bold text-gray-900 mb-2">{reportContent.beroepen.verrassend.titel}</h4>
@@ -481,14 +481,14 @@ const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated
           <Button
             onClick={handlePrint}
             variant="outline"
-            className="border-[#232D4B] text-[#232D4B] hover:bg-blue-50"
+            className="border-[#232D4B] text-[#232D4B] hover:bg-[rgba(26,46,90,0.05)]"
           >
             <Printer className="w-4 h-4 mr-2" />
             {t('dashboard.round_dashboard.actions.print_button')}
           </Button>
           <Button 
             onClick={onNext}
-            className="bg-[#F5C518] hover:bg-yellow-500 text-[#232D4B] font-semibold px-8"
+            className="bg-[#1a2e5a] hover:bg-[#142347] text-white font-semibold px-8"
           >
             {t('common.button.next')}
           </Button>

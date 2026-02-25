@@ -49,7 +49,7 @@ const OrganisatieIntro = () => {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+    <div className="min-h-screen flex flex-col bg-[#fafaf8]">
       {/* Header */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-6 py-6">
@@ -63,7 +63,7 @@ const OrganisatieIntro = () => {
             <Button
               onClick={() => navigate(`/organisaties/${slug}`)}
               variant="outline"
-              className="border-[#232D4B] text-[#232D4B] hover:bg-blue-50 font-semibold"
+              className="border-[#1a2e5a] text-[#1a2e5a] hover:bg-[rgba(26,46,90,0.05)] font-semibold"
             >
               Terug
             </Button>
@@ -131,7 +131,7 @@ const OrganisatieIntro = () => {
           </div>
 
           {/* Vertrouwelijk & flexibel */}
-          <div className="bg-[#E8F4FD] rounded-xl p-5 flex gap-4">
+          <div className="bg-[#fffbeb] border-l-4 border-[#F5C518] rounded-xl p-5 flex gap-4">
             <Shield className="h-6 w-6 text-[#232D4B] mt-0.5 flex-shrink-0" />
             <div>
               <h3 className="font-semibold text-[#232D4B] mb-1">Vertrouwelijk & flexibel</h3>

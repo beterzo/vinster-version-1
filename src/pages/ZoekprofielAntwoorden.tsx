@@ -123,12 +123,12 @@ const ZoekprofielAntwoorden = () => {
   };
 
   if (loading || zoekprofielLoading) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">{t('common.loading')}</div>;
+    return <div className="min-h-screen bg-[#fafaf8] flex items-center justify-center">{t('common.loading')}</div>;
   }
 
   // Don't show the form if user already has a zoekprofiel
   if (hasExistingZoekprofiel) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">{t('common.redirecting')}</div>;
+    return <div className="min-h-screen bg-[#fafaf8] flex items-center justify-center">{t('common.redirecting')}</div>;
   }
 
   const questions = [
@@ -179,7 +179,7 @@ const ZoekprofielAntwoorden = () => {
   const allFieldsFilled = Object.values(formData).every(answer => answer.trim() !== "");
 
   return (
-    <div className="min-h-screen bg-gray-50 font-sans">
+    <div className="min-h-screen bg-[#fafaf8] font-sans">
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
@@ -240,7 +240,7 @@ const ZoekprofielAntwoorden = () => {
                   type="button"
                   onClick={() => navigate("/home")}
                   variant="outline"
-                  className="border-blue-900 text-blue-900 hover:bg-blue-50"
+                  className="border-[#1a2e5a] text-[#1a2e5a] hover:bg-[rgba(26,46,90,0.05)]"
                 >
                   {t('journey.zoekprofiel.antwoorden.back_button')}
                 </Button>

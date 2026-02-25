@@ -24,7 +24,7 @@ const WensberoepenVoltooiPagina = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 font-sans">
+    <div className="min-h-screen bg-[#fafaf8] font-sans">
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
@@ -108,7 +108,7 @@ const WensberoepenVoltooiPagina = () => {
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Button 
                 onClick={handleProfielVoltooien} 
-                className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold px-8 py-3 text-lg"
+                className="bg-[#1a2e5a] hover:bg-[#142347] text-white font-semibold px-8 py-3 text-lg"
               >
                 {t('wensberoepen.voltooi.create_report_button')}
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -116,7 +116,7 @@ const WensberoepenVoltooiPagina = () => {
               <Button 
                 onClick={handleTerugNaarOverzicht} 
                 variant="outline" 
-                className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold px-8 py-3 text-lg"
+                className="border-[#1a2e5a] text-[#1a2e5a] hover:bg-[rgba(26,46,90,0.05)] font-semibold px-8 py-3 text-lg"
               >
                 {t('wensberoepen.voltooi.back_to_overview_button')}
               </Button>
