@@ -1,35 +1,49 @@
 
 
-## Fix signup timeout-afhandeling en glassmorphism op signup pagina
+## Twee aanpassingen
 
-### Probleem 1: Signup lijkt niet te werken
+### 1. Organisatie-badge toevoegen aan Dashboard en PaymentRequired
 
-De `send-confirmation-email` edge function heeft soms een cold start die langer dan 5 seconden duurt. Supabase geeft dan een `hook_timeout` error terug, maar het account wordt WEL aangemaakt en de verificatie-email wordt WEL verstuurd. De gebruiker ziet echter een foutmelding.
+Dezelfde badge (Building2 icoon + organisatienaam, gele achtergrond) die nu op de RondeDashboard staat, wordt ook toegevoegd aan:
 
-**Oplossing:** In `src/pages/SignupPage.tsx` de hook_timeout error afhandelen als een succes in plaats van een fout. Als de foutmelding "hook_timeout" of "maximum time" bevat, sturen we de gebruiker gewoon door naar de verificatiepagina (want het account is aangemaakt en de email is verzonden).
+**Dashboard (`src/components/Dashboard.tsx`)**
+- Import `useOrganisation` en `Building2`
+- Badge plaatsen in de welkomst-card, direct onder de welkomsttekst (regel 175-176), voor de beschrijvingstekst
 
-Betreffende code (regel 54-56): In plaats van een foutmelding te tonen, behandelen we dit als succes en navigeren naar `/email-verification`.
+**PaymentRequired (`src/pages/PaymentRequired.tsx`)**
+- Import `useOrganisation` en `Building2`
+- Badge plaatsen in de welkomstsectie, direct onder de subtitel (regel 183-184)
 
-### Probleem 2: Glassmorphism ontbreekt op signup pagina
+Styling is identiek aan de RondeDashboard badge:
+`inline-flex items-center gap-1.5 text-xs font-medium bg-[#FEF9E6] text-[#232D4B] px-3 py-1 rounded-full`
 
-**Oplossing:** In `src/pages/SignupPage.tsx` regel 110 aanpassen:
+### 2. WelkomInline stappen-grid centreren
 
-Van:
+**WelkomInline (`src/components/journey/WelkomInline.tsx`)**
+
+Huidige grid (regel 112):
 ```
-bg-white bg-opacity-90 rounded-2xl p-8 max-w-md
+grid gap-4 md:grid-cols-2 lg:grid-cols-3
+```
+Dit zet 3 kaarten bovenaan en 2 (of 3) links-uitgelijnd onderaan.
+
+Oplossing: de grid-container veranderen zodat de onderste rij gecentreerd wordt. Dit doe ik door de grid-container `justify-items-center` te geven en de items een `max-w` mee te geven, OF door een flexbox-aanpak te gebruiken:
+
+Verander van een CSS grid naar een flex-wrap layout:
+```
+flex flex-wrap justify-center gap-4
+```
+Met elk item een vaste breedte:
+```
+w-full md:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.75rem)]
 ```
 
-Naar (identiek aan login pagina):
-```
-bg-white/15 backdrop-blur-[8px] border border-white/20 rounded-xl p-8 max-w-md
-```
-
-En de blockquote tekst van `text-blue-900` naar `text-white drop-shadow-sm` (ook identiek aan login pagina).
+Dit zorgt ervoor dat bij 5 items (organisatie-modus) de 2 onderste kaarten gecentreerd staan, en bij 6 items (normaal) ze netjes 3+3 vullen.
 
 ### Bestanden
 
 | Bestand | Wijziging |
 |---------|-----------|
-| `src/pages/SignupPage.tsx` | 1) Hook timeout als succes behandelen (regel 54-56), 2) Glassmorphism styling toepassen (regel 110-113) |
-
-Geen edge function changes nodig. Geen database wijzigingen.
+| `src/components/Dashboard.tsx` | Organisatie-badge in welkomst-card |
+| `src/pages/PaymentRequired.tsx` | Organisatie-badge in welkomstsectie |
+| `src/components/journey/WelkomInline.tsx` | Grid naar flex-wrap voor gecentreerde onderste rij |
