@@ -1,0 +1,1 @@
+UPDATE public.organisation_access_codes SET code = 'MoleWaterPlein3015' WHERE id = 'eb1a1530-a812-454f-af01-cba2c14138be';
