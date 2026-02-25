@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 /**
  * Utility function to clean keywords by removing quotes and unwanted characters
  */
@@ -58,7 +57,7 @@ export const boldQuotedKeywords = (text: string): React.ReactNode[] => {
       result.push(text.slice(lastIndex, match.index));
     }
     result.push(
-      <strong key={keyIndex++} className="font-bold text-[#1a2e5a]">{match[1]}</strong>
+      React.createElement('strong', { key: keyIndex++, className: 'font-bold text-[#1a2e5a]' }, match[1])
     );
     lastIndex = regex.lastIndex;
   }
