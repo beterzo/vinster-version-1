@@ -115,7 +115,7 @@ Je ontvangt informatie over een aantal wensberoepen van een gebruiker en ook ove
 
 Je vertaalt dit profiel naar drie bestaande functies die passen bij het Nederlandse arbeidslandschap. Dit zijn:
 • Twee logische, passende beroepen die direct aansluiten op de voorkeuren van de gebruiker
-• Eén verrassend, maar goed beargumenteerd alternatief dat ook écht bestaat (dus geen verzonnen functietitel)
+• Eén verrassend en avontuurlijk alternatief — een functie die de gebruiker zelf waarschijnlijk niet snel zou bedenken, maar die qua opleidingsniveau en kernvaardigheden wél haalbaar is. Durf creatief te denken en buiten de gebaande paden te gaan, maar het moet een écht bestaand beroep zijn (geen verzonnen functietitel)
 
 Voor elk beroep geef je een heldere, korte uitleg (max. 6 zinnen) waarin je actief de kernwoorden verwerkt en laat zien waarom deze functie bij de gebruiker past. Houd daarbij rekening met het opleidingsniveau, fysieke beperkingen (indien van toepassing), sectorvoorkeur en andere context.
 
@@ -251,7 +251,7 @@ Opdracht:
 Bedenk drie concrete functies die bij deze persoon passen:
 • Kies uitsluitend bestaande beroepen die in Nederland gangbaar zijn
 • Gebruik bijvoorbeeld beroepentitels zoals opgenomen in NLQF/BIG/ISCO-structuren, of zoals te vinden op websites als werk.nl, nationaleberoepengids.nl of 123test.nl
-• Geef twee passende beroepen en één verrassend beroep (dat buiten verwachting ligt, maar goed onderbouwd is)
+• Geef twee passende beroepen en één verrassend en avontuurlijk beroep — iets dat de gebruiker zelf waarschijnlijk niet zou bedenken, maar dat wél aansluit bij het opleidingsniveau en de kernvaardigheden. Denk creatief en buiten de gebaande paden
 • Voeg bij elk beroep een korte uitleg toe van maximaal 40 woorden
 • Schrijf altijd volledige, afgeronde zinnen - geen afgekapte tekst
 • Verwerk actief de gegenereerde kernwoorden in de uitleg
@@ -268,7 +268,7 @@ You receive information about several desired occupations from a user, as well a
 
 You translate this profile into three existing roles that fit within the European labour market. These are:
 • Two logical, fitting occupations that directly match the user's preferences
-• One surprising, but well-argued alternative that really exists (so no invented job titles)
+• One surprising, more adventurous alternative — a role the user would likely not have thought of themselves, but that still matches their education level and core competencies. Think creatively and outside the box, but it must be a real, existing occupation (no invented job titles)
 
 For each occupation, you provide a clear, concise explanation (max. 6 sentences) in which you actively use the keywords and show why this role fits the user. You take into account the user's education level, physical limitations (if applicable), sector preference and other relevant context.
 
@@ -414,7 +414,7 @@ Generate three concrete job suggestions that fit this person:
 
 • Choose only existing occupations commonly used in Europe
 • Use job titles as found in SOC/O*NET/ESCO frameworks, or as found on websites like onetonline.org, prospects.ac.uk
-• Provide two fitting occupations and one surprising (but well-substantiated) option
+• Provide two fitting occupations and one surprising, adventurous option — something the user would likely not have thought of themselves, but that still matches their education level and core competencies. Think creatively and outside the box
 • Provide a short explanation per occupation (max 40 words)
 • Always write complete, finished sentences - no truncated text
 • Actively use the generated keywords in the explanation
@@ -431,7 +431,7 @@ Du erhältst Informationen über mehrere Wunschberufe einer Nutzerin oder eines 
 
 Du übersetzt dieses Profil in drei real existierende Berufe, die zum deutschen Arbeitsmarkt passen. Diese sind:
 • Zwei logische, passende Berufe, die direkt an die Präferenzen der Person anknüpfen
-• Ein überraschender, aber gut begründeter Alternativberuf, der ebenfalls real existiert (keine erfundenen Berufstitel)
+• Ein überraschender, kreativerer und etwas abenteuerlicherer Alternativberuf — ein Beruf, an den die Person selbst wahrscheinlich nicht gedacht hätte, der aber zum Bildungsniveau und den Kernkompetenzen passt. Denke kreativ und über den Tellerrand hinaus, aber es muss ein real existierender Beruf sein (keine erfundenen Berufstitel)
 
 Für jeden Beruf gibst du eine klare, kurze Erklärung (max. 6 Sätze), in der du die Schlüsselwörter aktiv einsetzt und nachvollziehbar erklärst, warum dieser Beruf zu der Person passt. Dabei berücksichtigst du Bildungsniveau, eventuelle körperliche Einschränkungen, Branchenpräferenzen und weiteren Kontext.
 
@@ -569,7 +569,7 @@ Aufgabe:
 Denke dir drei konkrete Berufe aus, die zu dieser Person passen:
 • Wähle ausschließlich bestehende Berufe, die im europäischen Kontext gebräuchlich sind
 • Nutze zum Beispiel Berufstitel, wie sie in Strukturen wie DEQF/BIG/ISCO vorkommen oder auf Websites wie berufenet.arbeitsagentur.de, BERUFENET der Bundesagentur für Arbeit, berufe.tv oder BERUFE-Entdecker der IHK zu finden sind
-• Gib zwei passende Berufe und einen überraschenden Beruf an (unerwartet, aber gut begründet)
+• Gib zwei passende Berufe und einen überraschenden, abenteuerlichen Beruf an — etwas, an das die Person selbst wahrscheinlich nicht gedacht hätte, das aber zum Bildungsniveau und den Kernkompetenzen passt. Denke kreativ und über den Tellerrand hinaus
 • Füge für jeden Beruf eine kurze Erklärung mit maximal 40 Wörtern hinzu
 • Schreibe immer vollständige, abgeschlossene Sätze - kein abgebrochener Text
 • Verarbeite die generierten Schlüsselwörter aktiv in den Erläuterungen
@@ -586,7 +586,7 @@ Du mottar informasjon om flere ønskede yrker fra en bruker, samt informasjon om
 
 Du oversetter denne profilen til tre eksisterende yrker som passer innenfor det norske arbeidsmarkedet. Disse er:
 • To logiske, passende yrker som direkte samsvarer med brukerens preferanser
-• Ett overraskende, men godt begrunnet alternativ som også finnes i virkeligheten (ingen oppdiktede yrkestitler)
+• Ett overraskende, mer kreativt og eventyrlig alternativ — et yrke brukeren sannsynligvis ikke ville tenkt på selv, men som likevel passer med utdanningsnivået og kjernekompetansene. Tenk kreativt og utenfor boksen, men det må være et reelt eksisterende yrke (ingen oppdiktede yrkestitler)
 
 For hvert yrke gir du en tydelig og kort forklaring (maks. 6 setninger) der du aktivt bruker nøkkelordene og forklarer hvorfor yrket passer brukeren. Du tar hensyn til utdanningsnivå, eventuelle fysiske begrensninger, sektorpreferanse og annen relevant kontekst.
 
@@ -733,7 +733,7 @@ Oppgave
 Lag tre konkrete jobbforslag som passer denne personen:
 • Velg kun eksisterende yrker som er vanlige i Norge og Europa
 • Bruk for eksempel yrkestitler som finnes i strukturer som NOKUT, Utdanning.no, NAVs yrkesbeskrivelser eller på nettsider som Finn.no, Arbeidsplassen.no eller utdanning.no
-• Gi to passende yrker og ett overraskende (men godt begrunnet) yrke
+• Gi to passende yrker og ett overraskende, eventyrlig yrke — noe brukeren sannsynligvis ikke ville tenkt på selv, men som likevel passer med utdanningsnivået og kjernekompetansene. Tenk kreativt og utenfor boksen
 • Forklaringen per yrke skal være maks 40 ord
 • Skriv alltid fullstendige, avsluttede setninger - ingen avbrutt tekst
 • Bruk nøkkelordene aktivt i forklaringene
@@ -1059,7 +1059,7 @@ Regels:
 1. Kies PRECIES 3 functies uit de ankerlijst.
 2. De 3 functies mogen NIET alle drie uit dezelfde categorie komen — zorg voor spreiding over minimaal 2 verschillende categorieën.
 3. Functie 1 en 2 zijn de meest logische en herkenbare matches op basis van de kernwoorden van de gebruiker.
-4. Functie 3 is bewust verrassend — een functie uit een andere categorie dan de gebruiker verwacht, maar die wél past bij de kernwoorden. Begin deze met: "En als verrassing..." of "Misschien had je dit niet verwacht, maar..."
+4. Functie 3 is bewust verrassend en avontuurlijk — een functie uit een andere categorie die de medewerker zelf niet snel zou bedenken, maar die wél aansluit bij het opleidingsniveau en de kernvaardigheden. Durf creatief te zijn en buiten de gebaande paden te denken, maar houd het haalbaar. Begin deze met: "En als verrassing..." of "Misschien had je dit niet verwacht, maar..."
 5. Schrijf per functie 2-3 zinnen:
    - Begin met een verwijzing naar de specifieke kernwoorden van de gebruiker
    - Leg concreet uit hoe deze functie eruitziet binnen Erasmus MC
@@ -1133,7 +1133,7 @@ Regels:
 1. Kies PRECIES 3 functies uit de ankerlijst.
 2. De 3 functies mogen NIET alle drie uit dezelfde categorie komen — zorg voor spreiding over minimaal 2 verschillende categorieën.
 3. Functie 1 en 2 zijn de meest logische en herkenbare matches op basis van de kernwoorden van de gebruiker.
-4. Functie 3 is bewust verrassend — een functie uit een andere categorie dan de gebruiker verwacht, maar die wél past bij de kernwoorden. Begin deze met: "En als verrassing..." of "Misschien had je dit niet verwacht, maar..."
+4. Functie 3 is bewust verrassend en avontuurlijk — een functie uit een andere categorie die de medewerker zelf niet snel zou bedenken, maar die wél aansluit bij het opleidingsniveau en de kernvaardigheden. Durf creatief te zijn en buiten de gebaande paden te denken, maar houd het haalbaar. Begin deze met: "En als verrassing..." of "Misschien had je dit niet verwacht, maar..."
 5. Schrijf per functie 2-3 zinnen:
    - Begin met een verwijzing naar de specifieke kernwoorden van de gebruiker
    - Leg concreet uit hoe deze functie eruitziet binnen een medisch centrum
