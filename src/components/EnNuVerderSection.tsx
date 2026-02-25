@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, MessageCircle, Trophy, ArrowRight } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,6 +16,7 @@ interface CardData {
   popupTextKey: string;
   buttonKey: string;
   link: string;
+  icon: 'coach' | 'game';
 }
 
 const cards: CardData[] = [
@@ -24,14 +25,16 @@ const cards: CardData[] = [
     subtitleKey: "en_nu_verder.coach.subtitle",
     popupTextKey: "en_nu_verder.coach.popup_text",
     buttonKey: "en_nu_verder.coach.button",
-    link: "https://www.deloopbaanopleiding.nl/register"
+    link: "https://www.deloopbaanopleiding.nl/register",
+    icon: 'coach'
   },
   {
     titleKey: "en_nu_verder.online_game.title",
     subtitleKey: "en_nu_verder.online_game.subtitle",
     popupTextKey: "en_nu_verder.online_game.popup_text",
     buttonKey: "en_nu_verder.online_game.button",
-    link: "https://loopbaanspel.nl/"
+    link: "https://loopbaanspel.nl/",
+    icon: 'game'
   }
 ];
 
@@ -39,10 +42,15 @@ const EnNuVerderSection = () => {
   const { t } = useTranslation();
   const [openDialog, setOpenDialog] = useState<number | null>(null);
 
+  const getIcon = (type: 'coach' | 'game') => {
+    if (type === 'coach') return <MessageCircle className="w-6 h-6 text-[#232D4B]" />;
+    return <Trophy className="w-6 h-6 text-[#232D4B]" />;
+  };
+
   return (
-    <div className="rounded-3xl p-8" style={{ backgroundColor: '#E6F0F6' }}>
+    <div className="rounded-2xl p-8 bg-white border border-gray-100 shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
       <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold text-vinster-blue mb-2">
+        <h2 className="text-2xl font-bold text-[#232D4B] mb-2">
           {t('dashboard.en_nu_verder.title')}
         </h2>
         <p className="text-gray-600">
@@ -54,22 +62,24 @@ const EnNuVerderSection = () => {
         {cards.map((card, index) => (
           <Card
             key={index}
-            className="p-6 bg-white rounded-2xl cursor-pointer hover:shadow-lg transition-shadow duration-200 border-0"
+            className="p-6 bg-white rounded-2xl cursor-pointer hover:shadow-lg transition-shadow duration-200 border border-gray-100 shadow-[0_2px_16px_rgba(0,0,0,0.06)] flex flex-col"
             onClick={() => setOpenDialog(index)}
           >
-            <div className="mb-4">
-              <img 
-                src="/lovable-uploads/loopbaan-logo.png" 
-                alt="Loopbaan logo" 
-                className="w-10 h-10 object-contain"
-              />
+            <div className="w-12 h-12 rounded-full bg-[#FEF9E6] flex items-center justify-center mb-4">
+              {getIcon(card.icon)}
             </div>
-            <h3 className="font-bold text-lg text-vinster-blue mb-2">
+            <h3 className="font-bold text-lg text-[#232D4B] mb-2">
               {t(`dashboard.${card.titleKey}`)}
             </h3>
-            <p className="text-gray-600 text-sm leading-relaxed">
+            <p className="text-gray-600 text-sm leading-relaxed mb-4 flex-1">
               {t(`dashboard.${card.subtitleKey}`)}
             </p>
+            <Button
+              className="bg-[#F5C518] hover:bg-[#e0b215] text-[#232D4B] rounded-lg px-4 py-2 text-sm font-medium w-fit gap-1"
+              onClick={(e) => { e.stopPropagation(); setOpenDialog(index); }}
+            >
+              Meer info <ArrowRight className="w-3.5 h-3.5" />
+            </Button>
           </Card>
         ))}
       </div>
@@ -78,18 +88,11 @@ const EnNuVerderSection = () => {
       {cards.map((card, index) => (
         <Dialog key={index} open={openDialog === index} onOpenChange={(open) => setOpenDialog(open ? index : null)}>
           <DialogContent className="sm:max-w-lg p-8">
-            {/* Blue accent line - Vinster blue */}
-            <div className="absolute top-4 left-6 w-16 h-1 rounded-full" style={{ backgroundColor: '#4B8FD3' }} />
-            
-            {/* Decorative elements - Vinster colors */}
-            <div className="absolute top-4 right-12 flex flex-col gap-1">
-              <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: '#E5B84F' }} />
-              <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: '#4B8FD3' }} />
-              <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: '#232D4B' }} />
-            </div>
+            {/* Blue accent line */}
+            <div className="absolute top-4 left-6 w-16 h-1 rounded-full bg-[#F5C518]" />
 
             <DialogHeader className="pt-6">
-              <DialogTitle className="text-2xl font-bold text-vinster-blue">
+              <DialogTitle className="text-2xl font-bold text-[#232D4B]">
                 {t(`dashboard.${card.titleKey}`)}
               </DialogTitle>
             </DialogHeader>
@@ -102,18 +105,7 @@ const EnNuVerderSection = () => {
               href={card.link} 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="flex items-center justify-center gap-2 bg-white border-2 border-gray-300 rounded-full px-8 py-4 font-semibold transition-all duration-200 w-full"
-              style={{ color: '#232D4B' }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#232D4B';
-                e.currentTarget.style.borderColor = '#232D4B';
-                e.currentTarget.style.color = 'white';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'white';
-                e.currentTarget.style.borderColor = '#d1d5db';
-                e.currentTarget.style.color = '#232D4B';
-              }}
+              className="flex items-center justify-center gap-2 bg-[#232D4B] hover:bg-[#1a2350] text-white rounded-xl px-8 py-3 h-12 font-semibold transition-all duration-200 w-full"
             >
               {t(`dashboard.${card.buttonKey}`)}
               <ExternalLink className="w-4 h-4" />

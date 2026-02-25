@@ -63,7 +63,7 @@ const JourneyStepNavigator = ({
                 onClick={() => isAccessible && onStepClick(step.id)}
                 disabled={!isAccessible}
                 className={`
-                  relative flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium
+                  relative flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-medium
                   transition-all duration-200
                   ${status === 'completed'
                     ? 'bg-white text-[#232D4B] hover:-translate-y-0.5 hover:shadow-card-hover cursor-pointer shadow-card'
