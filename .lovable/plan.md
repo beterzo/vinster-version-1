@@ -1,30 +1,27 @@
 
 
-## Fix: Laatste stap-kaart centreren in organisatie-modus
+## Fix: Dubbele bullets verwijderen in "Belangrijk om te weten"
 
 ### Probleem
-De laatste stap ("Onderzoeksplan") staat links uitgelijnd in een halve kolom, met lege ruimte rechts ernaast.
+Elke lijst-item heeft zowel een geel vinkje-icoon (vanuit de component) als een bullet-teken (`•`) in de tekst zelf. Dit geeft dubbele bullets.
+
+### Oorzaak
+De `•` staat hardcoded in `src/locales/nl/dashboard.json` bij elke `point1`–`point6` string.
 
 ### Oplossing
-In `src/components/journey/WelkomInline.tsx`, regel 140: de inner wrapper `max-width` aanpassen zodat de laatste oneven kaart niet dezelfde breedte krijgt als de actieve kaart (560px), maar 50% van de container — waardoor hij dezelfde visuele breedte heeft als de kaarten erboven.
+Verwijder het `•` teken (en de spatie erna) uit alle 6 punten in `src/locales/nl/dashboard.json`. Geen andere bestanden of talen worden aangepast.
 
-**Regel 140** veranderen van:
-```tsx
-<div className={`${isFullWidth ? 'max-w-[560px] mx-auto' : ''}`}>
-```
-naar:
-```tsx
-<div className={`${isCurrent && isOrganisationMode ? 'max-w-[560px] mx-auto' : isLastOddNonActive ? 'sm:max-w-[50%] mx-auto' : ''}`}>
-```
-
-Dit zorgt ervoor dat:
-- De **actieve kaart** nog steeds `max-w-[560px]` krijgt (prominent, gecentreerd)
-- De **laatste oneven locked kaart** `max-w-[50%]` krijgt, waardoor hij dezelfde breedte heeft als de kaarten in de 2-koloms rijen erboven, maar gecentreerd staat
-- Alle andere kaarten ongewijzigd blijven
+| Regel | Oud | Nieuw |
+|-------|-----|-------|
+| 58 | `"• Er zijn geen goede of foute antwoorden..."` | `"Er zijn geen goede of foute antwoorden..."` |
+| 59 | `"• Je kunt maximaal tien keer..."` | `"Je kunt maximaal tien keer..."` |
+| 60 | `"• Alle informatie wordt vertrouwelijk..."` | `"Alle informatie wordt vertrouwelijk..."` |
+| 61 | `"• Denk aan concrete situaties..."` | `"Denk aan concrete situaties..."` |
+| 62 | `"• Het is juist goed om de antwoorden..."` | `"Het is juist goed om de antwoorden..."` |
+| 63 | `"• Alle voortgang wordt automatisch opgeslagen"` | `"Alle voortgang wordt automatisch opgeslagen"` |
 
 ### Bestand
 
 | Bestand | Wijziging |
 |---------|-----------|
-| `src/components/journey/WelkomInline.tsx` | Regel 140: inner wrapper max-width conditioneel per kaarttype |
-
+| `src/locales/nl/dashboard.json` | `•` verwijderen uit point1 t/m point6 (regels 58-63) |
