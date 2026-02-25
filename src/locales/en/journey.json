@@ -345,13 +345,10 @@
     "intro": {
       "title": "Your career report",
       "subtitle": "Almost ready to generate your personal report",
-      "description": "Based on everything you have filled in during the enthusiasm scan, dream jobs and your personal profile, Vinster will now generate a personal career report.",
+      "description": "You have completed the enthusiasm scan, dream jobs and your personal profile. Based on all this information, Vinster will now generate a personal career report for you.",
       "what_you_get_title": "What you get",
       "what_you_get_item1": "An overview of activities, working conditions and interests that suit you",
-      "what_you_get_item2": "Three concrete job suggestions: two fitting and one surprising alternative",
-      "warning_title": "Please note",
-      "warning_text": "You can still go back to adjust your answers in the previous steps. Once you generate the report, your answers are fixed for this round.",
-      "continue_button": "Continue to confirmation"
+      "what_you_get_item2": "Three concrete job suggestions: two fitting and one surprising alternative"
     }
   },
   "rapport": {

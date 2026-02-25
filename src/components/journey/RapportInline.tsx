@@ -335,28 +335,12 @@ const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated
             </div>
           </div>
 
-          <div className="mb-8 p-6 bg-[#FEF3C7] rounded-xl border border-[#F5C518]">
-            <p className="text-gray-800">
-              <span className="font-bold text-[#232D4B]">{t('journey.loopbaanrapport.intro.warning_title')}: </span>
-              {t('journey.loopbaanrapport.intro.warning_text')}
-            </p>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              variant="outline" 
-              size="lg" 
-              onClick={onPrevious} 
-              disabled={isGenerating}
-              className="text-lg px-8 py-6 border-[#232D4B] text-[#232D4B]"
-            >
-              {t('common.button.previous')}
-            </Button>
+          <div className="flex justify-center">
             <Button 
               size="lg" 
               onClick={handleGenerateReport} 
               disabled={isGenerating} 
-              className="text-lg px-8 py-6 bg-[#1a2e5a] hover:bg-[#142347] text-white font-bold"
+              className="w-full sm:w-auto text-lg px-8 py-6 bg-[#232D4B] hover:bg-[#1a2350] text-white font-bold h-12"
             >
               {isGenerating ? (
                 <>
