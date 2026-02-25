@@ -1,34 +1,23 @@
 
+## Fix 6-stappen grid layout op de journey overview
 
-## E-mailverificatie verplicht maken op de verificatiepagina
+### Probleem
+De 6 stappen in de normale (niet-organisatie) modus gebruiken nu `flex flex-wrap` met berekende breedtes per kaart. Dit levert een ongelijk grid op.
 
-### Wat er verandert
-De huidige pagina zegt "Account aangemaakt! Je kunt nu direct inloggen." Dit wordt aangepast naar een duidelijke boodschap dat de gebruiker eerst zijn/haar e-mail moet bevestigen voordat hij/zij kan inloggen.
+### Oplossing
+Eén wijziging in `src/components/journey/WelkomInline.tsx`:
 
-### Wijzigingen
+**Grid container (regel 114)**: vervang de `flex flex-wrap justify-center gap-4` class voor de normale modus door een CSS grid:
 
-**1. `src/pages/EmailVerificationPage.tsx`**
-- Verwijder de "Account aangemaakt!" soft-verify flow
-- Toon in plaats daarvan een Mail-icoon (in plaats van CheckCircle) met de boodschap "Controleer je e-mail"
-- Beschrijving: "We hebben een verificatielink naar je e-mailadres gestuurd. Klik op de link om je account te activeren."
-- Verwijder de gele "je hoeft de mail niet te openen" notice
-- Vervang de primaire "Inloggen" knop door een subtielere "Terug naar inloggen" link
-- Houd de "E-mail niet ontvangen?" sectie met resend-functionaliteit
+```
+grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-[960px] mx-auto
+```
 
-**2. `src/locales/nl/auth.json`** - Alleen NL
-- `soft_verify_title` --> "Controleer je e-mail"
-- `soft_verify_description` --> "We hebben een verificatielink naar je e-mailadres gestuurd. Klik op de link in de e-mail om je account te activeren."
-- `soft_verify_notice` --> "Het kan een paar minuten duren voordat de e-mail binnenkomt. Controleer ook je spam folder."
-- `go_to_login` --> "Terug naar inloggen"
+**Kaart-breedte (regel 138)**: verwijder de berekende breedtes (`w-full md:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.75rem)]`) en gebruik simpelweg `col-span-1` -- de grid regelt de rest.
 
-**3. `src/locales/en/auth.json`** - Alleen EN
-- Zelfde aanpassingen in het Engels
+Dit geeft:
+- Desktop (lg+): 3 kolommen x 2 rijen -- perfect symmetrisch
+- Tablet (sm-lg): 2 kolommen (3 rijen)
+- Mobiel (kleiner dan sm): 1 kolom
 
-**4. `src/locales/de/auth.json`** en `src/locales/no/auth.json`**
-- Zelfde aanpassingen in Duits en Noors
-
-### Visuele wijzigingen
-- Icoon: van groen vinkje (CheckCircle) naar blauw mail-icoon (Mail)
-- Achtergrondkleur icoon: van groen naar blauw
-- Gele notice-box: wordt een neutrale info-box met de spam-tip
-- Primaire knop "Inloggen" wordt een secundaire/outline knop "Terug naar inloggen"
+Geen wijzigingen aan content, iconen, tekst, routing of card-styling.
