@@ -39,7 +39,7 @@ const JourneyStepNavigator = ({
 
   return (
     <div className="w-full overflow-x-auto pb-2">
-      <div className="flex items-center justify-between min-w-max gap-2 px-4">
+      <div className="flex items-center min-w-max px-4">
         {activeSteps.map((step, index) => {
           const status = getStepStatus(step.id);
           const isAccessible = isStepAccessible(step.id);
@@ -87,7 +87,7 @@ const JourneyStepNavigator = ({
 
               {index < activeSteps.length - 1 && (
                 <div className={`
-                  w-8 h-0.5 mx-1
+                  w-8 h-[2px] mx-2 flex-shrink-0
                   ${completedSteps.includes(step.id) ? 'bg-[#232D4B]' : 'bg-gray-300'}
                 `} />
               )}
