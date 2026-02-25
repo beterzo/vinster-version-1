@@ -111,7 +111,7 @@ const WelkomInline = ({
           <div className="mb-10">
             <div className={isOrganisationMode 
               ? "grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-[800px] mx-auto"
-              : "flex flex-wrap justify-center gap-4"
+              : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-[960px] mx-auto"
             }>
               {steps.map((step, index) => {
                 const status = getStepStatus(step.id);
@@ -135,7 +135,7 @@ const WelkomInline = ({
                   <div className={
                     isOrganisationMode
                       ? `${isFullWidth ? 'sm:col-span-2' : 'col-span-1'}`
-                      : `w-full md:w-[calc(50%-0.5rem)] ${lgWidth}`
+                      : 'col-span-1'
                   }>
                     <div className={`${isFullWidth ? 'max-w-[560px] mx-auto' : ''}`}>
                     <div 
