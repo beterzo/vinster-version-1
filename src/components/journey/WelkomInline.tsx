@@ -109,7 +109,7 @@ const WelkomInline = ({
 
           {/* Steps grid */}
           <div className="mb-10">
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <div className="flex flex-wrap justify-center gap-4">
               {steps.map((step, index) => {
                 const status = getStepStatus(step.id);
                 const isCompleted = status === 'completed';
@@ -117,91 +117,93 @@ const WelkomInline = ({
                 const isLocked = status === 'locked';
 
                 const cardContent = (
-                  <div 
-                    className={`
-                       rounded-2xl p-5 flex flex-col h-full transition-all duration-200
-                      ${isCompleted 
-                        ? 'bg-white border border-gray-200 shadow-card hover:-translate-y-0.5 hover:shadow-card-hover border-l-4 border-l-[#232D4B]' 
-                        : isCurrent 
-                          ? 'bg-white border-b-4 border-[#F5C518] shadow-card-hover' 
-                          : isLocked
-                            ? 'bg-gray-50 border border-gray-100 opacity-40 cursor-not-allowed'
-                            : 'bg-white border border-gray-100 shadow-card hover:-translate-y-0.5 hover:shadow-card-hover'
-                      }
-                    `}
-                  >
-                    <div className="flex items-start gap-4 flex-1">
-                      <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-semibold ${
-                        isCompleted 
-                          ? 'bg-[#232D4B] text-white' 
+                  <div className="w-full md:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.75rem)]">
+                    <div 
+                      className={`
+                         rounded-2xl p-5 flex flex-col h-full transition-all duration-200
+                        ${isCompleted 
+                          ? 'bg-white border border-gray-200 shadow-card hover:-translate-y-0.5 hover:shadow-card-hover border-l-4 border-l-[#232D4B]' 
                           : isCurrent 
-                            ? 'bg-[#F5C518] text-[#232D4B]' 
-                            : 'bg-gray-200 text-gray-500'
-                      }`}>
-                        {isCompleted ? (
-                          <CheckCircle2 className="w-5 h-5" />
-                        ) : isLocked ? (
-                          <Lock className="w-4 h-4" />
-                        ) : (
-                          <span>{step.number}</span>
-                        )}
-                      </div>
-
-                      <div className="flex-1 min-w-0 flex flex-col">
-                        <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-                          <step.icon className={`w-4 h-4 ${isLocked ? 'text-gray-400' : 'text-[#232D4B]'}`} />
-                          <h3 className={`font-semibold text-sm ${isLocked ? 'text-gray-400' : 'text-[#232D4B]'}`}>
-                            {step.title}
-                          </h3>
-                          {isCompleted && (
-                            <span className="text-xs bg-[#232D4B] text-white px-2 py-0.5 rounded-full font-medium">
-                              {t('welkom.step_completed')}
-                            </span>
-                          )}
-                          {isCurrent && (
-                            <span className="text-xs bg-[#F5C518] text-[#232D4B] px-2 py-0.5 rounded-full font-medium">
-                              {t('welkom.step_current')}
-                            </span>
+                            ? 'bg-white border-b-4 border-[#F5C518] shadow-card-hover' 
+                            : isLocked
+                              ? 'bg-gray-50 border border-gray-100 opacity-40 cursor-not-allowed'
+                              : 'bg-white border border-gray-100 shadow-card hover:-translate-y-0.5 hover:shadow-card-hover'
+                        }
+                      `}
+                    >
+                      <div className="flex items-start gap-4 flex-1">
+                        <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-semibold ${
+                          isCompleted 
+                            ? 'bg-[#232D4B] text-white' 
+                            : isCurrent 
+                              ? 'bg-[#F5C518] text-[#232D4B]' 
+                              : 'bg-gray-200 text-gray-500'
+                        }`}>
+                          {isCompleted ? (
+                            <CheckCircle2 className="w-5 h-5" />
+                          ) : isLocked ? (
+                            <Lock className="w-4 h-4" />
+                          ) : (
+                            <span>{step.number}</span>
                           )}
                         </div>
-                        
-                        <p className={`text-sm mb-2 leading-relaxed ${isLocked ? 'text-gray-400' : 'text-gray-600'}`}>
-                          {step.description}
-                        </p>
-                        
-                        {step.time && (
-                          <div className={`flex items-center gap-1.5 text-xs ${isLocked ? 'text-gray-400' : 'text-gray-500'}`}>
-                            <Clock className="w-3 h-3" />
-                            <span>{step.time}</span>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                    
-                    {isCompleted && onStepClick && (
-                      <div className="mt-auto pt-3 pl-14">
-                        <Button 
-                          variant="outline" 
-                          size="sm"
-                          onClick={() => onStepClick(step.id)}
-                          className="text-[#232D4B] border-[#232D4B]/20 hover:bg-[#232D4B] hover:text-white transition-colors"
-                        >
-                          <Eye className="w-4 h-4 mr-1" />
-                          {t('welkom.view_button')}
-                        </Button>
-                      </div>
-                    )}
 
-                    {isCurrent && onStepClick && (
-                      <div className="mt-auto pt-3">
-                        <Button 
-                          onClick={() => onStepClick(step.id)}
-                          className="bg-[#F5C518] hover:bg-[#d4a912] text-[#232D4B] font-bold px-6 py-3 rounded-xl w-full transition-all duration-200"
-                        >
-                          Ga verder →
-                        </Button>
+                        <div className="flex-1 min-w-0 flex flex-col">
+                          <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+                            <step.icon className={`w-4 h-4 ${isLocked ? 'text-gray-400' : 'text-[#232D4B]'}`} />
+                            <h3 className={`font-semibold text-sm ${isLocked ? 'text-gray-400' : 'text-[#232D4B]'}`}>
+                              {step.title}
+                            </h3>
+                            {isCompleted && (
+                              <span className="text-xs bg-[#232D4B] text-white px-2 py-0.5 rounded-full font-medium">
+                                {t('welkom.step_completed')}
+                              </span>
+                            )}
+                            {isCurrent && (
+                              <span className="text-xs bg-[#F5C518] text-[#232D4B] px-2 py-0.5 rounded-full font-medium">
+                                {t('welkom.step_current')}
+                              </span>
+                            )}
+                          </div>
+                          
+                          <p className={`text-sm mb-2 leading-relaxed ${isLocked ? 'text-gray-400' : 'text-gray-600'}`}>
+                            {step.description}
+                          </p>
+                          
+                          {step.time && (
+                            <div className={`flex items-center gap-1.5 text-xs ${isLocked ? 'text-gray-400' : 'text-gray-500'}`}>
+                              <Clock className="w-3 h-3" />
+                              <span>{step.time}</span>
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    )}
+                      
+                      {isCompleted && onStepClick && (
+                        <div className="mt-auto pt-3 pl-14">
+                          <Button 
+                            variant="outline" 
+                            size="sm"
+                            onClick={() => onStepClick(step.id)}
+                            className="text-[#232D4B] border-[#232D4B]/20 hover:bg-[#232D4B] hover:text-white transition-colors"
+                          >
+                            <Eye className="w-4 h-4 mr-1" />
+                            {t('welkom.view_button')}
+                          </Button>
+                        </div>
+                      )}
+
+                      {isCurrent && onStepClick && (
+                        <div className="mt-auto pt-3">
+                          <Button 
+                            onClick={() => onStepClick(step.id)}
+                            className="bg-[#F5C518] hover:bg-[#d4a912] text-[#232D4B] font-bold px-6 py-3 rounded-xl w-full transition-all duration-200"
+                          >
+                            Ga verder →
+                          </Button>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 );
 

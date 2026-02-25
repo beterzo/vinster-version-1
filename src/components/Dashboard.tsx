@@ -15,7 +15,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useToast } from "@/hooks/use-toast";
-import { Lock, Download, FileText, Play, Lightbulb, CheckCircle } from "lucide-react";
+import { Lock, Download, FileText, Play, Lightbulb, CheckCircle, Building2 } from "lucide-react";
+import { useOrganisation } from "@/contexts/OrganisationContext";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -32,6 +33,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { toast } = useToast();
+  const { name: organisationName } = useOrganisation();
   const { data: reportData, loading: reportLoading } = useRapportData();
   const { hasExistingZoekprofiel } = useExistingZoekprofiel();
   const stepAccess = useStepAccess();
@@ -174,6 +176,12 @@ const Dashboard = () => {
             <h1 className="text-[1.75rem] font-bold text-[#1a2e5a] mb-4">
               {t('dashboard.welcome').replace('{name}', firstName)}
             </h1>
+            {organisationName && (
+              <div className="inline-flex items-center gap-1.5 text-xs font-medium bg-[#FEF9E6] text-[#232D4B] px-3 py-1 rounded-full mb-4">
+                <Building2 className="w-3.5 h-3.5" />
+                {organisationName}
+              </div>
+            )}
             <p className="text-base leading-[1.7] text-[#4b5563] max-w-[600px] mb-6">
               {t('dashboard.description')}
             </p>
