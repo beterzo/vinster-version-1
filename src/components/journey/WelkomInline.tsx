@@ -115,9 +115,12 @@ const WelkomInline = ({
                 const isCompleted = status === 'completed';
                 const isCurrent = status === 'current';
                 const isLocked = status === 'locked';
+                const lgWidth = totalSteps === 5 && index < 2
+                  ? 'lg:w-[calc(50%-0.5rem)]'
+                  : 'lg:w-[calc(33.333%-0.75rem)]';
 
                 const cardContent = (
-                  <div className="w-full md:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.75rem)]">
+                  <div className={`w-full md:w-[calc(50%-0.5rem)] ${lgWidth}`}>
                     <div 
                       className={`
                          rounded-2xl p-5 flex flex-col h-full transition-all duration-200
