@@ -77,8 +77,8 @@ const EmailVerificationPage = () => {
         </div>
         
         <div className="relative z-10 h-full flex items-end p-12">
-          <div className="bg-white bg-opacity-90 rounded-2xl p-8 max-w-md">
-            <blockquote className="text-xl font-medium text-blue-900 leading-relaxed">
+          <div className="bg-white/15 backdrop-blur-[8px] border border-white/20 rounded-xl p-8 max-w-md">
+            <blockquote className="text-xl font-medium text-white leading-relaxed drop-shadow-sm">
               {t('auth.login.quote')}
             </blockquote>
           </div>
