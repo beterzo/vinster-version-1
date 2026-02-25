@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
-import { Calendar, CheckCircle, Play, Loader2 } from "lucide-react";
+import { Calendar, CheckCircle, Play, Loader2, ChevronRight } from "lucide-react";
 import { useUserRounds, UserRound, RoundReport } from "@/hooks/useUserRounds";
 import { useTranslation } from "@/hooks/useTranslation";
 
@@ -77,7 +77,7 @@ const RoundsOverview = ({ onViewReport, onResumeRound }: RoundsOverviewProps) =>
           <div
             key={round.id}
             onClick={() => navigate(`/ronde/${round.id}`)}
-            className="flex items-center justify-between p-4 bg-white rounded-xl border border-gray-100 hover:shadow-md transition-all cursor-pointer hover:border-[#232D4B]/20"
+            className="flex items-center justify-between p-5 bg-white rounded-xl border border-[#f0f0f0] border-l-4 border-l-[#1a2e5a] shadow-[0_2px_16px_rgba(0,0,0,0.08)] hover:-translate-y-[2px] hover:shadow-[0_6px_24px_rgba(0,0,0,0.12)] transition-all duration-150 cursor-pointer"
           >
             <div className="flex items-center gap-4">
               <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
@@ -99,8 +99,8 @@ const RoundsOverview = ({ onViewReport, onResumeRound }: RoundsOverviewProps) =>
                   </span>
                   <span className={`text-xs px-3 py-1 rounded-full font-semibold ${
                     round.status === 'completed'
-                      ? 'bg-[#232D4B] text-white'
-                      : 'bg-[#F5C518] text-[#232D4B]'
+                      ? 'bg-[#16a34a] text-white'
+                      : 'bg-[#F5C518] text-[#1a2e5a]'
                   }`}>
                     {round.status === 'completed' 
                       ? t('dashboard.rounds.status_completed')
@@ -115,11 +115,14 @@ const RoundsOverview = ({ onViewReport, onResumeRound }: RoundsOverviewProps) =>
               </div>
             </div>
 
-            <button 
-              className="bg-[#232D4B] hover:bg-[#1a2350] text-white rounded-lg px-4 py-2 h-10 font-medium transition-all duration-200 text-sm"
-            >
-              {t('dashboard.rounds.view_round')}
-            </button>
+            <div className="flex items-center gap-2">
+              <button 
+                className="bg-[#232D4B] hover:bg-[#1a2350] text-white rounded-lg px-4 py-2 h-10 font-medium transition-all duration-200 text-sm"
+              >
+                {t('dashboard.rounds.view_round')}
+              </button>
+              <ChevronRight className="w-[18px] h-[18px] text-[#9ca3af]" />
+            </div>
           </div>
         ))}
       </div>

@@ -172,12 +172,17 @@ const ExtraInformatieVragen = ({ mode = 'edit' }: StepProps) => {
             </div>
 
             {/* Questions */}
-            <div className="space-y-8">
+            <div className="space-y-10">
               {questions.map((item, index) => (
                 <div key={index}>
-                  <Label htmlFor={item.field} className="text-[#232D4B] font-semibold text-base mb-3 block text-left border-l-4 border-[#F5C518] pl-3">
-                    {index + 1}. {item.question}
-                  </Label>
+                  <div className="flex items-center mb-2">
+                    <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-[#1a2e5a] text-white text-xs font-bold mr-2.5 flex-shrink-0">
+                      {index + 1}
+                    </span>
+                    <Label htmlFor={item.field} className="text-base font-semibold text-[#1a2e5a]">
+                      {item.question}
+                    </Label>
+                  </div>
                   <Textarea
                     id={item.field}
                     placeholder={isViewMode ? "" : item.placeholder}
@@ -185,7 +190,7 @@ const ExtraInformatieVragen = ({ mode = 'edit' }: StepProps) => {
                     onChange={(e) => handleInputChange(item.field, e.target.value)}
                     onBlur={(e) => !isViewMode && handleInputBlur(item.field, e.target.value)}
                     disabled={isViewMode}
-                    className={`min-h-[100px] border-[#232D4B] border-2 bg-[#f8f9ff] focus:border-[#232D4B] focus:ring-[#232D4B] ${
+                    className={`min-h-[100px] border-[1.5px] border-[#d1d5db] rounded-[10px] p-3 text-[0.95rem] leading-[1.6] focus:border-[#1a2e5a] focus:bg-[#f8faff] focus:ring-0 focus:shadow-[0_0_0_3px_rgba(26,46,90,0.08)] ${
                       isViewMode ? 'bg-gray-100 cursor-not-allowed text-gray-700' : ''
                     }`}
                   />
@@ -194,19 +199,19 @@ const ExtraInformatieVragen = ({ mode = 'edit' }: StepProps) => {
             </div>
 
             {/* Navigation */}
-            <div className="flex justify-between pt-12">
+            <div className="flex justify-between mt-10 pt-6 border-t border-[#f0f0f0]">
               <Button 
                 onClick={handleBackToPriorities}
                 variant="outline"
-                className="border-2 border-[#232D4B] text-[#232D4B] hover:bg-gray-50 h-12 rounded-xl"
+                className="bg-transparent text-[#1a2e5a] border-[1.5px] border-[#1a2e5a] rounded-[10px] min-h-[48px] px-7 font-semibold hover:bg-gray-50"
               >
                 {t('profiel_voltooien.extra_informatie.back_button')}
               </Button>
               <Button 
                 onClick={handleComplete}
-                className={`font-semibold px-8 h-12 rounded-xl ${
+                className={`font-semibold px-8 min-h-[48px] rounded-[10px] ${
                   isViewMode || allFieldsFilled
-                    ? "bg-[#232D4B] hover:bg-[#1a2350] text-white" 
+                    ? "bg-[#1a2e5a] hover:bg-[#142347] hover:-translate-y-[1px] text-white transition-all duration-150" 
                     : "bg-gray-200 text-gray-400 cursor-not-allowed"
                 }`}
                 disabled={!isViewMode && !allFieldsFilled}

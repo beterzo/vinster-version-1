@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { usePrioriteitenResponses } from "@/hooks/usePrioriteitenResponses";
 import { cleanKeywords } from "@/utils/keywordUtils";
 import { useTranslation } from "@/hooks/useTranslation";
-import { Info } from "lucide-react";
+import { Info, Check } from "lucide-react";
 
 interface StepProps {
   mode?: 'edit' | 'view';
@@ -72,9 +72,9 @@ const PrioriteitenWerkomstandigheden = ({ mode = 'edit' }: StepProps) => {
     return <div className="min-h-screen bg-[#fafaf8] flex items-center justify-center">{t('common.loading')}</div>;
   }
 
-  // Use AI-generated keywords or fallback to empty array
   const availableKeywords = cleanKeywords(aiKeywords.werkomstandigheden || []);
   const canProceed = selectedKeywords.length >= 5;
+  const minReached = selectedKeywords.length >= 5;
 
   return (
     <div className="min-h-screen bg-[#fafaf8] font-sans">
@@ -115,34 +115,48 @@ const PrioriteitenWerkomstandigheden = ({ mode = 'edit' }: StepProps) => {
         <Card className="rounded-3xl shadow-card">
           <CardContent className="p-12">
             {/* Title */}
-            <div className="text-center mb-12">
+            <div className="text-center mb-8">
               <h1 className="text-3xl font-bold text-[#232D4B] mb-2">
                 {t('profiel_voltooien.prioriteiten.werkomstandigheden.title')}
               </h1>
               <p className="text-xl text-gray-600">
                 {t('profiel_voltooien.prioriteiten.werkomstandigheden.subtitle')}
               </p>
-              <p className="text-sm text-gray-500 mt-2">
-                {t('profiel_voltooien.prioriteiten.werkomstandigheden.selected_count').replace('{count}', selectedKeywords.length.toString())}
-              </p>
+            </div>
+
+            {/* Selection Counter */}
+            <div className="flex items-center gap-4 p-3 bg-white rounded-[10px] border border-[#e5e7eb] mb-5 max-w-md mx-auto">
+              <span className={`text-sm font-medium ${minReached ? 'text-[#16a34a]' : 'text-[#374151]'}`}>
+                {minReached ? 'Minimaal bereikt ✓' : 'Geselecteerd'}
+              </span>
+              <span className="text-sm font-bold text-[#1a2e5a]">{selectedKeywords.length} / 8</span>
+              <div className="h-1.5 rounded-full bg-[#e5e7eb] flex-1 overflow-hidden">
+                <div 
+                  className={`h-full rounded-full transition-all duration-200 ${minReached ? 'bg-[#16a34a]' : 'bg-[#F5C518]'}`}
+                  style={{ width: `${Math.min((selectedKeywords.length / 8) * 100, 100)}%` }}
+                />
+              </div>
             </div>
 
             {/* Keywords Grid */}
             {availableKeywords.length > 0 ? (
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mb-8">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
                 {availableKeywords.map((keyword) => (
                   <button
                     key={keyword}
                     onClick={() => !isViewMode && handleKeywordToggle(keyword)}
                     disabled={isViewMode}
-                    className={`p-3 rounded-lg border-2 transition-all duration-200 text-sm font-medium ${
+                    className={`relative p-3 rounded-[10px] transition-all duration-150 text-sm text-center ${
                       selectedKeywords.includes(keyword)
-                        ? "bg-[#232D4B] text-white border-[#232D4B] shadow-md"
+                        ? "bg-[#F5C518]/10 border-2 border-[#F5C518] text-[#1a2e5a] font-bold shadow-sm"
                         : isViewMode
-                          ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
-                          : "bg-white text-[#232D4B] border-gray-300 hover:border-[#232D4B] hover:bg-gray-50"
+                          ? 'bg-gray-200 text-gray-500 cursor-not-allowed border-[1.5px] border-gray-200'
+                          : "bg-white text-[#374151] border-[1.5px] border-[#d1d5db] font-medium hover:bg-[#f9fafb] hover:border-[#9ca3af] cursor-pointer"
                     }`}
                   >
+                    {selectedKeywords.includes(keyword) && (
+                      <Check className="absolute top-1.5 right-2 w-3.5 h-3.5 text-[#F5C518] stroke-[3]" />
+                    )}
                     {keyword}
                   </button>
                 ))}
@@ -174,19 +188,19 @@ const PrioriteitenWerkomstandigheden = ({ mode = 'edit' }: StepProps) => {
             </div>
 
             {/* Navigation */}
-            <div className="flex justify-between pt-8">
+            <div className="flex justify-between mt-8 pt-6 border-t border-[#f0f0f0]">
               <Button 
                 onClick={handlePrevious}
                 variant="outline"
-                className="border-[#232D4B] text-[#232D4B] hover:bg-gray-50 h-12"
+                className="bg-transparent text-[#1a2e5a] border-[1.5px] border-[#1a2e5a] rounded-[10px] min-h-[48px] px-7 font-semibold hover:bg-gray-50"
               >
                 {t('profiel_voltooien.prioriteiten.werkomstandigheden.previous_button')}
               </Button>
               <Button 
                 onClick={handleNext}
-                className={`font-semibold px-8 h-12 ${
+                className={`font-semibold px-8 min-h-[48px] rounded-[10px] ${
                   canProceed
-                    ? "bg-[#232D4B] hover:bg-[#1a2350] text-white" 
+                    ? "bg-[#1a2e5a] hover:bg-[#142347] hover:-translate-y-[1px] text-white transition-all duration-150" 
                     : "bg-gray-200 text-gray-400 cursor-not-allowed"
                 }`}
                 disabled={!canProceed}

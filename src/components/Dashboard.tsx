@@ -170,11 +170,11 @@ const Dashboard = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
           {/* Welcome Section - spans first 2 columns */}
-          <Card className="lg:col-span-2 p-8 border border-gray-100 rounded-3xl bg-white shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
-            <h1 className="text-3xl font-bold text-vinster-blue mb-4">
+          <Card className="lg:col-span-2 p-8 border border-gray-100 rounded-xl bg-white shadow-[0_2px_16px_rgba(0,0,0,0.06)]">
+            <h1 className="text-[1.75rem] font-bold text-[#1a2e5a] mb-4">
               {t('dashboard.welcome').replace('{name}', firstName)}
             </h1>
-            <p className="text-gray-700 leading-relaxed mb-6">
+            <p className="text-base leading-[1.7] text-[#4b5563] max-w-[600px] mb-6">
               {t('dashboard.description')}
             </p>
             
@@ -208,14 +208,14 @@ const Dashboard = () => {
           </Card>
 
           {/* Important Info - spans 2 columns, compact */}
-          <Card className="lg:col-span-2 p-8 border-0 border-l-4 border-[#F5C518] rounded-3xl bg-[#FEF9E6]">
+          <Card className="lg:col-span-2 p-8 border-0 border-l-4 border-[#F5C518] rounded-xl bg-[#FEF9E6]">
             <div className="flex items-start gap-3 mb-3">
               <Lightbulb className="w-6 h-6 text-[#F5C518] flex-shrink-0 mt-0.5" />
-              <h3 className="font-bold text-3xl text-[#232D4B]">
+              <h3 className="text-base font-bold text-[#1a2e5a] mb-2">
                 {t('dashboard.important_info.title')}
               </h3>
             </div>
-            <ul className="text-sm leading-snug grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 text-[#232D4B]">
+            <ul className="text-sm leading-[1.7] grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 text-[#374151]">
               <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-[#F5C518] flex-shrink-0 mt-0.5" />{t('dashboard.important_info.point1')}</li>
               <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-[#F5C518] flex-shrink-0 mt-0.5" />{t('dashboard.important_info.point2')}</li>
               <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-[#F5C518] flex-shrink-0 mt-0.5" />{t('dashboard.important_info.point3')}</li>
