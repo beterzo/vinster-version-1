@@ -10,6 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useOrganisation } from "@/contexts/OrganisationContext";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { supabase } from "@/integrations/supabase/client";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -20,11 +21,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { t } = useTranslation();
-  const { clearOrganisation } = useOrganisation();
-
-  useEffect(() => {
-    clearOrganisation();
-  }, [clearOrganisation]);
+  const { setOrganisation } = useOrganisation();
 
   useEffect(() => {
     const verified = searchParams.get('verified');
@@ -63,6 +60,32 @@ const LoginPage = () => {
         variant: "destructive"
       });
     } else {
+      // Check if user has an organisation session
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          const { data: orgSession } = await supabase
+            .from('user_organisation_sessions')
+            .select('organisation_type_id, access_code_id, organisation_types(slug, name)')
+            .eq('user_id', user.id)
+            .order('created_at', { ascending: false })
+            .limit(1)
+            .maybeSingle();
+
+          if (orgSession?.organisation_type_id && orgSession.organisation_types) {
+            const orgType = orgSession.organisation_types as unknown as { slug: string; name: string };
+            setOrganisation({
+              organisationTypeId: orgSession.organisation_type_id,
+              accessCodeId: orgSession.access_code_id,
+              slug: orgType.slug,
+              name: orgType.name,
+            });
+          }
+        }
+      } catch (err) {
+        console.error('Error restoring organisation context:', err);
+      }
+
       toast({
         title: t('login.login_success'),
         description: t('login.welcome_back')
