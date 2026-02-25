@@ -200,7 +200,7 @@ const OrganisatieLanding = () => {
                 </h2>
               </div>
               <p className="text-gray-600 mb-6">
-                Als je van een specifieke organisatie een toegangscode hebt ontvangen, kun je die hier gebruiken voor een traject op maat.
+                Als je van jouw organisatie een toegangscode hebt ontvangen, kun je die hier gebruiken voor een traject op maat.
               </p>
 
               <div className="grid gap-4 sm:grid-cols-2">
