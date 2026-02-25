@@ -12,10 +12,13 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
 import { Label } from "@/components/ui/label";
+import { useOrganisation } from "@/contexts/OrganisationContext";
+import { Building2 } from "lucide-react";
 const PaymentRequired = () => {
   const {
     user
   } = useAuth();
+  const { name: organisationName } = useOrganisation();
   const {
     toast
   } = useToast();
@@ -182,6 +185,12 @@ const PaymentRequired = () => {
           <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
             {t('payment.subtitle')}
           </p>
+          {organisationName && (
+            <div className="inline-flex items-center gap-1.5 text-xs font-medium bg-[#FEF9E6] text-[#232D4B] px-3 py-1 rounded-full mt-3">
+              <Building2 className="w-3.5 h-3.5" />
+              {organisationName}
+            </div>
+          )}
         </div>
 
         {/* Main content - responsive layout with aligned columns */}
