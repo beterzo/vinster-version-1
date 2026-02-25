@@ -24,8 +24,8 @@ const WhatDoYouGetCard = () => {
   const viewSample = String(t('landing.what_do_you_get.view_sample') || '');
 
   return (
-    <Card className="text-white p-6 md:p-8 rounded-3xl border-0 relative overflow-hidden h-full flex flex-col" style={{
-      backgroundColor: '#0476B9'
+    <Card className="text-white p-8 md:p-10 rounded-3xl border-0 relative overflow-hidden h-full flex flex-col shadow-card hover:shadow-card-hover transition-all duration-200" style={{
+      backgroundColor: '#232D4B'
     }}>
       <div className="space-y-6 flex-grow">
         <h2 className="text-2xl md:text-3xl font-bold leading-tight text-left">

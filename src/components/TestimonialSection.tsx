@@ -12,17 +12,18 @@ const TestimonialSection = () => {
         backgroundPosition: 'left 30%',
         backgroundRepeat: 'no-repeat'
       }}>
-        {/* Slightly darker overlay for better text readability */}
-        <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+        {/* Lighter overlay */}
+        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
         <div className="relative z-10 px-12 py-16 flex items-center min-h-[300px]">
-          {/* Text positioned on the left */}
           <div className="max-w-lg">
-            <blockquote className="text-3xl font-bold leading-tight text-left" style={{
-              color: '#FFFFFF',
-              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
-            }}>
-              {t('landing.testimonial')}
-            </blockquote>
+            <div className="bg-white/15 backdrop-blur-[4px] border border-white/20 rounded-xl p-8">
+              <blockquote className="text-2xl md:text-3xl font-bold leading-tight text-left text-white">
+                {t('landing.testimonial')}
+              </blockquote>
+              <p className="text-white/80 text-sm mt-4 font-medium">
+                — Gebruiker, Vinster
+              </p>
+            </div>
           </div>
         </div>
       </div>

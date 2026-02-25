@@ -38,20 +38,21 @@
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Vinster brand tokens */
+    --vinster-navy: 222 38% 22%;
+    --vinster-navy-dark: 222 42% 18%;
+    --vinster-yellow: 47 92% 53%;
+    --vinster-yellow-dark: 47 92% 46%;
+    --vinster-off-white: 40 14% 97%;
+    --vinster-warm-white: 40 25% 98%;
   }
 
   .dark {
@@ -90,11 +91,6 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
-
-    --vinster-navy: 222 38% 22%;
-    --vinster-yellow: 47 92% 53%;
-    --vinster-off-white: 40 14% 97%;
-    --vinster-blue-light: 200 68% 95%;
   }
 }
 
@@ -111,10 +107,13 @@
 
 @layer utilities {
   .shadow-card {
-    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
   }
   .shadow-card-hover {
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  }
+  .bg-vinster-warm {
+    background-color: hsl(var(--vinster-warm-white));
   }
 }
 
