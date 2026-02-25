@@ -1,0 +1,1 @@
+UPDATE organisation_types SET is_active = true WHERE slug IN ('transport-logistiek', 'financieel');
