@@ -1,49 +1,30 @@
 
 
-## Twee aanpassingen
+## Layout stappen-grid aanpassen: 2 boven + 3 onder
 
-### 1. Organisatie-badge toevoegen aan Dashboard en PaymentRequired
+### Probleem
+Bij 5 stappen (organisatie-modus) worden ze nu 3+2 verdeeld, wat er onevenwichtig uitziet. Bij 6 stappen (normaal) worden ze 3+3 verdeeld, wat prima is.
 
-Dezelfde badge (Building2 icoon + organisatienaam, gele achtergrond) die nu op de RondeDashboard staat, wordt ook toegevoegd aan:
+### Oplossing
+In `src/components/journey/WelkomInline.tsx` de breedte per kaart dynamisch maken op basis van het totaal aantal stappen en de positie:
 
-**Dashboard (`src/components/Dashboard.tsx`)**
-- Import `useOrganisation` en `Building2`
-- Badge plaatsen in de welkomst-card, direct onder de welkomsttekst (regel 175-176), voor de beschrijvingstekst
+- **5 stappen (organisatie-modus):** eerste 2 kaarten krijgen `lg:w-[calc(50%-0.5rem)]` (2 per rij), de onderste 3 kaarten krijgen `lg:w-[calc(33.333%-0.75rem)]` (3 per rij)
+- **6 stappen (normaal):** alle kaarten blijven `lg:w-[calc(33.333%-0.75rem)]` (3+3)
 
-**PaymentRequired (`src/pages/PaymentRequired.tsx`)**
-- Import `useOrganisation` en `Building2`
-- Badge plaatsen in de welkomstsectie, direct onder de subtitel (regel 183-184)
+### Technisch
+In de `cardContent` div (regel 120), de `lg:w-[...]` class dynamisch maken:
 
-Styling is identiek aan de RondeDashboard badge:
-`inline-flex items-center gap-1.5 text-xs font-medium bg-[#FEF9E6] text-[#232D4B] px-3 py-1 rounded-full`
-
-### 2. WelkomInline stappen-grid centreren
-
-**WelkomInline (`src/components/journey/WelkomInline.tsx`)**
-
-Huidige grid (regel 112):
 ```
-grid gap-4 md:grid-cols-2 lg:grid-cols-3
-```
-Dit zet 3 kaarten bovenaan en 2 (of 3) links-uitgelijnd onderaan.
-
-Oplossing: de grid-container veranderen zodat de onderste rij gecentreerd wordt. Dit doe ik door de grid-container `justify-items-center` te geven en de items een `max-w` mee te geven, OF door een flexbox-aanpak te gebruiken:
-
-Verander van een CSS grid naar een flex-wrap layout:
-```
-flex flex-wrap justify-center gap-4
-```
-Met elk item een vaste breedte:
-```
-w-full md:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.75rem)]
+const lgWidth = totalSteps === 5 && index < 2
+  ? 'lg:w-[calc(50%-0.5rem)]'
+  : 'lg:w-[calc(33.333%-0.75rem)]';
 ```
 
-Dit zorgt ervoor dat bij 5 items (organisatie-modus) de 2 onderste kaarten gecentreerd staan, en bij 6 items (normaal) ze netjes 3+3 vullen.
+De container (`flex flex-wrap justify-center gap-4`) blijft ongewijzigd.
 
-### Bestanden
+### Bestand
 
 | Bestand | Wijziging |
 |---------|-----------|
-| `src/components/Dashboard.tsx` | Organisatie-badge in welkomst-card |
-| `src/pages/PaymentRequired.tsx` | Organisatie-badge in welkomstsectie |
-| `src/components/journey/WelkomInline.tsx` | Grid naar flex-wrap voor gecentreerde onderste rij |
+| `src/components/journey/WelkomInline.tsx` | Dynamische breedte per kaart op basis van positie en totaal aantal stappen |
+
