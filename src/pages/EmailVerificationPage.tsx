@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { CheckCircle, ArrowRight, RefreshCw, Mail } from "lucide-react";
+import { RefreshCw, Mail } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -88,47 +88,28 @@ const EmailVerificationPage = () => {
       {/* Right side - Verification content */}
       <div className="bg-white flex items-center justify-center p-4 sm:p-6 lg:p-12">
         <div className="w-full max-w-md space-y-6 lg:space-y-8">
-          {/* Success header - Account created */}
+          {/* Header - Check your email */}
           <div className="text-center space-y-4">
-            <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
-              <CheckCircle className="w-8 h-8 text-green-600" />
+            <div className="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+              <Mail className="w-8 h-8 text-blue-600" />
             </div>
             
             <h1 className="text-2xl sm:text-3xl font-bold text-vinster-blue">
-              {t('auth.email_verification.soft_verify_title') || 'Account aangemaakt!'}
+              {t('auth.email_verification.soft_verify_title') || 'Controleer je e-mail'}
             </h1>
             
             <p className="text-gray-600">
-              {t('auth.email_verification.soft_verify_description') || 'Je kunt nu direct inloggen. We hebben ook een bevestigingsmail gestuurd.'}
+              {t('auth.email_verification.soft_verify_description') || 'We hebben een verificatielink naar je e-mailadres gestuurd. Klik op de link in de e-mail om je account te activeren.'}
             </p>
           </div>
 
-          {/* Info notice - No verification required */}
-          <div className="bg-[#fffbeb] border border-amber-200 rounded-lg p-4">
+          {/* Spam notice */}
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
             <div className="flex items-start space-x-3">
-              <Mail className="w-5 h-5 text-[#232D4B] mt-0.5 flex-shrink-0" />
-              <div className="text-sm text-[#232D4B]">
-                <p>{t('auth.email_verification.soft_verify_notice') || 'Je hoeft de mail niet per se te openen - je kunt gewoon inloggen.'}</p>
+              <Mail className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+              <div className="text-sm text-gray-700">
+                <p>{t('auth.email_verification.soft_verify_notice') || 'Het kan een paar minuten duren voordat de e-mail binnenkomt. Controleer ook je spam folder.'}</p>
               </div>
-            </div>
-          </div>
-
-          {/* Primary action: Go to login */}
-          <Button 
-            onClick={handleGoToLogin}
-            className="w-full py-6 text-lg font-semibold"
-            style={{ 
-              backgroundColor: '#E4C05B', 
-              color: '#1F2937'
-            }}
-          >
-            {t('auth.email_verification.go_to_login') || 'Inloggen'}
-          </Button>
-
-          {/* Separator */}
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t border-gray-200" />
             </div>
           </div>
 
@@ -165,10 +146,17 @@ const EmailVerificationPage = () => {
             </div>
           </div>
 
-          <div className="text-center">
+          <div className="text-center space-y-3">
+            <Button 
+              onClick={handleGoToLogin}
+              variant="outline"
+              className="w-full"
+            >
+              {t('auth.email_verification.go_to_login') || 'Terug naar inloggen'}
+            </Button>
             <Link 
               to="/" 
-              className="text-sm text-blue-600 hover:text-blue-800 underline"
+              className="text-sm text-muted-foreground hover:text-foreground underline block"
             >
               {t('auth.email_verification.back_to_home') || 'Terug naar startpagina'}
             </Link>
