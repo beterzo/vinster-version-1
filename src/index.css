@@ -90,6 +90,11 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --vinster-navy: 222 38% 22%;
+    --vinster-yellow: 47 92% 53%;
+    --vinster-off-white: 40 14% 97%;
+    --vinster-blue-light: 200 68% 95%;
   }
 }
 
@@ -101,6 +106,15 @@
   body {
     @apply bg-background text-foreground;
     font-family: 'urw-form', sans-serif;
+  }
+}
+
+@layer utilities {
+  .shadow-card {
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+  }
+  .shadow-card-hover {
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
   }
 }
 
