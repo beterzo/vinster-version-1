@@ -204,8 +204,8 @@
     "prioriteiten": {
       "activiteiten": {
         "title": "Prioriteringer - aktiviteter",
-        "subtitle": "Velg minst 8 aktiviteter du liker å gjøre",
-        "selected_count": "Valgt: {count} av minst 8",
+        "subtitle": "Velg minst 5 aktiviteter du liker å gjøre",
+        "selected_count": "Valgt: {count} av minst 5",
         "missing_keywords": "Det er ikke generert personlige aktiviteter ennå. Fyll ut entusiasme-skanningen og drømmejobbene først.",
         "extra_text_label": "Savner du aktiviteter? Legg dem til her (valgfritt)",
         "extra_text_placeholder": "For eksempel: Fotografering, Programmering, Hagearbeid...",
