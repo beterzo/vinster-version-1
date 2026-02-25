@@ -109,18 +109,35 @@ const WelkomInline = ({
 
           {/* Steps grid */}
           <div className="mb-10">
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className={isOrganisationMode 
+              ? "grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-[800px] mx-auto"
+              : "flex flex-wrap justify-center gap-4"
+            }>
               {steps.map((step, index) => {
                 const status = getStepStatus(step.id);
                 const isCompleted = status === 'completed';
                 const isCurrent = status === 'current';
                 const isLocked = status === 'locked';
-                const lgWidth = totalSteps === 5 && index < 2
-                  ? 'lg:w-[calc(50%-0.5rem)]'
-                  : 'lg:w-[calc(33.333%-0.75rem)]';
+
+                // Organisation mode: active card full-width, others in 2-col grid
+                // Check if this is the last non-active card and there's an odd number of non-active cards
+                const nonActiveSteps = steps.filter((_, i) => getStepStatus(steps[i].id) !== 'current');
+                const isLastOddNonActive = isOrganisationMode && !isCurrent && 
+                  nonActiveSteps.length % 2 === 1 && 
+                  index === steps.length - 1;
+
+                const isFullWidth = isOrganisationMode && (isCurrent || isLastOddNonActive);
+
+                // Normal mode widths
+                const lgWidth = !isOrganisationMode ? 'lg:w-[calc(33.333%-0.75rem)]' : '';
 
                 const cardContent = (
-                  <div className={`w-full md:w-[calc(50%-0.5rem)] ${lgWidth}`}>
+                  <div className={
+                    isOrganisationMode
+                      ? `${isFullWidth ? 'sm:col-span-2' : 'col-span-1'}`
+                      : `w-full md:w-[calc(50%-0.5rem)] ${lgWidth}`
+                  }>
+                    <div className={`${isFullWidth ? 'max-w-[560px] mx-auto' : ''}`}>
                     <div 
                       className={`
                          rounded-2xl p-5 flex flex-col h-full transition-all duration-200
@@ -206,6 +223,7 @@ const WelkomInline = ({
                           </Button>
                         </div>
                       )}
+                    </div>
                     </div>
                   </div>
                 );
