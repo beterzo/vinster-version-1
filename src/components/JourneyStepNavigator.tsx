@@ -27,11 +27,8 @@ const JourneyStepNavigator = ({
   const isStepAccessible = (step: JourneyStep) => {
     const stepIndex = activeSteps.findIndex(s => s.id === step);
     if (stepIndex === 0) return true;
-    
     for (let i = 0; i < stepIndex; i++) {
-      if (!completedSteps.includes(activeSteps[i].id)) {
-        return false;
-      }
+      if (!completedSteps.includes(activeSteps[i].id)) return false;
     }
     return true;
   };
@@ -43,7 +40,6 @@ const JourneyStepNavigator = ({
     return 'active';
   };
 
-  // Find the first locked step's prerequisite for tooltip
   const getLockedTooltip = (stepIndex: number): string => {
     for (let i = stepIndex - 1; i >= 0; i--) {
       if (!completedSteps.includes(activeSteps[i].id)) {
@@ -56,7 +52,7 @@ const JourneyStepNavigator = ({
   return (
     <TooltipProvider delayDuration={200}>
       <div className="w-full overflow-x-auto">
-        <div className="flex items-center justify-center min-w-max">
+        <div className="flex items-center justify-center min-w-max gap-1">
           {activeSteps.map((step, index) => {
             const status = getStepStatus(step.id);
             const isAccessible = isStepAccessible(step.id);
@@ -70,9 +66,9 @@ const JourneyStepNavigator = ({
                   relative flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium
                   transition-all duration-200
                   ${status === 'completed'
-                    ? 'bg-[#E8F4FD] text-[#232D4B] hover:-translate-y-0.5 hover:shadow-card-hover cursor-pointer'
+                    ? 'bg-white text-[#232D4B] hover:-translate-y-0.5 hover:shadow-card-hover cursor-pointer shadow-card'
                     : isCurrent 
-                      ? 'bg-white text-[#232D4B] shadow-card border-l-[3px] border-[#F5C518]' 
+                      ? 'bg-white text-[#232D4B] shadow-card-hover border-b-[3px] border-[#F5C518]' 
                       : status === 'locked'
                         ? 'bg-gray-50 text-gray-400 opacity-50 cursor-not-allowed'
                         : 'bg-white text-[#232D4B] hover:-translate-y-0.5 hover:shadow-card cursor-pointer'
@@ -120,7 +116,7 @@ const JourneyStepNavigator = ({
 
                 {index < activeSteps.length - 1 && (
                   <div className={`
-                    w-6 h-[2px] mx-1.5 flex-shrink-0 rounded-full
+                    w-6 h-[2px] mx-2 flex-shrink-0 rounded-full
                     ${completedSteps.includes(step.id) ? 'bg-[#232D4B]' : 'bg-gray-200'}
                   `} />
                 )}

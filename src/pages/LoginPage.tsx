@@ -20,7 +20,6 @@ const LoginPage = () => {
   const { toast } = useToast();
   const { t } = useTranslation();
 
-  // Check for verification success parameter
   useEffect(() => {
     const verified = searchParams.get('verified');
     if (verified === 'true') {
@@ -69,7 +68,7 @@ const LoginPage = () => {
 
   return (
     <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2">
-      {/* Left side - Image with quote overlay */}
+      {/* Left side - Image with glassmorphism quote overlay */}
       <div className="relative hidden lg:block">
         <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
           backgroundImage: "url('/lovable-uploads/4bce3129-ec2c-4ee4-a082-bb74962f620e.png')"
@@ -78,8 +77,8 @@ const LoginPage = () => {
         </div>
         
         <div className="relative z-10 h-full flex items-end p-12">
-          <div className="bg-white bg-opacity-90 rounded-2xl p-8 max-w-md">
-            <blockquote className="text-xl font-medium text-blue-900 leading-relaxed">
+          <div className="bg-white/15 backdrop-blur-[8px] border border-white/20 rounded-xl p-8 max-w-md">
+            <blockquote className="text-xl font-medium text-white leading-relaxed drop-shadow-sm">
               {t('login.quote')}
             </blockquote>
           </div>
@@ -89,7 +88,6 @@ const LoginPage = () => {
       {/* Right side - Login form */}
       <div className="bg-white flex items-center justify-center p-4 sm:p-6 lg:p-12">
         <div className="w-full max-w-md space-y-6 lg:space-y-8">
-          {/* Header with Logo and Language Switcher */}
           <div className="flex items-center justify-between">
             <img 
               alt="Vinster Logo" 
@@ -100,9 +98,8 @@ const LoginPage = () => {
             <LanguageSwitcher />
           </div>
 
-          {/* Login form title */}
           <div className="text-center space-y-2">
-            <h1 className="text-2xl sm:text-3xl font-bold text-blue-900">
+            <h1 className="text-2xl sm:text-3xl font-bold text-[#232D4B]">
               {t('login.title')}
             </h1>
             <p className="text-gray-600">
@@ -112,7 +109,7 @@ const LoginPage = () => {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-blue-900 font-medium text-left block">
+              <Label htmlFor="email" className="text-[#232D4B] font-medium text-left block">
                 {t('login.email')}
               </Label>
               <Input 
@@ -121,13 +118,13 @@ const LoginPage = () => {
                 placeholder={t('login.email_placeholder')} 
                 value={email} 
                 onChange={e => setEmail(e.target.value)} 
-                className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900" 
+                className="h-12 px-4" 
                 required 
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password" className="text-blue-900 font-medium text-left block">
+              <Label htmlFor="password" className="text-[#232D4B] font-medium text-left block">
                 {t('login.password')}
               </Label>
               <Input 
@@ -136,7 +133,7 @@ const LoginPage = () => {
                 placeholder={t('login.password_placeholder')} 
                 value={password} 
                 onChange={e => setPassword(e.target.value)} 
-                className="h-12 px-4 border-gray-300 focus:border-blue-900 focus:ring-blue-900" 
+                className="h-12 px-4" 
                 required 
               />
             </div>
@@ -149,14 +146,14 @@ const LoginPage = () => {
                 </Label>
               </div>
               
-              <Link to="/forgot-password" className="text-sm font-semibold text-yellow-500 hover:text-yellow-600">
+              <Link to="/forgot-password" className="text-sm font-semibold text-[#F5C518] hover:text-[#d4a912]">
                 {t('login.forgot_password')}
               </Link>
             </div>
 
             <Button 
               type="submit" 
-              className="w-full h-12 bg-blue-900 hover:bg-blue-800 text-white font-semibold text-base rounded-lg" 
+              className="w-full h-12 bg-[#232D4B] hover:bg-[#1a2350] text-white font-semibold text-base rounded-[10px]" 
               disabled={isLoading}
             >
               {isLoading ? t('login.logging_in') : t('login.sign_in')}
@@ -165,7 +162,7 @@ const LoginPage = () => {
             <div className="text-center">
               <p className="text-sm text-gray-600">
                 {t('login.no_account')}{" "}
-                <Link to="/signup" className="font-semibold text-yellow-500 hover:text-yellow-600">
+                <Link to="/signup" className="font-semibold text-[#F5C518] hover:text-[#d4a912]">
                   {t('login.create_account')}
                 </Link>
               </p>

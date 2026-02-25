@@ -16,14 +16,12 @@ const HeroSection = () => {
         className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
         style={{ backgroundImage: "url('/lovable-uploads/b67ce5d1-c717-4a77-b5ad-550d88a42378.png')" }}
       >
-        {/* Overlay for better text readability - made lighter */}
         <div className="absolute inset-0 bg-black bg-opacity-20"></div>
       </div>
       
       <div className="relative z-10 max-w-[1440px] mx-auto px-6">
-        {/* Header with Logo (left) and Desktop Nav + LanguageSwitcher + Button (right) */}
+        {/* Header */}
         <div className="py-6 flex items-center justify-between">
-          {/* Left side - Logo */}
           <div className="flex items-center pt-1 -ml-4">
             <img 
               alt="Vinster Logo" 
@@ -33,42 +31,42 @@ const HeroSection = () => {
             />
           </div>
           
-          {/* Right side - Desktop Nav, Language Switcher, Login Button, Mobile Menu */}
           <div className="flex items-center space-x-4 mt-6">
-            {/* Desktop navigation - hidden on mobile */}
             <DesktopNavigation />
-            
-            {/* Language Switcher - visible on all screen sizes */}
             <LanguageSwitcher />
-            
-            {/* Login button - hidden on mobile */}
             <Button 
               onClick={() => navigate('/login')} 
-              className="hidden md:block bg-white hover:bg-gray-100 text-blue-900 font-semibold px-6 py-3 rounded-full border border-gray-200 shadow-sm transition-all duration-200 h-12"
+              className="hidden md:block bg-white hover:bg-gray-100 text-[#232D4B] font-semibold px-6 py-3 rounded-full border border-gray-200 shadow-sm transition-all duration-200 h-12"
             >
               {t('landing.login')}
             </Button>
-            
-            {/* Mobile Menu - only visible on mobile */}
             <MobileMenu />
           </div>
         </div>
         
-        {/* Main Hero Content - Changed to flex layout for better left alignment */}
+        {/* Main Hero Content */}
         <div className="flex items-center min-h-[400px]">
-          {/* Left Content - Made wider and fully left-aligned */}
           <div className="w-full max-w-2xl space-y-6 text-left pb-8">
             <div className="text-xl text-white leading-relaxed">
               {t('landing.tagline')}
             </div>
             
-            <h1 className="text-4xl font-bold text-white leading-tight">
-              {t('landing.welcome')} <span style={{ color: '#FFCD3E' }}>Vinster</span>
+            <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight">
+              {t('landing.welcome')} <span style={{ color: '#F5C518' }}>Vinster</span>
             </h1>
             
             <p className="text-xl text-white leading-relaxed">
               {t('landing.description')}
             </p>
+
+            <div className="pt-2">
+              <Button 
+                onClick={() => navigate('/signup')}
+                className="bg-[#F5C518] hover:bg-[#d4a912] text-[#232D4B] font-bold px-8 py-4 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5 h-auto"
+              >
+                {t('landing.process_steps.start_button') || 'Start hier voor €29'}
+              </Button>
+            </div>
           </div>
         </div>
       </div>

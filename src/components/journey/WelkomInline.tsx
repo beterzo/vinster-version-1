@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "@/hooks/useTranslation";
-import { Clock, CheckCircle2, FileText, Search, Lightbulb, User, ClipboardList, MapPin, Lock, ChevronRight, Eye, Shield } from "lucide-react";
+import { Clock, CheckCircle2, FileText, Search, Lightbulb, User, ClipboardList, MapPin, Lock, ChevronRight, Eye, Shield, Compass } from "lucide-react";
 import { JourneyStep, JOURNEY_STEPS } from "@/types/journey";
 import { Progress } from "@/components/ui/progress";
 import {
@@ -85,23 +85,24 @@ const WelkomInline = ({
     <TooltipProvider delayDuration={200}>
       <div className="bg-white shadow-card rounded-2xl">
         <div className="p-8 md:p-12">
-          {/* Header */}
+          {/* Header - replaced logo with compass icon */}
           <div className="text-center mb-10">
-            <img 
-              src="/lovable-uploads/vinster-new-logo.png" 
-              alt="Vinster" 
-              className="w-14 h-14 mx-auto mb-5 object-contain"
-            />
+            <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-[#F5C518]/15 flex items-center justify-center">
+              <Compass className="w-7 h-7 text-[#232D4B]" />
+            </div>
             <h1 className="text-2xl md:text-3xl font-bold text-[#232D4B] mb-2">
               {hasProgress ? t('welkom.progress_title') : t('welkom.steps_overview_title')}
             </h1>
             
             {hasProgress && (
-              <div className="max-w-sm mx-auto mt-4">
-                <Progress value={progressPercentage} className="h-2 mb-2" />
-                <p className="text-sm text-gray-500">
-                  {t('welkom.completed_count').replace('{{count}}', String(completedSteps.length))}
-                </p>
+              <div className="w-full max-w-lg mx-auto mt-4">
+                <div className="flex items-center justify-between mb-1">
+                  <p className="text-sm text-gray-500">
+                    {t('welkom.completed_count').replace('{{count}}', String(completedSteps.length))}
+                  </p>
+                  <span className="text-sm font-medium text-[#232D4B]">{Math.round(progressPercentage)}%</span>
+                </div>
+                <Progress value={progressPercentage} className="h-2.5" />
               </div>
             )}
           </div>
@@ -120,9 +121,9 @@ const WelkomInline = ({
                     className={`
                       rounded-2xl p-5 flex flex-col h-full transition-all duration-200
                       ${isCompleted 
-                        ? 'bg-[#E8F4FD] border border-[#232D4B]/10 shadow-card hover:-translate-y-0.5 hover:shadow-card-hover' 
+                        ? 'bg-white border border-gray-200 shadow-card hover:-translate-y-0.5 hover:shadow-card-hover border-l-4 border-l-[#232D4B]' 
                         : isCurrent 
-                          ? 'bg-white border-l-4 border-[#F5C518] shadow-card-hover' 
+                          ? 'bg-white border-b-4 border-[#F5C518] shadow-card-hover' 
                           : isLocked
                             ? 'bg-gray-50 border border-gray-100 opacity-50 cursor-not-allowed'
                             : 'bg-white border border-gray-100 shadow-card hover:-translate-y-0.5 hover:shadow-card-hover'
@@ -190,6 +191,18 @@ const WelkomInline = ({
                         </Button>
                       </div>
                     )}
+
+                    {isCurrent && onStepClick && (
+                      <div className="mt-auto pt-3 pl-14">
+                        <Button 
+                          size="sm"
+                          onClick={() => onStepClick(step.id)}
+                          className="bg-[#F5C518] hover:bg-[#d4a912] text-[#232D4B] font-semibold transition-all duration-200"
+                        >
+                          Ga verder →
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 );
 
@@ -213,7 +226,7 @@ const WelkomInline = ({
 
           {/* Total time */}
           {!hasProgress && (
-            <div className="bg-[#E8F4FD] rounded-2xl p-5 mb-10">
+            <div className="bg-gray-50 rounded-2xl p-5 mb-10">
               <div className="flex items-center gap-3">
                 <Clock className="w-5 h-5 text-[#232D4B]" />
                 <p className="text-[#232D4B] font-medium text-sm">
@@ -223,7 +236,7 @@ const WelkomInline = ({
             </div>
           )}
 
-          {/* Tips — coach callout style */}
+          {/* Tips */}
           <div className="mb-10 bg-[#FEF9E6] border border-yellow-200 rounded-2xl p-6">
             <div className="flex gap-4">
               <div className="flex-shrink-0 mt-0.5">
@@ -257,7 +270,7 @@ const WelkomInline = ({
           <div className="flex justify-center">
             <Button 
               onClick={onNext}
-              className="bg-[#F5C518] hover:bg-yellow-500 text-[#232D4B] font-semibold text-lg px-12 py-6 rounded-xl shadow-card hover:shadow-card-hover transition-all duration-200 hover:-translate-y-0.5"
+              className="bg-[#F5C518] hover:bg-[#d4a912] text-[#232D4B] font-semibold text-lg px-12 py-6 rounded-xl shadow-card hover:shadow-card-hover transition-all duration-200 hover:-translate-y-0.5"
             >
               {hasProgress ? t('welkom.continue_button') : t('welkom.start_button')}
               {hasProgress && <ChevronRight className="w-5 h-5 ml-2" />}

@@ -66,7 +66,7 @@ const ProgressStep = ({
           : isCompleted
             ? 'bg-white shadow-card hover:-translate-y-0.5 hover:shadow-card-hover cursor-pointer border-l-4 border-[#232D4B]'
             : isCurrent
-              ? 'bg-white shadow-card-hover cursor-pointer border-l-4 border-[#F5C518]'
+              ? 'bg-white shadow-card-hover cursor-pointer border-b-4 border-[#F5C518]'
               : 'bg-white shadow-card hover:-translate-y-0.5 hover:shadow-card-hover cursor-pointer'
         }
       `}
@@ -93,11 +93,23 @@ const ProgressStep = ({
         
         {/* Content */}
         <div className="flex-1 min-w-0">
-          <h3 className={`text-sm font-semibold truncate mb-2 ${
-            isLocked ? 'text-gray-400' : 'text-[#232D4B]'
-          }`}>
-            {step.title}
-          </h3>
+          <div className="flex items-center gap-2 mb-2">
+            <h3 className={`text-sm font-semibold truncate ${
+              isLocked ? 'text-gray-400' : 'text-[#232D4B]'
+            }`}>
+              {step.title}
+            </h3>
+            {isCompleted && (
+              <span className="text-xs bg-[#232D4B] text-white px-2 py-0.5 rounded-full font-medium whitespace-nowrap">
+                Voltooid
+              </span>
+            )}
+            {isCurrent && (
+              <span className="text-xs bg-[#F5C518] text-[#232D4B] px-2 py-0.5 rounded-full font-medium whitespace-nowrap">
+                Aan de beurt
+              </span>
+            )}
+          </div>
           
           <Progress 
             value={isCompleted ? 100 : progress} 
@@ -115,10 +127,22 @@ const ProgressStep = ({
                 e.stopPropagation();
                 navigate(viewPath);
               }}
-              className="text-[#232D4B] hover:text-[#232D4B] hover:bg-[#E8F4FD]"
+              className="text-[#232D4B] hover:text-[#232D4B] hover:bg-gray-100"
             >
               <Eye className="h-4 w-4 mr-1" />
               <span className="text-xs">{t('common.button.view_answers')}</span>
+            </Button>
+          ) : isCurrent ? (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={(e) => {
+                e.stopPropagation();
+                onClick();
+              }}
+              className="text-[#232D4B] hover:bg-[#F5C518]/10 font-semibold"
+            >
+              <span className="text-xs">Ga verder →</span>
             </Button>
           ) : isLocked ? (
             <Lock className="w-4 h-4 text-gray-300" />

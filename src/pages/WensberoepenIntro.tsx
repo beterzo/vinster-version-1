@@ -17,53 +17,32 @@ const WensberoepenIntro = () => {
       isLoading={stepAccess.isLoading}
       blockedReason={stepAccess.wensberoepen.blockedReason}
     >
-    <div className="min-h-screen bg-gray-50 font-sans">
-      {/* Header */}
+    <div className="min-h-screen bg-[#fafaf8] font-sans">
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
           <div className="flex items-center">
-            <img 
-              alt="Vinster Logo" 
-              onClick={() => navigate('/home')} 
-              src="/lovable-uploads/156369dd-8a1e-4584-a996-14af3efed639.png" 
-              className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" 
-            />
+            <img alt="Vinster Logo" onClick={() => navigate('/home')} src="/lovable-uploads/156369dd-8a1e-4584-a996-14af3efed639.png" className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity duration-200" />
           </div>
         </div>
       </div>
 
-      {/* Main Content */}
       <div className="max-w-[1440px] mx-auto px-6 py-12">
-        <Card className="rounded-3xl shadow-xl">
+        <Card className="rounded-3xl shadow-card">
           <CardContent className="p-12">
-            {/* Main Title */}
-            <h1 className="text-4xl font-bold text-blue-900 mb-8 text-center">
-              {t('wensberoepen.intro.title')}
-            </h1>
+            <div className="bg-[#FEF9E6] border border-yellow-200 rounded-xl p-4 mb-8">
+              <p className="text-[#232D4B] font-medium text-center">{t('wensberoepen.intro.title')}</p>
+            </div>
 
-            {/* Instructions Section */}
             <div className="space-y-8">
               <div>
-                <h2 className="text-2xl font-semibold text-blue-900 mb-4">
-                  {t('wensberoepen.intro.instruction_title')}
-                </h2>
-                <p className="text-lg text-gray-700 leading-relaxed mb-4">
-                  {t('wensberoepen.intro.instruction_description')}
-                </p>
-                <p className="text-lg text-gray-700 leading-relaxed mb-4">
-                  {t('wensberoepen.intro.instruction_details')}
-                </p>
-                <p className="text-lg text-gray-700 leading-relaxed">
-                  {t('wensberoepen.intro.instruction_questions')}
-                </p>
+                <h2 className="text-xl font-semibold text-[#232D4B] mb-4">{t('wensberoepen.intro.instruction_title')}</h2>
+                <p className="text-lg text-gray-700 leading-[1.7] mb-4">{t('wensberoepen.intro.instruction_description')}</p>
+                <p className="text-lg text-gray-700 leading-[1.7] mb-4">{t('wensberoepen.intro.instruction_details')}</p>
+                <p className="text-lg text-gray-700 leading-[1.7]">{t('wensberoepen.intro.instruction_questions')}</p>
               </div>
 
-              {/* Start Button */}
               <div className="text-center pt-8">
-                <Button 
-                  onClick={() => navigate('/wensberoepen-step-1')} 
-                  className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold text-lg px-12 py-4 rounded-lg"
-                >
+                <Button onClick={() => navigate('/wensberoepen-step-1')} className="bg-[#232D4B] hover:bg-[#1a2350] text-white font-semibold text-lg px-12 py-4 rounded-[10px] h-12">
                   {t('wensberoepen.intro.start_button')}
                 </Button>
               </div>
