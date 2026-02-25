@@ -6,7 +6,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { formatKeywordsForReport } from "@/utils/keywordUtils";
+import { formatKeywordsForReport, boldQuotedKeywords } from "@/utils/keywordUtils";
 
 interface RapportInlineProps {
   roundId: string;
@@ -297,8 +297,9 @@ const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center p-12">
-        <Loader2 className="w-8 h-8 animate-spin text-[#232D4B]" />
+      <div className="fixed bottom-6 right-6 z-50 bg-[#1a2e5a] text-white rounded-[10px] px-5 py-3 flex items-center gap-3 shadow-lg text-sm font-medium">
+        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+        {t('common.rapport_confirmatie.generating')}
       </div>
     );
   }
@@ -375,14 +376,14 @@ const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated
           <h3 className="text-2xl font-bold text-[#232D4B] mb-6">{t('rapport.ideale_functie.title')}</h3>
           <div className="space-y-6">
             {/* Activiteiten */}
-            <div className="p-4 rounded-xl bg-[#FEF3C7] border-l-4 border-[#F5C518]">
-              <h4 className="font-semibold text-[#232D4B] mb-3 flex items-center gap-2">
-                <span className="w-6 h-6 bg-[#F5C518] rounded-full flex items-center justify-center text-[#232D4B] text-xs font-bold">1</span>
+            <div className="bg-white rounded-xl shadow-[0_2px_16px_rgba(0,0,0,0.08)] border border-[#f0f0f0] border-l-[5px] border-l-[#F5C518] p-8">
+              <h4 className="text-lg font-bold text-[#1a2e5a] mb-3 flex items-center gap-2">
+                <span className="w-8 h-8 bg-[#F5C518] text-[#1a2e5a] rounded-full flex items-center justify-center text-sm font-bold">1</span>
                 {t('rapport.ideale_functie.activiteiten')}
               </h4>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap">
                 {reportContent.ideale_functie?.activiteiten?.map((item: string, i: number) => (
-                  <span key={i} className="px-3 py-1 bg-white rounded-full text-sm text-[#232D4B] border border-[#F5C518]">
+                  <span key={i} className="inline-flex items-center bg-[#fffbeb] text-[#92400e] border border-[#fde68a] rounded-full px-3 py-1 text-[0.8rem] font-semibold m-[3px]">
                     {item}
                   </span>
                 ))}
@@ -390,14 +391,14 @@ const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated
             </div>
 
             {/* Werkomgeving */}
-            <div className="p-4 rounded-xl bg-[#fffbeb] border-l-4 border-[#F5C518]">
-              <h4 className="font-semibold text-[#232D4B] mb-3 flex items-center gap-2">
-                <span className="w-6 h-6 bg-[#232D4B] rounded-full flex items-center justify-center text-white text-xs font-bold">2</span>
+            <div className="bg-white rounded-xl shadow-[0_2px_16px_rgba(0,0,0,0.08)] border border-[#f0f0f0] border-l-[5px] border-l-[#1a2e5a] p-8">
+              <h4 className="text-lg font-bold text-[#1a2e5a] mb-3 flex items-center gap-2">
+                <span className="w-8 h-8 bg-[#1a2e5a] text-white rounded-full flex items-center justify-center text-sm font-bold">2</span>
                 {t('rapport.ideale_functie.werkomgeving')}
               </h4>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap">
                 {reportContent.ideale_functie?.werkomgeving?.map((item: string, i: number) => (
-                  <span key={i} className="px-3 py-1 bg-white rounded-full text-sm text-[#232D4B] border border-[#e5e7eb]">
+                  <span key={i} className="inline-flex items-center bg-[#f3f4f6] text-[#1a2e5a] border border-[#e5e7eb] rounded-full px-3 py-1 text-[0.8rem] font-semibold m-[3px]">
                     {item}
                   </span>
                 ))}
@@ -405,14 +406,14 @@ const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated
             </div>
 
             {/* Interessegebieden */}
-            <div className="p-4 rounded-xl bg-[#fffbeb] border-l-4 border-[#232D4B]">
-              <h4 className="font-semibold text-[#232D4B] mb-3 flex items-center gap-2">
-                <span className="w-6 h-6 bg-[#232D4B] rounded-full flex items-center justify-center text-white text-xs font-bold">3</span>
+            <div className="bg-white rounded-xl shadow-[0_2px_16px_rgba(0,0,0,0.08)] border border-[#f0f0f0] border-l-[5px] border-l-[#16a34a] p-8">
+              <h4 className="text-lg font-bold text-[#1a2e5a] mb-3 flex items-center gap-2">
+                <span className="w-8 h-8 bg-[#16a34a] text-white rounded-full flex items-center justify-center text-sm font-bold">3</span>
                 {t('rapport.ideale_functie.interessegebieden')}
               </h4>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap">
                 {reportContent.ideale_functie?.interessegebieden?.map((item: string, i: number) => (
-                  <span key={i} className="px-3 py-1 bg-white rounded-full text-sm text-[#232D4B] border border-[#232D4B]">
+                  <span key={i} className="inline-flex items-center bg-[#f3f4f6] text-[#1a2e5a] border border-[#e5e7eb] rounded-full px-3 py-1 text-[0.8rem] font-semibold m-[3px]">
                     {item}
                   </span>
                 ))}
@@ -424,37 +425,37 @@ const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated
         {/* Beroepen sectie */}
         <Card className="rounded-2xl p-6 border border-gray-200">
           <h3 className="text-2xl font-bold text-[#232D4B] mb-6">{t('rapport.beroepen.title')}</h3>
-          <div className="space-y-4">
-            {/* Passend 1 - Donkerblauw */}
+          <div className="space-y-5">
+            {/* Passend 1 */}
             {reportContent.beroepen?.passend_1 && (
-              <div className="border-l-4 p-4 rounded-r-xl bg-white border border-[#e5e7eb]" style={{ borderLeftColor: '#232D4B' }}>
-                <span className="px-3 py-1 rounded-full text-xs font-medium text-white mb-2 inline-block bg-[#16a34a]">
+              <div className="bg-white rounded-xl shadow-[0_2px_16px_rgba(0,0,0,0.08)] border border-[#f0f0f0] border-l-[5px] border-l-[#1a2e5a] p-6 relative">
+                <span className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold bg-[#16a34a] text-white">
                   {t('rapport.beroepen.passend')}
                 </span>
-                <h4 className="text-xl font-bold text-gray-900 mb-2">{reportContent.beroepen.passend_1.titel}</h4>
-                <p className="text-gray-700">{reportContent.beroepen.passend_1.beschrijving}</p>
+                <h4 className="text-lg font-bold text-[#1a2e5a] mb-2">{reportContent.beroepen.passend_1.titel}</h4>
+                <p className="text-[0.95rem] leading-[1.7] text-[#374151]">{boldQuotedKeywords(reportContent.beroepen.passend_1.beschrijving)}</p>
               </div>
             )}
             
-            {/* Passend 2 - Donkerblauw */}
+            {/* Passend 2 */}
             {reportContent.beroepen?.passend_2 && (
-              <div className="border-l-4 p-4 rounded-r-xl bg-white border border-[#e5e7eb]" style={{ borderLeftColor: '#232D4B' }}>
-                <span className="px-3 py-1 rounded-full text-xs font-medium text-white mb-2 inline-block bg-[#16a34a]">
+              <div className="bg-white rounded-xl shadow-[0_2px_16px_rgba(0,0,0,0.08)] border border-[#f0f0f0] border-l-[5px] border-l-[#1a2e5a] p-6 relative">
+                <span className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold bg-[#16a34a] text-white">
                   {t('rapport.beroepen.passend')}
                 </span>
-                <h4 className="text-xl font-bold text-gray-900 mb-2">{reportContent.beroepen.passend_2.titel}</h4>
-                <p className="text-gray-700">{reportContent.beroepen.passend_2.beschrijving}</p>
+                <h4 className="text-lg font-bold text-[#1a2e5a] mb-2">{reportContent.beroepen.passend_2.titel}</h4>
+                <p className="text-[0.95rem] leading-[1.7] text-[#374151]">{boldQuotedKeywords(reportContent.beroepen.passend_2.beschrijving)}</p>
               </div>
             )}
             
-            {/* Verrassend - Lichtblauw */}
+            {/* Verrassend */}
             {reportContent.beroepen?.verrassend && (
-              <div className="border-l-4 p-4 rounded-r-xl bg-white border border-[#e5e7eb]" style={{ borderLeftColor: '#F5C518' }}>
-                <span className="px-3 py-1 rounded-full text-xs font-medium mb-2 inline-block bg-[#F5C518] text-[#1a2e5a]">
+              <div className="bg-white rounded-xl shadow-[0_2px_16px_rgba(0,0,0,0.08)] border border-[#f0f0f0] border-l-[5px] border-l-[#1a2e5a] p-6 relative">
+                <span className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold bg-[#F5C518] text-[#1a2e5a]">
                   {t('rapport.beroepen.verrassend')}
                 </span>
-                <h4 className="text-xl font-bold text-gray-900 mb-2">{reportContent.beroepen.verrassend.titel}</h4>
-                <p className="text-gray-700">{reportContent.beroepen.verrassend.beschrijving}</p>
+                <h4 className="text-lg font-bold text-[#1a2e5a] mb-2">{reportContent.beroepen.verrassend.titel}</h4>
+                <p className="text-[0.95rem] leading-[1.7] text-[#374151]">{boldQuotedKeywords(reportContent.beroepen.verrassend.beschrijving)}</p>
               </div>
             )}
           </div>
@@ -462,14 +463,13 @@ const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated
 
         {/* Action buttons */}
         <div className="flex justify-between items-center">
-          <Button
+          <button
             onClick={handlePrint}
-            variant="outline"
-            className="border-[#232D4B] text-[#232D4B] hover:bg-[rgba(26,46,90,0.05)]"
+            className="bg-transparent text-[#1a2e5a] border-[1.5px] border-[#1a2e5a] rounded-[10px] px-5 py-2.5 font-semibold text-[0.9rem] flex items-center gap-2 hover:bg-[#1a2e5a]/5 transition-colors"
           >
-            <Printer className="w-4 h-4 mr-2" />
+            <Printer className="w-4 h-4" />
             {t('dashboard.round_dashboard.actions.print_button')}
-          </Button>
+          </button>
           <Button 
             onClick={onNext}
             className="bg-[#1a2e5a] hover:bg-[#142347] text-white font-semibold px-8"

@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Printer, ArrowLeft } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
-import { formatKeywordsForReport } from "@/utils/keywordUtils";
+import { formatKeywordsForReport, boldQuotedKeywords } from "@/utils/keywordUtils";
 
 interface ReportContent {
   voorblad: {
@@ -63,7 +63,7 @@ const RapportViewer = ({ reportContent, onBack }: RapportViewerProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-[#fafaf8]">
       {/* Action Bar - Hidden in print */}
       <div className="print:hidden sticky top-0 z-10 bg-white border-b shadow-sm">
         <div className="max-w-[900px] mx-auto px-6 py-4 flex items-center justify-between">
@@ -76,13 +76,13 @@ const RapportViewer = ({ reportContent, onBack }: RapportViewerProps) => {
             {t('rapport.back_to_dashboard')}
           </Button>
           
-          <Button
+          <button
             onClick={handlePrint}
-            className="gap-2 bg-[#232D4B] hover:bg-[#232D4B]/90"
+            className="bg-transparent text-[#1a2e5a] border-[1.5px] border-[#1a2e5a] rounded-[10px] px-5 py-2.5 font-semibold text-[0.9rem] flex items-center gap-2 hover:bg-[#1a2e5a]/5 transition-colors"
           >
             <Printer className="w-4 h-4" />
             {t('rapport.print')}
-          </Button>
+          </button>
         </div>
       </div>
 
@@ -118,21 +118,51 @@ const RapportViewer = ({ reportContent, onBack }: RapportViewerProps) => {
             </h2>
             <div className="w-32 h-1 bg-[#F5D54B] mb-10"></div>
             
-            <div className="space-y-8">
+            <div className="space-y-6">
               {/* Activiteiten */}
-              <p className="text-gray-700 leading-relaxed text-lg">
-                {formatKeywordsForReport(reportContent.ideale_functie.activiteiten)}
-              </p>
+              <div className="bg-white rounded-xl shadow-[0_2px_16px_rgba(0,0,0,0.08)] border border-[#f0f0f0] border-l-[5px] border-l-[#F5C518] p-6">
+                <h4 className="text-lg font-bold text-[#1a2e5a] mb-3 flex items-center gap-2">
+                  <span className="w-8 h-8 bg-[#F5C518] text-[#1a2e5a] rounded-full flex items-center justify-center text-sm font-bold">1</span>
+                  {t('rapport.ideale_functie.activiteiten')}
+                </h4>
+                <div className="flex flex-wrap">
+                  {reportContent.ideale_functie.activiteiten?.map((item: string, i: number) => (
+                    <span key={i} className="inline-flex items-center bg-[#fffbeb] text-[#92400e] border border-[#fde68a] rounded-full px-3 py-1 text-[0.8rem] font-semibold m-[3px]">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
 
               {/* Werkomgeving */}
-              <p className="text-gray-700 leading-relaxed text-lg">
-                {formatKeywordsForReport(reportContent.ideale_functie.werkomgeving)}
-              </p>
+              <div className="bg-white rounded-xl shadow-[0_2px_16px_rgba(0,0,0,0.08)] border border-[#f0f0f0] border-l-[5px] border-l-[#1a2e5a] p-6">
+                <h4 className="text-lg font-bold text-[#1a2e5a] mb-3 flex items-center gap-2">
+                  <span className="w-8 h-8 bg-[#1a2e5a] text-white rounded-full flex items-center justify-center text-sm font-bold">2</span>
+                  {t('rapport.ideale_functie.werkomgeving')}
+                </h4>
+                <div className="flex flex-wrap">
+                  {reportContent.ideale_functie.werkomgeving?.map((item: string, i: number) => (
+                    <span key={i} className="inline-flex items-center bg-[#f3f4f6] text-[#1a2e5a] border border-[#e5e7eb] rounded-full px-3 py-1 text-[0.8rem] font-semibold m-[3px]">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
 
               {/* Interessegebieden */}
-              <p className="text-gray-700 leading-relaxed text-lg">
-                {formatKeywordsForReport(reportContent.ideale_functie.interessegebieden)}
-              </p>
+              <div className="bg-white rounded-xl shadow-[0_2px_16px_rgba(0,0,0,0.08)] border border-[#f0f0f0] border-l-[5px] border-l-[#16a34a] p-6">
+                <h4 className="text-lg font-bold text-[#1a2e5a] mb-3 flex items-center gap-2">
+                  <span className="w-8 h-8 bg-[#16a34a] text-white rounded-full flex items-center justify-center text-sm font-bold">3</span>
+                  {t('rapport.ideale_functie.interessegebieden')}
+                </h4>
+                <div className="flex flex-wrap">
+                  {reportContent.ideale_functie.interessegebieden?.map((item: string, i: number) => (
+                    <span key={i} className="inline-flex items-center bg-[#f3f4f6] text-[#1a2e5a] border border-[#e5e7eb] rounded-full px-3 py-1 text-[0.8rem] font-semibold m-[3px]">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
           
@@ -150,34 +180,43 @@ const RapportViewer = ({ reportContent, onBack }: RapportViewerProps) => {
             </h2>
             <div className="w-32 h-1 bg-[#F5D54B] mb-10"></div>
             
-            <div className="space-y-8">
+            <div className="space-y-5">
               {/* Beroep 1 */}
-              <div>
-                <h3 className="text-xl font-bold text-[#0D8FD9] mb-2">
+              <div className="bg-white rounded-xl shadow-[0_2px_16px_rgba(0,0,0,0.08)] border border-[#f0f0f0] border-l-[5px] border-l-[#1a2e5a] p-6 relative">
+                <span className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold bg-[#16a34a] text-white">
+                  {t('rapport.beroepen.passend')}
+                </span>
+                <h3 className="text-lg font-bold text-[#1a2e5a] mb-2">
                   {reportContent.beroepen.passend_1.titel}
                 </h3>
-                <p className="text-gray-600 leading-relaxed text-[15px]">
-                  {reportContent.beroepen.passend_1.beschrijving}
+                <p className="text-[0.95rem] leading-[1.7] text-[#374151]">
+                  {boldQuotedKeywords(reportContent.beroepen.passend_1.beschrijving)}
                 </p>
               </div>
 
               {/* Beroep 2 */}
-              <div>
-                <h3 className="text-xl font-bold text-[#0D8FD9] mb-2">
+              <div className="bg-white rounded-xl shadow-[0_2px_16px_rgba(0,0,0,0.08)] border border-[#f0f0f0] border-l-[5px] border-l-[#1a2e5a] p-6 relative">
+                <span className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold bg-[#16a34a] text-white">
+                  {t('rapport.beroepen.passend')}
+                </span>
+                <h3 className="text-lg font-bold text-[#1a2e5a] mb-2">
                   {reportContent.beroepen.passend_2.titel}
                 </h3>
-                <p className="text-gray-600 leading-relaxed text-[15px]">
-                  {reportContent.beroepen.passend_2.beschrijving}
+                <p className="text-[0.95rem] leading-[1.7] text-[#374151]">
+                  {boldQuotedKeywords(reportContent.beroepen.passend_2.beschrijving)}
                 </p>
               </div>
 
-              {/* Beroep 3 */}
-              <div>
-                <h3 className="text-xl font-bold text-[#0D8FD9] mb-2">
+              {/* Beroep 3 (verrassend) */}
+              <div className="bg-white rounded-xl shadow-[0_2px_16px_rgba(0,0,0,0.08)] border border-[#f0f0f0] border-l-[5px] border-l-[#1a2e5a] p-6 relative">
+                <span className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold bg-[#F5C518] text-[#1a2e5a]">
+                  {t('rapport.beroepen.verrassend')}
+                </span>
+                <h3 className="text-lg font-bold text-[#1a2e5a] mb-2">
                   {reportContent.beroepen.verrassend.titel}
                 </h3>
-                <p className="text-gray-600 leading-relaxed text-[15px]">
-                  {reportContent.beroepen.verrassend.beschrijving}
+                <p className="text-[0.95rem] leading-[1.7] text-[#374151]">
+                  {boldQuotedKeywords(reportContent.beroepen.verrassend.beschrijving)}
                 </p>
               </div>
             </div>
