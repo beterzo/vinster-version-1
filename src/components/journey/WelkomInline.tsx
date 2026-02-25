@@ -87,22 +87,22 @@ const WelkomInline = ({
         <div className="p-8 md:p-12">
           {/* Header - replaced logo with compass icon */}
           <div className="text-center mb-10">
-            <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-[#F5C518]/15 flex items-center justify-center">
-              <Compass className="w-7 h-7 text-[#232D4B]" />
+            <div className="w-16 h-16 mx-auto mb-5 rounded-full bg-[#FEF9E6] p-3 flex items-center justify-center">
+              <Compass className="w-12 h-12 text-[#232D4B]" />
             </div>
             <h1 className="text-2xl md:text-3xl font-bold text-[#232D4B] mb-2">
               {hasProgress ? t('welkom.progress_title') : t('welkom.steps_overview_title')}
             </h1>
             
             {hasProgress && (
-              <div className="w-full max-w-lg mx-auto mt-4">
+              <div className="w-full mx-auto mt-4">
                 <div className="flex items-center justify-between mb-1">
                   <p className="text-sm text-gray-500">
                     {t('welkom.completed_count').replace('{{count}}', String(completedSteps.length))}
                   </p>
                   <span className="text-sm font-medium text-[#232D4B]">{Math.round(progressPercentage)}%</span>
                 </div>
-                <Progress value={progressPercentage} className="h-2.5" />
+                <Progress value={progressPercentage} className="h-2.5 w-full" />
               </div>
             )}
           </div>
@@ -119,13 +119,13 @@ const WelkomInline = ({
                 const cardContent = (
                   <div 
                     className={`
-                      rounded-2xl p-5 flex flex-col h-full transition-all duration-200
+                       rounded-2xl p-5 flex flex-col h-full transition-all duration-200
                       ${isCompleted 
                         ? 'bg-white border border-gray-200 shadow-card hover:-translate-y-0.5 hover:shadow-card-hover border-l-4 border-l-[#232D4B]' 
                         : isCurrent 
                           ? 'bg-white border-b-4 border-[#F5C518] shadow-card-hover' 
                           : isLocked
-                            ? 'bg-gray-50 border border-gray-100 opacity-50 cursor-not-allowed'
+                            ? 'bg-gray-50 border border-gray-100 opacity-40 cursor-not-allowed'
                             : 'bg-white border border-gray-100 shadow-card hover:-translate-y-0.5 hover:shadow-card-hover'
                       }
                     `}
@@ -193,11 +193,10 @@ const WelkomInline = ({
                     )}
 
                     {isCurrent && onStepClick && (
-                      <div className="mt-auto pt-3 pl-14">
+                      <div className="mt-auto pt-3">
                         <Button 
-                          size="sm"
                           onClick={() => onStepClick(step.id)}
-                          className="bg-[#F5C518] hover:bg-[#d4a912] text-[#232D4B] font-semibold transition-all duration-200"
+                          className="bg-[#F5C518] hover:bg-[#d4a912] text-[#232D4B] font-bold px-6 py-3 rounded-xl w-full transition-all duration-200"
                         >
                           Ga verder →
                         </Button>
@@ -251,7 +250,7 @@ const WelkomInline = ({
                 <ul className="space-y-2.5">
                   {tips.map((tip, index) => (
                     <li key={index} className="flex items-start gap-2.5">
-                      <span className="w-1.5 h-1.5 bg-[#F5C518] rounded-full mt-2 flex-shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-[#F5C518] flex-shrink-0 mt-0.5" />
                       <span className="text-sm text-gray-700 leading-relaxed">{tip}</span>
                     </li>
                   ))}
@@ -270,7 +269,7 @@ const WelkomInline = ({
           <div className="flex justify-center">
             <Button 
               onClick={onNext}
-              className="bg-[#F5C518] hover:bg-[#d4a912] text-[#232D4B] font-semibold text-lg px-12 py-6 rounded-xl shadow-card hover:shadow-card-hover transition-all duration-200 hover:-translate-y-0.5"
+              className="bg-[#232D4B] hover:bg-[#1a2350] text-white font-semibold text-lg px-12 py-6 rounded-xl shadow-card hover:shadow-card-hover transition-all duration-200 hover:-translate-y-0.5"
             >
               {hasProgress ? t('welkom.continue_button') : t('welkom.start_button')}
               {hasProgress && <ChevronRight className="w-5 h-5 ml-2" />}

@@ -138,14 +138,14 @@ const WensberoepenStep1 = ({ mode = 'edit' }: StepProps) => {
       <div className="max-w-[1440px] mx-auto px-6 py-12">
         {isViewMode && (
           <div className="mb-6">
-            <div className="bg-blue-50 border-2 border-blue-400 rounded-xl p-4">
+            <div className="bg-[#FEF9E6] border-l-4 border-[#F5C518] rounded-r-lg p-4">
               <div className="flex items-start gap-3">
-                <Info className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                <Info className="h-5 w-5 text-[#232D4B] flex-shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-blue-900 font-medium">
+                  <p className="text-[#232D4B] font-medium">
                     {t('common.view_only_mode.title')}
                   </p>
-                  <p className="text-blue-700 text-sm mt-1">
+                  <p className="text-[#232D4B]/70 text-sm mt-1">
                     {t('common.view_only_mode.description')}
                   </p>
                 </div>

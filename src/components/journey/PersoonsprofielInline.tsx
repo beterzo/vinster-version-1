@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Loader2 } from "lucide-react";
+import { Loader2, AlertTriangle } from "lucide-react";
 import { usePrioriteitenResponses } from "@/hooks/usePrioriteitenResponses";
 import { useExtraInformatieResponses } from "@/hooks/useExtraInformatieResponses";
 import { useAuth } from "@/hooks/useAuth";
@@ -113,9 +113,10 @@ const PersoonsprofielInline = ({ roundId, subStep, onNext, onPrevious }: Persoon
             </p>
 
             {/* Warning box */}
-            <div className="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-lg">
-              <p className="text-gray-700">
-                <span className="font-bold text-[#232D4B]">{t('profiel_voltooien.intro.warning_title')}: </span>
+            <div className="bg-[#FEF9E6] border-l-4 border-[#F5C518] p-4 rounded-r-lg flex items-start gap-3">
+              <AlertTriangle className="w-5 h-5 text-[#F5C518] flex-shrink-0 mt-0.5" />
+              <p className="text-[#232D4B]">
+                <span className="font-bold">{t('profiel_voltooien.intro.warning_title')}: </span>
                 {t('profiel_voltooien.intro.warning_text')}
               </p>
             </div>
@@ -132,7 +133,7 @@ const PersoonsprofielInline = ({ roundId, subStep, onNext, onPrevious }: Persoon
             <Button 
               onClick={handleStartClick}
               disabled={generatingKeywords}
-              className="bg-[#F5C518] hover:bg-yellow-500 text-[#232D4B] font-semibold text-lg px-12 py-4 rounded-lg"
+              className="bg-[#232D4B] hover:bg-[#1a2350] text-white font-semibold text-lg px-12 py-4 h-12 rounded-xl w-full"
             >
               {generatingKeywords ? (
                 <>
@@ -177,7 +178,7 @@ const PersoonsprofielInline = ({ roundId, subStep, onNext, onPrevious }: Persoon
           <div className="space-y-8">
             {questions.map((item, index) => (
               <div key={index}>
-                <Label htmlFor={item.field} className="text-[#232D4B] font-medium text-lg mb-3 block text-left">
+                <Label htmlFor={item.field} className="text-[#232D4B] font-semibold text-base mb-3 block text-left border-l-4 border-[#F5C518] pl-3">
                   {index + 1}. {item.question}
                 </Label>
                 <Textarea
@@ -186,19 +187,19 @@ const PersoonsprofielInline = ({ roundId, subStep, onNext, onPrevious }: Persoon
                   value={extraInfoAnswers[item.field as keyof typeof extraInfoAnswers]}
                   onChange={(e) => setExtraInfoAnswers(prev => ({ ...prev, [item.field]: e.target.value }))}
                   onBlur={(e) => saveExtraInfoResponses({ ...extraInfoAnswers, [item.field]: e.target.value })}
-                  className="min-h-[80px] border-gray-300 focus:border-[#232D4B] focus:ring-[#232D4B]"
+                  className="min-h-[100px] border-[#232D4B] border-2 bg-[#f8f9ff] focus:border-[#232D4B] focus:ring-[#232D4B]"
                 />
               </div>
             ))}
           </div>
 
           <div className="flex justify-between pt-12">
-            <Button onClick={onPrevious} variant="outline" className="border-[#232D4B] text-[#232D4B] hover:bg-blue-50">
+            <Button onClick={onPrevious} variant="outline" className="border-2 border-[#232D4B] text-[#232D4B] hover:bg-gray-50 h-12 rounded-xl">
               {t('common.button.previous')}
             </Button>
             <Button 
               onClick={onNext}
-              className={`font-semibold px-8 ${allFieldsFilled ? "bg-[#F5C518] hover:bg-yellow-500 text-[#232D4B]" : "bg-gray-300 text-gray-500 cursor-not-allowed"}`}
+              className={`font-semibold px-8 h-12 rounded-xl ${allFieldsFilled ? "bg-[#232D4B] hover:bg-[#1a2350] text-white" : "bg-gray-300 text-gray-500 cursor-not-allowed"}`}
               disabled={!allFieldsFilled}
             >
               {t('common.button.next')}
@@ -260,7 +261,7 @@ const PersoonsprofielInline = ({ roundId, subStep, onNext, onPrevious }: Persoon
                   className={`p-3 rounded-lg border-2 transition-all duration-200 text-sm font-medium ${
                     selectedKeywords.includes(keyword)
                       ? "bg-[#232D4B] text-white border-[#232D4B] shadow-md"
-                      : "bg-white text-[#232D4B] border-gray-300 hover:border-[#232D4B] hover:bg-blue-50"
+                      : "bg-white text-[#232D4B] border-gray-300 hover:border-[#232D4B] hover:bg-gray-50"
                   }`}
                 >
                   {keyword}
@@ -276,7 +277,7 @@ const PersoonsprofielInline = ({ roundId, subStep, onNext, onPrevious }: Persoon
           )}
 
           <div className="mb-8">
-            <Label htmlFor="extraText" className="text-[#232D4B] font-medium text-lg mb-3 block text-left">
+            <Label htmlFor="extraText" className="text-[#232D4B] font-semibold text-base mb-3 block text-left border-l-4 border-[#F5C518] pl-3">
               {t(`profiel_voltooien.prioriteiten.${type}.extra_text_label`)}
             </Label>
             <Textarea 
@@ -285,17 +286,17 @@ const PersoonsprofielInline = ({ roundId, subStep, onNext, onPrevious }: Persoon
               value={extraText} 
               onChange={e => setExtraText(e.target.value)}
               onBlur={handleExtraTextBlur}
-              className="min-h-[80px] border-gray-300 focus:border-[#232D4B] focus:ring-[#232D4B]"
+              className="min-h-[100px] border-[#232D4B] border-2 bg-[#f8f9ff] focus:border-[#232D4B] focus:ring-[#232D4B]"
             />
           </div>
 
           <div className="flex justify-between pt-8">
-            <Button onClick={onPrevious} variant="outline" className="border-[#232D4B] text-[#232D4B] hover:bg-blue-50">
+            <Button onClick={onPrevious} variant="outline" className="border-2 border-[#232D4B] text-[#232D4B] hover:bg-gray-50 h-12 rounded-xl">
               {t('common.button.previous')}
             </Button>
             <Button 
               onClick={onNext} 
-              className={`font-semibold px-8 ${canProceed ? "bg-[#F5C518] hover:bg-yellow-500 text-[#232D4B]" : "bg-gray-300 text-gray-500 cursor-not-allowed"}`} 
+              className={`font-semibold px-8 h-12 rounded-xl ${canProceed ? "bg-[#232D4B] hover:bg-[#1a2350] text-white" : "bg-gray-300 text-gray-500 cursor-not-allowed"}`} 
               disabled={!canProceed}
             >
               {t('common.button.next')}

@@ -30,7 +30,7 @@ const DashboardHeader = () => {
   };
 
   return (
-    <div className="flex justify-between items-center mb-8">
+    <div className="flex justify-between items-center mb-8 pb-4 border-b border-gray-100">
       <div className="flex items-center">
         <img 
           alt="Vinster Logo" 
