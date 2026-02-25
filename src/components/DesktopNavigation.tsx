@@ -95,8 +95,8 @@ const DesktopNavigation = () => {
                         }}
                         className={`block w-full text-left py-2.5 text-sm font-medium transition-colors ${
                           org.indent
-                            ? "pl-10 text-gray-500 hover:bg-blue-50 hover:text-blue-900"
-                            : "px-5 text-gray-700 hover:bg-blue-50 hover:text-blue-900"
+                            ? "pl-10 text-gray-500 hover:bg-[rgba(26,46,90,0.05)] hover:text-[#1a2e5a]"
+                            : "px-5 text-gray-700 hover:bg-[rgba(26,46,90,0.05)] hover:text-[#1a2e5a]"
                         }`}
                       >
                         {org.indent ? `→ ${org.name}` : org.name}

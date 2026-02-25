@@ -85,7 +85,7 @@ const ZoekprofielIntro = () => {
                     <Button 
                       onClick={() => navigate('/home')} 
                       variant="outline"
-                      className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold text-lg px-12 py-4 rounded-lg"
+                      className="border-[#1a2e5a] text-[#1a2e5a] hover:bg-[rgba(26,46,90,0.05)] font-semibold text-lg px-12 py-4 rounded-lg"
                     >
                       {t('zoekprofiel.intro.back_button')}
                     </Button>

@@ -168,7 +168,7 @@ const AdminErasmusMCVacatures = () => {
               className="h-16 w-auto cursor-pointer hover:opacity-80"
               onClick={() => navigate("/")}
             />
-            <Button onClick={() => navigate("/home")} variant="outline" className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold">
+            <Button onClick={() => navigate("/home")} variant="outline" className="border-[#1a2e5a] text-[#1a2e5a] hover:bg-[rgba(26,46,90,0.05)] font-semibold">
               <ArrowLeft className="w-4 h-4 mr-2" /> Terug
             </Button>
           </div>
@@ -235,7 +235,7 @@ const AdminErasmusMCVacatures = () => {
                 {/* Preview table */}
                 <div className="overflow-x-auto">
                   <table className="min-w-full text-sm border border-gray-200 rounded-xl overflow-hidden">
-                    <thead className="bg-blue-50">
+                    <thead className="bg-[#fffbeb]">
                       <tr>
                         {headers.map((h) => (
                           <th key={h} className="px-4 py-2 text-left font-semibold text-blue-900">{h}</th>
