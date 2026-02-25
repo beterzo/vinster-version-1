@@ -1,84 +1,63 @@
 
 
-## Visual Improvements to Rapport Output Page
+## Visuele verbeteringen zoekprofiel output pagina
 
-Changes apply to `src/components/journey/RapportInline.tsx` (the on-screen "complete" view, lines 369-480) and `src/components/RapportViewer.tsx`. Print-only components are left untouched.
+Puur styling-wijzigingen in 2 bestanden. Geen data, routing of generatielogica verandert.
+
+### Bestanden
+
+| Bestand | Wat |
+|---------|-----|
+| `src/components/ZoekprofielViewer.tsx` | Volledige visuele restyling van het zoekprofiel-document |
+| `src/components/journey/ZoekprofielInline.tsx` | Floating titel + print-knop boven viewer verwijderen (verplaatst naar viewer zelf) |
 
 ---
 
-### 1. Ideale functie - three content blocks (RapportInline lines 374-422)
+### 1. ZoekprofielInline.tsx -- "complete" view (regels 231-264)
 
-Replace the current mixed-background sections with unified white cards:
+- **Verwijder** de losse `<h2>` titel en de print-knop boven de viewer (regels 234-248). De titel en print-knop zitten nu in de ZoekprofielViewer header zelf.
+- Voeg een **tweede print-knop** toe onder de viewer, boven het "volgende stappen" blok, zodat de gebruiker altijd een printactie kan vinden.
 
-| Current | New |
-|---------|-----|
-| Section 1: `bg-[#FEF3C7] border-l-4 border-[#F5C518]` | `bg-white rounded-xl shadow-card border border-[#f0f0f0] border-l-[5px] border-l-[#F5C518] p-8 mb-6` |
-| Section 2: `bg-[#fffbeb] border-l-4 border-[#F5C518]` | Same white card, `border-l-[#1a2e5a]` |
-| Section 3: `bg-[#fffbeb] border-l-4 border-[#232D4B]` | Same white card, `border-l-[#16a34a]` |
+### 2. ZoekprofielViewer.tsx -- volledige restyling
 
-Number badges change from `w-6 h-6` to `w-8 h-8` with updated colors:
-- Badge 1: `bg-[#F5C518] text-[#1a2e5a]`
-- Badge 2: `bg-[#1a2e5a] text-white`
-- Badge 3: `bg-[#16a34a] text-white`
+**Props**: voeg `onPrint?: () => void` prop toe zodat de print-knop in de header kan werken.
 
-Section headings: `text-lg font-bold text-[#1a2e5a]`. Body text: `text-[0.95rem] leading-[1.7] text-[#374151]`.
-
-### 2. Keyword chips
-
-Default chips (sections 2 and 3):
+**Buitenste wrapper** (Section 6):
 ```
-bg-[#f3f4f6] text-[#1a2e5a] border border-[#e5e7eb] rounded-full px-3 py-1 text-[0.8rem] font-semibold m-[3px]
+bg-white rounded-xl shadow-[0_4px_32px_rgba(0,0,0,0.1)] overflow-hidden max-w-[800px] mx-auto
 ```
 
-Section 1 (amber) chips:
-```
-bg-[#fffbeb] text-[#92400e] border border-[#fde68a] rounded-full px-3 py-1 text-[0.8rem] font-semibold m-[3px]
-```
+**Header** (Section 1):
+- Achtergrond: `bg-[#1a2e5a]` (was `#232D4B`)
+- Padding: `p-8 md:px-10`
+- Rounded: `rounded-t-xl` (via overflow-hidden op wrapper)
+- Links: titel `text-[1.75rem] font-bold text-white` + naam `text-[0.95rem] text-white/70 mt-1`
+- Rechts: Vinster logo + print-knop (wit op donker, `bg-white text-[#1a2e5a] border-2 border-white rounded-[10px] px-5 py-2.5 font-bold text-sm flex items-center gap-2`, hover: `hover:bg-white/15 hover:text-white`)
 
-### 3. Beroepskaarten (RapportInline lines 424-461)
+**Content blokken** (Section 2):
+- Geen padding-wrapper meer; items direct in de card
+- Elk item: `bg-white border-l-4 border-[#F5C518] px-7 py-5 border-b border-b-[#f0f0f0]`
+- Laatste item: `border-b-0`
+- Label: `text-[0.7rem] font-bold tracking-[0.1em] uppercase text-[#9ca3af] mb-1`
+- Waarde: `text-[1.05rem] font-semibold text-[#1a2e5a] leading-[1.6]`
 
-Replace current cards with:
-```
-bg-white rounded-xl shadow-card border border-[#f0f0f0] border-l-[5px] border-l-[#1a2e5a] p-6 mb-5 relative
-```
+**Samenvatting** (Section 3):
+- Container: `bg-[#fffbeb] border border-[#fde68a] border-l-4 border-l-[#F5C518] rounded-lg p-6 mx-7 my-6`
+- Label: `text-[0.7rem] font-bold tracking-[0.1em] uppercase text-[#92400e] mb-2`
+- Body: `text-[0.95rem] leading-[1.7] text-[#374151]`
 
-- Title: `text-lg font-bold text-[#1a2e5a] mb-2`
-- Description: unchanged color, but add a helper function `boldQuotedKeywords(text)` that finds `"keyword"` patterns in the description text and replaces them with bold spans (`font-bold text-[#1a2e5a]`) without the quotes
-- Badge moves to `absolute top-4 right-4` position (top-right corner of card)
-- "Passend" badge: `bg-[#16a34a] text-white`
-- "Verrassend" badge: `bg-[#F5C518] text-[#1a2e5a]`
+**Footer** (Section 5):
+- `bg-[#F5C518] px-10 py-3 flex items-center justify-between rounded-b-xl` (via overflow-hidden)
+- Links: klein donker Vinster logo (`h-6`) + `vinster.ai` tekst `text-[#1a2e5a] text-sm font-semibold`
+- Rechts: generatiedatum `text-[0.75rem] text-[#1a2e5a]/60`
 
-### 4. Print button (RapportInline lines 464-472)
+**Print stylesheet** (Section 7):
+- Bestaande print CSS behouden maar uitbreiden:
+  - `print-color-adjust: exact` op header en footer
+  - `box-shadow: none` op wrapper
+  - Buttons verbergen (`print:hidden` class)
+  - Rond corners verwijderen voor print
 
-Update to a more prominent secondary button:
-```
-bg-transparent text-[#1a2e5a] border-[1.5px] border-[#1a2e5a] rounded-[10px] px-5 py-2.5 font-semibold text-[0.9rem] flex items-center gap-2
-```
-Printer icon stays at `w-4 h-4`.
+### Resultaat
 
-### 5. Loading state toast (RapportInline lines 298-304)
-
-Replace the current centered spinner with a fixed-position toast notification:
-```
-fixed bottom-6 right-6 z-50 bg-[#1a2e5a] text-white rounded-[10px] px-5 py-3 flex items-center gap-3 shadow-lg text-sm font-medium
-```
-Add CSS `@keyframes spin` inline for the spinner animation (small 16px border-spinner). Display the existing translation text next to it.
-
-### 6. RapportViewer.tsx (standalone viewer)
-
-Apply same visual changes to the screen view (pages 2 and 3):
-- Page 2 "ideale functie": Convert three plain `<p>` blocks into the same white-card-with-left-border system with keyword chips instead of comma-separated text
-- Page 3 "beroepen": Apply the same card styling with badges and bold-keywords helper
-- Print button: Update to match the new secondary button style
-- Background: Change `bg-gray-100` to `bg-[#fafaf8]`
-
-### Files affected
-
-| File | Changes |
-|------|---------|
-| `src/components/journey/RapportInline.tsx` | Sections 1-5: card styling, chips, beroepskaarten, print button, loading toast |
-| `src/components/RapportViewer.tsx` | Same visual system for standalone viewer (pages 2-3), background color, print button |
-| `src/utils/keywordUtils.ts` | Add `boldQuotedKeywords()` helper that strips quotes and bolds keywords in description text |
-
-No changes to data fetching, routing, translations, or print-only components.
-
+Het zoekprofiel voelt als een samenhangende, printbare kaart: donkerblauwe header met titel + print-knop, 6 nette content-rijen met amber linkerborder, een warm samenvatting-blok, en een branded gele footer. Twee print-knoppen (header + onder viewer) zorgen dat de gebruiker altijd kan printen.
