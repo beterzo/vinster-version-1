@@ -48,7 +48,7 @@ const RapportActies = ({ onPrint, onNewRound, showNewRoundButton = true }: Rappo
         <AccordionItem value="antwoorden" className="border-none">
           <AccordionTrigger className="hover:no-underline py-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: '#E8F4FD' }}>
+              <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(35, 45, 75, 0.1)' }}>
                 <CheckCircle className="w-5 h-5" style={{ color: '#232D4B' }} />
               </div>
               <div className="text-left">
@@ -103,7 +103,7 @@ const RapportActies = ({ onPrint, onNewRound, showNewRoundButton = true }: Rappo
                         <p className="text-sm font-medium text-gray-600 mb-2">{t('dashboard.round_dashboard.actions.selected_activities')}</p>
                         <div className="flex flex-wrap gap-2">
                           {prioriteitenResponses.selected_activiteiten_keywords.map((kw, i) => (
-                            <span key={i} className="px-3 py-1 rounded-full text-sm" style={{ backgroundColor: '#E8F4FD', color: '#232D4B' }}>{kw}</span>
+                            <span key={i} className="px-3 py-1 rounded-full text-sm" style={{ backgroundColor: '#fffbeb', color: '#232D4B' }}>{kw}</span>
                           ))}
                         </div>
                       </div>
@@ -113,7 +113,7 @@ const RapportActies = ({ onPrint, onNewRound, showNewRoundButton = true }: Rappo
                         <p className="text-sm font-medium text-gray-600 mb-2">{t('dashboard.round_dashboard.actions.selected_conditions')}</p>
                         <div className="flex flex-wrap gap-2">
                           {prioriteitenResponses.selected_werkomstandigheden_keywords.map((kw, i) => (
-                            <span key={i} className="px-3 py-1 rounded-full text-sm" style={{ backgroundColor: '#E8F4FD', color: '#232D4B' }}>{kw}</span>
+                            <span key={i} className="px-3 py-1 rounded-full text-sm" style={{ backgroundColor: '#fffbeb', color: '#232D4B' }}>{kw}</span>
                           ))}
                         </div>
                       </div>
@@ -123,7 +123,7 @@ const RapportActies = ({ onPrint, onNewRound, showNewRoundButton = true }: Rappo
                         <p className="text-sm font-medium text-gray-600 mb-2">{t('dashboard.round_dashboard.actions.selected_interests')}</p>
                         <div className="flex flex-wrap gap-2">
                           {prioriteitenResponses.selected_interesses_keywords.map((kw, i) => (
-                            <span key={i} className="px-3 py-1 rounded-full text-sm" style={{ backgroundColor: '#E8F4FD', color: '#232D4B' }}>{kw}</span>
+                            <span key={i} className="px-3 py-1 rounded-full text-sm" style={{ backgroundColor: '#fffbeb', color: '#232D4B' }}>{kw}</span>
                           ))}
                         </div>
                       </div>

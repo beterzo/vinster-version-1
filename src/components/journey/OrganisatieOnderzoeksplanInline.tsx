@@ -244,7 +244,7 @@ const OrganisatieOnderzoeksplanInline = ({ roundId, onComplete }: OrganisatieOnd
               </h1>
 
               {/* Intro block */}
-              <div className="bg-[#E8F4FD] rounded-xl p-6 mb-8">
+              <div className="bg-[#fffbeb] border-l-4 border-[#F5C518] rounded-xl p-6 mb-8">
                 <p className="text-[#232D4B] text-lg leading-relaxed">
                   Bespreek deze uitkomst met jouw loopbaan- of HR-adviseur.
                 </p>
@@ -284,7 +284,7 @@ const OrganisatieOnderzoeksplanInline = ({ roundId, onComplete }: OrganisatieOnd
                 <Button
                   size="lg"
                   onClick={handleRestart}
-                  className="text-lg px-8 py-6 bg-[#F5C518] hover:bg-yellow-500 text-[#232D4B] font-bold"
+                  className="text-lg px-8 py-6 bg-[#1a2e5a] hover:bg-[#142347] text-white font-bold"
                 >
                   <RotateCcw className="w-5 h-5 mr-2" />
                   Opnieuw beginnen

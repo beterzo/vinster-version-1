@@ -162,7 +162,7 @@ const ZoekprofielViewer = ({ content, userName }: ZoekprofielViewerProps) => {
             <h3 className="text-sm font-semibold text-[#232D4B]/60 uppercase tracking-wide mb-3 print:text-lg">
               {currentHeadings.samenvatting}
             </h3>
-            <div className="bg-[#E8F4FD] rounded-xl p-4 md:p-6 print:p-6">
+            <div className="bg-[#fffbeb] border-l-4 border-[#F5C518] rounded-xl p-4 md:p-6 print:p-6">
               <p className="text-[#232D4B] leading-relaxed print:text-xl print:leading-relaxed">
                 {content.samenvatting}
               </p>

@@ -12,7 +12,7 @@ const Ervaringen = () => {
   const testimonials = t('experiences.testimonials');
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#fafaf8]">
       {/* Header with Logo */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-6 py-6">
@@ -30,7 +30,7 @@ const Ervaringen = () => {
               <Button 
                 onClick={() => navigate('/')} 
                 variant="outline" 
-                className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold"
+                className="border-[#1a2e5a] text-[#1a2e5a] hover:bg-[rgba(26,46,90,0.05)] font-semibold"
               >
                 {t('experiences.back_to_home')}
               </Button>
@@ -72,7 +72,7 @@ const Ervaringen = () => {
             <Button 
               onClick={() => navigate('/')} 
               variant="outline" 
-              className="h-12 px-8 border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold"
+              className="h-12 px-8 border-[#1a2e5a] text-[#1a2e5a] hover:bg-[rgba(26,46,90,0.05)] font-semibold"
             >
               {t('experiences.back_to_home')}
             </Button>

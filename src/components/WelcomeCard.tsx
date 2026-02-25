@@ -3,11 +3,11 @@ import { Star } from "lucide-react";
 
 const WelcomeCard = () => {
   return (
-    <Card className="p-6 border-0 rounded-3xl" style={{ backgroundColor: '#E6F0F6' }}>
+    <Card className="p-6 border border-[#e5e7eb] rounded-xl shadow-card">
       <div className="flex items-start space-x-4">
         <div className="flex-shrink-0">
           <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-            <Star className="w-6 h-6" style={{ color: '#78BFE3' }} />
+            <Star className="w-6 h-6 text-[#232D4B]" />
           </div>
         </div>
         <div>

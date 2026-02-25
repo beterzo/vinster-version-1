@@ -30,7 +30,7 @@ const VoorWieIsHet = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 font-sans">
+    <div className="min-h-screen bg-[#fafaf8] font-sans">
       {/* Header */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-[1440px] mx-auto px-6 py-6">
@@ -48,7 +48,7 @@ const VoorWieIsHet = () => {
               <Button 
                 onClick={() => navigate('/')} 
                 variant="outline" 
-                className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold"
+                className="border-[#1a2e5a] text-[#1a2e5a] hover:bg-[rgba(26,46,90,0.05)] font-semibold"
               >
                 {t('for_whom.back_to_home')}
               </Button>
@@ -100,7 +100,7 @@ const VoorWieIsHet = () => {
             <Button 
               onClick={() => navigate('/')} 
               variant="outline" 
-              className="h-12 px-8 border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold"
+              className="h-12 px-8 border-[#1a2e5a] text-[#1a2e5a] hover:bg-[rgba(26,46,90,0.05)] font-semibold"
             >
               {t('for_whom.back_to_home')}
             </Button>

@@ -122,7 +122,7 @@ const EnthousiasmeInline = ({
           <div className="flex justify-center pt-8">
             <Button 
               onClick={onNext}
-              className="bg-[#F5C518] hover:bg-yellow-500 text-[#232D4B] font-semibold text-lg px-12 py-4 rounded-lg"
+              className="bg-[#1a2e5a] hover:bg-[#142347] text-white font-semibold text-lg px-12 py-4 rounded-lg"
             >
               {t('enthousiasme.intro.start_button')}
             </Button>
@@ -233,7 +233,7 @@ const EnthousiasmeInline = ({
             <Button 
               onClick={onPrevious}
               variant="outline"
-              className="border-[#232D4B] text-[#232D4B] hover:bg-blue-50"
+              className="border-[#232D4B] text-[#232D4B] hover:bg-[rgba(26,46,90,0.05)]"
             >
               {t('common.button.previous')}
             </Button>
@@ -241,7 +241,7 @@ const EnthousiasmeInline = ({
               onClick={onNext}
               className={`font-semibold px-8 ${
                 allFieldsFilled
-                  ? "bg-[#F5C518] hover:bg-yellow-500 text-[#232D4B]" 
+                  ? "bg-[#1a2e5a] hover:bg-[#142347] text-white" 
                   : "bg-gray-300 text-gray-500 cursor-not-allowed"
               }`}
               disabled={!allFieldsFilled}

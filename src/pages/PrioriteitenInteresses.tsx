@@ -215,8 +215,8 @@ const PrioriteitenInteresses = ({ mode = 'edit' }: StepProps) => {
                 {t('profiel_voltooien.prioriteiten.interesses.selected_count').replace('{count}', selectedKeywords.length.toString())}
               </p>
               {isSubmitting && (
-                <div className="mt-4 p-3 bg-blue-50 rounded-lg">
-                  <p className="text-sm text-blue-700">
+                <div className="mt-4 p-3 bg-[#fffbeb] rounded-lg">
+                  <p className="text-sm text-[#232D4B]">
                     📤 {t('common.toast.profile_completing')}
                   </p>
                 </div>

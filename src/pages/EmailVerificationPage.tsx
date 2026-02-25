@@ -104,10 +104,10 @@ const EmailVerificationPage = () => {
           </div>
 
           {/* Info notice - No verification required */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <div className="bg-[#fffbeb] border border-amber-200 rounded-lg p-4">
             <div className="flex items-start space-x-3">
-              <Mail className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
-              <div className="text-sm text-blue-800">
+              <Mail className="w-5 h-5 text-[#232D4B] mt-0.5 flex-shrink-0" />
+              <div className="text-sm text-[#232D4B]">
                 <p>{t('auth.email_verification.soft_verify_notice') || 'Je hoeft de mail niet per se te openen - je kunt gewoon inloggen.'}</p>
               </div>
             </div>

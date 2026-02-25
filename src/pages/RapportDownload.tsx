@@ -172,7 +172,7 @@ const RapportDownload = () => {
     }
   };
   if (loading) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+    return <div className="min-h-screen bg-[#fafaf8] flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-900 mx-auto mb-4"></div>
           <p className="text-gray-700">{t('journey.rapport.download.loading_data')}</p>
@@ -181,7 +181,7 @@ const RapportDownload = () => {
   }
   const status = getStatusMessage();
   return <ConditionalRoute canAccess={stepAccess.rapport.canAccess} isLoading={stepAccess.isLoading} blockedReason={stepAccess.rapport.blockedReason}>
-    <div className="min-h-screen bg-gray-50 font-sans">
+    <div className="min-h-screen bg-[#fafaf8] font-sans">
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
@@ -218,7 +218,7 @@ const RapportDownload = () => {
                     {isDownloading ? t('journey.rapport.download.downloading') : t('journey.rapport.download.download_button')}
                   </Button>
                   
-                  <Button onClick={handleOpenInNewTab} variant="outline" size="lg" className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold px-8 py-4 rounded-lg flex items-center gap-2">
+                  <Button onClick={handleOpenInNewTab} variant="outline" size="lg" className="border-[#1a2e5a] text-[#1a2e5a] hover:bg-[rgba(26,46,90,0.05)] font-semibold px-8 py-4 rounded-lg flex items-center gap-2">
                     <ExternalLink className="w-5 h-5" />
                     {t('journey.rapport.download.view_browser')}
                   </Button>
@@ -234,7 +234,7 @@ const RapportDownload = () => {
                   <p className="text-gray-600 mb-6">
                     {t('journey.rapport.download.next_step_description')}
                   </p>
-                  <Button onClick={handleNextStep} size="lg" className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-semibold px-8 py-4 rounded-lg flex items-center gap-2 mx-auto">
+                  <Button onClick={handleNextStep} size="lg" className="bg-[#1a2e5a] hover:bg-[#142347] text-white font-semibold px-8 py-4 rounded-lg flex items-center gap-2 mx-auto">
                     {t('journey.rapport.download.research_plan_button')}
                     <ArrowRight className="w-5 h-5" />
                   </Button>
@@ -262,12 +262,12 @@ const RapportDownload = () => {
                 <p className="text-gray-600 mb-4">
                   {t('journey.rapport.download.generating_status')}
                 </p>
-                <div className="bg-blue-50 p-4 rounded-lg mb-4">
-                  <p className="text-sm text-blue-700">
+                <div className="bg-[#fffbeb] p-4 rounded-lg mb-4">
+                  <p className="text-sm text-[#232D4B]">
                     {t('journey.rapport.download.generating_tip')}
                   </p>
                 </div>
-                <Button onClick={refreshData} variant="outline" className="border-blue-900 text-blue-900 hover:bg-blue-50">
+                <Button onClick={refreshData} variant="outline" className="border-[#1a2e5a] text-[#1a2e5a] hover:bg-[rgba(26,46,90,0.05)]">
                   {t('journey.rapport.download.refresh_status')}
                 </Button>
               </div>}
@@ -287,13 +287,13 @@ const RapportDownload = () => {
                 <p className="text-gray-600 mb-4">
                   {t('journey.rapport.download.generating_fallback')}
                 </p>
-                <Button onClick={() => window.location.reload()} variant="outline" className="border-blue-900 text-blue-900 hover:bg-blue-50">
+                <Button onClick={() => window.location.reload()} variant="outline" className="border-[#1a2e5a] text-[#1a2e5a] hover:bg-[rgba(26,46,90,0.05)]">
                   {t('journey.rapport.download.refresh_page')}
                 </Button>
               </div>}
 
             <div className="mt-12 pt-8 border-t border-gray-200">
-              <Button onClick={() => navigate('/home')} variant="outline" className="border-blue-900 text-blue-900 hover:bg-blue-50">
+              <Button onClick={() => navigate('/home')} variant="outline" className="border-[#1a2e5a] text-[#1a2e5a] hover:bg-[rgba(26,46,90,0.05)]">
                 {t('journey.rapport.download.back_button')}
               </Button>
             </div>

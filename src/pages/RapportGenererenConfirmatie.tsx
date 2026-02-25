@@ -186,13 +186,13 @@ const RapportGenererenConfirmatie = () => {
     }
   };
   if (stepAccess.isLoading || reportLoading) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+    return <div className="min-h-screen bg-[#fafaf8] flex items-center justify-center">
         <div className="text-center">
           <div className="text-xl text-blue-900">{t('common.loading')}</div>
         </div>
       </div>;
   }
-  return <div className="min-h-screen bg-gray-50 font-sans">
+  return <div className="min-h-screen bg-[#fafaf8] font-sans">
       <div className="max-w-4xl mx-auto px-6 py-12">
         {/* Logo Header */}
         <div className="mb-12 text-center">
