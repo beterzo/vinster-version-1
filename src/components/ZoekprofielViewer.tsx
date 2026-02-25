@@ -1,4 +1,5 @@
 import { useTranslation } from "@/hooks/useTranslation";
+import { Printer } from "lucide-react";
 
 interface ZoekprofielContent {
   functie_zin: string;
@@ -13,48 +14,65 @@ interface ZoekprofielContent {
 interface ZoekprofielViewerProps {
   content: ZoekprofielContent;
   userName?: string;
+  onPrint?: () => void;
 }
 
-const ZoekprofielViewer = ({ content, userName }: ZoekprofielViewerProps) => {
+const ZoekprofielViewer = ({ content, userName, onPrint }: ZoekprofielViewerProps) => {
   const { t, language } = useTranslation();
+
+  const handlePrint = () => {
+    if (onPrint) {
+      onPrint();
+    } else {
+      window.print();
+    }
+  };
 
   // Language-specific headings
   const headings: Record<string, Record<string, string>> = {
     nl: {
+      title: "Jouw zoekprofiel",
       functie: "Ik ga voor een functie als",
       kerntaken: "Met de volgende kerntaken",
       sector: "In de sector",
       organisatie: "Bij een",
       regio: "In deze regio",
       voorwaarden: "Met deze arbeidsvoorwaarden",
-      samenvatting: "Samenvatting"
+      samenvatting: "Samenvatting",
+      print: "Afdrukken"
     },
     en: {
+      title: "Your search profile",
       functie: "I'm aiming for a role as",
       kerntaken: "With the following core tasks",
       sector: "In the sector",
       organisatie: "At an",
       regio: "In this region",
       voorwaarden: "With these employment conditions",
-      samenvatting: "Summary"
+      samenvatting: "Summary",
+      print: "Print"
     },
     de: {
+      title: "Dein Suchprofil",
       functie: "Ich strebe eine Position als … an",
       kerntaken: "Mit folgenden Kernaufgaben",
       sector: "In der Branche",
       organisatie: "Bei einem",
       regio: "In dieser Region",
       voorwaarden: "Mit diesen Arbeitsbedingungen",
-      samenvatting: "Zusammenfassung"
+      samenvatting: "Zusammenfassung",
+      print: "Drucken"
     },
     no: {
+      title: "Din søkeprofil",
       functie: "Jeg går for en rolle som",
       kerntaken: "Med følgende kjerneoppgaver",
       sector: "Innenfor sektoren",
       organisatie: "Hos en",
       regio: "I denne regionen",
       voorwaarden: "Med disse arbeidsvilkårene",
-      samenvatting: "Sammendrag"
+      samenvatting: "Sammendrag",
+      print: "Skriv ut"
     }
   };
 
@@ -68,6 +86,12 @@ const ZoekprofielViewer = ({ content, userName }: ZoekprofielViewerProps) => {
     { heading: currentHeadings.regio, value: content.regio_zin },
     { heading: currentHeadings.voorwaarden, value: content.voorwaarden_zin },
   ];
+
+  const generationDate = new Date().toLocaleDateString(language === 'nl' ? 'nl-NL' : language === 'de' ? 'de-DE' : language === 'no' ? 'nb-NO' : 'en-US', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
 
   return (
     <>
@@ -86,22 +110,20 @@ const ZoekprofielViewer = ({ content, userName }: ZoekprofielViewerProps) => {
               overflow: hidden !important;
               margin: 0 !important;
               padding: 0 !important;
+              background: white !important;
               print-color-adjust: exact !important;
               -webkit-print-color-adjust: exact !important;
             }
 
-            /* Verberg alles visueel */
             body * {
               visibility: hidden !important;
             }
 
-            /* Toon print container en alle children */
             .zoekprofiel-print-container,
             .zoekprofiel-print-container * {
               visibility: visible !important;
             }
 
-            /* Position fixed haalt element uit document flow */
             .zoekprofiel-print-container {
               position: fixed !important;
               left: 0 !important;
@@ -114,9 +136,28 @@ const ZoekprofielViewer = ({ content, userName }: ZoekprofielViewerProps) => {
               background: white !important;
               overflow: hidden !important;
               z-index: 999999 !important;
+              box-shadow: none !important;
+              border-radius: 0 !important;
             }
 
-            /* Voorkom dat verborgen content ruimte inneemt */
+            .zoekprofiel-print-container .zoekprofiel-header {
+              background: #1a2e5a !important;
+              print-color-adjust: exact !important;
+              -webkit-print-color-adjust: exact !important;
+              border-radius: 0 !important;
+            }
+
+            .zoekprofiel-print-container .zoekprofiel-footer {
+              background: #F5C518 !important;
+              print-color-adjust: exact !important;
+              -webkit-print-color-adjust: exact !important;
+              border-radius: 0 !important;
+            }
+
+            .zoekprofiel-print-hide {
+              display: none !important;
+            }
+
             #root {
               height: 0 !important;
               overflow: hidden !important;
@@ -124,57 +165,80 @@ const ZoekprofielViewer = ({ content, userName }: ZoekprofielViewerProps) => {
           }
         `}
       </style>
-      <div className="bg-white rounded-2xl shadow-lg overflow-hidden zoekprofiel-print-container print:rounded-none print:shadow-none">
-        {/* Header */}
-        <div className="bg-[#232D4B] text-white p-6 md:p-8 print:p-10">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl md:text-3xl font-bold print:text-4xl">
-                {t('journey.zoekprofiel.viewer.title')}
-              </h1>
-              {userName && (
-                <p className="text-white/80 mt-1 print:text-xl">{userName}</p>
-              )}
-            </div>
+
+      {/* Section 6: Overall card wrapper */}
+      <div className="bg-white rounded-xl shadow-[0_4px_32px_rgba(0,0,0,0.1)] overflow-hidden max-w-[800px] mx-auto zoekprofiel-print-container print:rounded-none print:shadow-none">
+        
+        {/* Section 1: Header */}
+        <div className="zoekprofiel-header bg-[#1a2e5a] p-8 md:px-10 flex items-center justify-between">
+          <div>
+            <h1 className="text-[1.75rem] font-bold text-white print:text-4xl">
+              {currentHeadings.title}
+            </h1>
+            {userName && (
+              <p className="text-[0.95rem] text-white/70 mt-1 print:text-xl">{userName}</p>
+            )}
+          </div>
+          <div className="flex items-center gap-4">
             <img 
               src="/images/vinster-logo-white.png" 
               alt="Vinster Logo" 
-              className="h-16 md:h-20 print:h-28"
+              className="h-14 md:h-16 print:h-24"
             />
+            <button
+              onClick={handlePrint}
+              className="zoekprofiel-print-hide bg-white text-[#1a2e5a] border-2 border-white rounded-[10px] px-5 py-2.5 font-bold text-sm flex items-center gap-2 transition-all duration-150 hover:bg-white/15 hover:text-white"
+            >
+              <Printer className="w-4 h-4" />
+              {currentHeadings.print}
+            </button>
           </div>
         </div>
 
-        {/* Profile Items */}
-        <div className="p-6 md:p-8 space-y-6 print:p-10 print:space-y-6">
+        {/* Section 2: Content blocks */}
+        <div>
           {items.map((item, index) => (
-            <div key={index} className="border-l-4 border-[#F5C518] pl-4 print:pl-6">
-              <h3 className="text-sm font-semibold text-[#232D4B]/60 uppercase tracking-wide mb-1 print:text-lg">
+            <div
+              key={index}
+              className={`bg-white border-l-4 border-[#F5C518] px-7 py-5 ${
+                index < items.length - 1 ? 'border-b border-b-[#f0f0f0]' : ''
+              }`}
+            >
+              <p className="text-[0.7rem] font-bold tracking-[0.1em] uppercase text-[#9ca3af] mb-1 print:text-base">
                 {item.heading}
-              </h3>
-              <p className="text-lg text-[#232D4B] font-medium print:text-2xl">
+              </p>
+              <p className="text-[1.05rem] font-semibold text-[#1a2e5a] leading-[1.6] print:text-xl">
                 {item.value}
               </p>
             </div>
           ))}
+        </div>
 
-          {/* Summary */}
-          <div className="mt-8 pt-6 border-t border-gray-200 print:mt-4 print:pt-4">
-            <h3 className="text-sm font-semibold text-[#232D4B]/60 uppercase tracking-wide mb-3 print:text-lg">
+        {/* Section 3: Samenvatting */}
+        <div className="mx-7 my-6">
+          <div className="bg-[#fffbeb] border border-[#fde68a] border-l-4 border-l-[#F5C518] rounded-lg p-6">
+            <p className="text-[0.7rem] font-bold tracking-[0.1em] uppercase text-[#92400e] mb-2 print:text-base">
               {currentHeadings.samenvatting}
-            </h3>
-            <div className="bg-[#fffbeb] border-l-4 border-[#F5C518] rounded-xl p-4 md:p-6 print:p-6">
-              <p className="text-[#232D4B] leading-relaxed print:text-xl print:leading-relaxed">
-                {content.samenvatting}
-              </p>
-            </div>
+            </p>
+            <p className="text-[0.95rem] leading-[1.7] text-[#374151] print:text-lg print:leading-relaxed">
+              {content.samenvatting}
+            </p>
           </div>
         </div>
 
-        {/* Footer */}
-        <div className="bg-[#F5C518] p-4 text-center print:p-8">
-          <p className="text-[#232D4B] text-sm font-medium print:text-2xl print:font-bold">
-            vinster.ai
-          </p>
+        {/* Section 5: Footer */}
+        <div className="zoekprofiel-footer bg-[#F5C518] px-10 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <img 
+              src="/images/vinster-logo.png" 
+              alt="Vinster" 
+              className="h-6 print:h-10"
+            />
+            <span className="text-[#1a2e5a] text-sm font-semibold print:text-lg">vinster.ai</span>
+          </div>
+          <span className="text-[0.75rem] text-[#1a2e5a]/60 print:text-sm">
+            {generationDate}
+          </span>
         </div>
       </div>
     </>
