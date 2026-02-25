@@ -8,6 +8,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useOrganisation } from "@/contexts/OrganisationContext";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const LoginPage = () => {
@@ -19,6 +20,11 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { t } = useTranslation();
+  const { clearOrganisation } = useOrganisation();
+
+  useEffect(() => {
+    clearOrganisation();
+  }, [clearOrganisation]);
 
   useEffect(() => {
     const verified = searchParams.get('verified');

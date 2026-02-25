@@ -7,6 +7,7 @@ import TestimonialSection from "@/components/TestimonialSection";
 import FeatureCards from "@/components/FeatureCards";
 import Footer from "@/components/Footer";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useOrganisation } from "@/contexts/OrganisationContext";
 import SEOHead from "@/components/SEOHead";
 import CookieBanner from "@/components/CookieBanner";
 
@@ -14,6 +15,11 @@ const LandingPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const { clearOrganisation } = useOrganisation();
+
+  useEffect(() => {
+    clearOrganisation();
+  }, [clearOrganisation]);
 
   useEffect(() => {
     // Check if this is a password recovery redirect that ended up on the homepage
