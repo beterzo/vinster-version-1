@@ -44,25 +44,31 @@ export const useStepAccess = () => {
     const stepAccessData = {
       enthousiasme: {
         canAccess: true, // Always allow access for read-only viewing
-        canEdit: !isBlockedByCompletedReport, // Only edit if not blocked
+        canEdit: !persoonsprofielCompleted && !isBlockedByCompletedReport,
         isCompleted: enthousiasmeCompleted,
-        blockedReason: isBlockedByCompletedReport ? t('dashboard.report_limit.blocked_reason') : undefined
+        blockedReason: persoonsprofielCompleted
+          ? t('dashboard.step_blocked.profiel_completed')
+          : isBlockedByCompletedReport ? t('dashboard.report_limit.blocked_reason') : undefined
       },
       wensberoepen: {
         canAccess: enthousiasmeCompleted, // Must have enthousiasme completed
-        canEdit: enthousiasmeCompleted && !isBlockedByCompletedReport,
+        canEdit: enthousiasmeCompleted && !persoonsprofielCompleted && !isBlockedByCompletedReport,
         isCompleted: isWensberoepenComplete,
-        blockedReason: isBlockedByCompletedReport 
-          ? t('dashboard.report_limit.blocked_reason')
-          : t('dashboard.step_blocked.enthousiasme_required')
+        blockedReason: persoonsprofielCompleted
+          ? t('dashboard.step_blocked.profiel_completed')
+          : isBlockedByCompletedReport 
+            ? t('dashboard.report_limit.blocked_reason')
+            : t('dashboard.step_blocked.enthousiasme_required')
       },
       persoonsprofiel: {
         canAccess: isWensberoepenComplete,
-        canEdit: isWensberoepenComplete && !isBlockedByCompletedReport,
+        canEdit: isWensberoepenComplete && !persoonsprofielCompleted && !isBlockedByCompletedReport,
         isCompleted: persoonsprofielCompleted,
-        blockedReason: isBlockedByCompletedReport
-          ? t('dashboard.report_limit.blocked_reason')
-          : t('dashboard.step_blocked.wensberoepen_required')
+        blockedReason: persoonsprofielCompleted
+          ? t('dashboard.step_blocked.profiel_completed')
+          : isBlockedByCompletedReport
+            ? t('dashboard.report_limit.blocked_reason')
+            : t('dashboard.step_blocked.wensberoepen_required')
       },
       rapport: {
         canAccess: persoonsprofielCompleted,

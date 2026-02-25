@@ -73,7 +73,8 @@
       "enthousiasme_required": "Sie müssen zuerst den Begeisterungsscan abschließen",
       "wensberoepen_required": "Sie müssen zuerst Ihre Wunschberufe vervollständigen",
       "persoonsprofiel_required": "Sie müssen zuerst Ihr persönliches Profil vervollständigen",
-      "rapport_required": "Sie müssen zuerst Ihren Bericht abschließen, um fortzufahren"
+      "rapport_required": "Sie müssen zuerst Ihren Bericht abschließen, um fortzufahren",
+      "profiel_completed": "Ihr Profil ist abgeschlossen. Sie können Ihre Antworten nur noch ansehen."
     },
     "restart_journey": {
       "title": "Möchten Sie die Reise noch einmal machen?",

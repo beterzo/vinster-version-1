@@ -73,7 +73,8 @@
       "enthousiasme_required": "Du må først fullføre entusiasme-skanningen",
       "wensberoepen_required": "Du må først fullføre dine ønskede yrker",
       "persoonsprofiel_required": "Du må først fullføre din personlige profil",
-      "rapport_required": "Du må først fullføre rapporten din for å fortsette"
+      "rapport_required": "Du må først fullføre rapporten din for å fortsette",
+      "profiel_completed": "Profilen din er fullført. Du kan bare se svarene dine."
     },
     "restart_journey": {
       "title": "Vil du gjøre reisen igjen?",
