@@ -73,7 +73,8 @@
       "enthousiasme_required": "You must first complete the enthusiasm scan before continuing",
       "wensberoepen_required": "You must first complete the desired professions scan before continuing",
       "persoonsprofiel_required": "You must first complete your personal profile before continuing",
-      "rapport_required": "You must first generate your career report before continuing"
+      "rapport_required": "You must first generate your career report before continuing",
+      "profiel_completed": "Your profile is complete. You can only view your answers."
     },
     "restart_journey": {
       "title": "Want to do the journey again?",

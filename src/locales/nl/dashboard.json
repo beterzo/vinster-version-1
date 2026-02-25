@@ -72,7 +72,8 @@
       "enthousiasme_required": "Je moet eerst de enthousiasmescan voltooien voordat je verder kunt gaan",
       "wensberoepen_required": "Je moet eerst de wensberoepen scan voltooien voordat je verder kunt gaan",
       "persoonsprofiel_required": "Je moet eerst je persoonsprofiel voltooien voordat je verder kunt gaan",
-      "rapport_required": "Je moet eerst je loopbaanrapport laten genereren voordat je verder kunt gaan"
+      "rapport_required": "Je moet eerst je loopbaanrapport laten genereren voordat je verder kunt gaan",
+      "profiel_completed": "Je profiel is voltooid. Je kunt je antwoorden alleen bekijken."
     },
     "restart_journey": {
       "title": "Wil je het traject nog een keer doen?",
