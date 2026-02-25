@@ -1,27 +1,43 @@
 
 
-## Fix: Dubbele bullets verwijderen in "Belangrijk om te weten"
+## Organisatie-modus wissen bij normale navigatie
 
 ### Probleem
-Elke lijst-item heeft zowel een geel vinkje-icoon (vanuit de component) als een bullet-teken (`•`) in de tekst zelf. Dit geeft dubbele bullets.
-
-### Oorzaak
-De `•` staat hardcoded in `src/locales/nl/dashboard.json` bij elke `point1`–`point6` string.
+De organisatie-context wordt opgeslagen in localStorage en nooit gewist wanneer een gebruiker via de normale knoppen navigeert (Hero "Start hier", login, signup, etc.). Dit betekent dat als iemand eerder via een organisatie-pad is binnengekomen, de organisatie-modus actief blijft -- ook bij een normaal traject.
 
 ### Oplossing
-Verwijder het `•` teken (en de spatie erna) uit alle 6 punten in `src/locales/nl/dashboard.json`. Geen andere bestanden of talen worden aangepast.
+Op drie strategische plekken `clearOrganisation()` aanroepen, zodat de organisatie-context altijd wordt gewist bij normale flow-entry points:
 
-| Regel | Oud | Nieuw |
-|-------|-----|-------|
-| 58 | `"• Er zijn geen goede of foute antwoorden..."` | `"Er zijn geen goede of foute antwoorden..."` |
-| 59 | `"• Je kunt maximaal tien keer..."` | `"Je kunt maximaal tien keer..."` |
-| 60 | `"• Alle informatie wordt vertrouwelijk..."` | `"Alle informatie wordt vertrouwelijk..."` |
-| 61 | `"• Denk aan concrete situaties..."` | `"Denk aan concrete situaties..."` |
-| 62 | `"• Het is juist goed om de antwoorden..."` | `"Het is juist goed om de antwoorden..."` |
-| 63 | `"• Alle voortgang wordt automatisch opgeslagen"` | `"Alle voortgang wordt automatisch opgeslagen"` |
+1. **`src/pages/LandingPage.tsx`** (of `src/components/HeroSection.tsx`)
+   - Bij mount van de landingspagina: `clearOrganisation()` aanroepen. De landingspagina is het startpunt van de normale flow. Als iemand hier terechtkomt, moet de organisatie-context weg zijn.
 
-### Bestand
+2. **`src/pages/SignupPage.tsx`**
+   - Bij mount: `clearOrganisation()` aanroepen. Signup via de normale knoppen = normaal traject.
+
+3. **`src/pages/LoginPage.tsx`**
+   - Bij mount: `clearOrganisation()` aanroepen. Inloggen via de normale knop = normaal traject.
+
+De organisatie-modus wordt **alleen** gezet via `OrganisatieLanding.tsx` (de organisatie dropdown flow), dus die blijft onaangetast.
+
+### Technische wijzigingen
 
 | Bestand | Wijziging |
 |---------|-----------|
-| `src/locales/nl/dashboard.json` | `•` verwijderen uit point1 t/m point6 (regels 58-63) |
+| `src/pages/LandingPage.tsx` | Import `useOrganisation`, roep `clearOrganisation()` aan in een `useEffect` bij mount |
+| `src/pages/SignupPage.tsx` | Import `useOrganisation`, roep `clearOrganisation()` aan in een `useEffect` bij mount |
+| `src/pages/LoginPage.tsx` | Import `useOrganisation`, roep `clearOrganisation()` aan in een `useEffect` bij mount |
+
+Per bestand wordt dit toegevoegd:
+
+```tsx
+import { useOrganisation } from "@/contexts/OrganisationContext";
+
+// In de component:
+const { clearOrganisation } = useOrganisation();
+
+useEffect(() => {
+  clearOrganisation();
+}, [clearOrganisation]);
+```
+
+Dit is minimaal invasief: 3 regels per bestand, geen verandering aan bestaande logica. De organisatie-modus wordt alleen actief als de gebruiker expliciet via de organisatie-dropdown navigeert.
