@@ -1,30 +1,40 @@
 
 
-## Layout stappen-grid aanpassen: 2 boven + 3 onder
+## Layout fix: Organisatie-modus (5 stappen) - full-width actieve kaart + 2x2 grid
 
-### Probleem
-Bij 5 stappen (organisatie-modus) worden ze nu 3+2 verdeeld, wat er onevenwichtig uitziet. Bij 6 stappen (normaal) worden ze 3+3 verdeeld, wat prima is.
+Alleen het grid-gedeelte in `src/components/journey/WelkomInline.tsx` wordt aangepast. Geen wijzigingen aan content, styling, badges, routing of kaart-opmaak.
 
-### Oplossing
-In `src/components/journey/WelkomInline.tsx` de breedte per kaart dynamisch maken op basis van het totaal aantal stappen en de positie:
+### Wat verandert
 
-- **5 stappen (organisatie-modus):** eerste 2 kaarten krijgen `lg:w-[calc(50%-0.5rem)]` (2 per rij), de onderste 3 kaarten krijgen `lg:w-[calc(33.333%-0.75rem)]` (3 per rij)
-- **6 stappen (normaal):** alle kaarten blijven `lg:w-[calc(33.333%-0.75rem)]` (3+3)
+**Alleen bij organisatie-modus (5 stappen):**
+- De actieve/huidige stap wordt full-width weergegeven, gecentreerd met `max-width: 560px`
+- De overige 4 stappen worden in een strak 2x2 grid getoond
+- Als er een oneven aantal overige stappen is (bv. na voltooiing van stap 1), wordt de laatste kaart ook full-width gecentreerd
 
-### Technisch
-In de `cardContent` div (regel 120), de `lg:w-[...]` class dynamisch maken:
+**Bij normale modus (6 stappen):** Geen verandering, blijft 3+3 flex-wrap layout.
 
+### Technische aanpak
+
+In de steps grid sectie (regel 111-229), de rendering conditioneel maken op `isOrganisationMode`:
+
+**Organisatie-modus:** Gebruik een CSS grid container:
 ```
-const lgWidth = totalSteps === 5 && index < 2
-  ? 'lg:w-[calc(50%-0.5rem)]'
-  : 'lg:w-[calc(33.333%-0.75rem)]';
+grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-[800px] mx-auto
 ```
 
-De container (`flex flex-wrap justify-center gap-4`) blijft ongewijzigd.
+Per kaart:
+- Actieve/huidige stap: `col-span-1 sm:col-span-2` + inner wrapper met `max-w-[560px] mx-auto`
+- Locked/completed stappen: gewone grid cellen (`col-span-1`), met `h-full` voor gelijke hoogte
+- Als het aantal overige stappen oneven is, krijgt de laatste ook `sm:col-span-2` + centered
+
+**Normale modus:** Behoudt huidige `flex flex-wrap justify-center gap-4` met `lg:w-[calc(33.333%-0.75rem)]` (3+3).
+
+### Responsive gedrag
+- Onder `sm` (640px): alles 1 kolom, geen col-span nodig
+- Boven `sm`: 2-koloms grid voor organisatie-modus
 
 ### Bestand
 
 | Bestand | Wijziging |
 |---------|-----------|
-| `src/components/journey/WelkomInline.tsx` | Dynamische breedte per kaart op basis van positie en totaal aantal stappen |
-
+| `src/components/journey/WelkomInline.tsx` | Grid layout conditioneel per modus in het steps-renderblok (regels 111-229) |
