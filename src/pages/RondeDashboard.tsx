@@ -130,7 +130,12 @@ const RondeDashboard = () => {
       setCurrentSubStep(reportExists ? 'complete' : 'confirm');
     } else {
       const stepConfig = activeSteps.find(s => s.id === step);
-      setCurrentSubStep(stepConfig?.subSteps[0] || 'intro');
+      // Skip 'welkom' substep so we don't loop back to the overview page
+      const firstSubStep = stepConfig?.subSteps[0];
+      const targetSubStep = firstSubStep === 'welkom' 
+        ? (stepConfig?.subSteps[1] || 'intro') 
+        : (firstSubStep || 'intro');
+      setCurrentSubStep(targetSubStep);
     }
   };
 
