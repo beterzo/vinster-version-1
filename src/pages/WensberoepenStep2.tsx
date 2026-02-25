@@ -112,14 +112,14 @@ const WensberoepenStep2 = ({ mode = 'edit' }: StepProps) => {
   ];
 
   if (isLoading) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">{t('common.loading')}</div>;
+    return <div className="min-h-screen bg-[#fafaf8] flex items-center justify-center">{t('common.loading')}</div>;
   }
 
   // Real-time validation based on current state
   const step2Complete = jobTitle.trim() !== "" && Object.values(answers).every(answer => answer.trim() !== "");
 
   return (
-    <div className="min-h-screen bg-gray-50 font-sans">
+    <div className="min-h-screen bg-[#fafaf8] font-sans">
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
           <div className="flex items-center">
@@ -154,10 +154,10 @@ const WensberoepenStep2 = ({ mode = 'edit' }: StepProps) => {
         
         <WensberoepenProgress currentStep={2} totalSteps={3} />
         
-        <Card className="rounded-3xl shadow-xl">
+        <Card className="rounded-3xl shadow-card">
           <CardContent className="p-12">
             <div className="text-center mb-12">
-              <h1 className="text-3xl font-bold text-blue-900 mb-2">
+              <h1 className="text-3xl font-bold text-[#232D4B] mb-2">
                 {t('wensberoepen.step2.title')}
               </h1>
               <p className="text-xl text-gray-600">
@@ -166,7 +166,7 @@ const WensberoepenStep2 = ({ mode = 'edit' }: StepProps) => {
             </div>
 
             <div className="mb-8">
-              <Label htmlFor="jobTitle" className="text-blue-900 font-medium text-lg mb-3 block text-left">
+              <Label htmlFor="jobTitle" className="text-[#232D4B] font-semibold text-base mb-3 block text-left border-l-2 border-[#F5C518] pl-3">
                 {t('wensberoepen.step2.job_title_label')}
               </Label>
               <Input 
@@ -176,7 +176,7 @@ const WensberoepenStep2 = ({ mode = 'edit' }: StepProps) => {
                 onChange={(e) => handleJobTitleChange(e.target.value)} 
                 onBlur={!isViewMode ? handleJobTitleBlur : undefined}
                 disabled={isViewMode}
-                className={`text-lg border-gray-300 focus:border-blue-900 focus:ring-blue-900 ${
+                className={`text-lg ${
                   isViewMode ? 'bg-gray-100 cursor-not-allowed text-gray-700' : ''
                 }`}
               />
@@ -185,7 +185,7 @@ const WensberoepenStep2 = ({ mode = 'edit' }: StepProps) => {
             <div className="space-y-6">
               {questions.map((question, index) => (
                 <div key={index}>
-                  <Label htmlFor={`question${index + 1}`} className="text-blue-900 font-medium mb-3 block text-left">
+                  <Label htmlFor={`question${index + 1}`} className="text-[#232D4B] font-semibold text-base mb-3 block text-left border-l-2 border-[#F5C518] pl-3">
                     {index + 1}. {question}
                   </Label>
                   <Textarea 
@@ -195,7 +195,7 @@ const WensberoepenStep2 = ({ mode = 'edit' }: StepProps) => {
                     onChange={(e) => handleInputChange(`question${index + 1}`, e.target.value)} 
                     onBlur={(e) => !isViewMode && handleInputBlur(`question${index + 1}`, e.target.value)}
                     disabled={isViewMode}
-                    className={`min-h-[80px] border-gray-300 focus:border-blue-900 focus:ring-blue-900 ${
+                    className={`min-h-[80px] ${
                       isViewMode ? 'bg-gray-100 cursor-not-allowed text-gray-700' : ''
                     }`}
                   />
@@ -207,16 +207,16 @@ const WensberoepenStep2 = ({ mode = 'edit' }: StepProps) => {
               <Button 
                 onClick={handlePrevious} 
                 variant="outline" 
-                className="border-blue-900 text-blue-900 hover:bg-blue-50"
+                className="border-[#232D4B] text-[#232D4B] hover:bg-gray-50 h-12"
               >
                 {t('wensberoepen.step2.previous_button')}
               </Button>
               <Button 
                 onClick={handleNext} 
-                className={`font-semibold px-8 ${
+                className={`font-semibold px-8 h-12 ${
                   isViewMode || step2Complete 
-                    ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 
-                    : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                    ? "bg-[#232D4B] hover:bg-[#1a2350] text-white" 
+                    : "bg-gray-200 text-gray-400 cursor-not-allowed"
                 }`} 
                 disabled={!isViewMode && !step2Complete}
               >

@@ -77,13 +77,13 @@ const EnthousiasmeStep3 = ({ mode = 'edit' }: StepProps) => {
   ];
 
   if (loading) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">{t('common.loading')}</div>;
+    return <div className="min-h-screen bg-[#fafaf8] flex items-center justify-center">{t('common.loading')}</div>;
   }
 
   const allFieldsFilled = Object.values(answers).every(answer => answer.trim() !== "");
 
   return (
-    <div className="min-h-screen bg-gray-50 font-sans">
+    <div className="min-h-screen bg-[#fafaf8] font-sans">
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
@@ -120,11 +120,11 @@ const EnthousiasmeStep3 = ({ mode = 'edit' }: StepProps) => {
         
         <EnthousiasmeProgress currentStep={3} totalSteps={3} />
         
-        <Card className="rounded-3xl shadow-xl">
+        <Card className="rounded-3xl shadow-card">
           <CardContent className="p-12">
             {/* Title */}
             <div className="text-center mb-12">
-              <h1 className="text-3xl font-bold text-blue-900 mb-2">
+              <h1 className="text-3xl font-bold text-[#232D4B] mb-2">
                 {t('enthousiasme.step3.title')}
               </h1>
               <p className="text-xl text-gray-600">
@@ -136,7 +136,7 @@ const EnthousiasmeStep3 = ({ mode = 'edit' }: StepProps) => {
             <div className="space-y-8">
               {questions.map((item, index) => (
                 <div key={index}>
-                  <Label htmlFor={item.field} className="text-blue-900 font-medium text-lg mb-3 block text-left">
+                  <Label htmlFor={item.field} className="text-[#232D4B] font-semibold text-base mb-3 block text-left border-l-2 border-[#F5C518] pl-3">
                     {index + 1}. {item.question}
                   </Label>
                   <Textarea
@@ -146,7 +146,7 @@ const EnthousiasmeStep3 = ({ mode = 'edit' }: StepProps) => {
                     onChange={(e) => handleInputChange(item.field, e.target.value)}
                     onBlur={(e) => !isViewMode && handleInputBlur(item.field, e.target.value)}
                     disabled={isViewMode}
-                    className={`min-h-[100px] border-gray-300 focus:border-blue-900 focus:ring-blue-900 ${
+                    className={`min-h-[100px] ${
                       isViewMode ? 'bg-gray-100 cursor-not-allowed text-gray-700' : ''
                     }`}
                   />
@@ -159,16 +159,16 @@ const EnthousiasmeStep3 = ({ mode = 'edit' }: StepProps) => {
               <Button 
                 onClick={handlePrevious}
                 variant="outline"
-                className="border-blue-900 text-blue-900 hover:bg-blue-50"
+                className="border-[#232D4B] text-[#232D4B] hover:bg-gray-50 h-12"
               >
                 {t('enthousiasme.step3.previous_button')}
               </Button>
               <Button 
                 onClick={handleComplete}
-                className={`font-semibold px-8 ${
+                className={`font-semibold px-8 h-12 ${
                   allFieldsFilled
-                    ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 
-                    : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                    ? "bg-[#232D4B] hover:bg-[#1a2350] text-white" 
+                    : "bg-gray-200 text-gray-400 cursor-not-allowed"
                 }`}
                 disabled={!allFieldsFilled}
               >

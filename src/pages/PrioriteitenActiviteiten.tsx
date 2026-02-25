@@ -70,7 +70,7 @@ const PrioriteitenActiviteiten = ({ mode = 'edit' }: StepProps) => {
   };
 
   if (loading) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">{t('common.loading')}</div>;
+    return <div className="min-h-screen bg-[#fafaf8] flex items-center justify-center">{t('common.loading')}</div>;
   }
 
   // Use AI-generated keywords or fallback to empty array
@@ -78,7 +78,7 @@ const PrioriteitenActiviteiten = ({ mode = 'edit' }: StepProps) => {
   const canProceed = selectedKeywords.length >= 8;
 
   return (
-    <div className="min-h-screen bg-gray-50 font-sans">
+    <div className="min-h-screen bg-[#fafaf8] font-sans">
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-6 py-4">
@@ -113,11 +113,11 @@ const PrioriteitenActiviteiten = ({ mode = 'edit' }: StepProps) => {
           </div>
         )}
         
-        <Card className="rounded-3xl shadow-xl">
+        <Card className="rounded-3xl shadow-card">
           <CardContent className="p-12">
             {/* Title */}
             <div className="text-center mb-12">
-              <h1 className="text-3xl font-bold text-blue-900 mb-2">
+              <h1 className="text-3xl font-bold text-[#232D4B] mb-2">
                 {t('profiel_voltooien.prioriteiten.activiteiten.title')}
               </h1>
               <p className="text-xl text-gray-600">
@@ -138,10 +138,10 @@ const PrioriteitenActiviteiten = ({ mode = 'edit' }: StepProps) => {
                     disabled={isViewMode}
                     className={`p-3 rounded-lg border-2 transition-all duration-200 text-sm font-medium ${
                       selectedKeywords.includes(keyword)
-                        ? "bg-blue-900 text-white border-blue-900 shadow-md"
+                        ? "bg-[#232D4B] text-white border-[#232D4B] shadow-md"
                         : isViewMode
                           ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
-                          : "bg-white text-blue-900 border-gray-300 hover:border-blue-900 hover:bg-blue-50"
+                          : "bg-white text-[#232D4B] border-gray-300 hover:border-[#232D4B] hover:bg-gray-50"
                     }`}
                   >
                     {keyword}
@@ -158,7 +158,7 @@ const PrioriteitenActiviteiten = ({ mode = 'edit' }: StepProps) => {
 
             {/* Extra Text Field */}
             <div className="mb-8">
-              <Label htmlFor="extraText" className="text-blue-900 font-medium text-lg mb-3 block text-left">
+              <Label htmlFor="extraText" className="text-[#232D4B] font-semibold text-base mb-3 block text-left border-l-2 border-[#F5C518] pl-3">
                 {t('profiel_voltooien.prioriteiten.activiteiten.extra_text_label')}
               </Label>
               <Textarea 
@@ -168,7 +168,7 @@ const PrioriteitenActiviteiten = ({ mode = 'edit' }: StepProps) => {
                 onChange={e => handleExtraTextChange(e.target.value)}
                 onBlur={!isViewMode ? handleExtraTextBlur : undefined}
                 disabled={isViewMode}
-                className={`min-h-[80px] border-gray-300 focus:border-blue-900 focus:ring-blue-900 ${
+                className={`min-h-[80px] ${
                   isViewMode ? 'bg-gray-100 cursor-not-allowed text-gray-700' : ''
                 }`}
               />
@@ -178,10 +178,10 @@ const PrioriteitenActiviteiten = ({ mode = 'edit' }: StepProps) => {
             <div className="flex justify-end pt-8">
               <Button 
                 onClick={handleNext} 
-                className={`font-semibold px-8 ${
+                className={`font-semibold px-8 h-12 ${
                   canProceed 
-                    ? "bg-yellow-400 hover:bg-yellow-500 text-blue-900" 
-                    : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                    ? "bg-[#232D4B] hover:bg-[#1a2350] text-white" 
+                    : "bg-gray-200 text-gray-400 cursor-not-allowed"
                 }`} 
                 disabled={!canProceed}
               >
