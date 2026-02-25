@@ -221,10 +221,10 @@ const Dashboard = () => {
           </Card>
 
           {/* Important Info - spans 2 columns, compact */}
-          <Card className="lg:col-span-2 p-5 border-0 rounded-3xl text-white" style={{
+          <Card className="lg:col-span-2 p-8 border-0 rounded-3xl text-white" style={{
             backgroundColor: '#78BFE3'
           }}>
-            <h3 className="font-bold text-xl mb-2">
+            <h3 className="font-bold text-3xl text-[#232D4B] mb-3">
               {t('dashboard.important_info.title')}
             </h3>
             <ul className="text-sm leading-snug grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
