@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useToast } from "@/hooks/use-toast";
-import { Lock, Download, FileText, Play } from "lucide-react";
+import { Lock, Download, FileText, Play, Lightbulb, CheckCircle } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -199,20 +199,7 @@ const Dashboard = () => {
               <Button 
                 onClick={handleStartNewRound}
                 disabled={roundsLoading}
-                className="bg-white border-2 border-gray-300 hover:text-white rounded-full px-8 py-4 font-semibold transition-all duration-200 gap-2 w-full"
-                style={{ 
-                  color: '#232D4B'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#232D4B';
-                  e.currentTarget.style.borderColor = '#232D4B';
-                  e.currentTarget.style.color = 'white';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'white';
-                  e.currentTarget.style.borderColor = '#d1d5db';
-                  e.currentTarget.style.color = '#232D4B';
-                }}
+                className="bg-[#232D4B] hover:bg-[#1a2350] text-white rounded-xl h-12 px-8 font-semibold transition-all duration-200 gap-2 w-full"
               >
                 <Play className="w-4 h-4" />
                 {t('dashboard.rounds.start_new')}
@@ -221,19 +208,20 @@ const Dashboard = () => {
           </Card>
 
           {/* Important Info - spans 2 columns, compact */}
-          <Card className="lg:col-span-2 p-8 border-0 rounded-3xl text-white" style={{
-            backgroundColor: '#78BFE3'
-          }}>
-            <h3 className="font-bold text-3xl text-[#232D4B] mb-3">
-              {t('dashboard.important_info.title')}
-            </h3>
-            <ul className="text-sm leading-snug grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
-              <li>{t('dashboard.important_info.point1')}</li>
-              <li>{t('dashboard.important_info.point2')}</li>
-              <li>{t('dashboard.important_info.point3')}</li>
-              <li>{t('dashboard.important_info.point4')}</li>
-              <li>{t('dashboard.important_info.point5')}</li>
-              <li>{t('dashboard.important_info.point6')}</li>
+          <Card className="lg:col-span-2 p-8 border-0 border-l-4 border-[#F5C518] rounded-3xl bg-[#FEF9E6]">
+            <div className="flex items-start gap-3 mb-3">
+              <Lightbulb className="w-6 h-6 text-[#F5C518] flex-shrink-0 mt-0.5" />
+              <h3 className="font-bold text-3xl text-[#232D4B]">
+                {t('dashboard.important_info.title')}
+              </h3>
+            </div>
+            <ul className="text-sm leading-snug grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 text-[#232D4B]">
+              <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-[#F5C518] flex-shrink-0 mt-0.5" />{t('dashboard.important_info.point1')}</li>
+              <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-[#F5C518] flex-shrink-0 mt-0.5" />{t('dashboard.important_info.point2')}</li>
+              <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-[#F5C518] flex-shrink-0 mt-0.5" />{t('dashboard.important_info.point3')}</li>
+              <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-[#F5C518] flex-shrink-0 mt-0.5" />{t('dashboard.important_info.point4')}</li>
+              <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-[#F5C518] flex-shrink-0 mt-0.5" />{t('dashboard.important_info.point5')}</li>
+              <li className="flex items-start gap-2"><CheckCircle className="w-4 h-4 text-[#F5C518] flex-shrink-0 mt-0.5" />{t('dashboard.important_info.point6')}</li>
             </ul>
           </Card>
         </div>
