@@ -67,11 +67,12 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				vinster: {
-					yellow: '#F5C518',
-					blue: '#E8F4FD',
-					gray: '#F8F9FA'
-				}
+			vinster: {
+				yellow: '#F5C518',
+				blue: '#E8F4FD',
+				gray: '#F8F9FA',
+				'off-white': '#F8F7F5',
+			}
 			},
 			textColor: {
 				'vinster-blue': '#232D4B'

@@ -2,7 +2,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState, useMemo } from "react";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import JourneyStepNavigator from "@/components/JourneyStepNavigator";
 import WelkomInline from "@/components/journey/WelkomInline";
 import EnthousiasmeInline from "@/components/journey/EnthousiasmeInline";
@@ -12,6 +11,7 @@ import RapportInline from "@/components/journey/RapportInline";
 import OnderzoeksplanInline from "@/components/journey/OnderzoeksplanInline";
 import OrganisatieOnderzoeksplanInline from "@/components/journey/OrganisatieOnderzoeksplanInline";
 import ZoekprofielInline from "@/components/journey/ZoekprofielInline";
+import { Progress } from "@/components/ui/progress";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useUserRounds } from "@/hooks/useUserRounds";
 import { useEnthousiasmeResponses } from "@/hooks/useEnthousiasmeResponses";
@@ -29,7 +29,6 @@ const RondeDashboard = () => {
   const { rounds, loading: roundsLoading } = useUserRounds();
   const { isOrganisationMode, organisationTypeId, name: organisationName, accessCodeId: organisationAccessCodeId } = useOrganisation();
   
-  // Filter steps: skip zoekprofiel in organisation mode
   const activeSteps = useMemo(() => {
     if (isOrganisationMode) {
       return JOURNEY_STEPS.filter(s => s.id !== 'zoekprofiel');
@@ -37,7 +36,6 @@ const RondeDashboard = () => {
     return JOURNEY_STEPS;
   }, [isOrganisationMode]);
   
-  // Pass roundId to all response hooks
   const { responses: enthousiasmeResponses, loading: enthousiasmeLoading, loadResponses: reloadEnthousiasme } = useEnthousiasmeResponses(roundId);
   const { isWensberoepenComplete, isLoading: wensberoepenLoading, reloadWensberoepen } = useWensberoepenValidation(roundId);
   const { responses: prioriteitenResponses, loading: prioriteitenLoading, loadResponses: reloadPrioriteiten } = usePrioriteitenResponses(roundId);
@@ -62,7 +60,6 @@ const RondeDashboard = () => {
     const checkReportAndZoekprofiel = async () => {
       if (!roundId) return;
       
-      // Check report
       const { data: reportData } = await supabase
         .from('user_reports')
         .select('id')
@@ -71,7 +68,6 @@ const RondeDashboard = () => {
         .maybeSingle();
       setReportExists(!!reportData);
       
-      // Check zoekprofiel - only complete if zoekprofiel_content exists for this round
       const { data: zoekprofielData } = await supabase
         .from('user_zoekprofielen')
         .select('zoekprofiel_content')
@@ -84,7 +80,6 @@ const RondeDashboard = () => {
 
   const isLoading = roundsLoading || enthousiasmeLoading || wensberoepenLoading || prioriteitenLoading || extraInfoLoading;
 
-  // Calculate completed steps
   const enthousiasmeComplete = enthousiasmeResponses && 
     enthousiasmeResponses.kindertijd_activiteiten && 
     enthousiasmeResponses.fluitend_thuiskomen_dag;
@@ -102,38 +97,24 @@ const RondeDashboard = () => {
     if (enthousiasmeComplete) completed.push('enthousiasme');
     if (wensberoepenComplete) completed.push('wensberoepen');
     if (persoonsprofielComplete) completed.push('persoonsprofiel');
-    if (reportExists) {
-      completed.push('loopbaanrapport');
-    }
-    if (onderzoeksplanComplete) {
-      completed.push('onderzoeksplan');
-    }
-    // Zoekprofiel is only complete when zoekprofiel_content exists for this specific round
-    if (zoekprofielComplete) {
-      completed.push('zoekprofiel');
-    }
+    if (reportExists) completed.push('loopbaanrapport');
+    if (onderzoeksplanComplete) completed.push('onderzoeksplan');
+    if (zoekprofielComplete) completed.push('zoekprofiel');
     return completed;
   };
 
   const completedSteps = getCompletedSteps();
+  const progressPercentage = (completedSteps.length / activeSteps.length) * 100;
 
-  // Bepaal de juiste substep voor het bekijken van voltooide stappen (skip intro/welkom)
   const getViewSubStepForCompletedStep = (step: JourneyStep): SubStep => {
     switch (step) {
-      case 'enthousiasme':
-        return 'step1';  // Direct naar eerste vraag-pagina
-      case 'wensberoepen':
-        return 'step1';  // Direct naar wensberoep 1
-      case 'persoonsprofiel':
-        return 'extra_info';  // Direct naar inhoud
-      case 'loopbaanrapport':
-        return 'complete';  // Naar het rapport
-      case 'onderzoeksplan':
-        return 'page1';  // Naar eerste pagina
-      case 'zoekprofiel':
-        return 'step1';  // Direct naar vragen
-      default:
-        return 'step1';
+      case 'enthousiasme': return 'step1';
+      case 'wensberoepen': return 'step1';
+      case 'persoonsprofiel': return 'extra_info';
+      case 'loopbaanrapport': return 'complete';
+      case 'onderzoeksplan': return 'page1';
+      case 'zoekprofiel': return 'step1';
+      default: return 'step1';
     }
   };
 
@@ -141,17 +122,13 @@ const RondeDashboard = () => {
     setSlideDirection(activeSteps.findIndex(s => s.id === step) > activeSteps.findIndex(s => s.id === currentStep) ? 'left' : 'right');
     setCurrentStep(step);
     
-    // Check of de stap voltooid is
     const isStepCompleted = completedSteps.includes(step);
     
     if (isStepCompleted) {
-      // Voltooide stap: direct naar inhoud (skip intro/welkom)
       setCurrentSubStep(getViewSubStepForCompletedStep(step));
     } else if (step === 'loopbaanrapport') {
-      // Loopbaanrapport: check report status
       setCurrentSubStep(reportExists ? 'complete' : 'confirm');
     } else {
-      // Niet voltooide stap: naar eerste substep (intro/welkom)
       const stepConfig = activeSteps.find(s => s.id === step);
       setCurrentSubStep(stepConfig?.subSteps[0] || 'intro');
     }
@@ -162,19 +139,15 @@ const RondeDashboard = () => {
   const handleNext = async () => {
     const stepConfig = getCurrentStepConfig();
     if (!stepConfig) return;
-
     const currentSubIndex = stepConfig.subSteps.indexOf(currentSubStep);
     
     if (currentSubIndex < stepConfig.subSteps.length - 1) {
       setSlideDirection('left');
       setCurrentSubStep(stepConfig.subSteps[currentSubIndex + 1]);
     } else {
-      // End of current step's substeps - refresh data first, then show overview
-      if (currentStep === 'enthousiasme') {
-        await reloadEnthousiasme();
-      } else if (currentStep === 'wensberoepen') {
-        await reloadWensberoepen();
-      } else if (currentStep === 'persoonsprofiel') {
+      if (currentStep === 'enthousiasme') await reloadEnthousiasme();
+      else if (currentStep === 'wensberoepen') await reloadWensberoepen();
+      else if (currentStep === 'persoonsprofiel') {
         await reloadPrioriteiten();
         await reloadExtraInfo();
       }
@@ -184,7 +157,6 @@ const RondeDashboard = () => {
   };
 
   const handleContinueFromOverview = () => {
-    // Find the next incomplete step
     const nextStep = activeSteps.find(step => !completedSteps.includes(step.id));
     if (nextStep) {
       setSlideDirection('left');
@@ -193,13 +165,11 @@ const RondeDashboard = () => {
     }
   };
 
-  // Specifieke functie voor navigatie vanuit welkom scherm naar volgende incomplete stap
   const handleContinueFromWelkom = () => {
     const nextIncompleteStep = activeSteps.find(step => !completedSteps.includes(step.id));
     if (nextIncompleteStep) {
       setSlideDirection('left');
       setCurrentStep(nextIncompleteStep.id);
-      // Skip 'welkom' substep - go to 'intro' (the second substep)
       const targetSubStep = nextIncompleteStep.subSteps[0] === 'welkom' 
         ? nextIncompleteStep.subSteps[1] 
         : nextIncompleteStep.subSteps[0];
@@ -210,7 +180,6 @@ const RondeDashboard = () => {
   const handlePrevious = () => {
     const stepConfig = getCurrentStepConfig();
     if (!stepConfig) return;
-
     const currentSubIndex = stepConfig.subSteps.indexOf(currentSubStep);
     
     if (currentSubIndex > 0) {
@@ -227,10 +196,9 @@ const RondeDashboard = () => {
     }
   };
 
-
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-vinster-off-white flex items-center justify-center">
         <Loader2 className="w-8 h-8 animate-spin text-[#232D4B]" />
       </div>
     );
@@ -238,7 +206,7 @@ const RondeDashboard = () => {
 
   if (!round) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-vinster-off-white flex items-center justify-center">
         <div className="text-center">
           <p className="text-gray-600 mb-4">{t('dashboard.round_dashboard.not_found')}</p>
           <Button onClick={() => navigate('/home')}>{t('dashboard.round_dashboard.back_to_dashboard')}</Button>
@@ -250,7 +218,6 @@ const RondeDashboard = () => {
   const renderContent = () => {
     const animationClass = slideDirection === 'left' ? 'animate-slide-in-right' : 'animate-slide-in-left';
 
-    // Show WelkomInline with progress when substep is 'overview'
     if (currentSubStep === 'overview') {
       return (
         <div key={`overview-${currentStep}`} className={animationClass}>
@@ -270,78 +237,78 @@ const RondeDashboard = () => {
       <div key={`${currentStep}-${currentSubStep}`} className={animationClass}>
         {currentStep === 'enthousiasme' && roundId && (
           <EnthousiasmeInline 
-            roundId={roundId} 
-            subStep={currentSubStep} 
-            onNext={handleNext} 
-            onPrevious={handlePrevious}
-            completedSteps={completedSteps}
-            onStepClick={handleStepClick}
-            onContinueFromWelkom={handleContinueFromWelkom}
-            isOrganisationMode={isOrganisationMode}
-            organisationName={organisationName}
-            organisationAccessCodeId={organisationAccessCodeId}
+            roundId={roundId} subStep={currentSubStep} onNext={handleNext} onPrevious={handlePrevious}
+            completedSteps={completedSteps} onStepClick={handleStepClick} onContinueFromWelkom={handleContinueFromWelkom}
+            isOrganisationMode={isOrganisationMode} organisationName={organisationName} organisationAccessCodeId={organisationAccessCodeId}
           />
         )}
         {currentStep === 'wensberoepen' && roundId && (
-          <WensberoepenInline 
-            roundId={roundId} 
-            subStep={currentSubStep} 
-            onNext={handleNext} 
-            onPrevious={handlePrevious}
-          />
+          <WensberoepenInline roundId={roundId} subStep={currentSubStep} onNext={handleNext} onPrevious={handlePrevious} />
         )}
         {currentStep === 'persoonsprofiel' && roundId && (
           <PersoonsprofielInline roundId={roundId} subStep={currentSubStep} onNext={handleNext} onPrevious={handlePrevious} />
         )}
         {currentStep === 'loopbaanrapport' && roundId && (
           <RapportInline 
-            roundId={roundId} 
-            subStep={currentSubStep as 'confirm' | 'complete'}
-            onNext={handleNext} 
-            onPrevious={handlePrevious}
-            onReportGenerated={() => setReportExists(true)}
-            organisationTypeId={isOrganisationMode ? organisationTypeId : undefined}
+            roundId={roundId} subStep={currentSubStep as 'confirm' | 'complete'} onNext={handleNext} onPrevious={handlePrevious}
+            onReportGenerated={() => setReportExists(true)} organisationTypeId={isOrganisationMode ? organisationTypeId : undefined}
           />
         )}
         {currentStep === 'onderzoeksplan' && isOrganisationMode && roundId && (
-          <OrganisatieOnderzoeksplanInline 
-            roundId={roundId}
-            onComplete={() => setOnderzoeksplanComplete(true)}
-          />
+          <OrganisatieOnderzoeksplanInline roundId={roundId} onComplete={() => setOnderzoeksplanComplete(true)} />
         )}
         {currentStep === 'onderzoeksplan' && !isOrganisationMode && (
-          <OnderzoeksplanInline 
-            subStep={currentSubStep as 'page1' | 'page2' | 'page3'} 
-            onNext={handleNext} 
-            onPrevious={handlePrevious}
-            onComplete={() => setOnderzoeksplanComplete(true)}
-          />
+          <OnderzoeksplanInline subStep={currentSubStep as 'page1' | 'page2' | 'page3'} onNext={handleNext} onPrevious={handlePrevious} onComplete={() => setOnderzoeksplanComplete(true)} />
         )}
         {currentStep === 'zoekprofiel' && roundId && (
-          <ZoekprofielInline 
-            roundId={roundId} 
-            subStep={currentSubStep === 'complete' ? 'complete' : currentSubStep === 'step1' ? 'step1' : 'intro'} 
-            onNext={handleNext}
-            onPrevious={handlePrevious}
-          />
+          <ZoekprofielInline roundId={roundId} subStep={currentSubStep === 'complete' ? 'complete' : currentSubStep === 'step1' ? 'step1' : 'intro'} onNext={handleNext} onPrevious={handlePrevious} />
         )}
       </div>
     );
   };
 
+  const currentStepIndex = activeSteps.findIndex(s => s.id === currentStep);
+  const currentStepLabel = activeSteps[currentStepIndex] ? t(activeSteps[currentStepIndex].labelKey) : '';
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      <div className="container mx-auto px-4 py-6 max-w-6xl">
-        <div className="flex items-center justify-between mb-6">
-          <Button variant="ghost" onClick={() => navigate('/home')} className="text-gray-600 hover:text-gray-900">
+    <div className="min-h-screen bg-vinster-off-white">
+      <div className="container mx-auto px-4 py-6 max-w-5xl">
+        <div className="mb-4">
+          <Button 
+            variant="ghost" 
+            onClick={() => navigate('/home')} 
+            className="text-gray-500 hover:text-[#232D4B] hover:bg-white/60 -ml-2"
+          >
             <ArrowLeft className="w-4 h-4 mr-2" />
             {t('dashboard.round_dashboard.back_to_dashboard')}
           </Button>
         </div>
 
-        <Card className="p-4 mb-6 border-0 rounded-2xl bg-white shadow-md">
-          <JourneyStepNavigator currentStep={currentStep} completedSteps={completedSteps} onStepClick={handleStepClick} steps={activeSteps} />
-        </Card>
+        <div className="bg-white shadow-card rounded-2xl p-6 md:p-8 mb-6">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-5">
+            <div>
+              <h1 className="text-xl md:text-2xl font-bold text-[#232D4B]">
+                Jouw loopbaantraject
+              </h1>
+              <p className="text-sm text-gray-500 mt-1">
+                Stap {currentStepIndex + 1} van {activeSteps.length} — {currentStepLabel}
+              </p>
+            </div>
+            <div className="flex items-center gap-3 min-w-[180px]">
+              <Progress value={progressPercentage} className="h-2 flex-1" />
+              <span className="text-xs font-medium text-[#232D4B] whitespace-nowrap">
+                {Math.round(progressPercentage)}%
+              </span>
+            </div>
+          </div>
+
+          <JourneyStepNavigator 
+            currentStep={currentStep} 
+            completedSteps={completedSteps} 
+            onStepClick={handleStepClick} 
+            steps={activeSteps} 
+          />
+        </div>
 
         <div className="overflow-hidden">
           {renderContent()}
@@ -352,3 +319,4 @@ const RondeDashboard = () => {
 };
 
 export default RondeDashboard;
+
