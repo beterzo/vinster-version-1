@@ -43,7 +43,7 @@ const WelkomInline = ({
   const allSteps = [
     { id: 'enthousiasme' as JourneyStep, number: 1, icon: Lightbulb, title: t('welkom.steps.step1.title'), description: t('welkom.steps.step1.description'), time: t('welkom.steps.step1.time') },
     { id: 'wensberoepen' as JourneyStep, number: 2, icon: ClipboardList, title: t('welkom.steps.step2.title'),
-      description: orgLabels ? `Noem drie wensberoepen en beschrijf wat je erin aanspreekt. Deze mogen binnen of buiten ${orgLabels.contextLabel} liggen. Jouw antwoorden worden gebruikt om te bedenken bij welke functies ${orgLabels.binnenLabel} jouw wensen passen.` : t('welkom.steps.step2.description'),
+      description: orgLabels ? `Noem drie wensberoepen en beschrijf wat je erin aanspreekt. Jouw antwoorden worden gebruikt om te bedenken bij welke functies ${orgLabels.binnenLabel} jouw wensen passen.` : t('welkom.steps.step2.description'),
       time: t('welkom.steps.step2.time') },
     { id: 'persoonsprofiel' as JourneyStep, number: 3, icon: User, title: t('welkom.steps.step3.title'), description: t('welkom.steps.step3.description'), time: t('welkom.steps.step3.time') },
     { id: 'loopbaanrapport' as JourneyStep, number: 4, icon: FileText, title: t('welkom.steps.step4.title'),
