@@ -284,7 +284,7 @@ const RondeDashboard = () => {
           </Button>
         </div>
 
-        <div className="bg-white shadow-card rounded-2xl p-6 md:p-8 mb-6">
+        <div className="bg-white shadow-[0_2px_16px_rgba(0,0,0,0.08)] rounded-2xl p-6 md:p-8 mb-6 border-t-4 border-[#F5C518]">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-5">
             <div>
               <h1 className="text-xl md:text-2xl font-bold text-[#232D4B]">
@@ -294,10 +294,10 @@ const RondeDashboard = () => {
                 Stap {currentStepIndex + 1} van {activeSteps.length} — {currentStepLabel}
               </p>
             </div>
-            <div className="flex items-center gap-3 min-w-[180px]">
-              <Progress value={progressPercentage} className="h-2 flex-1" />
-              <span className="text-xs font-medium text-[#232D4B] whitespace-nowrap">
-                {Math.round(progressPercentage)}%
+            <div className="flex flex-col items-end gap-1 min-w-[180px]">
+              <Progress value={progressPercentage} className="h-2.5 flex-1 w-full" />
+              <span className="text-xs font-medium text-gray-500">
+                {Math.round(progressPercentage)}% voltooid
               </span>
             </div>
           </div>
