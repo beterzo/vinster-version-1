@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
@@ -15,42 +14,38 @@ const OnderzoeksplanInline = ({ subStep, onNext, onPrevious, onComplete }: Onder
 
   if (subStep === 'page1') {
     return (
-      <Card className="rounded-3xl shadow-xl border-0">
-        <CardContent className="p-8 md:p-12">
-          <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-8">
-              <h1 className="text-3xl md:text-4xl font-bold text-[#232D4B] mb-6">
-                {t('journey.onderzoeksplan.page1.title')}
-              </h1>
-            </div>
-            
-            <div className="space-y-6 text-lg text-gray-700">
-              <p>{t('journey.onderzoeksplan.page1.intro')}</p>
-              <p className="font-medium text-[#232D4B]">
-                {t('journey.onderzoeksplan.page1.instruction')}
-              </p>
-            </div>
+      <div className="bg-white rounded-xl shadow-[0_2px_16px_rgba(0,0,0,0.08)] p-8 md:px-10 max-w-[720px] mx-auto">
+        <div className="text-center mb-8">
+          <h1 className="text-3xl md:text-4xl font-bold text-[#232D4B] mb-6">
+            {t('journey.onderzoeksplan.page1.title')}
+          </h1>
+        </div>
+        
+        <div className="space-y-6 text-lg text-gray-700">
+          <p>{t('journey.onderzoeksplan.page1.intro')}</p>
+          <p className="font-medium text-[#232D4B]">
+            {t('journey.onderzoeksplan.page1.instruction')}
+          </p>
+        </div>
 
-            <div className="flex justify-between mt-10">
-              <Button 
-                onClick={onPrevious}
-                variant="outline"
-                className="font-semibold px-6"
-              >
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                {t('journey.onderzoeksplan.previous_button')}
-              </Button>
-              <Button 
-                onClick={onNext}
-                className="bg-[#1a2e5a] hover:bg-[#142347] text-white font-semibold px-8 py-3"
-              >
-                {t('journey.onderzoeksplan.next_button')}
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+        <div className="flex justify-between items-center mt-8 pt-6 border-t border-[#f0f0f0]">
+          <Button 
+            onClick={onPrevious}
+            variant="outline"
+            className="bg-transparent text-[#1a2e5a] border-[1.5px] border-[#1a2e5a] rounded-[10px] min-h-[48px] px-7 font-semibold hover:bg-[#1a2e5a]/5"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            {t('journey.onderzoeksplan.previous_button')}
+          </Button>
+          <Button 
+            onClick={onNext}
+            className="bg-[#1a2e5a] hover:bg-[#142347] hover:-translate-y-[1px] text-white rounded-[10px] min-h-[48px] px-7 font-semibold transition-all duration-150"
+          >
+            {t('journey.onderzoeksplan.next_button')}
+            <ArrowRight className="w-4 h-4 ml-2" />
+          </Button>
+        </div>
+      </div>
     );
   }
 
@@ -69,81 +64,83 @@ const OnderzoeksplanInline = ({ subStep, onNext, onPrevious, onComplete }: Onder
     ];
 
     return (
-      <Card className="rounded-3xl shadow-xl border-0">
-        <CardContent className="p-8 md:p-12">
-          <div className="max-w-3xl mx-auto">
-            <h1 className="text-2xl md:text-3xl font-bold text-[#232D4B] mb-8">
-              {t('journey.onderzoeksplan.page2.title')}
-            </h1>
-            
-            <ol className="space-y-4">
-              {steps.map((step, index) => (
-                <li key={index} className="flex gap-4">
-                  <span className="flex-shrink-0 w-8 h-8 bg-[#232D4B] text-white rounded-full flex items-center justify-center font-bold text-sm">
-                    {index + 1}
-                  </span>
-                  <p className="text-gray-700 pt-1">{step}</p>
-                </li>
-              ))}
-            </ol>
+      <div className="bg-white rounded-xl shadow-[0_2px_16px_rgba(0,0,0,0.08)] p-8 md:px-10 max-w-[720px] mx-auto">
+        <h1 className="text-2xl md:text-3xl font-bold text-[#232D4B] mb-4">
+          {t('journey.onderzoeksplan.page2.title')}
+        </h1>
 
-            <div className="flex justify-between mt-10">
-              <Button 
-                onClick={onPrevious}
-                variant="outline"
-                className="font-semibold px-6"
-              >
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                {t('journey.onderzoeksplan.previous_button')}
-              </Button>
-              <Button 
-                onClick={onNext}
-                className="bg-[#1a2e5a] hover:bg-[#142347] text-white font-semibold px-8"
-              >
-                {t('journey.onderzoeksplan.next_button')}
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
+        <p className="text-[0.95rem] leading-[1.7] text-[#6b7280] pb-5 border-b-2 border-[#f0f0f0] mb-5">
+          {t('journey.onderzoeksplan.page1.instruction')}
+        </p>
+        
+        <div>
+          {steps.map((step, index) => (
+            <div key={index}>
+              {/* Phase dividers after step 3 and step 6 */}
+              {(index === 3 || index === 6) && (
+                <div className="border-t-2 border-[#F5C518] my-2 opacity-40" />
+              )}
+              <div className={`flex items-start gap-4 py-4 ${index < steps.length - 1 ? 'border-b border-[#f0f0f0]' : ''}`}>
+                <span className="w-8 h-8 min-w-[32px] rounded-full bg-[#1a2e5a] text-white text-[0.8rem] font-bold flex items-center justify-center mt-0.5">
+                  {index + 1}
+                </span>
+                <p className="text-[0.95rem] leading-[1.7] text-[#374151] flex-1">{step}</p>
+              </div>
             </div>
-          </div>
-        </CardContent>
-      </Card>
+          ))}
+        </div>
+
+        <div className="flex justify-between items-center mt-8 pt-6 border-t border-[#f0f0f0]">
+          <Button 
+            onClick={onPrevious}
+            variant="outline"
+            className="bg-transparent text-[#1a2e5a] border-[1.5px] border-[#1a2e5a] rounded-[10px] min-h-[48px] px-7 font-semibold hover:bg-[#1a2e5a]/5"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            {t('journey.onderzoeksplan.previous_button')}
+          </Button>
+          <Button 
+            onClick={onNext}
+            className="bg-[#1a2e5a] hover:bg-[#142347] hover:-translate-y-[1px] text-white rounded-[10px] min-h-[48px] px-7 font-semibold transition-all duration-150"
+          >
+            {t('journey.onderzoeksplan.next_button')}
+            <ArrowRight className="w-4 h-4 ml-2" />
+          </Button>
+        </div>
+      </div>
     );
   }
 
   // page3
   return (
-    <Card className="rounded-3xl shadow-xl border-0">
-      <CardContent className="p-8 md:p-12">
-        <div className="max-w-3xl mx-auto">
-          <div className="bg-[#fffbeb] border-l-4 border-[#F5C518] rounded-2xl p-6 mb-8">
-            <p className="text-[#232D4B] leading-relaxed text-lg">
-              {t('journey.onderzoeksplan.page3.closing_text')}
-            </p>
-          </div>
+    <div className="bg-white rounded-xl shadow-[0_2px_16px_rgba(0,0,0,0.08)] p-8 md:px-10 max-w-[720px] mx-auto">
+      <div className="bg-[#fffbeb] border-l-4 border-[#F5C518] rounded-2xl p-6 mb-8">
+        <p className="text-[#232D4B] leading-relaxed text-lg">
+          {t('journey.onderzoeksplan.page3.closing_text')}
+        </p>
+      </div>
 
-          <div className="flex justify-between">
-            <Button 
-              onClick={onPrevious}
-              variant="outline"
-              className="font-semibold px-6"
-            >
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              {t('journey.onderzoeksplan.previous_button')}
-            </Button>
-            <Button 
-              onClick={() => {
-                onComplete?.();
-                onNext();
-              }}
-              className="bg-[#1a2e5a] hover:bg-[#142347] text-white font-semibold px-8"
-            >
-              {t('journey.onderzoeksplan.to_zoekprofiel_button')}
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Button>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
+      <div className="flex justify-between items-center mt-8 pt-6 border-t border-[#f0f0f0]">
+        <Button 
+          onClick={onPrevious}
+          variant="outline"
+          className="bg-transparent text-[#1a2e5a] border-[1.5px] border-[#1a2e5a] rounded-[10px] min-h-[48px] px-7 font-semibold hover:bg-[#1a2e5a]/5"
+        >
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          {t('journey.onderzoeksplan.previous_button')}
+        </Button>
+        <Button 
+          onClick={() => {
+            onComplete?.();
+            onNext();
+          }}
+          className="bg-[#1a2e5a] hover:bg-[#142347] hover:-translate-y-[1px] text-white rounded-[10px] min-h-[48px] px-7 font-semibold transition-all duration-150"
+        >
+          {t('journey.onderzoeksplan.to_zoekprofiel_button')}
+          <ArrowRight className="w-4 h-4 ml-2" />
+        </Button>
+      </div>
+    </div>
   );
 };
 
