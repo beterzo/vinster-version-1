@@ -231,23 +231,18 @@ const ZoekprofielInline = ({ roundId, subStep, onNext, onPrevious }: Zoekprofiel
   if (zoekprofielContent) {
     return (
       <div className="space-y-6">
-        <div className="flex justify-between items-center mb-4 print:hidden">
-          <h2 className="text-2xl font-bold text-[#232D4B]">
-            {t('journey.zoekprofiel.complete.title')}
-          </h2>
-          <div className="flex gap-3">
-            <Button 
-              onClick={handlePrint}
-              variant="outline"
-              className="font-semibold"
-            >
-              <Printer className="w-4 h-4 mr-2" />
-              {t('journey.zoekprofiel.complete.print_button')}
-            </Button>
-          </div>
-        </div>
+        <ZoekprofielViewer content={zoekprofielContent} userName={userName} onPrint={handlePrint} />
 
-        <ZoekprofielViewer content={zoekprofielContent} userName={userName} />
+        {/* Second print button below viewer */}
+        <div className="flex justify-center print:hidden">
+          <button
+            onClick={handlePrint}
+            className="bg-transparent text-[#1a2e5a] border-[1.5px] border-[#1a2e5a] rounded-[10px] px-5 py-2.5 font-semibold text-[0.9rem] flex items-center gap-2 transition-all duration-150 hover:bg-[#1a2e5a] hover:text-white"
+          >
+            <Printer className="w-4 h-4" />
+            {t('journey.zoekprofiel.complete.print_button')}
+          </button>
+        </div>
 
         <div className="bg-[#fffbeb] border-l-4 border-[#F5C518] rounded-2xl p-6 text-center print:hidden">
           <p className="text-[#232D4B] mb-4">
