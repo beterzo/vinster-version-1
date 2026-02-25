@@ -51,9 +51,15 @@ const SignupPage = () => {
       if (error) {
         let errorMessage = t('signup.unknown_error');
         
-        // Handle specific hook timeout error
-        if (error.message.includes("Failed to reach hook") || error.message.includes("maximum time")) {
-          errorMessage = "Er is een probleem met het versturen van de verificatie email. Probeer het over een paar minuten opnieuw of neem contact op met support.";
+        // Hook timeout = cold start, but account IS created and email IS sent
+        if (error.message.includes("hook_timeout") || error.message.includes("Failed to reach hook") || error.message.includes("maximum time")) {
+          toast({
+            title: t('signup.account_created'),
+            description: t('signup.verification_email_sent'),
+            duration: 6000
+          });
+          navigate(`/email-verification?lang=${language}`);
+          return;
         } else if (error.message === "User already registered") {
           errorMessage = t('signup.user_already_registered');
           // For existing users, show specific message and redirect to login
@@ -107,8 +113,8 @@ const SignupPage = () => {
         </div>
         
         <div className="relative z-10 h-full flex items-end p-12">
-          <div className="bg-white bg-opacity-90 rounded-2xl p-8 max-w-md">
-            <blockquote className="text-xl font-medium text-blue-900 leading-relaxed">
+          <div className="bg-white/15 backdrop-blur-[8px] border border-white/20 rounded-xl p-8 max-w-md">
+            <blockquote className="text-xl font-medium text-white leading-relaxed drop-shadow-sm">
               {t('signup.quote')}
             </blockquote>
           </div>
