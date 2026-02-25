@@ -158,7 +158,7 @@ const CheckEmailPasswordResetPage = () => {
             <Button
               onClick={handleResendEmail}
               variant="outline"
-              className="w-full h-12 border-blue-900 text-blue-900 hover:bg-blue-50"
+              className="w-full h-12 border-[#1a2e5a] text-[#1a2e5a] hover:bg-[rgba(26,46,90,0.05)]"
               disabled={isResending || !email}
             >
               <RotateCcw className="w-4 h-4 mr-2" />

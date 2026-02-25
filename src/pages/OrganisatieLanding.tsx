@@ -217,7 +217,7 @@ const OrganisatieLanding = () => {
                       variant="outline"
                       size="sm"
                       onClick={() => navigate(`/organisaties/${child.slug}`)}
-                      className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold"
+                      className="border-[#1a2e5a] text-[#1a2e5a] hover:bg-[rgba(26,46,90,0.05)] font-semibold"
                     >
                       Vul code in
                     </Button>
@@ -263,7 +263,7 @@ const OrganisatieLanding = () => {
             </p>
           )}
 
-          <div className="bg-blue-50 rounded-xl p-6">
+          <div className="bg-[#fffbeb] border-l-4 border-[#F5C518] rounded-xl p-6">
             <h2 className="text-lg font-semibold text-blue-900 mb-1">Jouw toegangscode</h2>
             <p className="text-sm text-gray-600 mb-4">Vul de code in die je van je organisatie hebt ontvangen.</p>
             <form onSubmit={handleSubmit} className="space-y-4">

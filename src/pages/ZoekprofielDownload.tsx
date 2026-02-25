@@ -174,14 +174,14 @@ const ZoekprofielDownload = () => {
                     {isDownloading || downloading ? t('journey.zoekprofiel.download.downloading') : t('journey.zoekprofiel.download.download_button')}
                   </Button>
                   
-                  <Button onClick={handleOpenInNewTab} variant="outline" size="lg" className="border-blue-900 text-blue-900 hover:bg-blue-50 font-semibold px-8 py-4 rounded-lg flex items-center gap-2">
+                  <Button onClick={handleOpenInNewTab} variant="outline" size="lg" className="border-[#1a2e5a] text-[#1a2e5a] hover:bg-[rgba(26,46,90,0.05)] font-semibold px-8 py-4 rounded-lg flex items-center gap-2">
                     <ExternalLink className="w-5 h-5" />
                     {t('journey.zoekprofiel.download.view_browser_button')}
                   </Button>
                 </div>
                 
-                <div className="mt-8 p-4 bg-blue-50 rounded-lg">
-                  <p className="text-sm text-blue-700 mb-4">
+                <div className="mt-8 p-4 bg-[#fffbeb] border-l-4 border-[#F5C518] rounded-lg">
+                  <p className="text-sm text-[#1a2e5a] mb-4">
                     💡 <strong>Tip:</strong> {t('journey.zoekprofiel.download.tip_applications')}
                   </p>
                 </div>
@@ -206,12 +206,12 @@ const ZoekprofielDownload = () => {
                 <p className="text-gray-600 mb-4">
                   {t('journey.zoekprofiel.download.generating_progress')}
                 </p>
-                <div className="bg-blue-50 p-4 rounded-lg mb-4">
-                  <p className="text-sm text-blue-700">
+                <div className="bg-[#fffbeb] border-l-4 border-[#F5C518] p-4 rounded-lg mb-4">
+                   <p className="text-sm text-[#1a2e5a]">
                     💡 <strong>Tip:</strong> {t('journey.zoekprofiel.download.tip_wait')}
                   </p>
                 </div>
-                <Button onClick={loadPdfData} variant="outline" className="border-blue-900 text-blue-900 hover:bg-blue-50">
+                <Button onClick={loadPdfData} variant="outline" className="border-[#1a2e5a] text-[#1a2e5a] hover:bg-[rgba(26,46,90,0.05)]">
                   {t('journey.zoekprofiel.download.status_refresh_button')}
                 </Button>
               </div>}
@@ -231,13 +231,13 @@ const ZoekprofielDownload = () => {
                 <p className="text-gray-600 mb-4">
                   {t('journey.zoekprofiel.download.generating_wait')}
                 </p>
-                <Button onClick={() => window.location.reload()} variant="outline" className="border-blue-900 text-blue-900 hover:bg-blue-50">
+                <Button onClick={() => window.location.reload()} variant="outline" className="border-[#1a2e5a] text-[#1a2e5a] hover:bg-[rgba(26,46,90,0.05)]">
                   {t('journey.zoekprofiel.download.refresh_button')}
                 </Button>
               </div>}
 
             <div className="mt-12 pt-8 border-t border-gray-200">
-              <Button onClick={() => navigate('/home')} variant="outline" className="border-blue-900 text-blue-900 hover:bg-blue-50">
+              <Button onClick={() => navigate('/home')} variant="outline" className="border-[#1a2e5a] text-[#1a2e5a] hover:bg-[rgba(26,46,90,0.05)]">
                 {t('journey.zoekprofiel.download.back_button')}
               </Button>
             </div>

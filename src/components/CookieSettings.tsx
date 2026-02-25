@@ -118,7 +118,7 @@ const CookieSettings = () => {
           <Button
             onClick={handleSave}
             variant="outline"
-            className="border-blue-900 text-blue-900 hover:bg-blue-50"
+            className="border-[#1a2e5a] text-[#1a2e5a] hover:bg-[rgba(26,46,90,0.05)]"
           >
             {t('cookies.settings.save')}
           </Button>

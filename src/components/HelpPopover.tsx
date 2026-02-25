@@ -24,7 +24,7 @@ export const HelpPopover: React.FC<HelpPopoverProps> = ({ examples, title }) => 
           type="button"
           variant="ghost"
           size="sm"
-          className="h-6 w-6 p-0 text-blue-600 hover:text-blue-800 hover:bg-blue-50"
+          className="h-6 w-6 p-0 text-blue-600 hover:text-blue-800 hover:bg-[rgba(26,46,90,0.05)]"
         >
           <HelpCircle className="h-4 w-4" />
         </Button>
