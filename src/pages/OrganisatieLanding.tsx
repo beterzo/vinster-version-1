@@ -232,9 +232,9 @@ const OrganisatieLanding = () => {
             </Button>
           </div>
 
-          {/* Section 2: Specific organisations with inline code input */}
+          {/* Section 2: Intro text for specific organisations */}
           {childOrgs.length > 0 && (
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-12">
+            <div>
               <div className="flex items-center gap-3 mb-2">
                 <Building2 className="h-6 w-6 text-blue-900" />
                 <h2 className="text-xl font-semibold text-blue-900">
@@ -245,24 +245,26 @@ const OrganisatieLanding = () => {
                 Als je van jouw organisatie een toegangscode hebt ontvangen, kun je die hier gebruiken voor een traject op maat.
               </p>
 
+              {/* Individual organisation cards */}
               <div className="grid gap-4">
                 {childOrgs.map((child) => {
                   const logo = ORG_LOGOS[child.slug];
                   return (
                     <div
                       key={child.id}
-                      className="border border-gray-200 rounded-xl p-5 hover:border-blue-300 hover:shadow-sm transition-all"
+                      className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 hover:border-blue-300 hover:shadow-md transition-all"
                     >
-                      <div className="flex items-center gap-3 mb-3">
-                        {logo && (
+                      <div className="flex items-center gap-4 mb-4">
+                        {logo ? (
                           <img
                             src={logo}
                             alt={`${child.name} logo`}
-                            className="h-10 w-auto object-contain"
+                            className="h-12 w-auto object-contain"
                           />
+                        ) : (
+                          <KeyRound className="h-6 w-6 text-blue-900/60" />
                         )}
-                        {!logo && <KeyRound className="h-5 w-5 text-blue-900/60" />}
-                        <span className="font-medium text-blue-900 text-lg">{child.name}</span>
+                        <span className="font-semibold text-blue-900 text-lg">{child.name}</span>
                       </div>
                       <form
                         onSubmit={(e) => handleChildCodeSubmit(e, child.id)}
