@@ -24,7 +24,6 @@ const ExtraInformatieVragen = ({ mode = 'edit' }: StepProps) => {
   const [answers, setAnswers] = useState({
     opleidingsniveau: "",
     beroepsopleiding: "",
-    sector_voorkeur: "",
     fysieke_beperkingen: ""
   });
 
@@ -38,7 +37,6 @@ const ExtraInformatieVragen = ({ mode = 'edit' }: StepProps) => {
       setAnswers({
         opleidingsniveau: responses.opleidingsniveau || "",
         beroepsopleiding: responses.beroepsopleiding || "",
-        sector_voorkeur: responses.sector_voorkeur || "",
         fysieke_beperkingen: responses.fysieke_beperkingen || ""
       });
     }
@@ -103,14 +101,9 @@ const ExtraInformatieVragen = ({ mode = 'edit' }: StepProps) => {
       placeholder: t('profiel_voltooien.extra_informatie.placeholder2')
     },
     {
-      field: "sector_voorkeur",
+      field: "fysieke_beperkingen",
       question: t('profiel_voltooien.extra_informatie.question3'),
       placeholder: t('profiel_voltooien.extra_informatie.placeholder3')
-    },
-    {
-      field: "fysieke_beperkingen",
-      question: t('profiel_voltooien.extra_informatie.question4'),
-      placeholder: t('profiel_voltooien.extra_informatie.placeholder4')
     }
   ];
 
@@ -119,8 +112,7 @@ const ExtraInformatieVragen = ({ mode = 'edit' }: StepProps) => {
   }
 
   const allFieldsFilled = answers.opleidingsniveau.trim() !== "" && 
-                          answers.beroepsopleiding.trim() !== "" && 
-                          answers.sector_voorkeur.trim() !== "";
+                          answers.beroepsopleiding.trim() !== "";
 
   return (
     <div className="min-h-screen bg-[#fafaf8] font-sans">

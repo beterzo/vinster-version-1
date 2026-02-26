@@ -143,12 +143,6 @@ const RapportActies = ({ onPrint, onNewRound, showNewRoundButton = true }: Rappo
                         <p className="text-gray-900">{extraInfoResponses.opleidingsniveau}</p>
                       </div>
                     )}
-                    {extraInfoResponses.sector_voorkeur && (
-                      <div className="bg-white rounded-lg p-4 border border-gray-200">
-                        <p className="text-sm font-medium text-gray-600 mb-1">{t('dashboard.round_dashboard.actions.sector_preference')}</p>
-                        <p className="text-gray-900">{extraInfoResponses.sector_voorkeur}</p>
-                      </div>
-                    )}
                   </div>
                 </div>
               )}

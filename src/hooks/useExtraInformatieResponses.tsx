@@ -10,7 +10,6 @@ interface ExtraInformatieData {
   opleidingsniveau: string;
   beroepsopleiding: string;
   fysieke_beperkingen: string;
-  sector_voorkeur: string;
 }
 
 export const useExtraInformatieResponses = (roundId?: string) => {
@@ -21,8 +20,7 @@ export const useExtraInformatieResponses = (roundId?: string) => {
   const [responses, setResponses] = useState<ExtraInformatieData>({
     opleidingsniveau: '',
     beroepsopleiding: '',
-    fysieke_beperkingen: '',
-    sector_voorkeur: ''
+    fysieke_beperkingen: ''
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -42,8 +40,7 @@ export const useExtraInformatieResponses = (roundId?: string) => {
       setResponses({
         opleidingsniveau: '',
         beroepsopleiding: '',
-        fysieke_beperkingen: '',
-        sector_voorkeur: ''
+        fysieke_beperkingen: ''
       });
       setLoading(true);
       if (user && roundId) {
@@ -78,8 +75,7 @@ export const useExtraInformatieResponses = (roundId?: string) => {
         setResponses({
           opleidingsniveau: data.opleidingsniveau || '',
           beroepsopleiding: data.beroepsopleiding || '',
-          fysieke_beperkingen: data.fysieke_beperkingen || '',
-          sector_voorkeur: data.sector_voorkeur || ''
+          fysieke_beperkingen: data.fysieke_beperkingen || ''
         });
       } else {
         console.log('No extra informatie responses found, using empty defaults');
