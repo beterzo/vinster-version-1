@@ -85,7 +85,7 @@ const EmailConfirmedPage = () => {
           </div>
 
           <div className="space-y-4">
-            <Button onClick={handleGoToLogin} className="w-full h-12 bg-blue-900 hover:bg-blue-800 text-white font-semibold text-base rounded-lg">
+            <Button onClick={handleGoToLogin} className="w-full h-12 bg-[#232D4B] hover:bg-[#1a2350] text-white font-semibold text-base rounded-[10px]">
               {t('auth.email_confirmed.continue_to_login')}
             </Button>
             

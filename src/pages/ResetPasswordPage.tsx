@@ -312,7 +312,7 @@ const ResetPasswordPage = () => {
 
             <Button 
               type="submit" 
-              className="w-full h-12 bg-blue-900 hover:bg-blue-800 text-white font-semibold text-base rounded-lg" 
+              className="w-full h-12 bg-[#232D4B] hover:bg-[#1a2350] text-white font-semibold text-base rounded-[10px]" 
               disabled={isLoading}
             >
               {isLoading ? t('reset_password.updating') : t('reset_password.update_password')}
