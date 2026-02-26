@@ -60,7 +60,7 @@ const PasswordResetSuccessPage = () => {
 
           <Link 
             to="/login" 
-            className="inline-flex items-center justify-center w-full h-12 bg-blue-900 hover:bg-blue-800 text-white font-semibold text-base rounded-lg transition-colors"
+            className="inline-flex items-center justify-center w-full h-12 bg-[#232D4B] hover:bg-[#1a2350] text-white font-semibold text-base rounded-[10px] transition-colors"
           >
             {t('auth.password_reset_success.continue_to_login')}
           </Link>
