@@ -204,8 +204,8 @@
     "prioriteiten": {
       "activiteiten": {
         "title": "Prioriteiten - activiteiten",
-        "subtitle": "Selecteer minimaal 5 activiteiten die je leuk vindt om te doen",
-        "selected_count": "Geselecteerd: {count} van minimaal 5",
+        "subtitle": "Selecteer minimaal 8 activiteiten die je leuk vindt om te doen",
+        "selected_count": "Geselecteerd: {count} van minimaal 8",
         "missing_keywords": "Er zijn nog geen persoonlijke activiteiten gegenereerd. Vul eerst je enthousiasmescan en wensberoepen in.",
         "extra_text_label": "Mis je nog activiteiten? Voeg ze hier toe (optioneel)",
         "extra_text_placeholder": "Bijvoorbeeld: Fotograferen, Programmeren, Tuinieren...",
@@ -213,8 +213,8 @@
       },
       "werkomstandigheden": {
         "title": "Prioriteiten - werkomstandigheden",
-        "subtitle": "Selecteer minimaal 5 werkomstandigheden die belangrijk voor je zijn",
-        "selected_count": "Geselecteerd: {count} van minimaal 5",
+        "subtitle": "Selecteer minimaal 8 werkomstandigheden die belangrijk voor je zijn",
+        "selected_count": "Geselecteerd: {count} van minimaal 8",
         "missing_keywords": "Er zijn nog geen persoonlijke werkomstandigheden gegenereerd. Vul eerst je enthousiasmescan en wensberoepen in.",
         "extra_text_label": "Mis je nog werkomstandigheden? Voeg ze hier toe (optioneel)",
         "extra_text_placeholder": "Bijvoorbeeld: Hond mee naar kantoor, Goede koffie, Ergonomische werkplek...",
@@ -223,8 +223,8 @@
       },
       "interesses": {
         "title": "Prioriteiten - interesses",
-        "subtitle": "Selecteer minimaal 5 interesses die je aantrekken",
-        "selected_count": "Geselecteerd: {count} van minimaal 5",
+        "subtitle": "Selecteer minimaal 8 interesses die je aantrekken",
+        "selected_count": "Geselecteerd: {count} van minimaal 8",
         "missing_keywords": "Er zijn nog geen persoonlijke interesses gegenereerd. Vul eerst je enthousiasmescan en wensberoepen in.",
         "extra_text_label": "Mis je nog interesses? Voeg ze hier toe (optioneel)",
         "extra_text_placeholder": "Bijvoorbeeld: Duurzaamheid, Technologie, Kunst...",

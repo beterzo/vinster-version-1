@@ -219,7 +219,7 @@ const PersoonsprofielInline = ({ roundId, subStep, onNext, onPrevious }: Persoon
     setExtraText: (text: string) => void
   ) => {
     const availableKeywords = cleanKeywords(aiKeywords[type] || []);
-    const minimumRequired = 5;
+    const minimumRequired = 8;
     const canProceed = selectedKeywords.length >= minimumRequired;
 
     const handleKeywordToggle = (keyword: string) => {
