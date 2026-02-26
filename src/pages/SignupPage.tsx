@@ -8,7 +8,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useOrganisation } from "@/contexts/OrganisationContext";
+
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const SignupPage = () => {
@@ -25,11 +25,8 @@ const SignupPage = () => {
   const { toast } = useToast();
   const { t } = useTranslation();
   const { language } = useLanguage();
-  const { clearOrganisation } = useOrganisation();
 
-  useEffect(() => {
-    clearOrganisation();
-  }, [clearOrganisation]);
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
