@@ -1,42 +1,45 @@
 
 
-## Erasmus MC los van het blok tonen
+## Minimum kernwoorden van 5 naar 8
 
-### Wat verandert
+Alle plekken waar het minimum van 5 kernwoorden wordt afgedwongen, worden gewijzigd naar 8.
 
-De huidige opzet toont Erasmus MC (en toekomstige organisaties) binnen het witte "Hoor je bij een specifieke organisatie?" blok als een kaart met code-invoer. De aanpassing haalt de organisatie-items uit dat blok en toont ze als losse, visuele kaarten eronder.
+### Code-aanpassingen
 
-### Nieuwe layout
+**`src/pages/PrioriteitenActiviteiten.tsx`** -- `>= 5` wordt `>= 8` (2x)
 
-**Section 1** (intro + "Start het traject") -- blijft exact hetzelfde.
+**`src/pages/PrioriteitenWerkomstandigheden.tsx`** -- `>= 5` wordt `>= 8` (2x)
 
-**Section 2** ("Hoor je bij een specifieke organisatie?") -- wordt een simpele tekst-sectie zonder witte kaart eromheen, alleen de koptekst en uitleg.
+**`src/pages/PrioriteitenInteresses.tsx`** -- `>= 5` wordt `>= 8` (2x)
 
-**Organisatie-kaarten** -- elke child org wordt een eigen los blok:
+**`src/pages/RondeDashboard.tsx`** -- 3x `>= 5` wordt `>= 8` (completeness check)
 
-```text
-+--------------------------------------------------+
-|  [Erasmus MC logo]     Erasmus MC                 |
-|                                                   |
-|  [________Vul hier je code in________] [Bevestig] |
-|                                                   |
-+--------------------------------------------------+
-```
+**`src/components/journey/PersoonsprofielInline.tsx`** -- `minimumRequired = 5` wordt `minimumRequired = 8`
 
-- Elk een eigen wit afgerond blok met border en lichte shadow
-- Logo links bovenin (groot genoeg, ca. 48px hoog), organisatienaam ernaast
-- Code-invoer + bevestig-knop eronder
-- Bij organisaties zonder logo: alleen de naam met een KeyRound icoon
-- Schaalt goed als er later meer organisaties bijkomen (grid of stack)
+### Vertalingen (alle talen)
 
-### Technische details
+**Nederlands** (`nl/journey.json`):
+- "Selecteer minimaal 5 activiteiten..." wordt "...minimaal 8..."
+- "Geselecteerd: {count} van minimaal 5" wordt "...minimaal 8"
+- Idem voor werkomstandigheden en interesses
 
-**Bestand: `src/pages/OrganisatieLanding.tsx`**
+**Nederlands** (`nl/common.json`):
+- "Selecteer minimaal 5 items" wordt "...minimaal 8 items"
+- "Je moet minimaal 5 items selecteren..." wordt "...minimaal 8 items..."
 
-1. Verwijder de omsluitende witte kaart (`div.bg-white.rounded-2xl`) rond Section 2
-2. Houd de koptekst "Hoor je bij een specifieke organisatie?" en uitleg als losse tekst (zonder kaart-styling)
-3. Render elke `childOrg` als een eigen `div.bg-white.rounded-2xl.shadow-sm.border` blok
-4. Per blok: logo + naam bovenaan, code-invoer + knop eronder
-5. Alle bestaande validatie-logica (`handleChildCodeSubmit`, state per child) blijft ongewijzigd
+**Engels** (`en/common.json`):
+- "Select at least 5 items" wordt "...at least 8 items"
+- "You must select at least 5 items..." wordt "...at least 8 items..."
 
-Geen andere bestanden wijzigen.
+**Duits** (`de/common.json`):
+- "Mindestens 5 Elemente auswahlen" wordt "...8 Elemente..."
+- "...mindestens 5 Elemente..." wordt "...8 Elemente..."
+
+**Noors** (`no/common.json`):
+- "Velg minst 5 elementer" wordt "...8 elementer"
+- "...minst 5 elementer..." wordt "...8 elementer..."
+
+### Wat NIET verandert
+- De `hasMinimumKeywords` functie in `usePrioriteitenResponses.tsx` (die checkt op `>= 3`, een andere drempel voor page completion tracking)
+- De `isPageComplete` functie (ook `>= 3`)
+- Geen styling, layout of andere logica
