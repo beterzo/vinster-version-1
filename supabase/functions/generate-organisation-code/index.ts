@@ -21,7 +21,7 @@ serve(async (req) => {
   }
 
   try {
-    const { organisation_type_id, max_uses } = await req.json();
+    const { organisation_type_id, max_uses, code: customCode } = await req.json();
 
     if (!organisation_type_id) {
       throw new Error('organisation_type_id is required');
@@ -31,7 +31,7 @@ serve(async (req) => {
     const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
     const supabase = createClient(SUPABASE_URL!, SUPABASE_SERVICE_ROLE_KEY!);
 
-    const code = generateCode();
+    const code = customCode && customCode.trim() !== '' ? customCode.trim() : generateCode();
 
     const { data, error } = await supabase
       .from('organisation_access_codes')

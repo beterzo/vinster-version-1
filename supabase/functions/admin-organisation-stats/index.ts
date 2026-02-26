@@ -31,8 +31,23 @@ serve(async (req) => {
     const thisMonthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
     const lastMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1).toISOString();
 
+    // Get uses_count from access codes as fallback
+    const { data: allCodes } = await supabase
+      .from('organisation_access_codes')
+      .select('organisation_type_id, uses_count');
+
+    // Sum uses_count per org type
+    const codeUsesMap = new Map<string, number>();
+    (allCodes || []).forEach(c => {
+      if (c.organisation_type_id) {
+        codeUsesMap.set(c.organisation_type_id, (codeUsesMap.get(c.organisation_type_id) || 0) + (c.uses_count || 0));
+      }
+    });
+
     const stats = (orgTypes || []).map(ot => {
       const orgSessions = (sessions || []).filter(s => s.organisation_type_id === ot.id);
+      const sessionTotal = orgSessions.length;
+      const codeTotal = codeUsesMap.get(ot.id) || 0;
       const thisMonth = orgSessions.filter(s => s.created_at >= thisMonthStart).length;
       const lastMonth = orgSessions.filter(s => s.created_at >= lastMonthStart && s.created_at < thisMonthStart).length;
       return {
@@ -41,7 +56,7 @@ serve(async (req) => {
         parent_type_id: ot.parent_type_id || null,
         this_month: thisMonth,
         last_month: lastMonth,
-        total: orgSessions.length,
+        total: Math.max(sessionTotal, codeTotal),
       };
     });
 
