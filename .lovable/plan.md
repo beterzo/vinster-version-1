@@ -1,45 +1,62 @@
 
 
-## Minimum kernwoorden van 5 naar 8
+## Verwijder de vraag "In welke organisatie/sector zou je willen werken?"
 
-Alle plekken waar het minimum van 5 kernwoorden wordt afgedwongen, worden gewijzigd naar 8.
+### Wat verandert
 
-### Code-aanpassingen
+Het veld `sector_voorkeur` wordt verwijderd uit alle formulieren, weergaven en validatie. De database-kolom blijft bestaan (geen migratie nodig), maar wordt niet meer gevuld of uitgelezen in nieuwe invullingen.
 
-**`src/pages/PrioriteitenActiviteiten.tsx`** -- `>= 5` wordt `>= 8` (2x)
+### UI-aanpassingen
 
-**`src/pages/PrioriteitenWerkomstandigheden.tsx`** -- `>= 5` wordt `>= 8` (2x)
+**1. `src/pages/ExtraInformatieVragen.tsx`**
+- Verwijder `sector_voorkeur` uit de `answers` state
+- Verwijder vraag 3 uit de `questions` array
+- Verwijder `sector_voorkeur` uit de `allFieldsFilled` validatie
+- De stap-indicator ("Stap 3 van 6") en vraagnummering blijft correct doordat de vragen automatisch hernummerd worden
 
-**`src/pages/PrioriteitenInteresses.tsx`** -- `>= 5` wordt `>= 8` (2x)
+**2. `src/components/journey/PersoonsprofielInline.tsx`**
+- Verwijder `sector_voorkeur` uit `extraInfoAnswers` state
+- Verwijder vraag 3 uit de `extraInfoQuestions` array
+- Verwijder `sector_voorkeur` uit de `allFieldsFilled` check
 
-**`src/pages/RondeDashboard.tsx`** -- 3x `>= 5` wordt `>= 8` (completeness check)
+**3. `src/components/EditExtraInfoDialog.tsx`**
+- Verwijder `sector_voorkeur` uit `formData` state en het formulier (het "In welke sectoren" veld)
 
-**`src/components/journey/PersoonsprofielInline.tsx`** -- `minimumRequired = 5` wordt `minimumRequired = 8`
+**4. `src/components/RapportActies.tsx`**
+- Verwijder het blok dat `sector_voorkeur` toont
 
-### Vertalingen (alle talen)
+### Hook-aanpassingen
 
-**Nederlands** (`nl/journey.json`):
-- "Selecteer minimaal 5 activiteiten..." wordt "...minimaal 8..."
-- "Geselecteerd: {count} van minimaal 5" wordt "...minimaal 8"
-- Idem voor werkomstandigheden en interesses
+**5. `src/hooks/useExtraInformatieResponses.tsx`**
+- Verwijder `sector_voorkeur` uit de `ExtraInformatieData` interface
+- Verwijder uit initial state en reset state
+- Verwijder uit `loadResponses` mapping
 
-**Nederlands** (`nl/common.json`):
-- "Selecteer minimaal 5 items" wordt "...minimaal 8 items"
-- "Je moet minimaal 5 items selecteren..." wordt "...minimaal 8 items..."
+### Data/webhook-aanpassingen
 
-**Engels** (`en/common.json`):
-- "Select at least 5 items" wordt "...at least 8 items"
-- "You must select at least 5 items..." wordt "...at least 8 items..."
+**6. `src/hooks/useMakeWebhookData.ts`**
+- Verwijder `sector_voorkeur` uit het webhook data object (2 plekken)
 
-**Duits** (`de/common.json`):
-- "Mindestens 5 Elemente auswahlen" wordt "...8 Elemente..."
-- "...mindestens 5 Elemente..." wordt "...8 Elemente..."
+**7. `src/services/webhookService.ts`**
+- Verwijder `sector_voorkeur` uit de interface
 
-**Noors** (`no/common.json`):
-- "Velg minst 5 elementer" wordt "...8 elementer"
-- "...minst 5 elementer..." wordt "...8 elementer..."
+### AI prompt-aanpassingen
+
+**8. `supabase/functions/generate-career-report/index.ts`**
+- Verwijder `sectorVoorkeur` uit de `UserData` interface
+- Verwijder de regel `sectorVoorkeur: extraInfoData?.sector_voorkeur || 'Niet ingevuld'` uit de data mapping
+- In alle 4 talen (NL, EN, DE, NO):
+  - Verwijder de `Sectorvoorkeur: ${data.sectorVoorkeur}` regel uit de user prompt
+  - Verwijder verwijzingen naar "sectorvoorkeur" uit de system prompt instructies (bijv. "Houd daarbij rekening met het opleidingsniveau, fysieke beperkingen (indien van toepassing), sectorvoorkeur en andere context" wordt "...fysieke beperkingen (indien van toepassing) en andere context")
+  - Idem voor EN ("sector preference"), DE ("Bevorzugter Sektor"), NO ("Foretrukket sektor")
+
+### Vertalingen
+
+**9. Alle taalbestanden** (`nl`, `en`, `de`, `no`):
+- `journey.json`: Verwijder `question3` en `placeholder3` onder `extra_informatie`, hernummer `question4`/`placeholder4` naar `question3`/`placeholder3`
+- `dashboard.json`: Verwijder de `sector_preference` vertaalsleutel
 
 ### Wat NIET verandert
-- De `hasMinimumKeywords` functie in `usePrioriteitenResponses.tsx` (die checkt op `>= 3`, een andere drempel voor page completion tracking)
-- De `isPageComplete` functie (ook `>= 3`)
-- Geen styling, layout of andere logica
+- De database-kolom `sector_voorkeur` blijft bestaan (bestaande data blijft bewaard)
+- De Supabase types (`types.ts`) worden niet handmatig aangepast (die worden automatisch gegenereerd)
+
