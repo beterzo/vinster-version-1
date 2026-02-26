@@ -21,6 +21,10 @@ interface ChildOrg {
   name: string;
 }
 
+const ORG_LOGOS: Record<string, string> = {
+  "erasmus-mc": "/images/erasmus-mc-logo.png",
+};
+
 const OrganisatieLanding = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
@@ -32,9 +36,9 @@ const OrganisatieLanding = () => {
   const [error, setError] = useState("");
   const [validating, setValidating] = useState(false);
   const [childOrgs, setChildOrgs] = useState<ChildOrg[]>([]);
-  const [branchCode, setBranchCode] = useState("");
-  const [branchCodeError, setBranchCodeError] = useState("");
-  const [branchCodeValidating, setBranchCodeValidating] = useState(false);
+  const [childCodes, setChildCodes] = useState<Record<string, string>>({});
+  const [childErrors, setChildErrors] = useState<Record<string, string>>({});
+  const [childValidating, setChildValidating] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     const fetchOrgType = async () => {
@@ -110,26 +114,26 @@ const OrganisatieLanding = () => {
     navigate(`/organisaties/${slug}/intro`);
   };
 
-  // --- Code submission on branch pages ---
-  const handleBranchCodeSubmit = async (e: React.FormEvent) => {
+  // --- Code submission per child org on branch pages ---
+  const handleChildCodeSubmit = async (e: React.FormEvent, childId: string) => {
     e.preventDefault();
-    setBranchCodeError("");
-    if (!branchCode.trim()) {
-      setBranchCodeError("Vul een toegangscode in.");
+    const codeValue = (childCodes[childId] || "").trim();
+    setChildErrors((prev) => ({ ...prev, [childId]: "" }));
+    if (!codeValue) {
+      setChildErrors((prev) => ({ ...prev, [childId]: "Vul een toegangscode in." }));
       return;
     }
-    setBranchCodeValidating(true);
+    setChildValidating((prev) => ({ ...prev, [childId]: true }));
     try {
       const { data, error: fnError } = await supabase.functions.invoke(
         "validate-organisation-code",
-        { body: { code: branchCode.trim(), branch_slug: slug } }
+        { body: { code: codeValue, branch_slug: slug } }
       );
       if (fnError || !data?.success) {
-        setBranchCodeError(data?.error || "Deze code is niet bekend.");
-        setBranchCodeValidating(false);
+        setChildErrors((prev) => ({ ...prev, [childId]: data?.error || "Deze code is niet bekend." }));
+        setChildValidating((prev) => ({ ...prev, [childId]: false }));
         return;
       }
-      // Use the resolved org name for the badge
       const resolvedName = data.organisation?.name || orgType?.name || null;
       setOrganisation({
         organisationTypeId: data.organisation_type_id,
@@ -139,9 +143,9 @@ const OrganisatieLanding = () => {
       });
       navigate(`/organisaties/${slug}/intro`);
     } catch {
-      setBranchCodeError("Er is een fout opgetreden. Probeer het opnieuw.");
+      setChildErrors((prev) => ({ ...prev, [childId]: "Er is een fout opgetreden. Probeer het opnieuw." }));
     } finally {
-      setBranchCodeValidating(false);
+      setChildValidating((prev) => ({ ...prev, [childId]: false }));
     }
   };
 
@@ -228,50 +232,7 @@ const OrganisatieLanding = () => {
             </Button>
           </div>
 
-          {/* Section 2: Optional code input */}
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-12">
-            <div className="flex items-center gap-3 mb-2">
-              <KeyRound className="h-6 w-6 text-blue-900" />
-              <h2 className="text-xl font-semibold text-blue-900">
-                Heeft u een organisatiecode? Voer hem hier in
-              </h2>
-            </div>
-            <p className="text-sm text-gray-500 mb-4">
-              Geen code? Sla dit over en ga gewoon door.
-            </p>
-            <form onSubmit={handleBranchCodeSubmit} className="flex flex-col sm:flex-row gap-3">
-              <div className="flex-1">
-                <Input
-                  type="text"
-                  placeholder="bijv. molewaterplein"
-                  value={branchCode}
-                  onChange={(e) => {
-                    setBranchCode(e.target.value);
-                    setBranchCodeError("");
-                  }}
-                  className="text-base h-12 bg-white"
-                  maxLength={50}
-                />
-                {branchCodeError && <p className="text-sm text-red-600 mt-2">{branchCodeError}</p>}
-              </div>
-              <Button
-                type="submit"
-                disabled={branchCodeValidating}
-                className="bg-blue-900 hover:bg-blue-800 text-white font-semibold h-12 px-6"
-              >
-                {branchCodeValidating ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Controleren...
-                  </>
-                ) : (
-                  "Bevestig code"
-                )}
-              </Button>
-            </form>
-          </div>
-
-          {/* Section 3: Specific organisations */}
+          {/* Section 2: Specific organisations with inline code input */}
           {childOrgs.length > 0 && (
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-12">
               <div className="flex items-center gap-3 mb-2">
@@ -284,26 +245,63 @@ const OrganisatieLanding = () => {
                 Als je van jouw organisatie een toegangscode hebt ontvangen, kun je die hier gebruiken voor een traject op maat.
               </p>
 
-              <div className="grid gap-4 sm:grid-cols-2">
-                {childOrgs.map((child) => (
-                  <div
-                    key={child.id}
-                    className="border border-gray-200 rounded-xl p-5 hover:border-blue-300 hover:shadow-sm transition-all flex items-center justify-between"
-                  >
-                    <div className="flex items-center gap-3">
-                      <KeyRound className="h-5 w-5 text-blue-900/60" />
-                      <span className="font-medium text-blue-900">{child.name}</span>
-                    </div>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => navigate(`/organisaties/${child.slug}`)}
-                      className="border-[#1a2e5a] text-[#1a2e5a] hover:bg-[rgba(26,46,90,0.05)] font-semibold"
+              <div className="grid gap-4">
+                {childOrgs.map((child) => {
+                  const logo = ORG_LOGOS[child.slug];
+                  return (
+                    <div
+                      key={child.id}
+                      className="border border-gray-200 rounded-xl p-5 hover:border-blue-300 hover:shadow-sm transition-all"
                     >
-                      Vul code in
-                    </Button>
-                  </div>
-                ))}
+                      <div className="flex items-center gap-3 mb-3">
+                        {logo && (
+                          <img
+                            src={logo}
+                            alt={`${child.name} logo`}
+                            className="h-10 w-auto object-contain"
+                          />
+                        )}
+                        {!logo && <KeyRound className="h-5 w-5 text-blue-900/60" />}
+                        <span className="font-medium text-blue-900 text-lg">{child.name}</span>
+                      </div>
+                      <form
+                        onSubmit={(e) => handleChildCodeSubmit(e, child.id)}
+                        className="flex flex-col sm:flex-row gap-3"
+                      >
+                        <div className="flex-1">
+                          <Input
+                            type="text"
+                            placeholder="Vul hier je code in"
+                            value={childCodes[child.id] || ""}
+                            onChange={(e) => {
+                              setChildCodes((prev) => ({ ...prev, [child.id]: e.target.value }));
+                              setChildErrors((prev) => ({ ...prev, [child.id]: "" }));
+                            }}
+                            className="text-base h-11 bg-white"
+                            maxLength={50}
+                          />
+                          {childErrors[child.id] && (
+                            <p className="text-sm text-red-600 mt-1">{childErrors[child.id]}</p>
+                          )}
+                        </div>
+                        <Button
+                          type="submit"
+                          disabled={childValidating[child.id]}
+                          className="bg-blue-900 hover:bg-blue-800 text-white font-semibold h-11 px-6"
+                        >
+                          {childValidating[child.id] ? (
+                            <>
+                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                              Controleren...
+                            </>
+                          ) : (
+                            "Bevestig"
+                          )}
+                        </Button>
+                      </form>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           )}
