@@ -1,46 +1,57 @@
 
-## Admin pagina: normaal gebruik + maandelijks overzicht
 
-### Wat wordt toegevoegd
+## Security Fix: Prevent client-side `has_paid` manipulation
 
-**1. "Normaal Vinster gebruik" statistieken**
-Bovenaan de admin pagina komt een nieuwe kaart die toont hoeveel gebruikers de normale (niet-organisatie) kant van Vinster gebruiken. Dit wordt gemeten via de `profiles` tabel -- alle gebruikers die GEEN `user_organisation_sessions` record hebben zijn "normale" gebruikers.
+### The Vulnerability
+The `profiles` table has an UPDATE RLS policy that allows authenticated users to update ANY column on their own row, including `has_paid`. This means any user can bypass the paywall by running a simple PATCH request from DevTools.
 
-**2. Maandelijks overzicht (voor alles)**
-In plaats van alleen "deze maand" en "vorige maand" komt er een tabel met de laatste 6 maanden als kolommen (bijv. feb 2026, jan 2026, dec 2025, ...) plus een totaal-kolom. Dit geldt voor zowel de organisatie-statistieken als de normale gebruikers.
+### The Fix
+Use a **database trigger** that prevents any non-service-role user from changing `has_paid`. This is the safest approach because:
+- Column-level GRANT/REVOKE can be tricky with Supabase migrations
+- A trigger is explicit, easy to audit, and works regardless of how the update is made
+- It preserves the existing UPDATE policy for safe columns (first_name, last_name, language, etc.)
 
-### Wijzigingen
+### Changes
 
-**`supabase/functions/admin-organisation-stats/index.ts`**
-- Haal alle `profiles` op met `created_at`
-- Haal alle `user_organisation_sessions` op met `user_id` (voor het onderscheid normaal vs. organisatie)
-- Bereken per maand (laatste 6 maanden):
-  - Totaal nieuwe gebruikers
-  - Nieuwe organisatie-gebruikers (met sessie)
-  - Nieuwe normale gebruikers (zonder sessie)
-- Per organisatie: maandelijkse breakdown i.p.v. alleen deze/vorige maand
-- Return `monthly_columns` (lijst van maand-labels) + `general_stats` (normaal gebruik per maand) naast de bestaande `stats`
+**1. Database migration: Add a protection trigger**
 
-**`src/pages/AdminOrganisatieGebruik.tsx`**
-- Nieuwe kaart bovenaan: "Algemeen Vinster Gebruik" met maandelijkse kolommen
-  - Rij: Totaal nieuwe gebruikers
-  - Rij: Via organisatie
-  - Rij: Normaal (zonder organisatie)
-- Organisatie-tabel: dynamische maandkolommen i.p.v. vaste "deze maand" / "vorige maand"
-- Interfaces updaten voor de nieuwe datastructuur
+Create a trigger function that checks if `has_paid` is being changed. If the caller is not using the `service_role` (i.e., it's a regular authenticated user via the client), the trigger silently resets `has_paid` to the old value, preventing manipulation.
 
-### Voorbeeld tabelindeling
+```sql
+CREATE OR REPLACE FUNCTION public.protect_has_paid()
+RETURNS trigger
+LANGUAGE plpgsql
+SECURITY DEFINER
+AS $$
+BEGIN
+  -- If has_paid is being changed and the caller is NOT service_role,
+  -- silently revert the change
+  IF NEW.has_paid IS DISTINCT FROM OLD.has_paid THEN
+    -- Check if current role is the service_role (used by Edge Functions)
+    IF current_setting('role') != 'service_role' THEN
+      NEW.has_paid := OLD.has_paid;
+    END IF;
+  END IF;
+  RETURN NEW;
+END;
+$$;
 
-```text
-Algemeen Vinster Gebruik
-                    | feb '26 | jan '26 | dec '25 | ... | Totaal
-Totaal gebruikers   |    12   |    8    |    5    |     |   45
-Via organisatie      |    3    |    2    |    1    |     |   10
-Normaal (individueel)|   9    |    6    |    4    |     |   35
-
-Organisatie Gebruik
-                    | feb '26 | jan '26 | dec '25 | ... | Totaal
-Medisch Centrum     |    2    |    1    |    0    |     |    5
-  - ErasmusMC       |    1    |    1    |    0    |     |    3
-Transport & Log.    |    1    |    1    |    1    |     |    5
+CREATE TRIGGER protect_has_paid_trigger
+BEFORE UPDATE ON public.profiles
+FOR EACH ROW
+EXECUTE FUNCTION public.protect_has_paid();
 ```
+
+**No other file changes needed.** The existing Edge Functions (`verify-payment`, `stripe-webhook`) already use `SUPABASE_SERVICE_ROLE_KEY` to update `has_paid`, so they will continue to work. Only client-side attempts to change `has_paid` will be blocked.
+
+### Before / After
+
+| Scenario | Before | After |
+|---|---|---|
+| User runs `update({ has_paid: true })` from DevTools | Succeeds -- paywall bypassed | `has_paid` silently stays `false` |
+| Edge Function sets `has_paid = true` via service role | Works | Works (unchanged) |
+| User updates `first_name` or `language` | Works | Works (unchanged) |
+
+### Also protected by this pattern
+The same trigger also protects against future columns that might be sensitive on `profiles`. If needed, additional columns (like AI-generated fields) can be added to the trigger guard.
+
