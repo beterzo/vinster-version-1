@@ -12,8 +12,7 @@ interface OrgStats {
   org_name: string;
   org_id: string;
   parent_type_id: string | null;
-  this_month: number;
-  last_month: number;
+  monthly: Record<string, number>;
   total: number;
 }
 
@@ -27,6 +26,10 @@ interface AccessCode {
   last_used_at: string | null;
 }
 
+interface GeneralStats {
+  [month: string]: { total: number; org: number; normal: number };
+}
+
 const AdminOrganisatieGebruik = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -35,6 +38,9 @@ const AdminOrganisatieGebruik = () => {
   const [codes, setCodes] = useState<AccessCode[]>([]);
   const [loading, setLoading] = useState(true);
   const [orgTypes, setOrgTypes] = useState<{ id: string; name: string }[]>([]);
+  const [monthlyColumns, setMonthlyColumns] = useState<string[]>([]);
+  const [generalStats, setGeneralStats] = useState<GeneralStats>({});
+  const [generalTotals, setGeneralTotals] = useState({ total: 0, org: 0, normal: 0 });
   const [newCodeOrgId, setNewCodeOrgId] = useState("");
   const [newCodeMaxUses, setNewCodeMaxUses] = useState("");
   const [newCodeValue, setNewCodeValue] = useState("");
@@ -48,6 +54,9 @@ const AdminOrganisatieGebruik = () => {
       setStats(data?.stats || []);
       setCodes(data?.codes || []);
       setOrgTypes(data?.org_types || []);
+      setMonthlyColumns(data?.monthly_columns || []);
+      setGeneralStats(data?.general_stats || {});
+      setGeneralTotals(data?.general_totals || { total: 0, org: 0, normal: 0 });
     } catch (err) {
       console.error(err);
       toast({ title: "Fout bij laden data", variant: "destructive" });
@@ -93,8 +102,10 @@ const AdminOrganisatieGebruik = () => {
   };
 
   const exportCSV = () => {
-    const header = "Organisatie,Deze maand,Vorige maand,Totaal";
-    const rows = stats.map((s) => `"${s.org_name}",${s.this_month},${s.last_month},${s.total}`);
+    const header = ["Organisatie", ...monthlyColumns, "Totaal"].join(",");
+    const rows = stats.map((s) =>
+      [`"${s.org_name}"`, ...monthlyColumns.map(m => s.monthly[m] || 0), s.total].join(",")
+    );
     const codesHeader = "\n\nCode,Organisatie,Gebruik,Max,Actief,Laatst gebruikt";
     const codeRows = codes.map(
       (c) => `"${c.code}","${c.org_name}",${c.uses_count},${c.max_uses ?? "∞"},${c.is_active ? "Ja" : "Nee"},${c.last_used_at ? new Date(c.last_used_at).toLocaleDateString("nl-NL") : "-"}`
@@ -157,78 +168,125 @@ const AdminOrganisatieGebruik = () => {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-bold text-blue-900 mb-2">Organisatie Gebruik</h1>
-            <p className="text-gray-600">Overzicht van organisatie-sessies per branche en organisatie.</p>
+            <p className="text-gray-600">Overzicht van gebruikers en organisatie-sessies per maand.</p>
           </div>
           <Button onClick={exportCSV} variant="outline" className="border-[#1a2e5a] text-[#1a2e5a] hover:bg-[rgba(26,46,90,0.05)] font-semibold">
             <Download className="w-4 h-4 mr-2" /> Export CSV
           </Button>
         </div>
 
-        {/* Usage stats with branch grouping */}
+        {/* General Vinster Usage */}
+        <Card className="mb-8 rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+          <div className="px-6 py-4 bg-emerald-50 border-b border-emerald-100">
+            <h2 className="text-lg font-semibold text-blue-900">Algemeen Vinster Gebruik</h2>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="min-w-full text-sm">
+              <thead>
+                <tr className="border-b border-gray-100">
+                  <th className="px-6 py-3 text-left font-semibold text-gray-700 min-w-[180px]">Type</th>
+                  {monthlyColumns.map(m => (
+                    <th key={m} className="px-4 py-3 text-left font-semibold text-gray-700 whitespace-nowrap">{m}</th>
+                  ))}
+                  <th className="px-6 py-3 text-left font-semibold text-gray-700">Totaal</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-gray-50 hover:bg-gray-50">
+                  <td className="px-6 py-3 font-semibold text-gray-900">Totaal gebruikers</td>
+                  {monthlyColumns.map(m => (
+                    <td key={m} className="px-4 py-3 text-gray-700 font-medium">{generalStats[m]?.total || 0}</td>
+                  ))}
+                  <td className="px-6 py-3 font-bold text-blue-900">{generalTotals.total}</td>
+                </tr>
+                <tr className="border-b border-gray-50 hover:bg-gray-50">
+                  <td className="px-6 py-3 text-gray-700">Via organisatie</td>
+                  {monthlyColumns.map(m => (
+                    <td key={m} className="px-4 py-3 text-gray-600">{generalStats[m]?.org || 0}</td>
+                  ))}
+                  <td className="px-6 py-3 font-semibold text-blue-800">{generalTotals.org}</td>
+                </tr>
+                <tr className="border-b border-gray-50 hover:bg-gray-50">
+                  <td className="px-6 py-3 text-gray-700">Normaal (individueel)</td>
+                  {monthlyColumns.map(m => (
+                    <td key={m} className="px-4 py-3 text-gray-600">{generalStats[m]?.normal || 0}</td>
+                  ))}
+                  <td className="px-6 py-3 font-semibold text-blue-800">{generalTotals.normal}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </Card>
+
+        {/* Organisation usage with monthly columns */}
         <Card className="mb-8 rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
           <div className="px-6 py-4 bg-blue-50 border-b border-blue-100">
             <h2 className="text-lg font-semibold text-blue-900">Gebruik per branche / organisatie</h2>
           </div>
-          <table className="min-w-full text-sm">
-            <thead>
-              <tr className="border-b border-gray-100">
-                <th className="px-6 py-3 text-left font-semibold text-gray-700">Organisatie</th>
-                <th className="px-6 py-3 text-left font-semibold text-gray-700">Deze maand</th>
-                <th className="px-6 py-3 text-left font-semibold text-gray-700">Vorige maand</th>
-                <th className="px-6 py-3 text-left font-semibold text-gray-700">Totaal</th>
-              </tr>
-            </thead>
-            <tbody>
-              {branches.length === 0 && stats.length === 0 ? (
-                <tr>
-                  <td colSpan={4} className="px-6 py-8 text-center text-gray-400">Nog geen data</td>
+          <div className="overflow-x-auto">
+            <table className="min-w-full text-sm">
+              <thead>
+                <tr className="border-b border-gray-100">
+                  <th className="px-6 py-3 text-left font-semibold text-gray-700 min-w-[220px]">Organisatie</th>
+                  {monthlyColumns.map(m => (
+                    <th key={m} className="px-4 py-3 text-left font-semibold text-gray-700 whitespace-nowrap">{m}</th>
+                  ))}
+                  <th className="px-6 py-3 text-left font-semibold text-gray-700">Totaal</th>
                 </tr>
-              ) : (
-                branches.map((branch) => {
-                  const kids = childrenMap.get(branch.org_id) || [];
-                  const hasChildren = kids.length > 0;
-                  const isExpanded = expandedBranches.has(branch.org_id);
+              </thead>
+              <tbody>
+                {branches.length === 0 && stats.length === 0 ? (
+                  <tr>
+                    <td colSpan={monthlyColumns.length + 2} className="px-6 py-8 text-center text-gray-400">Nog geen data</td>
+                  </tr>
+                ) : (
+                  branches.map((branch) => {
+                    const kids = childrenMap.get(branch.org_id) || [];
+                    const hasChildren = kids.length > 0;
+                    const isExpanded = expandedBranches.has(branch.org_id);
 
-                  // Branch totals = own + children
-                  const totalThisMonth = branch.this_month + kids.reduce((s, k) => s + k.this_month, 0);
-                  const totalLastMonth = branch.last_month + kids.reduce((s, k) => s + k.last_month, 0);
-                  const totalAll = branch.total + kids.reduce((s, k) => s + k.total, 0);
+                    // Branch totals = own + children
+                    const totalAll = branch.total + kids.reduce((s, k) => s + k.total, 0);
 
-                  return (
-                    <React.Fragment key={branch.org_id}>
-                      <tr
-                        className={`border-b border-gray-50 hover:bg-gray-50 ${hasChildren ? "cursor-pointer" : ""}`}
-                        onClick={() => hasChildren && toggleBranch(branch.org_id)}
-                      >
-                        <td className="px-6 py-3 font-semibold text-gray-900 flex items-center gap-2">
-                          {hasChildren && (
-                            isExpanded
-                              ? <ChevronDown className="w-4 h-4 text-gray-500" />
-                              : <ChevronRight className="w-4 h-4 text-gray-500" />
-                          )}
-                          {branch.org_name}
-                          {hasChildren && (
-                            <span className="text-xs text-gray-400 ml-1">({kids.length} org{kids.length > 1 ? "s" : ""})</span>
-                          )}
-                        </td>
-                        <td className="px-6 py-3 text-gray-700 font-medium">{totalThisMonth}</td>
-                        <td className="px-6 py-3 text-gray-700 font-medium">{totalLastMonth}</td>
-                        <td className="px-6 py-3 font-bold text-blue-900">{totalAll}</td>
-                      </tr>
-                      {isExpanded && kids.map((child) => (
-                        <tr key={child.org_id} className="border-b border-gray-50 bg-gray-50/50">
-                          <td className="px-6 py-2 pl-14 text-gray-700">{child.org_name}</td>
-                          <td className="px-6 py-2 text-gray-600">{child.this_month}</td>
-                          <td className="px-6 py-2 text-gray-600">{child.last_month}</td>
-                          <td className="px-6 py-2 font-semibold text-blue-800">{child.total}</td>
+                    return (
+                      <React.Fragment key={branch.org_id}>
+                        <tr
+                          className={`border-b border-gray-50 hover:bg-gray-50 ${hasChildren ? "cursor-pointer" : ""}`}
+                          onClick={() => hasChildren && toggleBranch(branch.org_id)}
+                        >
+                          <td className="px-6 py-3 font-semibold text-gray-900 flex items-center gap-2">
+                            {hasChildren && (
+                              isExpanded
+                                ? <ChevronDown className="w-4 h-4 text-gray-500" />
+                                : <ChevronRight className="w-4 h-4 text-gray-500" />
+                            )}
+                            {branch.org_name}
+                            {hasChildren && (
+                              <span className="text-xs text-gray-400 ml-1">({kids.length} org{kids.length > 1 ? "s" : ""})</span>
+                            )}
+                          </td>
+                          {monthlyColumns.map(m => {
+                            const val = (branch.monthly[m] || 0) + kids.reduce((s, k) => s + (k.monthly[m] || 0), 0);
+                            return <td key={m} className="px-4 py-3 text-gray-700 font-medium">{val}</td>;
+                          })}
+                          <td className="px-6 py-3 font-bold text-blue-900">{totalAll}</td>
                         </tr>
-                      ))}
-                    </React.Fragment>
-                  );
-                })
-              )}
-            </tbody>
-          </table>
+                        {isExpanded && kids.map((child) => (
+                          <tr key={child.org_id} className="border-b border-gray-50 bg-gray-50/50">
+                            <td className="px-6 py-2 pl-14 text-gray-700">{child.org_name}</td>
+                            {monthlyColumns.map(m => (
+                              <td key={m} className="px-4 py-2 text-gray-600">{child.monthly[m] || 0}</td>
+                            ))}
+                            <td className="px-6 py-2 font-semibold text-blue-800">{child.total}</td>
+                          </tr>
+                        ))}
+                      </React.Fragment>
+                    );
+                  })
+                )}
+              </tbody>
+            </table>
+          </div>
         </Card>
 
         {/* Access codes */}
