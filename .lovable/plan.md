@@ -1,30 +1,17 @@
 
-## Admin pagina: zelf code intypen + statistieken fix
+## Na login direct naar /home in plaats van intro-pagina
 
-### Probleem 1: Statistieken tonen 0 terwijl code 1x gebruikt is
-De gebruikstabel telt records uit `user_organisation_sessions`, maar die tabel is leeg. De code-validatie verhoogt alleen `uses_count` op `organisation_access_codes`. De sessie-aanmaak in LoginPage is pas net toegevoegd en was nog niet actief toen de code werd gebruikt.
+### Probleem
+Na het aanmaken van een account via de organisatie-flow komt de gebruiker opnieuw op de intro-pagina (`/organisaties/:slug/intro`), terwijl die al gelezen is voor het aanmaken van het account.
 
-**Fix:** De stats Edge Function (`admin-organisation-stats`) moet ook `uses_count` uit `organisation_access_codes` meenemen als fallback. De tabel toont dan het hoogste van beide: sessie-count of totaal uses_count van alle codes bij die organisatie.
+### Oplossing
+Een kleine aanpassing in `src/pages/LoginPage.tsx` (regel 83): verander de redirect van `/organisaties/${orgSlug}/intro` naar `/home`. De organisatie-context is al opgeslagen in localStorage en de org-sessie wordt aangemaakt in de database, dus de gebruiker belandt direct in het dashboard met de juiste organisatie-context actief.
 
-### Probleem 2: Codes zelf intypen i.p.v. random genereren
-Nu genereert de Edge Function een random 8-karakter code. Je wilt zelf een code kunnen intypen.
+### Wat verandert
+- **`src/pages/LoginPage.tsx`** regel 83: `navigate("/home")` in plaats van `navigate(\`/organisaties/${orgSlug}/intro\`)`
 
-**Fix:** Voeg een tekstveld toe waar je de code zelf intypt. De Edge Function accepteert een optionele `code` parameter -- als die meegegeven wordt, gebruikt hij die in plaats van een random code te genereren.
-
-### Wijzigingen
-
-**1. `supabase/functions/admin-organisation-stats/index.ts` -- Gebruik `uses_count` als fallback**
-- Haal ook `organisation_access_codes` op met `uses_count` per `organisation_type_id`
-- Per organisatie: tel sessies, maar gebruik ook de som van `uses_count` van alle codes bij die org
-- Toon het hoogste getal zodat er geen gebruik verloren gaat
-
-**2. `supabase/functions/generate-organisation-code/index.ts` -- Accepteer custom code**
-- Voeg optionele `code` parameter toe aan de request body
-- Als `code` is meegegeven en niet leeg: gebruik die waarde
-- Als `code` leeg of niet meegegeven: genereer random code zoals nu
-
-**3. `src/pages/AdminOrganisatieGebruik.tsx` -- Tekstveld voor eigen code**
-- Vervang de auto-genereer flow met een tekstveld waar je zelf een code intypt
-- Voeg state `newCodeValue` toe
-- Het veld wordt meegestuurd als `code` parameter naar de Edge Function
-- Validatie: code mag niet leeg zijn
+### Flow na de fix
+1. Gebruiker bezoekt `/organisaties/erasmus-mc` -> vult code in -> leest intro
+2. Klikt "Start Vinster" -> gaat naar `/signup` -> maakt account aan
+3. Verifieert e-mail -> logt in -> belandt direct op `/home` (dashboard)
+4. De organisatie-context is actief, dus het dashboard toont de juiste organisatie-flow
