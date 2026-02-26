@@ -37,6 +37,7 @@ import AdminPasswordGate from "@/components/AdminPasswordGate";
 import AdminPortal from "@/pages/AdminPortal";
 import AdminVacatures from "@/pages/AdminVacatures";
 import AdminOrganisatieGebruik from "@/pages/AdminOrganisatieGebruik";
+import AdminOrganisaties from "@/pages/AdminOrganisaties";
 
 // Protected route imports
 import ProtectedRoute from "@/components/ProtectedRoute";
@@ -159,6 +160,7 @@ const AppRouter = () => {
       <Route path="/admin" element={<AdminPasswordGate><AdminPortal /></AdminPasswordGate>} />
       <Route path="/admin/gebruik" element={<AdminPasswordGate><AdminOrganisatieGebruik /></AdminPasswordGate>} />
       <Route path="/admin/vacatures" element={<AdminPasswordGate><AdminVacatures /></AdminPasswordGate>} />
+      <Route path="/admin/organisaties" element={<AdminPasswordGate><AdminOrganisaties /></AdminPasswordGate>} />
       
       {/* Legacy admin redirects */}
       <Route path="/admin/erasmus-mc/vacatures" element={<Navigate to="/admin/vacatures" replace />} />

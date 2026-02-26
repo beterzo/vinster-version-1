@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { BarChart3, FileSpreadsheet, ArrowRight } from "lucide-react";
+import { BarChart3, FileSpreadsheet, ArrowRight, Building2 } from "lucide-react";
 
 const adminCards = [
   {
@@ -15,6 +15,12 @@ const adminCards = [
     description: "Upload en beheer vacatures per branche of specifieke organisatie via CSV.",
     icon: FileSpreadsheet,
     path: "/admin/vacatures",
+  },
+  {
+    title: "Organisaties & Codes",
+    description: "Beheer organisaties, bekijk gebruik en voeg nieuwe toegangscodes toe.",
+    icon: Building2,
+    path: "/admin/organisaties",
   },
 ];
 
