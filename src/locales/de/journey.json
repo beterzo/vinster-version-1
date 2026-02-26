@@ -206,8 +206,8 @@
     "prioriteiten": {
       "activiteiten": {
         "title": "Prioritäten - Aktivitäten",
-        "subtitle": "Wählen Sie mindestens 5 Aktivitäten aus, die Sie gerne machen",
-        "selected_count": "Ausgewählt: {count} von mindestens 5",
+        "subtitle": "Wählen Sie mindestens 8 Aktivitäten aus, die Sie gerne machen",
+        "selected_count": "Ausgewählt: {count} von mindestens 8",
         "missing_keywords": "Es wurden noch keine persönlichen Aktivitäten generiert. Füllen Sie zuerst Ihren Begeisterungsscan und Traumjobs aus.",
         "extra_text_label": "Vermissen Sie noch Aktivitäten? Fügen Sie sie hier hinzu (optional)",
         "extra_text_placeholder": "Zum Beispiel: Fotografieren, Programmieren, Gärtnern...",
@@ -215,8 +215,8 @@
       },
       "werkomstandigheden": {
         "title": "Prioritäten - Arbeitsbedingungen",
-        "subtitle": "Wählen Sie mindestens 5 Arbeitsbedingungen aus, die Ihnen wichtig sind",
-        "selected_count": "Ausgewählt: {count} von mindestens 5",
+        "subtitle": "Wählen Sie mindestens 8 Arbeitsbedingungen aus, die Ihnen wichtig sind",
+        "selected_count": "Ausgewählt: {count} von mindestens 8",
         "missing_keywords": "Es wurden noch keine persönlichen Arbeitsbedingungen generiert. Füllen Sie zuerst Ihren Begeisterungsscan und Traumjobs aus.",
         "extra_text_label": "Vermissen Sie noch Arbeitsbedingungen? Fügen Sie sie hier hinzu (optional)",
         "extra_text_placeholder": "Zum Beispiel: Hund mit ins Büro, Guter Kaffee, Ergonomischer Arbeitsplatz...",
@@ -225,8 +225,8 @@
       },
       "interesses": {
         "title": "Prioritäten - Interessen",
-        "subtitle": "Wählen Sie mindestens 5 Interessen aus, die Sie ansprechen",
-        "selected_count": "Ausgewählt: {count} von mindestens 5",
+        "subtitle": "Wählen Sie mindestens 8 Interessen aus, die Sie ansprechen",
+        "selected_count": "Ausgewählt: {count} von mindestens 8",
         "missing_keywords": "Es wurden noch keine persönlichen Interessen generiert. Füllen Sie zuerst Ihren Begeisterungsscan und Traumjobs aus.",
         "extra_text_label": "Vermissen Sie noch Interessen? Fügen Sie sie hier hinzu (optional)",
         "extra_text_placeholder": "Zum Beispiel: Nachhaltigkeit, Technologie, Kunst...",

@@ -205,8 +205,8 @@
     "prioriteiten": {
       "activiteiten": {
         "title": "Priorities - activities",
-        "subtitle": "Select at least 5 activities that you enjoy doing",
-        "selected_count": "Selected: {count} of at least 5",
+        "subtitle": "Select at least 8 activities that you enjoy doing",
+        "selected_count": "Selected: {count} of at least 8",
         "missing_keywords": "No personal activities have been generated yet. First complete your enthusiasm scan and dream jobs.",
         "extra_text_label": "Missing any activities? Add them here (optional)",
         "extra_text_placeholder": "For example: Photography, Programming, Gardening...",
@@ -214,8 +214,8 @@
       },
       "werkomstandigheden": {
         "title": "Priorities - working conditions",
-        "subtitle": "Select at least 5 working conditions that are important to you",
-        "selected_count": "Selected: {count} of at least 5",
+        "subtitle": "Select at least 8 working conditions that are important to you",
+        "selected_count": "Selected: {count} of at least 8",
         "missing_keywords": "No personal working conditions have been generated yet. First complete your enthusiasm scan and dream jobs.",
         "extra_text_label": "Missing any working conditions? Add them here (optional)",
         "extra_text_placeholder": "For example: Dog to the office, Good coffee, Ergonomic workplace...",
@@ -224,8 +224,8 @@
       },
       "interesses": {
         "title": "Priorities - interests",
-        "subtitle": "Select at least 5 interests that attract you",
-        "selected_count": "Selected: {count} of at least 5",
+        "subtitle": "Select at least 8 interests that attract you",
+        "selected_count": "Selected: {count} of at least 8",
         "missing_keywords": "No personal interests have been generated yet. First complete your enthusiasm scan and dream jobs.",
         "extra_text_label": "Missing any interests? Add them here (optional)",
         "extra_text_placeholder": "For example: Sustainability, Technology, Art...",

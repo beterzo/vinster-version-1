@@ -87,9 +87,9 @@ const RondeDashboard = () => {
   const wensberoepenComplete = isWensberoepenComplete;
   
   const persoonsprofielComplete = prioriteitenResponses && 
-    prioriteitenResponses.selected_activiteiten_keywords?.length >= 5 &&
-    prioriteitenResponses.selected_werkomstandigheden_keywords?.length >= 5 &&
-    prioriteitenResponses.selected_interesses_keywords?.length >= 5 &&
+    prioriteitenResponses.selected_activiteiten_keywords?.length >= 8 &&
+    prioriteitenResponses.selected_werkomstandigheden_keywords?.length >= 8 &&
+    prioriteitenResponses.selected_interesses_keywords?.length >= 8 &&
     extraInfoResponses?.opleidingsniveau;
 
   const getCompletedSteps = (): JourneyStep[] => {

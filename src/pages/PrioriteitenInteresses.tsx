@@ -162,8 +162,8 @@ const PrioriteitenInteresses = ({ mode = 'edit' }: StepProps) => {
   }
 
   const availableKeywords = cleanKeywords(aiKeywords.interesses || []);
-  const canProceed = selectedKeywords.length >= 5;
-  const minReached = selectedKeywords.length >= 5;
+  const canProceed = selectedKeywords.length >= 8;
+  const minReached = selectedKeywords.length >= 8;
 
   return (
     <div className="min-h-screen bg-[#fafaf8] font-sans">
