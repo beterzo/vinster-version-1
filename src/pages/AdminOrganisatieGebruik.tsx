@@ -37,6 +37,7 @@ const AdminOrganisatieGebruik = () => {
   const [orgTypes, setOrgTypes] = useState<{ id: string; name: string }[]>([]);
   const [newCodeOrgId, setNewCodeOrgId] = useState("");
   const [newCodeMaxUses, setNewCodeMaxUses] = useState("");
+  const [newCodeValue, setNewCodeValue] = useState("");
   const [generating, setGenerating] = useState(false);
   const [expandedBranches, setExpandedBranches] = useState<Set<string>>(new Set());
 
@@ -64,18 +65,24 @@ const AdminOrganisatieGebruik = () => {
       toast({ title: "Selecteer een organisatie type", variant: "destructive" });
       return;
     }
+    if (!newCodeValue.trim()) {
+      toast({ title: "Vul een code in", variant: "destructive" });
+      return;
+    }
     setGenerating(true);
     try {
       const { data, error } = await supabase.functions.invoke("generate-organisation-code", {
         body: {
           organisation_type_id: newCodeOrgId,
           max_uses: newCodeMaxUses ? parseInt(newCodeMaxUses) : null,
+          code: newCodeValue.trim(),
         },
       });
       if (error) throw error;
       toast({ title: `Code aangemaakt: ${data?.code}` });
       setNewCodeOrgId("");
       setNewCodeMaxUses("");
+      setNewCodeValue("");
       await fetchData();
     } catch (err) {
       console.error(err);
@@ -284,6 +291,16 @@ const AdminOrganisatieGebruik = () => {
                 </SelectContent>
               </Select>
             </div>
+            <div className="flex-1 min-w-[200px]">
+              <label className="block text-sm font-medium text-gray-700 mb-1">Code</label>
+              <Input
+                type="text"
+                placeholder="Bijv. MoleWaterPlein3015"
+                value={newCodeValue}
+                onChange={(e) => setNewCodeValue(e.target.value)}
+                className="bg-white"
+              />
+            </div>
             <div className="w-32">
               <label className="block text-sm font-medium text-gray-700 mb-1">Max gebruik</label>
               <Input
@@ -300,7 +317,7 @@ const AdminOrganisatieGebruik = () => {
               className="bg-blue-900 hover:bg-blue-800 text-white font-semibold h-10 px-6"
             >
               {generating ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Plus className="w-4 h-4 mr-2" />}
-              Genereer code
+              Code aanmaken
             </Button>
           </div>
         </Card>
