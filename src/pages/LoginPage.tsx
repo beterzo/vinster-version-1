@@ -80,7 +80,7 @@ const LoginPage = () => {
           title: t('login.login_success'),
           description: t('login.welcome_back')
         });
-        navigate(`/organisaties/${orgSlug}/intro`);
+        navigate("/home");
       } else {
         // No org context: restore from DB for returning users
         try {
