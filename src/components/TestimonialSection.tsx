@@ -18,11 +18,8 @@ const TestimonialSection = () => {
           <div className="max-w-lg">
             <div className="bg-white/15 backdrop-blur-[4px] border border-white/20 rounded-xl p-8">
               <blockquote className="text-2xl md:text-3xl font-bold leading-tight text-left text-white">
-                {t('landing.testimonial')}
+                "{t('landing.testimonial')}"
               </blockquote>
-              <p className="text-white/80 text-sm mt-4 font-medium">
-                — Gebruiker, Vinster
-              </p>
             </div>
           </div>
         </div>
