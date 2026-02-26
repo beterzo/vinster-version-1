@@ -6,6 +6,26 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
+function getMonthKey(date: Date): string {
+  const months = ['jan', 'feb', 'mrt', 'apr', 'mei', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'];
+  return `${months[date.getMonth()]} '${String(date.getFullYear()).slice(2)}`;
+}
+
+function getLast6Months(): { key: string; start: string; end: string }[] {
+  const now = new Date();
+  const months: { key: string; start: string; end: string }[] = [];
+  for (let i = 0; i < 6; i++) {
+    const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    const next = new Date(d.getFullYear(), d.getMonth() + 1, 1);
+    months.push({
+      key: getMonthKey(d),
+      start: d.toISOString(),
+      end: next.toISOString(),
+    });
+  }
+  return months;
+}
+
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
@@ -16,59 +36,68 @@ serve(async (req) => {
     const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
     const supabase = createClient(SUPABASE_URL!, SUPABASE_SERVICE_ROLE_KEY!);
 
-    // Get all org types
-    const { data: orgTypes } = await supabase
-      .from('organisation_types')
-      .select('id, name, parent_type_id')
-      .order('name');
+    const months = getLast6Months();
+    const monthly_columns = months.map(m => m.key);
 
-    // Get all sessions
-    const { data: sessions } = await supabase
-      .from('user_organisation_sessions')
-      .select('id, organisation_type_id, created_at');
+    // Fetch all data
+    const [orgTypesRes, sessionsRes, profilesRes, codesRes] = await Promise.all([
+      supabase.from('organisation_types').select('id, name, parent_type_id').order('name'),
+      supabase.from('user_organisation_sessions').select('id, organisation_type_id, created_at, user_id'),
+      supabase.from('profiles').select('id, created_at'),
+      supabase.from('organisation_access_codes').select('id, code, organisation_type_id, uses_count, max_uses, is_active, last_used_at').order('created_at', { ascending: false }),
+    ]);
 
-    const now = new Date();
-    const thisMonthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
-    const lastMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1).toISOString();
+    const orgTypes = orgTypesRes.data || [];
+    const sessions = sessionsRes.data || [];
+    const profiles = profilesRes.data || [];
+    const codesRaw = codesRes.data || [];
 
-    // Get uses_count from access codes as fallback
-    const { data: allCodes } = await supabase
-      .from('organisation_access_codes')
-      .select('organisation_type_id, uses_count');
+    // General stats: per month count total, org, normal users
+    const orgUserIds = new Set(sessions.map(s => s.user_id));
 
-    // Sum uses_count per org type
+    const general_stats: Record<string, { total: number; org: number; normal: number }> = {};
+    let totalAll = 0, totalOrg = 0, totalNormal = 0;
+
+    for (const m of months) {
+      const inMonth = profiles.filter(p => p.created_at >= m.start && p.created_at < m.end);
+      const org = inMonth.filter(p => orgUserIds.has(p.id)).length;
+      const normal = inMonth.length - org;
+      general_stats[m.key] = { total: inMonth.length, org, normal };
+    }
+    totalAll = profiles.length;
+    totalOrg = profiles.filter(p => orgUserIds.has(p.id)).length;
+    totalNormal = totalAll - totalOrg;
+
+    // Sum uses_count per org type (for fallback total)
     const codeUsesMap = new Map<string, number>();
-    (allCodes || []).forEach(c => {
+    codesRaw.forEach(c => {
       if (c.organisation_type_id) {
         codeUsesMap.set(c.organisation_type_id, (codeUsesMap.get(c.organisation_type_id) || 0) + (c.uses_count || 0));
       }
     });
 
-    const stats = (orgTypes || []).map(ot => {
-      const orgSessions = (sessions || []).filter(s => s.organisation_type_id === ot.id);
-      const sessionTotal = orgSessions.length;
+    // Org stats with monthly breakdown
+    const stats = orgTypes.map(ot => {
+      const orgSessions = sessions.filter(s => s.organisation_type_id === ot.id);
       const codeTotal = codeUsesMap.get(ot.id) || 0;
-      const thisMonth = orgSessions.filter(s => s.created_at >= thisMonthStart).length;
-      const lastMonth = orgSessions.filter(s => s.created_at >= lastMonthStart && s.created_at < thisMonthStart).length;
+
+      const monthly: Record<string, number> = {};
+      for (const m of months) {
+        monthly[m.key] = orgSessions.filter(s => s.created_at >= m.start && s.created_at < m.end).length;
+      }
+
       return {
         org_name: ot.name,
         org_id: ot.id,
         parent_type_id: ot.parent_type_id || null,
-        this_month: thisMonth,
-        last_month: lastMonth,
-        total: Math.max(sessionTotal, codeTotal),
+        monthly,
+        total: Math.max(orgSessions.length, codeTotal),
       };
     });
 
-    // Get all access codes with org type names
-    const { data: codesRaw } = await supabase
-      .from('organisation_access_codes')
-      .select('id, code, organisation_type_id, uses_count, max_uses, is_active, last_used_at')
-      .order('created_at', { ascending: false });
-
-    const orgMap = new Map((orgTypes || []).map(ot => [ot.id, ot.name]));
-
-    const codes = (codesRaw || []).map(c => ({
+    // Access codes with org names
+    const orgMap = new Map(orgTypes.map(ot => [ot.id, ot.name]));
+    const codes = codesRaw.map(c => ({
       id: c.id,
       code: c.code,
       org_name: orgMap.get(c.organisation_type_id) || 'Onbekend',
@@ -78,7 +107,14 @@ serve(async (req) => {
       last_used_at: c.last_used_at,
     }));
 
-    return new Response(JSON.stringify({ stats, codes, org_types: orgTypes || [] }), {
+    return new Response(JSON.stringify({
+      stats,
+      codes,
+      org_types: orgTypes,
+      monthly_columns,
+      general_stats,
+      general_totals: { total: totalAll, org: totalOrg, normal: totalNormal },
+    }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   } catch (error) {
