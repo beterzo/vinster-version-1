@@ -21,7 +21,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { t } = useTranslation();
-  const { setOrganisation } = useOrganisation();
+  const { setOrganisation, isOrganisationMode, organisationTypeId, accessCodeId, slug: orgSlug } = useOrganisation();
 
   useEffect(() => {
     const verified = searchParams.get('verified');
@@ -60,37 +60,60 @@ const LoginPage = () => {
         variant: "destructive"
       });
     } else {
-      // Check if user has an organisation session
-      try {
-        const { data: { user } } = await supabase.auth.getUser();
-        if (user) {
-          const { data: orgSession } = await supabase
-            .from('user_organisation_sessions')
-            .select('organisation_type_id, access_code_id, organisation_types(slug, name)')
-            .eq('user_id', user.id)
-            .order('created_at', { ascending: false })
-            .limit(1)
-            .maybeSingle();
-
-          if (orgSession?.organisation_type_id && orgSession.organisation_types) {
-            const orgType = orgSession.organisation_types as unknown as { slug: string; name: string };
-            setOrganisation({
-              organisationTypeId: orgSession.organisation_type_id,
-              accessCodeId: orgSession.access_code_id,
-              slug: orgType.slug,
-              name: orgType.name,
+      // Check if user came from an organisation flow (context in localStorage)
+      if (isOrganisationMode && organisationTypeId) {
+        try {
+          const { data: { user } } = await supabase.auth.getUser();
+          if (user) {
+            // Create org session record for billing/logging
+            await supabase.from('user_organisation_sessions').insert({
+              user_id: user.id,
+              organisation_type_id: organisationTypeId,
+              access_code_id: accessCodeId,
             });
           }
+        } catch (err) {
+          console.error('Error creating organisation session:', err);
         }
-      } catch (err) {
-        console.error('Error restoring organisation context:', err);
-      }
 
-      toast({
-        title: t('login.login_success'),
-        description: t('login.welcome_back')
-      });
-      navigate("/home");
+        toast({
+          title: t('login.login_success'),
+          description: t('login.welcome_back')
+        });
+        navigate(`/organisaties/${orgSlug}/intro`);
+      } else {
+        // No org context: restore from DB for returning users
+        try {
+          const { data: { user } } = await supabase.auth.getUser();
+          if (user) {
+            const { data: orgSession } = await supabase
+              .from('user_organisation_sessions')
+              .select('organisation_type_id, access_code_id, organisation_types(slug, name)')
+              .eq('user_id', user.id)
+              .order('created_at', { ascending: false })
+              .limit(1)
+              .maybeSingle();
+
+            if (orgSession?.organisation_type_id && orgSession.organisation_types) {
+              const orgType = orgSession.organisation_types as unknown as { slug: string; name: string };
+              setOrganisation({
+                organisationTypeId: orgSession.organisation_type_id,
+                accessCodeId: orgSession.access_code_id,
+                slug: orgType.slug,
+                name: orgType.name,
+              });
+            }
+          }
+        } catch (err) {
+          console.error('Error restoring organisation context:', err);
+        }
+
+        toast({
+          title: t('login.login_success'),
+          description: t('login.welcome_back')
+        });
+        navigate("/home");
+      }
     }
     setIsLoading(false);
   };
