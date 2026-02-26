@@ -32,6 +32,9 @@ const OrganisatieLanding = () => {
   const [error, setError] = useState("");
   const [validating, setValidating] = useState(false);
   const [childOrgs, setChildOrgs] = useState<ChildOrg[]>([]);
+  const [branchCode, setBranchCode] = useState("");
+  const [branchCodeError, setBranchCodeError] = useState("");
+  const [branchCodeValidating, setBranchCodeValidating] = useState(false);
 
   useEffect(() => {
     const fetchOrgType = async () => {
@@ -105,6 +108,41 @@ const OrganisatieLanding = () => {
       name: orgType.name,
     });
     navigate(`/organisaties/${slug}/intro`);
+  };
+
+  // --- Code submission on branch pages ---
+  const handleBranchCodeSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setBranchCodeError("");
+    if (!branchCode.trim()) {
+      setBranchCodeError("Vul een toegangscode in.");
+      return;
+    }
+    setBranchCodeValidating(true);
+    try {
+      const { data, error: fnError } = await supabase.functions.invoke(
+        "validate-organisation-code",
+        { body: { code: branchCode.trim(), branch_slug: slug } }
+      );
+      if (fnError || !data?.success) {
+        setBranchCodeError(data?.error || "Deze code is niet bekend.");
+        setBranchCodeValidating(false);
+        return;
+      }
+      // Use the resolved org name for the badge
+      const resolvedName = data.organisation?.name || orgType?.name || null;
+      setOrganisation({
+        organisationTypeId: data.organisation_type_id,
+        accessCodeId: data.access_code_id,
+        slug: data.organisation?.slug || slug || null,
+        name: resolvedName,
+      });
+      navigate(`/organisaties/${slug}/intro`);
+    } catch {
+      setBranchCodeError("Er is een fout opgetreden. Probeer het opnieuw.");
+    } finally {
+      setBranchCodeValidating(false);
+    }
   };
 
   // --- Header (shared) ---
@@ -181,7 +219,7 @@ const OrganisatieLanding = () => {
                 `Ontdek welke functies binnen een ${orgType.name.toLowerCase()} bij jou passen. Vinster helpt je om inzicht te krijgen in jouw mogelijkheden.`}
             </p>
 
-            <Button
+          <Button
               onClick={handleFreeStart}
               className="bg-blue-900 hover:bg-blue-800 text-white font-semibold h-12 px-8 text-base"
             >
@@ -190,7 +228,50 @@ const OrganisatieLanding = () => {
             </Button>
           </div>
 
-          {/* Section 2: Specific organisations */}
+          {/* Section 2: Optional code input */}
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-12">
+            <div className="flex items-center gap-3 mb-2">
+              <KeyRound className="h-6 w-6 text-blue-900" />
+              <h2 className="text-xl font-semibold text-blue-900">
+                Heeft u een organisatiecode? Voer hem hier in
+              </h2>
+            </div>
+            <p className="text-sm text-gray-500 mb-4">
+              Geen code? Sla dit over en ga gewoon door.
+            </p>
+            <form onSubmit={handleBranchCodeSubmit} className="flex flex-col sm:flex-row gap-3">
+              <div className="flex-1">
+                <Input
+                  type="text"
+                  placeholder="bijv. molewaterplein"
+                  value={branchCode}
+                  onChange={(e) => {
+                    setBranchCode(e.target.value);
+                    setBranchCodeError("");
+                  }}
+                  className="text-base h-12 bg-white"
+                  maxLength={50}
+                />
+                {branchCodeError && <p className="text-sm text-red-600 mt-2">{branchCodeError}</p>}
+              </div>
+              <Button
+                type="submit"
+                disabled={branchCodeValidating}
+                className="bg-blue-900 hover:bg-blue-800 text-white font-semibold h-12 px-6"
+              >
+                {branchCodeValidating ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Controleren...
+                  </>
+                ) : (
+                  "Bevestig code"
+                )}
+              </Button>
+            </form>
+          </div>
+
+          {/* Section 3: Specific organisations */}
           {childOrgs.length > 0 && (
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-12">
               <div className="flex items-center gap-3 mb-2">

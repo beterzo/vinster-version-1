@@ -12,7 +12,7 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { code } = await req.json();
+    const { code, branch_slug } = await req.json();
 
     if (!code || typeof code !== "string" || code.trim().length === 0) {
       return new Response(
@@ -35,7 +35,7 @@ Deno.serve(async (req) => {
 
     if (lookupError || !accessCode) {
       return new Response(
-        JSON.stringify({ error: "Deze code is niet geldig of niet meer actief." }),
+        JSON.stringify({ error: "Deze code is niet bekend." }),
         { status: 404, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
@@ -52,6 +52,39 @@ Deno.serve(async (req) => {
         JSON.stringify({ error: "Deze code is niet geldig of niet meer actief." }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
+    }
+
+    // Get the organisation type linked to this code
+    const { data: orgType } = await supabase
+      .from("organisation_types")
+      .select("id, slug, name, parent_type_id, is_unique")
+      .eq("id", accessCode.organisation_type_id)
+      .single();
+
+    // If branch_slug is provided, validate the code belongs to this branch or a child of it
+    if (branch_slug && orgType) {
+      // Get the branch by slug
+      const { data: branch } = await supabase
+        .from("organisation_types")
+        .select("id")
+        .eq("slug", branch_slug)
+        .eq("is_active", true)
+        .single();
+
+      if (branch) {
+        const codeOrgId = orgType.id;
+        const codeParentId = orgType.parent_type_id;
+        const branchId = branch.id;
+
+        // Code must belong to the branch itself OR be a child of the branch
+        const belongsToBranch = codeOrgId === branchId || codeParentId === branchId;
+        if (!belongsToBranch) {
+          return new Response(
+            JSON.stringify({ error: "Deze code is niet bekend." }),
+            { status: 404, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+          );
+        }
+      }
     }
 
     // Increment uses_count and set last_used_at
@@ -71,12 +104,16 @@ Deno.serve(async (req) => {
       );
     }
 
-    // Get organisation type info
-    const { data: orgType } = await supabase
-      .from("organisation_types")
-      .select("id, slug, name")
-      .eq("id", accessCode.organisation_type_id)
-      .single();
+    // Get parent branch info if this org has a parent
+    let parentBranch = null;
+    if (orgType?.parent_type_id) {
+      const { data: parent } = await supabase
+        .from("organisation_types")
+        .select("id, slug, name")
+        .eq("id", orgType.parent_type_id)
+        .single();
+      parentBranch = parent;
+    }
 
     return new Response(
       JSON.stringify({
@@ -84,6 +121,7 @@ Deno.serve(async (req) => {
         organisation_type_id: accessCode.organisation_type_id,
         access_code_id: accessCode.id,
         organisation: orgType,
+        parent_branch: parentBranch,
       }),
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
