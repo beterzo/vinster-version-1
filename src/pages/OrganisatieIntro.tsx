@@ -3,11 +3,13 @@ import { Button } from "@/components/ui/button";
 import Footer from "@/components/Footer";
 import { CheckCircle2, Shield, Sparkles, ArrowRight } from "lucide-react";
 import { useOrganisation } from "@/contexts/OrganisationContext";
+import { useAuth } from "@/hooks/useAuth";
 
 const OrganisatieIntro = () => {
   const navigate = useNavigate();
   const { slug } = useParams<{ slug: string }>();
   const { name, accessCodeId } = useOrganisation();
+  const { user } = useAuth();
 
   // Determine labels based on category vs specific org
   const isCategory = !accessCodeId;
@@ -160,7 +162,7 @@ const OrganisatieIntro = () => {
           {/* CTA */}
           <div className="pt-2">
             <Button
-              onClick={() => navigate("/home")}
+              onClick={() => navigate(user ? "/home" : "/signup")}
               className="bg-[#232D4B] hover:bg-blue-800 text-white font-semibold h-12 px-8 w-full sm:w-auto"
             >
               <Sparkles className="mr-2 h-5 w-5" />

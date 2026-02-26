@@ -153,7 +153,7 @@ const AppRouter = () => {
       <Route path="/organisaties" element={<OrganisatiesOverzicht />} />
       <Route path="/organisaties/binnenkort" element={<OrganisatieBinnenkort />} />
       <Route path="/organisaties/:slug" element={<OrganisatieLanding />} />
-      <Route path="/organisaties/:slug/intro" element={<ProtectedRoute requirePayment={false}><OrganisatieIntro /></ProtectedRoute>} />
+      <Route path="/organisaties/:slug/intro" element={<OrganisatieIntro />} />
       
       {/* Admin routes */}
       <Route path="/admin" element={<AdminPasswordGate><AdminPortal /></AdminPasswordGate>} />
