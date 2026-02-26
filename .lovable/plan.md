@@ -1,37 +1,42 @@
 
 
-## Aanpassingen branch pagina (/organisaties/medisch-centrum)
+## Erasmus MC los van het blok tonen
 
 ### Wat verandert
 
-**1. Verwijder Section 2 (het losse code-invoerblok)**
-Het aparte blok "Heeft u een organisatiecode?" met placeholder "bijv. molewaterplein" wordt verwijderd.
+De huidige opzet toont Erasmus MC (en toekomstige organisaties) binnen het witte "Hoor je bij een specifieke organisatie?" blok als een kaart met code-invoer. De aanpassing haalt de organisatie-items uit dat blok en toont ze als losse, visuele kaarten eronder.
 
-**2. Pas Section 3 aan (specifieke organisaties)**
-Het bestaande blok "Hoor je bij een specifieke organisatie?" blijft behouden met de tekst. Maar in plaats van een "Vul code in" knop die doorlinkt naar /organisaties/erasmus-mc, komt er per organisatie een inline code-invoerveld:
-- Een tekstveld met placeholder "Vul hier je code in"
-- Een "Bevestig" knop ernaast
-- Validatie en foutmelding direct inline
-- Bij succes: context opslaan en doorgaan naar intro
+### Nieuwe layout
 
-**3. Erasmus MC logo toevoegen**
-Het geupload logo wordt gekopieerd naar het project en getoond naast de Erasmus MC naam in de organisatie-kaart, zodat het er professioneel en herkenbaar uitziet.
+**Section 1** (intro + "Start het traject") -- blijft exact hetzelfde.
+
+**Section 2** ("Hoor je bij een specifieke organisatie?") -- wordt een simpele tekst-sectie zonder witte kaart eromheen, alleen de koptekst en uitleg.
+
+**Organisatie-kaarten** -- elke child org wordt een eigen los blok:
+
+```text
++--------------------------------------------------+
+|  [Erasmus MC logo]     Erasmus MC                 |
+|                                                   |
+|  [________Vul hier je code in________] [Bevestig] |
+|                                                   |
++--------------------------------------------------+
+```
+
+- Elk een eigen wit afgerond blok met border en lichte shadow
+- Logo links bovenin (groot genoeg, ca. 48px hoog), organisatienaam ernaast
+- Code-invoer + bevestig-knop eronder
+- Bij organisaties zonder logo: alleen de naam met een KeyRound icoon
+- Schaalt goed als er later meer organisaties bijkomen (grid of stack)
 
 ### Technische details
 
 **Bestand: `src/pages/OrganisatieLanding.tsx`**
-- Verwijder Section 2 (regels 231-272)
-- Pas Section 3 aan: vervang de `Button` per child org door een inline `form` met `Input` + `Button`
-- Voeg state toe per child org voor code/error/validating (gebruik een object met child.id als key)
-- Placeholder wordt "Vul hier je code in"
-- Bij submit: roep `validate-organisation-code` aan met `branch_slug: slug`
-- Toon het Erasmus MC logo als afbeelding naast de naam in de kaart
 
-**Bestand: Erasmus MC logo**
-- Kopieer het geuploade logo naar `public/images/erasmus-mc-logo.png`
-- Toon het in de child org kaart naast de naam (ca. 40-48px hoog)
+1. Verwijder de omsluitende witte kaart (`div.bg-white.rounded-2xl`) rond Section 2
+2. Houd de koptekst "Hoor je bij een specifieke organisatie?" en uitleg als losse tekst (zonder kaart-styling)
+3. Render elke `childOrg` als een eigen `div.bg-white.rounded-2xl.shadow-sm.border` blok
+4. Per blok: logo + naam bovenaan, code-invoer + knop eronder
+5. Alle bestaande validatie-logica (`handleChildCodeSubmit`, state per child) blijft ongewijzigd
 
-De layout per child org kaart wordt:
-- Links: logo + organisatienaam
-- Daaronder of ernaast: code invoerveld + bevestig knop
-- Foutmelding inline onder het veld
+Geen andere bestanden wijzigen.
