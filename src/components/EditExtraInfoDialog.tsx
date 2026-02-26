@@ -24,8 +24,7 @@ const EditExtraInfoDialog = ({ open, onOpenChange, data, onSave }: EditExtraInfo
   const [formData, setFormData] = useState({
     opleidingsniveau: '',
     beroepsopleiding: '',
-    fysieke_beperkingen: '',
-    sector_voorkeur: ''
+    fysieke_beperkingen: ''
   });
 
   useEffect(() => {
@@ -33,8 +32,7 @@ const EditExtraInfoDialog = ({ open, onOpenChange, data, onSave }: EditExtraInfo
       setFormData({
         opleidingsniveau: data.opleidingsniveau || '',
         beroepsopleiding: data.beroepsopleiding || '',
-        fysieke_beperkingen: data.fysieke_beperkingen || '',
-        sector_voorkeur: data.sector_voorkeur || ''
+        fysieke_beperkingen: data.fysieke_beperkingen || ''
       });
     }
   }, [data]);
@@ -127,19 +125,6 @@ const EditExtraInfoDialog = ({ open, onOpenChange, data, onSave }: EditExtraInfo
               value={formData.fysieke_beperkingen}
               onChange={(e) => setFormData(prev => ({ ...prev, fysieke_beperkingen: e.target.value }))}
               placeholder="Geef eventuele fysieke beperkingen of speciale behoeften aan..."
-              className="mt-1"
-              rows={3}
-            />
-          </div>
-
-          <div>
-            <Label className="text-sm font-medium text-gray-700">
-              Sector voorkeur
-            </Label>
-            <Textarea
-              value={formData.sector_voorkeur}
-              onChange={(e) => setFormData(prev => ({ ...prev, sector_voorkeur: e.target.value }))}
-              placeholder="In welke sectoren zou je graag willen werken?"
               className="mt-1"
               rows={3}
             />

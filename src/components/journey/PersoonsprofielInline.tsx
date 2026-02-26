@@ -42,7 +42,6 @@ const PersoonsprofielInline = ({ roundId, subStep, onNext, onPrevious }: Persoon
   const [extraInfoAnswers, setExtraInfoAnswers] = useState({
     opleidingsniveau: "",
     beroepsopleiding: "",
-    sector_voorkeur: "",
     fysieke_beperkingen: ""
   });
 
@@ -60,7 +59,6 @@ const PersoonsprofielInline = ({ roundId, subStep, onNext, onPrevious }: Persoon
       setExtraInfoAnswers({
         opleidingsniveau: extraInfoResponses.opleidingsniveau || "",
         beroepsopleiding: extraInfoResponses.beroepsopleiding || "",
-        sector_voorkeur: extraInfoResponses.sector_voorkeur || "",
         fysieke_beperkingen: extraInfoResponses.fysieke_beperkingen || ""
       });
     }
@@ -155,13 +153,11 @@ const PersoonsprofielInline = ({ roundId, subStep, onNext, onPrevious }: Persoon
     const questions = [
       { field: "opleidingsniveau", question: t('profiel_voltooien.extra_informatie.question1'), placeholder: t('profiel_voltooien.extra_informatie.placeholder1') },
       { field: "beroepsopleiding", question: t('profiel_voltooien.extra_informatie.question2'), placeholder: t('profiel_voltooien.extra_informatie.placeholder2') },
-      { field: "sector_voorkeur", question: t('profiel_voltooien.extra_informatie.question3'), placeholder: t('profiel_voltooien.extra_informatie.placeholder3') },
-      { field: "fysieke_beperkingen", question: t('profiel_voltooien.extra_informatie.question4'), placeholder: t('profiel_voltooien.extra_informatie.placeholder4') }
+      { field: "fysieke_beperkingen", question: t('profiel_voltooien.extra_informatie.question3'), placeholder: t('profiel_voltooien.extra_informatie.placeholder3') }
     ];
 
     const allFieldsFilled = extraInfoAnswers.opleidingsniveau.trim() !== "" && 
-                            extraInfoAnswers.beroepsopleiding.trim() !== "" && 
-                            extraInfoAnswers.sector_voorkeur.trim() !== "";
+                            extraInfoAnswers.beroepsopleiding.trim() !== "";
 
     return (
       <Card className="rounded-3xl shadow-xl border-0">

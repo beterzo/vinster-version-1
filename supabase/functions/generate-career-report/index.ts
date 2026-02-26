@@ -96,7 +96,6 @@ interface UserData {
   // Extra info
   opleidingsniveau: string;
   beroepsopleiding: string;
-  sectorVoorkeur: string;
   fysiekeBeperkingen: string;
 }
 
@@ -117,7 +116,7 @@ Je vertaalt dit profiel naar drie bestaande functies die passen bij het Nederlan
 • Twee logische, passende beroepen die direct aansluiten op de voorkeuren van de gebruiker
 • Eén verrassend en avontuurlijk alternatief — een functie die de gebruiker zelf waarschijnlijk niet snel zou bedenken, maar die qua opleidingsniveau en kernvaardigheden wél haalbaar is. Durf creatief te denken en buiten de gebaande paden te gaan, maar het moet een écht bestaand beroep zijn (geen verzonnen functietitel)
 
-Voor elk beroep geef je een heldere, korte uitleg (max. 6 zinnen) waarin je actief de kernwoorden verwerkt en laat zien waarom deze functie bij de gebruiker past. Houd daarbij rekening met het opleidingsniveau, fysieke beperkingen (indien van toepassing), sectorvoorkeur en andere context.
+Voor elk beroep geef je een heldere, korte uitleg (max. 6 zinnen) waarin je actief de kernwoorden verwerkt en laat zien waarom deze functie bij de gebruiker past. Houd daarbij rekening met het opleidingsniveau, fysieke beperkingen (indien van toepassing) en andere context.
 
 Je kiest alleen uit functies die:
 • Bekend zijn binnen het Nederlandse werkveld (bijv. uit de NLQF, werk.nl, nationaleberoepengids.nl)
@@ -242,7 +241,6 @@ Hier nog wat meer context over de gebruiker:
 • Hoogste opleiding: ${data.opleidingsniveau}
 • Richting van de opleiding: ${data.beroepsopleiding}
 • Eventuele beperkingen: ${data.fysiekeBeperkingen}
-• Sectorvoorkeur: ${data.sectorVoorkeur}
 
 ⸻
 
@@ -255,7 +253,7 @@ Bedenk drie concrete functies die bij deze persoon passen:
 • Voeg bij elk beroep een korte uitleg toe van maximaal 40 woorden
 • Schrijf altijd volledige, afgeronde zinnen - geen afgekapte tekst
 • Verwerk actief de gegenereerde kernwoorden in de uitleg
-• Houd rekening met opleiding, beperkingen en sectorvoorkeur
+• Houd rekening met opleiding en beperkingen
 • De functietitels mogen maximaal uit 3 woorden bestaan
 
 ⚠️ Belangrijk:
@@ -270,7 +268,7 @@ You translate this profile into three existing roles that fit within the Europea
 • Two logical, fitting occupations that directly match the user's preferences
 • One surprising, more adventurous alternative — a role the user would likely not have thought of themselves, but that still matches their education level and core competencies. Think creatively and outside the box, but it must be a real, existing occupation (no invented job titles)
 
-For each occupation, you provide a clear, concise explanation (max. 6 sentences) in which you actively use the keywords and show why this role fits the user. You take into account the user's education level, physical limitations (if applicable), sector preference and other relevant context.
+For each occupation, you provide a clear, concise explanation (max. 6 sentences) in which you actively use the keywords and show why this role fits the user. You take into account the user's education level, physical limitations (if applicable) and other relevant context.
 
 You only choose occupations that:
 • Are known within the European labour market (SOC/O*NET/ESCO frameworks, or as found on websites like onetonline.org, prospects.ac.uk)
@@ -404,7 +402,6 @@ Additional user context:
 • Highest education: ${data.opleidingsniveau}
 • Field of study: ${data.beroepsopleiding}
 • Possible limitations: ${data.fysiekeBeperkingen}
-• Preferred sector: ${data.sectorVoorkeur}
 
 ⸻
 
@@ -418,7 +415,7 @@ Generate three concrete job suggestions that fit this person:
 • Provide a short explanation per occupation (max 40 words)
 • Always write complete, finished sentences - no truncated text
 • Actively use the generated keywords in the explanation
-• Consider education, limitations, and sector preference
+• Consider education and limitations
 • Job titles must consist of a maximum of 3 words
 
 ⚠️ Important
@@ -433,7 +430,7 @@ Du übersetzt dieses Profil in drei real existierende Berufe, die zum deutschen 
 • Zwei logische, passende Berufe, die direkt an die Präferenzen der Person anknüpfen
 • Ein überraschender, kreativerer und etwas abenteuerlicherer Alternativberuf — ein Beruf, an den die Person selbst wahrscheinlich nicht gedacht hätte, der aber zum Bildungsniveau und den Kernkompetenzen passt. Denke kreativ und über den Tellerrand hinaus, aber es muss ein real existierender Beruf sein (keine erfundenen Berufstitel)
 
-Für jeden Beruf gibst du eine klare, kurze Erklärung (max. 6 Sätze), in der du die Schlüsselwörter aktiv einsetzt und nachvollziehbar erklärst, warum dieser Beruf zu der Person passt. Dabei berücksichtigst du Bildungsniveau, eventuelle körperliche Einschränkungen, Branchenpräferenzen und weiteren Kontext.
+Für jeden Beruf gibst du eine klare, kurze Erklärung (max. 6 Sätze), in der du die Schlüsselwörter aktiv einsetzt und nachvollziehbar erklärst, warum dieser Beruf zu der Person passt. Dabei berücksichtigst du Bildungsniveau, eventuelle körperliche Einschränkungen und weiteren Kontext.
 
 Du wählst ausschließlich Berufe aus, die:
 • Auf dem deutschen Arbeitsmarkt bekannt und eindeutig definierbar sind
@@ -560,7 +557,6 @@ Zusätzlicher Kontext zur Person:
 • Höchster Bildungsabschluss: ${data.opleidingsniveau}
 • Fachrichtung der Ausbildung: ${data.beroepsopleiding}
 • Eventuelle Einschränkungen: ${data.fysiekeBeperkingen}
-• Bevorzugter Sektor: ${data.sectorVoorkeur}
 
 ⸻
 
@@ -573,7 +569,7 @@ Denke dir drei konkrete Berufe aus, die zu dieser Person passen:
 • Füge für jeden Beruf eine kurze Erklärung mit maximal 40 Wörtern hinzu
 • Schreibe immer vollständige, abgeschlossene Sätze - kein abgebrochener Text
 • Verarbeite die generierten Schlüsselwörter aktiv in den Erläuterungen
-• Berücksichtige Ausbildung, Einschränkungen und bevorzugten Sektor
+• Berücksichtige Ausbildung und Einschränkungen
 • Die Berufstitel dürfen höchstens aus 3 Wörtern bestehen
 
 ⚠️ Wichtig:
@@ -588,7 +584,7 @@ Du oversetter denne profilen til tre eksisterende yrker som passer innenfor det 
 • To logiske, passende yrker som direkte samsvarer med brukerens preferanser
 • Ett overraskende, mer kreativt og eventyrlig alternativ — et yrke brukeren sannsynligvis ikke ville tenkt på selv, men som likevel passer med utdanningsnivået og kjernekompetansene. Tenk kreativt og utenfor boksen, men det må være et reelt eksisterende yrke (ingen oppdiktede yrkestitler)
 
-For hvert yrke gir du en tydelig og kort forklaring (maks. 6 setninger) der du aktivt bruker nøkkelordene og forklarer hvorfor yrket passer brukeren. Du tar hensyn til utdanningsnivå, eventuelle fysiske begrensninger, sektorpreferanse og annen relevant kontekst.
+For hvert yrke gir du en tydelig og kort forklaring (maks. 6 setninger) der du aktivt bruker nøkkelordene og forklarer hvorfor yrket passer brukeren. Du tar hensyn til utdanningsnivå, eventuelle fysiske begrensninger og annen relevant kontekst.
 
 Du velger kun yrker som:
 • Er kjente og etablerte i det norske arbeidsmarkedet
@@ -724,7 +720,6 @@ Ytterligere kontekst:
 • Høyeste utdanningsnivå: ${data.opleidingsniveau}
 • Utdanningsretning: ${data.beroepsopleiding}
 • Eventuelle begrensninger: ${data.fysiekeBeperkingen}
-• Foretrukket sektor: ${data.sectorVoorkeur}
 
 ⸻
 
@@ -737,7 +732,7 @@ Lag tre konkrete jobbforslag som passer denne personen:
 • Forklaringen per yrke skal være maks 40 ord
 • Skriv alltid fullstendige, avsluttede setninger - ingen avbrutt tekst
 • Bruk nøkkelordene aktivt i forklaringene
-• Ta hensyn til utdanning, begrensninger og foretrukket sektor
+• Ta hensyn til utdanning og begrensninger
 • Yrker kan bestå av maks tre ord
 
 ⚠️ Viktig
@@ -911,7 +906,6 @@ serve(async (req) => {
       // Extra info
       opleidingsniveau: extraInfoData?.opleidingsniveau || 'Niet ingevuld',
       beroepsopleiding: extraInfoData?.beroepsopleiding || 'Niet ingevuld',
-      sectorVoorkeur: extraInfoData?.sector_voorkeur || 'Niet ingevuld',
       fysiekeBeperkingen: extraInfoData?.fysieke_beperkingen || 'Geen',
     };
 

@@ -23,7 +23,6 @@ export interface MakeWebhookData {
   opleidingsniveau: string;
   beroepsopleiding: string;
   fysieke_beperkingen: string;
-  sector_voorkeur: string;
   // Wensberoep 1
   wensberoep_1_titel: string;
   wensberoep_1_werkweek_activiteiten: string;

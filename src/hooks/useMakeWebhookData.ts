@@ -130,7 +130,6 @@ export const useMakeWebhookData = () => {
         opleidingsniveau: extraInfoData?.opleidingsniveau || "",
         beroepsopleiding: extraInfoData?.beroepsopleiding || "",
         fysieke_beperkingen: extraInfoData?.fysieke_beperkingen || "",
-        sector_voorkeur: extraInfoData?.sector_voorkeur || "",
 
         // Wensberoep 1
         wensberoep_1_titel: wensberoepenData?.wensberoep_1_titel || "",
@@ -216,7 +215,6 @@ export const useMakeWebhookData = () => {
       opleidingsniveau: extraInformatieResponses?.opleidingsniveau || "",
       beroepsopleiding: extraInformatieResponses?.beroepsopleiding || "",
       fysieke_beperkingen: extraInformatieResponses?.fysieke_beperkingen || "",
-      sector_voorkeur: extraInformatieResponses?.sector_voorkeur || "",
 
       // Wensberoep 1
       wensberoep_1_titel: wensberoepenResponses?.wensberoep_1_titel || "",
