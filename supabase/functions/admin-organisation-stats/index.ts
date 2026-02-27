@@ -71,6 +71,29 @@ serve(async (req) => {
     const totalOrg = paidProfiles.filter(p => orgUserIds.has(p.id)).length;
     const totalNormal = totalAll - totalOrg;
 
+    // Account KPIs: new profiles per month with paid/code breakdown
+    const sessionsWithCode = sessions.filter(s => s.access_code_id);
+    const usersWithCode = new Set(sessionsWithCode.map(s => s.user_id));
+
+    const account_kpis: Record<string, { total_new_profiles: number; new_paid_accounts: number; new_unpaid_accounts: number; via_payment: number; via_code: number }> = {};
+    let kpiTotals = { total_new_profiles: 0, new_paid_accounts: 0, new_unpaid_accounts: 0, via_payment: 0, via_code: 0 };
+
+    for (const m of months) {
+      const newInMonth = profiles.filter(p => p.created_at >= m.start && p.created_at < m.end);
+      const total_new = newInMonth.length;
+      const via_payment = newInMonth.filter(p => p.has_paid).length;
+      const via_code = newInMonth.filter(p => usersWithCode.has(p.id)).length;
+      const new_paid = newInMonth.filter(p => p.has_paid || usersWithCode.has(p.id)).length;
+      const new_unpaid = total_new - new_paid;
+
+      account_kpis[m.key] = { total_new_profiles: total_new, new_paid_accounts: new_paid, new_unpaid_accounts: new_unpaid, via_payment, via_code };
+      kpiTotals.total_new_profiles += total_new;
+      kpiTotals.new_paid_accounts += new_paid;
+      kpiTotals.new_unpaid_accounts += new_unpaid;
+      kpiTotals.via_payment += via_payment;
+      kpiTotals.via_code += via_code;
+    }
+
     // Build is_unique lookup
     const isUniqueMap = new Map(orgTypes.map(ot => [ot.id, ot.is_unique ?? false]));
 
@@ -119,6 +142,8 @@ serve(async (req) => {
       monthly_columns,
       general_stats,
       general_totals: { total: totalAll, org: totalOrg, normal: totalNormal },
+      account_kpis,
+      account_kpi_totals: kpiTotals,
     }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
