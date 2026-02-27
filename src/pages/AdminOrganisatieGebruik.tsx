@@ -30,6 +30,14 @@ interface GeneralStats {
   [month: string]: { total: number; org: number; normal: number };
 }
 
+interface AccountKpi {
+  total_new_profiles: number;
+  new_paid_accounts: number;
+  new_unpaid_accounts: number;
+  via_payment: number;
+  via_code: number;
+}
+
 const AdminOrganisatieGebruik = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -41,6 +49,8 @@ const AdminOrganisatieGebruik = () => {
   const [monthlyColumns, setMonthlyColumns] = useState<string[]>([]);
   const [generalStats, setGeneralStats] = useState<GeneralStats>({});
   const [generalTotals, setGeneralTotals] = useState({ total: 0, org: 0, normal: 0 });
+  const [accountKpis, setAccountKpis] = useState<Record<string, AccountKpi>>({});
+  const [accountKpiTotals, setAccountKpiTotals] = useState<AccountKpi>({ total_new_profiles: 0, new_paid_accounts: 0, new_unpaid_accounts: 0, via_payment: 0, via_code: 0 });
   const [newCodeOrgId, setNewCodeOrgId] = useState("");
   const [newCodeMaxUses, setNewCodeMaxUses] = useState("");
   const [newCodeValue, setNewCodeValue] = useState("");
@@ -57,6 +67,8 @@ const AdminOrganisatieGebruik = () => {
       setMonthlyColumns(data?.monthly_columns || []);
       setGeneralStats(data?.general_stats || {});
       setGeneralTotals(data?.general_totals || { total: 0, org: 0, normal: 0 });
+      setAccountKpis(data?.account_kpis || {});
+      setAccountKpiTotals(data?.account_kpi_totals || { total_new_profiles: 0, new_paid_accounts: 0, new_unpaid_accounts: 0, via_payment: 0, via_code: 0 });
     } catch (err) {
       console.error(err);
       toast({ title: "Fout bij laden data", variant: "destructive" });
@@ -175,7 +187,65 @@ const AdminOrganisatieGebruik = () => {
           </Button>
         </div>
 
-        {/* General Vinster Usage */}
+        {/* Account KPIs */}
+        <Card className="mb-8 rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+          <div className="px-6 py-4 bg-amber-50 border-b border-amber-100">
+            <h2 className="text-lg font-semibold text-blue-900">Nieuwe Accounts per Maand</h2>
+            <p className="text-sm text-gray-500 mt-1">Accounts met toegang via betaling of organisatiecode</p>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="min-w-full text-sm">
+              <thead>
+                <tr className="border-b border-gray-100">
+                  <th className="px-6 py-3 text-left font-semibold text-gray-700 min-w-[180px]">KPI</th>
+                  {monthlyColumns.map(m => (
+                    <th key={m} className="px-4 py-3 text-left font-semibold text-gray-700 whitespace-nowrap">{m}</th>
+                  ))}
+                  <th className="px-6 py-3 text-left font-semibold text-gray-700">Totaal</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-gray-50 hover:bg-gray-50">
+                  <td className="px-6 py-3 font-semibold text-gray-900">Totaal nieuwe profielen</td>
+                  {monthlyColumns.map(m => (
+                    <td key={m} className="px-4 py-3 text-gray-700 font-medium">{accountKpis[m]?.total_new_profiles || 0}</td>
+                  ))}
+                  <td className="px-6 py-3 font-bold text-blue-900">{accountKpiTotals.total_new_profiles}</td>
+                </tr>
+                <tr className="border-b border-gray-50 hover:bg-gray-50">
+                  <td className="px-6 py-3 text-gray-700">Betaalde accounts</td>
+                  {monthlyColumns.map(m => (
+                    <td key={m} className="px-4 py-3 text-gray-600">{accountKpis[m]?.new_paid_accounts || 0}</td>
+                  ))}
+                  <td className="px-6 py-3 font-semibold text-green-700">{accountKpiTotals.new_paid_accounts}</td>
+                </tr>
+                <tr className="border-b border-gray-50 hover:bg-gray-50">
+                  <td className="px-6 py-3 text-gray-700">Onbetaalde accounts</td>
+                  {monthlyColumns.map(m => (
+                    <td key={m} className="px-4 py-3 text-gray-600">{accountKpis[m]?.new_unpaid_accounts || 0}</td>
+                  ))}
+                  <td className="px-6 py-3 font-semibold text-red-700">{accountKpiTotals.new_unpaid_accounts}</td>
+                </tr>
+                <tr className="border-b border-gray-50 hover:bg-gray-50">
+                  <td className="px-6 py-3 text-gray-500 pl-10">↳ Via betaling</td>
+                  {monthlyColumns.map(m => (
+                    <td key={m} className="px-4 py-3 text-gray-500">{accountKpis[m]?.via_payment || 0}</td>
+                  ))}
+                  <td className="px-6 py-3 text-gray-600">{accountKpiTotals.via_payment}</td>
+                </tr>
+                <tr className="border-b border-gray-50 hover:bg-gray-50">
+                  <td className="px-6 py-3 text-gray-500 pl-10">↳ Via organisatiecode</td>
+                  {monthlyColumns.map(m => (
+                    <td key={m} className="px-4 py-3 text-gray-500">{accountKpis[m]?.via_code || 0}</td>
+                  ))}
+                  <td className="px-6 py-3 text-gray-600">{accountKpiTotals.via_code}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </Card>
+
+
         <Card className="mb-8 rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
           <div className="px-6 py-4 bg-emerald-50 border-b border-emerald-100">
             <h2 className="text-lg font-semibold text-blue-900">Algemeen Vinster Gebruik</h2>
