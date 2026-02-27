@@ -110,6 +110,8 @@ function getOrganisationSectorPrompts(language: string, sectorName: string, orga
 
 Je ontvangt informatie over een medewerker en vertaalt dit naar drie concrete functies die bestaan binnen de sector "${sectorName}".
 
+BELANGRIJK: Je ontvangt GEEN beroepsnamen van de medewerker -- die zijn bewust weggelaten. Baseer je functievoorstellen UITSLUITEND op de inhoud van de antwoorden. Laat je niet leiden door veronderstellingen over welk beroep de medewerker in gedachten had.
+
 BELANGRIJK: Je bent NIET beperkt tot een vaste lijst van functies. Je mag ALLE bestaande functies voorstellen die passen binnen de sector "${sectorName}", zolang het échte, bestaande functies zijn.
 
 Je kiest:
@@ -123,7 +125,9 @@ Lever uitsluitend het JSON-object aan.`,
 Hier is informatie over de medewerker:
 • Naam: ${data.firstName} ${data.lastName}
 
-Wensberoep 1: ${data.wensberoep1.titel}
+De medewerker heeft 3 sets van 8 vragen beantwoord over ideale werksituaties. De beroepsnamen zijn bewust weggelaten -- analyseer alleen de antwoorden.
+
+Beschrijving 1:
 - Werkweek activiteiten: ${data.wensberoep1.werkweekActiviteiten}
 - Werklocatie: ${data.wensberoep1.werklocatieOmgeving}
 - Samenwerking: ${data.wensberoep1.samenwerkingContacten}
@@ -133,7 +137,7 @@ Wensberoep 1: ${data.wensberoep1.titel}
 - Belangrijke aspecten: ${data.wensberoep1.belangrijkeAspecten}
 - Kennis focus: ${data.wensberoep1.kennisFocus}
 
-Wensberoep 2: ${data.wensberoep2.titel}
+Beschrijving 2:
 - Werkweek activiteiten: ${data.wensberoep2.werkweekActiviteiten}
 - Werklocatie: ${data.wensberoep2.werklocatieOmgeving}
 - Samenwerking: ${data.wensberoep2.samenwerkingContacten}
@@ -143,7 +147,7 @@ Wensberoep 2: ${data.wensberoep2.titel}
 - Belangrijke aspecten: ${data.wensberoep2.belangrijkeAspecten}
 - Kennis focus: ${data.wensberoep2.kennisFocus}
 
-Wensberoep 3: ${data.wensberoep3.titel}
+Beschrijving 3:
 - Werkweek activiteiten: ${data.wensberoep3.werkweekActiviteiten}
 - Werklocatie: ${data.wensberoep3.werklocatieOmgeving}
 - Samenwerking: ${data.wensberoep3.samenwerkingContacten}
@@ -184,6 +188,8 @@ Regels:
 
 You receive information about an employee and translate this into three concrete roles that exist within the "${sectorName}" sector.
 
+IMPORTANT: You do NOT receive occupation names from the employee -- these have been deliberately omitted. Base your job suggestions EXCLUSIVELY on the content of the answers. Do not be guided by assumptions about what occupation the employee had in mind.
+
 IMPORTANT: You are NOT limited to a fixed list of roles. You may suggest ANY existing role that fits within the "${sectorName}" sector, as long as it is a real, existing occupation.
 
 You choose:
@@ -197,7 +203,9 @@ Provide only the JSON object.`,
 Here is information about the employee:
 • Name: ${data.firstName} ${data.lastName}
 
-Desired occupation 1: ${data.wensberoep1.titel}
+The employee has answered 3 sets of 8 questions about ideal work situations. Occupation names have been deliberately omitted -- analyse only the answers.
+
+Description 1:
 - Weekly activities: ${data.wensberoep1.werkweekActiviteiten}
 - Work location: ${data.wensberoep1.werklocatieOmgeving}
 - Collaboration: ${data.wensberoep1.samenwerkingContacten}
@@ -207,7 +215,7 @@ Desired occupation 1: ${data.wensberoep1.titel}
 - Important aspects: ${data.wensberoep1.belangrijkeAspecten}
 - Knowledge focus: ${data.wensberoep1.kennisFocus}
 
-Desired occupation 2: ${data.wensberoep2.titel}
+Description 2:
 - Weekly activities: ${data.wensberoep2.werkweekActiviteiten}
 - Work location: ${data.wensberoep2.werklocatieOmgeving}
 - Collaboration: ${data.wensberoep2.samenwerkingContacten}
@@ -217,7 +225,7 @@ Desired occupation 2: ${data.wensberoep2.titel}
 - Important aspects: ${data.wensberoep2.belangrijkeAspecten}
 - Knowledge focus: ${data.wensberoep2.kennisFocus}
 
-Desired occupation 3: ${data.wensberoep3.titel}
+Description 3:
 - Weekly activities: ${data.wensberoep3.werkweekActiviteiten}
 - Work location: ${data.wensberoep3.werklocatieOmgeving}
 - Collaboration: ${data.wensberoep3.samenwerkingContacten}
@@ -258,6 +266,8 @@ Rules:
 
 Du erhältst Informationen über eine Mitarbeiterin / einen Mitarbeiter und übersetzt diese in drei konkrete Funktionen, die im Bereich "${sectorName}" existieren.
 
+WICHTIG: Du erhältst KEINE Berufsnamen von der Person -- diese wurden bewusst weggelassen. Basiere deine Vorschläge AUSSCHLIESSLICH auf dem Inhalt der Antworten. Lass dich nicht von Vermutungen leiten, welchen Beruf die Person im Kopf hatte.
+
 WICHTIG: Du bist NICHT auf eine feste Liste von Funktionen beschränkt. Du darfst ALLE existierenden Funktionen vorschlagen, die in den Bereich "${sectorName}" passen, solange es echte, bestehende Berufe sind.
 
 Du wählst:
@@ -271,7 +281,9 @@ Liefere ausschließlich das JSON-Objekt.`,
 Informationen zur Person:
 • Name: ${data.firstName} ${data.lastName}
 
-Wunschberuf 1: ${data.wensberoep1.titel}
+Die Person hat 3 Sets von je 8 Fragen über ideale Arbeitssituationen beantwortet. Die Berufsnamen wurden bewusst weggelassen -- analysiere ausschließlich die Antworten.
+
+Beschreibung 1:
 - Wochenaktivitäten: ${data.wensberoep1.werkweekActiviteiten}
 - Arbeitsort: ${data.wensberoep1.werklocatieOmgeving}
 - Zusammenarbeit: ${data.wensberoep1.samenwerkingContacten}
@@ -281,7 +293,7 @@ Wunschberuf 1: ${data.wensberoep1.titel}
 - Wichtige Aspekte: ${data.wensberoep1.belangrijkeAspecten}
 - Wissensfokus: ${data.wensberoep1.kennisFocus}
 
-Wunschberuf 2: ${data.wensberoep2.titel}
+Beschreibung 2:
 - Wochenaktivitäten: ${data.wensberoep2.werkweekActiviteiten}
 - Arbeitsort: ${data.wensberoep2.werklocatieOmgeving}
 - Zusammenarbeit: ${data.wensberoep2.samenwerkingContacten}
@@ -291,7 +303,7 @@ Wunschberuf 2: ${data.wensberoep2.titel}
 - Wichtige Aspekte: ${data.wensberoep2.belangrijkeAspecten}
 - Wissensfokus: ${data.wensberoep2.kennisFocus}
 
-Wunschberuf 3: ${data.wensberoep3.titel}
+Beschreibung 3:
 - Wochenaktivitäten: ${data.wensberoep3.werkweekActiviteiten}
 - Arbeitsort: ${data.wensberoep3.werklocatieOmgeving}
 - Zusammenarbeit: ${data.wensberoep3.samenwerkingContacten}
@@ -332,6 +344,8 @@ Regeln:
 
 Du mottar informasjon om en ansatt og oversetter dette til tre konkrete funksjoner som finnes innenfor "${sectorName}"-sektoren.
 
+VIKTIG: Du mottar INGEN yrkesnavn fra den ansatte -- disse er bevisst utelatt. Baser yrkesforslag UTELUKKENDE på innholdet i svarene. Ikke la deg lede av antakelser om hvilket yrke den ansatte hadde i tankene.
+
 VIKTIG: Du er IKKE begrenset til en fast liste over funksjoner. Du kan foreslå ALLE eksisterende funksjoner som passer innenfor "${sectorName}"-sektoren, så lenge det er ekte, eksisterende yrker.
 
 Du velger:
@@ -345,7 +359,9 @@ Lever kun JSON-objektet.`,
 Informasjon om den ansatte:
 • Navn: ${data.firstName} ${data.lastName}
 
-Ønsket yrke 1: ${data.wensberoep1.titel}
+Den ansatte har besvart 3 sett med 8 spørsmål om ideale arbeidssituasjoner. Yrkesnavnene er bevisst utelatt -- analyser kun svarene.
+
+Beskrivelse 1:
 - Ukeaktiviteter: ${data.wensberoep1.werkweekActiviteiten}
 - Arbeidssted: ${data.wensberoep1.werklocatieOmgeving}
 - Samarbeid: ${data.wensberoep1.samenwerkingContacten}
@@ -355,7 +371,7 @@ Informasjon om den ansatte:
 - Viktige aspekter: ${data.wensberoep1.belangrijkeAspecten}
 - Kunnskapsfokus: ${data.wensberoep1.kennisFocus}
 
-Ønsket yrke 2: ${data.wensberoep2.titel}
+Beskrivelse 2:
 - Ukeaktiviteter: ${data.wensberoep2.werkweekActiviteiten}
 - Arbeidssted: ${data.wensberoep2.werklocatieOmgeving}
 - Samarbeid: ${data.wensberoep2.samenwerkingContacten}
@@ -365,7 +381,7 @@ Informasjon om den ansatte:
 - Viktige aspekter: ${data.wensberoep2.belangrijkeAspecten}
 - Kunnskapsfokus: ${data.wensberoep2.kennisFocus}
 
-Ønsket yrke 3: ${data.wensberoep3.titel}
+Beskrivelse 3:
 - Ukeaktiviteter: ${data.wensberoep3.werkweekActiviteiten}
 - Arbeidssted: ${data.wensberoep3.werklocatieOmgeving}
 - Samarbeid: ${data.wensberoep3.samenwerkingContacten}
@@ -411,7 +427,9 @@ function getCareerReportPrompts(language: string, data: UserData): { system: str
     nl: {
       system: `Je bent een professionele loopbaancoach met diepgaande kennis van bestaande beroepen, functies, sectoren en loopbaanontwikkeling. Je denkt praktisch en mensgericht, en baseert je adviezen op een aantal interviews en wat iemand leuk vindt om te doen (activiteiten), waar iemand zich prettig voelt (werkomgeving), en waar iemand oprecht in geïnteresseerd is (interesses).
 
-Je ontvangt informatie over een aantal wensberoepen van een gebruiker en ook over iemand zijn/haar lievelings activiteiten, gewenste werkomgeving en interesses.
+Je ontvangt GEEN beroepsnamen van de gebruiker -- die zijn bewust weggelaten. Baseer je functievoorstellen UITSLUITEND op de inhoud van de antwoorden. Laat je niet leiden door veronderstellingen over welk beroep de gebruiker in gedachten had.
+
+Je ontvangt informatie over de antwoorden van een gebruiker op vragen over ideale werksituaties, en ook over iemand zijn/haar lievelings activiteiten, gewenste werkomgeving en interesses.
 
 Je vertaalt dit profiel naar drie bestaande functies die passen bij het Nederlandse arbeidslandschap. Dit zijn:
 • Twee logische, passende beroepen die direct aansluiten op de voorkeuren van de gebruiker
@@ -441,9 +459,9 @@ Hier eerst wat informatie over de gebruiker:
 • achternaam: ${data.lastName}
 • user_id: ${data.userId}
 
-De gebruiker heeft in totaal 3 wensberoepen genoemd en per wensberoep 8 vragen beantwoord. De antwoorden op deze vragen moeten worden meegenomen als context om voorbeeldfuncties te genereren.
+De gebruiker heeft 3 sets van 8 vragen beantwoord over ideale werksituaties. De beroepsnamen zijn bewust weggelaten -- analyseer alleen de antwoorden.
 
-Wensberoep 1: ${data.wensberoep1.titel}
+Beschrijving 1:
 Vraag 1: "Wat doe je in een werkweek? Antwoord in werkwoorden en activiteiten."
 Antwoord 1: "${data.wensberoep1.werkweekActiviteiten}"
 
@@ -468,7 +486,7 @@ Antwoord 7: "${data.wensberoep1.belangrijkeAspecten}"
 Vraag 8: "Waar gaat het vooral over in jouw werk? Waar moet je veel van weten?"
 Antwoord 8: "${data.wensberoep1.kennisFocus}"
 
-Wensberoep 2: ${data.wensberoep2.titel}
+Beschrijving 2:
 Vraag 1: "Wat doe je in een werkweek? Antwoord in werkwoorden en activiteiten."
 Antwoord 1: "${data.wensberoep2.werkweekActiviteiten}"
 
@@ -493,7 +511,7 @@ Antwoord 7: "${data.wensberoep2.belangrijkeAspecten}"
 Vraag 8: "Waar gaat het vooral over in jouw werk? Waar moet je veel van weten?"
 Antwoord 8: "${data.wensberoep2.kennisFocus}"
 
-Wensberoep 3: ${data.wensberoep3.titel}
+Beschrijving 3:
 Vraag 1: "Wat doe je in een werkweek? Antwoord in werkwoorden en activiteiten."
 Antwoord 1: "${data.wensberoep3.werkweekActiviteiten}"
 
@@ -563,7 +581,9 @@ De functie uitleg mag per functie maximaal 40 woorden zijn. Zorg dat elke beschr
     en: {
       system: `You are a professional career coach with in-depth knowledge of existing occupations, roles, sectors and career development. You think in a practical and people-focused way, and you base your advice on a series of interviews and on what someone likes to do (activities), where they feel comfortable (work environment), and what they are genuinely interested in (interests).
 
-You receive information about several desired occupations from a user, as well as information about their favourite activities, preferred work environment and interests.
+You do NOT receive occupation names from the user -- these have been deliberately omitted. Base your job suggestions EXCLUSIVELY on the content of the answers. Do not be guided by assumptions about what occupation the user had in mind.
+
+You receive information about a user's answers to questions about ideal work situations, as well as information about their favourite activities, preferred work environment and interests.
 
 You translate this profile into three existing roles that fit within the European labour market. These are:
 • Two logical, fitting occupations that directly match the user's preferences
@@ -593,11 +613,11 @@ Here is some information about the user:
 • last name: ${data.lastName}
 • user_id: ${data.userId}
 
-The user has mentioned a total of 3 desired occupations and has answered 8 questions per desired occupation. The answers to these questions must be used as context to generate example job suggestions.
+The user has answered 3 sets of 8 questions about ideal work situations. Occupation names have been deliberately omitted -- analyse only the answers.
 
 ⸻
 
-Desired occupation 1: ${data.wensberoep1.titel}
+Description 1:
 
 Question 1: "What do you do in a working week? Answer in verbs and activities."
 Answer 1: "${data.wensberoep1.werkweekActiviteiten}"
@@ -625,7 +645,7 @@ Answer 8: "${data.wensberoep1.kennisFocus}"
 
 ⸻
 
-Desired occupation 2: ${data.wensberoep2.titel}
+Description 2:
 
 Question 1: "What do you do in a working week? Answer in verbs and activities."
 Answer 1: "${data.wensberoep2.werkweekActiviteiten}"
@@ -653,7 +673,7 @@ Answer 8: "${data.wensberoep2.kennisFocus}"
 
 ⸻
 
-Desired occupation 3: ${data.wensberoep3.titel}
+Description 3:
 
 Question 1: "What do you do in a working week? Answer in verbs and activities."
 Answer 1: "${data.wensberoep3.werkweekActiviteiten}"
@@ -725,7 +745,9 @@ The function explanation can be no longer than 40 words per occupation. Ensure e
     de: {
       system: `Du bist eine professionelle Laufbahnberaterin bzw. ein professioneller Laufbahnberater mit tiefgehendem Wissen über bestehende Berufe, Tätigkeiten, Branchen und berufliche Entwicklung. Du denkst praktisch und menschenorientiert und stützt deine Empfehlungen auf mehrere Interviews sowie darauf, was eine Person gerne tut (Aktivitäten), in welcher Arbeitsumgebung sie sich wohlfühlt und welche Themen sie wirklich interessieren (Interessen).
 
-Du erhältst Informationen über mehrere Wunschberufe einer Nutzerin oder eines Nutzers sowie Angaben zu bevorzugten Aktivitäten, gewünschter Arbeitsumgebung und Interessen.
+Du erhältst KEINE Berufsnamen von der Person -- diese wurden bewusst weggelassen. Basiere deine Vorschläge AUSSCHLIESSLICH auf dem Inhalt der Antworten. Lass dich nicht von Vermutungen leiten, welchen Beruf die Person im Kopf hatte.
+
+Du erhältst Informationen über die Antworten einer Person auf Fragen zu idealen Arbeitssituationen sowie Angaben zu bevorzugten Aktivitäten, gewünschter Arbeitsumgebung und Interessen.
 
 Du übersetzt dieses Profil in drei real existierende Berufe, die zum deutschen Arbeitsmarkt passen. Diese sind:
 • Zwei logische, passende Berufe, die direkt an die Präferenzen der Person anknüpfen
@@ -757,9 +779,9 @@ Zunächst einige Informationen über die Person:
 • Nachname: ${data.lastName}
 • user_id: ${data.userId}
 
-Die Nutzerin / der Nutzer hat insgesamt 3 Wunschberufe genannt und pro Wunschberuf 8 Fragen beantwortet. Die Antworten auf diese Fragen müssen als Kontext genutzt werden, um passende Beispielberufe zu generieren.
+Die Person hat 3 Sets von je 8 Fragen über ideale Arbeitssituationen beantwortet. Die Berufsnamen wurden bewusst weggelassen -- analysiere ausschließlich die Antworten.
 
-Wunschberuf 1: ${data.wensberoep1.titel}
+Beschreibung 1:
 Frage 1: „Was machst du in einer Arbeitswoche? Antworte in Tätigkeitswörtern (Verben) und Aktivitäten."
 Antwort 1: "${data.wensberoep1.werkweekActiviteiten}"
 
@@ -784,7 +806,7 @@ Antwort 7: "${data.wensberoep1.belangrijkeAspecten}"
 Frage 8: „Worum geht es in deiner Arbeit hauptsächlich? Wovon musst du viel wissen?"
 Antwort 8: "${data.wensberoep1.kennisFocus}"
 
-Wunschberuf 2: ${data.wensberoep2.titel}
+Beschreibung 2:
 Frage 1: „Was machst du in einer Arbeitswoche? Antworte in Tätigkeitswörtern (Verben) und Aktivitäten."
 Antwort 1: "${data.wensberoep2.werkweekActiviteiten}"
 
@@ -809,7 +831,7 @@ Antwort 7: "${data.wensberoep2.belangrijkeAspecten}"
 Frage 8: „Worum geht es in deiner Arbeit hauptsächlich? Wovon musst du viel wissen?"
 Antwort 8: "${data.wensberoep2.kennisFocus}"
 
-Wunschberuf 3: ${data.wensberoep3.titel}
+Beschreibung 3:
 Frage 1: „Was machst du in einer Arbeitswoche? Antworte in Tätigkeitswörtern (Verben) und Aktivitäten."
 Antwort 1: "${data.wensberoep3.werkweekActiviteiten}"
 
@@ -879,7 +901,9 @@ Die Erläuterung pro Beruf darf maximal 40 Wörter enthalten. Stelle sicher, das
     no: {
       system: `Du er en profesjonell karriereveileder med inngående kunnskap om eksisterende yrker, funksjoner, sektorer og karriereutvikling. Du tenker praktisk og menneskefokusert, og du baserer dine råd på flere intervjuer og på hva en person liker å gjøre (aktiviteter), hvilken arbeidskontekst personen trives i (arbeidsmiljø), og hva personen oppriktig er interessert i (interesser).
 
-Du mottar informasjon om flere ønskede yrker fra en bruker, samt informasjon om brukerens favorittaktiviteter, ønsket arbeidsmiljø og interesser.
+Du mottar INGEN yrkesnavn fra brukeren -- disse er bevisst utelatt. Baser yrkesforslag UTELUKKENDE på innholdet i svarene. Ikke la deg lede av antakelser om hvilket yrke brukeren hadde i tankene.
+
+Du mottar informasjon om en brukers svar på spørsmål om ideale arbeidssituasjoner, samt informasjon om brukerens favorittaktiviteter, ønsket arbeidsmiljø og interesser.
 
 Du oversetter denne profilen til tre eksisterende yrker som passer innenfor det norske arbeidsmarkedet. Disse er:
 • To logiske, passende yrker som direkte samsvarer med brukerens preferanser
@@ -911,11 +935,11 @@ Her er først litt informasjon om brukeren:
 • etternavn: ${data.lastName}
 • user_id: ${data.userId}
 
-Brukeren har oppgitt totalt tre ønskede yrker og besvart åtte spørsmål for hvert ønsket yrke. Svarene på disse spørsmålene skal brukes som kontekst for å generere passende jobbforslag.
+Brukeren har besvart 3 sett med 8 spørsmål om ideale arbeidssituasjoner. Yrkesnavnene er bevisst utelatt -- analyser kun svarene.
 
 ⸻
 
-Ønsket yrke 1: ${data.wensberoep1.titel}
+Beskrivelse 1:
 
 Spørsmål 1: "Hva gjør du i en arbeidsuke? Svar i verb og aktiviteter."
 Svar 1: "${data.wensberoep1.werkweekActiviteiten}"
@@ -943,7 +967,7 @@ Svar 8: "${data.wensberoep1.kennisFocus}"
 
 ⸻
 
-Ønsket yrke 2: ${data.wensberoep2.titel}
+Beskrivelse 2:
 
 Spørsmål 1: "Hva gjør du i en arbeidsuke? Svar i verb og aktiviteter."
 Svar 1: "${data.wensberoep2.werkweekActiviteiten}"
@@ -971,7 +995,7 @@ Svar 8: "${data.wensberoep2.kennisFocus}"
 
 ⸻
 
-Ønsket yrke 3: ${data.wensberoep3.titel}
+Beskrivelse 3:
 
 Spørsmål 1: "Hva gjør du i en arbeidsuke? Svar i verb og aktiviteter."
 Svar 1: "${data.wensberoep3.werkweekActiviteiten}"
