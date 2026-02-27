@@ -186,16 +186,13 @@ const OrganisatieLanding = () => {
         <Header />
         <main className="flex-1 max-w-4xl mx-auto px-6 py-12 w-full text-center">
           <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-12">
-            <h1 className="text-2xl font-bold text-blue-900 mb-4">Organisatie niet gevonden</h1>
-            <p className="text-gray-700 mb-6">
-              Dit organisatietype bestaat niet of is niet actief.
-            </p>
-            <Button
-              onClick={() => navigate("/organisaties")}
-              className="bg-blue-900 hover:bg-blue-800 text-white font-semibold h-12 px-8"
+            <h1 className="text-2xl font-bold text-blue-900 mb-4">Toegang tot Vinster voor jouw organisatie?</h1>
+            <a
+              href="mailto:team@vinster.ai"
+              className="text-lg text-blue-900 underline hover:text-blue-700 font-semibold"
             >
-              Bekijk alle organisaties
-            </Button>
+              Neem contact op
+            </a>
           </div>
         </main>
         <Footer />
