@@ -39,11 +39,11 @@ serve(async (req) => {
     const months = getLast6Months();
     const monthly_columns = months.map(m => m.key);
 
-    // Fetch all data
+    // Fetch all data - now including has_paid and is_unique
     const [orgTypesRes, sessionsRes, profilesRes, codesRes] = await Promise.all([
-      supabase.from('organisation_types').select('id, name, parent_type_id').order('name'),
+      supabase.from('organisation_types').select('id, name, parent_type_id, is_unique').order('name'),
       supabase.from('user_organisation_sessions').select('id, organisation_type_id, created_at, user_id'),
-      supabase.from('profiles').select('id, created_at'),
+      supabase.from('profiles').select('id, created_at, has_paid'),
       supabase.from('organisation_access_codes').select('id, code, organisation_type_id, uses_count, max_uses, is_active, last_used_at').order('created_at', { ascending: false }),
     ]);
 
@@ -52,21 +52,24 @@ serve(async (req) => {
     const profiles = profilesRes.data || [];
     const codesRaw = codesRes.data || [];
 
-    // General stats: per month count total, org, normal users
+    // Build a set of paid user IDs for quick lookup
+    const paidUserIds = new Set(profiles.filter(p => p.has_paid).map(p => p.id));
+    const paidProfiles = profiles.filter(p => p.has_paid);
+
+    // General stats: only count paid profiles
     const orgUserIds = new Set(sessions.map(s => s.user_id));
 
     const general_stats: Record<string, { total: number; org: number; normal: number }> = {};
-    let totalAll = 0, totalOrg = 0, totalNormal = 0;
 
     for (const m of months) {
-      const inMonth = profiles.filter(p => p.created_at >= m.start && p.created_at < m.end);
+      const inMonth = paidProfiles.filter(p => p.created_at >= m.start && p.created_at < m.end);
       const org = inMonth.filter(p => orgUserIds.has(p.id)).length;
       const normal = inMonth.length - org;
       general_stats[m.key] = { total: inMonth.length, org, normal };
     }
-    totalAll = profiles.length;
-    totalOrg = profiles.filter(p => orgUserIds.has(p.id)).length;
-    totalNormal = totalAll - totalOrg;
+    const totalAll = paidProfiles.length;
+    const totalOrg = paidProfiles.filter(p => orgUserIds.has(p.id)).length;
+    const totalNormal = totalAll - totalOrg;
 
     // Sum uses_count per org type (for fallback total)
     const codeUsesMap = new Map<string, number>();
@@ -76,22 +79,35 @@ serve(async (req) => {
       }
     });
 
+    // Build is_unique lookup
+    const isUniqueMap = new Map(orgTypes.map(ot => [ot.id, ot.is_unique ?? false]));
+
     // Org stats with monthly breakdown
     const stats = orgTypes.map(ot => {
+      const isUnique = isUniqueMap.get(ot.id) || false;
       const orgSessions = sessions.filter(s => s.organisation_type_id === ot.id);
       const codeTotal = codeUsesMap.get(ot.id) || 0;
 
+      // For branches (is_unique=false): only count sessions from paid users
+      // For specific orgs (is_unique=true): count all sessions (code = access)
+      const filteredSessions = isUnique
+        ? orgSessions
+        : orgSessions.filter(s => paidUserIds.has(s.user_id));
+
       const monthly: Record<string, number> = {};
       for (const m of months) {
-        monthly[m.key] = orgSessions.filter(s => s.created_at >= m.start && s.created_at < m.end).length;
+        monthly[m.key] = filteredSessions.filter(s => s.created_at >= m.start && s.created_at < m.end).length;
       }
 
       return {
         org_name: ot.name,
         org_id: ot.id,
         parent_type_id: ot.parent_type_id || null,
+        is_unique: isUnique,
         monthly,
-        total: Math.max(orgSessions.length, codeTotal),
+        total: isUnique
+          ? Math.max(orgSessions.length, codeTotal)
+          : filteredSessions.length,
       };
     });
 
