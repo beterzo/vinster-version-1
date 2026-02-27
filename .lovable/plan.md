@@ -1,24 +1,24 @@
 
 
-# "Organisatie niet gevonden" vervangen door contactpagina
+# Fix: Totaal baseren op sessies in plaats van code-gebruik
 
 ## Wat er verandert
 
-In `src/pages/OrganisatieLanding.tsx` (regels 183-203) wordt het "niet gevonden" blok vervangen door een vriendelijkere boodschap:
+In `supabase/functions/admin-organisation-stats/index.ts` wordt de totaal-berekening voor `is_unique` organisaties aangepast:
 
-**Huidige tekst:**
-- "Organisatie niet gevonden"
-- "Dit organisatietype bestaat niet of is niet actief."
-- Knop: "Bekijk alle organisaties"
+**Huidige logica (regel ~80):**
+```
+total: isUnique ? Math.max(orgSessions.length, codeTotal) : filteredSessions.length
+```
 
-**Nieuwe tekst:**
-- "Toegang tot Vinster voor jouw organisatie?"
-- Link: "Neem contact op" (opent mailto:team@vinster.ai)
+**Nieuwe logica:**
+```
+total: isUnique ? orgSessions.length : filteredSessions.length
+```
 
-## Technisch
+Dit zorgt ervoor dat het totaal altijd gebaseerd is op daadwerkelijke sessies, niet op `uses_count` van toegangscodes (die hoger kan zijn door meerdere validatiepogingen).
 
-Eenvoudige tekstwijziging in het `!orgType` blok van `OrganisatieLanding.tsx`:
-- Titel wordt "Toegang tot Vinster voor jouw organisatie?"
-- De knop/paragraaf wordt vervangen door een `mailto:team@vinster.ai` link met de tekst "Neem contact op"
-- De "Bekijk alle organisaties" knop wordt verwijderd
+## Bestanden
+
+- **`supabase/functions/admin-organisation-stats/index.ts`**: Verwijder `Math.max` met `codeTotal`, gebruik alleen sessie-telling. De `codeUsesMap` variabele kan ook verwijderd worden aangezien die niet meer nodig is.
 
