@@ -93,6 +93,7 @@ const OrganisatieLanding = () => {
         accessCodeId: data.access_code_id,
         slug: data.organisation?.slug || slug || null,
         name: data.organisation?.name || null,
+        code: code.trim(),
       });
       navigate(`/organisaties/${slug}/intro`);
     } catch {
@@ -110,6 +111,7 @@ const OrganisatieLanding = () => {
       accessCodeId: null,
       slug: slug || null,
       name: orgType.name,
+      code: null,
     });
     navigate(`/organisaties/${slug}/intro`);
   };
@@ -140,6 +142,7 @@ const OrganisatieLanding = () => {
         accessCodeId: data.access_code_id,
         slug: data.organisation?.slug || slug || null,
         name: resolvedName,
+        code: codeValue,
       });
       navigate(`/organisaties/${slug}/intro`);
     } catch {

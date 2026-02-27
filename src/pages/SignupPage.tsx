@@ -8,7 +8,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useLanguage } from "@/contexts/LanguageContext";
-
+import { useOrganisation } from "@/contexts/OrganisationContext";
+import { supabase } from "@/integrations/supabase/client";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const SignupPage = () => {
@@ -25,6 +26,7 @@ const SignupPage = () => {
   const { toast } = useToast();
   const { t } = useTranslation();
   const { language } = useLanguage();
+  const { isOrganisationMode, organisationTypeId, accessCodeId, code: orgCode } = useOrganisation();
 
 
 
@@ -85,6 +87,30 @@ const SignupPage = () => {
           variant: "destructive"
         });
       } else {
+        // If in organisation mode, create org session + log entry_event
+        if (isOrganisationMode && organisationTypeId) {
+          try {
+            const { data: { user } } = await supabase.auth.getUser();
+            if (user) {
+              await supabase.from('user_organisation_sessions').insert({
+                user_id: user.id,
+                organisation_type_id: organisationTypeId,
+                access_code_id: accessCodeId,
+              });
+
+              await supabase.functions.invoke('log-entry-event', {
+                body: {
+                  entry_method: 'organisation_access_code',
+                  org_id: organisationTypeId,
+                  code: orgCode || null,
+                },
+              });
+            }
+          } catch (err) {
+            console.error('Error creating organisation session after signup:', err);
+          }
+        }
+
         toast({
           title: t('signup.account_created'),
           description: t('signup.verification_email_sent'),
