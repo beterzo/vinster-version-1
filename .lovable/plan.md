@@ -1,24 +1,30 @@
 
+# KPI Widget: Nieuwe betaalde accounts per maand
 
-# Fix: Totaal baseren op sessies in plaats van code-gebruik
+## Wat er komt
 
-## Wat er verandert
+Een nieuwe widget bovenaan de AdminOrganisatieGebruik pagina die per maand toont:
+- **Totaal nieuwe profielen** (profiles.created_at in die maand)
+- **Nieuwe betaalde accounts** (has_paid = true OR user heeft een organisatie-sessie met access_code_id)
+- **Onbetaalde accounts** (geen van beide)
+- **Breakdown**: via betaling vs. via organisatiecode
 
-In `supabase/functions/admin-organisation-stats/index.ts` wordt de totaal-berekening voor `is_unique` organisaties aangepast:
+## Huidige data (feb 2026)
+- 19 nieuwe profielen, 18 betaald, 1 onbetaald, 0 via organisatiecode (de enige org-sessie in feb was van een bestaande gebruiker)
 
-**Huidige logica (regel ~80):**
-```
-total: isUnique ? Math.max(orgSessions.length, codeTotal) : filteredSessions.length
-```
+## Technische aanpassingen
 
-**Nieuwe logica:**
-```
-total: isUnique ? orgSessions.length : filteredSessions.length
-```
+### 1. Edge function: `admin-organisation-stats/index.ts`
+- Per maand berekenen: LEFT JOIN profiles met user_organisation_sessions (op user_id) om access_code_id te checken
+- Nieuwe velden in response: `account_kpis` object met per maand + totalen:
+  - `total_new_profiles`, `new_paid_accounts`, `new_unpaid_accounts`, `via_payment`, `via_code`
 
-Dit zorgt ervoor dat het totaal altijd gebaseerd is op daadwerkelijke sessies, niet op `uses_count` van toegangscodes (die hoger kan zijn door meerdere validatiepogingen).
+### 2. Frontend: `AdminOrganisatieGebruik.tsx`
+- Nieuwe state voor `accountKpis`
+- Widget met tabel (zelfde stijl als "Algemeen Vinster Gebruik") boven de bestaande tabellen
+- Kolommen: maand headers + totaal
+- Rijen: Totaal nieuw | Betaald | Onbetaald | Via betaling | Via org-code
 
-## Bestanden
-
-- **`supabase/functions/admin-organisation-stats/index.ts`**: Verwijder `Math.max` met `codeTotal`, gebruik alleen sessie-telling. De `codeUsesMap` variabele kan ook verwijderd worden aangezien die niet meer nodig is.
-
+### Bestanden
+- `supabase/functions/admin-organisation-stats/index.ts` - KPI berekening toevoegen
+- `src/pages/AdminOrganisatieGebruik.tsx` - Widget toevoegen
