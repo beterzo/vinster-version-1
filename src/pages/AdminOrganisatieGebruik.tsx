@@ -8,6 +8,15 @@ import { ArrowLeft, Download, Plus, Loader2, ChevronDown, ChevronRight } from "l
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
+interface AccessStats {
+  total_with_access: number;
+  via_stripe: number;
+  via_promo: number;
+  via_org_code: number;
+  new_profiles: number;
+  new_profiles_with_access: number;
+}
+
 interface OrgStats {
   org_name: string;
   org_id: string;
@@ -27,60 +36,47 @@ interface AccessCode {
   last_used_at: string | null;
 }
 
-interface GeneralStats {
-  [month: string]: { total: number; org: number; normal: number };
-}
-
-interface AccountKpi {
-  total_new_profiles: number;
-  new_paid_accounts: number;
-  new_unpaid_accounts: number;
-  via_payment: number;
-  via_code: number;
-}
-
-interface EntryKpi {
-  total_with_access: number;
-  via_stripe: number;
-  via_promo: number;
-  via_org_code: number;
-}
-
 const AdminOrganisatieGebruik = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const [stats, setStats] = useState<OrgStats[]>([]);
-  const [codes, setCodes] = useState<AccessCode[]>([]);
   const [loading, setLoading] = useState(true);
-  const [orgTypes, setOrgTypes] = useState<{ id: string; name: string }[]>([]);
   const [monthlyColumns, setMonthlyColumns] = useState<string[]>([]);
-  const [generalStats, setGeneralStats] = useState<GeneralStats>({});
+
+  // Widget 1: Toegang per Maand
+  const [accessStats, setAccessStats] = useState<Record<string, AccessStats>>({});
+  const [accessTotals, setAccessTotals] = useState<AccessStats>({ total_with_access: 0, via_stripe: 0, via_promo: 0, via_org_code: 0, new_profiles: 0, new_profiles_with_access: 0 });
+
+  // Widget 2: Algemeen Vinster Gebruik
+  const [generalStats, setGeneralStats] = useState<Record<string, { total: number; org: number; normal: number }>>({});
   const [generalTotals, setGeneralTotals] = useState({ total: 0, org: 0, normal: 0 });
-  const [accountKpis, setAccountKpis] = useState<Record<string, AccountKpi>>({});
-  const [accountKpiTotals, setAccountKpiTotals] = useState<AccountKpi>({ total_new_profiles: 0, new_paid_accounts: 0, new_unpaid_accounts: 0, via_payment: 0, via_code: 0 });
-  const [entryKpis, setEntryKpis] = useState<Record<string, EntryKpi>>({});
-  const [entryKpiTotals, setEntryKpiTotals] = useState<EntryKpi>({ total_with_access: 0, via_stripe: 0, via_promo: 0, via_org_code: 0 });
+
+  // Widget 3: Gebruik per branche
+  const [orgStats, setOrgStats] = useState<OrgStats[]>([]);
+  const [expandedBranches, setExpandedBranches] = useState<Set<string>>(new Set());
+
+  // Widget 4: Toegangscodes
+  const [codes, setCodes] = useState<AccessCode[]>([]);
+  const [orgTypes, setOrgTypes] = useState<{ id: string; name: string }[]>([]);
+
+  // New code form
   const [newCodeOrgId, setNewCodeOrgId] = useState("");
   const [newCodeMaxUses, setNewCodeMaxUses] = useState("");
   const [newCodeValue, setNewCodeValue] = useState("");
   const [generating, setGenerating] = useState(false);
-  const [expandedBranches, setExpandedBranches] = useState<Set<string>>(new Set());
 
   const fetchData = async () => {
     try {
       const { data, error } = await supabase.functions.invoke("admin-organisation-stats");
       if (error) throw error;
-      setStats(data?.stats || []);
-      setCodes(data?.codes || []);
-      setOrgTypes(data?.org_types || []);
       setMonthlyColumns(data?.monthly_columns || []);
+      setAccessStats(data?.access_stats || {});
+      setAccessTotals(data?.access_totals || { total_with_access: 0, via_stripe: 0, via_promo: 0, via_org_code: 0, new_profiles: 0, new_profiles_with_access: 0 });
       setGeneralStats(data?.general_stats || {});
       setGeneralTotals(data?.general_totals || { total: 0, org: 0, normal: 0 });
-      setAccountKpis(data?.account_kpis || {});
-      setAccountKpiTotals(data?.account_kpi_totals || { total_new_profiles: 0, new_paid_accounts: 0, new_unpaid_accounts: 0, via_payment: 0, via_code: 0 });
-      setEntryKpis(data?.entry_kpis || {});
-      setEntryKpiTotals(data?.entry_kpi_totals || { total_with_access: 0, via_stripe: 0, via_promo: 0, via_org_code: 0 });
+      setOrgStats(data?.org_stats || []);
+      setCodes(data?.codes || []);
+      setOrgTypes(data?.org_types || []);
     } catch (err) {
       console.error(err);
       toast({ title: "Fout bij laden data", variant: "destructive" });
@@ -127,12 +123,12 @@ const AdminOrganisatieGebruik = () => {
 
   const exportCSV = () => {
     const header = ["Organisatie", ...monthlyColumns, "Totaal"].join(",");
-    const rows = stats.map((s) =>
+    const rows = orgStats.map((s) =>
       [`"${s.org_name}"`, ...monthlyColumns.map(m => s.monthly[m] || 0), s.total].join(",")
     );
-    const codesHeader = "\n\nCode,Organisatie,Gebruik,Max,Actief,Laatst gebruikt";
+    const codesHeader = "\n\nCode,Organisatie,Pogingen,Unieke users,Max,Actief,Laatst gebruikt";
     const codeRows = codes.map(
-      (c) => `"${c.code}","${c.org_name}",${c.uses_count},${c.max_uses ?? "∞"},${c.is_active ? "Ja" : "Nee"},${c.last_used_at ? new Date(c.last_used_at).toLocaleDateString("nl-NL") : "-"}`
+      (c) => `"${c.code}","${c.org_name}",${c.uses_count},${c.unique_users},${c.max_uses ?? "∞"},${c.is_active ? "Ja" : "Nee"},${c.last_used_at ? new Date(c.last_used_at).toLocaleDateString("nl-NL") : "-"}`
     );
     const csv = [header, ...rows, codesHeader, ...codeRows].join("\n");
     const blob = new Blob([csv], { type: "text/csv" });
@@ -153,10 +149,10 @@ const AdminOrganisatieGebruik = () => {
     });
   };
 
-  // Group stats: branches (parent_type_id === null) and their children
-  const branches = stats.filter((s) => !s.parent_type_id);
+  // Group org_stats: branches (parent_type_id === null) and their children
+  const branches = orgStats.filter((s) => !s.parent_type_id);
   const childrenMap = new Map<string, OrgStats[]>();
-  stats.filter((s) => s.parent_type_id).forEach((s) => {
+  orgStats.filter((s) => s.parent_type_id).forEach((s) => {
     const arr = childrenMap.get(s.parent_type_id!) || [];
     arr.push(s);
     childrenMap.set(s.parent_type_id!, arr);
@@ -192,82 +188,24 @@ const AdminOrganisatieGebruik = () => {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-bold text-blue-900 mb-2">Organisatie Gebruik</h1>
-            <p className="text-gray-600">Overzicht van gebruikers en organisatie-sessies per maand.</p>
+            <p className="text-gray-600">Alle statistieken gebaseerd op entry_events (single source of truth).</p>
           </div>
           <Button onClick={exportCSV} variant="outline" className="border-[#1a2e5a] text-[#1a2e5a] hover:bg-[rgba(26,46,90,0.05)] font-semibold">
             <Download className="w-4 h-4 mr-2" /> Export CSV
           </Button>
         </div>
 
-        {/* Account KPIs */}
+        {/* Widget 1: Toegang per Maand */}
         <Card className="mb-8 rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
           <div className="px-6 py-4 bg-amber-50 border-b border-amber-100">
-            <h2 className="text-lg font-semibold text-blue-900">Nieuwe Accounts per Maand</h2>
-            <p className="text-sm text-gray-500 mt-1">Accounts met toegang via betaling of organisatiecode</p>
+            <h2 className="text-lg font-semibold text-blue-900">Toegang per Maand</h2>
+            <p className="text-sm text-gray-500 mt-1">Unieke gebruikers met toegang via entry_events.redeemed_at</p>
           </div>
           <div className="overflow-x-auto">
             <table className="min-w-full text-sm">
               <thead>
                 <tr className="border-b border-gray-100">
-                  <th className="px-6 py-3 text-left font-semibold text-gray-700 min-w-[180px]">KPI</th>
-                  {monthlyColumns.map(m => (
-                    <th key={m} className="px-4 py-3 text-left font-semibold text-gray-700 whitespace-nowrap">{m}</th>
-                  ))}
-                  <th className="px-6 py-3 text-left font-semibold text-gray-700">Totaal</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="border-b border-gray-50 hover:bg-gray-50">
-                  <td className="px-6 py-3 font-semibold text-gray-900">Totaal nieuwe profielen</td>
-                  {monthlyColumns.map(m => (
-                    <td key={m} className="px-4 py-3 text-gray-700 font-medium">{accountKpis[m]?.total_new_profiles || 0}</td>
-                  ))}
-                  <td className="px-6 py-3 font-bold text-blue-900">{accountKpiTotals.total_new_profiles}</td>
-                </tr>
-                <tr className="border-b border-gray-50 hover:bg-gray-50">
-                  <td className="px-6 py-3 text-gray-700">Betaalde accounts</td>
-                  {monthlyColumns.map(m => (
-                    <td key={m} className="px-4 py-3 text-gray-600">{accountKpis[m]?.new_paid_accounts || 0}</td>
-                  ))}
-                  <td className="px-6 py-3 font-semibold text-green-700">{accountKpiTotals.new_paid_accounts}</td>
-                </tr>
-                <tr className="border-b border-gray-50 hover:bg-gray-50">
-                  <td className="px-6 py-3 text-gray-700">Onbetaalde accounts</td>
-                  {monthlyColumns.map(m => (
-                    <td key={m} className="px-4 py-3 text-gray-600">{accountKpis[m]?.new_unpaid_accounts || 0}</td>
-                  ))}
-                  <td className="px-6 py-3 font-semibold text-red-700">{accountKpiTotals.new_unpaid_accounts}</td>
-                </tr>
-                <tr className="border-b border-gray-50 hover:bg-gray-50">
-                  <td className="px-6 py-3 text-gray-500 pl-10" title="has_paid=true (Stripe + promo-codes)">↳ Via betaling</td>
-                  {monthlyColumns.map(m => (
-                    <td key={m} className="px-4 py-3 text-gray-500">{accountKpis[m]?.via_payment || 0}</td>
-                  ))}
-                  <td className="px-6 py-3 text-gray-600">{accountKpiTotals.via_payment}</td>
-                </tr>
-                <tr className="border-b border-gray-50 hover:bg-gray-50">
-                  <td className="px-6 py-3 text-gray-500 pl-10">↳ Via organisatiecode</td>
-                  {monthlyColumns.map(m => (
-                    <td key={m} className="px-4 py-3 text-gray-500">{accountKpis[m]?.via_code || 0}</td>
-                  ))}
-                  <td className="px-6 py-3 text-gray-600">{accountKpiTotals.via_code}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </Card>
-
-        {/* Entry Events KPI (single source of truth) */}
-        <Card className="mb-8 rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-          <div className="px-6 py-4 bg-violet-50 border-b border-violet-100">
-            <h2 className="text-lg font-semibold text-blue-900">Toegang via Entry Events</h2>
-            <p className="text-sm text-gray-500 mt-1">Nieuwe accounts met gelogde entry_event (standaard KPI)</p>
-          </div>
-          <div className="overflow-x-auto">
-            <table className="min-w-full text-sm">
-              <thead>
-                <tr className="border-b border-gray-100">
-                  <th className="px-6 py-3 text-left font-semibold text-gray-700 min-w-[180px]">KPI</th>
+                  <th className="px-6 py-3 text-left font-semibold text-gray-700 min-w-[220px]">KPI</th>
                   {monthlyColumns.map(m => (
                     <th key={m} className="px-4 py-3 text-left font-semibold text-gray-700 whitespace-nowrap">{m}</th>
                   ))}
@@ -278,40 +216,55 @@ const AdminOrganisatieGebruik = () => {
                 <tr className="border-b border-gray-50 hover:bg-gray-50">
                   <td className="px-6 py-3 font-semibold text-gray-900">Totaal met toegang</td>
                   {monthlyColumns.map(m => (
-                    <td key={m} className="px-4 py-3 text-gray-700 font-medium">{entryKpis[m]?.total_with_access || 0}</td>
+                    <td key={m} className="px-4 py-3 text-gray-700 font-medium">{accessStats[m]?.total_with_access || 0}</td>
                   ))}
-                  <td className="px-6 py-3 font-bold text-blue-900">{entryKpiTotals.total_with_access}</td>
+                  <td className="px-6 py-3 font-bold text-blue-900">{accessTotals.total_with_access}</td>
                 </tr>
                 <tr className="border-b border-gray-50 hover:bg-gray-50">
                   <td className="px-6 py-3 text-gray-500 pl-10">↳ Via Stripe betaling</td>
                   {monthlyColumns.map(m => (
-                    <td key={m} className="px-4 py-3 text-gray-500">{entryKpis[m]?.via_stripe || 0}</td>
+                    <td key={m} className="px-4 py-3 text-gray-500">{accessStats[m]?.via_stripe || 0}</td>
                   ))}
-                  <td className="px-6 py-3 text-gray-600">{entryKpiTotals.via_stripe}</td>
+                  <td className="px-6 py-3 text-gray-600">{accessTotals.via_stripe}</td>
                 </tr>
                 <tr className="border-b border-gray-50 hover:bg-gray-50">
                   <td className="px-6 py-3 text-gray-500 pl-10">↳ Via promo-code</td>
                   {monthlyColumns.map(m => (
-                    <td key={m} className="px-4 py-3 text-gray-500">{entryKpis[m]?.via_promo || 0}</td>
+                    <td key={m} className="px-4 py-3 text-gray-500">{accessStats[m]?.via_promo || 0}</td>
                   ))}
-                  <td className="px-6 py-3 text-gray-600">{entryKpiTotals.via_promo}</td>
+                  <td className="px-6 py-3 text-gray-600">{accessTotals.via_promo}</td>
                 </tr>
                 <tr className="border-b border-gray-50 hover:bg-gray-50">
                   <td className="px-6 py-3 text-gray-500 pl-10">↳ Via organisatiecode</td>
                   {monthlyColumns.map(m => (
-                    <td key={m} className="px-4 py-3 text-gray-500">{entryKpis[m]?.via_org_code || 0}</td>
+                    <td key={m} className="px-4 py-3 text-gray-500">{accessStats[m]?.via_org_code || 0}</td>
                   ))}
-                  <td className="px-6 py-3 text-gray-600">{entryKpiTotals.via_org_code}</td>
+                  <td className="px-6 py-3 text-gray-600">{accessTotals.via_org_code}</td>
+                </tr>
+                <tr className="border-b border-gray-50 hover:bg-gray-50 bg-gray-50/30">
+                  <td className="px-6 py-3 text-gray-700">Nieuwe profielen (registraties)</td>
+                  {monthlyColumns.map(m => (
+                    <td key={m} className="px-4 py-3 text-gray-600">{accessStats[m]?.new_profiles || 0}</td>
+                  ))}
+                  <td className="px-6 py-3 font-semibold text-gray-700">{accessTotals.new_profiles}</td>
+                </tr>
+                <tr className="border-b border-gray-50 hover:bg-gray-50 bg-gray-50/30">
+                  <td className="px-6 py-3 text-gray-700">Nieuwe profielen met toegang</td>
+                  {monthlyColumns.map(m => (
+                    <td key={m} className="px-4 py-3 text-gray-600">{accessStats[m]?.new_profiles_with_access || 0}</td>
+                  ))}
+                  <td className="px-6 py-3 font-semibold text-gray-700">{accessTotals.new_profiles_with_access}</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </Card>
 
-
+        {/* Widget 2: Algemeen Vinster Gebruik */}
         <Card className="mb-8 rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
           <div className="px-6 py-4 bg-emerald-50 border-b border-emerald-100">
             <h2 className="text-lg font-semibold text-blue-900">Algemeen Vinster Gebruik</h2>
+            <p className="text-sm text-gray-500 mt-1">Gebaseerd op entry_events — totaal / organisatie / individueel</p>
           </div>
           <div className="overflow-x-auto">
             <table className="min-w-full text-sm">
@@ -351,10 +304,11 @@ const AdminOrganisatieGebruik = () => {
           </div>
         </Card>
 
-        {/* Organisation usage with monthly columns */}
+        {/* Widget 3: Gebruik per branche (unieke gebruikers) */}
         <Card className="mb-8 rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
           <div className="px-6 py-4 bg-blue-50 border-b border-blue-100">
-            <h2 className="text-lg font-semibold text-blue-900">Gebruik per branche / organisatie (sessies)</h2>
+            <h2 className="text-lg font-semibold text-blue-900">Gebruik per branche / organisatie (unieke gebruikers)</h2>
+            <p className="text-sm text-gray-500 mt-1">Bron: entry_events WHERE entry_method = 'organisation_access_code'</p>
           </div>
           <div className="overflow-x-auto">
             <table className="min-w-full text-sm">
@@ -368,7 +322,7 @@ const AdminOrganisatieGebruik = () => {
                 </tr>
               </thead>
               <tbody>
-                {branches.length === 0 && stats.length === 0 ? (
+                {branches.length === 0 && orgStats.length === 0 ? (
                   <tr>
                     <td colSpan={monthlyColumns.length + 2} className="px-6 py-8 text-center text-gray-400">Nog geen data</td>
                   </tr>
@@ -377,8 +331,6 @@ const AdminOrganisatieGebruik = () => {
                     const kids = childrenMap.get(branch.org_id) || [];
                     const hasChildren = kids.length > 0;
                     const isExpanded = expandedBranches.has(branch.org_id);
-
-                    // Branch totals = own + children
                     const totalAll = branch.total + kids.reduce((s, k) => s + k.total, 0);
 
                     return (
@@ -422,10 +374,11 @@ const AdminOrganisatieGebruik = () => {
           </div>
         </Card>
 
-        {/* Access codes */}
+        {/* Widget 4: Toegangscodes */}
         <Card className="mb-8 rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
           <div className="px-6 py-4 bg-blue-50 border-b border-blue-100">
             <h2 className="text-lg font-semibold text-blue-900">Toegangscodes</h2>
+            <p className="text-sm text-gray-500 mt-1">Unieke gebruikers uit entry_events — pogingen uit organisation_access_codes</p>
           </div>
           <table className="min-w-full text-sm">
             <thead>
