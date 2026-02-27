@@ -1,0 +1,1 @@
+UPDATE organisation_access_codes SET uses_count = 0, last_used_at = NULL WHERE code = 'MoleWaterPlein3015';
