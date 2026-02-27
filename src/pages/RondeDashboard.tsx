@@ -38,7 +38,7 @@ const RondeDashboard = () => {
   
   const { responses: enthousiasmeResponses, loading: enthousiasmeLoading, loadResponses: reloadEnthousiasme } = useEnthousiasmeResponses(roundId);
   const { isWensberoepenComplete, isLoading: wensberoepenLoading, reloadWensberoepen } = useWensberoepenValidation(roundId);
-  const { responses: prioriteitenResponses, loading: prioriteitenLoading, loadResponses: reloadPrioriteiten } = usePrioriteitenResponses(roundId);
+  const { responses: prioriteitenResponses, loading: prioriteitenLoading, loadResponses: reloadPrioriteiten, hasAiKeywords } = usePrioriteitenResponses(roundId);
   const { responses: extraInfoResponses, loading: extraInfoLoading, loadResponses: reloadExtraInfo } = useExtraInformatieResponses(roundId);
   
   const [round, setRound] = useState<any>(null);
@@ -131,11 +131,15 @@ const RondeDashboard = () => {
     } else {
       const stepConfig = activeSteps.find(s => s.id === step);
       // Skip 'welkom' substep so we don't loop back to the overview page
-      const firstSubStep = stepConfig?.subSteps[0];
-      const targetSubStep = firstSubStep === 'welkom' 
-        ? (stepConfig?.subSteps[1] || 'intro') 
-        : (firstSubStep || 'intro');
-      setCurrentSubStep(targetSubStep);
+      let firstSubStep = stepConfig?.subSteps[0];
+      if (firstSubStep === 'welkom') {
+        firstSubStep = stepConfig?.subSteps[1];
+      }
+      // Skip 'intro' for persoonsprofiel if AI keywords already exist
+      if (step === 'persoonsprofiel' && firstSubStep === 'intro' && hasAiKeywords()) {
+        firstSubStep = 'extra_info';
+      }
+      setCurrentSubStep(firstSubStep || 'intro');
     }
   };
 
@@ -166,7 +170,16 @@ const RondeDashboard = () => {
     if (nextStep) {
       setSlideDirection('left');
       setCurrentStep(nextStep.id);
-      setCurrentSubStep(nextStep.subSteps[0]);
+      let targetSubStep = nextStep.subSteps[0];
+      // Skip 'welkom' substep
+      if (targetSubStep === 'welkom') {
+        targetSubStep = nextStep.subSteps[1] || targetSubStep;
+      }
+      // Skip 'intro' for persoonsprofiel if AI keywords already exist
+      if (nextStep.id === 'persoonsprofiel' && targetSubStep === 'intro' && hasAiKeywords()) {
+        targetSubStep = 'extra_info';
+      }
+      setCurrentSubStep(targetSubStep);
     }
   };
 
@@ -175,9 +188,13 @@ const RondeDashboard = () => {
     if (nextIncompleteStep) {
       setSlideDirection('left');
       setCurrentStep(nextIncompleteStep.id);
-      const targetSubStep = nextIncompleteStep.subSteps[0] === 'welkom' 
+      let targetSubStep = nextIncompleteStep.subSteps[0] === 'welkom' 
         ? nextIncompleteStep.subSteps[1] 
         : nextIncompleteStep.subSteps[0];
+      // Skip 'intro' for persoonsprofiel if AI keywords already exist
+      if (nextIncompleteStep.id === 'persoonsprofiel' && targetSubStep === 'intro' && hasAiKeywords()) {
+        targetSubStep = 'extra_info';
+      }
       setCurrentSubStep(targetSubStep);
     }
   };
