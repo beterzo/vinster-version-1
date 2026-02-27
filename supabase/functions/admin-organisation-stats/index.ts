@@ -39,10 +39,10 @@ serve(async (req) => {
     const months = getLast6Months();
     const monthly_columns = months.map(m => m.key);
 
-    // Fetch all data - now including has_paid and is_unique
+    // FIX 1: added access_code_id to sessions select
     const [orgTypesRes, sessionsRes, profilesRes, codesRes, entryEventsRes] = await Promise.all([
       supabase.from('organisation_types').select('id, name, parent_type_id, is_unique').order('name'),
-      supabase.from('user_organisation_sessions').select('id, organisation_type_id, created_at, user_id'),
+      supabase.from('user_organisation_sessions').select('id, organisation_type_id, created_at, user_id, access_code_id'),
       supabase.from('profiles').select('id, created_at, has_paid'),
       supabase.from('organisation_access_codes').select('id, code, organisation_type_id, uses_count, max_uses, is_active, last_used_at').order('created_at', { ascending: false }),
       supabase.from('entry_events').select('user_id, entry_method, redeemed_at'),
@@ -58,22 +58,29 @@ serve(async (req) => {
     const paidUserIds = new Set(profiles.filter(p => p.has_paid).map(p => p.id));
     const paidProfiles = profiles.filter(p => p.has_paid);
 
-    // General stats: only count paid profiles
-    const orgUserIds = new Set(sessions.map(s => s.user_id));
-
+    // FIX 4: Build month-scoped org user sets instead of global
     const general_stats: Record<string, { total: number; org: number; normal: number }> = {};
 
     for (const m of months) {
       const inMonth = paidProfiles.filter(p => p.created_at >= m.start && p.created_at < m.end);
-      const org = inMonth.filter(p => orgUserIds.has(p.id)).length;
+      // Only count users who had an org session in the SAME month
+      const orgUserIdsInMonth = new Set(
+        sessions
+          .filter(s => s.created_at >= m.start && s.created_at < m.end)
+          .map(s => s.user_id)
+      );
+      const org = inMonth.filter(p => orgUserIdsInMonth.has(p.id)).length;
       const normal = inMonth.length - org;
       general_stats[m.key] = { total: inMonth.length, org, normal };
     }
+
+    // Totals: also scope org to sessions that overlap with profile month
     const totalAll = paidProfiles.length;
-    const totalOrg = paidProfiles.filter(p => orgUserIds.has(p.id)).length;
+    const allOrgUserIds = new Set(sessions.map(s => s.user_id));
+    const totalOrg = paidProfiles.filter(p => allOrgUserIds.has(p.id)).length;
     const totalNormal = totalAll - totalOrg;
 
-    // Account KPIs: new profiles per month with paid/code breakdown
+    // Account KPIs: now correctly using access_code_id (FIX 1)
     const sessionsWithCode = sessions.filter(s => s.access_code_id);
     const usersWithCode = new Set(sessionsWithCode.map(s => s.user_id));
 
@@ -123,8 +130,6 @@ serve(async (req) => {
       const isUnique = isUniqueMap.get(ot.id) || false;
       const orgSessions = sessions.filter(s => s.organisation_type_id === ot.id);
 
-      // For branches (is_unique=false): only count sessions from paid users
-      // For specific orgs (is_unique=true): count all sessions (code = access)
       const filteredSessions = isUnique
         ? orgSessions
         : orgSessions.filter(s => paidUserIds.has(s.user_id));
@@ -144,13 +149,24 @@ serve(async (req) => {
       };
     });
 
-    // Access codes with org names
+    // FIX 3: Compute unique_users per code from sessions
+    const codeUniqueUsers = new Map<string, Set<string>>();
+    for (const s of sessions) {
+      if (s.access_code_id) {
+        if (!codeUniqueUsers.has(s.access_code_id)) {
+          codeUniqueUsers.set(s.access_code_id, new Set());
+        }
+        codeUniqueUsers.get(s.access_code_id)!.add(s.user_id);
+      }
+    }
+
     const orgMap = new Map(orgTypes.map(ot => [ot.id, ot.name]));
     const codes = codesRaw.map(c => ({
       id: c.id,
       code: c.code,
       org_name: orgMap.get(c.organisation_type_id) || 'Onbekend',
       uses_count: c.uses_count || 0,
+      unique_users: codeUniqueUsers.get(c.id)?.size || 0,
       max_uses: c.max_uses,
       is_active: c.is_active ?? true,
       last_used_at: c.last_used_at,

@@ -21,6 +21,7 @@ interface AccessCode {
   code: string;
   org_name: string;
   uses_count: number;
+  unique_users: number;
   max_uses: number | null;
   is_active: boolean;
   last_used_at: string | null;
@@ -238,7 +239,7 @@ const AdminOrganisatieGebruik = () => {
                   <td className="px-6 py-3 font-semibold text-red-700">{accountKpiTotals.new_unpaid_accounts}</td>
                 </tr>
                 <tr className="border-b border-gray-50 hover:bg-gray-50">
-                  <td className="px-6 py-3 text-gray-500 pl-10">↳ Via betaling</td>
+                  <td className="px-6 py-3 text-gray-500 pl-10" title="has_paid=true (Stripe + promo-codes)">↳ Via betaling</td>
                   {monthlyColumns.map(m => (
                     <td key={m} className="px-4 py-3 text-gray-500">{accountKpis[m]?.via_payment || 0}</td>
                   ))}
@@ -353,7 +354,7 @@ const AdminOrganisatieGebruik = () => {
         {/* Organisation usage with monthly columns */}
         <Card className="mb-8 rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
           <div className="px-6 py-4 bg-blue-50 border-b border-blue-100">
-            <h2 className="text-lg font-semibold text-blue-900">Gebruik per branche / organisatie</h2>
+            <h2 className="text-lg font-semibold text-blue-900">Gebruik per branche / organisatie (sessies)</h2>
           </div>
           <div className="overflow-x-auto">
             <table className="min-w-full text-sm">
@@ -431,7 +432,8 @@ const AdminOrganisatieGebruik = () => {
               <tr className="border-b border-gray-100">
                 <th className="px-6 py-3 text-left font-semibold text-gray-700">Code</th>
                 <th className="px-6 py-3 text-left font-semibold text-gray-700">Organisatie</th>
-                <th className="px-6 py-3 text-left font-semibold text-gray-700">Gebruik</th>
+                <th className="px-6 py-3 text-left font-semibold text-gray-700">Pogingen</th>
+                <th className="px-6 py-3 text-left font-semibold text-gray-700">Unieke users</th>
                 <th className="px-6 py-3 text-left font-semibold text-gray-700">Max</th>
                 <th className="px-6 py-3 text-left font-semibold text-gray-700">Actief</th>
                 <th className="px-6 py-3 text-left font-semibold text-gray-700">Laatst gebruikt</th>
@@ -440,7 +442,7 @@ const AdminOrganisatieGebruik = () => {
             <tbody>
               {codes.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="px-6 py-8 text-center text-gray-400">Geen codes gevonden</td>
+                  <td colSpan={7} className="px-6 py-8 text-center text-gray-400">Geen codes gevonden</td>
                 </tr>
               ) : (
                 codes.map((c) => (
@@ -448,6 +450,7 @@ const AdminOrganisatieGebruik = () => {
                     <td className="px-6 py-3 font-mono text-gray-900">{c.code}</td>
                     <td className="px-6 py-3 text-gray-700">{c.org_name}</td>
                     <td className="px-6 py-3 text-gray-700">{c.uses_count}</td>
+                    <td className="px-6 py-3 text-gray-700 font-semibold">{c.unique_users}</td>
                     <td className="px-6 py-3 text-gray-700">{c.max_uses ?? "∞"}</td>
                     <td className="px-6 py-3">
                       <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${c.is_active ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
