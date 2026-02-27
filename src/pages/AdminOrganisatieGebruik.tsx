@@ -38,6 +38,13 @@ interface AccountKpi {
   via_code: number;
 }
 
+interface EntryKpi {
+  total_with_access: number;
+  via_stripe: number;
+  via_promo: number;
+  via_org_code: number;
+}
+
 const AdminOrganisatieGebruik = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -51,6 +58,8 @@ const AdminOrganisatieGebruik = () => {
   const [generalTotals, setGeneralTotals] = useState({ total: 0, org: 0, normal: 0 });
   const [accountKpis, setAccountKpis] = useState<Record<string, AccountKpi>>({});
   const [accountKpiTotals, setAccountKpiTotals] = useState<AccountKpi>({ total_new_profiles: 0, new_paid_accounts: 0, new_unpaid_accounts: 0, via_payment: 0, via_code: 0 });
+  const [entryKpis, setEntryKpis] = useState<Record<string, EntryKpi>>({});
+  const [entryKpiTotals, setEntryKpiTotals] = useState<EntryKpi>({ total_with_access: 0, via_stripe: 0, via_promo: 0, via_org_code: 0 });
   const [newCodeOrgId, setNewCodeOrgId] = useState("");
   const [newCodeMaxUses, setNewCodeMaxUses] = useState("");
   const [newCodeValue, setNewCodeValue] = useState("");
@@ -69,6 +78,8 @@ const AdminOrganisatieGebruik = () => {
       setGeneralTotals(data?.general_totals || { total: 0, org: 0, normal: 0 });
       setAccountKpis(data?.account_kpis || {});
       setAccountKpiTotals(data?.account_kpi_totals || { total_new_profiles: 0, new_paid_accounts: 0, new_unpaid_accounts: 0, via_payment: 0, via_code: 0 });
+      setEntryKpis(data?.entry_kpis || {});
+      setEntryKpiTotals(data?.entry_kpi_totals || { total_with_access: 0, via_stripe: 0, via_promo: 0, via_org_code: 0 });
     } catch (err) {
       console.error(err);
       toast({ title: "Fout bij laden data", variant: "destructive" });
@@ -239,6 +250,57 @@ const AdminOrganisatieGebruik = () => {
                     <td key={m} className="px-4 py-3 text-gray-500">{accountKpis[m]?.via_code || 0}</td>
                   ))}
                   <td className="px-6 py-3 text-gray-600">{accountKpiTotals.via_code}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </Card>
+
+        {/* Entry Events KPI (single source of truth) */}
+        <Card className="mb-8 rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+          <div className="px-6 py-4 bg-violet-50 border-b border-violet-100">
+            <h2 className="text-lg font-semibold text-blue-900">Toegang via Entry Events</h2>
+            <p className="text-sm text-gray-500 mt-1">Nieuwe accounts met gelogde entry_event (standaard KPI)</p>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="min-w-full text-sm">
+              <thead>
+                <tr className="border-b border-gray-100">
+                  <th className="px-6 py-3 text-left font-semibold text-gray-700 min-w-[180px]">KPI</th>
+                  {monthlyColumns.map(m => (
+                    <th key={m} className="px-4 py-3 text-left font-semibold text-gray-700 whitespace-nowrap">{m}</th>
+                  ))}
+                  <th className="px-6 py-3 text-left font-semibold text-gray-700">Totaal</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-gray-50 hover:bg-gray-50">
+                  <td className="px-6 py-3 font-semibold text-gray-900">Totaal met toegang</td>
+                  {monthlyColumns.map(m => (
+                    <td key={m} className="px-4 py-3 text-gray-700 font-medium">{entryKpis[m]?.total_with_access || 0}</td>
+                  ))}
+                  <td className="px-6 py-3 font-bold text-blue-900">{entryKpiTotals.total_with_access}</td>
+                </tr>
+                <tr className="border-b border-gray-50 hover:bg-gray-50">
+                  <td className="px-6 py-3 text-gray-500 pl-10">↳ Via Stripe betaling</td>
+                  {monthlyColumns.map(m => (
+                    <td key={m} className="px-4 py-3 text-gray-500">{entryKpis[m]?.via_stripe || 0}</td>
+                  ))}
+                  <td className="px-6 py-3 text-gray-600">{entryKpiTotals.via_stripe}</td>
+                </tr>
+                <tr className="border-b border-gray-50 hover:bg-gray-50">
+                  <td className="px-6 py-3 text-gray-500 pl-10">↳ Via promo-code</td>
+                  {monthlyColumns.map(m => (
+                    <td key={m} className="px-4 py-3 text-gray-500">{entryKpis[m]?.via_promo || 0}</td>
+                  ))}
+                  <td className="px-6 py-3 text-gray-600">{entryKpiTotals.via_promo}</td>
+                </tr>
+                <tr className="border-b border-gray-50 hover:bg-gray-50">
+                  <td className="px-6 py-3 text-gray-500 pl-10">↳ Via organisatiecode</td>
+                  {monthlyColumns.map(m => (
+                    <td key={m} className="px-4 py-3 text-gray-500">{entryKpis[m]?.via_org_code || 0}</td>
+                  ))}
+                  <td className="px-6 py-3 text-gray-600">{entryKpiTotals.via_org_code}</td>
                 </tr>
               </tbody>
             </table>

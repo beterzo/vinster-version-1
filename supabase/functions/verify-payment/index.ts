@@ -54,6 +54,14 @@ serve(async (req) => {
       throw new Error("Failed to update payment status");
     }
 
+    // Log entry event
+    await supabaseAdmin.from("entry_events").insert({
+      user_id: userId,
+      entry_method: "stripe_payment",
+      stripe_payment_intent_id: typeof session.payment_intent === "string" ? session.payment_intent : null,
+      source: "checkout",
+    });
+
     console.log(`✅ Payment verified and has_paid set to true for user: ${userId}`);
 
     return new Response(

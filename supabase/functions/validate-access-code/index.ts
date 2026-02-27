@@ -77,6 +77,14 @@ serve(async (req) => {
     // Deactivate the promotion code so it can't be reused
     await stripe.promotionCodes.update(promoCode.id, { active: false });
 
+    // Log entry event
+    await supabaseAdmin.from("entry_events").insert({
+      user_id: userId,
+      entry_method: "promo_code",
+      code: accessCode.trim(),
+      source: "stripe_promo",
+    });
+
     console.log(`✅ Access code "${accessCode}" validated and deactivated for user: ${userId}`);
 
     return new Response(

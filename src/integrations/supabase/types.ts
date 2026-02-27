@@ -80,6 +80,39 @@ export type Database = {
           },
         ]
       }
+      entry_events: {
+        Row: {
+          code: string | null
+          entry_method: string
+          id: string
+          org_id: string | null
+          redeemed_at: string
+          source: string | null
+          stripe_payment_intent_id: string | null
+          user_id: string
+        }
+        Insert: {
+          code?: string | null
+          entry_method: string
+          id?: string
+          org_id?: string | null
+          redeemed_at?: string
+          source?: string | null
+          stripe_payment_intent_id?: string | null
+          user_id: string
+        }
+        Update: {
+          code?: string | null
+          entry_method?: string
+          id?: string
+          org_id?: string | null
+          redeemed_at?: string
+          source?: string | null
+          stripe_payment_intent_id?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       extra_informatie_responses: {
         Row: {
           beroepsopleiding: string | null

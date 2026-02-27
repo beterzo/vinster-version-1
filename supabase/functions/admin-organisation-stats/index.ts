@@ -40,17 +40,19 @@ serve(async (req) => {
     const monthly_columns = months.map(m => m.key);
 
     // Fetch all data - now including has_paid and is_unique
-    const [orgTypesRes, sessionsRes, profilesRes, codesRes] = await Promise.all([
+    const [orgTypesRes, sessionsRes, profilesRes, codesRes, entryEventsRes] = await Promise.all([
       supabase.from('organisation_types').select('id, name, parent_type_id, is_unique').order('name'),
       supabase.from('user_organisation_sessions').select('id, organisation_type_id, created_at, user_id'),
       supabase.from('profiles').select('id, created_at, has_paid'),
       supabase.from('organisation_access_codes').select('id, code, organisation_type_id, uses_count, max_uses, is_active, last_used_at').order('created_at', { ascending: false }),
+      supabase.from('entry_events').select('user_id, entry_method, redeemed_at'),
     ]);
 
     const orgTypes = orgTypesRes.data || [];
     const sessions = sessionsRes.data || [];
     const profiles = profilesRes.data || [];
     const codesRaw = codesRes.data || [];
+    const entryEvents = entryEventsRes.data || [];
 
     // Build a set of paid user IDs for quick lookup
     const paidUserIds = new Set(profiles.filter(p => p.has_paid).map(p => p.id));
@@ -92,6 +94,25 @@ serve(async (req) => {
       kpiTotals.new_unpaid_accounts += new_unpaid;
       kpiTotals.via_payment += via_payment;
       kpiTotals.via_code += via_code;
+    }
+
+    // Entry KPIs based on entry_events table (single source of truth)
+    const entry_kpis: Record<string, { total_with_access: number; via_stripe: number; via_promo: number; via_org_code: number }> = {};
+    let entryTotals = { total_with_access: 0, via_stripe: 0, via_promo: 0, via_org_code: 0 };
+
+    for (const m of months) {
+      const newInMonth = profiles.filter(p => p.created_at >= m.start && p.created_at < m.end);
+      const newUserIds = new Set(newInMonth.map(p => p.id));
+      const relevantEvents = entryEvents.filter(e => newUserIds.has(e.user_id));
+      const usersWithEntry = new Set(relevantEvents.map(e => e.user_id));
+      const via_stripe = new Set(relevantEvents.filter(e => e.entry_method === 'stripe_payment').map(e => e.user_id)).size;
+      const via_promo = new Set(relevantEvents.filter(e => e.entry_method === 'promo_code').map(e => e.user_id)).size;
+      const via_org_code = new Set(relevantEvents.filter(e => e.entry_method === 'organisation_access_code').map(e => e.user_id)).size;
+      entry_kpis[m.key] = { total_with_access: usersWithEntry.size, via_stripe, via_promo, via_org_code };
+      entryTotals.total_with_access += usersWithEntry.size;
+      entryTotals.via_stripe += via_stripe;
+      entryTotals.via_promo += via_promo;
+      entryTotals.via_org_code += via_org_code;
     }
 
     // Build is_unique lookup
@@ -144,6 +165,8 @@ serve(async (req) => {
       general_totals: { total: totalAll, org: totalOrg, normal: totalNormal },
       account_kpis,
       account_kpi_totals: kpiTotals,
+      entry_kpis,
+      entry_kpi_totals: entryTotals,
     }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
