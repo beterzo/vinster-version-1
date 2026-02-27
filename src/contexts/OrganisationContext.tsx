@@ -5,6 +5,7 @@ interface OrganisationContextData {
   accessCodeId: string | null;
   slug: string | null;
   name: string | null;
+  code: string | null;
 }
 
 interface OrganisationContextValue extends OrganisationContextData {
@@ -23,7 +24,7 @@ export const OrganisationProvider = ({ children }: { children: React.ReactNode }
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) return JSON.parse(stored);
     } catch {}
-    return { organisationTypeId: null, accessCodeId: null, slug: null, name: null };
+    return { organisationTypeId: null, accessCodeId: null, slug: null, name: null, code: null };
   });
 
   useEffect(() => {
@@ -39,7 +40,7 @@ export const OrganisationProvider = ({ children }: { children: React.ReactNode }
   }, []);
 
   const clearOrganisation = useCallback(() => {
-    setData({ organisationTypeId: null, accessCodeId: null, slug: null, name: null });
+    setData({ organisationTypeId: null, accessCodeId: null, slug: null, name: null, code: null });
   }, []);
 
   return (

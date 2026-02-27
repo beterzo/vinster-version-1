@@ -21,7 +21,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { t } = useTranslation();
-  const { setOrganisation, isOrganisationMode, organisationTypeId, accessCodeId, slug: orgSlug } = useOrganisation();
+  const { setOrganisation, isOrganisationMode, organisationTypeId, accessCodeId, code: orgCode, slug: orgSlug } = useOrganisation();
 
   useEffect(() => {
     const verified = searchParams.get('verified');
@@ -71,16 +71,23 @@ const LoginPage = () => {
               organisation_type_id: organisationTypeId,
               access_code_id: accessCodeId,
             });
+
+            // Log entry_event via edge function (service role insert with deduplication)
+            try {
+              await supabase.functions.invoke('log-entry-event', {
+                body: {
+                  entry_method: 'organisation_access_code',
+                  org_id: organisationTypeId,
+                  code: orgCode || null,
+                },
+              });
+            } catch (entryErr) {
+              console.error('Error logging entry_event:', entryErr);
+            }
           }
         } catch (err) {
           console.error('Error creating organisation session:', err);
         }
-
-        toast({
-          title: t('login.login_success'),
-          description: t('login.welcome_back')
-        });
-        navigate("/home");
       } else {
         // No org context: restore from DB for returning users
         try {
@@ -101,19 +108,20 @@ const LoginPage = () => {
                 accessCodeId: orgSession.access_code_id,
                 slug: orgType.slug,
                 name: orgType.name,
+                code: null,
               });
             }
           }
         } catch (err) {
           console.error('Error restoring organisation context:', err);
         }
-
-        toast({
-          title: t('login.login_success'),
-          description: t('login.welcome_back')
-        });
-        navigate("/home");
       }
+
+      toast({
+        title: t('login.login_success'),
+        description: t('login.welcome_back')
+      });
+      navigate("/home");
     }
     setIsLoading(false);
   };
