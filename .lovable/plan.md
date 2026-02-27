@@ -1,69 +1,61 @@
 
+# Plan: Wensberoep-namen verwijderen uit AI-prompts
 
-# Plan: Anchor-lijst vervangen door sector-gebaseerde AI-prompting
-
-## Samenvatting
-
-De huidige organisatie-rapportgeneratie werkt met een vaste "ankerlijst" van functies waaruit de AI moet kiezen. Dit beperkt de variatie enorm (bijv. maar ~60 functies voor medische centra). We vervangen dit door een open prompt waarbij de AI alleen de instructie krijgt om functies te bedenken **binnen de relevante sector/branche**, zonder vaste lijst.
+## Probleem
+De AI krijgt de naam van elk wensberoep (bijv. "leraar") mee in de prompt, waardoor de AI te veel gewicht legt op die naam in plaats van op de inhoud van de 8 antwoorden per wensberoep.
 
 ## Wat verandert er
 
-### 1. Database: anchor_list kolom leegmaken
-- De `anchor_list` JSONB-kolom in `organisation_types` wordt leeggemaakt (op NULL gezet) voor "Medisch Centrum"
-- De kolom zelf kan blijven bestaan (geen schema-wijziging nodig), maar wordt niet meer gebruikt
+### Bestand: `supabase/functions/generate-career-report/index.ts`
 
-### 2. Edge Function: `generate-career-report/index.ts`
+Er zijn **2 promptfuncties** die aangepast moeten worden:
 
-De huidige code heeft 3 takken:
-- **ErasmusMC** (anchor list + vacatures) 
-- **Generiek met anchor list** (alleen anchor list)
-- **Normaal** (geen organisatie)
+1. **`getOrganisationSectorPrompts()`** (regels 102-407) -- organisatie-modus (NL, EN, DE, NO)
+2. **`getCareerReportPrompts()`** (regels 409+) -- normale modus (NL, EN, DE, NO)
 
-Dit wordt vereenvoudigd naar 2 takken:
-- **Organisatie-modus**: sector-gebaseerde prompt (bijv. "medische sector", "transport & logistiek", "financiele sector") -- in alle 4 talen (NL, EN, DE, NO)
-- **Normaal**: bestaande prompts blijven ongewijzigd
+### Concrete wijzigingen per functie
 
-**Wat er concreet verandert in de prompts:**
-- De `formatAnchorList()` functie en alle verwijzingen naar ankerlijsten worden verwijderd
-- De variabelen `hasAnchorList` en `anchorListText` verdwijnen
-- In plaats daarvan wordt de **naam van de organisatie-categorie** (bijv. "Medisch Centrum", "Transport & Logistiek") doorgegeven aan de prompt
-- De AI krijgt de instructie: "Bedenk functies die passen **binnen de sector [naam]**" in plaats van "Kies uit deze lijst"
-- ErasmusMC blijft een aparte variant behouden vanwege de vacature-database, maar ook zonder ankerlijst -- de vacatures dienen als inspiratie, niet als beperking
-- De sector-prompt wordt in alle 4 talen (NL, EN, DE, NO) geschreven
+**In beide functies, voor alle 4 talen:**
 
-**Voorbeeld van de nieuwe organisatie-prompt (NL):**
-> "Je bent een loopbaancoach gespecialiseerd in de medische sector. Je bedenkt functies die bestaan binnen een medisch centrum of ziekenhuis. Je bent NIET beperkt tot een vaste lijst -- kies uit alle bestaande functies die passen bij deze branche."
+1. **Strip de wensberoep-titel uit de user prompt**
+   - Verwijder regels als `Wensberoep 1: ${data.wensberoep1.titel}` / `Desired occupation 1: ${data.wensberoep1.titel}` / `Wunschberuf 1: ${data.wensberoep1.titel}` / `Onsket yrke 1: ${data.wensberoep1.titel}`
+   - Vervang door neutrale labels zonder naam: `Beschrijving 1:` / `Description 1:` / `Beschreibung 1:` / `Beskrivelse 1:`
+   - Doe dit voor alle 3 wensberoepen in alle 4 talen
 
-**Voorbeeld voor Transport & Logistiek:**
-> "Je bent een loopbaancoach gespecialiseerd in transport en logistiek. Je bedenkt functies die bestaan binnen de transport- en logistieksector."
+2. **Voeg expliciete instructie toe aan de system prompt**
+   - NL: *"Je ontvangt GEEN beroepsnamen van de gebruiker -- die zijn bewust weggelaten. Baseer je functievoorstellen UITSLUITEND op de inhoud van de antwoorden. Laat je niet leiden door veronderstellingen over welk beroep de gebruiker in gedachten had."*
+   - EN: *"You do NOT receive occupation names from the user -- these have been deliberately omitted. Base your job suggestions EXCLUSIVELY on the content of the answers. Do not be guided by assumptions about what occupation the user had in mind."*
+   - DE: *"Du erhaltst KEINE Berufsnamen von der Person -- diese wurden bewusst weggelassen. Basiere deine Vorschlage AUSSCHLIESSLICH auf dem Inhalt der Antworten. Lass dich nicht von Vermutungen leiten, welchen Beruf die Person im Kopf hatte."*
+   - NO: *"Du mottar INGEN yrkesnavn fra brukeren -- disse er bevisst utelatt. Baser yrkesforslag UTELUKKENDE pa innholdet i svarene. Ikke la deg lede av antakelser om hvilket yrke brukeren hadde i tankene."*
 
-### 3. Sector-naam ophalen
-- De `organisation_types.name` wordt al opgehaald uit de database
-- Bij child-organisaties (zoals ErasmusMC) wordt ook de parent-naam opgehaald om de sector te bepalen
-- De sector-naam wordt dynamisch in de prompt geplaatst
+3. **Pas de intro-tekst aan in de user prompt**
+   - In de NL-prompt staat nu: *"De gebruiker heeft in totaal 3 wensberoepen genoemd en per wensberoep 8 vragen beantwoord."*
+   - Wordt: *"De gebruiker heeft 3 sets van 8 vragen beantwoord over ideale werksituaties. De beroepsnamen zijn bewust weggelaten -- analyseer alleen de antwoorden."*
+   - Vergelijkbare aanpassing in EN, DE, NO
 
-### 4. Taalondersteuning
-De organisatie-prompt wordt in alle 4 talen geschreven:
-- **NL**: "binnen de sector [naam]"
-- **EN**: "within the [name] sector"  
-- **DE**: "im Bereich [Name]"
-- **NO**: "innenfor [navn]-sektoren"
+### Wat NIET verandert
+- De `UserData` interface behoudt het `titel` veld (het wordt nog steeds uit de database geladen, maar niet meer meegegeven in de prompt-tekst)
+- De frontend blijft ongewijzigd
+- De kernwoorden, prioriteiten, extra info en alle andere data blijven identiek
+- De JSON output-structuur verandert niet
+- Het `titel` veld wordt nog steeds opgeslagen in de database (de gebruiker ziet het nog in de UI)
 
-## Wat NIET verandert
-- De normale (niet-organisatie) prompts in alle 4 talen blijven exact hetzelfde
-- De frontend code blijft ongewijzigd (stuurt nog steeds `organisation_type_id` mee)
-- De vacature-logica voor ErasmusMC blijft bestaan als aanvullende context (maar niet meer als beperking)
-- De JSON output-structuur blijft identiek
+### Overzicht van alle plekken waar `titel` verwijderd wordt
 
-## Technisch overzicht
+**`getOrganisationSectorPrompts()`:**
+- NL user prompt: regels ~126, ~136, ~146
+- EN user prompt: regels ~200, ~210, ~220
+- DE user prompt: regels ~274, ~284, ~294
+- NO user prompt: regels ~348, ~358, ~368
 
-### Bestanden die worden aangepast:
-1. **`supabase/functions/generate-career-report/index.ts`** -- hoofdwijziging:
-   - `formatAnchorList()` functie verwijderen
-   - Nieuwe functie `getOrganisationPrompts(language, sectorName, data, vacancies?)` toevoegen
-   - De 3-takken logica vereenvoudigen naar 2 takken
-   - Sector-naam ophalen uit organisatie + parent
-   
-### Database-wijziging:
-1. `UPDATE organisation_types SET anchor_list = NULL WHERE slug = 'medisch-centrum'` -- data leegmaken
+**`getCareerReportPrompts()`:**
+- NL user prompt: regels ~446, ~471, ~496
+- EN user prompt: regels ~600, ~628, ~656
+- DE user prompt: (vergelijkbare regels in het DE-blok)
+- NO user prompt: (vergelijkbare regels in het NO-blok)
 
+Totaal: **24 plekken** waar de titel verwijderd wordt (3 wensberoepen x 4 talen x 2 functies).
+
+### Na implementatie
+- Edge function wordt opnieuw gedeployed
+- Nieuwe rapporten zullen functievoorstellen genereren puur op basis van antwoorden, niet op basis van beroepsnamen
