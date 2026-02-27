@@ -1,0 +1,1 @@
+UPDATE organisation_types SET anchor_list = NULL WHERE slug = 'medisch-centrum';
