@@ -275,6 +275,22 @@ serve(async (req) => {
         console.log(`Processing professional codes fulfillment for session: ${session.id}`);
         await fulfillProfessionalCodes(stripe, session);
       }
+
+      // Log entry_event for individual payments (not professional codes)
+      if (!metadata.type && session.payment_status === "paid" && metadata.user_id) {
+        const { createClient } = await import("npm:@supabase/supabase-js@2.57.2");
+        const supabaseAdmin = createClient(
+          Deno.env.get("SUPABASE_URL") ?? "",
+          Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
+        );
+        await supabaseAdmin.from("entry_events").insert({
+          user_id: metadata.user_id,
+          entry_method: "stripe_payment",
+          stripe_payment_intent_id: typeof session.payment_intent === "string" ? session.payment_intent : null,
+          source: "webhook",
+        });
+        console.log(`✅ Entry event logged for user ${metadata.user_id} via webhook`);
+      }
     }
 
     return new Response(JSON.stringify({ received: true }), {

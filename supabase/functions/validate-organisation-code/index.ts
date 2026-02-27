@@ -104,6 +104,29 @@ Deno.serve(async (req) => {
       );
     }
 
+    // Log entry event — we don't have user_id here (it's client-side), so use the auth header
+    const authHeader = req.headers.get("authorization");
+    let entryUserId: string | null = null;
+    if (authHeader) {
+      const anonKey = Deno.env.get("SUPABASE_ANON_KEY")!;
+      const { createClient: createAnonClient } = await import("https://esm.sh/@supabase/supabase-js@2");
+      const userClient = createAnonClient(Deno.env.get("SUPABASE_URL")!, anonKey, {
+        global: { headers: { Authorization: authHeader } },
+      });
+      const { data: userData } = await userClient.auth.getUser();
+      entryUserId = userData?.user?.id || null;
+    }
+
+    if (entryUserId) {
+      await supabase.from("entry_events").insert({
+        user_id: entryUserId,
+        entry_method: "organisation_access_code",
+        code: code.trim(),
+        org_id: accessCode.organisation_type_id,
+        source: "organisation",
+      });
+    }
+
     // Get parent branch info if this org has a parent
     let parentBranch = null;
     if (orgType?.parent_type_id) {
