@@ -57,22 +57,26 @@ function getMonthlyAccessStats(
   monthStart: string,
   monthEnd: string
 ): MonthlyAccessStats {
-  // Filter entry_events by redeemed_at
-  const eventsInMonth = entryEvents.filter(
-    e => e.redeemed_at >= monthStart && e.redeemed_at < monthEnd
-  );
+  const startTs = new Date(monthStart).getTime();
+  const endTs = new Date(monthEnd).getTime();
 
-  // DISTINCT user_ids per method
+  const eventsInMonth = entryEvents.filter(e => {
+    if (!e.redeemed_at) return false;
+    const redeemedTs = new Date(e.redeemed_at).getTime();
+    return redeemedTs >= startTs && redeemedTs < endTs;
+  });
+
   const allUsers = new Set(eventsInMonth.map(e => e.user_id));
   const stripeUsers = new Set(eventsInMonth.filter(e => e.entry_method === 'stripe_payment').map(e => e.user_id));
   const promoUsers = new Set(eventsInMonth.filter(e => e.entry_method === 'promo_code').map(e => e.user_id));
   const orgUsers = new Set(eventsInMonth.filter(e => e.entry_method === 'organisation_access_code').map(e => e.user_id));
 
-  // New profiles = profiles.created_at in month
-  const newProfiles = profiles.filter(p => p.created_at >= monthStart && p.created_at < monthEnd);
+  const newProfiles = profiles.filter(p => {
+    if (!p.created_at) return false;
+    const createdTs = new Date(p.created_at).getTime();
+    return createdTs >= startTs && createdTs < endTs;
+  });
   const newProfileIds = new Set(newProfiles.map(p => p.id));
-
-  // New profiles that also have access in this month
   const newWithAccess = new Set([...allUsers].filter(uid => newProfileIds.has(uid)));
 
   return {
@@ -148,9 +152,15 @@ serve(async (req) => {
     const org_stats = orgTypes.map(ot => {
       const monthly: Record<string, number> = {};
       for (const m of months) {
+        const startTs = new Date(m.start).getTime();
+        const endTs = new Date(m.end).getTime();
         const usersInMonth = new Set(
           orgCodeEvents
-            .filter(e => e.org_id === ot.id && e.redeemed_at >= m.start && e.redeemed_at < m.end)
+            .filter(e => {
+              if (e.org_id !== ot.id || !e.redeemed_at) return false;
+              const ts = new Date(e.redeemed_at).getTime();
+              return ts >= startTs && ts < endTs;
+            })
             .map(e => e.user_id)
         );
         monthly[m.key] = usersInMonth.size;
