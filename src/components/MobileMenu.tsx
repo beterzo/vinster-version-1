@@ -16,6 +16,8 @@ import { useTranslation } from "@/hooks/useTranslation";
 const organisationItems = [
   { name: "Medisch Centrum", slug: "medisch-centrum", available: true },
   { name: "ErasmusMC", slug: "erasmus-mc", indent: true, available: true },
+  { name: "Transport & Logistiek", shortName: "Transport", slug: "transport-en-logistiek", available: true },
+  { name: "Financiële instellingen", shortName: "Financieel", slug: "financiele-instellingen", available: true },
   { name: "Universiteit", slug: "universiteit", available: false },
   { name: "Zorg en Welzijn", slug: "zorg-en-welzijn", available: false },
   { name: "Hogeschool", slug: "hogeschool", available: false },
@@ -138,7 +140,8 @@ const MobileMenu = () => {
                             org.indent ? "pl-4 text-gray-500" : "text-gray-600"
                           } ${!org.available ? "opacity-50 cursor-default" : "hover:text-blue-900"}`}
                         >
-                          {org.indent ? `→ ${org.name}` : org.name}
+                          {org.indent ? `→ ${org.name}` : (org.shortName || org.name)}
+                          {org.shortName && org.available && <span className="text-xs text-gray-400 ml-2">{org.name}</span>}
                           {!org.available && <span className="text-xs text-gray-400 ml-2">Binnenkort</span>}
                         </button>
                       ))}
