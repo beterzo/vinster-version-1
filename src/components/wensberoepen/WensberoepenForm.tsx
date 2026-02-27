@@ -124,7 +124,7 @@ export const WensberoepenForm = ({
       {/* Goede werkdag */}
       <WensberoepenFormSection>
         <Label htmlFor={fluitendThuiskoemenDagField} className="text-base font-medium text-gray-700">
-          Beschrijf een goede werkdag waarbij je tevreden thuiskomt
+          Wat heb je gedaan op een dag waarop je met plezier terugkijkt?
         </Label>
         <Textarea
           id={fluitendThuiskoemenDagField}
