@@ -71,14 +71,6 @@ serve(async (req) => {
     const totalOrg = paidProfiles.filter(p => orgUserIds.has(p.id)).length;
     const totalNormal = totalAll - totalOrg;
 
-    // Sum uses_count per org type (for fallback total)
-    const codeUsesMap = new Map<string, number>();
-    codesRaw.forEach(c => {
-      if (c.organisation_type_id) {
-        codeUsesMap.set(c.organisation_type_id, (codeUsesMap.get(c.organisation_type_id) || 0) + (c.uses_count || 0));
-      }
-    });
-
     // Build is_unique lookup
     const isUniqueMap = new Map(orgTypes.map(ot => [ot.id, ot.is_unique ?? false]));
 
@@ -86,7 +78,6 @@ serve(async (req) => {
     const stats = orgTypes.map(ot => {
       const isUnique = isUniqueMap.get(ot.id) || false;
       const orgSessions = sessions.filter(s => s.organisation_type_id === ot.id);
-      const codeTotal = codeUsesMap.get(ot.id) || 0;
 
       // For branches (is_unique=false): only count sessions from paid users
       // For specific orgs (is_unique=true): count all sessions (code = access)
@@ -105,9 +96,7 @@ serve(async (req) => {
         parent_type_id: ot.parent_type_id || null,
         is_unique: isUnique,
         monthly,
-        total: isUnique
-          ? Math.max(orgSessions.length, codeTotal)
-          : filteredSessions.length,
+        total: isUnique ? orgSessions.length : filteredSessions.length,
       };
     });
 
