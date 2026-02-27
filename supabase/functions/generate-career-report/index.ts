@@ -99,10 +99,311 @@ interface UserData {
   fysiekeBeperkingen: string;
 }
 
-function formatAnchorList(anchorList: any[]): string {
-  return anchorList.map(cat =>
-    `${cat.category}\n${cat.functions.map((f: string) => `   - ${f}`).join('\n')}`
-  ).join('\n\n');
+function getOrganisationSectorPrompts(language: string, sectorName: string, organisationName: string, data: UserData, vacancies?: any[]): { system: string; user: string } {
+  const vacatureList = vacancies && vacancies.length > 0
+    ? vacancies.map((v, i) => `${i + 1}. ${v.title}${v.department ? ` (Afdeling: ${v.department})` : ''}${v.description ? ` — ${v.description}` : ''}`).join('\n')
+    : null;
+
+  const prompts: Record<string, { system: string; user: string }> = {
+    nl: {
+      system: `Je bent een professionele loopbaancoach gespecialiseerd in de sector "${sectorName}". Je hebt diepgaande kennis van alle functies en beroepen die bestaan binnen deze branche.
+
+Je ontvangt informatie over een medewerker en vertaalt dit naar drie concrete functies die bestaan binnen de sector "${sectorName}".
+
+BELANGRIJK: Je bent NIET beperkt tot een vaste lijst van functies. Je mag ALLE bestaande functies voorstellen die passen binnen de sector "${sectorName}", zolang het échte, bestaande functies zijn.
+
+Je kiest:
+• Twee logische, passende functies die direct aansluiten op de voorkeuren van de medewerker
+• Eén verrassend, avontuurlijk en onverwacht alternatief — een functie die de medewerker zelf waarschijnlijk niet snel zou bedenken, maar die wél aansluit bij het opleidingsniveau en de kernvaardigheden. Kies bewust een richting die de medewerker zelf nooit zou googelen of overwegen. Verras echt. Begin deze met: "En als verrassing..." of "Misschien had je dit niet verwacht, maar..."
+
+Je antwoordt altijd in exact de gevraagde JSON-structuur, zonder toelichting erboven of eronder.
+Lever uitsluitend het JSON-object aan.`,
+      user: `Je genereert een loopbaanrapport voor een medewerker van ${organisationName}.
+
+Hier is informatie over de medewerker:
+• Naam: ${data.firstName} ${data.lastName}
+
+Wensberoep 1: ${data.wensberoep1.titel}
+- Werkweek activiteiten: ${data.wensberoep1.werkweekActiviteiten}
+- Werklocatie: ${data.wensberoep1.werklocatieOmgeving}
+- Samenwerking: ${data.wensberoep1.samenwerkingContacten}
+- Fluitend thuiskomen: ${data.wensberoep1.fluitendThuiskomen}
+- Doel: ${data.wensberoep1.werkDoel}
+- Leukste onderdelen: ${data.wensberoep1.leuksteOnderdelen}
+- Belangrijke aspecten: ${data.wensberoep1.belangrijkeAspecten}
+- Kennis focus: ${data.wensberoep1.kennisFocus}
+
+Wensberoep 2: ${data.wensberoep2.titel}
+- Werkweek activiteiten: ${data.wensberoep2.werkweekActiviteiten}
+- Werklocatie: ${data.wensberoep2.werklocatieOmgeving}
+- Samenwerking: ${data.wensberoep2.samenwerkingContacten}
+- Fluitend thuiskomen: ${data.wensberoep2.fluitendThuiskomen}
+- Doel: ${data.wensberoep2.werkDoel}
+- Leukste onderdelen: ${data.wensberoep2.leuksteOnderdelen}
+- Belangrijke aspecten: ${data.wensberoep2.belangrijkeAspecten}
+- Kennis focus: ${data.wensberoep2.kennisFocus}
+
+Wensberoep 3: ${data.wensberoep3.titel}
+- Werkweek activiteiten: ${data.wensberoep3.werkweekActiviteiten}
+- Werklocatie: ${data.wensberoep3.werklocatieOmgeving}
+- Samenwerking: ${data.wensberoep3.samenwerkingContacten}
+- Fluitend thuiskomen: ${data.wensberoep3.fluitendThuiskomen}
+- Doel: ${data.wensberoep3.werkDoel}
+- Leukste onderdelen: ${data.wensberoep3.leuksteOnderdelen}
+- Belangrijke aspecten: ${data.wensberoep3.belangrijkeAspecten}
+- Kennis focus: ${data.wensberoep3.kennisFocus}
+
+Kernwoorden van de medewerker:
+• Lievelings activiteiten: ${data.selectedActiviteiten}
+• Werkomgeving: ${data.selectedWerkomstandigheden}
+• Interesses: ${data.selectedInteresses}
+
+Extra toelichting:
+• Activiteiten: ${data.extraActiviteiten}
+• Werkomgeving: ${data.extraWerkomstandigheden}
+• Interesses: ${data.extraInteresses}
+
+Context:
+• Opleiding: ${data.opleidingsniveau}
+• Richting: ${data.beroepsopleiding}
+• Beperkingen: ${data.fysiekeBeperkingen}
+${vacatureList ? `\nDaarnaast zijn er recente vacatures binnen ${organisationName} die als inspiratie kunnen dienen (maar je bent hier NIET toe beperkt):\n${vacatureList}` : ''}
+
+Regels:
+1. Bedenk PRECIES 3 functies die bestaan binnen de sector "${sectorName}".
+2. De functies moeten echte, bestaande functies zijn — geen verzonnen titels.
+3. Zorg voor variatie: de 3 functies moeten uit verschillende werkgebieden komen.
+4. Functie 1 en 2 zijn de meest logische en herkenbare matches.
+5. Functie 3 is bewust verrassend en onverwacht. Begin deze met: "En als verrassing..." of "Misschien had je dit niet verwacht, maar..."
+6. Schrijf per functie 2-3 zinnen, maximaal 40 woorden.
+7. Verwerk actief de kernwoorden van de medewerker.
+8. De functietitels mogen maximaal uit 3 woorden bestaan.`
+    },
+    en: {
+      system: `You are a professional career coach specialised in the "${sectorName}" sector. You have in-depth knowledge of all roles and occupations that exist within this industry.
+
+You receive information about an employee and translate this into three concrete roles that exist within the "${sectorName}" sector.
+
+IMPORTANT: You are NOT limited to a fixed list of roles. You may suggest ANY existing role that fits within the "${sectorName}" sector, as long as it is a real, existing occupation.
+
+You choose:
+• Two logical, fitting occupations that directly match the employee's preferences
+• One surprising, adventurous and unexpected alternative — a role the employee would likely not have thought of themselves, but that still matches their education level and core competencies. Choose a direction the employee would never search for or consider on their own. Truly surprise them
+
+You always respond in exactly the requested JSON structure, without any explanation above or below it.
+Provide only the JSON object.`,
+      user: `You are generating a career report for an employee of ${organisationName}.
+
+Here is information about the employee:
+• Name: ${data.firstName} ${data.lastName}
+
+Desired occupation 1: ${data.wensberoep1.titel}
+- Weekly activities: ${data.wensberoep1.werkweekActiviteiten}
+- Work location: ${data.wensberoep1.werklocatieOmgeving}
+- Collaboration: ${data.wensberoep1.samenwerkingContacten}
+- Satisfied day: ${data.wensberoep1.fluitendThuiskomen}
+- Goal: ${data.wensberoep1.werkDoel}
+- Best parts: ${data.wensberoep1.leuksteOnderdelen}
+- Important aspects: ${data.wensberoep1.belangrijkeAspecten}
+- Knowledge focus: ${data.wensberoep1.kennisFocus}
+
+Desired occupation 2: ${data.wensberoep2.titel}
+- Weekly activities: ${data.wensberoep2.werkweekActiviteiten}
+- Work location: ${data.wensberoep2.werklocatieOmgeving}
+- Collaboration: ${data.wensberoep2.samenwerkingContacten}
+- Satisfied day: ${data.wensberoep2.fluitendThuiskomen}
+- Goal: ${data.wensberoep2.werkDoel}
+- Best parts: ${data.wensberoep2.leuksteOnderdelen}
+- Important aspects: ${data.wensberoep2.belangrijkeAspecten}
+- Knowledge focus: ${data.wensberoep2.kennisFocus}
+
+Desired occupation 3: ${data.wensberoep3.titel}
+- Weekly activities: ${data.wensberoep3.werkweekActiviteiten}
+- Work location: ${data.wensberoep3.werklocatieOmgeving}
+- Collaboration: ${data.wensberoep3.samenwerkingContacten}
+- Satisfied day: ${data.wensberoep3.fluitendThuiskomen}
+- Goal: ${data.wensberoep3.werkDoel}
+- Best parts: ${data.wensberoep3.leuksteOnderdelen}
+- Important aspects: ${data.wensberoep3.belangrijkeAspecten}
+- Knowledge focus: ${data.wensberoep3.kennisFocus}
+
+Employee keywords:
+• Favourite activities: ${data.selectedActiviteiten}
+• Work environment: ${data.selectedWerkomstandigheden}
+• Interests: ${data.selectedInteresses}
+
+Extra explanations:
+• Activities: ${data.extraActiviteiten}
+• Work environment: ${data.extraWerkomstandigheden}
+• Interests: ${data.extraInteresses}
+
+Context:
+• Education: ${data.opleidingsniveau}
+• Field of study: ${data.beroepsopleiding}
+• Limitations: ${data.fysiekeBeperkingen}
+${vacatureList ? `\nAdditionally, here are recent vacancies within ${organisationName} for inspiration (you are NOT limited to these):\n${vacatureList}` : ''}
+
+Rules:
+1. Suggest EXACTLY 3 roles that exist within the "${sectorName}" sector.
+2. The roles must be real, existing occupations — no invented titles.
+3. Ensure variety: the 3 roles should come from different work areas.
+4. Role 1 and 2 are the most logical and recognisable matches.
+5. Role 3 is deliberately surprising and unexpected.
+6. Write 2-3 sentences per role, maximum 40 words.
+7. Actively use the employee's keywords.
+8. Job titles must consist of a maximum of 3 words.`
+    },
+    de: {
+      system: `Du bist ein professioneller Karriereberater, spezialisiert auf den Bereich "${sectorName}". Du hast fundierte Kenntnisse über alle Funktionen und Berufe, die in dieser Branche existieren.
+
+Du erhältst Informationen über eine Mitarbeiterin / einen Mitarbeiter und übersetzt diese in drei konkrete Funktionen, die im Bereich "${sectorName}" existieren.
+
+WICHTIG: Du bist NICHT auf eine feste Liste von Funktionen beschränkt. Du darfst ALLE existierenden Funktionen vorschlagen, die in den Bereich "${sectorName}" passen, solange es echte, bestehende Berufe sind.
+
+Du wählst:
+• Zwei logische, passende Berufe, die direkt an die Präferenzen der Person anknüpfen
+• Einen überraschenden, abenteuerlichen und unerwarteten Alternativberuf — einen Beruf, an den die Person selbst wahrscheinlich nicht gedacht hätte, der aber zum Bildungsniveau und den Kernkompetenzen passt
+
+Du antwortest immer exakt in der geforderten JSON-Struktur, ohne zusätzliche Erklärungen.
+Liefere ausschließlich das JSON-Objekt.`,
+      user: `Du erstellst einen Karrierebericht für eine Mitarbeiterin / einen Mitarbeiter von ${organisationName}.
+
+Informationen zur Person:
+• Name: ${data.firstName} ${data.lastName}
+
+Wunschberuf 1: ${data.wensberoep1.titel}
+- Wochenaktivitäten: ${data.wensberoep1.werkweekActiviteiten}
+- Arbeitsort: ${data.wensberoep1.werklocatieOmgeving}
+- Zusammenarbeit: ${data.wensberoep1.samenwerkingContacten}
+- Zufriedener Tag: ${data.wensberoep1.fluitendThuiskomen}
+- Ziel: ${data.wensberoep1.werkDoel}
+- Beste Teile: ${data.wensberoep1.leuksteOnderdelen}
+- Wichtige Aspekte: ${data.wensberoep1.belangrijkeAspecten}
+- Wissensfokus: ${data.wensberoep1.kennisFocus}
+
+Wunschberuf 2: ${data.wensberoep2.titel}
+- Wochenaktivitäten: ${data.wensberoep2.werkweekActiviteiten}
+- Arbeitsort: ${data.wensberoep2.werklocatieOmgeving}
+- Zusammenarbeit: ${data.wensberoep2.samenwerkingContacten}
+- Zufriedener Tag: ${data.wensberoep2.fluitendThuiskomen}
+- Ziel: ${data.wensberoep2.werkDoel}
+- Beste Teile: ${data.wensberoep2.leuksteOnderdelen}
+- Wichtige Aspekte: ${data.wensberoep2.belangrijkeAspecten}
+- Wissensfokus: ${data.wensberoep2.kennisFocus}
+
+Wunschberuf 3: ${data.wensberoep3.titel}
+- Wochenaktivitäten: ${data.wensberoep3.werkweekActiviteiten}
+- Arbeitsort: ${data.wensberoep3.werklocatieOmgeving}
+- Zusammenarbeit: ${data.wensberoep3.samenwerkingContacten}
+- Zufriedener Tag: ${data.wensberoep3.fluitendThuiskomen}
+- Ziel: ${data.wensberoep3.werkDoel}
+- Beste Teile: ${data.wensberoep3.leuksteOnderdelen}
+- Wichtige Aspekte: ${data.wensberoep3.belangrijkeAspecten}
+- Wissensfokus: ${data.wensberoep3.kennisFocus}
+
+Schlüsselwörter der Person:
+• Lieblingsaktivitäten: ${data.selectedActiviteiten}
+• Arbeitsumgebung: ${data.selectedWerkomstandigheden}
+• Interessen: ${data.selectedInteresses}
+
+Zusätzliche Erläuterungen:
+• Aktivitäten: ${data.extraActiviteiten}
+• Arbeitsumgebung: ${data.extraWerkomstandigheden}
+• Interessen: ${data.extraInteresses}
+
+Kontext:
+• Bildungsabschluss: ${data.opleidingsniveau}
+• Fachrichtung: ${data.beroepsopleiding}
+• Einschränkungen: ${data.fysiekeBeperkingen}
+${vacatureList ? `\nZusätzlich gibt es aktuelle Stellenangebote bei ${organisationName} als Inspiration (du bist NICHT darauf beschränkt):\n${vacatureList}` : ''}
+
+Regeln:
+1. Schlage GENAU 3 Funktionen vor, die im Bereich "${sectorName}" existieren.
+2. Die Funktionen müssen echte, bestehende Berufe sein — keine erfundenen Titel.
+3. Sorge für Abwechslung: die 3 Funktionen sollten aus verschiedenen Arbeitsbereichen kommen.
+4. Funktion 1 und 2 sind die logischsten und erkennbarsten Übereinstimmungen.
+5. Funktion 3 ist bewusst überraschend und unerwartet.
+6. Schreibe 2-3 Sätze pro Funktion, maximal 40 Wörter.
+7. Verarbeite aktiv die Schlüsselwörter der Person.
+8. Berufstitel dürfen maximal aus 3 Wörtern bestehen.`
+    },
+    no: {
+      system: `Du er en profesjonell karriereveileder spesialisert innenfor "${sectorName}"-sektoren. Du har inngående kunnskap om alle funksjoner og yrker som finnes innenfor denne bransjen.
+
+Du mottar informasjon om en ansatt og oversetter dette til tre konkrete funksjoner som finnes innenfor "${sectorName}"-sektoren.
+
+VIKTIG: Du er IKKE begrenset til en fast liste over funksjoner. Du kan foreslå ALLE eksisterende funksjoner som passer innenfor "${sectorName}"-sektoren, så lenge det er ekte, eksisterende yrker.
+
+Du velger:
+• To logiske, passende yrker som direkte samsvarer med den ansattes preferanser
+• Ett overraskende, eventyrlig og uventet alternativ — et yrke den ansatte sannsynligvis ikke ville tenkt på selv, men som likevel passer med utdanningsnivået og kjernekompetansene
+
+Du svarer alltid i nøyaktig den forespurte JSON-strukturen, uten forklaring.
+Lever kun JSON-objektet.`,
+      user: `Du genererer en karriererapport for en ansatt hos ${organisationName}.
+
+Informasjon om den ansatte:
+• Navn: ${data.firstName} ${data.lastName}
+
+Ønsket yrke 1: ${data.wensberoep1.titel}
+- Ukeaktiviteter: ${data.wensberoep1.werkweekActiviteiten}
+- Arbeidssted: ${data.wensberoep1.werklocatieOmgeving}
+- Samarbeid: ${data.wensberoep1.samenwerkingContacten}
+- Fornøyd dag: ${data.wensberoep1.fluitendThuiskomen}
+- Mål: ${data.wensberoep1.werkDoel}
+- Beste deler: ${data.wensberoep1.leuksteOnderdelen}
+- Viktige aspekter: ${data.wensberoep1.belangrijkeAspecten}
+- Kunnskapsfokus: ${data.wensberoep1.kennisFocus}
+
+Ønsket yrke 2: ${data.wensberoep2.titel}
+- Ukeaktiviteter: ${data.wensberoep2.werkweekActiviteiten}
+- Arbeidssted: ${data.wensberoep2.werklocatieOmgeving}
+- Samarbeid: ${data.wensberoep2.samenwerkingContacten}
+- Fornøyd dag: ${data.wensberoep2.fluitendThuiskomen}
+- Mål: ${data.wensberoep2.werkDoel}
+- Beste deler: ${data.wensberoep2.leuksteOnderdelen}
+- Viktige aspekter: ${data.wensberoep2.belangrijkeAspecten}
+- Kunnskapsfokus: ${data.wensberoep2.kennisFocus}
+
+Ønsket yrke 3: ${data.wensberoep3.titel}
+- Ukeaktiviteter: ${data.wensberoep3.werkweekActiviteiten}
+- Arbeidssted: ${data.wensberoep3.werklocatieOmgeving}
+- Samarbeid: ${data.wensberoep3.samenwerkingContacten}
+- Fornøyd dag: ${data.wensberoep3.fluitendThuiskomen}
+- Mål: ${data.wensberoep3.werkDoel}
+- Beste deler: ${data.wensberoep3.leuksteOnderdelen}
+- Viktige aspekter: ${data.wensberoep3.belangrijkeAspecten}
+- Kunnskapsfokus: ${data.wensberoep3.kennisFocus}
+
+Nøkkelord for den ansatte:
+• Favorittaktiviteter: ${data.selectedActiviteiten}
+• Arbeidsmiljø: ${data.selectedWerkomstandigheden}
+• Interesser: ${data.selectedInteresses}
+
+Ekstra forklaringer:
+• Aktiviteter: ${data.extraActiviteiten}
+• Arbeidsmiljø: ${data.extraWerkomstandigheden}
+• Interesser: ${data.extraInteresses}
+
+Kontekst:
+• Utdanningsnivå: ${data.opleidingsniveau}
+• Utdanningsretning: ${data.beroepsopleiding}
+• Begrensninger: ${data.fysiekeBeperkingen}
+${vacatureList ? `\nI tillegg er det nylige stillingsannonser hos ${organisationName} som inspirasjon (du er IKKE begrenset til disse):\n${vacatureList}` : ''}
+
+Regler:
+1. Foreslå NØYAKTIG 3 funksjoner som finnes innenfor "${sectorName}"-sektoren.
+2. Funksjonene må være ekte, eksisterende yrker — ingen oppdiktede titler.
+3. Sørg for variasjon: de 3 funksjonene bør komme fra forskjellige arbeidsområder.
+4. Funksjon 1 og 2 er de mest logiske og gjenkjennelige treffene.
+5. Funksjon 3 er bevisst overraskende og uventet.
+6. Skriv 2-3 setninger per funksjon, maksimalt 40 ord.
+7. Bruk aktivt nøkkelordene til den ansatte.
+8. Yrkestitler kan bestå av maks 3 ord.`
+    }
+  };
+
+  return prompts[language] || prompts.nl;
 }
 
 function getCareerReportPrompts(language: string, data: UserData): { system: string; user: string } {
@@ -909,238 +1210,83 @@ serve(async (req) => {
       fysiekeBeperkingen: extraInfoData?.fysieke_beperkingen || 'Geen',
     };
 
-    // === Organisation type detection & anchor list ===
-    let isErasmusMC = false;
-    let hasAnchorList = false;
-    let anchorListText = '';
-    let erasmusMCVacancies: any[] = [];
+    // === Organisation type detection & sector-based prompting ===
+    let isOrganisationMode = false;
+    let organisationVacancies: any[] = [];
+    let sectorName = '';
+    let organisationName = '';
 
     if (organisation_type_id) {
-      // Fetch org type with anchor_list and parent_type_id
+      // Fetch org type with name and parent_type_id
       const { data: orgType } = await supabase
         .from('organisation_types')
-        .select('slug, is_unique, anchor_list, parent_type_id')
+        .select('slug, name, is_unique, parent_type_id')
         .eq('id', organisation_type_id)
         .single();
 
-      // Determine anchor list (own or inherited from parent)
-      let anchorList = orgType?.anchor_list || null;
+      if (orgType) {
+        isOrganisationMode = true;
+        organisationName = orgType.name;
 
-      if (!anchorList && orgType?.parent_type_id) {
-        const { data: parentType } = await supabase
-          .from('organisation_types')
-          .select('anchor_list')
-          .eq('id', orgType.parent_type_id)
-          .single();
-        anchorList = parentType?.anchor_list || null;
-      }
+        // Determine sector name: use parent name if this is a child org, otherwise use own name
+        if (orgType.parent_type_id) {
+          const { data: parentType } = await supabase
+            .from('organisation_types')
+            .select('name')
+            .eq('id', orgType.parent_type_id)
+            .single();
+          sectorName = parentType?.name || orgType.name;
+        } else {
+          sectorName = orgType.name;
+        }
 
-      if (anchorList) {
-        hasAnchorList = true;
-        anchorListText = formatAnchorList(anchorList as any[]);
-        console.log('📋 Anchor list loaded with', (anchorList as any[]).length, 'categories');
-      }
+        console.log(`🏢 Organisation mode: "${organisationName}" in sector "${sectorName}"`);
 
-      isErasmusMC = !!(orgType?.is_unique && orgType?.slug === 'erasmus-mc');
+        // For unique organisations (like ErasmusMC), also fetch relevant vacancies as inspiration
+        if (orgType.is_unique) {
+          console.log('🏥 Unique organisation detected - fetching vacancies as inspiration...');
 
-      if (isErasmusMC) {
-        console.log('🏥 ErasmusMC mode detected - fetching vacancies...');
+          const allKeywords = [
+            ...(prioriteitenData?.selected_activiteiten_keywords || []),
+            ...(prioriteitenData?.selected_werkomstandigheden_keywords || []),
+            ...(prioriteitenData?.selected_interesses_keywords || []),
+          ].map((k: string) => k.toLowerCase());
 
-        const allKeywords = [
-          ...(prioriteitenData?.selected_activiteiten_keywords || []),
-          ...(prioriteitenData?.selected_werkomstandigheden_keywords || []),
-          ...(prioriteitenData?.selected_interesses_keywords || []),
-        ].map((k: string) => k.toLowerCase());
+          const { data: vacancies } = await supabase
+            .from('organisation_vacancies')
+            .select('title, department, description, keywords')
+            .eq('organisation_type_id', organisation_type_id);
 
-        const { data: vacancies } = await supabase
-          .from('organisation_vacancies')
-          .select('title, department, description, keywords')
-          .eq('organisation_type_id', organisation_type_id);
-
-        if (vacancies && vacancies.length > 0) {
-          const scored = vacancies.map(v => {
-            const searchText = [
-              v.title || '',
-              v.department || '',
-              v.description || '',
-              ...(v.keywords || []),
-            ].join(' ').toLowerCase();
-            const matchCount = allKeywords.filter(kw => searchText.includes(kw)).length;
-            return { ...v, matchCount };
-          });
-          scored.sort((a, b) => b.matchCount - a.matchCount);
-          erasmusMCVacancies = scored.slice(0, 20);
-          console.log(`✅ Found ${vacancies.length} total vacancies, selected top ${erasmusMCVacancies.length} relevant`);
+          if (vacancies && vacancies.length > 0) {
+            const scored = vacancies.map(v => {
+              const searchText = [
+                v.title || '',
+                v.department || '',
+                v.description || '',
+                ...(v.keywords || []),
+              ].join(' ').toLowerCase();
+              const matchCount = allKeywords.filter(kw => searchText.includes(kw)).length;
+              return { ...v, matchCount };
+            });
+            scored.sort((a, b) => b.matchCount - a.matchCount);
+            organisationVacancies = scored.slice(0, 20);
+            console.log(`✅ Found ${vacancies.length} total vacancies, selected top ${organisationVacancies.length} relevant`);
+          }
         }
       }
     }
 
-    // === Prompt selection: 3 branches ===
+    // === Prompt selection: 2 branches ===
     let prompts;
 
-    if (isErasmusMC && hasAnchorList) {
-      // ErasmusMC: anchor list + vacancy database
-      const vacatureList = erasmusMCVacancies.map((v, i) =>
-        `${i + 1}. ${v.title}${v.department ? ` (Afdeling: ${v.department})` : ''}${v.description ? ` — ${v.description}` : ''}`
-      ).join('\n');
-
-      prompts = {
-        system: `Je bent een loopbaancoach gespecialiseerd in interne mobiliteit binnen het Erasmus MC.
-Je ontvangt informatie over een medewerker, een ankerlijst van functies die binnen een medisch centrum bestaan, en een database van interne vacatures.
-Je kiest uitsluitend functies uit de opgegeven ankerlijst. De vacature-database gebruik je als aanvullende context om concrete functietitels te vinden die aansluiten bij de ankerlijst-categorieën.
-
-Je antwoordt altijd in exact de gevraagde JSON-structuur, zonder toelichting erboven of eronder. Je output wordt automatisch verwerkt in een rapport.
-
-Lever uitsluitend het JSON-object aan zoals opgegeven in de prompt.`,
-        user: `Je genereert een loopbaanrapport voor een medewerker van Erasmus MC.
-
-Hier is informatie over de medewerker:
-• Naam: ${userData.firstName} ${userData.lastName}
-
-Wensberoep 1: ${userData.wensberoep1.titel}
-- Werkweek activiteiten: ${userData.wensberoep1.werkweekActiviteiten}
-- Werklocatie: ${userData.wensberoep1.werklocatieOmgeving}
-- Samenwerking: ${userData.wensberoep1.samenwerkingContacten}
-- Fluitend thuiskomen: ${userData.wensberoep1.fluitendThuiskomen}
-- Doel: ${userData.wensberoep1.werkDoel}
-- Leukste onderdelen: ${userData.wensberoep1.leuksteOnderdelen}
-- Belangrijke aspecten: ${userData.wensberoep1.belangrijkeAspecten}
-- Kennis focus: ${userData.wensberoep1.kennisFocus}
-
-Wensberoep 2: ${userData.wensberoep2.titel}
-- Werkweek activiteiten: ${userData.wensberoep2.werkweekActiviteiten}
-- Werklocatie: ${userData.wensberoep2.werklocatieOmgeving}
-- Samenwerking: ${userData.wensberoep2.samenwerkingContacten}
-- Fluitend thuiskomen: ${userData.wensberoep2.fluitendThuiskomen}
-- Doel: ${userData.wensberoep2.werkDoel}
-- Leukste onderdelen: ${userData.wensberoep2.leuksteOnderdelen}
-- Belangrijke aspecten: ${userData.wensberoep2.belangrijkeAspecten}
-- Kennis focus: ${userData.wensberoep2.kennisFocus}
-
-Wensberoep 3: ${userData.wensberoep3.titel}
-- Werkweek activiteiten: ${userData.wensberoep3.werkweekActiviteiten}
-- Werklocatie: ${userData.wensberoep3.werklocatieOmgeving}
-- Samenwerking: ${userData.wensberoep3.samenwerkingContacten}
-- Fluitend thuiskomen: ${userData.wensberoep3.fluitendThuiskomen}
-- Doel: ${userData.wensberoep3.werkDoel}
-- Leukste onderdelen: ${userData.wensberoep3.leuksteOnderdelen}
-- Belangrijke aspecten: ${userData.wensberoep3.belangrijkeAspecten}
-- Kennis focus: ${userData.wensberoep3.kennisFocus}
-
-Kernwoorden van de medewerker:
-• Lievelings activiteiten: ${userData.selectedActiviteiten}
-• Werkomgeving: ${userData.selectedWerkomstandigheden}
-• Interesses: ${userData.selectedInteresses}
-
-Extra toelichting:
-• Activiteiten: ${userData.extraActiviteiten}
-• Werkomgeving: ${userData.extraWerkomstandigheden}
-• Interesses: ${userData.extraInteresses}
-
-Context:
-• Opleiding: ${userData.opleidingsniveau}
-• Richting: ${userData.beroepsopleiding}
-• Beperkingen: ${userData.fysiekeBeperkingen}
-
-ANKERLIJST MEDISCH CENTRUM — kies uitsluitend uit onderstaande functies:
-
-${anchorListText}
-
-Gebruik daarnaast de onderstaande ErasmusMC vacatures (afgelopen 5 jaar) als aanvullende context om concrete functietitels te vinden die aansluiten bij de ankerlijst-categorieën:
-${vacatureList || 'Geen vacatures beschikbaar'}
-
-Regels:
-1. Kies PRECIES 3 functies uit de ankerlijst.
-2. De 3 functies mogen NIET alle drie uit dezelfde categorie komen — zorg voor spreiding over minimaal 2 verschillende categorieën.
-3. Functie 1 en 2 zijn de meest logische en herkenbare matches op basis van de kernwoorden van de gebruiker.
-4. Functie 3 is bewust verrassend, avontuurlijk en onverwacht — een functie uit een andere categorie die de medewerker zelf niet snel zou bedenken, maar die wél aansluit bij het opleidingsniveau en de kernvaardigheden. Kies een functie waar de medewerker zelf nooit aan zou denken maar die wél past bij de kernvaardigheden. Durf creatief te zijn en buiten de gebaande paden te denken, maar houd het haalbaar. Begin deze met: "En als verrassing..." of "Misschien had je dit niet verwacht, maar..."
-5. Schrijf per functie 2-3 zinnen:
-   - Begin met een verwijzing naar de specifieke kernwoorden van de gebruiker
-   - Leg concreet uit hoe deze functie eruitziet binnen Erasmus MC
-   - Blijf herkenbaar en motiverend
-6. Stel NOOIT functies voor die niet in de ankerlijst staan.
-7. Gebruik de vacature-database om concrete functietitels te vinden die aansluiten bij de ankerlijst-categorieën.
-8. De functietitels mogen maximaal uit 3 woorden bestaan.
-9. De beschrijving per functie mag maximaal 40 woorden zijn.`
-      };
-    } else if (hasAnchorList) {
-      // Generic Medisch Centrum: anchor list only
-      prompts = {
-        system: `Je bent een loopbaancoach gespecialiseerd in interne mobiliteit binnen een medisch centrum. Je kiest uitsluitend functies uit de opgegeven ankerlijst. Je antwoordt altijd in exact de gevraagde JSON-structuur, zonder toelichting erboven of eronder. Je output wordt automatisch verwerkt in een rapport.
-
-Lever uitsluitend het JSON-object aan zoals opgegeven in de prompt.`,
-        user: `Je genereert een loopbaanrapport voor een medewerker van een medisch centrum.
-
-Hier is informatie over de medewerker:
-• Naam: ${userData.firstName} ${userData.lastName}
-
-Wensberoep 1: ${userData.wensberoep1.titel}
-- Werkweek activiteiten: ${userData.wensberoep1.werkweekActiviteiten}
-- Werklocatie: ${userData.wensberoep1.werklocatieOmgeving}
-- Samenwerking: ${userData.wensberoep1.samenwerkingContacten}
-- Fluitend thuiskomen: ${userData.wensberoep1.fluitendThuiskomen}
-- Doel: ${userData.wensberoep1.werkDoel}
-- Leukste onderdelen: ${userData.wensberoep1.leuksteOnderdelen}
-- Belangrijke aspecten: ${userData.wensberoep1.belangrijkeAspecten}
-- Kennis focus: ${userData.wensberoep1.kennisFocus}
-
-Wensberoep 2: ${userData.wensberoep2.titel}
-- Werkweek activiteiten: ${userData.wensberoep2.werkweekActiviteiten}
-- Werklocatie: ${userData.wensberoep2.werklocatieOmgeving}
-- Samenwerking: ${userData.wensberoep2.samenwerkingContacten}
-- Fluitend thuiskomen: ${userData.wensberoep2.fluitendThuiskomen}
-- Doel: ${userData.wensberoep2.werkDoel}
-- Leukste onderdelen: ${userData.wensberoep2.leuksteOnderdelen}
-- Belangrijke aspecten: ${userData.wensberoep2.belangrijkeAspecten}
-- Kennis focus: ${userData.wensberoep2.kennisFocus}
-
-Wensberoep 3: ${userData.wensberoep3.titel}
-- Werkweek activiteiten: ${userData.wensberoep3.werkweekActiviteiten}
-- Werklocatie: ${userData.wensberoep3.werklocatieOmgeving}
-- Samenwerking: ${userData.wensberoep3.samenwerkingContacten}
-- Fluitend thuiskomen: ${userData.wensberoep3.fluitendThuiskomen}
-- Doel: ${userData.wensberoep3.werkDoel}
-- Leukste onderdelen: ${userData.wensberoep3.leuksteOnderdelen}
-- Belangrijke aspecten: ${userData.wensberoep3.belangrijkeAspecten}
-- Kennis focus: ${userData.wensberoep3.kennisFocus}
-
-Kernwoorden van de medewerker:
-• Lievelings activiteiten: ${userData.selectedActiviteiten}
-• Werkomgeving: ${userData.selectedWerkomstandigheden}
-• Interesses: ${userData.selectedInteresses}
-
-Extra toelichting:
-• Activiteiten: ${userData.extraActiviteiten}
-• Werkomgeving: ${userData.extraWerkomstandigheden}
-• Interesses: ${userData.extraInteresses}
-
-Context:
-• Opleiding: ${userData.opleidingsniveau}
-• Richting: ${userData.beroepsopleiding}
-• Beperkingen: ${userData.fysiekeBeperkingen}
-
-ANKERLIJST MEDISCH CENTRUM — kies uitsluitend uit onderstaande functies:
-
-${anchorListText}
-
-Regels:
-1. Kies PRECIES 3 functies uit de ankerlijst.
-2. De 3 functies mogen NIET alle drie uit dezelfde categorie komen — zorg voor spreiding over minimaal 2 verschillende categorieën.
-3. Functie 1 en 2 zijn de meest logische en herkenbare matches op basis van de kernwoorden van de gebruiker.
-4. Functie 3 is bewust verrassend, avontuurlijk en onverwacht — een functie uit een andere categorie die de medewerker zelf niet snel zou bedenken, maar die wél aansluit bij het opleidingsniveau en de kernvaardigheden. Kies een functie waar de medewerker zelf nooit aan zou denken maar die wél past bij de kernvaardigheden. Durf creatief te zijn en buiten de gebaande paden te denken, maar houd het haalbaar. Begin deze met: "En als verrassing..." of "Misschien had je dit niet verwacht, maar..."
-5. Schrijf per functie 2-3 zinnen:
-   - Begin met een verwijzing naar de specifieke kernwoorden van de gebruiker
-   - Leg concreet uit hoe deze functie eruitziet binnen een medisch centrum
-   - Blijf herkenbaar en motiverend
-6. Stel NOOIT functies voor die niet in de ankerlijst staan.
-7. De functietitels mogen maximaal uit 3 woorden bestaan.
-8. De beschrijving per functie mag maximaal 40 woorden zijn.`
-      };
+    if (isOrganisationMode) {
+      // Organisation mode: sector-based prompting (with optional vacancies as inspiration)
+      prompts = getOrganisationSectorPrompts(language, sectorName, organisationName, userData, organisationVacancies.length > 0 ? organisationVacancies : undefined);
     } else {
       prompts = getCareerReportPrompts(language, userData);
     }
 
-    console.log('🏥 ErasmusMC mode:', isErasmusMC);
+    console.log('🏢 Organisation mode:', isOrganisationMode, '| Sector:', sectorName || 'N/A');
 
     console.log('🤖 Calling Lovable AI Gateway with language:', language);
 
