@@ -26,6 +26,65 @@ function getLast6Months(): { key: string; start: string; end: string }[] {
   return months;
 }
 
+// ============================================================
+// Shared helper: all widgets use this single function
+// ============================================================
+interface MonthlyAccessStats {
+  total_with_access: number;
+  via_stripe: number;
+  via_promo: number;
+  via_org_code: number;
+  new_profiles: number;
+  new_profiles_with_access: number;
+}
+
+interface EntryEvent {
+  user_id: string;
+  entry_method: string;
+  redeemed_at: string;
+  org_id: string | null;
+  code: string | null;
+}
+
+interface Profile {
+  id: string;
+  created_at: string;
+}
+
+function getMonthlyAccessStats(
+  entryEvents: EntryEvent[],
+  profiles: Profile[],
+  monthStart: string,
+  monthEnd: string
+): MonthlyAccessStats {
+  // Filter entry_events by redeemed_at
+  const eventsInMonth = entryEvents.filter(
+    e => e.redeemed_at >= monthStart && e.redeemed_at < monthEnd
+  );
+
+  // DISTINCT user_ids per method
+  const allUsers = new Set(eventsInMonth.map(e => e.user_id));
+  const stripeUsers = new Set(eventsInMonth.filter(e => e.entry_method === 'stripe_payment').map(e => e.user_id));
+  const promoUsers = new Set(eventsInMonth.filter(e => e.entry_method === 'promo_code').map(e => e.user_id));
+  const orgUsers = new Set(eventsInMonth.filter(e => e.entry_method === 'organisation_access_code').map(e => e.user_id));
+
+  // New profiles = profiles.created_at in month
+  const newProfiles = profiles.filter(p => p.created_at >= monthStart && p.created_at < monthEnd);
+  const newProfileIds = new Set(newProfiles.map(p => p.id));
+
+  // New profiles that also have access in this month
+  const newWithAccess = new Set([...allUsers].filter(uid => newProfileIds.has(uid)));
+
+  return {
+    total_with_access: allUsers.size,
+    via_stripe: stripeUsers.size,
+    via_promo: promoUsers.size,
+    via_org_code: orgUsers.size,
+    new_profiles: newProfiles.length,
+    new_profiles_with_access: newWithAccess.size,
+  };
+}
+
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
@@ -39,124 +98,87 @@ serve(async (req) => {
     const months = getLast6Months();
     const monthly_columns = months.map(m => m.key);
 
-    // FIX 1: added access_code_id to sessions select
-    const [orgTypesRes, sessionsRes, profilesRes, codesRes, entryEventsRes] = await Promise.all([
+    // Only 3 core fetches needed now
+    const [orgTypesRes, entryEventsRes, profilesRes, codesRes] = await Promise.all([
       supabase.from('organisation_types').select('id, name, parent_type_id, is_unique').order('name'),
-      supabase.from('user_organisation_sessions').select('id, organisation_type_id, created_at, user_id, access_code_id'),
-      supabase.from('profiles').select('id, created_at, has_paid'),
+      supabase.from('entry_events').select('user_id, entry_method, redeemed_at, org_id, code'),
+      supabase.from('profiles').select('id, created_at'),
       supabase.from('organisation_access_codes').select('id, code, organisation_type_id, uses_count, max_uses, is_active, last_used_at').order('created_at', { ascending: false }),
-      supabase.from('entry_events').select('user_id, entry_method, redeemed_at'),
     ]);
 
     const orgTypes = orgTypesRes.data || [];
-    const sessions = sessionsRes.data || [];
-    const profiles = profilesRes.data || [];
+    const entryEvents: EntryEvent[] = entryEventsRes.data || [];
+    const profiles: Profile[] = profilesRes.data || [];
     const codesRaw = codesRes.data || [];
-    const entryEvents = entryEventsRes.data || [];
 
-    // Build a set of paid user IDs for quick lookup
-    const paidUserIds = new Set(profiles.filter(p => p.has_paid).map(p => p.id));
-    const paidProfiles = profiles.filter(p => p.has_paid);
+    // ============================================================
+    // Widget 1: Toegang per Maand (uses shared helper)
+    // ============================================================
+    const access_stats: Record<string, MonthlyAccessStats> = {};
+    for (const m of months) {
+      access_stats[m.key] = getMonthlyAccessStats(entryEvents, profiles, m.start, m.end);
+    }
 
-    // FIX 4: Build month-scoped org user sets instead of global
+    // Totals across all time
+    const allTime = getMonthlyAccessStats(entryEvents, profiles, '1970-01-01T00:00:00.000Z', '2099-01-01T00:00:00.000Z');
+
+    // ============================================================
+    // Widget 2: Algemeen Vinster Gebruik (same data, different grouping)
+    // ============================================================
     const general_stats: Record<string, { total: number; org: number; normal: number }> = {};
-
     for (const m of months) {
-      const inMonth = paidProfiles.filter(p => p.created_at >= m.start && p.created_at < m.end);
-      // Only count users who had an org session in the SAME month
-      const orgUserIdsInMonth = new Set(
-        sessions
-          .filter(s => s.created_at >= m.start && s.created_at < m.end)
-          .map(s => s.user_id)
-      );
-      const org = inMonth.filter(p => orgUserIdsInMonth.has(p.id)).length;
-      const normal = inMonth.length - org;
-      general_stats[m.key] = { total: inMonth.length, org, normal };
+      const s = access_stats[m.key];
+      general_stats[m.key] = {
+        total: s.total_with_access,
+        org: s.via_org_code,
+        normal: s.via_stripe + s.via_promo,
+      };
     }
+    const general_totals = {
+      total: allTime.total_with_access,
+      org: allTime.via_org_code,
+      normal: allTime.via_stripe + allTime.via_promo,
+    };
 
-    // Totals: also scope org to sessions that overlap with profile month
-    const totalAll = paidProfiles.length;
-    const allOrgUserIds = new Set(sessions.map(s => s.user_id));
-    const totalOrg = paidProfiles.filter(p => allOrgUserIds.has(p.id)).length;
-    const totalNormal = totalAll - totalOrg;
+    // ============================================================
+    // Widget 3: Gebruik per branche (entry_events, DISTINCT users, grouped by org_id)
+    // ============================================================
+    const orgCodeEvents = entryEvents.filter(e => e.entry_method === 'organisation_access_code' && e.org_id);
 
-    // Account KPIs: now correctly using access_code_id (FIX 1)
-    const sessionsWithCode = sessions.filter(s => s.access_code_id);
-    const usersWithCode = new Set(sessionsWithCode.map(s => s.user_id));
-
-    const account_kpis: Record<string, { total_new_profiles: number; new_paid_accounts: number; new_unpaid_accounts: number; via_payment: number; via_code: number }> = {};
-    let kpiTotals = { total_new_profiles: 0, new_paid_accounts: 0, new_unpaid_accounts: 0, via_payment: 0, via_code: 0 };
-
-    for (const m of months) {
-      const newInMonth = profiles.filter(p => p.created_at >= m.start && p.created_at < m.end);
-      const total_new = newInMonth.length;
-      const via_payment = newInMonth.filter(p => p.has_paid).length;
-      const via_code = newInMonth.filter(p => usersWithCode.has(p.id)).length;
-      const new_paid = newInMonth.filter(p => p.has_paid || usersWithCode.has(p.id)).length;
-      const new_unpaid = total_new - new_paid;
-
-      account_kpis[m.key] = { total_new_profiles: total_new, new_paid_accounts: new_paid, new_unpaid_accounts: new_unpaid, via_payment, via_code };
-      kpiTotals.total_new_profiles += total_new;
-      kpiTotals.new_paid_accounts += new_paid;
-      kpiTotals.new_unpaid_accounts += new_unpaid;
-      kpiTotals.via_payment += via_payment;
-      kpiTotals.via_code += via_code;
-    }
-
-    // Entry KPIs based on entry_events table (single source of truth)
-    const entry_kpis: Record<string, { total_with_access: number; via_stripe: number; via_promo: number; via_org_code: number }> = {};
-    let entryTotals = { total_with_access: 0, via_stripe: 0, via_promo: 0, via_org_code: 0 };
-
-    for (const m of months) {
-      const newInMonth = profiles.filter(p => p.created_at >= m.start && p.created_at < m.end);
-      const newUserIds = new Set(newInMonth.map(p => p.id));
-      const relevantEvents = entryEvents.filter(e => newUserIds.has(e.user_id));
-      const usersWithEntry = new Set(relevantEvents.map(e => e.user_id));
-      const via_stripe = new Set(relevantEvents.filter(e => e.entry_method === 'stripe_payment').map(e => e.user_id)).size;
-      const via_promo = new Set(relevantEvents.filter(e => e.entry_method === 'promo_code').map(e => e.user_id)).size;
-      const via_org_code = new Set(relevantEvents.filter(e => e.entry_method === 'organisation_access_code').map(e => e.user_id)).size;
-      entry_kpis[m.key] = { total_with_access: usersWithEntry.size, via_stripe, via_promo, via_org_code };
-      entryTotals.total_with_access += usersWithEntry.size;
-      entryTotals.via_stripe += via_stripe;
-      entryTotals.via_promo += via_promo;
-      entryTotals.via_org_code += via_org_code;
-    }
-
-    // Build is_unique lookup
-    const isUniqueMap = new Map(orgTypes.map(ot => [ot.id, ot.is_unique ?? false]));
-
-    // Org stats with monthly breakdown
-    const stats = orgTypes.map(ot => {
-      const isUnique = isUniqueMap.get(ot.id) || false;
-      const orgSessions = sessions.filter(s => s.organisation_type_id === ot.id);
-
-      const filteredSessions = isUnique
-        ? orgSessions
-        : orgSessions.filter(s => paidUserIds.has(s.user_id));
-
+    const org_stats = orgTypes.map(ot => {
       const monthly: Record<string, number> = {};
       for (const m of months) {
-        monthly[m.key] = filteredSessions.filter(s => s.created_at >= m.start && s.created_at < m.end).length;
+        const usersInMonth = new Set(
+          orgCodeEvents
+            .filter(e => e.org_id === ot.id && e.redeemed_at >= m.start && e.redeemed_at < m.end)
+            .map(e => e.user_id)
+        );
+        monthly[m.key] = usersInMonth.size;
       }
+
+      const totalUsers = new Set(
+        orgCodeEvents.filter(e => e.org_id === ot.id).map(e => e.user_id)
+      );
 
       return {
         org_name: ot.name,
         org_id: ot.id,
         parent_type_id: ot.parent_type_id || null,
-        is_unique: isUnique,
         monthly,
-        total: isUnique ? orgSessions.length : filteredSessions.length,
+        total: totalUsers.size,
       };
     });
 
-    // FIX 3: Compute unique_users per code from sessions
+    // ============================================================
+    // Widget 4: Toegangscodes (unique_users from entry_events)
+    // ============================================================
     const codeUniqueUsers = new Map<string, Set<string>>();
-    for (const s of sessions) {
-      if (s.access_code_id) {
-        if (!codeUniqueUsers.has(s.access_code_id)) {
-          codeUniqueUsers.set(s.access_code_id, new Set());
+    for (const e of orgCodeEvents) {
+      if (e.code) {
+        if (!codeUniqueUsers.has(e.code)) {
+          codeUniqueUsers.set(e.code, new Set());
         }
-        codeUniqueUsers.get(s.access_code_id)!.add(s.user_id);
+        codeUniqueUsers.get(e.code)!.add(e.user_id);
       }
     }
 
@@ -166,23 +188,21 @@ serve(async (req) => {
       code: c.code,
       org_name: orgMap.get(c.organisation_type_id) || 'Onbekend',
       uses_count: c.uses_count || 0,
-      unique_users: codeUniqueUsers.get(c.id)?.size || 0,
+      unique_users: codeUniqueUsers.get(c.code)?.size || 0,
       max_uses: c.max_uses,
       is_active: c.is_active ?? true,
       last_used_at: c.last_used_at,
     }));
 
     return new Response(JSON.stringify({
-      stats,
+      monthly_columns,
+      access_stats,
+      access_totals: allTime,
+      general_stats,
+      general_totals,
+      org_stats,
       codes,
       org_types: orgTypes,
-      monthly_columns,
-      general_stats,
-      general_totals: { total: totalAll, org: totalOrg, normal: totalNormal },
-      account_kpis,
-      account_kpi_totals: kpiTotals,
-      entry_kpis,
-      entry_kpi_totals: entryTotals,
     }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
