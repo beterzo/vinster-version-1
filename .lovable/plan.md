@@ -1,23 +1,23 @@
 
+# Alle organisatietypen klikbaar maken in navigatie
 
-# Logo beschikbaar maken via publieke URL
+## Wat er verandert
 
-## Wat er gebeurt
+De vier inactieve organisatietypen (Universiteit, Zorg en Welzijn, Hogeschool, Mbo-instelling) worden klikbaar gemaakt in zowel de desktop dropdown als het mobiele menu. Wanneer iemand erop klikt, gaan ze naar `/organisaties/{slug}`.
 
-Het geüploade logo (wit op blauw) wordt gekopieerd naar de `public/images/` map van het project. Na deployment is het logo bereikbaar op:
+Omdat deze organisaties niet als actief in de database staan, toont de bestaande `OrganisatieLanding` pagina automatisch de "Toegang tot Vinster voor jouw organisatie? Neem contact op" melding -- precies het gewenste resultaat.
 
-```text
-https://vinster.lovable.app/images/vinster-logo-wit-op-blauw.png
-```
+## Aanpassingen
 
-Deze URL kun je direct gebruiken in de HTML van je nieuwsbrief, bijvoorbeeld:
+### 1. `src/components/DesktopNavigation.tsx`
+- Verwijder het onderscheid tussen `available: true` en `available: false`
+- Alle items worden klikbare links naar `/organisaties/{slug}`
+- Verwijder de "Neem contact op" tooltip bij inactieve items
+- Verwijder de grijze styling voor inactieve items
 
-```text
-<img src="https://vinster.lovable.app/images/vinster-logo-wit-op-blauw.png" alt="Vinster Logo" />
-```
+### 2. `src/components/MobileMenu.tsx`
+- Zelfde aanpassing: alle organisatie-items worden klikbaar
+- Verwijder de `disabled` state en "Binnenkort" labels
+- Alle items navigeren naar `/organisaties/{slug}`
 
-## Technisch
-
-- **Kopieer** `user-uploads://Vinster_logo_wit_op_blauw.png` naar `public/images/vinster-logo-wit-op-blauw.png`
-- Geen code-aanpassingen nodig, het bestand wordt automatisch geserveerd als statisch asset
-
+Er zijn geen database- of backend-wijzigingen nodig. De bestaande fallback op de landingspagina regelt de contactmelding.
