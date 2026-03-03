@@ -1,23 +1,37 @@
 
-# Alle organisatietypen klikbaar maken in navigatie
 
-## Wat er verandert
+# Alleen Medisch Centrum / ErasmusMC als actief traject
 
-De vier inactieve organisatietypen (Universiteit, Zorg en Welzijn, Hogeschool, Mbo-instelling) worden klikbaar gemaakt in zowel de desktop dropdown als het mobiele menu. Wanneer iemand erop klikt, gaan ze naar `/organisaties/{slug}`.
+## Samenvatting
 
-Omdat deze organisaties niet als actief in de database staan, toont de bestaande `OrganisatieLanding` pagina automatisch de "Toegang tot Vinster voor jouw organisatie? Neem contact op" melding -- precies het gewenste resultaat.
+Alleen via **Medisch Centrum** (en de sub-organisatie **ErasmusMC**) kan daadwerkelijk een Vinster-traject gestart worden. Alle andere organisatietypen (Hogeschool, Transport, Financieel, Universiteit, Zorgorganisatie, Mbo-instelling) worden op inactief gezet in de database. Daardoor toont hun landingspagina automatisch de bestaande "Toegang tot Vinster voor jouw organisatie? Neem contact op"-melding.
 
-## Aanpassingen
+De navigatiemenu's blijven ongewijzigd -- alle organisaties blijven zichtbaar en klikbaar, maar leiden naar de contactpagina.
 
-### 1. `src/components/DesktopNavigation.tsx`
-- Verwijder het onderscheid tussen `available: true` en `available: false`
-- Alle items worden klikbare links naar `/organisaties/{slug}`
-- Verwijder de "Neem contact op" tooltip bij inactieve items
-- Verwijder de grijze styling voor inactieve items
+## Aanpassing
 
-### 2. `src/components/MobileMenu.tsx`
-- Zelfde aanpassing: alle organisatie-items worden klikbaar
-- Verwijder de `disabled` state en "Binnenkort" labels
-- Alle items navigeren naar `/organisaties/{slug}`
+### Database-update (geen schema-wijziging, alleen data)
 
-Er zijn geen database- of backend-wijzigingen nodig. De bestaande fallback op de landingspagina regelt de contactmelding.
+De volgende organisatietypen worden op `is_active = false` gezet:
+
+| Organisatie | Huidige status | Nieuwe status |
+|---|---|---|
+| Medisch Centrum | actief | **actief** (blijft) |
+| ErasmusMC | actief | **actief** (blijft) |
+| Hogeschool | actief | **inactief** |
+| Transport en Logistiek | actief | **inactief** |
+| Financieel | actief | **inactief** |
+| Universiteit | actief | **inactief** |
+| Zorgorganisatie | actief | **inactief** |
+| Mbo-instelling | inactief | **inactief** (blijft) |
+
+### Resultaat
+
+- Klikken op bijv. "Hogeschool" of "Transport" in het menu leidt naar `/organisaties/hogeschool` etc.
+- De landingspagina vindt geen actieve organisatie en toont: **"Toegang tot Vinster voor jouw organisatie? Neem contact op"** met een mailto-link naar team@vinster.ai
+- Medisch Centrum en ErasmusMC blijven volledig functioneel
+
+### Geen code-aanpassingen nodig
+
+De bestaande fallback in `OrganisatieLanding.tsx` regelt dit automatisch. De navigatie (desktop + mobiel) is al bijgewerkt zodat alle items klikbaar zijn.
+
