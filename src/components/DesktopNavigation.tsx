@@ -5,14 +5,14 @@ import { ChevronDown } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 const organisationItems = [
-  { name: "Medisch Centrum", slug: "medisch-centrum", available: true },
-  { name: "ErasmusMC", slug: "erasmus-mc", indent: true, available: true },
-  { name: "Transport & Logistiek", shortName: "Transport", slug: "transport-en-logistiek", available: true },
-  { name: "Financiële instellingen", shortName: "Financieel", slug: "financiele-instellingen", available: true },
-  { name: "Universiteit", slug: "universiteit", available: false },
-  { name: "Zorg en Welzijn", slug: "zorg-en-welzijn", available: false },
-  { name: "Hogeschool", slug: "hogeschool", available: false },
-  { name: "Mbo-instelling", slug: "mbo-instelling", available: false },
+  { name: "Medisch Centrum", slug: "medisch-centrum" },
+  { name: "ErasmusMC", slug: "erasmus-mc", indent: true },
+  { name: "Transport & Logistiek", shortName: "Transport", slug: "transport-en-logistiek" },
+  { name: "Financiële instellingen", shortName: "Financieel", slug: "financiele-instellingen" },
+  { name: "Universiteit", slug: "universiteit" },
+  { name: "Zorg en Welzijn", slug: "zorg-en-welzijn" },
+  { name: "Hogeschool", slug: "hogeschool" },
+  { name: "Mbo-instelling", slug: "mbo-instelling" },
 ];
 
 const DesktopNavigation = () => {
@@ -88,43 +88,28 @@ const DesktopNavigation = () => {
               <TooltipProvider delayDuration={200}>
                 <div className="rounded-xl border border-gray-100 bg-white shadow-xl py-1">
                   {organisationItems.map((org) => (
-                    org.available ? (
-                      <Tooltip key={org.slug}>
-                        <TooltipTrigger asChild>
-                          <button
-                            onClick={() => {
-                              navigate(`/organisaties/${org.slug}`);
-                              setDropdownOpen(false);
-                            }}
-                            className={`block w-full text-left py-2.5 text-sm font-medium transition-colors ${
-                              org.indent
-                                ? "pl-10 text-gray-500 hover:bg-[rgba(26,46,90,0.05)] hover:text-[#1a2e5a]"
-                                : "px-5 text-gray-700 hover:bg-[rgba(26,46,90,0.05)] hover:text-[#1a2e5a]"
-                            }`}
-                          >
-                            {org.indent ? `→ ${org.name}` : (org.shortName || org.name)}
-                          </button>
-                        </TooltipTrigger>
-                        {org.shortName && (
-                          <TooltipContent side="right">
-                            <p>{org.name}</p>
-                          </TooltipContent>
-                        )}
-                      </Tooltip>
-                    ) : (
-                      <Tooltip key={org.slug}>
-                        <TooltipTrigger asChild>
-                          <span
-                            className="block w-full text-left py-2.5 px-5 text-sm font-medium text-gray-400 cursor-default"
-                          >
-                            {org.name}
-                          </span>
-                        </TooltipTrigger>
+                    <Tooltip key={org.slug}>
+                      <TooltipTrigger asChild>
+                        <button
+                          onClick={() => {
+                            navigate(`/organisaties/${org.slug}`);
+                            setDropdownOpen(false);
+                          }}
+                          className={`block w-full text-left py-2.5 text-sm font-medium transition-colors ${
+                            org.indent
+                              ? "pl-10 text-gray-500 hover:bg-[rgba(26,46,90,0.05)] hover:text-[#1a2e5a]"
+                              : "px-5 text-gray-700 hover:bg-[rgba(26,46,90,0.05)] hover:text-[#1a2e5a]"
+                          }`}
+                        >
+                          {org.indent ? `→ ${org.name}` : (org.shortName || org.name)}
+                        </button>
+                      </TooltipTrigger>
+                      {org.shortName && (
                         <TooltipContent side="right">
-                          <p>Neem contact op</p>
+                          <p>{org.name}</p>
                         </TooltipContent>
-                      </Tooltip>
-                    )
+                      )}
+                    </Tooltip>
                   ))}
                 </div>
               </TooltipProvider>
