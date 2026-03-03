@@ -14,14 +14,14 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const organisationItems = [
-  { name: "Medisch Centrum", slug: "medisch-centrum", available: true },
-  { name: "ErasmusMC", slug: "erasmus-mc", indent: true, available: true },
-  { name: "Transport & Logistiek", shortName: "Transport", slug: "transport-en-logistiek", available: true },
-  { name: "Financiële instellingen", shortName: "Financieel", slug: "financiele-instellingen", available: true },
-  { name: "Universiteit", slug: "universiteit", available: false },
-  { name: "Zorg en Welzijn", slug: "zorg-en-welzijn", available: false },
-  { name: "Hogeschool", slug: "hogeschool", available: false },
-  { name: "Mbo-instelling", slug: "mbo-instelling", available: false },
+  { name: "Medisch Centrum", slug: "medisch-centrum" },
+  { name: "ErasmusMC", slug: "erasmus-mc", indent: true },
+  { name: "Transport & Logistiek", shortName: "Transport", slug: "transport-en-logistiek" },
+  { name: "Financiële instellingen", shortName: "Financieel", slug: "financiele-instellingen" },
+  { name: "Universiteit", slug: "universiteit" },
+  { name: "Zorg en Welzijn", slug: "zorg-en-welzijn" },
+  { name: "Hogeschool", slug: "hogeschool" },
+  { name: "Mbo-instelling", slug: "mbo-instelling" },
 ];
 
 const MobileMenu = () => {
@@ -134,15 +134,13 @@ const MobileMenu = () => {
                       {organisationItems.map((org) => (
                         <button
                           key={org.slug}
-                          onClick={() => org.available && handleNavigation(`/organisaties/${org.slug}`)}
-                          disabled={!org.available}
-                          className={`block w-full text-left py-2 px-0 text-base font-medium transition-colors ${
+                          onClick={() => handleNavigation(`/organisaties/${org.slug}`)}
+                          className={`block w-full text-left py-2 px-0 text-base font-medium transition-colors hover:text-blue-900 ${
                             org.indent ? "pl-4 text-gray-500" : "text-gray-600"
-                          } ${!org.available ? "opacity-50 cursor-default" : "hover:text-blue-900"}`}
+                          }`}
                         >
                           {org.indent ? `→ ${org.name}` : (org.shortName || org.name)}
-                          {org.shortName && org.available && <span className="text-xs text-gray-400 ml-2">{org.name}</span>}
-                          {!org.available && <span className="text-xs text-gray-400 ml-2">Binnenkort</span>}
+                          {org.shortName && <span className="text-xs text-gray-400 ml-2">{org.name}</span>}
                         </button>
                       ))}
                     </div>
