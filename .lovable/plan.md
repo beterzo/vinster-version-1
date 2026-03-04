@@ -1,37 +1,17 @@
 
 
-# Alleen Medisch Centrum / ErasmusMC als actief traject
+## Quote glassmorphism aanpassing
 
-## Samenvatting
+Twee pagina's moeten worden bijgewerkt zodat de quote-overlay dezelfde glassmorphism-stijl krijgt als Login, Signup en EmailVerification:
 
-Alleen via **Medisch Centrum** (en de sub-organisatie **ErasmusMC**) kan daadwerkelijk een Vinster-traject gestart worden. Alle andere organisatietypen (Hogeschool, Transport, Financieel, Universiteit, Zorgorganisatie, Mbo-instelling) worden op inactief gezet in de database. Daardoor toont hun landingspagina automatisch de bestaande "Toegang tot Vinster voor jouw organisatie? Neem contact op"-melding.
+### Wijzigingen
 
-De navigatiemenu's blijven ongewijzigd -- alle organisaties blijven zichtbaar en klikbaar, maar leiden naar de contactpagina.
+**1. `src/pages/ForgotPasswordPage.tsx`** (regel ~89-92)
+- Verander `bg-white bg-opacity-90 rounded-2xl p-8 max-w-md` naar `bg-white/15 backdrop-blur-[8px] border border-white/20 rounded-xl p-8 max-w-md`
+- Verander `text-xl font-medium text-blue-900 leading-relaxed` naar `text-xl font-medium text-white leading-relaxed drop-shadow-sm`
 
-## Aanpassing
+**2. `src/pages/CheckEmailPasswordResetPage.tsx`** (regel ~83-86)
+- Zelfde wijzigingen als hierboven
 
-### Database-update (geen schema-wijziging, alleen data)
-
-De volgende organisatietypen worden op `is_active = false` gezet:
-
-| Organisatie | Huidige status | Nieuwe status |
-|---|---|---|
-| Medisch Centrum | actief | **actief** (blijft) |
-| ErasmusMC | actief | **actief** (blijft) |
-| Hogeschool | actief | **inactief** |
-| Transport en Logistiek | actief | **inactief** |
-| Financieel | actief | **inactief** |
-| Universiteit | actief | **inactief** |
-| Zorgorganisatie | actief | **inactief** |
-| Mbo-instelling | inactief | **inactief** (blijft) |
-
-### Resultaat
-
-- Klikken op bijv. "Hogeschool" of "Transport" in het menu leidt naar `/organisaties/hogeschool` etc.
-- De landingspagina vindt geen actieve organisatie en toont: **"Toegang tot Vinster voor jouw organisatie? Neem contact op"** met een mailto-link naar team@vinster.ai
-- Medisch Centrum en ErasmusMC blijven volledig functioneel
-
-### Geen code-aanpassingen nodig
-
-De bestaande fallback in `OrganisatieLanding.tsx` regelt dit automatisch. De navigatie (desktop + mobiel) is al bijgewerkt zodat alle items klikbaar zijn.
+Dit brengt beide pagina's in lijn met de glassmorphism-stijl van de andere auth-pagina's.
 
