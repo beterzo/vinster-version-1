@@ -40,46 +40,6 @@ export const formatKeywordsForReport = (keywords: string[]): string => {
 };
 
 /**
- * Pronoun prefixes per language for the je-vorm in reports.
- */
-const pronounMap: Record<string, string> = {
-  nl: 'Je ',
-  en: 'You ',
-  de: 'Du ',
-  no: 'Du ',
-};
-
-/**
- * Format keywords for report display with je-vorm:
- * - First keyword gets the pronoun prefix (e.g. "Je bedenkt graag...")
- * - Remaining keywords stay neutral (e.g. "werkt het liefst...")
- * - All joined with comma + space as a flowing sentence
- */
-export const formatKeywordsForReportWithJeVorm = (
-  keywords: string[],
-  language: string = 'nl'
-): string => {
-  if (!keywords || keywords.length === 0) return '';
-
-  const pronoun = pronounMap[language] || pronounMap.nl;
-
-  return keywords
-    .map((keyword, index) => {
-      const cleaned = keyword.trim();
-      if (index === 0) {
-        // First item: add pronoun + lowercase first char
-        const withoutPronoun = cleaned.replace(/^(Je |You |Du )/i, '');
-        return pronoun + withoutPronoun.charAt(0).toLowerCase() + withoutPronoun.slice(1);
-      } else {
-        // Subsequent items: ensure no pronoun, lowercase
-        const withoutPronoun = cleaned.replace(/^(Je |You |Du )/i, '');
-        return withoutPronoun.charAt(0).toLowerCase() + withoutPronoun.slice(1);
-      }
-    })
-    .join(', ');
-};
-
-/**
  * Bold quoted keywords in description text.
  * Finds "keyword" patterns and returns React elements with bold spans (no quotes).
  */

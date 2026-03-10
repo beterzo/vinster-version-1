@@ -14,19 +14,16 @@ const getPrompts = (language: string, enthousiasmeData: any, wensberoepenData: a
 
 BELANGRIJK: Genereer GEEN losse woorden. Elk item moet een korte beschrijvende zin zijn van 4-8 woorden die een concrete voorkeur of eigenschap beschrijft.
 
-CRUCIAAL - NEUTRALE STIJL: Alle items worden geformuleerd ZONDER persoonlijk voornaamwoord ("Je"). Begin elk item direct met het werkwoord of een beschrijvend woord. De items moeten neutraal zijn zodat ze als losse keuzeopties gepresenteerd kunnen worden.
-
 De output moet een JSON-object zijn, met drie aparte arrays:
 
-- "activiteiten": dingen die iemand graag doet. GEEN "Je" gebruiken.
-  Correct voorbeeld: ["bedenkt graag creatieve oplossingen", "werkt het liefst samen in een klein team", "begeleidt en coacht anderen", "geeft graag presentaties aan grote groepen"]
-  FOUT: ["Je bedenkt graag creatieve oplossingen"] — GEEN "Je" gebruiken!
-- "werkomgeving": voorkeuren voor omgeving of samenwerking. Zelfde regel: GEEN "Je".
-  Voorbeeld: ["werkt het liefst in een informele sfeer", "houdt van flexibele werktijden", "wisselt graag af tussen kantoor en buitenwerk", "zoekt een rustige werkplek met concentratie"]
-- "interesses": thema's of onderwerpen waar iemand in geïnteresseerd is. Zelfde regel.
-  Voorbeeld: ["geïnteresseerd in technologie en innovatie", "gefascineerd door menselijk gedrag", "heeft een passie voor duurzaamheid", "nieuwsgierig naar kunst en cultuur"]
+- "activiteiten": dingen die iemand graag doet, verwoord als korte beschrijvende zinnen.
+  Voorbeelden: "Creatieve oplossingen bedenken voor problemen", "Graag samenwerken in een klein team", "Mensen begeleiden en coachen", "Presentaties geven aan grote groepen"
+- "werkomgeving": voorkeuren voor omgeving of samenwerking, als korte beschrijvende zinnen.
+  Voorbeelden: "Werken in een informele sfeer", "Flexibel kunnen indelen van werktijd", "Afwisseling tussen kantoor en buitenwerk", "Rustige werkplek met veel concentratie"
+- "interesses": thema's of onderwerpen waar iemand in geïnteresseerd is, als korte beschrijvende zinnen.
+  Voorbeelden: "Geïnteresseerd in technologie en innovatie", "Gefascineerd door menselijk gedrag", "Passie voor duurzaamheid en milieu", "Nieuwsgierig naar kunst en cultuur"
 
-Gebruik uitsluitend informatie uit de antwoorden van de deelnemer. Formuleer alles in de stijl van de deelnemer. Elk item MOET een korte zin zijn van 4-8 woorden, NOOIT een los woord. NOOIT beginnen met "Je".
+Gebruik uitsluitend informatie uit de antwoorden van de deelnemer. Formuleer alles in de stijl van de deelnemer. Elk item MOET een korte zin zijn van 4-8 woorden, NOOIT een los woord.
 
 ⚠️ De output moet geldig JSON zijn. Geen toelichting, geen extra uitleg, alleen het JSON-object.`,
       user: `Je ontvangt nu een volledig ingevulde antwoordenlijst van een gebruiker. Gebruik deze input om op basis van de methodiek van de loopbaantrechter 48 korte beschrijvende zinnen te genereren (exact 16 per categorie), verdeeld over drie categorieën:
@@ -34,13 +31,9 @@ Gebruik uitsluitend informatie uit de antwoorden van de deelnemer. Formuleer all
 • werkomgeving (de sfeer, structuur en context waarin iemand graag werkt)
 • interesses (onderwerpen waar iemand door gefascineerd is of energie van krijgt)
 
-BELANGRIJK - NEUTRALE STIJL: Begin GEEN enkel item met "Je". Start direct met het werkwoord.
-Goed voorbeeld:
-  Item 1: "bedenkt graag creatieve oplossingen"
-  Item 2: "werkt het liefst in een informele sfeer"
-  Item 3: "geïnteresseerd in technologie"
-FOUT voorbeeld:
-  Item 1: "Je bedenkt graag creatieve oplossingen"  ← FOUT, geen "Je" gebruiken!
+BELANGRIJK: Elk item moet een korte beschrijvende zin zijn van 4-8 woorden. Geen losse woorden!
+Goed: "Graag samenwerken in een klein team"
+Fout: "Samenwerken"
 
 De output moet in JSON-format zijn, met drie duidelijke keys:
 {
@@ -48,7 +41,7 @@ De output moet in JSON-format zijn, met drie duidelijke keys:
   "werkomgeving": [],
   "interesses": []
 }
-Laat elke lijst exact 16 korte zinnen bevatten. Dit is belangrijk: niet meer, niet minder dan 16 items per categorie. Elk item moet een beschrijvende zin zijn van 4-8 woorden. NOOIT beginnen met "Je".
+Laat elke lijst exact 16 korte zinnen bevatten. Dit is belangrijk: niet meer, niet minder dan 16 items per categorie. Elk item moet een beschrijvende zin zijn van 4-8 woorden.
 
 Input – Antwoorden gebruiker:
 
@@ -119,18 +112,15 @@ Wensberoep 3 – ${wensberoepenData?.wensberoep_3_titel || 'Niet ingevuld'}
 
 IMPORTANT: Do NOT generate single words. Each item must be a short descriptive phrase of 4-8 words that describes a concrete preference or characteristic.
 
-CRUCIAL - NEUTRAL STYLE: All items must be formulated WITHOUT the personal pronoun "You". Start each item directly with a verb or descriptive word. The items must be neutral so they can be presented as individual selection options.
-
 The output must be a JSON object, with three separate arrays:
-• "activiteiten": things someone enjoys doing. Do NOT use "You".
-  Correct example: ["enjoy solving creative problems", "prefer collaborating in small teams", "like coaching and mentoring others", "love presenting ideas to large groups"]
-  WRONG: ["You enjoy solving creative problems"] — do NOT use "You"!
-• "werkomgeving": preferences for environment or collaboration. Same rule: NO "You".
-  Example: ["prefer working in a relaxed atmosphere", "enjoy flexible scheduling of work hours", "like alternating between office and fieldwork", "seek a quiet workspace for concentration"]
-• "interesses": themes or topics someone is interested in. Same rule.
-  Example: ["interested in technology and innovation", "fascinated by human behavior", "have a passion for sustainability", "curious about art and culture"]
+• "activiteiten": things someone enjoys doing, phrased as short descriptive sentences.
+  Examples: "Enjoy solving creative problems", "Like coaching and mentoring others", "Presenting ideas to large groups", "Organizing events and activities"
+• "werkomgeving": preferences for environment or collaboration, as short descriptive sentences.
+  Examples: "Working in a relaxed informal atmosphere", "Flexible scheduling of work hours", "Quiet workspace with good concentration", "Mix of teamwork and solo tasks"
+• "interesses": themes or topics someone is interested in, as short descriptive sentences.
+  Examples: "Interested in technology and innovation", "Fascinated by human behavior", "Passionate about sustainability and environment", "Curious about art and culture"
 
-Use only information from the participant's answers. Formulate everything in the participant's own style. Each item MUST be a short phrase of 4-8 words, NEVER a single word. NEVER start with "You".
+Use only information from the participant's answers. Formulate everything in the participant's own style. Each item MUST be a short phrase of 4-8 words, NEVER a single word.
 
 ⚠️ The output must be valid JSON. No explanation, no additional text, only the JSON object.`,
       user: `You are now receiving a fully completed list of answers from a user. Use this input to generate 48 short descriptive phrases (exactly 16 per category) based on the method of the career funnel, divided into three categories:
@@ -138,13 +128,9 @@ Use only information from the participant's answers. Formulate everything in the
 • work environment (the atmosphere, structure, and context in which someone prefers to work)
 • interests (topics that fascinate or energize someone)
 
-IMPORTANT - NEUTRAL STYLE: Do NOT start any item with "You". Start directly with the verb.
-Correct example:
-  Item 1: "enjoy solving creative problems"
-  Item 2: "prefer working in a relaxed atmosphere"
-  Item 3: "interested in technology"
-WRONG example:
-  Item 1: "You enjoy solving creative problems"  ← WRONG, no "You"!
+IMPORTANT: Each item must be a short descriptive phrase of 4-8 words. No single words!
+Good: "Enjoy collaborating in a small team"
+Wrong: "Collaboration"
 
 The output must be in JSON format, with three clear keys:
 {
@@ -152,7 +138,7 @@ The output must be in JSON format, with three clear keys:
   "werkomgeving": [],
   "interesses": []
 }
-Each list must contain exactly 16 short phrases. This is important: not more, not less than 16 items per category. Each item must be a descriptive phrase of 4-8 words. NEVER start with "You".
+Each list must contain exactly 16 short phrases. This is important: not more, not less than 16 items per category. Each item must be a descriptive phrase of 4-8 words.
 
 Input – User answers:
 
@@ -223,18 +209,15 @@ Dream job 3 – ${wensberoepenData?.wensberoep_3_titel || 'Not filled in'}
 
 WICHTIG: Generiere KEINE einzelnen Wörter. Jedes Item muss ein kurzer beschreibender Satz von 4-8 Wörtern sein, der eine konkrete Vorliebe oder Eigenschaft beschreibt.
 
-ENTSCHEIDEND - NEUTRALER STIL: Alle Items werden OHNE das Personalpronomen "Du" formuliert. Beginne jedes Item direkt mit dem Verb oder einem beschreibenden Wort. Die Items sollen neutral sein, damit sie als einzelne Auswahloptionen präsentiert werden können.
-
 Die Ausgabe muss ein JSON-Objekt sein, mit drei separaten Arrays:
-• "activiteiten": Dinge, die jemand gerne tut. KEIN "Du" verwenden.
-  Korrektes Beispiel: ["findest gerne kreative Lösungen", "arbeitest am liebsten im kleinen Team", "begleitest und coachst andere", "hältst gerne Präsentationen vor großen Gruppen"]
-  FALSCH: ["Du findest gerne kreative Lösungen"] — KEIN "Du" verwenden!
-• "werkomgeving": Präferenzen für Umgebung oder Zusammenarbeit. Gleiche Regel.
-  Beispiel: ["arbeitest am liebsten in entspannter Atmosphäre", "schätzt flexible Arbeitszeiten", "wechselst gerne zwischen Büro und Außenarbeit", "suchst einen ruhigen Arbeitsplatz"]
-• "interesses": Themen oder Bereiche. Gleiche Regel.
-  Beispiel: ["interessierst dich für Technologie und Innovation", "bist fasziniert von menschlichem Verhalten", "hast eine Leidenschaft für Nachhaltigkeit", "bist neugierig auf Kunst und Kultur"]
+• "activiteiten": Dinge, die jemand gerne tut, als kurze beschreibende Sätze.
+  Beispiele: "Kreative Lösungen für Probleme finden", "Gerne im kleinen Team zusammenarbeiten", "Menschen begleiten und coachen", "Präsentationen vor großen Gruppen halten"
+• "werkomgeving": Präferenzen bezüglich Umgebung oder Zusammenarbeit, als kurze beschreibende Sätze.
+  Beispiele: "Arbeiten in entspannter informeller Atmosphäre", "Flexible Einteilung der Arbeitszeit", "Abwechslung zwischen Büro und Außenarbeit", "Ruhiger Arbeitsplatz mit viel Konzentration"
+• "interesses": Themen oder Bereiche, für die sich jemand interessiert, als kurze beschreibende Sätze.
+  Beispiele: "Interessiert an Technologie und Innovation", "Fasziniert von menschlichem Verhalten", "Leidenschaft für Nachhaltigkeit und Umwelt", "Neugierig auf Kunst und Kultur"
 
-Verwende ausschließlich Informationen aus den Antworten des Teilnehmers. Formuliere alles im Stil des Teilnehmers. Jedes Item MUSS ein kurzer Satz von 4-8 Wörtern sein, NIEMALS ein einzelnes Wort. NIEMALS mit "Du" beginnen.
+Verwende ausschließlich Informationen aus den Antworten des Teilnehmers. Formuliere alles im Stil des Teilnehmers. Jedes Item MUSS ein kurzer Satz von 4-8 Wörtern sein, NIEMALS ein einzelnes Wort.
 
 ⚠️ Die Ausgabe muss gültiges JSON sein. Keine Erläuterungen, keine zusätzlichen Erklärungen, nur das JSON-Objekt.`,
       user: `Du erhältst nun eine vollständig ausgefüllte Antwortliste von einer Nutzerin oder einem Nutzer. Verwende diese Eingaben, um auf Grundlage der Methodik des Berufstrichters 48 kurze beschreibende Sätze zu generieren (genau 16 pro Kategorie), aufgeteilt in drei Kategorien:
@@ -242,13 +225,9 @@ Verwende ausschließlich Informationen aus den Antworten des Teilnehmers. Formul
 • Arbeitsumgebung (die Atmosphäre, Struktur und der Kontext, in dem jemand gerne arbeitet)
 • Interessen (Themen, die jemanden faszinieren oder ihm/ihr Energie geben)
 
-WICHTIG - NEUTRALER STIL: Beginne KEIN Item mit "Du". Starte direkt mit dem Verb.
-Korrektes Beispiel:
-  Item 1: "findest gerne kreative Lösungen"
-  Item 2: "arbeitest am liebsten in entspannter Atmosphäre"
-  Item 3: "interessierst dich für Technologie"
-FALSCHES Beispiel:
-  Item 1: "Du findest gerne kreative Lösungen"  ← FALSCH, kein "Du" verwenden!
+WICHTIG: Jedes Item muss ein kurzer beschreibender Satz von 4-8 Wörtern sein. Keine einzelnen Wörter!
+Gut: "Gerne im kleinen Team zusammenarbeiten"
+Falsch: "Zusammenarbeit"
 
 Das Ergebnis muss im JSON-Format sein, mit drei klaren Schlüsseln:
 {
@@ -256,7 +235,7 @@ Das Ergebnis muss im JSON-Format sein, mit drei klaren Schlüsseln:
   "werkomgeving": [],
   "interesses": []
 }
-Jede Liste muss genau 16 kurze Sätze enthalten. Dies ist wichtig: nicht mehr, nicht weniger als 16 Einträge pro Kategorie. Jedes Item muss ein beschreibender Satz von 4-8 Wörtern sein. NIEMALS mit "Du" beginnen.
+Jede Liste muss genau 16 kurze Sätze enthalten. Dies ist wichtig: nicht mehr, nicht weniger als 16 Einträge pro Kategorie. Jedes Item muss ein beschreibender Satz von 4-8 Wörtern sein.
 
 Eingabe – Antworten der Nutzerin/des Nutzers:
 
@@ -327,18 +306,15 @@ Wunschberuf 3 – ${wensberoepenData?.wensberoep_3_titel || 'Nicht ausgefüllt'}
 
 VIKTIG: IKKE generer enkeltord. Hvert element må være en kort beskrivende setning på 4-8 ord som beskriver en konkret preferanse eller egenskap.
 
-AVGJØRENDE - NØYTRAL STIL: Alle elementer formuleres UTEN personlig pronomen "Du". Start hvert element direkte med verbet eller et beskrivende ord. Elementene skal være nøytrale slik at de kan presenteres som individuelle valgmuligheter.
-
 Output må være et JSON-objekt med tre separate arrays:
-• "activiteiten": ting en person liker å gjøre. IKKE bruk "Du".
-  Korrekt eksempel: ["liker å finne kreative løsninger", "trives med å samarbeide i team", "veileder og coacher andre", "holder gjerne presentasjoner for store grupper"]
-  FEIL: ["Du liker å finne kreative løsninger"] — IKKE bruk "Du"!
-• "werkomgeving": preferanser for miljø eller samarbeid. Samme regel.
-  Eksempel: ["jobber helst i en uformell atmosfære", "setter pris på fleksibel arbeidstid", "veksler gjerne mellom kontor og feltarbeid", "søker en rolig arbeidsplass"]
-• "interesses": temaer eller områder. Samme regel.
-  Eksempel: ["interessert i teknologi og innovasjon", "fascinert av menneskelig atferd", "har en lidenskap for bærekraft", "nysgjerrig på kunst og kultur"]
+• "activiteiten": ting en person liker å gjøre, formulert som korte beskrivende setninger.
+  Eksempler: "Liker å finne kreative løsninger", "Trives med å samarbeide i team", "Veilede og coache andre mennesker", "Holde presentasjoner for store grupper"
+• "werkomgeving": preferanser for miljø eller samarbeid, som korte beskrivende setninger.
+  Eksempler: "Jobbe i en uformell atmosfære", "Fleksibel inndeling av arbeidstiden", "Veksle mellom kontor og feltarbeid", "Rolig arbeidsplass med god konsentrasjon"
+• "interesses": temaer eller områder en person er interessert i, som korte beskrivende setninger.
+  Eksempler: "Interessert i teknologi og innovasjon", "Fascinert av menneskelig atferd", "Lidenskap for bærekraft og miljø", "Nysgjerrig på kunst og kultur"
 
-Bruk utelukkende informasjon fra svarene til deltakeren. Formuler alt i deltakerens egen stil. Hvert element MÅ være en kort setning på 4-8 ord, ALDRI et enkeltord. ALDRI begynne med "Du".
+Bruk utelukkende informasjon fra svarene til deltakeren. Formuler alt i deltakerens egen stil. Hvert element MÅ være en kort setning på 4-8 ord, ALDRI et enkeltord.
 
 ⚠️ Output må være gyldig JSON. Ingen forklaringer, ingen ekstra tekst, kun JSON-objektet.`,
       user: `Du mottar nå en fullstendig utfylt svarliste fra en bruker. Bruk denne inputen til å generere 48 korte beskrivende setninger (nøyaktig 16 per kategori) basert på metoden til karrieretrakten, fordelt på tre kategorier:
@@ -346,13 +322,9 @@ Bruk utelukkende informasjon fra svarene til deltakeren. Formuler alt i deltaker
 • arbeidsmiljø (stemningen, strukturen og konteksten personen trives i)
 • interesser (temaer personen er fascinert av eller får energi av)
 
-VIKTIG - NØYTRAL STIL: Start INGEN elementer med "Du". Start direkte med verbet.
-Korrekt eksempel:
-  Element 1: "liker å finne kreative løsninger"
-  Element 2: "jobber helst i en uformell atmosfære"
-  Element 3: "interessert i teknologi"
-FEIL eksempel:
-  Element 1: "Du liker å finne kreative løsninger"  ← FEIL, ikke bruk "Du"!
+VIKTIG: Hvert element må være en kort beskrivende setning på 4-8 ord. Ingen enkeltord!
+Riktig: "Liker å samarbeide i et lite team"
+Feil: "Samarbeid"
 
 Output skal være i JSON-format, med tre tydelige keys:
 {
@@ -360,7 +332,7 @@ Output skal være i JSON-format, med tre tydelige keys:
   "werkomgeving": [],
   "interesses": []
 }
-Hver liste må inneholde nøyaktig 16 korte setninger. Dette er viktig: ikke mer, ikke mindre enn 16 elementer per kategori. Hvert element må være en beskrivende setning på 4-8 ord. ALDRI begynne med "Du".
+Hver liste må inneholde nøyaktig 16 korte setninger. Dette er viktig: ikke mer, ikke mindre enn 16 elementer per kategori. Hvert element må være en beskrivende setning på 4-8 ord.
 
 Input – Brukerens svar:
 

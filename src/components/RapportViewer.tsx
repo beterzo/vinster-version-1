@@ -2,7 +2,6 @@ import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Printer, ArrowLeft } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
-import { useLanguage } from "@/contexts/LanguageContext";
 import { formatKeywordsForReport, boldQuotedKeywords } from "@/utils/keywordUtils";
 
 interface ReportContent {
@@ -57,7 +56,6 @@ const PageDecoration = () => (
 
 const RapportViewer = ({ reportContent, onBack }: RapportViewerProps) => {
   const { t } = useTranslation();
-  const { language } = useLanguage();
   const printRef = useRef<HTMLDivElement>(null);
 
   const handlePrint = () => {
@@ -128,15 +126,11 @@ const RapportViewer = ({ reportContent, onBack }: RapportViewerProps) => {
                   {t('rapport.ideale_functie.activiteiten')}
                 </h4>
                 <div className="flex flex-wrap">
-                  {reportContent.ideale_functie.activiteiten?.map((item: string, i: number) => {
-                    const pronoun = language === 'en' ? 'You ' : language === 'de' || language === 'no' ? 'Du ' : 'Je ';
-                    const displayItem = i === 0 ? pronoun + item.replace(/^(Je |You |Du )/i, '').charAt(0).toLowerCase() + item.replace(/^(Je |You |Du )/i, '').slice(1) : item;
-                    return (
-                      <span key={i} className="inline-flex items-center bg-[#fffbeb] text-[#92400e] border border-[#fde68a] rounded-full px-3 py-1 text-[0.7rem] font-semibold m-[3px]">
-                        {displayItem}
-                      </span>
-                    );
-                  })}
+                  {reportContent.ideale_functie.activiteiten?.map((item: string, i: number) => (
+                    <span key={i} className="inline-flex items-center bg-[#fffbeb] text-[#92400e] border border-[#fde68a] rounded-full px-3 py-1 text-[0.7rem] font-semibold m-[3px]">
+                      {item}
+                    </span>
+                  ))}
                 </div>
               </div>
 
@@ -147,15 +141,11 @@ const RapportViewer = ({ reportContent, onBack }: RapportViewerProps) => {
                   {t('rapport.ideale_functie.werkomgeving')}
                 </h4>
                 <div className="flex flex-wrap">
-                  {reportContent.ideale_functie.werkomgeving?.map((item: string, i: number) => {
-                    const pronoun = language === 'en' ? 'You ' : language === 'de' || language === 'no' ? 'Du ' : 'Je ';
-                    const displayItem = i === 0 ? pronoun + item.replace(/^(Je |You |Du )/i, '').charAt(0).toLowerCase() + item.replace(/^(Je |You |Du )/i, '').slice(1) : item;
-                    return (
-                      <span key={i} className="inline-flex items-center bg-[#f3f4f6] text-[#1a2e5a] border border-[#e5e7eb] rounded-full px-3 py-1 text-[0.7rem] font-semibold m-[3px]">
-                        {displayItem}
-                      </span>
-                    );
-                  })}
+                  {reportContent.ideale_functie.werkomgeving?.map((item: string, i: number) => (
+                    <span key={i} className="inline-flex items-center bg-[#f3f4f6] text-[#1a2e5a] border border-[#e5e7eb] rounded-full px-3 py-1 text-[0.7rem] font-semibold m-[3px]">
+                      {item}
+                    </span>
+                  ))}
                 </div>
               </div>
 
@@ -166,15 +156,11 @@ const RapportViewer = ({ reportContent, onBack }: RapportViewerProps) => {
                   {t('rapport.ideale_functie.interessegebieden')}
                 </h4>
                 <div className="flex flex-wrap">
-                  {reportContent.ideale_functie.interessegebieden?.map((item: string, i: number) => {
-                    const pronoun = language === 'en' ? 'You ' : language === 'de' || language === 'no' ? 'Du ' : 'Je ';
-                    const displayItem = i === 0 ? pronoun + item.replace(/^(Je |You |Du )/i, '').charAt(0).toLowerCase() + item.replace(/^(Je |You |Du )/i, '').slice(1) : item;
-                    return (
-                      <span key={i} className="inline-flex items-center bg-[#f3f4f6] text-[#1a2e5a] border border-[#e5e7eb] rounded-full px-3 py-1 text-[0.7rem] font-semibold m-[3px]">
-                        {displayItem}
-                      </span>
-                    );
-                  })}
+                  {reportContent.ideale_functie.interessegebieden?.map((item: string, i: number) => (
+                    <span key={i} className="inline-flex items-center bg-[#f3f4f6] text-[#1a2e5a] border border-[#e5e7eb] rounded-full px-3 py-1 text-[0.7rem] font-semibold m-[3px]">
+                      {item}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>
