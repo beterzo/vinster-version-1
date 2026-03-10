@@ -349,9 +349,14 @@ Bruk utelukkende informasjon fra svarene til deltakeren. Formuler alt i deltaker
 • arbeidsmiljø (stemningen, strukturen og konteksten personen trives i)
 • interesser (temaer personen er fascinert av eller får energi av)
 
-VIKTIG: Hvert element må være en kort beskrivende setning på 4-8 ord. Ingen enkeltord!
-Riktig: "Liker å samarbeide i et lite team"
-Feil: "Samarbeid"
+VIKTIG - OPPLISTINGSSTIL: Kun det FØRSTE elementet per kategori begynner med "Du". Alle følgende elementer begynner UTEN "Du", slik at de passer som opplisting etter det første elementet.
+Korrekt eksempel:
+  Element 1: "Du liker å finne kreative løsninger"
+  Element 2: "jobber helst i en uformell atmosfære"
+  Element 3: "er interessert i teknologi"
+FEIL eksempel:
+  Element 1: "Du liker å finne kreative løsninger"
+  Element 2: "Du jobber helst i en uformell atmosfære"  ← FEIL, "Du" kun ved element 1!
 
 Output skal være i JSON-format, med tre tydelige keys:
 {
