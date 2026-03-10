@@ -14,14 +14,17 @@ const getPrompts = (language: string, enthousiasmeData: any, wensberoepenData: a
 
 BELANGRIJK: Genereer GEEN losse woorden. Elk item moet een korte beschrijvende zin zijn van 4-8 woorden die een concrete voorkeur of eigenschap beschrijft.
 
+CRUCIAAL - OPSOMMINGSSTIJL: De items moeten samen één vloeiende opsomming vormen in de jij-vorm. Alleen het EERSTE item per categorie begint met "Je". Alle volgende items vervolgen ZONDER "Je", zodat ze met komma's achter elkaar gelezen kunnen worden als één doorlopende zin.
+
 De output moet een JSON-object zijn, met drie aparte arrays:
 
-- "activiteiten": dingen die iemand graag doet, verwoord als korte beschrijvende zinnen.
-  Voorbeelden: "Creatieve oplossingen bedenken voor problemen", "Graag samenwerken in een klein team", "Mensen begeleiden en coachen", "Presentaties geven aan grote groepen"
-- "werkomgeving": voorkeuren voor omgeving of samenwerking, als korte beschrijvende zinnen.
-  Voorbeelden: "Werken in een informele sfeer", "Flexibel kunnen indelen van werktijd", "Afwisseling tussen kantoor en buitenwerk", "Rustige werkplek met veel concentratie"
-- "interesses": thema's of onderwerpen waar iemand in geïnteresseerd is, als korte beschrijvende zinnen.
-  Voorbeelden: "Geïnteresseerd in technologie en innovatie", "Gefascineerd door menselijk gedrag", "Passie voor duurzaamheid en milieu", "Nieuwsgierig naar kunst en cultuur"
+- "activiteiten": dingen die iemand graag doet. Het eerste item begint met "Je", de rest vervolgt zonder "Je".
+  Voorbeeld van correcte lijst: ["Je bedenkt graag creatieve oplossingen", "werkt het liefst samen in een klein team", "begeleidt en coacht anderen", "geeft graag presentaties aan grote groepen"]
+  FOUT: ["Je bedenkt graag creatieve oplossingen", "Je werkt het liefst samen", "Je begeleidt anderen"] — hier staat "Je" te vaak!
+- "werkomgeving": voorkeuren voor omgeving of samenwerking. Zelfde regel: alleen eerste item begint met "Je".
+  Voorbeeld: ["Je werkt het liefst in een informele sfeer", "houdt van flexibele werktijden", "wisselt graag af tussen kantoor en buitenwerk", "zoekt een rustige werkplek met concentratie"]
+- "interesses": thema's of onderwerpen waar iemand in geïnteresseerd is. Zelfde regel.
+  Voorbeeld: ["Je bent geïnteresseerd in technologie en innovatie", "bent gefascineerd door menselijk gedrag", "hebt een passie voor duurzaamheid", "bent nieuwsgierig naar kunst en cultuur"]
 
 Gebruik uitsluitend informatie uit de antwoorden van de deelnemer. Formuleer alles in de stijl van de deelnemer. Elk item MOET een korte zin zijn van 4-8 woorden, NOOIT een los woord.
 
