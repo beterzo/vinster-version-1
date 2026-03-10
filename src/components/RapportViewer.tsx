@@ -57,6 +57,7 @@ const PageDecoration = () => (
 
 const RapportViewer = ({ reportContent, onBack }: RapportViewerProps) => {
   const { t } = useTranslation();
+  const { language } = useLanguage();
   const printRef = useRef<HTMLDivElement>(null);
 
   const handlePrint = () => {
