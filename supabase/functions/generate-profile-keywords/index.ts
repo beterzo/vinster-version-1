@@ -120,13 +120,16 @@ Wensberoep 3 – ${wensberoepenData?.wensberoep_3_titel || 'Niet ingevuld'}
 
 IMPORTANT: Do NOT generate single words. Each item must be a short descriptive phrase of 4-8 words that describes a concrete preference or characteristic.
 
+CRUCIAL - ENUMERATION STYLE: The items must form one flowing enumeration in the second person ("you"). Only the FIRST item per category starts with "You". All subsequent items continue WITHOUT "You", so they can be read as a comma-separated flowing sentence.
+
 The output must be a JSON object, with three separate arrays:
-• "activiteiten": things someone enjoys doing, phrased as short descriptive sentences.
-  Examples: "Enjoy solving creative problems", "Like coaching and mentoring others", "Presenting ideas to large groups", "Organizing events and activities"
-• "werkomgeving": preferences for environment or collaboration, as short descriptive sentences.
-  Examples: "Working in a relaxed informal atmosphere", "Flexible scheduling of work hours", "Quiet workspace with good concentration", "Mix of teamwork and solo tasks"
-• "interesses": themes or topics someone is interested in, as short descriptive sentences.
-  Examples: "Interested in technology and innovation", "Fascinated by human behavior", "Passionate about sustainability and environment", "Curious about art and culture"
+• "activiteiten": things someone enjoys doing. First item starts with "You", the rest continues without "You".
+  Correct example: ["You enjoy solving creative problems", "prefer collaborating in small teams", "like coaching and mentoring others", "love presenting ideas to large groups"]
+  WRONG: ["You enjoy solving creative problems", "You prefer collaborating", "You like coaching"] — "You" appears too often!
+• "werkomgeving": preferences for environment or collaboration. Same rule: only first item starts with "You".
+  Example: ["You prefer working in a relaxed atmosphere", "enjoy flexible scheduling of work hours", "like alternating between office and fieldwork", "seek a quiet workspace for concentration"]
+• "interesses": themes or topics someone is interested in. Same rule.
+  Example: ["You are interested in technology and innovation", "are fascinated by human behavior", "have a passion for sustainability", "are curious about art and culture"]
 
 Use only information from the participant's answers. Formulate everything in the participant's own style. Each item MUST be a short phrase of 4-8 words, NEVER a single word.
 
