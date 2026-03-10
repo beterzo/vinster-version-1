@@ -171,7 +171,7 @@
     "sections": {
       "who_we_are": {
         "title": "1. Wie zijn wij?",
-        "content": "Vinster is een service van De Loopbaanopleiding, gevestigd in Nederland. Wij zijn verantwoordelijk voor de verwerking van uw persoonsgegevens zoals beschreven in deze privacyverklaring.",
+        "content": "Vinster is een service van De Loopbaanopleiding, gevestigd in Nederland. Wij zijn verantwoordelijk voor de verwerking van je persoonsgegevens zoals beschreven in deze privacyverklaring.",
         "contact": "Email: team@vinster.ai<br />KvK nr: 04050762",
         "contact_label": "Contactgegevens:"
       },
@@ -187,41 +187,41 @@
         ]
       },
       "data_usage": {
-        "title": "3. Waarvoor gebruiken wij uw gegevens?",
-        "intro": "Wij gebruiken uw persoonsgegevens voor:",
+        "title": "3. Waarvoor gebruiken wij je gegevens?",
+        "intro": "Wij gebruiken je persoonsgegevens voor:",
         "items": [
-          "Het leveren van onze loopbaanservice en het genereren van uw persoonlijke rapport",
-          "Communicatie over uw account en onze services",
+          "Het leveren van onze loopbaanservice en het genereren van je persoonlijke rapport",
+          "Communicatie over je account en onze services",
           "Verbetering van onze website en services",
           "Voldoen aan wettelijke verplichtingen"
         ]
       },
       "legal_basis": {
         "title": "4. Rechtsgrond voor verwerking",
-        "intro": "Wij verwerken uw persoonsgegevens op basis van:",
+        "intro": "Wij verwerken je persoonsgegevens op basis van:",
         "items": [
-          "Uitvoering van de overeenkomst tussen u en ons",
-          "Uw toestemming",
+          "Uitvoering van de overeenkomst tussen jou en ons",
+          "Jouw toestemming",
           "Gerechtvaardigd belang voor verbetering van onze services",
           "Wettelijke verplichting"
         ]
       },
       "data_sharing": {
         "title": "5. Delen van gegevens",
-        "intro": "Wij delen uw persoonsgegevens niet met derden, behalve:",
+        "intro": "Wij delen je persoonsgegevens niet met derden, behalve:",
         "items": [
           "Met onze technische serviceproviders (onder strikte verwerkingsovereenkomsten)",
           "Wanneer dit wettelijk verplicht is",
-          "Met uw expliciete toestemming"
+          "Met jouw expliciete toestemming"
         ]
       },
       "retention": {
         "title": "6. Bewaartermijn",
-        "content": "Wij bewaren uw persoonsgegevens niet langer dan noodzakelijk. Accountgegevens worden bewaard zolang uw account actief is. Na verwijdering van uw account worden gegevens binnen 30 dagen permanent verwijderd."
+        "content": "Wij bewaren je persoonsgegevens niet langer dan noodzakelijk. Accountgegevens worden bewaard zolang je account actief is. Na verwijdering van je account worden gegevens binnen 30 dagen permanent verwijderd."
       },
       "user_rights": {
-        "title": "7. Uw rechten",
-        "intro": "U heeft de volgende rechten betreffende uw persoonsgegevens:",
+        "title": "7. Jouw rechten",
+        "intro": "Je hebt de volgende rechten betreffende je persoonsgegevens:",
         "items": [
           "Recht op inzage",
           "Recht op rectificatie", 
@@ -230,15 +230,15 @@
           "Recht op gegevensoverdraagbaarheid",
           "Recht van bezwaar"
         ],
-        "contact": "Om deze rechten uit te oefenen kunt u contact met ons opnemen via team@vinster.ai"
+        "contact": "Om deze rechten uit te oefenen kun je contact met ons opnemen via team@vinster.ai"
       },
       "security": {
         "title": "8. Beveiliging",
-        "content": "Wij nemen passende technische en organisatorische maatregelen om uw persoonsgegevens te beschermen tegen verlies, misbruik, ongeautoriseerde toegang, openbaarmaking, wijziging of vernietiging."
+        "content": "Wij nemen passende technische en organisatorische maatregelen om je persoonsgegevens te beschermen tegen verlies, misbruik, ongeautoriseerde toegang, openbaarmaking, wijziging of vernietiging."
       },
       "third_party_accounts": {
         "title": "9. Gebruik van accounts door derden",
-        "content": "Elk Vinster-account is bedoeld voor individueel gebruik door de accounthouder. Wanneer u derden via uw persoonlijke account toegang geeft tot Vinster, bent u zelf verantwoordelijk voor de verwerking en bescherming van de ingevoerde gegevens. Vinster is in dat geval niet verantwoordelijk voor de privacy en veiligheid van deze gegevens. Wij adviseren iedereen die Vinster wil gebruiken om een eigen account aan te maken."
+        "content": "Elk Vinster-account is bedoeld voor individueel gebruik door de accounthouder. Wanneer je derden via je persoonlijke account toegang geeft tot Vinster, ben je zelf verantwoordelijk voor de verwerking en bescherming van de ingevoerde gegevens. Vinster is in dat geval niet verantwoordelijk voor de privacy en veiligheid van deze gegevens. Wij adviseren iedereen die Vinster wil gebruiken om een eigen account aan te maken."
       },
       "cookies": {
         "title": "10. Cookies",
@@ -250,7 +250,7 @@
       },
       "contact": {
         "title": "12. Contact",
-        "content": "Voor vragen over deze privacyverklaring of over de verwerking van uw persoonsgegevens kunt u contact met ons opnemen:",
+        "content": "Voor vragen over deze privacyverklaring of over de verwerking van je persoonsgegevens kun je contact met ons opnemen:",
         "details": "Email: team@vinster.ai"
       }
     }
