@@ -221,21 +221,21 @@ const sampleReports: Record<Language, ReportContent> = {
         "lernt kontinuierlich und entwickelt sich weiter"
       ],
       interessegebieden: [
-        "Interessiert an persönlicher Entwicklung und Wachstum",
-        "Fasziniert von effektiver Kommunikation",
-        "Neugierig auf Führung und Managementstile",
-        "Leidenschaft für Innovation und Erneuerung",
-        "Interessiert an Psychologie und Verhalten",
-        "Engagiert in Bildung und Wissenstransfer",
-        "Fasziniert von Unternehmensstrategie und Wachstum",
-        "Neugierig auf Technologie und Digitalisierung",
-        "Leidenschaft für Nachhaltigkeit und Umwelt",
-        "Interessiert an Gesundheit und Wohlbefinden",
-        "Getrieben von sozialer Wirkung erzielen",
-        "Neugierig auf Unternehmertum und Startups",
-        "Inspiriert von Kultur und kreativer Kunst",
-        "Interessiert an Zukunftstrends und Entwicklungen",
-        "Fasziniert von menschlichem Verhalten und Motivation"
+        "interessiert an persönlicher Entwicklung und Wachstum",
+        "fasziniert von effektiver Kommunikation",
+        "neugierig auf Führung und Managementstile",
+        "hat Leidenschaft für Innovation und Erneuerung",
+        "interessiert an Psychologie und Verhalten",
+        "engagiert in Bildung und Wissenstransfer",
+        "fasziniert von Unternehmensstrategie und Wachstum",
+        "neugierig auf Technologie und Digitalisierung",
+        "hat Leidenschaft für Nachhaltigkeit und Umwelt",
+        "interessiert an Gesundheit und Wohlbefinden",
+        "getrieben von sozialer Wirkung erzielen",
+        "neugierig auf Unternehmertum und Startups",
+        "inspiriert von Kultur und kreativer Kunst",
+        "interessiert an Zukunftstrends und Entwicklungen",
+        "fasziniert von menschlichem Verhalten und Motivation"
       ]
     },
     beroepen: {
