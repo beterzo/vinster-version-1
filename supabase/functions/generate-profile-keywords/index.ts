@@ -34,14 +34,13 @@ Gebruik uitsluitend informatie uit de antwoorden van de deelnemer. Formuleer all
 • werkomgeving (de sfeer, structuur en context waarin iemand graag werkt)
 • interesses (onderwerpen waar iemand door gefascineerd is of energie van krijgt)
 
-BELANGRIJK - OPSOMMINGSSTIJL: Alleen het EERSTE item per categorie begint met "Je". Alle volgende items beginnen ZONDER "Je" zodat ze als opsomming achter het eerste item passen.
+BELANGRIJK - NEUTRALE STIJL: Begin GEEN enkel item met "Je". Start direct met het werkwoord.
 Goed voorbeeld:
-  Item 1: "Je bedenkt graag creatieve oplossingen"
+  Item 1: "bedenkt graag creatieve oplossingen"
   Item 2: "werkt het liefst in een informele sfeer"
-  Item 3: "bent geïnteresseerd in technologie"
+  Item 3: "geïnteresseerd in technologie"
 FOUT voorbeeld:
-  Item 1: "Je bedenkt graag creatieve oplossingen"
-  Item 2: "Je werkt het liefst in een informele sfeer"  ← FOUT, "Je" mag alleen bij item 1!
+  Item 1: "Je bedenkt graag creatieve oplossingen"  ← FOUT, geen "Je" gebruiken!
 
 De output moet in JSON-format zijn, met drie duidelijke keys:
 {
@@ -49,7 +48,7 @@ De output moet in JSON-format zijn, met drie duidelijke keys:
   "werkomgeving": [],
   "interesses": []
 }
-Laat elke lijst exact 16 korte zinnen bevatten. Dit is belangrijk: niet meer, niet minder dan 16 items per categorie. Elk item moet een beschrijvende zin zijn van 4-8 woorden.
+Laat elke lijst exact 16 korte zinnen bevatten. Dit is belangrijk: niet meer, niet minder dan 16 items per categorie. Elk item moet een beschrijvende zin zijn van 4-8 woorden. NOOIT beginnen met "Je".
 
 Input – Antwoorden gebruiker:
 
