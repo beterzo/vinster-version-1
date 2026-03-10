@@ -10,15 +10,20 @@ const corsHeaders = {
 const getPrompts = (language: string, enthousiasmeData: any, wensberoepenData: any) => {
   const prompts: Record<string, { system: string; user: string }> = {
     nl: {
-      system: `Je bent een loopbaanprofessional gespecialiseerd in het analyseren van open antwoorden van kandidaten. Je doel is om 48 kernwoorden of korte zinnen te genereren (exact 16 per categorie) op basis van reflectieve antwoorden op vragen over werkervaring, voorkeuren en interesses.
+      system: `Je bent een loopbaanprofessional gespecialiseerd in het analyseren van open antwoorden van kandidaten. Je doel is om 48 korte beschrijvende zinnen te genereren (exact 16 per categorie) op basis van reflectieve antwoorden op vragen over werkervaring, voorkeuren en interesses.
+
+BELANGRIJK: Genereer GEEN losse woorden. Elk item moet een korte beschrijvende zin zijn van 4-8 woorden die een concrete voorkeur of eigenschap beschrijft.
 
 De output moet een JSON-object zijn, met drie aparte arrays:
 
-- "activiteiten": dingen die iemand graag doet, verwoord als werkwoorden of korte zinnen.
-- "werkomgeving": voorkeuren voor omgeving of samenwerking.
-- "interesses": thema's of onderwerpen waar iemand in geïnteresseerd is.
+- "activiteiten": dingen die iemand graag doet, verwoord als korte beschrijvende zinnen.
+  Voorbeelden: "Creatieve oplossingen bedenken voor problemen", "Graag samenwerken in een klein team", "Mensen begeleiden en coachen", "Presentaties geven aan grote groepen"
+- "werkomgeving": voorkeuren voor omgeving of samenwerking, als korte beschrijvende zinnen.
+  Voorbeelden: "Werken in een informele sfeer", "Flexibel kunnen indelen van werktijd", "Afwisseling tussen kantoor en buitenwerk", "Rustige werkplek met veel concentratie"
+- "interesses": thema's of onderwerpen waar iemand in geïnteresseerd is, als korte beschrijvende zinnen.
+  Voorbeelden: "Geïnteresseerd in technologie en innovatie", "Gefascineerd door menselijk gedrag", "Passie voor duurzaamheid en milieu", "Nieuwsgierig naar kunst en cultuur"
 
-Gebruik uitsluitend informatie uit de antwoorden van de deelnemer. Formuleer alles in de stijl van de deelnemer. Je mag ook korte zinnen gebruiken als dat beter past dan één woord.
+Gebruik uitsluitend informatie uit de antwoorden van de deelnemer. Formuleer alles in de stijl van de deelnemer. Elk item MOET een korte zin zijn van 4-8 woorden, NOOIT een los woord.
 
 ⚠️ De output moet geldig JSON zijn. Geen toelichting, geen extra uitleg, alleen het JSON-object.`,
       user: `Je ontvangt nu een volledig ingevulde antwoordenlijst van een gebruiker. Gebruik deze input om op basis van de methodiek van de loopbaantrechter 48 kernwoorden of korte zinnen te genereren (exact 16 per categorie), verdeeld over drie categorieën:
