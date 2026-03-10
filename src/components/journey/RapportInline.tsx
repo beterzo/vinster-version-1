@@ -383,7 +383,7 @@ const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated
               </h4>
               <div className="flex flex-wrap">
                 {reportContent.ideale_functie?.activiteiten?.map((item: string, i: number) => (
-                  <span key={i} className="inline-flex items-center bg-[#fffbeb] text-[#92400e] border border-[#fde68a] rounded-full px-3 py-1 text-[0.8rem] font-semibold m-[3px]">
+                  <span key={i} className="inline-flex items-center bg-[#fffbeb] text-[#92400e] border border-[#fde68a] rounded-full px-3 py-1 text-[0.7rem] font-semibold m-[3px]">
                     {item}
                   </span>
                 ))}
