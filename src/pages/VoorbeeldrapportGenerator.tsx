@@ -563,7 +563,7 @@ const VoorbeeldrapportGenerator = () => {
                   {t.interestsSubtitle}
                 </h3>
                 <p className="text-gray-700 leading-relaxed text-base md:text-xl">
-                  {formatKeywordsForReport(reportContent.ideale_functie.interessegebieden)}
+                  {formatKeywordsForReportWithJeVorm(reportContent.ideale_functie.interessegebieden, selectedLanguage)}
                 </p>
                 <div className="hidden md:block"><SectionSquare color="darkblue" /></div>
               </div>
