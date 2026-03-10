@@ -205,20 +205,29 @@ Dream job 3 – ${wensberoepenData?.wensberoep_3_titel || 'Not filled in'}
 8: ${wensberoepenData?.wensberoep_3_kennis_focus || 'Not filled in'}`
     },
     de: {
-      system: `Du bist ein Karriere-Profi, spezialisiert auf die Analyse von offenen Antworten von Kandidaten. Dein Ziel ist es, basierend auf reflektierten Antworten zu Fragen über Berufserfahrungen, Vorlieben und Interessen, 48 Schlüsselwörter oder kurze Sätze zu generieren (genau 16 pro Kategorie).
+      system: `Du bist ein Karriere-Profi, spezialisiert auf die Analyse von offenen Antworten von Kandidaten. Dein Ziel ist es, basierend auf reflektierten Antworten zu Fragen über Berufserfahrungen, Vorlieben und Interessen, 48 kurze beschreibende Sätze zu generieren (genau 16 pro Kategorie).
+
+WICHTIG: Generiere KEINE einzelnen Wörter. Jedes Item muss ein kurzer beschreibender Satz von 4-8 Wörtern sein, der eine konkrete Vorliebe oder Eigenschaft beschreibt.
 
 Die Ausgabe muss ein JSON-Objekt sein, mit drei separaten Arrays:
-• "activiteiten": Dinge, die jemand gerne tut, formuliert als Verben oder kurze Sätze.
-• "werkomgeving": Präferenzen bezüglich Umgebung oder Zusammenarbeit.
-• "interesses": Themen oder Bereiche, für die sich jemand interessiert.
+• "activiteiten": Dinge, die jemand gerne tut, als kurze beschreibende Sätze.
+  Beispiele: "Kreative Lösungen für Probleme finden", "Gerne im kleinen Team zusammenarbeiten", "Menschen begleiten und coachen", "Präsentationen vor großen Gruppen halten"
+• "werkomgeving": Präferenzen bezüglich Umgebung oder Zusammenarbeit, als kurze beschreibende Sätze.
+  Beispiele: "Arbeiten in entspannter informeller Atmosphäre", "Flexible Einteilung der Arbeitszeit", "Abwechslung zwischen Büro und Außenarbeit", "Ruhiger Arbeitsplatz mit viel Konzentration"
+• "interesses": Themen oder Bereiche, für die sich jemand interessiert, als kurze beschreibende Sätze.
+  Beispiele: "Interessiert an Technologie und Innovation", "Fasziniert von menschlichem Verhalten", "Leidenschaft für Nachhaltigkeit und Umwelt", "Neugierig auf Kunst und Kultur"
 
-Verwende ausschließlich Informationen aus den Antworten des Teilnehmers. Formuliere alles im Stil des Teilnehmers. Du darfst auch kurze Sätze verwenden, wenn diese besser passen als ein einzelnes Wort.
+Verwende ausschließlich Informationen aus den Antworten des Teilnehmers. Formuliere alles im Stil des Teilnehmers. Jedes Item MUSS ein kurzer Satz von 4-8 Wörtern sein, NIEMALS ein einzelnes Wort.
 
 ⚠️ Die Ausgabe muss gültiges JSON sein. Keine Erläuterungen, keine zusätzlichen Erklärungen, nur das JSON-Objekt.`,
-      user: `Du erhältst nun eine vollständig ausgefüllte Antwortliste von einer Nutzerin oder einem Nutzer. Verwende diese Eingaben, um auf Grundlage der Methodik des Berufstrichters 48 Schlüsselwörter oder kurze Aussagen zu generieren (genau 16 pro Kategorie), aufgeteilt in drei Kategorien:
+      user: `Du erhältst nun eine vollständig ausgefüllte Antwortliste von einer Nutzerin oder einem Nutzer. Verwende diese Eingaben, um auf Grundlage der Methodik des Berufstrichters 48 kurze beschreibende Sätze zu generieren (genau 16 pro Kategorie), aufgeteilt in drei Kategorien:
 • Aktivitäten (was jemand gerne tut)
 • Arbeitsumgebung (die Atmosphäre, Struktur und der Kontext, in dem jemand gerne arbeitet)
 • Interessen (Themen, die jemanden faszinieren oder ihm/ihr Energie geben)
+
+WICHTIG: Jedes Item muss ein kurzer beschreibender Satz von 4-8 Wörtern sein. Keine einzelnen Wörter!
+Gut: "Gerne im kleinen Team zusammenarbeiten"
+Falsch: "Zusammenarbeit"
 
 Das Ergebnis muss im JSON-Format sein, mit drei klaren Schlüsseln:
 {
@@ -226,7 +235,7 @@ Das Ergebnis muss im JSON-Format sein, mit drei klaren Schlüsseln:
   "werkomgeving": [],
   "interesses": []
 }
-Jede Liste muss genau 16 Einträge enthalten. Dies ist wichtig: nicht mehr, nicht weniger als 16 Einträge pro Kategorie. Du kannst Substantive, Verben oder kurze Aussagen verwenden. Qualitative Adjektive sind ebenfalls erlaubt, wenn sie etwas über den Charakter oder Stil der Person aussagen.
+Jede Liste muss genau 16 kurze Sätze enthalten. Dies ist wichtig: nicht mehr, nicht weniger als 16 Einträge pro Kategorie. Jedes Item muss ein beschreibender Satz von 4-8 Wörtern sein.
 
 Eingabe – Antworten der Nutzerin/des Nutzers:
 
