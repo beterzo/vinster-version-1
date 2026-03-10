@@ -75,21 +75,21 @@ const sampleReports: Record<Language, ReportContent> = {
         "blijft continu leren en ontwikkelen"
       ],
       interessegebieden: [
-        "Geïnteresseerd in persoonlijke ontwikkeling en groei",
-        "Gefascineerd door effectieve communicatie",
-        "Nieuwsgierig naar leiderschap en management",
-        "Passie voor innovatie en vernieuwing",
-        "Geïnteresseerd in psychologie en gedrag",
-        "Betrokken bij onderwijs en kennisdeling",
-        "Gefascineerd door bedrijfsstrategie en groei",
-        "Nieuwsgierig naar technologie en digitalisering",
-        "Passie voor duurzaamheid en milieubewustzijn",
-        "Geïnteresseerd in gezondheid en welzijn",
-        "Gedreven door maatschappelijke impact maken",
-        "Nieuwsgierig naar ondernemerschap en startups",
-        "Geïnspireerd door cultuur en kunst",
-        "Geïnteresseerd in toekomstige trends en ontwikkelingen",
-        "Gefascineerd door menselijk gedrag en motivatie"
+        "geïnteresseerd in persoonlijke ontwikkeling en groei",
+        "gefascineerd door effectieve communicatie",
+        "nieuwsgierig naar leiderschap en management",
+        "heeft passie voor innovatie en vernieuwing",
+        "geïnteresseerd in psychologie en gedrag",
+        "betrokken bij onderwijs en kennisdeling",
+        "gefascineerd door bedrijfsstrategie en groei",
+        "nieuwsgierig naar technologie en digitalisering",
+        "heeft passie voor duurzaamheid en milieubewustzijn",
+        "geïnteresseerd in gezondheid en welzijn",
+        "gedreven door maatschappelijke impact maken",
+        "nieuwsgierig naar ondernemerschap en startups",
+        "geïnspireerd door cultuur en kunst",
+        "geïnteresseerd in toekomstige trends en ontwikkelingen",
+        "gefascineerd door menselijk gedrag en motivatie"
       ]
     },
     beroepen: {
