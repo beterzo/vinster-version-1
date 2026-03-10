@@ -330,13 +330,16 @@ Wunschberuf 3 – ${wensberoepenData?.wensberoep_3_titel || 'Nicht ausgefüllt'}
 
 VIKTIG: IKKE generer enkeltord. Hvert element må være en kort beskrivende setning på 4-8 ord som beskriver en konkret preferanse eller egenskap.
 
+AVGJØRENDE - OPPLISTINGSSTIL: Elementene skal sammen danne én flytende opplisting i du-form. Kun det FØRSTE elementet per kategori begynner med "Du". Alle påfølgende elementer fortsetter UTEN "Du", slik at de med komma kan leses som én sammenhengende setning.
+
 Output må være et JSON-objekt med tre separate arrays:
-• "activiteiten": ting en person liker å gjøre, formulert som korte beskrivende setninger.
-  Eksempler: "Liker å finne kreative løsninger", "Trives med å samarbeide i team", "Veilede og coache andre mennesker", "Holde presentasjoner for store grupper"
-• "werkomgeving": preferanser for miljø eller samarbeid, som korte beskrivende setninger.
-  Eksempler: "Jobbe i en uformell atmosfære", "Fleksibel inndeling av arbeidstiden", "Veksle mellom kontor og feltarbeid", "Rolig arbeidsplass med god konsentrasjon"
-• "interesses": temaer eller områder en person er interessert i, som korte beskrivende setninger.
-  Eksempler: "Interessert i teknologi og innovasjon", "Fascinert av menneskelig atferd", "Lidenskap for bærekraft og miljø", "Nysgjerrig på kunst og kultur"
+• "activiteiten": ting en person liker å gjøre. Første element begynner med "Du", resten uten "Du".
+  Korrekt eksempel: ["Du liker å finne kreative løsninger", "trives med å samarbeide i team", "veileder og coacher andre", "holder gjerne presentasjoner for store grupper"]
+  FEIL: ["Du liker å finne kreative løsninger", "Du trives med å samarbeide", "Du veileder andre"] — "Du" brukes for ofte!
+• "werkomgeving": preferanser for miljø eller samarbeid. Samme regel.
+  Eksempel: ["Du jobber helst i en uformell atmosfære", "setter pris på fleksibel arbeidstid", "veksler gjerne mellom kontor og feltarbeid", "søker en rolig arbeidsplass"]
+• "interesses": temaer eller områder. Samme regel.
+  Eksempel: ["Du er interessert i teknologi og innovasjon", "er fascinert av menneskelig atferd", "har en lidenskap for bærekraft", "er nysgjerrig på kunst og kultur"]
 
 Bruk utelukkende informasjon fra svarene til deltakeren. Formuler alt i deltakerens egen stil. Hvert element MÅ være en kort setning på 4-8 ord, ALDRI et enkeltord.
 
