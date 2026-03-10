@@ -139,9 +139,14 @@ Use only information from the participant's answers. Formulate everything in the
 • work environment (the atmosphere, structure, and context in which someone prefers to work)
 • interests (topics that fascinate or energize someone)
 
-IMPORTANT: Each item must be a short descriptive phrase of 4-8 words. No single words!
-Good: "Enjoy collaborating in a small team"
-Wrong: "Collaboration"
+IMPORTANT - ENUMERATION STYLE: Only the FIRST item per category starts with "You". All following items start WITHOUT "You" so they fit as an enumeration after the first item.
+Correct example:
+  Item 1: "You enjoy solving creative problems"
+  Item 2: "prefer working in a relaxed atmosphere"
+  Item 3: "are interested in technology"
+WRONG example:
+  Item 1: "You enjoy solving creative problems"
+  Item 2: "You prefer working in a relaxed atmosphere"  ← WRONG, "You" only at item 1!
 
 The output must be in JSON format, with three clear keys:
 {
