@@ -1,17 +1,31 @@
 
 
-## Quote glassmorphism aanpassing
+## Keywords: neutraal genereren, jij-vorm in rapport
 
-Twee pagina's moeten worden bijgewerkt zodat de quote-overlay dezelfde glassmorphism-stijl krijgt als Login, Signup en EmailVerification:
+### Probleem
+Nu worden keywords met "Je" gegenereerd, wat ook zichtbaar is in het selectieproces. De gebruiker wil neutrale keywords bij het selecteren, en pas "Je" ervoor in het rapport.
 
-### Wijzigingen
+### Aanpak
 
-**1. `src/pages/ForgotPasswordPage.tsx`** (regel ~89-92)
-- Verander `bg-white bg-opacity-90 rounded-2xl p-8 max-w-md` naar `bg-white/15 backdrop-blur-[8px] border border-white/20 rounded-xl p-8 max-w-md`
-- Verander `text-xl font-medium text-blue-900 leading-relaxed` naar `text-xl font-medium text-white leading-relaxed drop-shadow-sm`
+**1. `supabase/functions/generate-profile-keywords/index.ts`** — Prompts voor alle 4 talen terug naar neutraal
+- Items worden gegenereerd zonder persoonlijk voornaamwoord
+- Stijl: "bedenkt graag creatieve oplossingen", "werkt het liefst in een informele sfeer", "bent geïnteresseerd in technologie"
+- In het selectieproces ziet de gebruiker dus neutrale zinnen
 
-**2. `src/pages/CheckEmailPasswordResetPage.tsx`** (regel ~83-86)
-- Zelfde wijzigingen als hierboven
+**2. `src/utils/keywordUtils.ts`** — Nieuwe functie `formatKeywordsWithJeVorm`
+- Voegt "Je " toe aan het eerste item per categorie
+- Laat de rest ongewijzigd (ze beginnen al met een werkwoord dat aansluit)
+- Taalafhankelijk: NL → "Je", EN → "You", DE → "Du", NO → "Du"
 
-Dit brengt beide pagina's in lijn met de glassmorphism-stijl van de andere auth-pagina's.
+**3. Rapportweergave aanpassen** — 3 bestanden
+- `src/components/RapportViewer.tsx`: Bij het tonen van chips, "Je " toevoegen aan eerste item
+- `src/components/journey/RapportInline.tsx`: Idem via `formatKeywordsForReport`
+- `src/pages/VoorbeeldrapportGenerator.tsx`: Voorbeelddata updaten naar neutrale stijl, weergave met jij-vorm
+
+**4. `supabase/functions/generate-career-report/index.ts`** — Geen wijziging nodig
+- De keywords worden al direct uit de database gehaald (user-selected). De jij-vorm wordt alleen in de frontend toegevoegd bij weergave.
+
+### Resultaat
+- **Selectieproces**: "bedenkt graag creatieve oplossingen" ✓
+- **Rapport**: "Je bedenkt graag creatieve oplossingen, werkt het liefst in een informele sfeer, bent geïnteresseerd in..." ✓
 
