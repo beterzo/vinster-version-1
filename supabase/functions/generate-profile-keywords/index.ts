@@ -119,18 +119,18 @@ Wensberoep 3 – ${wensberoepenData?.wensberoep_3_titel || 'Niet ingevuld'}
 
 IMPORTANT: Do NOT generate single words. Each item must be a short descriptive phrase of 4-8 words that describes a concrete preference or characteristic.
 
-CRUCIAL - ENUMERATION STYLE: The items must form one flowing enumeration in the second person ("you"). Only the FIRST item per category starts with "You". All subsequent items continue WITHOUT "You", so they can be read as a comma-separated flowing sentence.
+CRUCIAL - NEUTRAL STYLE: All items must be formulated WITHOUT the personal pronoun "You". Start each item directly with a verb or descriptive word. The items must be neutral so they can be presented as individual selection options.
 
 The output must be a JSON object, with three separate arrays:
-• "activiteiten": things someone enjoys doing. First item starts with "You", the rest continues without "You".
-  Correct example: ["You enjoy solving creative problems", "prefer collaborating in small teams", "like coaching and mentoring others", "love presenting ideas to large groups"]
-  WRONG: ["You enjoy solving creative problems", "You prefer collaborating", "You like coaching"] — "You" appears too often!
-• "werkomgeving": preferences for environment or collaboration. Same rule: only first item starts with "You".
-  Example: ["You prefer working in a relaxed atmosphere", "enjoy flexible scheduling of work hours", "like alternating between office and fieldwork", "seek a quiet workspace for concentration"]
+• "activiteiten": things someone enjoys doing. Do NOT use "You".
+  Correct example: ["enjoy solving creative problems", "prefer collaborating in small teams", "like coaching and mentoring others", "love presenting ideas to large groups"]
+  WRONG: ["You enjoy solving creative problems"] — do NOT use "You"!
+• "werkomgeving": preferences for environment or collaboration. Same rule: NO "You".
+  Example: ["prefer working in a relaxed atmosphere", "enjoy flexible scheduling of work hours", "like alternating between office and fieldwork", "seek a quiet workspace for concentration"]
 • "interesses": themes or topics someone is interested in. Same rule.
-  Example: ["You are interested in technology and innovation", "are fascinated by human behavior", "have a passion for sustainability", "are curious about art and culture"]
+  Example: ["interested in technology and innovation", "fascinated by human behavior", "have a passion for sustainability", "curious about art and culture"]
 
-Use only information from the participant's answers. Formulate everything in the participant's own style. Each item MUST be a short phrase of 4-8 words, NEVER a single word.
+Use only information from the participant's answers. Formulate everything in the participant's own style. Each item MUST be a short phrase of 4-8 words, NEVER a single word. NEVER start with "You".
 
 ⚠️ The output must be valid JSON. No explanation, no additional text, only the JSON object.`,
       user: `You are now receiving a fully completed list of answers from a user. Use this input to generate 48 short descriptive phrases (exactly 16 per category) based on the method of the career funnel, divided into three categories:
