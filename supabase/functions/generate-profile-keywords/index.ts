@@ -327,18 +327,18 @@ Wunschberuf 3 – ${wensberoepenData?.wensberoep_3_titel || 'Nicht ausgefüllt'}
 
 VIKTIG: IKKE generer enkeltord. Hvert element må være en kort beskrivende setning på 4-8 ord som beskriver en konkret preferanse eller egenskap.
 
-AVGJØRENDE - OPPLISTINGSSTIL: Elementene skal sammen danne én flytende opplisting i du-form. Kun det FØRSTE elementet per kategori begynner med "Du". Alle påfølgende elementer fortsetter UTEN "Du", slik at de med komma kan leses som én sammenhengende setning.
+AVGJØRENDE - NØYTRAL STIL: Alle elementer formuleres UTEN personlig pronomen "Du". Start hvert element direkte med verbet eller et beskrivende ord. Elementene skal være nøytrale slik at de kan presenteres som individuelle valgmuligheter.
 
 Output må være et JSON-objekt med tre separate arrays:
-• "activiteiten": ting en person liker å gjøre. Første element begynner med "Du", resten uten "Du".
-  Korrekt eksempel: ["Du liker å finne kreative løsninger", "trives med å samarbeide i team", "veileder og coacher andre", "holder gjerne presentasjoner for store grupper"]
-  FEIL: ["Du liker å finne kreative løsninger", "Du trives med å samarbeide", "Du veileder andre"] — "Du" brukes for ofte!
+• "activiteiten": ting en person liker å gjøre. IKKE bruk "Du".
+  Korrekt eksempel: ["liker å finne kreative løsninger", "trives med å samarbeide i team", "veileder og coacher andre", "holder gjerne presentasjoner for store grupper"]
+  FEIL: ["Du liker å finne kreative løsninger"] — IKKE bruk "Du"!
 • "werkomgeving": preferanser for miljø eller samarbeid. Samme regel.
-  Eksempel: ["Du jobber helst i en uformell atmosfære", "setter pris på fleksibel arbeidstid", "veksler gjerne mellom kontor og feltarbeid", "søker en rolig arbeidsplass"]
+  Eksempel: ["jobber helst i en uformell atmosfære", "setter pris på fleksibel arbeidstid", "veksler gjerne mellom kontor og feltarbeid", "søker en rolig arbeidsplass"]
 • "interesses": temaer eller områder. Samme regel.
-  Eksempel: ["Du er interessert i teknologi og innovasjon", "er fascinert av menneskelig atferd", "har en lidenskap for bærekraft", "er nysgjerrig på kunst og kultur"]
+  Eksempel: ["interessert i teknologi og innovasjon", "fascinert av menneskelig atferd", "har en lidenskap for bærekraft", "nysgjerrig på kunst og kultur"]
 
-Bruk utelukkende informasjon fra svarene til deltakeren. Formuler alt i deltakerens egen stil. Hvert element MÅ være en kort setning på 4-8 ord, ALDRI et enkeltord.
+Bruk utelukkende informasjon fra svarene til deltakeren. Formuler alt i deltakerens egen stil. Hvert element MÅ være en kort setning på 4-8 ord, ALDRI et enkeltord. ALDRI begynne med "Du".
 
 ⚠️ Output må være gyldig JSON. Ingen forklaringer, ingen ekstra tekst, kun JSON-objektet.`,
       user: `Du mottar nå en fullstendig utfylt svarliste fra en bruker. Bruk denne inputen til å generere 48 korte beskrivende setninger (nøyaktig 16 per kategori) basert på metoden til karrieretrakten, fordelt på tre kategorier:
