@@ -128,11 +128,15 @@ const RapportViewer = ({ reportContent, onBack }: RapportViewerProps) => {
                   {t('rapport.ideale_functie.activiteiten')}
                 </h4>
                 <div className="flex flex-wrap">
-                  {reportContent.ideale_functie.activiteiten?.map((item: string, i: number) => (
-                    <span key={i} className="inline-flex items-center bg-[#fffbeb] text-[#92400e] border border-[#fde68a] rounded-full px-3 py-1 text-[0.7rem] font-semibold m-[3px]">
-                      {item}
-                    </span>
-                  ))}
+                  {reportContent.ideale_functie.activiteiten?.map((item: string, i: number) => {
+                    const pronoun = language === 'en' ? 'You ' : language === 'de' || language === 'no' ? 'Du ' : 'Je ';
+                    const displayItem = i === 0 ? pronoun + item.replace(/^(Je |You |Du )/i, '').charAt(0).toLowerCase() + item.replace(/^(Je |You |Du )/i, '').slice(1) : item;
+                    return (
+                      <span key={i} className="inline-flex items-center bg-[#fffbeb] text-[#92400e] border border-[#fde68a] rounded-full px-3 py-1 text-[0.7rem] font-semibold m-[3px]">
+                        {displayItem}
+                      </span>
+                    );
+                  })}
                 </div>
               </div>
 
