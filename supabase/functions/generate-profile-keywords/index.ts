@@ -242,14 +242,13 @@ Verwende ausschließlich Informationen aus den Antworten des Teilnehmers. Formul
 • Arbeitsumgebung (die Atmosphäre, Struktur und der Kontext, in dem jemand gerne arbeitet)
 • Interessen (Themen, die jemanden faszinieren oder ihm/ihr Energie geben)
 
-WICHTIG - AUFZÄHLUNGSSTIL: Nur das ERSTE Item pro Kategorie beginnt mit "Du". Alle folgenden Items beginnen OHNE "Du", sodass sie als Aufzählung hinter dem ersten Item passen.
+WICHTIG - NEUTRALER STIL: Beginne KEIN Item mit "Du". Starte direkt mit dem Verb.
 Korrektes Beispiel:
-  Item 1: "Du findest gerne kreative Lösungen"
+  Item 1: "findest gerne kreative Lösungen"
   Item 2: "arbeitest am liebsten in entspannter Atmosphäre"
   Item 3: "interessierst dich für Technologie"
 FALSCHES Beispiel:
-  Item 1: "Du findest gerne kreative Lösungen"
-  Item 2: "Du arbeitest am liebsten in entspannter Atmosphäre"  ← FALSCH, "Du" nur bei Item 1!
+  Item 1: "Du findest gerne kreative Lösungen"  ← FALSCH, kein "Du" verwenden!
 
 Das Ergebnis muss im JSON-Format sein, mit drei klaren Schlüsseln:
 {
@@ -257,7 +256,7 @@ Das Ergebnis muss im JSON-Format sein, mit drei klaren Schlüsseln:
   "werkomgeving": [],
   "interesses": []
 }
-Jede Liste muss genau 16 kurze Sätze enthalten. Dies ist wichtig: nicht mehr, nicht weniger als 16 Einträge pro Kategorie. Jedes Item muss ein beschreibender Satz von 4-8 Wörtern sein.
+Jede Liste muss genau 16 kurze Sätze enthalten. Dies ist wichtig: nicht mehr, nicht weniger als 16 Einträge pro Kategorie. Jedes Item muss ein beschreibender Satz von 4-8 Wörtern sein. NIEMALS mit "Du" beginnen.
 
 Eingabe – Antworten der Nutzerin/des Nutzers:
 
