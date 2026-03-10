@@ -79,7 +79,7 @@ const PrintIdealeFunctiePage = ({ reportContent, t }: { reportContent: any; t: (
         <div>
           <h3 className="text-3xl font-semibold text-[#78BFE3] mb-4">Jouw ideale werkomgeving</h3>
           <p className="text-xl text-gray-800 leading-relaxed line-clamp-6 overflow-hidden break-words">
-            {formatKeywordsForReport(reportContent.ideale_functie?.werkomgeving || [])}
+            {formatKeywordsForReportWithJeVorm(reportContent.ideale_functie?.werkomgeving || [], 'nl')}
           </p>
         </div>
 
