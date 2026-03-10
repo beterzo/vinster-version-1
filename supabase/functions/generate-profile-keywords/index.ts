@@ -108,20 +108,29 @@ Wensberoep 3 – ${wensberoepenData?.wensberoep_3_titel || 'Niet ingevuld'}
 8: ${wensberoepenData?.wensberoep_3_kennis_focus || 'Niet ingevuld'}`
     },
     en: {
-      system: `You are a career professional specialized in analyzing open-ended responses from candidates. Your goal is to generate 48 English keywords or short phrases (exactly 16 per category) based on reflective answers to questions about work experience, preferences, and interests.
+      system: `You are a career professional specialized in analyzing open-ended responses from candidates. Your goal is to generate 48 short descriptive phrases in English (exactly 16 per category) based on reflective answers to questions about work experience, preferences, and interests.
+
+IMPORTANT: Do NOT generate single words. Each item must be a short descriptive phrase of 4-8 words that describes a concrete preference or characteristic.
 
 The output must be a JSON object, with three separate arrays:
-• "activiteiten": things someone enjoys doing, phrased as verbs or short sentences.
-• "werkomgeving": preferences for environment or collaboration.
-• "interesses": themes or topics someone is interested in.
+• "activiteiten": things someone enjoys doing, phrased as short descriptive sentences.
+  Examples: "Enjoy solving creative problems", "Like coaching and mentoring others", "Presenting ideas to large groups", "Organizing events and activities"
+• "werkomgeving": preferences for environment or collaboration, as short descriptive sentences.
+  Examples: "Working in a relaxed informal atmosphere", "Flexible scheduling of work hours", "Quiet workspace with good concentration", "Mix of teamwork and solo tasks"
+• "interesses": themes or topics someone is interested in, as short descriptive sentences.
+  Examples: "Interested in technology and innovation", "Fascinated by human behavior", "Passionate about sustainability and environment", "Curious about art and culture"
 
-Use only information from the participant's answers. Formulate everything in the participant's own style. You may also use short sentences if that fits better than a single word.
+Use only information from the participant's answers. Formulate everything in the participant's own style. Each item MUST be a short phrase of 4-8 words, NEVER a single word.
 
 ⚠️ The output must be valid JSON. No explanation, no additional text, only the JSON object.`,
-      user: `You are now receiving a fully completed list of answers from a user. Use this input to generate 48 keywords or short phrases (exactly 16 per category) based on the method of the career funnel, divided into three categories:
+      user: `You are now receiving a fully completed list of answers from a user. Use this input to generate 48 short descriptive phrases (exactly 16 per category) based on the method of the career funnel, divided into three categories:
 • activities (what someone enjoys doing)
 • work environment (the atmosphere, structure, and context in which someone prefers to work)
 • interests (topics that fascinate or energize someone)
+
+IMPORTANT: Each item must be a short descriptive phrase of 4-8 words. No single words!
+Good: "Enjoy collaborating in a small team"
+Wrong: "Collaboration"
 
 The output must be in JSON format, with three clear keys:
 {
@@ -129,7 +138,7 @@ The output must be in JSON format, with three clear keys:
   "werkomgeving": [],
   "interesses": []
 }
-Each list must contain exactly 16 items. This is important: not more, not less than 16 items per category. You may use nouns, verbs, or short phrases. Descriptive adjectives are also allowed if they add something to the character or style of the person.
+Each list must contain exactly 16 short phrases. This is important: not more, not less than 16 items per category. Each item must be a descriptive phrase of 4-8 words.
 
 Input – User answers:
 
