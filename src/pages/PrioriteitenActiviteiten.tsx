@@ -142,7 +142,7 @@ const PrioriteitenActiviteiten = ({ mode = 'edit' }: StepProps) => {
 
             {/* Keywords Grid */}
             {availableKeywords.length > 0 ? (
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
                 {availableKeywords.map(keyword => (
                   <button
                     key={keyword}
