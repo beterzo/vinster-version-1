@@ -244,9 +244,14 @@ Verwende ausschließlich Informationen aus den Antworten des Teilnehmers. Formul
 • Arbeitsumgebung (die Atmosphäre, Struktur und der Kontext, in dem jemand gerne arbeitet)
 • Interessen (Themen, die jemanden faszinieren oder ihm/ihr Energie geben)
 
-WICHTIG: Jedes Item muss ein kurzer beschreibender Satz von 4-8 Wörtern sein. Keine einzelnen Wörter!
-Gut: "Gerne im kleinen Team zusammenarbeiten"
-Falsch: "Zusammenarbeit"
+WICHTIG - AUFZÄHLUNGSSTIL: Nur das ERSTE Item pro Kategorie beginnt mit "Du". Alle folgenden Items beginnen OHNE "Du", sodass sie als Aufzählung hinter dem ersten Item passen.
+Korrektes Beispiel:
+  Item 1: "Du findest gerne kreative Lösungen"
+  Item 2: "arbeitest am liebsten in entspannter Atmosphäre"
+  Item 3: "interessierst dich für Technologie"
+FALSCHES Beispiel:
+  Item 1: "Du findest gerne kreative Lösungen"
+  Item 2: "Du arbeitest am liebsten in entspannter Atmosphäre"  ← FALSCH, "Du" nur bei Item 1!
 
 Das Ergebnis muss im JSON-Format sein, mit drei klaren Schlüsseln:
 {
