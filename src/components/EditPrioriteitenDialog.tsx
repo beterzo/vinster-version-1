@@ -93,7 +93,7 @@ const EditPrioriteitenDialog = ({ open, onOpenChange, data, onSave }: EditPriori
     <div className="space-y-4">
       <div>
         <Label className="text-base font-semibold">{title}</Label>
-        <div className="grid grid-cols-2 gap-2 mt-2">
+        <div className="grid grid-cols-1 gap-2 mt-2">
           {keywords.map((keyword, index) => (
             <div key={index} className="flex items-center space-x-2">
               <Checkbox

@@ -127,7 +127,7 @@ const RapportViewer = ({ reportContent, onBack }: RapportViewerProps) => {
                 </h4>
                 <div className="flex flex-wrap">
                   {reportContent.ideale_functie.activiteiten?.map((item: string, i: number) => (
-                    <span key={i} className="inline-flex items-center bg-[#fffbeb] text-[#92400e] border border-[#fde68a] rounded-full px-3 py-1 text-[0.8rem] font-semibold m-[3px]">
+                    <span key={i} className="inline-flex items-center bg-[#fffbeb] text-[#92400e] border border-[#fde68a] rounded-full px-3 py-1 text-[0.7rem] font-semibold m-[3px]">
                       {item}
                     </span>
                   ))}
@@ -142,7 +142,7 @@ const RapportViewer = ({ reportContent, onBack }: RapportViewerProps) => {
                 </h4>
                 <div className="flex flex-wrap">
                   {reportContent.ideale_functie.werkomgeving?.map((item: string, i: number) => (
-                    <span key={i} className="inline-flex items-center bg-[#f3f4f6] text-[#1a2e5a] border border-[#e5e7eb] rounded-full px-3 py-1 text-[0.8rem] font-semibold m-[3px]">
+                    <span key={i} className="inline-flex items-center bg-[#f3f4f6] text-[#1a2e5a] border border-[#e5e7eb] rounded-full px-3 py-1 text-[0.7rem] font-semibold m-[3px]">
                       {item}
                     </span>
                   ))}
@@ -157,7 +157,7 @@ const RapportViewer = ({ reportContent, onBack }: RapportViewerProps) => {
                 </h4>
                 <div className="flex flex-wrap">
                   {reportContent.ideale_functie.interessegebieden?.map((item: string, i: number) => (
-                    <span key={i} className="inline-flex items-center bg-[#f3f4f6] text-[#1a2e5a] border border-[#e5e7eb] rounded-full px-3 py-1 text-[0.8rem] font-semibold m-[3px]">
+                    <span key={i} className="inline-flex items-center bg-[#f3f4f6] text-[#1a2e5a] border border-[#e5e7eb] rounded-full px-3 py-1 text-[0.7rem] font-semibold m-[3px]">
                       {item}
                     </span>
                   ))}

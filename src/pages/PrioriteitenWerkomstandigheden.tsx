@@ -140,13 +140,13 @@ const PrioriteitenWerkomstandigheden = ({ mode = 'edit' }: StepProps) => {
 
             {/* Keywords Grid */}
             {availableKeywords.length > 0 ? (
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
                 {availableKeywords.map((keyword) => (
                   <button
                     key={keyword}
                     onClick={() => !isViewMode && handleKeywordToggle(keyword)}
                     disabled={isViewMode}
-                    className={`relative p-3 rounded-[10px] transition-all duration-150 text-sm text-center ${
+                    className={`relative p-3 rounded-[10px] transition-all duration-150 text-sm text-left ${
                       selectedKeywords.includes(keyword)
                         ? "bg-[#F5C518]/10 border-2 border-[#F5C518] text-[#1a2e5a] font-bold shadow-sm"
                         : isViewMode
