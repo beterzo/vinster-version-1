@@ -14,14 +14,17 @@ const getPrompts = (language: string, enthousiasmeData: any, wensberoepenData: a
 
 BELANGRIJK: Genereer GEEN losse woorden. Elk item moet een korte beschrijvende zin zijn van 4-8 woorden die een concrete voorkeur of eigenschap beschrijft.
 
+CRUCIAAL - OPSOMMINGSSTIJL: De items moeten samen één vloeiende opsomming vormen in de jij-vorm. Alleen het EERSTE item per categorie begint met "Je". Alle volgende items vervolgen ZONDER "Je", zodat ze met komma's achter elkaar gelezen kunnen worden als één doorlopende zin.
+
 De output moet een JSON-object zijn, met drie aparte arrays:
 
-- "activiteiten": dingen die iemand graag doet, verwoord als korte beschrijvende zinnen.
-  Voorbeelden: "Creatieve oplossingen bedenken voor problemen", "Graag samenwerken in een klein team", "Mensen begeleiden en coachen", "Presentaties geven aan grote groepen"
-- "werkomgeving": voorkeuren voor omgeving of samenwerking, als korte beschrijvende zinnen.
-  Voorbeelden: "Werken in een informele sfeer", "Flexibel kunnen indelen van werktijd", "Afwisseling tussen kantoor en buitenwerk", "Rustige werkplek met veel concentratie"
-- "interesses": thema's of onderwerpen waar iemand in geïnteresseerd is, als korte beschrijvende zinnen.
-  Voorbeelden: "Geïnteresseerd in technologie en innovatie", "Gefascineerd door menselijk gedrag", "Passie voor duurzaamheid en milieu", "Nieuwsgierig naar kunst en cultuur"
+- "activiteiten": dingen die iemand graag doet. Het eerste item begint met "Je", de rest vervolgt zonder "Je".
+  Voorbeeld van correcte lijst: ["Je bedenkt graag creatieve oplossingen", "werkt het liefst samen in een klein team", "begeleidt en coacht anderen", "geeft graag presentaties aan grote groepen"]
+  FOUT: ["Je bedenkt graag creatieve oplossingen", "Je werkt het liefst samen", "Je begeleidt anderen"] — hier staat "Je" te vaak!
+- "werkomgeving": voorkeuren voor omgeving of samenwerking. Zelfde regel: alleen eerste item begint met "Je".
+  Voorbeeld: ["Je werkt het liefst in een informele sfeer", "houdt van flexibele werktijden", "wisselt graag af tussen kantoor en buitenwerk", "zoekt een rustige werkplek met concentratie"]
+- "interesses": thema's of onderwerpen waar iemand in geïnteresseerd is. Zelfde regel.
+  Voorbeeld: ["Je bent geïnteresseerd in technologie en innovatie", "bent gefascineerd door menselijk gedrag", "hebt een passie voor duurzaamheid", "bent nieuwsgierig naar kunst en cultuur"]
 
 Gebruik uitsluitend informatie uit de antwoorden van de deelnemer. Formuleer alles in de stijl van de deelnemer. Elk item MOET een korte zin zijn van 4-8 woorden, NOOIT een los woord.
 
@@ -31,9 +34,14 @@ Gebruik uitsluitend informatie uit de antwoorden van de deelnemer. Formuleer all
 • werkomgeving (de sfeer, structuur en context waarin iemand graag werkt)
 • interesses (onderwerpen waar iemand door gefascineerd is of energie van krijgt)
 
-BELANGRIJK: Elk item moet een korte beschrijvende zin zijn van 4-8 woorden. Geen losse woorden!
-Goed: "Graag samenwerken in een klein team"
-Fout: "Samenwerken"
+BELANGRIJK - OPSOMMINGSSTIJL: Alleen het EERSTE item per categorie begint met "Je". Alle volgende items beginnen ZONDER "Je" zodat ze als opsomming achter het eerste item passen.
+Goed voorbeeld:
+  Item 1: "Je bedenkt graag creatieve oplossingen"
+  Item 2: "werkt het liefst in een informele sfeer"
+  Item 3: "bent geïnteresseerd in technologie"
+FOUT voorbeeld:
+  Item 1: "Je bedenkt graag creatieve oplossingen"
+  Item 2: "Je werkt het liefst in een informele sfeer"  ← FOUT, "Je" mag alleen bij item 1!
 
 De output moet in JSON-format zijn, met drie duidelijke keys:
 {
@@ -112,13 +120,16 @@ Wensberoep 3 – ${wensberoepenData?.wensberoep_3_titel || 'Niet ingevuld'}
 
 IMPORTANT: Do NOT generate single words. Each item must be a short descriptive phrase of 4-8 words that describes a concrete preference or characteristic.
 
+CRUCIAL - ENUMERATION STYLE: The items must form one flowing enumeration in the second person ("you"). Only the FIRST item per category starts with "You". All subsequent items continue WITHOUT "You", so they can be read as a comma-separated flowing sentence.
+
 The output must be a JSON object, with three separate arrays:
-• "activiteiten": things someone enjoys doing, phrased as short descriptive sentences.
-  Examples: "Enjoy solving creative problems", "Like coaching and mentoring others", "Presenting ideas to large groups", "Organizing events and activities"
-• "werkomgeving": preferences for environment or collaboration, as short descriptive sentences.
-  Examples: "Working in a relaxed informal atmosphere", "Flexible scheduling of work hours", "Quiet workspace with good concentration", "Mix of teamwork and solo tasks"
-• "interesses": themes or topics someone is interested in, as short descriptive sentences.
-  Examples: "Interested in technology and innovation", "Fascinated by human behavior", "Passionate about sustainability and environment", "Curious about art and culture"
+• "activiteiten": things someone enjoys doing. First item starts with "You", the rest continues without "You".
+  Correct example: ["You enjoy solving creative problems", "prefer collaborating in small teams", "like coaching and mentoring others", "love presenting ideas to large groups"]
+  WRONG: ["You enjoy solving creative problems", "You prefer collaborating", "You like coaching"] — "You" appears too often!
+• "werkomgeving": preferences for environment or collaboration. Same rule: only first item starts with "You".
+  Example: ["You prefer working in a relaxed atmosphere", "enjoy flexible scheduling of work hours", "like alternating between office and fieldwork", "seek a quiet workspace for concentration"]
+• "interesses": themes or topics someone is interested in. Same rule.
+  Example: ["You are interested in technology and innovation", "are fascinated by human behavior", "have a passion for sustainability", "are curious about art and culture"]
 
 Use only information from the participant's answers. Formulate everything in the participant's own style. Each item MUST be a short phrase of 4-8 words, NEVER a single word.
 
@@ -128,9 +139,14 @@ Use only information from the participant's answers. Formulate everything in the
 • work environment (the atmosphere, structure, and context in which someone prefers to work)
 • interests (topics that fascinate or energize someone)
 
-IMPORTANT: Each item must be a short descriptive phrase of 4-8 words. No single words!
-Good: "Enjoy collaborating in a small team"
-Wrong: "Collaboration"
+IMPORTANT - ENUMERATION STYLE: Only the FIRST item per category starts with "You". All following items start WITHOUT "You" so they fit as an enumeration after the first item.
+Correct example:
+  Item 1: "You enjoy solving creative problems"
+  Item 2: "prefer working in a relaxed atmosphere"
+  Item 3: "are interested in technology"
+WRONG example:
+  Item 1: "You enjoy solving creative problems"
+  Item 2: "You prefer working in a relaxed atmosphere"  ← WRONG, "You" only at item 1!
 
 The output must be in JSON format, with three clear keys:
 {
@@ -209,13 +225,16 @@ Dream job 3 – ${wensberoepenData?.wensberoep_3_titel || 'Not filled in'}
 
 WICHTIG: Generiere KEINE einzelnen Wörter. Jedes Item muss ein kurzer beschreibender Satz von 4-8 Wörtern sein, der eine konkrete Vorliebe oder Eigenschaft beschreibt.
 
+ENTSCHEIDEND - AUFZÄHLUNGSSTIL: Die Items müssen zusammen eine fließende Aufzählung in der Du-Form bilden. Nur das ERSTE Item pro Kategorie beginnt mit "Du". Alle folgenden Items setzen OHNE "Du" fort, sodass sie mit Kommas hintereinander als ein fließender Satz gelesen werden können.
+
 Die Ausgabe muss ein JSON-Objekt sein, mit drei separaten Arrays:
-• "activiteiten": Dinge, die jemand gerne tut, als kurze beschreibende Sätze.
-  Beispiele: "Kreative Lösungen für Probleme finden", "Gerne im kleinen Team zusammenarbeiten", "Menschen begleiten und coachen", "Präsentationen vor großen Gruppen halten"
-• "werkomgeving": Präferenzen bezüglich Umgebung oder Zusammenarbeit, als kurze beschreibende Sätze.
-  Beispiele: "Arbeiten in entspannter informeller Atmosphäre", "Flexible Einteilung der Arbeitszeit", "Abwechslung zwischen Büro und Außenarbeit", "Ruhiger Arbeitsplatz mit viel Konzentration"
-• "interesses": Themen oder Bereiche, für die sich jemand interessiert, als kurze beschreibende Sätze.
-  Beispiele: "Interessiert an Technologie und Innovation", "Fasziniert von menschlichem Verhalten", "Leidenschaft für Nachhaltigkeit und Umwelt", "Neugierig auf Kunst und Kultur"
+• "activiteiten": Dinge, die jemand gerne tut. Erstes Item beginnt mit "Du", der Rest ohne "Du".
+  Korrektes Beispiel: ["Du findest gerne kreative Lösungen", "arbeitest am liebsten im kleinen Team", "begleitest und coachst andere", "hältst gerne Präsentationen vor großen Gruppen"]
+  FALSCH: ["Du findest gerne kreative Lösungen", "Du arbeitest am liebsten im Team", "Du begleitest andere"] — "Du" steht zu oft!
+• "werkomgeving": Präferenzen für Umgebung oder Zusammenarbeit. Gleiche Regel.
+  Beispiel: ["Du arbeitest am liebsten in entspannter Atmosphäre", "schätzt flexible Arbeitszeiten", "wechselst gerne zwischen Büro und Außenarbeit", "suchst einen ruhigen Arbeitsplatz"]
+• "interesses": Themen oder Bereiche. Gleiche Regel.
+  Beispiel: ["Du interessierst dich für Technologie und Innovation", "bist fasziniert von menschlichem Verhalten", "hast eine Leidenschaft für Nachhaltigkeit", "bist neugierig auf Kunst und Kultur"]
 
 Verwende ausschließlich Informationen aus den Antworten des Teilnehmers. Formuliere alles im Stil des Teilnehmers. Jedes Item MUSS ein kurzer Satz von 4-8 Wörtern sein, NIEMALS ein einzelnes Wort.
 
@@ -225,9 +244,14 @@ Verwende ausschließlich Informationen aus den Antworten des Teilnehmers. Formul
 • Arbeitsumgebung (die Atmosphäre, Struktur und der Kontext, in dem jemand gerne arbeitet)
 • Interessen (Themen, die jemanden faszinieren oder ihm/ihr Energie geben)
 
-WICHTIG: Jedes Item muss ein kurzer beschreibender Satz von 4-8 Wörtern sein. Keine einzelnen Wörter!
-Gut: "Gerne im kleinen Team zusammenarbeiten"
-Falsch: "Zusammenarbeit"
+WICHTIG - AUFZÄHLUNGSSTIL: Nur das ERSTE Item pro Kategorie beginnt mit "Du". Alle folgenden Items beginnen OHNE "Du", sodass sie als Aufzählung hinter dem ersten Item passen.
+Korrektes Beispiel:
+  Item 1: "Du findest gerne kreative Lösungen"
+  Item 2: "arbeitest am liebsten in entspannter Atmosphäre"
+  Item 3: "interessierst dich für Technologie"
+FALSCHES Beispiel:
+  Item 1: "Du findest gerne kreative Lösungen"
+  Item 2: "Du arbeitest am liebsten in entspannter Atmosphäre"  ← FALSCH, "Du" nur bei Item 1!
 
 Das Ergebnis muss im JSON-Format sein, mit drei klaren Schlüsseln:
 {
@@ -306,13 +330,16 @@ Wunschberuf 3 – ${wensberoepenData?.wensberoep_3_titel || 'Nicht ausgefüllt'}
 
 VIKTIG: IKKE generer enkeltord. Hvert element må være en kort beskrivende setning på 4-8 ord som beskriver en konkret preferanse eller egenskap.
 
+AVGJØRENDE - OPPLISTINGSSTIL: Elementene skal sammen danne én flytende opplisting i du-form. Kun det FØRSTE elementet per kategori begynner med "Du". Alle påfølgende elementer fortsetter UTEN "Du", slik at de med komma kan leses som én sammenhengende setning.
+
 Output må være et JSON-objekt med tre separate arrays:
-• "activiteiten": ting en person liker å gjøre, formulert som korte beskrivende setninger.
-  Eksempler: "Liker å finne kreative løsninger", "Trives med å samarbeide i team", "Veilede og coache andre mennesker", "Holde presentasjoner for store grupper"
-• "werkomgeving": preferanser for miljø eller samarbeid, som korte beskrivende setninger.
-  Eksempler: "Jobbe i en uformell atmosfære", "Fleksibel inndeling av arbeidstiden", "Veksle mellom kontor og feltarbeid", "Rolig arbeidsplass med god konsentrasjon"
-• "interesses": temaer eller områder en person er interessert i, som korte beskrivende setninger.
-  Eksempler: "Interessert i teknologi og innovasjon", "Fascinert av menneskelig atferd", "Lidenskap for bærekraft og miljø", "Nysgjerrig på kunst og kultur"
+• "activiteiten": ting en person liker å gjøre. Første element begynner med "Du", resten uten "Du".
+  Korrekt eksempel: ["Du liker å finne kreative løsninger", "trives med å samarbeide i team", "veileder og coacher andre", "holder gjerne presentasjoner for store grupper"]
+  FEIL: ["Du liker å finne kreative løsninger", "Du trives med å samarbeide", "Du veileder andre"] — "Du" brukes for ofte!
+• "werkomgeving": preferanser for miljø eller samarbeid. Samme regel.
+  Eksempel: ["Du jobber helst i en uformell atmosfære", "setter pris på fleksibel arbeidstid", "veksler gjerne mellom kontor og feltarbeid", "søker en rolig arbeidsplass"]
+• "interesses": temaer eller områder. Samme regel.
+  Eksempel: ["Du er interessert i teknologi og innovasjon", "er fascinert av menneskelig atferd", "har en lidenskap for bærekraft", "er nysgjerrig på kunst og kultur"]
 
 Bruk utelukkende informasjon fra svarene til deltakeren. Formuler alt i deltakerens egen stil. Hvert element MÅ være en kort setning på 4-8 ord, ALDRI et enkeltord.
 
@@ -322,9 +349,14 @@ Bruk utelukkende informasjon fra svarene til deltakeren. Formuler alt i deltaker
 • arbeidsmiljø (stemningen, strukturen og konteksten personen trives i)
 • interesser (temaer personen er fascinert av eller får energi av)
 
-VIKTIG: Hvert element må være en kort beskrivende setning på 4-8 ord. Ingen enkeltord!
-Riktig: "Liker å samarbeide i et lite team"
-Feil: "Samarbeid"
+VIKTIG - OPPLISTINGSSTIL: Kun det FØRSTE elementet per kategori begynner med "Du". Alle følgende elementer begynner UTEN "Du", slik at de passer som opplisting etter det første elementet.
+Korrekt eksempel:
+  Element 1: "Du liker å finne kreative løsninger"
+  Element 2: "jobber helst i en uformell atmosfære"
+  Element 3: "er interessert i teknologi"
+FEIL eksempel:
+  Element 1: "Du liker å finne kreative løsninger"
+  Element 2: "Du jobber helst i en uformell atmosfære"  ← FEIL, "Du" kun ved element 1!
 
 Output skal være i JSON-format, med tre tydelige keys:
 {
