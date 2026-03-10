@@ -138,14 +138,13 @@ Use only information from the participant's answers. Formulate everything in the
 • work environment (the atmosphere, structure, and context in which someone prefers to work)
 • interests (topics that fascinate or energize someone)
 
-IMPORTANT - ENUMERATION STYLE: Only the FIRST item per category starts with "You". All following items start WITHOUT "You" so they fit as an enumeration after the first item.
+IMPORTANT - NEUTRAL STYLE: Do NOT start any item with "You". Start directly with the verb.
 Correct example:
-  Item 1: "You enjoy solving creative problems"
+  Item 1: "enjoy solving creative problems"
   Item 2: "prefer working in a relaxed atmosphere"
-  Item 3: "are interested in technology"
+  Item 3: "interested in technology"
 WRONG example:
-  Item 1: "You enjoy solving creative problems"
-  Item 2: "You prefer working in a relaxed atmosphere"  ← WRONG, "You" only at item 1!
+  Item 1: "You enjoy solving creative problems"  ← WRONG, no "You"!
 
 The output must be in JSON format, with three clear keys:
 {
@@ -153,7 +152,7 @@ The output must be in JSON format, with three clear keys:
   "werkomgeving": [],
   "interesses": []
 }
-Each list must contain exactly 16 short phrases. This is important: not more, not less than 16 items per category. Each item must be a descriptive phrase of 4-8 words.
+Each list must contain exactly 16 short phrases. This is important: not more, not less than 16 items per category. Each item must be a descriptive phrase of 4-8 words. NEVER start with "You".
 
 Input – User answers:
 
