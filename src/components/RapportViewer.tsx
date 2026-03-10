@@ -147,11 +147,15 @@ const RapportViewer = ({ reportContent, onBack }: RapportViewerProps) => {
                   {t('rapport.ideale_functie.werkomgeving')}
                 </h4>
                 <div className="flex flex-wrap">
-                  {reportContent.ideale_functie.werkomgeving?.map((item: string, i: number) => (
-                    <span key={i} className="inline-flex items-center bg-[#f3f4f6] text-[#1a2e5a] border border-[#e5e7eb] rounded-full px-3 py-1 text-[0.7rem] font-semibold m-[3px]">
-                      {item}
-                    </span>
-                  ))}
+                  {reportContent.ideale_functie.werkomgeving?.map((item: string, i: number) => {
+                    const pronoun = language === 'en' ? 'You ' : language === 'de' || language === 'no' ? 'Du ' : 'Je ';
+                    const displayItem = i === 0 ? pronoun + item.replace(/^(Je |You |Du )/i, '').charAt(0).toLowerCase() + item.replace(/^(Je |You |Du )/i, '').slice(1) : item;
+                    return (
+                      <span key={i} className="inline-flex items-center bg-[#f3f4f6] text-[#1a2e5a] border border-[#e5e7eb] rounded-full px-3 py-1 text-[0.7rem] font-semibold m-[3px]">
+                        {displayItem}
+                      </span>
+                    );
+                  })}
                 </div>
               </div>
 
