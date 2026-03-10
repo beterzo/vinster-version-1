@@ -175,6 +175,7 @@ const PrintBeroepenPage = ({ reportContent, t }: { reportContent: any; t: (key: 
 const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated, organisationTypeId }: RapportInlineProps) => {
   const { t } = useTranslation();
   const { user } = useAuth();
+  const { language } = useLanguage();
   const { toast } = useToast();
   const [reportContent, setReportContent] = useState<any>(null);
   const [loading, setLoading] = useState(true);
