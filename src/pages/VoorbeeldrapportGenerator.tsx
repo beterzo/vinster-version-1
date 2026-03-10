@@ -148,21 +148,21 @@ const sampleReports: Record<Language, ReportContent> = {
         "continuously learn and develop new skills"
       ],
       interessegebieden: [
-        "Interested in personal development and growth",
-        "Fascinated by effective communication strategies",
-        "Curious about leadership and management styles",
-        "Passionate about innovation and renewal",
-        "Interested in psychology and human behavior",
-        "Engaged in education and knowledge sharing",
-        "Fascinated by business strategy and growth",
-        "Curious about technology and digital transformation",
-        "Passionate about sustainability and environment",
-        "Interested in health and overall wellness",
-        "Driven by making meaningful social impact",
-        "Curious about entrepreneurship and startups",
-        "Inspired by culture and creative arts",
-        "Interested in future trends and developments",
-        "Fascinated by human motivation and behavior"
+        "interested in personal development and growth",
+        "fascinated by effective communication strategies",
+        "curious about leadership and management styles",
+        "passionate about innovation and renewal",
+        "interested in psychology and human behavior",
+        "engaged in education and knowledge sharing",
+        "fascinated by business strategy and growth",
+        "curious about technology and digital transformation",
+        "passionate about sustainability and environment",
+        "interested in health and overall wellness",
+        "driven by making meaningful social impact",
+        "curious about entrepreneurship and startups",
+        "inspired by culture and creative arts",
+        "interested in future trends and developments",
+        "fascinated by human motivation and behavior"
       ]
     },
     beroepen: {
