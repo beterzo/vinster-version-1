@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage, Language as AppLanguage } from "@/contexts/LanguageContext";
-import { formatKeywordsForReport } from "@/utils/keywordUtils";
+import { formatKeywordsForReportWithJeVorm } from "@/utils/keywordUtils";
 
 type Language = "nl" | "en" | "de" | "no";
 
@@ -41,55 +41,55 @@ const sampleReports: Record<Language, ReportContent> = {
     },
     ideale_functie: {
       activiteiten: [
-        "Graag mensen coachen en begeleiden",
-        "Inspirerende presentaties geven aan groepen",
-        "Creatieve teksten schrijven met impact",
-        "Evenementen organiseren van A tot Z",
-        "Actief netwerken en contacten leggen",
-        "Complexe problemen stap voor stap oplossen",
-        "Creatief denken over nieuwe mogelijkheden",
-        "Teams aansturen en motiveren",
-        "Collega's begeleiden in hun ontwikkeling",
-        "Strategische plannen maken voor lange termijn",
-        "Interactieve workshops faciliteren en leiden",
-        "Duurzame relaties opbouwen met stakeholders",
-        "Data analyseren en inzichten vertalen",
-        "Innovatieve strategieën ontwikkelen voor groei",
-        "Anderen inspireren met enthousiasme en visie"
+        "bedenkt graag creatieve oplossingen",
+        "geeft inspirerende presentaties aan groepen",
+        "schrijft creatieve teksten met impact",
+        "organiseert evenementen van A tot Z",
+        "netwerkt actief en legt contacten",
+        "lost complexe problemen stap voor stap op",
+        "denkt creatief over nieuwe mogelijkheden",
+        "stuurt teams aan en motiveert",
+        "begeleidt collega's in hun ontwikkeling",
+        "maakt strategische plannen voor lange termijn",
+        "faciliteert interactieve workshops en leidt",
+        "bouwt duurzame relaties op met stakeholders",
+        "analyseert data en vertaalt inzichten",
+        "ontwikkelt innovatieve strategieën voor groei",
+        "inspireert anderen met enthousiasme en visie"
       ],
       werkomgeving: [
-        "Werken op een flexibele werkplek",
-        "Samenwerken in een dynamisch team",
-        "Actief zijn in internationale omgeving",
-        "Werken in een modern ingericht kantoor",
-        "Mogelijkheid om vanuit huis te werken",
-        "Gedijen in een samenwerkende cultuur",
-        "Werken bij een innovatief bedrijf",
-        "Omringd zijn door diverse collega's",
-        "Werken met open en eerlijke communicatie",
-        "Volop groeimogelijkheden binnen de organisatie",
-        "Goede balans tussen werk en privé",
-        "Ondersteunend management dat vertrouwen geeft",
-        "Creatieve vrijheid in eigen aanpak",
-        "Werken aan zinvolle en impactvolle projecten",
-        "Continu blijven leren en ontwikkelen"
+        "werkt het liefst op een flexibele werkplek",
+        "werkt graag samen in een dynamisch team",
+        "is actief in internationale omgeving",
+        "werkt in een modern ingericht kantoor",
+        "heeft mogelijkheid om vanuit huis te werken",
+        "gedijt in een samenwerkende cultuur",
+        "werkt bij een innovatief bedrijf",
+        "is omringd door diverse collega's",
+        "werkt met open en eerlijke communicatie",
+        "heeft volop groeimogelijkheden binnen de organisatie",
+        "heeft goede balans tussen werk en privé",
+        "heeft ondersteunend management dat vertrouwen geeft",
+        "heeft creatieve vrijheid in eigen aanpak",
+        "werkt aan zinvolle en impactvolle projecten",
+        "blijft continu leren en ontwikkelen"
       ],
       interessegebieden: [
-        "Geïnteresseerd in persoonlijke ontwikkeling en groei",
-        "Gefascineerd door effectieve communicatie",
-        "Nieuwsgierig naar leiderschap en management",
-        "Passie voor innovatie en vernieuwing",
-        "Geïnteresseerd in psychologie en gedrag",
-        "Betrokken bij onderwijs en kennisdeling",
-        "Gefascineerd door bedrijfsstrategie en groei",
-        "Nieuwsgierig naar technologie en digitalisering",
-        "Passie voor duurzaamheid en milieubewustzijn",
-        "Geïnteresseerd in gezondheid en welzijn",
-        "Gedreven door maatschappelijke impact maken",
-        "Nieuwsgierig naar ondernemerschap en startups",
-        "Geïnspireerd door cultuur en kunst",
-        "Geïnteresseerd in toekomstige trends en ontwikkelingen",
-        "Gefascineerd door menselijk gedrag en motivatie"
+        "geïnteresseerd in persoonlijke ontwikkeling en groei",
+        "gefascineerd door effectieve communicatie",
+        "nieuwsgierig naar leiderschap en management",
+        "heeft passie voor innovatie en vernieuwing",
+        "geïnteresseerd in psychologie en gedrag",
+        "betrokken bij onderwijs en kennisdeling",
+        "gefascineerd door bedrijfsstrategie en groei",
+        "nieuwsgierig naar technologie en digitalisering",
+        "heeft passie voor duurzaamheid en milieubewustzijn",
+        "geïnteresseerd in gezondheid en welzijn",
+        "gedreven door maatschappelijke impact maken",
+        "nieuwsgierig naar ondernemerschap en startups",
+        "geïnspireerd door cultuur en kunst",
+        "geïnteresseerd in toekomstige trends en ontwikkelingen",
+        "gefascineerd door menselijk gedrag en motivatie"
       ]
     },
     beroepen: {
@@ -114,55 +114,55 @@ const sampleReports: Record<Language, ReportContent> = {
     },
     ideale_functie: {
       activiteiten: [
-        "Enjoy coaching and mentoring individuals",
-        "Presenting inspiring ideas to groups",
-        "Writing creative and impactful content",
-        "Organizing events from start to finish",
-        "Actively networking and building connections",
-        "Solving complex problems step by step",
-        "Thinking creatively about new possibilities",
-        "Leading and motivating diverse teams",
-        "Mentoring colleagues in their growth",
-        "Creating strategic plans for long term",
-        "Facilitating interactive and engaging workshops",
-        "Building lasting relationships with stakeholders",
-        "Analyzing data and translating insights",
-        "Developing innovative strategies for growth",
-        "Inspiring others with enthusiasm and vision"
+        "enjoy coaching and mentoring individuals",
+        "present inspiring ideas to groups",
+        "write creative and impactful content",
+        "organize events from start to finish",
+        "actively network and build connections",
+        "solve complex problems step by step",
+        "think creatively about new possibilities",
+        "lead and motivate diverse teams",
+        "mentor colleagues in their growth",
+        "create strategic plans for long term",
+        "facilitate interactive and engaging workshops",
+        "build lasting relationships with stakeholders",
+        "analyze data and translate insights",
+        "develop innovative strategies for growth",
+        "inspire others with enthusiasm and vision"
       ],
       werkomgeving: [
-        "Working in a flexible workspace",
-        "Collaborating within a dynamic team",
-        "Active in an international environment",
-        "Working in a modern well-equipped office",
-        "Having options for remote work",
-        "Thriving in a collaborative work culture",
-        "Working at an innovative forward-thinking company",
-        "Surrounded by diverse and inspiring colleagues",
-        "Working with open and honest communication",
-        "Plenty of growth opportunities within organization",
-        "Maintaining good work-life balance daily",
-        "Supportive management that gives trust",
-        "Creative freedom in own approach",
-        "Working on meaningful and impactful projects",
-        "Continuously learning and developing new skills"
+        "prefer working in a flexible workspace",
+        "collaborate within a dynamic team",
+        "are active in an international environment",
+        "work in a modern well-equipped office",
+        "have options for remote work",
+        "thrive in a collaborative work culture",
+        "work at an innovative forward-thinking company",
+        "are surrounded by diverse inspiring colleagues",
+        "work with open and honest communication",
+        "have plenty of growth opportunities",
+        "maintain good work-life balance daily",
+        "have supportive management that gives trust",
+        "enjoy creative freedom in own approach",
+        "work on meaningful and impactful projects",
+        "continuously learn and develop new skills"
       ],
       interessegebieden: [
-        "Interested in personal development and growth",
-        "Fascinated by effective communication strategies",
-        "Curious about leadership and management styles",
-        "Passionate about innovation and renewal",
-        "Interested in psychology and human behavior",
-        "Engaged in education and knowledge sharing",
-        "Fascinated by business strategy and growth",
-        "Curious about technology and digital transformation",
-        "Passionate about sustainability and environment",
-        "Interested in health and overall wellness",
-        "Driven by making meaningful social impact",
-        "Curious about entrepreneurship and startups",
-        "Inspired by culture and creative arts",
-        "Interested in future trends and developments",
-        "Fascinated by human motivation and behavior"
+        "interested in personal development and growth",
+        "fascinated by effective communication strategies",
+        "curious about leadership and management styles",
+        "passionate about innovation and renewal",
+        "interested in psychology and human behavior",
+        "engaged in education and knowledge sharing",
+        "fascinated by business strategy and growth",
+        "curious about technology and digital transformation",
+        "passionate about sustainability and environment",
+        "interested in health and overall wellness",
+        "driven by making meaningful social impact",
+        "curious about entrepreneurship and startups",
+        "inspired by culture and creative arts",
+        "interested in future trends and developments",
+        "fascinated by human motivation and behavior"
       ]
     },
     beroepen: {
@@ -187,55 +187,55 @@ const sampleReports: Record<Language, ReportContent> = {
     },
     ideale_functie: {
       activiteiten: [
-        "Menschen gerne coachen und begleiten",
-        "Inspirierende Präsentationen vor Gruppen halten",
-        "Kreative Texte mit Wirkung schreiben",
-        "Veranstaltungen von A bis Z organisieren",
-        "Aktiv netzwerken und Kontakte knüpfen",
-        "Komplexe Probleme Schritt für Schritt lösen",
-        "Kreativ über neue Möglichkeiten nachdenken",
-        "Teams anleiten und motivieren",
-        "Kollegen in ihrer Entwicklung begleiten",
-        "Strategische Pläne langfristig erstellen",
-        "Interaktive Workshops moderieren und leiten",
-        "Nachhaltige Beziehungen zu Stakeholdern aufbauen",
-        "Daten analysieren und Erkenntnisse übersetzen",
-        "Innovative Strategien für Wachstum entwickeln",
-        "Andere mit Begeisterung und Vision inspirieren"
+        "coacht und begleitet gerne Menschen",
+        "hält inspirierende Präsentationen vor Gruppen",
+        "schreibt kreative Texte mit Wirkung",
+        "organisiert Veranstaltungen von A bis Z",
+        "netzwerkt aktiv und knüpft Kontakte",
+        "löst komplexe Probleme Schritt für Schritt",
+        "denkt kreativ über neue Möglichkeiten nach",
+        "leitet Teams an und motiviert",
+        "begleitet Kollegen in ihrer Entwicklung",
+        "erstellt strategische Pläne langfristig",
+        "moderiert interaktive Workshops und leitet",
+        "baut nachhaltige Beziehungen zu Stakeholdern auf",
+        "analysiert Daten und übersetzt Erkenntnisse",
+        "entwickelt innovative Strategien für Wachstum",
+        "inspiriert andere mit Begeisterung und Vision"
       ],
       werkomgeving: [
-        "Arbeiten an einem flexiblen Arbeitsplatz",
-        "Zusammenarbeiten in einem dynamischen Team",
-        "Aktiv in einem internationalen Umfeld",
-        "Arbeiten in einem modern eingerichteten Büro",
-        "Möglichkeit von zu Hause zu arbeiten",
-        "Gedeihen in einer kollaborativen Kultur",
-        "Arbeiten bei einem innovativen Unternehmen",
-        "Umgeben von vielfältigen inspirierenden Kollegen",
-        "Arbeiten mit offener ehrlicher Kommunikation",
-        "Reichlich Entwicklungschancen in der Organisation",
-        "Gute Balance zwischen Arbeit und Privatleben",
-        "Unterstützende Führung die Vertrauen gibt",
-        "Kreative Freiheit im eigenen Ansatz",
-        "Arbeiten an sinnvollen wirkungsvollen Projekten",
-        "Kontinuierlich lernen und weiterentwickeln"
+        "arbeitet an einem flexiblen Arbeitsplatz",
+        "arbeitet gerne in einem dynamischen Team zusammen",
+        "ist aktiv in einem internationalen Umfeld",
+        "arbeitet in einem modern eingerichteten Büro",
+        "hat Möglichkeit von zu Hause zu arbeiten",
+        "gedeiht in einer kollaborativen Kultur",
+        "arbeitet bei einem innovativen Unternehmen",
+        "ist umgeben von vielfältigen inspirierenden Kollegen",
+        "arbeitet mit offener ehrlicher Kommunikation",
+        "hat reichlich Entwicklungschancen in der Organisation",
+        "hat gute Balance zwischen Arbeit und Privatleben",
+        "hat unterstützende Führung die Vertrauen gibt",
+        "hat kreative Freiheit im eigenen Ansatz",
+        "arbeitet an sinnvollen wirkungsvollen Projekten",
+        "lernt kontinuierlich und entwickelt sich weiter"
       ],
       interessegebieden: [
-        "Interessiert an persönlicher Entwicklung und Wachstum",
-        "Fasziniert von effektiver Kommunikation",
-        "Neugierig auf Führung und Managementstile",
-        "Leidenschaft für Innovation und Erneuerung",
-        "Interessiert an Psychologie und Verhalten",
-        "Engagiert in Bildung und Wissenstransfer",
-        "Fasziniert von Unternehmensstrategie und Wachstum",
-        "Neugierig auf Technologie und Digitalisierung",
-        "Leidenschaft für Nachhaltigkeit und Umwelt",
-        "Interessiert an Gesundheit und Wohlbefinden",
-        "Getrieben von sozialer Wirkung erzielen",
-        "Neugierig auf Unternehmertum und Startups",
-        "Inspiriert von Kultur und kreativer Kunst",
-        "Interessiert an Zukunftstrends und Entwicklungen",
-        "Fasziniert von menschlichem Verhalten und Motivation"
+        "interessiert an persönlicher Entwicklung und Wachstum",
+        "fasziniert von effektiver Kommunikation",
+        "neugierig auf Führung und Managementstile",
+        "hat Leidenschaft für Innovation und Erneuerung",
+        "interessiert an Psychologie und Verhalten",
+        "engagiert in Bildung und Wissenstransfer",
+        "fasziniert von Unternehmensstrategie und Wachstum",
+        "neugierig auf Technologie und Digitalisierung",
+        "hat Leidenschaft für Nachhaltigkeit und Umwelt",
+        "interessiert an Gesundheit und Wohlbefinden",
+        "getrieben von sozialer Wirkung erzielen",
+        "neugierig auf Unternehmertum und Startups",
+        "inspiriert von Kultur und kreativer Kunst",
+        "interessiert an Zukunftstrends und Entwicklungen",
+        "fasziniert von menschlichem Verhalten und Motivation"
       ]
     },
     beroepen: {
@@ -260,55 +260,55 @@ const sampleReports: Record<Language, ReportContent> = {
     },
     ideale_functie: {
       activiteiten: [
-        "Liker å veilede og coache mennesker",
-        "Holde inspirerende presentasjoner for grupper",
-        "Skrive kreativt innhold med effekt",
-        "Organisere arrangementer fra start til slutt",
-        "Aktivt bygge nettverk og kontakter",
-        "Løse komplekse problemer steg for steg",
-        "Tenke kreativt om nye muligheter",
-        "Lede og motivere mangfoldige team",
-        "Veilede kolleger i deres utvikling",
-        "Lage strategiske planer for lang sikt",
-        "Fasilitere interaktive og engasjerende workshops",
-        "Bygge varige relasjoner med interessenter",
-        "Analysere data og oversette innsikt",
-        "Utvikle innovative strategier for vekst",
-        "Inspirere andre med entusiasme og visjon"
+        "liker å veilede og coache mennesker",
+        "holder inspirerende presentasjoner for grupper",
+        "skriver kreativt innhold med effekt",
+        "organiserer arrangementer fra start til slutt",
+        "bygger aktivt nettverk og kontakter",
+        "løser komplekse problemer steg for steg",
+        "tenker kreativt om nye muligheter",
+        "leder og motiverer mangfoldige team",
+        "veileder kolleger i deres utvikling",
+        "lager strategiske planer for lang sikt",
+        "fasiliterer interaktive og engasjerende workshops",
+        "bygger varige relasjoner med interessenter",
+        "analyserer data og oversetter innsikt",
+        "utvikler innovative strategier for vekst",
+        "inspirerer andre med entusiasme og visjon"
       ],
       werkomgeving: [
-        "Jobbe på en fleksibel arbeidsplass",
-        "Samarbeide i et dynamisk team",
-        "Aktiv i et internasjonalt miljø",
-        "Jobbe på et moderne velutstyrt kontor",
-        "Mulighet for å jobbe hjemmefra",
-        "Trives i en samarbeidende arbeidskultur",
-        "Jobbe i en innovativ fremtidsrettet bedrift",
-        "Omgitt av mangfoldige inspirerende kolleger",
-        "Jobbe med åpen og ærlig kommunikasjon",
-        "Rikelig med utviklingsmuligheter i organisasjonen",
-        "God balanse mellom jobb og fritid",
-        "Støttende ledelse som gir tillit",
-        "Kreativ frihet i egen tilnærming",
-        "Jobbe med meningsfulle og virkningsfulle prosjekter",
-        "Kontinuerlig lære og utvikle nye ferdigheter"
+        "jobber på en fleksibel arbeidsplass",
+        "samarbeider i et dynamisk team",
+        "er aktiv i et internasjonalt miljø",
+        "jobber på et moderne velutstyrt kontor",
+        "har mulighet for å jobbe hjemmefra",
+        "trives i en samarbeidende arbeidskultur",
+        "jobber i en innovativ fremtidsrettet bedrift",
+        "er omgitt av mangfoldige inspirerende kolleger",
+        "jobber med åpen og ærlig kommunikasjon",
+        "har rikelig med utviklingsmuligheter i organisasjonen",
+        "har god balanse mellom jobb og fritid",
+        "har støttende ledelse som gir tillit",
+        "har kreativ frihet i egen tilnærming",
+        "jobber med meningsfulle og virkningsfulle prosjekter",
+        "lærer kontinuerlig og utvikler nye ferdigheter"
       ],
       interessegebieden: [
-        "Interessert i personlig utvikling og vekst",
-        "Fascinert av effektiv kommunikasjon",
-        "Nysgjerrig på ledelse og ledelsesstiler",
-        "Lidenskap for innovasjon og fornyelse",
-        "Interessert i psykologi og menneskelig atferd",
-        "Engasjert i utdanning og kunnskapsdeling",
-        "Fascinert av forretningsstrategi og vekst",
-        "Nysgjerrig på teknologi og digital transformasjon",
-        "Lidenskap for bærekraft og miljø",
-        "Interessert i helse og generelt velvære",
-        "Drevet av å skape sosial påvirkning",
-        "Nysgjerrig på entreprenørskap og oppstartsbedrifter",
-        "Inspirert av kultur og kreativ kunst",
-        "Interessert i fremtidige trender og utviklinger",
-        "Fascinert av menneskelig motivasjon og atferd"
+        "interessert i personlig utvikling og vekst",
+        "fascinert av effektiv kommunikasjon",
+        "nysgjerrig på ledelse og ledelsesstiler",
+        "har lidenskap for innovasjon og fornyelse",
+        "interessert i psykologi og menneskelig atferd",
+        "engasjert i utdanning og kunnskapsdeling",
+        "fascinert av forretningsstrategi og vekst",
+        "nysgjerrig på teknologi og digital transformasjon",
+        "har lidenskap for bærekraft og miljø",
+        "interessert i helse og generelt velvære",
+        "drevet av å skape sosial påvirkning",
+        "nysgjerrig på entreprenørskap og oppstartsbedrifter",
+        "inspirert av kultur og kreativ kunst",
+        "interessert i fremtidige trender og utviklinger",
+        "fascinert av menneskelig motivasjon og atferd"
       ]
     },
     beroepen: {
@@ -541,7 +541,7 @@ const VoorbeeldrapportGenerator = () => {
                   {t.activitiesSubtitle}
                 </h3>
                 <p className="text-gray-700 leading-relaxed text-base md:text-xl">
-                  {formatKeywordsForReport(reportContent.ideale_functie.activiteiten)}
+                  {formatKeywordsForReportWithJeVorm(reportContent.ideale_functie.activiteiten, selectedLanguage)}
                 </p>
                 <div className="hidden md:block"><SectionSquare color="yellow" /></div>
               </div>
@@ -552,7 +552,7 @@ const VoorbeeldrapportGenerator = () => {
                   {t.environmentSubtitle}
                 </h3>
                 <p className="text-gray-700 leading-relaxed text-base md:text-xl">
-                  {formatKeywordsForReport(reportContent.ideale_functie.werkomgeving)}
+                  {formatKeywordsForReportWithJeVorm(reportContent.ideale_functie.werkomgeving, selectedLanguage)}
                 </p>
                 <div className="hidden md:block"><SectionSquare color="blue" /></div>
               </div>
@@ -563,7 +563,7 @@ const VoorbeeldrapportGenerator = () => {
                   {t.interestsSubtitle}
                 </h3>
                 <p className="text-gray-700 leading-relaxed text-base md:text-xl">
-                  {formatKeywordsForReport(reportContent.ideale_functie.interessegebieden)}
+                  {formatKeywordsForReportWithJeVorm(reportContent.ideale_functie.interessegebieden, selectedLanguage)}
                 </p>
                 <div className="hidden md:block"><SectionSquare color="darkblue" /></div>
               </div>

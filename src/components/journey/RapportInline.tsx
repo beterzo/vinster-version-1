@@ -6,7 +6,8 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { formatKeywordsForReport, boldQuotedKeywords } from "@/utils/keywordUtils";
+import { formatKeywordsForReportWithJeVorm, boldQuotedKeywords } from "@/utils/keywordUtils";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface RapportInlineProps {
   roundId: string;
@@ -70,7 +71,7 @@ const PrintIdealeFunctiePage = ({ reportContent, t }: { reportContent: any; t: (
         <div>
           <h3 className="text-3xl font-semibold text-[#78BFE3] mb-4">Wat je graag doet</h3>
           <p className="text-xl text-gray-800 leading-relaxed line-clamp-6 overflow-hidden break-words">
-            {formatKeywordsForReport(reportContent.ideale_functie?.activiteiten || [])}
+            {formatKeywordsForReportWithJeVorm(reportContent.ideale_functie?.activiteiten || [], 'nl')}
           </p>
         </div>
 
@@ -78,7 +79,7 @@ const PrintIdealeFunctiePage = ({ reportContent, t }: { reportContent: any; t: (
         <div>
           <h3 className="text-3xl font-semibold text-[#78BFE3] mb-4">Jouw ideale werkomgeving</h3>
           <p className="text-xl text-gray-800 leading-relaxed line-clamp-6 overflow-hidden break-words">
-            {formatKeywordsForReport(reportContent.ideale_functie?.werkomgeving || [])}
+            {formatKeywordsForReportWithJeVorm(reportContent.ideale_functie?.werkomgeving || [], 'nl')}
           </p>
         </div>
 
@@ -86,7 +87,7 @@ const PrintIdealeFunctiePage = ({ reportContent, t }: { reportContent: any; t: (
         <div>
           <h3 className="text-3xl font-semibold text-[#78BFE3] mb-4">Jouw interessegebieden</h3>
           <p className="text-xl text-gray-800 leading-relaxed line-clamp-6 overflow-hidden break-words">
-            {formatKeywordsForReport(reportContent.ideale_functie?.interessegebieden || [])}
+            {formatKeywordsForReportWithJeVorm(reportContent.ideale_functie?.interessegebieden || [], 'nl')}
           </p>
         </div>
       </div>
@@ -174,6 +175,7 @@ const PrintBeroepenPage = ({ reportContent, t }: { reportContent: any; t: (key: 
 const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated, organisationTypeId }: RapportInlineProps) => {
   const { t } = useTranslation();
   const { user } = useAuth();
+  const { language } = useLanguage();
   const { toast } = useToast();
   const [reportContent, setReportContent] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -382,11 +384,15 @@ const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated
                 {t('rapport.ideale_functie.activiteiten')}
               </h4>
               <div className="flex flex-wrap">
-                {reportContent.ideale_functie?.activiteiten?.map((item: string, i: number) => (
-                  <span key={i} className="inline-flex items-center bg-[#fffbeb] text-[#92400e] border border-[#fde68a] rounded-full px-3 py-1 text-[0.7rem] font-semibold m-[3px]">
-                    {item}
-                  </span>
-                ))}
+                {reportContent.ideale_functie?.activiteiten?.map((item: string, i: number) => {
+                  const pronoun = language === 'en' ? 'You ' : language === 'de' || language === 'no' ? 'Du ' : 'Je ';
+                  const displayItem = i === 0 ? pronoun + item.replace(/^(Je |You |Du )/i, '').charAt(0).toLowerCase() + item.replace(/^(Je |You |Du )/i, '').slice(1) : item;
+                  return (
+                    <span key={i} className="inline-flex items-center bg-[#fffbeb] text-[#92400e] border border-[#fde68a] rounded-full px-3 py-1 text-[0.7rem] font-semibold m-[3px]">
+                      {displayItem}
+                    </span>
+                  );
+                })}
               </div>
             </div>
 
@@ -397,11 +403,15 @@ const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated
                 {t('rapport.ideale_functie.werkomgeving')}
               </h4>
               <div className="flex flex-wrap">
-                {reportContent.ideale_functie?.werkomgeving?.map((item: string, i: number) => (
-                  <span key={i} className="inline-flex items-center bg-[#f3f4f6] text-[#1a2e5a] border border-[#e5e7eb] rounded-full px-3 py-1 text-[0.7rem] font-semibold m-[3px]">
-                    {item}
-                  </span>
-                ))}
+                {reportContent.ideale_functie?.werkomgeving?.map((item: string, i: number) => {
+                  const pronoun = language === 'en' ? 'You ' : language === 'de' || language === 'no' ? 'Du ' : 'Je ';
+                  const displayItem = i === 0 ? pronoun + item.replace(/^(Je |You |Du )/i, '').charAt(0).toLowerCase() + item.replace(/^(Je |You |Du )/i, '').slice(1) : item;
+                  return (
+                    <span key={i} className="inline-flex items-center bg-[#f3f4f6] text-[#1a2e5a] border border-[#e5e7eb] rounded-full px-3 py-1 text-[0.7rem] font-semibold m-[3px]">
+                      {displayItem}
+                    </span>
+                  );
+                })}
               </div>
             </div>
 
@@ -412,11 +422,15 @@ const RapportInline = ({ roundId, subStep, onNext, onPrevious, onReportGenerated
                 {t('rapport.ideale_functie.interessegebieden')}
               </h4>
               <div className="flex flex-wrap">
-                {reportContent.ideale_functie?.interessegebieden?.map((item: string, i: number) => (
-                  <span key={i} className="inline-flex items-center bg-[#f3f4f6] text-[#1a2e5a] border border-[#e5e7eb] rounded-full px-3 py-1 text-[0.7rem] font-semibold m-[3px]">
-                    {item}
-                  </span>
-                ))}
+                {reportContent.ideale_functie?.interessegebieden?.map((item: string, i: number) => {
+                  const pronoun = language === 'en' ? 'You ' : language === 'de' || language === 'no' ? 'Du ' : 'Je ';
+                  const displayItem = i === 0 ? pronoun + item.replace(/^(Je |You |Du )/i, '').charAt(0).toLowerCase() + item.replace(/^(Je |You |Du )/i, '').slice(1) : item;
+                  return (
+                    <span key={i} className="inline-flex items-center bg-[#f3f4f6] text-[#1a2e5a] border border-[#e5e7eb] rounded-full px-3 py-1 text-[0.7rem] font-semibold m-[3px]">
+                      {displayItem}
+                    </span>
+                  );
+                })}
               </div>
             </div>
           </div>
