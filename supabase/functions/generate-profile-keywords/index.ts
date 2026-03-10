@@ -34,9 +34,14 @@ Gebruik uitsluitend informatie uit de antwoorden van de deelnemer. Formuleer all
 • werkomgeving (de sfeer, structuur en context waarin iemand graag werkt)
 • interesses (onderwerpen waar iemand door gefascineerd is of energie van krijgt)
 
-BELANGRIJK: Elk item moet een korte beschrijvende zin zijn van 4-8 woorden. Geen losse woorden!
-Goed: "Graag samenwerken in een klein team"
-Fout: "Samenwerken"
+BELANGRIJK - OPSOMMINGSSTIJL: Alleen het EERSTE item per categorie begint met "Je". Alle volgende items beginnen ZONDER "Je" zodat ze als opsomming achter het eerste item passen.
+Goed voorbeeld:
+  Item 1: "Je bedenkt graag creatieve oplossingen"
+  Item 2: "werkt het liefst in een informele sfeer"
+  Item 3: "bent geïnteresseerd in technologie"
+FOUT voorbeeld:
+  Item 1: "Je bedenkt graag creatieve oplossingen"
+  Item 2: "Je werkt het liefst in een informele sfeer"  ← FOUT, "Je" mag alleen bij item 1!
 
 De output moet in JSON-format zijn, met drie duidelijke keys:
 {
