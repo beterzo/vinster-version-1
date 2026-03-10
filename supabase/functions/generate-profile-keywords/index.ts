@@ -26,10 +26,14 @@ De output moet een JSON-object zijn, met drie aparte arrays:
 Gebruik uitsluitend informatie uit de antwoorden van de deelnemer. Formuleer alles in de stijl van de deelnemer. Elk item MOET een korte zin zijn van 4-8 woorden, NOOIT een los woord.
 
 ⚠️ De output moet geldig JSON zijn. Geen toelichting, geen extra uitleg, alleen het JSON-object.`,
-      user: `Je ontvangt nu een volledig ingevulde antwoordenlijst van een gebruiker. Gebruik deze input om op basis van de methodiek van de loopbaantrechter 48 kernwoorden of korte zinnen te genereren (exact 16 per categorie), verdeeld over drie categorieën:
+      user: `Je ontvangt nu een volledig ingevulde antwoordenlijst van een gebruiker. Gebruik deze input om op basis van de methodiek van de loopbaantrechter 48 korte beschrijvende zinnen te genereren (exact 16 per categorie), verdeeld over drie categorieën:
 • activiteiten (wat iemand graag doet)
 • werkomgeving (de sfeer, structuur en context waarin iemand graag werkt)
 • interesses (onderwerpen waar iemand door gefascineerd is of energie van krijgt)
+
+BELANGRIJK: Elk item moet een korte beschrijvende zin zijn van 4-8 woorden. Geen losse woorden!
+Goed: "Graag samenwerken in een klein team"
+Fout: "Samenwerken"
 
 De output moet in JSON-format zijn, met drie duidelijke keys:
 {
@@ -37,7 +41,7 @@ De output moet in JSON-format zijn, met drie duidelijke keys:
   "werkomgeving": [],
   "interesses": []
 }
-Laat elke lijst exact 16 items bevatten. Dit is belangrijk: niet meer, niet minder dan 16 items per categorie. Je mag zelfstandige naamwoorden, werkwoorden of korte zinnen gebruiken. Kwalitatieve bijvoeglijke naamwoorden zijn ook toegestaan als die iets toevoegen aan het karakter of de stijl van de persoon.
+Laat elke lijst exact 16 korte zinnen bevatten. Dit is belangrijk: niet meer, niet minder dan 16 items per categorie. Elk item moet een beschrijvende zin zijn van 4-8 woorden.
 
 Input – Antwoorden gebruiker:
 
