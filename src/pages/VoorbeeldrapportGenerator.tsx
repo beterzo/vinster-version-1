@@ -552,7 +552,7 @@ const VoorbeeldrapportGenerator = () => {
                   {t.environmentSubtitle}
                 </h3>
                 <p className="text-gray-700 leading-relaxed text-base md:text-xl">
-                  {formatKeywordsForReport(reportContent.ideale_functie.werkomgeving)}
+                  {formatKeywordsForReportWithJeVorm(reportContent.ideale_functie.werkomgeving, selectedLanguage)}
                 </p>
                 <div className="hidden md:block"><SectionSquare color="blue" /></div>
               </div>
