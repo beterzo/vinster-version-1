@@ -14,19 +14,19 @@ const getPrompts = (language: string, enthousiasmeData: any, wensberoepenData: a
 
 BELANGRIJK: Genereer GEEN losse woorden. Elk item moet een korte beschrijvende zin zijn van 4-8 woorden die een concrete voorkeur of eigenschap beschrijft.
 
-CRUCIAAL - OPSOMMINGSSTIJL: De items moeten samen één vloeiende opsomming vormen in de jij-vorm. Alleen het EERSTE item per categorie begint met "Je". Alle volgende items vervolgen ZONDER "Je", zodat ze met komma's achter elkaar gelezen kunnen worden als één doorlopende zin.
+CRUCIAAL - NEUTRALE STIJL: Alle items worden geformuleerd ZONDER persoonlijk voornaamwoord ("Je"). Begin elk item direct met het werkwoord of een beschrijvend woord. De items moeten neutraal zijn zodat ze als losse keuzeopties gepresenteerd kunnen worden.
 
 De output moet een JSON-object zijn, met drie aparte arrays:
 
-- "activiteiten": dingen die iemand graag doet. Het eerste item begint met "Je", de rest vervolgt zonder "Je".
-  Voorbeeld van correcte lijst: ["Je bedenkt graag creatieve oplossingen", "werkt het liefst samen in een klein team", "begeleidt en coacht anderen", "geeft graag presentaties aan grote groepen"]
-  FOUT: ["Je bedenkt graag creatieve oplossingen", "Je werkt het liefst samen", "Je begeleidt anderen"] — hier staat "Je" te vaak!
-- "werkomgeving": voorkeuren voor omgeving of samenwerking. Zelfde regel: alleen eerste item begint met "Je".
-  Voorbeeld: ["Je werkt het liefst in een informele sfeer", "houdt van flexibele werktijden", "wisselt graag af tussen kantoor en buitenwerk", "zoekt een rustige werkplek met concentratie"]
+- "activiteiten": dingen die iemand graag doet. GEEN "Je" gebruiken.
+  Correct voorbeeld: ["bedenkt graag creatieve oplossingen", "werkt het liefst samen in een klein team", "begeleidt en coacht anderen", "geeft graag presentaties aan grote groepen"]
+  FOUT: ["Je bedenkt graag creatieve oplossingen"] — GEEN "Je" gebruiken!
+- "werkomgeving": voorkeuren voor omgeving of samenwerking. Zelfde regel: GEEN "Je".
+  Voorbeeld: ["werkt het liefst in een informele sfeer", "houdt van flexibele werktijden", "wisselt graag af tussen kantoor en buitenwerk", "zoekt een rustige werkplek met concentratie"]
 - "interesses": thema's of onderwerpen waar iemand in geïnteresseerd is. Zelfde regel.
-  Voorbeeld: ["Je bent geïnteresseerd in technologie en innovatie", "bent gefascineerd door menselijk gedrag", "hebt een passie voor duurzaamheid", "bent nieuwsgierig naar kunst en cultuur"]
+  Voorbeeld: ["geïnteresseerd in technologie en innovatie", "gefascineerd door menselijk gedrag", "heeft een passie voor duurzaamheid", "nieuwsgierig naar kunst en cultuur"]
 
-Gebruik uitsluitend informatie uit de antwoorden van de deelnemer. Formuleer alles in de stijl van de deelnemer. Elk item MOET een korte zin zijn van 4-8 woorden, NOOIT een los woord.
+Gebruik uitsluitend informatie uit de antwoorden van de deelnemer. Formuleer alles in de stijl van de deelnemer. Elk item MOET een korte zin zijn van 4-8 woorden, NOOIT een los woord. NOOIT beginnen met "Je".
 
 ⚠️ De output moet geldig JSON zijn. Geen toelichting, geen extra uitleg, alleen het JSON-object.`,
       user: `Je ontvangt nu een volledig ingevulde antwoordenlijst van een gebruiker. Gebruik deze input om op basis van de methodiek van de loopbaantrechter 48 korte beschrijvende zinnen te genereren (exact 16 per categorie), verdeeld over drie categorieën:
