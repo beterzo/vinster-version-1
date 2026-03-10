@@ -10,30 +10,21 @@ const corsHeaders = {
 const getPrompts = (language: string, enthousiasmeData: any, wensberoepenData: any) => {
   const prompts: Record<string, { system: string; user: string }> = {
     nl: {
-      system: `Je bent een loopbaanprofessional gespecialiseerd in het analyseren van open antwoorden van kandidaten. Je doel is om 48 korte beschrijvende zinnen te genereren (exact 16 per categorie) op basis van reflectieve antwoorden op vragen over werkervaring, voorkeuren en interesses.
-
-BELANGRIJK: Genereer GEEN losse woorden. Elk item moet een korte beschrijvende zin zijn van 4-8 woorden die een concrete voorkeur of eigenschap beschrijft.
+      system: `Je bent een loopbaanprofessional gespecialiseerd in het analyseren van open antwoorden van kandidaten. Je doel is om 48 kernwoorden of korte zinnen te genereren (exact 16 per categorie) op basis van reflectieve antwoorden op vragen over werkervaring, voorkeuren en interesses.
 
 De output moet een JSON-object zijn, met drie aparte arrays:
 
-- "activiteiten": dingen die iemand graag doet, verwoord als korte beschrijvende zinnen.
-  Voorbeelden: "Creatieve oplossingen bedenken voor problemen", "Graag samenwerken in een klein team", "Mensen begeleiden en coachen", "Presentaties geven aan grote groepen"
-- "werkomgeving": voorkeuren voor omgeving of samenwerking, als korte beschrijvende zinnen.
-  Voorbeelden: "Werken in een informele sfeer", "Flexibel kunnen indelen van werktijd", "Afwisseling tussen kantoor en buitenwerk", "Rustige werkplek met veel concentratie"
-- "interesses": thema's of onderwerpen waar iemand in geïnteresseerd is, als korte beschrijvende zinnen.
-  Voorbeelden: "Geïnteresseerd in technologie en innovatie", "Gefascineerd door menselijk gedrag", "Passie voor duurzaamheid en milieu", "Nieuwsgierig naar kunst en cultuur"
+- "activiteiten": dingen die iemand graag doet, verwoord als werkwoorden of korte zinnen.
+- "werkomgeving": voorkeuren voor omgeving of samenwerking.
+- "interesses": thema's of onderwerpen waar iemand in geïnteresseerd is.
 
-Gebruik uitsluitend informatie uit de antwoorden van de deelnemer. Formuleer alles in de stijl van de deelnemer. Elk item MOET een korte zin zijn van 4-8 woorden, NOOIT een los woord.
+Gebruik uitsluitend informatie uit de antwoorden van de deelnemer. Formuleer alles in de stijl van de deelnemer. Je mag ook korte zinnen gebruiken als dat beter past dan één woord.
 
 ⚠️ De output moet geldig JSON zijn. Geen toelichting, geen extra uitleg, alleen het JSON-object.`,
-      user: `Je ontvangt nu een volledig ingevulde antwoordenlijst van een gebruiker. Gebruik deze input om op basis van de methodiek van de loopbaantrechter 48 korte beschrijvende zinnen te genereren (exact 16 per categorie), verdeeld over drie categorieën:
+      user: `Je ontvangt nu een volledig ingevulde antwoordenlijst van een gebruiker. Gebruik deze input om op basis van de methodiek van de loopbaantrechter 48 kernwoorden of korte zinnen te genereren (exact 16 per categorie), verdeeld over drie categorieën:
 • activiteiten (wat iemand graag doet)
 • werkomgeving (de sfeer, structuur en context waarin iemand graag werkt)
 • interesses (onderwerpen waar iemand door gefascineerd is of energie van krijgt)
-
-BELANGRIJK: Elk item moet een korte beschrijvende zin zijn van 4-8 woorden. Geen losse woorden!
-Goed: "Graag samenwerken in een klein team"
-Fout: "Samenwerken"
 
 De output moet in JSON-format zijn, met drie duidelijke keys:
 {
@@ -41,7 +32,7 @@ De output moet in JSON-format zijn, met drie duidelijke keys:
   "werkomgeving": [],
   "interesses": []
 }
-Laat elke lijst exact 16 korte zinnen bevatten. Dit is belangrijk: niet meer, niet minder dan 16 items per categorie. Elk item moet een beschrijvende zin zijn van 4-8 woorden.
+Laat elke lijst exact 16 items bevatten. Dit is belangrijk: niet meer, niet minder dan 16 items per categorie. Je mag zelfstandige naamwoorden, werkwoorden of korte zinnen gebruiken. Kwalitatieve bijvoeglijke naamwoorden zijn ook toegestaan als die iets toevoegen aan het karakter of de stijl van de persoon.
 
 Input – Antwoorden gebruiker:
 
@@ -108,29 +99,20 @@ Wensberoep 3 – ${wensberoepenData?.wensberoep_3_titel || 'Niet ingevuld'}
 8: ${wensberoepenData?.wensberoep_3_kennis_focus || 'Niet ingevuld'}`
     },
     en: {
-      system: `You are a career professional specialized in analyzing open-ended responses from candidates. Your goal is to generate 48 short descriptive phrases in English (exactly 16 per category) based on reflective answers to questions about work experience, preferences, and interests.
-
-IMPORTANT: Do NOT generate single words. Each item must be a short descriptive phrase of 4-8 words that describes a concrete preference or characteristic.
+      system: `You are a career professional specialized in analyzing open-ended responses from candidates. Your goal is to generate 48 English keywords or short phrases (exactly 16 per category) based on reflective answers to questions about work experience, preferences, and interests.
 
 The output must be a JSON object, with three separate arrays:
-• "activiteiten": things someone enjoys doing, phrased as short descriptive sentences.
-  Examples: "Enjoy solving creative problems", "Like coaching and mentoring others", "Presenting ideas to large groups", "Organizing events and activities"
-• "werkomgeving": preferences for environment or collaboration, as short descriptive sentences.
-  Examples: "Working in a relaxed informal atmosphere", "Flexible scheduling of work hours", "Quiet workspace with good concentration", "Mix of teamwork and solo tasks"
-• "interesses": themes or topics someone is interested in, as short descriptive sentences.
-  Examples: "Interested in technology and innovation", "Fascinated by human behavior", "Passionate about sustainability and environment", "Curious about art and culture"
+• "activiteiten": things someone enjoys doing, phrased as verbs or short sentences.
+• "werkomgeving": preferences for environment or collaboration.
+• "interesses": themes or topics someone is interested in.
 
-Use only information from the participant's answers. Formulate everything in the participant's own style. Each item MUST be a short phrase of 4-8 words, NEVER a single word.
+Use only information from the participant's answers. Formulate everything in the participant's own style. You may also use short sentences if that fits better than a single word.
 
 ⚠️ The output must be valid JSON. No explanation, no additional text, only the JSON object.`,
-      user: `You are now receiving a fully completed list of answers from a user. Use this input to generate 48 short descriptive phrases (exactly 16 per category) based on the method of the career funnel, divided into three categories:
+      user: `You are now receiving a fully completed list of answers from a user. Use this input to generate 48 keywords or short phrases (exactly 16 per category) based on the method of the career funnel, divided into three categories:
 • activities (what someone enjoys doing)
 • work environment (the atmosphere, structure, and context in which someone prefers to work)
 • interests (topics that fascinate or energize someone)
-
-IMPORTANT: Each item must be a short descriptive phrase of 4-8 words. No single words!
-Good: "Enjoy collaborating in a small team"
-Wrong: "Collaboration"
 
 The output must be in JSON format, with three clear keys:
 {
@@ -138,7 +120,7 @@ The output must be in JSON format, with three clear keys:
   "werkomgeving": [],
   "interesses": []
 }
-Each list must contain exactly 16 short phrases. This is important: not more, not less than 16 items per category. Each item must be a descriptive phrase of 4-8 words.
+Each list must contain exactly 16 items. This is important: not more, not less than 16 items per category. You may use nouns, verbs, or short phrases. Descriptive adjectives are also allowed if they add something to the character or style of the person.
 
 Input – User answers:
 
@@ -205,29 +187,20 @@ Dream job 3 – ${wensberoepenData?.wensberoep_3_titel || 'Not filled in'}
 8: ${wensberoepenData?.wensberoep_3_kennis_focus || 'Not filled in'}`
     },
     de: {
-      system: `Du bist ein Karriere-Profi, spezialisiert auf die Analyse von offenen Antworten von Kandidaten. Dein Ziel ist es, basierend auf reflektierten Antworten zu Fragen über Berufserfahrungen, Vorlieben und Interessen, 48 kurze beschreibende Sätze zu generieren (genau 16 pro Kategorie).
-
-WICHTIG: Generiere KEINE einzelnen Wörter. Jedes Item muss ein kurzer beschreibender Satz von 4-8 Wörtern sein, der eine konkrete Vorliebe oder Eigenschaft beschreibt.
+      system: `Du bist ein Karriere-Profi, spezialisiert auf die Analyse von offenen Antworten von Kandidaten. Dein Ziel ist es, basierend auf reflektierten Antworten zu Fragen über Berufserfahrungen, Vorlieben und Interessen, 48 Schlüsselwörter oder kurze Sätze zu generieren (genau 16 pro Kategorie).
 
 Die Ausgabe muss ein JSON-Objekt sein, mit drei separaten Arrays:
-• "activiteiten": Dinge, die jemand gerne tut, als kurze beschreibende Sätze.
-  Beispiele: "Kreative Lösungen für Probleme finden", "Gerne im kleinen Team zusammenarbeiten", "Menschen begleiten und coachen", "Präsentationen vor großen Gruppen halten"
-• "werkomgeving": Präferenzen bezüglich Umgebung oder Zusammenarbeit, als kurze beschreibende Sätze.
-  Beispiele: "Arbeiten in entspannter informeller Atmosphäre", "Flexible Einteilung der Arbeitszeit", "Abwechslung zwischen Büro und Außenarbeit", "Ruhiger Arbeitsplatz mit viel Konzentration"
-• "interesses": Themen oder Bereiche, für die sich jemand interessiert, als kurze beschreibende Sätze.
-  Beispiele: "Interessiert an Technologie und Innovation", "Fasziniert von menschlichem Verhalten", "Leidenschaft für Nachhaltigkeit und Umwelt", "Neugierig auf Kunst und Kultur"
+• "activiteiten": Dinge, die jemand gerne tut, formuliert als Verben oder kurze Sätze.
+• "werkomgeving": Präferenzen bezüglich Umgebung oder Zusammenarbeit.
+• "interesses": Themen oder Bereiche, für die sich jemand interessiert.
 
-Verwende ausschließlich Informationen aus den Antworten des Teilnehmers. Formuliere alles im Stil des Teilnehmers. Jedes Item MUSS ein kurzer Satz von 4-8 Wörtern sein, NIEMALS ein einzelnes Wort.
+Verwende ausschließlich Informationen aus den Antworten des Teilnehmers. Formuliere alles im Stil des Teilnehmers. Du darfst auch kurze Sätze verwenden, wenn diese besser passen als ein einzelnes Wort.
 
 ⚠️ Die Ausgabe muss gültiges JSON sein. Keine Erläuterungen, keine zusätzlichen Erklärungen, nur das JSON-Objekt.`,
-      user: `Du erhältst nun eine vollständig ausgefüllte Antwortliste von einer Nutzerin oder einem Nutzer. Verwende diese Eingaben, um auf Grundlage der Methodik des Berufstrichters 48 kurze beschreibende Sätze zu generieren (genau 16 pro Kategorie), aufgeteilt in drei Kategorien:
+      user: `Du erhältst nun eine vollständig ausgefüllte Antwortliste von einer Nutzerin oder einem Nutzer. Verwende diese Eingaben, um auf Grundlage der Methodik des Berufstrichters 48 Schlüsselwörter oder kurze Aussagen zu generieren (genau 16 pro Kategorie), aufgeteilt in drei Kategorien:
 • Aktivitäten (was jemand gerne tut)
 • Arbeitsumgebung (die Atmosphäre, Struktur und der Kontext, in dem jemand gerne arbeitet)
 • Interessen (Themen, die jemanden faszinieren oder ihm/ihr Energie geben)
-
-WICHTIG: Jedes Item muss ein kurzer beschreibender Satz von 4-8 Wörtern sein. Keine einzelnen Wörter!
-Gut: "Gerne im kleinen Team zusammenarbeiten"
-Falsch: "Zusammenarbeit"
 
 Das Ergebnis muss im JSON-Format sein, mit drei klaren Schlüsseln:
 {
@@ -235,7 +208,7 @@ Das Ergebnis muss im JSON-Format sein, mit drei klaren Schlüsseln:
   "werkomgeving": [],
   "interesses": []
 }
-Jede Liste muss genau 16 kurze Sätze enthalten. Dies ist wichtig: nicht mehr, nicht weniger als 16 Einträge pro Kategorie. Jedes Item muss ein beschreibender Satz von 4-8 Wörtern sein.
+Jede Liste muss genau 16 Einträge enthalten. Dies ist wichtig: nicht mehr, nicht weniger als 16 Einträge pro Kategorie. Du kannst Substantive, Verben oder kurze Aussagen verwenden. Qualitative Adjektive sind ebenfalls erlaubt, wenn sie etwas über den Charakter oder Stil der Person aussagen.
 
 Eingabe – Antworten der Nutzerin/des Nutzers:
 
@@ -302,29 +275,20 @@ Wunschberuf 3 – ${wensberoepenData?.wensberoep_3_titel || 'Nicht ausgefüllt'}
 8: ${wensberoepenData?.wensberoep_3_kennis_focus || 'Nicht ausgefüllt'}`
     },
     no: {
-      system: `Du er en karriereekspert, spesialisert på å analysere åpne svar fra kandidater. Målet ditt er å generere 48 korte beskrivende setninger (nøyaktig 16 per kategori) basert på reflekterende svar på spørsmål om arbeidserfaring, preferanser og interesser.
-
-VIKTIG: IKKE generer enkeltord. Hvert element må være en kort beskrivende setning på 4-8 ord som beskriver en konkret preferanse eller egenskap.
+      system: `Du er en karriereekspert, spesialisert på å analysere åpne svar fra kandidater. Målet ditt er å generere 48 nøkkelord eller korte setninger (nøyaktig 16 per kategori) basert på reflekterende svar på spørsmål om arbeidserfaring, preferanser og interesser.
 
 Output må være et JSON-objekt med tre separate arrays:
-• "activiteiten": ting en person liker å gjøre, formulert som korte beskrivende setninger.
-  Eksempler: "Liker å finne kreative løsninger", "Trives med å samarbeide i team", "Veilede og coache andre mennesker", "Holde presentasjoner for store grupper"
-• "werkomgeving": preferanser for miljø eller samarbeid, som korte beskrivende setninger.
-  Eksempler: "Jobbe i en uformell atmosfære", "Fleksibel inndeling av arbeidstiden", "Veksle mellom kontor og feltarbeid", "Rolig arbeidsplass med god konsentrasjon"
-• "interesses": temaer eller områder en person er interessert i, som korte beskrivende setninger.
-  Eksempler: "Interessert i teknologi og innovasjon", "Fascinert av menneskelig atferd", "Lidenskap for bærekraft og miljø", "Nysgjerrig på kunst og kultur"
+• "activiteiten": ting en person liker å gjøre, formulert som verb eller korte setninger.
+• "werkomgeving": preferanser for miljø eller samarbeid.
+• "interesses": temaer eller områder en person er interessert i.
 
-Bruk utelukkende informasjon fra svarene til deltakeren. Formuler alt i deltakerens egen stil. Hvert element MÅ være en kort setning på 4-8 ord, ALDRI et enkeltord.
+Bruk utelukkende informasjon fra svarene til deltakeren. Formuler alt i deltakerens egen stil. Du kan også bruke korte setninger hvis det passer bedre enn enkeltord.
 
 ⚠️ Output må være gyldig JSON. Ingen forklaringer, ingen ekstra tekst, kun JSON-objektet.`,
-      user: `Du mottar nå en fullstendig utfylt svarliste fra en bruker. Bruk denne inputen til å generere 48 korte beskrivende setninger (nøyaktig 16 per kategori) basert på metoden til karrieretrakten, fordelt på tre kategorier:
+      user: `Du mottar nå en fullstendig utfylt svarliste fra en bruker. Bruk denne inputen til å generere 48 nøkkelord eller korte fraser (nøyaktig 16 per kategori) basert på metoden til karrieretrakten, fordelt på tre kategorier:
 • aktiviteter (hva personen liker å gjøre)
 • arbeidsmiljø (stemningen, strukturen og konteksten personen trives i)
 • interesser (temaer personen er fascinert av eller får energi av)
-
-VIKTIG: Hvert element må være en kort beskrivende setning på 4-8 ord. Ingen enkeltord!
-Riktig: "Liker å samarbeide i et lite team"
-Feil: "Samarbeid"
 
 Output skal være i JSON-format, med tre tydelige keys:
 {
@@ -332,7 +296,7 @@ Output skal være i JSON-format, med tre tydelige keys:
   "werkomgeving": [],
   "interesses": []
 }
-Hver liste må inneholde nøyaktig 16 korte setninger. Dette er viktig: ikke mer, ikke mindre enn 16 elementer per kategori. Hvert element må være en beskrivende setning på 4-8 ord.
+Hver liste må inneholde nøyaktig 16 elementer. Dette er viktig: ikke mer, ikke mindre enn 16 elementer per kategori. Du kan bruke substantiv, verb eller korte fraser. Kvalitative adjektiver er også tillatt dersom de tilfører noe til personens stil eller karakter.
 
 Input – Brukerens svar:
 
