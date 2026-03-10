@@ -1,17 +1,29 @@
 
 
-## Quote glassmorphism aanpassing
+## Vinster naar de jij-vorm: analyse en implementatieprompt
 
-Twee pagina's moeten worden bijgewerkt zodat de quote-overlay dezelfde glassmorphism-stijl krijgt als Login, Signup en EmailVerification:
+### Huidige situatie
 
-### Wijzigingen
+Na analyse van de volledige codebase blijkt dat **het overgrote deel al in de jij-vorm staat**:
+- Alle locale-bestanden (auth, dashboard, journey, rapport, common, etc.) gebruiken consequent "je/jij"
+- Alle AI-prompts (generate-profile-keywords, generate-career-report, generate-zoekprofiel) gebruiken al "je/jij"
+- Email-templates gebruiken al "je/jij"
 
-**1. `src/pages/ForgotPasswordPage.tsx`** (regel ~89-92)
-- Verander `bg-white bg-opacity-90 rounded-2xl p-8 max-w-md` naar `bg-white/15 backdrop-blur-[8px] border border-white/20 rounded-xl p-8 max-w-md`
-- Verander `text-xl font-medium text-blue-900 leading-relaxed` naar `text-xl font-medium text-white leading-relaxed drop-shadow-sm`
+### Wat nog formeel "u" gebruikt
 
-**2. `src/pages/CheckEmailPasswordResetPage.tsx`** (regel ~83-86)
-- Zelfde wijzigingen als hierboven
+Alleen de **juridische teksten** in `src/locales/nl/landing.json` (regels ~200-355):
+- **Privacyverklaring** (secties 4-12): "uw persoonsgegevens", "U heeft", "u kunt", etc.
+- **Algemene Voorwaarden** (secties 2-12): "U bent verantwoordelijk", "u gaat akkoord", etc.
 
-Dit brengt beide pagina's in lijn met de glassmorphism-stijl van de andere auth-pagina's.
+Dit zijn ~30 voorkomens van "u/uw" verspreid over deze twee juridische secties.
+
+### Implementatie
+
+Eén bestand aan te passen: `src/locales/nl/landing.json` -- alle "u/uw" omzetten naar "je/jij/jouw" in de privacy- en voorwaardensecties.
+
+### Prompt voor implementatie
+
+Hier is de prompt die je mij kunt geven:
+
+> **"Pas alle teksten in `src/locales/nl/landing.json` aan van de u-vorm naar de jij-vorm. Dit betreft de privacyverklaring (privacy_statement secties) en de algemene voorwaarden (terms secties). Vervang consequent: 'u' → 'je/jij', 'uw' → 'je/jouw', 'U heeft' → 'Je hebt', 'U bent' → 'Je bent', 'U kunt' → 'Je kunt'. Zorg dat de juridische teksten inhoudelijk correct blijven maar in de informele jij-vorm staan."**
 
