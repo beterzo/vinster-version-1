@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage, Language as AppLanguage } from "@/contexts/LanguageContext";
-import { formatKeywordsForReport } from "@/utils/keywordUtils";
+import { formatKeywordsForReportWithJeVorm } from "@/utils/keywordUtils";
 
 type Language = "nl" | "en" | "de" | "no";
 
