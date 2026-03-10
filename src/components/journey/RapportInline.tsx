@@ -6,7 +6,8 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { formatKeywordsForReport, boldQuotedKeywords } from "@/utils/keywordUtils";
+import { formatKeywordsForReportWithJeVorm, boldQuotedKeywords } from "@/utils/keywordUtils";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface RapportInlineProps {
   roundId: string;
