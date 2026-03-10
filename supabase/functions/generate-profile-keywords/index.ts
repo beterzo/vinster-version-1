@@ -225,13 +225,16 @@ Dream job 3 – ${wensberoepenData?.wensberoep_3_titel || 'Not filled in'}
 
 WICHTIG: Generiere KEINE einzelnen Wörter. Jedes Item muss ein kurzer beschreibender Satz von 4-8 Wörtern sein, der eine konkrete Vorliebe oder Eigenschaft beschreibt.
 
+ENTSCHEIDEND - AUFZÄHLUNGSSTIL: Die Items müssen zusammen eine fließende Aufzählung in der Du-Form bilden. Nur das ERSTE Item pro Kategorie beginnt mit "Du". Alle folgenden Items setzen OHNE "Du" fort, sodass sie mit Kommas hintereinander als ein fließender Satz gelesen werden können.
+
 Die Ausgabe muss ein JSON-Objekt sein, mit drei separaten Arrays:
-• "activiteiten": Dinge, die jemand gerne tut, als kurze beschreibende Sätze.
-  Beispiele: "Kreative Lösungen für Probleme finden", "Gerne im kleinen Team zusammenarbeiten", "Menschen begleiten und coachen", "Präsentationen vor großen Gruppen halten"
-• "werkomgeving": Präferenzen bezüglich Umgebung oder Zusammenarbeit, als kurze beschreibende Sätze.
-  Beispiele: "Arbeiten in entspannter informeller Atmosphäre", "Flexible Einteilung der Arbeitszeit", "Abwechslung zwischen Büro und Außenarbeit", "Ruhiger Arbeitsplatz mit viel Konzentration"
-• "interesses": Themen oder Bereiche, für die sich jemand interessiert, als kurze beschreibende Sätze.
-  Beispiele: "Interessiert an Technologie und Innovation", "Fasziniert von menschlichem Verhalten", "Leidenschaft für Nachhaltigkeit und Umwelt", "Neugierig auf Kunst und Kultur"
+• "activiteiten": Dinge, die jemand gerne tut. Erstes Item beginnt mit "Du", der Rest ohne "Du".
+  Korrektes Beispiel: ["Du findest gerne kreative Lösungen", "arbeitest am liebsten im kleinen Team", "begleitest und coachst andere", "hältst gerne Präsentationen vor großen Gruppen"]
+  FALSCH: ["Du findest gerne kreative Lösungen", "Du arbeitest am liebsten im Team", "Du begleitest andere"] — "Du" steht zu oft!
+• "werkomgeving": Präferenzen für Umgebung oder Zusammenarbeit. Gleiche Regel.
+  Beispiel: ["Du arbeitest am liebsten in entspannter Atmosphäre", "schätzt flexible Arbeitszeiten", "wechselst gerne zwischen Büro und Außenarbeit", "suchst einen ruhigen Arbeitsplatz"]
+• "interesses": Themen oder Bereiche. Gleiche Regel.
+  Beispiel: ["Du interessierst dich für Technologie und Innovation", "bist fasziniert von menschlichem Verhalten", "hast eine Leidenschaft für Nachhaltigkeit", "bist neugierig auf Kunst und Kultur"]
 
 Verwende ausschließlich Informationen aus den Antworten des Teilnehmers. Formuliere alles im Stil des Teilnehmers. Jedes Item MUSS ein kurzer Satz von 4-8 Wörtern sein, NIEMALS ein einzelnes Wort.
 
