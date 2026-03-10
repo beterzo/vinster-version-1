@@ -541,7 +541,7 @@ const VoorbeeldrapportGenerator = () => {
                   {t.activitiesSubtitle}
                 </h3>
                 <p className="text-gray-700 leading-relaxed text-base md:text-xl">
-                  {formatKeywordsForReport(reportContent.ideale_functie.activiteiten)}
+                  {formatKeywordsForReportWithJeVorm(reportContent.ideale_functie.activiteiten, selectedLanguage)}
                 </p>
                 <div className="hidden md:block"><SectionSquare color="yellow" /></div>
               </div>
