@@ -302,20 +302,29 @@ Wunschberuf 3 – ${wensberoepenData?.wensberoep_3_titel || 'Nicht ausgefüllt'}
 8: ${wensberoepenData?.wensberoep_3_kennis_focus || 'Nicht ausgefüllt'}`
     },
     no: {
-      system: `Du er en karriereekspert, spesialisert på å analysere åpne svar fra kandidater. Målet ditt er å generere 48 nøkkelord eller korte setninger (nøyaktig 16 per kategori) basert på reflekterende svar på spørsmål om arbeidserfaring, preferanser og interesser.
+      system: `Du er en karriereekspert, spesialisert på å analysere åpne svar fra kandidater. Målet ditt er å generere 48 korte beskrivende setninger (nøyaktig 16 per kategori) basert på reflekterende svar på spørsmål om arbeidserfaring, preferanser og interesser.
+
+VIKTIG: IKKE generer enkeltord. Hvert element må være en kort beskrivende setning på 4-8 ord som beskriver en konkret preferanse eller egenskap.
 
 Output må være et JSON-objekt med tre separate arrays:
-• "activiteiten": ting en person liker å gjøre, formulert som verb eller korte setninger.
-• "werkomgeving": preferanser for miljø eller samarbeid.
-• "interesses": temaer eller områder en person er interessert i.
+• "activiteiten": ting en person liker å gjøre, formulert som korte beskrivende setninger.
+  Eksempler: "Liker å finne kreative løsninger", "Trives med å samarbeide i team", "Veilede og coache andre mennesker", "Holde presentasjoner for store grupper"
+• "werkomgeving": preferanser for miljø eller samarbeid, som korte beskrivende setninger.
+  Eksempler: "Jobbe i en uformell atmosfære", "Fleksibel inndeling av arbeidstiden", "Veksle mellom kontor og feltarbeid", "Rolig arbeidsplass med god konsentrasjon"
+• "interesses": temaer eller områder en person er interessert i, som korte beskrivende setninger.
+  Eksempler: "Interessert i teknologi og innovasjon", "Fascinert av menneskelig atferd", "Lidenskap for bærekraft og miljø", "Nysgjerrig på kunst og kultur"
 
-Bruk utelukkende informasjon fra svarene til deltakeren. Formuler alt i deltakerens egen stil. Du kan også bruke korte setninger hvis det passer bedre enn enkeltord.
+Bruk utelukkende informasjon fra svarene til deltakeren. Formuler alt i deltakerens egen stil. Hvert element MÅ være en kort setning på 4-8 ord, ALDRI et enkeltord.
 
 ⚠️ Output må være gyldig JSON. Ingen forklaringer, ingen ekstra tekst, kun JSON-objektet.`,
-      user: `Du mottar nå en fullstendig utfylt svarliste fra en bruker. Bruk denne inputen til å generere 48 nøkkelord eller korte fraser (nøyaktig 16 per kategori) basert på metoden til karrieretrakten, fordelt på tre kategorier:
+      user: `Du mottar nå en fullstendig utfylt svarliste fra en bruker. Bruk denne inputen til å generere 48 korte beskrivende setninger (nøyaktig 16 per kategori) basert på metoden til karrieretrakten, fordelt på tre kategorier:
 • aktiviteter (hva personen liker å gjøre)
 • arbeidsmiljø (stemningen, strukturen og konteksten personen trives i)
 • interesser (temaer personen er fascinert av eller får energi av)
+
+VIKTIG: Hvert element må være en kort beskrivende setning på 4-8 ord. Ingen enkeltord!
+Riktig: "Liker å samarbeide i et lite team"
+Feil: "Samarbeid"
 
 Output skal være i JSON-format, med tre tydelige keys:
 {
@@ -323,7 +332,7 @@ Output skal være i JSON-format, med tre tydelige keys:
   "werkomgeving": [],
   "interesses": []
 }
-Hver liste må inneholde nøyaktig 16 elementer. Dette er viktig: ikke mer, ikke mindre enn 16 elementer per kategori. Du kan bruke substantiv, verb eller korte fraser. Kvalitative adjektiver er også tillatt dersom de tilfører noe til personens stil eller karakter.
+Hver liste må inneholde nøyaktig 16 korte setninger. Dette er viktig: ikke mer, ikke mindre enn 16 elementer per kategori. Hvert element må være en beskrivende setning på 4-8 ord.
 
 Input – Brukerens svar:
 

@@ -242,7 +242,7 @@ const PrioriteitenInteresses = ({ mode = 'edit' }: StepProps) => {
                     key={keyword}
                     onClick={() => !isViewMode && handleKeywordToggle(keyword)}
                     disabled={isViewMode || isSubmitting}
-                    className={`relative p-3 rounded-[10px] transition-all duration-150 text-sm text-center ${
+                    className={`relative p-3 rounded-[10px] transition-all duration-150 text-sm text-left ${
                       selectedKeywords.includes(keyword)
                         ? "bg-[#F5C518]/10 border-2 border-[#F5C518] text-[#1a2e5a] font-bold shadow-sm"
                         : isViewMode
