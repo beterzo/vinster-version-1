@@ -346,14 +346,13 @@ Bruk utelukkende informasjon fra svarene til deltakeren. Formuler alt i deltaker
 • arbeidsmiljø (stemningen, strukturen og konteksten personen trives i)
 • interesser (temaer personen er fascinert av eller får energi av)
 
-VIKTIG - OPPLISTINGSSTIL: Kun det FØRSTE elementet per kategori begynner med "Du". Alle følgende elementer begynner UTEN "Du", slik at de passer som opplisting etter det første elementet.
+VIKTIG - NØYTRAL STIL: Start INGEN elementer med "Du". Start direkte med verbet.
 Korrekt eksempel:
-  Element 1: "Du liker å finne kreative løsninger"
+  Element 1: "liker å finne kreative løsninger"
   Element 2: "jobber helst i en uformell atmosfære"
-  Element 3: "er interessert i teknologi"
+  Element 3: "interessert i teknologi"
 FEIL eksempel:
-  Element 1: "Du liker å finne kreative løsninger"
-  Element 2: "Du jobber helst i en uformell atmosfære"  ← FEIL, "Du" kun ved element 1!
+  Element 1: "Du liker å finne kreative løsninger"  ← FEIL, ikke bruk "Du"!
 
 Output skal være i JSON-format, med tre tydelige keys:
 {
@@ -361,7 +360,7 @@ Output skal være i JSON-format, med tre tydelige keys:
   "werkomgeving": [],
   "interesses": []
 }
-Hver liste må inneholde nøyaktig 16 korte setninger. Dette er viktig: ikke mer, ikke mindre enn 16 elementer per kategori. Hvert element må være en beskrivende setning på 4-8 ord.
+Hver liste må inneholde nøyaktig 16 korte setninger. Dette er viktig: ikke mer, ikke mindre enn 16 elementer per kategori. Hvert element må være en beskrivende setning på 4-8 ord. ALDRI begynne med "Du".
 
 Input – Brukerens svar:
 
