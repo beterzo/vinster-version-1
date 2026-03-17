@@ -8,11 +8,11 @@ const corsHeaders = {
 };
 
 const PRICE_MAP: Record<string, { priceId: string; locale: string }> = {
-  nl: { priceId: "price_1Rvvv7BiHXiKCcHU0KcdPOTI", locale: "nl" },
-  en: { priceId: "price_1RvvuWBiHXiKCcHURzeouvup", locale: "en" },
-  us: { priceId: "price_1SrvTuBiHXiKCcHU1cbMTgk1", locale: "en" },
-  de: { priceId: "price_1RvvtyBiHXiKCcHUW0vJIVSL", locale: "de" },
-  no: { priceId: "price_1RvvtKBiHXiKCcHU4ROeMOpf", locale: "nb" },
+  nl: { priceId: "price_1RvvxHBiHXiKCcHUSsdylXIs", locale: "nl" },
+  en: { priceId: "price_1RvvwiBiHXiKCcHUV0eIl6p3", locale: "en" },
+  us: { priceId: "price_1SrvURBiHXiKCcHUNnwjcecd", locale: "en" },
+  de: { priceId: "price_1RvvwJBiHXiKCcHU2ZUBWZ9A", locale: "de" },
+  no: { priceId: "price_1RvvqaBiHXiKCcHUqEayLHLV", locale: "nb" },
 };
 
 serve(async (req) => {
