@@ -191,7 +191,7 @@ async function fulfillProfessionalCodes(stripe: Stripe, session: Stripe.Checkout
       percent_off: 100,
       duration: "once",
       max_redemptions: 1,
-      name: `Vinster Professional Code - ${code}`,
+      name: `Pro Code ${code}`,
     });
 
     await stripe.promotionCodes.create({
