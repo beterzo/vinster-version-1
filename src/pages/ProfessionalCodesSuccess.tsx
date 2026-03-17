@@ -59,9 +59,11 @@ const ProfessionalCodesSuccess = () => {
           <div className="space-y-6">
             <Loader2 className="h-16 w-16 animate-spin text-vinster-blue mx-auto" />
             <h1 className="text-2xl font-semibold" style={{ color: "#232D4B" }}>
-              {t("professionals.toasts.redirecting") || "Codes worden gegenereerd..."}
+              {t("professionals.success.generating_title")}
             </h1>
-            <p className="text-gray-600">Even geduld, je codes worden aangemaakt en per e-mail verstuurd.</p>
+            <p className="text-gray-600">
+              {t("professionals.success.generating_description")}
+            </p>
           </div>
         )}
 
