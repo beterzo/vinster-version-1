@@ -62,6 +62,14 @@ serve(async (req) => {
         email,
         language: langKey,
       },
+      payment_intent_data: {
+        metadata: {
+          type: "professional_codes",
+          quantity: String(quantity),
+          email,
+          language: langKey,
+        },
+      },
       success_url: `${origin}/professional-codes-success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/toegangscodes-professionals`,
     });
