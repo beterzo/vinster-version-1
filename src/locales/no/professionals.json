@@ -80,6 +80,10 @@
       "contact_note_desc": "Vi tar kontakt så snart som mulig for betaling.",
       "send_error": "Feil ved sending",
       "send_error_desc": "Noe gikk galt. Prøv igjen senere."
+    },
+    "success": {
+      "generating_title": "Kodene dine blir opprettet...",
+      "generating_description": "Vennligst vent, kodene dine blir opprettet og sendt til deg på e-post."
     }
   }
 }
