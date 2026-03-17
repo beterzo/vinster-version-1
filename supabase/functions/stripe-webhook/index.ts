@@ -166,7 +166,9 @@ function buildEmailHtml(codes: string[], lang: string): string {
 }
 
 async function fulfillProfessionalCodes(stripe: Stripe, session: Stripe.Checkout.Session): Promise<void> {
-  const metadata = session.metadata || {};
+  // Re-fetch session from Stripe to get current metadata (webhook retries send the original payload)
+  const freshSession = await stripe.checkout.sessions.retrieve(session.id);
+  const metadata = freshSession.metadata || {};
   
   // Prevent double fulfillment
   if (metadata.fulfilled === "true") {
