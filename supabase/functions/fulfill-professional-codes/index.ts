@@ -237,7 +237,7 @@ serve(async (req) => {
         percent_off: 100,
         duration: "once",
         max_redemptions: 1,
-        name: `Vinster Professional Code - ${code}`,
+        name: `Pro Code ${code}`,
       });
 
       // Create promotion code with readable code
