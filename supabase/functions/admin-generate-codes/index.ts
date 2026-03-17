@@ -103,13 +103,7 @@ serve(async (req) => {
   }
 
   try {
-    const { email, quantity, admin_key } = await req.json();
-
-    // Simple admin check
-    const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "";
-    if (admin_key !== serviceKey) {
-      return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers: corsHeaders });
-    }
+    const { email, quantity } = await req.json();
 
     if (!email || !quantity) {
       throw new Error("email and quantity are required");
