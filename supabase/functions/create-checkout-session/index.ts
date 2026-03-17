@@ -68,6 +68,12 @@ serve(async (req) => {
       allow_promotion_codes: true,
       invoice_creation: { enabled: true },
       metadata: { user_id: user.id },
+      payment_intent_data: {
+        metadata: {
+          type: "individual_trajectory",
+          user_id: user.id,
+        },
+      },
       success_url: `${origin}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/payment-required`,
     });
