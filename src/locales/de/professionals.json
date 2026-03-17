@@ -81,6 +81,10 @@
       "contact_note_desc": "Wir nehmen so schnell wie möglich Kontakt mit Ihnen auf für die Zahlung.",
       "send_error": "Fehler beim Senden",
       "send_error_desc": "Etwas ist schiefgelaufen. Versuchen Sie es später erneut."
+    },
+    "success": {
+      "generating_title": "Ihre Codes werden erstellt...",
+      "generating_description": "Bitte warten Sie, Ihre Codes werden erstellt und per E-Mail versendet."
     }
   }
 }

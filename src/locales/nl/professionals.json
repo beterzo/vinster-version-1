@@ -81,6 +81,10 @@
       "contact_note_desc": "We nemen zo snel mogelijk contact met je op voor de betaling.",
       "send_error": "Fout bij verzenden",
       "send_error_desc": "Er is iets misgegaan. Probeer het later opnieuw."
+    },
+    "success": {
+      "generating_title": "Je codes worden aangemaakt...",
+      "generating_description": "Even geduld, je codes worden aangemaakt en per e-mail verstuurd."
     }
   }
 }

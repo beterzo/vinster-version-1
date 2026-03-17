@@ -81,6 +81,10 @@
       "contact_note_desc": "We will contact you as soon as possible for payment.",
       "send_error": "Error sending",
       "send_error_desc": "Something went wrong. Please try again later."
+    },
+    "success": {
+      "generating_title": "Your codes are being generated...",
+      "generating_description": "Please wait, your codes are being created and will be sent to you by email."
     }
   }
 }
