@@ -53,6 +53,7 @@ serve(async (req) => {
         },
       ],
       mode: "payment",
+      automatic_tax: { enabled: true },
       locale: config.locale as Stripe.Checkout.SessionCreateParams.Locale,
       allow_promotion_codes: true,
       invoice_creation: { enabled: true },
