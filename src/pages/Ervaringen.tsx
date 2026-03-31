@@ -51,11 +51,14 @@ const Ervaringen = () => {
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 mb-16">
-          {testimonials?.map((testimonial: {quote: string}, index: number) => (
+          {testimonials?.map((testimonial: {quote: string; role: string}, index: number) => (
             <div key={index} className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100 hover:shadow-xl transition-shadow duration-300">
               <blockquote className="text-lg md:text-xl leading-relaxed text-gray-700 italic">
                 "{testimonial.quote}"
               </blockquote>
+              {testimonial.role && (
+                <p className="mt-4 text-sm text-gray-500 text-right">— {testimonial.role}</p>
+              )}
             </div>
           ))}
         </div>
