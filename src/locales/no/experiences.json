@@ -1,3 +1,4 @@
+
 {
   "experiences": {
     "page_title": "Erfaringer",
@@ -6,16 +7,44 @@
     "intro": "Oppdag hvordan Vinster har hjulpet andre med å finne arbeid som gjør dem lykkelige.",
     "testimonials": [
       {
-        "quote": "Jeg hadde aldri trodd at noen få spørsmål ville gi et så klart bilde av mitt ideelle arbeid. Vinster hjalp meg å oppdage hva jeg virkelig ønsker!"
+        "quote": "Flott å se hvilke overraskende innsikter en karriererapport kan gi. Jeg syntes det var fint å fylle ut selv også. Det tok meg tilbake til barndommen min og min første jobb. Det er fine minner jeg allerede hadde glemt!",
+        "role": "Karriereveileder"
       },
       {
-        "quote": "Etter år med tvil om karrieren min, ga Vinster meg endelig retningen jeg lette etter. Klart, praktisk og veldig gjenkjennelig."
+        "quote": "Jeg prøvde det med en gang. Tross alt, beviset ligger i puddingen. Jeg ble overrasket over resultatene. Ikke at yrkene nødvendigvis er drømmejobben min, men jeg kjente igjen mye av begrunnelsen bak dem.",
+        "role": "Karriereveileder"
       },
       {
-        "quote": "Forslagene jeg fikk var overraskende nøyaktige. Det føltes som om noen virkelig hadde lyttet til meg og forstått hva jeg leter etter i arbeid."
+        "quote": "Jeg snakket nettopp med noen jeg støtter i karrieren hennes. Hun hadde fått Vinster-rapporten sin og var veldig entusiastisk. Hun kjente seg helt igjen i den, og rapporten ga henne akkurat den bekreftelsen hun trengte.",
+        "role": "Karriereveileder"
       },
       {
-        "quote": "Vinster hjalp meg ikke bare med å finne jobber, men også å forstå hvorfor bestemt arbeid passer meg. Den innsikten er uvurderlig."
+        "quote": "Jeg fikk også laget en rapport for å se hvordan det fungerer. Og jeg ble virkelig overrasket over kvaliteten. Rapporten var nyansert, personlig og godt begrunnet. Dette er virkelig et tilskudd til coachingpraksisen min.",
+        "role": "Karriereveileder"
+      },
+      {
+        "quote": "Veldig meningsfullt å fylle ut! Det får deg virkelig til å tenke.",
+        "role": "Kommunikasjonsmedarbeider museum"
+      },
+      {
+        "quote": "Klienten min vil slutte i jobben som administrativ medarbeider. Hun vet bare ikke hva hun vil i stedet. Vinster hjalp henne med å få mer klarhet i det. Forslagene var overraskende passende.",
+        "role": "Karriereveileder"
+      },
+      {
+        "quote": "Nå har jeg fullført alle trinnene i Vinster. Jeg synes det er et veldig fint verktøy. Det tvinger deg til å tenke nøye over hva du synes er viktig i arbeid. Og rapporten som kommer ut er virkelig verdifull.",
+        "role": "Karriereveileder"
+      },
+      {
+        "quote": "Jeg gikk gjennom Vinster-verktøyet. Veldig praktisk og lett å gjennomføre. Spørsmålene er klare og rapporten gir konkrete holdepunkter. Jeg kommer definitivt til å bruke det med klientene mine.",
+        "role": "Karriereveileder"
+      },
+      {
+        "quote": "Jeg synes spørsmålene i Vinster er virkelig fantastiske. De er annerledes enn det du vanligvis møter i karriereverktøy. De går virkelig i dybden uten at det føles tungt.",
+        "role": "Karriereveileder"
+      },
+      {
+        "quote": "Jeg gjorde selv en gang Karrieretrakten hos Heidi Jansen. Vinster føles som en digital versjon av det, men enda mer tilgjengelig. Veldig imponerende hvordan det er bygget opp.",
+        "role": "Personlig coach"
       }
     ],
     "cta": {
