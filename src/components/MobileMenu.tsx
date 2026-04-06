@@ -16,10 +16,10 @@ import { useTranslation } from "@/hooks/useTranslation";
 const organisationItems = [
   { name: "Medisch Centrum", slug: "medisch-centrum" },
   { name: "ErasmusMC", slug: "erasmus-mc", indent: true },
-  { name: "Transport & Logistiek", shortName: "Transport", slug: "transport-en-logistiek" },
-  { name: "Financiële instellingen", shortName: "Financieel", slug: "financiele-instellingen" },
+  { name: "Transport & Logistiek", shortName: "Transport", slug: "transport-logistiek" },
+  { name: "Financieel", shortName: "Financieel", slug: "financieel" },
   { name: "Universiteit", slug: "universiteit" },
-  { name: "Zorg en Welzijn", slug: "zorg-en-welzijn" },
+  { name: "Zorgorganisatie", slug: "zorgorganisatie" },
   { name: "Hogeschool", slug: "hogeschool" },
   { name: "Mbo-instelling", slug: "mbo-instelling" },
 ];
