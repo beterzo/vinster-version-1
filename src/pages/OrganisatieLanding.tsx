@@ -232,7 +232,7 @@ const OrganisatieLanding = () => {
             </Button>
           </div>
 
-          {/* Section 2: Intro text for specific organisations */}
+          {/* Section 2: Specific organisations with access codes */}
           {childOrgs.length > 0 && (
             <div>
               <div className="flex items-center gap-3 mb-2">
@@ -307,6 +307,24 @@ const OrganisatieLanding = () => {
               </div>
             </div>
           )}
+
+          {/* Section 3: CTA for own organisation */}
+          <div className="bg-blue-50 rounded-2xl border border-blue-100 p-8 md:p-10 text-center">
+            <Building2 className="h-8 w-8 text-blue-900 mx-auto mb-3" />
+            <h2 className="text-xl font-semibold text-blue-900 mb-2">
+              Vinster voor jouw {orgType.name.toLowerCase()}?
+            </h2>
+            <p className="text-gray-700 mb-4 max-w-lg mx-auto">
+              Wil je Vinster op maat inzetten voor jouw eigen organisatie, met een eigen functielijst en toegangscodes voor medewerkers? Dat kan.
+            </p>
+            <a
+              href="mailto:team@vinster.ai?subject=Vinster%20voor%20onze%20organisatie"
+              className="inline-flex items-center gap-2 bg-blue-900 hover:bg-blue-800 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+            >
+              Neem contact op
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
         </main>
 
         <Footer />
