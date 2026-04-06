@@ -100,23 +100,48 @@ interface UserData {
 }
 
 function getOrganisationSectorPrompts(language: string, sectorName: string, organisationName: string, data: UserData, vacancies?: any[]): { system: string; user: string } {
-  const vacatureList = vacancies && vacancies.length > 0
-    ? vacancies.map((v, i) => `${i + 1}. ${v.title}${v.department ? ` (Afdeling: ${v.department})` : ''}${v.description ? ` — ${v.description}` : ''}`).join('\n')
-    : null;
+  // Groepeer vacatures per categorie voor gestructureerde weergave
+  let vacatureList: string | null = null;
+  if (vacancies && vacancies.length > 0) {
+    const grouped: Record<string, typeof vacancies> = {};
+    vacancies.forEach(v => {
+      const cat = v.category || 'Overig';
+      if (!grouped[cat]) grouped[cat] = [];
+      grouped[cat].push(v);
+    });
+    vacatureList = Object.entries(grouped)
+      .map(([cat, vacs]) =>
+        `CATEGORIE: ${cat}\n${(vacs as any[]).map(v =>
+          `• ${v.title}${v.description ? ` — ${v.description}` : ''}`
+        ).join('\n')}`
+      ).join('\n\n');
+  }
 
   const prompts: Record<string, { system: string; user: string }> = {
     nl: {
-      system: `Je bent een professionele loopbaancoach gespecialiseerd in de sector "${sectorName}". Je hebt diepgaande kennis van alle functies en beroepen die bestaan binnen deze branche.
+      system: `Je bent een professionele loopbaancoach voor medewerkers van ${organisationName} binnen de sector "${sectorName}".
 
-Je ontvangt informatie over een medewerker en vertaalt dit naar drie concrete functies die bestaan binnen de sector "${sectorName}".
+Je ontvangt informatie over een medewerker en kiest drie concrete functies die bij deze persoon passen.
 
-BELANGRIJK: Je ontvangt GEEN beroepsnamen van de medewerker -- die zijn bewust weggelaten. Baseer je functievoorstellen UITSLUITEND op de inhoud van de antwoorden. Laat je niet leiden door veronderstellingen over welk beroep de medewerker in gedachten had.
+BELANGRIJK: Je ontvangt GEEN beroepsnamen van de medewerker -- die zijn bewust weggelaten. Baseer je functievoorstellen UITSLUITEND op de inhoud van de antwoorden en kernwoorden. Laat je niet leiden door veronderstellingen over welk beroep de medewerker in gedachten had.
+${vacatureList ? `
+BESCHIKBARE FUNCTIES BINNEN ${organisationName}:
+Je MOET je 3 voorstellen kiezen uit onderstaande functies. Gebruik de functietitel EXACT zoals hieronder staat. Verzin GEEN eigen titels.
 
-BELANGRIJK: Je bent NIET beperkt tot een vaste lijst van functies. Je mag ALLE bestaande functies voorstellen die passen binnen de sector "${sectorName}", zolang het échte, bestaande functies zijn.
+${vacatureList}
 
+SELECTIEREGELS:
+1. Kies PRECIES 3 functies uit bovenstaande lijst.
+2. Gebruik de EXACTE functietitel -- wijzig deze niet.
+3. De 3 functies moeten uit minimaal 2 verschillende categorieën komen.
+4. Functie 1 en 2 zijn de meest logische en herkenbare matches op basis van de kernwoorden.
+5. Functie 3 is bewust verrassend en onverwacht -- kies deze uit een ANDERE categorie dan functie 1 en 2. Begin met: "En als verrassing..." of "Misschien had je dit niet verwacht, maar..."
+6. Schrijf per functie 2-3 zinnen, maximaal 40 woorden.
+7. Verwerk actief de kernwoorden van de medewerker in je uitleg.
+8. Houd rekening met opleidingsniveau en eventuele beperkingen.` : `
 Je kiest:
 • Twee logische, passende functies die direct aansluiten op de voorkeuren van de medewerker
-• Eén verrassend, avontuurlijk en onverwacht alternatief — een functie die de medewerker zelf waarschijnlijk niet snel zou bedenken, maar die wél aansluit bij het opleidingsniveau en de kernvaardigheden. Kies bewust een richting die de medewerker zelf nooit zou googelen of overwegen. Verras echt. Begin deze met: "En als verrassing..." of "Misschien had je dit niet verwacht, maar..."
+• Eén verrassend, avontuurlijk en onverwacht alternatief -- een functie die de medewerker zelf waarschijnlijk niet snel zou bedenken, maar die wél aansluit bij het opleidingsniveau en de kernvaardigheden. Kies bewust een richting die de medewerker zelf nooit zou googelen of overwegen. Verras echt. Begin deze met: "En als verrassing..." of "Misschien had je dit niet verwacht, maar..."`}
 
 Je antwoordt altijd in exact de gevraagde JSON-structuur, zonder toelichting erboven of eronder.
 Lever uitsluitend het JSON-object aan.`,
@@ -157,7 +182,12 @@ Beschrijving 3:
 - Belangrijke aspecten: ${data.wensberoep3.belangrijkeAspecten}
 - Kennis focus: ${data.wensberoep3.kennisFocus}
 
-Kernwoorden van de medewerker:
+AI-gegenereerde kernwoorden (volledige set):
+• Activiteiten: ${data.aiActiviteiten}
+• Werkomgeving: ${data.aiWerkomstandigheden}
+• Interesses: ${data.aiInteresses}
+
+Door de medewerker geselecteerde kernwoorden (meest belangrijk):
 • Lievelings activiteiten: ${data.selectedActiviteiten}
 • Werkomgeving: ${data.selectedWerkomstandigheden}
 • Interesses: ${data.selectedInteresses}
@@ -171,30 +201,33 @@ Context:
 • Opleiding: ${data.opleidingsniveau}
 • Richting: ${data.beroepsopleiding}
 • Beperkingen: ${data.fysiekeBeperkingen}
-${vacatureList ? `\nDaarnaast zijn er recente vacatures binnen ${organisationName} die als inspiratie kunnen dienen (maar je bent hier NIET toe beperkt):\n${vacatureList}` : ''}
 
-Regels:
-1. Bedenk PRECIES 3 functies die bestaan binnen de sector "${sectorName}".
-2. De functies moeten echte, bestaande functies zijn — geen verzonnen titels.
-3. Zorg voor variatie: de 3 functies moeten uit verschillende werkgebieden komen.
-4. Functie 1 en 2 zijn de meest logische en herkenbare matches.
-5. Functie 3 is bewust verrassend en onverwacht. Begin deze met: "En als verrassing..." of "Misschien had je dit niet verwacht, maar..."
-6. Schrijf per functie 2-3 zinnen, maximaal 40 woorden.
-7. Verwerk actief de kernwoorden van de medewerker.
-8. De functietitels mogen maximaal uit 3 woorden bestaan.`
+Geef je 3 functievoorstellen op basis van bovenstaande informatie.`
     },
     en: {
-      system: `You are a professional career coach specialised in the "${sectorName}" sector. You have in-depth knowledge of all roles and occupations that exist within this industry.
+      system: `You are a professional career coach for employees of ${organisationName} within the "${sectorName}" sector.
 
-You receive information about an employee and translate this into three concrete roles that exist within the "${sectorName}" sector.
+You receive information about an employee and choose three concrete roles that fit this person.
 
-IMPORTANT: You do NOT receive occupation names from the employee -- these have been deliberately omitted. Base your job suggestions EXCLUSIVELY on the content of the answers. Do not be guided by assumptions about what occupation the employee had in mind.
+IMPORTANT: You do NOT receive occupation names from the employee -- these have been deliberately omitted. Base your suggestions EXCLUSIVELY on the content of the answers and keywords. Do not be guided by assumptions about what occupation the employee had in mind.
+${vacatureList ? `
+AVAILABLE ROLES WITHIN ${organisationName}:
+You MUST choose your 3 suggestions from the roles listed below. Use the job title EXACTLY as listed. Do NOT invent your own titles.
 
-IMPORTANT: You are NOT limited to a fixed list of roles. You may suggest ANY existing role that fits within the "${sectorName}" sector, as long as it is a real, existing occupation.
+${vacatureList}
 
+SELECTION RULES:
+1. Choose EXACTLY 3 roles from the list above.
+2. Use the EXACT job title -- do not modify it.
+3. The 3 roles must come from at least 2 different categories.
+4. Roles 1 and 2 are the most logical and recognisable matches based on the keywords.
+5. Role 3 is deliberately surprising and unexpected -- choose it from a DIFFERENT category than roles 1 and 2.
+6. Write 2-3 sentences per role, maximum 40 words.
+7. Actively use the employee's keywords in your explanation.
+8. Take education level and any limitations into account.` : `
 You choose:
 • Two logical, fitting occupations that directly match the employee's preferences
-• One surprising, adventurous and unexpected alternative — a role the employee would likely not have thought of themselves, but that still matches their education level and core competencies. Choose a direction the employee would never search for or consider on their own. Truly surprise them
+• One surprising, adventurous and unexpected alternative -- a role the employee would likely not have thought of themselves, but that still matches their education level and core competencies. Choose a direction the employee would never search for or consider on their own. Truly surprise them.`}
 
 You always respond in exactly the requested JSON structure, without any explanation above or below it.
 Provide only the JSON object.`,
@@ -235,7 +268,12 @@ Description 3:
 - Important aspects: ${data.wensberoep3.belangrijkeAspecten}
 - Knowledge focus: ${data.wensberoep3.kennisFocus}
 
-Employee keywords:
+AI-generated keywords (full set):
+• Activities: ${data.aiActiviteiten}
+• Work environment: ${data.aiWerkomstandigheden}
+• Interests: ${data.aiInteresses}
+
+Employee-selected keywords (most important):
 • Favourite activities: ${data.selectedActiviteiten}
 • Work environment: ${data.selectedWerkomstandigheden}
 • Interests: ${data.selectedInteresses}
@@ -249,30 +287,33 @@ Context:
 • Education: ${data.opleidingsniveau}
 • Field of study: ${data.beroepsopleiding}
 • Limitations: ${data.fysiekeBeperkingen}
-${vacatureList ? `\nAdditionally, here are recent vacancies within ${organisationName} for inspiration (you are NOT limited to these):\n${vacatureList}` : ''}
 
-Rules:
-1. Suggest EXACTLY 3 roles that exist within the "${sectorName}" sector.
-2. The roles must be real, existing occupations — no invented titles.
-3. Ensure variety: the 3 roles should come from different work areas.
-4. Role 1 and 2 are the most logical and recognisable matches.
-5. Role 3 is deliberately surprising and unexpected.
-6. Write 2-3 sentences per role, maximum 40 words.
-7. Actively use the employee's keywords.
-8. Job titles must consist of a maximum of 3 words.`
+Provide your 3 role suggestions based on the information above.`
     },
     de: {
-      system: `Du bist ein professioneller Karriereberater, spezialisiert auf den Bereich "${sectorName}". Du hast fundierte Kenntnisse über alle Funktionen und Berufe, die in dieser Branche existieren.
+      system: `Du bist ein professioneller Karriereberater für Mitarbeiter von ${organisationName} im Bereich "${sectorName}".
 
-Du erhältst Informationen über eine Mitarbeiterin / einen Mitarbeiter und übersetzt diese in drei konkrete Funktionen, die im Bereich "${sectorName}" existieren.
+Du erhältst Informationen über eine Mitarbeiterin / einen Mitarbeiter und wählst drei konkrete Funktionen, die zu dieser Person passen.
 
-WICHTIG: Du erhältst KEINE Berufsnamen von der Person -- diese wurden bewusst weggelassen. Basiere deine Vorschläge AUSSCHLIESSLICH auf dem Inhalt der Antworten. Lass dich nicht von Vermutungen leiten, welchen Beruf die Person im Kopf hatte.
+WICHTIG: Du erhältst KEINE Berufsnamen von der Person -- diese wurden bewusst weggelassen. Basiere deine Vorschläge AUSSCHLIESSLICH auf dem Inhalt der Antworten und Schlüsselwörter.
+${vacatureList ? `
+VERFÜGBARE FUNKTIONEN BEI ${organisationName}:
+Du MUSST deine 3 Vorschläge aus den unten aufgeführten Funktionen wählen. Verwende den Berufstitel EXAKT wie angegeben. Erfinde KEINE eigenen Titel.
 
-WICHTIG: Du bist NICHT auf eine feste Liste von Funktionen beschränkt. Du darfst ALLE existierenden Funktionen vorschlagen, die in den Bereich "${sectorName}" passen, solange es echte, bestehende Berufe sind.
+${vacatureList}
 
+AUSWAHLREGELN:
+1. Wähle GENAU 3 Funktionen aus der obigen Liste.
+2. Verwende den EXAKTEN Berufstitel -- ändere ihn nicht.
+3. Die 3 Funktionen müssen aus mindestens 2 verschiedenen Kategorien stammen.
+4. Funktion 1 und 2 sind die logischsten und erkennbarsten Übereinstimmungen.
+5. Funktion 3 ist bewusst überraschend -- wähle sie aus einer ANDEREN Kategorie als Funktion 1 und 2.
+6. Schreibe 2-3 Sätze pro Funktion, maximal 40 Wörter.
+7. Verarbeite aktiv die Schlüsselwörter der Person.
+8. Berücksichtige Bildungsniveau und eventuelle Einschränkungen.` : `
 Du wählst:
 • Zwei logische, passende Berufe, die direkt an die Präferenzen der Person anknüpfen
-• Einen überraschenden, abenteuerlichen und unerwarteten Alternativberuf — einen Beruf, an den die Person selbst wahrscheinlich nicht gedacht hätte, der aber zum Bildungsniveau und den Kernkompetenzen passt
+• Einen überraschenden, abenteuerlichen und unerwarteten Alternativberuf -- einen Beruf, an den die Person selbst wahrscheinlich nicht gedacht hätte, der aber zum Bildungsniveau und den Kernkompetenzen passt.`}
 
 Du antwortest immer exakt in der geforderten JSON-Struktur, ohne zusätzliche Erklärungen.
 Liefere ausschließlich das JSON-Objekt.`,
@@ -313,7 +354,12 @@ Beschreibung 3:
 - Wichtige Aspekte: ${data.wensberoep3.belangrijkeAspecten}
 - Wissensfokus: ${data.wensberoep3.kennisFocus}
 
-Schlüsselwörter der Person:
+KI-generierte Schlüsselwörter (vollständiger Satz):
+• Aktivitäten: ${data.aiActiviteiten}
+• Arbeitsumgebung: ${data.aiWerkomstandigheden}
+• Interessen: ${data.aiInteresses}
+
+Von der Person ausgewählte Schlüsselwörter (am wichtigsten):
 • Lieblingsaktivitäten: ${data.selectedActiviteiten}
 • Arbeitsumgebung: ${data.selectedWerkomstandigheden}
 • Interessen: ${data.selectedInteresses}
@@ -327,30 +373,33 @@ Kontext:
 • Bildungsabschluss: ${data.opleidingsniveau}
 • Fachrichtung: ${data.beroepsopleiding}
 • Einschränkungen: ${data.fysiekeBeperkingen}
-${vacatureList ? `\nZusätzlich gibt es aktuelle Stellenangebote bei ${organisationName} als Inspiration (du bist NICHT darauf beschränkt):\n${vacatureList}` : ''}
 
-Regeln:
-1. Schlage GENAU 3 Funktionen vor, die im Bereich "${sectorName}" existieren.
-2. Die Funktionen müssen echte, bestehende Berufe sein — keine erfundenen Titel.
-3. Sorge für Abwechslung: die 3 Funktionen sollten aus verschiedenen Arbeitsbereichen kommen.
-4. Funktion 1 und 2 sind die logischsten und erkennbarsten Übereinstimmungen.
-5. Funktion 3 ist bewusst überraschend und unerwartet.
-6. Schreibe 2-3 Sätze pro Funktion, maximal 40 Wörter.
-7. Verarbeite aktiv die Schlüsselwörter der Person.
-8. Berufstitel dürfen maximal aus 3 Wörtern bestehen.`
+Gib deine 3 Funktionsvorschläge auf Basis der obigen Informationen.`
     },
     no: {
-      system: `Du er en profesjonell karriereveileder spesialisert innenfor "${sectorName}"-sektoren. Du har inngående kunnskap om alle funksjoner og yrker som finnes innenfor denne bransjen.
+      system: `Du er en profesjonell karriereveileder for ansatte hos ${organisationName} innenfor "${sectorName}"-sektoren.
 
-Du mottar informasjon om en ansatt og oversetter dette til tre konkrete funksjoner som finnes innenfor "${sectorName}"-sektoren.
+Du mottar informasjon om en ansatt og velger tre konkrete funksjoner som passer denne personen.
 
-VIKTIG: Du mottar INGEN yrkesnavn fra den ansatte -- disse er bevisst utelatt. Baser yrkesforslag UTELUKKENDE på innholdet i svarene. Ikke la deg lede av antakelser om hvilket yrke den ansatte hadde i tankene.
+VIKTIG: Du mottar INGEN yrkesnavn fra den ansatte -- disse er bevisst utelatt. Baser forslagene dine UTELUKKENDE på innholdet i svarene og nøkkelordene.
+${vacatureList ? `
+TILGJENGELIGE FUNKSJONER HOS ${organisationName}:
+Du MÅ velge dine 3 forslag fra funksjonene listet nedenfor. Bruk yrkestittelen NØYAKTIG som angitt. IKKE finn opp egne titler.
 
-VIKTIG: Du er IKKE begrenset til en fast liste over funksjoner. Du kan foreslå ALLE eksisterende funksjoner som passer innenfor "${sectorName}"-sektoren, så lenge det er ekte, eksisterende yrker.
+${vacatureList}
 
+UTVALGSREGLER:
+1. Velg NØYAKTIG 3 funksjoner fra listen ovenfor.
+2. Bruk den EKSAKTE yrkestittelen -- ikke endre den.
+3. De 3 funksjonene må komme fra minst 2 forskjellige kategorier.
+4. Funksjon 1 og 2 er de mest logiske og gjenkjennelige treffene.
+5. Funksjon 3 er bevisst overraskende -- velg den fra en ANNEN kategori enn funksjon 1 og 2.
+6. Skriv 2-3 setninger per funksjon, maksimalt 40 ord.
+7. Bruk aktivt nøkkelordene til den ansatte.
+8. Ta hensyn til utdanningsnivå og eventuelle begrensninger.` : `
 Du velger:
 • To logiske, passende yrker som direkte samsvarer med den ansattes preferanser
-• Ett overraskende, eventyrlig og uventet alternativ — et yrke den ansatte sannsynligvis ikke ville tenkt på selv, men som likevel passer med utdanningsnivået og kjernekompetansene
+• Ett overraskende, eventyrlig og uventet alternativ -- et yrke den ansatte sannsynligvis ikke ville tenkt på selv, men som likevel passer med utdanningsnivået og kjernekompetansene.`}
 
 Du svarer alltid i nøyaktig den forespurte JSON-strukturen, uten forklaring.
 Lever kun JSON-objektet.`,
@@ -391,7 +440,12 @@ Beskrivelse 3:
 - Viktige aspekter: ${data.wensberoep3.belangrijkeAspecten}
 - Kunnskapsfokus: ${data.wensberoep3.kennisFocus}
 
-Nøkkelord for den ansatte:
+AI-genererte nøkkelord (fullstendig sett):
+• Aktiviteter: ${data.aiActiviteiten}
+• Arbeidsmiljø: ${data.aiWerkomstandigheden}
+• Interesser: ${data.aiInteresses}
+
+Nøkkelord valgt av den ansatte (viktigst):
 • Favorittaktiviteter: ${data.selectedActiviteiten}
 • Arbeidsmiljø: ${data.selectedWerkomstandigheden}
 • Interesser: ${data.selectedInteresses}
@@ -405,17 +459,8 @@ Kontekst:
 • Utdanningsnivå: ${data.opleidingsniveau}
 • Utdanningsretning: ${data.beroepsopleiding}
 • Begrensninger: ${data.fysiekeBeperkingen}
-${vacatureList ? `\nI tillegg er det nylige stillingsannonser hos ${organisationName} som inspirasjon (du er IKKE begrenset til disse):\n${vacatureList}` : ''}
 
-Regler:
-1. Foreslå NØYAKTIG 3 funksjoner som finnes innenfor "${sectorName}"-sektoren.
-2. Funksjonene må være ekte, eksisterende yrker — ingen oppdiktede titler.
-3. Sørg for variasjon: de 3 funksjonene bør komme fra forskjellige arbeidsområder.
-4. Funksjon 1 og 2 er de mest logiske og gjenkjennelige treffene.
-5. Funksjon 3 er bevisst overraskende og uventet.
-6. Skriv 2-3 setninger per funksjon, maksimalt 40 ord.
-7. Bruk aktivt nøkkelordene til den ansatte.
-8. Yrkestitler kan bestå av maks 3 ord.`
+Gi dine 3 funksjonsforslag basert på informasjonen ovenfor.`
     }
   };
 
@@ -1244,7 +1289,7 @@ serve(async (req) => {
       // Fetch org type with name and parent_type_id
       const { data: orgType } = await supabase
         .from('organisation_types')
-        .select('slug, name, is_unique, parent_type_id')
+        .select('slug, name, is_unique, parent_type_id, anchor_list')
         .eq('id', organisation_type_id)
         .single();
 
@@ -1266,36 +1311,92 @@ serve(async (req) => {
 
         console.log(`🏢 Organisation mode: "${organisationName}" in sector "${sectorName}"`);
 
-        // For unique organisations (like ErasmusMC), also fetch relevant vacancies as inspiration
+        // For unique organisations (like ErasmusMC), fetch relevant vacancies via full-text search
         if (orgType.is_unique) {
-          console.log('🏥 Unique organisation detected - fetching vacancies as inspiration...');
+          console.log('🏥 Unique organisation detected - matching vacancies via full-text search...');
 
-          const allKeywords = [
+          // Combineer geselecteerde + AI-gegenereerde keywords voor breed zoeken
+          const selectedKeywords = [
             ...(prioriteitenData?.selected_activiteiten_keywords || []),
             ...(prioriteitenData?.selected_werkomstandigheden_keywords || []),
             ...(prioriteitenData?.selected_interesses_keywords || []),
-          ].map((k: string) => k.toLowerCase());
+          ];
 
-          const { data: vacancies } = await supabase
-            .from('organisation_vacancies')
-            .select('title, department, description, keywords')
-            .eq('organisation_type_id', organisation_type_id);
+          const aiKeywords = [
+            ...(profileData?.ai_lievelings_activiteiten || '').split(','),
+            ...(profileData?.ai_werkomstandigheden || '').split(','),
+            ...(profileData?.ai_interesses || '').split(','),
+          ];
 
-          if (vacancies && vacancies.length > 0) {
-            const scored = vacancies.map(v => {
-              const searchText = [
-                v.title || '',
-                v.department || '',
-                v.description || '',
-                ...(v.keywords || []),
-              ].join(' ').toLowerCase();
-              const matchCount = allKeywords.filter(kw => searchText.includes(kw)).length;
-              return { ...v, matchCount };
+          const uniqueKeywords = [...new Set([...selectedKeywords, ...aiKeywords])]
+            .map((k: string) => k.trim().toLowerCase().replace(/[^a-zA-Zëéèüïöäàáâ\s]/g, ''))
+            .filter((k: string) => k.length > 2);
+
+          console.log(`🔍 Searching with ${uniqueKeywords.length} unique keywords`);
+
+          if (uniqueKeywords.length > 0) {
+            // Server-side full-text search met Nederlandse stemming
+            const keywordQuery = uniqueKeywords.join(' | ');
+
+            const { data: matched, error: matchError } = await supabase.rpc('match_vacancies', {
+              p_keywords: keywordQuery,
+              p_org_type_id: organisation_type_id,
+              p_limit: 25,
             });
-            scored.sort((a, b) => b.matchCount - a.matchCount);
-            organisationVacancies = scored.slice(0, 20);
-            console.log(`✅ Found ${vacancies.length} total vacancies, selected top ${organisationVacancies.length} relevant`);
+
+            if (matchError) {
+              console.error('⚠️ Full-text search error, falling back to random selection:', matchError);
+            }
+
+            organisationVacancies = matched || [];
+            console.log(`✅ Full-text search returned ${organisationVacancies.length} matches`);
           }
+
+          // Fallback: als < 10 resultaten, haal willekeurige vacatures
+          if (organisationVacancies.length < 10) {
+            console.log('⚠️ Too few matches, broadening search...');
+            const { data: fallback } = await supabase
+              .from('organisation_vacancies')
+              .select('title, department, description, category')
+              .eq('organisation_type_id', organisation_type_id)
+              .limit(25);
+            if (fallback && fallback.length > organisationVacancies.length) {
+              organisationVacancies = fallback;
+              console.log(`✅ Fallback: using ${organisationVacancies.length} random vacancies`);
+            }
+          }
+
+          // Garandeer categorie-diversiteit (min 3 categorieën voor "verrassend" functie)
+          const existingCategories = [...new Set(organisationVacancies.map((v: any) => v.category).filter(Boolean))];
+          if (existingCategories.length < 3 && organisationVacancies.length >= 10) {
+            console.log(`⚠️ Only ${existingCategories.length} categories, fetching diverse additions...`);
+            const { data: diverse } = await supabase
+              .from('organisation_vacancies')
+              .select('title, department, description, category')
+              .eq('organisation_type_id', organisation_type_id)
+              .not('category', 'in', `(${existingCategories.map(c => `"${c}"`).join(',')})`)
+              .limit(5);
+            if (diverse) {
+              organisationVacancies = [...organisationVacancies, ...diverse];
+              console.log(`✅ Added ${diverse.length} diverse vacancies from other categories`);
+            }
+          }
+
+          console.log(`📋 Final vacancy list: ${organisationVacancies.length} vacancies across ${[...new Set(organisationVacancies.map((v: any) => v.category).filter(Boolean))].length} categories`);
+        }
+
+        // For non-unique organisations with an anchor list, format as vacancies
+        if (!orgType.is_unique && orgType.anchor_list && orgType.anchor_list.length > 0) {
+          console.log('📋 Non-unique org with anchor list - formatting as vacancies...');
+          organisationVacancies = orgType.anchor_list.flatMap((cat: any) =>
+            cat.functions.map((fn: string) => ({
+              title: fn,
+              category: cat.category,
+              description: null,
+              department: null,
+            }))
+          );
+          console.log(`✅ Anchor list: ${organisationVacancies.length} functions across ${orgType.anchor_list.length} categories`);
         }
       }
     }
