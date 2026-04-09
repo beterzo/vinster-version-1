@@ -99,5 +99,27 @@
     "generating": "Report is being generated...",
     "please_wait": "This may take a moment. You will be redirected automatically once your report is ready."
   },
-  "ok": "OK"
+  "ok": "OK",
+  "cookies": {
+    "settings": {
+      "title": "Cookie settings",
+      "description": "Here you can choose which cookies you want to accept. Necessary cookies are always active.",
+      "save": "Save preferences",
+      "accept_all": "Accept all"
+    },
+    "categories": {
+      "necessary": {
+        "title": "Necessary cookies",
+        "description": "These cookies are essential for the website to function."
+      },
+      "statistics": {
+        "title": "Statistics cookies",
+        "description": "These cookies help us understand how visitors use the website."
+      },
+      "marketing": {
+        "title": "Marketing cookies",
+        "description": "These cookies are used for advertising and marketing purposes."
+      }
+    }
+  }
 }
