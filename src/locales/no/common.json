@@ -106,5 +106,27 @@
     "generating": "Rapporten genereres...",
     "please_wait": "Dette kan ta litt tid. Du blir automatisk videresendt når rapporten er klar."
   },
-  "ok": "OK"
+  "ok": "OK",
+  "cookies": {
+    "settings": {
+      "title": "Informasjonskapsel-innstillinger",
+      "description": "Her kan du velge hvilke informasjonskapsler du vil akseptere. Nødvendige informasjonskapsler er alltid aktive.",
+      "save": "Lagre innstillinger",
+      "accept_all": "Godta alle"
+    },
+    "categories": {
+      "necessary": {
+        "title": "Nødvendige informasjonskapsler",
+        "description": "Disse informasjonskapslene er nødvendige for at nettstedet skal fungere."
+      },
+      "statistics": {
+        "title": "Statistikk-informasjonskapsler",
+        "description": "Disse informasjonskapslene hjelper oss med å forstå hvordan besøkende bruker nettstedet."
+      },
+      "marketing": {
+        "title": "Markedsførings-informasjonskapsler",
+        "description": "Disse informasjonskapslene brukes til reklame- og markedsføringsformål."
+      }
+    }
+  }
 }

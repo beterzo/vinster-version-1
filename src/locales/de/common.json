@@ -146,5 +146,27 @@
     "generating": "Bericht wird erstellt...",
     "please_wait": "Dies kann einen Moment dauern. Sie werden automatisch weitergeleitet, sobald Ihr Bericht fertig ist."
   },
-  "ok": "OK"
+  "ok": "OK",
+  "cookies": {
+    "settings": {
+      "title": "Cookie-Einstellungen",
+      "description": "Hier können Sie auswählen, welche Cookies Sie akzeptieren möchten. Notwendige Cookies sind immer aktiv.",
+      "save": "Einstellungen speichern",
+      "accept_all": "Alle akzeptieren"
+    },
+    "categories": {
+      "necessary": {
+        "title": "Notwendige Cookies",
+        "description": "Diese Cookies sind für das Funktionieren der Website unerlässlich."
+      },
+      "statistics": {
+        "title": "Statistik-Cookies",
+        "description": "Diese Cookies helfen uns zu verstehen, wie Besucher die Website nutzen."
+      },
+      "marketing": {
+        "title": "Marketing-Cookies",
+        "description": "Diese Cookies werden für Werbe- und Marketingzwecke verwendet."
+      }
+    }
+  }
 }
