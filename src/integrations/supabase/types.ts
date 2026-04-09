@@ -271,6 +271,7 @@ export type Database = {
       }
       organisation_vacancies: {
         Row: {
+          category: string | null
           created_at: string | null
           department: string | null
           description: string | null
@@ -278,10 +279,12 @@ export type Database = {
           keywords: string[] | null
           organisation_type_id: string | null
           raw_data: Json | null
+          search_vector: unknown
           title: string
           year: number | null
         }
         Insert: {
+          category?: string | null
           created_at?: string | null
           department?: string | null
           description?: string | null
@@ -289,10 +292,12 @@ export type Database = {
           keywords?: string[] | null
           organisation_type_id?: string | null
           raw_data?: Json | null
+          search_vector?: unknown
           title: string
           year?: number | null
         }
         Update: {
+          category?: string | null
           created_at?: string | null
           department?: string | null
           description?: string | null
@@ -300,6 +305,7 @@ export type Database = {
           keywords?: string[] | null
           organisation_type_id?: string | null
           raw_data?: Json | null
+          search_vector?: unknown
           title?: string
           year?: number | null
         }
@@ -748,7 +754,16 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      match_vacancies: {
+        Args: { p_keywords: string; p_limit?: number; p_org_type_id: string }
+        Returns: {
+          category: string
+          department: string
+          description: string
+          rank: number
+          title: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
