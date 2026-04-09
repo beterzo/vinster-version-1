@@ -99,5 +99,27 @@
     "generating": "Rapport wordt gegenereerd...",
     "please_wait": "Dit kan even duren. Je wordt automatisch doorgestuurd zodra je rapport klaar is."
   },
-  "ok": "OK"
+  "ok": "OK",
+  "cookies": {
+    "settings": {
+      "title": "Cookie-instellingen",
+      "description": "Hier kun je aangeven welke cookies je wilt accepteren. Noodzakelijke cookies zijn altijd actief.",
+      "save": "Voorkeuren opslaan",
+      "accept_all": "Alles accepteren"
+    },
+    "categories": {
+      "necessary": {
+        "title": "Noodzakelijke cookies",
+        "description": "Deze cookies zijn essentieel voor het functioneren van de website."
+      },
+      "statistics": {
+        "title": "Statistiek cookies",
+        "description": "Deze cookies helpen ons begrijpen hoe bezoekers de website gebruiken."
+      },
+      "marketing": {
+        "title": "Marketing cookies",
+        "description": "Deze cookies worden gebruikt voor advertenties en marketing doeleinden."
+      }
+    }
+  }
 }
