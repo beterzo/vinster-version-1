@@ -230,6 +230,7 @@ const OrganisatieLanding = () => {
 
             <p className="text-lg text-gray-700 leading-relaxed mb-8">
               {orgType.intro_text ||
+                SLUG_INTRO_TEXT[orgType.slug] ||
                 `Ontdek welke functies binnen een ${orgType.name.toLowerCase()} bij jou passen. Vinster helpt je om inzicht te krijgen in jouw mogelijkheden.`}
             </p>
 
