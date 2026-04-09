@@ -25,6 +25,16 @@ const ORG_LOGOS: Record<string, string> = {
   "erasmus-mc": "/images/erasmus-mc-logo.png",
 };
 
+const SLUG_INTRO_TEXT: Record<string, string> = {
+  "financieel": "Ontdek welke functies bij een financiële instelling bij jou passen. Vinster helpt je om inzicht te krijgen in jouw mogelijkheden.",
+  "transport-logistiek": "Ontdek welke functies in de wereld van transport & logistiek bij jou passen. Vinster helpt je om inzicht te krijgen in jouw mogelijkheden.",
+  "zorgorganisatie": "Ontdek welke functies binnen de zorg en welzijn bij jou passen. Vinster helpt je om inzicht te krijgen in jouw mogelijkheden.",
+  "medisch-centrum": "Ontdek welke functies bij een medisch centrum bij jou passen. Vinster helpt je om inzicht te krijgen in jouw mogelijkheden.",
+  "universiteit": "Ontdek welke functies bij een universiteit bij jou passen. Vinster helpt je om inzicht te krijgen in jouw mogelijkheden.",
+  "hogeschool": "Ontdek welke functies bij een hogeschool bij jou passen. Vinster helpt je om inzicht te krijgen in jouw mogelijkheden.",
+  "mbo-instelling": "Ontdek welke functies bij een mbo-instelling bij jou passen. Vinster helpt je om inzicht te krijgen in jouw mogelijkheden.",
+};
+
 const OrganisatieLanding = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
@@ -220,6 +230,7 @@ const OrganisatieLanding = () => {
 
             <p className="text-lg text-gray-700 leading-relaxed mb-8">
               {orgType.intro_text ||
+                SLUG_INTRO_TEXT[orgType.slug] ||
                 `Ontdek welke functies binnen een ${orgType.name.toLowerCase()} bij jou passen. Vinster helpt je om inzicht te krijgen in jouw mogelijkheden.`}
             </p>
 
