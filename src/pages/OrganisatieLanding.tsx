@@ -35,6 +35,16 @@ const SLUG_INTRO_TEXT: Record<string, string> = {
   "mbo-instelling": "Ontdek welke functies bij een mbo-instelling bij jou passen. Vinster helpt je om inzicht te krijgen in jouw mogelijkheden.",
 };
 
+const SLUG_CTA_NAME: Record<string, string> = {
+  "financieel": "financiële instelling",
+  "transport-logistiek": "transport & logistiek organisatie",
+  "zorgorganisatie": "zorg- en welzijnsorganisatie",
+  "medisch-centrum": "medisch centrum",
+  "universiteit": "universiteit",
+  "hogeschool": "hogeschool",
+  "mbo-instelling": "mbo-instelling",
+};
+
 const OrganisatieLanding = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
@@ -323,7 +333,7 @@ const OrganisatieLanding = () => {
           <div className="bg-blue-50 rounded-2xl border border-blue-100 p-8 md:p-10 text-center">
             <Building2 className="h-8 w-8 text-blue-900 mx-auto mb-3" />
             <h2 className="text-xl font-semibold text-blue-900 mb-2">
-              Vinster voor jouw {orgType.name.toLowerCase()}?
+              Vinster voor jouw {SLUG_CTA_NAME[orgType.slug] || orgType.name.toLowerCase()}?
             </h2>
             <p className="text-gray-700 mb-4 max-w-lg mx-auto">
               Wil je Vinster op maat inzetten voor jouw eigen organisatie, met een eigen functielijst en toegangscodes voor medewerkers? Dat kan.
