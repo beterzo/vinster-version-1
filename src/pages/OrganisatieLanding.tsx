@@ -35,6 +35,16 @@ const SLUG_INTRO_TEXT: Record<string, string> = {
   "mbo-instelling": "Ontdek welke functies bij een mbo-instelling bij jou passen. Vinster helpt je om inzicht te krijgen in jouw mogelijkheden.",
 };
 
+const SLUG_CTA_NAME: Record<string, string> = {
+  "financieel": "financiële instelling",
+  "transport-logistiek": "transport & logistiek organisatie",
+  "zorgorganisatie": "zorg- en welzijnsorganisatie",
+  "medisch-centrum": "medisch centrum",
+  "universiteit": "universiteit",
+  "hogeschool": "hogeschool",
+  "mbo-instelling": "mbo-instelling",
+};
+
 const OrganisatieLanding = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
