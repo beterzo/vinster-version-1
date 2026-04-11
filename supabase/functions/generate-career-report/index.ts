@@ -499,6 +499,9 @@ Je kiest alleen uit functies die:
 • Een herkenbare functietitel hebben van maximaal drie woorden
 • Reëel en uitvoerbaar zijn binnen de aangegeven wensen
 
+SCHRIJFSTIJL:
+Schrijf vloeiende, natuurlijke zinnen. Verwerk de kernwoorden subtiel in de tekst — gebruik ze NIET letterlijk met hoofdletters midden in een zin. Schrijf zoals een mens zou schrijven, niet als een opsomming van trefwoorden. Alle woorden in de beschrijving moeten in kleine letters staan, tenzij het de eerste letter van een zin is of een eigennaam.
+
 Je antwoordt altijd in exact de gevraagde JSON-structuur, zonder toelichting erboven of eronder. Je output wordt automatisch verwerkt in een rapport, dus zorg dat het direct bruikbaar en foutloos is.
 
 Lever uitsluitend het JSON-object aan zoals opgegeven in de prompt.`,
@@ -652,6 +655,9 @@ You only choose occupations that:
 • Are known within the European labour market (SOC/O*NET/ESCO frameworks, or as found on websites like onetonline.org, prospects.ac.uk)
 • Have a recognisable job title of a maximum of three words
 • Are realistic and feasible within the stated preferences
+
+WRITING STYLE:
+Write fluent, natural sentences. Weave the keywords subtly into the text — do NOT use them literally with capital letters in the middle of a sentence. Write as a human would write, not as a list of buzzwords. All words in the description must be in lowercase, unless it is the first letter of a sentence or a proper noun.
 
 You always respond in exactly the requested JSON structure, without any explanation above or below it. Your output is processed automatically in a report, so it must be immediately usable and free of errors.
 
@@ -819,6 +825,9 @@ Du wählst ausschließlich Berufe aus, die:
 • In anerkannten Strukturen oder Datenbanken vorkommen, wie zum Beispiel:
 DEQF/BIG/ISCO sowie Websites und Berufsbeschreibungen wie berufenet.arbeitsagentur.de, BERUFENET der Bundesagentur für Arbeit, berufe.tv oder BERUFE-Entdecker der IHK
 
+SCHREIBSTIL:
+Schreibe flüssige, natürliche Sätze. Verarbeite die Schlüsselwörter subtil im Text — verwende sie NICHT wörtlich mit Großbuchstaben mitten im Satz. Schreibe so, wie ein Mensch schreiben würde, nicht wie eine Aufzählung von Schlagwörtern. Alle Wörter in der Beschreibung müssen in Kleinbuchstaben stehen, es sei denn, es ist der Anfang eines Satzes oder ein Eigenname.
+
 Du antwortest immer exakt in der geforderten JSON-Struktur, ohne zusätzliche Erklärungen davor oder danach. Deine Ausgabe wird automatisch in einen Bericht übernommen und muss deshalb sofort nutzbar und fehlerfrei sein.
 
 Liefere ausschließlich das JSON-Objekt, wie in der Prompt-Beschreibung angegeben.`,
@@ -974,6 +983,9 @@ Du velger kun yrker som:
 • Er realistiske og gjennomførbare innenfor brukerens ønsker
 • Forekommer i anerkjente strukturer og databaser, for eksempel:
 NOKUT, Utdanning.no, NAVs yrkesbeskrivelser, samt nettsider som Finn.no, Arbeidsplassen.no eller utdanning.no
+
+SKRIVESTIL:
+Skriv flytende, naturlige setninger. Vev nøkkelordene subtilt inn i teksten — IKKE bruk dem bokstavelig med store bokstaver midt i en setning. Skriv slik et menneske ville skrevet, ikke som en oppramsing av stikkord. Alle ord i beskrivelsen skal være med små bokstaver, med mindre det er første bokstav i en setning eller et egennavn.
 
 Du svarer alltid i nøyaktig den forespurte JSON-strukturen, uten forklaring over eller under. Outputen din blir automatisk brukt i en rapport, så den må være umiddelbart anvendelig og helt feilfri.
 
