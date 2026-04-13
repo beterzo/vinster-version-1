@@ -1,24 +1,29 @@
 
 
-## Fix: AI-rapportteksten met rare hoofdletters en slechte zinnen
+## Fix: Hoofdletters in AI-rapportteksten
 
 ### Probleem
-De AI-prompt instrueert het model om kernwoorden te verwerken in de uitleg, maar geeft geen instructie over:
-1. Geen hoofdletters midden in zinnen gebruiken voor keywords
-2. Vloeiende, natuurlijke zinnen schrijven in plaats van keywords aan elkaar plakken
+De vorige fix ging te ver: de instructie "Alle woorden in de beschrijving moeten in kleine letters staan" zorgt ervoor dat de AI ook beroepstitels en het begin van zinnen in kleine letters schrijft. Heidi ziet nu correct lopende zinnen, maar zonder hoofdletters aan het begin en na punten.
+
+### Oorzaak
+De schrijfstijl-instructie in alle 10 prompt-blokken (2 functies x 4 talen + 2 extra NL) zegt expliciet dat alles in kleine letters moet. De AI volgt dit te letterlijk.
 
 ### Oplossing
-Expliciete instructies toevoegen aan **beide** prompt-functies in `supabase/functions/generate-career-report/index.ts`:
+De SCHRIJFSTIJL-instructie in alle prompt-blokken aanpassen. De nieuwe instructie moet:
 
-**1. `getOrganisationSectorPrompts` (alle 4 talen)** — bij de schrijfinstructies toevoegen:
-- "Schrijf vloeiende, natuurlijke zinnen. Verwerk de kernwoorden subtiel in de tekst — gebruik ze NIET letterlijk met hoofdletters midden in een zin. Schrijf zoals een mens zou schrijven, niet als een opsomming van trefwoorden."
+1. **Beroepstitels**: beginnen met een hoofdletter (bijv. "Beleidsmedewerker arbeidsmarkt" i.p.v. "beleidsmedewerker arbeidsmarkt")
+2. **Beschrijvingen**: elke zin begint met een hoofdletter, na elke punt ook een hoofdletter
+3. **Keywords**: nog steeds subtiel verwerkt zonder random hoofdletters midden in zinnen
 
-**2. `getCareerReportPrompts` (alle 4 talen)** — zelfde instructie toevoegen bij de opdracht-sectie.
+**Nieuwe NL-instructie:**
+> "Schrijf vloeiende, natuurlijke zinnen. Begin elke zin met een hoofdletter, ook na een punt. Beroepstitels beginnen ook met een hoofdletter. Verwerk de kernwoorden subtiel in de tekst — gebruik ze NIET letterlijk met hoofdletters midden in een zin."
+
+Equivalent voor EN, DE en NO.
 
 ### Bestanden
-- `supabase/functions/generate-career-report/index.ts` — prompt-aanpassingen in beide functies, 4 talen elk
-- Deploy edge function na wijziging
+- `supabase/functions/generate-career-report/index.ts` — alle 10 SCHRIJFSTIJL/WRITING STYLE/SCHREIBSTIL/SKRIVESTIL blokken aanpassen
+- Deploy edge function
 
 ### Resultaat
-Toekomstige rapporten krijgen vloeiende tekst zonder random hoofdletters. Bestaande rapporten blijven ongewijzigd.
+Toekomstige rapporten hebben correcte hoofdletters bij titels en zinnen, zonder de eerder opgeloste keyword-hoofdletter-bug terug te brengen.
 
