@@ -962,7 +962,7 @@ Denke dir drei konkrete Berufe aus, die zu dieser Person passen:
 • Die Berufstitel dürfen höchstens aus 3 Wörtern bestehen
 
 ⚠️ Wichtig:
-Die Erläuterung pro Beruf darf maximal 40 Wörter enthalten. Stelle sicher, dass jede Beschreibung mit einem vollständigen Satz endet. Alle Wörter in der Beschreibung müssen kleingeschrieben sein, es sei denn, es ist der Anfang eines Satzes oder ein Eigenname.`
+Die Erläuterung pro Beruf darf maximal 40 Wörter enthalten. Stelle sicher, dass jede Beschreibung mit einem vollständigen Satz endet. Beginne jeden Satz mit einem Großbuchstaben. Berufsbezeichnungen beginnen ebenfalls mit einem Großbuchstaben.`
     },
     no: {
       system: `Du er en profesjonell karriereveileder med inngående kunnskap om eksisterende yrker, funksjoner, sektorer og karriereutvikling. Du tenker praktisk og menneskefokusert, og du baserer dine råd på flere intervjuer og på hva en person liker å gjøre (aktiviteter), hvilken arbeidskontekst personen trives i (arbeidsmiljø), og hva personen oppriktig er interessert i (interesser).
