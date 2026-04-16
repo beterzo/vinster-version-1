@@ -164,43 +164,59 @@ ${enthousiasmeData?.leuk_project_en_rol || 'Not filled in'}
 9. When do you come home whistling? What happened during that day?
 ${enthousiasmeData?.fluitend_thuiskomen_dag || 'Not filled in'}
 
-Dream job 1 – ${wensberoepenData?.wensberoep_1_titel || 'Not filled in'}
-1. What do you do in a typical workweek?
+Description 1:
+1. Where do you work and what does your work environment look like?
 ${wensberoepenData?.wensberoep_1_werkweek_activiteiten || 'Not filled in'}
-2. Where do you do your work?
+2. What do you do on a typical working day in this job?
 ${wensberoepenData?.wensberoep_1_werklocatie_omgeving || 'Not filled in'}
-3. Do you work alone or with others?
+3. Who do you mainly deal with in this work?
 ${wensberoepenData?.wensberoep_1_samenwerking_contacten || 'Not filled in'}
-4. What happens during a day that makes you come home whistling?
+4. When do you truly enjoy your work? What are you doing at those moments?
 ${wensberoepenData?.wensberoep_1_fluitend_thuiskomen_dag || 'Not filled in'}
-5. What is your goal with this work?
+5. What do you find important regarding employment conditions?
 ${wensberoepenData?.wensberoep_1_werk_doel || 'Not filled in'}
-6. What parts of the work do you enjoy the most?
+6. What do you need to know about or be interested in to do this work well?
 ${wensberoepenData?.wensberoep_1_leukste_onderdelen || 'Not filled in'}
-7. What is important in this work?
+7. How much freedom do you have to decide what you do and how you do it?
 ${wensberoepenData?.wensberoep_1_belangrijke_aspecten || 'Not filled in'}
-8. What is the main focus of your work?
+8. What do you contribute to with your work, and why do you find that important?
 ${wensberoepenData?.wensberoep_1_kennis_focus || 'Not filled in'}
 
-Dream job 2 – ${wensberoepenData?.wensberoep_2_titel || 'Not filled in'}
-1: ${wensberoepenData?.wensberoep_2_werkweek_activiteiten || 'Not filled in'}
-2: ${wensberoepenData?.wensberoep_2_werklocatie_omgeving || 'Not filled in'}
-3: ${wensberoepenData?.wensberoep_2_samenwerking_contacten || 'Not filled in'}
-4: ${wensberoepenData?.wensberoep_2_fluitend_thuiskomen_dag || 'Not filled in'}
-5: ${wensberoepenData?.wensberoep_2_werk_doel || 'Not filled in'}
-6: ${wensberoepenData?.wensberoep_2_leukste_onderdelen || 'Not filled in'}
-7: ${wensberoepenData?.wensberoep_2_belangrijke_aspecten || 'Not filled in'}
-8: ${wensberoepenData?.wensberoep_2_kennis_focus || 'Not filled in'}
+Description 2:
+1. Describe the place or places where you work.
+${wensberoepenData?.wensberoep_2_werkweek_activiteiten || 'Not filled in'}
+2. What are your most important tasks?
+${wensberoepenData?.wensberoep_2_werklocatie_omgeving || 'Not filled in'}
+3. What works best for you? Thinking along, executing yourself, managing others, or something else?
+${wensberoepenData?.wensberoep_2_samenwerking_contacten || 'Not filled in'}
+4. When does this work feel meaningful or worthwhile to you?
+${wensberoepenData?.wensberoep_2_fluitend_thuiskomen_dag || 'Not filled in'}
+5. Who do you encounter in this work and what do you do together?
+${wensberoepenData?.wensberoep_2_werk_doel || 'Not filled in'}
+6. At what moments do you think: this is great work! What are you doing then?
+${wensberoepenData?.wensberoep_2_leukste_onderdelen || 'Not filled in'}
+7. What does this work offer you so that you can sustain it easily and feel happy?
+${wensberoepenData?.wensberoep_2_belangrijke_aspecten || 'Not filled in'}
+8. What is the work about content-wise? What should you find interesting?
+${wensberoepenData?.wensberoep_2_kennis_focus || 'Not filled in'}
 
-Dream job 3 – ${wensberoepenData?.wensberoep_3_titel || 'Not filled in'}
-1: ${wensberoepenData?.wensberoep_3_werkweek_activiteiten || 'Not filled in'}
-2: ${wensberoepenData?.wensberoep_3_werklocatie_omgeving || 'Not filled in'}
-3: ${wensberoepenData?.wensberoep_3_samenwerking_contacten || 'Not filled in'}
-4: ${wensberoepenData?.wensberoep_3_fluitend_thuiskomen_dag || 'Not filled in'}
-5: ${wensberoepenData?.wensberoep_3_werk_doel || 'Not filled in'}
-6: ${wensberoepenData?.wensberoep_3_leukste_onderdelen || 'Not filled in'}
-7: ${wensberoepenData?.wensberoep_3_belangrijke_aspecten || 'Not filled in'}
-8: ${wensberoepenData?.wensberoep_3_kennis_focus || 'Not filled in'}`
+Description 3:
+1. Why does this work environment suit you?
+${wensberoepenData?.wensberoep_3_werkweek_activiteiten || 'Not filled in'}
+2. What do you spend most of your time on?
+${wensberoepenData?.wensberoep_3_werklocatie_omgeving || 'Not filled in'}
+3. Who or what do you ultimately do this work for, and what do you want to achieve?
+${wensberoepenData?.wensberoep_3_samenwerking_contacten || 'Not filled in'}
+4. What kind of people do you work with and what is your role?
+${wensberoepenData?.wensberoep_3_fluitend_thuiskomen_dag || 'Not filled in'}
+5. Which parts of the work give you the most energy?
+${wensberoepenData?.wensberoep_3_werk_doel || 'Not filled in'}
+6. Which employment conditions or circumstances are really important to you?
+${wensberoepenData?.wensberoep_3_leukste_onderdelen || 'Not filled in'}
+7. How independently do you work in this profession? What do you find most comfortable?
+${wensberoepenData?.wensberoep_3_belangrijke_aspecten || 'Not filled in'}
+8. What should you be curious about or want to learn more about in this work?
+${wensberoepenData?.wensberoep_3_kennis_focus || 'Not filled in'}`
     },
     de: {
       system: `Du bist ein Karriere-Profi, spezialisiert auf die Analyse von offenen Antworten von Kandidaten. Dein Ziel ist es, basierend auf reflektierten Antworten zu Fragen über Berufserfahrungen, Vorlieben und Interessen, 48 Schlüsselwörter oder kurze Sätze zu generieren (genau 16 pro Kategorie).
@@ -252,43 +268,59 @@ ${enthousiasmeData?.leuk_project_en_rol || 'Nicht ausgefüllt'}
 9. Wann kommst du pfeifend nach Hause? Was ist an diesem Tag passiert?
 ${enthousiasmeData?.fluitend_thuiskomen_dag || 'Nicht ausgefüllt'}
 
-Wunschberuf 1 – ${wensberoepenData?.wensberoep_1_titel || 'Nicht ausgefüllt'}
-1. Was machst du in einer typischen Arbeitswoche?
+Beschreibung 1:
+1. Wo arbeiten Sie und wie sieht Ihre Arbeitsumgebung aus?
 ${wensberoepenData?.wensberoep_1_werkweek_activiteiten || 'Nicht ausgefüllt'}
-2. Wo übst du deinen Beruf aus?
+2. Was machen Sie alles an einem normalen Arbeitstag?
 ${wensberoepenData?.wensberoep_1_werklocatie_omgeving || 'Nicht ausgefüllt'}
-3. Arbeitest du alleine oder im Team?
+3. Mit wem haben Sie hauptsächlich zu tun?
 ${wensberoepenData?.wensberoep_1_samenwerking_contacten || 'Nicht ausgefüllt'}
-4. Was erlebst du an einem Tag, an dem du pfeifend nach Hause kommst?
+4. Wann haben Sie wirklich Spaß an Ihrer Arbeit? Was tun Sie dann?
 ${wensberoepenData?.wensberoep_1_fluitend_thuiskomen_dag || 'Nicht ausgefüllt'}
-5. Was ist dein Ziel mit dieser Arbeit?
+5. Was ist Ihnen bezüglich der Arbeitsbedingungen wichtig?
 ${wensberoepenData?.wensberoep_1_werk_doel || 'Nicht ausgefüllt'}
-6. Welche Aufgaben gefallen dir in diesem Beruf am meisten?
+6. Wovon müssen Sie etwas wissen oder wofür müssen Sie sich interessieren?
 ${wensberoepenData?.wensberoep_1_leukste_onderdelen || 'Nicht ausgefüllt'}
-7. Was ist in diesem Beruf wichtig?
+7. Wie viel Freiheit haben Sie, selbst zu bestimmen was und wie Sie arbeiten?
 ${wensberoepenData?.wensberoep_1_belangrijke_aspecten || 'Nicht ausgefüllt'}
-8. Worum geht es inhaltlich hauptsächlich in deinem Beruf?
+8. Wozu tragen Sie mit Ihrer Arbeit bei, und warum finden Sie das wichtig?
 ${wensberoepenData?.wensberoep_1_kennis_focus || 'Nicht ausgefüllt'}
 
-Wunschberuf 2 – ${wensberoepenData?.wensberoep_2_titel || 'Nicht ausgefüllt'}
-1: ${wensberoepenData?.wensberoep_2_werkweek_activiteiten || 'Nicht ausgefüllt'}
-2: ${wensberoepenData?.wensberoep_2_werklocatie_omgeving || 'Nicht ausgefüllt'}
-3: ${wensberoepenData?.wensberoep_2_samenwerking_contacten || 'Nicht ausgefüllt'}
-4: ${wensberoepenData?.wensberoep_2_fluitend_thuiskomen_dag || 'Nicht ausgefüllt'}
-5: ${wensberoepenData?.wensberoep_2_werk_doel || 'Nicht ausgefüllt'}
-6: ${wensberoepenData?.wensberoep_2_leukste_onderdelen || 'Nicht ausgefüllt'}
-7: ${wensberoepenData?.wensberoep_2_belangrijke_aspecten || 'Nicht ausgefüllt'}
-8: ${wensberoepenData?.wensberoep_2_kennis_focus || 'Nicht ausgefüllt'}
+Beschreibung 2:
+1. Beschreiben Sie den Ort oder die Orte, an denen Sie arbeiten.
+${wensberoepenData?.wensberoep_2_werkweek_activiteiten || 'Nicht ausgefüllt'}
+2. Was sind Ihre wichtigsten Aufgaben?
+${wensberoepenData?.wensberoep_2_werklocatie_omgeving || 'Nicht ausgefüllt'}
+3. Was funktioniert für Sie am besten? Mitdenken, selbst ausführen, andere anleiten?
+${wensberoepenData?.wensberoep_2_samenwerking_contacten || 'Nicht ausgefüllt'}
+4. Wann fühlt sich diese Arbeit sinnvoll oder lohnenswert an?
+${wensberoepenData?.wensberoep_2_fluitend_thuiskomen_dag || 'Nicht ausgefüllt'}
+5. Wen treffen Sie in dieser Arbeit und was machen Sie zusammen?
+${wensberoepenData?.wensberoep_2_werk_doel || 'Nicht ausgefüllt'}
+6. In welchen Momenten denken Sie: Das ist tolle Arbeit! Was tun Sie dann?
+${wensberoepenData?.wensberoep_2_leukste_onderdelen || 'Nicht ausgefüllt'}
+7. Was bietet Ihnen diese Arbeit, damit Sie sie leicht durchhalten?
+${wensberoepenData?.wensberoep_2_belangrijke_aspecten || 'Nicht ausgefüllt'}
+8. Worum geht es inhaltlich? Was sollten Sie interessant finden?
+${wensberoepenData?.wensberoep_2_kennis_focus || 'Nicht ausgefüllt'}
 
-Wunschberuf 3 – ${wensberoepenData?.wensberoep_3_titel || 'Nicht ausgefüllt'}
-1: ${wensberoepenData?.wensberoep_3_werkweek_activiteiten || 'Nicht ausgefüllt'}
-2: ${wensberoepenData?.wensberoep_3_werklocatie_omgeving || 'Nicht ausgefüllt'}
-3: ${wensberoepenData?.wensberoep_3_samenwerking_contacten || 'Nicht ausgefüllt'}
-4: ${wensberoepenData?.wensberoep_3_fluitend_thuiskomen_dag || 'Nicht ausgefüllt'}
-5: ${wensberoepenData?.wensberoep_3_werk_doel || 'Nicht ausgefüllt'}
-6: ${wensberoepenData?.wensberoep_3_leukste_onderdelen || 'Nicht ausgefüllt'}
-7: ${wensberoepenData?.wensberoep_3_belangrijke_aspecten || 'Nicht ausgefüllt'}
-8: ${wensberoepenData?.wensberoep_3_kennis_focus || 'Nicht ausgefüllt'}`
+Beschreibung 3:
+1. Warum passt diese Arbeitsumgebung zu Ihnen?
+${wensberoepenData?.wensberoep_3_werkweek_activiteiten || 'Nicht ausgefüllt'}
+2. Womit verbringen Sie den größten Teil Ihrer Zeit?
+${wensberoepenData?.wensberoep_3_werklocatie_omgeving || 'Nicht ausgefüllt'}
+3. Für wen oder was machen Sie diese Arbeit und was möchten Sie erreichen?
+${wensberoepenData?.wensberoep_3_samenwerking_contacten || 'Nicht ausgefüllt'}
+4. Mit was für Menschen arbeiten Sie zusammen und was ist Ihre Rolle?
+${wensberoepenData?.wensberoep_3_fluitend_thuiskomen_dag || 'Nicht ausgefüllt'}
+5. Welche Teile der Arbeit geben Ihnen die meiste Energie?
+${wensberoepenData?.wensberoep_3_werk_doel || 'Nicht ausgefüllt'}
+6. Welche Arbeitsbedingungen sind für Sie wirklich wichtig?
+${wensberoepenData?.wensberoep_3_leukste_onderdelen || 'Nicht ausgefüllt'}
+7. Wie selbstständig arbeiten Sie? Was finden Sie am angenehmsten?
+${wensberoepenData?.wensberoep_3_belangrijke_aspecten || 'Nicht ausgefüllt'}
+8. Wofür sollten Sie neugierig sein oder mehr darüber lernen wollen?
+${wensberoepenData?.wensberoep_3_kennis_focus || 'Nicht ausgefüllt'}`
     },
     no: {
       system: `Du er en karriereekspert, spesialisert på å analysere åpne svar fra kandidater. Målet ditt er å generere 48 nøkkelord eller korte setninger (nøyaktig 16 per kategori) basert på reflekterende svar på spørsmål om arbeidserfaring, preferanser og interesser.
@@ -340,43 +372,59 @@ ${enthousiasmeData?.leuk_project_en_rol || 'Ikke utfylt'}
 9. Når kommer du hjem med et smil? Hva har du da opplevd i løpet av dagen?
 ${enthousiasmeData?.fluitend_thuiskomen_dag || 'Ikke utfylt'}
 
-Ønskeyrke 1 – ${wensberoepenData?.wensberoep_1_titel || 'Ikke utfylt'}
-1. Hva gjør du i løpet av en arbeidsuke?
+Beskrivelse 1:
+1. Hvor jobber du og hvordan ser arbeidsmiljøet ditt ut?
 ${wensberoepenData?.wensberoep_1_werkweek_activiteiten || 'Ikke utfylt'}
-2. Hvor jobber du?
+2. Hva gjør du på en vanlig arbeidsdag?
 ${wensberoepenData?.wensberoep_1_werklocatie_omgeving || 'Ikke utfylt'}
-3. Jobber du alene eller med andre?
+3. Hvem har du mest å gjøre med i dette arbeidet?
 ${wensberoepenData?.wensberoep_1_samenwerking_contacten || 'Ikke utfylt'}
-4. Hva har du gjort på en dag som får deg til å komme hjem med et smil?
+4. Når har du virkelig glede av jobben din? Hva gjør du da?
 ${wensberoepenData?.wensberoep_1_fluitend_thuiskomen_dag || 'Ikke utfylt'}
-5. Hva er målet ditt med denne jobben?
+5. Hva synes du er viktig når det gjelder arbeidsvilkår?
 ${wensberoepenData?.wensberoep_1_werk_doel || 'Ikke utfylt'}
-6. Hvilke deler av jobben liker du best?
+6. Hva må du vite noe om eller være interessert i for å gjøre denne jobben godt?
 ${wensberoepenData?.wensberoep_1_leukste_onderdelen || 'Ikke utfylt'}
-7. Hva er viktig i denne jobben?
+7. Hvor mye frihet har du til å bestemme hva og hvordan du jobber?
 ${wensberoepenData?.wensberoep_1_belangrijke_aspecten || 'Ikke utfylt'}
-8. Hva handler jobben din hovedsakelig om?
+8. Hva bidrar du til med arbeidet ditt, og hvorfor synes du det er viktig?
 ${wensberoepenData?.wensberoep_1_kennis_focus || 'Ikke utfylt'}
 
-Ønskeyrke 2 – ${wensberoepenData?.wensberoep_2_titel || 'Ikke utfylt'}
-1: ${wensberoepenData?.wensberoep_2_werkweek_activiteiten || 'Ikke utfylt'}
-2: ${wensberoepenData?.wensberoep_2_werklocatie_omgeving || 'Ikke utfylt'}
-3: ${wensberoepenData?.wensberoep_2_samenwerking_contacten || 'Ikke utfylt'}
-4: ${wensberoepenData?.wensberoep_2_fluitend_thuiskomen_dag || 'Ikke utfylt'}
-5: ${wensberoepenData?.wensberoep_2_werk_doel || 'Ikke utfylt'}
-6: ${wensberoepenData?.wensberoep_2_leukste_onderdelen || 'Ikke utfylt'}
-7: ${wensberoepenData?.wensberoep_2_belangrijke_aspecten || 'Ikke utfylt'}
-8: ${wensberoepenData?.wensberoep_2_kennis_focus || 'Ikke utfylt'}
+Beskrivelse 2:
+1. Beskriv stedet eller stedene der du jobber.
+${wensberoepenData?.wensberoep_2_werkweek_activiteiten || 'Ikke utfylt'}
+2. Hva er dine viktigste oppgaver?
+${wensberoepenData?.wensberoep_2_werklocatie_omgeving || 'Ikke utfylt'}
+3. Hva fungerer best for deg? Tenke med, utføre selv, lede andre?
+${wensberoepenData?.wensberoep_2_samenwerking_contacten || 'Ikke utfylt'}
+4. Når føles dette arbeidet meningsfullt eller verdt innsatsen?
+${wensberoepenData?.wensberoep_2_fluitend_thuiskomen_dag || 'Ikke utfylt'}
+5. Hvem møter du i dette arbeidet og hva gjør dere sammen?
+${wensberoepenData?.wensberoep_2_werk_doel || 'Ikke utfylt'}
+6. I hvilke øyeblikk tenker du: dette er flott arbeid! Hva gjør du da?
+${wensberoepenData?.wensberoep_2_leukste_onderdelen || 'Ikke utfylt'}
+7. Hva gir denne jobben deg slik at du lett holder ut?
+${wensberoepenData?.wensberoep_2_belangrijke_aspecten || 'Ikke utfylt'}
+8. Hva handler arbeidet om innholdsmessig? Hva bør du synes er interessant?
+${wensberoepenData?.wensberoep_2_kennis_focus || 'Ikke utfylt'}
 
-Ønskeyrke 3 – ${wensberoepenData?.wensberoep_3_titel || 'Ikke utfylt'}
-1: ${wensberoepenData?.wensberoep_3_werkweek_activiteiten || 'Ikke utfylt'}
-2: ${wensberoepenData?.wensberoep_3_werklocatie_omgeving || 'Ikke utfylt'}
-3: ${wensberoepenData?.wensberoep_3_samenwerking_contacten || 'Ikke utfylt'}
-4: ${wensberoepenData?.wensberoep_3_fluitend_thuiskomen_dag || 'Ikke utfylt'}
-5: ${wensberoepenData?.wensberoep_3_werk_doel || 'Ikke utfylt'}
-6: ${wensberoepenData?.wensberoep_3_leukste_onderdelen || 'Ikke utfylt'}
-7: ${wensberoepenData?.wensberoep_3_belangrijke_aspecten || 'Ikke utfylt'}
-8: ${wensberoepenData?.wensberoep_3_kennis_focus || 'Ikke utfylt'}`
+Beskrivelse 3:
+1. Hvorfor passer dette arbeidsmiljøet for deg?
+${wensberoepenData?.wensberoep_3_werkweek_activiteiten || 'Ikke utfylt'}
+2. Hva bruker du mesteparten av tiden din på?
+${wensberoepenData?.wensberoep_3_werklocatie_omgeving || 'Ikke utfylt'}
+3. For hvem eller hva gjør du dette arbeidet og hva vil du oppnå?
+${wensberoepenData?.wensberoep_3_samenwerking_contacten || 'Ikke utfylt'}
+4. Hva slags mennesker jobber du med og hva er din rolle?
+${wensberoepenData?.wensberoep_3_fluitend_thuiskomen_dag || 'Ikke utfylt'}
+5. Hvilke deler av arbeidet gir deg mest energi?
+${wensberoepenData?.wensberoep_3_werk_doel || 'Ikke utfylt'}
+6. Hvilke arbeidsvilkår er virkelig viktige for deg?
+${wensberoepenData?.wensberoep_3_leukste_onderdelen || 'Ikke utfylt'}
+7. Hvor selvstendig jobber du? Hva synes du er mest behagelig?
+${wensberoepenData?.wensberoep_3_belangrijke_aspecten || 'Ikke utfylt'}
+8. Hva bør du være nysgjerrig på eller ønske å lære mer om?
+${wensberoepenData?.wensberoep_3_kennis_focus || 'Ikke utfylt'}`
     }
   };
 
