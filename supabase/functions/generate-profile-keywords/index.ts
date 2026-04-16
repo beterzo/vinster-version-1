@@ -60,43 +60,59 @@ ${enthousiasmeData?.leuk_project_en_rol || 'Niet ingevuld'}
 9. Wanneer kom jij fluitend thuis? Wat heb je dan meegemaakt op een dag?
 ${enthousiasmeData?.fluitend_thuiskomen_dag || 'Niet ingevuld'}
 
-Wensberoep 1 – ${wensberoepenData?.wensberoep_1_titel || 'Niet ingevuld'}
-1. Wat doe je in een werkweek?
+Beschrijving 1:
+1. Waar werk je en hoe ziet jouw werkomgeving eruit?
 ${wensberoepenData?.wensberoep_1_werkweek_activiteiten || 'Niet ingevuld'}
-2. Waar doe je je werk?
+2. Wat doe je allemaal op een gewone werkdag in dit werk?
 ${wensberoepenData?.wensberoep_1_werklocatie_omgeving || 'Niet ingevuld'}
-3. Werk je samen of alleen?
+3. Met wie heb je tijdens dit werk vooral te maken?
 ${wensberoepenData?.wensberoep_1_samenwerking_contacten || 'Niet ingevuld'}
-4. Wat heb je gedaan op een dag dat je fluitend thuiskomt?
+4. Wanneer heb je echt plezier in je werk? Wat ben je dan aan het doen?
 ${wensberoepenData?.wensberoep_1_fluitend_thuiskomen_dag || 'Niet ingevuld'}
-5. Wat is je doel met dit werk?
+5. Wat vind jij belangrijk in dit werk qua arbeidsvoorwaarden?
 ${wensberoepenData?.wensberoep_1_werk_doel || 'Niet ingevuld'}
-6. Welke onderdelen uit je werk zijn het leukst?
+6. Waar moet je iets van weten of interesse in hebben om dit werk goed te doen?
 ${wensberoepenData?.wensberoep_1_leukste_onderdelen || 'Niet ingevuld'}
-7. Wat is belangrijk in dit werk?
+7. Hoeveel vrijheid heb je in dit werk om zelf te bepalen wat je doet en hoe je het doet?
 ${wensberoepenData?.wensberoep_1_belangrijke_aspecten || 'Niet ingevuld'}
-8. Waar gaat het vooral over in jouw werk?
+8. Waar draag jij met jouw werk aan bij, en waarom vind je dat belangrijk?
 ${wensberoepenData?.wensberoep_1_kennis_focus || 'Niet ingevuld'}
 
-Wensberoep 2 – ${wensberoepenData?.wensberoep_2_titel || 'Niet ingevuld'}
-1: ${wensberoepenData?.wensberoep_2_werkweek_activiteiten || 'Niet ingevuld'}
-2: ${wensberoepenData?.wensberoep_2_werklocatie_omgeving || 'Niet ingevuld'}
-3: ${wensberoepenData?.wensberoep_2_samenwerking_contacten || 'Niet ingevuld'}
-4: ${wensberoepenData?.wensberoep_2_fluitend_thuiskomen_dag || 'Niet ingevuld'}
-5: ${wensberoepenData?.wensberoep_2_werk_doel || 'Niet ingevuld'}
-6: ${wensberoepenData?.wensberoep_2_leukste_onderdelen || 'Niet ingevuld'}
-7: ${wensberoepenData?.wensberoep_2_belangrijke_aspecten || 'Niet ingevuld'}
-8: ${wensberoepenData?.wensberoep_2_kennis_focus || 'Niet ingevuld'}
+Beschrijving 2:
+1. Beschrijf de plek of plekken waar je werkt.
+${wensberoepenData?.wensberoep_2_werkweek_activiteiten || 'Niet ingevuld'}
+2. Wat zijn jouw belangrijkste taken?
+${wensberoepenData?.wensberoep_2_werklocatie_omgeving || 'Niet ingevuld'}
+3. Wat werkt voor jou het fijnst? Meedenken, zelf uitvoeren, anderen aansturen of nog iets anders?
+${wensberoepenData?.wensberoep_2_samenwerking_contacten || 'Niet ingevuld'}
+4. Wanneer voelt dit werk voor jou zinvol of de moeite waard?
+${wensberoepenData?.wensberoep_2_fluitend_thuiskomen_dag || 'Niet ingevuld'}
+5. Wie kom je tegen in dit werk en wat doe je samen?
+${wensberoepenData?.wensberoep_2_werk_doel || 'Niet ingevuld'}
+6. Op welke momenten denk je: dit is leuk werk! Wat ben je dan aan het doen?
+${wensberoepenData?.wensberoep_2_leukste_onderdelen || 'Niet ingevuld'}
+7. Wat biedt dit werk jou zodat je het makkelijk volhoudt en er blij van wordt?
+${wensberoepenData?.wensberoep_2_belangrijke_aspecten || 'Niet ingevuld'}
+8. Waar gaat het werk inhoudelijk over? Wat moet je interessant vinden als je dit werk doet?
+${wensberoepenData?.wensberoep_2_kennis_focus || 'Niet ingevuld'}
 
-Wensberoep 3 – ${wensberoepenData?.wensberoep_3_titel || 'Niet ingevuld'}
-1: ${wensberoepenData?.wensberoep_3_werkweek_activiteiten || 'Niet ingevuld'}
-2: ${wensberoepenData?.wensberoep_3_werklocatie_omgeving || 'Niet ingevuld'}
-3: ${wensberoepenData?.wensberoep_3_samenwerking_contacten || 'Niet ingevuld'}
-4: ${wensberoepenData?.wensberoep_3_fluitend_thuiskomen_dag || 'Niet ingevuld'}
-5: ${wensberoepenData?.wensberoep_3_werk_doel || 'Niet ingevuld'}
-6: ${wensberoepenData?.wensberoep_3_leukste_onderdelen || 'Niet ingevuld'}
-7: ${wensberoepenData?.wensberoep_3_belangrijke_aspecten || 'Niet ingevuld'}
-8: ${wensberoepenData?.wensberoep_3_kennis_focus || 'Niet ingevuld'}`
+Beschrijving 3:
+1. Waarom past deze werkomgeving bij je?
+${wensberoepenData?.wensberoep_3_werkweek_activiteiten || 'Niet ingevuld'}
+2. Waar besteed je het grootste deel van je tijd aan?
+${wensberoepenData?.wensberoep_3_werklocatie_omgeving || 'Niet ingevuld'}
+3. Voor wie of wat doe jij dit werk uiteindelijk, en wat wil je daarmee bereiken?
+${wensberoepenData?.wensberoep_3_samenwerking_contacten || 'Niet ingevuld'}
+4. Met wat voor mensen werk je samen en wat is jouw rol daarin?
+${wensberoepenData?.wensberoep_3_fluitend_thuiskomen_dag || 'Niet ingevuld'}
+5. Welke onderdelen van het werk geven jou de meeste energie?
+${wensberoepenData?.wensberoep_3_werk_doel || 'Niet ingevuld'}
+6. Welke arbeidsvoorwaarden of omstandigheden zijn voor jou echt belangrijk?
+${wensberoepenData?.wensberoep_3_leukste_onderdelen || 'Niet ingevuld'}
+7. Hoe zelfstandig werk je in dit beroep? Wat vind jij het prettigst?
+${wensberoepenData?.wensberoep_3_belangrijke_aspecten || 'Niet ingevuld'}
+8. Waar moet je nieuwsgierig naar zijn of meer over willen leren in dit werk?
+${wensberoepenData?.wensberoep_3_kennis_focus || 'Niet ingevuld'}`
     },
     en: {
       system: `You are a career professional specialized in analyzing open-ended responses from candidates. Your goal is to generate 48 English keywords or short phrases (exactly 16 per category) based on reflective answers to questions about work experience, preferences, and interests.
