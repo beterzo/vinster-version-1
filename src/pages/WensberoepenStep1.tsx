@@ -166,6 +166,9 @@ const WensberoepenStep1 = ({ mode = 'edit' }: StepProps) => {
               <p className="text-xl text-gray-600">
                 {t('wensberoepen.step1.subtitle')}
               </p>
+              <p className="text-base text-gray-500 mt-4 italic">
+                {t('wensberoepen.step1.intro_text')}
+              </p>
             </div>
 
             {/* Job Title Input */}

@@ -301,6 +301,9 @@ const WensberoepenStep3 = ({ mode = 'edit' }: StepProps) => {
               <p className="text-xl text-gray-600">
                 {t('wensberoepen.step3.subtitle')}
               </p>
+              <p className="text-base text-gray-500 mt-4 italic">
+                {t('wensberoepen.step3.intro_text')}
+              </p>
               {isSubmitting && (
                 <div className="mt-4 p-3 bg-blue-50 rounded-lg">
                   <p className="text-sm text-blue-700">
