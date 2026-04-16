@@ -522,78 +522,78 @@ Hier eerst wat informatie over de gebruiker:
 De gebruiker heeft 3 sets van 8 vragen beantwoord over ideale werksituaties. De beroepsnamen zijn bewust weggelaten -- analyseer alleen de antwoorden.
 
 Beschrijving 1:
-Vraag 1: "Wat doe je in een werkweek? Antwoord in werkwoorden en activiteiten."
+Vraag 1: "Waar werk je en hoe ziet jouw werkomgeving eruit?"
 Antwoord 1: "${data.wensberoep1.werkweekActiviteiten}"
 
-Vraag 2: "Waar doe je je werk? Beschrijf de omgeving, het gebouw, de ruimte..."
+Vraag 2: "Wat doe je allemaal op een gewone werkdag in dit werk?"
 Antwoord 2: "${data.wensberoep1.werklocatieOmgeving}"
 
-Vraag 3: "Werk je meer samen of meer alleen? Met wat voor mensen heb je contact?"
+Vraag 3: "Met wie heb je tijdens dit werk vooral te maken?"
 Antwoord 3: "${data.wensberoep1.samenwerkingContacten}"
 
-Vraag 4: "Wat heb je gedaan op een dag dat je tevreden thuiskomt?"
+Vraag 4: "Wanneer heb je echt plezier in je werk? Wat ben je dan aan het doen?"
 Antwoord 4: "${data.wensberoep1.fluitendThuiskomen}"
 
-Vraag 5: "Wat is je doel met dit werk?"
+Vraag 5: "Wat vind jij belangrijk in dit werk qua arbeidsvoorwaarden?"
 Antwoord 5: "${data.wensberoep1.werkDoel}"
 
-Vraag 6: "Welke onderdelen uit je werk zijn het leukst?"
+Vraag 6: "Waar moet je iets van weten of interesse in hebben om dit werk goed te doen?"
 Antwoord 6: "${data.wensberoep1.leuksteOnderdelen}"
 
-Vraag 7: "Wat is voor jou belangrijk in dit werk?"
+Vraag 7: "Hoeveel vrijheid heb je in dit werk om zelf te bepalen wat je doet en hoe je het doet?"
 Antwoord 7: "${data.wensberoep1.belangrijkeAspecten}"
 
-Vraag 8: "Waar gaat het vooral over in jouw werk? Waar moet je veel van weten?"
+Vraag 8: "Waar draag jij met jouw werk aan bij, en waarom vind je dat belangrijk?"
 Antwoord 8: "${data.wensberoep1.kennisFocus}"
 
 Beschrijving 2:
-Vraag 1: "Wat doe je in een werkweek? Antwoord in werkwoorden en activiteiten."
+Vraag 1: "Beschrijf de plek of plekken waar je werkt."
 Antwoord 1: "${data.wensberoep2.werkweekActiviteiten}"
 
-Vraag 2: "Waar doe je je werk? Beschrijf de omgeving, het gebouw, de ruimte..."
+Vraag 2: "Wat zijn jouw belangrijkste taken?"
 Antwoord 2: "${data.wensberoep2.werklocatieOmgeving}"
 
-Vraag 3: "Werk je meer samen of meer alleen? Met wat voor mensen heb je contact?"
+Vraag 3: "Wat werkt voor jou het fijnst? Meedenken, zelf uitvoeren, anderen aansturen of nog iets anders?"
 Antwoord 3: "${data.wensberoep2.samenwerkingContacten}"
 
-Vraag 4: "Wat heb je gedaan op een dag dat je tevreden thuiskomt?"
+Vraag 4: "Wanneer voelt dit werk voor jou zinvol of de moeite waard?"
 Antwoord 4: "${data.wensberoep2.fluitendThuiskomen}"
 
-Vraag 5: "Wat is je doel met dit werk?"
+Vraag 5: "Wie kom je tegen in dit werk en wat doe je samen?"
 Antwoord 5: "${data.wensberoep2.werkDoel}"
 
-Vraag 6: "Welke onderdelen uit je werk zijn het leukst?"
+Vraag 6: "Op welke momenten denk je: dit is leuk werk! Wat ben je dan aan het doen?"
 Antwoord 6: "${data.wensberoep2.leuksteOnderdelen}"
 
-Vraag 7: "Wat is voor jou belangrijk in dit werk?"
+Vraag 7: "Wat biedt dit werk jou zodat je het makkelijk volhoudt en er blij van wordt?"
 Antwoord 7: "${data.wensberoep2.belangrijkeAspecten}"
 
-Vraag 8: "Waar gaat het vooral over in jouw werk? Waar moet je veel van weten?"
+Vraag 8: "Waar gaat het werk inhoudelijk over? Wat moet je interessant vinden als je dit werk doet?"
 Antwoord 8: "${data.wensberoep2.kennisFocus}"
 
 Beschrijving 3:
-Vraag 1: "Wat doe je in een werkweek? Antwoord in werkwoorden en activiteiten."
+Vraag 1: "Waarom past deze werkomgeving bij je?"
 Antwoord 1: "${data.wensberoep3.werkweekActiviteiten}"
 
-Vraag 2: "Waar doe je je werk? Beschrijf de omgeving, het gebouw, de ruimte..."
+Vraag 2: "Waar besteed je het grootste deel van je tijd aan?"
 Antwoord 2: "${data.wensberoep3.werklocatieOmgeving}"
 
-Vraag 3: "Werk je meer samen of meer alleen? Met wat voor mensen heb je contact?"
+Vraag 3: "Voor wie of wat doe jij dit werk uiteindelijk, en wat wil je daarmee bereiken?"
 Antwoord 3: "${data.wensberoep3.samenwerkingContacten}"
 
-Vraag 4: "Wat heb je gedaan op een dag dat je tevreden thuiskomt?"
+Vraag 4: "Met wat voor mensen werk je samen en wat is jouw rol daarin?"
 Antwoord 4: "${data.wensberoep3.fluitendThuiskomen}"
 
-Vraag 5: "Wat is je doel met dit werk?"
+Vraag 5: "Welke onderdelen van het werk geven jou de meeste energie?"
 Antwoord 5: "${data.wensberoep3.werkDoel}"
 
-Vraag 6: "Welke onderdelen uit je werk zijn het leukst?"
+Vraag 6: "Welke arbeidsvoorwaarden of omstandigheden zijn voor jou echt belangrijk?"
 Antwoord 6: "${data.wensberoep3.leuksteOnderdelen}"
 
-Vraag 7: "Wat is voor jou belangrijk in dit werk?"
+Vraag 7: "Hoe zelfstandig werk je in dit beroep? Wat vind jij het prettigst?"
 Antwoord 7: "${data.wensberoep3.belangrijkeAspecten}"
 
-Vraag 8: "Waar gaat het vooral over in jouw werk? Waar moet je veel van weten?"
+Vraag 8: "Waar moet je nieuwsgierig naar zijn of meer over willen leren in dit werk?"
 Antwoord 8: "${data.wensberoep3.kennisFocus}"
 
 Op basis van de interviews en de wensberoepen zijn kernwoorden gegenereerd in de categorieën:
@@ -682,84 +682,84 @@ The user has answered 3 sets of 8 questions about ideal work situations. Occupat
 
 Description 1:
 
-Question 1: "What do you do in a working week? Answer in verbs and activities."
+Question 1: "Where do you work and what does your work environment look like?"
 Answer 1: "${data.wensberoep1.werkweekActiviteiten}"
 
-Question 2: "Where do you do your work? Describe the environment, the building, the space…"
+Question 2: "What do you do on a typical working day in this job?"
 Answer 2: "${data.wensberoep1.werklocatieOmgeving}"
 
-Question 3: "Do you work mostly together or mostly alone? What kind of people do you have contact with?"
+Question 3: "Who do you mainly deal with in this work?"
 Answer 3: "${data.wensberoep1.samenwerkingContacten}"
 
-Question 4: "What have you done on a day when you come home satisfied?"
+Question 4: "When do you truly enjoy your work? What are you doing at those moments?"
 Answer 4: "${data.wensberoep1.fluitendThuiskomen}"
 
-Question 5: "What is your goal with this work?"
+Question 5: "What do you find important regarding employment conditions?"
 Answer 5: "${data.wensberoep1.werkDoel}"
 
-Question 6: "Which parts of your work do you enjoy most?"
+Question 6: "What do you need to know about or be interested in to do this work well?"
 Answer 6: "${data.wensberoep1.leuksteOnderdelen}"
 
-Question 7: "What is important to you in this work?"
+Question 7: "How much freedom do you have to decide what you do and how you do it?"
 Answer 7: "${data.wensberoep1.belangrijkeAspecten}"
 
-Question 8: "What is your work mainly about? What do you need to know a lot about?"
+Question 8: "What do you contribute to with your work, and why do you find that important?"
 Answer 8: "${data.wensberoep1.kennisFocus}"
 
 ⸻
 
 Description 2:
 
-Question 1: "What do you do in a working week? Answer in verbs and activities."
+Question 1: "Describe the place or places where you work."
 Answer 1: "${data.wensberoep2.werkweekActiviteiten}"
 
-Question 2: "Where do you do your work? Describe the environment, the building, the space…"
+Question 2: "What are your most important tasks?"
 Answer 2: "${data.wensberoep2.werklocatieOmgeving}"
 
-Question 3: "Do you work mostly together or mostly alone? What kind of people do you have contact with?"
+Question 3: "What works best for you? Thinking along, executing yourself, managing others, or something else?"
 Answer 3: "${data.wensberoep2.samenwerkingContacten}"
 
-Question 4: "What have you done on a day when you come home satisfied?"
+Question 4: "When does this work feel meaningful or worthwhile to you?"
 Answer 4: "${data.wensberoep2.fluitendThuiskomen}"
 
-Question 5: "What is your goal with this work?"
+Question 5: "Who do you encounter in this work and what do you do together?"
 Answer 5: "${data.wensberoep2.werkDoel}"
 
-Question 6: "Which parts of your work do you enjoy most?"
+Question 6: "At what moments do you think: this is great work! What are you doing then?"
 Answer 6: "${data.wensberoep2.leuksteOnderdelen}"
 
-Question 7: "What is important to you in this work?"
+Question 7: "What does this work offer you so that you can sustain it easily and feel happy?"
 Answer 7: "${data.wensberoep2.belangrijkeAspecten}"
 
-Question 8: "What is your work mainly about? What do you need to know a lot about?"
+Question 8: "What is the work about content-wise? What should you find interesting?"
 Answer 8: "${data.wensberoep2.kennisFocus}"
 
 ⸻
 
 Description 3:
 
-Question 1: "What do you do in a working week? Answer in verbs and activities."
+Question 1: "Why does this work environment suit you?"
 Answer 1: "${data.wensberoep3.werkweekActiviteiten}"
 
-Question 2: "Where do you do your work? Describe the environment, the building, the space…"
+Question 2: "What do you spend most of your time on?"
 Answer 2: "${data.wensberoep3.werklocatieOmgeving}"
 
-Question 3: "Do you work mostly together or mostly alone? What kind of people do you have contact with?"
+Question 3: "Who or what do you ultimately do this work for, and what do you want to achieve?"
 Answer 3: "${data.wensberoep3.samenwerkingContacten}"
 
-Question 4: "What have you done on a day when you come home satisfied?"
+Question 4: "What kind of people do you work with and what is your role?"
 Answer 4: "${data.wensberoep3.fluitendThuiskomen}"
 
-Question 5: "What is your goal with this work?"
+Question 5: "Which parts of the work give you the most energy?"
 Answer 5: "${data.wensberoep3.werkDoel}"
 
-Question 6: "Which parts of your work do you enjoy most?"
+Question 6: "Which employment conditions or circumstances are really important to you?"
 Answer 6: "${data.wensberoep3.leuksteOnderdelen}"
 
-Question 7: "What is important to you in this work?"
+Question 7: "How independently do you work in this profession? What do you find most comfortable?"
 Answer 7: "${data.wensberoep3.belangrijkeAspecten}"
 
-Question 8: "What is your work mainly about? What do you need to know a lot about?"
+Question 8: "What should you be curious about or want to learn more about in this work?"
 Answer 8: "${data.wensberoep3.kennisFocus}"
 
 ⸻
@@ -848,78 +848,78 @@ Zunächst einige Informationen über die Person:
 Die Person hat 3 Sets von je 8 Fragen über ideale Arbeitssituationen beantwortet. Die Berufsnamen wurden bewusst weggelassen -- analysiere ausschließlich die Antworten.
 
 Beschreibung 1:
-Frage 1: „Was machst du in einer Arbeitswoche? Antworte in Tätigkeitswörtern (Verben) und Aktivitäten."
+Frage 1: „Wo arbeiten Sie und wie sieht Ihre Arbeitsumgebung aus?"
 Antwort 1: "${data.wensberoep1.werkweekActiviteiten}"
 
-Frage 2: „Wo übst du deine Arbeit aus? Beschreibe die Umgebung, das Gebäude, den Raum …"
+Frage 2: „Was machen Sie alles an einem normalen Arbeitstag?"
 Antwort 2: "${data.wensberoep1.werklocatieOmgeving}"
 
-Frage 3: „Arbeitest du mehr im Team oder mehr allein? Mit welchen Menschen hast du Kontakt?"
+Frage 3: „Mit wem haben Sie hauptsächlich zu tun?"
 Antwort 3: "${data.wensberoep1.samenwerkingContacten}"
 
-Frage 4: „Was hast du an einem Tag getan, an dem du zufrieden nach Hause kommst?"
+Frage 4: „Wann haben Sie wirklich Spaß an Ihrer Arbeit? Was tun Sie dann?"
 Antwort 4: "${data.wensberoep1.fluitendThuiskomen}"
 
-Frage 5: „Was ist dein Ziel mit dieser Arbeit?"
+Frage 5: „Was ist Ihnen bezüglich der Arbeitsbedingungen wichtig?"
 Antwort 5: "${data.wensberoep1.werkDoel}"
 
-Frage 6: „Welche Teile deiner Arbeit machen dir am meisten Spaß?"
+Frage 6: „Wovon müssen Sie etwas wissen oder wofür müssen Sie sich interessieren?"
 Antwort 6: "${data.wensberoep1.leuksteOnderdelen}"
 
-Frage 7: „Was ist für dich wichtig in dieser Arbeit?"
+Frage 7: „Wie viel Freiheit haben Sie, selbst zu bestimmen was und wie Sie arbeiten?"
 Antwort 7: "${data.wensberoep1.belangrijkeAspecten}"
 
-Frage 8: „Worum geht es in deiner Arbeit hauptsächlich? Wovon musst du viel wissen?"
+Frage 8: „Wozu tragen Sie mit Ihrer Arbeit bei, und warum finden Sie das wichtig?"
 Antwort 8: "${data.wensberoep1.kennisFocus}"
 
 Beschreibung 2:
-Frage 1: „Was machst du in einer Arbeitswoche? Antworte in Tätigkeitswörtern (Verben) und Aktivitäten."
+Frage 1: „Beschreiben Sie den Ort oder die Orte, an denen Sie arbeiten."
 Antwort 1: "${data.wensberoep2.werkweekActiviteiten}"
 
-Frage 2: „Wo übst du deine Arbeit aus? Beschreibe die Umgebung, das Gebäude, den Raum …"
+Frage 2: „Was sind Ihre wichtigsten Aufgaben?"
 Antwort 2: "${data.wensberoep2.werklocatieOmgeving}"
 
-Frage 3: „Arbeitest du mehr im Team oder mehr allein? Mit welchen Menschen hast du Kontakt?"
+Frage 3: „Was funktioniert für Sie am besten? Mitdenken, selbst ausführen, andere anleiten?"
 Antwort 3: "${data.wensberoep2.samenwerkingContacten}"
 
-Frage 4: „Was hast du an einem Tag getan, an dem du zufrieden nach Hause kommst?"
+Frage 4: „Wann fühlt sich diese Arbeit sinnvoll oder lohnenswert an?"
 Antwort 4: "${data.wensberoep2.fluitendThuiskomen}"
 
-Frage 5: „Was ist dein Ziel mit dieser Arbeit?"
+Frage 5: „Wen treffen Sie in dieser Arbeit und was machen Sie zusammen?"
 Antwort 5: "${data.wensberoep2.werkDoel}"
 
-Frage 6: „Welche Teile deiner Arbeit machen dir am meisten Spaß?"
+Frage 6: „In welchen Momenten denken Sie: Das ist tolle Arbeit! Was tun Sie dann?"
 Antwort 6: "${data.wensberoep2.leuksteOnderdelen}"
 
-Frage 7: „Was ist für dich wichtig in dieser Arbeit?"
+Frage 7: „Was bietet Ihnen diese Arbeit, damit Sie sie leicht durchhalten?"
 Antwort 7: "${data.wensberoep2.belangrijkeAspecten}"
 
-Frage 8: „Worum geht es in deiner Arbeit hauptsächlich? Wovon musst du viel wissen?"
+Frage 8: „Worum geht es inhaltlich? Was sollten Sie interessant finden?"
 Antwort 8: "${data.wensberoep2.kennisFocus}"
 
 Beschreibung 3:
-Frage 1: „Was machst du in einer Arbeitswoche? Antworte in Tätigkeitswörtern (Verben) und Aktivitäten."
+Frage 1: „Warum passt diese Arbeitsumgebung zu Ihnen?"
 Antwort 1: "${data.wensberoep3.werkweekActiviteiten}"
 
-Frage 2: „Wo übst du deine Arbeit aus? Beschreibe die Umgebung, das Gebäude, den Raum …"
+Frage 2: „Womit verbringen Sie den größten Teil Ihrer Zeit?"
 Antwort 2: "${data.wensberoep3.werklocatieOmgeving}"
 
-Frage 3: „Arbeitest du mehr im Team oder mehr allein? Mit welchen Menschen hast du Kontakt?"
+Frage 3: „Für wen oder was machen Sie diese Arbeit und was möchten Sie erreichen?"
 Antwort 3: "${data.wensberoep3.samenwerkingContacten}"
 
-Frage 4: „Was hast du an einem Tag getan, an dem du zufrieden nach Hause kommst?"
+Frage 4: „Mit was für Menschen arbeiten Sie zusammen und was ist Ihre Rolle?"
 Antwort 4: "${data.wensberoep3.fluitendThuiskomen}"
 
-Frage 5: „Was ist dein Ziel mit dieser Arbeit?"
+Frage 5: „Welche Teile der Arbeit geben Ihnen die meiste Energie?"
 Antwort 5: "${data.wensberoep3.werkDoel}"
 
-Frage 6: „Welche Teile deiner Arbeit machen dir am meisten Spaß?"
+Frage 6: „Welche Arbeitsbedingungen sind für Sie wirklich wichtig?"
 Antwort 6: "${data.wensberoep3.leuksteOnderdelen}"
 
-Frage 7: „Was ist für dich wichtig in dieser Arbeit?"
+Frage 7: „Wie selbstständig arbeiten Sie? Was finden Sie am angenehmsten?"
 Antwort 7: "${data.wensberoep3.belangrijkeAspecten}"
 
-Frage 8: „Worum geht es in deiner Arbeit hauptsächlich? Wovon musst du viel wissen?"
+Frage 8: „Wofür sollten Sie neugierig sein oder mehr darüber lernen wollen?"
 Antwort 8: "${data.wensberoep3.kennisFocus}"
 
 Auf Basis der Interviews und der Wunschberufe sind Schlüsselwörter in folgenden Kategorien generiert worden:
@@ -1010,84 +1010,84 @@ Brukeren har besvart 3 sett med 8 spørsmål om ideale arbeidssituasjoner. Yrkes
 
 Beskrivelse 1:
 
-Spørsmål 1: "Hva gjør du i en arbeidsuke? Svar i verb og aktiviteter."
+Spørsmål 1: "Hvor jobber du og hvordan ser arbeidsmiljøet ditt ut?"
 Svar 1: "${data.wensberoep1.werkweekActiviteiten}"
 
-Spørsmål 2: "Hvor utfører du arbeidet ditt? Beskriv miljøet, bygget, rommet …"
+Spørsmål 2: "Hva gjør du på en vanlig arbeidsdag?"
 Svar 2: "${data.wensberoep1.werklocatieOmgeving}"
 
-Spørsmål 3: "Jobber du mest sammen med andre eller mest alene? Hvilke mennesker har du kontakt med?"
+Spørsmål 3: "Hvem har du mest å gjøre med i dette arbeidet?"
 Svar 3: "${data.wensberoep1.samenwerkingContacten}"
 
-Spørsmål 4: "Hva har du gjort på en dag der du kommer hjem fornøyd?"
+Spørsmål 4: "Når har du virkelig glede av jobben din? Hva gjør du da?"
 Svar 4: "${data.wensberoep1.fluitendThuiskomen}"
 
-Spørsmål 5: "Hva er målet ditt med dette arbeidet?"
+Spørsmål 5: "Hva synes du er viktig når det gjelder arbeidsvilkår?"
 Svar 5: "${data.wensberoep1.werkDoel}"
 
-Spørsmål 6: "Hvilke deler av arbeidet liker du best?"
+Spørsmål 6: "Hva må du vite noe om eller være interessert i for å gjøre denne jobben godt?"
 Svar 6: "${data.wensberoep1.leuksteOnderdelen}"
 
-Spørsmål 7: "Hva er viktig for deg i dette arbeidet?"
+Spørsmål 7: "Hvor mye frihet har du til å bestemme hva og hvordan du jobber?"
 Svar 7: "${data.wensberoep1.belangrijkeAspecten}"
 
-Spørsmål 8: "Hva handler arbeidet ditt hovedsakelig om? Hva må du vite mye om?"
+Spørsmål 8: "Hva bidrar du til med arbeidet ditt, og hvorfor synes du det er viktig?"
 Svar 8: "${data.wensberoep1.kennisFocus}"
 
 ⸻
 
 Beskrivelse 2:
 
-Spørsmål 1: "Hva gjør du i en arbeidsuke? Svar i verb og aktiviteter."
+Spørsmål 1: "Beskriv stedet eller stedene der du jobber."
 Svar 1: "${data.wensberoep2.werkweekActiviteiten}"
 
-Spørsmål 2: "Hvor utfører du arbeidet ditt? Beskriv miljøet, bygget, rommet …"
+Spørsmål 2: "Hva er dine viktigste oppgaver?"
 Svar 2: "${data.wensberoep2.werklocatieOmgeving}"
 
-Spørsmål 3: "Jobber du mest sammen med andre eller mest alene? Hvilke mennesker har du kontakt med?"
+Spørsmål 3: "Hva fungerer best for deg? Tenke med, utføre selv, lede andre?"
 Svar 3: "${data.wensberoep2.samenwerkingContacten}"
 
-Spørsmål 4: "Hva har du gjort på en dag der du kommer hjem fornøyd?"
+Spørsmål 4: "Når føles dette arbeidet meningsfullt eller verdt innsatsen?"
 Svar 4: "${data.wensberoep2.fluitendThuiskomen}"
 
-Spørsmål 5: "Hva er målet ditt med dette arbeidet?"
+Spørsmål 5: "Hvem møter du i dette arbeidet og hva gjør dere sammen?"
 Svar 5: "${data.wensberoep2.werkDoel}"
 
-Spørsmål 6: "Hvilke deler av arbeidet liker du best?"
+Spørsmål 6: "I hvilke øyeblikk tenker du: dette er flott arbeid! Hva gjør du da?"
 Svar 6: "${data.wensberoep2.leuksteOnderdelen}"
 
-Spørsmål 7: "Hva er viktig for deg i dette arbeidet?"
+Spørsmål 7: "Hva gir denne jobben deg slik at du lett holder ut?"
 Svar 7: "${data.wensberoep2.belangrijkeAspecten}"
 
-Spørsmål 8: "Hva handler arbeidet ditt hovedsakelig om? Hva må du vite mye om?"
+Spørsmål 8: "Hva handler arbeidet om innholdsmessig? Hva bør du synes er interessant?"
 Svar 8: "${data.wensberoep2.kennisFocus}"
 
 ⸻
 
 Beskrivelse 3:
 
-Spørsmål 1: "Hva gjør du i en arbeidsuke? Svar i verb og aktiviteter."
+Spørsmål 1: "Hvorfor passer dette arbeidsmiljøet for deg?"
 Svar 1: "${data.wensberoep3.werkweekActiviteiten}"
 
-Spørsmål 2: "Hvor utfører du arbeidet ditt? Beskriv miljøet, bygget, rommet …"
+Spørsmål 2: "Hva bruker du mesteparten av tiden din på?"
 Svar 2: "${data.wensberoep3.werklocatieOmgeving}"
 
-Spørsmål 3: "Jobber du mest sammen med andre eller mest alene? Hvilke mennesker har du kontakt med?"
+Spørsmål 3: "For hvem eller hva gjør du dette arbeidet og hva vil du oppnå?"
 Svar 3: "${data.wensberoep3.samenwerkingContacten}"
 
-Spørsmål 4: "Hva har du gjort på en dag der du kommer hjem fornøyd?"
+Spørsmål 4: "Hva slags mennesker jobber du med og hva er din rolle?"
 Svar 4: "${data.wensberoep3.fluitendThuiskomen}"
 
-Spørsmål 5: "Hva er målet ditt med dette arbeidet?"
+Spørsmål 5: "Hvilke deler av arbeidet gir deg mest energi?"
 Svar 5: "${data.wensberoep3.werkDoel}"
 
-Spørsmål 6: "Hvilke deler av arbeidet liker du best?"
+Spørsmål 6: "Hvilke arbeidsvilkår er virkelig viktige for deg?"
 Svar 6: "${data.wensberoep3.leuksteOnderdelen}"
 
-Spørsmål 7: "Hva er viktig for deg i dette arbeidet?"
+Spørsmål 7: "Hvor selvstendig jobber du? Hva synes du er mest behagelig?"
 Svar 7: "${data.wensberoep3.belangrijkeAspecten}"
 
-Spørsmål 8: "Hva handler arbeidet ditt hovedsakelig om? Hva må du vite mye om?"
+Spørsmål 8: "Hva bør du være nysgjerrig på eller ønske å lære mer om?"
 Svar 8: "${data.wensberoep3.kennisFocus}"
 
 ⸻
