@@ -92,6 +92,18 @@ Deno.serve(async (req) => {
       );
     }
 
+    // Organisatietoegang betekent dat de organisatie heeft betaald voor de
+    // medewerker. Geef has_paid=true zodat de PaymentGate niet triggert.
+    if (entry_method === "organisation_access_code") {
+      const { error: payError } = await supabase
+        .from("profiles")
+        .update({ has_paid: true })
+        .eq("id", userId);
+      if (payError) {
+        console.error("Failed to set has_paid for org user:", payError);
+      }
+    }
+
     return new Response(
       JSON.stringify({ success: true, deduplicated: false }),
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
