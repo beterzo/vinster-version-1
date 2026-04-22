@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
-import { Calendar, CheckCircle, Play, Loader2, ChevronRight } from "lucide-react";
+import { Building2, Calendar, CheckCircle, Play, Loader2, ChevronRight, User2 } from "lucide-react";
 import { useUserRounds, UserRound, RoundReport } from "@/hooks/useUserRounds";
 import { useTranslation } from "@/hooks/useTranslation";
 
@@ -108,9 +108,24 @@ const RoundsOverview = ({ onViewReport, onResumeRound }: RoundsOverviewProps) =>
                     }
                   </span>
                 </div>
-                <div className="flex items-center gap-1 text-sm text-gray-500">
-                  <Calendar className="w-3 h-3" />
-                  {round.completed_at ? formatDate(round.completed_at) : formatDate(round.created_at)}
+                <div className="flex items-center gap-3 text-sm text-gray-500 flex-wrap">
+                  <span className="flex items-center gap-1">
+                    <Calendar className="w-3 h-3" />
+                    {round.completed_at ? formatDate(round.completed_at) : formatDate(round.created_at)}
+                  </span>
+                  <span className="inline-flex items-center gap-1 text-xs font-medium bg-[#FEF9E6] text-[#232D4B] px-2 py-0.5 rounded-full">
+                    {round.organisation_name ? (
+                      <>
+                        <Building2 className="w-3 h-3" />
+                        {round.organisation_name}
+                      </>
+                    ) : (
+                      <>
+                        <User2 className="w-3 h-3" />
+                        Algemeen
+                      </>
+                    )}
+                  </span>
                 </div>
               </div>
             </div>

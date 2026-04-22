@@ -98,7 +98,9 @@ const WelkomInline = ({
               <div className="w-full mx-auto mt-4">
                 <div className="flex items-center justify-between mb-1">
                   <p className="text-sm text-gray-500">
-                    {t('welkom.completed_count').replace('{{count}}', String(completedSteps.length))}
+                    {t('welkom.completed_count')
+                      .replace('{{count}}', String(completedSteps.length))
+                      .replace('{{total}}', String(totalSteps))}
                   </p>
                   <span className="text-sm font-medium text-[#232D4B]">{Math.round(progressPercentage)}%</span>
                 </div>

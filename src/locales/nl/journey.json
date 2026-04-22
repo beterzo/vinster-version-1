@@ -45,7 +45,7 @@
     "account_notice": "Dit account is bedoeld voor persoonlijk gebruik. Laat anderen hun eigen account aanmaken voor de beste ervaring en privacy.",
     "start_button": "Start",
     "progress_title": "Jouw voortgang",
-    "completed_count": "{{count}} van 6 stappen voltooid",
+    "completed_count": "{{count}} van {{total}} stappen voltooid",
     "step_completed": "Voltooid",
     "step_current": "Aan de beurt",
     "step_locked": "Vergrendeld",
@@ -480,7 +480,7 @@
   },
   "overview": {
     "title": "Je voortgang",
-    "completed_count": "{{count}} van 6 stappen voltooid",
+    "completed_count": "{{count}} van {{total}} stappen voltooid",
     "step_completed": "Voltooid",
     "step_current": "Nu aan de beurt",
     "step_locked": "Nog niet beschikbaar",

@@ -514,6 +514,9 @@ export type Database = {
           completed_at: string | null
           created_at: string
           id: string
+          organisation_name: string | null
+          organisation_slug: string | null
+          organisation_type_id: string | null
           round_number: number
           started_at: string
           status: string
@@ -524,6 +527,9 @@ export type Database = {
           completed_at?: string | null
           created_at?: string
           id?: string
+          organisation_name?: string | null
+          organisation_slug?: string | null
+          organisation_type_id?: string | null
           round_number?: number
           started_at?: string
           status?: string
@@ -534,13 +540,24 @@ export type Database = {
           completed_at?: string | null
           created_at?: string
           id?: string
+          organisation_name?: string | null
+          organisation_slug?: string | null
+          organisation_type_id?: string | null
           round_number?: number
           started_at?: string
           status?: string
           updated_at?: string
           user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "user_rounds_organisation_type_id_fkey"
+            columns: ["organisation_type_id"]
+            isOneToOne: false
+            referencedRelation: "organisation_types"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       user_zoekprofielen: {
         Row: {

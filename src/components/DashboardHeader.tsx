@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "@/hooks/useTranslation";
+import OrganisationSwitcher from "@/components/OrganisationSwitcher";
 
 const DashboardHeader = () => {
   const { signOut } = useAuth();
@@ -41,8 +42,9 @@ const DashboardHeader = () => {
       </div>
       
       <div className="flex items-center space-x-4">
-        <Button 
-          onClick={handleLogout} 
+        <OrganisationSwitcher />
+        <Button
+          onClick={handleLogout}
           className="bg-white hover:bg-gray-100 text-blue-900 font-semibold px-6 py-3 rounded-full border border-gray-200 shadow-sm transition-all duration-200 flex items-center space-x-2"
         >
           <LogOut className="w-4 h-4" />

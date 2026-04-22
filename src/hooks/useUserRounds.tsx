@@ -12,6 +12,15 @@ export interface UserRound {
   completed_at: string | null;
   created_at: string;
   updated_at: string;
+  organisation_type_id: string | null;
+  organisation_name: string | null;
+  organisation_slug: string | null;
+}
+
+export interface NewRoundOrganisationContext {
+  organisation_type_id: string | null;
+  organisation_name: string | null;
+  organisation_slug: string | null;
 }
 
 export interface RoundReport {
@@ -67,7 +76,9 @@ export const useUserRounds = () => {
   const canStartNewRound = rounds.length < MAX_ROUNDS;
   const roundsRemaining = MAX_ROUNDS - rounds.length;
 
-  const startNewRound = async (): Promise<UserRound | null> => {
+  const startNewRound = async (
+    organisationContext?: NewRoundOrganisationContext
+  ): Promise<UserRound | null> => {
     if (!user) return null;
     if (!canStartNewRound) {
       toast({
@@ -80,8 +91,8 @@ export const useUserRounds = () => {
 
     setCreating(true);
     try {
-      const nextRoundNumber = rounds.length > 0 
-        ? Math.max(...rounds.map(r => r.round_number)) + 1 
+      const nextRoundNumber = rounds.length > 0
+        ? Math.max(...rounds.map(r => r.round_number)) + 1
         : 1;
 
       const { data, error } = await supabase
@@ -89,7 +100,10 @@ export const useUserRounds = () => {
         .insert({
           user_id: user.id,
           round_number: nextRoundNumber,
-          status: 'in_progress'
+          status: 'in_progress',
+          organisation_type_id: organisationContext?.organisation_type_id ?? null,
+          organisation_name: organisationContext?.organisation_name ?? null,
+          organisation_slug: organisationContext?.organisation_slug ?? null,
         })
         .select()
         .single();

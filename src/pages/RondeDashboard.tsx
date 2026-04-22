@@ -27,8 +27,25 @@ const RondeDashboard = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { rounds, loading: roundsLoading } = useUserRounds();
-  const { isOrganisationMode, organisationTypeId, name: organisationName, accessCodeId: organisationAccessCodeId } = useOrganisation();
-  
+  const {
+    isOrganisationMode: globalIsOrganisationMode,
+    organisationTypeId: globalOrganisationTypeId,
+    name: globalOrganisationName,
+    accessCodeId: globalOrganisationAccessCodeId,
+  } = useOrganisation();
+
+  const [round, setRound] = useState<any>(null);
+
+  // Prefer the round's own organisation context (stored at round creation).
+  // Fall back to the global context for legacy rounds (created before we
+  // stored the organisation per round).
+  const effectiveOrganisationTypeId = round?.organisation_type_id ?? (globalIsOrganisationMode ? globalOrganisationTypeId : null);
+  const effectiveOrganisationName = round?.organisation_name ?? (globalIsOrganisationMode ? globalOrganisationName : null);
+  const isOrganisationMode = !!effectiveOrganisationTypeId;
+  const organisationTypeId = effectiveOrganisationTypeId;
+  const organisationName = effectiveOrganisationName;
+  const organisationAccessCodeId = globalOrganisationAccessCodeId;
+
   const activeSteps = useMemo(() => {
     if (isOrganisationMode) {
       return JOURNEY_STEPS.filter(s => s.id !== 'zoekprofiel');
@@ -41,7 +58,6 @@ const RondeDashboard = () => {
   const { responses: prioriteitenResponses, loading: prioriteitenLoading, loadResponses: reloadPrioriteiten, hasAiKeywords } = usePrioriteitenResponses(roundId);
   const { responses: extraInfoResponses, loading: extraInfoLoading, loadResponses: reloadExtraInfo } = useExtraInformatieResponses(roundId);
   
-  const [round, setRound] = useState<any>(null);
   const [currentStep, setCurrentStep] = useState<JourneyStep>('enthousiasme');
   const [currentSubStep, setCurrentSubStep] = useState<SubStep>('welkom');
   const [slideDirection, setSlideDirection] = useState<'left' | 'right'>('left');

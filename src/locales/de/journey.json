@@ -45,7 +45,7 @@
     "account_notice": "Dieses Konto ist für den persönlichen Gebrauch bestimmt. Lassen Sie andere ihr eigenes Konto erstellen für das beste Erlebnis und Datenschutz.",
     "start_button": "Start",
     "progress_title": "Dein Fortschritt",
-    "completed_count": "{{count}} von 6 Schritten abgeschlossen",
+    "completed_count": "{{count}} von {{total}} Schritten abgeschlossen",
     "step_completed": "Abgeschlossen",
     "step_current": "Als nächstes",
     "step_locked": "Gesperrt",
@@ -471,7 +471,7 @@
   },
   "overview": {
     "title": "Dein Fortschritt",
-    "completed_count": "{{count}} von 6 Schritten abgeschlossen",
+    "completed_count": "{{count}} von {{total}} Schritten abgeschlossen",
     "step_completed": "Abgeschlossen",
     "step_current": "Als nächstes",
     "step_locked": "Noch nicht verfügbar",

@@ -45,7 +45,7 @@
     "account_notice": "Denne kontoen er ment for personlig bruk. La andre opprette sin egen konto for best opplevelse og personvern.",
     "start_button": "Start",
     "progress_title": "Din fremgang",
-    "completed_count": "{{count}} av 6 steg fullført",
+    "completed_count": "{{count}} av {{total}} steg fullført",
     "step_completed": "Fullført",
     "step_current": "Neste",
     "step_locked": "Låst",
@@ -467,7 +467,7 @@
   },
   "overview": {
     "title": "Din fremgang",
-    "completed_count": "{{count}} av 6 steg fullført",
+    "completed_count": "{{count}} av {{total}} steg fullført",
     "step_completed": "Fullført",
     "step_current": "Neste",
     "step_locked": "Ikke tilgjengelig ennå",

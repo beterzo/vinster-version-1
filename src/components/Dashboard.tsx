@@ -33,7 +33,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { toast } = useToast();
-  const { name: organisationName } = useOrganisation();
+  const { name: organisationName, organisationTypeId, slug: organisationSlug } = useOrganisation();
   const { data: reportData, loading: reportLoading } = useRapportData();
   const { hasExistingZoekprofiel } = useExistingZoekprofiel();
   const stepAccess = useStepAccess();
@@ -65,7 +65,11 @@ const Dashboard = () => {
 
   const proceedWithNewRound = async () => {
     setShowRoundInProgressDialog(false);
-    const newRound = await startNewRound();
+    const newRound = await startNewRound({
+      organisation_type_id: organisationTypeId,
+      organisation_name: organisationName,
+      organisation_slug: organisationSlug,
+    });
     if (newRound) {
       navigate(`/ronde/${newRound.id}`);
     }
