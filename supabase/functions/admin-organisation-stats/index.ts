@@ -102,18 +102,32 @@ serve(async (req) => {
     const months = getLast6Months();
     const monthly_columns = months.map(m => m.key);
 
-    // Only 3 core fetches needed now
-    const [orgTypesRes, entryEventsRes, profilesRes, codesRes] = await Promise.all([
+    // Core fetches + test-user detection (internal @beterzo.tech, @vinster.ai,
+    // @deloopbaanopleiding.nl accounts should never appear in billable stats).
+    const TEST_DOMAINS = ['@beterzo.tech', '@vinster.ai', '@deloopbaanopleiding.nl'];
+
+    const [orgTypesRes, entryEventsRes, profilesRes, codesRes, testUsersRes] = await Promise.all([
       supabase.from('organisation_types').select('id, name, parent_type_id, is_unique').order('name'),
       supabase.from('entry_events').select('user_id, entry_method, redeemed_at, org_id, code'),
       supabase.from('profiles').select('id, created_at'),
       supabase.from('organisation_access_codes').select('id, code, organisation_type_id, uses_count, max_uses, is_active, last_used_at').order('created_at', { ascending: false }),
+      supabase.auth.admin.listUsers({ perPage: 1000 }),
     ]);
 
     const orgTypes = orgTypesRes.data || [];
-    const entryEvents: EntryEvent[] = entryEventsRes.data || [];
-    const profiles: Profile[] = profilesRes.data || [];
     const codesRaw = codesRes.data || [];
+
+    const testUserIds = new Set<string>(
+      (testUsersRes.data?.users ?? [])
+        .filter(u => {
+          const email = (u.email || '').toLowerCase();
+          return TEST_DOMAINS.some(d => email.endsWith(d));
+        })
+        .map(u => u.id)
+    );
+
+    const entryEvents: EntryEvent[] = (entryEventsRes.data || []).filter(e => !testUserIds.has(e.user_id));
+    const profiles: Profile[] = (profilesRes.data || []).filter(p => !testUserIds.has(p.id));
 
     // ============================================================
     // Widget 1: Toegang per Maand (uses shared helper)

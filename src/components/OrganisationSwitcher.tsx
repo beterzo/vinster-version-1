@@ -28,11 +28,17 @@ const OrganisationSwitcher = () => {
     isOrganisationMode,
     name: currentName,
     organisationTypeId,
+    accessCodeId,
     setOrganisation,
     clearOrganisation,
   } = useOrganisation();
   const [types, setTypes] = useState<OrganisationType[]>([]);
   const [loading, setLoading] = useState(true);
+
+  // Users who entered via a specific organisation access code (e.g. ErasmusMC)
+  // are contractually tied to that organisation. They should not be able to
+  // switch ingang — their seat is paid for by the org.
+  const isLockedToOrganisation = isOrganisationMode && !!accessCodeId;
 
   useEffect(() => {
     const load = async () => {
@@ -75,6 +81,19 @@ const OrganisationSwitcher = () => {
   };
 
   const buttonLabel = isOrganisationMode && currentName ? currentName : "Algemeen";
+
+  // Locked-in users: show a static badge, no dropdown.
+  if (isLockedToOrganisation) {
+    return (
+      <div
+        className="inline-flex items-center gap-2 text-sm font-medium bg-[#FEF9E6] text-[#232D4B] px-3 py-1.5 rounded-full border border-[#f0e6b8]"
+        title="Je bent ingelogd via een organisatiecode"
+      >
+        <Building2 className="w-3.5 h-3.5" />
+        <span className="max-w-[200px] truncate">{buttonLabel}</span>
+      </div>
+    );
+  }
 
   return (
     <DropdownMenu>
