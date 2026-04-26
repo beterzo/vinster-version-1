@@ -556,7 +556,7 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "organisation_types"
             referencedColumns: ["id"]
-          }
+          },
         ]
       }
       user_zoekprofielen: {
