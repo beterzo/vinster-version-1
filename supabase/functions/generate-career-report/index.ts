@@ -146,6 +146,8 @@ Je kiest:
 SCHRIJFSTIJL:
 Schrijf vloeiende, natuurlijke zinnen. Begin elke zin met een hoofdletter, ook na een punt. Beroepstitels beginnen ook met een hoofdletter. Verwerk de kernwoorden subtiel in de tekst — gebruik ze NIET letterlijk met hoofdletters midden in een zin. Schrijf zoals een mens zou schrijven, niet als een opsomming van trefwoorden.
 
+Schrijf in gewone, toegankelijke taal die iedereen meteen begrijpt. Vermijd gezwollen, formele of "dure" woorden en vage clichés zoals "wordt gekenmerkt door", "een diepe interesse in" of "een sterke drang naar". Het mag niet kinderachtig of simpel klinken, maar wel natuurlijk en helder, zoals je het tegen een collega zou zeggen. Voorbeeld te gezwollen: "Mijn persoonlijke identiteit wordt gekenmerkt door een diepe interesse in mensen en een sterke drang naar educatie en dierenwelzijn." Beter: "Ik ben geïnteresseerd in alles wat met leren en ontwikkelen te maken heeft. Daarnaast zet ik me graag in voor dierenwelzijn."
+
 Je antwoordt altijd in exact de gevraagde JSON-structuur, zonder toelichting erboven of eronder.
 Lever uitsluitend het JSON-object aan.`,
       user: `Je genereert een loopbaanrapport voor een medewerker van ${organisationName}.
@@ -234,6 +236,8 @@ You choose:
 
 WRITING STYLE:
 Write fluent, natural sentences. Start every sentence with a capital letter, including after a period. Job titles also start with a capital letter. Weave the keywords subtly into the text — do NOT use them literally with capital letters in the middle of a sentence. Write as a human would write, not as a list of buzzwords.
+
+Write in plain, accessible language that anyone understands right away. Avoid inflated, formal or "fancy" words and vague clichés such as "is characterised by", "a deep interest in" or "a strong drive towards". It should not sound childish or oversimplified, but natural and clear, the way you would say it to a colleague. Example of too inflated: "My personal identity is characterised by a deep interest in people and a strong drive towards education and animal welfare." Better: "I'm interested in everything to do with learning and development. I also like to commit myself to animal welfare."
 
 You always respond in exactly the requested JSON structure, without any explanation above or below it.
 Provide only the JSON object.`,
@@ -324,6 +328,8 @@ Du wählst:
 SCHREIBSTIL:
 Schreibe flüssige, natürliche Sätze. Beginne jeden Satz mit einem Großbuchstaben, auch nach einem Punkt. Berufsbezeichnungen beginnen ebenfalls mit einem Großbuchstaben. Verarbeite die Schlüsselwörter subtil im Text — verwende sie NICHT wörtlich mit Großbuchstaben mitten im Satz. Schreibe so, wie ein Mensch schreiben würde, nicht wie eine Aufzählung von Schlagwörtern.
 
+Schreibe in einfacher, verständlicher Sprache, die jeder sofort versteht. Vermeide geschwollene, formelle oder "gehobene" Wörter und vage Klischees wie "ist gekennzeichnet durch", "ein tiefes Interesse an" oder "ein starkes Streben nach". Es soll nicht kindisch oder zu simpel klingen, sondern natürlich und klar, so wie du es einem Kollegen sagen würdest. Beispiel zu geschwollen: "Meine persönliche Identität ist gekennzeichnet durch ein tiefes Interesse an Menschen und ein starkes Streben nach Bildung und Tierwohl." Besser: "Ich interessiere mich für alles, was mit Lernen und Entwicklung zu tun hat. Außerdem setze ich mich gerne für das Tierwohl ein."
+
 Du antwortest immer exakt in der geforderten JSON-Struktur, ohne zusätzliche Erklärungen.
 Liefere ausschließlich das JSON-Objekt.`,
       user: `Du erstellst einen Karrierebericht für eine Mitarbeiterin / einen Mitarbeiter von ${organisationName}.
@@ -413,6 +419,8 @@ Du velger:
 SKRIVESTIL:
 Skriv flytende, naturlige setninger. Start hver setning med stor bokstav, også etter punktum. Yrkesbenevnelser starter også med stor bokstav. Vev nøkkelordene subtilt inn i teksten — IKKE bruk dem bokstavelig med store bokstaver midt i en setning. Skriv slik et menneske ville skrevet, ikke som en oppramsing av stikkord.
 
+Skriv i et enkelt og tilgjengelig språk som alle forstår med en gang. Unngå oppblåste, formelle eller "fine" ord og vage klisjeer som "kjennetegnes av", "en dyp interesse for" eller "en sterk trang til". Det skal ikke høres barnslig eller for enkelt ut, men naturlig og tydelig, slik du ville sagt det til en kollega. Eksempel for oppblåst: "Min personlige identitet kjennetegnes av en dyp interesse for mennesker og en sterk trang til utdanning og dyrevelferd." Bedre: "Jeg er interessert i alt som har med læring og utvikling å gjøre. I tillegg engasjerer jeg meg gjerne for dyrevelferd."
+
 Du svarer alltid i nøyaktig den forespurte JSON-strukturen, uten forklaring.
 Lever kun JSON-objektet.`,
       user: `Du genererer en karriererapport for en ansatt hos ${organisationName}.
@@ -501,6 +509,8 @@ Je kiest alleen uit functies die:
 
 SCHRIJFSTIJL:
 Schrijf vloeiende, natuurlijke zinnen. Begin elke zin met een hoofdletter, ook na een punt. Beroepstitels beginnen ook met een hoofdletter. Verwerk de kernwoorden subtiel in de tekst — gebruik ze NIET letterlijk met hoofdletters midden in een zin. Schrijf zoals een mens zou schrijven, niet als een opsomming van trefwoorden.
+
+Schrijf in gewone, toegankelijke taal die iedereen meteen begrijpt. Vermijd gezwollen, formele of "dure" woorden en vage clichés zoals "wordt gekenmerkt door", "een diepe interesse in" of "een sterke drang naar". Het mag niet kinderachtig of simpel klinken, maar wel natuurlijk en helder, zoals je het tegen een collega zou zeggen. Voorbeeld te gezwollen: "Mijn persoonlijke identiteit wordt gekenmerkt door een diepe interesse in mensen en een sterke drang naar educatie en dierenwelzijn." Beter: "Ik ben geïnteresseerd in alles wat met leren en ontwikkelen te maken heeft. Daarnaast zet ik me graag in voor dierenwelzijn."
 
 Je antwoordt altijd in exact de gevraagde JSON-structuur, zonder toelichting erboven of eronder. Je output wordt automatisch verwerkt in een rapport, dus zorg dat het direct bruikbaar en foutloos is.
 
@@ -658,6 +668,8 @@ You only choose occupations that:
 
 WRITING STYLE:
 Write fluent, natural sentences. Start every sentence with a capital letter, including after a period. Job titles also start with a capital letter. Weave the keywords subtly into the text — do NOT use them literally with capital letters in the middle of a sentence. Write as a human would write, not as a list of buzzwords.
+
+Write in plain, accessible language that anyone understands right away. Avoid inflated, formal or "fancy" words and vague clichés such as "is characterised by", "a deep interest in" or "a strong drive towards". It should not sound childish or oversimplified, but natural and clear, the way you would say it to a colleague. Example of too inflated: "My personal identity is characterised by a deep interest in people and a strong drive towards education and animal welfare." Better: "I'm interested in everything to do with learning and development. I also like to commit myself to animal welfare."
 
 You always respond in exactly the requested JSON structure, without any explanation above or below it. Your output is processed automatically in a report, so it must be immediately usable and free of errors.
 
@@ -828,6 +840,8 @@ DEQF/BIG/ISCO sowie Websites und Berufsbeschreibungen wie berufenet.arbeitsagent
 SCHREIBSTIL:
 Schreibe flüssige, natürliche Sätze. Beginne jeden Satz mit einem Großbuchstaben, auch nach einem Punkt. Berufsbezeichnungen beginnen ebenfalls mit einem Großbuchstaben. Verarbeite die Schlüsselwörter subtil im Text — verwende sie NICHT wörtlich mit Großbuchstaben mitten im Satz. Schreibe so, wie ein Mensch schreiben würde, nicht wie eine Aufzählung von Schlagwörtern.
 
+Schreibe in einfacher, verständlicher Sprache, die jeder sofort versteht. Vermeide geschwollene, formelle oder "gehobene" Wörter und vage Klischees wie "ist gekennzeichnet durch", "ein tiefes Interesse an" oder "ein starkes Streben nach". Es soll nicht kindisch oder zu simpel klingen, sondern natürlich und klar, so wie du es einem Kollegen sagen würdest. Beispiel zu geschwollen: "Meine persönliche Identität ist gekennzeichnet durch ein tiefes Interesse an Menschen und ein starkes Streben nach Bildung und Tierwohl." Besser: "Ich interessiere mich für alles, was mit Lernen und Entwicklung zu tun hat. Außerdem setze ich mich gerne für das Tierwohl ein."
+
 Du antwortest immer exakt in der geforderten JSON-Struktur, ohne zusätzliche Erklärungen davor oder danach. Deine Ausgabe wird automatisch in einen Bericht übernommen und muss deshalb sofort nutzbar und fehlerfrei sein.
 
 Liefere ausschließlich das JSON-Objekt, wie in der Prompt-Beschreibung angegeben.`,
@@ -986,6 +1000,8 @@ NOKUT, Utdanning.no, NAVs yrkesbeskrivelser, samt nettsider som Finn.no, Arbeids
 
 SKRIVESTIL:
 Skriv flytende, naturlige setninger. Start hver setning med stor bokstav, også etter punktum. Yrkesbenevnelser starter også med stor bokstav. Vev nøkkelordene subtilt inn i teksten — IKKE bruk dem bokstavelig med store bokstaver midt i en setning. Skriv slik et menneske ville skrevet, ikke som en oppramsing av stikkord.
+
+Skriv i et enkelt og tilgjengelig språk som alle forstår med en gang. Unngå oppblåste, formelle eller "fine" ord og vage klisjeer som "kjennetegnes av", "en dyp interesse for" eller "en sterk trang til". Det skal ikke høres barnslig eller for enkelt ut, men naturlig og tydelig, slik du ville sagt det til en kollega. Eksempel for oppblåst: "Min personlige identitet kjennetegnes av en dyp interesse for mennesker og en sterk trang til utdanning og dyrevelferd." Bedre: "Jeg er interessert i alt som har med læring og utvikling å gjøre. I tillegg engasjerer jeg meg gjerne for dyrevelferd."
 
 Du svarer alltid i nøyaktig den forespurte JSON-strukturen, uten forklaring over eller under. Outputen din blir automatisk brukt i en rapport, så den må være umiddelbart anvendelig og helt feilfri.
 
